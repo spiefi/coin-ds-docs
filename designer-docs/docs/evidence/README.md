@@ -42,7 +42,7 @@ Add `docs/evidence/<slug>.md` with these sections, and a row above:
 # <Display name> source evidence
 
 ## Checked
-Date; declared, installed, and registry `latest` jfs-components versions.
+Date; declared, installed, and newest package-repo tag of jfs-components.
 
 ## Sources
 Figma node link and id; Storybook docs URL and the story ids used on the page.

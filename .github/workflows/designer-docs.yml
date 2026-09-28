@@ -44,6 +44,17 @@ jobs:
           cache: npm
           cache-dependency-path: designer-docs/package-lock.json
 
+      - name: Allow reading the private Coin components package
+        # jfs-components installs from the private repo spiefi/coin-components.
+        # COIN_COMPONENTS_DEPLOY_KEY is a read-only deploy key for that repo.
+        env:
+          COIN_COMPONENTS_DEPLOY_KEY: ${{ secrets.COIN_COMPONENTS_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$COIN_COMPONENTS_DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+
       - name: Install dependencies
         run: npm ci
 
@@ -64,18 +75,39 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+          cache: npm
+          cache-dependency-path: designer-docs/package-lock.json
 
-      - name: Deploy to Vercel
+      - name: Allow reading the private Coin components package
+        # jfs-components installs from the private repo spiefi/coin-components.
+        # COIN_COMPONENTS_DEPLOY_KEY is a read-only deploy key for that repo.
+        env:
+          COIN_COMPONENTS_DEPLOY_KEY: ${{ secrets.COIN_COMPONENTS_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$COIN_COMPONENTS_DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Build here and upload the result: Vercel's own build servers cannot
+      # read the private components repo.
+      - name: Build and deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ] && [ "${{ github.event_name }}" != "pull_request" ]; then
             target="production"
-            url=$(npx --yes vercel@60 deploy --prod --yes --token "$VERCEL_TOKEN")
+            prod="--prod"
           else
             target="preview"
-            url=$(npx --yes vercel@60 deploy --yes --token "$VERCEL_TOKEN")
+            prod=""
           fi
+          npx --yes vercel@60 pull --yes --environment="$target" --token "$VERCEL_TOKEN"
+          npx --yes vercel@60 build $prod --token "$VERCEL_TOKEN"
+          url=$(npx --yes vercel@60 deploy --prebuilt $prod --token "$VERCEL_TOKEN")
           echo "Deployed ${target}: ${url}"
           echo "### Designer docs ${target} deployment" >> "$GITHUB_STEP_SUMMARY"
           echo "${url}" >> "$GITHUB_STEP_SUMMARY"

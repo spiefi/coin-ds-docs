@@ -11,7 +11,9 @@ Coin components for designers.
 - When a slot receives a Coin child and the owner does not propagate modes,
   pass the owner's same mode object to the child.
 - Before revising a guide, compare the declared/installed `jfs-components`
-  version with `npm view jfs-components version`. Upgrade only with the
+  version with the newest tag of the private package repo
+  (`git ls-remote --tags git@github.com:spiefi/coin-components.git`; see
+  the root `AGENTS.md`). Upgrade only with the
   user's authorization. Report missing capabilities as Coin gaps (a ticket on
   the Coin Workflow board, assigned per the root `TICKET-OWNERS.md`), never work
   around them.

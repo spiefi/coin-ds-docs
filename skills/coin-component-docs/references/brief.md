@@ -13,7 +13,7 @@ evidence file, not the brief.
 
 slug: <slug> · label: <Display name> · public API: <Export>
 figma: <node URL> · storybook: docsUrl('<name>') · stories: <label>=<id>, …
-checked: <date> · jfs-components <version> (registry latest <version>)
+checked: <date> · jfs-components <version> (newest package tag <version>)
 icon: <one-line description of an 18×18 outline glyph>
 
 ## Overview
