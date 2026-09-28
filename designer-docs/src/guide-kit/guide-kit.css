@@ -325,3 +325,64 @@
   gap: 10px 22px;
   margin-top: 18px;
 }
+
+/* Hosts ------------------------------------------------------------------ */
+
+.gk-screen-frame {
+  position: relative;
+  width: min(100%, 360px);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+}
+
+.gk-screen-frame.is-bar {
+  height: 96px;
+}
+
+.gk-screen-frame.is-screen {
+  height: 320px;
+}
+
+.gk-screen-content {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 16px 16px 96px;
+  overflow: auto;
+}
+
+.gk-backdrop {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  width: min(100%, 330px);
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 14px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 12px;
+}
+
+.gk-backdrop::before {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 20, 30, 0.18);
+  border-radius: inherit;
+  content: '';
+}
+
+.gk-backdrop > * {
+  position: relative;
+  z-index: 1;
+}
+
+.gk-backdrop.is-compact {
+  min-height: 72px;
+}
+
+.gk-backdrop.is-card {
+  min-height: 180px;
+}

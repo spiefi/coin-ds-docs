@@ -19,12 +19,17 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | autoplaycontrol | [autoplaycontrol.md](autoplaycontrol.md) |
 | avatar, avatargroup | [avatar-and-avatargroup.md](avatar-and-avatargroup.md) |
 | badge | [badge.md](badge.md) |
+| bottomnav | [bottomnav.md](bottomnav.md) |
 | bottomnavitem | [bottomnavitem.md](bottomnavitem.md) |
 | brandchip | [brandchip.md](brandchip.md) |
 | button, hstack, vstack, stack, breadcrumbs | [button-and-layout.md](button-and-layout.md) |
 | buttongroup | [buttongroup.md](buttongroup.md) |
 | checkbox | [checkbox.md](checkbox.md) |
 | checkboxitem | [checkboxitem.md](checkboxitem.md) |
+| checkboxgroup | [checkboxgroup.md](checkboxgroup.md) |
+| chipselect | [chipselect.md](chipselect.md) |
+| favoritetoggle | [favoritetoggle.md](favoritetoggle.md) |
+| filterbar | [filterbar.md](filterbar.md) |
 
 ## New guides
 

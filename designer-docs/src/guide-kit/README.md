@@ -98,6 +98,8 @@ passed (self-check, pins match legend rows, no horizontal scroll).
 | `classes` | Joins conditional class names. |
 | `ExampleCard` | One example with a title and optional description. |
 | `DoDont` | A Do/Don't pair with titles and captions. |
+| `ScreenFrame` | A positioned app-screen host (`footer`, optional screen `children`, `size="bar" \| "screen"`) for components that anchor to the bottom of their host, such as BottomNav. |
+| `Backdrop` | A photographic scene (`size="compact" \| "card"`) for glass components designed to sit on imagery; children align to the top-right. |
 
 Layout classes already in `styles.css` that guides may use: `preview-stage`,
 `stage-label`, `controls-panel`, `text-control`, `coin-new-example-grid`

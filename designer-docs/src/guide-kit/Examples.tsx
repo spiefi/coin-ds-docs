@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import backdropImage from '../assets/bank-hero.png'
 
 export function ExampleCard({
   title,
@@ -47,6 +48,37 @@ export function DoDont({
         <h3>{badTitle}</h3>
         <p>{badCaption}</p>
       </article>
+    </div>
+  )
+}
+
+/**
+ * A positioned app-screen host for components that anchor themselves to the
+ * bottom of their nearest positioned ancestor (e.g. BottomNav). `bar` is only
+ * tall enough for the anchored component; `screen` adds a content area above.
+ */
+export function ScreenFrame({
+  children,
+  footer,
+  size = 'screen',
+}: {
+  children?: ReactNode
+  footer: ReactNode
+  size?: 'bar' | 'screen'
+}) {
+  return (
+    <div className={`gk-screen-frame is-${size}`}>
+      {size === 'screen' && <div className="gk-screen-content">{children}</div>}
+      {footer}
+    </div>
+  )
+}
+
+/** A photographic scene for glass components designed to sit on imagery. */
+export function Backdrop({ children, size = 'compact' }: { children: ReactNode; size?: 'compact' | 'card' }) {
+  return (
+    <div className={`gk-backdrop is-${size}`} style={{ backgroundImage: `url(${backdropImage})` }}>
+      {children}
     </div>
   )
 }
