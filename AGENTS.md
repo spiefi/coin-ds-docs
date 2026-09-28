@@ -9,7 +9,7 @@ in `designer-docs/` (live at <https://coin-designer-docs.vercel.app>).
   `sh skills/install.sh` to update the Claude Code and Codex copies.
 - Docs worker agents: `.claude/agents/coin-docs-worker.md` (Claude Code) and
   `.codex/agents/coin_docs_worker.toml` (Codex).
-- Before creating or assigning a Coin Workflow ticket, read `TEAM.md` for who
+- Before creating or assigning a Coin Workflow ticket, read `TICKET-OWNERS.md` for who
   owns which kind of ticket.
 
 The former product app (Buy Gold flow and other screens) and its screen

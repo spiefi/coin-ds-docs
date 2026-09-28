@@ -1,4 +1,4 @@
-# Coin team
+# Coin ticket owners
 
 Who owns what on the Coin Workflow board. Agents use this file to assign the
 tickets they create (for example, Coin gaps found while documenting a

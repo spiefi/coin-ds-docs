@@ -65,7 +65,7 @@ completed. Never complete a contribution on someone else's behalf.
   and stable idempotency keys; do not repeat writes to prove success.
 - After an approved release, add a live-link note without changing status.
 - A Coin gap found while documenting becomes its own ticket, not a note on the
-  docs ticket. Assign and tag it by `TEAM.md` at the repository root (component
+  docs ticket. Assign and tag it by `TICKET-OWNERS.md` at the repository root (component
   bugs go to the Components workflow's To do, tagged `Component Bug`), mention
   its number in the docs ticket's work note, and list it in the final summary
   under "New tickets I created".
