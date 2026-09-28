@@ -47,6 +47,16 @@ completed. Never complete a contribution on someone else's behalf.
 
 - Use the `coin-workflow` MCP for reads and writes. If it is unavailable, say
   so before ticket-linked work; do not substitute browser writes.
+- Right after selection, call `start_work` on every selected ticket in one
+  call; the board lights those cards while the agent works. Do it before any
+  research, so there is no gap between pickup and the board showing it.
+- When you begin building a ticket, call `start_work` on that ticket again with
+  a new idempotency key. The board turns the working state off after 2 hours
+  without agent activity on a ticket, which would otherwise hit tickets late in
+  a long batch.
+- A ticket that is blocked, skipped, or cancelled gets `stop_work` with a
+  short note saying why. Moving a ticket to Review ends its working state; no
+  `stop_work` is needed then.
 - Leave an In progress ticket there while working.
 - After verification: one short work note with the result and review link,
   complete only Marcin's contribution, move the ticket to Review. Never move to
@@ -54,3 +64,8 @@ completed. Never complete a contribution on someone else's behalf.
 - Re-read the ticket to confirm status and contribution. Use expected versions
   and stable idempotency keys; do not repeat writes to prove success.
 - After an approved release, add a live-link note without changing status.
+- A Coin gap found while documenting becomes its own ticket, not a note on the
+  docs ticket. Assign and tag it by `TEAM.md` at the repository root (component
+  bugs go to the Components workflow's To do, tagged `Component Bug`), mention
+  its number in the docs ticket's work note, and list it in the final summary
+  under "New tickets I created".

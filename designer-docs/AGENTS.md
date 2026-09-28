@@ -13,7 +13,8 @@ Coin components for designers.
 - Before revising a guide, compare the declared/installed `jfs-components`
   version with `npm view jfs-components version`. Upgrade only with the
   user's authorization. Report missing capabilities as Coin gaps (a ticket on
-  the Coin Workflow board), never work around them.
+  the Coin Workflow board, assigned per the root `TEAM.md`), never work
+  around them.
 - Figma is read-only reference: the Coin Components Library for public
   properties, variants, slots, and modes; Coin Subcomponents only to
   understand anatomy.

@@ -33,7 +33,10 @@ User instructions take precedence. The skill's source is
 1. Use the `coin-workflow` MCP to collect eligible In progress tickets for
    Marcin Śpiewak's design documentation ([selection rules](references/release-and-tickets.md#coin-workflow-tickets)).
    Report an unavailable connection before starting.
-2. Announce the batch, then build every ticket in board order on one feature
+2. Call `start_work` on the whole batch at once, before any research or
+   Figma/Storybook reads, so the board shows the pickup
+   ([board signals](references/release-and-tickets.md#coin-workflow-tickets)).
+   Announce the batch, then build every ticket in board order on one feature
    branch. A blocked ticket is reported and skipped, not stopped on.
 3. For each verified guide: add the review link as a work note, complete only
    Marcin's contribution, move the ticket to Review, and re-read it.
