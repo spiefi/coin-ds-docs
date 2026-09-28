@@ -28,8 +28,11 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | checkboxitem | [checkboxitem.md](checkboxitem.md) |
 | checkboxgroup | [checkboxgroup.md](checkboxgroup.md) |
 | chipselect | [chipselect.md](chipselect.md) |
+| dropdown | [dropdown.md](dropdown.md) |
+| dropdowninput | [dropdowninput.md](dropdowninput.md) |
 | favoritetoggle | [favoritetoggle.md](favoritetoggle.md) |
 | filterbar | [filterbar.md](filterbar.md) |
+| iconbutton | [iconbutton.md](iconbutton.md) |
 
 ## New guides
 

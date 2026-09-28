@@ -142,6 +142,7 @@ export default defineConfig({
       'jfs-components',
       'react-native',
       'react-native-reanimated',
+      'react-native-safe-area-context',
       'react-native-svg',
       '@react-native-community/blur',
     ],
