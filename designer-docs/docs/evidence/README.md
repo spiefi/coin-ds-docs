@@ -35,6 +35,10 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | filterbar | [filterbar.md](filterbar.md) |
 | iconbutton | [iconbutton.md](iconbutton.md) |
 | link | [link.md](link.md) |
+| navarrow | [navarrow.md](navarrow.md) |
+| numberpagination | [numberpagination.md](numberpagination.md) |
+| numpad | [numpad.md](numpad.md) |
+| radio | [radio.md](radio.md) |
 
 ## New guides
 
