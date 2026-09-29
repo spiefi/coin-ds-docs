@@ -3,8 +3,6 @@ import type { GuideDefinition } from './define'
 // Holds the registered guides. It imports no guide modules, so navigation
 // and page shells can read it without creating an import cycle.
 
-export const HOME_SLUG = 'button'
-
 let guides: readonly GuideDefinition[] = []
 
 export function registerGuides(list: readonly GuideDefinition[]) {
@@ -16,9 +14,7 @@ export function listGuides() {
   return guides
 }
 
+/** The guide registered for a slug; undefined when there is none. */
 export function findGuide(slug: string | null | undefined) {
-  return (
-    guides.find((guide) => guide.slug === slug) ??
-    guides.find((guide) => guide.slug === HOME_SLUG)!
-  )
+  return guides.find((guide) => guide.slug === slug)
 }

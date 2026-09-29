@@ -12,8 +12,9 @@ headless-browser pass over every guide at 1280 px and 390 px.
 ## Add a guide
 
 Create one file, `src/guides/<slug>.guide.tsx`. It registers itself: the
-navigation, route, and page title come from it. Do not edit App, the
-navigation, or `styles.css`.
+navigation (and its component count), route, page title, and search entry
+come from it.
+Do not edit App, the navigation, or `styles.css`.
 
 ```tsx
 import { Example } from 'jfs-components'
@@ -26,7 +27,7 @@ function ExampleGuide() {
     content, context, 'dos-donts', sources — every section is required */ }
   return (
     <ComponentGuideTemplate
-      metadata={{ slug: 'example', summary: '…', corePrinciple: '…', figmaUrl: '…', storybookUrl: docsUrl('example') }}
+      metadata={{ slug: 'example', corePrinciple: '…', figmaUrl: '…', storybookUrl: docsUrl('example') }}
       playground={<>{/* .preview-stage + .controls-panel */}</>}
       sections={sections}
     />
@@ -36,10 +37,16 @@ function ExampleGuide() {
 export default defineGuide({
   slug: 'example',            // must match the file name
   label: 'Example',           // readable name; also the page title
+  summary: 'Use an Example to …', // one sentence, ≤ 140 characters: the page lede and search
+  keywords: ['other name'],   // optional: other words people search for
   icon: <path d="…" stroke="currentColor" strokeWidth="1.5" />, // 18×18
   Component: ExampleGuide,
 })
 ```
+
+`summary` comes from the brief's `summary:` line and `keywords` from its
+`keywords:` line. The page shows the summary as its lede, so do not pass one
+in `metadata`.
 
 Reference guide: `src/BadgeGuide.tsx`.
 

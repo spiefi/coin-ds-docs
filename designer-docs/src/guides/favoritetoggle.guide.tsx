@@ -100,7 +100,6 @@ function FavoriteToggleGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'favoritetoggle', name: 'Favorite Toggle',
-    summary: 'Use a Favorite Toggle on an image card so people can save the item for later with one tap.',
     corePrinciple: 'One heart per item, on imagery, saying exactly what gets saved.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('favoritetoggle'),
   }} playground={<>
@@ -120,6 +119,8 @@ function FavoriteToggleGuide() {
 export default defineGuide({
   slug: 'favoritetoggle',
   label: 'Favorite Toggle',
+  summary: 'Use a Favorite Toggle on an image card so people can save the item for later with one tap.',
+  keywords: ['heart', 'like', 'save', 'bookmark', 'wishlist'],
   icon: <path d="M9 14.5 3.6 9.3A3 3 0 0 1 9 5.2a3 3 0 0 1 5.4 4.1L9 14.5Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />,
   Component: FavoriteToggleGuide,
 })

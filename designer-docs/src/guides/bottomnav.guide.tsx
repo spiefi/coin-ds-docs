@@ -137,7 +137,6 @@ function BottomNavGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'bottomnav', name: 'Bottom Nav',
-    summary: 'Use a Bottom Nav to move between the top-level sections of an app from any screen.',
     corePrinciple: 'Three to five destinations, exactly one Active, always at the bottom.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('bottomnav'),
   }} playground={<>
@@ -159,6 +158,8 @@ function BottomNavGuide() {
 export default defineGuide({
   slug: 'bottomnav',
   label: 'Bottom Nav',
+  summary: 'Use a Bottom Nav to move between the top-level sections of an app from any screen.',
+  keywords: ['tab bar', 'bottom navigation', 'navigation bar', 'tabs'],
   icon: <path d="M2 12h14M5 15h.01M9 15h.01M13 15h.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />,
   Component: BottomNavGuide,
 })

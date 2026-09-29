@@ -372,7 +372,6 @@ export function AvatarGroupGuide() {
       metadata={{
         slug: 'avatargroup',
         name: 'Avatar Group',
-        summary: 'Show several people or identities as one compact visual cue.',
         corePrinciple: 'Share one size across the Avatar children.',
         figmaUrl: AVATAR_GROUP_FIGMA,
         storybookUrl: AVATAR_GROUP_STORYBOOK,
@@ -611,7 +610,6 @@ export function AvatarGuide() {
       metadata={{
         slug: 'avatar',
         name: 'Avatar',
-        summary: 'Represent one person or account with an image or initials.',
         corePrinciple: 'Use a real image when available; use a short monogram otherwise.',
         figmaUrl: AVATAR_FIGMA,
         storybookUrl: AVATAR_STORYBOOK,

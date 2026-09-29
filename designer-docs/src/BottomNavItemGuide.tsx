@@ -627,7 +627,6 @@ export function BottomNavItemGuide() {
       metadata={{
         slug: 'bottomnavitem',
         name: 'Bottom Nav Item',
-        summary: 'Show one top-level destination in the bottom navigation bar with an icon and a short label.',
         corePrinciple: 'One destination, one short label. Let BottomNav mark the Active item.',
         figmaUrl: FIGMA_URL,
         storybookUrl: STORYBOOK_URL,

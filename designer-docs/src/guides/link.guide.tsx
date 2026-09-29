@@ -139,7 +139,6 @@ function LinkGuide() {
   const liveModes = { ...LIGHT, 'Text Sizes': textSize } as Modes
   return <ComponentGuideTemplate metadata={{
     slug: 'link',
-    summary: 'Use a Link to send people to related content, such as terms, help, or a recovery step, on its own line or inside a sentence.',
     corePrinciple: 'Links take people somewhere. Keep the screen’s main action a Button.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('link'),
   }} playground={<>
@@ -160,6 +159,8 @@ function LinkGuide() {
 export default defineGuide({
   slug: 'link',
   label: 'Link',
+  summary: 'Use a Link to send people to related content, such as terms, help, or a recovery step, on its own line or inside a sentence.',
+  keywords: ['hyperlink', 'text link', 'inline link', 'anchor'],
   icon: <path d="M7.5 10.5l3-3M8.5 5.5l1.3-1.3a2.8 2.8 0 0 1 4 4l-1.3 1.3M9.5 12.5l-1.3 1.3a2.8 2.8 0 0 1-4-4l1.3-1.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />,
   Component: LinkGuide,
 })

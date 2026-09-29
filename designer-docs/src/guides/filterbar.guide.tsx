@@ -124,7 +124,6 @@ function FilterBarGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'filterbar',
-    summary: 'Use a Filter Bar at the top of a list so people can narrow what they see by typing.',
     corePrinciple: 'Name what is being searched, then let the list below respond to every keystroke.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('filterbar'),
   }} playground={<>
@@ -143,6 +142,8 @@ function FilterBarGuide() {
 export default defineGuide({
   slug: 'filterbar',
   label: 'Filter Bar',
+  summary: 'Use a Filter Bar at the top of a list so people can narrow what they see by typing.',
+  keywords: ['search', 'search bar', 'search field', 'text field', 'filter'],
   icon: <path d="M13 8A5 5 0 1 1 3 8a5 5 0 0 1 10 0ZM11.6 11.6 15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />,
   Component: FilterBarGuide,
 })

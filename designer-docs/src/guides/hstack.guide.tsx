@@ -9,6 +9,8 @@ function HStackPage() {
 export default defineGuide({
   slug: 'hstack',
   label: 'HStack',
+  summary: 'Use HStack for a row of related content.',
+  keywords: ['horizontal stack', 'row', 'layout', 'auto layout', 'spacing'],
   icon: LEGACY_ICONS.hstack,
   Component: HStackPage,
 })

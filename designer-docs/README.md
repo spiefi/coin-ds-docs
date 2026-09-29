@@ -9,9 +9,11 @@ and sources.
 
 | Path | Role |
 | --- | --- |
-| `src/guides/<slug>.guide.tsx` | Registers one guide: slug, label, icon, page component. Navigation (alphabetical), routes (`/?component=<slug>`), and page titles come from these files. |
+| `src/guides/<slug>.guide.tsx` | Registers one guide: slug, label, summary, search keywords, icon, page component. Navigation (alphabetical), routes (`/?component=<slug>`), page titles, the component count, and search come from these files. |
 | `src/guide-kit/` | Shared documentation chrome: `Anatomy`, `Sources`, `Segment`, `ExampleCard`, `DoDont`. Start with its [README](src/guide-kit/README.md). |
 | `src/ComponentGuideTemplate.tsx` | The page shell used by guides. |
+| `src/site/` | Site chrome outside the guides: the home page at `/`, an onboarding introduction to Coin with live examples (also shown for an unknown `?component=`), component search (⌘K or Ctrl K, `/`, or the Search buttons), and their CSS in `site.css`. |
+| `public/` | Favicons (`favicon.svg`, with `favicon.ico` and `apple-touch-icon.png` rendered from it). |
 | `docs/evidence/<slug>.md` | Verified package, Figma, Storybook, API, and accessibility evidence per guide ([index](docs/evidence/README.md)). |
 | `scripts/check-guides.mjs` | Guardrails run by `npm run build`. |
 
@@ -36,8 +38,10 @@ npm run verify
 ```
 
 `verify` runs `build` (typecheck, guide check, Vite build) and then
-`test:browser`, which loads every guide in headless Chrome at 1280 px and
-390 px. It needs Google Chrome (or `npx playwright-core install chromium`).
+`test:browser`, which loads the home page, search, and every guide in
+headless Chrome at 1280 px and 390 px (`npm run test:browser home` checks only
+the home page and search). It needs Google Chrome (or
+`npx playwright-core install chromium`).
 Vercel runs only `build`; run `verify` before committing.
 
 ## Deployment

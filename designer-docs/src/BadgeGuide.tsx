@@ -118,7 +118,6 @@ export function BadgeGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'badge', name: 'Badge',
-    summary: 'Use a Badge to make a short status, category, or count easy to scan beside the content it describes.',
     corePrinciple: 'Say one thing, in a few words. Let the label carry the meaning and use emphasis to establish priority.',
     figmaUrl: FIGMA, storybookUrl: STORYBOOK,
   }} playground={<>

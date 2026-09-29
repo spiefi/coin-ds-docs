@@ -117,7 +117,6 @@ function NavArrowGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'navarrow',
-    summary: 'Use a Nav Arrow to show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header.',
     corePrinciple: 'A cue, not a button. Make the whole row pressable, and give the arrow onPress only when it stands alone.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('navarrow'),
   }} playground={<>
@@ -136,6 +135,8 @@ function NavArrowGuide() {
 export default defineGuide({
   slug: 'navarrow',
   label: 'Nav Arrow',
+  summary: 'Use a Nav Arrow to show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header.',
+  keywords: ['chevron', 'arrow', 'back arrow', 'disclosure indicator', 'caret'],
   icon: <path d="M7 4.5 11.5 9 7 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />,
   Component: NavArrowGuide,
 })

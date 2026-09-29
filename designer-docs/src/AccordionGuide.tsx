@@ -493,8 +493,6 @@ export function AccordionGuide() {
       metadata={{
         slug: 'accordion',
         name: 'Accordion',
-        summary:
-          'Reveal supporting details when people need them, while keeping the page easy to scan.',
         corePrinciple: 'Make the header a clear promise about the content inside.',
         figmaUrl: FIGMA_URL,
         storybookUrl: STORYBOOK_URL,

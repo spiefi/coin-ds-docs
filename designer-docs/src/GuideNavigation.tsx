@@ -5,7 +5,8 @@ import {
   type MouseEvent,
   type ReactNode,
 } from 'react'
-import { HOME_SLUG, listGuides } from './guides/store'
+import { listGuides } from './guides/store'
+import { SearchButton } from './site/SearchButton'
 
 /** A registered guide slug; see src/guides/<slug>.guide.tsx. */
 export type ComponentSlug = string
@@ -135,11 +136,13 @@ export const PAGE_NAV = [
   ['sources', 'Sources'],
 ] as const
 
+export const HOME_HREF = '/'
+
 export function guideHref(slug: ComponentSlug) {
-  return slug === HOME_SLUG ? '/#overview' : `/?component=${slug}#overview`
+  return `/?component=${slug}#overview`
 }
 
-function GuideIcon({ icon }: { icon: ReactNode }) {
+export function GuideIcon({ icon }: { icon: ReactNode }) {
   return (
     <svg
       className="component-icon-svg"
@@ -154,12 +157,28 @@ function GuideIcon({ icon }: { icon: ReactNode }) {
   )
 }
 
-export function GuideSidebar({ active }: { active: ComponentSlug }) {
+const HOME_ICON = (
+  <path
+    d="M3 8.25 9 3.5l6 4.75V15h-4v-4H7v4H3z"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinejoin="round"
+  />
+)
+
+/** `active` is the current guide's slug; omit it on the home page. */
+export function GuideSidebar({
+  active,
+  pageNav = PAGE_NAV,
+}: {
+  active?: ComponentSlug
+  pageNav?: ReadonlyArray<readonly [string, string]>
+}) {
   return (
     <aside className="sidebar" aria-label="Documentation navigation">
       <a
         className="brand"
-        href={guideHref(HOME_SLUG)}
+        href={HOME_HREF}
         aria-label="Coin documentation home"
         onClick={handleGuideNavigation}
       >
@@ -170,8 +189,26 @@ export function GuideSidebar({ active }: { active: ComponentSlug }) {
         </span>
       </a>
 
+      <SearchButton variant="sidebar" />
+
+      <div className="sidebar-home">
+        <a
+          className={'component-link ' + (active ? '' : 'is-active')}
+          href={HOME_HREF}
+          aria-current={active ? undefined : 'page'}
+          onClick={handleGuideNavigation}
+        >
+          <span className="component-icon" aria-hidden="true">
+            <GuideIcon icon={HOME_ICON} />
+          </span>
+          Home
+        </a>
+      </div>
+
       <div className="sidebar-group">
-        <p>Components</p>
+        <p>
+          Components <span className="nav-count">{listGuides().length}</span>
+        </p>
         {listGuides().map((item) => (
           <a
             className={'component-link ' + (item.slug === active ? 'is-active' : '')}
@@ -190,31 +227,38 @@ export function GuideSidebar({ active }: { active: ComponentSlug }) {
 
       <nav className="page-nav" aria-label="On this page">
         <p>On this page</p>
-        {PAGE_NAV.map(([id, label]) => (
+        {pageNav.map(([id, label]) => (
           <a href={'#' + id} key={id}>{label}</a>
         ))}
       </nav>
-      <p className="sidebar-version">Coin Components · 0.1.60</p>
+      <p className="sidebar-version">Coin Components · {__COIN_COMPONENTS_VERSION__}</p>
     </aside>
   )
 }
 
-export function GuideMobileBar() {
+/** `sources` adds a link to the guide's Sources section; the home page has none. */
+export function GuideMobileBar({ sources = true }: { sources?: boolean }) {
   return (
     <div className="mobile-bar">
-      <a className="brand" href={guideHref(HOME_SLUG)} onClick={handleGuideNavigation}>
+      <a className="brand" href={HOME_HREF} onClick={handleGuideNavigation}>
         <span className="brand-mark" aria-hidden="true">C</span>
         <strong>Coin designer docs</strong>
       </a>
-      <a href="#sources">Sources</a>
+      <div className="mobile-bar-actions">
+        {sources && <a href="#sources">Sources</a>}
+        <SearchButton variant="icon" />
+      </div>
     </div>
   )
 }
 
-export function MobileComponentNav({ active }: { active: ComponentSlug }) {
+/** `active` is the current guide's slug; omit it on the home page. */
+export function MobileComponentNav({ active }: { active?: ComponentSlug }) {
   return (
     <nav className="mobile-component-toc" aria-label="Components">
-      <span className="mobile-component-toc-label">Components</span>
+      <span className="mobile-component-toc-label">
+        Components <span className="nav-count">{listGuides().length}</span>
+      </span>
       <div>
         {listGuides().map((item) => (
           <a

@@ -103,7 +103,6 @@ function NumberPaginationGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'numberpagination',
-    summary: 'Use Number Pagination to show which slide of a short media carousel is in view, and to jump to another.',
     corePrinciple: 'A few pages, over imagery. The screen tracks the page; the component shows it.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('numberpagination'),
   }} playground={<>
@@ -121,6 +120,8 @@ function NumberPaginationGuide() {
 export default defineGuide({
   slug: 'numberpagination',
   label: 'Number Pagination',
+  summary: 'Use Number Pagination to show which slide of a short media carousel is in view, and to jump to another.',
+  keywords: ['pagination', 'page indicator', 'carousel', 'pager', 'slides'],
   icon: <><rect x="2" y="5.5" width="14" height="7" rx="3.5" stroke="currentColor" strokeWidth="1.5" fill="none" /><circle cx="6" cy="9" r="1.6" fill="currentColor" /><path d="M9.5 9h.01M12.5 9h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></>,
   Component: NumberPaginationGuide,
 })

@@ -113,7 +113,6 @@ function NumpadGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'numpad',
-    summary: 'Use the Numpad to enter a PIN, a one-time code, or an amount on screen, without the system keyboard.',
     corePrinciple: 'Secure by default. Keep the digits shuffled whenever the number is sensitive.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('numpad'),
   }} playground={<>
@@ -132,6 +131,8 @@ function NumpadGuide() {
 export default defineGuide({
   slug: 'numpad',
   label: 'Numpad',
+  summary: 'Use the Numpad to enter a PIN, a one-time code, or an amount on screen, without the system keyboard.',
+  keywords: ['keypad', 'number pad', 'keyboard', 'PIN', 'OTP', 'passcode'],
   icon: <path d="M4.5 4.5h.01M9 4.5h.01M13.5 4.5h.01M4.5 9h.01M9 9h.01M13.5 9h.01M4.5 13.5h.01M9 13.5h.01M13.5 13.5h.01" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />,
   Component: NumpadGuide,
 })

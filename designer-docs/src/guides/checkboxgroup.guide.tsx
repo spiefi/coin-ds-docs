@@ -119,7 +119,6 @@ function CheckboxGroupGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'checkboxgroup', name: 'Checkbox Group',
-    summary: 'Use a Checkbox Group to let people pick any number of related options, such as accounts to link.',
     corePrinciple: 'Related choices, each independent, stacked with even spacing.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('checkboxgroup'),
   }} playground={<>
@@ -142,6 +141,8 @@ function CheckboxGroupGuide() {
 export default defineGuide({
   slug: 'checkboxgroup',
   label: 'Checkbox Group',
+  summary: 'Use a Checkbox Group to let people pick any number of related options, such as accounts to link.',
+  keywords: ['multi-select', 'multiple choice', 'checkbox list', 'options'],
   icon: <path d="M2 2h4v4H2zM3 4l.8.8L5 3.2M8 4h8M2 7h4v4H2zM8 9h8M2 12h4v4H2zM8 14h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />,
   Component: CheckboxGroupGuide,
 })

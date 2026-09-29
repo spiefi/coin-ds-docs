@@ -78,7 +78,7 @@ export function CheckboxGuide() {
     },
   }
 
-  return <ComponentGuideTemplate metadata={{ slug: 'checkbox', name: 'Checkbox', summary: 'Use Checkbox for an independent yes-or-no choice. People can select more than one option in a set.', corePrinciple: 'Keep the selected value separate from hover, focus, and availability. Always make the meaning of the choice clear.', figmaUrl: FIGMA, storybookUrl: STORYBOOK }} playground={<>
+  return <ComponentGuideTemplate metadata={{ slug: 'checkbox', name: 'Checkbox', corePrinciple: 'Keep the selected value separate from hover, focus, and availability. Always make the meaning of the choice clear.', figmaUrl: FIGMA, storybookUrl: STORYBOOK }} playground={<>
     <div className="preview-stage"><div className="coin-new-row"><Checkbox checked={checked} disabled={disabled} onValueChange={setChecked} accessibilityLabel="Include savings account" modes={LIGHT_MODES} /><span>Include savings account</span></div><span className="stage-label">Live Coin Checkbox</span></div>
     <div className="controls-panel"><Segment label="Checked" value={checked ? 'On' : 'Off'} options={['Off', 'On'] as const} onChange={value => setChecked(value === 'On')} /><Segment label="Disabled" value={disabled ? 'On' : 'Off'} options={['Off', 'On'] as const} onChange={value => setDisabled(value === 'On')} /><p className="coin-new-readout" role="status">{checked ? 'Savings account included' : 'Savings account not included'}</p><p className="coin-new-readout">Hover with a pointer or reach the control with Tab to see interaction feedback.</p></div>
   </>} sections={sections} />

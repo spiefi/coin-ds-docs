@@ -15,9 +15,10 @@ slug: <slug> · label: <Display name> · public API: <Export>
 figma: <node URL> · storybook: docsUrl('<name>') · stories: <label>=<id>, …
 checked: <date> · jfs-components <version> (newest package tag <version>)
 icon: <one-line description of an 18×18 outline glyph>
+keywords: <optional: other names designers search for, e.g. tab bar, keypad>
 
 ## Overview
-summary: <one sentence, when to use it>
+summary: <one sentence, when to use it; ≤ 140 characters, also shown in search>
 principle: <one short sentence>
 playground: <each control → public prop/mode it drives>; default state; readout text
 

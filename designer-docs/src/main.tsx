@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
 import App from './App'
 import './styles.css'
+import './site/site.css'
 
 const root = document.getElementById('root')
 

@@ -18,7 +18,7 @@ export type ComponentGuideMetadata = {
   slug: ComponentSlug
   /** Defaults to the registered guide label, which keeps title and navigation in sync. */
   name?: string
-  summary: string
+  // No summary here: the lede is the summary registered in src/guides/<slug>.guide.tsx.
   corePrinciple: string
   figmaUrl: string
   storybookUrl: string
@@ -45,7 +45,7 @@ const SECTION_NAV = PAGE_NAV.slice(1) as ReadonlyArray<
   readonly [GuideSectionId, string]
 >
 
-function SourceLink({ href, children }: { href: string; children: string }) {
+export function SourceLink({ href, children }: { href: string; children: string }) {
   return (
     <a className="source-link" href={href} target="_blank" rel="noreferrer">
       {children}
@@ -72,8 +72,7 @@ export function ComponentGuideTemplate({
   sections,
 }: ComponentGuideTemplateProps) {
   const registered = findGuide(metadata.slug)
-  const name =
-    registered.slug === metadata.slug ? registered.label : (metadata.name ?? metadata.slug)
+  const name = registered?.label ?? metadata.name ?? metadata.slug
 
   useLayoutEffect(() => {
     const previousTitle = document.title
@@ -106,7 +105,7 @@ export function ComponentGuideTemplate({
                 <h1>{name}</h1>
                 <span className="public-badge">Public component</span>
               </div>
-              <p className="hero-lede">{metadata.summary}</p>
+              <p className="hero-lede">{registered?.summary}</p>
               <p className="recommendation-label">Usage recommendations</p>
               <div className="hero-links">
                 <SourceLink href={metadata.figmaUrl}>Open in Figma</SourceLink>

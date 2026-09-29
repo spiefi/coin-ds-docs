@@ -760,7 +760,6 @@ export function ButtonGroupGuide() {
       metadata={{
         slug: 'buttongroup',
         name: 'Button Group',
-        summary: 'Keep a few related actions in one row with shared spacing and modes.',
         corePrinciple: 'Give the group its width and modes; let only the key action stand out.',
         figmaUrl: FIGMA_URL,
         storybookUrl: STORYBOOK_URL,

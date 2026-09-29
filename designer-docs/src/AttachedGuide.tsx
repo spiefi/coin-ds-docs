@@ -326,7 +326,6 @@ export function AttachedGuide() {
       metadata={{
         slug: 'attached',
         name: 'Attached',
-        summary: 'Add a subordinate signal to a main item without altering its footprint.',
         corePrinciple: 'Attachment supports the item, never obscures it.',
         figmaUrl: FIGMA_URL,
         storybookUrl: STORYBOOK_URL,

@@ -70,7 +70,7 @@ export function BrandChipGuide() {
     },
   }
 
-  return <ComponentGuideTemplate metadata={{ slug: 'brandchip', name: 'Brand Chip', summary: 'Use Brand Chip to identify a linked brand or account with an avatar and a short label.', corePrinciple: 'Pair a recognizable identity with just enough text to distinguish it.', figmaUrl: FIGMA, storybookUrl: STORYBOOK }} playground={<>
+  return <ComponentGuideTemplate metadata={{ slug: 'brandchip', name: 'Brand Chip', corePrinciple: 'Pair a recognizable identity with just enough text to distinguish it.', figmaUrl: FIGMA, storybookUrl: STORYBOOK }} playground={<>
     <div className="preview-stage"><Chip label={currentLabel} onPress={mode === 'Interactive' ? () => setPlaygroundMessage('Account details opened') : undefined} /><span className="stage-label">Live Coin BrandChip</span></div>
     <div className="controls-panel"><Segment label="Behavior" value={mode} options={['Static', 'Interactive']} onChange={setMode} /><Segment label="Label" value={labelPreset} options={['Account', 'Short']} onChange={setLabelPreset} /><p className="coin-new-readout" role="status">{playgroundMessage}</p></div>
   </>} sections={sections} />

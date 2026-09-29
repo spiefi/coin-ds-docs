@@ -136,7 +136,6 @@ function RadioGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'radio',
-    summary: 'Use a Radio to pick exactly one option from a short list, such as the account to pay from or how often to invest.',
     corePrinciple: 'One choice from a visible set. Put a label beside every Radio, and let the whole row select it.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('radio'),
   }} playground={<>
@@ -155,6 +154,8 @@ function RadioGuide() {
 export default defineGuide({
   slug: 'radio',
   label: 'Radio',
+  summary: 'Use a Radio to pick exactly one option from a short list, such as the account to pay from or how often to invest.',
+  keywords: ['radio button', 'single select', 'single choice', 'option'],
   icon: <><circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" /><circle cx="9" cy="9" r="2.5" fill="currentColor" /></>,
   Component: RadioGuide,
 })

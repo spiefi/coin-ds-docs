@@ -1,13 +1,18 @@
 import { defineConfig, transformWithEsbuild } from 'vite'
 import react from '@vitejs/plugin-react'
+import { readFileSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
 
 const fromDocs = (path: string) => fileURLToPath(new URL(path, import.meta.url))
+const coinComponentsVersion: string = JSON.parse(
+  readFileSync(fromDocs('./node_modules/jfs-components/package.json'), 'utf8'),
+).version
 
 export default defineConfig({
   base: './',
   define: {
     __DEV__: JSON.stringify(true),
+    __COIN_COMPONENTS_VERSION__: JSON.stringify(coinComponentsVersion),
     global: 'globalThis',
   },
   plugins: [

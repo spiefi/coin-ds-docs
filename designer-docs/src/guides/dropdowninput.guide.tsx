@@ -146,7 +146,6 @@ function DropdownInputGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'dropdowninput',
-    summary: 'Use a Dropdown Input in a form when people choose one option from a list of four or more.',
     corePrinciple: 'Label the question, show the choice, and open the list only when asked.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('dropdowninput'),
   }} playground={<>
@@ -167,6 +166,8 @@ function DropdownInputGuide() {
 export default defineGuide({
   slug: 'dropdowninput',
   label: 'Dropdown Input',
+  summary: 'Use a Dropdown Input in a form when people choose one option from a list of four or more.',
+  keywords: ['select', 'picker', 'combobox', 'select field', 'form field'],
   icon: <path d="M4 5h10a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm7 3 1.5 1.5L14 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />,
   Component: DropdownInputGuide,
 })

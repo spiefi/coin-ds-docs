@@ -117,7 +117,6 @@ function DropdownGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'dropdown', name: 'Dropdown',
-    summary: 'Use a Dropdown as the floating panel for a short list of choices or actions that opens from a button or field.',
     corePrinciple: 'A short, scannable list; the screen decides when it opens and where it sits.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('dropdown'),
   }} playground={<>
@@ -137,6 +136,8 @@ function DropdownGuide() {
 export default defineGuide({
   slug: 'dropdown',
   label: 'Dropdown',
+  summary: 'Use a Dropdown as the floating panel for a short list of choices or actions that opens from a button or field.',
+  keywords: ['popover', 'menu', 'flyout', 'options list', 'panel'],
   icon: <><rect x="3" y="3" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none" /><path d="M6 7h6M6 9.5h6M6 12h6" stroke="currentColor" strokeWidth="1.5" /></>,
   Component: DropdownGuide,
 })

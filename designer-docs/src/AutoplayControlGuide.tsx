@@ -431,7 +431,6 @@ export function AutoplayControlGuide() {
       metadata={{
         slug: 'autoplaycontrol',
         name: 'Autoplay Control',
-        summary: 'Let people pause and resume content that advances on its own, such as a slideshow.',
         corePrinciple: 'Show the action a press will take: pause while content plays, play while it is stopped.',
         figmaUrl: FIGMA_URL,
         storybookUrl: STORYBOOK_URL,

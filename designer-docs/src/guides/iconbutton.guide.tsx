@@ -126,7 +126,6 @@ function IconButtonGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'iconbutton',
-    summary: 'Use an Icon Button for a frequent, well-known action where an icon alone is clear, such as add, share, or close.',
     corePrinciple: 'One familiar icon, one clear action, and a label for people who cannot see it.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('iconbutton'),
   }} playground={<>
@@ -148,6 +147,8 @@ function IconButtonGuide() {
 export default defineGuide({
   slug: 'iconbutton',
   label: 'Icon Button',
+  summary: 'Use an Icon Button for a frequent, well-known action where an icon alone is clear, such as add, share, or close.',
+  keywords: ['icon', 'icon only', 'close button', 'share button', 'add button'],
   icon: <><circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5" /><path d="M9 6v6M6 9h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>,
   Component: IconButtonGuide,
 })

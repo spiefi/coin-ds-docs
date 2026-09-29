@@ -126,7 +126,6 @@ function DropdownMenuGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'dropdownmenu', name: 'Dropdown Menu',
-    summary: 'Use a Dropdown Menu for a short list of actions that opens from a button, such as an overflow or account menu.',
     corePrinciple: 'Actions, not answers. For choosing a form value, use Dropdown Input.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('dropdownmenu'),
   }} playground={<>
@@ -147,6 +146,8 @@ function DropdownMenuGuide() {
 export default defineGuide({
   slug: 'dropdownmenu',
   label: 'Dropdown Menu',
+  summary: 'Use a Dropdown Menu for a short list of actions that opens from a button, such as an overflow or account menu.',
+  keywords: ['overflow menu', 'kebab menu', 'more menu', 'context menu', 'actions menu'],
   icon: <><rect x="3" y="3" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none" /><path d="M6 7h4M6 9.5h4M6 12h4M11.5 8.5l1 1-1 1" stroke="currentColor" strokeWidth="1.5" fill="none" /></>,
   Component: DropdownMenuGuide,
 })

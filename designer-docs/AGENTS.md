@@ -37,6 +37,10 @@ Do not read other guides or `src/styles.css` unless the task is about them.
 - Copy comes from the brief or the existing page. Anatomy part names are 1–3
   words (≤ 28 characters); notes are one sentence (≤ 120).
 - Keep verified facts in `docs/evidence/<slug>.md`, not in page copy.
+- A guide's `summary` and `keywords` live in its `defineGuide()` registration;
+  the page lede and search read them from there. Site chrome (the home page,
+  which onboards new designers, and search) is in `src/site/`; guides never
+  edit it.
 
 ## Verify
 
@@ -45,8 +49,10 @@ Do not read other guides or `src/styles.css` unless the task is about them.
   which loads every guide in headless Chrome at 1280 px and 390 px and fails
   on render errors, title/navigation mismatches, Anatomy self-check issues,
   pin/legend mismatches, horizontal scroll, or runtime errors.
+  A full run also checks the home page and search.
   `npm run test:browser <slug>` checks selected guides on its own private
-  build, so parallel workers can run it at the same time.
+  build, so parallel workers can run it at the same time;
+  `npm run test:browser home` checks only the home page and search.
 - While iterating on the dev server (`npm run dev -- --port 4178`),
   `await guideKitSurvey(['<slug>'])` on any page gives the same Anatomy
   result instantly; `{}` means it passes.

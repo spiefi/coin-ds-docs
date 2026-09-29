@@ -109,7 +109,6 @@ function ChipSelectGuide() {
 
   return <ComponentGuideTemplate metadata={{
     slug: 'chipselect', name: 'Chip Select',
-    summary: 'Use a Chip Select to show one filter, such as a date range, and whether it is applied.',
     corePrinciple: 'Idle names the filter; Active shows the chosen value and how to clear it.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('chipselect'),
   }} playground={<>
@@ -130,6 +129,8 @@ function ChipSelectGuide() {
 export default defineGuide({
   slug: 'chipselect',
   label: 'Chip Select',
+  summary: 'Use a Chip Select to show one filter, such as a date range, and whether it is applied.',
+  keywords: ['filter chip', 'chip', 'pill', 'date range', 'filter'],
   icon: <><rect x="2" y="5" width="14" height="8" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M11 7.8 13 10.2M13 7.8 11 10.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>,
   Component: ChipSelectGuide,
 })

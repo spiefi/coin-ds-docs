@@ -570,7 +570,6 @@ export function AppBarGuide() {
       metadata={{
         slug: 'appbar',
         name: 'App Bar',
-        summary: 'Keep page identity, navigation and a few relevant actions together at the top of a view.',
         corePrinciple: 'Use the bar to orient people. Keep its title short and its actions focused.',
         figmaUrl: FIGMA_URL,
         storybookUrl: STORYBOOK_URL,

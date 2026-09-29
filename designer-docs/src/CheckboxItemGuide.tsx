@@ -88,7 +88,7 @@ export function CheckboxItemGuide() {
     },
   }
 
-  return <ComponentGuideTemplate metadata={{ slug: 'checkboxitem', name: 'Checkbox Item', summary: 'Use Checkbox Item for a selectable row with a clear label and, when needed, a supporting action.', corePrinciple: 'Make the whole choice easy to understand and select. Keep supporting actions distinct from the selection.', figmaUrl: FIGMA, storybookUrl: STORYBOOK }} playground={<>
+  return <ComponentGuideTemplate metadata={{ slug: 'checkboxitem', name: 'Checkbox Item', corePrinciple: 'Make the whole choice easy to understand and select. Keep supporting actions distinct from the selection.', figmaUrl: FIGMA, storybookUrl: STORYBOOK }} playground={<>
     <div className="preview-stage"><div className="coin-new-host wide"><Row label={label || 'Savings • 0245'} checked={checked} disabled={disabled} control={edge} action={action} onValueChange={setChecked} onAction={() => setMessage('Savings account details opened')} /></div><span className="stage-label">Live Coin CheckboxItem</span></div>
     <div className="controls-panel">
       <label className="text-control"><span>Label</span><input value={label} onChange={event => setLabel(event.target.value)} maxLength={72} /></label>

@@ -46,6 +46,12 @@ for (const file of readdirSync(join(root, 'src/guides')).filter((f) => f.endsWit
   const declared = source.match(/slug:\s*'([^']+)'/)?.[1]
   if (declared !== slug) errors.push(`src/guides/${file}: slug must be '${slug}' to match the file name.`)
   if (!/label:\s*'[^']+'/.test(source)) errors.push(`src/guides/${file}: add a readable label.`)
+  const summary = source.match(/summary:\s*'((?:[^'\\\n]|\\.)+)'/)?.[1]
+  if (!summary) {
+    errors.push(`src/guides/${file}: add a one-sentence summary to defineGuide() (page lede and search).`)
+  } else if (summary.length > 140) {
+    errors.push(`src/guides/${file}: summary is ${summary.length} characters; keep it to one sentence of 140 or fewer.`)
+  }
   if (!/icon:/.test(source)) errors.push(`src/guides/${file}: add an 18×18 navigation icon.`)
   if (slugs.has(slug)) errors.push(`src/guides/${file}: duplicate slug '${slug}'.`)
   slugs.add(slug)

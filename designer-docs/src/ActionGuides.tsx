@@ -919,7 +919,6 @@ export function ActionFooterGuide() {
         metadata={{
           slug: 'actionfooter',
           name: 'Action Footer',
-          summary: 'Keep the next step close to the decision.',
           corePrinciple: 'Give one action clear priority.',
           figmaUrl: ACTION_FOOTER_FIGMA,
           storybookUrl: ACTION_FOOTER_STORYBOOK,
@@ -938,7 +937,6 @@ export function ActionTileGuide() {
         metadata={{
           slug: 'actiontile',
           name: 'Action Tile',
-          summary: 'A compact shortcut to one destination.',
           corePrinciple: 'One icon. One short label. One destination.',
           figmaUrl: ACTION_TILE_FIGMA,
           storybookUrl: ACTION_TILE_STORYBOOK,
@@ -957,7 +955,6 @@ export function AddItemGuide() {
         metadata={{
           slug: 'additem',
           name: 'Add Item',
-          summary: 'Add an attachment and show what was chosen.',
           corePrinciple: 'Keep empty, preview, and unavailable states distinct.',
           figmaUrl: ADDITEM_FIGMA,
           storybookUrl: ADDITEM_STORYBOOK,
