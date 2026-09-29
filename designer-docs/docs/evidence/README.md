@@ -34,6 +34,7 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | favoritetoggle | [favoritetoggle.md](favoritetoggle.md) |
 | filterbar | [filterbar.md](filterbar.md) |
 | iconbutton | [iconbutton.md](iconbutton.md) |
+| link | [link.md](link.md) |
 
 ## New guides
 
