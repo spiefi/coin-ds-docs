@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import backdropImage from '../assets/bank-hero.png'
 
 export function ExampleCard({
@@ -79,6 +79,48 @@ export function Backdrop({ children, size = 'compact' }: { children: ReactNode; 
   return (
     <div className={`gk-backdrop is-${size}`} style={{ backgroundImage: `url(${backdropImage})` }}>
       {children}
+    </div>
+  )
+}
+
+/**
+ * Shows a component at its natural width and scales it down only when the
+ * host is narrower, for components with a fixed minimum width (e.g. OTP).
+ * Interaction still works; a "Shown at N%" tag marks a scaled view.
+ */
+export function FitWidth({ children }: { children: ReactNode }) {
+  const outerRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLDivElement>(null)
+  const [fit, setFit] = useState({ scale: 1, height: 0 })
+
+  useLayoutEffect(() => {
+    const outer = outerRef.current
+    const inner = innerRef.current
+    if (!outer || !inner) return
+    const measure = () => {
+      const width = inner.offsetWidth
+      const height = inner.offsetHeight
+      const scale = width > outer.clientWidth && width > 0 ? outer.clientWidth / width : 1
+      setFit((current) =>
+        Math.abs(current.scale - scale) < 0.001 && current.height === height ? current : { scale, height },
+      )
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(outer)
+    observer.observe(inner)
+    return () => observer.disconnect()
+  }, [])
+
+  const scaled = fit.scale < 1
+  return (
+    <div className="gk-fit">
+      <div className="gk-fit-box" ref={outerRef} style={{ height: scaled ? fit.height * fit.scale : undefined }}>
+        <div className="gk-fit-inner" ref={innerRef} style={{ transform: scaled ? `scale(${fit.scale})` : undefined }}>
+          {children}
+        </div>
+      </div>
+      {scaled && <span className="gk-fit-zoom">Shown at {Math.round(fit.scale * 100)}%</span>}
     </div>
   )
 }

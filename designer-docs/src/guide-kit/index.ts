@@ -12,4 +12,4 @@ export {
 } from './Anatomy'
 export { Sources, storyUrl, docsUrl, ArrowIcon } from './Sources'
 export { Segment, OnOff, Readout, Toggle, classes } from './Controls'
-export { ExampleCard, DoDont, ScreenFrame, Backdrop } from './Examples'
+export { ExampleCard, DoDont, ScreenFrame, Backdrop, FitWidth } from './Examples'

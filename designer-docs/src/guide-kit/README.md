@@ -106,6 +106,7 @@ passed (self-check, pins match legend rows, no horizontal scroll).
 | `ExampleCard` | One example with a title and optional description. |
 | `DoDont` | A Do/Don't pair with titles and captions. |
 | `ScreenFrame` | A positioned app-screen host (`footer`, optional screen `children`, `size="bar" \| "screen"`) for components that anchor to the bottom of their host, such as BottomNav. |
+| `FitWidth` | Shows a fixed-width component (e.g. OTP) at its natural size and scales it down, still interactive, only when the host is narrower; a "Shown at N%" tag marks it. Use it instead of a host that would clip or scroll. |
 | `Backdrop` | A photographic scene (`size="compact" \| "card"`) for glass components designed to sit on imagery; children align to the top-right. |
 
 Layout classes already in `styles.css` that guides may use: `preview-stage`,
