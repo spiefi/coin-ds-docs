@@ -74,6 +74,15 @@ export function ScreenFrame({
   )
 }
 
+/**
+ * A white panel for light grey components (such as a #f5f5f5 pill or field)
+ * that disappear on the grey example stages. Lays children out in a row like
+ * a host; `width` matches the host widths.
+ */
+export function Surface({ children, width }: { children: ReactNode; width?: 'wide' | 'narrow' }) {
+  return <div className={`gk-surface${width ? ` is-${width}` : ''}`}>{children}</div>
+}
+
 /** A photographic scene for glass components designed to sit on imagery. */
 export function Backdrop({ children, size = 'compact' }: { children: ReactNode; size?: 'compact' | 'card' }) {
   return (

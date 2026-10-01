@@ -75,7 +75,8 @@ Reference guide: `src/BadgeGuide.tsx`.
   Use `specimenWidth={300}` for components that fill their host, such as rows.
 - Several variants in one diagram: wrap them in `<SpecimenRow>` and
   `<Specimen caption="…">`.
-- `surface="dark"` for components designed for dark or media backgrounds.
+- `surface="dark"` for components designed for dark or media backgrounds;
+  `surface="white"` for light grey components that vanish on the default stage.
 - `marks` adds measured teaching marks, keyed under the legend automatically:
   `{ kind: 'outline', target, variant: 'bounds' | 'child' }`,
   `{ kind: 'gap', from, to }` (hatched band plus its px size), and
@@ -107,6 +108,7 @@ passed (self-check, pins match legend rows, no horizontal scroll).
 | `DoDont` | A Do/Don't pair with titles and captions. |
 | `ScreenFrame` | A positioned app-screen host (`footer`, optional screen `children`, `size="bar" \| "screen"`) for components that anchor to the bottom of their host, such as BottomNav. |
 | `FitWidth` | Shows a fixed-width component (e.g. OTP) at its natural size and scales it down, still interactive, only when the host is narrower; a "Shown at N%" tag marks it. Use it instead of a host that would clip or scroll. |
+| `Surface` | A white panel (`width="wide" \| "narrow"`) for light grey components, such as a `#f5f5f5` pill or field, that disappear on the grey stages. Pair it with `<Anatomy surface="white">`. |
 | `Backdrop` | A photographic scene (`size="compact" \| "card"`) for glass components designed to sit on imagery; children align to the top-right. |
 
 Layout classes already in `styles.css` that guides may use: `preview-stage`,
