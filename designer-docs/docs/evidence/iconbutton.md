@@ -41,3 +41,4 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 - #172 fixed. Toggle On reads `toggleIconButton/*` through the `isActive` True/False modes. In Light mode the fill changes from gold `rgb(206,161,90)` (Off) to white (On).
 - `aria-pressed` follows `isActive`, and the derived name stays "Flash" in both states; 0.1.77 changed it to "Flash Off".
 - The Glass variant and the 40 px vs Figma 42 px size gap remain open (Biscuit's note).
+- Open Coin gap #179 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar). A mouse click focuses the button, and IconButton then draws its `focusOverlayStyle` border (1 px, hardcoded `#222`), so a dark ring stays after clicking. `:focus-visible` is false at that point. The behaviour is the same in 0.1.77 and 0.1.78.
