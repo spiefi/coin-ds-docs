@@ -18,24 +18,56 @@ branch `archive/product-app`.
 
 ## Coin components package
 
-The docs install `jfs-components` from the private GitHub repo
-`spiefi/coin-components` (a git dependency pinned to a `v<version>` tag).
-New versions are no longer on public npm; public `jfs-components` stopped at
-0.1.60. Keep the package private: never publish it to npm or copy it into this
-public repository.
+Biscuit's private repository
+`MrBiscuit/react-native-storybook-boilerplate-master` is the source of truth
+for Coin components (package
+`@jio-finance-platform-and-service-ltd/jfs-components`). Agents only read it;
+component changes go to Biscuit as tickets.
 
-To add a version Biscuit shares as a source zip:
+The docs install a built copy, as `jfs-components`, from the private mirror
+`spiefi/coin-components` (a git dependency pinned to a tag). The mirror exists
+because CI and Vercel cannot read Biscuit's repository, and because npm would
+otherwise rebuild the package from source on every install. Public
+`jfs-components` stopped at 0.1.60. Keep the package private: never publish it
+to npm or copy it into this public repository.
 
-1. Unpack it outside this repository, run
-   `npm ci --ignore-scripts --legacy-peer-deps`, then `npx bob build`.
-2. `npm pack --ignore-scripts`, unpack the tarball, remove the `prepare` script
-   from its `package.json` (so git installs do not rebuild), commit it to
-   `spiefi/coin-components`, tag it `v<version>`, and push the tag.
-3. With the user's authorization, point `designer-docs/package.json` at the
-   new tag (`github:spiefi/coin-components#v<version>`), run `npm install`
-   and `npm run verify`.
+`designer-docs/scripts/coin-components.mjs` keeps the mirror in step. Run it
+from `designer-docs/`; its clones live in `~/.cache/coin-components`.
 
-CI reads the package with the read-only deploy key in the
+- `npm run coin:status` compares Biscuit's `main`, the mirror, and the docs,
+  and lists upstream commits that the mirror does not have yet.
+- `npm run coin:sync` builds Biscuit's `main` (or `-- --ref <branch|tag|commit>`)
+  and lists the changed source files and the guides to re-test. It pushes
+  nothing.
+- `npm run coin:sync -- --push` commits that build to the mirror as
+  `v<version>`, or `v<version>-<commit>` when the version was not bumped, and
+  pushes it. It refuses when it cannot prove the build is newer than the
+  mirror's (Biscuit rewrote `main`, or the mirror's build came from a zip):
+  check the listed changes, then add `--force`.
+- `npm run coin:use -- <tag>` points `designer-docs/package.json` at a mirror
+  tag and runs `npm install`. Run `npm run verify` next.
+
+A fix counts as delivered only when it is on Biscuit's `main`. If he sends a
+zip instead, ask him to push it: a zip build cannot be traced to a commit.
+
+### Fix and test loop
+
+1. Coin gaps found while documenting go to Biscuit as Component Bug tickets
+   (see `TICKET-OWNERS.md`).
+2. When he reports fixes, run `npm run coin:status`, then `npm run coin:sync`.
+3. Push the build to the mirror with the user's go-ahead.
+4. On a branch, `npm run coin:use -- <tag>`, then `npm run verify`. Re-test
+   every ticket he marked fixed against its
+   `designer-docs/docs/evidence/<slug>.md`, starting with the guides
+   `coin:sync` listed. Update the evidence and guide copy that the fix
+   changes.
+5. Add a work note with the result to each ticket (`coin-workflow` MCP),
+   saying plainly which fixes failed. Never complete Biscuit's contribution,
+   and move tickets only when the user asks: failed fixes usually go back to
+   In-Progress; only people can move tickets to Done. Release through `main`
+   as usual.
+
+CI reads the mirror with the read-only deploy key in the
 `COIN_COMPONENTS_DEPLOY_KEY` repository secret, and deploys a prebuilt site
 because Vercel's build servers cannot read the private repo.
 

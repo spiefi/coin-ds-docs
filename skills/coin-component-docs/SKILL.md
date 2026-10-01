@@ -51,8 +51,8 @@ defaults. A request to edit or explain this skill starts no board work.
 
 **Planner (you, the primary agent, strongest model).** Owns judgment and copy:
 
-1. Check `jfs-components` declared/installed vs the newest `v*` tag of the
-   private package repo (`git ls-remote --tags git@github.com:spiefi/coin-components.git`).
+1. Check the installed `jfs-components` against the private mirror and
+   Biscuit's source repository: `npm run coin:status` in `designer-docs/`.
 2. Read the public export and types, the Figma node, and the actual Storybook
    stories. Classify each behavior as designer-configurable, system-driven, or
    developer-only; never merge conflicting sources into an invented contract.
