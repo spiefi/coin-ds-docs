@@ -35,3 +35,12 @@
 ## Verification
 
 `npm run verify` passed on 28 September 2026 (all 29 guides at 1280 and 390 px). Planner review of desktop and 390 px captures: Sizing size labels moved above the specimens (they collided with the S/M/L captions), in-context text stacked, and backtick prop names removed from page copy. Rendered Saved state confirmed as a white heart, matching the Limits.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #168 fixed. Saved resolves `Favorite Toggle Color` Active: background `rgb(255,255,255)` and a gold heart (`rgb(206,161,90)`); 0.1.77 drew `rgba(255,255,255,0.2)` with a white heart.
+- With no `Favorite Toggle Size` mode the toggle is 29 × 29 (M); 0.1.77 defaulted to 14 × 14 (S).
+- The web element carries `aria-checked` true or false.
+- A 44 px `hitSlop` is set in code. react-native-web's Pressable ignores `hitSlop`, so in a browser the tap area is still the visible circle.

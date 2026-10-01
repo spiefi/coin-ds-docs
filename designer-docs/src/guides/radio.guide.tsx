@@ -69,12 +69,12 @@ function RadioGuide() {
       description: 'Radio has no label of its own. Use list rows when options need detail, and a plain label for short options.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="In list rows" description="For options with detail, such as accounts. The whole row selects its Radio."><VStack modes={LIGHT} style={{ width: '100%' }}><AccountRows value={configAccount} onSelect={setConfigAccount} /></VStack></ExampleCard>
-        <ExampleCard title="Beside a short label" description="For short options. Only the 18 px circle responds to a press."><LabelRows selected={[configFrequency]} onSelect={setConfigFrequency} /></ExampleCard>
+        <ExampleCard title="Beside a short label" description="For short options. Only the circle responds to a press: 18 px in a browser, 44 px on phones."><LabelRows selected={[configFrequency]} onSelect={setConfigFrequency} /></ExampleCard>
       </div>,
     },
     states: {
       header: 'States', title: 'Selected, unselected, and disabled',
-      description: 'The screen sets which Radio is selected and which are disabled. Hover adds a lilac glow and keyboard focus a yellow ring while people interact.',
+      description: 'The screen sets which Radio is selected and which are disabled. Hover adds a lilac glow; keyboard focus adds a yellow ring and an orange border.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Unselected" description="An empty ring: not chosen."><LabelRow option="Quarterly" /></ExampleCard>
         <ExampleCard title="Selected" description="Purple fill with a white dot."><LabelRow option="Monthly" selected /></ExampleCard>
@@ -84,7 +84,7 @@ function RadioGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'An 18 px circle inside a larger row',
-      description: 'The Radio is always 18 × 18 px. On its own only the circle is pressable, so put it in a list row whose whole height and width select it.',
+      description: 'The Radio is always 18 × 18 px. On its own only the circle is pressable (44 px on phones, 18 px in a browser), so put it in a list row whose whole height and width select it.',
       body: <Anatomy legend={false} marks={[
         { kind: 'size', target: byTestId('radio-alone'), side: 'top', label: 'both' },
         { kind: 'size', target: `${byTestId('radio-row')} [role="button"]`, side: 'top', label: 'both' },
@@ -130,7 +130,7 @@ function RadioGuide() {
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
       body: <Sources checked="29 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('radio')} stories={[
         { label: 'Default', id: 'components-radio--default' }, { label: 'All states', id: 'components-radio--all-states' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository. Figma has eight variants (Idle, Hover, Active, Focus, and Disabled, unselected and selected); the package sets <code>selected</code> and <code>disabled</code>, and draws hover and focus itself. <code>RadioButton</code> is a deprecated name for the same component. Radio has no label or group: the screen keeps one selected value. On the web a Radio is not announced as a radio button or as selected, Space does not select it, and the unselected focus border differs from Figma.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma has eight variants (Idle, Hover, Active, Focus, and Disabled, unselected and selected); the package sets <code>selected</code> and <code>disabled</code>, and draws hover and focus itself. <code>RadioButton</code> is a deprecated name for the same component. Radio has no label or group: the screen keeps one selected value. On the web a Radio is announced as a radio button with its selected state, Space selects it, and the focused unselected border is Figma’s orange. Developers name each Radio with <code>accessibilityLabel</code>.</Sources>,
     },
   }
 

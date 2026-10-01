@@ -51,11 +51,11 @@ function IconButtonGuide() {
     },
     states: {
       header: 'States', title: 'Default, toggle, disabled, loading',
-      description: 'A toggle swaps between two icons. In Figma its On state also turns white; the installed package does not apply that colour yet, so only the icon changes.',
+      description: 'A toggle swaps between two icons, and its On state turns into a white circle with a black icon. It keeps one name and is announced as pressed or not pressed.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Default" description="One press, one action."><IconButton iconName="ic_add" accessibilityLabel="Add" modes={modes()} /></ExampleCard>
-        <ExampleCard title="Toggle off" description="Shows the current state's icon."><IconButton isToggle isActive={false} inactiveIcon="ic_flash" activeIcon="ic_flash_off" accessibilityLabel="Turn flash off" modes={modes()} /></ExampleCard>
-        <ExampleCard title="Toggle on" description="Currently only the icon changes (known Coin issue)."><IconButton isToggle isActive inactiveIcon="ic_flash" activeIcon="ic_flash_off" accessibilityLabel="Turn flash on" modes={modes()} /></ExampleCard>
+        <ExampleCard title="Toggle off" description="Gold fill with the inactive icon."><IconButton isToggle isActive={false} inactiveIcon="ic_flash" activeIcon="ic_flash_off" accessibilityLabel="Flash" modes={modes()} /></ExampleCard>
+        <ExampleCard title="Toggle on" description="White fill with the active icon, announced as pressed."><IconButton isToggle isActive inactiveIcon="ic_flash" activeIcon="ic_flash_off" accessibilityLabel="Flash" modes={modes()} /></ExampleCard>
         <ExampleCard title="Disabled" description="Dimmed to half opacity and skipped by keyboard focus."><IconButton iconName="ic_add" accessibilityLabel="Add" disabled modes={modes()} /></ExampleCard>
         <ExampleCard title="Loading" description="A same-size placeholder while the action loads."><SkeletonGroup loading><IconButton loading iconName="ic_add" accessibilityLabel="Add" modes={modes()} /></SkeletonGroup></ExampleCard>
       </div>,
@@ -120,7 +120,7 @@ function IconButtonGuide() {
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
       body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('iconbutton')} stories={[
         { label: 'Default', id: 'components-iconbutton--default' }, { label: 'Toggle', id: 'components-iconbutton--toggle' }, { label: 'Sizes', id: 'components-iconbutton--sizes' }, { label: 'Emphasis', id: 'components-iconbutton--appearance-modes' }, { label: 'Disabled', id: 'components-iconbutton--disabled' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Size, emphasis, and appearance come from the <code>Button / Size</code>, <code>Emphasis</code>, and <code>AppearanceBrand</code> modes. Figma’s toggle On state is a white circle with a black icon, but the installed package keeps the gold fill and only swaps the icon, and it does not expose the toggle as pressed. Figma’s Glass variant has no package equivalent. Without a label, the accessible name is the icon’s name, so always set one.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Size, emphasis, and appearance come from the <code>Button / Size</code>, <code>Emphasis</code>, and <code>AppearanceBrand</code> modes. A toggle’s On state uses the toggle tokens, a white circle with a black icon as in Figma. On the web a toggle is announced as pressed or not pressed and keeps the same name in both states. Figma’s Glass variant has no package equivalent. Without a label, the accessible name is the icon’s name, so always set one.</Sources>,
     },
   }
 

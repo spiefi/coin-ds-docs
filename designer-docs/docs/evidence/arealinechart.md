@@ -14,3 +14,10 @@ Checked 22 September 2026 for the local Attached, Area Line Chart, Allocation Co
 - The DOM exposes focusable x-axis targets; canonical IAB accessibility-tree readback omitted those targets and complete series labels. The guide therefore includes a visible plotted-values table as supporting text and does not claim a complete screen-reader chart experience.
 - The guide's anatomy callouts measure the rendered y-axis, plot, goal pin, and x-axis label after layout and fonts settle; the leaders and numbered markers are documentation chrome.
 - The chart's y-axis labels are absolutely positioned by the shipped component, so the guide reserves external host clearance around chart examples; the deliberately constrained long-label teaching example may still clip inside its own frame.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #166 fixed. In a 320 px host the Y-axis tick labels used to sit 28 px left of the chart (0.1.77); they now stay inside it, because an in-flow probe sizes the Y-axis column. The goal pin used to overflow the right edge (300–324 px in a 320 px host) and is now clamped inside the plot.
+- Not in the ticket: the last x-axis label ("Jun") still extends about 3 px past the right edge in that host.

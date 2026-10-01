@@ -9,8 +9,8 @@ const LIGHT = { 'Color Mode': 'Light' } as Modes
 const ACCOUNTS = ['Savings account', 'Checking account', 'Brokerage account', 'Recurring deposit']
 const OPTIONS = Array.from({ length: 12 }, (_, i) => `Option ${i + 1}`)
 const ACTIONS = ['Download statement', 'Share statement', 'Report a problem']
-const MENU = '[role="menu"]'
-const item = (n: number) => `${MENU} [role="menuitem"]:nth-child(${n})`
+const MENU = '[role="listbox"]'
+const item = (n: number) => `${MENU} [role="option"]:nth-child(${n})`
 
 function List({ labels, selected = [], disabled = [], icons = false, maxHeight, width = 240, label = 'Accounts', onPress }: {
   labels: string[]; selected?: string[]; disabled?: string[]; icons?: boolean; maxHeight?: number; width?: number; label?: string; onPress?: (label: string) => void
@@ -111,7 +111,7 @@ function DropdownGuide() {
       body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('dropdown')} stories={[
         { label: 'Default', id: 'components-dropdown--default' }, { label: 'With icons', id: 'components-dropdown--with-icons' },
         { label: 'With disabled item', id: 'components-dropdown--with-disabled-item' }, { label: 'Scrollable', id: 'components-dropdown--scrollable' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a menu of menu items, the selected item is shown only visually (it is not announced as selected), and arrow keys do not move between items; Tab and Enter do.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a listbox of options and the selected item is announced as selected. Arrow keys do not move between items; Tab and Enter do.</Sources>,
     },
   }
 

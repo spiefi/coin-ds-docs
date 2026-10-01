@@ -31,3 +31,10 @@
 ## Verification
 
 `npm run verify` passed on 28 September 2026 (32 guides at 1280 and 390 px). Planner review of desktop and 390 px captures: the Sizing item mark's label covered the first label (panel mark moved to the top, item mark to the right), and the playground's "Selected" control covered only two of four items (removed; pressing an item selects it). The worker used the public `Icon` prop `iconName` where the brief said `name`.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #173 (Dropdown part). The panel is `role=listbox` with `role=option` items, and the selected item has `aria-selected=true`; disabled items get `aria-disabled`. The guide's anatomy selectors moved from `menu`/`menuitem` to `listbox`/`option`.
+- Standalone keyboard: Tab reaches each option and Enter selects it. Space and arrow keys do nothing. Hover and press still use the same grey as selected.

@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { ChipSelect, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
-import { Anatomy, DoDont, ExampleCard, OnOff, Readout, Segment, Sources, docsUrl } from '../guide-kit'
+import { Anatomy, DoDont, ExampleCard, OnOff, Readout, Segment, Sources, byTestId, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
 
 const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1901-4727'
 const modes = { 'Color Mode': 'Light' } as Modes
 const CAL = 'ic_calendar_week'
 const FILTER = 'ic_filter'
-const ROOT = '[tabindex="0"]'
+const ROOT = byTestId('chip-anatomy')
 
 function Chip(props: { label: string; active?: boolean; icon?: string; showCloseIcon?: boolean }) {
   return <ChipSelect modes={modes} {...props} />
@@ -38,7 +38,7 @@ function ChipSelectGuide() {
         { name: 'Close icon', note: 'Shows that pressing again clears the filter.', target: `${ROOT} > div:last-child`, side: 'right' },
         { name: 'Container', note: 'Pill that turns lavender when Active.', target: ROOT, side: 'bottom' },
       ]} marks={[{ kind: 'gap', from: `${ROOT} > div:first-child`, to: `${ROOT} [dir="auto"]` }]}>
-        <ChipSelect active label="Date" icon={CAL} modes={modes} />
+        <ChipSelect active label="Date" icon={CAL} modes={modes} testID="chip-anatomy" />
       </Anatomy>,
     },
     configuration: {
@@ -64,7 +64,7 @@ function ChipSelectGuide() {
       description: 'Height is fixed at 32 px. Width grows with the label and the icons, so short labels keep a row of chips on one line.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} marks={[{ kind: 'size', target: ROOT, side: 'bottom', label: 'both' }, { kind: 'padding', target: ROOT }]}>
-          <ChipSelect label="Date" modes={modes} />
+          <ChipSelect label="Date" modes={modes} testID="chip-anatomy" />
         </Anatomy>
         <ExampleCard title="Short and long"><div className="coin-new-content-list"><Chip label="Date" /><Chip label="Last 30 days" /></div></ExampleCard>
       </div>,
@@ -103,7 +103,7 @@ function ChipSelectGuide() {
       body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('chipselect')} stories={[
         { label: 'Default', id: 'components-chipselect--default' }, { label: 'Active', id: 'components-chipselect--active' },
         { label: 'Custom icon', id: 'components-chipselect--custom-icon' }, { label: 'Active without close icon', id: 'components-chipselect--active-without-close-icon' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Figma’s State variant maps to the <code>active</code> property, which sets the <code>ChipSelect State</code> mode. The leading icon shows in both states, as in Figma. The close icon is part of the single press target, not a separate button. On the web the chip has no button role and does not announce whether it is Active; Enter and click both activate it.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s State variant maps to the <code>active</code> property, which sets the <code>ChipSelect State</code> mode. The leading icon shows in both states, as in Figma. The close icon is part of the single press target, not a separate button. On the web the chip is a button named by its label and announced as pressed when Active; Enter and click activate it. Developers can replace the name with <code>accessibilityLabel</code>.</Sources>,
     },
   }
 

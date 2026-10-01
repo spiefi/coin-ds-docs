@@ -41,17 +41,17 @@ function FavoriteToggleGuide() {
     },
     states: {
       header: 'States', title: 'Saved, not saved, disabled, loading',
-      description: 'Figma shows Saved as a white circle with a gold heart. The installed package does not apply those colours yet, so Saved and Not saved look almost the same; only the blur behind the heart changes.',
+      description: 'Saved is a white circle with a gold heart, as in Figma. Not saved is a frosted circle with a white heart.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Not saved" description="Frosted circle, white heart."><Backdrop><Fav /></Backdrop></ExampleCard>
-        <ExampleCard title="Saved" description="Currently renders a flat translucent circle with a white heart (known Coin issue)."><Backdrop><Fav initial /></Backdrop></ExampleCard>
+        <ExampleCard title="Saved" description="White circle, gold heart."><Backdrop><Fav initial /></Backdrop></ExampleCard>
         <ExampleCard title="Disabled" description="Dimmed to half opacity and skipped by keyboard focus."><Backdrop><Fav disabled /></Backdrop></ExampleCard>
         <ExampleCard title="Loading" description="A same-size circle holds the place while the item loads."><Backdrop><SkeletonGroup loading><FavoriteToggle loading modes={modes('M')} accessibilityLabel="Save to favorites" /></SkeletonGroup></Backdrop></ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: 'A fixed square set by the size mode',
-      description: 'The toggle never stretches. Its tap area is exactly its visible size, so Small gives a 14 px target and Medium 29 px.',
+      description: 'The toggle never stretches. On phones its tap area reaches 44 px around the circle; in a web browser only the visible circle responds, 14 px for Small and 29 px for Medium.',
       body: <Anatomy legend={false} surface="dark" marks={[
         { kind: 'size', target: byTestId('fav-size-s'), side: 'top', label: 'both' },
         { kind: 'size', target: byTestId('fav-size-m'), side: 'top', label: 'both' },
@@ -94,7 +94,7 @@ function FavoriteToggleGuide() {
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
       body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('favoritetoggle')} stories={[
         { label: 'Default', id: 'components-favoritetoggle--default' }, { label: 'States', id: 'components-favoritetoggle--states' }, { label: 'Disabled', id: 'components-favoritetoggle--disabled' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Size comes from the <code>Favorite Toggle Size</code> mode (S 14, M 29, L 41 px); the package defaults to S while the Figma masters are M, so this guide sets M. Figma’s Saved state is a white circle with a gold heart, but the installed package does not resolve the <code>Favorite Toggle Color</code> Active mode, so Saved renders with a white heart. On the web the saved state is not announced (<code>aria-checked</code> is missing), and the tap area equals the visible size.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Size comes from the <code>Favorite Toggle Size</code> mode (S 14, M 29, L 41 px) and defaults to M, the Figma size. Saved uses the <code>Favorite Toggle Color</code> Active mode: a white circle with a gold heart. On the web the saved state is announced (<code>aria-checked</code>). On iOS and Android a hit slop extends the tap area to 44 px; react-native-web ignores it, so in a browser the tap area equals the visible size.</Sources>,
     },
   }
 
@@ -111,7 +111,7 @@ function FavoriteToggleGuide() {
       <Segment label="State" value={saved ? 'Saved' : 'Not saved'} options={['Not saved', 'Saved'] as const} onChange={v => setSaved(v === 'Saved')} />
       <Segment label="Size" value={size} options={['S', 'M', 'L'] as const} onChange={setSize} />
       <OnOff label="Disabled" value={disabled} onChange={setDisabled} />
-      <Readout title="Saved" value={saved ? 'Yes' : 'No'}>Both states currently render a white heart; see Sources.</Readout>
+      <Readout title="Saved" value={saved ? 'Yes' : 'No'}>Saved shows a gold heart on a white circle.</Readout>
     </div>
   </>} sections={sections} />
 }

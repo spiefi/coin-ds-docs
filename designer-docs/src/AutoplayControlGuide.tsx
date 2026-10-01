@@ -420,7 +420,7 @@ export function AutoplayControlGuide() {
           stories={STORIES}
           checked="24 September 2026"
         >
-          Declared, installed, and npm <code>latest</code> are all <code>jfs-components@0.1.60</code>. Figma’s state variants match the package’s <code>state</code> property. Storybook asks for an accessibility label, but this package accepts none, so the rendered button has no accessible name; report this before shipping the control on its own. The control has no timer: Carousel’s Numbered type owns autoplay, with a 4-second default interval.
+          Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s state variants match the package’s <code>state</code> property. The control is named “Pause” or “Play” after its state; developers can set a more specific <code>accessibilityLabel</code>, such as “Pause slideshow”, as Storybook asks. The control has no timer: Carousel’s Numbered type owns autoplay, with a 4-second default interval.
         </Sources>
       ),
     },
@@ -457,9 +457,9 @@ export function AutoplayControlGuide() {
             <Readout title="Consumer state" value={`state="${state}"${disabled ? ' · disabled' : ''}`}>
               {stateMessage(state)} The control has no timer; the host starts and stops playback.
             </Readout>
-            <div className="coin-guide-note is-warning">
-              <strong>No accessible name</strong>
-              <p>This package version cannot label the control, so screen readers announce only “button”. See Sources.</p>
+            <div className="coin-guide-note">
+              <strong>Named after its state</strong>
+              <p>Screen readers hear “Pause” or “Play”. For a clearer name, such as “Pause slideshow”, the developer sets an accessibility label.</p>
             </div>
           </div>
         </>

@@ -68,7 +68,7 @@ function FilterBarGuide() {
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Empty" description="The placeholder carries the name."><Host><FilterBar modes={MODES} placeholder="Search funds" value="" onChangeText={() => {}} /></Host></ExampleCard>
         <ExampleCard title="Filled" description="The query replaces the placeholder."><Host><FilterBar modes={MODES} placeholder="Search funds" value="Nifty" onChangeText={() => {}} /></Host></ExampleCard>
-        <ExampleCard title="Focused" description="Select the field: the bar draws a 1 px outline around its padded area."><Host><Bar placeholder="Search funds" /></Host></ExampleCard>
+        <ExampleCard title="Focused" description="Select the field: a 1 px ring outlines its padded area without changing the bar’s height."><Host><Bar placeholder="Search funds" /></Host></ExampleCard>
       </div>,
     },
     sizing: {
@@ -118,7 +118,7 @@ function FilterBarGuide() {
         { label: 'Custom placeholder', id: 'components-filterbar--with-custom-placeholder' },
         { label: 'Prefilled value', id: 'components-filterbar--with-value' },
         { label: 'Custom input', id: 'components-filterbar--with-render-input' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Figma draws the bar at 360 × 64 with a 44 px field; the installed package renders 62 px with a 42 px field. The focus outline is a fixed 1 px dark border that adds 2 px of height. On the web, <code>accessibilityLabel</code> is not applied to the default input, so the placeholder is the field’s only accessible name. <code>renderInput</code> and <code>children</code> are developer overrides and are not shown.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma draws the bar at 360 × 64 with a 44 px field; the installed package renders 62 px with a 42 px field. The focus outline is a fixed 1 px dark ring (not a token) that keeps the bar’s height. On the web, <code>accessibilityLabel</code> still does not reach the default input, so the placeholder is the field’s only accessible name. <code>renderInput</code> and <code>children</code> are developer overrides and are not shown.</Sources>,
     },
   }
 

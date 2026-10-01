@@ -39,3 +39,9 @@
 ## Verification
 
 `npm run verify` passed on 29 September 2026 (34 guides at 1280 and 390 px) on jfs-components 0.1.77; `guideKitSurvey(['link'])` returned `{}`. Planner review of desktop and 390 px captures: anatomy pins sit on the label, the underline, and the right edge of the Fill bounds (shown at 1.5×); Sizing reads 184 × 17 (Fill) and 77 × 17 (Hug) and scales to 0.72 at 390 px without horizontal scroll. Playground checked: Center centres the Fill label, a press on the empty right side of a Fill row counts, Hug + Center moves the label to the left edge, and Disabled dims the link and stops the count. In context: Terms, Privacy Policy, Continue, and Need help? each update the status line. Review fix (brief error): the Configuration Hug example first looked identical to Fill, left; it now shows Hug in a row beside other content (Recent transactions · View all).
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #174 fixed. Enter and Space on a focused link both call `onPress`. A disabled link has `aria-disabled=true` and `tabindex=-1`; 0.1.77 had `tabindex=0` and no `aria-disabled`.

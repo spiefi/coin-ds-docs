@@ -132,7 +132,7 @@ function LinkGuide() {
         { label: 'Disabled', id: 'components-link--disabled' },
         { label: 'Truncated', id: 'components-link--truncated' },
         { label: 'With children', id: 'components-link--with-children' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository. Figma has three variants (Left and Fill, Left and Hug, Center and Fill) and no disabled variant; the package adds <code>disabled</code>. The screen handles navigation in <code>onPress</code>; Link has no web address or target. On the web, Enter does not activate a focused link, and a disabled link can still be focused and is not announced as disabled.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma has three variants (Left and Fill, Left and Hug, Center and Fill) and no disabled variant; the package adds <code>disabled</code>. The screen handles navigation in <code>onPress</code>; Link has no web address or target. On the web, Enter and Space activate a focused link, and a disabled link is announced as disabled and skipped by Tab.</Sources>,
     },
   }
 

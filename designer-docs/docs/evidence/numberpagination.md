@@ -31,3 +31,9 @@
 ## Verification
 
 `npm run verify` passed on 29 September 2026 (38 guides at 1280 and 390 px) on jfs-components 0.1.77; `guideKitSurvey` returned `{}`. Planner review of desktop and 390 px captures. Playground Pages control and presses update "Slide n of m"; anatomy pins on the pill, active page, and a page number (shown at 2×); Sizing reads 138 × 39 and 32 × 32. Review fixes (brief errors): In context copy no longer promises a photo swap the demo does not show; the 12-page Don't says some pages are cut off (the Backdrop clips the first ones).
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #176 fixed. The active page has `aria-current=page`. The container renders as `<nav aria-label="Pagination">` (a toolbar on native). Twelve pages in a 360 px host scroll horizontally, and the last page can be scrolled into view; 0.1.77 clipped pages 11–12. The guide's anatomy targets moved from `:scope > div` to `[role="navigation"]`.

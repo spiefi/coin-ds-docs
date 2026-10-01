@@ -31,7 +31,7 @@ function NumberPaginationGuide() {
       header: 'Anatomy', title: 'Numbers on a glass pill',
       description: 'A frosted, translucent pill holds one circular number per page. The page in view is a white circle with a dark number.',
       body: <Anatomy surface="dark" parts={[
-        { name: 'Glass pill', note: 'Frosted, translucent surface with a thin light border.', target: ':scope > div', side: 'left' },
+        { name: 'Glass pill', note: 'Frosted, translucent surface with a thin light border.', target: '[role="navigation"]', side: 'left' },
         { name: 'Active page', note: 'White circle with a dark number for the slide in view.', target: '[aria-label="Page 1"]', side: 'top' },
         { name: 'Page number', note: 'Other pages in white; each is a 32 px pressable circle.', target: '[aria-label="Page 3"]', side: 'bottom' },
       ]} marks={[{ kind: 'size', target: '[aria-label="Page 4"]', side: 'right' }]}>
@@ -57,9 +57,9 @@ function NumberPaginationGuide() {
     },
     sizing: {
       header: 'Sizing', title: '39 px tall, 32 px per page',
-      description: 'The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide. It does not wrap or scroll, so extra pages are cut off in a narrow space.',
+      description: 'The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide. It does not wrap: pages that do not fit scroll sideways inside the pill.',
       body: <Anatomy legend={false} surface="dark" marks={[
-        { kind: 'size', target: ':scope > div', side: 'top', label: 'both' },
+        { kind: 'size', target: '[role="navigation"]', side: 'top', label: 'both' },
         { kind: 'size', target: '[aria-label="Page 1"]', side: 'bottom', label: 'both' },
       ]}>
         <NumberPagination totalPages={4} activePage={1} modes={LIGHT} onPageChange={() => {}} />
@@ -87,7 +87,7 @@ function NumberPaginationGuide() {
           goodCaption="White numbers stand out on a photo." badCaption="White numbers disappear on white." />
         <DoDont good={<OnImage total={5} initial={1} />} bad={<OnImage total={12} initial={1} />}
           goodTitle="Keep to a few pages" badTitle="Show every page of a long set"
-          goodCaption="Five numbers fit comfortably." badCaption="Twelve pages overflow a narrow space and some are cut off." />
+          goodCaption="Five numbers fit comfortably." badCaption="Twelve pages don’t fit, so people must scroll the pill to find the rest." />
       </div>,
     },
     sources: {
@@ -97,7 +97,7 @@ function NumberPaginationGuide() {
         { label: 'Default', id: 'components-numberpagination--default' },
         { label: 'Active page', id: 'components-numberpagination--active-page' },
         { label: 'Custom children', id: 'components-numberpagination--custom-children' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows, disabled state, or overflow handling. On the web the active page is shown only visually, and the numbers are not grouped under a label.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the pill. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.</Sources>,
     },
   }
 

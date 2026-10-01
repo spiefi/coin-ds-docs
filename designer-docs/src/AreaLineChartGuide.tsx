@@ -289,7 +289,7 @@ export function AreaLineChartGuide() {
           storybookDescription="Default, overlap, forecast, and interactive stories"
           stories={AREA_STORIES}
         >
-          Examples use public <code>AreaLineChart</code> and its public interaction model from <code>jfs-components</code> 0.1.60. The chart derives a nice tick domain from its data unless y bounds are supplied, and its plot height excludes the x-axis row. Projected points, selected indices, goal pins, curves, grid, dots, and legends are public choices. SVG interaction is keyboard reachable through the public x-axis Pressable in RN Web, but the rendered accessibility tree does not expose full series labels; the guide keeps a visible values table.
+          Examples use public <code>AreaLineChart</code> and its public interaction model from <code>jfs-components</code> 0.1.78. The Y-axis column reserves the width of its widest tick label, and the goal pin stays inside the plot. The chart derives a nice tick domain from its data unless y bounds are supplied, and its plot height excludes the x-axis row. Projected points, selected indices, goal pins, curves, grid, dots, and legends are public choices. SVG interaction is keyboard reachable through the public x-axis Pressable in RN Web, but the rendered accessibility tree does not expose full series labels; the guide keeps a visible values table.
         </Sources>
       ),
     },

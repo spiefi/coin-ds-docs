@@ -33,3 +33,9 @@
 ## Verification
 
 `npm run verify` passed on 28 September 2026 (all 29 guides at 1280 and 390 px). Planner review of desktop and 390 px captures: backtick prop names removed from two descriptions; anatomy, examples, and in-context toggling render as briefed. The Idle chip's #f5f5f5 fill is low-contrast against the example stage; this is the kit stage colour, not a component change.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #169 fixed. The chip renders as a `<button>` with `aria-label` from `label`, and `aria-pressed` follows `active`. `accessibilityLabel` replaces the name, and `testID` reaches the element (the guide's anatomy now targets `byTestId('chip-anatomy')`).

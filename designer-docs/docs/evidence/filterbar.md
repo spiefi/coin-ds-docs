@@ -32,3 +32,11 @@
 ## Verification
 
 `npm run verify` passed on 28 September 2026 (build, guide check, headless browser test of all 29 guides at 1280 and 390 px). Planner review of desktop and 390 px captures: two brief errors fixed (a false "placeholder is cut off first" sizing claim and a Don't with no visible consequence, replaced by a long placeholder that truncates in a narrow host), and blank Anatomy/Sources headings filled. Playground typing, the Start with control, and the in-context list filter were exercised.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #170 partly fixed; it was moved back to In-Progress with a work note.
+- Fixed: focus draws a 1 px `#222` box-shadow ring, so the bar keeps its height (94 → 94 px in the test host; 0.1.77 grew by 2 px). The ring colour is still not a token.
+- Not fixed: `<FilterBar accessibilityLabel="Search transactions">` renders an `<input>` with no `aria-label`. FilterBar passes the label to the Coin `TextInput`, which sets `accessibilityLabel={undefined}` on its inner input.

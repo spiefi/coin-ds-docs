@@ -33,3 +33,11 @@
 ## Verification
 
 `npm run verify` passed on 28 September 2026 (32 guides at 1280 and 390 px). A headless run pressed the first field, saw the menu open, chose Checking account, and saw the field update and the menu close with no page errors. Planner review of desktop and 390 px captures fixed: the anatomy size mark covering pin 2 (removed; Sizing measures the field), the Support text pin crowding the Placeholder pin (moved right), the Sizing mark crossing the label (moved right), a false "long values end in an ellipsis" claim, a missing placeholder in Content, and a 390 px playground overflow (kit fix: `.playground-grid > * { min-width: 0 }`).
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #173 partly fixed; it was moved back to In-Progress with a work note.
+- Fixed: it renders without a safe-area provider (0.1.77 threw "No safe area value available"). The trigger has `aria-haspopup=listbox` and opens `role=listbox` with `role=option` items. The chosen option has `aria-selected=true`. `aria-invalid` and `aria-required` are set. A disabled field has `tabindex=-1`. Focus draws a 2 px box-shadow ring with no height change.
+- Not fixed: opening the menu moves focus to the hidden "Close options" backdrop inside the Modal, so ArrowDown and Enter never reach the trigger's `onKeyDown`, and the keyboard cannot select an option. A disabled field has no `aria-disabled` attribute, although `a11yProps` sets it.

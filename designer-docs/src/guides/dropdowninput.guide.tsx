@@ -140,7 +140,7 @@ function DropdownInputGuide() {
         { label: 'Default', id: 'components-dropdowninput--default' }, { label: 'Required', id: 'components-dropdowninput--required' },
         { label: 'Invalid', id: 'components-dropdowninput--invalid' }, { label: 'Disabled', id: 'components-dropdowninput--disabled' },
         { label: 'Read-only', id: 'components-dropdowninput--read-only' }, { label: 'Long list', id: 'components-dropdowninput--scrollable-long-list' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Figma’s Open variant is the field with a Dropdown below it; in code the list opens as a layer over the page when the field is pressed. The component needs a <code>SafeAreaProvider</code> at the app root and fails without one. On the web the field is a combobox that opens a menu rather than a listbox, arrow keys do not move through options, invalid, required, and disabled states are not announced, a disabled field can still receive focus, and the focus outline is removed.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Open variant is the field with a Dropdown below it; in code the list opens as a layer over the page when the field is pressed. It works with or without a <code>SafeAreaProvider</code>. On the web the field is a combobox that opens a listbox, the chosen option is announced as selected, invalid and required are announced, a disabled field leaves the tab order, and focus shows a ring. Two gaps remain: arrow keys do not move through the open list, and a disabled field is not announced as disabled.</Sources>,
     },
   }
 

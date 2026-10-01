@@ -32,3 +32,10 @@
 ## Verification
 
 `npm run verify` passed on 29 September 2026 (38 guides at 1280 and 390 px) on jfs-components 0.1.77; `guideKitSurvey` returned `{}`. Planner review of desktop and 390 px captures. Playground: pressing a label row's Radio changes the Frequency readout; Disable Yearly greys it and blocks presses. In context: rows and Radios select the account and Continue enables. Review fixes (brief errors): the Anatomy size mark collided with the specimen caption and was removed; the account rows in Configuration and Content now fill the example card.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #175 fixed. `role=radio` with `aria-checked`, `accessibilityLabel` becomes `aria-label`, and Space selects. A focused unselected radio draws a `rgb(253,90,19)` (#fd5a13) border plus the existing 4 px yellow ring; the border falls back to that value while `radio/focus/border/color` is missing from the packaged variables.
+- A 44 px `hitSlop` is set in code. react-native-web's Pressable ignores it, so a browser still measures 18 × 18.

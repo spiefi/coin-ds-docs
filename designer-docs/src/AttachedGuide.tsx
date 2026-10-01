@@ -313,7 +313,7 @@ export function AttachedGuide() {
               { label: 'Open all positions story', id: 'components-attached--all-positions' },
             ]}
           >
-            Examples use public <code>Attached</code> and <code>IconCapsule</code> exports from <code>jfs-components</code> 0.1.60. The package source defaults <code>circular</code> to <code>true</code>, while its JSDoc says <code>false</code>; the guide uses the actual runtime default when omitted and exposes the supported choice. Badge placement waits for layout measurement, and the badge does not expand the parent layout footprint. The capsule story enlarges its children with style dimensions; this guide uses the native Icon Capsule Size modes M and XS so both child capsules keep their component-owned circular geometry.
+            Examples use public <code>Attached</code> and <code>IconCapsule</code> exports from <code>jfs-components</code> 0.1.78. The package defaults <code>circular</code> to <code>true</code>; the guide uses that default when omitted and exposes the supported choice. Badge placement waits for layout measurement, and the badge does not expand the parent layout footprint. The capsule story enlarges its children with style dimensions; this guide uses the native Icon Capsule Size modes M and XS so both child capsules keep their component-owned circular geometry.
           </Sources>
         ),
       },

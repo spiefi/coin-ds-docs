@@ -22,3 +22,9 @@ Storybook IDs were verified in the published `index.json` (v5, 1,070 entries). S
 - `npm run build` (typecheck and Vite) passed; the chunk-size warning predates this batch.
 - Headless Chromium through `playwright-core` 1.56.1 captured desktop (1440 × 900) and narrow-mobile (390 × 844) full frames and per-section frames for all three guides. No page had horizontal overflow and no console errors appeared; the only warning is the Carousel `pointerEvents` deprecation.
 - Checked interactions: every playground control; pointer, Enter, and Space activation; disabled items leaving the Tab order; `inert` specimens staying out of focus; measured anatomy after font loading; sidebar and mobile navigation between the new guides, Avatar Group, and Accordion; direct anchor entry; refresh; and Back.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- Fixed since the 28 September build (0.1.77) and unchanged in 0.1.78. The control accepts `accessibilityLabel` and defaults its name to "Pause" or "Play" from `state`, and the icon is hidden from assistive technology. The guide no longer reports a missing accessible name.

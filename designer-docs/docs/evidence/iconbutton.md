@@ -33,3 +33,11 @@
 ## Verification
 
 `npm run verify` passed on 28 September 2026 (32 guides at 1280 and 390 px). Planner review of desktop and 390 px captures: the size-consistency Do/Don't used Low emphasis, which has no fill, so the size difference was invisible; both rows now use Medium. Everything else rendered as briefed, including the toggle On state showing only the icon swap.
+
+## 0.1.78 check
+
+Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
+
+- #172 fixed. Toggle On reads `toggleIconButton/*` through the `isActive` True/False modes. In Light mode the fill changes from gold `rgb(206,161,90)` (Off) to white (On).
+- `aria-pressed` follows `isActive`, and the derived name stays "Flash" in both states; 0.1.77 changed it to "Flash Off".
+- The Glass variant and the 40 px vs Figma 42 px size gap remain open (Biscuit's note).
