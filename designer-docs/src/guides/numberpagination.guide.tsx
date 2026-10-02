@@ -93,7 +93,7 @@ function NumberPaginationGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Number Pagination contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="29 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('numberpagination')} stories={[
+      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('numberpagination')} stories={[
         { label: 'Default', id: 'components-numberpagination--default' },
         { label: 'Active page', id: 'components-numberpagination--active-page' },
         { label: 'Custom children', id: 'components-numberpagination--custom-children' },

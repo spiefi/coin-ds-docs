@@ -126,7 +126,7 @@ function LinkGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Link contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="29 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('link')} stories={[
+      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('link')} stories={[
         { label: 'Default', id: 'components-link--default' },
         { label: 'Inside Text Segment', id: 'components-link--inside-text-segment' },
         { label: 'Disabled', id: 'components-link--disabled' },

@@ -92,7 +92,7 @@ function FavoriteToggleGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Favorite Toggle contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('favoritetoggle')} stories={[
+      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('favoritetoggle')} stories={[
         { label: 'Default', id: 'components-favoritetoggle--default' }, { label: 'States', id: 'components-favoritetoggle--states' }, { label: 'Disabled', id: 'components-favoritetoggle--disabled' },
       ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Size comes from the <code>Favorite Toggle Size</code> mode (S 14, M 29, L 41 px) and defaults to M, the Figma size. Saved uses the <code>Favorite Toggle Color</code> Active mode: a white circle with a gold heart. On the web the saved state is announced (<code>aria-checked</code>). On iOS and Android a hit slop extends the tap area to 44 px; react-native-web ignores it, so in a browser the tap area equals the visible size.</Sources>,
     },

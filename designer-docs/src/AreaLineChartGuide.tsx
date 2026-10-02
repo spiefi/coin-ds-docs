@@ -282,7 +282,7 @@ export function AreaLineChartGuide() {
       description: 'This guide uses the published AreaLineChart API, the inspected Figma master, and the canonical Storybook stories.',
       body: (
         <Sources
-          checked="22 September 2026"
+          checked="1 October 2026"
           figmaUrl={FIGMA_URL}
           figmaDescription="Area Line Chart · node 4225:1049"
           storybookUrl={STORYBOOK_URL}

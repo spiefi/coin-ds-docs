@@ -40,3 +40,9 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 - #170 partly fixed; it was moved back to In-Progress with a work note.
 - Fixed: focus draws a 1 px `#222` box-shadow ring, so the bar keeps its height (94 → 94 px in the test host; 0.1.77 grew by 2 px). The ring colour is still not a token.
 - Not fixed: `<FilterBar accessibilityLabel="Search transactions">` renders an `<input>` with no `aria-label`. FilterBar passes the label to the Coin `TextInput`, which sets `accessibilityLabel={undefined}` on its inner input.
+
+## 3795b4c check
+
+Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
+
+- #170 fixed. `<FilterBar accessibilityLabel="Search transactions">` renders the input with `aria-label="Search transactions"`, because TextInput now forwards the label. The focus ring from 0.1.78 is unchanged.

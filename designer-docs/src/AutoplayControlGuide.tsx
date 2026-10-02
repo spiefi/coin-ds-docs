@@ -418,7 +418,7 @@ export function AutoplayControlGuide() {
           storybookUrl={STORYBOOK_URL}
           storybookDescription="AutoplayControl docs and stories; Carousel Numbered story"
           stories={STORIES}
-          checked="24 September 2026"
+          checked="1 October 2026"
         >
           Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s state variants match the package’s <code>state</code> property. The control is named “Pause” or “Play” after its state; developers can set a more specific <code>accessibilityLabel</code>, such as “Pause slideshow”, as Storybook asks. The control has no timer: Carousel’s Numbered type owns autoplay, with a 4-second default interval.
         </Sources>

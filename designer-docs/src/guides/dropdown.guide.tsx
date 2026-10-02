@@ -108,10 +108,10 @@ function DropdownGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Dropdown contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('dropdown')} stories={[
+      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('dropdown')} stories={[
         { label: 'Default', id: 'components-dropdown--default' }, { label: 'With icons', id: 'components-dropdown--with-icons' },
         { label: 'With disabled item', id: 'components-dropdown--with-disabled-item' }, { label: 'Scrollable', id: 'components-dropdown--scrollable' },
-      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a listbox of options and the selected item is announced as selected. Arrow keys do not move between items; Tab and Enter do.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a listbox of options and the selected item is announced as selected. In this version a Dropdown on its own can’t be reached with the keyboard: its items leave the tab order and arrow keys don’t move between them. Inside Dropdown Input, the field handles the keyboard.</Sources>,
     },
   }
 

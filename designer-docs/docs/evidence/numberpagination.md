@@ -39,3 +39,9 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 - #176, accessibility part fixed. The active page has `aria-current=page`. The container renders as `<nav aria-label="Pagination">` (a toolbar on native). Twelve pages in a 360 px host scroll horizontally, and the last page can be scrolled into view; 0.1.77 clipped pages 11–12. The guide's anatomy targets moved from `:scope > div` to `[role="navigation"]`.
 - #176 regression; the ticket was moved back to In-Progress with a work note. The new horizontal ScrollView is as tall as the pill's padded content box (29 px) and clips vertically, so the 32 px page circles lose about 2 px at the top and 1 px at the bottom. In the "Four pages" example the button spans 447–479 px and the ScrollView 449–478 px. 0.1.77 drew the full circle, and Storybook still runs the older code.
 - Open Coin gap #180 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar), present in both 0.1.77 and 0.1.78. The blur layer (`backdrop-filter: blur(9px)`, border-radius 0) is not clipped to the rounded pill, so on a photo the blur shows square corners. On Storybook's plain background it is invisible.
+
+## 3795b4c check
+
+Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
+
+- #176 regression resolved. The scroll viewport is now the 32 px item height, with vertical padding clamped, so the active circle is no longer clipped. The four-page pill is 138 × 39 again. `aria-current`, the Pagination landmark, and the 12-page scroll still pass. #180 (square blur corners) is still open.

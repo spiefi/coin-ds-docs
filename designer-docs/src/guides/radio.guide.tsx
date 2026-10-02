@@ -128,7 +128,7 @@ function RadioGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Radio contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="29 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('radio')} stories={[
+      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('radio')} stories={[
         { label: 'Default', id: 'components-radio--default' }, { label: 'All states', id: 'components-radio--all-states' },
       ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma has eight variants (Idle, Hover, Active, Focus, and Disabled, unselected and selected); the package sets <code>selected</code> and <code>disabled</code>, and draws hover and focus itself. <code>RadioButton</code> is a deprecated name for the same component. Radio has no label or group: the screen keeps one selected value. On the web a Radio is announced as a radio button with its selected state, Space selects it, and the focused unselected border is Figma’s orange. Developers name each Radio with <code>accessibilityLabel</code>.</Sources>,
     },

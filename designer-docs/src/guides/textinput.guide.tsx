@@ -116,12 +116,12 @@ function TextInputGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Text Input contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('textinput')} stories={[
+      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('textinput')} stories={[
         { label: 'Default', id: 'components-textinput--default' },
         { label: 'Leading and trailing', id: 'components-textinput--with-leading-and-trailing' },
         { label: 'Custom leading', id: 'components-textinput--with-custom-leading' },
         { label: 'Search', id: 'components-textinput--search' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; Text Input is unchanged in 0.1.78. Figma’s textInput is 251 × 44 with start and end icon slots; the package renders 42 px tall and shows focus with its own dark outline. <code>TextInput.Search</code> is the same field with a fixed search icon. The field has no visible label, error, or disabled state, and its leading icon can be changed but not removed. On the web the accessibility label is not applied to the input and the placeholder clears on focus, so a focused field has no accessible name; a rotating placeholder leaves it unnamed throughout.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s textInput is 251 × 44 with start and end icon slots; the package renders 42 px tall and shows focus with its own dark outline. <code>TextInput.Search</code> is the same field with a fixed search icon. The field has no visible label, error, or disabled state, and its leading icon can be changed but not removed. On the web the accessibility label names the input. Without one, the placeholder is the field’s only name, and it clears on focus; a rotating placeholder leaves the field unnamed. Always set an accessibility label.</Sources>,
     },
   }
 

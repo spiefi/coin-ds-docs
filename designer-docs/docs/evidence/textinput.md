@@ -23,3 +23,9 @@ Checked 1 October 2026. Declared and installed `jfs-components` is `0.1.77` from
 - `editable={false}` sets `readonly` with no visual change.
 - A custom trailing `Icon` defaults to gold. `AppearanceBrand: Neutral` gives the grey `rgb(84,89,97)` used in the guide.
 - Coin gap #183 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): `accessibilityLabel` never reaches the `<input>`, including through `TextInput.Search`. This is the root cause of FilterBar #170. The placeholder clears on focus, so a focused field has no accessible name, and a rotating placeholder leaves the input's placeholder empty throughout. The ticket also notes the 42 vs 44 px height.
+
+## 3795b4c check
+
+Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
+
+- #183 partly fixed. `accessibilityLabel` now reaches the input as `aria-label`, including through TextInput.Search, and a labelled field keeps its name while focused. Without a label, the placeholder still clears on focus, and a rotating placeholder leaves the field unnamed. The guide now tells designers to always set an accessibility label.

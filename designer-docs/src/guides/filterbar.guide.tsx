@@ -113,12 +113,12 @@ function FilterBarGuide() {
     },
     sources: {
       header: 'Sources', title: 'Use the public Filter Bar contract', description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('filterbar')} stories={[
+      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('filterbar')} stories={[
         { label: 'Default', id: 'components-filterbar--default' },
         { label: 'Custom placeholder', id: 'components-filterbar--with-custom-placeholder' },
         { label: 'Prefilled value', id: 'components-filterbar--with-value' },
         { label: 'Custom input', id: 'components-filterbar--with-render-input' },
-      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma draws the bar at 360 × 64 with a 44 px field; the installed package renders 62 px with a 42 px field. The focus outline is a fixed 1 px dark ring (not a token) that keeps the bar’s height. On the web, <code>accessibilityLabel</code> still does not reach the default input, so the placeholder is the field’s only accessible name. <code>renderInput</code> and <code>children</code> are developer overrides and are not shown.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma draws the bar at 360 × 64 with a 44 px field; the installed package renders 62 px with a 42 px field. The focus outline is a fixed 1 px dark ring (not a token) that keeps the bar’s height. On the web, <code>accessibilityLabel</code> names the input. <code>renderInput</code> and <code>children</code> are developer overrides and are not shown.</Sources>,
     },
   }
 

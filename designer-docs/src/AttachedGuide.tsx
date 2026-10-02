@@ -303,7 +303,7 @@ export function AttachedGuide() {
           'This guide uses the published Attached API, the Coin Components Library node, and the canonical Storybook fixtures.',
         body: (
           <Sources
-            checked="22 September 2026"
+            checked="1 October 2026"
             figmaUrl={FIGMA_URL}
             figmaDescription="Attached component set · node 4477:471"
             storybookUrl={STORYBOOK_URL}

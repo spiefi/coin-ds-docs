@@ -41,3 +41,9 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 - #173 partly fixed; it was moved back to In-Progress with a work note.
 - Fixed: it renders without a safe-area provider (0.1.77 threw "No safe area value available"). The trigger has `aria-haspopup=listbox` and opens `role=listbox` with `role=option` items. The chosen option has `aria-selected=true`. `aria-invalid` and `aria-required` are set. A disabled field has `tabindex=-1`. Focus draws a 2 px box-shadow ring with no height change.
 - Not fixed: opening the menu moves focus to the hidden "Close options" backdrop inside the Modal, so ArrowDown and Enter never reach the trigger's `onKeyDown`, and the keyboard cannot select an option. A disabled field has no `aria-disabled` attribute, although `a11yProps` sets it.
+
+## 3795b4c check
+
+Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
+
+- #173 fixed. ArrowDown opens the menu and moves focus into the listbox ("From options"); ArrowDown and Enter then select an option, and the chosen option has `aria-selected=true`. A disabled field has `aria-disabled=true` and `tabindex=-1`.

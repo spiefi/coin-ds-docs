@@ -100,7 +100,7 @@ function ChipSelectGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Chip Select contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('chipselect')} stories={[
+      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('chipselect')} stories={[
         { label: 'Default', id: 'components-chipselect--default' }, { label: 'Active', id: 'components-chipselect--active' },
         { label: 'Custom icon', id: 'components-chipselect--custom-icon' }, { label: 'Active without close icon', id: 'components-chipselect--active-without-close-icon' },
       ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s State variant maps to the <code>active</code> property, which sets the <code>ChipSelect State</code> mode. The leading icon shows in both states, as in Figma. The close icon is part of the single press target, not a separate button. On the web the chip is a button named by its label and announced as pressed when Active; Enter and click activate it. Developers can replace the name with <code>accessibilityLabel</code>.</Sources>,

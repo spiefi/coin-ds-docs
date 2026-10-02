@@ -38,3 +38,9 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 
 - #173 (Dropdown part). The panel is `role=listbox` with `role=option` items, and the selected item has `aria-selected=true`; disabled items get `aria-disabled`. The guide's anatomy selectors moved from `menu`/`menuitem` to `listbox`/`option`.
 - Standalone keyboard: Tab reaches each option and Enter selects it. Space and arrow keys do nothing. Hover and press still use the same grey as selected.
+
+## 3795b4c check
+
+Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
+
+- Regression, Coin gap #185 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar). DropdownItem now always renders `tabindex=-1`, and the listbox is focusable only with the new `focusable` prop (with `activeDescendantId` managed by the host). A standalone Dropdown therefore can't be reached with the keyboard: Tab skips it. In 0.1.77, Tab reached each option and Enter selected it. Inside DropdownInput the field handles the keyboard.

@@ -136,11 +136,11 @@ function DropdownInputGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Dropdown Input contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('dropdowninput')} stories={[
+      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('dropdowninput')} stories={[
         { label: 'Default', id: 'components-dropdowninput--default' }, { label: 'Required', id: 'components-dropdowninput--required' },
         { label: 'Invalid', id: 'components-dropdowninput--invalid' }, { label: 'Disabled', id: 'components-dropdowninput--disabled' },
         { label: 'Read-only', id: 'components-dropdowninput--read-only' }, { label: 'Long list', id: 'components-dropdowninput--scrollable-long-list' },
-      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Open variant is the field with a Dropdown below it; in code the list opens as a layer over the page when the field is pressed. It works with or without a <code>SafeAreaProvider</code>. On the web the field is a combobox that opens a listbox, the chosen option is announced as selected, invalid and required are announced, a disabled field leaves the tab order, and focus shows a ring. Two gaps remain: arrow keys do not move through the open list, and a disabled field is not announced as disabled.</Sources>,
+      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Open variant is the field with a Dropdown below it; in code the list opens as a layer over the page when the field is pressed. It works with or without a <code>SafeAreaProvider</code>. On the web the field is a combobox that opens a listbox; arrow keys move through the open list and Enter chooses. The chosen option is announced as selected, invalid, required, and disabled are announced, a disabled field leaves the tab order, and focus shows a ring.</Sources>,
     },
   }
 
