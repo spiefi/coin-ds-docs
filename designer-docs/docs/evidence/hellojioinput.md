@@ -21,6 +21,7 @@ Checked 2 October 2026. Declared and installed `jfs-components` is `0.1.78`, bui
 - Pill 36 px tall in every state (Figma 38 for Idle and Active), radius 20, padding 4/4/4/8, `rgb(245,245,245)` fill and 1 px border. Brand icon 18 px; text 14/18 `rgb(84,89,97)`; send button 26 × 26 (Figma 28), gold `rgb(206,161,90)`, named "Send". Fills its container.
 - Focus: white fill, `rgb(181,181,181)` border; the placeholder clears but the input keeps its name ("Ask me anything").
 - Send with an empty field calls `onSubmit('')`; Return sends the typed text; the text stays in the field afterwards.
+- The send button is a Coin IconButton, so a mouse click leaves a dark 1 px `rgb(34,34,34)` border around it until focus moves (`:focus-visible` is false). This is IconButton gap #179, not specific to HelloJio Input.
 - `disabled`: opacity 0.5, input `readonly`, send `aria-disabled` and out of the tab order.
 - `leading={null}` and `trailing={null}` remove the icon and the send button.
 - With two Chat Attachment chips the pill grows to 110 px; chips sit above the prompt. A chip with `onClose` gets an 18 × 18 "Remove attachment" button that works with a mouse; without `onClose` its close icon does nothing.
