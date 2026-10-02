@@ -249,7 +249,8 @@ export function Anatomy({
   scale?: 'auto' | number
   /** Layout width for specimens that fill their host, such as rows. */
   specimenWidth?: number
-  surface?: 'light' | 'dark'
+  /** 'white' for light grey components that disappear on the default stage. */
+  surface?: 'light' | 'dark' | 'white'
   /** Identifies this diagram in self-check warnings. */
   title?: string
 }) {
@@ -532,7 +533,7 @@ export function Anatomy({
   const shownScale = Math.round(geometry.scale * 10) / 10
 
   return (
-    <div className={`gk-anatomy${surface === 'dark' ? ' is-dark' : ''}${legend ? '' : ' is-bare'}`}>
+    <div className={`gk-anatomy${surface === 'dark' ? ' is-dark' : surface === 'white' ? ' is-white' : ''}${legend ? '' : ' is-bare'}`}>
       <div
         className="gk-anatomy-stage"
         ref={stageRef}
