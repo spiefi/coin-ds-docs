@@ -9,8 +9,9 @@ in `designer-docs/` (live at <https://coin-designer-docs.vercel.app>).
   `sh skills/install.sh` to update the Claude Code and Codex copies.
 - Docs worker agents: `.claude/agents/coin-docs-worker.md` (Claude Code) and
   `.codex/agents/coin_docs_worker.toml` (Codex).
-- Before creating or assigning a Coin Workflow ticket, read `TICKET-OWNERS.md` for who
-  owns which kind of ticket.
+- Before creating or assigning a ticket on the DuetWorks board (the
+  `coin-workflow` MCP), read `TICKET-OWNERS.md`: it says which kinds of ticket
+  follow a board flow, and who gets the rest.
 
 The former product app (Buy Gold flow and other screens) and its screen
 tooling were removed on 26 September 2026. They are preserved on the local
@@ -52,20 +53,21 @@ zip instead, ask him to push it: a zip build cannot be traced to a commit.
 
 ### Fix and test loop
 
-1. Coin gaps found while documenting go to Biscuit as Component Bug tickets
-   (see `TICKET-OWNERS.md`).
-2. When he reports fixes, run `npm run coin:status`, then `npm run coin:sync`.
+1. Coin gaps found while documenting become Component Bug tickets for Biscuit
+   and Anagha, filed the way the board's Component Fix flow starts (see
+   `TICKET-OWNERS.md`).
+2. When they report fixes, run `npm run coin:status`, then `npm run coin:sync`.
 3. Push the build to the mirror with the user's go-ahead.
 4. On a branch, `npm run coin:use -- <tag>`, then `npm run verify`. Re-test
-   every ticket he marked fixed against its
+   every ticket they marked fixed against its
    `designer-docs/docs/evidence/<slug>.md`, starting with the guides
    `coin:sync` listed. Update the evidence and guide copy that the fix
    changes.
 5. Add a work note with the result to each ticket (`coin-workflow` MCP),
-   saying plainly which fixes failed. Never complete Biscuit's contribution,
-   and move tickets only when the user asks: failed fixes usually go back to
-   In-Progress; only people can move tickets to Done. Release through `main`
-   as usual.
+   saying plainly which fixes failed. Never complete Biscuit's or Anagha's
+   contribution, and move tickets only when the user asks: failed fixes
+   usually go back to In progress; only people can move tickets to Done.
+   Release through `main` as usual.
 
 CI reads the mirror with the read-only deploy key in the
 `COIN_COMPONENTS_DEPLOY_KEY` repository secret, and deploys a prebuilt site

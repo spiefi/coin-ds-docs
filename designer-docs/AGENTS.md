@@ -13,8 +13,8 @@ Coin components for designers.
 - Before revising a guide, run `npm run coin:status` to compare the installed
   `jfs-components` with the private mirror and Biscuit's source repository
   (see the root `AGENTS.md`). Upgrade only with the user's authorization.
-  Report missing capabilities as Coin gaps (a ticket on the Coin Workflow
-  board, assigned per the root `TICKET-OWNERS.md`), never work around them.
+  Report missing capabilities as Coin gaps (a ticket on the DuetWorks board,
+  filed per the root `TICKET-OWNERS.md`), never work around them.
 - Figma is read-only reference: the Coin Components Library for public
   properties, variants, slots, and modes; Coin Subcomponents only to
   understand anatomy.
