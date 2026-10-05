@@ -45,17 +45,29 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
     steps:
       - uses: actions/checkout@v7
         with:
           ref: main
+          path: docs
           fetch-depth: 0
+
+      # The protected dispatch tag pins the workflow and release script.
+      # Guides start from current main, preserving earlier publications.
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          path: .release-contract
+          fetch-depth: 1
 
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: designer-docs/package-lock.json
+          cache-dependency-path: docs/designer-docs/package-lock.json
 
       # The step names are what the board shows when a run stops; keep them in step with
       # STEP_REASONS in the board's app/lib/github-publish.ts.
@@ -65,15 +77,15 @@ jobs:
           CONFIRMATION: ${{ inputs.confirmation }}
           DUETWORKS_BOARD_KEY: ${{ secrets.DUETWORKS_BOARD_KEY }}
         run: |
-          echo "${PUBLISH_SCRIPT_SHA256}  .github/scripts/publish.mjs" | sha256sum --check --strict
-          node .github/scripts/publish.mjs check "$CONFIRMATION" "$TICKETS"
+          echo "${PUBLISH_SCRIPT_SHA256}  ../.release-contract/.github/scripts/publish.mjs" | sha256sum --check --strict
+          node ../.release-contract/.github/scripts/publish.mjs check "$CONFIRMATION" "$TICKETS"
 
       - name: Pick the approved commits
         run: |
           git fetch origin docs-next
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          node .github/scripts/publish.mjs pick
+          node ../.release-contract/.github/scripts/publish.mjs pick
           if ! git cherry-pick -x $(cat "$RUNNER_TEMP/commits"); then
             git cherry-pick --abort
             echo "::error::An approved commit didn't apply cleanly to main. Nothing was published."
@@ -92,11 +104,11 @@ jobs:
           ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
 
       - name: Install dependencies
-        working-directory: designer-docs
+        working-directory: docs/designer-docs
         run: npm ci
 
       - name: Check the guides
-        working-directory: designer-docs
+        working-directory: docs/designer-docs
         run: npm run verify
 
       # A push made with GITHUB_TOKEN doesn't start the "Designer docs" workflow, so this one deploys.
@@ -104,7 +116,7 @@ jobs:
         run: git push origin HEAD:refs/heads/main
 
       - name: Deploy to Vercel
-        working-directory: designer-docs
+        working-directory: docs/designer-docs
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           TICKETS: ${{ inputs.tickets }}
@@ -121,5 +133,5 @@ jobs:
           REQUEST: ${{ inputs.request }}
           DUETWORKS_BOARD_KEY: ${{ secrets.DUETWORKS_BOARD_KEY }}
         run: |
-          echo "${PUBLISH_SCRIPT_SHA256}  .github/scripts/publish.mjs" | sha256sum --check --strict
-          node .github/scripts/publish.mjs mark "$(git rev-parse HEAD)" "$REQUEST"
+          echo "${PUBLISH_SCRIPT_SHA256}  ../.release-contract/.github/scripts/publish.mjs" | sha256sum --check --strict
+          node ../.release-contract/.github/scripts/publish.mjs mark "$(git rev-parse HEAD)" "$REQUEST"
