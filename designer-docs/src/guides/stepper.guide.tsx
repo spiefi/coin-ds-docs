@@ -18,7 +18,7 @@ const KYC = [
   { title: 'Verify PAN', text: 'Match your PAN with your name', date: '2 Oct 2026', attention: 'Your PAN name differs slightly from your bank name', failed: 'PAN not found. Check the number and try again' },
   { title: 'Add bank account', text: 'Link the account you’ll invest from', date: '3 Oct 2026', attention: 'Add your account’s IFSC to continue', failed: 'Account name doesn’t match your PAN' },
   { title: 'Add nominee', text: 'Choose who receives your investments', date: '4 Oct 2026', attention: 'Nominee’s date of birth is missing', failed: 'Nominee details couldn’t be saved. Try again' },
-  { title: 'eSign', text: 'Sign the form with an Aadhaar OTP', date: '', attention: 'Your OTP expires in 2 minutes', failed: 'OTP didn’t match. Request a new one' },
+  { title: 'eSign', text: 'Sign the form with an Aadhaar OTP', date: '5 Oct 2026', attention: 'Your OTP expires in 2 minutes', failed: 'OTP didn’t match. Request a new one' },
 ]
 const OUTCOMES = ['In progress', 'Needs attention', 'Failed'] as const
 type Outcome = typeof OUTCOMES[number]
@@ -30,17 +30,23 @@ function step(key: string | number, s: State, title?: string, text?: string, dat
 
 const Host = ({ children }: { children: React.ReactNode }) => <div className="coin-new-host wide"><VStack modes={LIGHT} style={{ width: '100%' }}>{children}</VStack></div>
 
+/** Every stage carries a date line, as in Figma: when it finished, started, or is due. */
+const STARTED = 'Started 5 Oct 2026'
+const DUE = 'Due by 12 Oct 2026'
+const done = (date: string) => `Done ${date}`
+
 /** KYC(current, outcome): `current` is 1-based; current > 4 means every stage is done. */
 function kyc(current: number, outcome: Outcome, dates = true, doneDates?: string[]) {
   return KYC.map((k, i) => {
     const n = i + 1
-    if (n < current) return step(n, 'done', k.title, k.text, dates ? (doneDates?.[i] || k.date || undefined) : undefined)
+    if (n < current) return step(n, 'done', k.title, k.text, dates ? done(doneDates?.[i] || k.date) : undefined)
     if (n === current) {
-      if (outcome === 'Needs attention') return step(n, 'attention', k.title, k.attention)
-      if (outcome === 'Failed') return step(n, 'failed', k.title, k.failed)
-      return step(n, 'current', k.title, k.text)
+      const date = dates ? STARTED : undefined
+      if (outcome === 'Needs attention') return step(n, 'attention', k.title, k.attention, date)
+      if (outcome === 'Failed') return step(n, 'failed', k.title, k.failed, date)
+      return step(n, 'current', k.title, k.text, date)
     }
-    return step(n, 'upcoming', k.title, k.text)
+    return step(n, 'upcoming', k.title, k.text, dates ? DUE : undefined)
   })
 }
 
@@ -72,11 +78,11 @@ function StepperGuide() {
         { name: 'Connector', note: 'Links a stage to the next one.', target: connector(2), side: 'left' },
         { name: 'Upcoming stage', note: 'Pale circle: not started yet.', target: circle(3), side: 'bottom' },
         { name: 'Title', note: 'Names the stage.', target: text(1, 1), side: 'top' },
-        { name: 'Date', note: 'When the stage was finished.', target: text(1, 3), side: 'right' },
+        { name: 'Date', note: 'When the stage finished, started, or is due.', target: text(1, 3), side: 'right' },
         { name: 'Supporting text', note: 'What the stage involves, or how it went.', target: text(2, 2), side: 'right' },
       ]}>
         <Stepper modes={LIGHT}>
-          {step(1, 'done', KYC[0].title, KYC[0].text, KYC[0].date)}
+          {step(1, 'done', KYC[0].title, KYC[0].text, done(KYC[0].date))}
           {step(2, 'current', KYC[1].title, KYC[1].text)}
           {step(3, 'upcoming', KYC[2].title, KYC[2].text)}
         </Stepper>
@@ -92,8 +98,8 @@ function StepperGuide() {
         <ExampleCard title="Title and supporting text" description="Explains what each stage asks for."><Host><Stepper modes={LIGHT}>
           {step(1, 'done', KYC[0].title, KYC[0].text)}{step(2, 'current', KYC[1].title, KYC[1].text)}{step(3, 'upcoming', KYC[2].title, KYC[2].text)}
         </Stepper></Host></ExampleCard>
-        <ExampleCard title="With dates" description="Shows when each stage was finished."><Host><Stepper modes={LIGHT}>
-          {step(1, 'done', KYC[0].title, KYC[0].text, KYC[0].date)}{step(2, 'current', KYC[1].title, KYC[1].text)}{step(3, 'upcoming', KYC[2].title, KYC[2].text)}
+        <ExampleCard title="With dates" description="Shows when each stage finished, started, or is due."><Host><Stepper modes={LIGHT}>
+          {step(1, 'done', KYC[0].title, KYC[0].text, done(KYC[0].date))}{step(2, 'current', KYC[1].title, KYC[1].text, STARTED)}{step(3, 'upcoming', KYC[2].title, KYC[2].text, DUE)}
         </Stepper></Host></ExampleCard>
       </div>,
     },

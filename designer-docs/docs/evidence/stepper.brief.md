@@ -12,7 +12,8 @@ KYC stages (title · supporting text · date when done):
 1. Verify PAN · Match your PAN with your name · 2 Oct 2026
 2. Add bank account · Link the account you’ll invest from · 3 Oct 2026
 3. Add nominee · Choose who receives your investments · 4 Oct 2026
-4. eSign · Sign the form with an Aadhaar OTP
+4. eSign · Sign the form with an Aadhaar OTP · 5 Oct 2026
+Every stage carries a date line, as in Figma and the Storybook stories: done “Done 2 Oct 2026”, current (any outcome) “Started 5 Oct 2026”, upcoming “Due by 12 Oct 2026”. (Dating only done stages made the Dates toggle look broken at stages 1–2; review comment, 5 October 2026.)
 Outcome text for the current stage (needs attention / failed): 1 “Your PAN name differs slightly from your bank name” / “PAN not found. Check the number and try again”; 2 “Add your account’s IFSC to continue” / “Account name doesn’t match your PAN”; 3 “Nominee’s date of birth is missing” / “Nominee details couldn’t be saved. Try again”; 4 “Your OTP expires in 2 minutes” / “OTP didn’t match. Request a new one”.
 "KYC(current, outcome)": stages before `current` are done (with dates), the current one is current / attention / failed (outcome text replaces its supporting text), later ones upcoming. Hosts: `<div className="coin-new-host wide"><VStack modes={LIGHT} style={{ width: '100%' }}>…</VStack></div>` (without the full-width VStack the text does not wrap).
 No `testID`. In an Anatomy specimen the Stepper is `:scope > div`; stage k is `S(k) = ':scope > div > div:nth-child(k)'`; its circle `${S(k)} > div:first-child > div:first-child`; connector `${S(k)} > div:first-child > div:nth-child(2)`; title, supporting text, date `${S(k)} > div:last-child > div > div:nth-child(1|2|3)`.
@@ -20,7 +21,7 @@ No `testID`. In an Anatomy specimen the Stepper is `:scope > div`; stage k is `S
 ## Overview
 summary: Use a Stepper to show where someone is in a process with several stages, such as KYC, and how each stage went.
 principle: Every stage named, its state shown in colour, icon, and words.
-playground: `.preview-stage` with a host holding KYC(current, outcome). Controls: Segment "Current stage" ['1', '2', '3', '4']; Segment "Outcome" ['In progress', 'Needs attention', 'Failed'] → the current stage’s state; OnOff "Dates" (default on) → `meta` on every Step. Readout title "Progress", value "Stage 2 of 4: Add bank account"; note: "Stepper isn’t pressable. The screen sets each stage’s state." Stage label: "Live Coin Stepper".
+playground: `.preview-stage` with a host holding KYC(current, outcome). Controls: Segment "Current stage" ['1', '2', '3', '4']; Segment "Outcome" ['In progress', 'Needs attention', 'Failed'] → the current stage’s state; OnOff "Dates" (default on) → the date line on every stage. Readout title "Progress", value "Stage 2 of 4: Add bank account"; note: "Stepper isn’t pressable. The screen sets each stage’s state." Stage label: "Live Coin Stepper".
 
 ## Anatomy
 header: Anatomy · title: Stages joined by a line · description: Each stage pairs a 36 px indicator with its text. A 2 px connector links it to the next stage; the last stage has none.
@@ -30,7 +31,7 @@ parts:
 2. Connector — Links a stage to the next one. — target: connector of S(2) — side: left
 3. Upcoming stage — Pale circle: not started yet. — target: circle of S(3) — side: bottom
 4. Title — Names the stage. — target: title of S(1) — side: top
-5. Date — When the stage was finished. — target: date of S(1) — side: right
+5. Date — When the stage finished, started, or is due. — target: date of S(1) — side: right
 6. Supporting text — What the stage involves, or how it went. — target: supporting text of S(2) — side: right
 If the survey reports overlapping pins, move a left pin to the bottom.
 
@@ -39,7 +40,7 @@ header: Configuration · title: Choose the text each stage shows · description:
 Grid `coin-new-example-grid three`, each a host with stages 1 done, 2 current, 3 upcoming:
 - Title only — titles only — lesson: Compact, for short processes whose titles say enough.
 - Title and supporting text — add supporting text — lesson: Explains what each stage asks for.
-- With dates — add supporting text and the done stage’s date — lesson: Shows when each stage was finished.
+- With dates — add supporting text and each stage’s date line — lesson: Shows when each stage finished, started, or is due.
 
 ## States
 header: States · title: Five stage states · description: Each stage shows one state. In Figma, pick it with the Step Status mode; in code the matching icon and colour are set together, so a check is always green.
@@ -61,7 +62,7 @@ One ExampleCard "Stage names and outcomes": a host with stage('done') Verify PAN
 
 ## In context
 header: In context · title: KYC progress on a card · description: The screen works out each stage’s state and updates the Stepper as the person moves on. Stepper isn’t pressable, so the next action is a separate button.
-Composition in `.coin-new-context`: `<Card modes={LIGHT}>` › `<VStack modes={LIGHT} style={{ width: '100%' }}>` › KYC(current, 'In progress') starting at stage 2, then `<Button modes={LIGHT} label="Continue" onPress={…} />`. Continue marks the current stage done (with today’s date “5 Oct 2026”) and makes the next one current; after stage 4 every stage is done and the button label becomes “Start again”, which resets to stage 1. Below the card, `<p className="coin-new-readout" role="status">` with “Stage 2 of 4: Add bank account” or “All 4 stages done”.
+Composition in `.coin-new-context`: `<Card modes={LIGHT}>` › `<VStack modes={LIGHT} style={{ width: '100%' }}>` › KYC(current, 'In progress') starting at stage 2, then `<Button modes={LIGHT} label="Continue" onPress={…} />`. Continue marks the current stage done (“Done 5 Oct 2026”) and makes the next one current; after stage 4 every stage is done and the button label becomes “Start again”, which resets to stage 1. Below the card, `<p className="coin-new-readout" role="status">` with “Stage 2 of 4: Add bank account” or “All 4 stages done”.
 
 ## Do & Don'ts
 header: Do & Don’ts · title: Make every stage readable · description: Each pair shows a stage people understand versus one that misleads them.
