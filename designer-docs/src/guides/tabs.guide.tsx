@@ -34,9 +34,9 @@ function TabsGuide() {
   const [selected, setSelected] = useState(0)
   const [ctx, setCtx] = useState(0)
   const labels = set === 'Views' ? VIEWS : FILTERS
-  const scrollable = layout === 'Scrollable'
-  const note = scrollable ? 'Tabs hug their labels; scroll the row for the rest.'
-    : set === 'Filters' ? 'Six equal-width tabs crush their labels. Switch to Scrollable.'
+  const scrollable = set === 'Filters' || layout === 'Scrollable'
+  const note = set === 'Filters' ? 'Six filters don’t fit an equal-width row, so they always scroll.'
+    : scrollable ? 'Tabs hug their labels; scroll the row for the rest.'
     : 'Each tab takes an equal share of the row.'
   const ctxLabel = VIEWS[ctx]
 
@@ -130,7 +130,7 @@ function TabsGuide() {
     </div>
     <div className="controls-panel">
       <Segment label="Set" value={set} options={['Views', 'Filters'] as const} onChange={v => { setSet(v); setSelected(0) }} />
-      <Segment label="Layout" value={layout} options={['Equal width', 'Scrollable'] as const} onChange={setLayout} />
+      {set === 'Views' && <Segment label="Layout" value={layout} options={['Equal width', 'Scrollable'] as const} onChange={setLayout} />}
       <Readout title="Selected tab" value={labels[selected]}>{note}</Readout>
     </div>
   </>} sections={sections} />
