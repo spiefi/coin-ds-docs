@@ -97,6 +97,7 @@ jobs:
       - name: Build and deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ] && [ "${{ github.event_name }}" != "pull_request" ]; then
             target="production"
@@ -111,3 +112,12 @@ jobs:
           echo "Deployed ${target}: ${url}"
           echo "### Designer docs ${target} deployment" >> "$GITHUB_STEP_SUMMARY"
           echo "${url}" >> "$GITHUB_STEP_SUMMARY"
+          # The team's one stable preview address always shows the newest docs-next build. It stays
+          # behind Vercel's login; the owner shares it with one shareable link.
+          if [ "$HEAD_REF" = "docs-next" ]; then
+            if npx --yes vercel@60 alias set "$url" coin-designer-docs-preview.vercel.app --token "$VERCEL_TOKEN"; then
+              echo "Stable preview: https://coin-designer-docs-preview.vercel.app" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::warning::The stable preview address wasn't moved to this deployment."
+            fi
+          fi
