@@ -60,13 +60,13 @@ One ExampleCard "The peek shows the first item" › Frame, collapsed, peek 140, 
 
 ## In context
 header: In context · title: Recent transactions on a home screen · description: The drawer peeks under the home screen. It can only be resized by dragging, so the screen adds a button that opens it for keyboard and screen-reader users.
-Composition in `.coin-new-context`: Frame, controlled, starts collapsed, `title="Recent transactions"`, all 6 TX rows. Screen: `<Text modes={LIGHT}>Home</Text>`, `<Button label="See all transactions" onPress={() => setState('expanded')} modes={LIGHT} />`. Below the frame, `<p className="coin-new-readout" role="status">`: “Drawer collapsed” or “Drawer expanded”.
+Composition in `.coin-new-context`: Frame, controlled, starts collapsed, `title="Recent transactions"`, all 6 TX rows. Screen: `<Text modes={LIGHT}>Home</Text>`, then the button centred in `<VStack modes={LIGHT} alignHorizontal="center">`: `<Button label="See all transactions" onPress={() => setState('expanded')} modes={LIGHT} />` (review on #67, 7 October: the left-aligned button looked unfinished). Below the frame, `<p className="coin-new-readout" role="status">`: “Drawer collapsed” or “Drawer expanded”.
 
 ## Do & Don'ts
 header: Do & Don’ts · title: Show enough, and offer another way in · description: Each pair shows a drawer people understand and can open versus one that hides its content or its controls.
 Every preview is a Frame, collapsed, with `title="Recent transactions"` and all 6 TX rows unless stated.
 - Do Peek enough to read: The title and the first item say what’s inside. — peek 140 | Don't Peek only the handle: People can’t tell what the drawer holds. — peek 24
-- Do Add a button that opens it: Keyboard and screen-reader users can reach the content. — screen: `<Button label="See all transactions" onPress={…} modes={LIGHT} />` that expands it | Don't Rely on dragging alone: Without a button, only a drag opens it. — screen: Text “Home” only
+- Do Add a button that opens it: Keyboard and screen-reader users can reach the content. — screen: same as In context (Home, centred `<Button label="See all transactions" onPress={…} modes={LIGHT} />`) that expands it | Don't Rely on dragging alone: Without a button, only a drag opens it. — screen: Text “Home” only
 
 ## Sources
 header: Sources · title: Use the public Drawer contract · description: The guide compares the Figma component with the installed package and its Storybook stories.

@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { useWindowDimensions } from 'react-native'
-import { Button, Drawer, ListGroup, ListItem, MoneyValue, Text, type Modes } from 'jfs-components'
+import { Button, Drawer, ListGroup, ListItem, MoneyValue, Text, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
 import { Anatomy, DoDont, ExampleCard, OnOff, Readout, ScreenFrame, Segment, Sources, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
@@ -57,7 +57,7 @@ function Controlled({ peek = 140, screen, showOverlay, children }: { peek?: numb
 }
 
 function OpenScreen({ open }: { open: () => void }) {
-  return <><Text modes={LIGHT}>Home</Text><Button label="See all transactions" onPress={open} modes={LIGHT} /></>
+  return <><Text modes={LIGHT}>Home</Text><VStack modes={LIGHT} alignHorizontal="center"><Button label="See all transactions" onPress={open} modes={LIGHT} /></VStack></>
 }
 
 function DrawerGuide() {
