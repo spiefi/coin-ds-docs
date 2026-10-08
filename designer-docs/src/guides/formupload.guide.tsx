@@ -56,7 +56,7 @@ function FormUploadGuide() {
       body: <Anatomy surface="white" specimenWidth={300} parts={[
         { name: 'Label', note: 'Names what to add; plain text above the row.', target: `${R} > div:first-child`, side: 'left' },
         { name: 'Preview', note: 'A 44 px thumbnail of each added image.', target: byTestId('fu-anatomy-item-0'), side: 'left' },
-        { name: 'Remove', note: 'Takes the file out of the row.', target: `${byTestId('fu-anatomy-item-1')} button`, side: 'top' },
+        { name: 'Remove', note: 'A button named after the file that takes it out of the row.', target: `${byTestId('fu-anatomy-item-1')} [aria-label="Remove Receipt 2"]`, side: 'top' },
         { name: 'Add cell', note: 'Opens the app’s picker; hidden once the limit is reached.', target: byTestId('fu-anatomy-add'), side: 'right' },
         { name: 'Support text', note: 'File rules; an error message replaces it.', target: `${R} > div:nth-child(3)`, side: 'bottom' },
       ]}>
@@ -74,11 +74,11 @@ function FormUploadGuide() {
     },
     states: {
       header: 'States', title: 'Default, error, and disabled',
-      description: 'An error shows its message in place of the support text; the cells do not change colour. Disabled fades the whole field and stops adding and removing.',
+      description: 'An error shows its message in place of the support text; the cells do not change colour. Disabled fades the cells and stops adding and removing; the label stays at full contrast.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Default" description="Ready to add more files."><Field label="Receipts" maxCount={3} supportText={HINT} count={1} /></ExampleCard>
         <ExampleCard title="Error" description="The message turns red and replaces the hint."><Field label="Receipts" maxCount={3} supportText={HINT} isInvalid errorMessage="Add at least one receipt" /></ExampleCard>
-        <ExampleCard title="Disabled" description="Faded, with adding and removing turned off."><Field label="Receipts" maxCount={3} isDisabled count={1} /></ExampleCard>
+        <ExampleCard title="Disabled" description="Faded cells, with adding and removing turned off."><Field label="Receipts" maxCount={3} isDisabled count={1} /></ExampleCard>
       </div>,
     },
     sizing: {
@@ -122,13 +122,13 @@ function FormUploadGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Form Upload contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('formupload')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('formupload')} stories={[
         { label: 'Default', id: 'components-formupload--default' },
         { label: 'With previews', id: 'components-formupload--with-previews' },
         { label: 'Invalid', id: 'components-formupload--invalid' },
         { label: 'Disabled', id: 'components-formupload--disabled' },
         { label: 'Inside form', id: 'components-formupload--inside-form' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s FormUpload is a 328 × 93 component with label and support text options and a slot of Add Item cells in one clipped row; the package wraps the row and always puts the add cell last. The app supplies the picker and keeps the list of files. Previews show images only, and file type and size are not checked. Figma has no error or disabled design: an error only changes the support text, and disabled fades the cells twice. On the web the remove button responds to touch only, not to a mouse click or the keyboard, and has no accessible name.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s FormUpload is a 328 × 93 component with label and support text options and a slot of Add Item cells in one clipped row; the package wraps the row and always puts the add cell last. The app supplies the picker and keeps the list of files. Previews show images only, and file type and size are not checked. Figma has no error or disabled design: an error only changes the support text, and disabled fades the cells to half opacity. On the web the field is a group named by its label, and the add cell says which field it adds to. Each file’s remove button is named after it, such as “Remove Receipt 1”, and works with a click, a tap, or Enter.</Sources>,
     },
   }
 

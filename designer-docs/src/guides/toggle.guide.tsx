@@ -101,11 +101,11 @@ function ToggleGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Toggle contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('toggle')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('toggle')} stories={[
         { label: 'Default', id: 'components-toggle--default' }, { label: 'On', id: 'components-toggle--on' },
         { label: 'Disabled', id: 'components-toggle--disabled' }, { label: 'All states', id: 'components-toggle--all-states' },
         { label: 'Interactive list', id: 'components-toggle--interactive' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; Toggle is unchanged in 0.1.78. Figma has two variants, Off and On, both 52 × 31; the package adds <code>disabled</code>, which dims the toggle to 50% and greys the track in both states. Toggle has no label of its own, so the screen names it, usually with the row’s title. On the web it is a switch with a name, but its on or off state is not announced, and Space does not switch it; Enter and click do.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma has two variants, Off and On, both 52 × 31; the package adds <code>disabled</code>, which dims the toggle to 50% and greys the track in both states. Toggle has no label of its own, so the screen names it, usually with the row’s title. On the web it is a switch with a name, and its on or off state is announced. Space and click switch it; in this build Enter does not. A disabled toggle is announced as disabled and skipped by Tab.</Sources>,
     },
   }
 

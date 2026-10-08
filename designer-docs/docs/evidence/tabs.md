@@ -23,3 +23,12 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 - #194 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): no `aria-selected` on any tab, because RNW 0.21.2 does not map `accessibilityState.selected`; Space does not select (Enter does); no arrow, Home, or End keys, and every tab is a Tab stop; the tablist has no name; no `testID`; `JFSThemeProvider` ignored; Figma's counter badge and hug layout have no code equivalent; two `active` items both render selected; the published Storybook predates 0.1.78.
 - #197 (Components, To do; Marcin): `tabItem/active/label/color` is black in Dark mode too. The guide shows Light only.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2. The docs moved to this build to publish other fixes; the Tabs ticket #194 is still In progress.
+
+- From #194 (mostly fixed, back in In progress on 8 October): tabs hug their labels with 16 px gaps, as in Figma (Overview 62.4, Activity 50.8, Details 46.9 px in a 328 px row). `aria-selected` is true or false; Space selects; the arrow keys, Home, and End move focus and select; the tab list is named by `accessibilityLabel`; `testID` works; provider modes apply; `badge` shows a CounterBadge; a second `active` item is ignored (only the first is selected).
+- Still open (#194): every tab is its own Tab stop (all `tabindex=0`, no roving tabindex). Six labels in a 330 px fixed row now clip the last tab (“Refunded” is cut at the edge) instead of overlapping; there is no truncation or minimum width.
+- Regression #209 (Component Fix, To do): Enter calls a tab’s `onPress` twice. Selecting the same tab twice has no visible effect.
+- Guide: the playground’s Layout options are now One row and Scrollable. Configuration, Sizing (size mark moved to the top so its label clears the 16 px gap label), the Tab row note, the “Select two tabs” and “Squeeze six tabs into one row” Don’ts, and the Sources note describe hugging tabs, the badge, single selection, the keyboard support, and the clipped last tab.

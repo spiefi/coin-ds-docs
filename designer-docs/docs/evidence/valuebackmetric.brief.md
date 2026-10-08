@@ -2,7 +2,7 @@
 
 slug: valuebackmetric · label: Value Back Metric · public API: ValueBackMetric (+ Card, VStack, HStack, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7581-1460 · storybook: docsUrl('valuebackmetric') · stories: Default=components-valuebackmetric--default, No link=components-valuebackmetric--no-link, No caption=components-valuebackmetric--no-caption, Brand appearance=components-valuebackmetric--brand-appearance, Card row=components-valuebackmetric--card-row, Pressable card=components-valuebackmetric--pressable-card
-checked: 1 October 2026 · jfs-components 0.1.77 (newest package tag v0.1.78; ValueBackMetric unchanged)
+checked: 8 October 2026 · jfs-components 0.1.78 (5 October build, mirror tag v0.1.78-636f3f5)
 icon: a coin with a return arrow — `<circle cx="9" cy="9" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M6.5 9h5M8.8 6.7 6.5 9l2.3 2.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />`
 keywords: JioPoints, cashback, rewards, points, value back
 
@@ -37,7 +37,7 @@ Grid `coin-new-example-grid`:
 - Pressable — JioPoints card with `onPress` — lesson: The whole card opens the programme; Earn still runs its own action.
 
 ## Sizing
-header: Sizing · title: As wide as its longest line, at least 82 px tall · description: The card is as wide as its longest line and at least 82 px tall, with no padding. Text does not wrap, so keep each line short in narrow columns.
+header: Sizing · title: No wider than its column, at least 82 px tall · description: The card has no padding and is at least 82 px tall. It never grows wider than its column: in a narrow column the text wraps instead of overflowing, but short lines still read best.
 Measured diagram: `<Anatomy legend={false} marks={[{ kind: 'size', target: ':scope > div', side: 'right', label: 'both' }]}>` with the JioPoints card. Expected label about 136 × 84.
 
 ## Content
@@ -57,7 +57,7 @@ Each preview holds the card in `.coin-new-row`.
 
 ## Sources
 header: Sources · title: Use the public Value Back Metric contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; Value Back Metric is unchanged in 0.1.78. Figma’s valueBack metric (122 × 83) stacks the JioPoints header, a value, a caption, and an Earn call to action. The package uses <code>ic_rupee_coin</code> as the default icon because the JioPoints mark is not in the icon set. The call to action is purple text, not a Link, so it has no underline. On the web, Enter does not activate the call to action, a pressable card nests the call to action inside its button, and long lines overflow instead of wrapping.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s valueBack metric (122 × 83) stacks the JioPoints header, a value, a caption, and an Earn call to action. The package uses <code>ic_rupee_coin</code> as the default icon because the JioPoints mark is not in the icon set. The call to action is purple text, not a Link, so it has no underline. On the web, Enter and Space activate the call to action, and in a pressable card the call to action sits beside the card’s button, not inside it, so each press runs only its own action. Long lines wrap within the column.
 
 ## Limits
-Do not show Dark mode, `link` slot content, an image header, `titleStyle`/`valueStyle`/`captionStyle`, `disabled`, or header-only cards. Do not imply wrapping, Enter activation, or an underlined link (ticket #184).
+Do not show Dark mode, `link` slot content, an image header, `titleStyle`/`valueStyle`/`captionStyle`, `disabled`, or header-only cards. Do not imply an underlined link, or that a card without `onPress` is announced as one item (still open after #184).

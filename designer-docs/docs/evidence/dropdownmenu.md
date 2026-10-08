@@ -31,3 +31,11 @@
 ## Verification
 
 `npm run verify` passed on 28 September 2026 (33 guides at 1280 and 390 px) on jfs-components 0.1.77. Planner review of desktop and 390 px captures found no issues: anatomy pins sit on the panel, avatar, label, chevron, and selected row; examples, states, sizing marks, the overflow-menu composition, and the Do/Don't pairs render as briefed. The default photo Avatar appears only in Anatomy and the People and accounts example.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #171 fixed. The build of Biscuit's `main` that the docs install exports `DropdownMenu` and `DropdownMenuItem` (`lib/typescript` index and `src/components/index.ts`). They render as a named menu with menu items, and this guide passes the browser test on this build. The docs install from the private mirror, so no npm release is needed; public npm stays at 0.1.60 by design.
+- Unchanged, from the installed source (not browser-checked): an item passes `selected` only through `accessibilityState`, which react-native-web 0.21 does not turn into `aria-selected`, and there is no arrow-key handling. The Sources note keeps saying both.
+- Guide: the Sources note gives the 5 October build and says it exports Dropdown Menu and its items, replacing the 0.1.77 and public-npm wording; checked date 8 October 2026. The brief matches.

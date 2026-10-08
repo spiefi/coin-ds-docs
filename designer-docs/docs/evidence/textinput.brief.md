@@ -2,7 +2,7 @@
 
 slug: textinput · label: Text Input · public API: TextInput (+ Icon, Card, VStack, ListItem, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=506-10017 · storybook: docsUrl('textinput') · stories: Default=components-textinput--default, Leading and trailing=components-textinput--with-leading-and-trailing, Custom leading=components-textinput--with-custom-leading, Search=components-textinput--search
-checked: 1 October 2026 · jfs-components 0.1.77 (newest package tag v0.1.78; TextInput unchanged)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-636f3f5, 5 October build)
 icon: a field with a cursor — `<rect x="1.5" y="5" width="15" height="8" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M6 7.3v3.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />`
 keywords: input, text field, search field, search bar
 
@@ -20,7 +20,7 @@ parts:
 1. Leading icon — Hints at what to type; a search icon by default. — target: `:scope > div > div:first-child` — side: left
 2. Text — The placeholder, then what people type; one line. — target: `byTestId('ti-anatomy')` — side: top
 3. End slot — Optional content after the text, such as a filter icon. — target: `:scope > div > div:last-child` — side: right
-4. Field — Grey rounded surface; a dark outline shows focus. — target: `:scope > div` — side: bottom
+4. Field — Grey rounded surface; a darker grey border shows focus. — target: `:scope > div` — side: bottom
 
 ## Configuration
 header: Configuration · title: Choose the icons · description: The leading icon is always there: keep the search icon or pick one that matches what people type. The end slot is empty unless you add content.
@@ -30,9 +30,9 @@ Grid `coin-new-example-grid` (each in a host):
 - End slot — `placeholder="Search funds" trailing={<Icon iconName="ic_filter" … />}` — lesson: A cue at the end, such as filters.
 
 ## States
-header: States · title: Empty, focused, and filled · description: Empty, the field shows its placeholder. Focused, a dark outline appears and the placeholder clears. Filled, it shows the text. It has no disabled or error state.
+header: States · title: Empty, focused, and filled · description: Empty, the field shows its placeholder. Focused, a darker grey border appears and the placeholder clears. Filled, it shows the text. It has no disabled or error state.
 Grid `coin-new-example-grid` (each in a host):
-- Empty — `placeholder="Search transactions"` — lesson: The prompt shows until people type. Select the field to see the focus outline.
+- Empty — `placeholder="Search transactions"` — lesson: The prompt shows until people type. Select the field to see the focus border.
 - Filled — `value="Gold"` with its own state — lesson: The text replaces the prompt.
 
 ## Sizing
@@ -53,11 +53,11 @@ header: Do & Don’ts · title: Keep the field clear · description: Each pair s
 Every preview is a host.
 - Do Prompt with what to type: A short prompt names the task. — `placeholder="Search transactions"` | Don't Put instructions in the placeholder: It is cut off and disappears as people type. — `placeholder="Enter the 12-digit number exactly as printed on your card"`
 - Do Match the icon to the task: The rupee icon says an amount goes here. — `placeholder="Amount" leadingIconName="ic_rupee"` | Don't Keep the search icon everywhere: A search icon on an amount field misleads. — `placeholder="Amount"`
-- Do Keep one fixed prompt: The field always says what it is for. — `placeholder="Search"` | Don't Rotate the prompt: Changing text distracts, and the field loses its accessible name. — `placeholder={['Search gold', 'Search funds', 'Search bills']}`
+- Do Keep one fixed prompt: The field always says what it is for. — `placeholder="Search"` | Don't Rotate the prompt: Changing text distracts, and screen readers hear only the first prompt. — `placeholder={['Search gold', 'Search funds', 'Search bills']}`
 
 ## Sources
 header: Sources · title: Use the public Text Input contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; Text Input is unchanged in 0.1.78. Figma’s textInput is 251 × 44 with start and end icon slots; the package renders 42 px tall and shows focus with its own dark outline. <code>TextInput.Search</code> is the same field with a fixed search icon. The field has no visible label, error, or disabled state, and its leading icon can be changed but not removed. On the web the accessibility label is not applied to the input and the placeholder clears on focus, so a focused field has no accessible name; a rotating placeholder leaves it unnamed throughout.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s textInput is 251 × 44 with start and end icon slots; the package renders 42 px tall, and focus draws the 1 px grey border of the Active input state. <code>TextInput.Search</code> is the same field with a fixed search icon. The field has no visible label, error, or disabled state, and its leading icon can be changed but not removed. On the web the input is named by its accessibility label, or else by its placeholder, and keeps that name while focused; a rotating placeholder names it after its first prompt. Set an accessibility label when the placeholder does not say what the field is for.
 
 ## Limits
-Do not show Dark mode, the `InputState` modes, `editable={false}`, `inputStyle`/`style`, a custom `leading` node, or focusable controls in the slots. Do not imply a visible label, an error or disabled state, or an announced name (ticket #183).
+Do not show Dark mode, the `InputState` modes, `editable={false}`, `inputStyle`/`style`, a custom `leading` node, or focusable controls in the slots. Do not imply a visible label, an error or disabled state, a 44 px field, or that the placeholder stays visible while the field is focused.

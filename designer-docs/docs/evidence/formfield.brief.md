@@ -2,7 +2,7 @@
 
 slug: formfield · label: Form Field · public API: FormField (+ Button, Card, VStack, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1922-5647 · storybook: docsUrl('formfield') · stories: Default=components-formfield--default, With trailing button=components-formfield--with-trailing-button, With start icon=components-formfield--with-start-icon, Password=components-formfield--password-type, Invalid=components-formfield--invalid, All states=components-formfield--all-states
-checked: 2 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-3795b4c, up to date)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-636f3f5, 5 October build)
 icon: a label line over a field — `<path d="M2 3.5h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><rect x="1.5" y="7" width="15" height="7.5" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />`
 keywords: input, text field, form input, label, error message
 
@@ -11,11 +11,11 @@ Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; `const ACTION = { 'Co
 ## Overview
 summary: Use a Form Field to collect one labelled value, such as an account number, with a hint or an error message below it.
 principle: A clear label, a format example, and help when it goes wrong.
-playground: `.preview-stage` holding a host with `PhoneWidth` around `<FormField value={value} onChangeText={setValue} label={label} placeholder="XXXX XXXX XXXX" supportText={support} isRequired={required} isInvalid={state === 'Error'} errorMessage={state === 'Error' ? 'Account numbers have 9 to 18 digits' : undefined} isReadOnly={state === 'Read only'} isDisabled={state === 'Disabled'} trailing={action ? <Button modes={ACTION} label="Verify" /> : undefined} />`. Controls: `text-control` "Label" (default "Account number", maxLength 32); `text-control` "Support text" (default "As printed on your passbook", maxLength 60); Segment "State" Default | Error | Read only | Disabled; OnOff "Required" (off); OnOff "End action" (off). Readout title "Value", value = the typed text or "Empty". Stage label: "Live Coin Form Field".
+playground: `.preview-stage` holding a host with `<FormField value={value} onChangeText={setValue} label={label} placeholder="XXXX XXXX XXXX" supportText={support} isRequired={required} isInvalid={state === 'Error'} errorMessage={state === 'Error' ? 'Account numbers have 9 to 18 digits' : undefined} isReadOnly={state === 'Read only'} isDisabled={state === 'Disabled'} trailing={action ? <Button modes={ACTION} label="Verify" /> : undefined} />`. Controls: `text-control` "Label" (default "Account number", maxLength 32); `text-control` "Support text" (default "As printed on your passbook", maxLength 60); Segment "State" Default | Error | Read only | Disabled; OnOff "Required" (off); OnOff "End action" (off). Readout title "Value", value = the typed text or "Empty". Stage label: "Live Coin Form Field".
 
 ## Anatomy
 header: Anatomy · title: A label, the field, and a hint · description: The label names the value. The field holds the text with an optional icon, and support text or an error sits below.
-specimen: `<Anatomy surface="white" specimenWidth={300} …><FormField modes={LIGHT} testID="ff-anatomy" label="Amount" isRequired startIcon type="number" placeholder="0" supportText="Up to ₹50,000 a day" /></Anatomy>` (no end action: on the web the input keeps about 186 px, so an action does not fit the 390 px diagram) (let `R = byTestId('ff-anatomy')`)
+specimen: `<Anatomy surface="white" specimenWidth={300} …><FormField modes={LIGHT} testID="ff-anatomy" label="Amount" isRequired startIcon type="number" placeholder="0" supportText="Up to ₹50,000 a day" /></Anatomy>` (let `R = byTestId('ff-anatomy')`)
 parts:
 1. Label — Names the value and gives the field its accessible name. — target: `${R} > div:first-child > div:first-child` — side: top
 2. Required mark — A red asterisk for fields people must fill in. — target: `${R} > div:first-child > div:last-child` — side: right
@@ -30,7 +30,7 @@ header: Configuration · title: Add only what helps people fill it in · descrip
 Grid `coin-new-example-grid` (each in a host):
 - Label and hint — `label="Account number" placeholder="XXXX XXXX XXXX" supportText="As printed on your passbook"` — lesson: The default: a label, a format example, and a hint below.
 - Start icon — `label="Amount" startIcon type="number" placeholder="0"` — lesson: The rupee icon marks an amount before people type.
-- End action — `label="Promo code" placeholder="JIO200" trailing={<Button modes={ACTION} label="Apply" />}`, inside the host wrapped in `PhoneWidth` = `<FitWidth><VStack modes={LIGHT} style={{ width: 328 }}>…</VStack></FitWidth>` — lesson: A small text button acts on the value without leaving the field.
+- End action — `label="Promo code" placeholder="JIO200" trailing={<Button modes={ACTION} label="Apply" />}` — lesson: A small text button acts on the value without leaving the field.
 - Required — `label="Full name" isRequired placeholder="As on your PAN"` — lesson: A red asterisk marks a field people must fill in.
 - Password — `label="Password" type="password"` with its own state, initial value "jio2026" — lesson: The type hides the characters. It also picks the keyboard for email, phone, and number fields.
 
@@ -40,7 +40,7 @@ Grid `coin-new-example-grid` (each in a host):
 - Default — `label="Account number" placeholder="XXXX XXXX XXXX" supportText="As printed on your passbook"` — lesson: A grey border. Select the field to see the purple focus border.
 - Error — `label="IFSC code" value="SBIN000123" supportText="On your cheque book" isInvalid errorMessage="IFSC codes have 11 characters"` — lesson: Red border and fill; the message replaces the hint.
 - Read only — `label="Account holder" value="Asha Rao" supportText="From your bank" isReadOnly` — lesson: Grey and full contrast: people can read the value but not change it.
-- Disabled — `label="Account holder" value="Asha Rao" isDisabled` — lesson: The read-only look at half opacity, for a field that does not apply yet.
+- Disabled — `label="Account holder" value="Asha Rao" isDisabled` — lesson: The read-only look at half opacity, and Tab skips it. Use it for a field that does not apply yet.
 
 ## Sizing
 header: Sizing · title: Full width, 47 px field · description: Form Field fills its container’s width. The field is 47 px tall with 12 px of padding at each end, and the label and support text sit 8 px above and below it. The screen sets the width.
@@ -67,7 +67,7 @@ Every preview is a host.
 
 ## Sources
 header: Sources · title: Use the public Form Field contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s FormField is a 328 × 94 component with label, start icon, end slot, and support text options; its states are variable modes. The package field is 47 px tall (45 px in Figma). Disabled uses the read-only colours at half opacity instead of Figma’s Disabled colours, and the required asterisk is a fixed red. Dark mode is not supported. On the web the label names the input, but the error, the required mark, and the support text are not announced, and a disabled field can still be reached with the keyboard. The web input also never shrinks below about 186 px, so a field with an end action needs about 300 px; those examples are shown at a 328 px phone width.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s FormField is a 328 × 94 component with label, start icon, end slot, and support text options; its states are variable modes. The package field is 47 px tall (45 px in Figma). Disabled uses the read-only colours at half opacity instead of Figma’s Disabled colours. Dark mode is not supported. On the web the label names the input; screen readers also announce required and invalid fields and read the support text or error with them. Tab skips a disabled field, and the input narrows to make room for an end action.
 
 ## Limits
-Do not show Dark mode, forced `FormField States` modes, a custom `leading` node, `leadingIconName` other than in prose, the `search`/`url` types, `maxLength`, Form `validationErrors`, or `style`/`inputStyle`. Do not imply that errors, required, or disabled are announced to screen readers.
+Do not show Dark mode, forced `FormField States` modes, a custom `leading` node, `leadingIconName` other than in prose, the `search`/`url` types, `maxLength`, Form `validationErrors`, or `style`/`inputStyle`. Do not imply that Disabled uses Figma’s Disabled colours, or that errors are announced the moment they appear (they are read when people reach the field).

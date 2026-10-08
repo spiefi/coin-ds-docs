@@ -39,3 +39,12 @@
 ## Verification
 
 `npm run verify` passed on 1 October 2026 (home page, search, and 39 guides at 1280 and 390 px) on jfs-components 0.1.77. Planner review of desktop and 390 px captures. Playground typing updates the Entered readout and reports Complete at 6 digits. In context: 111111 shows "Incorrect code. Try again." and the "Incorrect code" status, editing returns to "Waiting for the code", 123456 gives "Number verified". Review fixes: kit error (`FitWidth` collapsed scaled content; fixed with `align-items: flex-start`) and brief error (6 digits are 344 px, 4 digits 232 px, not 360 and 224).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #178 fixed. Slots now shrink with a 48 px cap: 8 digits in 334 px get 32.8 px slots and fit, 7 digits in 360 px get 42.3, 6 digits in 334 px get 46.3, and a wide parent keeps 48.
+- Installed source: the root is `width: 100%` with `align-items: stretch`; slots are `flex: 1 1 0` with `max-width` 48 and `min-width` 0, in a row that starts at the left. The OTP therefore fills its container instead of hugging its slots.
+- Regression (open, #210): the support text and countdown moved from the right edge to the left, and the Resend button now stretches across the whole row (344 × 32). In 3795b4c and in Figma (node 2759:330) they are right-aligned.
+- Guide: every live OTP now sits in a `coin-new-host wide` (334 px inside) instead of `FitWidth`, because OTP no longer has a fixed width and `FitWidth` measures a max-content box; the In context card has no wrapper, and both Anatomy diagrams use `specimenWidth={344}`. Copy: the Anatomy no longer says "fixed-width" and its Support line note says left in code, right in Figma; the 4-digit caption says slots stay 48 px; Ready to resend says the button stretches across the row in this build; Sizing now says OTP fills its container and slots shrink (8 digits fit 334 px at about 33 px); the Sources note gives the 5 October build, drops the too-wide warning, and states the #210 alignment difference; `checked` is 8 October 2026. The brief matches. Not yet browser-tested on the guide.

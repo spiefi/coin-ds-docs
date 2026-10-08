@@ -63,8 +63,8 @@ function ValueBackMetricGuide() {
       </div>,
     },
     sizing: {
-      header: 'Sizing', title: 'As wide as its longest line, at least 82 px tall',
-      description: 'The card is as wide as its longest line and at least 82 px tall, with no padding. Text does not wrap, so keep each line short in narrow columns.',
+      header: 'Sizing', title: 'No wider than its column, at least 82 px tall',
+      description: 'The card has no padding and is at least 82 px tall. It never grows wider than its column: in a narrow column the text wraps instead of overflowing, but short lines still read best.',
       body: <Anatomy legend={false} marks={[{ kind: 'size', target: ':scope > div', side: 'right', label: 'both' }]}>
         <Metric {...JIOPOINTS} />
       </Anatomy>,
@@ -106,14 +106,14 @@ function ValueBackMetricGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Value Back Metric contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('valuebackmetric')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('valuebackmetric')} stories={[
         { label: 'Default', id: 'components-valuebackmetric--default' },
         { label: 'No link', id: 'components-valuebackmetric--no-link' },
         { label: 'No caption', id: 'components-valuebackmetric--no-caption' },
         { label: 'Brand appearance', id: 'components-valuebackmetric--brand-appearance' },
         { label: 'Card row', id: 'components-valuebackmetric--card-row' },
         { label: 'Pressable card', id: 'components-valuebackmetric--pressable-card' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; Value Back Metric is unchanged in 0.1.78. Figma’s valueBack metric (122 × 83) stacks the JioPoints header, a value, a caption, and an Earn call to action. The package uses <code>ic_rupee_coin</code> as the default icon because the JioPoints mark is not in the icon set. The call to action is purple text, not a Link, so it has no underline. On the web, Enter does not activate the call to action, a pressable card nests the call to action inside its button, and long lines overflow instead of wrapping.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s valueBack metric (122 × 83) stacks the JioPoints header, a value, a caption, and an Earn call to action. The package uses <code>ic_rupee_coin</code> as the default icon because the JioPoints mark is not in the icon set. The call to action is purple text, not a Link, so it has no underline. On the web, Enter and Space activate the call to action, and in a pressable card the call to action sits beside the card’s button, not inside it, so each press runs only its own action. Long lines wrap within the column.</Sources>,
     },
   }
 

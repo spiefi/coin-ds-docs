@@ -23,3 +23,12 @@ Checked 1 October 2026. Declared and installed `jfs-components` is `0.1.77` from
 - Earn is `role=link` with `tabindex=0`, but Enter on it does not call `onLinkPress`; click does.
 - Text does not wrap: in a 120 px column, value "1,24,000" with a long caption renders 226 px wide.
 - Coin gap #184 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar) covers Enter, the nested link in a pressable card, the ignored generic label, and the lack of wrapping.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #184 fixed. Enter (and Space) on Earn calls `onLinkPress`. With `onPress`, the card is a button and Earn is a sibling link, not inside it; each click calls only its own handler. In a 120 px column the caption wraps and nothing overflows.
+- Installed source: the root now has `maxWidth: '100%'`, `minWidth: 0`, and `alignSelf: 'stretch'`, and each text has `flexShrink: 1`. In a row (`.coin-new-row`, the Anatomy specimen) the card still hugs its longest line; in a column container it may fill the column's width. Not measured on the guide.
+- Still open (not in the ticket's Expected): without `onPress`, the joined label still sits on a role-less div, so assistive tech ignores it (the text is still read in order).
+- Guide: the Sizing title and description now say the card is never wider than its column and its text wraps in narrow columns; the Sources note gives the 5 October build and says Enter and Space activate the call to action, a pressable card keeps it beside its button, and long lines wrap; `checked` is 8 October 2026. The brief's checked line, Sizing, note, and Limits match.

@@ -116,11 +116,11 @@ function DropdownMenuGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Dropdown Menu contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('dropdownmenu')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('dropdownmenu')} stories={[
         { label: 'Default', id: 'components-dropdownmenu--default' }, { label: 'Without leading', id: 'components-dropdownmenu--without-leading' },
         { label: 'Without trailing', id: 'components-dropdownmenu--without-trailing' }, { label: 'Custom slots', id: 'components-dropdownmenu--custom-slots' },
         { label: 'Disabled item', id: 'components-dropdownmenu--with-disabled-item' }, { label: 'Scrollable', id: 'components-dropdownmenu--scrollable' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; public npm stops at 0.1.60, which has no Dropdown Menu. Dropdown Menu draws the panel and rows; opening, placing, and closing it, and which row is selected, belong to the screen. The default leading Avatar is a sample photo, so replace it with a real avatar or an icon. On the web the selected row is shown only visually and arrow keys do not move between rows. Figma’s Menu Item master cited by the package is no longer in the file.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. That build exports Dropdown Menu and its items. Dropdown Menu draws the panel and rows; opening, placing, and closing it, and which row is selected, belong to the screen. The default leading Avatar is a sample photo, so replace it with a real avatar or an icon. On the web the selected row is shown only visually and arrow keys do not move between rows. Figma’s Menu Item master cited by the package is no longer in the file.</Sources>,
     },
   }
 

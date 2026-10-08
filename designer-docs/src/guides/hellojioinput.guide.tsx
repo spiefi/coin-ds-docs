@@ -106,13 +106,13 @@ function HelloJioInputGuide() {
       description: 'The pill is grey while idle and turns white with a border while people type. Over imagery, Jio Plus makes the idle pill frosted glass.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Idle" description="Grey pill. Select it to see the white focused pill."><Field /></ExampleCard>
-        <ExampleCard title="Jio Plus" description="Frosted glass over imagery while not focused. On the web the frost currently hides the prompt."><PhotoHost><Input jioPlus /></PhotoHost></ExampleCard>
+        <ExampleCard title="Jio Plus" description="Frosted glass over imagery while not focused. The prompt and typed text stay readable."><PhotoHost><Input jioPlus /></PhotoHost></ExampleCard>
         <ExampleCard title="Disabled" description="Half opacity; typing and sending are off."><Field disabled /></ExampleCard>
       </div>,
     },
     sizing: {
-      header: 'Sizing', title: 'Full width, 36 px tall',
-      description: 'HelloJio Input fills its container’s width and is 36 px tall, with an 18 px brand icon and a 26 px send button. Attachments add height above the prompt.',
+      header: 'Sizing', title: 'Full width, 38 px tall',
+      description: 'HelloJio Input fills its container’s width and is 38 px tall (36 px in Jio Plus, which has no border), with an 18 px brand icon and a 26 px send button. Attachments add height above the prompt.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} surface="white" specimenWidth={300} marks={[
           { kind: 'size', target: PILL, side: 'bottom', label: 'both' },
@@ -151,14 +151,14 @@ function HelloJioInputGuide() {
     sources: {
       header: 'Sources', title: 'Use the public HelloJio Input contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('hellojioinput')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('hellojioinput')} stories={[
         { label: 'Default', id: 'components-hellojioinput--default' },
         { label: 'Active', id: 'components-hellojioinput--active' },
         { label: 'Jio Plus', id: 'components-hellojioinput--jio-plus' },
         { label: 'Submit log', id: 'components-hellojioinput--submit-log' },
         { label: 'Without send', id: 'components-hellojioinput--without-send' },
         { label: 'With attachments', id: 'components-hellojioinput--with-attachments' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s HelloJio Input is a set with Idle, Active, and IdleJioPlus states, start and end slot options, and an attachment slot. The package sets the state from focus and the Jio Plus option. The pill is 36 px tall (38 px in Figma) and the send button 26 px (28 px). Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field. On the web the Jio Plus frost hides the prompt and typed text until the field is focused, and the pill adds an unnamed tab stop before the input. Dark mode is not shown.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s HelloJio Input is a set with Idle, Active, and IdleJioPlus states, start and end slot options, and an attachment slot. The package sets the state from focus and the Jio Plus option. The pill is 38 px tall, or 36 px in Jio Plus, as in Figma; the send button is 26 px (28 px in Figma). Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field. On the web Tab goes from the input straight to Send. Dark mode is not shown.</Sources>,
     },
   }
 

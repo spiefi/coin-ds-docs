@@ -59,7 +59,7 @@ function TabItemGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'A label, and a spoken name when needed',
-      description: 'A Tab Item has no size, icon, or style options: you set its label. Figma’s counter badge has no code equivalent yet, so keep it hidden.',
+      description: 'A Tab Item has no size, icon, or style options: you set its label and, when a view needs a count, the counter badge from Figma.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Label" description="The label is also what screen readers say."><Host><StaticRow list={items('Overview', 'Activity', 'Details')} initial={0} /></Host></ExampleCard>
         <ExampleCard title="Abbreviation with a spoken name" description="Short labels such as AY24 get a full spoken name: “Assessment year 2024”."><Host><StaticRow list={YEARS} initial={1} /></Host></ExampleCard>
@@ -75,7 +75,7 @@ function TabItemGuide() {
     },
     sizing: {
       header: 'Sizing', title: '33 px tall; Tabs sets the width',
-      description: 'A Tab Item is 33 px tall: a 17 px label with 8 px above and below. Tabs sets its width: an equal share of the row, or the label’s width when the row scrolls.',
+      description: 'A Tab Item is 33 px tall: a 17 px label with 8 px above and below. It is as wide as its label; Tabs places the tabs 16 px apart.',
       body: <Anatomy legend={false} specimenWidth={240} marks={[
         { kind: 'size', target: TAB(1), side: 'bottom', label: 'both' },
         { kind: 'padding', target: TAB(1) },
@@ -102,10 +102,10 @@ function TabItemGuide() {
       header: 'Do & Don’ts', title: 'Keep each tab in its row',
       description: 'Each pair shows a Tab Item used as intended versus one that confuses people.',
       body: <div className="coin-new-stack">
-        <DoDont goodTitle="Use it inside Tabs" goodCaption="The row spaces the tabs and shares out the width." good={<Host><Row items={items('Overview', 'Activity', 'Details')} selected={0} /></Host>}
+        <DoDont goodTitle="Use it inside Tabs" goodCaption="The row places the tabs 16 px apart." good={<Host><Row items={items('Overview', 'Activity', 'Details')} selected={0} /></Host>}
           badTitle="Place one on its own" badCaption="A lone Tab Item stretches across its container with no row around it." bad={<Host><TabItem modes={LIGHT} label="Overview" active /></Host>} />
         <DoDont goodTitle="Mark one tab active" goodCaption="One underline shows the current view." good={<Host><Row items={items('Overview', 'Activity', 'Details')} selected={2} /></Host>}
-          badTitle="Mark two tabs active" badCaption="Two underlines leave people unsure which view is showing." bad={<Host><Row items={items('Overview', 'Activity', 'Details')} selected={0} also={2} /></Host>} />
+          badTitle="Mark two tabs active" badCaption="Only the first is underlined, which may not be the view that’s showing." bad={<Host><Row items={items('Overview', 'Activity', 'Details')} selected={0} also={2} /></Host>} />
         <DoDont goodTitle="Name the view" goodCaption="“Statements” says what the panel shows." good={<Host><Row items={items('Overview', 'Statements')} selected={1} /></Host>}
           badTitle="Write an action" badCaption="“Download” sounds like a button, but tabs only switch views." bad={<Host><Row items={items('Overview', 'Download')} selected={1} /></Host>} />
       </div>,
@@ -113,10 +113,10 @@ function TabItemGuide() {
     sources: {
       header: 'Sources', title: 'Use Tab Item through Tabs',
       description: 'The guide compares the Figma subcomponent with the installed package and the Tabs stories.',
-      body: <Sources checked="5 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
         { label: 'Tabs default', id: 'components-tabs--default' }, { label: 'Tabs with labels', id: 'components-tabs--with-labels' },
         { label: 'Tabs scrollable', id: 'components-tabs--scrollable' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package has no badge. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name but not as selected; Enter selects it, Space does not.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected; Enter and Space select it, and the arrow keys move between tabs.</Sources>,
     },
   }
 

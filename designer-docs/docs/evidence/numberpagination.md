@@ -45,3 +45,10 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
 
 - #176 regression resolved. The scroll viewport is now the 32 px item height, with vertical padding clamped, so the active circle is no longer clipped. The four-page pill is 138 × 39 again. `aria-current`, the Pagination landmark, and the 12-page scroll still pass. #180 (square blur corners) is still open.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #180 fixed. The blur layer (`backdrop-filter: blur(9px)`) now has the pill's 19.5 px radius with overflow hidden. On the docs photo the frost follows the rounded ends, with no square corners.
+- Guide: no page copy described the square corners, so only the Sources note changed (5 October build; checked date 8 October 2026). The brief, which still described 0.1.77, now matches the page: the `[role="navigation"]` target, scrolling pages, the announced active page, and the 12-page Don’t caption.

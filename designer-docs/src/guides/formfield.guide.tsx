@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { Button, Card, FormField, Text, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
-import { Anatomy, DoDont, ExampleCard, FitWidth, OnOff, Readout, Segment, Sources, Surface, byTestId, docsUrl } from '../guide-kit'
+import { Anatomy, DoDont, ExampleCard, OnOff, Readout, Segment, Sources, Surface, byTestId, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
 
 const LIGHT = { 'Color Mode': 'Light' } as Modes
@@ -24,12 +24,6 @@ function Input({ value: initial = '', ...props }: FieldProps) {
 
 function Field({ narrow, ...props }: FieldProps & { narrow?: boolean }) {
   return <Host narrow={narrow}><Input {...props} /></Host>
-}
-
-// On the web the input never shrinks below about 186 px, so a field with an end
-// action is shown at a phone field width (328 px) and scaled down when narrower.
-function PhoneWidth({ children }: { children: ReactNode }) {
-  return <FitWidth><VStack modes={LIGHT} style={{ width: 328 }}>{children}</VStack></FitWidth>
 }
 
 function BankAccount() {
@@ -86,7 +80,7 @@ function FormFieldGuide() {
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Label and hint" description="The default: a label, a format example, and a hint below."><Field label="Account number" placeholder="XXXX XXXX XXXX" supportText="As printed on your passbook" /></ExampleCard>
         <ExampleCard title="Start icon" description="The rupee icon marks an amount before people type."><Field label="Amount" startIcon type="number" placeholder="0" /></ExampleCard>
-        <ExampleCard title="End action" description="A small text button acts on the value without leaving the field."><Host><PhoneWidth><Input label="Promo code" placeholder="JIO200" trailing={<Button modes={ACTION} label="Apply" />} /></PhoneWidth></Host></ExampleCard>
+        <ExampleCard title="End action" description="A small text button acts on the value without leaving the field."><Field label="Promo code" placeholder="JIO200" trailing={<Button modes={ACTION} label="Apply" />} /></ExampleCard>
         <ExampleCard title="Required" description="A red asterisk marks a field people must fill in."><Field label="Full name" isRequired placeholder="As on your PAN" /></ExampleCard>
         <ExampleCard title="Password" description="The type hides the characters. It also picks the keyboard for email, phone, and number fields."><Field label="Password" type="password" value="jio2026" /></ExampleCard>
       </div>,
@@ -98,7 +92,7 @@ function FormFieldGuide() {
         <ExampleCard title="Default" description="A grey border. Select the field to see the purple focus border."><Field label="Account number" placeholder="XXXX XXXX XXXX" supportText="As printed on your passbook" /></ExampleCard>
         <ExampleCard title="Error" description="Red border and fill; the message replaces the hint."><Field label="IFSC code" value="SBIN000123" supportText="On your cheque book" isInvalid errorMessage="IFSC codes have 11 characters" /></ExampleCard>
         <ExampleCard title="Read only" description="Grey and full contrast: people can read the value but not change it."><Field label="Account holder" value="Asha Rao" supportText="From your bank" isReadOnly /></ExampleCard>
-        <ExampleCard title="Disabled" description="The read-only look at half opacity, for a field that does not apply yet."><Field label="Account holder" value="Asha Rao" isDisabled /></ExampleCard>
+        <ExampleCard title="Disabled" description="The read-only look at half opacity, and Tab skips it. Use it for a field that does not apply yet."><Field label="Account holder" value="Asha Rao" isDisabled /></ExampleCard>
       </div>,
     },
     sizing: {
@@ -144,14 +138,14 @@ function FormFieldGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Form Field contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('formfield')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('formfield')} stories={[
         { label: 'Default', id: 'components-formfield--default' },
         { label: 'With trailing button', id: 'components-formfield--with-trailing-button' },
         { label: 'With start icon', id: 'components-formfield--with-start-icon' },
         { label: 'Password', id: 'components-formfield--password-type' },
         { label: 'Invalid', id: 'components-formfield--invalid' },
         { label: 'All states', id: 'components-formfield--all-states' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s FormField is a 328 × 94 component with label, start icon, end slot, and support text options; its states are variable modes. The package field is 47 px tall (45 px in Figma). Disabled uses the read-only colours at half opacity instead of Figma’s Disabled colours, and the required asterisk is a fixed red. Dark mode is not supported. On the web the label names the input, but the error, the required mark, and the support text are not announced, and a disabled field can still be reached with the keyboard. The web input also never shrinks below about 186 px, so a field with an end action needs about 300 px; those examples are shown at a 328 px phone width.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s FormField is a 328 × 94 component with label, start icon, end slot, and support text options; its states are variable modes. The package field is 47 px tall (45 px in Figma). Disabled uses the read-only colours at half opacity instead of Figma’s Disabled colours. Dark mode is not supported. On the web the label names the input; screen readers also announce required and invalid fields and read the support text or error with them. Tab skips a disabled field, and the input narrows to make room for an end action.</Sources>,
     },
   }
 
@@ -161,9 +155,9 @@ function FormFieldGuide() {
     figmaUrl: FIGMA, storybookUrl: docsUrl('formfield'),
   }} playground={<>
     <div className="preview-stage">
-      <Host><PhoneWidth><FormField modes={LIGHT} value={value} onChangeText={setValue} label={label} placeholder="XXXX XXXX XXXX" supportText={support}
+      <Host><FormField modes={LIGHT} value={value} onChangeText={setValue} label={label} placeholder="XXXX XXXX XXXX" supportText={support}
         isRequired={required} isInvalid={state === 'Error'} errorMessage={state === 'Error' ? 'Account numbers have 9 to 18 digits' : undefined}
-        isReadOnly={state === 'Read only'} isDisabled={state === 'Disabled'} trailing={action ? <Button modes={ACTION} label="Verify" /> : undefined} /></PhoneWidth></Host>
+        isReadOnly={state === 'Read only'} isDisabled={state === 'Disabled'} trailing={action ? <Button modes={ACTION} label="Verify" /> : undefined} /></Host>
       <span className="stage-label">Live Coin Form Field</span>
     </div>
     <div className="controls-panel">

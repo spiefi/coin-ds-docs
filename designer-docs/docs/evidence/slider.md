@@ -23,3 +23,12 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 - #193 (Component Fix, To do, Component Bug, high; Mr. Biscuit, Anagha Ghotkar): collapsed bubble; value and disabled state not exposed on the web; duplicate `aria-label`; `JFSThemeProvider` ignored; 61 px vs Figma 44 px; no `testID`; `onChangeEnd` on every key; ref methods work while disabled.
 - #197 (Components, To do; Marcin): Slider labels resolve black in Dark mode. The guide shows Light only.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #193 fixed. The bubble hugs its value (40 × 34 for "50"), radius 8, max width 280, with readable white text. `role="slider"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax` and `aria-valuetext`, plus `aria-disabled` when disabled; only one element carries the name. `JFSThemeProvider` now matches the `modes` prop, and `testID` works. `onChangeEnd` no longer fires when a key can't change the value, and ref methods do nothing while disabled.
+- Installed source: the track area keeps the same children (track, fill, handle, bubble), so the guide's `[role="slider"] > div:nth-child(n)` targets still hold. The bubble is still positioned 12 px above the 20 px handle row and takes no layout space, so the 48 px Room stays.
+- Still open for a decision: the Slider is 61 px tall vs Figma's 44 (change code or Figma). Every render logs four "Variable not found" warnings for the tooltip radius and maxWidth lookups (console warnings, not errors).
+- Guide: the Anatomy description now describes a rounded black bubble with the value (the "narrow black block" warning is gone); the Sources note gives the 5 October build, says the bubble matches Figma, and says the name, value, and disabled state are announced; the 61 vs 44 px note stays; `checked` is 8 October 2026. No example hid or worked around the bubble, so examples are unchanged. The brief's checked line, setup note, Anatomy, note, and Limits match.

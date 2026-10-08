@@ -15,7 +15,7 @@ const ICON_NOTES = {
 } as const
 
 function Copy({ label, source }: { label: string; source?: string }) {
-  return <UpiHandle modes={LIGHT} label={label} source={source} iconName="ic_copy" onPress={noop} />
+  return <UpiHandle modes={LIGHT} label={label} source={source} iconName="ic_copy" accessibilityLabel={`Copy ${label}`} onPress={noop} />
 }
 
 function Host({ children }: { children: React.ReactNode }) {
@@ -54,26 +54,31 @@ function UpiHandleGuide() {
     },
     states: {
       header: 'States', title: 'Display only or pressable',
-      description: 'Without an action the pill only shows the handle. With one, the whole pill is the control and shrinks slightly while pressed. A disabled pill looks the same as an enabled one, so avoid disabling it.',
+      description: 'Without an action the pill only shows the handle. With one, the whole pill is a button and shrinks slightly while pressed. A disabled pill is dimmed and ignores presses.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Display only" description="Static text in a pill."><Host><UpiHandle modes={LIGHT} label="priya@jio" showIcon={false} /></Host></ExampleCard>
         <ExampleCard title="Pressable" description="The whole pill responds to a press."><Host><Copy label="priya@jio" /></Host></ExampleCard>
-        <ExampleCard title="Disabled" description="Ignores presses but looks unchanged."><Host><UpiHandle modes={LIGHT} label="priya@jio" iconName="ic_copy" onPress={noop} disabled /></Host></ExampleCard>
+        <ExampleCard title="Disabled" description="Dimmed to half opacity and skipped by keyboard focus."><Host><UpiHandle modes={LIGHT} label="priya@jio" iconName="ic_copy" accessibilityLabel="Copy priya@jio" onPress={noop} disabled /></Host></ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: '29 px tall, as wide as its content',
-      description: 'The pill is 29 px tall and grows with its handle: 14 px of padding at each end (4 px before an avatar), a 23 px avatar, and a 12 px icon. It never shrinks, so keep long handles out of narrow columns.',
-      body: <Anatomy surface="white" legend={false} marks={[
-        { kind: 'size', target: byTestId('upi-size'), side: 'bottom', label: 'both' },
-        { kind: 'padding', target: byTestId('upi-size') },
-      ]}>
-        <UpiHandle modes={LIGHT} testID="upi-size" label="shrutirai-1@jio" iconName="ic_copy" onPress={noop} />
-      </Anatomy>,
+      description: 'The pill is 29 px tall and grows with its handle: 14 px of padding at each end (4 px before an avatar), a 23 px avatar, and a 12 px icon. When space runs out, a long handle ends in an ellipsis, so leave room for the whole ID.',
+      body: <div className="coin-new-stack">
+        <Anatomy surface="white" legend={false} marks={[
+          { kind: 'size', target: byTestId('upi-size'), side: 'bottom', label: 'both' },
+          { kind: 'padding', target: byTestId('upi-size') },
+        ]}>
+          <UpiHandle modes={LIGHT} testID="upi-size" label="shrutirai-1@jio" iconName="ic_copy" onPress={noop} />
+        </Anatomy>
+        <ExampleCard title="Long handles truncate" description="Limited to 140 px, the handle ends in an ellipsis and the pill stays inside its space."><Host>
+          <UpiHandle modes={LIGHT} label="very-long-upi-handle-id@jio" iconName="ic_copy" accessibilityLabel="Copy very-long-upi-handle-id@jio" onPress={noop} style={{ maxWidth: 140 }} />
+        </Host></ExampleCard>
+      </div>,
     },
     content: {
       header: 'Content', title: 'Show the real handle',
-      description: 'Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio. Don’t add “UPI:” or translate it; the pill already says what it is.',
+      description: 'Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio. Don’t add “UPI:” or translate it; the pill already says what it is. On a pressable pill, set an accessibility label that says the action, such as “Copy priya@jio”.',
       body: <ExampleCard title="Handles"><Host>
         <Copy label="priya@jio" /><Copy label="merchant-1234@jio" /><Copy label="9184844184" />
       </Host></ExampleCard>,
@@ -84,7 +89,7 @@ function UpiHandleGuide() {
       body: <div className="coin-new-context">
         <Card modes={LIGHT}><VStack modes={LIGHT}>
           <Text modes={LIGHT}>Paying Priya Sharma</Text>
-          <UpiHandle modes={LIGHT} label="priya@jio" source={AVATAR} iconName="ic_copy" onPress={() => setStatus('UPI ID copied')} />
+          <UpiHandle modes={LIGHT} label="priya@jio" source={AVATAR} iconName="ic_copy" accessibilityLabel="Copy priya@jio" onPress={() => setStatus('UPI ID copied')} />
           <Button modes={LIGHT} label="Pay ₹500" onPress={() => setStatus('Payment started')} />
         </VStack></Card>
         <p className="coin-new-readout" role="status">{status}</p>
@@ -105,14 +110,14 @@ function UpiHandleGuide() {
     sources: {
       header: 'Sources', title: 'Use the public UPI Handle contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('upihandle')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('upihandle')} stories={[
         { label: 'Default', id: 'components-upihandle--default' },
         { label: 'Without image', id: 'components-upihandle--without-image' },
         { label: 'Without icon', id: 'components-upihandle--without-icon' },
         { label: 'Pressable', id: 'components-upihandle--pressable-handle' },
         { label: 'Disabled', id: 'components-upihandle--disabled' },
         { label: 'Several handles', id: 'components-upihandle--multiple-handles' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; UPI Handle is unchanged in 0.1.78. Figma shows an avatar, the handle, and a copy icon in a 144 × 29 pill. The package defaults to a scan icon, so this guide sets the copy icon wherever the pill copies. The avatar shows only when a source is set and is never tinted. On the web a pressable pill is focusable but is not announced as a button, its accessibility label is ignored, a disabled pill looks enabled, and a click leaves a dark outline that grows it by 2 px.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma shows an avatar, the handle, and a copy icon in a 144 × 29 pill. The package defaults to a scan icon, so this guide sets the copy icon wherever the pill copies. The avatar shows only when a source is set and is never tinted. On the web a pressable pill is a button named by its accessibility label, or by the handle when none is set. Keyboard focus draws a thin ring without moving anything, and a mouse click leaves no ring.</Sources>,
     },
   }
 

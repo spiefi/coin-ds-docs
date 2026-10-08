@@ -24,3 +24,12 @@ Checked 1 October 2026. Declared and installed `jfs-components` is `0.1.77` from
 - With `onPress` and `disabled`: `aria-disabled` and `tabindex=-1`, but it looks unchanged (opacity 1).
 - Coin gap #182 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar) covers the missing role and name, the unchanged disabled look, the click border and layout shift, the overflow, and the Figma icon difference (Figma `ic_copy`, package default `ic_scan_qr_code`).
 - Guide sample avatar: an inline SVG monogram passed as `source` (sample content, not a product asset).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #182 fixed. A pressable pill is a button named by `accessibilityLabel` ("Copy priya@jio"), and Enter works. Disabled renders at 0.5 opacity with `aria-disabled` and `tabindex -1`. A mouse click shows no ring and the pill stays 100.5 × 29. Tab shows a 1 px outline ring in a token colour, with no layout shift. Long handles truncate with an ellipsis inside 140 px, and the new `style` prop constrains the pill.
+- From the installed source (not browser-checked): without `accessibilityLabel` the name falls back to `label`; the pill now has `maxWidth: '100%'` and `flexShrink: 1`, and the label truncates to one line unless `disableTruncation` is set.
+- Still open (not in the ticket's Expected): the default icon is still `ic_scan_qr_code`, while Figma uses `ic_copy`.
+- Guide: States and the Disabled example say a disabled pill is dimmed and skipped by keyboard focus. Sizing says a long handle ends in an ellipsis and adds a "Long handles truncate" example (`style={{ maxWidth: 140 }}`). Content asks for an action label such as "Copy priya@jio", and every Copy pill, the Disabled example, and the In context pill now set one. The Sources note gives the 5 October build and describes the button role, name, and focus ring instead of the old gaps; checked date 8 October 2026. The brief matches.

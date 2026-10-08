@@ -22,3 +22,12 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 - #194 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): selected state not announced on the web, Space doesn't select, no arrow keys, no `testID`, Figma counter badge missing in code, no TabItem stories in the published Storybook.
 - #197 (Components, To do; Marcin): active label stays black in Dark mode. The guide shows Light only.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2. The docs moved to this build to publish other fixes; the Tabs ticket #194 is still In progress.
+
+- From #194 (mostly fixed, back in In progress on 8 October): tabs hug their labels with 16 px gaps, as in Figma (Overview 62.4, Activity 50.8, Details 46.9 px in a 328 px row). `aria-selected` is true or false; Space selects; the arrow keys, Home, and End move focus and select; the tab list is named by `accessibilityLabel`; `testID` works; provider modes apply; `badge` shows a CounterBadge; a second `active` item is ignored (only the first is selected).
+- Still open (#194): every tab is its own Tab stop (all `tabindex=0`, no roving tabindex). Six labels in a 330 px fixed row now clip the last tab (“Refunded” is cut at the edge) instead of overlapping; there is no truncation or minimum width.
+- Regression #209 (Component Fix, To do): Enter calls a tab’s `onPress` twice. Selecting the same tab twice has no visible effect.
+- Guide: Configuration mentions the counter badge, Sizing says a tab is as wide as its label, and the “Use it inside Tabs” and “Mark two tabs active” captions and the Sources note describe the hugging width, single selection, announced selection, and Enter, Space, and arrow keys.

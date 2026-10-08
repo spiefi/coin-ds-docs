@@ -2,7 +2,7 @@
 
 slug: stepper · label: Stepper · public API: Stepper, Step (+ Card, VStack, Button for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457 · storybook: docsUrl('stepper') · stories: Default=components-stepper--default, Order tracking=components-stepper--order-tracking, Three steps=components-stepper--three-steps, Step complete=components-step--complete, Step error=components-step--error-state, Step warning=components-step--warning-state
-checked: 5 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-3795b4c, Biscuit's main 3795b4c)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
 icon: two stage circles joined by a line, with text lines — `<circle cx="5" cy="4" r="2.2" fill="currentColor" /><path d="M5 6.7v4.6" stroke="currentColor" strokeWidth="1.5" /><circle cx="5" cy="14" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M10 4h6M10 14h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />`
 keywords: progress steps, timeline, onboarding steps, order tracking
 
@@ -43,7 +43,7 @@ Grid `coin-new-example-grid three`, each a host with stages 1 done, 2 current, 3
 - With dates — add supporting text and each stage’s date line — lesson: Shows when each stage finished, started, or is due.
 
 ## States
-header: States · title: Five stage states · description: Each stage shows one state. In Figma, pick it with the Step Status mode; in code the matching icon and colour are set together, so a check is always green.
+header: States · title: Five stage states · description: Each stage shows one state. In Figma, pick it with the Step Status mode; in code the stage’s status sets both its icon and its colour, so a check is always green.
 Grid `coin-new-example-grid three`; each ExampleCard holds a host with a one-stage Stepper:
 - Done — stage('done'), Verify PAN, “PAN details match your name” — lesson: Green circle with a check.
 - Current — stage('current'), Add bank account, its supporting text — lesson: Purple circle with the stage number.
@@ -57,11 +57,11 @@ header: Sizing · title: Full width, at least 52 px per stage · description: St
 Measured diagram: `<Anatomy legend={false} specimenWidth={328} marks={[{ kind: 'size', target: S(1), side: 'right', label: 'both' }, { kind: 'size', target: circle of S(2), side: 'bottom', label: 'both' }, { kind: 'padding', target: ':scope > div' }]}>` with stages 1 done and 2 current (titles and supporting text). Expected labels: 312 × 52 and 36 × 36. (A circle mark on the side or a gap mark lands its label on a circle.)
 
 ## Content
-header: Content · title: Name the stage, then say how it went · description: Titles name the stage in a few words, such as “Verify PAN”, not an action like “Click to verify”. Supporting text says what happens or what went wrong, because the indicator’s colour and icon aren’t announced.
+header: Content · title: Name the stage, then say how it went · description: Titles name the stage in a few words, such as “Verify PAN”, not an action like “Click to verify”. Supporting text says what happens or what went wrong: the indicator only says that a stage failed or needs attention, not why.
 One ExampleCard "Stage names and outcomes": a host with stage('done') Verify PAN “PAN details match your name”, stage('attention') Add nominee “Nominee’s date of birth is missing”, stage('upcoming') eSign “Sign the form with an Aadhaar OTP”.
 
 ## In context
-header: In context · title: KYC progress on a card · description: The screen works out each stage’s state and updates the Stepper as the person moves on. Stepper isn’t pressable, so the next action is a separate button.
+header: In context · title: KYC progress on a card · description: The screen works out each stage’s state and updates the Stepper as the person moves on, and gives it a spoken name such as “KYC progress”. Stepper isn’t pressable, so the next action is a separate button. (The Stepper takes `accessibilityLabel="KYC progress"`.)
 Composition in `.coin-new-context`: `<Card modes={LIGHT}>` › `<VStack modes={LIGHT} style={{ width: '100%' }}>` › KYC(current, 'In progress') starting at stage 2, then `<Button modes={LIGHT} label="Continue" onPress={…} />`. Continue marks the current stage done (“Done 5 Oct 2026”) and makes the next one current; after stage 4 every stage is done and the button label becomes “Start again”, which resets to stage 1. Below the card, `<p className="coin-new-readout" role="status">` with “Stage 2 of 4: Add bank account” or “All 4 stages done”.
 
 ## Do & Don'ts
@@ -69,11 +69,11 @@ header: Do & Don’ts · title: Make every stage readable · description: Each p
 Every preview is a host (`coin-new-host wide`) with a Stepper.
 - Do Match the icon and colour: A done stage shows a check on green. — stage('done') Verify PAN, “PAN details match your name” | Don't Put a check on purple: A check in the current colour reads as both done and in progress. — `<Step status="complete" modes={{ ...LIGHT, 'Step Status': 'active' }} title="Verify PAN" supportingText="PAN details match your name" />`
 - Do Name each stage: “Verify PAN” and “Add bank account” say what happens. — stage('done') Verify PAN, stage('current') Add bank account | Don't Leave the default titles: “Stepper Item” tells people nothing. — stage('done') and stage('current') with no title (they show “Stepper Item”)
-- Do Write the outcome: The text says what failed and what to fix. — stage('failed') Add bank account, “Account name doesn’t match your PAN” | Don't Rely on the icon: A red cross alone doesn’t say what failed, and screen readers don’t hear it. — stage('failed') Add bank account, no supporting text
+- Do Write the outcome: The text says what failed and what to fix. — stage('failed') Add bank account, “Account name doesn’t match your PAN” | Don't Rely on the icon: A red cross, or “Failed” read aloud, doesn’t say what went wrong or how to fix it. — stage('failed') Add bank account, no supporting text
 
 ## Sources
 header: Sources · title: Use the public Stepper contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the developer sets the matching <code>status</code> and Step Status mode together. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is read as plain text, with no list, no current stage, and no names for the icons, so the text must carry each stage’s state. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the stage’s <code>status</code> sets both, and an explicit Step Status mode overrides the colour. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is a list named by its accessibility label: each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current. The icons themselves have no names, so the text must say what happened. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.
 
 ## Limits
-Do not show Dark mode (#197), a horizontal Stepper, pressable stages, custom content inside a Step, `connectorStyle` or `style`, or a Stepper-level Step Status. Do not show a glyph with a mismatched colour except in the Don’t above. Do not imply that state, progress, or the current stage is announced (#195).
+Do not show Dark mode (#197), a horizontal Stepper, pressable stages, custom content inside a Step, `connectorStyle` or `style`, or a Stepper-level Step Status. Do not show a glyph with a mismatched colour except in the Don’t above. Do not imply that the icons are announced or that the status word explains what happened.

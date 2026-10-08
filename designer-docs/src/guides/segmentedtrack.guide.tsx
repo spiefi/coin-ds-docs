@@ -40,20 +40,20 @@ function SegmentedTrackGuide() {
       header: 'Anatomy', title: 'A pill split by share',
       description: 'The track is a 24 px pill. Each slice’s width is its share of the total, and the colours step from strong to light.',
       body: <Anatomy specimenWidth={300} parts={[
-        { name: 'Track', note: 'Rounds the ends and holds the slices with no gaps.', target: '[role="img"]', side: 'left' },
-        { name: 'First slice', note: 'Strongest colour; its width is its share.', target: '[role="img"] > div:nth-child(1)', side: 'top' },
-        { name: 'Second slice', note: 'A lighter step of the same colour.', target: '[role="img"] > div:nth-child(2)', side: 'bottom' },
-        { name: 'Third slice', note: 'Lightest; the steps repeat after three slices.', target: '[role="img"] > div:nth-child(3)', side: 'top' },
+        { name: 'Track', note: 'Rounds the ends and holds the slices with no gaps.', target: '[role="group"]', side: 'left' },
+        { name: 'First slice', note: 'Strongest colour; its width is its share.', target: '[role="group"] > div:nth-child(1)', side: 'top' },
+        { name: 'Second slice', note: 'A lighter step of the same colour.', target: '[role="group"] > div:nth-child(2)', side: 'bottom' },
+        { name: 'Third slice', note: 'Lightest; the steps repeat after three slices.', target: '[role="group"] > div:nth-child(3)', side: 'top' },
       ]}><Track mix={MIX3} /></Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'Shares and appearance',
-      description: 'Pass each part’s share; the track works out the widths. An appearance recolours every slice. Figma uses Senary gold, while code defaults to Primary purple, so ask developers to set Senary.',
+      description: 'Pass each part’s share; the track works out the widths. An appearance recolours every slice. Figma and code both default to Senary gold.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Equal slices" description="Without shares every slice is the same width, as in Figma."><Panel><SegmentedTrack modes={SENARY} segments={[{}, {}, {}]} accessibilityLabel="Three equal parts" /></Panel></ExampleCard>
         <ExampleCard title="Weighted slices" description="Widths follow the shares: 60, 25, and 15."><Panel><Track mix={MIX3} /></Panel></ExampleCard>
         <ExampleCard title="Five parts" description="After three slices the colours repeat, so the legend tells them apart."><Panel><Track mix={MIX5} /><Legend mix={MIX5} /></Panel></ExampleCard>
-        <ExampleCard title="Primary appearance" description="The code default: purple steps instead of gold."><Panel modes={PRIMARY}><Track mix={MIX3} modes={PRIMARY} /></Panel></ExampleCard>
+        <ExampleCard title="Primary appearance" description="Purple steps instead of gold."><Panel modes={PRIMARY}><Track mix={MIX3} modes={PRIMARY} /></Panel></ExampleCard>
       </div>,
     },
     states: {
@@ -61,15 +61,15 @@ function SegmentedTrackGuide() {
       description: 'Segmented Track has no hover, pressed, selected, or disabled state and can’t take focus. Only the data changes it, so pass real shares and hide the track when there are none.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="A zero share" description="A part worth 0 still draws a 1 px sliver; leave it out instead."><Panel><SegmentedTrack modes={SENARY} segments={[{ value: 0 }, { value: 60 }, { value: 40 }]} accessibilityLabel="Portfolio mix: equity 0%, debt 60%, cash 40%" /></Panel></ExampleCard>
-        <ExampleCard title="No data" description="An empty list still paints three equal slices; hide the track instead."><Panel><SegmentedTrack modes={SENARY} segments={[]} accessibilityLabel="Portfolio mix" /></Panel></ExampleCard>
+        <ExampleCard title="No data" description="An empty list draws an empty 24 px track; hide the track instead."><Panel><SegmentedTrack modes={SENARY} segments={[]} accessibilityLabel="Portfolio mix" /></Panel></ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: '24 px tall, full width',
       description: 'The track is 24 px tall with fully rounded ends and stretches to the width of its container. Slices share that width by their shares, with no gaps.',
       body: <Anatomy legend={false} specimenWidth={300} marks={[
-        { kind: 'size', target: '[role="img"]', side: 'bottom', label: 'both' },
-        { kind: 'size', target: '[role="img"] > div:nth-child(1)', side: 'top', label: 'both' },
+        { kind: 'size', target: '[role="group"]', side: 'bottom', label: 'both' },
+        { kind: 'size', target: '[role="group"] > div:nth-child(1)', side: 'top', label: 'both' },
       ]}><Track mix={MIX3} /></Anatomy>,
     },
     content: {
@@ -101,20 +101,20 @@ function SegmentedTrackGuide() {
         <DoDont goodTitle="Use a data appearance" goodCaption="Senary gives three distinct golds." good={<Panel><Track mix={MIX3} /></Panel>}
           badTitle="Pick Neutral" badCaption="All three slices turn the same grey and the split disappears." bad={<Panel modes={NEUTRAL}><Track mix={MIX3} modes={NEUTRAL} /></Panel>} />
         <DoDont goodTitle="Hide it when there’s no data" goodCaption="Say so in words instead." good={<Panel><Text modes={SENARY}>No investments yet</Text></Panel>}
-          badTitle="Pass an empty list" badCaption="It paints three equal slices that look like real data."
+          badTitle="Pass an empty list" badCaption="It leaves a blank gap that says nothing about why."
           bad={<Panel><SegmentedTrack modes={SENARY} segments={[]} accessibilityLabel="Portfolio mix" /></Panel>} />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Segmented Track contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="5 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedtrack')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedtrack')} stories={[
         { label: 'Default', id: 'components-segmentedtrack--default' },
         { label: 'Proportional segments', id: 'components-segmentedtrack--proportional-segments' },
         { label: 'Senary', id: 'components-segmentedtrack--themed-senary' },
         { label: 'Many segments', id: 'components-segmentedtrack--many-segments' },
         { label: 'In Range Track', id: 'components-rangetrack--default' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Segmented Track is one 268 × 24 component with three equal gold slices, the Senary appearance; code defaults to Primary purple, so developers set Senary to match. It is display-only: on the web it is a single image named by its spoken name, and names given to single slices are likely not read out. Range Track builds on it, adding tabs and a legend. The published Storybook predates 0.1.78.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Segmented Track is one 268 × 24 component with three equal gold slices, the Senary appearance, which code now uses by default too. It is display-only: on the web it is a group named by its spoken name, and names given to single slices are not read out. Range Track builds on it, adding tabs and a legend. The published Storybook predates 0.1.78.</Sources>,
     },
   }
 
@@ -130,7 +130,7 @@ function SegmentedTrackGuide() {
     <div className="controls-panel">
       <Segment label="Parts" value={parts} options={['3 parts', '5 parts'] as const} onChange={setParts} />
       <Segment label="Appearance" value={appearance} options={['Senary', 'Primary', 'Quaternary'] as const} onChange={setAppearance} />
-      <Readout title="Spoken name" value={spoken(mix)}>Figma uses Senary gold; code defaults to Primary purple.</Readout>
+      <Readout title="Spoken name" value={spoken(mix)}>Figma and code both default to Senary gold.</Readout>
     </div>
   </>} sections={sections} />
 }

@@ -24,3 +24,12 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 - #195 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): no list, current-step, or status semantics; status glyph and Step Status colour set separately (`stepStatus` ignored); `{false}` child blanks the label; Fragments not unwrapped; no `testID`; stale published Storybook.
 - #197 (Components, To do; Marcin): in Dark mode complete and warning turn red and supporting text and dates stay near-black. The guide shows Light only.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #195 fixed. Stepper renders a `ul` (named by `accessibilityLabel`) and each Step an `li`. `aria-current="step"` is on the first incomplete step. Step labels read “Verify PAN, Completed”, “Payment failed, Failed”, and “Check details, Needs attention”. `status` alone now sets the colour (complete green, error red, warning orange); an explicit Step Status mode still overrides it, so the guide’s check-on-purple Don’t still renders. A `{false}` child keeps the title, Steps inside a Fragment number in order, and the last Step has no connector. `testID` works on Stepper, Step, and StepLabel.
+- Regression #211 (Component Fix, To do): every Stepper logs a React “unique key” error in development builds. The production docs build does not log it.
+- Still open: the check, cross, and alert glyphs are unnamed images.
+- Guide: anatomy and sizing targets moved from `:scope > div > div:nth-child(n)` to `:scope > ul > li:nth-child(n)` (padding mark on `:scope > ul`). The States description, Content description, “Rely on the icon” caption, and Sources note now describe `status` setting the colour and the list, current-stage, and status-word semantics; the In context Stepper is named “KYC progress”.

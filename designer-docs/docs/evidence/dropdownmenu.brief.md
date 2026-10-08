@@ -2,7 +2,7 @@
 
 slug: dropdownmenu · label: Dropdown Menu · public API: DropdownMenu, DropdownMenu.Item (+ Icon, Avatar, IconButton, Card, HStack, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9473-2192 · storybook: docsUrl('dropdownmenu') · stories: Default=components-dropdownmenu--default, Without leading=components-dropdownmenu--without-leading, Without trailing=components-dropdownmenu--without-trailing, Custom slots=components-dropdownmenu--custom-slots, Disabled item=components-dropdownmenu--with-disabled-item, Scrollable=components-dropdownmenu--scrollable
-checked: 28 September 2026 · jfs-components 0.1.77 (newest package tag v0.1.77)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-636f3f5, Biscuit's main 636f3f5)
 icon: a rounded panel (x 3–15, y 3–15, radius 2) with three short lines at y 7, 9.5, 12 (x 6–10) and a small right chevron at the end of the middle line; 1.5 stroke.
 
 All instances use `modes={{ 'Color Mode': 'Light' }}`, `style={{ width: 256 }}`, and an `accessibilityLabel`. Target structurally: root `[role="menu"]`, items `[role="menu"] [role="menuitem"]:nth-child(n)`. Never rely on the default photo Avatar except in Anatomy and where stated; elsewhere pass `leading={<Icon iconName="…" />}` or `showLeading={false}`.
@@ -59,7 +59,7 @@ header: Do & Don’ts · title: Keep menus for actions · description: Each pair
 
 ## Sources
 header: Sources · title: Use the public Dropdown Menu contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; public npm stops at 0.1.60, which has no Dropdown Menu. Dropdown Menu draws the panel and rows; opening, placing, and closing it, and which row is selected, belong to the screen. The default leading Avatar is a sample photo, so replace it with a real avatar or an icon. On the web the selected row is shown only visually and arrow keys do not move between rows. Figma’s Menu Item master cited by the package is no longer in the file.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. That build exports Dropdown Menu and its items. Dropdown Menu draws the panel and rows; opening, placing, and closing it, and which row is selected, belong to the screen. The default leading Avatar is a sample photo, so replace it with a real avatar or an icon. On the web the selected row is shown only visually and arrow keys do not move between rows. Figma’s Menu Item master cited by the package is no longer in the file.
 
 ## Limits
 Do not show a trigger or positioning as part of the component, `children` custom rows, `style` beyond width, or `labelStyle`. Do not claim announced selection or arrow-key navigation.

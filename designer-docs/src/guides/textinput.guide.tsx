@@ -52,7 +52,7 @@ function TextInputGuide() {
         { name: 'Leading icon', note: 'Hints at what to type; a search icon by default.', target: ':scope > div > div:first-child', side: 'left' },
         { name: 'Text', note: 'The placeholder, then what people type; one line.', target: byTestId('ti-anatomy'), side: 'top' },
         { name: 'End slot', note: 'Optional content after the text, such as a filter icon.', target: ':scope > div > div:last-child', side: 'right' },
-        { name: 'Field', note: 'Grey rounded surface; a dark outline shows focus.', target: ':scope > div', side: 'bottom' },
+        { name: 'Field', note: 'Grey rounded surface; a darker grey border shows focus.', target: ':scope > div', side: 'bottom' },
       ]}>
         <TextInput modes={LIGHT} testID="ti-anatomy" placeholder="Search transactions" trailing={filterIcon()} />
       </Anatomy>,
@@ -68,9 +68,9 @@ function TextInputGuide() {
     },
     states: {
       header: 'States', title: 'Empty, focused, and filled',
-      description: 'Empty, the field shows its placeholder. Focused, a dark outline appears and the placeholder clears. Filled, it shows the text. It has no disabled or error state.',
+      description: 'Empty, the field shows its placeholder. Focused, a darker grey border appears and the placeholder clears. Filled, it shows the text. It has no disabled or error state.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Empty" description="The prompt shows until people type. Select the field to see the focus outline."><Field placeholder="Search transactions" /></ExampleCard>
+        <ExampleCard title="Empty" description="The prompt shows until people type. Select the field to see the focus border."><Field placeholder="Search transactions" /></ExampleCard>
         <ExampleCard title="Filled" description="The text replaces the prompt."><FilledField /></ExampleCard>
       </div>,
     },
@@ -110,18 +110,18 @@ function TextInputGuide() {
         <DoDont goodTitle="Match the icon to the task" goodCaption="The rupee icon says an amount goes here." good={<Field placeholder="Amount" leadingIconName="ic_rupee" />}
           badTitle="Keep the search icon everywhere" badCaption="A search icon on an amount field misleads." bad={<Field placeholder="Amount" />} />
         <DoDont goodTitle="Keep one fixed prompt" goodCaption="The field always says what it is for." good={<Field placeholder="Search" />}
-          badTitle="Rotate the prompt" badCaption="Changing text distracts, and the field loses its accessible name." bad={<Field placeholder={['Search gold', 'Search funds', 'Search bills']} />} />
+          badTitle="Rotate the prompt" badCaption="Changing text distracts, and screen readers hear only the first prompt." bad={<Field placeholder={['Search gold', 'Search funds', 'Search bills']} />} />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Text Input contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('textinput')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('textinput')} stories={[
         { label: 'Default', id: 'components-textinput--default' },
         { label: 'Leading and trailing', id: 'components-textinput--with-leading-and-trailing' },
         { label: 'Custom leading', id: 'components-textinput--with-custom-leading' },
         { label: 'Search', id: 'components-textinput--search' },
-      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s textInput is 251 × 44 with start and end icon slots; the package renders 42 px tall and shows focus with its own dark outline. <code>TextInput.Search</code> is the same field with a fixed search icon. The field has no visible label, error, or disabled state, and its leading icon can be changed but not removed. On the web the accessibility label names the input. Without one, the placeholder is the field’s only name, and it clears on focus; a rotating placeholder leaves the field unnamed. Always set an accessibility label.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s textInput is 251 × 44 with start and end icon slots; the package renders 42 px tall, and focus draws the 1 px grey border of the Active input state. <code>TextInput.Search</code> is the same field with a fixed search icon. The field has no visible label, error, or disabled state, and its leading icon can be changed but not removed. On the web the input is named by its accessibility label, or else by its placeholder, and keeps that name while focused; a rotating placeholder names it after its first prompt. Set an accessibility label when the placeholder does not say what the field is for.</Sources>,
     },
   }
 

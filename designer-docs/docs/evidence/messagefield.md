@@ -28,3 +28,11 @@ Checked 2 October 2026. Declared and installed `jfs-components` is `0.1.78`, bui
 - Dark `Color Mode` renders identically to Light (no dark values).
 - A Coin `SupportText` with `status="Error"` and `modes={{ 'Color Mode': 'Light', Status: 'Error' }}` renders a red message with a warning icon; the guide uses it below the field for an error.
 - Accessibility: the text area's name is `accessibilityLabel`, then `label`, then the placeholder. No `aria-invalid` or `aria-required`; a read-only field stays focusable. Reported with the idle text colour as a Coin gap: #187 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #187 fixed. Typed text is `rgb(12,13,16)` while idle and after clicking away, while the placeholder stays `rgb(112,114,117)`. New `errorMessage` and `supportText` props render under the field, linked with `aria-describedby`, and a Form validation error is shown too. `aria-invalid` and `aria-required` are set, and the asterisk uses the Negative token. Disabled: `aria-disabled`, `tabindex -1`.
+- From the installed source: `errorMessage` replaces `supportText` only while the field is invalid (as in FormField). The message sits between the text area and the counter. Figma's Message Field still has no support text or error message.
+- Guide: the Error example, the Do "Say what to fix", the In context screen, and the playground's Error state now use `errorMessage` instead of a separate Support Text. The States, Filled, Error, Disabled, and In context copy and the Sources note now describe the fixed behaviour (text stays dark, the field shows its own error, errors and required are announced, Tab skips a disabled field).
