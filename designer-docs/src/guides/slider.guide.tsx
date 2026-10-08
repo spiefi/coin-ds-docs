@@ -26,7 +26,7 @@ function SliderGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'Track, fill, handle, and value',
-      description: 'A 4 px track fills in gold up to a 20 px handle. The value bubble floats above the handle and the range’s ends sit below. In 0.1.78 the bubble shows as a narrow black block without its value; in Figma it is a rounded label.',
+      description: 'A 4 px track fills in gold up to a 20 px handle. A rounded black bubble floats above the handle with the value, and the range’s ends sit below.',
       body: <Anatomy specimenWidth={300} parts={[
         { name: 'Fill', note: 'Gold from the minimum up to the value.', target: '[role="slider"] > div:nth-child(2)', side: 'left' },
         { name: 'Track', note: 'Pale gold: the rest of the range.', target: '[role="slider"] > div:nth-child(1)', side: 'right' },
@@ -102,11 +102,11 @@ function SliderGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Slider contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="5 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('slider')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('slider')} stories={[
         { label: 'Default', id: 'components-slider--default' }, { label: 'Currency format', id: 'components-slider--currency-format' },
         { label: 'Bubble on interaction', id: 'components-slider--tooltip-on-interaction' },
         { label: 'Without labels', id: 'components-slider--without-labels' }, { label: 'Disabled', id: 'components-slider--disabled' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Slider is 294 × 44; the package is 61 px tall because its handle row is 20 px. In 0.1.78 the value bubble reads two tokens that don’t exist, so it has no width or rounded corners; Figma shows a rounded black label. On the web the slider has a name and works with the arrow, Page Up and Down, Home, and End keys, but its value and disabled state are not announced. The published Storybook predates 0.1.78.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Slider is 294 × 44; the package is 61 px tall because its handle row is 20 px. The value bubble matches Figma: a rounded black label that fits its value. On the web the slider announces its name, value, and disabled state, and works with the arrow, Page Up and Down, Home, and End keys. The published Storybook predates 0.1.78.</Sources>,
     },
   }
 

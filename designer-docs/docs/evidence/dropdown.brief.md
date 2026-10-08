@@ -2,10 +2,10 @@
 
 slug: dropdown · label: Dropdown · public API: Dropdown, DropdownItem (+ IconButton, Icon, Card, Text, HStack for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3087-4266 · storybook: docsUrl('dropdown') · stories: Default=components-dropdown--default, With icons=components-dropdown--with-icons, With disabled item=components-dropdown--with-disabled-item, Scrollable=components-dropdown--scrollable
-checked: 28 September 2026 · jfs-components 0.1.60 (registry latest 0.1.60)
+checked: 8 October 2026 · jfs-components 0.1.78 (5 October build, mirror tag v0.1.78-636f3f5)
 icon: a rounded rectangle panel (x 3–15, y 3–15, radius 2) with three horizontal lines inside at y 7, 9.5, 12; 1.5 stroke.
 
-All instances use `modes={{ 'Color Mode': 'Light' }}`. Dropdown has no `testID`; target it structurally: root `[role="menu"]`, items `[role="menu"] [role="menuitem"]:nth-child(n)`. Give each Dropdown `style={{ width: 240 }}` unless stated, and pass `accessibilityLabel`.
+All instances use `modes={{ 'Color Mode': 'Light' }}`. Dropdown has no `testID`; target it structurally: root `[role="listbox"]`, items `[role="listbox"] [role="option"]:nth-child(n)`. Give each Dropdown `style={{ width: 240 }}` unless stated, and pass `accessibilityLabel`.
 
 Accounts: savings · Savings account; checking · Checking account; brokerage · Brokerage account; recurring · Recurring deposit.
 
@@ -18,11 +18,11 @@ playground: stage = one Dropdown (`accessibilityLabel="Accounts"`) of the four a
 header: Anatomy · title: A panel of items · description: A rounded, shadowed panel holds Dropdown Items. The selected item gets a grey fill and a check.
 specimen: `<Dropdown accessibilityLabel="Accounts" style={{ width: 240 }}>` with Savings account (`selected`), Checking account, Brokerage account
 parts:
-1. Panel — Rounded surface with a soft shadow that floats over content. — target: `[role="menu"]` — side: left
-2. Selected item — Grey fill and a check mark the current choice. — target: `[role="menu"] [role="menuitem"]:nth-child(1)` — side: top
-3. Check — Appears on the selected item unless it has its own trailing content. — target: `[role="menu"] [role="menuitem"]:nth-child(1) svg` — side: right
-4. Item — One choice or action in one line. — target: `[role="menu"] [role="menuitem"]:nth-child(3)` — side: bottom
-marks: padding `[role="menu"] [role="menuitem"]:nth-child(2)`
+1. Panel — Rounded surface with a soft shadow that floats over content. — target: `[role="listbox"]` — side: left
+2. Selected item — Grey fill and a check mark the current choice. — target: `[role="listbox"] [role="option"]:nth-child(1)` — side: top
+3. Check — Appears on the selected item unless it has its own trailing content. — target: `[role="listbox"] [role="option"]:nth-child(1) svg` — side: right
+4. Item — One choice or action in one line. — target: `[role="listbox"] [role="option"]:nth-child(3)` — side: bottom
+marks: padding `[role="listbox"] [role="option"]:nth-child(2)`
 
 ## Configuration
 header: Configuration · title: Labels, icons, and length · description: Items take a label and an optional leading icon. Set a maximum height when the list is long so the panel scrolls instead of growing.
@@ -39,7 +39,7 @@ Grid: `coin-new-example-grid`.
 
 ## Sizing
 header: Sizing · title: The screen sets the width · description: Items are 43 px tall and fill the panel’s width. Labels stay on one line and end in an ellipsis when they run out of room.
-- Measured diagram: `<Anatomy legend={false} marks={[{ kind: 'size', target: '[role="menu"]', side: 'top', label: 'both' }, { kind: 'size', target: '[role="menu"] [role="menuitem"]:nth-child(1)', side: 'right', label: 'both' }]}>` around the anatomy Dropdown without a selected item.
+- Measured diagram: `<Anatomy legend={false} marks={[{ kind: 'size', target: '[role="listbox"]', side: 'top', label: 'both' }, { kind: 'size', target: '[role="listbox"] [role="option"]:nth-child(1)', side: 'right', label: 'both' }]}>` around the anatomy Dropdown without a selected item.
 - ExampleCard "A long label" containing a Dropdown with Savings account and "Savings account for household and family expenses" — description "The label is cut to one line."
 
 ## Content
@@ -58,7 +58,7 @@ header: Do & Don’ts · title: Keep lists short and honest · description: Each
 
 ## Sources
 header: Sources · title: Use the public Dropdown contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a menu of menu items, the selected item is shown only visually (it is not announced as selected), and arrow keys do not move between items; Tab and Enter do.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a listbox of options and the selected item is announced as selected. On its own, Tab moves from option to option, skipping disabled ones, and Enter or Space picks one; arrow keys don’t move between options. In this build Enter fires an option twice, so an action such as “Download statement” would run twice. Inside Dropdown Input, the field handles the keyboard.
 
 ## Limits
-Do not describe built-in open/close, positioning, arrow-key navigation, or announced selection. Do not use `style` except the width, `labelStyle`, or custom `children` items.
+Do not describe built-in open/close, positioning, or arrow-key navigation in a standalone Dropdown. Do not imply that Enter runs an action once (regression #209). Do not use `style` except the width, `labelStyle`, or custom `children` items.

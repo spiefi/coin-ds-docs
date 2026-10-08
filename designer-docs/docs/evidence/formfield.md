@@ -27,3 +27,11 @@ Checked 2 October 2026. Declared and installed `jfs-components` is `0.1.78`, bui
 - A Coin `Button` with `AppearanceBrand: Secondary`, `Emphasis: Low`, `Button / Size: S` in `trailing` renders 74 × 32, transparent with purple `rgb(93,0,181)` text, matching Figma's end slot. It stays in the tab order after the input and keeps its name; the slot is not hidden from assistive tech on the web.
 - Dark `Color Mode` renders identically to Light (no dark values).
 - Accessibility: the input's name is `accessibilityLabel`, then `label`, then the placeholder. There is no `aria-invalid`, no `aria-required` (the asterisk is visual only), and neither the support text nor the error message is linked to the input. A disabled field is still reached with Tab and is not announced as disabled. Reported as a Coin gap: #186 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #186 fixed. The input has `aria-invalid` and `aria-required`, and `aria-describedby` points at the error ("IFSC codes have 11 characters"); the support text is linked while the field is valid. The asterisk uses the Negative token (`mode/Negative/1400 (base)`). Disabled sets `aria-disabled` and `tabindex -1`, and Tab skips the field. In a 260 px field with Apply, the input shrinks to 152 px and the button stays inside the border.
+- Still open (installed source): Disabled uses the Read Only colours at 50 % opacity rather than Figma's Disabled mode, and there is no live region, so an error is read when people reach the field, not when it appears. The 47 px height (Figma 45) and the Light-only colours were not re-measured.
+- Guide: the Sources note now says errors, required, and support text are announced and Tab skips a disabled field; the asterisk is no longer called a fixed red. The 328 px `PhoneWidth` workaround is gone: the End action example and the playground render the field at the host's width. The Disabled example says Tab skips it.

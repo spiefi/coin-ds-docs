@@ -118,9 +118,9 @@ function IconButtonGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Icon Button contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="1 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('iconbutton')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('iconbutton')} stories={[
         { label: 'Default', id: 'components-iconbutton--default' }, { label: 'Toggle', id: 'components-iconbutton--toggle' }, { label: 'Sizes', id: 'components-iconbutton--sizes' }, { label: 'Emphasis', id: 'components-iconbutton--appearance-modes' }, { label: 'Disabled', id: 'components-iconbutton--disabled' },
-      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Size, emphasis, and appearance come from the <code>Button / Size</code>, <code>Emphasis</code>, and <code>AppearanceBrand</code> modes. A toggle’s On state uses the toggle tokens, a white circle with a black icon as in Figma. On the web a toggle is announced as pressed or not pressed and keeps the same name in both states. Figma’s Glass variant has no package equivalent. Without a label, the accessible name is the icon’s name, so always set one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Size, emphasis, and appearance come from the <code>Button / Size</code>, <code>Emphasis</code>, and <code>AppearanceBrand</code> modes. A toggle’s On state uses the toggle tokens, a white circle with a black icon as in Figma. On the web a toggle is announced as pressed or not pressed and keeps the same name in both states. Keyboard focus draws a thin ring without changing the button’s size; a mouse click leaves no ring. Figma’s Glass variant has no package equivalent. Without a label, the accessible name is the icon’s name, so always set one.</Sources>,
     },
   }
 

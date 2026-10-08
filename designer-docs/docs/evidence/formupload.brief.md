@@ -2,7 +2,7 @@
 
 slug: formupload · label: Form Upload · public API: FormUpload (+ Button, Card, VStack, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7217-11616 · storybook: docsUrl('formupload') · stories: Default=components-formupload--default, With previews=components-formupload--with-previews, Invalid=components-formupload--invalid, Disabled=components-formupload--disabled, Inside form=components-formupload--inside-form
-checked: 2 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-3795b4c, up to date)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-636f3f5, 5 October build)
 icon: a photo tile with a plus — `<rect x="1.5" y="3.5" width="9" height="9" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M14 6v6M11 9h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />`
 keywords: upload, attachment, file upload, photo upload, image picker, receipt
 
@@ -19,7 +19,7 @@ specimen: `<Anatomy surface="white" specimenWidth={300} …><FormUpload modes={L
 parts:
 1. Label — Names what to add; plain text above the row. — target: `${R} > div:first-child` — side: left
 2. Preview — A 44 px thumbnail of each added image. — target: `${byTestId('fu-anatomy-item-0')}` — side: left
-3. Remove — Takes the file out of the row. — target: `${byTestId('fu-anatomy-item-1')} button` — side: top
+3. Remove — A button named after the file that takes it out of the row. — target: `${byTestId('fu-anatomy-item-1')} [aria-label="Remove Receipt 2"]` (the remove button is a sibling of the preview button, so a bare `button` selector lands on the preview) — side: top
 4. Add cell — Opens the app’s picker; hidden once the limit is reached. — target: `${byTestId('fu-anatomy-add')}` — side: right
 5. Support text — File rules; an error message replaces it. — target: `${R} > div:nth-child(3)` — side: bottom
 
@@ -31,11 +31,11 @@ Grid `coin-new-example-grid three` (each in a host):
 - At the limit — `label="PAN card, front and back" maxCount={2}`, `files(2)` — lesson: Reaching the limit hides the add cell.
 
 ## States
-header: States · title: Default, error, and disabled · description: An error shows its message in place of the support text; the cells do not change colour. Disabled fades the whole field and stops adding and removing.
+header: States · title: Default, error, and disabled · description: An error shows its message in place of the support text; the cells do not change colour. Disabled fades the cells and stops adding and removing; the label stays at full contrast.
 Grid `coin-new-example-grid three` (each in a host):
 - Default — `label="Receipts" maxCount={3} supportText="JPG or PNG, up to 5 MB each"`, `files(1)` — lesson: Ready to add more files.
 - Error — `label="Receipts" maxCount={3} supportText="JPG or PNG, up to 5 MB each" isInvalid errorMessage="Add at least one receipt"`, no files — lesson: The message turns red and replaces the hint.
-- Disabled — `label="Receipts" maxCount={3} isDisabled`, `files(1)` — lesson: Faded, with adding and removing turned off.
+- Disabled — `label="Receipts" maxCount={3} isDisabled`, `files(1)` — lesson: Faded cells, with adding and removing turned off.
 
 ## Sizing
 header: Sizing · title: 44 px cells that wrap · description: Each cell is 44 × 44 px with 8 px between cells. The row fills its container and wraps to a new line when it runs out of room.
@@ -61,7 +61,7 @@ Every preview is a host.
 
 ## Sources
 header: Sources · title: Use the public Form Upload contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s FormUpload is a 328 × 93 component with label and support text options and a slot of Add Item cells in one clipped row; the package wraps the row and always puts the add cell last. The app supplies the picker and keeps the list of files. Previews show images only, and file type and size are not checked. Figma has no error or disabled design: an error only changes the support text, and disabled fades the cells twice. On the web the remove button responds to touch only, not to a mouse click or the keyboard, and has no accessible name.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s FormUpload is a 328 × 93 component with label and support text options and a slot of Add Item cells in one clipped row; the package wraps the row and always puts the add cell last. The app supplies the picker and keeps the list of files. Previews show images only, and file type and size are not checked. Figma has no error or disabled design: an error only changes the support text, and disabled fades the cells to half opacity. On the web the field is a group named by its label, and the add cell says which field it adds to. Each file’s remove button is named after it, such as “Remove Receipt 1”, and works with a click, a tap, or Enter.
 
 ## Limits
-Do not show Dark mode, `children` (custom cells), `rowStyle`/`style`, Form `validationErrors`, or non-image files. Do not imply that remove works with a mouse or keyboard on the web, that file types or sizes are checked, or that the cells turn red on error.
+Do not show Dark mode, `children` (custom cells), `rowStyle`/`style`, Form `validationErrors`, or non-image files. Do not imply that file types or sizes are checked, that the cells turn red on error, or that disabled dims the label.

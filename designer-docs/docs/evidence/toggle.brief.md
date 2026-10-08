@@ -2,7 +2,7 @@
 
 slug: toggle · label: Toggle · public API: Toggle (+ ListItem, VStack, HStack, Card, Button, Checkbox for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2906-8120 · storybook: docsUrl('toggle') · stories: Default=components-toggle--default, On=components-toggle--on, Disabled=components-toggle--disabled, All states=components-toggle--all-states, Interactive list=components-toggle--interactive
-checked: 1 October 2026 · jfs-components 0.1.77 (newest package tag v0.1.78; Toggle unchanged)
+checked: 8 October 2026 · jfs-components 0.1.78 (5 October build, mirror tag v0.1.78-636f3f5)
 icon: a switch — `<rect x="1.5" y="5" width="15" height="8" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" /><circle cx="12.5" cy="9" r="2.2" fill="currentColor" />`
 keywords: switch, on/off, setting
 
@@ -55,7 +55,7 @@ Every preview is a host (`coin-new-host wide`).
 
 ## Sources
 header: Sources · title: Use the public Toggle contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.77</code> from the team’s private package repository; Toggle is unchanged in 0.1.78. Figma has two variants, Off and On, both 52 × 31; the package adds <code>disabled</code>, which dims the toggle to 50% and greys the track in both states. Toggle has no label of its own, so the screen names it, usually with the row’s title. On the web it is a switch with a name, but its on or off state is not announced, and Space does not switch it; Enter and click do.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma has two variants, Off and On, both 52 × 31; the package adds <code>disabled</code>, which dims the toggle to 50% and greys the track in both states. Toggle has no label of its own, so the screen names it, usually with the row’s title. On the web it is a switch with a name, and its on or off state is announced. Space and click switch it; in this build Enter does not. A disabled toggle is announced as disabled and skipped by Tab.
 
 ## Limits
-Do not show Dark mode, `style`, uncontrolled-only patterns as a choice, or a pressed or hover style. Do not imply that the state is announced, that Space works, or that disabled-on stays purple (ticket #181). Do not use the kit `Toggle` for the Coin component.
+Do not show Dark mode, `style`, uncontrolled-only patterns as a choice, or a pressed or hover style. Do not imply that Enter switches the toggle (regression #209) or that disabled-on stays purple. Do not use the kit `Toggle` for the Coin component.

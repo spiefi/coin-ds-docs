@@ -50,7 +50,7 @@ function kyc(current: number, outcome: Outcome, dates = true, doneDates?: string
   })
 }
 
-const S = (k: number) => `:scope > div > div:nth-child(${k})`
+const S = (k: number) => `:scope > ul > li:nth-child(${k})`
 const circle = (k: number) => `${S(k)} > div:first-child > div:first-child`
 const connector = (k: number) => `${S(k)} > div:first-child > div:nth-child(2)`
 const text = (k: number, n: 1 | 2 | 3) => `${S(k)} > div:last-child > div > div:nth-child(${n})`
@@ -105,7 +105,7 @@ function StepperGuide() {
     },
     states: {
       header: 'States', title: 'Five stage states',
-      description: 'Each stage shows one state. In Figma, pick it with the Step Status mode; in code the matching icon and colour are set together, so a check is always green.',
+      description: 'Each stage shows one state. In Figma, pick it with the Step Status mode; in code the stage’s status sets both its icon and its colour, so a check is always green.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Done" description="Green circle with a check."><Host><Stepper modes={LIGHT}>{step(1, 'done', 'Verify PAN', 'PAN details match your name')}</Stepper></Host></ExampleCard>
         <ExampleCard title="Current" description="Purple circle with the stage number."><Host><Stepper modes={LIGHT}>{step(1, 'current', KYC[1].title, KYC[1].text)}</Stepper></Host></ExampleCard>
@@ -120,7 +120,7 @@ function StepperGuide() {
       body: <Anatomy legend={false} specimenWidth={328} marks={[
         { kind: 'size', target: S(1), side: 'right', label: 'both' },
         { kind: 'size', target: circle(2), side: 'bottom', label: 'both' },
-        { kind: 'padding', target: ':scope > div' },
+        { kind: 'padding', target: ':scope > ul' },
       ]}>
         <Stepper modes={LIGHT}>
           {step(1, 'done', KYC[0].title, KYC[0].text)}
@@ -130,7 +130,7 @@ function StepperGuide() {
     },
     content: {
       header: 'Content', title: 'Name the stage, then say how it went',
-      description: 'Titles name the stage in a few words, such as “Verify PAN”, not an action like “Click to verify”. Supporting text says what happens or what went wrong, because the indicator’s colour and icon aren’t announced.',
+      description: 'Titles name the stage in a few words, such as “Verify PAN”, not an action like “Click to verify”. Supporting text says what happens or what went wrong: the indicator only says that a stage failed or needs attention, not why.',
       body: <ExampleCard title="Stage names and outcomes"><Host><Stepper modes={LIGHT}>
         {step(1, 'done', 'Verify PAN', 'PAN details match your name')}
         {step(2, 'attention', 'Add nominee', 'Nominee’s date of birth is missing')}
@@ -139,10 +139,10 @@ function StepperGuide() {
     },
     context: {
       header: 'In context', title: 'KYC progress on a card',
-      description: 'The screen works out each stage’s state and updates the Stepper as the person moves on. Stepper isn’t pressable, so the next action is a separate button.',
+      description: 'The screen works out each stage’s state and updates the Stepper as the person moves on, and gives it a spoken name such as “KYC progress”. Stepper isn’t pressable, so the next action is a separate button.',
       body: <div className="coin-new-context">
         <Card modes={LIGHT}><VStack modes={LIGHT} style={{ width: '100%' }}>
-          <Stepper modes={LIGHT}>{kyc(ctx, 'In progress', true, ctxDates)}</Stepper>
+          <Stepper modes={LIGHT} accessibilityLabel="KYC progress">{kyc(ctx, 'In progress', true, ctxDates)}</Stepper>
           <Button modes={LIGHT} label={ctx > 4 ? 'Start again' : 'Continue'} onPress={advance} />
         </VStack></Card>
         <p className="coin-new-readout" role="status">{ctx > 4 ? 'All 4 stages done' : `Stage ${ctx} of 4: ${KYC[ctx - 1].title}`}</p>
@@ -162,18 +162,18 @@ function StepperGuide() {
           bad={<Host><Stepper modes={LIGHT}>{step(1, 'done')}{step(2, 'current')}</Stepper></Host>} />
         <DoDont goodTitle="Write the outcome" goodCaption="The text says what failed and what to fix."
           good={<Host><Stepper modes={LIGHT}>{step(1, 'failed', 'Add bank account', 'Account name doesn’t match your PAN')}</Stepper></Host>}
-          badTitle="Rely on the icon" badCaption="A red cross alone doesn’t say what failed, and screen readers don’t hear it."
+          badTitle="Rely on the icon" badCaption="A red cross, or “Failed” read aloud, doesn’t say what went wrong or how to fix it."
           bad={<Host><Stepper modes={LIGHT}>{step(1, 'failed', 'Add bank account')}</Stepper></Host>} />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Stepper contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="5 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('stepper')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('stepper')} stories={[
         { label: 'Default', id: 'components-stepper--default' }, { label: 'Order tracking', id: 'components-stepper--order-tracking' },
         { label: 'Three steps', id: 'components-stepper--three-steps' }, { label: 'Step complete', id: 'components-step--complete' },
         { label: 'Step error', id: 'components-step--error-state' }, { label: 'Step warning', id: 'components-step--warning-state' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the developer sets the matching <code>status</code> and Step Status mode together. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is read as plain text, with no list, no current stage, and no names for the icons, so the text must carry each stage’s state. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the stage’s <code>status</code> sets both, and an explicit Step Status mode overrides the colour. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is a list named by its accessibility label: each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current. The icons themselves have no names, so the text must say what happened. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.</Sources>,
     },
   }
 

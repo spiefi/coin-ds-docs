@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { Button, Card, Form, FormField, FormUpload, TextInput, VStack, type Modes } from 'jfs-components'
+import { Button, Card, Form, FormField, FormUpload, MessageField, TextInput, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
 import { Anatomy, DoDont, ExampleCard, Readout, Segment, Sources, Surface, byTestId, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
@@ -14,7 +14,7 @@ const NONE: Errors = {}
 const ERR_IFSC: Errors = { ifsc: 'IFSC codes have 11 characters' }
 const ERR_TWO: Errors = { account: 'Account numbers have 9 to 18 digits', ifsc: 'IFSC codes have 11 characters' }
 const ERR_PAN: Errors = { pan: ['Enter all 10 characters of your PAN', 'Use capital letters only'] }
-const ERR_DOC: Errors = { doc: 'Upload a PDF or JPG under 5 MB' }
+const ERR_OTHER: Errors = { doc: 'Upload a PDF or JPG under 5 MB', note: 'Add a few more details, at least 20 characters' }
 const ERR_EMAIL: Errors = { email: 'Enter an email address like name@example.com' }
 
 type FieldProps = React.ComponentProps<typeof FormField>
@@ -31,6 +31,11 @@ function Input({ value: initial = '', ...props }: FieldProps) {
 const Holder = ({ value = 'Asha Rao' }: { value?: string }) => <Input name="holder" label="Account holder name" value={value} />
 const Account = ({ value = '12345' }: { value?: string }) => <Input name="account" type="number" label="Account number" value={value} />
 const Ifsc = ({ value = 'SBIN000123' }: { value?: string }) => <Input name="ifsc" label="IFSC code" value={value} />
+
+function Note() {
+  const [value, setValue] = useState('Charged twice')
+  return <MessageField modes={LIGHT} name="note" label="Describe your issue" value={value} onChangeText={setValue} />
+}
 
 const ERROR_OPTIONS = { None: NONE, 'One field': ERR_IFSC, 'Two fields': ERR_TWO } as const
 const ERROR_READOUT = { None: 'None', 'One field': 'IFSC code', 'Two fields': 'Account number, IFSC code' } as const
@@ -88,7 +93,7 @@ function FormGuide() {
         <ExampleCard title="No errors" description="The fields, 12 px apart, with nothing added."><Host><Form modes={LIGHT}><Holder /><Account /></Form></Host></ExampleCard>
         <ExampleCard title="An error for one field" description="Only the field whose name matches shows the message."><Host><Form modes={LIGHT} validationErrors={ERR_IFSC}><Holder /><Ifsc /></Form></Host></ExampleCard>
         <ExampleCard title="Two messages for one field" description="Given a list, the field shows only the first message."><Host><Form modes={LIGHT} validationErrors={ERR_PAN}><Input name="pan" label="PAN" value="ABCDE12" /></Form></Host></ExampleCard>
-        <ExampleCard title="Form Upload too" description="Form Upload shows its error the same way."><Host><Form modes={LIGHT} validationErrors={ERR_DOC}><FormUpload modes={LIGHT} name="doc" label="PAN card" /></Form></Host></ExampleCard>
+        <ExampleCard title="Other fields too" description="Form Upload and Message Field show their errors the same way."><Host><Form modes={LIGHT} validationErrors={ERR_OTHER}><FormUpload modes={LIGHT} name="doc" label="PAN card" /><Note /></Form></Host></ExampleCard>
       </div>,
     },
     states: {
@@ -141,11 +146,11 @@ function FormGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Form contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="7 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('form')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('form')} stories={[
         { label: 'Default', id: 'components-form--default' },
         { label: 'With validation errors', id: 'components-form--with-validation-errors' },
         { label: 'Server validation', id: 'components-form--server-validation' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Form is one 328 × 306 component: a slot of three Form Fields, 12 px apart, and the package matches it. In the package Form only spaces the fields and passes errors by name to Form Field, Form Upload, and Message Field; it does not submit or check anything, and its <code>onSubmit</code> property does nothing. In this version Message Field turns red but shows no message. On the web the form has no accessible name and errors are not announced. The published Storybook predates the current stories.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Form is one 328 × 306 component: a slot of three Form Fields, 12 px apart, and the package matches it. In the package Form only spaces the fields and passes errors by name to Form Field, Form Upload, and Message Field; it does not submit or check anything, and its <code>onSubmit</code> property does nothing. On the web the form has no accessible name, and nothing announces errors when they arrive. Form Field and Message Field mark themselves invalid and link their message, so a screen reader reads it with the field. The published Storybook predates the current stories.</Sources>,
     },
   }
 

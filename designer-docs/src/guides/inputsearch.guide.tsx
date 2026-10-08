@@ -23,7 +23,7 @@ type SearchProps = Omit<React.ComponentProps<typeof InputSearch>, 'value' | 'onC
 function Search({ initial = '', ...props }: SearchProps) {
   const [value, setValue] = useState(initial)
   const label = typeof props.placeholder === 'string' ? props.placeholder : undefined
-  return <InputSearch modes={LIGHT} accessibilityLabel={label} {...props} value={value} onChangeText={setValue} />
+  return <InputSearch modes={LIGHT} accessibilityLabel={label} supportText={props.supportTextLabel != null} {...props} value={value} onChangeText={setValue} />
 }
 
 function Field(props: SearchProps & { narrow?: boolean }) {
@@ -37,10 +37,10 @@ function AnatomySpecimen() {
     { name: 'Search icon', note: 'Marks the field as search; always shown.', target: `${F} > div:first-child`, side: 'top' },
     { name: 'Query', note: 'The placeholder, then what people type; one line.', target: byTestId('is-anatomy'), side: 'top' },
     { name: 'Clear', note: 'Appears with text and empties the field.', target: `${F} > div:last-child`, side: 'right' },
-    { name: 'Field', note: 'Grey rounded surface; a dark outline shows focus.', target: F, side: 'left' },
+    { name: 'Field', note: 'Grey rounded surface; a grey border shows focus.', target: F, side: 'left' },
     { name: 'Hint', note: 'Optional support text about what people can search for.', target: HINT, side: 'bottom' },
   ]}>
-    <InputSearch modes={LIGHT} testID="is-anatomy" value={value} onChangeText={setValue} placeholder="Search payees" accessibilityLabel="Search payees" supportTextLabel="Try a name or mobile number" />
+    <InputSearch modes={LIGHT} testID="is-anatomy" value={value} onChangeText={setValue} placeholder="Search payees" accessibilityLabel="Search payees" supportText supportTextLabel="Try a name or mobile number" />
   </Anatomy>
 }
 
@@ -50,7 +50,7 @@ function PayeeSearch() {
   const digits = query.replace(/\D/g, '')
   const matches = PAYEES.filter(p => p.name.toLowerCase().includes(q) || (digits !== '' && p.number.replace(/\s/g, '').includes(digits)))
   return <Card modes={LIGHT}><VStack modes={LIGHT}>
-    <InputSearch modes={LIGHT} value={query} onChangeText={setQuery} placeholder="Search payees" accessibilityLabel="Search payees" supportTextLabel="Try a name or mobile number" />
+    <InputSearch modes={LIGHT} value={query} onChangeText={setQuery} placeholder="Search payees" accessibilityLabel="Search payees" supportText supportTextLabel="Try a name or mobile number" />
     {matches.map(p => <ListItem key={p.name} modes={LIGHT} layout="Horizontal" navArrow={false} title={p.name} supportText={p.number} />)}
     {matches.length === 0 && <Text modes={LIGHT}>No payees match</Text>}
   </VStack></Card>
@@ -69,17 +69,17 @@ function InputSearchGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Add a hint when the prompt is not enough',
-      description: 'The hint is on by default and reads “Support Text” until you write one. Write a short hint, or turn it off.',
+      description: 'The hint is off by default. Turn it on only with a short hint you write; on its own it reads “Support Text”.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="With a hint" description="The hint says what kinds of search work."><Field placeholder="Search payees" supportTextLabel="Try a name or mobile number" /></ExampleCard>
-        <ExampleCard title="Without a hint" description="Turn it off when the prompt says enough."><Field placeholder="Search help articles" supportText={false} /></ExampleCard>
+        <ExampleCard title="Without a hint" description="Leave it off when the prompt says enough."><Field placeholder="Search help articles" supportText={false} /></ExampleCard>
       </div>,
     },
     states: {
       header: 'States', title: 'Empty, focused, and filled',
-      description: 'Empty, the field shows its prompt. Focused, a dark outline appears and the prompt clears. Filled, a clear button appears at the end. It has no disabled or error state.',
+      description: 'Empty, the field shows its prompt. Focused, a grey border appears and the prompt clears. Filled, a clear button appears at the end. It has no disabled or error state.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Empty" description="The prompt shows until people type. Select the field to see the focus outline."><Field placeholder="Search payees" supportText={false} /></ExampleCard>
+        <ExampleCard title="Empty" description="The prompt shows until people type. Select the field to see the focus border."><Field placeholder="Search payees" supportText={false} /></ExampleCard>
         <ExampleCard title="Filled" description="The clear button empties the field in one tap."><Field placeholder="Search payees" supportText={false} initial="Asha" /></ExampleCard>
       </div>,
     },
@@ -92,7 +92,7 @@ function InputSearchGuide() {
           { kind: 'padding', target: F },
           { kind: 'gap', from: F, to: HINT },
         ]}>
-          <InputSearch modes={LIGHT} placeholder="Search payees" accessibilityLabel="Search payees" supportTextLabel="Try a name or mobile number" value="" onChangeText={() => {}} />
+          <InputSearch modes={LIGHT} placeholder="Search payees" accessibilityLabel="Search payees" supportText supportTextLabel="Try a name or mobile number" value="" onChangeText={() => {}} />
         </Anatomy>
         <ExampleCard title="In a narrow column" description="The field narrows with its column, and the hint wraps."><Field narrow placeholder="Search" supportTextLabel="Try a name or mobile number" /></ExampleCard>
       </div>,
@@ -116,9 +116,9 @@ function InputSearchGuide() {
       description: 'Each pair shows a search people understand versus one that confuses them.',
       body: <div className="coin-new-stack">
         <DoDont goodTitle="Write your own hint" goodCaption="The hint gives an example that works." good={<Field placeholder="Search payees" supportTextLabel="Try a name or mobile number" />}
-          badTitle="Leave the default hint" badCaption="The placeholder words “Support Text” reach people." bad={<Field placeholder="Search payees" />} />
+          badTitle="Leave the default hint" badCaption="The placeholder words “Support Text” reach people." bad={<Field placeholder="Search payees" supportText />} />
         <DoDont goodTitle="Keep one fixed prompt" goodCaption="The field always says what it searches." good={<Field placeholder="Search investments" supportText={false} />}
-          badTitle="Rotate the prompt" badCaption="Changing text distracts, and the field loses its accessible name." bad={<Field placeholder={['Search gold', 'Search funds', 'Search bills']} supportText={false} />} />
+          badTitle="Rotate the prompt" badCaption="Changing text distracts, and screen readers hear only the first prompt." bad={<Field placeholder={['Search gold', 'Search funds', 'Search bills']} supportText={false} />} />
         <DoDont goodTitle="Use a Form Field for a labelled value" goodCaption="The label stays while people type." good={<Host><FormField modes={LIGHT} label="Account number" placeholder="XXXX XXXX XXXX" /></Host>}
           badTitle="Collect a value with a search field" badCaption="The prompt disappears as people type, and there is no label or error." bad={<Field placeholder="Account number" supportText={false} />} />
       </div>,
@@ -126,13 +126,13 @@ function InputSearchGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Input Search contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('inputsearch')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('inputsearch')} stories={[
         { label: 'Default', id: 'components-inputsearch--default' },
         { label: 'With value', id: 'components-inputsearch--with-value' },
         { label: 'No support text', id: 'components-inputsearch--no-support-text' },
         { label: 'Custom support icon', id: 'components-inputsearch--with-custom-support-icon' },
         { label: 'Animated placeholders', id: 'components-inputsearch--animated-placeholders' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Input Search is a 251 × 68 set with idle and active variants and a support text option. The package is a Text Input with a fixed search icon, a clear button that appears with text, and support text that is on by default and reads “Support Text” until you set it. The field is 42 px tall (44 px in Figma) and shows focus with a dark outline instead of Figma’s grey border. It has no label, error, or disabled design. On the web the clear button has no role or name, the field adds an unnamed tab stop before the input, and without an accessibility label the field is named only by its placeholder, which clears on focus.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Input Search is a 251 × 68 set with idle and active variants and a support text option. The package is a Text Input with a fixed search icon, a clear button that appears with text, and support text that is off by default and reads “Support Text” until you set it. The field is 42 px tall (44 px in Figma) and shows focus with a 1 px grey border, as in Figma’s active variant. It has no label, error, or disabled design. On the web the clear button is a button named “Clear search”, the field has one tab stop, and without an accessibility label the placeholder names the field, also while focused; a rotating placeholder is named by its first prompt.</Sources>,
     },
   }
 

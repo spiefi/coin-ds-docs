@@ -30,3 +30,12 @@ Checked 2 October 2026. Declared and installed `jfs-components` is `0.1.78`, bui
 - The pill's web wrapper is an extra, unnamed tab stop before the input (as in TextInput).
 - Dark `Color Mode` gives a near-black pill with pink text; not shown.
 - Coin gap ticket filed for the hidden Jio Plus text, the 36 vs 38 px height, and the extra tab stop: #190 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #190 fixed. In Jio Plus the input now sits above the glass layer, so the prompt and typed text stay readable on a photo. The pill is 38 px Idle and Active and 36 px in Jio Plus, matching Figma. Tab goes input → Send, with no extra stop.
+- #179 fixed (IconButton): the send button no longer keeps a dark ring after a mouse click.
+- Still open: the send button is 26 × 26 vs Figma's 28 (IconButton's known 2 px size gap), and the empty-send question is unanswered: that code path is unchanged, so `onSubmit` still receives empty text and the field is not cleared.
+- Guide: the Jio Plus example, the Sizing title and description (38 px, 36 px in Jio Plus), and the Sources note (5 October build, Figma heights, Tab order; the hidden-text and extra-tab-stop warnings removed) now describe the fixed behaviour; checked date 8 October 2026. The brief matches.

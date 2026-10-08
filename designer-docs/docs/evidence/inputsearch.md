@@ -24,3 +24,11 @@ Checked 2 October 2026. Declared and installed `jfs-components` is `0.1.78`, bui
 - Accessibility: without `accessibilityLabel` the input's only name is its placeholder, which clears on focus; a rotating placeholder leaves it unnamed. With `accessibilityLabel` the input is named (#183 partly fixed). The field's wrapper is an extra, unnamed tab stop before the input (from TextInput).
 - Dark `Color Mode`: the text turns orange `#ff9900` (token ticket #177) and the support text stays black on dark; not shown.
 - Coin gap ticket filed for the default support text, the unnamed clear button, and the extra tab stop: #189 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #189 fixed. Clear is a button named “Clear search”, and Enter clears the field. Tab goes input → Clear → next field, so the wrapper is no longer a tab stop. Focus draws a 1 px `rgb(181,181,181)` border on a transparent fill, matching Figma’s active variant. `supportText` now defaults to `false` (with `supportText` on and no label it still reads “Support Text”).
+- #183 fixed (TextInput underneath): without `accessibilityLabel` the placeholder names the input and keeps naming it while focused; a rotating placeholder names it after its first item. The visible placeholder still clears on focus.
+- Guide: every example with a hint now sets `supportText` (Anatomy, Sizing, Content, In context, and the “Leave the default hint” Don’t), which keeps the Hint pin and the 8 px gap mark. The Field note, Configuration, States, the “Rotate the prompt” caption, and the Sources note describe the grey focus border, the off-by-default hint, the named clear button, the single tab stop, and the kept name.

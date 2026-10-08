@@ -42,3 +42,11 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 - `aria-pressed` follows `isActive`, and the derived name stays "Flash" in both states; 0.1.77 changed it to "Flash Off".
 - The Glass variant and the 40 px vs Figma 42 px size gap remain open (Biscuit's note).
 - Open Coin gap #179 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar). A mouse click focuses the button, and IconButton then draws its `focusOverlayStyle` border (1 px, hardcoded `#222`), so a dark ring stays after clicking. `:focus-visible` is false at that point. The behaviour is the same in 0.1.77 and 0.1.78.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #179 fixed. After a mouse click there is no ring and the button stays 40 × 40; HelloJio Input's send button behaves the same. Keyboard focus draws a 1 px outline ring in a token colour (`mode/Grey/200`) without changing the size. Minor: on a freshly loaded page the very first Tab shows the browser's default ring instead, because the keyboard listener installs on first focus; later Tabs show the token ring.
+- Still open: the Glass variant has no package equivalent, and Medium is 40 px vs Figma's 42 px.
+- Guide: the Sources note gives the 5 October build and says keyboard focus draws a thin ring without changing the size, while a mouse click leaves none; checked date 8 October 2026. The brief now matches the page (toggle On state, Sources note, Limits).

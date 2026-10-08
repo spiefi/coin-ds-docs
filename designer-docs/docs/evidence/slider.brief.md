@@ -2,7 +2,7 @@
 
 slug: slider · label: Slider · public API: Slider (+ Card, VStack, Text, Button for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5373-446 · storybook: docsUrl('slider') · stories: Default=components-slider--default, Currency format=components-slider--currency-format, Bubble on interaction=components-slider--tooltip-on-interaction, Without labels=components-slider--without-labels, Disabled=components-slider--disabled
-checked: 5 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-3795b4c, Biscuit's main 3795b4c)
+checked: 8 October 2026 · jfs-components 0.1.78 (5 October build, mirror tag v0.1.78-636f3f5, Biscuit's main 636f3f5)
 icon: a rail with a handle — `<path d="M2 9h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><circle cx="7" cy="9" r="2.6" fill="currentColor" />`
 keywords: range, amount picker, seek bar
 
@@ -10,7 +10,7 @@ Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; every Coin instance g
 SIP = `minValue={500} maxValue={50000} step={500} formatOptions={{ style: 'currency', currency: 'INR', maximumFractionDigits: 0 }} locale="en-IN" accessibilityLabel="Monthly SIP amount"`. TENURE = `minValue={1} maxValue={30} formatValue={v => v === 1 ? '1 year' : `${v} years`} accessibilityLabel="Loan tenure"`.
 The value bubble floats above the handle and takes no space. "Room" = `<VStack modes={LIGHT} style={{ width: '100%', paddingTop: 48 }}>` around every Slider whose bubble is visible, so the bubble has space. Hosts: `<div className="coin-new-host wide">`.
 No `testID`. Targets: `[role="slider"]` is the handle row; its children are the track (`> div:nth-child(1)`), fill (`:nth-child(2)`), handle (`:nth-child(3)`), and bubble (`:nth-child(4)`); the end labels row is `[role="slider"] + div`.
-The bubble renders 24 px wide and square in 0.1.78 (ticket #193). Show it as it ships; never style around it.
+Since the 5 October build the bubble is a rounded label that fits its value, as in Figma (#193 fixed). Never restyle it.
 
 ## Overview
 summary: Use a Slider to pick a value from a wide range by dragging, such as a monthly SIP amount or a loan tenure.
@@ -18,7 +18,7 @@ principle: A rough value, chosen by dragging, with the range in view.
 playground: `.preview-stage` with a host › Room › controlled `<Slider {...SIP} value={v} onChange={setV} />` (starts at 5000). Controls: Segment "Value bubble" ['Always', 'While dragging'] → `alwaysShowTooltip`; OnOff "End labels" (on) → `showLabels`; OnOff "Disabled" → `isDisabled`. Readout title "Monthly SIP amount", value the formatted amount (e.g. “₹5,000”, same Intl options); note: disabled → "Disabled sliders keep their value but ignore drags and keys."; otherwise "Drag, tap the track, or use the arrow keys." Stage label: "Live Coin Slider".
 
 ## Anatomy
-header: Anatomy · title: Track, fill, handle, and value · description: A 4 px track fills in gold up to a 20 px handle. The value bubble floats above the handle and the range’s ends sit below. In 0.1.78 the bubble shows as a narrow black block without its value; in Figma it is a rounded label.
+header: Anatomy · title: Track, fill, handle, and value · description: A 4 px track fills in gold up to a 20 px handle. A rounded black bubble floats above the handle with the value, and the range’s ends sit below.
 specimen: Room › `<Slider {...SIP} defaultValue={15000} />`; specimenWidth 300
 parts:
 1. Fill — Gold from the minimum up to the value. — target: `[role="slider"] > div:nth-child(2)` — side: left
@@ -63,7 +63,7 @@ Every preview is a host.
 
 ## Sources
 header: Sources · title: Use the public Slider contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Slider is 294 × 44; the package is 61 px tall because its handle row is 20 px. In 0.1.78 the value bubble reads two tokens that don’t exist, so it has no width or rounded corners; Figma shows a rounded black label. On the web the slider has a name and works with the arrow, Page Up and Down, Home, and End keys, but its value and disabled state are not announced. The published Storybook predates 0.1.78.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Slider is 294 × 44; the package is 61 px tall because its handle row is 20 px. The value bubble matches Figma: a rounded black label that fits its value. On the web the slider announces its name, value, and disabled state, and works with the arrow, Page Up and Down, Home, and End keys. The published Storybook predates 0.1.78.
 
 ## Limits
-Do not show Dark mode (#197), appearance or semantic colour modes, two thumbs, vertical sliders, ticks, `renderTooltip`, the ref handle, `width`, or `style`. Do not hide or restyle the broken bubble except through `alwaysShowTooltip` where the brief says so, and do not present it as the intended look. Do not imply the value or disabled state is announced (#193).
+Do not show Dark mode (#197), appearance or semantic colour modes, two thumbs, vertical sliders, ticks, `renderTooltip`, the ref handle, `width`, or `style`. Do not hide or restyle the bubble except through `alwaysShowTooltip` where the brief says so. Do not present the 61 px height as matching Figma's 44 px (open for a decision after #193).

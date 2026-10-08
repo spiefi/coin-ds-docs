@@ -17,3 +17,12 @@ Checked 1 October 2026. Declared and installed `jfs-components` is `0.1.77` from
 - In Dark mode, Off stays grey and On becomes lilac `rgb(201,183,255)`. The guide shows Light only.
 - The web element is `role="switch"` with `aria-label` from `accessibilityLabel` and `tabindex=0`. Disabled adds `aria-disabled` and `tabindex=-1`. Tab focus shows the browser focus ring.
 - Coin gap #181 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): there is no `aria-checked`, so the on or off state is not announced. Space does not switch a focused toggle; Enter and click do.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #181 fixed. `aria-checked` follows the value, and Space switches a focused toggle. Disabled sets `aria-disabled` and `tabindex=-1`.
+- Regression (open, #209): Enter now calls `onValueChange` twice (true, then false), so Enter no longer switches the toggle. Click and Space do.
+- Still open: Disabled On and Disabled Off share one grey track, so only the thumb position shows the state.
+- Guide: the Sources note now gives the 5 October build, says the state is announced and Space and click switch the toggle, notes that Enter does not in this build, and says a disabled toggle is skipped by Tab; `checked` is 8 October 2026. The brief's note and Limits match.

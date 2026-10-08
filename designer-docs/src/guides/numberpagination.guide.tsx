@@ -93,11 +93,11 @@ function NumberPaginationGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Number Pagination contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('numberpagination')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('numberpagination')} stories={[
         { label: 'Default', id: 'components-numberpagination--default' },
         { label: 'Active page', id: 'components-numberpagination--active-page' },
         { label: 'Custom children', id: 'components-numberpagination--custom-children' },
-      ]}>Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the pill. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the pill. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.</Sources>,
     },
   }
 

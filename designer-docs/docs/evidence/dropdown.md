@@ -44,3 +44,11 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
 
 - Regression, Coin gap #185 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar). DropdownItem now always renders `tabindex=-1`, and the listbox is focusable only with the new `focusable` prop (with `activeDescendantId` managed by the host). A standalone Dropdown therefore can't be reached with the keyboard: Tab skips it. In 0.1.77, Tab reached each option and Enter selected it. Inside DropdownInput the field handles the keyboard.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #185 fixed. Standalone options have `tabindex=0` (disabled ones `-1`). Tab goes Newest → Oldest → the next element, and Enter and Space select. Inside DropdownInput the options stay out of the tab order (`omitFromTabOrder`), and arrow keys with Enter still pick. Standalone arrow keys still do nothing (no handler in the installed source).
+- Regression (open, #209): Enter calls `onPress` twice on a standalone option, so an action item would run twice. Picking a choice is unaffected, because selecting the same item twice changes nothing.
+- Guide: the Sources note now gives the 5 October build and says Tab reaches each option (skipping disabled ones) and Enter or Space picks one, that arrow keys don't move between options, and that Enter fires an option twice in this build; `checked` is 8 October 2026. The brief's checked line, note, and Limits match, and its selectors now use `listbox`/`option` as the page does.

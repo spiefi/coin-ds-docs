@@ -2,7 +2,7 @@
 
 slug: nudge · label: Nudge · public API: Nudge (+ ListItem, IconCapsule, Button, Card, MoneyValue, VStack for content and composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9177-4104 · storybook: docsUrl('nudge') · stories: Default=components-nudge--default, Without icon=components-nudge--without-icon, With close button=components-nudge--with-close-button, Inline compact=components-nudge--inline-compact, Stacked detailed=components-nudge--stacked-detailed
-checked: 7 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-3795b4c; Biscuit's main 636f3f5 does not change Nudge)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5; Nudge.tsx unchanged, its close IconButton fixed in #179)
 icon: a card with a sparkle and two lines — `<><rect x="1.5" y="3.5" width="15" height="11" rx="2.5" stroke="currentColor" strokeWidth="1.5" /><path d="M8 7.5h5.5M8 10.5h3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M4.75 6.5v2.5M3.5 7.75h2.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" /></>`
 keywords: promo card, suggestion, tip, upsell, banner
 
@@ -63,7 +63,7 @@ Every preview is a Host.
 
 ## Sources
 header: Sources · title: Use the public Nudge contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Figma’s small button needs the Nudge&Alert context, and its white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. The card has no role or name on the web, and the close button is always labelled “Close”.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Figma’s small button needs the Nudge&Alert context, and its white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. The card has no role or name on the web, and the close button is always labelled “Close”.
 
 ## Limits
 Do not show Dark mode, `Nudge padding: None`, `buttonSlot`, `closeSlot`, a custom `startSlot`, or `style`. Do not show `Context` unset outside the Don’t. Do not imply the card closes itself, that compact shows a title, or that detailed has a button or close.

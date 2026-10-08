@@ -1,11 +1,10 @@
 import { useState, type ReactNode } from 'react'
-import { Button, Card, FormField, MessageField, SupportText, Text, VStack, type Modes } from 'jfs-components'
+import { Button, Card, FormField, MessageField, Text, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
 import { Anatomy, DoDont, ExampleCard, OnOff, Readout, Segment, Sources, Surface, byTestId, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
 
 const LIGHT = { 'Color Mode': 'Light' } as Modes
-const ERROR = { 'Color Mode': 'Light', Status: 'Error' } as Modes
 const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4835-2564'
 const R = byTestId('mf-anatomy')
 const B = `${byTestId('mf-size')} > div:nth-child(2)`
@@ -27,10 +26,7 @@ function Field(props: MFProps) {
 }
 
 function ErrorField() {
-  return <Host>
-    <Input label="Describe your issue" value="Charged twice" maxLength={140} isInvalid />
-    <SupportText modes={ERROR} status="Error" label={ERROR_MSG} />
-  </Host>
+  return <Field label="Describe your issue" value="Charged twice" maxLength={140} isInvalid errorMessage={ERROR_MSG} />
 }
 
 function ReportProblem() {
@@ -43,8 +39,7 @@ function ReportProblem() {
   }
   return <Card modes={LIGHT}><VStack modes={LIGHT}>
     <MessageField modes={LIGHT} label="Describe your issue" placeholder="What happened, and when?" maxLength={500} isRequired
-      value={value} onChangeText={t => { setValue(t); setInvalid(false); setOk(false) }} isInvalid={invalid} />
-    {invalid && <SupportText modes={ERROR} status="Error" label={ERROR_MSG} />}
+      value={value} onChangeText={t => { setValue(t); setInvalid(false); setOk(false) }} isInvalid={invalid} errorMessage={ERROR_MSG} />
     <Button modes={LIGHT} label="Submit" onPress={submit} />
     {ok && <Text modes={LIGHT}>Thanks, we’ll reply within 24 hours</Text>}
   </VStack></Card>
@@ -83,13 +78,13 @@ function MessageFieldGuide() {
     },
     states: {
       header: 'States', title: 'Default, filled, error, read only, and disabled',
-      description: 'Focus draws a purple border. An error turns the label and border red but shows no message, so add one below the field. Read only and disabled lock the text.',
+      description: 'Focus draws a purple border. An error turns the label and border red and shows its message below the field. Read only and disabled lock the text.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Default" description="Select the field to see the purple focus border."><Field label="Describe your issue" placeholder="What happened, and when?" maxLength={140} /></ExampleCard>
-        <ExampleCard title="Filled" description="The counter tracks the length. Out of focus, the text turns the same grey as the placeholder."><Field label="Describe your issue" placeholder="What happened, and when?" maxLength={140} value="I was charged twice for one gold purchase." /></ExampleCard>
-        <ExampleCard title="Error" description="Red label and border; the message below is a separate Support Text."><ErrorField /></ExampleCard>
+        <ExampleCard title="Filled" description="The counter tracks the length, and the text stays dark when people leave the field."><Field label="Describe your issue" placeholder="What happened, and when?" maxLength={140} value="I was charged twice for one gold purchase." /></ExampleCard>
+        <ExampleCard title="Error" description="Red label and border, with the message below the field."><ErrorField /></ExampleCard>
         <ExampleCard title="Read only" description="Grey label and border; people can read the text but not change it."><Field label="Your message" value="Your request was received on 28 September." isReadOnly /></ExampleCard>
-        <ExampleCard title="Disabled" description="Grey text and border, for a field that does not apply yet."><Field label="Describe your issue" value="I was charged twice for one gold purchase." isDisabled /></ExampleCard>
+        <ExampleCard title="Disabled" description="Grey text and border, and Tab skips it. Use it for a field that does not apply yet."><Field label="Describe your issue" value="I was charged twice for one gold purchase." isDisabled /></ExampleCard>
       </div>,
     },
     sizing: {
@@ -115,7 +110,7 @@ function MessageFieldGuide() {
     },
     context: {
       header: 'In context', title: 'Report a problem',
-      description: 'The screen checks the message when people tap Submit and shows the error below the field. Message Field only turns red; the button stays enabled.',
+      description: 'The screen checks the message when people tap Submit and sets the error on the field. Message Field only shows it, and the button stays enabled.',
       body: <div className="coin-new-context"><ReportProblem /></div>,
     },
     'dos-donts': {
@@ -133,7 +128,7 @@ function MessageFieldGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Message Field contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="2 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('messagefield')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('messagefield')} stories={[
         { label: 'Default', id: 'components-messagefield--default' },
         { label: 'Required', id: 'components-messagefield--required' },
         { label: 'Invalid', id: 'components-messagefield--invalid' },
@@ -142,7 +137,7 @@ function MessageFieldGuide() {
         { label: 'No counter', id: 'components-messagefield--no-counter' },
         { label: 'Custom rows', id: 'components-messagefield--custom-rows' },
         { label: 'All states', id: 'components-messagefield--all-states' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Message Field is a 328 × 159 component with a label, a 108 px text area, and a fixed “0/140” counter; its states are variable modes. The package adds the required mark, a rows option, and a counter that shows only with a limit. It has no error message or support text: an error turns the label and border red, so the guide adds a Support Text below. Out of focus, typed text uses the placeholder’s grey. Dark mode is not supported. On the web the label names the text area, but the error and the required mark are not announced.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Message Field is a 328 × 159 component with a label, a 108 px text area, and a fixed “0/140” counter; its states are variable modes. The package adds the required mark, a rows option, a counter that shows only with a limit, and support text or an error message below the text area. Dark mode is not supported. On the web the label names the text area; screen readers also announce required and invalid fields and read the error or support text with them. Tab skips a disabled field.</Sources>,
     },
   }
 
@@ -154,7 +149,7 @@ function MessageFieldGuide() {
     <div className="preview-stage">
       <Host><MessageField modes={LIGHT} value={value} onChangeText={setValue} label={label} placeholder="What happened, and when?"
         maxLength={limit === 'None' ? undefined : Number(limit)} rows={Number(rows)} isRequired={required}
-        isInvalid={state === 'Error'} isReadOnly={state === 'Read only'} isDisabled={state === 'Disabled'} /></Host>
+        isInvalid={state === 'Error'} errorMessage={state === 'Error' ? ERROR_MSG : undefined} isReadOnly={state === 'Read only'} isDisabled={state === 'Disabled'} /></Host>
       <span className="stage-label">Live Coin Message Field</span>
     </div>
     <div className="controls-panel">

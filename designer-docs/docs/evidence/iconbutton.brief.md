@@ -2,7 +2,7 @@
 
 slug: iconbutton · label: Icon Button · public API: IconButton (+ SkeletonGroup for loading)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2018-4301 · storybook: docsUrl('iconbutton') · stories: Default=components-iconbutton--default, Toggle=components-iconbutton--toggle, Sizes=components-iconbutton--sizes, Emphasis=components-iconbutton--appearance-modes, Disabled=components-iconbutton--disabled
-checked: 28 September 2026 · jfs-components 0.1.60 (registry latest 0.1.60)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-636f3f5, Biscuit's main 636f3f5)
 icon: a circle (r 7 at 9,9) with a small plus inside; 1.5 stroke.
 
 Modes helper: `const modes = ({ size = 'M', emphasis = 'High', appearance = 'Primary' } = {}) => ({ 'Color Mode': 'Light', 'Button / Size': size, Emphasis: emphasis, AppearanceBrand: appearance })`. Every IconButton gets an explicit `accessibilityLabel` (given below). Put rows of buttons in `.coin-new-content-list`.
@@ -27,10 +27,10 @@ header: Configuration · title: Emphasis and appearance · description: Emphasis
 Stack: `.coin-new-stack` of two ExampleCards, each with a `.coin-new-content-list`.
 
 ## States
-header: States · title: Default, toggle, disabled, loading · description: A toggle swaps between two icons. In Figma its On state also turns white; the installed package does not apply that colour yet, so only the icon changes.
+header: States · title: Default, toggle, disabled, loading · description: A toggle swaps between two icons, and its On state turns into a white circle with a black icon. It keeps one name and is announced as pressed or not pressed.
 - Default — `ic_add` "Add" — lesson: one press, one action.
-- Toggle off — `isToggle`, `isActive={false}`, `inactiveIcon="ic_flash"`, `activeIcon="ic_flash_off"`, label "Turn flash off" — lesson: shows the current state's icon.
-- Toggle on — same with `isActive`, label "Turn flash on" — lesson: currently only the icon changes (known Coin issue).
+- Toggle off — `isToggle`, `isActive={false}`, `inactiveIcon="ic_flash"`, `activeIcon="ic_flash_off"`, label "Flash" — lesson: Gold fill with the inactive icon.
+- Toggle on — same with `isActive`, label "Flash" — lesson: White fill with the active icon, announced as pressed.
 - Disabled — `ic_add` "Add", `disabled` — lesson: dimmed to half opacity and skipped by keyboard focus.
 - Loading — `<SkeletonGroup loading><IconButton loading iconName="ic_add" accessibilityLabel="Add" modes={modes()} /></SkeletonGroup>` — lesson: a same-size placeholder while the action loads.
 Grid: `coin-new-example-grid three` (five cards).
@@ -55,7 +55,7 @@ header: Do & Don’ts · title: Keep icon actions obvious · description: Each p
 
 ## Sources
 header: Sources · title: Use the public Icon Button contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Size, emphasis, and appearance come from the <code>Button / Size</code>, <code>Emphasis</code>, and <code>AppearanceBrand</code> modes. Figma’s toggle On state is a white circle with a black icon, but the installed package keeps the gold fill and only swaps the icon, and it does not expose the toggle as pressed. Figma’s Glass variant has no package equivalent. Without a label, the accessible name is the icon’s name, so always set one.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Size, emphasis, and appearance come from the <code>Button / Size</code>, <code>Emphasis</code>, and <code>AppearanceBrand</code> modes. A toggle’s On state uses the toggle tokens, a white circle with a black icon as in Figma. On the web a toggle is announced as pressed or not pressed and keeps the same name in both states. Keyboard focus draws a thin ring without changing the button’s size; a mouse click leaves no ring. Figma’s Glass variant has no package equivalent. Without a label, the accessible name is the icon’s name, so always set one.
 
 ## Limits
-Do not show Glass, `source` fallbacks, `style`, or XS. Never render or describe a white On state as current behaviour.
+Do not show Glass, `source` fallbacks, `style`, or XS. Do not describe a dark border after a mouse click (fixed in #179).

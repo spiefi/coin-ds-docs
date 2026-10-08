@@ -124,6 +124,7 @@ function SourceCards({
   storybookUrl,
   storybookTitle,
   storybookDescription,
+  checked = '19 September 2026',
   children,
 }: {
   figmaUrl: string
@@ -132,6 +133,7 @@ function SourceCards({
   storybookUrl: string
   storybookTitle: string
   storybookDescription: string
+  checked?: string
   children: ReactNode
 }) {
   return (
@@ -155,7 +157,7 @@ function SourceCards({
         </a>
       </div>
       <div className="verification-note">
-        <span>Checked 19 September 2026</span>
+        <span>Checked {checked}</span>
         <p>{children}</p>
       </div>
     </>
@@ -553,9 +555,9 @@ function AdditemPlayground() {
           <strong>Local sample</strong>
           <p>Set Empty, then activate the add cell to load the bundled receipt illustration. This loads a bundled example; nothing is uploaded.</p>
         </div>
-        <div className="action-control-note is-warning">
+        <div className="action-control-note">
           <strong>Remove affordance</strong>
-          <p>The public preview overlay is shown as shipped. Its current mouse and keyboard limitation is recorded in Sources.</p>
+          <p>In Preview, the remove button clears the sample with a click, a tap, or Enter, without opening the preview.</p>
         </div>
       </div>
     </>
@@ -800,7 +802,7 @@ const additemSections: GuideSectionSlots = {
           { name: '44 × 44 cell', note: 'The fixed boundary is the target and visual container.', target: byTestId('additem-anatomy-empty'), side: 'left' },
           { name: 'Add icon', note: 'Identifies the empty state as an attachment trigger.', target: `${byTestId('additem-anatomy-empty')} [role="img"]`, side: 'top' },
           { name: 'Thumbnail', note: 'Confirms which visual asset was selected.', target: `${byTestId('additem-anatomy-preview')} img`, side: 'top', at: 0.15 },
-          { name: 'Remove affordance', note: 'Appears only when onRemove is supplied for a preview.', target: `${byTestId('additem-anatomy-preview')} [role="button"]`, side: 'right' },
+          { name: 'Remove affordance', note: 'Appears only when onRemove is supplied for a preview.', target: `${byTestId('additem-anatomy-preview')} [aria-label="Remove Receipt attachment preview"]`, side: 'right' },
         ]}
       >
         <SpecimenRow>
@@ -905,8 +907,8 @@ const additemSections: GuideSectionSlots = {
     title: 'Public export with a source limitation',
     description: 'The package and stories define the usable contract. The matching lower-case Figma subcomponent key was found, but an exact live node was not exposed in the available page context.',
     body: (
-      <SourceCards figmaUrl={ADDITEM_FIGMA} figmaTitle="Coin Subcomponents file" figmaDescription="Read-only source file · exact Additem node unresolved" storybookUrl={ADDITEM_STORYBOOK} storybookTitle="Additem Storybook" storybookDescription="Empty, preview, picker, disabled, and all-state stories">
-        The public export is jfs-components 0.1.60 and defaults its inner IconCapsule to Neutral, Low, and S. The exact Figma node remains unverified. In this web build the preview remove control did not remove the item with mouse or keyboard activation; the guide keeps the shipped component intact.
+      <SourceCards figmaUrl={ADDITEM_FIGMA} figmaTitle="Coin Subcomponents file" figmaDescription="Read-only source file · exact Additem node unresolved" storybookUrl={ADDITEM_STORYBOOK} storybookTitle="Additem Storybook" storybookDescription="Empty, preview, picker, disabled, and all-state stories" checked="8 October 2026">
+        Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Additem defaults its inner IconCapsule to Neutral, Low, and S. The exact Figma node remains unverified. The remove control is its own button beside the preview, named “Remove” plus the preview’s label, and a click, a tap, or Enter removes the item without opening the preview.
       </SourceCards>
     ),
   },

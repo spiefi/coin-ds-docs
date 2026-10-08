@@ -2,7 +2,7 @@
 
 slug: filterbar · label: Filter Bar · public API: FilterBar
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=541-4823 · storybook: docsUrl('filterbar') · stories: Default=components-filterbar--default, Custom placeholder=components-filterbar--with-custom-placeholder, Prefilled value=components-filterbar--with-value, Custom input=components-filterbar--with-render-input
-checked: 28 September 2026 · jfs-components 0.1.60 (registry latest 0.1.60)
+checked: 2 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-3795b4c); re-read 8 October 2026 against v0.1.78-636f3f5, page unchanged
 icon: a magnifying glass (circle r≈5 at 8,8 plus a short diagonal handle to 15,15) above nothing else; 1.5 stroke, round caps.
 
 All Coin instances use `modes={{ 'Color Mode': 'Light' }}`. Every FilterBar is controlled: `value` from React state, `onChangeText` sets it.
@@ -33,7 +33,7 @@ Grid: `coin-new-example-grid three`, each FilterBar inside `.coin-new-host.wide`
 header: States · title: Empty, filled, and focused · description: Filter Bar has no disabled or error state. It shows its placeholder when empty, the query when filled, and an outline while focused.
 - Empty — `value=""`, `placeholder="Search funds"` — lesson: the placeholder carries the name.
 - Filled — `value="Nifty"`, `placeholder="Search funds"` — lesson: the query replaces the placeholder.
-- Focused — live `placeholder="Search funds"` — ExampleCard description: "Select the field: the bar draws a 1 px outline around its padded area."
+- Focused — live `placeholder="Search funds"` — ExampleCard description: "Select the field: a 1 px ring outlines its padded area without changing the bar’s height."
 Grid: `coin-new-example-grid three`, hosts `.coin-new-host.wide`.
 
 ## Sizing
@@ -57,7 +57,7 @@ header: Do & Don’ts · title: Make search predictable · description: Each pai
 
 ## Sources
 header: Sources · title: Use the public Filter Bar contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. Figma draws the bar at 360 × 64 with a 44 px field; the installed package renders 62 px with a 42 px field. The focus outline is a fixed 1 px dark border that adds 2 px of height. On the web, <code>accessibilityLabel</code> is not applied to the default input, so the placeholder is the field’s only accessible name. <code>renderInput</code> and <code>children</code> are developer overrides and are not shown.
+note: Declared and installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma draws the bar at 360 × 64 with a 44 px field; the installed package renders 62 px with a 42 px field. The focus outline is a fixed 1 px dark ring (not a token) that keeps the bar’s height. On the web, <code>accessibilityLabel</code> names the input. <code>renderInput</code> and <code>children</code> are developer overrides and are not shown.
 
 ## Limits
-Do not show or describe a clear button, disabled or error state, result counts, or built-in filtering. Do not tell designers to rely on `accessibilityLabel`. Do not use `renderInput` or `children`.
+Do not show or describe a clear button, disabled or error state, result counts, or built-in filtering. Do not imply the placeholder names the input: FilterBar always passes a label (“Search filter” unless `accessibilityLabel` is set). Do not use `renderInput` or `children`.

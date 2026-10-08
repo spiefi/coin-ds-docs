@@ -46,3 +46,12 @@ Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, bu
 Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
 
 - #170 fixed. `<FilterBar accessibilityLabel="Search transactions">` renders the input with `aria-label="Search transactions"`, because TextInput now forwards the label. The focus ring from 0.1.78 is unchanged.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2. FilterBar facts below are read from the installed source; the TextInput facts come from the #183 re-test.
+
+- #183 (TextInput) fixed: an explicit label wins, a field keeps its name while focused, there is one tab stop per field, and focus draws the `InputState: Active` border, `rgb(181,181,181)`.
+- FilterBar itself is unchanged: it passes `accessibilityLabel` to TextInput, defaulting to "Search filter", so the placeholder never names the FilterBar input. The bar's focus ring is still a hard-coded 1 px `#222` box-shadow. While focused, the field inside now also shows TextInput's grey Active border.
+- Still open: the 42 px field (Figma 44) and the 62 px bar (Figma 64).
+- Guide: unchanged; no page sentence was made false. The brief's stale 0.1.60 lines (Sources note, the Focused lesson, and the `accessibilityLabel` limit) now match the page.

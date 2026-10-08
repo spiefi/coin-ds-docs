@@ -29,3 +29,12 @@ Checked 1 October 2026. Declared and installed `jfs-components` is `0.1.77` from
 Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
 
 - #183 partly fixed. `accessibilityLabel` now reaches the input as `aria-label`, including through TextInput.Search, and a labelled field keeps its name while focused. Without a label, the placeholder still clears on focus, and a rotating placeholder leaves the field unnamed. The guide now tells designers to always set an accessibility label.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #183 fixed; both items from the 2 October re-test now pass. A field without `accessibilityLabel` is named by its placeholder and keeps that name while focused. A rotating placeholder names the input after its first item ("Search payees"). An explicit label still wins. There is one tab stop per field, and focus uses the `InputState: Active` border, `rgb(181,181,181)`, instead of the old `#222` outline.
+- The placeholder text itself still disappears on focus; only the accessible name is kept.
+- Still open (lower priority in the ticket): the field is 42 px tall vs Figma's 44.
+- Guide: the Field anatomy note, the States description, and the Empty example now describe a darker grey focus border instead of a dark outline. The rotating-prompt Don't now says screen readers hear only the first prompt, and the Sources note no longer says a field without a label loses its name; it asks for a label only when the placeholder does not say what the field is for.

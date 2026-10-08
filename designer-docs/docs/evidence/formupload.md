@@ -26,3 +26,11 @@ Checked 2 October 2026. Declared and installed `jfs-components` is `0.1.78`, bui
 - Error: support text turns red `rgb(245,0,48)` with a warning icon; cells unchanged. Disabled: field opacity 0.5 and each cell 0.5 again (about 25 % overall); cells get `aria-disabled` and leave the tab order.
 - The wrapper has `role="presentation"`, so its `aria-label` (the label) does not name the group; the add button does not say which field it belongs to.
 - Coin gap ticket filed for the remove control, the doubled disabled opacity, and the unnamed group: #188 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar). Dark mode is not shown.
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #188 fixed. Remove is a button named "Remove Receipt 1", placed next to the preview button rather than inside it, and React no longer warns about a nested button. A mouse click and Enter both remove the file, and a standalone Additem's remove doesn't trigger open. Disabled cells render at 0.5 opacity once, with the label at full opacity. The field is a group named "Receipts", and the add button is named "Receipts, add attachment".
+- From the installed source: `testID-item-N` now lands on a wrapper that holds the preview button and the remove button as siblings, so the anatomy's Remove pin targets `[aria-label="Remove Receipt 2"]` instead of `button` (which would now match the preview).
+- Guide: the Sources note now says the field is a named group, the add cell names its field, and remove is a named button that works with a click, a tap, or Enter; "disabled fades the cells twice" is now "half opacity". The States description and the Disabled example say the cells fade and the label stays at full contrast. The Remove anatomy note says it is a button named after the file.

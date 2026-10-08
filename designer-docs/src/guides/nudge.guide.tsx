@@ -146,13 +146,13 @@ function NudgeGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Nudge contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="7 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('nudge')} stories={[
+      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('nudge')} stories={[
         { label: 'Default', id: 'components-nudge--default' },
         { label: 'Without icon', id: 'components-nudge--without-icon' },
         { label: 'With close button', id: 'components-nudge--with-close-button' },
         { label: 'Inline compact', id: 'components-nudge--inline-compact' },
         { label: 'Stacked detailed', id: 'components-nudge--stacked-detailed' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Figma’s small button needs the Nudge&amp;Alert context, and its white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. The card has no role or name on the web, and the close button is always labelled “Close”.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Figma’s small button needs the Nudge&amp;Alert context, and its white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. The card has no role or name on the web, and the close button is always labelled “Close”.</Sources>,
     },
   }
 
