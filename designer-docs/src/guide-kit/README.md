@@ -106,7 +106,7 @@ passed (self-check, pins match legend rows, no horizontal scroll).
 | `classes` | Joins conditional class names. |
 | `ExampleCard` | One example with a title and optional description. |
 | `DoDont` | A Do/Don't pair with titles and captions. |
-| `ScreenFrame` | A positioned app-screen host (`footer`, optional screen `children`, `size="bar" \| "screen"`) for components that anchor to the bottom of their host, such as BottomNav. |
+| `ScreenFrame` | A positioned app-screen host (`footer`, optional screen `children`, `size="bar" \| "screen"`) for components that anchor to the bottom of their host, such as BottomNav. `size="full"` is a 560 px screen whose `children` fill it, for components that are a whole screen (FullscreenModal); `surface="dark"` stands in for the dark media behind white-on-dark components. |
 | `FitWidth` | Shows a fixed-width component (e.g. OTP) at its natural size and scales it down, still interactive, only when the host is narrower; a "Shown at N%" tag marks it. Use it instead of a host that would clip or scroll. |
 | `Surface` | A white panel (`width="wide" \| "narrow"`) for light grey components, such as a `#f5f5f5` pill or field, that disappear on the grey stages. Pair it with `<Anatomy surface="white">`. |
 | `Backdrop` | A photographic scene (`size="compact" \| "card"`) for glass components designed to sit on imagery; children align to the top-right. |
