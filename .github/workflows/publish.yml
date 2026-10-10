@@ -1,0 +1,137 @@
+name: Publish approved guides
+
+# The DuetWorks board starts this from Done's "Publish N approved" button with the batch its
+# owner confirmed. Before anything changes, the board confirms that exact batch is still what's
+# approved and names each ticket's approved commit. Only those commits (and each ticket's earlier
+# ones) go on main; a later commit under the same ticket waits for its own review. Then the guides
+# are checked, deployed, and exactly the checked tickets are marked Live. No one deploys by hand,
+# and nothing here needs Claude. The board finds its run by the request id in the run's title, and
+# turns this workflow on only at a reviewed version of this file.
+
+run-name: Publish ${{ inputs.tickets }} · ${{ inputs.request }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      tickets:
+        description: 'Approved tickets, such as "#57 #61"'
+        required: true
+        type: string
+      request:
+        description: "The board's id for this request"
+        required: true
+        type: string
+      confirmation:
+        description: "The board's confirmation: the flow and ticket versions the owner confirmed (JSON)"
+        required: true
+        type: string
+
+# One release at a time; a second one waits instead of racing the first.
+concurrency:
+  group: publish-docs
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  VERCEL_ORG_ID: team_X0VoDx8wnIAl5BxPYptzkK8K
+  VERCEL_PROJECT_ID: prj_9hD7JPEDcUJ6UsR16Knrn805j6Rh
+  DOCS_SITE_URL: https://coin-designer-docs.vercel.app
+  DUETWORKS_MCP_URL: https://flowline-team-board.spiefson.chatgpt.site/api/mcp
+  # The release steps run only at this exact script (see .github/scripts/publish.mjs).
+  PUBLISH_SCRIPT_SHA256: 1a30265e6424325b05c4c46271f4558c73141784f2a91549f7a2b83614632232
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          path: docs
+          fetch-depth: 0
+
+      # The protected dispatch tag pins the workflow and release script.
+      # Guides start from current main, preserving earlier publications.
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          path: .release-contract
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: docs/designer-docs/package-lock.json
+
+      # The step names are what the board shows when a run stops; keep them in step with
+      # STEP_REASONS in the board's app/lib/github-publish.ts.
+      - name: Check the approved batch
+        env:
+          TICKETS: ${{ inputs.tickets }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+          DUETWORKS_BOARD_KEY: ${{ secrets.DUETWORKS_BOARD_KEY }}
+        run: |
+          echo "${PUBLISH_SCRIPT_SHA256}  ../.release-contract/.github/scripts/publish.mjs" | sha256sum --check --strict
+          node ../.release-contract/.github/scripts/publish.mjs check "$CONFIRMATION" "$TICKETS"
+
+      - name: Pick the approved commits
+        run: |
+          git fetch origin docs-next
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          node ../.release-contract/.github/scripts/publish.mjs pick
+          if ! git cherry-pick -x $(cat "$RUNNER_TEMP/commits"); then
+            git cherry-pick --abort
+            echo "::error::An approved commit didn't apply cleanly to main. Nothing was published."
+            exit 1
+          fi
+
+      - name: Allow reading the private Coin components package
+        # jfs-components installs from the private repo spiefi/coin-components.
+        # COIN_COMPONENTS_DEPLOY_KEY is a read-only deploy key for that repo.
+        env:
+          COIN_COMPONENTS_DEPLOY_KEY: ${{ secrets.COIN_COMPONENTS_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$COIN_COMPONENTS_DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+
+      - name: Install dependencies
+        working-directory: docs/designer-docs
+        run: npm ci
+
+      - name: Check the guides
+        working-directory: docs/designer-docs
+        run: npm run verify
+
+      # A push made with GITHUB_TOKEN doesn't start the "Designer docs" workflow, so this one deploys.
+      - name: Publish to main
+        run: git push origin HEAD:refs/heads/main
+
+      - name: Deploy to Vercel
+        working-directory: docs/designer-docs
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          TICKETS: ${{ inputs.tickets }}
+        run: |
+          npx --yes vercel@60 pull --yes --environment=production --token "$VERCEL_TOKEN"
+          npx --yes vercel@60 build --prod --token "$VERCEL_TOKEN"
+          url=$(npx --yes vercel@60 deploy --prebuilt --prod --token "$VERCEL_TOKEN")
+          echo "Deployed production: ${url}"
+          echo "### Published ${TICKETS}" >> "$GITHUB_STEP_SUMMARY"
+          echo "${DOCS_SITE_URL}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Mark the tickets live
+        env:
+          REQUEST: ${{ inputs.request }}
+          DUETWORKS_BOARD_KEY: ${{ secrets.DUETWORKS_BOARD_KEY }}
+        run: |
+          echo "${PUBLISH_SCRIPT_SHA256}  ../.release-contract/.github/scripts/publish.mjs" | sha256sum --check --strict
+          node ../.release-contract/.github/scripts/publish.mjs mark "$(git rev-parse HEAD)" "$REQUEST"
