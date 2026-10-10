@@ -40,3 +40,11 @@ Checked 7 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 - #206 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): close shown in every Figma prominent/compact variant but off by default in code; the Figma button size needs `Context: Nudge&Alert`, which Nudge doesn't set; no mode matches Figma's white card with purple icon; `buttonSlot={null}` can't remove the button; placeholder default copy; detailed silently ignores button/close props and compact ignores `title`; `nudge/radius` alias dangling; card has no role/name/testID; the Storybook rewrite is not on `main`.
 - #208 (Components, To do; Marcin Śpiewak), token problem shared with Note Input and Segmented Control: `nudge/title/color` is a literal #1e1a14 in Dark.
 - Existing: #179 (IconButton keeps a focus border after a click); #177 (Dark close icon orange, fixed upstream).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #179 fixed in IconButton, which Nudge uses for its close button: after a mouse click IconButton draws no ring and keeps its size, and keyboard focus draws a 1 px outline ring in a token colour (`mode/Grey/200`) without changing the size. This supersedes the dark-border note under Browser measurements.
+- Still open: #206 and #208 as listed under Coin gaps.
+- Guide: the Sources note gives the 5 October build; checked date 8 October 2026. The page never described the click border, so no other copy changed.

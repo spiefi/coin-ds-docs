@@ -56,19 +56,25 @@ export function DoDont({
  * A positioned app-screen host for components that anchor themselves to the
  * bottom of their nearest positioned ancestor (e.g. BottomNav). `bar` is only
  * tall enough for the anchored component; `screen` adds a content area above.
+ * `full` is a taller phone screen whose children fill it (a flex column), for
+ * components that are a whole screen themselves (e.g. FullscreenModal).
+ * `surface="dark"` stands in for dark media behind white-on-dark components.
  */
 export function ScreenFrame({
   children,
   footer,
   size = 'screen',
+  surface = 'light',
 }: {
   children?: ReactNode
-  footer: ReactNode
-  size?: 'bar' | 'screen'
+  footer?: ReactNode
+  size?: 'bar' | 'screen' | 'full'
+  surface?: 'light' | 'dark'
 }) {
   return (
-    <div className={`gk-screen-frame is-${size}`}>
+    <div className={`gk-screen-frame is-${size}${surface === 'dark' ? ' is-dark' : ''}`}>
       {size === 'screen' && <div className="gk-screen-content">{children}</div>}
+      {size === 'full' && children}
       {footer}
     </div>
   )
