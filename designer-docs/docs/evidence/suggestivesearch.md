@@ -35,6 +35,12 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - Every suggestion is read as “Dropdown item”, not its label.
 - Keyboard users can't choose a suggestion reliably (see above). Enter on a focused option fires twice (#209).
 
+## Review 11 October 2026 (fix loop)
+
+- Astra: after clicking the Anatomy link or another example, the Anatomy diagram lost its suggestion list. Docs mistake: the static examples opened their lists with `defaultOpen` (uncontrolled), and on the web the component closes an uncontrolled list on any mousedown outside it (`SuggestiveSearch.tsx:496-512`), so the first click anywhere closed every example's list for good. That closing is expected behaviour. The anatomy, the four open Configuration examples, and the no-match Do/Don't now pass the public controlled `open` prop.
+- Marcin: “UI is braking as well” (Idle next to Error in States). Docs mistake: example previews grew with their content, so cards in a row had different preview heights (6 rows on this page, including two Do/Don't pairs). Fixed for every guide in the kit (cards and Do/Don't pairs share rows through CSS subgrid).
+- Dark mode is out of scope.
+
 ## Limits
 
 - Not shown: Dark, `renderItem`, a custom `filter`, controlled `open`, `menuMaxHeight`, `menuOffset`, style props.

@@ -2,12 +2,12 @@
 
 slug: suggestivesearch · label: Suggestive Search · public API: SuggestiveSearch (+ Card, Button, VStack for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4579-8094 · storybook: docsUrl('suggestivesearch') · stories: Default=components-suggestivesearch--default, Prefilled=components-suggestivesearch--prefilled, Empty message=components-suggestivesearch--with-empty-message, Invalid=components-suggestivesearch--invalid, Object items=components-suggestivesearch--object-items
-checked: 10 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+checked: 11 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
 icon: a magnifier above two list lines — `<><circle cx="7" cy="6" r="3.75" stroke="currentColor" strokeWidth="1.5" /><path d="m9.75 8.75 2 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M3 13.5h12M3 16h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>`
 keywords: autocomplete, typeahead, combobox, search with suggestions, bank search
 
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; `const CARD = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes`. `BANKS = ['HDFC Bank', 'Himachal Pradesh Gramin Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra Bank', 'Punjab National Bank', 'Bank of Baroda', 'Canara Bank', 'Union Bank of India', 'IndusInd Bank', 'Yes Bank']`; `PEOPLE = [{ value: 'u1', label: 'Aarav Sharma' }, { value: 'u2', label: 'Aditi Verma' }, { value: 'u3', label: 'Rohan Mehta' }, { value: 'u4', label: 'Ananya Iyer', disabled: true }]`.
-Every SuggestiveSearch gets `modes={LIGHT}`, `items={BANKS}`, `label="Bank name"`, and `placeholder="Search bank name"` unless stated. Examples that show an open list pass `defaultInputValue=…` and `defaultOpen` and leave the query uncontrolled; the playground, Content, and In context keep `inputValue`/`onInputChange` and `value`/`onValueChange` in state.
+Every SuggestiveSearch gets `modes={LIGHT}`, `items={BANKS}`, `label="Bank name"`, and `placeholder="Search bank name"` unless stated. Examples that show an open list pass `defaultInputValue=…` and the controlled `open` prop (fix loop, 11 October: with `defaultOpen` the list closed on the first click anywhere on the page) and leave the query uncontrolled; the playground, Content, and In context keep `inputValue`/`onInputChange` and `value`/`onValueChange` in state.
 Host = `<div className="coin-new-host wide"><VStack modes={LIGHT} style={{ width: '100%', padding: 0, minHeight: H }}>{children}</VStack></div>`; the list floats below the field, so give a Host with an open list room: H = 72 + 6 + 44 × rows + 12 (omit H when closed).
 Selectors, with `testID` and `R = byTestId(id)`: label `${R} > div:first-child > [dir="auto"]:first-child`; required mark `${R} > div:first-child > [dir="auto"]:nth-child(2)`; field row `${R} > div:nth-child(2) > div:first-child`; input `${R} input`; list `${R} [role="listbox"]`; first match `${R} [role="option"] span`.
 
@@ -18,7 +18,7 @@ playground: `.preview-stage` › Host (H 320) › controlled SuggestiveSearch wi
 
 ## Anatomy
 header: Anatomy · title: A labelled field over a list of matches · description: A label names the field. As people type, matches from your list appear in a floating list under it, with the typed text in bold.
-specimen: `<Anatomy specimenWidth={328} …>` › Host-style `<VStack modes={LIGHT} style={{ width: '100%', padding: 0, minHeight: 230 }}>` › `<SuggestiveSearch testID="ss-anatomy" … isRequired defaultInputValue="Bank of" defaultOpen />` (three matches).
+specimen: `<Anatomy specimenWidth={328} …>` › Host-style `<VStack modes={LIGHT} style={{ width: '100%', padding: 0, minHeight: 230 }}>` › `<SuggestiveSearch testID="ss-anatomy" … isRequired defaultInputValue="Bank of" open />` (three matches).
 parts:
 1. Label — Names the value, such as “Bank name”. — target: label — side: top
 2. Required mark — Shown only; screen readers don’t hear it. — target: required mark — side: right
@@ -31,10 +31,10 @@ header: Configuration · title: Help text, limits, and options · description: A
 Grid `coin-new-example-grid`, each an ExampleCard › Host:
 - With support text — `supportText="Pick the bank your account is with."` — lesson: A short hint under the field.
 - Required — `isRequired` — lesson: A red asterisk after the label. It isn’t announced.
-- No-match message — `emptyMessage="No matching banks" defaultInputValue="Paytm" defaultOpen` (H for 1 row) — lesson: Says so when nothing matches; without it the list just disappears.
-- Fewer suggestions — `maxResults={3} defaultInputValue="Bank" defaultOpen` (3 rows) — lesson: Caps the list; otherwise it scrolls after about five rows.
-- Without highlight — `highlightMatch={false} defaultInputValue="Bank of" defaultOpen` (3 rows) — lesson: Matches show in plain text.
-- An option that can’t be chosen — `label="Beneficiary" placeholder="Search beneficiary" items={PEOPLE} defaultInputValue="A" defaultOpen` (4 rows) — lesson: Ananya Iyer is listed but disabled, such as a payee still being verified.
+- No-match message — `emptyMessage="No matching banks" defaultInputValue="Paytm" open` (H for 1 row) — lesson: Says so when nothing matches; without it the list just disappears.
+- Fewer suggestions — `maxResults={3} defaultInputValue="Bank" open` (3 rows) — lesson: Caps the list; otherwise it scrolls after about five rows.
+- Without highlight — `highlightMatch={false} defaultInputValue="Bank of" open` (3 rows) — lesson: Matches show in plain text.
+- An option that can’t be chosen — `label="Beneficiary" placeholder="Search beneficiary" items={PEOPLE} defaultInputValue="A" open` (4 rows) — lesson: Ananya Iyer is listed but disabled, such as a payee still being verified.
 
 ## States
 header: States · title: Rest, focus, error, read only, disabled · description: The field shows its state with its border and fill: grey at rest, purple while focused, red when invalid. Read only and disabled can’t be typed in or opened; disabled is also faded.
@@ -60,7 +60,7 @@ Composition in `.coin-new-context`: `<Card modes={CARD}>` › `<Card.Title>Add a
 header: Do & Don’ts · title: A named field that explains itself · description: Each pair shows a field people can understand and fix versus one that leaves them guessing.
 Every preview is a Host.
 - Do Label the field: “Bank name” stays visible while people type. — defaults | Don't Use the placeholder as the label: It disappears as soon as people type. — `label={undefined} placeholder="Bank name"`
-- Do Say when nothing matches: “No matching banks” explains the empty list. — `emptyMessage="No matching banks" defaultInputValue="Paytm" defaultOpen` (H for 1 row) | Don't Let the list vanish: People can’t tell whether anything matched. — `defaultInputValue="Paytm" defaultOpen` (same H)
+- Do Say when nothing matches: “No matching banks” explains the empty list. — `emptyMessage="No matching banks" defaultInputValue="Paytm" open` (H for 1 row) | Don't Let the list vanish: People can’t tell whether anything matched. — `defaultInputValue="Paytm" open` (same H)
 - Do Explain the error: The message says how to fix the pick. — `defaultInputValue="Paytm Bank" isInvalid errorMessage="Choose your bank from the list."` | Don't Rely on red alone: A red field doesn’t say what’s wrong. — `defaultInputValue="Paytm Bank" isInvalid`
 
 ## Sources
