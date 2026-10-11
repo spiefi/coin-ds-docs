@@ -36,7 +36,7 @@ function Frame({ fill = true, scrim = true, visible = true, topInset, closeButto
 }) {
   const [shown, setShown] = useState(visible)
   const hide = () => setShown(false)
-  return <ScreenFrame footer={
+  return <ScreenFrame receded={shown} footer={
     <ModalSheet visible={shown} fillHeight={fill} showOverlay={scrim} onOverlayPress={hide} onRequestClose={hide} topInset={topInset} modes={LIGHT}>
       <Chat close={hide} fill={fill} closeButton={closeButton} field={field} />
     </ModalSheet>
@@ -73,7 +73,7 @@ function ModalSheetGuide() {
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Fills the screen" description="The default: the sheet covers the screen and the field sits at its foot."><Frame /></ExampleCard>
         <ExampleCard title="Fits its content" description="The sheet hugs its content and docks to the bottom."><Frame fill={false} /></ExampleCard>
-        <ExampleCard title="Without a scrim" description="The page stays bright; the white sheet’s edge is harder to see."><Frame fill={false} scrim={false} /></ExampleCard>
+        <ExampleCard title="Without a scrim" description="The page stays bright behind the sheet, as in the Storybook story."><Frame fill={false} scrim={false} /></ExampleCard>
         <ExampleCard title="Top inset" description="The page peeks 40 px above, but on the web the sheet’s bottom is cut off by the same 40 px."><Frame topInset={40} /></ExampleCard>
       </div>,
     },
@@ -102,9 +102,9 @@ function ModalSheetGuide() {
     },
     context: {
       header: 'In context', title: 'Asking HelloJio from Home',
-      description: 'Ask HelloJio opens the sheet over Home. Sending a question or pressing the X closes it; the screen keeps what was asked.',
+      description: 'Ask HelloJio opens the sheet over Home, and Home steps back behind it. Sending a question or pressing the X closes it; the screen keeps what was asked.',
       body: <div className="coin-new-context">
-        <ScreenFrame footer={
+        <ScreenFrame receded={ctxShown} footer={
           <ModalSheet visible={ctxShown} fillHeight showOverlay onOverlayPress={ctxHide} onRequestClose={ctxHide} modes={LIGHT}>
             <Chat fill close={() => { setStatus('Closed without asking'); ctxHide() }}
               onSubmit={text => { setStatus(text.trim() ? `Asked: ${text.trim()}` : 'Asked nothing'); ctxHide() }} />
@@ -126,9 +126,9 @@ function ModalSheetGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Modal Sheet contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="10 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('modalsheet')} stories={[
+      body: <Sources checked="11 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('modalsheet')} stories={[
         { label: 'Default', id: 'components-modalsheet--default' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Modal Sheet is one 360 × 728 white surface with one slot. In the package it renders in place until it’s given <code>visible</code>; then it slides over its screen with an optional scrim and can be dragged down. Its 12 px gap isn’t applied, and a top inset pushes the sheet down without shrinking it, so its bottom is cut off. On the web it isn’t announced as a dialog, focus isn’t moved or kept in it, Escape does nothing, and a hidden sheet’s controls stay in the Tab order. The Page type JioPlus turns it light grey (not shown). The published Storybook still shows the old page, and on this site the spring is simplified.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Modal Sheet is one 360 × 728 white surface with one slot. In the package it renders in place until it’s given <code>visible</code>; then it slides over its screen with an optional scrim and can be dragged down. Its 12 px gap isn’t applied, and a top inset pushes the sheet down without shrinking it, so its bottom is cut off. On the web it isn’t announced as a dialog, focus isn’t moved or kept in it, Escape does nothing, and a hidden sheet’s controls stay in the Tab order. The Page type JioPlus turns it light grey (not shown). The examples host the sheet as the Storybook story does: on a black screen whose page steps back while the sheet is shown, by the package’s page-stack values (the screen’s job, not the sheet’s). The published Docs page is still the old generated one, and on this site the spring is simplified.</Sources>,
     },
   }
 
@@ -138,7 +138,7 @@ function ModalSheetGuide() {
     figmaUrl: FIGMA, storybookUrl: docsUrl('modalsheet'),
   }} playground={<>
     <div className="preview-stage">
-      <ScreenFrame footer={
+      <ScreenFrame receded={shown} footer={
         <ModalSheet visible={shown} fillHeight={fill} showOverlay={scrim} onOverlayPress={hide} onRequestClose={hide} modes={LIGHT}>
           <Chat close={hide} fill={fill} />
         </ModalSheet>

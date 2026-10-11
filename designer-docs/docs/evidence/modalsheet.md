@@ -9,7 +9,7 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 ## Sources
 
 - Figma: [Coin Components Library · Modal Sheet](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9559-28121), node `9559:28121`. One component, 360 × 728, white, radius 20, with one `slot` (344 × 684): padding 12 top, 8 sides, 32 bottom. Bound variables `modalSheet/gap` 12, padding, radius 20, `modalSheet/bg` `#ffffff`. No title, handle, close button, or shadow.
-- Storybook (published `index.json`, built 1 October): `components-modalsheet--docs`, `--default`. The published docs page is the old generated page. Biscuit's `main` has a handwritten mdx and an `InFlow` story that are not published. The Default story presents the sheet in a 360 × 728 frame with `topInset={40}`, a scrim, an AppBar (JioDot, title, close IconButton), a flex spacer, and a HelloJioInput.
+- Storybook (published `index.json`, built 1 October): `components-modalsheet--docs`, `--default`. The published docs page is the old generated page. Biscuit's `main` has a handwritten mdx and an `InFlow` story that are not published. The published Default story is already the rewrite (`ModalSheet.stories.tsx:128-209`): a black 360 × 728 frame (`presentFrame`, `#000000`); a white page with Home and an “Open HelloJio modal” button that steps back while the sheet is shown (`modalSheetPageStackBaseStyle` + `useModalSheetPageStackStyle(presentationProgress)`: scale 0.9 from the top, 16 px down, radius 10, from `MODAL_SHEET_PAGE_STACK`); then the sheet with `topInset={40}`, `showOverlay` off by default, `fillHeight` on, an AppBar (JioDot, title, close IconButton at Emphasis Low), a flex spacer, and a HelloJioInput. Its top corners show black; its bottom corners and the bottom 40 px are cut off (#234). Re-checked 11 October 2026 in Chrome.
 
 ## Contract
 
@@ -32,10 +32,14 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - Not announced as a dialog; focus isn't moved into it, kept in it, or returned; Escape does nothing. The “Drag down to dismiss” hint isn't exposed on the web. A hidden sheet's controls stay in the Tab order.
 - The scrim is a button named “Dismiss overlay” (fixed English). Close needs a named IconButton in the slot.
 
+## Review 11 October 2026 (fix loop)
+
+- Marcin: dark corners on all four corners; the second screen (Without a scrim) looked broken; “look how it’s made in Storybook”. Cause: the guide hosted the sheet in a white frame with the 70% scrim filling the same box, so the scrim showed as dark crescents between the sheet’s four 20 px corners and the frame; without a scrim, the white sheet sat on a white page with nothing between them. The sheet itself matches Figma (one radius 20 on all corners) and renders the same in Storybook. Fix: the kit’s `ScreenFrame receded` gives the frame Storybook’s black stage and steps the page back by `MODAL_SHEET_PAGE_STACK` (the site’s animation stub can’t run `useModalSheetPageStackStyle`: its `interpolate` returns the progress unchanged).
+
 ## Limits
 
 - Light only (Color Mode doesn't change the sheet; slot content is Light). The page uses `topInset={0}` except where it shows the inset.
-- Not shown: Page type JioPlus, `presentationProgress` and the page-stack helpers, `enableDismissGesture={false}`, `style`.
+- Not shown: Page type JioPlus, `presentationProgress` and the animated page-stack hook (the examples use its values through the kit), `enableDismissGesture={false}`, `style`.
 
 ## Coin gaps
 
