@@ -94,7 +94,7 @@ function SuggestiveSearchGuide() {
         { name: 'Match', note: 'The typed text, in bold.', target: A.match, side: 'left' },
       ]}>
         <VStack modes={LIGHT} style={{ width: '100%', padding: 0, minHeight: 230 }}>
-          <Search testID="ss-anatomy" isRequired defaultInputValue="Bank of" defaultOpen />
+          <Search testID="ss-anatomy" isRequired defaultInputValue="Bank of" open />
         </VStack>
       </Anatomy>,
     },
@@ -104,10 +104,10 @@ function SuggestiveSearchGuide() {
       body: <div className="coin-new-example-grid">
         <ExampleCard title="With support text" description="A short hint under the field."><Host><Search supportText={SUPPORT} /></Host></ExampleCard>
         <ExampleCard title="Required" description="A red asterisk after the label. It isn’t announced."><Host><Search isRequired /></Host></ExampleCard>
-        <ExampleCard title="No-match message" description="Says so when nothing matches; without it the list just disappears."><Host h={H(1)}><Search emptyMessage={EMPTY} defaultInputValue="Paytm" defaultOpen /></Host></ExampleCard>
-        <ExampleCard title="Fewer suggestions" description="Caps the list; otherwise it scrolls after about five rows."><Host h={H(3)}><Search maxResults={3} defaultInputValue="Bank" defaultOpen /></Host></ExampleCard>
-        <ExampleCard title="Without highlight" description="Matches show in plain text."><Host h={H(3)}><Search highlightMatch={false} defaultInputValue="Bank of" defaultOpen /></Host></ExampleCard>
-        <ExampleCard title="An option that can’t be chosen" description="Ananya Iyer is listed but disabled, such as a payee still being verified."><Host h={H(4)}><Search label="Beneficiary" placeholder="Search beneficiary" items={PEOPLE} defaultInputValue="A" defaultOpen /></Host></ExampleCard>
+        <ExampleCard title="No-match message" description="Says so when nothing matches; without it the list just disappears."><Host h={H(1)}><Search emptyMessage={EMPTY} defaultInputValue="Paytm" open /></Host></ExampleCard>
+        <ExampleCard title="Fewer suggestions" description="Caps the list; otherwise it scrolls after about five rows."><Host h={H(3)}><Search maxResults={3} defaultInputValue="Bank" open /></Host></ExampleCard>
+        <ExampleCard title="Without highlight" description="Matches show in plain text."><Host h={H(3)}><Search highlightMatch={false} defaultInputValue="Bank of" open /></Host></ExampleCard>
+        <ExampleCard title="An option that can’t be chosen" description="Ananya Iyer is listed but disabled, such as a payee still being verified."><Host h={H(4)}><Search label="Beneficiary" placeholder="Search beneficiary" items={PEOPLE} defaultInputValue="A" open /></Host></ExampleCard>
       </div>,
     },
     states: {
@@ -158,8 +158,8 @@ function SuggestiveSearchGuide() {
           goodTitle="Label the field" badTitle="Use the placeholder as the label"
           goodCaption="“Bank name” stays visible while people type." badCaption="It disappears as soon as people type." />
         <DoDont
-          good={<Host h={H(1)}><Search emptyMessage={EMPTY} defaultInputValue="Paytm" defaultOpen /></Host>}
-          bad={<Host h={H(1)}><Search defaultInputValue="Paytm" defaultOpen /></Host>}
+          good={<Host h={H(1)}><Search emptyMessage={EMPTY} defaultInputValue="Paytm" open /></Host>}
+          bad={<Host h={H(1)}><Search defaultInputValue="Paytm" open /></Host>}
           goodTitle="Say when nothing matches" badTitle="Let the list vanish"
           goodCaption="“No matching banks” explains the empty list." badCaption="People can’t tell whether anything matched." />
         <DoDont
@@ -172,7 +172,7 @@ function SuggestiveSearchGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Suggestive Search contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="10 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('suggestivesearch')} stories={[
+      body: <Sources checked="11 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('suggestivesearch')} stories={[
         { label: 'Default', id: 'components-suggestivesearch--default' },
         { label: 'Prefilled', id: 'components-suggestivesearch--prefilled' },
         { label: 'Empty message', id: 'components-suggestivesearch--with-empty-message' },
