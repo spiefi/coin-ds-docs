@@ -402,10 +402,14 @@
   overflow: auto;
 }
 
-/* A page that recedes behind a presented sheet; see ScreenFrame `receded`. */
+/* A page that recedes behind a presented sheet; see ScreenFrame `receded`.
+   Its corners are rounder than a sheet's (ModalSheet: 20 px), like a phone
+   screen's, so a sheet that reaches the screen's edges doesn't show the stage
+   at its corners. */
 .gk-screen-frame.is-stack {
   background: #000;
   border-color: #000;
+  border-radius: 32px;
 }
 
 .gk-screen-frame.is-stack > .gk-screen-content {

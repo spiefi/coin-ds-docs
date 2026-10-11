@@ -61,9 +61,10 @@ export function DoDont({
  * components that are a whole screen themselves (e.g. FullscreenModal).
  * `surface="dark"` stands in for dark media behind white-on-dark components.
  * `receded` stacks a `screen` page for sheets presented over it (ModalSheet):
- * the frame turns black, as in the package's Storybook, and while `receded`
- * is true the page shrinks and drops back by the package's
- * `MODAL_SHEET_PAGE_STACK` values.
+ * the frame turns black, as in the package's Storybook, its corners are
+ * rounder than the sheet's (like a phone screen), and while `receded` is true
+ * the page shrinks and drops back by the package's `MODAL_SHEET_PAGE_STACK`
+ * values.
  */
 export function ScreenFrame({
   children,
