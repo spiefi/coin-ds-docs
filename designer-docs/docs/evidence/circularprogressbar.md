@@ -35,10 +35,17 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - `<CircularProgressBar value={70} />` renders Inactive.
 - In CardFinancialCondition (Neutral by default) the ring is Inactive before the check and, after it, Active at 62 with a dark grey (Neutral) arc, named “62 out of 100”.
 
+## Review 11 October 2026 (fix loop)
+
+- Marcin: “Semantic Intent, AppearanceBrand and AppearanceSystem are missing in documentation.” Docs mistake: the guide showed one Secondary ring and one System positive ring and no controls for these modes. Re-checked against the package (`figma-modes.generated.ts:362`, `CircularProgressBar.mdx:23-49`, the token alias chain in `Coin Variables-variables-full.json`), Figma `3446:5217` (same collections and values), and Storybook (one select per collection under Modes, `modeArgTypes('CircularProgressBar')`).
+- The ring reads AppearanceBrand, AppearanceSystem, `circularProgressBar Size`, Color Mode, Emphasis, and Semantic Intent; no Context. Semantic Intent is the switch: Brand resolves the arc through AppearanceBrand, System through AppearanceSystem, so each appearance collection does nothing under the other intent (all four brand values give `#00773d` under System; all three system values give `#cea15a` under Brand). Figma instance `3973:2259` and the With support text story both set a system value under Brand.
+- Arc colours (Light) at Medium: Brand `#fde8c9`, `#e4dbff`, `#d6d6d9`, `#c4e7ff`; System `#d4f6d0`, `#ffe5d9`, `#ffe0de`. At Low: Brand `#fef4e5`, `#f6f3ff`, `#f5f5f5`, `#ecf7ff`; System transparent. Value text, support text, and icon are literal tokens that no colour mode changes.
+- Guide change: playground Intent, Appearance or Meaning, and Emphasis controls; Configuration cards for Semantic Intent, AppearanceBrand (all four), AppearanceSystem (all three), and Emphasis (all three); a Do/Don't for a meaning set without System intent. Dark is out of scope for the board and isn't shown or mentioned on the page.
+
 ## Limits
 
 - Light only: with Color Mode Dark the track, value text, and icon keep their Light colours (literal tokens), and only the arc changes.
-- Not shown: Dark, Emphasis Low, `style` and the `*Style` overrides, `disableTruncation`, CircularProgressBarDoted.
+- Not shown: Dark (out of scope), `style` and the `*Style` overrides, `disableTruncation`, CircularProgressBarDoted.
 - Not implied: animation, interaction, or a value announced separately from the name on the web.
 
 ## Coin gaps
