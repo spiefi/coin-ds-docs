@@ -35,6 +35,12 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - Each row is announced by its title and outcome word; the glyph itself has no name; supporting text and date are not in the name.
 - Not interactive: no focus, no press.
 
+## Review 11 October 2026 (fix loop)
+
+- Astra: the first Sources card is titled “Coin Components Library” but linked Coin Subcomponents. Marcin: Step having its own Subcomponents file is fine; designers shouldn't use subcomponents in Figma. Docs mistake: the kit's Figma card is always titled “Coin Components Library”, and the guide linked the Subcomponents file. The guide now links Stepper in the Components Library (`3228:457`, whose rows are Step instances), describes the card as “Stepper, which places each Step”, and the Sources note says Step itself lives in Coin Subcomponents. The Subcomponents node above stays the anatomy reference.
+- Marcin: “Broken alignment again” (With a date next to Custom content). Docs mistake: example previews grew with their content, so cards in a row had different preview heights. Fixed for every guide in the kit (`coin-new-example-grid` cards and Do/Don't pairs share rows through CSS subgrid); 91 misaligned rows across 70 guides measured before, 0 after.
+- Dark mode is out of scope.
+
 ## Limits
 
 - Light only, as in the Stepper guide.

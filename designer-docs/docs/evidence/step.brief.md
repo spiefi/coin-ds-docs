@@ -1,8 +1,8 @@
 # Step brief
 
 slug: step · label: Step · public API: Step, StepLabel (+ Stepper as the list; Card, VStack, HStack, Button for composition)
-figma: https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=27-854 · storybook: docsUrl('step') · stories: Default=components-step--default, Complete=components-step--complete, Error=components-step--error-state, Warning=components-step--warning-state, Last step=components-step--last-step, Custom slot=components-step--custom-slot
-checked: 10 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457 (Stepper, which places each Step; the Sources card takes `figmaDescription="Stepper, which places each Step"`) · storybook: docsUrl('step') · stories: Default=components-step--default, Complete=components-step--complete, Error=components-step--error-state, Warning=components-step--warning-state, Last step=components-step--last-step, Custom slot=components-step--custom-slot
+checked: 11 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
 icon: one stage circle with a line below it and two text lines — `<><circle cx="5" cy="5" r="2.75" stroke="currentColor" strokeWidth="1.5" /><path d="M5 8.5v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M10 4h6M10 7h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>`
 keywords: stepper item, stage, timeline item, progress step
 
@@ -69,7 +69,7 @@ Every preview is a Host.
 
 ## Sources
 header: Sources · title: Use the public Step contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma keeps Step in Coin Subcomponents; the Components Library uses it inside Stepper. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step is a list item read as its title plus “Completed”, “Failed”, or “Needs attention”; the supporting text and date aren’t read, and a Step with only a StepLabel child is read as “Step” and its number. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. In Figma, designers place Steps through Stepper in the Components Library (linked above); Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step is a list item read as its title plus “Completed”, “Failed”, or “Needs attention”; the supporting text and date aren’t read, and a Step with only a StepLabel child is read as “Step” and its number. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.
 
 ## Limits
 Do not show Dark mode, `connectorStyle`, `style`, `isCurrent`, a Stepper-level Step Status, or a glyph with a mismatched colour outside the Don’t. Do not imply that a Step is pressable or that the glyph, supporting text, or date is announced.

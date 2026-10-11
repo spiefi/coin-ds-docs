@@ -8,7 +8,7 @@ const LIGHT = { 'Color Mode': 'Light' } as Modes
 const BTN = { 'Color Mode': 'Light', 'Button / Size': 'S' } as Modes
 const CARD = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes
 const noop = () => {}
-const FIGMA = 'https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=27-854'
+const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457'
 
 type State = 'current' | 'upcoming' | 'done' | 'attention' | 'failed'
 const STATE = {
@@ -175,11 +175,11 @@ function StepGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Step contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="10 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('step')} stories={[
+      body: <Sources checked="11 October 2026" figmaUrl={FIGMA} figmaDescription="Stepper, which places each Step" storybookUrl={docsUrl('step')} stories={[
         { label: 'Default', id: 'components-step--default' }, { label: 'Complete', id: 'components-step--complete' },
         { label: 'Error', id: 'components-step--error-state' }, { label: 'Warning', id: 'components-step--warning-state' },
         { label: 'Last step', id: 'components-step--last-step' }, { label: 'Custom slot', id: 'components-step--custom-slot' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma keeps Step in Coin Subcomponents; the Components Library uses it inside Stepper. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step is a list item read as its title plus “Completed”, “Failed”, or “Needs attention”; the supporting text and date aren’t read, and a Step with only a StepLabel child is read as “Step” and its number. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. In Figma, designers place Steps through Stepper in the Components Library (linked above); Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step is a list item read as its title plus “Completed”, “Failed”, or “Needs attention”; the supporting text and date aren’t read, and a Step with only a StepLabel child is read as “Step” and its number. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.</Sources>,
     },
   }
 
