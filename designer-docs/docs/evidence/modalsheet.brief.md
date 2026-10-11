@@ -2,13 +2,13 @@
 
 slug: modalsheet · label: Modal Sheet · public API: ModalSheet (+ ScreenFrame from the kit; AppBar, JioDot, IconButton, Text, VStack, HelloJioInput, Button for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9559-28121 · storybook: docsUrl('modalsheet') · stories: Default=components-modalsheet--default
-checked: 10 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+checked: 11 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
 icon: a phone outline with a tall sheet covering most of it — `<><rect x="4" y="1.5" width="10" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M4 7c0-1.1.9-2 2-2h6a2 2 0 0 1 2 2" stroke="currentColor" strokeWidth="1.5" fill="none" /><path d="M7 13h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>`
 keywords: page sheet, modal, sheet, overlay page, HelloJio sheet
 
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; `const LOW = { 'Color Mode': 'Light', Emphasis: 'Low' } as Modes`. Every ModalSheet gets `modes={LIGHT}` (it passes them to its slot children); other Coin instances outside the sheet get `modes={LIGHT}`. On the web `topInset` defaults to 0; pass it only where stated.
 “Chat(close, fill)” = the sheet’s children: `<AppBar type="SubPage" leadingSlot={<JioDot />} actionsSlot={<IconButton iconName="ic_close" accessibilityLabel="Close" onPress={close} modes={LOW} />} />`, `<Text modes={LIGHT}>Ask about your spends, bills, or investments.</Text>`, then, when `fill`, a spacer `<VStack modes={LIGHT} style={{ flex: 1 }} />`, then `<HelloJioInput value={q} onChangeText={setQ} onSubmit={…} />` (its own state; default placeholder “Ask me anything”). Static examples can pass `onSubmit={noop}`.
-“Frame” = the kit’s `<ScreenFrame footer={<ModalSheet …>Chat</ModalSheet>}>{screen}</ScreenFrame>`: the 320 px frame is the sheet’s positioned parent. Screen = `<Text modes={LIGHT}>Home</Text>` and `<Button label="Ask HelloJio" onPress={open} modes={LIGHT} />`. A presented sheet is `<ModalSheet visible={shown} fillHeight={fill} showOverlay={scrim} onOverlayPress={hide} onRequestClose={hide} …>`; static examples start shown and keep their own `shown` state so they can be closed and reopened. “dimmed” means `showOverlay`.
+“Frame” = the kit’s `<ScreenFrame receded={shown} footer={<ModalSheet …>Chat</ModalSheet>}>{screen}</ScreenFrame>`: the 320 px frame is the sheet’s positioned parent; `receded` gives it Storybook’s black stage and steps the page back while the sheet is shown (every presented sheet, including the playground and In context, passes its own shown state). Screen = `<Text modes={LIGHT}>Home</Text>` and `<Button label="Ask HelloJio" onPress={open} modes={LIGHT} />`. A presented sheet is `<ModalSheet visible={shown} fillHeight={fill} showOverlay={scrim} onOverlayPress={hide} onRequestClose={hide} …>`; static examples start shown and keep their own `shown` state so they can be closed and reopened. “dimmed” means `showOverlay`.
 In-flow sheets (Anatomy, Sizing) omit `visible` and pass `fillHeight={false}`; selectors: sheet `MS = byTestId(id)`; slot `${MS} > div`; app bar `${MS} > div > [role="heading"]`; close `${MS} [aria-label="Close"]`; field `${MS} input`.
 
 ## Overview
@@ -31,7 +31,7 @@ header: Configuration · title: Height, scrim, and top inset · description: A s
 Grid `coin-new-example-grid`, each an ExampleCard › Frame:
 - Fills the screen — Chat(close, fill), `fillHeight` — lesson: The default: the sheet covers the screen and the field sits at its foot.
 - Fits its content — Chat(close, no fill), `fillHeight={false}`, dimmed — lesson: The sheet hugs its content and docks to the bottom.
-- Without a scrim — Chat(close, no fill), `fillHeight={false}`, no scrim — lesson: The page stays bright; the white sheet’s edge is harder to see.
+- Without a scrim — Chat(close, no fill), `fillHeight={false}`, no scrim — lesson: The page stays bright behind the sheet, as in the Storybook story.
 - Top inset — Chat(close, fill), `topInset={40}`, dimmed — lesson: The page peeks 40 px above, but on the web the sheet’s bottom is cut off by the same 40 px.
 
 ## States
@@ -49,7 +49,7 @@ header: Content · title: A title, a way out, and one task · description: Start
 One ExampleCard "One task, with a way out" › Frame › Chat(close, fill), shown.
 
 ## In context
-header: In context · title: Asking HelloJio from Home · description: Ask HelloJio opens the sheet over Home. Sending a question or pressing the X closes it; the screen keeps what was asked.
+header: In context · title: Asking HelloJio from Home · description: Ask HelloJio opens the sheet over Home, and Home steps back behind it. Sending a question or pressing the X closes it; the screen keeps what was asked.
 Composition in `.coin-new-context`: Frame (starts hidden) with the Screen above; the sheet is Chat(close, fill) whose HelloJioInput `onSubmit` sets the status to “Asked: <text>” (or “Asked nothing” for an empty send) and hides the sheet; the X sets “Closed without asking” and hides it. Below the frame, `<p className="coin-new-readout" role="status">`, starting “On Home”.
 
 ## Do & Don'ts
@@ -60,7 +60,7 @@ Every preview is a Frame with the sheet shown.
 
 ## Sources
 header: Sources · title: Use the public Modal Sheet contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Modal Sheet is one 360 × 728 white surface with one slot. In the package it renders in place until it’s given <code>visible</code>; then it slides over its screen with an optional scrim and can be dragged down. Its 12 px gap isn’t applied, and a top inset pushes the sheet down without shrinking it, so its bottom is cut off. On the web it isn’t announced as a dialog, focus isn’t moved or kept in it, Escape does nothing, and a hidden sheet’s controls stay in the Tab order. The Page type JioPlus turns it light grey (not shown). The published Storybook still shows the old page, and on this site the spring is simplified.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Modal Sheet is one 360 × 728 white surface with one slot. In the package it renders in place until it’s given <code>visible</code>; then it slides over its screen with an optional scrim and can be dragged down. Its 12 px gap isn’t applied, and a top inset pushes the sheet down without shrinking it, so its bottom is cut off. On the web it isn’t announced as a dialog, focus isn’t moved or kept in it, Escape does nothing, and a hidden sheet’s controls stay in the Tab order. The Page type JioPlus turns it light grey (not shown). The examples host the sheet as the Storybook story does: on a black screen whose page steps back while the sheet is shown, by the package’s page-stack values (the screen’s job, not the sheet’s). The published Docs page is still the old generated one, and on this site the spring is simplified.
 
 ## Limits
-Do not show Dark mode, Page type JioPlus, `presentationProgress` or the page-stack helpers, `enableDismissGesture={false}`, `style`, or `topInset` outside its Configuration example. Do not imply a title, handle, or close button of its own, focus trapping, Escape, or that the scrim calls `onRequestClose`.
+Do not show Page type JioPlus, `presentationProgress` or the animated page-stack hook (the kit’s `receded` uses the same `MODAL_SHEET_PAGE_STACK` values), `enableDismissGesture={false}`, `style`, or `topInset` outside its Configuration example. Do not imply a title, handle, or close button of its own, focus trapping, Escape, or that the scrim calls `onRequestClose`.
