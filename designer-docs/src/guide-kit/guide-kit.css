@@ -402,6 +402,18 @@
   overflow: auto;
 }
 
+/* A page that recedes behind a presented sheet; see ScreenFrame `receded`. */
+.gk-screen-frame.is-stack {
+  background: #000;
+  border-color: #000;
+}
+
+.gk-screen-frame.is-stack > .gk-screen-content {
+  background: #fff;
+  transform-origin: top;
+  transition: transform 0.3s ease-out, border-radius 0.3s ease-out;
+}
+
 .gk-backdrop {
   position: relative;
   display: flex;
@@ -435,6 +447,31 @@
 
 .gk-backdrop.is-card {
   min-height: 180px;
+}
+
+/* Examples --------------------------------------------------------------- */
+
+/* Cards in a row line up: each card's preview, title, and caption sit on rows
+   shared across the grid, so every preview in a row is as tall as the tallest
+   and the titles start on one line. */
+.coin-new-example-grid > .coin-new-example-card {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0;
+}
+
+.coin-new-comparison-row > .comparison-card {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0;
+}
+
+.coin-new-comparison-row > .comparison-card > .comparison-label {
+  justify-self: start;
 }
 
 /* Playground ------------------------------------------------------------- */

@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import { MODAL_SHEET_PAGE_STACK } from 'jfs-components'
 import backdropImage from '../assets/bank-hero.png'
 
 export function ExampleCard({
@@ -59,21 +60,31 @@ export function DoDont({
  * `full` is a taller phone screen whose children fill it (a flex column), for
  * components that are a whole screen themselves (e.g. FullscreenModal).
  * `surface="dark"` stands in for dark media behind white-on-dark components.
+ * `receded` stacks a `screen` page for sheets presented over it (ModalSheet):
+ * the frame turns black, as in the package's Storybook, and while `receded`
+ * is true the page shrinks and drops back by the package's
+ * `MODAL_SHEET_PAGE_STACK` values.
  */
 export function ScreenFrame({
   children,
   footer,
   size = 'screen',
   surface = 'light',
+  receded,
 }: {
   children?: ReactNode
   footer?: ReactNode
   size?: 'bar' | 'screen' | 'full'
   surface?: 'light' | 'dark'
+  receded?: boolean
 }) {
+  const stack = MODAL_SHEET_PAGE_STACK
   return (
-    <div className={`gk-screen-frame is-${size}${surface === 'dark' ? ' is-dark' : ''}`}>
-      {size === 'screen' && <div className="gk-screen-content">{children}</div>}
+    <div className={`gk-screen-frame is-${size}${surface === 'dark' ? ' is-dark' : ''}${receded === undefined ? '' : ' is-stack'}`}>
+      {size === 'screen' && <div className="gk-screen-content" style={receded ? {
+        transform: `scale(${stack.scale}) translateY(${stack.translateY}px)`,
+        borderRadius: stack.borderRadius,
+      } : undefined}>{children}</div>}
       {size === 'full' && children}
       {footer}
     </div>
