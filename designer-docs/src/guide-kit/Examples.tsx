@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
-import { MODAL_SHEET_PAGE_STACK } from 'jfs-components'
+import { useModalSheetPageStackStyle } from 'jfs-components'
+import { useSharedValue, type SharedValue } from 'react-native-reanimated'
 import backdropImage from '../assets/bank-hero.png'
 
 export function ExampleCard({
@@ -61,10 +62,11 @@ export function DoDont({
  * components that are a whole screen themselves (e.g. FullscreenModal).
  * `surface="dark"` stands in for dark media behind white-on-dark components.
  * `receded` stacks a `screen` page for sheets presented over it (ModalSheet):
- * the frame turns black, as in the package's Storybook, its corners are
- * rounder than the sheet's (like a phone screen), and while `receded` is true
- * the page shrinks and drops back by the package's `MODAL_SHEET_PAGE_STACK`
- * values.
+ * pass the `usePresentationProgress()` value that the sheet also gets as
+ * `presentationProgress`. The frame turns black, as in the package's
+ * Storybook, its corners are rounder than the sheet's (like a phone screen),
+ * and the page steps back with the sheet through the package's
+ * `useModalSheetPageStackStyle`, as the Storybook story does.
  */
 export function ScreenFrame({
   children,
@@ -77,17 +79,34 @@ export function ScreenFrame({
   footer?: ReactNode
   size?: 'bar' | 'screen' | 'full'
   surface?: 'light' | 'dark'
-  receded?: boolean
+  receded?: SharedValue<number>
 }) {
-  const stack = MODAL_SHEET_PAGE_STACK
   return (
-    <div className={`gk-screen-frame is-${size}${surface === 'dark' ? ' is-dark' : ''}${receded === undefined ? '' : ' is-stack'}`}>
-      {size === 'screen' && <div className="gk-screen-content" style={receded ? {
-        transform: `scale(${stack.scale}) translateY(${stack.translateY}px)`,
-        borderRadius: stack.borderRadius,
-      } : undefined}>{children}</div>}
+    <div className={`gk-screen-frame is-${size}${surface === 'dark' ? ' is-dark' : ''}${receded ? ' is-stack' : ''}`}>
+      {size === 'screen' && (receded
+        ? <StackedPage progress={receded}>{children}</StackedPage>
+        : <div className="gk-screen-content">{children}</div>)}
       {size === 'full' && children}
       {footer}
+    </div>
+  )
+}
+
+/**
+ * The presentation progress a ModalSheet reports while it shows and hides
+ * (0 hidden, 1 shown): pass it to the sheet's `presentationProgress` and to
+ * ScreenFrame's `receded`.
+ */
+export function usePresentationProgress() {
+  return useSharedValue(0)
+}
+
+function StackedPage({ progress, children }: { progress: SharedValue<number>; children?: ReactNode }) {
+  const { borderRadius, transform } = useModalSheetPageStackStyle(progress)
+  const [{ scale }, { translateY }] = transform
+  return (
+    <div className="gk-screen-content" style={{ borderRadius, transform: `scale(${scale}) translateY(${translateY}px)` }}>
+      {children}
     </div>
   )
 }
