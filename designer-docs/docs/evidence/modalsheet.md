@@ -4,7 +4,7 @@ Package, Figma, Storybook, and browser evidence for the Modal Sheet guide (board
 
 ## Checked
 
-Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5); `npm run coin:status` reports the mirror and the docs up to date. `ModalSheet.tsx` is identical to upstream. Re-checked 11 October 2026: still up to date with Biscuit's `main` (636f3f5).
+Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5); `npm run coin:status` reports the mirror and the docs up to date. `ModalSheet.tsx` is identical to upstream. Re-checked 11 and 12 October 2026: still up to date with Biscuit's `main` (636f3f5).
 
 ## Sources
 
@@ -15,7 +15,7 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 ## Contract
 
 - Props: `children` (one slot; every child gets the sheet's `modes`), `modes` (`Page type` only: MainPage and SubPage white, JioPlus `#f5f5f5`; Color Mode doesn't change the sheet), `fillHeight` (true: fill the parent; false: fit the content), `visible`, `showOverlay` (false), `onOverlayPress`, `onRequestClose` (drag-down only), `enableDismissGesture` (true), `onDismissed`, `topInset` (40 on iOS, 0 elsewhere), `presentationProgress`, `style`, and View props (`testID` lands on the sheet surface).
-- With `visible` omitted it renders in flow: the surface and its slot. With `visible` set it fills its nearest positioned parent as an overlay: the sheet springs up from below, an optional scrim (`rgba(0,0,0,0.7)`, a button named “Dismiss overlay”) fades in, and a drag down past a quarter of the travel or a downward fling calls `onRequestClose`. `visible={false}` keeps it mounted below the screen. It is not a Modal or portal; the screen sets `visible` to false on every close.
+- With `visible` omitted it renders in flow: the surface and its slot. With `visible` set it fills its nearest positioned parent as an overlay: the sheet slides up from below on Reanimated's `withSpring` with `SPRING_CONFIG` (`ModalSheet.tsx:27-35`: damping 32, stiffness 300, mass 1, rest thresholds 0.1; a damping ratio of 0.92, so it settles without a visible bounce; the same spring as Drawer and ContentSheet), `presentationProgress` and an optional scrim (`rgba(0,0,0,0.7)`, a button named “Dismiss overlay”) follow a 220 ms `withTiming` (Reanimated's default ease-in-out), a drag moves the sheet and the progress with the finger, and a drag down past a quarter of the travel or a downward fling calls `onRequestClose`. `visible={false}` keeps it mounted below the screen. It is not a Modal or portal; the screen sets `visible` to false on every close.
 - No title, handle, close button, footer, dialog role, focus handling, or Escape. Compose an App Bar with a named close IconButton at the top of the slot.
 - Tokens: padding 12 / 8 / 32 / 8, radius 20 on all corners, `modalSheet/gap` 12 (applied to the surface, whose only child is the slot, so slot children are not spaced). The `modalSheet/font*` tokens are unused.
 - Page type (`modalSheet/bg` → `ContentSheet/background/color`, collection “Page type”, default MainPage): MainPage `#ffffff`, SubPage `#ffffff`, JioPlus `#f5f5f5`. The other `modalSheet/*` tokens have one mode. The sheet passes its modes to its slot children (`ModalSheet.tsx:227-230`, `cloneChildrenWithModes`; a child's own modes are merged over them, `react-utils.ts:59-66`), so under JioPlus: Text `text/foreground` → `text/color` turns `#ffffff`; AppBar SubPage background turns transparent and its title stays dark; VStack padding is 16 on SubPage and JioPlus (8 on MainPage); HelloJioInput doesn't read Page type, and its Idle pill (background and border `#f5f5f5`) matches the JioPlus sheet. JioDot and IconButton (Emphasis Low) don't change. In Figma “Page type” is a remote variable collection, not a property or variant; the component resolves to MainPage. Storybook's Default story has a Page type control (`ModalSheet.stories.tsx:47, 56, 70, 206`).
@@ -28,7 +28,7 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - Presented in a 360 × 640 positioned frame with `topInset={40}`, `fillHeight`: the sheet is 640 tall and starts at 40, so its bottom 40 px (the 32 px padding and 8 px of content) fall outside the frame. With `fillHeight={false}` it docks to the bottom and is still pushed down by 40, cutting off the bottom of the HelloJioInput. With `topInset={0}` it fits.
 - The scrim covers the frame; tapping it calls `onOverlayPress`. The AppBar renders as a heading (`h1`) with a back button unless `leadingSlot` is set; the close IconButton is 40 × 40.
 - After closing, Tab still reaches the hidden sheet's back button, Close, the input, and Send, and scrolls the frame to show them.
-- On this site the slide is the simplified animation library's 420 ms spring.
+- Opening motion, measured frame by frame in Chrome (12 October 2026): the published Storybook Default story travels 860 px, overshoots 0.4 px, and settles in about 410 ms. Before this fix the guide's In context sheet travelled 900 px, overshot by 125 px, bounced back 14 px, and snapped 1 px at 430 ms. After it, the same sheet follows Storybook's curve (see the third fix loop below).
 
 ## Accessibility (web)
 
@@ -37,7 +37,7 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 ## Review 11 October 2026 (fix loop)
 
-- Marcin: dark corners on all four corners; the second screen (Without a scrim) looked broken; “look how it’s made in Storybook”. Cause: the guide hosted the sheet in a white frame with the 70% scrim filling the same box, so the scrim showed as dark crescents between the sheet’s four 20 px corners and the frame; without a scrim, the white sheet sat on a white page with nothing between them. The sheet itself matches Figma (one radius 20 on all corners) and renders the same in Storybook. Fix: the kit’s `ScreenFrame receded` gives the frame Storybook’s black stage and steps the page back by `MODAL_SHEET_PAGE_STACK` (the site’s animation stub can’t run `useModalSheetPageStackStyle`: its `interpolate` returns the progress unchanged).
+- Marcin: dark corners on all four corners; the second screen (Without a scrim) looked broken; “look how it’s made in Storybook”. Cause: the guide hosted the sheet in a white frame with the 70% scrim filling the same box, so the scrim showed as dark crescents between the sheet’s four 20 px corners and the frame; without a scrim, the white sheet sat on a white page with nothing between them. The sheet itself matches Figma (one radius 20 on all corners) and renders the same in Storybook. Fix: the kit’s `ScreenFrame receded` gives the frame Storybook’s black stage and steps the page back by `MODAL_SHEET_PAGE_STACK` (at that time the site's animation stub couldn't run `useModalSheetPageStackStyle`: its `interpolate` returned the progress unchanged; fixed in the third loop).
 
 ## Review 11 October 2026, second fix loop (Astra's three issues)
 
@@ -45,10 +45,16 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - “Configuration: page types MainPage, SubPage and JioPlus aren't shown.” Docs mistake, plus a component bug. The guide also wrapped the slot content in a helper that swallowed the modes the sheet passes to its slot, so Page type would never have reached the children. The slot content now takes the sheet's modes. MainPage and SubPage render the same white sheet; JioPlus renders a `#f5f5f5` sheet with white body Text and an input pill that blends into it (the same pill in Storybook's Default story with Page type JioPlus): #255.
 - “Dismissal: no explanation of drag-to-dismiss turned off (enableDismissGesture).” Docs mistake: it is a designer choice (whether a drag can close the sheet), and the brief had excluded it as developer-only.
 
+## Review 12 October 2026, third fix loop (animation)
+
+- Marcin: “Animation works differently, so it looks really odd, like we have some kind of spring animation. We should use the same version that we have in the code.” Docs mistake. This site replaces `react-native-reanimated` with a web stub (`src/web-stubs/reanimated.ts`, aliased in `vite.config.ts`). Its `withSpring` ignored the config and always played a fixed 420 ms curve, `1 − e^(−7p)·cos(10p)`, which overshoots about 11 %; its `withTiming` ignored the easing; its `interpolate` returned the input. The package's spring (damping 32, stiffness 300, mass 1) doesn't bounce, and Storybook, which runs the real Reanimated, shows no bounce (measurements above).
+- Fix: the stub now runs Reanimated 3's own spring step (`animation/spring.ts`, `springUtils.ts`: the under- and critically damped formulas, 64 ms frame cap, rest thresholds, overshoot clamping, defaults damping 10, stiffness 100, mass 1), `withTiming` with its easing (default `Easing.inOut(Easing.quad)`), and a real `Easing` and `interpolate`. The kit's `ScreenFrame receded` now takes the sheet's `presentationProgress` and steps the page back through the package's `useModalSheetPageStackStyle`, as Storybook's story does, in step with the sheet and the drag, instead of a 300 ms CSS transition.
+- Also affected, now as the package animates them: Drawer and ContentSheet (the same spring, no longer bouncing); ListGroup's shift (default easing); Section, TextInput, Spinner, and SkeletonGroup timings (their own easings). Popup uses React Native's `Animated`, not this stub.
+
 ## Limits
 
 - Light only (Color Mode doesn't change the sheet; slot content is Light). The page uses `topInset={0}` except where it shows the inset.
-- Not shown: `presentationProgress` and the animated page-stack hook (the examples use its values through the kit), `style`.
+- Not shown as designer settings: `presentationProgress` and the page-stack hook (the kit wires them as Storybook does), `style`.
 - Page type JioPlus is shown as it ships (#255).
 
 ## Coin gaps
