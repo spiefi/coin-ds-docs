@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
+import {
+  createElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ForwardedRef,
+} from 'react'
 import { Image, ScrollView, Text, TextInput, View } from 'react-native'
 
-const transition = new Proxy({}, { get: () => () => transition })
-
-export const FadeInUp = transition
-export const FadeOutUp = transition
-export const FadeOut = transition
-export const SlideInDown = transition
-export const SlideInUp = transition
 export const ReduceMotion = {
   System: 'system',
   Always: 'always',
@@ -15,6 +17,159 @@ export const ReduceMotion = {
 }
 
 type EasingFunction = (value: number) => number
+
+// Layout animations (`entering`, `exiting`) as Reanimated 3 plays them on the
+// web (layoutReanimation/web/animation/*.web.ts): CSS keyframes, 300 ms and
+// linear unless the builder says otherwise.
+const LAYOUT_KEYFRAMES: Record<string, Keyframe[]> = {
+  FadeIn: [{ opacity: 0 }, { opacity: 1 }],
+  FadeInUp: [
+    { opacity: 0, transform: 'translateY(-25px)' },
+    { opacity: 1, transform: 'translateY(0px)' },
+  ],
+  FadeOut: [{ opacity: 1 }, { opacity: 0 }],
+  FadeOutUp: [
+    { opacity: 1, transform: 'translateY(0px)' },
+    { opacity: 0, transform: 'translateY(-25px)' },
+  ],
+  SlideInUp: [{ transform: 'translateY(-100vh)' }, { transform: 'translateY(0%)' }],
+  SlideInDown: [{ transform: 'translateY(100vh)' }, { transform: 'translateY(0%)' }],
+}
+
+type LayoutConfig = {
+  duration?: number
+  delay?: number
+  easing?: EasingFunction
+  reduceMotion?: string
+}
+
+type LayoutAnimation = {
+  __coinLayout: string
+  config: LayoutConfig
+}
+
+function layoutAnimation(name: string, config: LayoutConfig = {}): LayoutAnimation {
+  const target: LayoutAnimation = { __coinLayout: name, config }
+  const next = (patch: LayoutConfig) => layoutAnimation(name, { ...config, ...patch })
+  return new Proxy(target, {
+    get: (object, key) => {
+      if (typeof key === 'symbol' || key === 'then') return undefined
+      if (key in object) return object[key as keyof LayoutAnimation]
+      switch (key) {
+        case 'duration':
+          return (duration: number) => next({ duration })
+        case 'delay':
+          return (delay: number) => next({ delay })
+        case 'easing':
+          return (easing: EasingFunction | { factory: () => EasingFunction }) =>
+            next({ easing: typeof easing === 'function' ? easing : easing.factory() })
+        case 'reduceMotion':
+          return (reduceMotion: string) => next({ reduceMotion })
+        default:
+          // Builder methods the web doesn't play (springify, withCallback, …).
+          return () => next({})
+      }
+    },
+  })
+}
+
+export const FadeIn = layoutAnimation('FadeIn')
+export const FadeInUp = layoutAnimation('FadeInUp')
+export const FadeOut = layoutAnimation('FadeOut')
+export const FadeOutUp = layoutAnimation('FadeOutUp')
+export const SlideInDown = layoutAnimation('SlideInDown')
+export const SlideInUp = layoutAnimation('SlideInUp')
+
+function isLayoutAnimation(value: unknown): value is LayoutAnimation {
+  return typeof value === 'object' && value !== null && '__coinLayout' in value
+}
+
+// A JS easing as a CSS linear() curve, sampled finely enough to match it.
+function cssEasing(easing?: EasingFunction) {
+  if (!easing) return 'linear'
+  const points = Array.from({ length: 41 }, (_, step) => easing(step / 40).toFixed(4))
+  return `linear(${points.join(', ')})`
+}
+
+function playLayoutAnimation(
+  element: HTMLElement,
+  animation: LayoutAnimation,
+  fill: FillMode,
+) {
+  const frames = LAYOUT_KEYFRAMES[animation.__coinLayout]
+  const { config } = animation
+  const reduceMotion = config.reduceMotion ?? ReduceMotion.System
+  const reduced =
+    reduceMotion === ReduceMotion.Always ||
+    (reduceMotion === ReduceMotion.System &&
+      typeof matchMedia === 'function' &&
+      matchMedia('(prefers-reduced-motion: reduce)').matches)
+  if (!frames || reduced || typeof element.animate !== 'function') return null
+  return element.animate(frames, {
+    duration: config.duration ?? 300,
+    delay: config.delay ?? 0,
+    easing: cssEasing(config.easing),
+    fill,
+  })
+}
+
+// Reanimated keeps an exiting view on screen by moving it into a copy placed
+// where it was, inside its offset parent, and animating the copy away.
+function playExit(element: HTMLElement, animation: LayoutAnimation) {
+  const parent = element.offsetParent
+  if (!(parent instanceof HTMLElement) || !element.isConnected) return
+  const copy = element.cloneNode(true) as HTMLElement
+  copy.removeAttribute('role')
+  copy.setAttribute('aria-hidden', 'true')
+  Object.assign(copy.style, {
+    position: 'absolute',
+    top: `${element.offsetTop}px`,
+    left: `${element.offsetLeft}px`,
+    width: `${element.offsetWidth}px`,
+    height: `${element.offsetHeight}px`,
+    margin: '0',
+    pointerEvents: 'none',
+  })
+  parent.appendChild(copy)
+  const playing = playLayoutAnimation(copy, animation, 'forwards')
+  if (!playing) {
+    copy.remove()
+    return
+  }
+  playing.onfinish = () => copy.remove()
+  playing.oncancel = () => copy.remove()
+}
+
+const AnimatedView = forwardRef(function AnimatedView(
+  { entering, exiting, layout: _layout, ...props }: Record<string, unknown>,
+  forwardedRef: ForwardedRef<unknown>,
+) {
+  const node = useRef<HTMLElement | null>(null)
+  const exit = useRef(exiting)
+  exit.current = exiting
+  const setRef = useCallback(
+    (value: HTMLElement | null) => {
+      node.current = value
+      if (typeof forwardedRef === 'function') forwardedRef(value)
+      else if (forwardedRef) forwardedRef.current = value
+    },
+    [forwardedRef],
+  )
+
+  useLayoutEffect(() => {
+    const element = node.current
+    if (element && isLayoutAnimation(entering)) {
+      playLayoutAnimation(element, entering, 'backwards')
+    }
+    return () => {
+      if (element && isLayoutAnimation(exit.current)) playExit(element, exit.current)
+    }
+    // Entering plays once, on mount; exiting once, on unmount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return createElement(View as never, { ...props, ref: setRef })
+})
 
 // Reanimated's cubic Bézier easing: find the curve's t for x, then return y(t).
 function bezierFn(x1: number, y1: number, x2: number, y2: number): EasingFunction {
@@ -64,6 +219,9 @@ type SpringConfig = typeof SPRING_DEFAULTS
 type AnimationDescriptor<T> = {
   to: T
   callback?: (finished: boolean) => void
+  // withRepeat: run `count` times (0 or less: for ever), reversing each time
+  // when `reverse`, otherwise starting again from the first value.
+  repeat?: { count: number; reverse: boolean }
 } & (
   | { __coinAnimation: 'timing'; duration: number; easing: EasingFunction }
   | { __coinAnimation: 'spring'; config: SpringConfig }
@@ -72,7 +230,12 @@ type AnimationDescriptor<T> = {
 interface WebSharedValue<T> {
   value: T
   __cancel?: () => void
+  __subscribe?: (listener: () => void) => () => void
 }
+
+// The shared values an animated style reads while it is computed, so the
+// component using the style can follow them (Reanimated tracks the same).
+let reading: Set<WebSharedValue<unknown>> | null = null
 
 function isAnimationDescriptor<T>(
   value: T | AnimationDescriptor<T>,
@@ -127,6 +290,12 @@ export const useSharedValue = <T,>(initialValue: T): WebSharedValue<T> => {
   const frame = useRef<number | null>(null)
   const [, render] = useState(0)
   const sharedValue = useRef<WebSharedValue<T> | null>(null)
+  const listeners = useRef(new Set<() => void>())
+  // Re-render the owner and every component whose animated style reads it.
+  const changed = () => {
+    render((version) => version + 1)
+    listeners.current.forEach((listener) => listener())
+  }
 
   const cancel = () => {
     if (frame.current !== null && typeof cancelAnimationFrame === 'function') {
@@ -140,7 +309,10 @@ export const useSharedValue = <T,>(initialValue: T): WebSharedValue<T> => {
 
     Object.defineProperty(value, 'value', {
       enumerable: true,
-      get: () => currentValue.current,
+      get: () => {
+        reading?.add(value as WebSharedValue<unknown>)
+        return currentValue.current
+      },
       set: (nextValue: T | AnimationDescriptor<T>) => {
         // A spring that takes over a running spring keeps its velocity.
         const startVelocity = frame.current === null ? 0 : currentVelocity.current
@@ -156,7 +328,7 @@ export const useSharedValue = <T,>(initialValue: T): WebSharedValue<T> => {
           currentValue.current = (
             isAnimationDescriptor(nextValue) ? nextValue.to : nextValue
           ) as T
-          render((version) => version + 1)
+          changed()
           if (isAnimationDescriptor(nextValue)) {
             nextValue.callback?.(true)
           }
@@ -164,11 +336,12 @@ export const useSharedValue = <T,>(initialValue: T): WebSharedValue<T> => {
         }
 
         const animation = nextValue
-        const from = currentValue.current
-        const to = animation.to as number
-        const startedAt =
+        let from = currentValue.current as number
+        let to = animation.to as number
+        let startedAt =
           typeof performance === 'undefined' ? Date.now() : performance.now()
         let lastFrameAt = startedAt
+        let runs = 1
         if (animation.__coinAnimation === 'spring') {
           currentVelocity.current = startVelocity || animation.config.velocity
         }
@@ -207,16 +380,31 @@ export const useSharedValue = <T,>(initialValue: T): WebSharedValue<T> => {
                 Math.abs(to - next.position) < config.restDisplacementThreshold)
           }
 
+          const { repeat } = animation
+          if (finished && repeat && (repeat.count <= 0 || runs < repeat.count)) {
+            // withRepeat: go back the other way, or start again from the
+            // first value, and keep running.
+            runs += 1
+            if (repeat.reverse) [from, to] = [to, from]
+            currentValue.current = from as T
+            currentVelocity.current = 0
+            startedAt = now
+            lastFrameAt = now
+            changed()
+            frame.current = requestAnimationFrame(tick)
+            return
+          }
+
           if (finished) {
             currentValue.current = to as T
             currentVelocity.current = 0
             frame.current = null
-            render((version) => version + 1)
+            changed()
             animation.callback?.(true)
             return
           }
 
-          render((version) => version + 1)
+          changed()
           frame.current = requestAnimationFrame(tick)
         }
 
@@ -225,6 +413,12 @@ export const useSharedValue = <T,>(initialValue: T): WebSharedValue<T> => {
     })
 
     value.__cancel = cancel
+    value.__subscribe = (listener) => {
+      listeners.current.add(listener)
+      return () => {
+        listeners.current.delete(listener)
+      }
+    }
     sharedValue.current = value
   }
 
@@ -233,8 +427,32 @@ export const useSharedValue = <T,>(initialValue: T): WebSharedValue<T> => {
   return sharedValue.current
 }
 
-export const useAnimatedStyle = (factory: () => object) => factory()
-export const useAnimatedProps = (factory: () => object) => factory()
+// Computes the style on every render and re-renders whenever a shared value it
+// read changes, including one owned by another component (Skeleton reads its
+// group's clock), as Reanimated updates the view on every frame.
+const useTrackedFactory = (factory: () => object) => {
+  const [, render] = useState(0)
+  const previous = reading
+  const read = new Set<WebSharedValue<unknown>>()
+  reading = read
+  let result: object
+  try {
+    result = factory()
+  } finally {
+    reading = previous
+  }
+
+  useEffect(() => {
+    const update = () => render((version) => version + 1)
+    const stops = [...read].map((value) => value.__subscribe?.(update))
+    return () => stops.forEach((stop) => stop?.())
+  })
+
+  return result
+}
+
+export const useAnimatedStyle = (factory: () => object) => useTrackedFactory(factory)
+export const useAnimatedProps = (factory: () => object) => useTrackedFactory(factory)
 export const useAnimatedScrollHandler = () => () => undefined
 export const useAnimatedKeyboard = () => ({
   height: { value: 0 },
@@ -271,7 +489,20 @@ export const withSpring = <T,>(
     config: { ...SPRING_DEFAULTS, ...config },
     callback,
   }) as T
-export const withRepeat = <T,>(value: T) => value
+// Reanimated's withRepeat: 2 runs by default; 0 or less repeats for ever.
+export const withRepeat = <T,>(
+  animation: T,
+  numberOfReps = 2,
+  reverse = false,
+  callback?: (finished: boolean) => void,
+) =>
+  (isAnimationDescriptor(animation)
+    ? {
+        ...animation,
+        repeat: { count: numberOfReps, reverse },
+        callback: callback ?? animation.callback,
+      }
+    : animation) as T
 export const cancelAnimation = <T,>(value: WebSharedValue<T>) =>
   value.__cancel?.()
 export const runOnJS = <T extends (...args: never[]) => unknown>(fn: T) => fn
@@ -313,7 +544,7 @@ export const interpolate = (
 }
 
 export const Animated = {
-  View,
+  View: AnimatedView,
   Text,
   Image,
   ScrollView,
