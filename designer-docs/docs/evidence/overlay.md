@@ -52,3 +52,11 @@ Checked in Chrome at 1280 and 390 px. The scrim measures 358 × 318 inside the 3
 ## Coin gaps
 
 - #269 (Component Fix, To do, Component Bug; Mr. Biscuit): “Dismiss overlay” is fixed English with no prop; the dismiss button's focus ring outlines the whole screen; Tab reaches the page behind and Escape does nothing; nothing marks the region as modal on the web.
+
+## Fix loop 12 October 2026
+
+Marcin's review (changes requested): “Why does the popup have a color, and the cancel button is secondary”.
+
+- Docs mistake, fixed: the dialog was a Coin `Card` with only Color Mode, so it took Card's default AppearanceBrand Primary fill, `card/background/color` = `rgb(254, 244, 229)` (cream). AppearanceBrand Neutral resolves it to `rgb(255, 255, 255)`, matching Storybook's white dialog. Card passes its modes to its children (`cloneChildrenWithModes`), so the buttons set AppearanceBrand Primary themselves.
+- Docs mistake, fixed: Cancel used `AppearanceBrand: 'Tertiary'`, a blue fill (`button/background` `rgb(3, 107, 153)`) copied from the Popup stories. It is now `Emphasis: 'Low'` on Primary (transparent fill, gold text), the low-emphasis way out Figma's Popup uses for Later. Pay stays the Primary fill; both sit side by side in the ButtonGroup, so the dialog's height doesn't change.
+- Docs mistake, fixed while checking 390 px: in the docked and stretched placements the dialog's Title cut “Confirm payment” to one line with an ellipsis (Title defaults to `numberOfLines` 1, `Title.tsx`). The Title now allows two lines.
