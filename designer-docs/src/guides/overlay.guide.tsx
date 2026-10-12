@@ -6,6 +6,8 @@ import { defineGuide } from './define'
 
 const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2976-55'
 const LIGHT = { 'Color Mode': 'Light' } as Modes
+// The white dialog Card passes AppearanceBrand Neutral to its children; its buttons stay Primary.
+const PRIMARY = { ...LIGHT, AppearanceBrand: 'Primary' } as Modes
 const noop = () => {}
 type Placement = 'center' | 'top' | 'bottom' | 'stretch'
 
@@ -20,11 +22,11 @@ function Screen({ open }: { open: () => void }) {
 }
 
 function Dialog({ pay, cancel }: { pay: () => void; cancel?: () => void }) {
-  return <Card modes={LIGHT} style={{ margin: 16 }}>
-    <Title title="Confirm payment" subtitle="₹250 to Ravi Stores" modes={LIGHT} />
+  return <Card modes={{ ...LIGHT, AppearanceBrand: 'Neutral' } as Modes} style={{ margin: 16 }}>
+    <Title title="Confirm payment" subtitle="₹250 to Ravi Stores" numberOfLines={2} modes={LIGHT} />
     <ButtonGroup modes={LIGHT}>
-      <Button label="Pay" onPress={pay} modes={LIGHT} />
-      {cancel && <Button label="Cancel" onPress={cancel} modes={{ ...LIGHT, AppearanceBrand: 'Tertiary' } as Modes} />}
+      <Button label="Pay" onPress={pay} modes={PRIMARY} />
+      {cancel && <Button label="Cancel" onPress={cancel} modes={{ ...PRIMARY, Emphasis: 'Low' } as Modes} />}
     </ButtonGroup>
   </Card>
 }
