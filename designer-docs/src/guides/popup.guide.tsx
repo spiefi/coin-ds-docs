@@ -1,5 +1,5 @@
 import { useRef, useState, type ComponentType } from 'react'
-import { Button, ButtonGroup, Popup, Text, Title, type Modes, type PopupProps, type PopupRef } from 'jfs-components'
+import { Button, Popup, Text, Title, VStack, type Modes, type PopupProps, type PopupRef } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
 import { Anatomy, DoDont, ExampleCard, OnOff, Readout, ScreenFrame, Segment, Sources, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
@@ -11,10 +11,10 @@ type ContentProps = { modes?: Modes; onClaim: () => void; onLater?: () => void }
 
 function Choice({ modes, onClaim, onLater, claim, later }: ContentProps & { claim: string; later: string }) {
   return (
-    <ButtonGroup modes={modes} style={{ alignSelf: 'stretch' }}>
+    <VStack modes={modes} style={{ alignSelf: 'stretch' }}>
       <Button label={claim} onPress={onClaim} modes={modes} />
-      {onLater && <Button label={later} onPress={onLater} modes={{ ...modes, AppearanceBrand: 'Tertiary' } as Modes} />}
-    </ButtonGroup>
+      {onLater && <Button label={later} onPress={onLater} modes={{ ...modes, Emphasis: 'Low' } as Modes} />}
+    </VStack>
   )
 }
 
@@ -126,9 +126,10 @@ function PopupGuide() {
       description: 'After a payment the screen opens a rewards popup. Claim or Later closes it and the screen notes the choice; a tap on the dimmed page or Escape just closes it.',
       body: <div className="coin-new-context">
         <ScreenFrame>
-          <Text modes={{ ...LIGHT, 'Text Sizes': 'Large' } as Modes}>Payment successful</Text>
-          <Text modes={LIGHT}>₹250 paid to Ravi Stores.</Text>
-          <Button label="Done" modes={LIGHT} onPress={() => setCtxOpen(true)} />
+          <VStack modes={{ ...LIGHT, 'Slot gap': 'L' } as Modes}>
+            <Title title="Payment successful" subtitle="₹250 paid to Ravi Stores." textAlign="Center" modes={LIGHT} />
+            <Button label="Done" modes={LIGHT} onPress={() => setCtxOpen(true)} />
+          </VStack>
           <Popup open={ctxOpen} onOpenChange={next => { setCtxOpen(next); if (!next) setStatus('Closed') }} modes={LIGHT}>
             <Rewards
               onClaim={() => { setStatus('Rewards claimed'); setCtxOpen(false) }}

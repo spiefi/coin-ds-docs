@@ -1,6 +1,6 @@
 # Popup brief
 
-slug: popup · label: Popup · public API: Popup, PopupRef (+ Title, ButtonGroup, Button, Text for content; ScreenFrame from the kit for In context)
+slug: popup · label: Popup · public API: Popup, PopupRef (+ Title, VStack, Button, Text for content; ScreenFrame from the kit for In context)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3040-764 · storybook: docsUrl('popup') · stories: Default=components-popup--default, Controlled=components-popup--controlled, Custom content=components-popup--custom-content
 checked: 12 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5; main's c1fa197c only rewrites the Storybook page)
 icon: a phone outline with a short sheet at the bottom — `<><rect x="4" y="1.5" width="10" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M4 11c0-1.1.9-2 2-2h6a2 2 0 0 1 2 2" stroke="currentColor" strokeWidth="1.5" fill="none" /></>`
@@ -8,9 +8,9 @@ keywords: bottom sheet popup, modal, promo sheet, rewards popup
 
 Important: Popup is a React Native Modal. On the web it opens over the whole browser window, never inside a card or frame, and is absent from the page while closed. Every example is therefore a button that opens a real Popup. Never use `defaultOpen` and never start an example open.
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; every Popup gets `modes={{ ...LIGHT, …extra } as Modes}` (only the extra modes named below). Buttons outside a popup get `modes={LIGHT}`.
-“Rewards” = a component `({ modes, onClaim, onLater }: { modes?: Modes; onClaim: () => void; onLater?: () => void })` returning `<Title title="Your rewards are waiting" subtitle="Claim your points and enjoy the benefits now." textAlign="Center" modes={modes} />` and `<ButtonGroup modes={modes} style={{ alignSelf: 'stretch' }}><Button label="Claim" onPress={onClaim} modes={modes} />{onLater && <Button label="Later" onPress={onLater} modes={{ ...modes, AppearanceBrand: 'Tertiary' } as Modes} />}</ButtonGroup>`. The popup injects its modes into `modes`; Rewards forwards them and never sets Page type or Slot gap itself.
-“Offer” = the same shape with Title "Get 50% cashback" / "On your next three bill payments this month." and buttons "Avail now" (onClaim) and "Maybe later" (onLater, Tertiary).
-“Terms” = the same shape with Title "Offer terms" / "Read before you claim." then 40 `<Text modes={modes}>` lines `${n}. Cashback is credited within 7 days of an eligible payment of ₹100 or more.` (n = 1…40; enough to outgrow a desktop window), then the ButtonGroup with Claim and Later.
+“Rewards” = a component `({ modes, onClaim, onLater }: { modes?: Modes; onClaim: () => void; onLater?: () => void })` returning `<Title title="Your rewards are waiting" subtitle="Claim your points and enjoy the benefits now." textAlign="Center" modes={modes} />` and, as in Figma, the buttons stacked full width: `<VStack modes={modes} style={{ alignSelf: 'stretch' }}><Button label="Claim" onPress={onClaim} modes={modes} />{onLater && <Button label="Later" onPress={onLater} modes={{ ...modes, Emphasis: 'Low' } as Modes} />}</VStack>` (Later is Figma's low-emphasis text button, not Storybook's blue Tertiary fill). The popup injects its modes into `modes`; Rewards forwards them and never sets Page type or Slot gap itself.
+“Offer” = the same shape with Title "Get 50% cashback" / "On your next three bill payments this month." and buttons "Avail now" (onClaim) and "Maybe later" (onLater, Emphasis Low).
+“Terms” = the same shape with Title "Offer terms" / "Read before you claim." then 40 `<Text modes={modes}>` lines `${n}. Cashback is credited within 7 days of an eligible payment of ₹100 or more.` (n = 1…40; enough to outgrow a desktop window), then the stacked Claim and Later.
 “Triggered(props, content)” = a component holding `const ref = useRef<PopupRef>(null)`, rendering `<Popup ref={ref} trigger={<Button label={label} modes={LIGHT} />} …props>` with content whose buttons call `ref.current?.close()`. Default trigger label "Open popup" unless stated.
 
 ## Overview
@@ -51,7 +51,7 @@ One ExampleCard "An offer" › Triggered with label "See offer", Offer. Descript
 
 ## In context
 header: In context · title: Rewards after a payment · description: After a payment the screen opens a rewards popup. Claim or Later closes it and the screen notes the choice; a tap on the dimmed page or Escape just closes it.
-Composition in `.coin-new-context`: `<ScreenFrame>` with `<Text modes={{ ...LIGHT, 'Text Sizes': 'Large' } as Modes}>Payment successful</Text>`, `<Text modes={LIGHT}>₹250 paid to Ravi Stores.</Text>`, `<Button label="Done" modes={LIGHT} onPress={() => setOpen(true)} />`, and `<Popup open={open} onOpenChange={setOpen} modes={LIGHT}>` with Rewards whose Claim sets the status "Rewards claimed" and Later "Saved for later", each closing it; `onOpenChange(false)` from the scrim or Escape sets "Closed". Below the frame, `<p className="coin-new-readout" role="status">`, starting "Payment complete".
+Composition in `.coin-new-context`: `<ScreenFrame>` holding a real screen laid out with Coin (never loose Text and a bare button): `<VStack modes={{ ...LIGHT, 'Slot gap': 'L' } as Modes}>` with `<Title title="Payment successful" subtitle="₹250 paid to Ravi Stores." textAlign="Center" modes={LIGHT} />` and a full-width `<Button label="Done" modes={LIGHT} onPress={() => setOpen(true)} />`; then `<Popup open={open} onOpenChange={setOpen} modes={LIGHT}>` with Rewards whose Claim sets the status "Rewards claimed" and Later "Saved for later", each closing it; `onOpenChange(false)` from the scrim or Escape sets "Closed". Below the frame, `<p className="coin-new-readout" role="status">`, starting "Payment complete".
 
 ## Do & Don'ts
 header: Do & Don’ts · title: Short, with a way out · description: Each pair opens a popup people can read and leave next to one that traps them or runs off the screen.

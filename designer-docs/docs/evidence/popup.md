@@ -48,3 +48,12 @@ Because the Modal covers the whole browser window, the guide shows the popup onl
 ## Review 12 October 2026
 
 Checked in Chrome at 1280 and 390 px. Opening the playground popup covers the whole window; the scrim's backdrop measures opacity 0.5 over black. Focus moves to the invisible “Close popup” scrim button on open (so Enter would close it), Tab then reaches Claim, and Escape closes it; the dialog has no name (added to #268). React Native's Animated warns once that `useNativeDriver` falls back to JS on the web. First fix round: twelve lines of terms didn't outgrow a 900 px window, so the tall example has forty.
+
+## Fix loop 12 October 2026
+
+Marcin's review (changes requested): the In context trigger had no padding or alignment. Astra's earlier check flagged the same screen (“Payment successful” ran into “₹250 paid to Ravi Stores.”) and that the anatomy pins only the trigger.
+
+- Docs mistake, fixed: the screen behind the popup was two loose Coin `Text`s and a bare `Button` directly in the frame; Coin Text runs inline without a stack. It is now a Coin `VStack` (Slot gap L, 24 px) with a centred `Title` (title + subtitle) and a full-width Done button.
+- Docs mistake, fixed alongside: Later used `AppearanceBrand: 'Tertiary'`, copied from the Storybook stories (`Popup.stories.tsx` Default and CustomContent pass Tertiary), which paints a blue filled button. Figma's Popup (3040:764) shows Claim as a full-width fill and Later as a low-emphasis gold text button below it. Later is now `Emphasis: 'Low'` (Primary: transparent fill, text `rgb(173, 132, 68)`), stacked under Claim in a Coin `VStack`, as in Figma.
+- Component behaviour, unchanged: the anatomy can't pin the sheet's parts. Popup renders through React Native `Modal` (`Popup.tsx`), which on the web is drawn over the whole window in its own layer, outside any diagram frame; Storybook's page says the same.
+- Headless note: on the Vite dev server the sheet's open spring didn't run in headless Chrome (sheet stayed at `translateY(900px)`); on the production build and the live preview it opens normally. Screenshots are taken from the production build.
