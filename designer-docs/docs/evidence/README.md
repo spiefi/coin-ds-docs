@@ -24,6 +24,7 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | brandchip | [brandchip.md](brandchip.md) |
 | button, hstack, vstack, stack, breadcrumbs | [button-and-layout.md](button-and-layout.md) |
 | buttongroup | [buttongroup.md](buttongroup.md) |
+| cardadvisory | [cardadvisory.md](cardadvisory.md) |
 | checkbox | [checkbox.md](checkbox.md) |
 | checkboxitem | [checkboxitem.md](checkboxitem.md) |
 | checkboxgroup | [checkboxgroup.md](checkboxgroup.md) |
