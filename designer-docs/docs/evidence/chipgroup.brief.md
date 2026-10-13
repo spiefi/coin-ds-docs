@@ -2,7 +2,7 @@
 
 slug: chipgroup · label: Chip Group · public API: ChipGroup (+ ChipSelect children; VStack for hosting)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1905-5123 · storybook: docsUrl('chipgroup') · stories: Default=components-chipgroup--default, With active state=components-chipgroup--with-active-state
-checked: 6 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-3795b4c, Biscuit's main 3795b4c)
+checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: three small pills, two on the first row and one below — `<rect x="2" y="3.5" width="6" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" /><rect x="10" y="3.5" width="6" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" /><rect x="2" y="10.5" width="9" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" />`
 keywords: filter chips, chip row, filters
 
@@ -23,7 +23,7 @@ parts (CG = `byTestId('chipgroup-anatomy')`):
 1. Chip Select — Each chip keeps its own label, icon, and Active state. — target: `${CG} > button:nth-child(2)` — side: right
 2. Gap — 8 px between chips, set by the group. — between: [`${CG} > button:nth-child(1)`, `${CG} > button:nth-child(2)`] — side: top
 3. Wrapped chip — A chip that doesn’t fit starts the next row, on the left. — target: `${CG} > button:nth-child(3)` — side: bottom
-4. Group — Lays chips out; it has no label or state of its own. — target: `CG` — side: left
+4. Group — Lays chips out; it has no state, only an optional spoken name. — target: `CG` — side: left
 marks: gap `${CG} > button:nth-child(1)` → `${CG} > button:nth-child(3)` (the 8 px row gap)
 
 ## Configuration
@@ -52,8 +52,8 @@ Grid `coin-new-example-grid`:
 - ExampleCard "Applied values" › Host › ChipGroup chips 1–3, all applied (“Last 30 days”, “Pending”, “UPI”)
 
 ## In context
-header: In context · title: Filters above a transaction list · description: The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it. The group only keeps the chips spaced as they change width.
-Composition in `.coin-new-context`: Host › controlled ChipGroup of chips 1–3 (each toggles between Idle and applied on press), then `<p className="coin-new-readout" role="status">`: “Showing all transactions”, or the applied values, e.g. “Showing UPI payments from the last 30 days, pending”. Build the sentence from what is applied: “Showing” + (“UPI payments” or “transactions”) + (“ from the last 30 days” if Date) + (“, pending” if Status).
+header: In context · title: Filters above a transaction list · description: The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it. The group only keeps the chips spaced as they change width. The screen names the row “Transaction filters”, so it is announced as a group.
+Composition in `.coin-new-context`: Host › controlled `<ChipGroup accessibilityLabel="Transaction filters">` of chips 1–3 (each toggles between Idle and applied on press), then `<p className="coin-new-readout" role="status">`: “Showing all transactions”, or the applied values, e.g. “Showing UPI payments from the last 30 days, pending”. Build the sentence from what is applied: “Showing” + (“UPI payments” or “transactions”) + (“ from the last 30 days” if Date) + (“, pending” if Status).
 
 ## Do & Don'ts
 header: Do & Don’ts · title: Keep the row short and easy to scan · description: Each pair shows a chip row people can read at a glance versus one that slows them down.
@@ -64,7 +64,7 @@ Every preview is a Host.
 
 ## Sources
 header: Sources · title: Use the public Chip Group contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Chip Group is one 370 × 32 component holding three Chip Selects in a slot, with no properties. The package wraps chips onto new rows with an 8 px gap; on the web the chips are slightly wider than in Figma. The group has no role or name of its own, so each chip is announced as a separate toggle button. The published Storybook stories show two chips without icons because their icon names don’t exist.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Chip Group is one 370 × 32 component holding three Chip Selects in a slot, with no properties. The package wraps chips onto new rows with an 8 px gap; on the web the chips are slightly wider than in Figma, and a chip wider than the row wraps its label to stay inside it. Given an accessibility label, the row is announced as a named group; each chip is still announced as its own toggle button. The published Storybook predates the current stories, so two of its chips show no icon.
 
 ## Limits
-Do not show Dark mode (the Active chip background nearly matches Idle), `style`, `testID`, horizontal scrolling, non-chip children, or a label for the group. Do not imply the group tracks selection, offers single choice, or truncates long labels. If any preview overflows its host at 390 px, report it instead of changing labels.
+Do not show Dark mode (the Active chip background nearly matches Idle), `style`, `testID`, horizontal scrolling, or non-chip children. A spoken name for the group appears only in In context. Do not imply the group tracks selection or offers single choice; a chip wider than the row wraps its label (it doesn’t truncate). If any preview overflows its host at 390 px, report it instead of changing labels.

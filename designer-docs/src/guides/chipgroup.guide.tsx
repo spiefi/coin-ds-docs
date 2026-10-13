@@ -55,7 +55,7 @@ function ChipGroupGuide() {
         { name: 'Chip Select', note: 'Each chip keeps its own label, icon, and Active state.', target: `${CG} > button:nth-child(2)`, side: 'right' },
         { name: 'Gap', note: '8 px between chips, set by the group.', between: [`${CG} > button:nth-child(1)`, `${CG} > button:nth-child(2)`], side: 'top' },
         { name: 'Wrapped chip', note: 'A chip that doesn’t fit starts the next row, on the left.', target: `${CG} > button:nth-child(3)`, side: 'bottom' },
-        { name: 'Group', note: 'Lays chips out; it has no label or state of its own.', target: CG, side: 'left' },
+        { name: 'Group', note: 'Lays chips out; it has no state, only an optional spoken name.', target: CG, side: 'left' },
       ]} marks={[{ kind: 'gap', from: `${CG} > button:nth-child(1)`, to: `${CG} > button:nth-child(3)` }]}>
         <ChipGroup testID="chipgroup-anatomy" modes={LIGHT}><Chips count={3} /></ChipGroup>
       </Anatomy>,
@@ -101,9 +101,9 @@ function ChipGroupGuide() {
     },
     context: {
       header: 'In context', title: 'Filters above a transaction list',
-      description: 'The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it. The group only keeps the chips spaced as they change width.',
+      description: 'The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it. The group only keeps the chips spaced as they change width. The screen names the row “Transaction filters”, so it is announced as a group.',
       body: <div className="coin-new-context">
-        <Host><ChipGroup modes={LIGHT}><Chips count={3} applied={ctxApplied} onToggle={ctxToggle} /></ChipGroup></Host>
+        <Host><ChipGroup modes={LIGHT} accessibilityLabel="Transaction filters"><Chips count={3} applied={ctxApplied} onToggle={ctxToggle} /></ChipGroup></Host>
         <p className="coin-new-readout" role="status">{ctxSentence}</p>
       </div>,
     },
@@ -131,10 +131,10 @@ function ChipGroupGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Chip Group contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="6 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('chipgroup')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('chipgroup')} stories={[
         { label: 'Default', id: 'components-chipgroup--default' },
         { label: 'With active state', id: 'components-chipgroup--with-active-state' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Chip Group is one 370 × 32 component holding three Chip Selects in a slot, with no properties. The package wraps chips onto new rows with an 8 px gap; on the web the chips are slightly wider than in Figma. The group has no role or name of its own, so each chip is announced as a separate toggle button. The published Storybook stories show two chips without icons because their icon names don’t exist.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Chip Group is one 370 × 32 component holding three Chip Selects in a slot, with no properties. The package wraps chips onto new rows with an 8 px gap; on the web the chips are slightly wider than in Figma, and a chip wider than the row wraps its label to stay inside it. Given an accessibility label, the row is announced as a named group; each chip is still announced as its own toggle button. The published Storybook predates the current stories, so two of its chips show no icon.</Sources>,
     },
   }
 

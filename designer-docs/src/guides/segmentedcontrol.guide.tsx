@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { Card, MoneyValue, SegmentedControl, Text, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
-import { Anatomy, DoDont, ExampleCard, Readout, Segment, Sources, Surface, docsUrl } from '../guide-kit'
+import { Anatomy, DoDont, ExampleCard, FitWidth, Readout, Segment, Sources, Surface, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
 
 const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2994-2578'
@@ -17,8 +17,10 @@ const CHANGE: Record<string, string> = { daily: '+₹1,180 (0.9%) today', weekly
 type Count = keyof typeof SETS
 type Width = 'Wide' | 'Narrow'
 
+/** Wide hosts show the control in a 360 px phone's 328 px column (scaled down in narrower previews), so labels fit as they do on a phone. */
 function Host({ children, narrow = false }: { children: ReactNode; narrow?: boolean }) {
-  return <Surface width={narrow ? 'narrow' : 'wide'}><VStack modes={LIGHT} style={{ width: '100%', padding: 0 }}>{children}</VStack></Surface>
+  if (narrow) return <Surface width="narrow"><VStack modes={LIGHT} style={{ width: '100%', padding: 0 }}>{children}</VStack></Surface>
+  return <Surface width="wide"><FitWidth><VStack modes={LIGHT} style={{ width: 328, padding: 0 }}>{children}</VStack></FitWidth></Surface>
 }
 
 function Controlled({ selected }: { selected: string }) {
@@ -57,11 +59,11 @@ function SegmentedControlGuide() {
     states: {
       header: 'States', title: 'Selected, unselected, and pressed',
       description: 'One segment is always selected. A pressed segment dims until release, then becomes the selection. There is no disabled or loading state.',
-      body: <ExampleCard title="Tap to choose" description="The purple fill moves to the segment you tap; Enter does the same from the keyboard."><Host><SegmentedControl items={PERIOD} defaultSelectedKey="weekly" modes={LIGHT} /></Host></ExampleCard>,
+      body: <ExampleCard title="Tap to choose" description="The purple fill moves to the segment you tap; Enter, Space, and the arrow keys do the same from the keyboard."><Host><SegmentedControl items={PERIOD} defaultSelectedKey="weekly" modes={LIGHT} /></Host></ExampleCard>,
     },
     sizing: {
       header: 'Sizing', title: 'Full width, 43 px tall, equal segments',
-      description: 'The track fills its container and splits it equally, with 8 px between segments and no padding of its own. Each segment is 43 px tall: 12 px above and below a 19 px label. In a row, the track shrinks to fit its labels.',
+      description: 'The track fills its container and splits it equally, with 8 px between segments and no padding of its own. Each segment is 43 px tall: 12 px above and below a 19 px label, with 16 px at each side. A label that doesn’t fit ends in an ellipsis. In a row, give the track a width: on its own it is too narrow for its longer labels.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} surface="white" specimenWidth={328} marks={[
           { kind: 'size', target: '[role="tab"]:nth-child(1)', side: 'bottom', label: 'both' },
@@ -70,12 +72,12 @@ function SegmentedControlGuide() {
         ]}>
           <SegmentedControl items={PERIOD} defaultSelectedKey="monthly" modes={LIGHT} />
         </Anatomy>
-        <ExampleCard title="In a narrow column" description="In a 216 px column each segment is about 67 px, and “Monthly” reaches the edge of the track. Leave room for the longest label."><Host narrow><SegmentedControl items={PERIOD} defaultSelectedKey="daily" modes={LIGHT} /></Host></ExampleCard>
+        <ExampleCard title="In a narrow column" description="In a 216 px column each segment is about 66 px, too narrow for any of these labels, so each ends in an ellipsis. Daily, Weekly, and Monthly need about 300 px."><Host narrow><SegmentedControl items={PERIOD} defaultSelectedKey="daily" modes={LIGHT} /></Host></ExampleCard>
       </div>,
     },
     content: {
       header: 'Content', title: 'One or two words per option',
-      description: 'Labels share the width equally and wrap instead of truncating, so keep them short and parallel: Daily, Weekly, Monthly. Use the words people see in the content below, and select the likeliest option first.',
+      description: 'Labels share the width equally and end in an ellipsis when they don’t fit, so keep them short and parallel: Daily, Weekly, Monthly. Use the words people see in the content below, and select the likeliest option first.',
       body: <ExampleCard title="Short and parallel"><Host>
         <SegmentedControl items={TRADE} defaultSelectedKey="buy" modes={LIGHT} />
         <SegmentedControl items={RANGE} defaultSelectedKey="1M" modes={LIGHT} />
@@ -98,10 +100,10 @@ function SegmentedControlGuide() {
       header: 'Do & Don’ts', title: 'Keep every option readable',
       description: 'Each pair shows a control people can read at a glance versus one that breaks its own layout.',
       body: <div className="coin-new-stack">
-        <DoDont goodTitle="Keep labels short" goodCaption="Each label fits on one line, so every segment is 43 px." good={<Host><SegmentedControl items={PERIOD} defaultSelectedKey="daily" modes={LIGHT} /></Host>}
-          badTitle="Write long labels" badCaption="“One-time payment” wraps to three lines and the segments end up different heights." bad={<Host><SegmentedControl items={PLANS} defaultSelectedKey="once" modes={LIGHT} /></Host>} />
+        <DoDont goodTitle="Keep labels short" goodCaption="Each label fits its segment, so every option reads in full." good={<Host><SegmentedControl items={PERIOD} defaultSelectedKey="daily" modes={LIGHT} /></Host>}
+          badTitle="Write long labels" badCaption="Every label is cut short, and “One-ti…” doesn’t say which plan it is." bad={<Host><SegmentedControl items={PLANS} defaultSelectedKey="once" modes={LIGHT} /></Host>} />
         <DoDont goodTitle="Offer five options at most" goodCaption="Each label has room to breathe." good={<Host><SegmentedControl items={RANGE} defaultSelectedKey="1M" modes={LIGHT} /></Host>}
-          badTitle="Squeeze in seven" badCaption="Segments of about 39 px leave no room, and labels crowd together." bad={<Host><SegmentedControl items={DAYS} defaultSelectedKey="Mon" modes={LIGHT} /></Host>} />
+          badTitle="Squeeze in seven" badCaption="Segments of about 40 px show at most a sliver of each day, so nobody can tell them apart." bad={<Host><SegmentedControl items={DAYS} defaultSelectedKey="Mon" modes={LIGHT} /></Host>} />
         <DoDont goodTitle="Select one of the options" goodCaption="One segment is always filled, so people see the current view." good={<Host><Controlled selected="weekly" /></Host>}
           badTitle="Pass a key that isn’t an option" badCaption="Nothing is selected, and people can’t tell what they’re looking at." bad={<Host><SegmentedControl items={PERIOD} selectedKey="yearly" modes={LIGHT} /></Host>} />
       </div>,
@@ -109,11 +111,11 @@ function SegmentedControlGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Segmented Control contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="7 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedcontrol')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedcontrol')} stories={[
         { label: 'Default', id: 'components-segmentedcontrol--default' },
         { label: 'Two segments', id: 'components-segmentedcontrol--two-segments' },
         { label: 'Interactive', id: 'components-segmentedcontrol--interactive' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Segmented Control is one 393 × 43 component whose slot holds the segments; the package matches its colours, its 43 px height, and its equal widths. On the web the segments are tabs, but the selected one is not announced, Space does not select (Enter does), and arrow keys do nothing. Dark mode shows the same colours as Light, so this page shows Light only. The published Storybook predates the current stories.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Segmented Control is one 393 × 43 component whose slot holds the segments; the package matches its colours, its 43 px height, and its equal widths. Labels that don’t fit end in an ellipsis. On the web the control is a tab list: the selected segment is announced as selected and is the only one in the Tab order, and Enter, Space, and the arrow keys select. Dark mode shows the same colours as Light, so this page shows Light only. The published Storybook predates the current stories.</Sources>,
     },
   }
 

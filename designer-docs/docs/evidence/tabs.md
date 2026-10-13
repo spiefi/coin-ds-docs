@@ -21,7 +21,7 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 ## Coin gaps
 
-- #194 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): no `aria-selected` on any tab, because RNW 0.21.2 does not map `accessibilityState.selected`; Space does not select (Enter does); no arrow, Home, or End keys, and every tab is a Tab stop; the tablist has no name; no `testID`; `JFSThemeProvider` ignored; Figma's counter badge and hug layout have no code equivalent; two `active` items both render selected; the published Storybook predates 0.1.78.
+- #194 (Component Fix, Done, published 13 October 2026 with c1fa197): no `aria-selected` on any tab, because RNW 0.21.2 does not map `accessibilityState.selected`; Space does not select (Enter does); no arrow, Home, or End keys, and every tab is a Tab stop; the tablist has no name; no `testID`; `JFSThemeProvider` ignored; Figma's counter badge and hug layout have no code equivalent; two `active` items both render selected; the published Storybook predates 0.1.78.
 - #197 (Components, To do; Marcin): `tabItem/active/label/color` is black in Dark mode too. The guide shows Light only.
 
 ## 636f3f5 check
@@ -30,5 +30,15 @@ Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `mai
 
 - From #194 (mostly fixed, back in In progress on 8 October): tabs hug their labels with 16 px gaps, as in Figma (Overview 62.4, Activity 50.8, Details 46.9 px in a 328 px row). `aria-selected` is true or false; Space selects; the arrow keys, Home, and End move focus and select; the tab list is named by `accessibilityLabel`; `testID` works; provider modes apply; `badge` shows a CounterBadge; a second `active` item is ignored (only the first is selected).
 - Still open (#194): every tab is its own Tab stop (all `tabindex=0`, no roving tabindex). Six labels in a 330 px fixed row now clip the last tab (“Refunded” is cut at the edge) instead of overlapping; there is no truncation or minimum width.
-- Regression #209 (Component Fix, To do): Enter calls a tab’s `onPress` twice. Selecting the same tab twice has no visible effect.
+- Regression #209 (Component Fix, Done, published 13 October 2026 with c1fa197): Enter called a tab’s `onPress` twice. Selecting the same tab twice has no visible effect.
 - Guide: the playground’s Layout options are now One row and Scrollable. Configuration, Sizing (size mark moved to the top so its label clears the 16 px gap label), the Tab row note, the “Select two tabs” and “Squeeze six tabs into one row” Don’ts, and the Sources note describe hugging tabs, the badge, single selection, the keyboard support, and the clipped last tab.
+
+## c1fa197 publish (13 October 2026)
+
+Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
+
+- #194 fixed (verified 12 October, published here): roving tabindex. Only the selected tab has `tabindex="0"`, the others `-1`; Tab enters on the selected tab and the next Tab leaves the row. The arrow keys, Home, and End move and select; the tab list is named by `accessibilityLabel`.
+- #209 fixed for TabItem (verified 12 October): Enter and Space each call a tab's `onPress` once.
+- Non-scrollable rows: labels are one line and end in an ellipsis; when the tabs don't fit, every tab shrinks. In the guide's “Squeeze six tabs into one row” Don't (313 px at 1280) all six labels are cut, even “All” (14 of 23 px); at 390 (226 px) “All” keeps 9 px. Rows that fit are unchanged: Overview 62, Activity 51, Details 47 px, 16 px apart.
+- Regression #272 (Component Fix, In progress): with no active tab every tab has `tabindex="-1"`, so the keyboard can't reach the row; a lone idle Tab Item is also unreachable.
+- Guide: the Sizing description, the “Squeeze six tabs into one row” caption, and the Sources note describe the ellipsis, the single Tab stop, and the #272 limit. The brief's copy and Limits match.

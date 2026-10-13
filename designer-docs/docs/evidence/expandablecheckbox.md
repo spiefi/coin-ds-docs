@@ -32,4 +32,16 @@ Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 ## Coin gaps
 
-- #200 (Component Fix, To do, Component Bug, high; Mr. Biscuit, Anagha Ghotkar): open label clipped on the web; `disableTruncation`/`collapsedLines={0}` overflow; Terms link cannot be opened by keyboard (TypeError); no `aria-checked`/`aria-expanded`, two checkbox tab stops, Space does not tick; disabled rows cannot be opened to read the copy; default label weight 500 vs Figma 400.
+- #200 (Component Fix, Done, published 13 October 2026 with c1fa197): open label clipped on the web; `disableTruncation`/`collapsedLines={0}` overflow; Terms link cannot be opened by keyboard (TypeError); no `aria-checked`/`aria-expanded`, two checkbox tab stops, Space does not tick; disabled rows cannot be opened to read the copy; default label weight 500 vs Figma 400.
+
+## c1fa197 publish (13 October 2026)
+
+Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
+
+- #200 fixed (verified 12 October, published here). Open text wraps inside the row: the long KYC consent in a 318 px row is three lines (292 × 51), with Read less (78.1 × 24) 8 px below on the right. `disableTruncation` wraps when Idle.
+- One checkbox is exposed: the row is `role="checkbox"` with `tabindex="0"` and `aria-checked`; the inner box is `aria-hidden` with `tabindex="-1"`. Enter and Space each tick it once. Read more / Read less has `aria-expanded`.
+- Enter on the Terms link calls `onLinkPress` once, with no TypeError, and doesn't tick the box.
+- Disabled: the row has `aria-disabled` and `tabindex="-1"` and can't be ticked, but Read more stays enabled and opens the text.
+- Label weight is 400, as in Figma. Still different from Figma: line height 17 (16) and Read more 84.9 px (81). Plain Checkbox and CheckboxItem are unchanged.
+- With the lighter label, “I agree” (43 px) + “Terms & Conditions” (127.1 px) fit one line when the row is at least about 293 px, so the “about 295 px” Narrow rows caption still holds; a 280 px row is 38 px tall.
+- Guide: the States description, the Disabled card, the playground note, and the Sources note now say Open text wraps, a disabled row can still be opened, the label is regular weight, and the box, toggle, and Terms link work from the keyboard. The brief matches.

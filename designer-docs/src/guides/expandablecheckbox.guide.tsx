@@ -48,12 +48,12 @@ function ExpandableCheckboxGuide() {
     },
     states: {
       header: 'States', title: 'Checked and Open are separate',
-      description: 'Ticking the box doesn’t open the text, and Read more doesn’t tick the box. Disabled dims the row and also stops it opening. In 0.1.78 on the web, an open sentence longer than the row is cut off instead of wrapping.',
+      description: 'Ticking the box doesn’t open the text, and Read more doesn’t tick the box. Disabled dims the row and stops the box changing, but Read more still opens the text so people can read what they agreed to.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Idle" description="The default: unticked, one line, Read more."><Host><ExpandableCheckbox {...LONG} modes={LIGHT} /></Host></ExampleCard>
         <ExampleCard title="Checked" description="A purple box records consent; the text stays collapsed."><Host><ExpandableCheckbox {...LONG} defaultChecked modes={LIGHT} /></Host></ExampleCard>
         <ExampleCard title="Open" description="The text opens above Read less, which moves to the right."><Host><ExpandableCheckbox {...LONG} defaultExpanded modes={LIGHT} /></Host></ExampleCard>
-        <ExampleCard title="Disabled" description="Dimmed; it can’t be ticked, unticked, or opened."><Host><ExpandableCheckbox {...LONG} disabled defaultChecked modes={LIGHT} /></Host></ExampleCard>
+        <ExampleCard title="Disabled" description="Dimmed; it can’t be ticked or unticked, but Read more still opens the text."><Host><ExpandableCheckbox {...LONG} disabled defaultChecked modes={LIGHT} /></Host></ExampleCard>
       </div>,
     },
     sizing: {
@@ -108,7 +108,7 @@ function ExpandableCheckboxGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Expandable Checkbox contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="6 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('expandablecheckbox')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('expandablecheckbox')} stories={[
         { label: 'Default', id: 'components-expandablecheckbox--default' },
         { label: 'Expanded', id: 'components-expandablecheckbox--expanded' },
         { label: 'Checked', id: 'components-expandablecheckbox--checked' },
@@ -116,7 +116,7 @@ function ExpandableCheckboxGuide() {
         { label: 'Long label', id: 'components-expandablecheckbox--long-label' },
         { label: 'Two-line collapse', id: 'components-expandablecheckbox--two-line-collapse' },
         { label: 'Custom button labels', id: 'components-expandablecheckbox--custom-button-labels' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Expandable Checkbox has two states, Idle and Open; checked, disabled, the number of collapsed lines, and the toggle labels exist only in the package. Figma’s label is regular weight; the package renders it medium. On the web the box doesn’t announce whether it is ticked, the toggle doesn’t announce whether the row is open, and Space doesn’t tick the box. In 0.1.78 an open sentence longer than the row is cut off, and the Terms link can’t be opened with the keyboard.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Expandable Checkbox has two states, Idle and Open; checked, disabled, the number of collapsed lines, and the toggle labels exist only in the package. Figma and the package both set the label in regular weight. On the web the row is one checkbox that announces whether it is ticked, Read more announces whether the text is open, and Enter or Space ticks the box. The Terms link opens with the keyboard, and an open sentence wraps inside the row.</Sources>,
     },
   }
 
@@ -132,7 +132,7 @@ function ExpandableCheckboxGuide() {
         <Segment label="State" value={expanded ? 'Open' : 'Idle'} options={['Idle', 'Open'] as const} onChange={v => setExpanded(v === 'Open')} />
         <OnOff label="Checked" value={checked} onChange={setChecked} />
         <OnOff label="Disabled" value={disabled} onChange={setDisabled} />
-        <Readout title="Consent" value={checked ? 'Given' : 'Not given'}>{disabled ? 'Disabled rows ignore presses and can’t be opened.' : 'Read more opens the text; it never ticks the box.'}</Readout>
+        <Readout title="Consent" value={checked ? 'Given' : 'Not given'}>{disabled ? 'Disabled rows can’t be ticked, but Read more still opens them.' : 'Read more opens the text; it never ticks the box.'}</Readout>
       </div>
     </>}
     sections={sections}

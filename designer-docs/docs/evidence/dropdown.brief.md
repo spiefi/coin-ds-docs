@@ -2,7 +2,7 @@
 
 slug: dropdown · label: Dropdown · public API: Dropdown, DropdownItem (+ IconButton, Icon, Card, Text, HStack for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3087-4266 · storybook: docsUrl('dropdown') · stories: Default=components-dropdown--default, With icons=components-dropdown--with-icons, With disabled item=components-dropdown--with-disabled-item, Scrollable=components-dropdown--scrollable
-checked: 8 October 2026 · jfs-components 0.1.78 (5 October build, mirror tag v0.1.78-636f3f5)
+checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: a rounded rectangle panel (x 3–15, y 3–15, radius 2) with three horizontal lines inside at y 7, 9.5, 12; 1.5 stroke.
 
 All instances use `modes={{ 'Color Mode': 'Light' }}`. Dropdown has no `testID`; target it structurally: root `[role="listbox"]`, items `[role="listbox"] [role="option"]:nth-child(n)`. Give each Dropdown `style={{ width: 240 }}` unless stated, and pass `accessibilityLabel`.
@@ -58,7 +58,7 @@ header: Do & Don’ts · title: Keep lists short and honest · description: Each
 
 ## Sources
 header: Sources · title: Use the public Dropdown contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a listbox of options and the selected item is announced as selected. On its own, Tab moves from option to option, skipping disabled ones, and Enter or Space picks one; arrow keys don’t move between options. In this build Enter fires an option twice, so an action such as “Download statement” would run twice. Inside Dropdown Input, the field handles the keyboard.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields. On the web the panel is a listbox of options and the selected item is announced as selected. On its own, Tab moves from option to option, skipping disabled ones, and Enter or Space picks one; arrow keys don’t move between options. Inside Dropdown Input, the field handles the keyboard.
 
 ## Limits
-Do not describe built-in open/close, positioning, or arrow-key navigation in a standalone Dropdown. Do not imply that Enter runs an action once (regression #209). Do not use `style` except the width, `labelStyle`, or custom `children` items.
+Do not describe built-in open/close, positioning, or arrow-key navigation in a standalone Dropdown. Do not use `style` except the width, `labelStyle`, or custom `children` items.

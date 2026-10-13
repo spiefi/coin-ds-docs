@@ -2,7 +2,7 @@
 
 slug: tabs · label: Tabs · public API: Tabs, TabItem (+ Card, VStack, ListItem for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3063-136 · storybook: docsUrl('tabs') · stories: Default=components-tabs--default, With labels=components-tabs--with-labels, Scrollable=components-tabs--scrollable, All idle=components-tabs--all-idle, In Range Track=components-rangetrack--scrollable-tabs
-checked: 8 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: two short labels with an underline under the first, over a baseline — `<path d="M3 7h4M11 7h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M2.5 11h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M2 14h14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />`
 keywords: tab bar, sub-navigation, views
 
@@ -38,7 +38,7 @@ Grid `coin-new-example-grid`:
 - Another tab selected — Row(VIEWS, 1) — lesson: The black label and underline move to the pressed tab.
 
 ## Sizing
-header: Sizing · title: Hugs its labels, 33 px tall · description: Tabs stretches to the width of its container. Each tab is 33 px tall: a 17 px label with 8 px above and below, and as wide as its label, with 16 px between tabs. Tabs that don’t fit are cut off unless the row scrolls.
+header: Sizing · title: Hugs its labels, 33 px tall · description: Tabs stretches to the width of its container. Each tab is 33 px tall: a 17 px label with 8 px above and below, and as wide as its label, with 16 px between tabs. When the tabs don’t fit, every label shrinks and ends in an ellipsis unless the row scrolls.
 Measured diagram: `<Anatomy legend={false} specimenWidth={328} marks={[{ kind: 'size', target: '[role="tablist"] > [role="tab"]:nth-child(1)', side: 'bottom', label: 'both' }, { kind: 'padding', target: '[role="tablist"] > [role="tab"]:nth-child(1)' }, { kind: 'gap', from: '[role="tablist"] > [role="tab"]:nth-child(1)', to: '[role="tablist"] > [role="tab"]:nth-child(2)' }]}>` Row(VIEWS, 0) `</Anatomy>`. Expected: about 99 × 33 and a 16 px gap.
 
 ## Content
@@ -58,12 +58,12 @@ header: Do & Don’ts · title: Use tabs for peer views · description: Each pai
 Every preview is a host (`coin-new-host wide`).
 - Do Switch between peer views: Overview, Activity, and Details show the same account. — Row(VIEWS, 0) | Don't Use tabs as actions: “Pay” and “Cancel” do something; use Buttons. — Row([Pay, Cancel], 0)
 - Do Select exactly one tab: One underline says which view is showing. — Row(VIEWS, 1) | Don't Select two tabs: Only the first is underlined, which may not be the view that’s showing. — Row(VIEWS) with the first and second both `active`
-- Do Scroll a long set: Six filters hug their labels and scroll. — Row(FILTERS, 0, scrollable) | Don't Squeeze six tabs into one row: The last labels are cut off at the edge of the row. — Row(FILTERS, 0)
+- Do Scroll a long set: Six filters hug their labels and scroll. — Row(FILTERS, 0, scrollable) | Don't Squeeze six tabs into one row: Every label shrinks and ends in an ellipsis, even “All”. — Row(FILTERS, 0)
 - Do Name each view: “Activity” says what’s there. — Row(VIEWS, 0) | Don't Number the tabs: “Tab 1”, “Tab 2”, and “Tab 3” say nothing about the view. — Row([Tab 1, Tab 2, Tab 3], 0)
 
 ## Sources
 header: Sources · title: Use the public Tabs contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected; Space, Enter, the arrow keys, Home, and End select tabs. Every tab is still its own Tab stop, and tabs that don’t fit a fixed row are cut off rather than shortened.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected; Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home, and End select tabs. If no tab is selected, the keyboard can’t reach the row, which is reported to the Coin team. In a row that doesn’t scroll, labels that don’t fit end in an ellipsis.
 
 ## Limits
-Do not show Dark mode (the active label stays black in Dark, #197), a counter badge, icons, disabled or loading tabs, `style` or `labelStyle` overrides, or hover styles. Do not imply a single Tab stop for the row, or that labels shorten to fit (#194 is still open for both). Do not link `components-tabitem--docs` (not published).
+Do not show Dark mode (the active label stays black in Dark, #197), a counter badge, icons, disabled or loading tabs, `style` or `labelStyle` overrides, or hover styles. Do not imply that a row with no selected tab can be reached by keyboard (#272). Do not link `components-tabitem--docs` (not published).

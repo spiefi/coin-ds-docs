@@ -2,7 +2,7 @@
 
 slug: tabitem · label: Tab Item · public API: TabItem, always inside Tabs (+ Card, VStack, ListItem for composition)
 figma: https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=66-913 · storybook: `const STORYBOOK = 'https://jfs-components-storybook.vercel.app/?path=/docs/tabs-tabitem--docs'` (the published docs id; do not use docsUrl) · stories: Tabs default=components-tabs--default, Tabs with labels=components-tabs--with-labels, Tabs scrollable=components-tabs--scrollable
-checked: 8 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: one label with an underline — `<path d="M5 7h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M3 12h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />`
 keywords: tab, tab label
 
@@ -13,7 +13,7 @@ YEARS = AY24 / AY25 / AY26 with `accessibilityLabel` "Assessment year 2024" / "A
 ## Overview
 summary: Use a Tab Item inside Tabs for each view: a short label that turns black with a gold underline while its view is showing.
 principle: One view, one short label, and always inside Tabs.
-playground: `.preview-stage` with a host holding Row([Overview, {editable item}, Details]). The middle item takes its `label` from a `text-control` "Label" (default "Activity", `maxLength={16}`). Segment "State" ['Idle', 'Active'] → the middle item's `active`; when Idle, Overview is active instead, so exactly one tab is selected. Pressing a tab also selects it and updates the State control. Readout title "Spoken name", value = the label; note: "Screen readers say the label. On the web they don’t hear which tab is selected." Stage label: "Live Coin Tab Item".
+playground: `.preview-stage` with a host holding Row([Overview, {editable item}, Details]). The middle item takes its `label` from a `text-control` "Label" (default "Activity", `maxLength={16}`). Segment "State" ['Idle', 'Active'] → the middle item's `active`; when Idle, Overview is active instead, so exactly one tab is selected. Pressing a tab also selects it and updates the State control. Readout title "Spoken name", value = the label; note: "Screen readers say the label and whether the tab is selected." Stage label: "Live Coin Tab Item".
 
 ## Anatomy
 header: Anatomy · title: A label and an underline · description: A Tab Item is a pressable label with 8 px above and below. When selected, its label turns black and a 2 px gold underline spans the tab’s full width.
@@ -62,7 +62,7 @@ Every preview is a host (`coin-new-host wide`).
 
 ## Sources
 header: Sources · title: Use Tab Item through Tabs · description: The guide compares the Figma subcomponent with the installed package and the Tabs stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected; Enter and Space select it, and the arrow keys move between tabs.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected. Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs.
 
 ## Limits
-Do not show Dark mode (#197), a counter badge, icons, a disabled tab, `style` or `labelStyle` overrides, or hover styles. Do not imply a single Tab stop for the row (#194 is still open for it). Do not suggest using Tab Item outside Tabs.
+Do not show Dark mode (#197), a counter badge, icons, a disabled tab, `style` or `labelStyle` overrides, or hover styles. Do not imply that a lone idle Tab Item can be reached by keyboard (#272). Do not suggest using Tab Item outside Tabs.

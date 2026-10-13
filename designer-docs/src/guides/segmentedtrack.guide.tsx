@@ -108,13 +108,13 @@ function SegmentedTrackGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Segmented Track contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedtrack')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedtrack')} stories={[
         { label: 'Default', id: 'components-segmentedtrack--default' },
         { label: 'Proportional segments', id: 'components-segmentedtrack--proportional-segments' },
         { label: 'Senary', id: 'components-segmentedtrack--themed-senary' },
         { label: 'Many segments', id: 'components-segmentedtrack--many-segments' },
         { label: 'In Range Track', id: 'components-rangetrack--default' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Segmented Track is one 268 × 24 component with three equal gold slices, the Senary appearance, which code now uses by default too. It is display-only: on the web it is a group named by its spoken name, and names given to single slices are not read out. Range Track builds on it, adding tabs and a legend. The published Storybook predates 0.1.78.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Segmented Track is one 268 × 24 component with three equal gold slices, the Senary appearance, which code now uses by default too. It is display-only: on the web it is a group named by its spoken name, and a slice given its own name is read as an image inside that group. Range Track builds on it, adding tabs and a legend. The published Storybook predates 0.1.78.</Sources>,
     },
   }
 

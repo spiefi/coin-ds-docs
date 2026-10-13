@@ -2,7 +2,7 @@
 
 slug: segmentedtrack · label: Segmented Track · public API: SegmentedTrack, MetricLegendItem (+ Card, VStack, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4176-39960 · storybook: docsUrl('segmentedtrack') · stories: Default=components-segmentedtrack--default, Proportional segments=components-segmentedtrack--proportional-segments, Senary=components-segmentedtrack--themed-senary, Many segments=components-segmentedtrack--many-segments, In Range Track=components-rangetrack--default
-checked: 8 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: a pill split into three parts — `<rect x="1.5" y="6" width="15" height="6" rx="3" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M9 6v6M13 6v6" stroke="currentColor" strokeWidth="1.5" />`
 keywords: stacked bar, allocation bar, share chart, portfolio mix
 
@@ -61,7 +61,7 @@ Every preview is a Panel with SENARY unless stated.
 
 ## Sources
 header: Sources · title: Use the public Segmented Track contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Segmented Track is one 268 × 24 component with three equal gold slices, the Senary appearance, which code now uses by default too. It is display-only: on the web it is a group named by its spoken name, and names given to single slices are not read out. Range Track builds on it, adding tabs and a legend. The published Storybook predates 0.1.78.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Segmented Track is one 268 × 24 component with three equal gold slices, the Senary appearance, which code now uses by default too. It is display-only: on the web it is a group named by its spoken name, and a slice given its own name is read as an image inside that group. Range Track builds on it, adding tabs and a legend. The published Storybook predates 0.1.78.
 
 ## Limits
-Do not show Dark mode (#197), Neutral as a choice (only in the Don’t), hex `color` overrides, `segmentStyle` or `style`, the `children` slot, or anything pressable. Do not imply per-slice names are announced (#196).
+Do not show Dark mode (#197), Neutral as a choice (only in the Don’t), hex `color` overrides, `segmentStyle` or `style`, the `children` slot, or anything pressable. The page names the whole track, not single slices.
