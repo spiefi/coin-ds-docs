@@ -2,7 +2,7 @@
 
 slug: circularrating · label: Circular Rating · public API: CircularRating
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3741-1711 · storybook: docsUrl('circularrating') · stories: Default=components-circularrating--default, Without nudge=components-circularrating--without-nudge, Low rating=components-circularrating--low-rating
-checked: 10 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+checked: 13 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: eight dots in a ring, six solid from 12 o’clock and two faint — `<><circle cx="9" cy="3" r="1.4" fill="currentColor" /><circle cx="13.24" cy="4.76" r="1.4" fill="currentColor" /><circle cx="15" cy="9" r="1.4" fill="currentColor" /><circle cx="13.24" cy="13.24" r="1.4" fill="currentColor" /><circle cx="9" cy="15" r="1.4" fill="currentColor" /><circle cx="4.76" cy="13.24" r="1.4" fill="currentColor" /><circle cx="3" cy="9" r="1.4" fill="currentColor" opacity="0.35" /><circle cx="4.76" cy="4.76" r="1.4" fill="currentColor" opacity="0.35" /></>`
 keywords: score ring, credit score, dotted ring, rating ring, health score
 
@@ -17,14 +17,14 @@ principle: A score, what it means, and what to do next.
 playground: `.preview-stage` › `<FitWidth>` › R(score, TIER[score]) with `showNudge={nudge}` and `modes={colour === 'Secondary' ? SECONDARY : BASE}`. TIER = { 36: 'Needs attention', 72: 'Doing great', 100: 'Excellent' }. Controls: Segment "Score" `36 | 72 | 100` (72); Segment "Colour" `Primary | Secondary` (Primary); OnOff "Nudge" (on). Readout title "Read as", value “Credit health. 72 out of 100. Doing great” (score and tier follow the controls); note: "The tier and colour don’t follow the score: you set them. The footer and nudge aren’t part of this name." No stage label: the rating (388–478 px tall) fills the stage, and the label would sit on its footer or nudge.
 
 ## Anatomy
-header: Anatomy · title: A dotted ring, the score, a footer, and a nudge · description: Twenty-four dots fill clockwise from 12 o’clock in step with the score. Inside sit a label, the score, and your tier with a chevron; below come a dated footer and an inline nudge.
+header: Anatomy · title: A dotted ring, the score, a footer, and a nudge · description: Twenty-four dots fill clockwise from 12 o’clock in step with the score. Inside sit a label, the score, and your tier; below come a dated footer and an inline nudge.
 specimen: `<Anatomy …>` › R(72, 'Doing great') with `testID="cr-anatomy"`.
 parts:
 1. Lit dots — 18 px dots in the ring’s colour; the share lit matches the score. — target: dot 4 — side: right
 2. Track dots — Grey dots for the rest of the 100. — target: dot 22 — side: left
 3. Label — 12 px; names the score. — target: label — side: top
 4. Score — 56 px heavy; the score rounded, out of 100. — target: score — side: left
-5. Tier — 16 px bold with a chevron; your verdict on the score. — target: tier row — side: right
+5. Tier — 16 px bold; your verdict on the score, with a chevron when it opens details. — target: tier row — side: right
 6. Footer — 12 px with an info icon; when the score was updated. — target: footer text (`${footer} > [dir="auto"]`; the row is 320 wide with centred text) — side: left
 7. Nudge — An inline nudge with one button for the next step. — target: nudge — side: bottom
 If the survey reports overlapping pins, move a pin’s `at` before changing sides.
@@ -35,7 +35,7 @@ Grid (two columns) of ExampleCards, each `<FitWidth>` › R(72, 'Doing great') p
 - Without the nudge — "The score and its footer, when there’s no next step." — `showNudge={false}`
 - Without the footer icon — "Just the update line." — `showNudge={false} showFooterIcon={false}`
 - Fewer dots — "Twelve dots: each stands for more of the score. Past about 50 dots they overlap." — `showNudge={false} dotCount={12}`
-- Tier opens details — "With onTierPress the tier row becomes a button, such as to open the score’s breakdown." — `showNudge={false} onTierPress={noop}`
+- Tier opens details — "With onTierPress the tier row becomes a button with a chevron, such as to open the score’s breakdown." — `showNudge={false} onTierPress={noop}`
 - Colour — "Modes colour the dots and the nudge together: Secondary is purple." — `modes={SECONDARY}`
 
 ## States
@@ -66,7 +66,7 @@ Every preview is `<FitWidth>` › R.
 
 ## Sources
 header: Sources · title: Use the public Circular Rating contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma has one Circular Rating component with no variants; the package builds it from Circular Progress Bar / Doted and an inline Nudge, and gives both one set of modes. Figma shows 26 dots, all lit, on a slightly smaller ring, with a white nudge; the package draws 24 dots lit by the score and colours the nudge with the ring. The nudge button matches Figma’s small size only with Context Nudge&Alert, which this guide sets. Screen readers hear the ring as a progress bar named by the label, score, and tier, without the footer and, on the web, without a separate value. With Color Mode Dark the text and grey dots keep their Light colours, so the guide shows Light only.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma has one Circular Rating component with no variants; the package builds it from Circular Progress Bar / Doted and an inline Nudge, and gives both one set of colour modes. Figma shows 26 dots, all lit, on a slightly smaller ring, with a white nudge; the package draws 24 dots lit by the score and colours the nudge with the ring. The nudge button is Figma’s small size by default. Screen readers hear the ring as a progress bar with its value out of 100, named by the label, score, and tier, then the footer as text. The chevron shows only when the tier opens details. The default nudge also shows a close button that does nothing yet (#271). With Color Mode Dark the text and grey dots keep their Light colours, so the guide shows Light only.
 
 ## Limits
 Light only. Do not show Dark, Emphasis Low, the footer or nudge slots, `style` overrides, `disableTruncation`, or more than 48 dots. Do not imply that the colour or tier follows the score, that it animates, or that the footer and nudge are part of the ring’s spoken name.

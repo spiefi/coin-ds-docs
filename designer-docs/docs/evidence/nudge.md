@@ -40,3 +40,7 @@ Checked 7 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 - #206 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): close shown in every Figma prominent/compact variant but off by default in code; the Figma button size needs `Context: Nudge&Alert`, which Nudge doesn't set; no mode matches Figma's white card with purple icon; `buttonSlot={null}` can't remove the button; placeholder default copy; detailed silently ignores button/close props and compact ignores `title`; `nudge/radius` alias dangling; card has no role/name/testID; the Storybook rewrite is not on `main`.
 - #208 (Components, To do; Marcin Śpiewak), token problem shared with Note Input and Segmented Control: `nudge/title/color` is a literal #1e1a14 in Dark.
 - Existing: #179 (IconButton keeps a focus border after a click); #177 (Dark close icon orange, fixed upstream).
+
+## c1fa197 install (13 October 2026)
+
+The release that published #205, #255, #203, #252, and #250 moved the docs to mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197), which also carries Biscuit's #206 Nudge changes. The Nudge root is now a `<section role="region">` named by its title, and a close button shows by default. Only the guide's anatomy and sizing selectors changed (`:scope > div` → `:scope > section`) so the diagrams measure the real card again. The copy wasn't re-checked against #206, which goes through its own Component Fix loop; until it is published, the page may still describe the close button as optional.

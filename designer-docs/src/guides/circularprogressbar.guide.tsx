@@ -56,7 +56,7 @@ function CircularProgressBarGuide() {
         <div className="coin-new-example-grid three">
           <ExampleCard title="Size S" description="60 px with an 8 px ring: the number alone, for cards and rows."><CircularProgressBar state="Active" value={70} modes={LIGHT} /></ExampleCard>
           <ExampleCard title="Size M" description="164 px with a 22 px ring, with room for support text."><CircularProgressBar state="Active" value={70} supportText="Savings goal" modes={M} /></ExampleCard>
-          <ExampleCard title="Value label" description="Shows a count such as “4 of 7” in place of the number; the arc still follows the value."><CircularProgressBar state="Active" value={(4 / 7) * 100} valueLabel="4 of 7" supportText="Benefits used" accessibilityLabel="Benefits used, 4 of 7" modes={M} /></ExampleCard>
+          <ExampleCard title="Value label" description="Shows a count such as “4 of 7” in place of the number; the arc still follows the value."><CircularProgressBar state="Active" value={(4 / 7) * 100} valueLabel="4 of 7" supportText="Benefits used" modes={M} /></ExampleCard>
         </div>
         <div className="coin-new-example-grid">
           <ExampleCard title="Semantic Intent" description="Brand (left) colours only the arc. System (right) colours the arc and tints the track to match."><div className="coin-new-content-list">
@@ -101,7 +101,7 @@ function CircularProgressBarGuide() {
       description: 'The ring shows a whole number with no % sign, so say nearby what it measures, or use a value label such as “3 of 5” for counts. Keep support text to two or three words, such as “Profile complete”.',
       body: <ExampleCard title="Name what’s measured"><div className="coin-new-row">
         <CircularProgressBar state="Active" value={80} supportText="Profile complete" modes={M} />
-        <CircularProgressBar state="Active" value={60} valueLabel="3 of 5" supportText="Tasks done" accessibilityLabel="Tasks done, 3 of 5" modes={M} />
+        <CircularProgressBar state="Active" value={60} valueLabel="3 of 5" supportText="Tasks done" modes={M} />
       </div></ExampleCard>,
     },
     context: {
@@ -119,20 +119,19 @@ function CircularProgressBarGuide() {
       body: <div className="coin-new-stack">
         <DoDont good={<CircularProgressBar state="Active" value={70} modes={LIGHT} />} bad={<CircularProgressBar value={70} modes={LIGHT} />} goodTitle="Set Active with a value" badTitle="Pass a value alone" goodCaption="The ring shows 70." badCaption="Without state, the ring stays Inactive and ignores the value." />
         <DoDont good={<CircularProgressBar state="Active" value={70} modes={LIGHT} />} bad={<CircularProgressBar state="Active" value={70} modes={MEDIUM} />} goodTitle="Keep emphasis High" badTitle="Lower the emphasis" goodCaption="The arc stands out from the track." badCaption="At Medium the pale arc has no contrast with the track (1.0:1)." />
-        <DoDont good={<CircularProgressBar state="Active" value={(4 / 7) * 100} valueLabel="4 of 7" supportText="Benefits used" accessibilityLabel="Benefits used, 4 of 7" modes={M} />} bad={<CircularProgressBar state="Active" value={(4 / 7) * 100} valueLabel="4 of 7" supportText="Benefits used" modes={M} />} goodTitle="Name a count" badTitle="Leave the default name on a count" goodCaption="“4 of 7” is read as “Benefits used, 4 of 7”." badCaption="It’s read as “Benefits used, 4 of 7 out of 100”." />
         <DoDont good={<CircularProgressBar state="Active" value={70} modes={system('Warning')} />} bad={<CircularProgressBar state="Active" value={70} modes={{ ...LIGHT, AppearanceSystem: 'warning' } as Modes} />} goodTitle="Set System intent with the meaning" badTitle="Set a meaning alone" goodCaption="Semantic Intent System with warning turns the arc orange." badCaption="Without System intent, warning is ignored and the arc stays gold." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Circular Progress Bar contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="11 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('circularprogressbar')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('circularprogressbar')} stories={[
         { label: 'Default', id: 'components-circularprogressbar--default' },
         { label: 'Inactive', id: 'components-circularprogressbar--inactive' },
         { label: 'Active', id: 'components-circularprogressbar--active' },
         { label: 'All states', id: 'components-circularprogressbar--all-states' },
         { label: 'With support text', id: 'components-circularprogressbar--with-support-text' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s State variant (Inactive, Active) matches the <code>state</code> prop, and size S or M is a variable mode in both. The component starts Inactive, while every Storybook story starts Active. Figma shows support text at M on its own; the package shows it only when you pass it. Figma’s ring looks about 15% of the size; the package draws 13% (8 px at S). On the web the ring is a progress bar named by its label, without a separate value. Figma and the package share the colour modes: Semantic Intent (Brand, System), AppearanceBrand (Primary, Secondary, Neutral, Tertiary), AppearanceSystem (positive, warning, negative), and Emphasis (High, Medium, Low); Storybook offers each as a control. AppearanceBrand applies only with Brand intent and AppearanceSystem only with System, so the With support text story’s warning leaves its arc gold. The number, support text, and icon keep one colour in every mode.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s State variant (Inactive, Active) matches the <code>state</code> prop, and size S or M is a variable mode in both. The component starts Inactive, so set Active with the value. Figma shows support text at M on its own; the package shows it only when you pass it. Figma’s ring looks about 15% of the size; the package draws 13% (8 px at S). On the web the ring is a progress bar with its value from 0 to 100, named by its number, its support text, or your value label as written. Figma and the package share the colour modes: Semantic Intent (Brand, System), AppearanceBrand (Primary, Secondary, Neutral, Tertiary), AppearanceSystem (positive, warning, negative), and Emphasis (High, Medium, Low); Storybook offers each as a control. AppearanceBrand applies only with Brand intent and AppearanceSystem only with System. The number, support text, and icon keep one colour in every mode. The published Storybook predates the 12 October build: its stories still start Active, and its With support text story leaves the warning arc gold.</Sources>,
     },
   }
 

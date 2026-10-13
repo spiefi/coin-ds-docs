@@ -34,8 +34,8 @@ const sel = (id: string) => {
   return {
     R,
     icon: `${R} > div:first-child > [role="img"]`,
-    title: `${R} > div:first-child > [dir="auto"]:nth-child(2)`,
-    description: `${R} > div:first-child > [dir="auto"]:nth-child(3)`,
+    title: `${R} > div:first-child > div:nth-child(2) > [role="heading"]`,
+    description: `${R} > div:first-child > div:nth-child(2) > [dir="auto"]:nth-child(2)`,
     button: `${R} > [role="button"]`,
     group: `${R} > div:first-child`,
   }

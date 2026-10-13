@@ -20,9 +20,9 @@ function R({ value, tier, ...rest }: { value: number; tier: string } & RatingPro
 const Fit = (props: { value: number; tier: string } & RatingProps) => <FitWidth><R {...props} /></FitWidth>
 
 const A = byTestId('cr-anatomy')
-const RING = `${A} [role="progressbar"]`
-const DOTS = `${RING} > div:first-child`
-const CENTRE = `${RING} > div:nth-child(2)`
+const RING = `${A} > div:first-child > div`
+const DOTS = `${RING} > div:nth-child(2)`
+const CENTRE = `${RING} > div:nth-child(3)`
 
 function CircularRatingGuide() {
   const [score, setScore] = useState<Score>(72)
@@ -33,13 +33,13 @@ function CircularRatingGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'A dotted ring, the score, a footer, and a nudge',
-      description: 'Twenty-four dots fill clockwise from 12 o’clock in step with the score. Inside sit a label, the score, and your tier with a chevron; below come a dated footer and an inline nudge.',
+      description: 'Twenty-four dots fill clockwise from 12 o’clock in step with the score. Inside sit a label, the score, and your tier; below come a dated footer and an inline nudge.',
       body: <Anatomy parts={[
         { name: 'Lit dots', note: '18 px dots in the ring’s colour; the share lit matches the score.', target: `${DOTS} > div:nth-child(4)`, side: 'right' },
         { name: 'Track dots', note: 'Grey dots for the rest of the 100.', target: `${DOTS} > div:nth-child(22)`, side: 'left' },
         { name: 'Label', note: '12 px; names the score.', target: `${CENTRE} > div:first-child > div:first-child`, side: 'top' },
         { name: 'Score', note: '56 px heavy; the score rounded, out of 100.', target: `${CENTRE} > div:first-child > div:nth-child(2)`, side: 'left' },
-        { name: 'Tier', note: '16 px bold with a chevron; your verdict on the score.', target: `${CENTRE} > div:nth-child(2)`, side: 'right' },
+        { name: 'Tier', note: '16 px bold; your verdict on the score, with a chevron when it opens details.', target: `${CENTRE} > div:nth-child(2)`, side: 'right' },
         { name: 'Footer', note: '12 px with an info icon; when the score was updated.', target: `${A} > div:nth-child(2) > [dir="auto"]`, side: 'left' },
         { name: 'Nudge', note: 'An inline nudge with one button for the next step.', target: `${A} > div:nth-child(3)`, side: 'bottom' },
       ]}><R value={72} tier="Doing great" testID="cr-anatomy" /></Anatomy>,
@@ -51,7 +51,7 @@ function CircularRatingGuide() {
         <ExampleCard title="Without the nudge" description="The score and its footer, when there’s no next step."><Fit value={72} tier="Doing great" showNudge={false} /></ExampleCard>
         <ExampleCard title="Without the footer icon" description="Just the update line."><Fit value={72} tier="Doing great" showNudge={false} showFooterIcon={false} /></ExampleCard>
         <ExampleCard title="Fewer dots" description="Twelve dots: each stands for more of the score. Past about 50 dots they overlap."><Fit value={72} tier="Doing great" showNudge={false} dotCount={12} /></ExampleCard>
-        <ExampleCard title="Tier opens details" description="With onTierPress the tier row becomes a button, such as to open the score’s breakdown."><Fit value={72} tier="Doing great" showNudge={false} onTierPress={noop} /></ExampleCard>
+        <ExampleCard title="Tier opens details" description="With onTierPress the tier row becomes a button with a chevron, such as to open the score’s breakdown."><Fit value={72} tier="Doing great" showNudge={false} onTierPress={noop} /></ExampleCard>
         <ExampleCard title="Colour" description="Modes colour the dots and the nudge together: Secondary is purple."><Fit value={72} tier="Doing great" modes={SECONDARY} /></ExampleCard>
       </div>,
     },
@@ -101,9 +101,9 @@ function CircularRatingGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Circular Rating contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="10 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('circularrating')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('circularrating')} stories={[
         { label: 'Default', id: 'components-circularrating--default' }, { label: 'Without nudge', id: 'components-circularrating--without-nudge' }, { label: 'Low rating', id: 'components-circularrating--low-rating' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma has one Circular Rating component with no variants; the package builds it from Circular Progress Bar / Doted and an inline Nudge, and gives both one set of modes. Figma shows 26 dots, all lit, on a slightly smaller ring, with a white nudge; the package draws 24 dots lit by the score and colours the nudge with the ring. The nudge button matches Figma’s small size only with Context Nudge&amp;Alert, which this guide sets. Screen readers hear the ring as a progress bar named by the label, score, and tier, without the footer and, on the web, without a separate value. With Color Mode Dark the text and grey dots keep their Light colours, so the guide shows Light only.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma has one Circular Rating component with no variants; the package builds it from Circular Progress Bar / Doted and an inline Nudge, and gives both one set of colour modes. Figma shows 26 dots, all lit, on a slightly smaller ring, with a white nudge; the package draws 24 dots lit by the score and colours the nudge with the ring. The nudge button is Figma’s small size by default. Screen readers hear the ring as a progress bar with its value out of 100, named by the label, score, and tier, then the footer as text. The chevron shows only when the tier opens details. The default nudge also shows a close button that does nothing yet (#271). With Color Mode Dark the text and grey dots keep their Light colours, so the guide shows Light only.</Sources>,
     },
   }
 
