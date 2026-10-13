@@ -86,7 +86,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           node ../.release-contract/.github/scripts/publish.mjs pick
-          if ! git cherry-pick -x $(cat "$RUNNER_TEMP/commits"); then
+          # A commit main already has (shared with a ticket published on another day) adds nothing: drop it.
+          if ! git cherry-pick -x --empty=drop $(cat "$RUNNER_TEMP/commits"); then
             git cherry-pick --abort
             echo "::error::An approved commit didn't apply cleanly to main. Nothing was published."
             exit 1
