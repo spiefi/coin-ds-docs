@@ -2,7 +2,7 @@
 
 slug: spinner · label: Spinner · public API: Spinner (+ VStack, HStack, Title, Text, Button for composition; ScreenFrame from the kit for In context)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2729-1039 · storybook: docsUrl('spinner') · stories: Default=components-spinner--default, Sizes=components-spinner--sizes, Heavy=components-spinner--heavy, Weightless=components-spinner--weightless, Resting=components-spinner--resting
-checked: 12 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5; main's c1fa197c and a463361 only rewrite the Storybook page)
+checked: 13 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c1fa197, Biscuit's main c1fa197; Spinner.tsx unchanged since 636f3f5). Biscuit's main 7020bf9 changes the ring to 12.8/72 (#276) but isn't installed.
 icon: an open ring, three quarters of a circle — `<path d="M9 2.5a6.5 6.5 0 1 1-6.5 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />`
 keywords: loader, loading indicator, activity indicator, progress spinner
 
@@ -12,7 +12,7 @@ Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`. Spinner takes no mode
 ## Overview
 summary: Use a Spinner to show that something is loading when you can't show its shape or say how long it will take.
 principle: Show that something is happening, then get out of the way.
-playground: `.preview-stage` › `<Spinner size durationMs gravity animating />`; stage label "Live Coin Spinner". Controls: Segment "Size" `32 | 56 | 72 | 88 | 128` (72) → `size`; Segment "Turn" `1000 ms | 1500 ms | 2800 ms` (1500 ms) → `durationMs`; Segment "Weight" `None | Default | Heavy` (Default) → `gravity` 0 / 0.45 / 0.85; OnOff "Animating" (on) → `animating`. Readout title "Spinner", value "Spinning" or "Resting"; note when on: "It turns until the screen removes it or sets animating off. Weight makes it whip over the top and slow at the bottom."; off: "Resting: three evenly spaced arcs, which isn't a frame of the spin."
+playground: `.preview-stage` › `<Spinner size durationMs gravity animating />`; stage label "Live Coin Spinner". Controls: Segment "Size" `32 | 56 | 72 | 88 | 128` (72) → `size`; Segment "Turn" `1000 ms | 1500 ms | 2800 ms` (1500 ms) → `durationMs`; OnOff "Animating" (on) → `animating`. Readout title "Spinner", value "Spinning" or "Resting"; note when on: "It turns until the screen removes it or sets animating off."; off: "Resting: three evenly spaced arcs, which isn't a frame of the spin."
 
 ## Anatomy
 header: Anatomy · title: Three arcs chasing each other · description: Three 100° arcs with round ends turn clockwise around an empty centre, with no track behind them. Each is 11% of the size thick, so 7.9 px at the default 72 px. The diagram shows the resting pose so the pins stay put.
@@ -24,11 +24,11 @@ parts:
 3. Trailing arc — Teal and last in the chain, closing up behind the others at the top of each turn. — target: SP (its right edge is where the teal arc sits in the resting pose; the arc path's box overshoots) — side: right
 
 ## Configuration
-header: Configuration · title: Size, speed, and weight · description: Three settings shape it: size sets the diameter, durationMs the time for one turn, and gravity how much it speeds up over the top and slows at the bottom. No mode changes it. A colors setting can replace its three colours in code; keep Coin's gold, purple, and teal.
+header: Configuration · title: Size, speed, and gravity · description: Three settings shape it: size sets the diameter, durationMs the time for one turn, and gravity how much it speeds up over the top and slows at the bottom. No mode changes it. A colors setting can replace its three colours in code; keep Coin's gold, purple, and teal.
 Grid `coin-new-example-grid three`, each an ExampleCard › one Spinner at the default size:
-- Default — `<Spinner />` — lesson: 72 px, one turn every 1.5 s, and gravity 0.45.
-- Heavy — `gravity={0.85} durationMs={2800}` — lesson: Whips over the top and hangs at the bottom, for a slower, weightier feel.
-- Weightless — `gravity={0} durationMs={1600}` — lesson: An even, steady turn with no change of speed.
+- Default — `<Spinner />` — lesson: Gravity 0.45 and a 1.5 s turn: a little faster over the top.
+- Heavy — `gravity={0.85} durationMs={2800}` — lesson: Gravity 0.85 and a 2.8 s turn: fast over the top, slow at the bottom.
+- Weightless — `gravity={0} durationMs={1600}` — lesson: Gravity 0 and a 1.6 s turn: the same speed all the way round.
 
 ## States
 header: States · title: Spinning or resting · description: It spins while animating is on, the default. With animating off, or when the device asks for reduced motion, it rests as an evenly spaced fan of three arcs; the rest isn't a frame of the spin. It has no pressed, focus, or disabled state.
@@ -58,7 +58,7 @@ header: Do & Don’ts · title: One clear wait · description: Each pair shows a
 
 ## Sources
 header: Sources · title: Use the public Spinner contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, weight, and resting pose exist only in code. In code the arcs are 11% of the size thick, 7.9 px at 72, while Figma’s ring is about 12.8 px (#276). No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The code’s description of durationMs says 2400 ms, but the default is 1500 ms. The published Storybook page is still the old generated one.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, gravity, and resting pose exist only in code. In code the arcs are 11% of the size thick, 7.9 px at 72, while Figma’s ring is about 12.8 px (#276); Biscuit’s 13 October build draws 12.8 px but isn’t installed here yet. No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The code’s description of durationMs says 2400 ms, but the default is 1500 ms. The published Storybook page is still the old generated one.
 
 ## Limits
-Don't demo `colors` (it needs hardcoded colours) or pass `modes`. Don't imply a progress value, a track, a label of its own, size variants, or that Button's loading state is a spinner (it's a Skeleton). Don't mention colour modes.
+Gravity appears only in Configuration, by its prop name; never as a playground control or under another name such as “weight” (review, 12 October). Don't demo `colors` (it needs hardcoded colours) or pass `modes`. Don't imply a progress value, a track, a label of its own, size variants, or that Button's loading state is a spinner (it's a Skeleton). Don't mention colour modes.
