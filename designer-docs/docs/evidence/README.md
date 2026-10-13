@@ -38,6 +38,7 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | navarrow | [navarrow.md](navarrow.md) |
 | numberpagination | [numberpagination.md](numberpagination.md) |
 | numpad | [numpad.md](numpad.md) |
+| paymentfeedback | [paymentfeedback.md](paymentfeedback.md) |
 | radio | [radio.md](radio.md) |
 
 ## New guides
