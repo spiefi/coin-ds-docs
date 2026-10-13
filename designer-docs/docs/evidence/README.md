@@ -8,6 +8,7 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | --- | --- |
 | accordion | [accordion.md](accordion.md) |
 | accordioncheckbox | [accordioncheckbox.md](accordioncheckbox.md) |
+| accountcard | [accountcard.md](accountcard.md) |
 | actionfooter | [actionfooter.md](actionfooter.md) |
 | actiontile | [actiontile.md](actiontile.md) |
 | additem | [additem.md](additem.md) |
