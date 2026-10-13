@@ -23,6 +23,13 @@ Checked 1 October 2026. Declared and installed `jfs-components` is `0.1.77` from
 Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
 
 - #181 fixed. `aria-checked` follows the value, and Space switches a focused toggle. Disabled sets `aria-disabled` and `tabindex=-1`.
-- Regression (open, #209): Enter now calls `onValueChange` twice (true, then false), so Enter no longer switches the toggle. Click and Space do.
+- Regression #209 (Component Fix, Done, published 13 October 2026 with c1fa197): Enter called `onValueChange` twice (true, then false), so Enter no longer switches the toggle. Click and Space do.
 - Still open: Disabled On and Disabled Off share one grey track, so only the thumb position shows the state.
 - Guide: the Sources note now gives the 5 October build, says the state is announced and Space and click switch the toggle, notes that Enter does not in this build, and says a disabled toggle is skipped by Tab; `checked` is 8 October 2026. The brief's note and Limits match.
+
+## c1fa197 publish (13 October 2026)
+
+Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
+
+- #209 fixed for Toggle (verified 12 October, published here): one Enter calls `onValueChange(true)` once and `aria-checked` becomes `true`; one Space calls it once. Click is unchanged.
+- Guide: the Sources note now says Enter, Space, and click switch the toggle; the brief's note and Limits match.

@@ -20,7 +20,7 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 ## Coin gaps
 
-- #196 (Component Fix, To do, Component Bug, low; Mr. Biscuit, Anagha Ghotkar): default appearance purple vs Figma gold; slice labels inside `role="img"` likely not announced; empty data paints three slices; no `testID`; stale published Storybook.
+- #196 (Component Fix, Done, published 13 October 2026 with c1fa197): default appearance purple vs Figma gold; slice labels inside `role="img"` likely not announced; empty data paints three slices; no `testID`; stale published Storybook.
 - #197 (Components, To do; Marcin): Neutral gives three identical slices; Dark mode reverses the emphasis order. The guide shows Light only.
 
 ## 636f3f5 check
@@ -28,5 +28,13 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2. The docs moved to this build to publish other fixes; Segmented Track's own ticket #196 is still In progress.
 
 - From #196 (partly fixed, back in In progress on 8 October): the default appearance is Senary gold (206,161,90 / 232,188,122 / 253,232,201), as in Figma. An empty `segments` list renders an empty, transparent 24 px track instead of three default slices (omitting `segments` still gives three equal slices). `testID` works. On the web the track is `role="group"` named by `accessibilityLabel`; slices are `role="presentation"`.
-- Still open (#196): slice labels can’t be reached on the web; each is an `aria-label` on a role-less element.
+- Still open (#196) on 8 October, fixed in c1fa197 (below): slice labels can’t be reached on the web; each is an `aria-label` on a role-less element.
 - Guide: anatomy and sizing targets moved from `[role="img"]` to `[role="group"]`. Configuration, the Primary example, the No data example, the empty-list Don’t, the playground readout, and the Sources note now say that code defaults to gold, that an empty list draws a blank track, and that the track is a group.
+
+## c1fa197 publish (13 October 2026)
+
+Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
+
+- #196 fixed (verified 12 October, published here): a slice with its own `accessibilityLabel` is `role="img"` named by it, so Chrome's accessibility tree shows the group (for example “Spending split”) containing images such as “Food 40%” and “Rent 35%”. Unlabelled slices stay hidden. The default slices are Senary gold (206,161,90 / 232,188,122 / 253,232,201).
+- The guide names the whole track and no single slice, so its examples render and read as before.
+- Guide: the Sources note says a slice given its own name is read as an image inside the group; the brief's note and Limits match.

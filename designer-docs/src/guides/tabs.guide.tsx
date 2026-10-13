@@ -71,7 +71,7 @@ function TabsGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Hugs its labels, 33 px tall',
-      description: 'Tabs stretches to the width of its container. Each tab is 33 px tall: a 17 px label with 8 px above and below, and as wide as its label, with 16 px between tabs. Tabs that don’t fit are cut off unless the row scrolls.',
+      description: 'Tabs stretches to the width of its container. Each tab is 33 px tall: a 17 px label with 8 px above and below, and as wide as its label, with 16 px between tabs. When the tabs don’t fit, every label shrinks and ends in an ellipsis unless the row scrolls.',
       body: <Anatomy legend={false} specimenWidth={328} marks={[
         { kind: 'size', target: TAB(1), side: 'top', label: 'both' },
         { kind: 'padding', target: TAB(1) },
@@ -103,7 +103,7 @@ function TabsGuide() {
         <DoDont goodTitle="Select exactly one tab" goodCaption="One underline says which view is showing." good={<Host><Row labels={VIEWS} selected={1} /></Host>}
           badTitle="Select two tabs" badCaption="Only the first is underlined, which may not be the view that’s showing." bad={<Host><Row labels={VIEWS} activeSet={[0, 1]} /></Host>} />
         <DoDont goodTitle="Scroll a long set" goodCaption="Six filters hug their labels and scroll." good={<Host><Row labels={FILTERS} selected={0} scrollable /></Host>}
-          badTitle="Squeeze six tabs into one row" badCaption="The last labels are cut off at the edge of the row." bad={<Host><Row labels={FILTERS} selected={0} /></Host>} />
+          badTitle="Squeeze six tabs into one row" badCaption="Every label shrinks and ends in an ellipsis, even “All”." bad={<Host><Row labels={FILTERS} selected={0} /></Host>} />
         <DoDont goodTitle="Name each view" goodCaption="“Activity” says what’s there." good={<Host><Row labels={VIEWS} selected={0} /></Host>}
           badTitle="Number the tabs" badCaption="“Tab 1”, “Tab 2”, and “Tab 3” say nothing about the view." bad={<Host><Row labels={['Tab 1', 'Tab 2', 'Tab 3']} selected={0} /></Host>} />
       </div>,
@@ -111,11 +111,11 @@ function TabsGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Tabs contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tabs')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tabs')} stories={[
         { label: 'Default', id: 'components-tabs--default' }, { label: 'With labels', id: 'components-tabs--with-labels' },
         { label: 'Scrollable', id: 'components-tabs--scrollable' }, { label: 'All idle', id: 'components-tabs--all-idle' },
         { label: 'In Range Track', id: 'components-rangetrack--scrollable-tabs' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected; Space, Enter, the arrow keys, Home, and End select tabs. Every tab is still its own Tab stop, and tabs that don’t fit a fixed row are cut off rather than shortened.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected; Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home, and End select tabs. If no tab is selected, the keyboard can’t reach the row, which is reported to the Coin team. In a row that doesn’t scroll, labels that don’t fit end in an ellipsis.</Sources>,
     },
   }
 

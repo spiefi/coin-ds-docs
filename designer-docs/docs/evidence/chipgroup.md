@@ -31,5 +31,15 @@ Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 ## Coin gaps
 
-- #199 (Component Fix, To do, Component Bug, low; Mr. Biscuit, Anagha Ghotkar): no role or accessible name for the group, and none can be passed; stories/mdx use missing icons `ic_loader` and `ic_rupee_sign` (published Storybook shows chips without icons); the published docs page is not the hand-written mdx; a long chip overflows the group with no truncation.
+- #199 (Component Fix, Done, published 13 October 2026 with c1fa197): no role or accessible name for the group, and none can be passed; stories/mdx use missing icons `ic_loader` and `ic_rupee_sign` (published Storybook shows chips without icons); the published docs page is not the hand-written mdx; a long chip overflows the group with no truncation.
 - #201 (Components, To do, low; Marcin): token `mode/Purple/2400` Dark is near-black, so Active chips look Idle in Dark.
+
+## c1fa197 publish (13 October 2026)
+
+Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
+
+- #199 fixed (verified 12 October, published here). `accessibilityLabel` reaches the row, which then gets `role="group"` and `aria-label` (“Filters”); `accessibilityRole`, `accessibilityHint`, `accessibilityState`, and `testID` reach it too. `role` and `aria-label` passed directly are still dropped. The stories and mdx on `main` use `ic_status_loading` and `ic_payments`; the published Storybook is still the old build, so its two chips still show no icon.
+- Each chip now gets `maxWidth: 100%`, `flexShrink: 1`, `minWidth: 0`, and `overflow: hidden` from the group. A chip wider than the row shrinks to the row and wraps its label: a 55-character label in a 328 px row gives a 328 × 64 chip with the label on two lines (Idle and Active alike). Chips that fit are unchanged: Date 86, Status 99, Payment methods 181 px; the guide's rows measure as before at both widths.
+- Strings and numbers among the children render as one-line text.
+- Regression #273 (open): every ChipGroup logs React's “unique key” error in development builds; the production docs build doesn't.
+- Guide: the Group anatomy note says the row has no state, only an optional spoken name; the In context row is named “Transaction filters” (it is now `role="group"`); the Sources note says a long chip wraps inside the row, the named row is announced as a group, and the published Storybook predates the stories. The brief's note, Group part, In context, and Limits match.

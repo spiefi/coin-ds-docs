@@ -30,6 +30,13 @@ Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
 
 - #195 fixed. Stepper renders a `ul` (named by `accessibilityLabel`) and each Step an `li`. `aria-current="step"` is on the first incomplete step. Step labels read “Verify PAN, Completed”, “Payment failed, Failed”, and “Check details, Needs attention”. `status` alone now sets the colour (complete green, error red, warning orange); an explicit Step Status mode still overrides it, so the guide’s check-on-purple Don’t still renders. A `{false}` child keeps the title, Steps inside a Fragment number in order, and the last Step has no connector. `testID` works on Stepper, Step, and StepLabel.
-- Regression #211 (Component Fix, To do): every Stepper logs a React “unique key” error in development builds. The production docs build does not log it.
+- Regression #211 (Component Fix, Done, published 13 October 2026 with c1fa197): every Stepper logged a React “unique key” error in development builds. The production docs build does not log it.
 - Still open: the check, cross, and alert glyphs are unnamed images.
 - Guide: anatomy and sizing targets moved from `:scope > div > div:nth-child(n)` to `:scope > ul > li:nth-child(n)` (padding mark on `:scope > ul`). The States description, Content description, “Rely on the icon” caption, and Sources note now describe `status` setting the colour and the list, current-stage, and status-word semantics; the In context Stepper is named “KYC progress”.
+
+## c1fa197 publish (13 October 2026)
+
+Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
+
+- #211 fixed (verified 12 October, published here): Stepper keeps a key on each flattened Step, so plain Steps, Steps in a Fragment, Steps with StepLabel children, and mapped Steps log no React “unique key” error in development builds. The production docs build never logged it.
+- No designer-facing behaviour changed, so the guide copy stays; only the Sources check date and build are updated (13 October, 12 October build). The brief's checked line and note match.

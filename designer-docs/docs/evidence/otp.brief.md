@@ -2,7 +2,7 @@
 
 slug: otp · label: OTP · public API: OTP (+ Card, VStack, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2759-330 · storybook: docsUrl('otp') · stories: Default=components-otp--default, Four digits=components-otp--four-digits, Invalid=components-otp--invalid, Disabled=components-otp--disabled, With resend countdown=components-otp--with-resend-countdown, Validation flow=components-otp--validation-flow
-checked: 8 October 2026 · jfs-components 0.1.78 (5 October build, mirror tag v0.1.78-636f3f5)
+checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: `<path d="M2.5 13.5h3M7.5 13.5h3M12.5 13.5h3M9 5v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />`
 keywords: one-time code, verification code, PIN input, passcode, OTP input
 
@@ -22,7 +22,7 @@ parts:
 2. Underline — Lit in the brand colour when filled or active; red when invalid. — target: underline of slot 2 — side: left
 3. Empty slot — Waits for the next digit; its underline stays neutral. — target: slot 4 — side: top
 4. Slot gap — A fixed 8 px between slots. — between: [slot 5, slot 6] — side: top
-5. Support line — Guidance, resend timer, or error; left-aligned in code, right-aligned in Figma. — target: support area — side: right
+5. Support line — Guidance, resend timer, or error, right-aligned under the slots. — target: support area — side: right
 marks: gap slot row (`${S} + div`) → support area
 
 ## Configuration
@@ -39,7 +39,7 @@ Grid `coin-new-example-grid`, each OTP in a Host:
 - Typing — `defaultValue="481" supportText="Enter the code sent to your phone"` — lesson: Click and type: filled slots stay lit; delete a digit and its slot fades back.
 - Invalid — `isInvalid defaultValue="481902" errorMessage="Incorrect code. Try again."` — lesson: Every underline turns red, and the error replaces the support text or resend timer.
 - Disabled — `isDisabled defaultValue="481902" supportText="Verifying code…" supportTextStatus="Loading"` — lesson: The whole field dims to 40% and takes no input, for example while the code is checked.
-- Ready to resend — `resend={{ autoStart: false, onResend }}` — lesson: After the countdown, a Resend button, which in this build stretches across the row. It reads “Sending…” while the request runs, then counts down again.
+- Ready to resend — `resend={{ autoStart: false, onResend }}` — lesson: After the countdown, a small Resend button at the right. It reads “Sending…” while the request runs, then counts down again.
 
 ## Sizing
 header: Sizing · title: Fills its container, slots up to 48 px · description: OTP fills its container. Slots are up to 48 px wide with 8 px gaps, plus 8 px padding, so 6 digits need 344 px at full size. In a narrower container the slots shrink: 8 digits fit a 334 px phone column at about 33 px each. In a wider one, slots stay 48 px at the left.
@@ -64,7 +64,7 @@ Every preview is an OTP in a Host.
 
 ## Sources
 header: Sources · title: Use the public OTP contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma and the package agree on 48 px slots and 8 px gaps. In code the slots shrink in a narrow container, so all of Storybook’s 4–8 digit lengths fit a phone. Figma right-aligns the support line and a small Resend button; in this build they sit at the left and Resend stretches across the row, which is reported to the Coin team. OTP has no verifying state; the screen checks the code and sets the error.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma and the package agree on 48 px slots and 8 px gaps, and on a right-aligned support line with a small Resend button. In code the slots shrink in a narrow container, so all of Storybook’s 4–8 digit lengths fit a phone. In this build, support or error text longer than the row doesn’t wrap, so keep it to one line; this is reported to the Coin team. OTP has no verifying state; the screen checks the code and sets the error.
 
 ## Limits
 Do not show Dark mode, `style`, `allowedPattern`, `autoFocus`, `formatCountdown`, `resendButtonModes`, `OTPResend` on its own, or the `useOtpResend` custom UI. Do not imply OTP validates the code, masks digits, or has a loading state, or that the support line and Resend are right-aligned in code (regression #210). Do not name or link the Coin Workflow board on the page.

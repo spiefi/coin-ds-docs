@@ -50,5 +50,12 @@ Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `mai
 Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
 
 - #185 fixed. Standalone options have `tabindex=0` (disabled ones `-1`). Tab goes Newest → Oldest → the next element, and Enter and Space select. Inside DropdownInput the options stay out of the tab order (`omitFromTabOrder`), and arrow keys with Enter still pick. Standalone arrow keys still do nothing (no handler in the installed source).
-- Regression (open, #209): Enter calls `onPress` twice on a standalone option, so an action item would run twice. Picking a choice is unaffected, because selecting the same item twice changes nothing.
+- Regression #209 (Component Fix, Done, published 13 October 2026 with c1fa197): Enter called `onPress` twice on a standalone option, so an action item would run twice. Picking a choice is unaffected, because selecting the same item twice changes nothing.
 - Guide: the Sources note now gives the 5 October build and says Tab reaches each option (skipping disabled ones) and Enter or Space picks one, that arrow keys don't move between options, and that Enter fires an option twice in this build; `checked` is 8 October 2026. The brief's checked line, note, and Limits match, and its selectors now use `listbox`/`option` as the page does.
+
+## c1fa197 publish (13 October 2026)
+
+Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
+
+- #209 fixed for DropdownItem (verified 12 October, published here): in a standalone Dropdown, Enter and Space each call an option's `onPress` once.
+- Guide: the Sources note no longer warns that Enter fires an option twice; the brief's note and Limits match.
