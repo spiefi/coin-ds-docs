@@ -4,7 +4,7 @@ Package, Figma, and Storybook evidence for the Spinner guide (board ticket #73, 
 
 ## Checked
 
-Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5). Biscuit's newer `main` (c1fa197c, a463361) changes only `Spinner.mdx` (handwritten rewrite) and `Spinner.stories.tsx` (docs control exclude); `Spinner.tsx` is identical.
+Checked 12 October 2026; re-checked 13 October 2026 for the review below. Installed `jfs-components` is now `0.1.78` from mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197); `Spinner.tsx` is identical to 636f3f5's. Biscuit's newest `main` 7020bf9 (13 October, not in the mirror or the docs) sets `STROKE_RATIO = 12.8 / 72` and corrects the `durationMs` JSDoc to 1500 (#276); it is not installed, so the guide still shows 11%.
 
 ## Sources
 
@@ -43,3 +43,13 @@ Storybook hosts it centred on the canvas with no frame; the guide does the same 
 
 - Not shown as designer settings: `colors` (would need hardcoded colours; designers keep gold, purple, teal), `modes` (no effect), `style`.
 - No progress value, track, label text, or size variants; sizes are free numbers.
+
+## Review, 13 October 2026
+
+Marcin's #73 comment (12 October): “what is weight? Whatever it is do not work on the documentation page”, on the playground's “Weight” segment (None / Default / Heavy → `gravity` 0 / 0.45 / 0.85).
+
+- “Weight” was the guide's own name; the prop is `gravity` (`Spinner.tsx:45-50`, default 0.45, clamped 0–0.9). Storybook calls the stories Heavy and Weightless and the prop gravity (7020bf9 `Spinner.mdx:172-182, 247`). The published Storybook docs page is still the old generated one (headings: Example, Available Collections and Modes, Usage, Sizes, Weight, Custom colours, Resting state, Props, Design Tokens).
+- The control did work. Leading-arc speed, fastest ÷ slowest over 3.2 s (60 ms windows, headless Chrome, 13 October):
+  - Storybook, real Reanimated: default 2.71 (1509 ms turn), heavy 12.58, weightless 1.39 (sampling noise; 0 is even by code).
+  - Docs preview playground (docs stand-in): None 1.37, Default 2.70, Heavy 12.12, all at a ~1500 ms turn.
+- Verdict: docs mistake (an unexplained, invented label for a subtle effect), not a component bug. Fix: no gravity control in the playground; Configuration names gravity and its value on each card (Default 0.45, Heavy 0.85, Weightless 0), side by side.

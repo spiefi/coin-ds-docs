@@ -33,15 +33,12 @@ function SpinningRows() {
 
 const SIZES = ['32', '56', '72', '88', '128'] as const
 const TURNS = { '1000 ms': 1000, '1500 ms': 1500, '2800 ms': 2800 } as const
-const WEIGHTS = { None: 0, Default: 0.45, Heavy: 0.85 } as const
 type Size = typeof SIZES[number]
 type Turn = keyof typeof TURNS
-type Weight = keyof typeof WEIGHTS
 
 function SpinnerGuide() {
   const [size, setSize] = useState<Size>('72')
   const [turn, setTurn] = useState<Turn>('1500 ms')
-  const [weight, setWeight] = useState<Weight>('Default')
   const [animating, setAnimating] = useState(true)
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState('Statements up to date')
@@ -65,12 +62,12 @@ function SpinnerGuide() {
       ]}><Spinner testID="sp-anatomy" animating={false} /></Anatomy>,
     },
     configuration: {
-      header: 'Configuration', title: 'Size, speed, and weight',
+      header: 'Configuration', title: 'Size, speed, and gravity',
       description: 'Three settings shape it: size sets the diameter, durationMs the time for one turn, and gravity how much it speeds up over the top and slows at the bottom. No mode changes it. A colors setting can replace its three colours in code; keep Coin\'s gold, purple, and teal.',
       body: <div className="coin-new-example-grid three">
-        <ExampleCard title="Default" description="72 px, one turn every 1.5 s, and gravity 0.45."><Spinner /></ExampleCard>
-        <ExampleCard title="Heavy" description="Whips over the top and hangs at the bottom, for a slower, weightier feel."><Spinner gravity={0.85} durationMs={2800} /></ExampleCard>
-        <ExampleCard title="Weightless" description="An even, steady turn with no change of speed."><Spinner gravity={0} durationMs={1600} /></ExampleCard>
+        <ExampleCard title="Default" description="Gravity 0.45 and a 1.5 s turn: a little faster over the top."><Spinner /></ExampleCard>
+        <ExampleCard title="Heavy" description="Gravity 0.85 and a 2.8 s turn: fast over the top, slow at the bottom."><Spinner gravity={0.85} durationMs={2800} /></ExampleCard>
+        <ExampleCard title="Weightless" description="Gravity 0 and a 1.6 s turn: the same speed all the way round."><Spinner gravity={0} durationMs={1600} /></ExampleCard>
       </div>,
     },
     states: {
@@ -128,11 +125,11 @@ function SpinnerGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Spinner contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="12 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('spinner')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('spinner')} stories={[
         { label: 'Default', id: 'components-spinner--default' }, { label: 'Sizes', id: 'components-spinner--sizes' },
         { label: 'Heavy', id: 'components-spinner--heavy' }, { label: 'Weightless', id: 'components-spinner--weightless' },
         { label: 'Resting', id: 'components-spinner--resting' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, weight, and resting pose exist only in code. In code the arcs are 11% of the size thick, 7.9 px at 72, while Figma’s ring is about 12.8 px (#276). No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The code’s description of durationMs says 2400 ms, but the default is 1500 ms. The published Storybook page is still the old generated one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, gravity, and resting pose exist only in code. In code the arcs are 11% of the size thick, 7.9 px at 72, while Figma’s ring is about 12.8 px (#276); Biscuit’s 13 October build draws 12.8 px but isn’t installed here yet. No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The code’s description of durationMs says 2400 ms, but the default is 1500 ms. The published Storybook page is still the old generated one.</Sources>,
     },
   }
 
@@ -142,17 +139,16 @@ function SpinnerGuide() {
     figmaUrl: FIGMA, storybookUrl: docsUrl('spinner'),
   }} playground={<>
     <div className="preview-stage">
-      <Spinner size={Number(size)} durationMs={TURNS[turn]} gravity={WEIGHTS[weight]} animating={animating} />
+      <Spinner size={Number(size)} durationMs={TURNS[turn]} animating={animating} />
       <span className="stage-label">Live Coin Spinner</span>
     </div>
     <div className="controls-panel">
       <Segment label="Size" value={size} options={SIZES} onChange={setSize} />
       <Segment label="Turn" value={turn} options={['1000 ms', '1500 ms', '2800 ms'] as const} onChange={setTurn} />
-      <Segment label="Weight" value={weight} options={['None', 'Default', 'Heavy'] as const} onChange={setWeight} />
       <OnOff label="Animating" value={animating} onChange={setAnimating} />
       <Readout title="Spinner" value={animating ? 'Spinning' : 'Resting'}>
         {animating
-          ? 'It turns until the screen removes it or sets animating off. Weight makes it whip over the top and slow at the bottom.'
+          ? 'It turns until the screen removes it or sets animating off.'
           : 'Resting: three evenly spaced arcs, which isn\'t a frame of the spin.'}
       </Readout>
     </div>
