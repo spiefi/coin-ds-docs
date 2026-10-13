@@ -2,7 +2,7 @@
 
 slug: contentsheet · label: Content Sheet · public API: ContentSheet (+ ScreenFrame from the kit; Overlay, ListGroup, ListItem, MoneyValue, Text, Button for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4451-1760 · storybook: docsUrl('contentsheet') · stories: Default=components-contentsheet--default, With title=components-contentsheet--with-title, Rich content=components-contentsheet--rich-content, Bottom pop-up=components-contentsheet--bottom-pop-up
-checked: 6 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-3795b4c, Biscuit's main 3795b4c)
+checked: 13 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c1fa197, Biscuit's main c1fa197)
 icon: a phone outline with a panel rising from its bottom — `<rect x="4" y="1.5" width="10" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M4 10.5c0-1.1.9-2 2-2h6a2 2 0 0 1 2 2" stroke="currentColor" strokeWidth="1.5" fill="none" /><path d="M7 12.5h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />`
 keywords: bottom sheet, bottom pop-up, action sheet, panel
 
@@ -20,7 +20,7 @@ playground: `.preview-stage` › Frame. Screen: `<Button label="Show transaction
 header: Anatomy · title: One slot under an optional title · description: A white sheet with 20 px top corners holds one slot of content and an optional centred title. In a screen it docks to the bottom and spans the full width.
 specimen: `<Anatomy specimenWidth={360} …>` › `<ContentSheet testID="cs-anatomy" pinToBottom={false} title="March 2025">` › ListGroup with the first 2 TX rows.
 parts (CS = `byTestId('cs-anatomy')`):
-1. Title — Optional and centred; it scrolls with the content. — target: `${CS} [dir="auto"]` — side: top
+1. Title — Optional and centred; it stays put while the content scrolls. — target: `${CS} [dir="auto"]` — side: top
 2. Slot — Any content; the sheet grows to fit it. — target: `${CS} [role="list"]` — side: right
 3. Sheet — White, with 20 px top corners and no handle. — target: `CS` — side: left
 No marks (a padding band would hide the rounded corners; Sizing shows the padding).
@@ -32,13 +32,13 @@ Grid `coin-new-example-grid`, each an ExampleCard holding a dimmed Frame:
 - Without a title — TX rows 1–2 — lesson: The slot starts right under the top padding.
 
 ## States
-header: States · title: Shown or hidden · description: The screen shows and hides the sheet: it springs up from the bottom and back down. A hidden sheet stays on the page, so Tab can still reach its content.
+header: States · title: Shown or hidden · description: The screen shows and hides the sheet: it springs up from the bottom and back down. A hidden sheet waits below the screen, out of the Tab order and hidden from screen readers.
 Grid `coin-new-example-grid`, each an ExampleCard:
 - Shown — dimmed Frame, `title="March 2025"`, TX rows 1–2 — lesson: Over a dimmed screen, docked to the bottom.
 - Hidden — Frame without a scrim, sheet `visible={false}`, TX rows 1–2 — lesson: Below the screen; only the screen shows.
 
 ## Sizing
-header: Sizing · title: Full width, as tall as its content · description: The sheet spans its screen and adds 12 px above and 41 px below the content. It never sets a height: it grows with the content up to 70% of the screen, then scrolls.
+header: Sizing · title: Full width, as tall as its content · description: The sheet spans its screen and adds 12 px above and 41 px below the content, with 8 px between the title and the content. It never sets a height: it grows with the content up to 70% of its screen, then the content scrolls under the title.
 Measured diagram: `<Anatomy legend={false} specimenWidth={360} marks={[{ kind: 'size', target: byTestId('cs-size'), side: 'right', label: 'both' }, { kind: 'padding', target: byTestId('cs-size') }]}>` › `<ContentSheet testID="cs-size" pinToBottom={false} title="March 2025">` › ListGroup with all 3 TX rows. Expected width 360; report the measured height.
 
 ## Content
@@ -58,7 +58,7 @@ Every preview is a Frame with TX rows 1–2 unless stated.
 
 ## Sources
 header: Sources · title: Use the public Content Sheet contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Content Sheet is one 360 × 350 component with a fixed header and a slot. In the package the title scrolls with the content, and the 8 px gap between the title and the slot is missing. The sheet has no role, scrim, or close control of its own, and a hidden sheet can still be reached with Tab. Its 70% height limit is measured against the browser window, and on this site its spring overshoots slightly because the site uses a simplified animation library.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Content Sheet is one 360 × 350 component with a fixed header and a slot. In the package, as in Figma, the title stays fixed 8 px above the content, and the items in the slot are 8 px apart. The title is a page heading. The sheet has no role, scrim, or close control of its own; a hidden sheet leaves the Tab order and is hidden from screen readers. Its 70% height limit is measured against its screen.
 
 ## Limits
 Do not show Dark mode, Page type modes, `maxHeightPercent`, `safeAreaBottom`, keyboard handling, or a sheet tall enough to scroll. Use `pinToBottom={false}` only in the two diagrams. Do not imply the sheet closes itself, traps focus, or has a handle or gestures.

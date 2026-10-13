@@ -15,7 +15,7 @@ const noop = () => {}
 const SPLIT = { title: 'Split payment', body: 'Pay ₹12,000 in 3 monthly instalments.', buttonLabel: 'See plans' }
 const AUTOPAY = { body: 'Set up autopay so you never miss a bill.', buttonLabel: 'Set up' }
 
-const R = ':scope > div'
+const R = ':scope > section'
 
 function Reasons() {
   return <>

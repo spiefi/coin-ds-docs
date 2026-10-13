@@ -43,3 +43,7 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 ## Coin gaps
 
 - #231 (Component Fix, To do, Component Bug; Mr. Biscuit): placeholder copy and a “Button” that does nothing by default; slots can't be removed with `null`; custom slots don't receive EmptyState's modes; Figma's red L capsule and S button need custom slots and modes; `emptyState/slot/gap` unused; title line height 20 vs Figma 18; no role, heading, or capsule name; Storybook Custom slots story uses a non-existent mode; the Storybook rewrite is not on `main`.
+
+## c1fa197 install (13 October 2026)
+
+The release that published #205, #255, #203, #252, and #250 moved the docs to mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197), which also carries Biscuit's EmptyState changes for #231. The title and description now sit in their own group, and the title is an `h1` (`role="heading"`). Only the guide's title and description selectors changed so the anatomy and sizing diagrams find them again. The copy wasn't re-checked against #231, which goes through its own Component Fix loop.

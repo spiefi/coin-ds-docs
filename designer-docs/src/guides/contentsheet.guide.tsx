@@ -54,7 +54,7 @@ function ContentSheetGuide() {
       header: 'Anatomy', title: 'One slot under an optional title',
       description: 'A white sheet with 20 px top corners holds one slot of content and an optional centred title. In a screen it docks to the bottom and spans the full width.',
       body: <Anatomy specimenWidth={360} parts={[
-        { name: 'Title', note: 'Optional and centred; it scrolls with the content.', target: `${byTestId('cs-anatomy')} [dir="auto"]`, side: 'top' },
+        { name: 'Title', note: 'Optional and centred; it stays put while the content scrolls.', target: `${byTestId('cs-anatomy')} [dir="auto"]`, side: 'top' },
         { name: 'Slot', note: 'Any content; the sheet grows to fit it.', target: `${byTestId('cs-anatomy')} [role="list"]`, side: 'right' },
         { name: 'Sheet', note: 'White, with 20 px top corners and no handle.', target: byTestId('cs-anatomy'), side: 'left' },
       ]}>
@@ -71,7 +71,7 @@ function ContentSheetGuide() {
     },
     states: {
       header: 'States', title: 'Shown or hidden',
-      description: 'The screen shows and hides the sheet: it springs up from the bottom and back down. A hidden sheet stays on the page, so Tab can still reach its content.',
+      description: 'The screen shows and hides the sheet: it springs up from the bottom and back down. A hidden sheet waits below the screen, out of the Tab order and hidden from screen readers.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Shown" description="Over a dimmed screen, docked to the bottom."><Frame title="March 2025"><TxRows count={2} /></Frame></ExampleCard>
         <ExampleCard title="Hidden" description="Below the screen; only the screen shows."><Frame scrim={false} visible={false}><TxRows count={2} /></Frame></ExampleCard>
@@ -79,7 +79,7 @@ function ContentSheetGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Full width, as tall as its content',
-      description: 'The sheet spans its screen and adds 12 px above and 41 px below the content. It never sets a height: it grows with the content up to 70% of the screen, then scrolls.',
+      description: 'The sheet spans its screen and adds 12 px above and 41 px below the content, with 8 px between the title and the content. It never sets a height: it grows with the content up to 70% of its screen, then the content scrolls under the title.',
       body: <Anatomy legend={false} specimenWidth={360} marks={[
         { kind: 'size', target: byTestId('cs-size'), side: 'right', label: 'both' },
         { kind: 'padding', target: byTestId('cs-size') },
@@ -121,12 +121,12 @@ function ContentSheetGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Content Sheet contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="6 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('contentsheet')} stories={[
+      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('contentsheet')} stories={[
         { label: 'Default', id: 'components-contentsheet--default' },
         { label: 'With title', id: 'components-contentsheet--with-title' },
         { label: 'Rich content', id: 'components-contentsheet--rich-content' },
         { label: 'Bottom pop-up', id: 'components-contentsheet--bottom-pop-up' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Content Sheet is one 360 × 350 component with a fixed header and a slot. In the package the title scrolls with the content, and the 8 px gap between the title and the slot is missing. The sheet has no role, scrim, or close control of its own, and a hidden sheet can still be reached with Tab. Its 70% height limit is measured against the browser window, and on this site its spring overshoots slightly because the site uses a simplified animation library.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Content Sheet is one 360 × 350 component with a fixed header and a slot. In the package, as in Figma, the title stays fixed 8 px above the content, and the items in the slot are 8 px apart. The title is a page heading. The sheet has no role, scrim, or close control of its own; a hidden sheet leaves the Tab order and is hidden from screen readers. Its 70% height limit is measured against its screen.</Sources>,
     },
   }
 

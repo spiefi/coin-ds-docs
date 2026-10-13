@@ -48,3 +48,7 @@ Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `mai
 - #179 fixed in IconButton, which Nudge uses for its close button: after a mouse click IconButton draws no ring and keeps its size, and keyboard focus draws a 1 px outline ring in a token colour (`mode/Grey/200`) without changing the size. This supersedes the dark-border note under Browser measurements.
 - Still open: #206 and #208 as listed under Coin gaps.
 - Guide: the Sources note gives the 5 October build; checked date 8 October 2026. The page never described the click border, so no other copy changed.
+
+## c1fa197 install (13 October 2026)
+
+The release that published #205, #255, #203, #252, and #250 moved the docs to mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197), which also carries Biscuit's #206 Nudge changes. The Nudge root is now a `<section role="region">` named by its title, and a close button shows by default. Only the guide's anatomy and sizing selectors changed (`:scope > div` → `:scope > section`) so the diagrams measure the real card again. The copy wasn't re-checked against #206, which goes through its own Component Fix loop; until it is published, the page may still describe the close button as optional.
