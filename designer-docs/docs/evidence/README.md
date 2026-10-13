@@ -19,6 +19,7 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | autoplaycontrol | [autoplaycontrol.md](autoplaycontrol.md) |
 | avatar, avatargroup | [avatar-and-avatargroup.md](avatar-and-avatargroup.md) |
 | badge | [badge.md](badge.md) |
+| benefitcard | [benefitcard.md](benefitcard.md) |
 | bottomnav | [bottomnav.md](bottomnav.md) |
 | bottomnavitem | [bottomnavitem.md](bottomnavitem.md) |
 | brandchip | [brandchip.md](brandchip.md) |
