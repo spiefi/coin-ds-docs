@@ -1,0 +1,296 @@
+{
+  "slug": "accordion",
+  "label": "Accordion",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/accordion.guide.tsx",
+    "src/AccordionGuide.tsx"
+  ],
+  "evidence": "docs/evidence/accordion.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-16T22:29:22.217Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "collapsible",
+    "expandable",
+    "disclosure",
+    "FAQ"
+  ],
+  "title": "Accordion",
+  "summary": "Reveal supporting details when people need them, while keeping the page easy to scan.",
+  "corePrinciple": "Make the header a clear promise about the content inside.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1291-4846",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-accordion--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A heading opens onto supporting content",
+      "description": "The header makes a clear promise, the indicator shows whether it is open, and the content slot reveals supporting detail when people ask for it.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Header",
+        "The title is the promise people use to decide whether to open the section.",
+        "Label",
+        "Keep the header short enough to remain scannable in a narrow host.",
+        "Indicator",
+        "The public component switches between add and minus icons as it opens and closes.",
+        "Divider",
+        "The component’s bottom border separates the open section from the following content.",
+        "Content slot",
+        "Put supporting details or related public rows here; keep primary actions visible in the page flow."
+      ],
+      "specimen": [
+        "Payment methods",
+        "Review the payment methods available for this account."
+      ],
+      "anatomy": [
+        {
+          "part": "Header",
+          "note": "The title is the promise people use to decide whether to open the section."
+        },
+        {
+          "part": "Label",
+          "note": "Keep the header short enough to remain scannable in a narrow host."
+        },
+        {
+          "part": "Indicator",
+          "note": "The public component switches between add and minus icons as it opens and closes."
+        },
+        {
+          "part": "Divider",
+          "note": "The component’s bottom border separates the open section from the following content."
+        },
+        {
+          "part": "Content slot",
+          "note": "Put supporting details or related public rows here; keep primary actions visible in the page flow."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the surface treatment deliberately",
+      "description": "The default treatment is quiet until interaction. Contained keeps the filled header treatment visible so a grouped section can stand apart from its host.",
+      "blocks": [
+        "Default",
+        "Let the page carry the surface",
+        "Use the default when the heading can sit comfortably in the surrounding page structure.",
+        "Contained",
+        "Keep the group visually together",
+        "Use contained when the filled header should keep related supporting content together."
+      ],
+      "specimen": [
+        "Payment methods"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Let interaction supply the state",
+      "description": "Expanded, disabled, and hover feedback come from the public component as people interact. Configure the values that describe the product situation and let the runtime derive the visual state.",
+      "blocks": [
+        "State references · move the pointer over the live hover example.",
+        "Collapsed",
+        "The heading is visible while supporting content stays out of the initial scan.",
+        "Open",
+        "The content slot is visible after the person asks for more detail.",
+        "Disabled",
+        "The section is unavailable until the product condition changes.",
+        "Hover feedback",
+        "Move the pointer over this public row to observe the package hover treatment.",
+        "The header responds to interaction.",
+        "Choose the expanded or disabled condition that reflects the product situation and let the header communicate the result."
+      ],
+      "specimen": [
+        "Payment methods",
+        "Supporting details appear here when people need them.",
+        "Move pointer over this row"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Give the host room to tell the story",
+      "description": "The Figma reference is 445px wide. In a product layout, the host supplies width and the component grows with its title and open content.",
+      "blocks": [
+        "Roomy host",
+        "Keep the title and content on one clear line when the host has space.",
+        "Narrow host",
+        "Allow a long title to wrap when the group name needs more than one line."
+      ],
+      "specimen": [
+        "Payment methods",
+        "Supporting details appear here when people need them.",
+        "Linked savings accounts and payment sources"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Use the slot for supporting detail",
+      "description": "The header should tell people what they will find. The open content can add context, related rows, or secondary explanations without hiding the page’s primary task.",
+      "blocks": [
+        "01",
+        "Make the promise specific",
+        "Use a meaningful header and let the body answer the question that header raises.",
+        "02",
+        "Keep related detail together",
+        "Rows or short explanatory text belong in the content slot when they answer the header’s promise.",
+        "03",
+        "Keep primary work visible",
+        "Leave the main task in the page flow when hiding it would block progress or change the decision."
+      ],
+      "specimen": [
+        "Payment methods",
+        "Review the payment methods available for this account."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Group related account details",
+      "description": "Two public Accordions can sit together while each keeps its own expanded state. Consumer wiring decides whether one, both, or neither is open.",
+      "blocks": [
+        "Payment Methods: open · Bank Accounts: closed",
+        "open",
+        "closed"
+      ],
+      "specimen": [
+        "Payment Methods",
+        "Credit Card",
+        "Ending 4242",
+        "₹",
+        "500",
+        "Debit Card",
+        "Ending 1234",
+        "Bank Accounts"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make the hidden detail worth opening",
+      "description": "Clear promises, related content, and visible primary work help a disclosure stay useful without becoming a hiding place.",
+      "blocks": [
+        "Do",
+        "Name what people will find",
+        "A specific promise lets people decide whether opening the section is useful.",
+        "Don’t",
+        "Use a heading with no meaning",
+        "People must open the section before they know whether it contains the detail they need.",
+        "Keep the content related",
+        "The open details answer the header’s promise and stay easy to scan.",
+        "Mix unrelated information",
+        "The heading stops helping because the open content answers several different questions.",
+        "Keep primary work visible",
+        "Use the Accordion for supporting details while the main payment action stays in the page flow.",
+        "Hide the primary action in the body",
+        "The button is unavailable until someone expands the section, so the task is harder to complete."
+      ],
+      "specimen": [
+        "Payment methods",
+        "More",
+        "Bank accounts",
+        "Savings Account · HDFC Bank",
+        "Support hours, marketing preferences, and unrelated profile reminders.",
+        "Payment details",
+        "Confirm payment"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Name what people will find",
+            "caption": "A specific promise lets people decide whether opening the section is useful.",
+            "specimen": "Payment methods"
+          },
+          "dont": {
+            "title": "Use a heading with no meaning",
+            "caption": "People must open the section before they know whether it contains the detail they need.",
+            "specimen": "More"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the content related",
+            "caption": "The open details answer the header’s promise and stay easy to scan.",
+            "specimen": "Bank accounts · Savings Account · HDFC Bank"
+          },
+          "dont": {
+            "title": "Mix unrelated information",
+            "caption": "The heading stops helping because the open content answers several different questions.",
+            "specimen": "Bank accounts · Support hours, marketing preferences, and unrelated profile reminders."
+          }
+        },
+        {
+          "do": {
+            "title": "Keep primary work visible",
+            "caption": "Use the Accordion for supporting details while the main payment action stays in the page flow.",
+            "specimen": "Payment details · Confirm payment"
+          },
+          "dont": {
+            "title": "Hide the primary action in the body",
+            "caption": "The button is unavailable until someone expands the section, so the task is harder to complete.",
+            "specimen": "Confirm payment"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the published component",
+      "description": "This guide records the public Accordion contract, the inspected Figma source, and the published story configurations used by the examples.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Accordion component set · node 1291:4846",
+        "02",
+        "Canonical Storybook",
+        "Default, contained, expanded, disabled, list, and group examples",
+        "Open default story",
+        "Open contained story",
+        "Open expanded story",
+        "Open disabled story",
+        "Open list-item story",
+        "Open group story",
+        "Checked 21 September 2026",
+        "Examples use public Accordion, ListItem, IconCapsule, MoneyValue, and Text exports from jfs-components 0.1.60. The package registry latest is also 0.1.60. The Accordion derives its state from public props and pointer interaction; the guide does not pass the internal Accordion States mode. The Figma reference includes a 445px header and content-driven open example, while package height follows its children and token padding. React Native Web can apply the package's requested LayoutAnimation immediately; the guide leaves that shipped behavior unchanged.",
+        "Accordion",
+        "ListItem",
+        "IconCapsule",
+        "MoneyValue",
+        "Text",
+        "jfs-components",
+        "Accordion States"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

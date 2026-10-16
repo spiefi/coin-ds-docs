@@ -1,0 +1,21 @@
+{
+  "slug": "accordion",
+  "entryHash": "f3fb4f0477d9e9b7dbe86c49adb5f7014299880da03c0688399d55827feabdfb",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "checkedAt": "2026-10-16T22:32:02Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/4",
+      "reason": "misreads-source: The sizing section only says \"Allow a long title to wrap when the group name needs more than one line.\" It never mentions disableTruncation and does not say wrapping needs a prop change. The evidence lists disableTruncation as a supported prop but does not tie it to wrapping, so the instruction to set disableTruncation=true is not supported by anything cited."
+    },
+    {
+      "field": "/facts/gaps/2",
+      "reason": "misreads-source: The evidence says the package requests LayoutAnimation and that \"In the local React Native Web preview, this transition is immediate\". The sources section says RNW \"can apply the package's requested LayoutAnimation immediately\". Neither says LayoutAnimation does not run, and the observation comes from a local preview, not the web in general."
+    }
+  ],
+  "notes": "/placementAdvice/2 generalises the guide's \"Two public Accordions\" to \"Several\". The evidence group fixture also has only two siblings. This is a reasonable reading but is worth a human glance. /examples/2 adds Button modes (Emphasis, AppearanceBrand) and body text that the guide does not show. These are illustrative and outside the guide's coverage."
+}

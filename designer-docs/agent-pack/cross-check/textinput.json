@@ -1,0 +1,17 @@
+{
+  "slug": "textinput",
+  "entryHash": "b0e7f589461c4efd21da99228f012872ea5fcd45ae56772959234024abda9c3d",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "checkedAt": "2026-10-16T22:32:01Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/facts/props/0",
+      "reason": "lost-context: The evidence says a field \"without `accessibilityLabel` is named by its placeholder and keeps that name while focused\", and that \"An explicit label still wins.\" Saying the field keeps the placeholder \"as its accessible name\" drops the no-label condition: when accessibilityLabel is set, the placeholder is not the name."
+    }
+  ],
+  "notes": "/facts/gaps/0 cites evidence 2026-10-08, but the evidence file never states 'no visible label, error state or disabled state' outright. It is only implied by the props list, InputState (Idle/Active only) and editable={false} having no visual change. The explicit statement is in the guide's Sources note. Separately, the guide's Sources note says the installed jfs-components is 0.1.78, while the 1 October evidence says 0.1.77 is declared and installed. The later checks were against 0.1.78 builds from main. This is a guide/evidence discrepancy, not an extraction error. /accessibility/0 omits the guide's 'On the web' qualifier for naming by placeholder. That is minor and not flagged."
+}
