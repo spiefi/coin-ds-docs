@@ -8,7 +8,10 @@
     {
       "text": "List what a plan or offer gives, with an optional upsell and one button to upgrade.",
       "strength": "recommended",
-      "from": { "section": "summary", "quote": "Use a Benefit Card to list what a plan or offer gives, with an optional upsell and one button to upgrade." }
+      "from": {
+        "section": "summary",
+        "quote": "Use a Benefit Card to list what a plan or offer gives, with an optional upsell and one button to upgrade."
+      }
     }
   ],
   "avoidWhen": [],
@@ -17,37 +20,55 @@
       "part": "Header title",
       "holds": "headerTitle at 12 px, a label for the rows below it.",
       "required": false,
-      "from": { "section": "anatomy", "quote": "headerTitle at 12 px, a label for the rows below it." }
+      "from": {
+        "section": "anatomy",
+        "quote": "headerTitle at 12 px, a label for the rows below it."
+      }
     },
     {
       "part": "Earnings row",
       "holds": "A headerItems row: an icon, a short title, and the figure on the right.",
       "required": false,
-      "from": { "section": "anatomy", "quote": "A headerItems row: an icon, a short title, and the figure on the right." }
+      "from": {
+        "section": "anatomy",
+        "quote": "A headerItems row: an icon, a short title, and the figure on the right."
+      }
     },
     {
       "part": "Divider",
       "holds": "Separates what you earn from what the plan includes; goes with the header.",
       "required": false,
-      "from": { "section": "anatomy", "quote": "Separates what you earn from what the plan includes." }
+      "from": {
+        "section": "anatomy",
+        "quote": "Separates what you earn from what the plan includes."
+      }
     },
     {
       "part": "Upsell",
       "holds": "The bodyHeader slot: a Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it.",
       "required": false,
-      "from": { "section": "anatomy", "quote": "A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it." }
+      "from": {
+        "section": "anatomy",
+        "quote": "A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it."
+      }
     },
     {
       "part": "Benefit row",
       "holds": "An items row: an icon and a short perk.",
       "required": true,
-      "from": { "section": "anatomy", "quote": "An items row: an icon and a short perk." }
+      "from": {
+        "section": "anatomy",
+        "quote": "An items row: an icon and a short perk."
+      }
     },
     {
       "part": "Button",
       "holds": "The call to action: buttonLabel and onButtonPress; showButton hides it.",
       "required": false,
-      "from": { "section": "anatomy", "quote": "buttonLabel and onButtonPress; showButton hides it." }
+      "from": {
+        "section": "anatomy",
+        "quote": "buttonLabel and onButtonPress; showButton hides it."
+      }
     }
   ],
   "placementAdvice": [
@@ -55,13 +76,19 @@
       "text": "The card is 344 px wide by default; to fill its container, set width to '100%'.",
       "strength": "recommended",
       "target": "width",
-      "from": { "section": "sizing", "quote": "It's 344 px wide unless you set width to another number or a percentage, such as 100% to fill its container." }
+      "from": {
+        "section": "sizing",
+        "quote": "It's 344 px wide unless you set width to another number or a percentage, such as 100% to fill its container."
+      }
     },
     {
       "text": "Let the screen own the next step through onButtonPress; the card doesn't act on its own.",
       "strength": "recommended",
       "target": "onButtonPress",
-      "from": { "section": "inContext", "quote": "The card doesn't act on its own." }
+      "from": {
+        "section": "inContext",
+        "quote": "The card doesn't act on its own."
+      }
     }
   ],
   "configuration": [
@@ -69,41 +96,61 @@
       "text": "Pass your own rows (headerItems and items, or the header and children slots) whenever those sections show: the default rows repeat one placeholder.",
       "strength": "required",
       "target": "items",
-      "from": { "section": "sources", "quote": "Its default rows repeat one placeholder, so always pass your own." },
-      "absolute": { "word": "always", "scope": "everywhere", "reason": "the sentence has no condition: any card that shows its default rows shows placeholder content." }
+      "from": {
+        "section": "sources",
+        "quote": "Its default rows repeat one placeholder, so always pass your own."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "the sentence has no condition: any card that shows its default rows shows placeholder content."
+      }
     },
     {
       "text": "Set showHeader false to drop the header title, its rows and the divider together.",
       "strength": "recommended",
       "target": "showHeader",
       "value": "false",
-      "from": { "section": "configuration", "quote": "showHeader drops the title, its rows, and the divider" }
+      "from": {
+        "section": "configuration",
+        "quote": "showHeader drops the title, its rows, and the divider"
+      }
     },
     {
       "text": "Set bodyHeader to null to remove the upsell, or pass a node to replace it.",
       "strength": "recommended",
       "target": "bodyHeader",
       "value": "null",
-      "from": { "section": "configuration", "quote": "bodyHeader set to null removes the upsell" }
+      "from": {
+        "section": "configuration",
+        "quote": "bodyHeader set to null removes the upsell"
+      }
     },
     {
       "text": "To hide the button, set showButton false; button={null} still renders the default button.",
       "strength": "required",
       "target": "showButton",
       "value": "false",
-      "from": { "fact": "props:button" }
+      "from": {
+        "fact": "props:button"
+      }
     },
     {
       "text": "Use AppearanceBrand to recolour the icons, the upsell and the button together; the card stays white.",
       "strength": "recommended",
       "target": "AppearanceBrand",
-      "from": { "section": "configuration", "quote": "AppearanceBrand recolours the icons, the upsell, and the button together; the card stays white." }
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand recolours the icons, the upsell, and the button together; the card stays white."
+      }
     },
     {
-      "text": "Set modes once on the card: they cascade to its rows, icons, upsell and button, including nodes in the header, bodyHeader and children slots.",
+      "text": "Set modes once on the card: they cascade to its rows, icons, upsell and button.",
       "strength": "recommended",
       "target": "modes",
-      "from": { "fact": "props:modes" }
+      "from": {
+        "fact": "props:modes"
+      }
     }
   ],
   "content": {
@@ -111,57 +158,95 @@
       {
         "text": "Show what people get, then one way to get it.",
         "strength": "recommended",
-        "from": { "section": "corePrinciple", "quote": "Show what people get, then one way to get it." }
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Show what people get, then one way to get it."
+        }
       },
       {
         "text": "Write the header title as a label, such as “You will earn”.",
         "strength": "recommended",
         "target": "headerTitle",
-        "from": { "section": "content", "quote": "Write the header title as a label, such as “You will earn”." }
+        "from": {
+          "section": "content",
+          "quote": "Write the header title as a label, such as “You will earn”."
+        }
       },
       {
         "text": "Keep each row title to a short noun phrase, one benefit per row.",
         "strength": "recommended",
         "target": "BenefitCardItem.title",
-        "from": { "section": "content", "quote": "Keep each row to a short noun phrase" }
+        "from": {
+          "section": "content",
+          "quote": "Keep each row to a short noun phrase"
+        }
       },
       {
         "text": "Put a row's figure in trailingText, where the figures line up on the right, not in its title.",
         "strength": "recommended",
         "target": "BenefitCardItem.trailingText",
-        "from": { "section": "content", "quote": "put its number in trailingText, where the figures line up on the right." }
+        "from": {
+          "section": "content",
+          "quote": "put its number in trailingText, where the figures line up on the right."
+        }
       },
       {
         "text": "Do not write a sentence as a row title: a long title is cut off, and the benefit with it.",
         "strength": "discouraged",
         "target": "BenefitCardItem.title",
-        "from": { "section": "doDont", "quote": "A long title is cut off, and the benefit with it." }
+        "from": {
+          "section": "doDont",
+          "quote": "A long title is cut off, and the benefit with it."
+        }
       },
       {
         "text": "Label the button with a verb, such as “Upgrade”.",
         "strength": "recommended",
         "target": "buttonLabel",
-        "from": { "section": "content", "quote": "Label the button with a verb, such as “Upgrade”." }
+        "from": {
+          "section": "content",
+          "quote": "Label the button with a verb, such as “Upgrade”."
+        }
       }
     ],
-    "good": ["You will earn", "JioPoints", "Up to 2000 pts", "Zero forex markup on cards", "Priority support, 24/7", "Upgrade"],
-    "bad": ["Pay abroad with any of your cards and get zero forex markup", "Up to 2000 JioPoints", "Up to ₹5000 cashback"]
+    "good": [
+      "You will earn",
+      "JioPoints",
+      "Up to 2000 pts",
+      "Zero forex markup on cards",
+      "Priority support, 24/7",
+      "Upgrade"
+    ],
+    "bad": [
+      "Pay abroad with any of your cards and get zero forex markup",
+      "Up to 2000 JioPoints",
+      "Up to ₹5000 cashback"
+    ]
   },
   "states": [
     {
       "state": "Default",
       "when": "The card has no state of its own; only its button acts, through onButtonPress, with Button's states.",
-      "from": { "section": "states", "quote": "The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states." }
+      "from": {
+        "section": "states",
+        "quote": "The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states."
+      }
     },
     {
       "state": "Without the button",
       "when": "showButton false: a summary of the plan.",
-      "from": { "section": "states", "quote": "showButton off: a summary of the plan." }
+      "from": {
+        "section": "states",
+        "quote": "showButton off: a summary of the plan."
+      }
     },
     {
       "state": "Pressable card",
       "when": "onPress set: the whole card is one button that dims while pressed.",
-      "from": { "section": "states", "quote": "onPress makes the whole card one button that dims while pressed" }
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button that dims while pressed"
+      }
     }
   ],
   "accessibility": [
@@ -169,7 +254,10 @@
       "text": "Avoid onPress while the card has a button: on the web the card's own buttons then sit inside it (#280).",
       "strength": "discouraged",
       "target": "onPress",
-      "from": { "section": "states", "quote": "on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280)." }
+      "from": {
+        "section": "states",
+        "quote": "on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280)."
+      }
     }
   ],
   "doDont": [
@@ -177,30 +265,45 @@
       "do": "Keep each perk short",
       "dont": "Write a sentence as a row",
       "why": "A long title is cut off, and the benefit with it.",
-      "from": { "section": "doDont", "quote": "Keep each perk short" }
+      "from": {
+        "section": "doDont",
+        "quote": "Keep each perk short"
+      }
     },
     {
       "do": "Put the figure in trailingText",
       "dont": "Put the figure in the title",
       "why": "The amounts are buried in the text.",
-      "from": { "section": "doDont", "quote": "Put the figure in trailingText" }
+      "from": {
+        "section": "doDont",
+        "quote": "Put the figure in trailingText"
+      }
     }
   ],
   "examples": [
     {
       "purpose": "A plan card with its own earnings rows, perks and an upgrade button.",
       "jsx": "<BenefitCard\n  headerTitle=\"You will earn\"\n  headerItems={[\n    { icon: 'ic_jewellery_diamond', title: 'JioPoints', trailingText: 'Up to 2000 pts' },\n    { icon: 'ic_offer', title: 'Cashback', trailingText: 'Up to ₹5000' },\n  ]}\n  items={[\n    { icon: 'ic_card', title: 'Zero forex markup on cards' },\n    { icon: 'ic_support', title: 'Priority support, 24/7' },\n  ]}\n  buttonLabel=\"Upgrade\"\n  onButtonPress={() => {}}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
-      "from": { "section": "content", "quote": "“JioPoints” with “Up to 2000 pts”, two perks, and “Upgrade”." }
+      "from": {
+        "section": "content",
+        "quote": "“JioPoints” with “Up to 2000 pts”, two perks, and “Upgrade”."
+      }
     },
     {
       "purpose": "Full width on a plan screen, without the upsell, in one brand.",
       "jsx": "<BenefitCard\n  width=\"100%\"\n  bodyHeader={null}\n  headerItems={[{ icon: 'ic_offer', title: 'Cashback', trailingText: 'Up to ₹5000' }]}\n  items={[{ icon: 'ic_support', title: 'Priority support, 24/7' }]}\n  onButtonPress={() => {}}\n  modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Tertiary' }}\n/>",
-      "from": { "section": "configuration", "quote": "bodyHeader set to null closes the gap between the lists." }
+      "from": {
+        "section": "configuration",
+        "quote": "bodyHeader set to null closes the gap between the lists."
+      }
     },
     {
       "purpose": "A summary of the plan: no header and no button.",
       "jsx": "<BenefitCard\n  showHeader={false}\n  showButton={false}\n  items={[\n    { icon: 'ic_card', title: 'Zero forex markup on cards' },\n    { icon: 'ic_support', title: 'Priority support, 24/7' },\n  ]}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
-      "from": { "section": "states", "quote": "showButton off: a summary of the plan." }
+      "from": {
+        "section": "states",
+        "quote": "showButton off: a summary of the plan."
+      }
     }
   ],
   "evidenceFacts": [

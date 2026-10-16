@@ -3,7 +3,7 @@
   "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
   "extractedBy": "Claude Code (claude-opus-5-5), agent pack POC session",
   "extractedOn": "2026-10-17",
-  "notes": "Stack's page is rendered by the shared LayoutGuides.tsx (with HStack, VStack and Breadcrumbs); only text that renders on the Stack page was used. Its Sources note says jfs-components 0.1.60, checked 15 September 2026; the shared evidence file was checked on 19 September 2026. Stack has no copy of its own, so there are no content rules. The second Do & Don't pair compares unrelated choices (fill width against a catch-all page canvas). The guide names no component to use instead of Stack, only 'the public component that owns the slot'.",
+  "notes": "Stack's page is rendered by the shared LayoutGuides.tsx (with HStack, VStack and Breadcrumbs); only text that renders on the Stack page was used. Its Sources note says jfs-components 0.1.60, checked 15 September 2026; the shared evidence file was checked on 19 September 2026. Stack has no copy of its own, so there are no content rules. The second Do & Don't pair compares unrelated choices (fill width against a catch-all page canvas). The guide names no component to use instead of Stack, only 'the public component that owns the slot'. The In context 'Action footer' card renders two status badges (Paid, Due today), not actions under supporting copy; the example here follows the sentence instead.",
   "useWhen": [
     {
       "text": "A public component's slot needs one token-driven gap and an intentional vertical or horizontal direction.",
@@ -248,8 +248,8 @@
   ],
   "examples": [
     {
-      "purpose": "A vertical Stack in ActionFooter's slot: an action above a disclaimer.",
-      "jsx": "<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <Stack layoutDirection=\"vertical\" fillWidth modes={{ 'Color Mode': 'Light', 'Slot gap': 'S' }}>\n    <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n    <Disclaimer disclaimer=\"Terms apply.\" modes={{ 'Color Mode': 'Light' }} />\n  </Stack>\n</ActionFooter>",
+      "purpose": "A vertical Stack in ActionFooter's slot: the action under its supporting copy.",
+      "jsx": "<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <Stack layoutDirection=\"vertical\" fillWidth modes={{ 'Color Mode': 'Light', 'Slot gap': 'S' }}>\n    <Text text=\"You can change your plan at any time.\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n  </Stack>\n</ActionFooter>",
       "from": {
         "section": "inContext",
         "quote": "Use a vertical Stack when actions belong under supporting copy."

@@ -27,7 +27,7 @@
   "anatomy": [
     {
       "part": "Leading visual",
-      "holds": "Optional leading node (an Icon) that adds a recognizable cue without replacing the words.",
+      "holds": "Optional leading node, such as an icon, that adds a recognizable cue without replacing the words.",
       "required": false,
       "from": {
         "section": "anatomy",
@@ -126,12 +126,12 @@
       }
     },
     {
-      "text": "Pass the Badge's own modes object to the Icon in leading: Badge renders the leading node as given.",
+      "text": "Pass the Badge's own modes object to the Icon in leading, with the Context4 that matches the treatment (solid or glass): Badge renders the leading node as given.",
       "strength": "recommended",
       "target": "leading",
       "from": {
         "section": "evidence",
-        "quote": "It renders a supplied leading node verbatim, so the guide passes the same owner mode object to the public Icon"
+        "quote": "It renders a supplied leading node verbatim, so the guide passes the same owner mode object to the public Icon and selects the matching `Context4` for Solid or Glass."
       },
       "checkedVersion": "0.1.60",
       "checkedOn": "2026-09-23"
@@ -301,12 +301,14 @@
       }
     },
     {
-      "purpose": "A badge with a leading icon; the Icon gets the Badge's modes.",
-      "jsx": "<Badge\n  label=\"Paid\"\n  modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium' }}\n  leading={<Icon iconName=\"ic_card\" modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium' }} />}\n/>",
+      "purpose": "A solid badge with a leading icon; the Icon gets the Badge's modes, with Context4 Badge.",
+      "jsx": "<Badge\n  label=\"Paid\"\n  modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', Context4: 'Badge' }}\n  leading={<Icon iconName=\"ic_card\" modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', Context4: 'Badge' }} />}\n/>",
       "from": {
-        "section": "anatomy",
-        "quote": "Adds a recognizable cue without replacing the words."
-      }
+        "section": "evidence",
+        "quote": "It renders a supplied leading node verbatim, so the guide passes the same owner mode object to the public Icon and selects the matching `Context4` for Solid or Glass."
+      },
+      "checkedVersion": "0.1.60",
+      "checkedOn": "2026-09-23"
     },
     {
       "purpose": "A badge that opens related detail.",
@@ -351,7 +353,7 @@
   ],
   "gaps": [
     {
-      "text": "Badge ignores accessibilityLabel; an interactive Badge is named only by its visible label.",
+      "text": "Badge ignores accessibilityLabel on its rendered wrapper.",
       "quote": "The current Badge implementation ignores its `accessibilityLabel` argument on the rendered wrapper",
       "checkedOn": "2026-09-23",
       "checkedVersion": "0.1.60"
