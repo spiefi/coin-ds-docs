@@ -14,9 +14,11 @@ truth for how pages are built:
   `Segment`, `ExampleCard`, `DoDont`) and how to add a guide.
 
 Read those two first. This skill covers who does what, the brief, and delivery.
-User instructions take precedence. The skill's source is
-`skills/coin-component-docs/` in the Coin DS repository; edit it there and run
-`sh skills/install.sh` to update the Claude Code and Codex copies.
+User instructions take precedence. The skill lives in the repository at
+`.claude/skills/coin-component-docs/` (Codex reads it through
+`.agents/skills/`), so every checkout loads the version on its branch and
+nothing is installed. Change it on `main` and cherry-pick the commit onto
+`docs-next`: board runs switch to `docs-next` partway through.
 
 ## Platform settings
 
@@ -37,7 +39,9 @@ User instructions take precedence. The skill's source is
    Figma/Storybook reads, so the board shows the pickup
    ([board signals](references/release-and-tickets.md#coin-workflow-tickets)).
    Announce the batch, then build every ticket in board order on one feature
-   branch. A blocked ticket is reported and skipped, not stopped on.
+   branch. A blocked ticket is reported and skipped, not stopped on. Refresh
+   `start_work` on the open batch at each phase change and at least every 15
+   minutes, or the board shows you as away.
 3. For each verified guide: add the review link as a work note, complete only
    Marcin's contribution, move the ticket to Review, and re-read it.
 4. Report results and review links. After the user approves the release,

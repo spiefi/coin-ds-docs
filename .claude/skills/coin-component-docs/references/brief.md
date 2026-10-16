@@ -64,7 +64,7 @@ section with the smallest honest content; do not pad with generic prose.
 Send this, filled in, to the worker (see the platform table in `SKILL.md`):
 
 ```text
-Implement the <Display name> guide in /Users/spiefi/Documents/Coin DS/designer-docs
+Implement the <Display name> guide in <your checkout>/designer-docs
 on branch <prefix>/<branch>.
 
 Read, in order: designer-docs/AGENTS.md, src/guide-kit/README.md,
