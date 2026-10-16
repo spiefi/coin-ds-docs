@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "packVersion": "0.1.78+1",
+  "status": "Draft for review. Astra settles every expected answer (sets expected.settledBy) before the test runs.",
+  "questions": [
+    {
+      "id": "q01",
+      "kind": "choose",
+      "question": "In a list of payments, each row needs to show whether that payment is Paid, Pending or Failed. Which Coin component shows the status, and where does it go?",
+      "expected": {
+        "validAnswers": [
+          "Badge, placed next to the item it describes in each row"
+        ],
+        "required": [
+          "Uses the public Badge export from jfs-components",
+          "Uses only props and modes Badge has (label, type, modes such as Semantic Intent, AppearanceSystem, Emphasis, Badge Size)"
+        ],
+        "recommended": [
+          "Places the Badge next to the item it describes",
+          "Short, consistent status labels (Paid, Pending, Failed), not sentences",
+          "Semantic Intent System with an AppearanceSystem meaning that agrees with each status, such as positive for Paid and negative for Failed"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q02",
+      "kind": "choose",
+      "question": "A JioFinance+ plan page needs a card that lists what the plan gives (JioPoints and cashback with their amounts, plus two perks) and one button to upgrade. Which component should I use?",
+      "expected": {
+        "validAnswers": [
+          "BenefitCard"
+        ],
+        "required": [
+          "Passes its own rows (headerItems and items, or the header and children slots) instead of relying on the placeholder default rows"
+        ],
+        "recommended": [
+          "Header title written as a label, such as 'You will earn'",
+          "Amounts in each row's trailingText, not in the row title",
+          "Short noun-phrase row titles",
+          "Button label is a verb, such as 'Upgrade'",
+          "The screen handles onButtonPress; no onPress on the whole card while it has a button (#280)"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q03",
+      "kind": "choose",
+      "question": "An FAQ screen has six questions. Each answer should stay hidden until the person asks for it, so the page stays easy to scan. What should I use?",
+      "expected": {
+        "validAnswers": [
+          "One Accordion per question, with the answer in its content slot (children)"
+        ],
+        "required": [
+          "Uses Accordion, with the answer in children (the content slot)",
+          "Does not set the Accordion States mode"
+        ],
+        "recommended": [
+          "Each header (title) names what people will find",
+          "Each answer answers its own header's question",
+          "Each Accordion keeps its own expanded state; nothing forces only one open at a time"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q04",
+      "kind": "choose",
+      "question": "People need to type a longer note, two or three lines, to go with a transfer. Is Text Input the right component?",
+      "expected": {
+        "validAnswers": [
+          "No: Text Input holds one line. Use NoteInput, a jfs-components export that has no entry in this pilot pack."
+        ],
+        "required": [
+          "Does not configure Text Input for several lines (the guide says it holds one line; inherited React Native props such as multiline are not part of the design contract)"
+        ],
+        "recommended": [
+          "Uses NoteInput, and says it has no entry in the pack, so the answer rests on its types"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q05",
+      "kind": "choose",
+      "question": "On the Accounts screen I want a row of tiles, one per linked bank account, plus a tile to add another account. Which Coin components should I use?",
+      "expected": {
+        "validAnswers": [
+          "AccountCard tiles (state 'connected' for each account, and one with state 'add'), laid out in a row such as an HStack, or in CarouselCardAccounts when there are more than fit"
+        ],
+        "required": [
+          "Uses AccountCard, a real jfs-components export; does not report a missing Coin component just because the pack has no entry for it"
+        ],
+        "recommended": [
+          "Says AccountCard has no entry in this pilot pack, so the answer rests on its types",
+          "Titles the add tile with its action, 'Add account', and shows only a masked number on connected tiles",
+          "Uses CarouselCardAccounts when there are more tiles than fit"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q06",
+      "kind": "configure",
+      "question": "Three statuses appear together: Failed, Paid and Archived. Failed needs attention. Configure the three Badges.",
+      "expected": {
+        "validAnswers": [
+          "Three Badges with short labels. Failed: Semantic Intent System, AppearanceSystem negative, Emphasis High. Paid: Semantic Intent System, AppearanceSystem positive, at a lower emphasis than Failed. Archived: a quiet treatment such as AppearanceBrand Neutral with Emphasis Low."
+        ],
+        "required": [
+          "Uses only real modes and values: Semantic Intent (Brand, System), AppearanceSystem (positive, warning, negative), AppearanceBrand (Primary, Secondary, Neutral, Tertiary), Emphasis (High, Medium, Low)"
+        ],
+        "recommended": [
+          "Failed gets the strongest emphasis; the three do not all get equal emphasis",
+          "Meaning and tone agree: Failed is not shown with a positive appearance",
+          "Labels share one style and capitalization"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q07",
+      "kind": "configure",
+      "question": "Configure a Text Input where people type an amount in rupees.",
+      "expected": {
+        "validAnswers": [
+          "TextInput with leadingIconName 'ic_rupee' and a short placeholder such as 'Amount'"
+        ],
+        "required": [
+          "Changes the leading icon with leadingIconName (or leading); does not try to remove the leading icon, which is always there"
+        ],
+        "recommended": [
+          "A rupee icon rather than the default search icon",
+          "A short placeholder that names what to type, with no instructions",
+          "Sets accessibilityLabel if the placeholder does not say what the field is for"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q08",
+      "kind": "configure",
+      "question": "A BenefitCard is used as a read-only summary of a plan the person already has. Remove its button.",
+      "expected": {
+        "validAnswers": [
+          "Set showButton to false"
+        ],
+        "required": [
+          "Hides the button with showButton={false}, not button={null}, which still renders the default button",
+          "Keeps passing the card's own rows rather than the placeholder defaults"
+        ],
+        "recommended": [
+          "Says that button={null} does not hide the button"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q09",
+      "kind": "configure",
+      "question": "An Accordion titled 'Payment details' should start open and stand apart from the page as a grouped section. Configure it.",
+      "expected": {
+        "validAnswers": [
+          "Accordion with defaultExpanded (or a controlled expanded with onExpandedChange) and contained"
+        ],
+        "required": [
+          "Opens it with defaultExpanded or expanded; does not set the Accordion States mode to force Open"
+        ],
+        "recommended": [
+          "contained, so the filled header keeps the group together",
+          "A header that names what people will find"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q10",
+      "kind": "configure",
+      "question": "I want a Glass button on a plain white settings card. Configure it.",
+      "expected": {
+        "validAnswers": [
+          "Use type 'default' instead, explaining that glass is for a meaningful backdrop such as rich media or a coloured surface",
+          "Keep type 'glass' only if a visible backdrop is added behind it, and say so"
+        ],
+        "required": [
+          "Uses only real Button types: default, glass, fixed"
+        ],
+        "recommended": [
+          "Does not put type glass on a plain, low-contrast surface",
+          "Says so when the answer departs from the request"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q11",
+      "kind": "compose",
+      "question": "Build the footer of a checkout screen: one line of supporting copy, with the 'Continue' action under it, filling the width.",
+      "expected": {
+        "validAnswers": [
+          "ActionFooter containing a vertical Stack with fillWidth, holding Text and then Button"
+        ],
+        "required": [
+          "Uses public jfs-components exports only (such as ActionFooter, Stack, Text, Button)",
+          "The action comes under the supporting copy"
+        ],
+        "recommended": [
+          "Stack with layoutDirection 'vertical' and fillWidth",
+          "The gap set with the Slot gap mode; no padding or wrap on Stack",
+          "Passes modes to the Coin children in the slot",
+          "A short, verb-led button label"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q12",
+      "kind": "compose",
+      "question": "A payment screen has 'Payment methods' and 'Bank accounts' sections that people can expand independently; each lists account rows. The 'Confirm payment' button must always be visible. Compose the screen.",
+      "expected": {
+        "validAnswers": [
+          "Two Accordions, each with ListItem rows in children, and the Confirm payment Button outside both Accordions in the page flow"
+        ],
+        "required": [
+          "The Confirm payment Button is not inside an Accordion's content slot",
+          "Each Accordion keeps its own expanded state (defaultExpanded, or its own expanded and onExpandedChange)",
+          "Does not set the Accordion States mode"
+        ],
+        "recommended": [
+          "Headers that name what people will find",
+          "The rows get the same modes as their Accordion",
+          "Confirm payment is the one strongest action (Emphasis High)"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q13",
+      "kind": "compose",
+      "question": "Compose a plan screen: the title 'JioFinance+', then a BenefitCard that fills the width; pressing Upgrade starts checkout.",
+      "expected": {
+        "validAnswers": [
+          "A public layout such as VStack with a Title and a BenefitCard with width '100%' whose onButtonPress starts checkout"
+        ],
+        "required": [
+          "The BenefitCard gets its own rows",
+          "Checkout starts from onButtonPress, the button's handler"
+        ],
+        "recommended": [
+          "width '100%' to fill the screen",
+          "No onPress on the whole card while it has a button (#280)",
+          "A label-style header title, amounts in trailingText, and a verb on the button"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q14",
+      "kind": "compose",
+      "question": "Build a transactions search: a search field with a filter button at its end that opens a filter sheet, above the list of transactions.",
+      "expected": {
+        "validAnswers": [
+          "A TextInput for the search with the filter action outside the field, for example an IconButton beside it in an HStack, above ListItem rows",
+          "A TextInput with a decorative filter icon in trailing, plus a separate pressable filter control outside the field"
+        ],
+        "required": [
+          "Does not put a focusable or pressable control inside the Text Input's trailing or leading slot"
+        ],
+        "recommended": [
+          "The screen filters the list through onChangeText",
+          "A placeholder such as 'Search transactions'",
+          "Any icon in trailing gets its own modes, such as AppearanceBrand Neutral"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q15",
+      "kind": "compose",
+      "question": "Inside a slim Card, show 'September payment' on the left and its Paid status on the right.",
+      "expected": {
+        "validAnswers": [
+          "Card with variant 'slim' containing an HStack (alignVertical 'center', justifyHorizontal 'space-between') with Text and a Badge",
+          "Card containing a ListItem with the Badge in its trailing slot"
+        ],
+        "required": [
+          "Uses public jfs-components exports only",
+          "The Badge sits beside the item it describes"
+        ],
+        "recommended": [
+          "The Badge uses Semantic Intent System with AppearanceSystem positive",
+          "Modes are passed to the Badge and the other Coin children"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q16",
+      "kind": "gap",
+      "question": "The amount field should show 'Enter a valid amount' in red under it when the value is invalid. How do I do that with Text Input?",
+      "expected": {
+        "validAnswers": [
+          "Text Input has no error state (a gap). Use FormField instead, whose isInvalid and errorMessage props show the error; FormField has no entry in this pilot pack.",
+          "Report the missing error state in Text Input as a gap"
+        ],
+        "required": [
+          "Does not invent error props on Text Input, or recreate an error message beside it with custom styling",
+          "Names the missing error state as a gap, or switches to a component whose types support an error"
+        ],
+        "recommended": [
+          "Prefers FormField (isInvalid, errorMessage) and says it has no entry in the pack"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q17",
+      "kind": "gap",
+      "question": "Show a disabled Badge for a feature that isn't available yet.",
+      "expected": {
+        "validAnswers": [
+          "Report that Badge has no disabled variant (a gap), rather than faking one"
+        ],
+        "required": [
+          "Does not invent a disabled prop or state on Badge",
+          "Does not fake a disabled look with custom colours, opacity or style overrides"
+        ],
+        "recommended": [
+          "Reports it as a Coin gap"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q18",
+      "kind": "gap",
+      "question": "Our app has a dark theme. Make the BenefitCard dark to match.",
+      "expected": {
+        "validAnswers": [
+          "Report that no mode changes the BenefitCard's white surface or black title, so it cannot be made dark (a gap)"
+        ],
+        "required": [
+          "Does not override the card's colours with style or hardcoded values",
+          "Reports the missing dark treatment as a gap"
+        ],
+        "recommended": [
+          "Says what modes can still change: AppearanceBrand recolours the icons, the upsell and the button"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q19",
+      "kind": "gap",
+      "question": "Add a date picker so people can choose the date of a scheduled payment.",
+      "expected": {
+        "validAnswers": [
+          "Report that Coin has no date picker component (a gap)"
+        ],
+        "required": [
+          "Does not invent a DatePicker or Calendar component",
+          "Does not build a date picker from Coin primitives and present it as a Coin component",
+          "Reports the missing date picker as a gap"
+        ],
+        "recommended": [
+          "Checks the package exports before concluding; jfs-components 0.1.78 exports no date picker"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q20",
+      "kind": "gap",
+      "question": "The product page needs an embedded video player with play, pause and a progress bar.",
+      "expected": {
+        "validAnswers": [
+          "Report that Coin has no video player component (a gap)"
+        ],
+        "required": [
+          "Does not invent a Coin video component",
+          "Reports the missing video player as a gap"
+        ],
+        "recommended": [
+          "Does not offer LottiePlayer, an animation player, as a video player"
+        ],
+        "settledBy": null
+      }
+    }
+  ]
+}

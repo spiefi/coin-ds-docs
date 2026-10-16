@@ -146,7 +146,7 @@ export function componentMarkdown(entry, { packVersion, outsidePilot = [] }) {
     '## Flags',
     '',
     ...(status.flags.length
-      ? ['Do not rely on a flagged item. A flag on `` (the whole entry) means the entry as a whole needs review.', '',
+      ? ['Do not rely on a flagged item. A flag with an empty field concerns the entry as a whole.', '',
         ...status.flags.map((flag) => `- ${code(flag.field || '(whole entry)')} · ${flag.by}: ${flag.reason}`)]
       : ['_None._']),
     '',
