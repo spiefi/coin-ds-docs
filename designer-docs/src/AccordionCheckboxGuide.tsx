@@ -16,7 +16,10 @@ import {
   MobileComponentNav,
   MobilePageNav,
   useGuidePageNavigation,
+  useGuideView,
 } from './GuideNavigation'
+import { AgentGuidePage } from './agent/AgentGuidePage'
+import { ViewSwitch } from './agent/ViewSwitch'
 import { Anatomy, Segment, Sources, docsUrl } from './guide-kit'
 
 const FIGMA_URL =
@@ -218,6 +221,7 @@ function AccountSelectionExample() {
 }
 
 export function AccordionCheckboxGuide() {
+  const view = useGuideView()
   useGuidePageNavigation()
 
   const [expanded, setExpanded] = useState(false)
@@ -235,6 +239,8 @@ export function AccordionCheckboxGuide() {
       document.title = previousTitle
     }
   }, [])
+
+  if (view === 'agent') return <AgentGuidePage slug="accordioncheckbox" name="Accordion Checkbox" />
 
   return (
     <div className="site-shell accordion-docs">
@@ -254,6 +260,7 @@ export function AccordionCheckboxGuide() {
                 <h1>Accordion Checkbox</h1>
                 <span className="public-badge">Public component</span>
               </div>
+              <ViewSwitch slug="accordioncheckbox" view="designer" />
               <p className="hero-lede">
                 Group related choices behind a clear heading. People can select the group and open its options independently.
               </p>
