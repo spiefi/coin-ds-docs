@@ -5,8 +5,12 @@ in `designer-docs/` (live at <https://coin-designer-docs.vercel.app>).
 
 - For any work on the site, follow `designer-docs/AGENTS.md`.
 - To build or revise component guides, use the `coin-component-docs` skill.
-  Its source is `skills/coin-component-docs/`; after editing it, run
-  `sh skills/install.sh` to update the Claude Code and Codex copies.
+  It lives in `.claude/skills/coin-component-docs/`, and Codex reads the same
+  folder through `.agents/skills/`, so both load it from the checkout and
+  nothing is installed. Change it on `main` and cherry-pick the commit onto
+  `docs-next` (board runs switch to `docs-next` partway through). Delete any
+  older installed copy in `~/.claude/skills` or `~/.codex/skills`: it can
+  shadow the repository's version.
 - Docs worker agents: `.claude/agents/coin-docs-worker.md` (Claude Code) and
   `.codex/agents/coin_docs_worker.toml` (Codex).
 - Before creating or assigning a ticket on the DuetWorks board (the

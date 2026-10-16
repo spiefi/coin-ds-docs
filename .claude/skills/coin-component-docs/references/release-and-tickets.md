@@ -54,6 +54,12 @@ completed. Never complete a contribution on someone else's behalf.
   a new idempotency key. The board turns the working state off after 2 hours
   without agent activity on a ticket, which would otherwise hit tickets late in
   a long batch.
+- Keep the board current while you work. The board shows an agent as away
+  (asleep) after 20 minutes without a board write, even while it is busy
+  locally. At each phase change (workers dispatched, review started, fixes
+  applied), and whenever 15 minutes pass without a board write, call
+  `start_work` on every batch ticket not yet in Review, in one call with new
+  idempotency keys. Do not add work notes just to show activity.
 - A ticket that is blocked, skipped, or cancelled gets `stop_work` with a
   short note saying why. Moving a ticket to Review ends its working state; no
   `stop_work` is needed then.
