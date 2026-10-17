@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
+import { AgentEntryPage } from './agent/AgentGuidePage'
 import { AgentPackPage } from './agent/AgentPages'
 import { readAgentPage } from './agent/routes'
 import { useGuideLocation } from './GuideNavigation'
@@ -28,6 +29,8 @@ function App() {
     <SearchProvider>
       {guide ? (
         <guide.Component />
+      ) : agentPage === 'entry' ? (
+        <AgentEntryPage key={location.search} />
       ) : agentPage ? (
         <AgentPackPage page={agentPage} key={agentPage} />
       ) : (

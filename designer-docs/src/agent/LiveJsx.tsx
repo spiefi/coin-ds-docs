@@ -54,7 +54,13 @@ function toElement(node: JsxNode, key: number): ReactNode {
         throw new Error(`<${node.name}> is not a jfs-components export`)
       }
       const props: Record<string, unknown> = { key }
-      for (const [name, value] of node.props) props[name] = toValue(value)
+      for (const [name, value] of node.props) {
+        // Functions can't run here. Event handlers become no-ops; other
+        // functions (format or render props) are left out, so the component
+        // uses its default instead of a function that returns nothing.
+        if (value.kind === 'function' && !/^on[A-Z]/.test(name)) continue
+        props[name] = toValue(value)
+      }
       return createElement(type as Parameters<typeof createElement>[0], props, ...node.children.map(toElement))
     }
   }

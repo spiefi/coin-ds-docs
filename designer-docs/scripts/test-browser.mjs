@@ -186,6 +186,7 @@ async function checkHome(context, width) {
 
 const AGENT_PAGES = [
   ['overview', 'Pack overview'],
+  ['graph', 'Graph map'],
   ['rules', 'Agent rules'],
   ['index', 'Agent index'],
   ['pilot', 'Pilot results'],
@@ -246,6 +247,49 @@ async function checkAgentViews(context, width) {
     expect(shown.title === 'Button', `title is "${shown.title}"`)
     expect(shown.view?.startsWith('Agent'), 'the switch does not mark Agent as current')
     expect(shown.sections >= 10 || shown.empty, 'shows neither the entry nor the empty state')
+  })
+
+  // The Full / Brief / Links switch changes the rendering without leaving the page.
+  await visit('agent view: renderings', '?component=badge&view=agent', async (shown, expect, page) => {
+    if (shown.empty) return
+    const brief = page.locator('.agent-rendering-options button', { hasText: 'Brief' })
+    if (await brief.isDisabled()) return
+    await brief.click()
+    await page.waitForFunction(() => new URLSearchParams(location.search).get('rendering') === 'brief', null, { timeout: 5000 })
+    await page.waitForFunction(() => !document.querySelector('.agent-loading'), null, { timeout: 15000 })
+    const rendered = await page.evaluate(() => ({
+      pressed: document.querySelector('.agent-rendering-options [aria-pressed="true"]')?.textContent,
+      body: !!document.querySelector('.agent-rendering-file .agent-markdown, .agent-rendering-file .agent-empty-line'),
+    }))
+    expect(rendered.pressed?.startsWith('Brief'), 'the Brief rendering is not selected')
+    expect(rendered.body, 'the brief neither rendered nor said it is missing')
+  })
+
+  // An entry without a guide page has its own Agent view.
+  await visit('agent entry page', '?agent=entry&slug=badge', (shown, expect) => {
+    expect(shown.title === 'Badge', `title is "${shown.title}"`)
+    expect(shown.sections >= 10 || shown.empty, 'shows neither the entry nor the empty state')
+  })
+
+  // The graph map offers its table of edges as the alternative view.
+  await visit('graph map: table', '?agent=graph&show=table', async (shown, expect, page) => {
+    const table = await page.evaluate(() => ({
+      rows: document.querySelectorAll('.agent-edge-table tbody tr').length,
+      missing: document.querySelector('.agent-page-body .agent-empty-line')?.textContent ?? '',
+    }))
+    expect(table.rows > 0 || /no graph\.json|No relationships/.test(table.missing), 'shows neither the edge table nor why it is missing')
+  })
+
+  // Selecting a component on the map opens its Agent view.
+  await visit('graph map: open a node', '?agent=graph', async (shown, expect, page) => {
+    const node = page.locator('a.agent-node').first()
+    if (!(await node.count())) return
+    await node.click()
+    await page.waitForFunction(
+      () => new URLSearchParams(location.search).get('view') === 'agent' || new URLSearchParams(location.search).get('agent') === 'entry',
+      null,
+      { timeout: 5000 },
+    )
   })
 
   for (const [id, title] of AGENT_PAGES) {

@@ -13,7 +13,7 @@ and sources.
 | `src/guide-kit/` | Shared documentation chrome: `Anatomy`, `Sources`, `Segment`, `ExampleCard`, `DoDont`. Start with its [README](src/guide-kit/README.md). |
 | `src/ComponentGuideTemplate.tsx` | The page shell used by guides. |
 | `src/site/` | Site chrome outside the guides: the home page at `/`, an onboarding introduction to Coin with live examples (also shown for an unknown `?component=`), component search (⌘K or Ctrl K, `/`, or the Search buttons), and their CSS in `site.css`. |
-| `src/agent/` | The agent views of the Coin agent pack: the Designer / Agent switch on every guide page (`?view=agent`), the Agent view of each component's pack entry, and the shared pack pages at `/?agent=overview`, `rules`, `index`, and `pilot`. Types for the pack files are in `types.ts`; until the pack is published under `public/agent/`, every agent page reads the fixtures in `fixtures/` and says “Sample data”. |
+| `src/agent/` | The agent views of the Coin agent pack: the Designer / Agent switch on every guide page (`?view=agent`), the Agent view of each component's pack entry (also at `/?agent=entry&slug=<slug>` for entries without a guide page), and the shared pack pages at `/?agent=overview`, `graph`, `rules`, `index`, and `pilot`. Types for the pack files are in `types.ts`; until the pack is published under `public/agent/`, every agent page reads the fixtures in `fixtures/` and says “Sample data”. |
 | `public/` | Favicons (`favicon.svg`, with `favicon.ico` and `apple-touch-icon.png` rendered from it). |
 | `docs/evidence/<slug>.md` | Verified package, Figma, Storybook, API, and accessibility evidence per guide ([index](docs/evidence/README.md)). |
 | `scripts/check-guides.mjs` | Guardrails run by `npm run build`. |
@@ -32,11 +32,21 @@ live with `jfs-components`, gaps, and flags. Each quoted source is checked
 against the guide as it is now, so a reviewer can tell a docs problem from an
 extraction problem.
 
-The views read `/agent/index.json` and then
-`/agent/<release>/components/<slug>.json`, `index.json`, `manifest.json`,
-`rules.md`, and `/agent/pilot/results.json`. The pack pipeline owns those
-files and their schemas; the views only read them. A page whose component has
-no entry says “No agent entry yet” and names the release it checked.
+The Agent view also switches between the three renderings agents read, each
+labelled with its token size: the full entry, the brief, and the links. An
+undocumented entry shows its facts first, with any guidance marked as hints.
+The graph map draws the relationships between components and lists them in a
+table; the overview shows what each file costs in tokens; and the pilot
+results compare the variants (no pack, full, brief, graph) on pass rate and
+tokens.
+
+The views read `/agent/index.json` and then, from the current release,
+`components/<slug>.json`, `.md`, `.brief.md`, and `.links.md`, `index.json`,
+`manifest.json`, `rules.md`, `graph.json`, and `sizes.json`, plus
+`/agent/pilot/results.json` (schema version 2). The pack pipeline owns those
+files and their schemas; the views only read them, and say plainly when a
+release lacks one. A page whose component has no entry says “No agent entry
+yet” and names the release it checked.
 
 ## Local development
 

@@ -6,10 +6,16 @@ import {
   loadEntry,
   loadIndex,
   loadPack,
+  loadRendering,
+  loadSizes,
   packFileUrl,
+  renderingPath,
+  sizeOf,
   useLoaded,
   type Pack,
+  type Rendering,
 } from './pack'
+import { RawToggle, useUrlFilter } from './pageParts'
 import {
   CommitLink,
   ComponentLink,
@@ -21,6 +27,7 @@ import {
   SourceBadge,
   StateChip,
   StrengthChip,
+  Tokens,
   flagBy,
   formatDate,
 } from './parts'
@@ -39,7 +46,8 @@ import {
   type GuideCopy,
   type TraceResult,
 } from './trace'
-import type { AgentEntry, Fact, Flag, Origin, PackIndex, QuoteOrigin, Rule } from './types'
+import type { AgentEntry, Fact, Flag, Origin, PackIndex, PackSizes, QuoteOrigin, Rule } from './types'
+import { findGuide } from '../guides/store'
 import './agent.css'
 
 // The live renderer imports every jfs-components export, so it loads only when an example shows.
@@ -63,6 +71,13 @@ export const AGENT_NAV = [
 ] as const
 
 const OVERVIEW_ONLY = [['overview', 'Overview']] as const
+
+/** The page navigation for an entry: facts first when no guide documents it. */
+function entryNav(hints: boolean): AgentNavItems {
+  if (!hints) return AGENT_NAV
+  const lead = new Set<string>(['agent-facts', 'agent-gaps'])
+  return [AGENT_NAV[0], ...AGENT_NAV.filter(([id]) => lead.has(id)), ...AGENT_NAV.slice(1).filter(([id]) => !lead.has(id))]
+}
 
 export type AgentNavItems = ReadonlyArray<readonly [string, string]>
 
@@ -120,14 +135,15 @@ type Context = {
   flagsFor: (pointer: string) => Flag[]
   /** Flags on exactly these fields, such as a whole array the guide leaves empty. */
   flagsAt: (pointers: readonly string[]) => Flag[]
+  /** Undocumented: no guide backs the guidance, so it reads as hints. */
+  hints: boolean
 }
 
 function useTraceContext(entry: AgentEntry | null, slug: string, copy: GuideCopy, index: PackIndex | null) {
   const evidence = useLoaded(`evidence:${slug}`, () => loadEvidence(slug))
-  const ownShell = !copy.sections
-  const source = useLoaded(ownShell ? `source:${slug}` : 'source:none', () =>
-    ownShell ? loadGuideSource(slug) : Promise.resolve(null),
-  )
+  // The guide's source files, for copy the section walk can't see: guides
+  // with their own page shell, and copy inside a guide's helper components.
+  const source = useLoaded(`source:${slug}`, () => loadGuideSource(slug))
   return useMemo<Context | null>(() => {
     if (!entry) return null
     const text = guideText(copy)
@@ -140,20 +156,24 @@ function useTraceContext(entry: AgentEntry | null, slug: string, copy: GuideCopy
       slug,
       ids,
       trace: (origin) => {
-        if (origin.section === 'evidence' && evidence.status === 'ready' && evidence.value === null) {
-          return { status: 'unchecked', reason: `This guide has no docs/evidence/${slug}.md.` }
+        if (origin.section === 'evidence') {
+          if (evidence.status === 'ready' && evidence.value === null) {
+            return { status: 'unchecked', reason: `This guide has no docs/evidence/${slug}.md.` }
+          }
+          return traceQuote(origin, text)
         }
-        if (text[origin.section] === undefined && origin.section !== 'evidence' && SECTION_ANCHORS[origin.section]) {
-          // A guide with its own page shell: look for the quote in its source.
-          if (source.status !== 'ready') return { status: 'unchecked', reason: 'Loading the guide source…' }
-          if (source.value === null) return { status: 'unchecked', reason: 'Not checked: the guide source was not found.' }
-          return source.value.includes(normalize(origin.quote)) ? { status: 'source' } : { status: 'missing' }
-        }
-        return traceQuote(origin, text)
+        const walked = text[origin.section] !== undefined ? traceQuote(origin, text) : null
+        if (walked && (walked.status === 'found' || walked.status === 'elsewhere')) return walked
+        if (!SECTION_ANCHORS[origin.section]) return walked ?? traceQuote(origin, text)
+        // Not in the section copy the page passes in: look in the guide's source.
+        if (source.status !== 'ready') return { status: 'unchecked', reason: 'Checking the guide source…' }
+        if (source.value === null) return walked ?? { status: 'unchecked', reason: 'Not checked: the guide source was not found.' }
+        return source.value.includes(normalize(origin.quote)) ? { status: 'source' } : { status: 'missing' }
       },
       flagsFor: (pointer) =>
         pointer ? flags.filter((flag) => flag.field === pointer || flag.field.startsWith(`${pointer}/`)) : [],
       flagsAt: (pointers) => flags.filter((flag) => pointers.includes(flag.field)),
+      hints: entry.status?.state === 'undocumented',
     }
   }, [copy, entry, evidence, index, slug, source])
 }
@@ -164,7 +184,7 @@ function TraceNote({ result }: { result: TraceResult }) {
       return <span className="agent-trace is-found">Matches the current guide</span>
     case 'source':
       return (
-        <span className="agent-trace is-found" title="This guide builds its own page, so the quote was found in its source file; its section was not checked.">
+        <span className="agent-trace is-found" title="Found in the guide's source files; its section was not checked.">
           Matches the guide’s source
         </span>
       )
@@ -230,6 +250,7 @@ function RuleItem({ rule, pointer, ctx }: { rule: Rule; pointer: string; ctx: Co
   return (
     <li className="agent-rule" id={anchorFor(pointer)}>
       <div className="agent-rule-head">
+        {ctx.hints && <span className="agent-hint-chip">Hint</span>}
         <StrengthChip strength={rule.strength} />
         {rule.target && (
           <span className="agent-rule-target">
@@ -422,16 +443,15 @@ function ExampleCard({ example, index, total, ctx }: { example: AgentEntry['exam
 
 function MarkdownFile({ pack, slug }: { pack: Pack; slug: string }) {
   const [open, setOpen] = useState(false)
-  const url = packFileUrl(pack.current, `components/${slug}.md`)
-  const file = useLoaded(open ? `md:${url}` : 'md:closed', () =>
-    open ? fetch(url).then((response) => (response.ok && !(response.headers.get('content-type') ?? '').includes('text/html') ? response.text() : null)) : Promise.resolve(null),
+  const file = useLoaded(open ? `md:${pack.source}:${pack.current}:${slug}` : 'md:closed', () =>
+    open ? loadRendering(pack, slug, 'full') : Promise.resolve(null),
   )
   return (
     <details className="agent-raw" onToggle={(event) => setOpen(event.currentTarget.open)}>
       <summary>
-        Markdown file <code>components/{slug}.md</code>
+        Markdown file <code>{renderingPath(slug, 'full')}</code>
       </summary>
-      {file.status === 'ready' && file.value !== null ? (
+      {!open ? null : file.status === 'ready' && file.value !== null ? (
         <Markdown source={file.value} />
       ) : file.status === 'ready' ? (
         <Empty>This release has no Markdown file for this entry.</Empty>
@@ -447,15 +467,52 @@ function MarkdownFile({ pack, slug }: { pack: Pack; slug: string }) {
 function EntryBody({ entry, pack, ctx }: { entry: AgentEntry; pack: Pack; ctx: Context }) {
   const flags = entry.status?.flags ?? []
   const facts = entry.facts
+  // Facts and gaps lead for an undocumented entry: they are what it has.
+  const factSections = (
+    <>
+      <AgentSection
+        id="agent-facts" flags={ctx.flagsAt(['/facts', '/facts/props', '/facts/modes', '/facts/slots', '/facts/events'])}
+        eyebrow="Facts"
+        title="Props, modes, slots, events"
+        intro="Generated from the package. Each fact names its source: types, runtime, evidence, or unknown."
+      >
+        <KindLabel kind="facts" />
+        <FactTable title="Props" facts={facts?.props} path="/facts/props" ctx={ctx} />
+        <FactTable title="Modes" facts={facts?.modes} path="/facts/modes" ctx={ctx} />
+        <FactTable title="Slots" facts={facts?.slots} path="/facts/slots" ctx={ctx} />
+        <FactTable title="Events" facts={facts?.events} path="/facts/events" ctx={ctx} />
+      </AgentSection>
+
+      <AgentSection id="agent-gaps" flags={ctx.flagsAt(['/facts/gaps'])} eyebrow="Gaps" title="What it can’t do yet" intro="The agent should never promise these.">
+        {facts?.gaps?.length ? (
+          <ul className="agent-gaps">
+            {facts.gaps.map((gap, index) => (
+              <li key={index} id={anchorFor(`/facts/gaps/${index}`)}>
+                <p>{gap.text}</p>
+                <p className="agent-gap-meta">
+                  <SourceBadge source={gap.source} />
+                  <span className="agent-checked">Checked {formatDate(gap.checkedOn)}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <Empty>No known gaps.</Empty>
+        )}
+      </AgentSection>
+
+    </>
+  )
   return (
     <>
+      {ctx.hints && factSections}
       <AgentSection
         id="agent-when" flags={ctx.flagsAt(['/useWhen', '/avoidWhen'])}
         eyebrow="When to use"
         title="Summary, use when, avoid when"
         intro="How the agent decides whether this is the right component."
       >
-        <KindLabel kind="guidance" />
+        <KindLabel kind="guidance" hints={ctx.hints} />
         <p className="agent-summary">{entry.summary}</p>
         <FlagNotes flags={ctx.flagsFor('/summary')} />
         <div className="agent-split">
@@ -540,7 +597,7 @@ function EntryBody({ entry, pack, ctx }: { entry: AgentEntry; pack: Pack; ctx: C
             )}
           </div>
           <div className="agent-panel is-guidance">
-            <KindLabel kind="guidance" />
+            <KindLabel kind="guidance" hints={ctx.hints} />
             <h3>Placement advice</h3>
             <RuleList rules={entry.placementAdvice} path="/placementAdvice" ctx={ctx} none="No placement advice." />
           </div>
@@ -548,12 +605,12 @@ function EntryBody({ entry, pack, ctx }: { entry: AgentEntry; pack: Pack; ctx: C
       </AgentSection>
 
       <AgentSection id="agent-configuration" flags={ctx.flagsAt(['/configuration'])} eyebrow="Configuration" title="Props and modes to choose">
-        <KindLabel kind="guidance" />
+        <KindLabel kind="guidance" hints={ctx.hints} />
         <RuleList rules={entry.configuration} path="/configuration" ctx={ctx} none="No configuration rules." />
       </AgentSection>
 
       <AgentSection id="agent-content" flags={ctx.flagsAt(['/content', '/content/rules', '/content/good', '/content/bad'])} eyebrow="Content" title="What to write">
-        <KindLabel kind="guidance" />
+        <KindLabel kind="guidance" hints={ctx.hints} />
         <RuleList rules={entry.content?.rules} path="/content/rules" ctx={ctx} none="No content rules." />
         <div className="agent-split agent-copy-examples">
           <div className="agent-panel">
@@ -604,7 +661,7 @@ function EntryBody({ entry, pack, ctx }: { entry: AgentEntry; pack: Pack; ctx: C
       </AgentSection>
 
       <AgentSection id="agent-accessibility" flags={ctx.flagsAt(['/accessibility'])} eyebrow="Accessibility" title="What keeps it usable">
-        <KindLabel kind="guidance" />
+        <KindLabel kind="guidance" hints={ctx.hints} />
         <RuleList rules={entry.accessibility} path="/accessibility" ctx={ctx} none="No accessibility rules." />
       </AgentSection>
 
@@ -656,37 +713,7 @@ function EntryBody({ entry, pack, ctx }: { entry: AgentEntry; pack: Pack; ctx: C
         )}
       </AgentSection>
 
-      <AgentSection
-        id="agent-facts" flags={ctx.flagsAt(['/facts', '/facts/props', '/facts/modes', '/facts/slots', '/facts/events'])}
-        eyebrow="Facts"
-        title="Props, modes, slots, events"
-        intro="Generated from the package. Each fact names its source: types, runtime, evidence, or unknown."
-      >
-        <KindLabel kind="facts" />
-        <FactTable title="Props" facts={facts?.props} path="/facts/props" ctx={ctx} />
-        <FactTable title="Modes" facts={facts?.modes} path="/facts/modes" ctx={ctx} />
-        <FactTable title="Slots" facts={facts?.slots} path="/facts/slots" ctx={ctx} />
-        <FactTable title="Events" facts={facts?.events} path="/facts/events" ctx={ctx} />
-      </AgentSection>
-
-      <AgentSection id="agent-gaps" flags={ctx.flagsAt(['/facts/gaps'])} eyebrow="Gaps" title="What it can’t do yet" intro="The agent should never promise these.">
-        {facts?.gaps?.length ? (
-          <ul className="agent-gaps">
-            {facts.gaps.map((gap, index) => (
-              <li key={index} id={anchorFor(`/facts/gaps/${index}`)}>
-                <p>{gap.text}</p>
-                <p className="agent-gap-meta">
-                  <SourceBadge source={gap.source} />
-                  <span className="agent-checked">Checked {formatDate(gap.checkedOn)}</span>
-                </p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <Empty>No known gaps.</Empty>
-        )}
-      </AgentSection>
-
+      {!ctx.hints && factSections}
       <AgentSection
         id="agent-flags"
         eyebrow="Flags"
@@ -750,23 +777,35 @@ function EntryBody({ entry, pack, ctx }: { entry: AgentEntry; pack: Pack; ctx: C
             <code>{JSON.stringify(entry, null, 2)}</code>
           </pre>
         </details>
-        {pack.source === 'live' ? (
-          <MarkdownFile pack={pack} slug={entry.slug} />
-        ) : (
-          <Empty>The sample has no Markdown file. The pipeline generates one from the JSON for each release.</Empty>
-        )}
+        <MarkdownFile pack={pack} slug={entry.slug} />
       </AgentSection>
     </>
   )
 }
 
-function ReceivesCard({ pack, entry, slug, ctx }: { pack: Pack; entry: AgentEntry | null; slug: string; ctx: Context | null }) {
+function ReceivesCard({
+  pack,
+  entry,
+  slug,
+  ctx,
+  sizes,
+}: {
+  pack: Pack
+  entry: AgentEntry | null
+  slug: string
+  ctx: Context | null
+  sizes: PackSizes | null
+}) {
   const files: Array<[string, string]> = [
     ['rules.md', 'Shared rules'],
     ['index.json', 'Every component, for choosing'],
     [`components/${slug}.json`, 'This entry'],
-    [`components/${slug}.md`, 'This entry as Markdown'],
+    [renderingPath(slug, 'full'), 'This entry as Markdown: the full variant'],
+    [renderingPath(slug, 'brief'), 'The brief: brief and graph variants'],
+    [renderingPath(slug, 'links'), 'Its relationships: graph variant'],
   ]
+  // Without sizes.json, list only the files every release has.
+  const listed = sizes ? files.filter(([path], index) => index < 4 || sizeOf(sizes, path)) : files.slice(0, 4)
   const origins = entry ? entryOrigins(entry) : []
   const quotes = origins.filter(({ origin }) => isQuote(origin))
   const traced = ctx ? quotes.map(({ origin }) => ctx.trace(origin as QuoteOrigin)) : []
@@ -783,18 +822,29 @@ function ReceivesCard({ pack, entry, slug, ctx }: { pack: Pack; entry: AgentEntr
     <aside className="agent-receives" aria-label="What the agent receives">
       <p className="eyebrow">What the agent receives</p>
       <ul className="agent-receives-files">
-        {files.map(([path, note]) => (
-          <li key={path}>
-            {pack.source === 'live' ? (
-              <a href={packFileUrl(pack.current, path)} target="_blank" rel="noreferrer">
+        {listed.map(([path, note]) => {
+          const size = sizeOf(sizes, path)
+          return (
+            <li key={path}>
+              {pack.source === 'live' ? (
+                <a href={packFileUrl(pack.current, path)} target="_blank" rel="noreferrer">
+                  <code>{path}</code>
+                </a>
+              ) : (
                 <code>{path}</code>
-              </a>
-            ) : (
-              <code>{path}</code>
-            )}
-            <span>{note}</span>
-          </li>
-        ))}
+              )}
+              <span>
+                {note}
+                {size && (
+                  <>
+                    {' · '}
+                    <Tokens tokens={size.tokens} estimated={size.estimated} />
+                  </>
+                )}
+              </span>
+            </li>
+          )
+        })}
       </ul>
       {entry && (
         <dl className="agent-receives-counts">
@@ -828,6 +878,9 @@ function ReceivesCard({ pack, entry, slug, ctx }: { pack: Pack; entry: AgentEntr
         </a>
         <a href={agentPageHref('index')} onClick={handleGuideNavigation}>
           Agent index
+        </a>
+        <a href={agentPageHref('graph')} onClick={handleGuideNavigation}>
+          Graph map
         </a>
         <a href={agentPageHref('overview')} onClick={handleGuideNavigation}>
           Pack overview
@@ -876,6 +929,14 @@ function StatusLine({ pack, entry }: { pack: Pack; entry: AgentEntry }) {
 
 function Notices({ entry, slug }: { entry: AgentEntry; slug: string }) {
   const notices: ReactNode[] = []
+  if (entry.status?.state === 'undocumented') {
+    notices.push(
+      <>
+        <strong>Facts only.</strong> No guide documents {entry.id}: its facts come from the package, and agents treat
+        any guidance in it as a hint, not a rule.
+      </>,
+    )
+  }
   const wholeEntry = (entry.status?.flags ?? []).filter((flag) => flag.field === '')
   for (const flag of wholeEntry) notices.push(<>{flag.reason} <span className="agent-muted">({flagBy(flag.by)})</span></>)
   const problems = entryProblems(entry)
@@ -899,12 +960,94 @@ function Notices({ entry, slug }: { entry: AgentEntry; slug: string }) {
   )
 }
 
+const RENDERINGS: ReadonlyArray<readonly [Rendering, string, string]> = [
+  ['full', 'Full entry', 'The full variant reads it. Below, the same entry from its JSON, with every source.'],
+  ['brief', 'Brief', 'The brief and graph variants read it; a full entry only on request.'],
+  ['links', 'Links', 'The graph variant reads it with the brief and graph.json.'],
+]
+
+/** Full entry, brief, or links: the renderings of this entry, with what each costs an agent. */
+function RenderingSwitch({
+  slug,
+  sizes,
+  value,
+  onChange,
+}: {
+  slug: string
+  sizes: PackSizes | null
+  value: Rendering
+  onChange: (value: Rendering) => void
+}) {
+  const note = RENDERINGS.find(([id]) => id === value)?.[2]
+  return (
+    <section className="agent-rendering" id="agent-rendering" aria-labelledby="agent-rendering-title">
+      <p className="agent-run-label" id="agent-rendering-title">
+        Rendering
+      </p>
+      <div className="agent-rendering-options" role="group" aria-labelledby="agent-rendering-title">
+        {RENDERINGS.map(([id, label]) => {
+          const path = renderingPath(slug, id)
+          const size = sizeOf(sizes, path)
+          // With sizes.json, a file it doesn't list is not in the release.
+          const missing = !!sizes && !size && id !== 'full'
+          return (
+            <button
+              key={id}
+              type="button"
+              aria-pressed={value === id}
+              className={value === id ? 'is-selected' : undefined}
+              disabled={missing}
+              onClick={() => onChange(id)}
+            >
+              <span className="agent-rendering-name">{label}</span>
+              <span className="agent-rendering-size">
+                {size ? <Tokens tokens={size.tokens} estimated={size.estimated} /> : missing ? 'Not in this release' : 'Size not listed'}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+      <p className="agent-rendering-note">
+        <code>{renderingPath(slug, value)}</code> · {note}
+      </p>
+    </section>
+  )
+}
+
+/** The brief or links file, as the agent receives it. */
+function RenderingFile({ pack, slug, rendering }: { pack: Pack; slug: string; rendering: Exclude<Rendering, 'full'> }) {
+  const file = useLoaded(`rendering:${pack.source}:${pack.current}:${slug}:${rendering}`, () => loadRendering(pack, slug, rendering))
+  const path = renderingPath(slug, rendering)
+  return (
+    <section className="agent-section agent-rendering-file" aria-label={path}>
+      {file.status === 'ready' && file.value !== null ? (
+        <RawToggle label="Show" raw={file.value}>
+          <Markdown source={file.value} />
+        </RawToggle>
+      ) : file.status === 'ready' ? (
+        <Empty>
+          Release <code>{pack.current}</code> has no <code>{path}</code>.
+        </Empty>
+      ) : file.status === 'error' ? (
+        <p className="agent-error" role="alert">
+          Could not read {path}: {file.message}
+        </p>
+      ) : (
+        <p className="agent-loading" role="status">
+          Loading {path}…
+        </p>
+      )}
+    </section>
+  )
+}
+
 function Hero({
   title,
   name,
   children,
   aside,
   solo,
+  hints,
 }: {
   title: ReactNode
   name: string
@@ -912,6 +1055,8 @@ function Hero({
   aside?: ReactNode
   /** Nothing follows the hero, so it needs no rule below it. */
   solo?: boolean
+  /** An undocumented entry: facts, with guidance only as hints. */
+  hints?: boolean
 }) {
   return (
     <section id="overview" className={`hero-section agent-hero anchor-section${solo ? ' is-solo' : ''}`}>
@@ -920,7 +1065,9 @@ function Hero({
         <p className="hero-lede agent-lede">
           {solo
             ? `What agents read about ${name} in the Coin agent pack.`
-            : `What agents read about ${name}: guidance from the guide and facts from the package, each with its source.`}
+            : hints
+              ? `What agents read about ${name}: facts from the package. No guide documents it, so any guidance is a hint.`
+              : `What agents read about ${name}: guidance from the guide and facts from the package, each with its source.`}
         </p>
         {children}
       </div>
@@ -952,19 +1099,29 @@ export function AgentView({
   const releaseKey = packValue ? `${packValue.source}:${packValue.current}` : 'none'
   const data = useLoaded(`entry:${releaseKey}:${slug}`, async () => {
     if (!packValue) return null
-    const [entry, index] = await Promise.all([loadEntry(packValue, slug), loadIndex(packValue).catch(() => null)])
-    return { entry, index }
+    const [entry, index, sizes] = await Promise.all([
+      loadEntry(packValue, slug),
+      loadIndex(packValue).catch(() => null),
+      loadSizes(packValue).catch(() => null),
+    ])
+    return { entry, index, sizes }
   })
+  const [rendering, setRendering] = useUrlFilter<Rendering>('rendering', 'full', { full: null, brief: 'brief', links: 'links' })
 
   const ready = data.status === 'ready' ? data.value : null
   const entry = ready?.entry ?? null
   const index = ready?.index ?? null
+  const sizes = ready?.sizes ?? null
   const ctx = useTraceContext(entry, slug, copy, index)
+  const hints = !!ctx?.hints
 
   const settled = pack.status === 'error' || (pack.status === 'ready' && data.status !== 'loading')
   useEffect(() => {
-    if (settled) onPageNav(entry ? AGENT_NAV : OVERVIEW_ONLY)
-  }, [entry, onPageNav, settled])
+    if (!settled) return
+    if (!entry) onPageNav(OVERVIEW_ONLY)
+    else if (rendering !== 'full') onPageNav([OVERVIEW_ONLY[0], ['agent-rendering', 'Rendering']])
+    else onPageNav(entryNav(hints))
+  }, [entry, hints, onPageNav, rendering, settled])
 
   // One hero for every state, so the view switch inside it keeps focus while the pack loads.
   let content: ReactNode
@@ -997,9 +1154,11 @@ export function AgentView({
           </p>
         )}
         <p className="agent-empty-links">
-          <a className="source-link" href={guideViewHref(slug, 'designer', 'overview')} onClick={handleGuideNavigation}>
-            Read the Designer view
-          </a>
+          {findGuide(slug) && (
+            <a className="source-link" href={guideViewHref(slug, 'designer', 'overview')} onClick={handleGuideNavigation}>
+              Read the Designer view
+            </a>
+          )}
           <a className="source-link" href={agentPageHref('overview')} onClick={handleGuideNavigation}>
             See every entry
           </a>
@@ -1022,11 +1181,18 @@ export function AgentView({
         title={title}
         name={name}
         solo={!showEntry}
-        aside={showEntry ? <ReceivesCard pack={packValue!} entry={entry} slug={slug} ctx={ctx} /> : undefined}
+        hints={hints}
+        aside={showEntry ? <ReceivesCard pack={packValue!} entry={entry} slug={slug} ctx={ctx} sizes={sizes} /> : undefined}
       >
         {content}
       </Hero>
-      {showEntry && <EntryBody entry={entry!} pack={packValue!} ctx={ctx!} />}
+      {showEntry && <RenderingSwitch slug={slug} sizes={sizes} value={rendering} onChange={setRendering} />}
+      {showEntry &&
+        (rendering === 'full' ? (
+          <EntryBody entry={entry!} pack={packValue!} ctx={ctx!} />
+        ) : (
+          <RenderingFile pack={packValue!} slug={slug} rendering={rendering} />
+        ))}
     </article>
   )
 }

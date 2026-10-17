@@ -11,6 +11,7 @@ import {
   guideViewHref,
   readGuideView,
   type AgentPage,
+  type AgentRoute,
   type GuideView,
 } from './agent/routes'
 import { listGuides } from './guides/store'
@@ -180,6 +181,15 @@ const AGENT_ICONS: Record<AgentPage, ReactNode> = {
       strokeLinejoin="round"
     />
   ),
+  graph: (
+    <path
+      d="M5.75 4h6.5M4.8 5.6l3.4 6.8M13.2 5.6l-3.4 6.8M5.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0M15.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0M10.75 14a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
   rules: (
     <path
       d="M4.5 2.75h6.75l2.25 2.25v10.25h-9zM7 8h4M7 11h4"
@@ -219,7 +229,7 @@ const HOME_ICON = (
 )
 
 /**
- * `active` is the current guide's slug and `agentPage` the current pack page;
+ * `active` is the current guide's slug and `agentPage` the current pack route;
  * omit both on the home page. `view` keeps guide links in the Agent view.
  */
 export function GuideSidebar({
@@ -229,7 +239,7 @@ export function GuideSidebar({
   pageNav = PAGE_NAV,
 }: {
   active?: ComponentSlug
-  agentPage?: AgentPage
+  agentPage?: AgentRoute
   view?: GuideView
   pageNav?: ReadonlyArray<readonly [string, string]>
 }) {

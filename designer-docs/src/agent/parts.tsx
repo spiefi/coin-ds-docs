@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { handleGuideNavigation } from '../GuideNavigation'
 import { findGuide } from '../guides/store'
-import { guideViewHref } from './routes'
+import { entryHref, guideViewHref } from './routes'
 import type { EntryState, FactSource, Flag, Strength } from './types'
 
 // Small pieces shared by the Agent view and the pack pages.
@@ -83,7 +83,19 @@ export function guideSlugFor(id: string, known?: ReadonlyMap<string, string>) {
   return findGuide(slug) ? slug : undefined
 }
 
-/** A link to a component's page in the given view, or plain text when the site has no guide for it. */
+/**
+ * Where a component's Agent view lives: its guide page in the Agent view, or,
+ * for a pack entry without a guide (`known` maps pack ids to slugs), the
+ * standalone entry page. Undefined when there is neither.
+ */
+export function agentHrefFor(id: string, known?: ReadonlyMap<string, string>, hash = 'overview') {
+  const slug = guideSlugFor(id, known)
+  if (slug) return guideViewHref(slug, 'agent', hash)
+  const entrySlug = known?.get(id)
+  return entrySlug ? entryHref(entrySlug, hash) : undefined
+}
+
+/** A link to a component's page in the given view, or plain text when there is none. */
 export function ComponentLink({
   id,
   view = 'agent',
@@ -96,11 +108,23 @@ export function ComponentLink({
   children?: ReactNode
 }) {
   const slug = guideSlugFor(id, known)
-  if (!slug) return <span title="No guide on this site">{children ?? id}</span>
+  const href = view === 'agent' ? agentHrefFor(id, known) : slug && guideViewHref(slug, 'designer', 'overview')
+  if (!href) return <span title="No guide or pack entry">{children ?? id}</span>
   return (
-    <a href={guideViewHref(slug, view, 'overview')} onClick={handleGuideNavigation}>
+    <a href={href} onClick={handleGuideNavigation}>
       {children ?? id}
     </a>
+  )
+}
+
+/** A token count, with ≈ when it is an estimate. `unit={false}` drops the word, for tables. */
+export function Tokens({ tokens, estimated, unit = true }: { tokens: number; estimated?: boolean; unit?: boolean }) {
+  return (
+    <span className="agent-tokens" title={`${estimated ? 'Estimated' : 'Counted'}: ${tokens.toLocaleString('en-GB')} tokens`}>
+      {estimated ? '≈' : ''}
+      {tokens.toLocaleString('en-GB')}
+      {unit && <span className="agent-tokens-unit"> tokens</span>}
+    </span>
   )
 }
 
@@ -134,10 +158,14 @@ export function Empty({ children }: { children: ReactNode }) {
   return <p className="agent-empty-line">{children}</p>
 }
 
-/** A labelled block of facts or guidance, so the two never look alike. */
-export function KindLabel({ kind }: { kind: 'facts' | 'guidance' }) {
-  return kind === 'facts' ? (
-    <p className="agent-kind is-facts">Facts · from the package</p>
+/**
+ * A labelled block of facts or guidance, so the two never look alike. For an
+ * undocumented entry (`hints`), guidance is only a hint: no guide backs it.
+ */
+export function KindLabel({ kind, hints = false }: { kind: 'facts' | 'guidance'; hints?: boolean }) {
+  if (kind === 'facts') return <p className="agent-kind is-facts">Facts · from the package</p>
+  return hints ? (
+    <p className="agent-kind is-hints">Hints · no guide documents this component</p>
   ) : (
     <p className="agent-kind is-guidance">Guidance · from the guide</p>
   )

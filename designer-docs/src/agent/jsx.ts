@@ -164,8 +164,15 @@ class Parser {
         const next = this.source[this.index]
         this.index += 1
         value += next === 'n' ? '\n' : next === 't' ? '\t' : next
+      } else if (quote === '`' && char === '$' && this.peek('{')) {
+        // A template expression can't run here: keep a literal's value, or show
+        // the expression itself, e.g. `${value}%` renders as "${value}%".
+        const start = this.index
+        this.skipBalanced('{', '}')
+        const inner = this.source.slice(start + 1, this.index - 1).trim()
+        const text = /^(['"])(.*)\1$/.exec(inner)?.[2]
+        value += text ?? (/^-?\d+(\.\d+)?$/.test(inner) ? inner : `\${${inner}}`)
       } else {
-        if (quote === '`' && char === '$' && this.peek('{')) this.fail('Template expressions are not supported')
         value += char
       }
     }
@@ -173,7 +180,7 @@ class Parser {
 
   expression(): Value {
     this.skipSpace()
-    const value = this.primary()
+    const value = this.arithmetic(['+', '-'], () => this.arithmetic(['*', '/'], () => this.primary()))
     this.skipSpace()
     // TypeScript casts in examples, e.g. modes={{ … } as Modes}.
     while (/^(as|satisfies)\b/.test(this.source.slice(this.index))) {
@@ -183,6 +190,25 @@ class Parser {
       this.skipSpace()
     }
     return value
+  }
+
+  /** Number arithmetic with the usual precedence, e.g. ratio={16 / 9}. */
+  arithmetic(operators: string[], operand: () => Value): Value {
+    let value = operand()
+    for (;;) {
+      this.skipSpace()
+      const operator = this.source[this.index]
+      // Not an operator: a comment, the end of a tag, or anything else.
+      if (!operators.includes(operator) || /^[/][/*>]/.test(this.source.slice(this.index))) return value
+      this.index += 1
+      this.skipSpace()
+      const right = operand()
+      if (value.kind !== 'literal' || right.kind !== 'literal' || typeof value.value !== 'number' || typeof right.value !== 'number') {
+        this.fail('Only arithmetic on numbers is supported')
+      }
+      const [a, b] = [value.value, right.value]
+      value = { kind: 'literal', value: operator === '+' ? a + b : operator === '-' ? a - b : operator === '*' ? a * b : a / b }
+    }
   }
 
   primary(): Value {

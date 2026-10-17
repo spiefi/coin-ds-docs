@@ -1,107 +1,601 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "packVersion": "0.1.78+0",
-  "runAt": "2026-10-16T00:00:00Z",
+  "runAt": "2026-10-17T00:00:00Z",
+  "model": "sample: no model was run",
+  "variants": [
+    "none",
+    "full",
+    "brief",
+    "graph"
+  ],
   "questions": [
     {
       "id": "badge-choose-status",
       "kind": "choose",
       "question": "A payment row needs to show that the payment went through. Which Coin component marks it?",
       "expected": {
-        "validAnswers": ["Badge"],
-        "required": ["Names Badge", "Places it beside the row title"],
-        "recommended": ["System intent with positive appearance"],
+        "validAnswers": [
+          "Badge"
+        ],
+        "required": [
+          "Names Badge",
+          "Places it beside the row title"
+        ],
+        "recommended": [
+          "System intent with positive appearance"
+        ],
         "settledBy": "Hand-written sample"
       },
-      "withPack": {
-        "answer": "A Badge labelled Paid beside the row title, with Semantic Intent System and AppearanceSystem positive.",
-        "read": ["rules.md", "index.json", "components/badge.json"],
-        "pass": true,
-        "failed": [],
-        "notes": ""
-      },
-      "withoutPack": {
-        "answer": "A green chip at the end of the row that says Payment successful.",
-        "read": [],
-        "pass": false,
-        "failed": ["Names Badge"],
-        "notes": "Picked a generic chip and wrote a sentence."
-      }
+      "runs": [
+        {
+          "variant": "none",
+          "answer": "A green chip at the end of the row that says Payment successful.",
+          "read": [],
+          "pass": false,
+          "failed": [
+            "Names Badge"
+          ],
+          "notes": "Picked a generic chip and wrote a sentence.",
+          "tokens": {
+            "input": 2400,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "output": 180,
+            "peakContext": 2400,
+            "coin": 0,
+            "coinEstimated": true
+          },
+          "calls": 1,
+          "durationMs": 9000
+        },
+        {
+          "variant": "full",
+          "answer": "A Badge labelled Paid beside the row title, with Semantic Intent System and AppearanceSystem positive.",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.md",
+              "tokens": 2026
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "",
+          "tokens": {
+            "input": 2050,
+            "cacheRead": 3073,
+            "cacheWrite": 0,
+            "output": 260,
+            "peakContext": 5523,
+            "coin": 2723,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 21000
+        },
+        {
+          "variant": "brief",
+          "answer": "A Badge labelled Paid beside the row title.",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "",
+          "tokens": {
+            "input": 1368,
+            "cacheRead": 2051,
+            "cacheWrite": 0,
+            "output": 220,
+            "peakContext": 3619,
+            "coin": 1019,
+            "coinEstimated": true
+          },
+          "calls": 2,
+          "durationMs": 14000
+        },
+        {
+          "variant": "graph",
+          "answer": "A Badge labelled Paid next to the row title in the Card.",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "graph.json",
+              "tokens": 409
+            },
+            {
+              "file": "components/badge.links.md",
+              "tokens": 97
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "",
+          "tokens": {
+            "input": 1570,
+            "cacheRead": 2355,
+            "cacheWrite": 0,
+            "output": 240,
+            "peakContext": 4325,
+            "coin": 1525,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 19000
+        }
+      ]
     },
     {
       "id": "badge-configure-failed",
       "kind": "configure",
       "question": "Configure a Badge that tells someone a payment failed.",
       "expected": {
-        "validAnswers": ["Badge with Semantic Intent System, AppearanceSystem negative, and a short label"],
-        "required": ["AppearanceSystem negative", "A short label such as Failed"],
-        "recommended": ["High emphasis"],
+        "validAnswers": [
+          "Badge with Semantic Intent System, AppearanceSystem negative, and a short label"
+        ],
+        "required": [
+          "AppearanceSystem negative",
+          "A short label such as Failed"
+        ],
+        "recommended": [
+          "High emphasis"
+        ],
         "settledBy": null
       },
-      "withPack": {
-        "answer": "<Badge label=\"Failed\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative', Emphasis: 'High' }} />",
-        "read": ["rules.md", "components/badge.json"],
-        "pass": true,
-        "failed": [],
-        "notes": ""
-      },
-      "withoutPack": {
-        "answer": "<Badge label=\"Payment failed, please try again\" color=\"red\" />",
-        "read": [],
-        "pass": false,
-        "failed": ["AppearanceSystem negative", "A short label such as Failed"],
-        "notes": "Invented a color prop."
-      }
+      "runs": [
+        {
+          "variant": "none",
+          "answer": "<Badge label=\"Payment failed, please try again\" color=\"red\" />",
+          "read": [],
+          "pass": false,
+          "failed": [
+            "AppearanceSystem negative",
+            "A short label such as Failed"
+          ],
+          "notes": "Invented a color prop.",
+          "tokens": {
+            "input": 2400,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "output": 180,
+            "peakContext": 2400,
+            "coin": 0,
+            "coinEstimated": true
+          },
+          "calls": 1,
+          "durationMs": 10000
+        },
+        {
+          "variant": "full",
+          "answer": "<Badge label=\"Failed\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative', Emphasis: 'High' }} />",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.md",
+              "tokens": 2026
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "",
+          "tokens": {
+            "input": 2050,
+            "cacheRead": 3073,
+            "cacheWrite": 0,
+            "output": 260,
+            "peakContext": 5523,
+            "coin": 2723,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 22000
+        },
+        {
+          "variant": "brief",
+          "answer": "<Badge label=\"Failed\" modes={{ Emphasis: 'High' }} />",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": false,
+          "failed": [
+            "AppearanceSystem negative"
+          ],
+          "notes": "The brief leaves out the AppearanceSystem values; it did not open the full entry.",
+          "tokens": {
+            "input": 1368,
+            "cacheRead": 2051,
+            "cacheWrite": 0,
+            "output": 220,
+            "peakContext": 3619,
+            "coin": 1019,
+            "coinEstimated": true
+          },
+          "calls": 2,
+          "durationMs": 15000
+        },
+        {
+          "variant": "graph",
+          "answer": "<Badge label=\"Failed\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }} />",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "graph.json",
+              "tokens": 409
+            },
+            {
+              "file": "components/badge.links.md",
+              "tokens": 97
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "Opened the full entry after the brief.",
+          "tokens": {
+            "input": 1570,
+            "cacheRead": 2355,
+            "cacheWrite": 0,
+            "output": 240,
+            "peakContext": 4325,
+            "coin": 1525,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 20000
+        }
+      ]
     },
     {
       "id": "badge-compose-icon",
       "kind": "compose",
       "question": "Add a status with an icon before its label to a Card row.",
       "expected": {
-        "validAnswers": ["A Badge in the row's HStack, with an Icon in leading that gets the Badge's modes"],
-        "required": ["The Icon gets the Badge's modes"],
-        "recommended": ["The Badge sits beside the row title"],
+        "validAnswers": [
+          "A Badge in the row's HStack, with an Icon in leading that gets the Badge's modes"
+        ],
+        "required": [
+          "The Icon gets the Badge's modes"
+        ],
+        "recommended": [
+          "The Badge sits beside the row title"
+        ],
         "settledBy": null
       },
-      "withPack": {
-        "answer": "<HStack><Text>September payment</Text><Badge label=\"Paid\" leading={<Icon iconName=\"ic_card\" />} /></HStack>",
-        "read": ["rules.md", "components/badge.json"],
-        "pass": false,
-        "failed": ["The Icon gets the Badge's modes"],
-        "notes": "Read the entry but left the Icon without modes."
-      },
-      "withoutPack": {
-        "answer": "<View style={{ flexDirection: 'row' }}><Text>September payment</Text><Badge icon=\"card\" label=\"Paid\" /></View>",
-        "read": [],
-        "pass": false,
-        "failed": ["The Icon gets the Badge's modes"],
-        "notes": "Used a View and an icon prop that Badge does not have."
-      }
+      "runs": [
+        {
+          "variant": "none",
+          "answer": "<View style={{ flexDirection: 'row' }}><Text>September payment</Text><Badge icon=\"card\" label=\"Paid\" /></View>",
+          "read": [],
+          "pass": false,
+          "failed": [
+            "The Icon gets the Badge's modes"
+          ],
+          "notes": "Used a View and an icon prop that Badge does not have.",
+          "tokens": {
+            "input": 2400,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "output": 180,
+            "peakContext": 2400,
+            "coin": 0,
+            "coinEstimated": true
+          },
+          "calls": 1,
+          "durationMs": 11000
+        },
+        {
+          "variant": "full",
+          "answer": "<HStack><Text>September payment</Text><Badge label=\"Paid\" modes={badgeModes} leading={<Icon iconName=\"ic_card\" modes={badgeModes} />} /></HStack>",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.md",
+              "tokens": 2026
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "",
+          "tokens": {
+            "input": 2050,
+            "cacheRead": 3073,
+            "cacheWrite": 0,
+            "output": 260,
+            "peakContext": 5523,
+            "coin": 2723,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 23000
+        },
+        {
+          "variant": "brief",
+          "answer": "<HStack><Text>September payment</Text><Badge label=\"Paid\" modes={badgeModes} leading={<Icon iconName=\"ic_card\" modes={badgeModes} />} /></HStack>",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "",
+          "tokens": {
+            "input": 1368,
+            "cacheRead": 2051,
+            "cacheWrite": 0,
+            "output": 220,
+            "peakContext": 3619,
+            "coin": 1019,
+            "coinEstimated": true
+          },
+          "calls": 2,
+          "durationMs": 16000
+        },
+        {
+          "variant": "graph",
+          "answer": "<HStack><Text>September payment</Text><Badge label=\"Paid\" leading={<Icon iconName=\"ic_card\" />} /></HStack>",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "graph.json",
+              "tokens": 409
+            },
+            {
+              "file": "components/badge.links.md",
+              "tokens": 97
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": false,
+          "failed": [
+            "The Icon gets the Badge's modes"
+          ],
+          "notes": "Followed the slotAccepts link but missed the required placement rule.",
+          "tokens": {
+            "input": 1570,
+            "cacheRead": 2355,
+            "cacheWrite": 0,
+            "output": 240,
+            "peakContext": 4325,
+            "coin": 1525,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 21000
+        }
+      ]
     },
     {
       "id": "badge-gap-label",
       "kind": "gap",
       "question": "Give an interactive Badge a screen-reader label that differs from its visible text.",
       "expected": {
-        "validAnswers": ["Not supported: Badge ignores accessibilityLabel"],
-        "required": ["Says accessibilityLabel is ignored"],
-        "recommended": ["Suggests a meaningful visible label"],
+        "validAnswers": [
+          "Not supported: Badge ignores accessibilityLabel"
+        ],
+        "required": [
+          "Says accessibilityLabel is ignored"
+        ],
+        "recommended": [
+          "Suggests a meaningful visible label"
+        ],
         "settledBy": null
       },
-      "withPack": {
-        "answer": "Badge ignores accessibilityLabel, so it can't differ from the visible text. Write a visible label that makes sense on its own, and report the gap.",
-        "read": ["components/badge.json"],
-        "pass": true,
-        "failed": [],
-        "notes": ""
-      },
-      "withoutPack": {
-        "answer": "Set accessibilityLabel=\"Open payment details\" on the Badge.",
-        "read": [],
-        "pass": false,
-        "failed": ["Says accessibilityLabel is ignored"],
-        "notes": ""
-      }
+      "runs": [
+        {
+          "variant": "none",
+          "answer": "Set accessibilityLabel=\"Open payment details\" on the Badge.",
+          "read": [],
+          "pass": false,
+          "failed": [
+            "Says accessibilityLabel is ignored"
+          ],
+          "notes": "",
+          "tokens": {
+            "input": 2400,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "output": 180,
+            "peakContext": 2400,
+            "coin": 0,
+            "coinEstimated": true
+          },
+          "calls": 1,
+          "durationMs": 12000
+        },
+        {
+          "variant": "full",
+          "answer": "Badge ignores accessibilityLabel, so it can't differ from the visible text. Write a visible label that makes sense on its own, and report the gap.",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.md",
+              "tokens": 2026
+            }
+          ],
+          "pass": true,
+          "failed": [],
+          "notes": "",
+          "tokens": {
+            "input": 2050,
+            "cacheRead": 3073,
+            "cacheWrite": 0,
+            "output": 260,
+            "peakContext": 5523,
+            "coin": 2723,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 24000
+        },
+        {
+          "variant": "brief",
+          "answer": "Set accessibilityLabel on the Badge.",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": false,
+          "failed": [
+            "Says accessibilityLabel is ignored"
+          ],
+          "notes": "Gaps are not in the brief.",
+          "tokens": {
+            "input": 1368,
+            "cacheRead": 2051,
+            "cacheWrite": 0,
+            "output": 220,
+            "peakContext": 3619,
+            "coin": 1019,
+            "coinEstimated": true
+          },
+          "calls": 2,
+          "durationMs": 17000
+        },
+        {
+          "variant": "graph",
+          "answer": "Set accessibilityLabel on the Badge.",
+          "read": [
+            {
+              "file": "rules.md",
+              "tokens": 475
+            },
+            {
+              "file": "index.json",
+              "tokens": 222
+            },
+            {
+              "file": "graph.json",
+              "tokens": 409
+            },
+            {
+              "file": "components/badge.links.md",
+              "tokens": 97
+            },
+            {
+              "file": "components/badge.brief.md",
+              "tokens": 322
+            }
+          ],
+          "pass": false,
+          "failed": [
+            "Says accessibilityLabel is ignored"
+          ],
+          "notes": "Gaps are not in the brief or the links.",
+          "tokens": {
+            "input": 1570,
+            "cacheRead": 2355,
+            "cacheWrite": 0,
+            "output": 240,
+            "peakContext": 4325,
+            "coin": 1525,
+            "coinEstimated": true
+          },
+          "calls": 3,
+          "durationMs": 22000
+        }
+      ]
     }
   ]
 }

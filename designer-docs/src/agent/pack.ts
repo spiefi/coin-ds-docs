@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
-import sampleEntry from './fixtures/badge.json'
+import sampleBadge from './fixtures/badge.json'
+import sampleCounterBadge from './fixtures/counterbadge.json'
+import sampleGraph from './fixtures/graph.json'
 import sampleIndex from './fixtures/index.json'
 import sampleManifest from './fixtures/manifest.json'
 import sampleResults from './fixtures/results.json'
 import sampleRules from './fixtures/rules.md?raw'
-import type { AgentEntry, Manifest, PackIndex, PilotResults, Releases } from './types'
+import sampleSizes from './fixtures/sizes.json'
+import type { AgentEntry, Manifest, PackGraph, PackIndex, PackSizes, PilotResults, Releases, SizedFile } from './types'
 
 // Reads the published agent pack from /agent/. Until the pipeline publishes
 // /agent/index.json, every page reads the fixtures in ./fixtures and says
@@ -24,9 +27,12 @@ const SAMPLE: Pack = {
   current: sampleIndex.packVersion,
 }
 
-const SAMPLE_ENTRIES: Record<string, AgentEntry> = {
-  [sampleEntry.slug]: sampleEntry as AgentEntry,
-}
+const SAMPLE_ENTRIES: Record<string, AgentEntry> = Object.fromEntries(
+  [sampleBadge, sampleCounterBadge].map((entry) => [entry.slug, entry as AgentEntry]),
+)
+
+// components/<slug>.md, .brief.md, and .links.md in the sample release.
+const SAMPLE_TEXTS = import.meta.glob<string>('./fixtures/*.md', { query: '?raw', import: 'default', eager: true })
 
 /** A file that is not there. Static hosts answer 404; the dev server answers with index.html. */
 class MissingFile extends Error {}
@@ -99,9 +105,57 @@ export async function loadRules(pack: Pack): Promise<string | null> {
   return orNull(fetchText(packFileUrl(pack.current, 'rules.md')))
 }
 
-export async function loadPilot(pack: Pack): Promise<PilotResults | null> {
+/** The three renderings of an entry that variants read. */
+export type Rendering = 'full' | 'brief' | 'links'
+
+/** The release file for each rendering: full is the entry's Markdown. */
+export function renderingPath(slug: string, rendering: Rendering) {
+  return `components/${slug}.${rendering === 'full' ? 'md' : `${rendering}.md`}`
+}
+
+export async function loadRendering(pack: Pack, slug: string, rendering: Rendering): Promise<string | null> {
+  const path = renderingPath(slug, rendering)
+  if (pack.source === 'sample') return SAMPLE_TEXTS[`./fixtures/${path.replace('components/', '')}`] ?? null
+  return orNull(fetchText(packFileUrl(pack.current, path)))
+}
+
+export async function loadGraph(pack: Pack): Promise<PackGraph | null> {
+  if (pack.source === 'sample') return sampleGraph as PackGraph
+  return orNull(fetchJson<PackGraph>(packFileUrl(pack.current, 'graph.json')))
+}
+
+export async function loadSizes(pack: Pack): Promise<PackSizes | null> {
+  if (pack.source === 'sample') return sampleSizes as PackSizes
+  return orNull(fetchJson<PackSizes>(packFileUrl(pack.current, 'sizes.json')))
+}
+
+/** A release file's size, matching paths with or without the release folder in front. */
+export function sizeOf(sizes: PackSizes | null | undefined, path: string): SizedFile | undefined {
+  const clean = (value: string) => value.replace(/^\/?(agent\/)?/, '').replace(/^\d+\.\d+\.\d+\+[^/]+\//, '')
+  const wanted = clean(path)
+  return sizes?.files?.find((file) => clean(file.path) === wanted)
+}
+
+/** The results file as published; the pilot page checks its schemaVersion. */
+export async function loadPilot(pack: Pack): Promise<PilotResults | { schemaVersion: unknown } | null> {
   if (pack.source === 'sample') return sampleResults as PilotResults
   return orNull(fetchJson<PilotResults>(PILOT_URL))
+}
+
+// An unscored measurement run the pipeline may keep beside its questions:
+// results in the version 2 shape, bare or wrapped as { label, results }.
+const SMOKE = import.meta.glob<unknown>('../../agent-pack/pilot/smoke.json', { import: 'default' })
+
+export type SmokeRun = { label: string | null; results: unknown }
+
+export async function loadSmoke(): Promise<SmokeRun | null> {
+  const load = Object.values(SMOKE)[0]
+  if (!load) return null
+  const value = (await load()) as { label?: unknown; results?: unknown } | null
+  if (value && typeof value === 'object' && 'results' in value) {
+    return { label: typeof value.label === 'string' ? value.label : null, results: value.results }
+  }
+  return { label: null, results: value }
 }
 
 export type Loaded<T> =

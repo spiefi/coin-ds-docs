@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "packVersion": "0.1.78+0",
+  "nodes": [
+    { "id": "Badge", "slug": "badge", "category": "feedback", "state": "flagged", "inPack": true },
+    { "id": "CounterBadge", "slug": "counterbadge", "category": "feedback", "state": "undocumented", "inPack": true },
+    { "id": "Nudge", "slug": "nudge", "category": null, "state": null, "inPack": false },
+    { "id": "Card", "slug": null, "category": null, "state": null, "inPack": false },
+    { "id": "Icon", "slug": null, "category": null, "state": null, "inPack": false },
+    { "id": "HStack", "slug": "hstack", "category": null, "state": null, "inPack": false },
+    { "id": "Text", "slug": null, "category": null, "state": null, "inPack": false }
+  ],
+  "edges": [
+    { "from": "Badge", "to": "Nudge", "type": "useInstead", "strength": "discouraged", "source": "/avoidWhen/0" },
+    { "from": "Badge", "to": "Card", "type": "placedIn", "strength": "recommended", "source": "/placementAdvice/0" },
+    { "from": "Badge", "to": "Icon", "type": "slotAccepts", "slot": "leading", "source": "/allowedChildren/0" },
+    { "from": "Badge", "to": "Card", "type": "usedWith", "source": "/examples/0" },
+    { "from": "Badge", "to": "HStack", "type": "usedWith", "source": "/examples/0" },
+    { "from": "Badge", "to": "Text", "type": "usedWith", "source": "/examples/0" },
+    { "from": "Badge", "to": "Icon", "type": "usedWith", "source": "/examples/1" }
+  ]
+}
