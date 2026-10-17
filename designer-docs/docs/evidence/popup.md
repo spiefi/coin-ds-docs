@@ -6,6 +6,8 @@ Package, Figma, and Storybook evidence for the Popup guide (board ticket #97, De
 
 Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5). Biscuit's newer `main` commit c1fa197c (12 October) changes only `Popup.mdx` (a handwritten rewrite) and adds `excludeStories` to `Popup.stories.tsx`; `Popup.tsx`, VStack, Title, and Button are unchanged.
 
+Re-checked 17 October 2026 for the #268 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `Popup.tsx` changes. New prop `accessibilityLabel` ("Accessible name for the dialog. Defaults to \"Popup\".", Popup.tsx:48-49). The sheet and its ScrollView have `maxHeight` 90% of the window height (Popup.tsx:172, 221, 233). The trigger is wrapped with the popup's modes. Measured on the guide's Tall content example in headless Chrome (window 900 px, at 1280 and 390 px wide): `role="dialog"` `aria-label="Popup"`, focus on the dialog after opening, no `[aria-label="Close popup"]`, the sheet starts at y 90 (810 px, 90%) and its scroller shows 786 of 1,198 px (1,878 at 390). Re-test on #268: `closeOnBackdropPress={false}` scrim clicks do nothing and Tab stays on the sheet; with it on, the scrim isn't a Tab stop and a click closes. The 50% scrim is unchanged (Biscuit: Figma has none; Marcin's call).
+
 ## Sources
 
 - Package: `src/components/Popup/Popup.tsx` (217 lines); exports `Popup` (forwardRef), `PopupProps`, `PopupRef` (`open()`, `close()`).
@@ -15,12 +17,12 @@ Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 ## Contract
 
-- Props: `open` (controlled when set), `defaultOpen` (false), `onOpenChange(open)` (called by the trigger, the ref, the scrim, and Escape/back), `trigger` (an element cloned with `onPress` that opens; rendered in place before the modal, without the popup's modes), `children` (one slot, wrapped in `VStack modes alignHorizontal="center"`), `modes`, `closeOnBackdropPress` (true), `backdropColor` (`#000000`), `backdropOpacity` (0.5), `animationDuration` (250), `style` (on the sheet). No `testID`, `accessibilityLabel`, title, close button, handle, drag, or placement.
+- Props: `open` (controlled when set), `defaultOpen` (false), `onOpenChange(open)` (called by the trigger, the ref, the scrim, and Escape/back), `trigger` (an element cloned with `onPress` that opens; rendered in place before the modal; since a116616 it receives the popup's modes), `children` (one slot, wrapped in `VStack modes alignHorizontal="center"`), `modes`, `closeOnBackdropPress` (true), `backdropColor` (`#000000`), `backdropOpacity` (0.5), `animationDuration` (250), `style` (on the sheet). `accessibilityLabel` (since a116616; default "Popup"). No `testID`, title, close button, handle, drag, or placement.
 - Renders React Native `Modal` (`transparent`, `animationType="none"`). On the web, react-native-web portals it into a new `div` on `document.body`, `position: fixed; inset: 0; z-index: 9999`: it covers the whole browser window, never a frame, and the sheet is 100% of the window's width. Closed, nothing is in the DOM.
 - Open: `Animated.spring` (React Native `Animated`, not Reanimated; damping 22, stiffness 220, mass 0.8, about 1% overshoot, ignores `animationDuration`) from the window's height, with the scrim fading to `backdropOpacity` over `animationDuration`. Close: slide and fade over `animationDuration` (ease in-out), then unmount.
-- Close paths: scrim press (only with `closeOnBackdropPress`), Escape on the web (react-native-web's Modal calls `onRequestClose`), Android back, `ref.close()`, or `open={false}`. With `closeOnBackdropPress={false}` the scrim is still a focusable button named “Close popup” with no action (#268).
-- Web accessibility: `role="dialog"` `aria-modal="true"` on react-native-web's wrapper, with no name (#268); react-native-web traps focus inside and returns it on close. `accessibilityViewIsModal` has no web effect.
-- No maximum height or scroll: the sheet is `overflow: hidden` and docks to the bottom, so tall content runs off the top (#268).
+- Close paths: scrim press (only with `closeOnBackdropPress`), Escape on the web (react-native-web's Modal calls `onRequestClose`), Android back, `ref.close()`, or `open={false}`. Since a116616 the scrim is never a Tab stop or a named button, and with `closeOnBackdropPress={false}` a press does nothing (#268, fixed; on c1fa197 it was a focusable “Close popup” button with no action).
+- Web accessibility: `role="dialog"` `aria-modal="true"` on react-native-web's wrapper, named by `accessibilityLabel` ("Popup" by default) since a116616 (#268, fixed; unnamed before); react-native-web traps focus inside and returns it on close. `accessibilityViewIsModal` has no web effect.
+- Maximum height: since a116616 the sheet stops at 90% of the window height and its content scrolls (#268, fixed; before, tall content ran off the top).
 
 ## Modes and tokens
 

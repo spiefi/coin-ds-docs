@@ -42,3 +42,10 @@ Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `ma
 - Non-scrollable rows: labels are one line and end in an ellipsis; when the tabs don't fit, every tab shrinks. In the guide's “Squeeze six tabs into one row” Don't (313 px at 1280) all six labels are cut, even “All” (14 of 23 px); at 390 (226 px) “All” keeps 9 px. Rows that fit are unchanged: Overview 62, Activity 51, Details 47 px, 16 px apart.
 - Regression #272 (Component Fix, In progress): with no active tab every tab has `tabindex="-1"`, so the keyboard can't reach the row; a lone idle Tab Item is also unreachable.
 - Guide: the Sizing description, the “Squeeze six tabs into one row” caption, and the Sources note describe the ellipsis, the single Tab stop, and the #272 limit. The brief's copy and Limits match.
+
+## a116616 publish (17 October 2026, #272)
+
+The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `TabItem.tsx` and `Tabs.tsx` changes.
+
+- #272 fixed (re-test 17 October): in `<Tabs accessibilityLabel="Idle tabs">` with two idle TabItems, the first has `tabindex="0"` and the second `-1`; Tab from the button before the row lands on the first tab and ArrowRight moves on. A standalone idle TabItem has `tabindex="0"`. With an active tab the roving tabindex is unchanged (active 0, others -1).
+- Guide: the Sources note now says only the selected tab is in the Tab order, or the first tab when none is selected; the #272 limit is gone. The brief's note and Limits match.

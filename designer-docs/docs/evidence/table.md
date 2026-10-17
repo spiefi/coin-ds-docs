@@ -6,6 +6,8 @@ Package, Figma, and Storybook evidence for the Table guide (board ticket #89, De
 
 Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5). `npm run coin:status` shows one newer upstream commit, c1fa197c (12 October), which touches no Table file; the last Table change is 452ceb45 (31 August). `Table.tsx`, `Table.mdx`, and `Table.stories.tsx` on `main` are identical to 636f3f5.
 
+Re-checked 17 October 2026 for the #264 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `Table.tsx` changes. Body text colour is set after the token colour (`bodyTextColor`), so Page type JioPlus no longer paints white on the white cells; text cells default to Weight Regular only when no Weight mode is set (Table.tsx:98-105); grid roles come from `gridRole()` (Table.tsx:112-116): `table`, `rowgroup`, `row`, `columnheader`, `cell`. With `onRowPress` a row stays `role="row"`, gets `tabIndex 0` on the web, activates with Enter or Space, and fades to 60% while pressed (Table.tsx:342-356). Re-test on #264: JioPlus body text rgb(0, 0, 0); Weight Bold body cells 800; table, rowgroup, 3 rows, 3 columnheaders, 6 cells. `Table.mdx` on main is the handwritten page since a463361.
+
 ## Sources
 
 - Package: `src/components/Table/Table.tsx` (611 lines); exports `Table` (with statics `Table.Header`, `.HeaderCell`, `.Body`, `.Row`, `.Cell`), `TableHeader`, `TableHeaderCell`, `TableBody`, `TableRow`, `TableCell`, and types `TableProps`, `TableColumn`, `TableCellAlign` (`src/components/index.ts:325-341`).
@@ -20,7 +22,7 @@ Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - Composition: `children` of `Table.Header` › `Table.HeaderCell` (`align`, `width`, `flex`) and `Table.Body` › `Table.Row` (`onPress`) › `Table.Cell` (`align`, `width`, `flex`, `isLastColumn`, `isLastRow`). With `children`, `columns`, `data`, and `showHeader` are ignored. Same look; only a direct `Table.Header` child is pinned by `maxHeight`.
 - Width: a column's `width` beats `columnWidth`, which beats `flex`. Flex cells shrink (`min-width: 0`) and wrap; fixed widths don't shrink, and the table is `overflow: hidden`, so fixed widths wider than the host are cut off unless `scrollable` is on.
 - `scrollable` wraps the table in a horizontal scroller with the scrollbar hidden. `maxHeight` scrolls the body under the header (pinned vertically); with both, the header scrolls sideways with the body.
-- `onRowPress` makes each row a button; pressed rows fade to 60% opacity. `data={[]}` renders the header only; there is no empty state.
+- `onRowPress` makes each row focusable and pressable (a `row`, not a button, since a116616); pressed rows fade to 60% opacity. `data={[]}` renders the header only; there is no empty state.
 - Cells: strings and numbers render through Coin `Text` (body) or token-styled header text; `null`, `undefined`, and booleans render empty; elements returned by `render` get the table's `modes` merged under their own (`cloneChildrenWithModes`). Right alignment is a style (Text offers Left and Center only). No truncation; text wraps.
 - Not supported: striping, hover, selection, sorting, sticky first column, row height, per-cell background, outer border, radius, empty state.
 
@@ -32,13 +34,13 @@ Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
   - Text Appearance (MainPage/SubPage): Neutral `#000000`, Primary `#cea15a`, Secondary `#5d00b5`, Tertiary `#026b9a`, Success `#0f5e0d`, Warning `#a1420a`, Error `#96001a`. The header stays black.
   - Text Sizes (Context Default): Small 12/16, Medium 14/17 (rendered), Large 18/24.
   - Context: Default and Nudge&Alert unchanged; ListItem Medium 12/14, Large 26/26; CTACard Medium 8/8.
-  - Weight: string and number cells are forced to Regular 400, so Weight changes nothing there (#264); it reaches only elements from `render`.
-  - Page type JioPlus: every Text Appearance resolves to `#ffffff` while the cell stays white, so body values disappear (#264).
+  - Weight: string and number cells are Regular 400 unless a Weight mode is set; since a116616 Weight reaches them (#264, fixed; before, they were forced to Regular).
+  - Page type JioPlus: the Text tokens resolve to `#ffffff`, but since a116616 the table sets its own body colour, so values stay dark on the white cells (#264, fixed).
 - Arithmetic (not measured): body row 12 + 17 + 12 + 1 = 42 px at Medium; header 12 + 20 + 12 + 1 = 45 px. Figma rows are 38 px.
 
 ## Web render
 
-`div[role="table"]` (width 100%; not when `scrollable`) › header row `div` (child 1) › header cells › `div[dir="auto"]`; body `div` (child 2) › rows › cells › Coin Text `div[dir="auto"]`. With `maxHeight`, child 2 is the scroller. No `testID` anywhere; no `row`, `cell`, or `columnheader` roles; pressable rows are `button` elements (#264).
+`div[role="table"]` (width 100%; not when `scrollable`) › header row `div` (child 1) › header cells › `div[dir="auto"]`; body `div` (child 2) › rows › cells › Coin Text `div[dir="auto"]`. With `maxHeight`, child 2 is the scroller. No `testID` anywhere; on c1fa197 no `row`, `cell`, or `columnheader` roles and pressable rows were `button` elements (#264); since a116616 the header and body are `rowgroup`s of `row`s with `columnheader` and `cell` children.
 
 ## Storybook hosting
 
@@ -53,7 +55,7 @@ Every story sits in a white `View` 360 wide (320 for the scroll stories) with 16
 
 ## Limits
 
-- Light only. Weight and Page type JioPlus are shown as they ship (#264).
+- Light only. Weight and Page type JioPlus are shown as they ship (fixed in a116616, #264).
 - Not shown as designer settings: `getRowKey`, `accessibilityLabel`, `style`, the composition API (same look; developer choice).
 
 ## Coin gaps

@@ -2,7 +2,7 @@
 
 slug: popup · label: Popup · public API: Popup, PopupRef (+ Title, VStack, Button, Text for content; ScreenFrame from the kit for In context)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3040-764 · storybook: docsUrl('popup') · stories: Default=components-popup--default, Controlled=components-popup--controlled, Custom content=components-popup--custom-content
-checked: 12 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5; main's c1fa197c only rewrites the Storybook page)
+checked: 17 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-a116616, Biscuit's main a116616; dialog name, scrim, maximum height and trigger modes fixed by #268)
 icon: a phone outline with a short sheet at the bottom — `<><rect x="4" y="1.5" width="10" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M4 11c0-1.1.9-2 2-2h6a2 2 0 0 1 2 2" stroke="currentColor" strokeWidth="1.5" fill="none" /></>`
 keywords: bottom sheet popup, modal, promo sheet, rewards popup
 
@@ -37,13 +37,13 @@ Grid `coin-new-example-grid`, each an ExampleCard:
 header: States · title: Closed, open, and how it closes · description: Closed, only the trigger shows. Opening fades in the scrim while the sheet springs up from the bottom; closing slides it down and fades the scrim over 250 ms. A tap on the scrim, Escape, or a button in the sheet closes it, and focus stays inside while it's open.
 Grid `coin-new-example-grid`:
 - Closes from inside — Triggered, Rewards — lesson: Later closes it from inside; Claim would carry on with the task.
-- Scrim tap off — Triggered, `closeOnBackdropPress={false}`, Rewards — lesson: Only Later or Escape closes it. The dimmed page is still a button named “Close popup” that does nothing (#268).
+- Scrim tap off — Triggered, `closeOnBackdropPress={false}`, Rewards — lesson: Only Later or Escape closes it; a tap on the dimmed page does nothing.
 
 ## Sizing
-header: Sizing · title: The window's width, its content's height · description: The sheet spans the whole window, as it spans a phone screen, and grows with its content. There's no maximum height and no scroll, so content taller than the screen runs off the top (#268).
+header: Sizing · title: The window's width, its content's height · description: The sheet spans the whole window, as it spans a phone screen, and grows with its content up to 90% of the window's height; taller content scrolls inside it.
 Grid `coin-new-example-grid`:
 - Short content — Triggered, Rewards — lesson: A title and two buttons: the sheet hugs them at the bottom of the screen.
-- Tall content — Triggered with label "Open tall content", Terms — lesson: Forty lines of terms run off the top of the window and can't be scrolled to.
+- Tall content — Triggered with label "Open tall content", Terms — lesson: Forty lines of terms stop at 90% of the window and scroll inside the sheet.
 
 ## Content
 header: Content · title: A headline, one line, and two choices · description: Lead with what's in it for people, add one supporting line, then a main action and a quiet way out. Figma's example also puts an image above the title.
@@ -54,14 +54,14 @@ header: In context · title: Rewards after a payment · description: After a pay
 Composition in `.coin-new-context`: `<ScreenFrame>` holding a real screen laid out with Coin (never loose Text and a bare button): `<VStack modes={{ ...LIGHT, 'Slot gap': 'L' } as Modes}>` with `<Title title="Payment successful" subtitle="₹250 paid to Ravi Stores." textAlign="Center" modes={LIGHT} />` and a full-width `<Button label="Done" modes={LIGHT} onPress={() => setOpen(true)} />`; then `<Popup open={open} onOpenChange={setOpen} modes={LIGHT}>` with Rewards whose Claim sets the status "Rewards claimed" and Later "Saved for later", each closing it; `onOpenChange(false)` from the scrim or Escape sets "Closed". Below the frame, `<p className="coin-new-readout" role="status">`, starting "Payment complete".
 
 ## Do & Don'ts
-header: Do & Don’ts · title: Short, with a way out · description: Each pair opens a popup people can read and leave next to one that traps them or runs off the screen.
+header: Do & Don’ts · title: Short, with a way out · description: Each pair opens a popup people can read and leave next to one that traps them or makes them scroll.
 Each preview is a Triggered with label "Open popup".
 - Do Offer a way out: Later, a tap on the dimmed page, and Escape all close it. — Rewards | Don't Trap people in it: With no Later and scrim taps off, only Escape closes it, and phones have no Escape key. — `closeOnBackdropPress={false}`, Rewards without `onLater`
-- Do Keep it short: A title and two buttons fit any screen. — Rewards | Don't Fill it with text: Long content runs off the top of the screen and can't be scrolled (#268). — Terms
+- Do Keep it short: A title and two buttons fit any screen. — Rewards | Don't Fill it with text: Long content fills the screen, and people must scroll to reach the buttons. — Terms
 
 ## Sources
 header: Sources · title: Use the public Popup contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Popup is a 360 × 508 white sheet with 20 px top corners and 24 px at the bottom, holding an image, a title, and two buttons; it has no scrim or properties. In code it’s a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so these examples open it from a button, as Storybook does. The sheet spans the window, its scrim is 50% black from props (Overlay’s is 70%), and it springs up but slides away over its close speed. On the web Escape closes it and focus stays inside it, but focus starts on the dimmed page’s “Close popup” button, the dialog has no name, a scrim with taps off is still that button, doing nothing, and tall content runs off the screen (#268). The published Storybook page is still the old generated one.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Popup is a 360 × 508 white sheet with 20 px top corners and 24 px at the bottom, holding an image, a title, and two buttons; it has no scrim or properties. In code it’s a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so these examples open it from a button, as Storybook does. The sheet spans the window, its scrim is 50% black from props (Overlay’s is 70%), and it springs up but slides away over its close speed. On the web Escape closes it, and focus moves into the sheet and stays there. Since the #268 fix the dialog is named by accessibilityLabel (“Popup” by default), the scrim is never a Tab stop, the sheet stops at 90% of the window and scrolls, and the trigger takes the popup’s modes. The published Storybook page is still the old generated one.
 
 ## Limits
 Never start a popup open or use `defaultOpen`; never host it as if a frame contained it. Do not show `backdropColor` (keep the black scrim), `style`, or the Background, Stack Context, and Context modes as settings. Don't imply a title or close button of its own, a handle, drag to close, a maximum height, or scrolling.

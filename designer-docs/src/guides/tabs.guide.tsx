@@ -111,11 +111,11 @@ function TabsGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Tabs contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tabs')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tabs')} stories={[
         { label: 'Default', id: 'components-tabs--default' }, { label: 'With labels', id: 'components-tabs--with-labels' },
         { label: 'Scrollable', id: 'components-tabs--scrollable' }, { label: 'All idle', id: 'components-tabs--all-idle' },
         { label: 'In Range Track', id: 'components-rangetrack--scrollable-tabs' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected; Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home, and End select tabs. If no tab is selected, the keyboard can’t reach the row, which is reported to the Coin team. In a row that doesn’t scroll, labels that don’t fit end in an ellipsis.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected. Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home, and End select tabs. In a row that doesn’t scroll, labels that don’t fit end in an ellipsis.</Sources>,
     },
   }
 

@@ -33,3 +33,7 @@ Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 ## Coin gaps
 
 - #202 (Component Fix, To do, Component Bug, medium; Mr. Biscuit, Anagha Ghotkar): positions from the window height instead of its parent; controlled `state` ignored at mount; `accessibilityLabel` dropped; no keyboard/screen-reader way to resize; content does not scroll in the published Storybook; Dark title white on grey; title font and secondary shadow tokens ignored; content 8 px higher than Figma; docs page stale.
+
+## Overlay focus trap (17 October 2026, #269 publish)
+
+The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October). Its Overlay fix for #269 adds a web focus trap that runs for every mounted Overlay (regression #281, Component Fix, To do). Measured on the built docs in headless Chrome at 1280 px: on load, focus lands on the “With a scrim” example’s overlay (`role="dialog"` “Dismiss overlay”) and the page scrolls to y 2437 (Configuration), and Tab stays there. The guide's Sources name #281; nothing works around it. The rest of this evidence was not re-checked against a116616.

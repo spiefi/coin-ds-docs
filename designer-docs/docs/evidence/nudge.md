@@ -44,3 +44,7 @@ Checked 7 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 ## c1fa197 install (13 October 2026)
 
 The release that published #205, #255, #203, #252, and #250 moved the docs to mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197), which also carries Biscuit's #206 Nudge changes. The Nudge root is now a `<section role="region">` named by its title, and a close button shows by default. Only the guide's anatomy and sizing selectors changed (`:scope > div` → `:scope > section`) so the diagrams measure the real card again. The copy wasn't re-checked against #206, which goes through its own Component Fix loop; until it is published, the page may still describe the close button as optional.
+
+## a116616 install (17 October 2026, publishing #271)
+
+The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries the #271 fix (7020bf9): Close renders only when `onClose` is set or `showClose` is true, and `showClose={false}` hides it even with `onClose`. Re-test on #271: a bare stacked-prominent or inline-compact Nudge without `onClose` has no `[aria-label="Close"]`; with `onClose`, a click and Enter call it. The guide's playground passes `showClose` explicitly and every close example passes both `showClose` and `onClose`, so the page already matched; its Sources line "the package adds it only when asked" is true again. Composites that render a default Nudge without `onClose` (CircularRating, CardInsight, CardAdvisory, BenefitCard) no longer show a dead X; their guides were updated.

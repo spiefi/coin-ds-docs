@@ -2,7 +2,7 @@
 
 slug: cardadvisory · label: Card Advisory · public API: CardAdvisory (+ VStack, Title for composition; Surface and FitWidth from the kit)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3780-5784 · storybook: docsUrl('cardadvisory') · stories: Default=components-cardadvisory--default, Without nudge=components-cardadvisory--without-nudge, Custom score=components-cardadvisory--custom-score
-checked: 13 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c1fa197, Biscuit's main c1fa197; main's 7020bf9 hides the nudge's Close and rewrites the Storybook page, not installed)
+checked: 17 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-a116616, Biscuit's main a116616; the nudge has no Close since the #271 fix)
 icon: a card with a ring — `<><rect x="2.5" y="3.5" width="13" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" /><circle cx="11.5" cy="8" r="2" stroke="currentColor" strokeWidth="1.5" /><path d="M5 7h2.5M5 11.5h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>`
 keywords: advisory card, score card, insight card, spending score, financial health
 
@@ -10,12 +10,12 @@ Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; `const NEUTRAL = { ..
 SPEND = `{ title: 'Spending', description: 'You’re within the plan you set for this month.', value: 70, nudgeBody: 'Data confidence is low. Add more accounts for better insights.', nudgeButtonLabel: 'Add accounts', accessibilityLabel: 'Spending score 70', onPressNudgeButton: noop }`.
 “CA(overrides)” = `<CardAdvisory {...SPEND} modes={NEUTRAL} {...overrides} />`.
 “Host(child)” = `<FitWidth><Surface>{child}</Surface></FitWidth>`: Storybook shows the white card on a white canvas; the card is a fixed 360 px, so FitWidth scales it down on narrow screens instead of clipping. Every CardAdvisory outside the Anatomy and Sizing diagrams sits in a Host.
-Selectors, with `testID` on the card and `R = byTestId(id)`: header `${R} > div:first-child > div:first-child > div:first-child`; title `${header} > [dir="auto"]`; info icon `${header} > div:last-child`; description `${R} > div:first-child > div:first-child > [dir="auto"]`; content `${R} > div:first-child > div:first-child`; main row `${R} > div:first-child`; score `${R} [role="progressbar"]`; nudge `${R} > [role="presentation"]`; close `${R} [aria-label="Close"]`.
+Selectors, with `testID` on the card and `R = byTestId(id)`: header `${R} > div:first-child > div:first-child > div:first-child`; title `${header} > [dir="auto"]`; info icon `${header} > div:last-child`; description `${R} > div:first-child > div:first-child > [dir="auto"]`; content `${R} > div:first-child > div:first-child`; main row `${R} > div:first-child`; score `${R} [role="progressbar"]`; nudge `${R} > [role="presentation"]`.
 
 ## Overview
 summary: Use a Card Advisory to show one score with a sentence on what it means and, if it helps, one next step.
 principle: One score, one reading, one next step.
-playground: `.preview-stage` › Host › CA with `modes={{ ...LIGHT, AppearanceBrand: appearance } as Modes}`, `value={score}`, `accessibilityLabel={`Spending score ${score}`}`, `showNudge={nudge}`, `showInfoIcon={info}`, `onPressNudgeButton={() => setAction('Add accounts pressed')}`; stage label "Live Coin Card Advisory". Controls: Segment "Appearance" `Neutral | Primary | Secondary | Tertiary` (Neutral); Segment "Score" `25 | 70 | 95` (70); OnOff "Nudge" (on); OnOff "Info icon" (on). Readout title "Last action", value "None" or "Add accounts pressed"; note: "Only the nudge button acts. In this build the nudge's Close button does nothing (#271)."
+playground: `.preview-stage` › Host › CA with `modes={{ ...LIGHT, AppearanceBrand: appearance } as Modes}`, `value={score}`, `accessibilityLabel={`Spending score ${score}`}`, `showNudge={nudge}`, `showInfoIcon={info}`, `onPressNudgeButton={() => setAction('Add accounts pressed')}`; stage label "Live Coin Card Advisory". Controls: Segment "Appearance" `Neutral | Primary | Secondary | Tertiary` (Neutral); Segment "Score" `25 | 70 | 95` (70); OnOff "Nudge" (on); OnOff "Info icon" (on). Readout title "Last action", value "None" or "Add accounts pressed"; note: "Only the nudge button acts."
 
 ## Anatomy
 header: Anatomy · title: A score, its reading, and a nudge · description: A bold title and one sentence sit beside a small ring that shows the score out of 100. An inline nudge below gives one reason to act and one button.
@@ -26,7 +26,6 @@ parts:
 3. Description — One sentence at 12 px that says what the score means. — target: description — side: left
 4. Score — A 60 px Circular Progress Bar of value out of 100; valueLabel changes the figure. — target: score — side: right
 5. Nudge — An inline Nudge with nudgeBody and one button; showNudge removes it. — target: nudge — side: bottom
-6. Close — Drawn by the nudge in this build; it does nothing yet (#271). — target: close — side: right
 
 ## Configuration
 header: Configuration · title: Brand and status colours · description: AppearanceBrand colours the ring, the nudge, and its button: Storybook uses Neutral, and the package defaults to Primary. For a score that's good or bad, set Semantic Intent to System and pick AppearanceSystem. The card itself stays white. Three slots, titleEndSlot, progressSlot, and nudgeSlot, replace the info icon, the ring, and the nudge with your own components.
@@ -63,7 +62,7 @@ Every preview is a Host.
 
 ## Sources
 header: Sources · title: Use the public Card Advisory contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Card / Advisory is one 360 × 136 component with a Title property; its nudge is the retired Nudge with a purple sparkle and no close button, a mix no single mode reproduces, so this page follows Storybook’s Neutral. In this build the card’s nudge shows a Close button that does nothing (#271); Biscuit’s 13 October build hides it but isn’t installed here. The title is cut to one line and sits on a 32 px line (26 in Figma). The card stays white in every mode. Its default spoken name reads the title, description, score, and nudge text, even when the nudge is hidden. The published Storybook still shows the old page and the older nudge.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card / Advisory is one 360 × 136 component with a Title property; its nudge is the retired Nudge with a purple sparkle and no close button, a mix no single mode reproduces, so this page follows Storybook’s Neutral. The card passes no onClose, so since the #271 fix its nudge shows no Close button. The title is cut to one line and sits on a 32 px line (26 in Figma). The card stays white in every mode. Its default spoken name reads the title, description, score, and nudge text, even when the nudge is hidden. The published Storybook still shows the old page and the older nudge.
 
 ## Limits
-Don't show Dark, Emphasis, circularProgressBar Size, Context, Border Boolean, Nudge padding, style props, or demos of titleEndSlot, progressSlot, or nudgeSlot. Don't hide or work around the Close button (#271), and don't imply a pressed, disabled, or loading state on the card.
+Don't show Dark, Emphasis, circularProgressBar Size, Context, Border Boolean, Nudge padding, style props, or demos of titleEndSlot, progressSlot, or nudgeSlot. Don't imply a pressed, disabled, or loading state on the card.

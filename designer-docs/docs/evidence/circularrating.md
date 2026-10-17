@@ -8,6 +8,8 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 Re-checked 13 October 2026 for the #252 publish: the docs now install mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197, 12 October), which carries the #252 fix. The facts below are updated to that build; the 10 October values they replace are noted where they matter.
 
+Re-checked 17 October 2026 for the #271 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October). `CircularRating.tsx` is unchanged; `Nudge.tsx` shows Close only with `onClose` or `showClose`. Re-test on #271: `<CircularRating value={72} />` renders no `[aria-label="Close"]`.
+
 ## Sources
 
 - Figma: [Coin Components Library · Circular Rating](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3741-1711), one component (no variant set), 340 × 476: `Circular Progress Bar / Doted` (320 × 320, at 10,10) with `scoreDisplay` (`scoreTier` › `label`, `scoreLabel`; `Score trend` › `tierLabel`, `ic_chevron_right`), a footer frame named `name needed` (320 × 16: text and a 16 px icon), and an instance of the deprecated `Nudge Old do not use ⛔️🔥` (320 × 56). Variables match the package tokens (dots 6 + 6 = 18 px, track `#EBEBED`, progress `#CEA15A`, score 56/56/900, tier 16/20.8/700, label 12/15.6/400, text `#080D1A`, footer 12/16 `#0D0D0F`, gap 32, padding 10), with a white nudge (`#FFFFFF`, purple sparkle `#5D00B5`, dark button `#303338`, 12 px label). Figma draws 26 dots, all lit at “72”, with centres about 138 px out (12 px inside the 320 box). Component properties and instance modes weren't readable with the read-only tools allowed.
@@ -33,7 +35,7 @@ Re-checked 13 October 2026 for the #252 publish: the docs now install mirror tag
 - Text: label 12/15.6 400, score 56/68 900, tier 16/20.8 700 (all `rgb(8,13,26)`); footer 12/16 400 `rgb(13,13,15)`; nudge body 12/16 500; nudge button label 12 px 700.
 - Root `aria-label` “Credit health. 72 out of 100. Doing great. Updated on 8 Oct 2026”, no role. Ring `role="progressbar"`, `aria-label` “Credit health. 72 out of 100. Doing great”, `aria-valuenow="72"`, `aria-valuemin="0"`, `aria-valuemax="100"`, no `aria-disabled` (13 October, c1fa197).
 - With `onTierPress` the tier row is a `<button>` after the progressbar, and the chevron shows; without it the tier is plain text with no chevron. The nudge button calls `onPressNudgeButton`. Without `nudgeButtonLabel` the button reads “Button”.
-- The default nudge now also shows a 26 px close button (from the #206 Nudge change); CircularRating doesn't wire it, so it does nothing (#271).
+- The default nudge has no close button since a116616 (#271, fixed). On c1fa197 it showed a 26 px close button (from the #206 Nudge change) that did nothing.
 - Every Nudge logs “Variable VariableID:2892:386 not found”: `nudge/radius` aliases a variable missing from the packaged Coin Variables (token problem, noted on #251).
 - The playground has no stage label: the rating fills the stage (350 px tall on mobile), and the label would sit on its footer or nudge.
 
@@ -46,6 +48,6 @@ Re-checked 13 October 2026 for the #252 publish: the docs now install mirror tag
 ## Coin gaps
 
 - #252 (Component Fix, Done, published 13 October 2026 with c1fa197): the ring was always `aria-disabled` (so was a pressable tier inside it) with no value on the web; a custom `accessibilityLabel` and the footer never reached the spoken name, and the root label was unclamped; the chevron couldn't be hidden; no default Context for Figma's small nudge button. Fixed. Still open from it, for Marcin to judge: the label, score and tier are read twice; the ring and nudge share colour modes; 0.4 shows “0”; the story's dot count goes to 120; Figma's 26 fully lit dots and deprecated nudge.
-- #271 (Component Fix; Mr. Biscuit): regression from the #206 Nudge change; the default nudge shows a close button that does nothing.
+- #271 (Component Fix; Mr. Biscuit): regression from the #206 Nudge change; the default nudge showed a close button that did nothing. Fixed in 7020bf9, published with a116616.
 - #251 (Components, To do; Marcin, token problem): no Dark values for the ring text, track dots, and footer; Medium and Low dots vanish against the track; the “Defult” mode name; the broken `nudge/radius` alias.
 - Related: #250 (CircularProgressBar has the same missing `aria-valuenow`).

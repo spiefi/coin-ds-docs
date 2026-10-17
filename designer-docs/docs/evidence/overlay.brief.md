@@ -2,7 +2,7 @@
 
 slug: overlay · label: Overlay · public API: Overlay (+ ScreenFrame from the kit; Card, Title, ButtonGroup, Button, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2976-55 · storybook: docsUrl('overlay') · stories: Default=components-overlay--default, Bare backdrop=components-overlay--bare-backdrop, Bottom sheet=components-overlay--bottom-sheet
-checked: 12 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5; main's c1fa197c only rewrites the Storybook page)
+checked: 17 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-a116616, Biscuit's main a116616; dismiss name, focus and Escape fixed by #269; every overlay traps focus, #281)
 icon: a rounded screen with a smaller filled box in the middle — `<><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" /><rect x="5" y="6.5" width="8" height="5" rx="1" fill="currentColor" /></>`
 keywords: scrim, backdrop, dim layer, modal background
 
@@ -18,7 +18,7 @@ principle: Dim the page so one thing stands out.
 playground: `.preview-stage` › Frame; stage label "Live Coin Overlay". Controls: OnOff "Shown" (on) → render the Overlay or not; Segment "Placement" `Center | Top | Bottom | Stretch` (Center) → `contentPlacement` (lower case); OnOff "Content" (on) → Dialog(hide, hide) or no children; OnOff "Tap to dismiss" (on) → `onPress={hide}` or none. Pay ₹250 on the screen turns Shown on. Readout title "Overlay", value "Shown" or "Hidden"; note with Tap to dismiss on: "Tap the dimmed screen, Pay, or Cancel to hide it. Pay ₹250 brings it back."; off: "Taps on the dimmed screen do nothing now. Pay or Cancel hide it."
 
 ## Anatomy
-header: Anatomy · title: A scrim with your content above it · description: The overlay is a 70% black layer over its screen. With onPress it also becomes one large dismiss button; whatever you place inside it sits above the scrim.
+header: Anatomy · title: A scrim with your content above it · description: The overlay is a 70% black layer over its screen. With onPress a tap anywhere on the scrim dismisses it; whatever you place inside it sits above the scrim.
 specimen: `<Anatomy specimenWidth={360}>` › `<ScreenFrame footer={<Overlay testID="ov-anatomy" modes={LIGHT} onPress={noop}>Dialog(noop, noop)</Overlay>}><Screen open={noop} /></ScreenFrame>`
 parts:
 1. Scrim — 70% black over the whole screen; it doesn't change with mode. — target: OV — side: left
@@ -36,7 +36,7 @@ Grid `coin-new-example-grid`, each an ExampleCard › Frame with Tap to dismiss 
 - Fill off — not in the footer: a `<ScreenFrame>` whose children are the Screen followed by `<Overlay fill={false} modes={LIGHT}>Dialog(noop, noop)</Overlay>` — lesson: The scrim stays in the page's flow and covers only its own content.
 
 ## States
-header: States · title: Shown, dismissible, or blocking · description: The screen shows an overlay by rendering it and hides it by removing it; it appears and goes at once, with no fade. With onPress, a tap on the scrim calls it; without, the scrim still blocks the page but does nothing.
+header: States · title: Shown, dismissible, or blocking · description: The screen shows an overlay by rendering it and hides it by removing it; it appears and goes at once, with no fade. With onPress, a tap on the scrim or Escape calls it; without, the scrim still blocks the page but does nothing. On the web, Tab stays inside the overlay while it’s shown.
 Grid `coin-new-example-grid`, each an ExampleCard › Frame:
 - Tap to dismiss — onPress hides it — lesson: A tap on the dimmed page hides it; Pay ₹250 brings it back.
 - Blocking — no onPress — lesson: Taps on the dimmed page do nothing, and the page underneath can't be pressed.
@@ -47,7 +47,7 @@ header: Sizing · title: Fills its nearest positioned parent · description: Wit
 Measured diagram: `<Anatomy legend={false} specimenWidth={360} marks={[{ kind: 'size', target: byTestId('ov-size'), side: 'right', label: 'both' }]}>` › `<ScreenFrame footer={<Overlay testID="ov-size" modes={LIGHT} />}><Screen open={noop} /></ScreenFrame>`. Report the measured size.
 
 ## Content
-header: Content · title: One focused task above the scrim · description: Put one small surface on the scrim, such as a confirmation with two buttons, and give people a way back: a Cancel button and onPress on the scrim. The scrim's spoken name, “Dismiss overlay”, is fixed in English.
+header: Content · title: One focused task above the scrim · description: Put one small surface on the scrim, such as a confirmation with two buttons, and give people a way back: a Cancel button and onPress on the scrim. Name it for screen readers with dismissAccessibilityLabel, such as “Cancel payment”; the default is “Dismiss overlay”.
 One ExampleCard "Confirm or cancel" › Frame (Tap to dismiss on). Description: "One question, one main action, and Cancel."
 
 ## In context
@@ -62,7 +62,7 @@ Every preview is a Frame.
 
 ## Sources
 header: Sources · title: Use the public Overlay contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Overlay is a fill of 70% black with no properties; placement, content, fill, and tap to dismiss exist only in code. In code it fills its nearest positioned parent, not the device screen, and its colour is the same in every mode. It isn’t a modal: it has no animation, focus handling, or Escape, and with onPress it adds one large button named “Dismiss overlay”, fixed in English, whose focus ring outlines the whole screen while Tab can still reach the page behind (#269). Drawer uses it for its scrim. The examples host it as the Storybook stories do, over a small white screen; the dialog is a Coin Card instead of the stories’ hand-made box. The published Storybook page is still the old generated one.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Overlay is a fill of 70% black with no properties; placement, content, fill, and tap to dismiss exist only in code. In code it fills its nearest positioned parent, not the device screen, and its colour is the same in every mode. It has no animation. Since the #269 fix it’s a modal on the web, named by dismissAccessibilityLabel: the scrim is no longer a Tab stop or a screen-wide focus ring, Tab stays inside, and Escape calls onPress. Every overlay takes focus as soon as it shows, even one that dims only part of a screen, so this page opens scrolled down to Do & Don’ts and Tab can’t leave that example (#281). Drawer uses it for its scrim. The examples host it as the Storybook stories do, over a small white screen; the dialog is a Coin Card instead of the stories’ hand-made box. The published Storybook page is still the old generated one.
 
 ## Limits
-Do not show `style` or `modes` as designer settings (the scrim ignores modes). Don't imply an animation, focus trapping, Escape, a modal role, a changeable dismiss name, or a scrim colour per mode. Dialog content is Coin components only.
+Do not show `style` or `modes` as designer settings (the scrim ignores modes). Don't imply an animation or a scrim colour per mode, and don't work around the focus trap on every overlay (#281). Dialog content is Coin components only.

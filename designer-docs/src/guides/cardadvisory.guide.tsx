@@ -36,7 +36,6 @@ const sel = (id: string) => {
     row: `${R} > div:first-child`,
     score: `${R} [role="progressbar"]`,
     nudge: `${R} > [role="presentation"]`,
-    close: `${R} [aria-label="Close"]`,
   }
 }
 const A = sel('ca-anatomy')
@@ -64,7 +63,6 @@ function CardAdvisoryGuide() {
         { name: 'Description', note: 'One sentence at 12 px that says what the score means.', target: A.description, side: 'left' },
         { name: 'Score', note: 'A 60 px Circular Progress Bar of value out of 100; valueLabel changes the figure.', target: A.score, side: 'right' },
         { name: 'Nudge', note: 'An inline Nudge with nudgeBody and one button; showNudge removes it.', target: A.nudge, side: 'bottom' },
-        { name: 'Close', note: 'Drawn by the nudge in this build; it does nothing yet (#271).', target: A.close, side: 'right' },
       ]}>
         {CA({ testID: 'ca-anatomy' })}
       </Anatomy>,
@@ -158,11 +156,11 @@ function CardAdvisoryGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Card Advisory contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardadvisory')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardadvisory')} stories={[
         { label: 'Default', id: 'components-cardadvisory--default' },
         { label: 'Without nudge', id: 'components-cardadvisory--without-nudge' },
         { label: 'Custom score', id: 'components-cardadvisory--custom-score' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Card / Advisory is one 360 × 136 component with a Title property; its nudge is the retired Nudge with a purple sparkle and no close button, a mix no single mode reproduces, so this page follows Storybook’s Neutral. In this build the card’s nudge shows a Close button that does nothing (#271); Biscuit’s 13 October build hides it but isn’t installed here. The title is cut to one line and sits on a 32 px line (26 in Figma). The card stays white in every mode. Its default spoken name reads the title, description, score, and nudge text, even when the nudge is hidden. The published Storybook still shows the old page and the older nudge.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card / Advisory is one 360 × 136 component with a Title property; its nudge is the retired Nudge with a purple sparkle and no close button, a mix no single mode reproduces, so this page follows Storybook’s Neutral. The card passes no onClose, so since the #271 fix its nudge shows no Close button. The title is cut to one line and sits on a 32 px line (26 in Figma). The card stays white in every mode. Its default spoken name reads the title, description, score, and nudge text, even when the nudge is hidden. The published Storybook still shows the old page and the older nudge.</Sources>,
     },
   }
 
@@ -188,7 +186,7 @@ function CardAdvisoryGuide() {
       <OnOff label="Nudge" value={nudge} onChange={setNudge} />
       <OnOff label="Info icon" value={info} onChange={setInfo} />
       <Readout title="Last action" value={action}>
-        Only the nudge button acts. In this build the nudge’s Close button does nothing (#271).
+        Only the nudge button acts.
       </Readout>
     </div>
   </>} sections={sections} />
