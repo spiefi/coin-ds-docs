@@ -1,0 +1,280 @@
+{
+  "slug": "tabitem",
+  "label": "Tab Item",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/tabitem.guide.tsx"
+  ],
+  "evidence": "docs/evidence/tabitem.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T11:18:30.895Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "tab",
+    "tab label"
+  ],
+  "title": "Tab Item",
+  "summary": "Use a Tab Item inside Tabs for each view: a short label that turns black with a gold underline while its view is showing.",
+  "corePrinciple": "One view, one short label, and always inside Tabs.",
+  "figma": "https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=66-913",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/tabs-tabitem--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A label and an underline",
+      "description": "A Tab Item is a pressable label with 8 px above and below. When selected, its label turns black and a 2 px gold underline spans the tab’s full width.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Selected tab",
+        "Its view is on screen now.",
+        "Underline",
+        "Shown only while the tab is selected.",
+        "Label",
+        "Names the view in a word or two.",
+        "Idle tab",
+        "Grey until someone presses it.",
+        "Padding"
+      ],
+      "specimen": [
+        "Overview",
+        "Statements"
+      ],
+      "anatomy": [
+        {
+          "part": "Selected tab",
+          "note": "Its view is on screen now."
+        },
+        {
+          "part": "Underline",
+          "note": "Shown only while the tab is selected."
+        },
+        {
+          "part": "Label",
+          "note": "Names the view in a word or two."
+        },
+        {
+          "part": "Idle tab",
+          "note": "Grey until someone presses it."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "A label, and a spoken name when needed",
+      "description": "A Tab Item has no size, icon, or style options: you set its label and, when a view needs a count, the counter badge from Figma.",
+      "blocks": [
+        "Label",
+        "The label is also what screen readers say.",
+        "Abbreviation with a spoken name",
+        "Short labels such as AY24 get a full spoken name: “Assessment year 2024”."
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details",
+        "AY24",
+        "AY25",
+        "AY26"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Label",
+          "description": "The label is also what screen readers say."
+        },
+        {
+          "title": "Abbreviation with a spoken name",
+          "description": "Short labels such as AY24 get a full spoken name: “Assessment year 2024”."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Idle and active",
+      "description": "The screen marks the tab whose view is showing as active; a Tab Item never selects itself. Pressing dims it to 70% until release. There is no disabled state.",
+      "blocks": [
+        "Idle",
+        "Grey label, no underline.",
+        "Active",
+        "Black label and a gold underline across the tab."
+      ],
+      "specimen": [
+        "Statements"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Idle",
+          "description": "Grey label, no underline."
+        },
+        {
+          "title": "Active",
+          "description": "Black label and a gold underline across the tab."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "33 px tall; Tabs sets the width",
+      "description": "A Tab Item is 33 px tall: a 17 px label with 8 px above and below. It is as wide as its label; Tabs places the tabs 16 px apart.",
+      "blocks": [
+        "62.5 × 33"
+      ],
+      "specimen": [
+        "Overview",
+        "Statements"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One or two words that name the view",
+      "description": "Write a noun in sentence case, such as “Statements”. Don’t write actions like “Download” or long phrases; when a label must be abbreviated, give the tab a spoken name.",
+      "blocks": [
+        "View names"
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "View names",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Tax years over one panel",
+      "description": "Each Tab Item belongs to a Tabs row. The screen marks one active and swaps the panel when another is pressed; the abbreviated labels each have a spoken name.",
+      "blocks": [
+        "Showing Assessment year 2025"
+      ],
+      "specimen": [
+        "AY24",
+        "AY25",
+        "AY26",
+        "Refund",
+        "₹1,180, credited 9 Oct 2025",
+        "Return filed",
+        "30 Jul 2025"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep each tab in its row",
+      "description": "Each pair shows a Tab Item used as intended versus one that confuses people.",
+      "blocks": [
+        "Do",
+        "Use it inside Tabs",
+        "The row places the tabs 16 px apart.",
+        "Don’t",
+        "Place one on its own",
+        "A lone Tab Item stretches across its container with no row around it.",
+        "Mark one tab active",
+        "One underline shows the current view.",
+        "Mark two tabs active",
+        "Only the first is underlined, which may not be the view that’s showing.",
+        "Name the view",
+        "“Statements” says what the panel shows.",
+        "Write an action",
+        "“Download” sounds like a button, but tabs only switch views."
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details",
+        "Statements",
+        "Download"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Use it inside Tabs",
+            "caption": "The row places the tabs 16 px apart.",
+            "specimen": "Overview · Activity · Details"
+          },
+          "dont": {
+            "title": "Place one on its own",
+            "caption": "A lone Tab Item stretches across its container with no row around it.",
+            "specimen": "Overview"
+          }
+        },
+        {
+          "do": {
+            "title": "Mark one tab active",
+            "caption": "One underline shows the current view.",
+            "specimen": "Overview · Activity · Details"
+          },
+          "dont": {
+            "title": "Mark two tabs active",
+            "caption": "Only the first is underlined, which may not be the view that’s showing.",
+            "specimen": "Overview · Activity · Details"
+          }
+        },
+        {
+          "do": {
+            "title": "Name the view",
+            "caption": "“Statements” says what the panel shows.",
+            "specimen": "Overview · Statements"
+          },
+          "dont": {
+            "title": "Write an action",
+            "caption": "“Download” sounds like a button, but tabs only switch views.",
+            "specimen": "Overview · Download"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use Tab Item through Tabs",
+      "description": "The guide compares the Figma subcomponent with the installed package and the Tabs stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Tabs default",
+        "Tabs with labels",
+        "Tabs scrollable",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected. Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

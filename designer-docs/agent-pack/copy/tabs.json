@@ -1,0 +1,318 @@
+{
+  "slug": "tabs",
+  "label": "Tabs",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/tabs.guide.tsx"
+  ],
+  "evidence": "docs/evidence/tabs.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T11:18:26.859Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "tab bar",
+    "sub-navigation",
+    "views"
+  ],
+  "title": "Tabs",
+  "summary": "Use Tabs to switch between a few peer views of the same content, such as an account’s overview, activity, and details.",
+  "corePrinciple": "A few peer views, exactly one selected, and the content below follows it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3063-136",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-tabs--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A row of tabs, one underlined",
+      "description": "Tabs lines up Tab Items in one row, 16 px apart. The selected tab has a black label and a gold underline; the others are grey.",
+      "blocks": [
+        "16",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Tab row",
+        "Holds the tabs in one row, 16 px apart.",
+        "Selected tab",
+        "Black label: the view on screen now.",
+        "Underline",
+        "2 px gold bar under the selected tab only.",
+        "Idle tab",
+        "Grey label: another view, one tap away.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details"
+      ],
+      "anatomy": [
+        {
+          "part": "Tab row",
+          "note": "Holds the tabs in one row, 16 px apart."
+        },
+        {
+          "part": "Selected tab",
+          "note": "Black label: the view on screen now."
+        },
+        {
+          "part": "Underline",
+          "note": "2 px gold bar under the selected tab only."
+        },
+        {
+          "part": "Idle tab",
+          "note": "Grey label: another view, one tap away."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "One row or scrollable",
+      "description": "Each tab hugs its label, 16 px from the next, as in Figma. Turn on scrollable when the labels don’t fit, so the row scrolls sideways.",
+      "blocks": [
+        "One row",
+        "Three tabs hug their labels from the start of the row.",
+        "Scrollable",
+        "Each tab hugs its label; scroll the row to reach the rest."
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details",
+        "All",
+        "Sent",
+        "Received",
+        "Pending",
+        "Failed",
+        "Refunded"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "One row",
+          "description": "Three tabs hug their labels from the start of the row."
+        },
+        {
+          "title": "Scrollable",
+          "description": "Each tab hugs its label; scroll the row to reach the rest."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "One tab selected at a time",
+      "description": "The screen keeps track of the selected tab: it marks that tab active and moves the mark when another tab is pressed. Tabs has no disabled or loading state.",
+      "blocks": [
+        "First tab selected",
+        "Open on the summary view.",
+        "Another tab selected",
+        "The black label and underline move to the pressed tab."
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "First tab selected",
+          "description": "Open on the summary view."
+        },
+        {
+          "title": "Another tab selected",
+          "description": "The black label and underline move to the pressed tab."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Hugs its labels, 33 px tall",
+      "description": "Tabs stretches to the width of its container. Each tab is 33 px tall: a 17 px label with 8 px above and below, and as wide as its label, with 16 px between tabs. When the tabs don’t fit, every label shrinks and ends in an ellipsis unless the row scrolls.",
+      "blocks": [
+        "62.5 × 33",
+        "16"
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name each view in a word or two",
+      "description": "Labels are short nouns in sentence case that name the view, such as “Overview” or “Activity”. Don’t number tabs or write actions.",
+      "blocks": [
+        "View names"
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "View names",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Account views over one panel",
+      "description": "The screen keeps the selected tab and shows that view below the row. Pressing another tab swaps the panel; the tabs only report the press.",
+      "blocks": [
+        "Showing Overview"
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details",
+        "Available balance",
+        "₹42,500.00",
+        "Spent this month",
+        "₹18,300 so far in October"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Use tabs for peer views",
+      "description": "Each pair shows tabs people understand versus tabs that mislead them.",
+      "blocks": [
+        "Do",
+        "Switch between peer views",
+        "Overview, Activity, and Details show the same account.",
+        "Don’t",
+        "Use tabs as actions",
+        "“Pay” and “Cancel” do something; use Buttons.",
+        "Select exactly one tab",
+        "One underline says which view is showing.",
+        "Select two tabs",
+        "Only the first is underlined, which may not be the view that’s showing.",
+        "Scroll a long set",
+        "Six filters hug their labels and scroll.",
+        "Squeeze six tabs into one row",
+        "Every label shrinks and ends in an ellipsis, even “All”.",
+        "Name each view",
+        "“Activity” says what’s there.",
+        "Number the tabs",
+        "“Tab 1”, “Tab 2”, and “Tab 3” say nothing about the view."
+      ],
+      "specimen": [
+        "Overview",
+        "Activity",
+        "Details",
+        "Pay",
+        "Cancel",
+        "All",
+        "Sent",
+        "Received",
+        "Pending",
+        "Failed",
+        "Refunded",
+        "Tab 1",
+        "Tab 2",
+        "Tab 3"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Switch between peer views",
+            "caption": "Overview, Activity, and Details show the same account.",
+            "specimen": "Overview · Activity · Details"
+          },
+          "dont": {
+            "title": "Use tabs as actions",
+            "caption": "“Pay” and “Cancel” do something; use Buttons.",
+            "specimen": "Pay · Cancel"
+          }
+        },
+        {
+          "do": {
+            "title": "Select exactly one tab",
+            "caption": "One underline says which view is showing.",
+            "specimen": "Overview · Activity · Details"
+          },
+          "dont": {
+            "title": "Select two tabs",
+            "caption": "Only the first is underlined, which may not be the view that’s showing.",
+            "specimen": "Overview · Activity · Details"
+          }
+        },
+        {
+          "do": {
+            "title": "Scroll a long set",
+            "caption": "Six filters hug their labels and scroll.",
+            "specimen": "All · Sent · Received · Pending · Failed · Refunded"
+          },
+          "dont": {
+            "title": "Squeeze six tabs into one row",
+            "caption": "Every label shrinks and ends in an ellipsis, even “All”.",
+            "specimen": "All · Sent · Received · Pending · Failed · Refunded"
+          }
+        },
+        {
+          "do": {
+            "title": "Name each view",
+            "caption": "“Activity” says what’s there.",
+            "specimen": "Overview · Activity · Details"
+          },
+          "dont": {
+            "title": "Number the tabs",
+            "caption": "“Tab 1”, “Tab 2”, and “Tab 3” say nothing about the view.",
+            "specimen": "Tab 1 · Tab 2 · Tab 3"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Tabs contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With labels",
+        "Scrollable",
+        "All idle",
+        "In Range Track",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected. Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home, and End select tabs. In a row that doesn’t scroll, labels that don’t fit end in an ellipsis.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

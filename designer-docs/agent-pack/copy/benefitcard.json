@@ -1,0 +1,353 @@
+{
+  "slug": "benefitcard",
+  "label": "Benefit Card",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/benefitcard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/benefitcard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T11:18:23.287Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "benefits card",
+    "plan benefits",
+    "rewards card",
+    "upgrade card",
+    "perks",
+    "membership"
+  ],
+  "title": "Benefit Card",
+  "summary": "Use a Benefit Card to list what a plan or offer gives, with an optional upsell and one button to upgrade.",
+  "corePrinciple": "Show what people get, then one way to get it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5352-1077",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-benefitcard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "What you earn, what you get, one button",
+      "description": "A white card with a header of earnings rows and a divider, an upsell line, a list of benefits, and an upgrade button, 8 px apart.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Header title",
+        "headerTitle at 12 px, a label for the rows below it.",
+        "Earnings row",
+        "A headerItems row: an icon, a short title, and the figure on the right.",
+        "Divider",
+        "Separates what you earn from what the plan includes.",
+        "Upsell",
+        "A Nudge by default, with no Close; bodyHeader replaces or removes it.",
+        "Benefit row",
+        "An items row: an icon and a short perk.",
+        "Button",
+        "buttonLabel and onButtonPress; showButton hides it."
+      ],
+      "specimen": [
+        "You will earn",
+        "JioPoints",
+        "Up to 2000 pts",
+        "Cashback",
+        "Up to ₹5000",
+        "Upgrade to",
+        "JioFinance+",
+        "and earn more",
+        "Zero forex markup on cards",
+        "Priority support, 24/7",
+        "Upgrade"
+      ],
+      "anatomy": [
+        {
+          "part": "Header title",
+          "note": "headerTitle at 12 px, a label for the rows below it."
+        },
+        {
+          "part": "Earnings row",
+          "note": "A headerItems row: an icon, a short title, and the figure on the right."
+        },
+        {
+          "part": "Divider",
+          "note": "Separates what you earn from what the plan includes."
+        },
+        {
+          "part": "Upsell",
+          "note": "A Nudge by default, with no Close; bodyHeader replaces or removes it."
+        },
+        {
+          "part": "Benefit row",
+          "note": "An items row: an icon and a short perk."
+        },
+        {
+          "part": "Button",
+          "note": "buttonLabel and onButtonPress; showButton hides it."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Sections and brand",
+      "description": "Each section can go: showHeader drops the title, its rows, and the divider; bodyHeader set to null removes the upsell; showButton hides the button. AppearanceBrand recolours the icons, the upsell, and the button together; the card stays white.",
+      "blocks": [
+        "Default",
+        "Purple icons, white upsell, gold button, as in Figma.",
+        "Without the upsell",
+        "bodyHeader set to null closes the gap between the lists.",
+        "Without the header",
+        "Just the upsell, the benefits, and the button.",
+        "Tertiary",
+        "One brand for the icons, the upsell, and the button."
+      ],
+      "specimen": [
+        "You will earn",
+        "JioPoints",
+        "Up to 2000 pts",
+        "Cashback",
+        "Up to ₹5000",
+        "Upgrade to",
+        "JioFinance+",
+        "and earn more",
+        "Zero forex markup on cards",
+        "Priority support, 24/7",
+        "Upgrade"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "Purple icons, white upsell, gold button, as in Figma."
+        },
+        {
+          "title": "Without the upsell",
+          "description": "bodyHeader set to null closes the gap between the lists."
+        },
+        {
+          "title": "Without the header",
+          "description": "Just the upsell, the benefits, and the button."
+        },
+        {
+          "title": "Tertiary",
+          "description": "One brand for the icons, the upsell, and the button."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "A summary with or without an action",
+      "description": "The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states. onPress makes the header a button named by its title, and pressing the header or the lists dims them and calls it; the upsell and the card’s button stay separate buttons beside it.",
+      "blocks": [
+        "With the button",
+        "One next step at the bottom.",
+        "Without the button",
+        "showButton off: a summary of the plan."
+      ],
+      "specimen": [
+        "You will earn",
+        "JioPoints",
+        "Up to 2000 pts",
+        "Cashback",
+        "Up to ₹5000",
+        "Upgrade to",
+        "JioFinance+",
+        "and earn more",
+        "Zero forex markup on cards",
+        "Priority support, 24/7",
+        "Upgrade"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "With the button",
+          "description": "One next step at the bottom."
+        },
+        {
+          "title": "Without the button",
+          "description": "showButton off: a summary of the plan."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "344 px wide, as tall as its content",
+      "description": "It's 344 px wide unless you set width to another number or a percentage, such as 100% to fill its container. It has 12 px padding, 12 px corners, and 8 px between sections, and it's as tall as what it shows. Figma's card is 344 × 221.",
+      "blocks": [
+        "344 × 223",
+        "8"
+      ],
+      "specimen": [
+        "You will earn",
+        "JioPoints",
+        "Up to 2000 pts",
+        "Cashback",
+        "Up to ₹5000",
+        "Upgrade to",
+        "JioFinance+",
+        "and earn more",
+        "Zero forex markup on cards",
+        "Priority support, 24/7",
+        "Upgrade"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "A label, short perks, and figures",
+      "description": "Write the header title as a label, such as “You will earn”. Keep each row to a short noun phrase and put its number in trailingText, where the figures line up on the right. Label the button with a verb, such as “Upgrade”.",
+      "blocks": [
+        "Short rows with the figures on the right",
+        "“JioPoints” with “Up to 2000 pts”, two perks, and “Upgrade”."
+      ],
+      "specimen": [
+        "You will earn",
+        "JioPoints",
+        "Up to 2000 pts",
+        "Cashback",
+        "Up to ₹5000",
+        "Upgrade to",
+        "JioFinance+",
+        "and earn more",
+        "Zero forex markup on cards",
+        "Priority support, 24/7",
+        "Upgrade"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short rows with the figures on the right",
+          "description": "“JioPoints” with “Up to 2000 pts”, two perks, and “Upgrade”."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Upgrading to JioFinance+",
+      "description": "The plan screen fills its width with the card (width 100%) and starts checkout when people press Upgrade, through onButtonPress. The card doesn't act on its own.",
+      "blocks": [
+        "Not upgraded yet"
+      ],
+      "specimen": [
+        "JioFinance+",
+        "Earn more on every payment",
+        "You will earn",
+        "JioPoints",
+        "Up to 2000 pts",
+        "Cashback",
+        "Up to ₹5000",
+        "Upgrade to",
+        "and earn more",
+        "Zero forex markup on cards",
+        "Priority support, 24/7",
+        "Upgrade"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Rows people scan",
+      "description": "Each pair shows a list people take in at a glance next to one they have to read line by line.",
+      "blocks": [
+        "Do",
+        "Keep each perk short",
+        "A few words per row, one benefit each.",
+        "Don’t",
+        "Write a sentence as a row",
+        "A long title is cut off, and the benefit with it.",
+        "Put the figure in trailingText",
+        "The amounts line up on the right.",
+        "Put the figure in the title",
+        "The amounts are buried in the text."
+      ],
+      "specimen": [
+        "You will earn",
+        "JioPoints",
+        "Up to 2000 pts",
+        "Cashback",
+        "Up to ₹5000",
+        "Upgrade to",
+        "JioFinance+",
+        "and earn more",
+        "Zero forex markup on cards",
+        "Priority support, 24/7",
+        "Upgrade",
+        "Pay abroad with any of your cards and get zero forex markup",
+        "Up to 2000 JioPoints",
+        "Up to ₹5000 cashback"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep each perk short",
+            "caption": "A few words per row, one benefit each.",
+            "specimen": "You will earn · JioPoints · Up to 2000 pts · Cashback · Up to ₹5000 · Upgrade to · JioFinance+ · and earn more · Zero forex markup on cards · Priority support, 24/7 · Upgrade"
+          },
+          "dont": {
+            "title": "Write a sentence as a row",
+            "caption": "A long title is cut off, and the benefit with it.",
+            "specimen": "You will earn · JioPoints · Up to 2000 pts · Cashback · Up to ₹5000 · Upgrade to · JioFinance+ · and earn more · Pay abroad with any of your cards and get zero forex markup · Priority support, 24/7 · Upgrade"
+          }
+        },
+        {
+          "do": {
+            "title": "Put the figure in trailingText",
+            "caption": "The amounts line up on the right.",
+            "specimen": "You will earn · JioPoints · Up to 2000 pts · Cashback · Up to ₹5000 · Upgrade to · JioFinance+ · and earn more · Zero forex markup on cards · Priority support, 24/7 · Upgrade"
+          },
+          "dont": {
+            "title": "Put the figure in the title",
+            "caption": "The amounts are buried in the text.",
+            "specimen": "You will earn · Up to 2000 JioPoints · Up to ₹5000 cashback · Upgrade to · JioFinance+ · and earn more · Zero forex markup on cards · Priority support, 24/7 · Upgrade"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Benefit Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Declarative arrays",
+        "Without upsell",
+        "Header hidden",
+        "Button hidden",
+        "Pressable card",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma’s BenefitCard is one 344 × 221 component with header and Button switches and two list slots; its upsell is the retired Nudge, with 12 px text and no close button. In this build the upsell has 14 px text and, since the #271 fix, no Close button, as in Figma; the card is 223 px tall, 2 more than Figma. The header swaps Figma’s spacing: 4 px under the title and 8 px between rows, 8 and 4 in Figma. The card and its title stay white and black in every mode. Its default rows repeat one placeholder, so always pass your own. The published Storybook still shows the old page and the older nudge.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

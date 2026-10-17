@@ -1,0 +1,307 @@
+{
+  "slug": "link",
+  "label": "Link",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "files": [
+    "src/guides/link.guide.tsx"
+  ],
+  "evidence": "docs/evidence/link.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:34.109Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "hyperlink",
+    "text link",
+    "inline link",
+    "anchor"
+  ],
+  "title": "Link",
+  "summary": "Use a Link to send people to related content, such as terms, help, or a recovery step, on its own line or inside a sentence.",
+  "corePrinciple": "Links take people somewhere. Keep the screen’s main action a Button.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=6981-5",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-link--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An underlined label",
+      "description": "Link is a single run of text in the same colour as the copy around it. The Text Sizes mode sets its size, and it is always underlined.",
+      "blocks": [
+        "Shown at 1.5×",
+        "1",
+        "2",
+        "3",
+        "Label",
+        "Says where the link goes; its size follows the Text Sizes mode.",
+        "Underline",
+        "Always on; it is the cue that the words can be pressed.",
+        "Pressable width",
+        "With Fill, the link spans its parent, so the whole row responds to a press.",
+        "Component bounds"
+      ],
+      "specimen": [
+        "Forgot PIN?"
+      ],
+      "anatomy": [
+        {
+          "part": "Label",
+          "note": "Says where the link goes; its size follows the Text Sizes mode."
+        },
+        {
+          "part": "Underline",
+          "note": "Always on; it is the cue that the words can be pressed."
+        },
+        {
+          "part": "Pressable width",
+          "note": "With Fill, the link spans its parent, so the whole row responds to a press."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the width and alignment",
+      "description": "Fill stretches the link across its parent, the only width where Center has room to work. Hug keeps it to its words. Inside a sentence, the link flows with the copy.",
+      "blocks": [
+        "Fill, left",
+        "The default. The label starts at the left and the whole row is pressable.",
+        "Fill, centred",
+        "Centres the label, for example under a full-width button.",
+        "Hug",
+        "Only the words are pressable, for a link in a row beside other content.",
+        "In a sentence",
+        "Inside a TextSegment the link wraps with the copy and takes its colour and size."
+      ],
+      "specimen": [
+        "Forgot PIN?",
+        "Recent transactions",
+        "View all",
+        "By continuing you agree to our",
+        "Terms",
+        "and",
+        "Privacy Policy",
+        "."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Fill, left",
+          "description": "The default. The label starts at the left and the whole row is pressable."
+        },
+        {
+          "title": "Fill, centred",
+          "description": "Centres the label, for example under a full-width button."
+        },
+        {
+          "title": "Hug",
+          "description": "Only the words are pressable, for a link in a row beside other content."
+        },
+        {
+          "title": "In a sentence",
+          "description": "Inside a TextSegment the link wraps with the copy and takes its colour and size."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Enabled and disabled",
+      "description": "Disable a link only while it briefly can’t be used, such as Resend code during a countdown. Links have no pressed, hover, or visited style.",
+      "blocks": [
+        "Enabled",
+        "Full-strength text with its underline.",
+        "Disabled",
+        "Dimmed to 40% and ignores presses."
+      ],
+      "specimen": [
+        "Resend code"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Enabled",
+          "description": "Full-strength text with its underline."
+        },
+        {
+          "title": "Disabled",
+          "description": "Dimmed to 40% and ignores presses."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The parent sets the width; the type sets the height",
+      "description": "A Fill link is as wide as its parent and a Hug link as wide as its words. Its height is one line of type: 16, 17, or 24 px for Small, Medium, and Large. Long labels wrap onto more lines.",
+      "blocks": [
+        "Fill",
+        "Hug",
+        "184 × 17",
+        "77 × 17"
+      ],
+      "specimen": [
+        "Forgot PIN?"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Say where it goes",
+      "description": "Write a short label in sentence case that names the destination or task, such as “Forgot PIN?” or “View all transactions”. In a sentence, link only the words that name the destination and keep the punctuation outside. Avoid vague labels such as “Click here”.",
+      "blocks": [
+        "On its own line",
+        "In a sentence"
+      ],
+      "specimen": [
+        "Forgot PIN?",
+        "View all transactions",
+        "Need help?",
+        "Interest rates change often.",
+        "See today’s rates",
+        "."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "On its own line",
+          "description": ""
+        },
+        {
+          "title": "In a sentence",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Terms and help on a confirmation card",
+      "description": "The screen opens the Terms, Privacy Policy, or help when a link is pressed; Link only reports the press. The main action stays a Button.",
+      "blocks": [
+        "Nothing opened yet"
+      ],
+      "specimen": [
+        "By continuing you agree to our",
+        "Terms",
+        "and",
+        "Privacy Policy",
+        ".",
+        "Continue",
+        "Need help?"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep links clear and secondary",
+      "description": "Each pair shows a link people can find and act on versus one that misleads them.",
+      "blocks": [
+        "Do",
+        "Link only the destination",
+        "Only “Terms” and “Privacy Policy” are underlined, so people know what opens.",
+        "Don’t",
+        "Link the whole sentence",
+        "A fully underlined sentence hides what will open.",
+        "Centre with Fill",
+        "The Fill link centres its label under the button.",
+        "Centre with Hug",
+        "A Hug link has no room to centre, so it stays at the left.",
+        "Keep the main action a Button",
+        "Continue stands out, and the link offers a way out.",
+        "Make the main action a link",
+        "A 17 px underlined line is easy to miss and hard to tap."
+      ],
+      "specimen": [
+        "By continuing you agree to our",
+        "Terms",
+        "and",
+        "Privacy Policy",
+        ".",
+        "By continuing you agree to our Terms and Privacy Policy.",
+        "Continue",
+        "Need help?",
+        "Not now"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Link only the destination",
+            "caption": "Only “Terms” and “Privacy Policy” are underlined, so people know what opens.",
+            "specimen": "By continuing you agree to our · Terms · and · Privacy Policy · ."
+          },
+          "dont": {
+            "title": "Link the whole sentence",
+            "caption": "A fully underlined sentence hides what will open.",
+            "specimen": "By continuing you agree to our Terms and Privacy Policy."
+          }
+        },
+        {
+          "do": {
+            "title": "Centre with Fill",
+            "caption": "The Fill link centres its label under the button.",
+            "specimen": "Continue · Need help?"
+          },
+          "dont": {
+            "title": "Centre with Hug",
+            "caption": "A Hug link has no room to centre, so it stays at the left.",
+            "specimen": "Continue · Need help?"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the main action a Button",
+            "caption": "Continue stands out, and the link offers a way out.",
+            "specimen": "Continue · Not now"
+          },
+          "dont": {
+            "title": "Make the main action a link",
+            "caption": "A 17 px underlined line is easy to miss and hard to tap.",
+            "specimen": "Continue · Not now"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Link contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Inside Text Segment",
+        "Disabled",
+        "Truncated",
+        "With children",
+        "Checked 1 October 2026",
+        "Declared and installed jfs-components is 0.1.78 from the team’s private package repository. Figma has three variants (Left and Fill, Left and Hug, Center and Fill) and no disabled variant; the package adds disabled. The screen handles navigation in onPress; Link has no web address or target. On the web, Enter and Space activate a focused link, and a disabled link is announced as disabled and skipped by Tab.",
+        "jfs-components",
+        "0.1.78",
+        "disabled",
+        "onPress"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,4 +1,7 @@
 import { useLayoutEffect, useRef } from 'react'
+import { AgentEntryPage } from './agent/AgentGuidePage'
+import { AgentPackPage } from './agent/AgentPages'
+import { readAgentPage } from './agent/routes'
 import { useGuideLocation } from './GuideNavigation'
 import { findGuide } from './guides/registry'
 import { HomePage } from './site/HomePage'
@@ -20,10 +23,19 @@ function App() {
 
   const requested = new URLSearchParams(location.search).get('component')
   const guide = findGuide(requested)
+  const agentPage = requested ? undefined : readAgentPage(location.search)
 
   return (
     <SearchProvider>
-      {guide ? <guide.Component /> : <HomePage missing={requested || undefined} />}
+      {guide ? (
+        <guide.Component />
+      ) : agentPage === 'entry' ? (
+        <AgentEntryPage key={location.search} />
+      ) : agentPage ? (
+        <AgentPackPage page={agentPage} key={agentPage} />
+      ) : (
+        <HomePage missing={requested || undefined} />
+      )}
     </SearchProvider>
   )
 }

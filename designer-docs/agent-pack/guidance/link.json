@@ -1,0 +1,429 @@
+{
+  "slug": "link",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "extractedBy": "Claude Code subagent, flow-kit extraction",
+  "extractedOn": "2026-10-17",
+  "notes": "Most of the evidence (Figma, Storybook, contract, rendered measurements, limits) was checked on 29 September 2026 against jfs-components 0.1.77. Only the #174 re-check (keyboard activation and the disabled semantics) was run on 0.1.78, on 1 October, from the mirror tag v0.1.78 built from Biscuit's fix/component-bugs-v0.1.78 branch at 5b6894b rather than from main. The guide's Sources note says 0.1.78 throughout, so items resting on the 0.1.77 measurements (width behaviour, Text Appearance contrast, Dark mode) are flagged as stale. The evidence's Limits section still lists #174 as open while its 0.1.78 check says #174 is fixed; the guide's Sources note follows the fix. Sizing gives the line heights as 16, 17 and 24 px; the evidence records the Medium token as 16 but rendered at 17 (raised by safeTextLineHeight). The guide names Button as the component for the main action, so that avoidWhen item carries useInstead Button. Two evidence lines were not kept as rules after the cross-check: the page's VStack hosting is a page fixture, and 'does not recommend recolouring' is not a discouragement.",
+  "useWhen": [
+    {
+      "text": "Send people to related content, such as terms, help, or a recovery step, on its own line or inside a sentence.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Link to send people to related content, such as terms, help, or a recovery step, on its own line or inside a sentence."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The screen's main action: links take people somewhere, so keep the main action a Button.",
+      "strength": "discouraged",
+      "useInstead": "Button",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Links take people somewhere. Keep the screen’s main action a Button."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "The text (text or children); says where the link goes, and its size follows the Text Sizes mode.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Says where the link goes; its size follows the Text Sizes mode."
+      }
+    },
+    {
+      "part": "Underline",
+      "holds": "Always on; the cue that the words can be pressed.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Always on; it is the cue that the words can be pressed."
+      }
+    },
+    {
+      "part": "Pressable width",
+      "holds": "With Fill, the link spans its parent, so the whole row responds to a press.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "With Fill, the link spans its parent, so the whole row responds to a press."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Inside a sentence, place the Link in a TextSegment: it wraps with the copy and takes its colour and size.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Inside a TextSegment the link wraps with the copy and takes its colour and size."
+      }
+    },
+    {
+      "text": "Let the screen open the destination (terms, privacy policy or help) in onPress; Link only reports the press.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the Terms, Privacy Policy, or help when a link is pressed; Link only reports the press."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" describes what the component does (it reports the press), not a limit on the designer."
+      }
+    },
+    {
+      "text": "The parent sets the width and the type sets the height: a Fill link is as wide as its parent and a Hug link as wide as its words.",
+      "strength": "recommended",
+      "target": "autolayout",
+      "from": {
+        "section": "sizing",
+        "quote": "A Fill link is as wide as its parent and a Hug link as wide as its words."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "autolayout Fill with textAlign Left is the default: the label starts at the left and the whole row is pressable.",
+      "strength": "recommended",
+      "target": "autolayout",
+      "value": "Fill",
+      "from": {
+        "section": "configuration",
+        "quote": "The default. The label starts at the left and the whole row is pressable."
+      }
+    },
+    {
+      "text": "Use textAlign Center with Fill to centre the label, for example under a full-width button.",
+      "strength": "recommended",
+      "target": "textAlign",
+      "value": "Center",
+      "from": {
+        "section": "configuration",
+        "quote": "Centres the label, for example under a full-width button."
+      }
+    },
+    {
+      "text": "Use textAlign Center with autolayout Fill: Fill stretches the link across its parent, the only width where Center has room to work.",
+      "strength": "required",
+      "target": "textAlign",
+      "value": "Center",
+      "from": {
+        "section": "configuration",
+        "quote": "Fill stretches the link across its parent, the only width where Center has room to work."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "the sentence states a layout fact with no condition: with Hug the link has no room to centre in any context (the Do & Don't pair and the evidence both show Hug + Center staying at the left)."
+      }
+    },
+    {
+      "text": "Use autolayout Hug for a link in a row beside other content; only the words are pressable.",
+      "strength": "recommended",
+      "target": "autolayout",
+      "value": "Hug",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the words are pressable, for a link in a row beside other content."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" describes Hug's pressable area, not a constraint on when to use it."
+      }
+    },
+    {
+      "text": "Disable a link only while it briefly can't be used, such as Resend code during a countdown.",
+      "strength": "recommended",
+      "target": "disabled",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "Disable a link only while it briefly can’t be used, such as Resend code during a countdown."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "the condition (briefly can't be used) is a judgement about the screen, not a constraint that can be checked everywhere."
+      }
+    },
+    {
+      "text": "Set the size with the Text Sizes mode: one line is 16, 17 or 24 px tall for Small, Medium and Large; long labels wrap onto more lines.",
+      "strength": "recommended",
+      "target": "Text Sizes",
+      "from": {
+        "section": "sizing",
+        "quote": "Its height is one line of type: 16, 17, or 24 px for Small, Medium, and Large. Long labels wrap onto more lines."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Links take people somewhere.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Links take people somewhere."
+        }
+      },
+      {
+        "text": "Write a short label in sentence case that names the destination or task, such as “Forgot PIN?” or “View all transactions”.",
+        "strength": "recommended",
+        "target": "text",
+        "from": {
+          "section": "content",
+          "quote": "Write a short label in sentence case that names the destination or task, such as “Forgot PIN?” or “View all transactions”."
+        }
+      },
+      {
+        "text": "In a sentence, link only the words that name the destination and keep the punctuation outside.",
+        "strength": "recommended",
+        "target": "text",
+        "from": {
+          "section": "content",
+          "quote": "In a sentence, link only the words that name the destination and keep the punctuation outside."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "it applies to links inside a sentence, not to a link on its own line."
+        }
+      },
+      {
+        "text": "Avoid vague labels such as “Click here”.",
+        "strength": "discouraged",
+        "target": "text",
+        "from": {
+          "section": "content",
+          "quote": "Avoid vague labels such as “Click here”."
+        }
+      },
+      {
+        "text": "Do not link the whole sentence: a fully underlined sentence hides what will open.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A fully underlined sentence hides what will open."
+        }
+      }
+    ],
+    "good": [
+      "Forgot PIN?",
+      "View all transactions",
+      "Need help?",
+      "See today’s rates",
+      "View all",
+      "Terms",
+      "Privacy Policy",
+      "Resend code"
+    ],
+    "bad": [
+      "Click here"
+    ]
+  },
+  "states": [
+    {
+      "state": "Enabled",
+      "when": "The default: full-strength text with its underline.",
+      "from": {
+        "section": "states",
+        "quote": "Full-strength text with its underline."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled true: dimmed to 40% and ignores presses; for a link that briefly can't be used.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to 40% and ignores presses."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Do not make the main action a link: a 17 px underlined line is easy to miss and hard to tap.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A 17 px underlined line is easy to miss and hard to tap."
+      }
+    },
+    {
+      "text": "On the web, Enter and Space activate a focused link, and a disabled link is announced as disabled and skipped by Tab.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web, Enter and Space activate a focused link, and a disabled link is announced as disabled and skipped by Tab."
+      },
+      "checkedVersion": "0.1.78",
+      "checkedOn": "2026-10-01"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Link only the destination",
+      "dont": "Link the whole sentence",
+      "why": "A fully underlined sentence hides what will open.",
+      "from": {
+        "section": "doDont",
+        "quote": "Link only the destination"
+      }
+    },
+    {
+      "do": "Centre with Fill",
+      "dont": "Centre with Hug",
+      "why": "A Hug link has no room to centre, so it stays at the left.",
+      "from": {
+        "section": "doDont",
+        "quote": "Centre with Fill"
+      }
+    },
+    {
+      "do": "Keep the main action a Button",
+      "dont": "Make the main action a link",
+      "why": "A 17 px underlined line is easy to miss and hard to tap.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the main action a Button"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Links inside a sentence: only the destinations are links, and the punctuation stays outside.",
+      "jsx": "<TextSegment modes={{ 'Color Mode': 'Light' }}>\n  <Text modes={{ 'Color Mode': 'Light' }}>By continuing you agree to our </Text>\n  <Link text=\"Terms\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n  <Text modes={{ 'Color Mode': 'Light' }}> and </Text>\n  <Link text=\"Privacy Policy\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n  <Text modes={{ 'Color Mode': 'Light' }}>.</Text>\n</TextSegment>",
+      "from": {
+        "section": "content",
+        "quote": "In a sentence, link only the words that name the destination and keep the punctuation outside."
+      }
+    },
+    {
+      "purpose": "A centred Fill link under the main Button.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n  <Link text=\"Need help?\" autolayout=\"Fill\" textAlign=\"Center\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>",
+      "from": {
+        "section": "configuration",
+        "quote": "Centres the label, for example under a full-width button."
+      }
+    },
+    {
+      "purpose": "A Hug link in a row beside other content.",
+      "jsx": "<HStack alignVertical=\"center\" justifyHorizontal=\"space-between\" modes={{ 'Color Mode': 'Light' }}>\n  <Text modes={{ 'Color Mode': 'Light' }}>Recent transactions</Text>\n  <Link text=\"View all\" autolayout=\"Hug\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</HStack>",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the words are pressable, for a link in a row beside other content."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "autolayout",
+      "description": "Fill is align-self: stretch, so a press on the empty right side of a Fill row fires onPress; Hug is the label's width. In a plain block parent on the web the element is inline and Fill has no effect.",
+      "quote": "In a 180 px `VStack` (padding 8) the link is 164 × 17, and a press on the empty right side fires `onPress`.",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "list": "props",
+      "name": "textAlign",
+      "description": "Center shows only with Fill; Hug with Center renders at the left edge.",
+      "quote": "Center shows only with Fill. Hug + Center renders at the left edge (checked under a full-width Button).",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "Enter and Space on a focused link both call onPress (#174 fixed).",
+      "quote": "Enter and Space on a focused link both call `onPress`.",
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "list": "props",
+      "name": "disabled",
+      "description": "Opacity 0.4 with onPress suppressed; the link has aria-disabled=true and tabindex=-1, so Tab skips it.",
+      "quote": "A disabled link has `aria-disabled=true` and `tabindex=-1`",
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "list": "props",
+      "name": "numberOfLines",
+      "description": "numberOfLines 1 keeps the label to one line with an ellipsis; without it, long labels wrap.",
+      "quote": "`numberOfLines={1}` in a 160 px `VStack`: 144 px wide, no wrap, ellipsis. Without it, long labels wrap.",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "list": "modes",
+      "name": "Text Appearance",
+      "description": "Primary is gold rgb(206,161,90), about 2.4:1 on white; Secondary is purple; Error is red. Inside a TextSegment the link takes the paragraph's modes.",
+      "quote": "Text Appearance on a link: Primary rgb(206, 161, 90), about 2.4:1 on white; Secondary rgb(93, 0, 181); Error rgb(150, 0, 26).",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "list": "modes",
+      "name": "Text Sizes",
+      "description": "Small 12/16, Medium 14/17, Large 18/24 px; line boxes 16, 17 and 24 px tall.",
+      "quote": "Text Sizes: Small 12/16, Medium 14/17, Large 18/24 px; line boxes 16, 17, 24 px tall in a stack.",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "list": "modes",
+      "name": "Weight",
+      "description": "Regular 400, Medium 500 (the default), Bold 800.",
+      "quote": "Weight Regular 400, Bold 800.",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "list": "modes",
+      "name": "Color Mode",
+      "description": "Dark leaves text/foreground black: Link (like Text) is not recoloured.",
+      "quote": "`Color Mode: Dark` leaves `text/foreground` black (Text behaves the same)",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "list": "modes",
+      "name": "Page type",
+      "description": "JioPlus gives white link text.",
+      "quote": "Page type JioPlus gives white.",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "No pressed, hover or visited style, and no testID.",
+      "quote": "No pressed, hover, or visited style; no `testID`",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "text": "Dark Color Mode does not recolour Link (or Text).",
+      "quote": "Dark Color Mode does not recolour Link (or Text), so the page shows no dark examples.",
+      "checkedOn": "2026-09-29",
+      "checkedVersion": "0.1.77"
+    },
+    {
+      "text": "Figma has no disabled variant and no Center + Hug variant; the package adds disabled.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma has three variants (Left and Fill, Left and Hug, Center and Fill) and no disabled variant; the package adds disabled."
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78"
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "slug": "vstack",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "extractedBy": "Claude Code subagent, flow-kit extraction",
+  "extractedOn": "2026-10-17",
+  "notes": "VStack's page is rendered by the shared LayoutGuides.tsx (with HStack, Stack and Breadcrumbs); only text that renders on the VStack page was used. Its Sources note says jfs-components 0.1.60, checked 15 September 2026; the shared evidence file (docs/evidence/button-and-layout.md) was checked on 19 September 2026, also on 0.1.60; the installed package is 0.1.78. Guide problems: (1) the evidence says the inspected Figma VStack exposes Slot only and no Alignment property, while the 0.1.78 types describe alignHorizontal flex-start as Figma's Top Left and center as Top, so one of them is stale; (2) the guide never names the wrap, reverse, alignHorizontal or justifyVertical props, only the behaviour ('Reverse is available', 'wrap'); (3) every live specimen, including the In context 'Keep the page in one flow' card, shows three status badges (Paid, Due today, New) rather than the heading, supporting copy and next step the copy describes, so the examples here follow the sentences; (4) the Configuration 'Mode context' card lists Stack Context, Background and Color Mode, but the guide gives no guidance on Stack Context, Background, Context or Page type; (5) there is no accessibility guidance and no copy guidance, so accessibility and content stay empty. The two Do & Don't pairs are matched.",
+  "useWhen": [
+    {
+      "text": "Page flow, grouped details and ordered content.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use VStack for page flow, grouped details, and ordered content."
+      }
+    },
+    {
+      "text": "One coherent vertical group, from heading through supporting detail and next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use VStack for one coherent vertical group, from heading through supporting detail and next step."
+      }
+    },
+    {
+      "text": "Sequence, grouping and supporting detail should be easy to scan in a column.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Use the column to make sequence, grouping, and supporting detail easy to scan."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Separating unrelated sections with a giant gap: spacing cannot repair a missing grouping boundary or unclear content hierarchy.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Spacing cannot repair a missing grouping boundary or unclear content hierarchy."
+      }
+    },
+    {
+      "text": "A responsive grid: a constrained height can let wrapped children flow into columns, but that does not turn VStack into a responsive grid.",
+      "strength": "discouraged",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "A constrained height can let wrapped children flow into columns; it does not turn VStack into a responsive grid."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Column direction",
+      "holds": "The children in vertical page-flow order; reverse is available when the content order genuinely needs it.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Children follow a vertical page-flow order. Reverse is available when the content order genuinely needs it."
+      }
+    },
+    {
+      "part": "Token gap",
+      "holds": "The Slot gap: the repeated rhythm between children, which stays consistent as content grows.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Slot gap sets the repeated rhythm between children and remains consistent as content grows."
+      }
+    },
+    {
+      "part": "Cross-axis edge",
+      "holds": "The owner's cross-axis edge that direct children share; with wrap, children flow into a new column only inside a height boundary.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Direct children share the owner’s cross-axis edge, while wrap flows into a new column only inside a height boundary."
+      }
+    },
+    {
+      "part": "Padding",
+      "holds": "The inset, Default or None, from the Padding mode; not recreated with local wrappers.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Default or None comes from the component mode. Do not recreate its inset with local wrappers."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the primitive where the relationship happens.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Place the primitive where the relationship happens"
+      }
+    },
+    {
+      "text": "Children follow token-driven spacing and padding; the host supplies the available height.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Its children follow token-driven spacing and padding while the host supplies the available height."
+      }
+    },
+    {
+      "text": "Place related content in one slot so spacing stays contiguous as items change.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Place related content in one slot so spacing stays contiguous as items change."
+      }
+    },
+    {
+      "text": "Design the host relationship: make the container boundary and content order clear before changing gap or wrap.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Make the container boundary and content order clear before changing gap or wrap."
+      }
+    },
+    {
+      "text": "A nested group can use Padding None when the surrounding section owns the inset.",
+      "strength": "recommended",
+      "target": "Padding",
+      "value": "None",
+      "from": {
+        "section": "inContext",
+        "quote": "A nested group can use None when the surrounding section owns the inset."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set Slot gap to the token rhythm that matches the surrounding hierarchy; do not tune each child independently.",
+      "strength": "recommended",
+      "target": "Slot gap",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the token rhythm that matches the surrounding hierarchy. Do not tune each child independently."
+      }
+    },
+    {
+      "text": "Choose Padding None when a containing pattern already supplies the page inset; Default and None are owner modes.",
+      "strength": "recommended",
+      "target": "Padding",
+      "value": "None",
+      "from": {
+        "section": "configuration",
+        "quote": "Default and None are owner modes. Choose None when a containing pattern already supplies the page inset."
+      }
+    },
+    {
+      "text": "Do not recreate the Padding inset with local wrappers.",
+      "strength": "discouraged",
+      "target": "Padding",
+      "from": {
+        "section": "anatomy",
+        "quote": "Do not recreate its inset with local wrappers."
+      }
+    },
+    {
+      "text": "Set Default or None padding once; avoid stacked insets from nested owners.",
+      "strength": "recommended",
+      "target": "Padding",
+      "from": {
+        "section": "content",
+        "quote": "Use Default or None padding once. Avoid stacked insets from nested owners."
+      }
+    },
+    {
+      "text": "Use wrap only when the host has a real height boundary and columns are meaningful.",
+      "strength": "recommended",
+      "target": "wrap",
+      "value": "true",
+      "from": {
+        "section": "content",
+        "quote": "Only use wrap when the host has a real height boundary and columns are meaningful."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "the condition includes a judgement (columns are meaningful), not only a constraint that can be checked everywhere."
+      }
+    },
+    {
+      "text": "Do not expect width to make columns: VStack wraps into columns only when its height is constrained.",
+      "strength": "discouraged",
+      "target": "wrap",
+      "from": {
+        "section": "sizing",
+        "quote": "VStack wraps into columns only when its height is constrained. Width alone does not make columns."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes how wrap behaves in a column at any width, and the evidence agrees (wrapping needs a constrained height); it stays advice because it describes behaviour, not a setting."
+      }
+    },
+    {
+      "text": "Use reverse when the content order genuinely needs it.",
+      "strength": "recommended",
+      "target": "reverse",
+      "value": "true",
+      "from": {
+        "section": "anatomy",
+        "quote": "Reverse is available when the content order genuinely needs it."
+      }
+    },
+    {
+      "text": "alignHorizontal defaults to stretch (Figma's Slot fill-width); pass flex-start for Top Left or center for Top.",
+      "strength": "recommended",
+      "target": "alignHorizontal",
+      "from": {
+        "fact": "props:alignHorizontal"
+      }
+    }
+  ],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "No mode changes: VStack uses its default direction and token rhythm.",
+      "from": {
+        "section": "states",
+        "quote": "uses its default direction and token rhythm."
+      }
+    },
+    {
+      "state": "Roomy rhythm",
+      "when": "A larger Slot gap on the owner: the whole group's rhythm changes.",
+      "from": {
+        "section": "states",
+        "quote": "Changing the owner gap changes the whole group."
+      }
+    },
+    {
+      "state": "Host-owned edge",
+      "when": "Padding None: a containing pattern owns the edge inset.",
+      "from": {
+        "section": "states",
+        "quote": "None lets a containing pattern own the edge inset."
+      }
+    },
+    {
+      "state": "Constrained host",
+      "when": "wrap set and the host supplies a height constraint: wrapping appears.",
+      "from": {
+        "section": "states",
+        "quote": "Wrapping appears when the host supplies a constraint."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Keep one coherent group together",
+      "dont": "Use a giant gap to separate unrelated sections",
+      "why": "Spacing cannot repair a missing grouping boundary or unclear content hierarchy.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep one coherent group together"
+      }
+    },
+    {
+      "do": "Use None when the section owns the inset",
+      "dont": "Stack component insets without a reason",
+      "why": "Nested owners can create an unintended double edge and weaken alignment.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use None when the section owns the inset"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "One page flow: a heading, supporting copy and the next step in sequence.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Title title=\"Payment summary\" subtitle=\"Review before confirming\" modes={{ 'Color Mode': 'Light' }} />\n  <Text text=\"Your payment is due today.\" modes={{ 'Color Mode': 'Light' }} />\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Group a heading, supporting copy, and next step in a clear sequence."
+      }
+    },
+    {
+      "purpose": "A nested group with Padding None inside a section that owns the inset.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Title title=\"Payment summary\" modes={{ 'Color Mode': 'Light' }} />\n  <VStack modes={{ 'Color Mode': 'Light', Padding: 'None' }}>\n    <Text text=\"To: Electricity bill\" modes={{ 'Color Mode': 'Light' }} />\n    <Text text=\"Amount: ₹2,499\" modes={{ 'Color Mode': 'Light' }} />\n  </VStack>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "A nested group can use None when the surrounding section owns the inset."
+      }
+    },
+    {
+      "purpose": "Wrap into columns inside a bounded height.",
+      "jsx": "<VStack wrap style={{ height: 92 }} modes={{ 'Color Mode': 'Light' }}>\n  <Badge label=\"Paid\" modes={{ 'Color Mode': 'Light' }} />\n  <Badge label=\"Due today\" modes={{ 'Color Mode': 'Light' }} />\n  <Badge label=\"New\" modes={{ 'Color Mode': 'Light' }} />\n</VStack>",
+      "from": {
+        "section": "sizing",
+        "quote": "VStack wraps into columns only when its height is constrained."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "wrap",
+      "description": "Wrapping needs a constrained height; wrapped children flow into columns.",
+      "quote": "Wrapping needs a constrained height and flows into columns.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "alignHorizontal",
+      "description": "Defaults to stretch. The inspected Figma VStack exposes Slot only, with no Alignment property.",
+      "quote": "The inspected Figma source exposes Slot only; it does not expose an Alignment property. Code defaults to stretch.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "reverse",
+      "description": "Reverses the visual direction.",
+      "quote": "**VStack** exposes vertical direction, cross-axis alignment, vertical justification, wrapping, and reverse visual direction with token-driven padding/gap.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The Figma VStack exposes Slot only, with no Alignment property, so code's cross-axis alignment has no Figma counterpart.",
+      "quote": "The inspected Figma source exposes Slot only; it does not expose an Alignment property.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

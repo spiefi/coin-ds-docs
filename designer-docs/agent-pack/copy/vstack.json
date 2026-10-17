@@ -1,0 +1,291 @@
+{
+  "slug": "vstack",
+  "label": "VStack",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "files": [
+    "src/guides/vstack.guide.tsx",
+    "src/LayoutGuides.tsx"
+  ],
+  "evidence": "docs/evidence/button-and-layout.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:26.766Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "vertical stack",
+    "column",
+    "layout",
+    "auto layout",
+    "spacing"
+  ],
+  "title": "VStack",
+  "summary": "Use VStack for page flow, grouped details, and ordered content. Its children follow token-driven spacing and padding while the host supplies the available height.",
+  "corePrinciple": "Use vertical rhythm to show hierarchy. A constrained height can let wrapped children flow into columns; it does not turn VStack into a responsive grid.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2841-190",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-vstack--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "VStack has one job",
+      "description": "See the column, slot, rhythm, and inset in one live example.",
+      "blocks": [
+        "Shown at 1.5×",
+        "16",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Column direction",
+        "Children follow a vertical page-flow order. Reverse is available when the content order genuinely needs it.",
+        "Token gap",
+        "Slot gap sets the repeated rhythm between children and remains consistent as content grows.",
+        "Cross-axis edge",
+        "Direct children share the owner’s cross-axis edge, while wrap flows into a new column only inside a height boundary.",
+        "Padding",
+        "Default or None comes from the component mode. Do not recreate its inset with local wrappers.",
+        "Component bounds",
+        "Child bounds",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Paid",
+        "Due today",
+        "New"
+      ],
+      "anatomy": [
+        {
+          "part": "Column direction",
+          "note": "Children follow a vertical page-flow order. Reverse is available when the content order genuinely needs it."
+        },
+        {
+          "part": "Token gap",
+          "note": "Slot gap sets the repeated rhythm between children and remains consistent as content grows."
+        },
+        {
+          "part": "Cross-axis edge",
+          "note": "Direct children share the owner’s cross-axis edge, while wrap flows into a new column only inside a height boundary."
+        },
+        {
+          "part": "Padding",
+          "note": "Default or None comes from the component mode. Do not recreate its inset with local wrappers."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Configure the owner, then read the result",
+      "description": "Choose vertical rhythm and inset once. Wrap is meaningful only inside a real height boundary.",
+      "blocks": [
+        "Slot gap",
+        "Use the token rhythm that matches the surrounding hierarchy. Do not tune each child independently.",
+        "One vertical rhythm",
+        "Padding",
+        "Default and None are owner modes. Choose None when a containing pattern already supplies the page inset.",
+        "Do not double the inset",
+        "Bounded height · 92px",
+        "Wrap in a height constraint",
+        "VStack wraps into columns only when the host supplies a constrained height.",
+        "System output of available height",
+        "Mode context",
+        "Keep vertical flow legible",
+        "Storybook exposes gap, padding, stack context, background, and color mode contexts. This guide keeps the examples focused on choices that alter the visible flow.",
+        "Slot gap · XS–XL",
+        "Padding · Default / None",
+        "Stack Context · Root / Nested",
+        "Color Mode · Light / Dark"
+      ],
+      "specimen": [
+        "A",
+        "B",
+        "A Host edge",
+        "Paid",
+        "Due today",
+        "New"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "VStack responds to its host",
+      "description": "Compare default, changed rhythm, host-owned edge, and constrained outcomes without recreating the layout primitive.",
+      "blocks": [
+        "Default",
+        "VStack uses its default direction and token rhythm.",
+        "Roomy rhythm",
+        "Changing the owner gap changes the whole group.",
+        "Host-owned edge",
+        "None lets a containing pattern own the edge inset.",
+        "Bounded height · 92px",
+        "Constrained host",
+        "Wrapping appears when the host supplies a constraint.",
+        "Design the host relationship.",
+        "A stack is a layout result inside its parent. Make the container boundary and content order clear before changing gap or wrap."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today",
+        "New"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The parent supplies the constraint",
+      "description": "VStack wrap is a height outcome. Width alone does not turn a column into a grid.",
+      "blocks": [
+        "Wide parent",
+        "Constrained parent",
+        "Bounded height · 92px",
+        "VStack wraps into columns only when its height is constrained. Width alone does not make columns."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today",
+        "New"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Make the relationship visible",
+      "description": "Columns work when sequence and grouping make the page easier to read.",
+      "blocks": [
+        "01",
+        "Show hierarchy vertically",
+        "Use the column to make sequence, grouping, and supporting detail easy to scan.",
+        "02",
+        "Keep one group together",
+        "Place related content in one slot so spacing stays contiguous as items change.",
+        "03",
+        "Constrain height for wrap",
+        "Only use wrap when the host has a real height boundary and columns are meaningful.",
+        "04",
+        "Let the host own edges",
+        "Use Default or None padding once. Avoid stacked insets from nested owners."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today",
+        "New"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Place the primitive where the relationship happens",
+      "description": "Use VStack for one coherent vertical group, from heading through supporting detail and next step.",
+      "blocks": [
+        "Summary row",
+        "Keep the page in one flow",
+        "Group a heading, supporting copy, and next step in a clear sequence.",
+        "Vertical · ordered content",
+        "Constrained host",
+        "Keep the edge ownership clear",
+        "A nested group can use None when the surrounding section owns the inset.",
+        "None · host-owned inset",
+        "Coin composition",
+        "Let vertical rhythm do the explaining",
+        "Use a vertical stack for one coherent group so each gap carries meaning.",
+        "Heading",
+        "→",
+        "Details",
+        "Next step"
+      ],
+      "specimen": [
+        "Paid",
+        "Due today",
+        "New"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Protect structure and clarity",
+      "description": "These pairs keep the layout relationship visible as content and host constraints change.",
+      "blocks": [
+        "Do",
+        "Keep one coherent group together",
+        "A single vertical flow keeps hierarchy and rhythm contiguous.",
+        "Don’t",
+        "Use a giant gap to separate unrelated sections",
+        "Spacing cannot repair a missing grouping boundary or unclear content hierarchy.",
+        "Use None when the section owns the inset",
+        "The visible boundary has one clear owner and the content remains aligned.",
+        "Stack component insets without a reason",
+        "Nested owners can create an unintended double edge and weaken alignment."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today",
+        "New"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep one coherent group together",
+            "caption": "A single vertical flow keeps hierarchy and rhythm contiguous.",
+            "specimen": "Paid · Due today · New"
+          },
+          "dont": {
+            "title": "Use a giant gap to separate unrelated sections",
+            "caption": "Spacing cannot repair a missing grouping boundary or unclear content hierarchy.",
+            "specimen": "Paid · Due today · New"
+          }
+        },
+        {
+          "do": {
+            "title": "Use None when the section owns the inset",
+            "caption": "The visible boundary has one clear owner and the content remains aligned.",
+            "specimen": "Paid · Due today · New"
+          },
+          "dont": {
+            "title": "Stack component insets without a reason",
+            "caption": "Nested owners can create an unintended double edge and weaken alignment.",
+            "specimen": "Paid · Due today · New"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the published component",
+      "description": "The guide separates designer choices from behavior supplied by the public library at runtime.",
+      "blocks": [
+        "01",
+        "Figma source",
+        "Coin Components Library · node 2841:190",
+        "02",
+        "Published Storybook",
+        "VStack component and live behavior",
+        "Checked 15 September 2026",
+        "Live layout examples use public exports from jfs-components 0.1.60. VStack uses its public package export with token-driven modes; documentation controls change owner configuration, not component internals."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

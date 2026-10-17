@@ -1,0 +1,358 @@
+{
+  "slug": "formfield",
+  "label": "Form Field",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/formfield.guide.tsx"
+  ],
+  "evidence": "docs/evidence/formfield.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:35.865Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "input",
+    "text field",
+    "form input",
+    "label",
+    "error message"
+  ],
+  "title": "Form Field",
+  "summary": "Use a Form Field to collect one labelled value, such as an account number, with a hint or an error message below it.",
+  "corePrinciple": "A clear label, a format example, and help when it goes wrong.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1922-5647",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-formfield--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A label, the field, and a hint",
+      "description": "The label names the value. The field holds the text with an optional icon, and support text or an error sits below.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Label",
+        "Names the value and gives the field its accessible name.",
+        "Required mark",
+        "A red asterisk for fields people must fill in.",
+        "Start icon",
+        "Optional 18 px icon, such as the rupee sign.",
+        "Input",
+        "The placeholder shows the format; then what people type.",
+        "Field",
+        "White box; purple border on focus, red on error.",
+        "Support text",
+        "A hint below the field; an error message replaces it."
+      ],
+      "specimen": [
+        "Amount",
+        "*",
+        "Up to ₹50,000 a day",
+        "0"
+      ],
+      "anatomy": [
+        {
+          "part": "Label",
+          "note": "Names the value and gives the field its accessible name."
+        },
+        {
+          "part": "Required mark",
+          "note": "A red asterisk for fields people must fill in."
+        },
+        {
+          "part": "Start icon",
+          "note": "Optional 18 px icon, such as the rupee sign."
+        },
+        {
+          "part": "Input",
+          "note": "The placeholder shows the format; then what people type."
+        },
+        {
+          "part": "Field",
+          "note": "White box; purple border on focus, red on error."
+        },
+        {
+          "part": "Support text",
+          "note": "A hint below the field; an error message replaces it."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Add only what helps people fill it in",
+      "description": "Every option is off unless you set it. Add an icon, an action, or the required mark when it tells people something they need.",
+      "blocks": [
+        "Label and hint",
+        "The default: a label, a format example, and a hint below.",
+        "Start icon",
+        "The rupee icon marks an amount before people type.",
+        "End action",
+        "A small text button acts on the value without leaving the field.",
+        "Required",
+        "A red asterisk marks a field people must fill in.",
+        "Password",
+        "The type hides the characters. It also picks the keyboard for email, phone, and number fields."
+      ],
+      "specimen": [
+        "Account number",
+        "As printed on your passbook",
+        "Amount",
+        "Promo code",
+        "Apply",
+        "Full name",
+        "*",
+        "Password",
+        "XXXX XXXX XXXX",
+        "0",
+        "JIO200",
+        "As on your PAN"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Label and hint",
+          "description": "The default: a label, a format example, and a hint below."
+        },
+        {
+          "title": "Start icon",
+          "description": "The rupee icon marks an amount before people type."
+        },
+        {
+          "title": "End action",
+          "description": "A small text button acts on the value without leaving the field."
+        },
+        {
+          "title": "Required",
+          "description": "A red asterisk marks a field people must fill in."
+        },
+        {
+          "title": "Password",
+          "description": "The type hides the characters. It also picks the keyboard for email, phone, and number fields."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Default, focused, error, read only, and disabled",
+      "description": "The field changes colour with its state. Focus draws a purple border; an error turns it red and shows the message; read only and disabled lock the value.",
+      "blocks": [
+        "Default",
+        "A grey border. Select the field to see the purple focus border.",
+        "Error",
+        "Red border and fill; the message replaces the hint.",
+        "Read only",
+        "Grey and full contrast: people can read the value but not change it.",
+        "Disabled",
+        "The read-only look at half opacity, and Tab skips it. Use it for a field that does not apply yet."
+      ],
+      "specimen": [
+        "Account number",
+        "As printed on your passbook",
+        "IFSC code",
+        "IFSC codes have 11 characters",
+        "Account holder",
+        "From your bank",
+        "XXXX XXXX XXXX"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "A grey border. Select the field to see the purple focus border."
+        },
+        {
+          "title": "Error",
+          "description": "Red border and fill; the message replaces the hint."
+        },
+        {
+          "title": "Read only",
+          "description": "Grey and full contrast: people can read the value but not change it."
+        },
+        {
+          "title": "Disabled",
+          "description": "The read-only look at half opacity, and Tab skips it. Use it for a field that does not apply yet."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 47 px field",
+      "description": "Form Field fills its container’s width. The field is 47 px tall with 12 px of padding at each end, and the label and support text sit 8 px above and below it. The screen sets the width.",
+      "blocks": [
+        "300 × 47",
+        "8",
+        "In a narrow column",
+        "The field narrows with its column, and the hint wraps."
+      ],
+      "specimen": [
+        "Account number",
+        "PIN code",
+        "We deliver to most PIN codes in India",
+        "XXXX XXXX XXXX",
+        "6 digits"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "In a narrow column",
+          "description": "The field narrows with its column, and the hint wraps."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the value, show the format",
+      "description": "Write the label as the name of the value in sentence case, such as “Account number”, not “Enter your account number”. Use the placeholder for a format example, support text for a rule, and an error that says how to fix the value.",
+      "blocks": [
+        "Labels, formats, and fixes"
+      ],
+      "specimen": [
+        "IFSC code",
+        "11 characters, on your cheque book",
+        "Mobile number",
+        "We’ll send a code to this number",
+        "PAN",
+        "Enter all 10 characters of your PAN",
+        "SBIN0001234",
+        "98765 43210"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Labels, formats, and fixes",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Add a bank account",
+      "description": "The screen checks the values when people tap Verify and sets the error on the field. Form Field only shows it, and the button stays enabled.",
+      "blocks": [],
+      "specimen": [
+        "Account holder name",
+        "Account number",
+        "IFSC code",
+        "11 characters, on your cheque book",
+        "Verify account",
+        "As on your passbook",
+        "9 to 18 digits",
+        "SBIN0001234"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep every field understandable",
+      "description": "Each pair shows a field people can complete versus one that leaves them guessing.",
+      "blocks": [
+        "Do",
+        "Label every field",
+        "The label stays visible while people type.",
+        "Don’t",
+        "Use the placeholder as the label",
+        "The name disappears as soon as people type.",
+        "Say how to fix it",
+        "The message names the fix.",
+        "Show red without a message",
+        "Colour alone does not say what is wrong.",
+        "Show fixed values as read only",
+        "Full contrast keeps the value easy to read.",
+        "Disable a value people need to read",
+        "Half opacity makes it hard to read."
+      ],
+      "specimen": [
+        "Account number",
+        "IFSC code",
+        "IFSC codes have 11 characters",
+        "Account holder",
+        "XXXX XXXX XXXX"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Label every field",
+            "caption": "The label stays visible while people type.",
+            "specimen": "Account number"
+          },
+          "dont": {
+            "title": "Use the placeholder as the label",
+            "caption": "The name disappears as soon as people type.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Say how to fix it",
+            "caption": "The message names the fix.",
+            "specimen": "IFSC code · IFSC codes have 11 characters"
+          },
+          "dont": {
+            "title": "Show red without a message",
+            "caption": "Colour alone does not say what is wrong.",
+            "specimen": "IFSC code"
+          }
+        },
+        {
+          "do": {
+            "title": "Show fixed values as read only",
+            "caption": "Full contrast keeps the value easy to read.",
+            "specimen": "Account holder"
+          },
+          "dont": {
+            "title": "Disable a value people need to read",
+            "caption": "Half opacity makes it hard to read.",
+            "specimen": "Account holder"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Form Field contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With trailing button",
+        "With start icon",
+        "Password",
+        "Invalid",
+        "All states",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s FormField is a 328 × 94 component with label, start icon, end slot, and support text options; its states are variable modes. The package field is 47 px tall (45 px in Figma). Disabled uses the read-only colours at half opacity instead of Figma’s Disabled colours. Dark mode is not supported. On the web the label names the input; screen readers also announce required and invalid fields and read the support text or error with them. Tab skips a disabled field, and the input narrows to make room for an end action.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

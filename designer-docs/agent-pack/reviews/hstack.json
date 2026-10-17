@@ -1,0 +1,17 @@
+{
+  "flags": [],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The example uses a `Badge` component. Nothing cited supports it: the evidence lists the public exports as Button, HStack, VStack, Stack, Icon and Text, plus the action-guide components, and Badge is not among them. The guide's live examples show only text labels (\"Paid | Due today | New\").",
+      "by": "Claude Code (claude-opus-5-5), flow-kit session, on the extraction's behalf; for Astra to confirm",
+      "why": "Badge is a public jfs-components 0.1.78 export: the build type-checks every example against the installed package. The reviewer read the 0.1.60 evidence's partial export list. The guide's own live HStack examples render Badges (Paid, Due today, New)."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: Same problem: it builds the wrapped row from `Badge` children. The evidence does not list Badge as a public export of jfs-components@0.1.60, so nothing cited supports using it.",
+      "by": "Claude Code (claude-opus-5-5), flow-kit session, on the extraction's behalf; for Astra to confirm",
+      "why": "Same as /examples/0: Badge is a public 0.1.78 export and the example type-checks."
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+{
+  "slug": "stack",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "extractedBy": "Claude Code (claude-opus-5-5), agent pack POC session",
+  "extractedOn": "2026-10-17",
+  "notes": "Stack's page is rendered by the shared LayoutGuides.tsx (with HStack, VStack and Breadcrumbs); only text that renders on the Stack page was used. Its Sources note says jfs-components 0.1.60, checked 15 September 2026; the shared evidence file was checked on 19 September 2026. Stack has no copy of its own, so there are no content rules. The second Do & Don't pair compares unrelated choices (fill width against a catch-all page canvas). The guide names no component to use instead of Stack, only 'the public component that owns the slot'. The In context 'Action footer' card renders two status badges (Paid, Due today), not actions under supporting copy; the example here follows the sentence instead.",
+  "useWhen": [
+    {
+      "text": "A public component's slot needs one token-driven gap and an intentional vertical or horizontal direction.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Stack when a public component slot needs one token-driven gap and an intentional vertical or horizontal direction."
+      }
+    },
+    {
+      "text": "A clear group, such as actions, metadata or supporting copy.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Use Stack for a clear group such as actions, metadata, or supporting copy."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A catch-all page canvas for unrelated sections: Stack has no wrap, padding or overlap.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Stack has no wrap, padding, or overlap semantics for unrelated sections."
+      }
+    },
+    {
+      "text": "The layout needs overlap, z-order, wrapping, padding or automatic viewport switching: use the public component that owns the slot.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Stack does not add overlap, z-order, wrapping, padding, or automatic viewport switching. Use the public component that owns the slot."
+      }
+    },
+    {
+      "text": "Expecting the direction to follow the viewport: the viewport does not switch layoutDirection; choose a different public composition when the content role changes.",
+      "strength": "discouraged",
+      "target": "layoutDirection",
+      "from": {
+        "section": "sizing",
+        "quote": "Choose a different public composition when the content role changes; the viewport does not switch layoutDirection for you."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Direction",
+      "holds": "layoutDirection, vertical or horizontal; vertical by default.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Set layoutDirection to vertical or horizontal. The default is vertical."
+      }
+    },
+    {
+      "part": "Token gap",
+      "holds": "The Slot gap between children; Stack has no padding, wrap or reverse control.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Slot gap provides repeated separation. Stack has no padding, wrap, or reverse control."
+      }
+    },
+    {
+      "part": "Cross-axis fit",
+      "holds": "Optional fillWidth (vertical) or equalHeight (horizontal); fixed child dimensions still win.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "fillWidth makes these vertical children share the host edge. Fixed child dimensions still win."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Use Stack in the slot owned by a public component, where direction and gap carry product meaning.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use Stack in the slot owned by a public component, where direction and gap carry product meaning."
+      }
+    },
+    {
+      "text": "Let the owning public component, such as ActionFooter, give the Stack its product meaning.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A public ActionFooter or related component gives this primitive its product meaning."
+      }
+    },
+    {
+      "text": "Designers consume public components and patterns that own the slot; Stack's Figma source is a Subcomponents anatomy reference, not something to place on its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma source is a Coin Subcomponents anatomy reference, so designers should consume public components and patterns that own the slot."
+      }
+    },
+    {
+      "text": "Stack keeps its chosen direction at every width; responsive intent belongs to the owning public composition.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Stack keeps its chosen direction at every width. Responsive intent belongs to the owning public composition."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use layoutDirection vertical (the default) for a column of actions or supporting content inside a public slot.",
+      "strength": "recommended",
+      "target": "layoutDirection",
+      "value": "vertical",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the default direction for a column of actions or supporting content inside a public slot."
+      }
+    },
+    {
+      "text": "Use layoutDirection horizontal when sibling actions or content belong on one line; set the direction explicitly.",
+      "strength": "recommended",
+      "target": "layoutDirection",
+      "value": "horizontal",
+      "from": {
+        "section": "configuration",
+        "quote": "Use a row when sibling actions or content belong on one line. Direction is explicit."
+      }
+    },
+    {
+      "text": "Choose the direction from the content role; it stays fixed through viewport changes.",
+      "strength": "recommended",
+      "target": "layoutDirection",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Choose direction from the content role. Stack stays direction-locked; it does not switch because the viewport changed."
+      }
+    },
+    {
+      "text": "Set the gap with the Slot gap mode; Stack has no padding, wrap or reverse control.",
+      "strength": "recommended",
+      "target": "Slot gap",
+      "from": {
+        "section": "anatomy",
+        "quote": "Slot gap provides repeated separation. Stack has no padding, wrap, or reverse control."
+      }
+    },
+    {
+      "text": "Use equalHeight only for a horizontal row, the direction it applies to.",
+      "strength": "recommended",
+      "target": "equalHeight",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "Use only for the active direction"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "the package docs agree that equalHeight only means something in a row; set in a column it has no effect, so the rule stays advice."
+      }
+    },
+    {
+      "text": "Use fillWidth for a vertical column when its children benefit from a shared edge.",
+      "strength": "recommended",
+      "target": "fillWidth",
+      "value": "true",
+      "from": {
+        "section": "content",
+        "quote": "Use equalHeight for a row or fillWidth for a column when the content benefits from shared edges."
+      }
+    },
+    {
+      "text": "Do not give children a fixed width when a fillWidth column should fill: fixed child dimensions still win.",
+      "strength": "discouraged",
+      "target": "fillWidth",
+      "from": {
+        "section": "doDont",
+        "quote": "Fixed child dimensions still win, so the column edge no longer aligns."
+      }
+    }
+  ],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Vertical",
+      "when": "layoutDirection vertical (default): a column for grouped slot content.",
+      "from": {
+        "section": "states",
+        "quote": "Default column direction for grouped slot content."
+      }
+    },
+    {
+      "state": "Horizontal",
+      "when": "layoutDirection horizontal: an explicit row for sibling content.",
+      "from": {
+        "section": "states",
+        "quote": "Explicit row direction for sibling content."
+      }
+    },
+    {
+      "state": "Equal height",
+      "when": "equalHeight in a row: children share the tallest height when they can stretch.",
+      "from": {
+        "section": "states",
+        "quote": "Horizontal children share the tallest height when they can stretch."
+      }
+    },
+    {
+      "state": "Fill width",
+      "when": "fillWidth in a column: children stretch across the stack when they can.",
+      "from": {
+        "section": "states",
+        "quote": "Vertical children stretch across the stack when they can."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Let a vertical slot fill its width",
+      "dont": "Fix child widths when the column should fill",
+      "why": "Fixed child dimensions still win, so the column edge no longer aligns.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let a vertical slot fill its width"
+      }
+    },
+    {
+      "do": "Use fill width when column edges should align",
+      "dont": "Use Stack as a catch-all page canvas",
+      "why": "Stack has no wrap, padding, or overlap semantics for unrelated sections.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Stack as a catch-all page canvas"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A vertical Stack in ActionFooter's slot: the action under its supporting copy.",
+      "jsx": "<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <Stack layoutDirection=\"vertical\" fillWidth modes={{ 'Color Mode': 'Light', 'Slot gap': 'S' }}>\n    <Text text=\"You can change your plan at any time.\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n  </Stack>\n</ActionFooter>",
+      "from": {
+        "section": "inContext",
+        "quote": "Use a vertical Stack when actions belong under supporting copy."
+      }
+    },
+    {
+      "purpose": "A deliberate row of actions that share an edge.",
+      "jsx": "<Stack layoutDirection=\"horizontal\" equalHeight modes={{ 'Color Mode': 'Light', 'Slot gap': 'M' }}>\n  <Button label=\"Back\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'Low', AppearanceBrand: 'Neutral' }} />\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'High' }} />\n</Stack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Use horizontal direction when actions are a deliberate row."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "layoutDirection",
+      "description": "vertical or horizontal, default vertical; the direction never switches on its own.",
+      "quote": "**Stack** exposes direction (`vertical` or `horizontal`, default `vertical`), token Slot gap, and cross-axis flags for equal height in a row or fill width in a column.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "fillWidth",
+      "description": "Stretches a column's children; a fixed child dimension still wins over the stretch.",
+      "quote": "A fixed child dimension still wins over a stretch request.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "equalHeight",
+      "description": "Stretches a row's children to the tallest; a fixed child dimension still wins over the stretch.",
+      "quote": "A fixed child dimension still wins over a stretch request.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Stack has no wrap, reverse, padding, overlap or automatic viewport direction.",
+      "quote": "It has no wrap, reverse, padding, overlap, or automatic viewport direction.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

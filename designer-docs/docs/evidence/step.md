@@ -50,3 +50,24 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 - #235 (Component Fix, To do, Component Bug; Mr. Biscuit): a StepLabel child's title isn't used for the spoken name (“Step N” is read), and `title` still names the row when children replace the label; a standalone Step is a list item with no list; Step.mdx and StepLabel.mdx are out of date with 636f3f5 and the published Storybook still predates 0.1.78.
 - Existing: #211 (React key error on every Stepper); #197 (Dark tokens, in Review).
+
+## a116616 check (17 October 2026)
+
+Re-checked against `jfs-components` 0.1.78 from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October); `npm run coin:status` reports upstream, mirror, and docs in step. c1fa197 rewrote `Step.tsx` (and touched `StepLabel.tsx`, `Stepper.tsx`, `Step.mdx`); nothing in the Stepper folder changed after it. Where this section differs from Contract › Web semantics and Accessibility above, it replaces them. Headless Chrome, react-native-web 0.21.2, Light, 344 px column:
+
+- The spoken name is the visible copy. With no children: `title` (or "Step N" when unset, while the screen shows "Stepper Item"), then the supporting text, then "Completed", "Failed", or "Needs attention". `<Step title="Verify PAN" supportingText="PAN details match your name" status="complete">` in a Stepper is `li aria-label="Verify PAN, PAN details match your name, Completed"`.
+- Supporting text is in the name only when it is shown (`subtitle` not false), trimmed, at most 80 characters, and has no line break: 80 x's were read, 81 y's weren't, and a 105-character sentence wasn't. The date (`metaText`) is never read.
+- With children, `title` is ignored for both display and name. A StepLabel child gives its own title (default "Stepper Item") plus its short supporting text: `<Step title="Prop title"><StepLabel title="Child title" supportingText="Child support"/></Step>` is read "Child title, Child support". Other children give their text content (a `<Text>` child's string); children with no text, such as a Button alone, give "Step N". The guide's Upload Form 16 slot is read "Upload Form 16, Add the PDF from your employer".
+- `withinStepper`: Stepper sets it, and only then is the Step an `li role="listitem"` with `aria-current="step"` when current. A Step on its own is a `div` with no role whose `aria-label` Chrome treats as a generic name: the accessibility snapshot shows only its text, so the status word isn't announced.
+- Colour: `status` sets the glyph and, with no `Step Status` mode, the colour; an explicit `Step Status` still wins (complete with `active` renders a check on purple, read "…, Completed").
+- The indicator's glyph SVG and numeral aren't hidden on the web (`accessibilityElementsHidden` has no web effect): Chrome lists an unnamed image for check, cross, and alert, and the numeral as text inside the list item.
+
+Re-checked sentences:
+
+- "Keep the title prop: it's what screen readers hear" (Custom content): no longer true; children replace the title. Now: children replace the text block and the title prop, and screen readers hear the StepLabel child's text. The guide's `uploadStep` no longer passes the ignored `title`.
+- "the supporting text and date aren't read" (Sources) and the playground note: the supporting text is read when it is up to 80 characters; the date isn't. The playground's "Read as" value now follows the Supporting text switch and matches the live list item's name for all four states.
+- "a Step with only a StepLabel child is read as 'Step' and its number" (Sources): no longer true; it is read by the StepLabel's title.
+- Content now says that screen readers hear supporting text of up to 80 characters with the title. Sources: checked 17 October 2026, 16 October build; a Step on its own isn't a list item. `step.brief.md` carries the same copy.
+- Unchanged and still true: "Leave the default title" (shows "Stepper Item", read "Step 1"); the check-on-purple Don't; the states' status words.
+
+#235 (Component Fix, In progress): the code parts are fixed (StepLabel title is the name; standalone Step isn't a list item; Step, StepLabel, and Stepper read JFSThemeProvider). Still open: Stepper.mdx says Stepper sets no role or label, StepLabel.mdx omits `testID` and lists modes that don't change the text, Step.mdx's Name row omits the supporting text, and the published Storybook Step page is still the old stub (checked 17 October; the site was redeployed 17 October 10:39 UTC without the new pages). Not on #235 (for the owner to decide): a standalone Step's name isn't announced, and the glyph SVG is an unnamed image rather than hidden.

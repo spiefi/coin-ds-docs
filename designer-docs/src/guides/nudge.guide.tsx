@@ -5,8 +5,9 @@ import { Anatomy, DoDont, ExampleCard, OnOff, Readout, Segment, Sources, docsUrl
 import { defineGuide } from './define'
 
 const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9177-4104'
-const NA = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral', Context: 'Nudge&Alert' } as Modes
-const SYSTEM = { ...NA, 'Semantic Intent': 'System', AppearanceSystem: 'warning' } as Modes
+/** Nudge sets Context: Nudge&Alert itself (Figma's small button), so the guide leaves it unset. */
+const NEUTRAL = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes
+const SYSTEM = { ...NEUTRAL, 'Semantic Intent': 'System', AppearanceSystem: 'warning' } as Modes
 const LIGHT = { 'Color Mode': 'Light' } as Modes
 const CARD = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes
 const CAPSULE = { 'Color Mode': 'Light', Emphasis: 'Low', 'Icon Capsule Size': 'S' } as Modes
@@ -19,9 +20,9 @@ const R = ':scope > section'
 
 function Reasons() {
   return <>
-    <ListItem layout="Horizontal" navArrow={false} modes={NA} title="No extra cost" supportText="You pay ₹12,000 in total" leading={<IconCapsule iconName="ic_offer" modes={CAPSULE} />} />
-    <ListItem layout="Horizontal" navArrow={false} modes={NA} title="Three monthly payments" supportText="₹4,000 on the 5th of each month" leading={<IconCapsule iconName="ic_calendar" modes={CAPSULE} />} />
-    <ListItem layout="Horizontal" navArrow={false} modes={NA} title="Pay with your card" supportText="Any Jio credit card" leading={<IconCapsule iconName="ic_card" modes={CAPSULE} />} />
+    <ListItem layout="Horizontal" navArrow={false} modes={NEUTRAL} title="No extra cost" supportText="You pay ₹12,000 in total" leading={<IconCapsule iconName="ic_offer" modes={CAPSULE} />} />
+    <ListItem layout="Horizontal" navArrow={false} modes={NEUTRAL} title="Three monthly payments" supportText="₹4,000 on the 5th of each month" leading={<IconCapsule iconName="ic_calendar" modes={CAPSULE} />} />
+    <ListItem layout="Horizontal" navArrow={false} modes={NEUTRAL} title="Pay with your card" supportText="Any Jio credit card" leading={<IconCapsule iconName="ic_card" modes={CAPSULE} />} />
   </>
 }
 
@@ -42,7 +43,7 @@ function NudgeGuide() {
   const [ctxShown, setCtxShown] = useState(true)
   const [status, setStatus] = useState('Ready to pay ₹12,000')
 
-  const playModes = { ...NA, AppearanceBrand: appearance } as Modes
+  const playModes = { ...NEUTRAL, AppearanceBrand: appearance } as Modes
   const common = {
     modes: playModes, showClose: close, startSlot: icon ? undefined : null,
     onPressButton: () => setAction('Button pressed'), onClose: () => setAction('Close pressed'),
@@ -63,22 +64,22 @@ function NudgeGuide() {
         { name: 'Body', note: '12 px; one sentence of detail.', target: `${R} > div:nth-child(2) > div:first-child > div:nth-child(2)`, side: 'right' },
         { name: 'Button', note: 'The one next step, as a small pill.', target: `${R} [role="button"]`, side: 'bottom' },
         { name: 'Card', note: 'Tinted by its appearance mode, with 12 px padding.', target: R, side: 'top', at: 0.9 },
-      ]}><Nudge modes={NA} {...SPLIT} onPressButton={noop} /></Anatomy>,
+      ]}><Nudge modes={NEUTRAL} {...SPLIT} onPressButton={noop} /></Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'Type, appearance, and a close button',
-      description: 'Choose the type for the space and content you have, and an appearance mode for its colour. Add a close button when people may dismiss it, and pass the Nudge&Alert context so the button is the small size from Figma.',
+      description: 'Choose the type for the space and content you have, and an appearance mode for its colour. Add a close button when people may dismiss it. Nudge sets the Nudge&Alert context itself, so its button is Figma’s small size.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Stacked prominent" description="The default: a title and body stacked beside the icon, the button below."><Host><Nudge modes={NA} {...SPLIT} onPressButton={noop} /></Host></ExampleCard>
-        <ExampleCard title="Inline compact" description="One line of text with the button beside it. It has no title."><Host><Nudge type="inline-compact" modes={NA} {...AUTOPAY} onPressButton={noop} /></Host></ExampleCard>
-        <ExampleCard title="Stacked detailed" description="A title over your own content, such as list items. No button or close."><Host><Nudge type="stacked-detailed" modes={NA} title="Why split this payment?"><Reasons /></Nudge></Host></ExampleCard>
-        <ExampleCard title="Close button" description="Adds an X on the right. The screen removes the nudge when it’s pressed."><Host><Nudge modes={NA} {...SPLIT} showClose onClose={noop} onPressButton={noop} /></Host></ExampleCard>
-        <ExampleCard title="Without icon" description="Remove the sparkle when the message needs no accent."><Host><Nudge modes={NA} startSlot={null} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" onPressButton={noop} /></Host></ExampleCard>
+        <ExampleCard title="Stacked prominent" description="The default: a title and body stacked beside the icon, the button below."><Host><Nudge modes={NEUTRAL} {...SPLIT} onPressButton={noop} /></Host></ExampleCard>
+        <ExampleCard title="Inline compact" description="One line of text with the button beside it. It has no title."><Host><Nudge type="inline-compact" modes={NEUTRAL} {...AUTOPAY} onPressButton={noop} /></Host></ExampleCard>
+        <ExampleCard title="Stacked detailed" description="A title over your own content, such as list items. No button or close."><Host><Nudge type="stacked-detailed" modes={NEUTRAL} title="Why split this payment?"><Reasons /></Nudge></Host></ExampleCard>
+        <ExampleCard title="Close button" description="Adds an X on the right. The screen removes the nudge when it’s pressed."><Host><Nudge modes={NEUTRAL} {...SPLIT} showClose onClose={noop} onPressButton={noop} /></Host></ExampleCard>
+        <ExampleCard title="Without icon" description="Remove the sparkle when the message needs no accent."><Host><Nudge modes={NEUTRAL} startSlot={null} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" onPressButton={noop} /></Host></ExampleCard>
         <ExampleCard title="Brand appearances" description="AppearanceBrand tints the card, body, icon, and button together."><Host>
-          {(['Primary', 'Secondary', 'Neutral', 'Tertiary'] as const).map(a => <Nudge key={a} modes={{ ...NA, AppearanceBrand: a } as Modes} {...SPLIT} onPressButton={noop} />)}
+          {(['Primary', 'Secondary', 'Neutral', 'Tertiary'] as const).map(a => <Nudge key={a} modes={{ ...NEUTRAL, AppearanceBrand: a } as Modes} {...SPLIT} onPressButton={noop} />)}
         </Host></ExampleCard>
         <ExampleCard title="System warning" description="System intent colours the card for a status: positive, warning, or negative."><Host><Nudge modes={SYSTEM} title="Bill due tomorrow" body="Pay ₹1,240 to avoid a late fee." buttonLabel="Pay now" onPressButton={noop} /></Host></ExampleCard>
-        <ExampleCard title="With a border" description="A 1 px grey border separates a white card from a white screen."><Host><Nudge modes={{ ...NA, 'Border Boolean': 'True' } as Modes} {...SPLIT} onPressButton={noop} /></Host></ExampleCard>
+        <ExampleCard title="With a border" description="A 1 px grey border separates a white card from a white screen."><Host><Nudge modes={{ ...NEUTRAL, 'Border Boolean': 'True' } as Modes} {...SPLIT} onPressButton={noop} /></Host></ExampleCard>
       </div>,
     },
     states: {
@@ -86,7 +87,7 @@ function NudgeGuide() {
       description: 'The card isn’t interactive. Its button and close button have their own pressed and focus states. Nudge has no hidden state: after a close, the screen removes it.',
       body: <ExampleCard title="Close removes it" description="Press the X: the screen hides the nudge. Bring it back with the button."><Host>
         {shown
-          ? <Nudge modes={NA} {...SPLIT} showClose onClose={() => setShown(false)} onPressButton={noop} />
+          ? <Nudge modes={NEUTRAL} {...SPLIT} showClose onClose={() => setShown(false)} onPressButton={noop} />
           : <Button label="Show the nudge again" onPress={() => setShown(true)} modes={LIGHT} />}
       </Host></ExampleCard>,
     },
@@ -98,16 +99,16 @@ function NudgeGuide() {
           { kind: 'size', target: R, side: 'bottom', label: 'both' },
           { kind: 'padding', target: R },
           { kind: 'gap', from: `${R} > div:first-child`, to: `${R} > div:nth-child(2)` },
-        ]}><Nudge modes={NA} {...SPLIT} onPressButton={noop} /></Anatomy>
+        ]}><Nudge modes={NEUTRAL} {...SPLIT} onPressButton={noop} /></Anatomy>
         <ExampleCard title="Long copy wraps" description="At 344 px, a two-line title and body make the card 129 px tall; the close button stays centred."><Host>
-          <Nudge modes={NA} showClose onClose={noop} onPressButton={noop} title="Split this ₹12,000 purchase into easy monthly instalments" body="Pay in 3, 6 or 9 months at no extra cost with your Jio credit card." buttonLabel="See plans" />
+          <Nudge modes={NEUTRAL} showClose onClose={noop} onPressButton={noop} title="Split this ₹12,000 purchase into easy monthly instalments" body="Pay in 3, 6 or 9 months at no extra cost with your Jio credit card." buttonLabel="See plans" />
         </Host></ExampleCard>
       </div>,
     },
     content: {
       header: 'Content', title: 'A benefit, a detail, and a next step',
-      description: 'Write the title as the benefit, the body as one sentence of detail, and the button as a verb or two. Nudge’s own copy is a placeholder, so always set all three.',
-      body: <ExampleCard title="Benefit, detail, next step"><Host><Nudge modes={NA} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" onPressButton={noop} /></Host></ExampleCard>,
+      description: 'Write the title as the benefit, the body as one sentence of detail, and the button as a verb or two. Nudge has no copy of its own, so set all three; the title also names the card for screen readers.',
+      body: <ExampleCard title="Benefit, detail, next step"><Host><Nudge modes={NEUTRAL} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" onPressButton={noop} /></Host></ExampleCard>,
     },
     context: {
       header: 'In context', title: 'A suggestion on a payment screen',
@@ -116,7 +117,7 @@ function NudgeGuide() {
         <Card modes={CARD}>
           <Card.Title>Pay Croma</Card.Title>
           <MoneyValue value="12,000" currency="₹" modes={CARD} />
-          {ctxShown && <Nudge modes={{ ...NA, AppearanceBrand: 'Secondary' } as Modes} {...SPLIT} showClose onPressButton={() => setStatus('Showing instalment plans')} onClose={() => { setCtxShown(false); setStatus('Suggestion dismissed') }} />}
+          {ctxShown && <Nudge modes={{ ...NEUTRAL, AppearanceBrand: 'Secondary' } as Modes} {...SPLIT} showClose onPressButton={() => setStatus('Showing instalment plans')} onClose={() => { setCtxShown(false); setStatus('Suggestion dismissed') }} />}
           <Button label="Pay ₹12,000" onPress={() => setStatus('Paid ₹12,000')} modes={LIGHT} />
         </Card>
         <p className="coin-new-readout" role="status">{status}</p>
@@ -127,18 +128,18 @@ function NudgeGuide() {
       description: 'Each pair shows a nudge people can read and act on versus one that shouts, says nothing, or hides its action.',
       body: <div className="coin-new-stack">
         <DoDont
-          good={<Host><Nudge modes={NA} {...SPLIT} onPressButton={noop} /></Host>}
-          bad={<Host><Nudge modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes} {...SPLIT} onPressButton={noop} /></Host>}
-          goodTitle="Use the Nudge&Alert context" badTitle="Leave the context unset"
-          goodCaption="The button is Figma’s small pill and stays below the message." badCaption="The button grows to 42 px and outweighs the message." />
+          good={<Host><Nudge modes={NEUTRAL} {...SPLIT} onPressButton={noop} /></Host>}
+          bad={<Host><Nudge modes={{ ...NEUTRAL, Context: 'Default' } as Modes} {...SPLIT} onPressButton={noop} /></Host>}
+          goodTitle="Keep Nudge’s own context" badTitle="Pass another Context"
+          goodCaption="The button is Figma’s small pill and stays below the message." badCaption="A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message." />
         <DoDont
-          good={<Host><Nudge modes={NA} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" onPressButton={noop} /></Host>}
-          bad={<Host><Nudge modes={NA} /></Host>}
-          goodTitle="Write your own copy" badTitle="Ship the placeholder copy"
-          goodCaption="The title, body, and button say what’s on offer." badCaption="Without props it reads “Split payment” and “Button”." />
+          good={<Host><Nudge modes={NEUTRAL} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" onPressButton={noop} /></Host>}
+          bad={<Host><Nudge modes={NEUTRAL} /></Host>}
+          goodTitle="Write your own copy" badTitle="Leave the copy out"
+          goodCaption="The title, body, and button say what’s on offer." badCaption="Nudge has no placeholder: without copy it’s an empty card with a sparkle and no button." />
         <DoDont
-          good={<Host><Nudge type="stacked-detailed" modes={NA} title="Why split this payment?"><Reasons /></Nudge></Host>}
-          bad={<Host><Nudge type="stacked-detailed" modes={NA} title="Split payment" buttonLabel="See plans" showClose /></Host>}
+          good={<Host><Nudge type="stacked-detailed" modes={NEUTRAL} title="Why split this payment?"><Reasons /></Nudge></Host>}
+          bad={<Host><Nudge type="stacked-detailed" modes={NEUTRAL} title="Split payment" buttonLabel="See plans" showClose /></Host>}
           goodTitle="Use stacked detailed for a list" badTitle="Expect an action on stacked detailed"
           goodCaption="A title over list items explains the offer." badCaption="It ignores the button and close, so people have nothing to tap." />
       </div>,
@@ -146,13 +147,13 @@ function NudgeGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Nudge contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="8 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('nudge')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('nudge')} stories={[
         { label: 'Default', id: 'components-nudge--default' },
         { label: 'Without icon', id: 'components-nudge--without-icon' },
         { label: 'With close button', id: 'components-nudge--with-close-button' },
         { label: 'Inline compact', id: 'components-nudge--inline-compact' },
         { label: 'Stacked detailed', id: 'components-nudge--stacked-detailed' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Figma’s small button needs the Nudge&amp;Alert context, and its white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. The card has no role or name on the web, and the close button is always labelled “Close”.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Nudge sets the Nudge&amp;Alert context for Figma’s small button unless a container passes another Context. Figma’s white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. On the web a card with a title is a region named by its title, and the close button is always labelled “Close”.</Sources>,
     },
   }
 

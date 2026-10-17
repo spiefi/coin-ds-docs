@@ -1,0 +1,292 @@
+{
+  "slug": "textinput",
+  "label": "Text Input",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/textinput.guide.tsx"
+  ],
+  "evidence": "docs/evidence/textinput.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:17.270Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "input",
+    "text field",
+    "search field",
+    "search bar"
+  ],
+  "title": "Text Input",
+  "summary": "Use a Text Input for a single line of text, such as a search, with an icon that hints at what to type.",
+  "corePrinciple": "A short prompt, the right icon, and room to type.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=506-10017",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-textinput--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An icon, the text, and an optional end slot",
+      "description": "A grey, fully rounded field holds a leading icon, the text people type, and optional content at the end.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Leading icon",
+        "Hints at what to type; a search icon by default.",
+        "Text",
+        "The placeholder, then what people type; one line.",
+        "End slot",
+        "Optional content after the text, such as a filter icon.",
+        "Field",
+        "Grey rounded surface; a darker grey border shows focus."
+      ],
+      "specimen": [
+        "Search transactions"
+      ],
+      "anatomy": [
+        {
+          "part": "Leading icon",
+          "note": "Hints at what to type; a search icon by default."
+        },
+        {
+          "part": "Text",
+          "note": "The placeholder, then what people type; one line."
+        },
+        {
+          "part": "End slot",
+          "note": "Optional content after the text, such as a filter icon."
+        },
+        {
+          "part": "Field",
+          "note": "Grey rounded surface; a darker grey border shows focus."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the icons",
+      "description": "The leading icon is always there: keep the search icon or pick one that matches what people type. The end slot is empty unless you add content.",
+      "blocks": [
+        "Search",
+        "The default, for searching a list.",
+        "Matching icon",
+        "The icon says what kind of text belongs here.",
+        "End slot",
+        "A cue at the end, such as filters."
+      ],
+      "specimen": [
+        "Search transactions",
+        "Amount",
+        "Search funds"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Search",
+          "description": "The default, for searching a list."
+        },
+        {
+          "title": "Matching icon",
+          "description": "The icon says what kind of text belongs here."
+        },
+        {
+          "title": "End slot",
+          "description": "A cue at the end, such as filters."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Empty, focused, and filled",
+      "description": "Empty, the field shows its placeholder. Focused, a darker grey border appears and the placeholder clears. Filled, it shows the text. It has no disabled or error state.",
+      "blocks": [
+        "Empty",
+        "The prompt shows until people type. Select the field to see the focus border.",
+        "Filled",
+        "The text replaces the prompt."
+      ],
+      "specimen": [
+        "Search transactions"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Empty",
+          "description": "The prompt shows until people type. Select the field to see the focus border."
+        },
+        {
+          "title": "Filled",
+          "description": "The text replaces the prompt."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 42 px tall",
+      "description": "Text Input fills its container’s width and is 42 px tall, with 14 px of padding at each end and 18 px icons. The screen sets the width.",
+      "blocks": [
+        "300 × 42",
+        "In a narrow column",
+        "The field narrows with its column."
+      ],
+      "specimen": [
+        "Search transactions",
+        "Search"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "In a narrow column",
+          "description": "The field narrows with its column."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Prompt with what to type",
+      "description": "Write a short placeholder that names what to type, such as “Search transactions”. Keep instructions out of it: it disappears as soon as people start typing.",
+      "blocks": [
+        "Prompts"
+      ],
+      "specimen": [
+        "Search transactions",
+        "Search funds or stocks",
+        "Amount"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Prompts",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Search a list of transactions",
+      "description": "The screen filters the list as people type; Text Input only reports the text.",
+      "blocks": [],
+      "specimen": [
+        "Gold purchase",
+        "₹2,000 · 28 Sep",
+        "Electricity bill",
+        "₹1,240 · 27 Sep",
+        "Grocery store",
+        "₹860 · 26 Sep",
+        "Search transactions"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep the field clear",
+      "description": "Each pair shows a field people can fill in versus one that loses them.",
+      "blocks": [
+        "Do",
+        "Prompt with what to type",
+        "A short prompt names the task.",
+        "Don’t",
+        "Put instructions in the placeholder",
+        "It is cut off and disappears as people type.",
+        "Match the icon to the task",
+        "The rupee icon says an amount goes here.",
+        "Keep the search icon everywhere",
+        "A search icon on an amount field misleads.",
+        "Keep one fixed prompt",
+        "The field always says what it is for.",
+        "Rotate the prompt",
+        "Changing text distracts, and screen readers hear only the first prompt."
+      ],
+      "specimen": [
+        "Search gold",
+        "Search funds",
+        "Search bills",
+        "Search transactions",
+        "Enter the 12-digit number exactly as printed on your card",
+        "Amount",
+        "Search"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Prompt with what to type",
+            "caption": "A short prompt names the task.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Put instructions in the placeholder",
+            "caption": "It is cut off and disappears as people type.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Match the icon to the task",
+            "caption": "The rupee icon says an amount goes here.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Keep the search icon everywhere",
+            "caption": "A search icon on an amount field misleads.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Keep one fixed prompt",
+            "caption": "The field always says what it is for.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Rotate the prompt",
+            "caption": "Changing text distracts, and screen readers hear only the first prompt.",
+            "specimen": "Search gold · Search funds · Search bills · Search gold"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Text Input contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Leading and trailing",
+        "Custom leading",
+        "Search",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s textInput is 251 × 44 with start and end icon slots; the package renders 42 px tall, and focus draws the 1 px grey border of the Active input state. TextInput.Search is the same field with a fixed search icon. The field has no visible label, error, or disabled state, and its leading icon can be changed but not removed. On the web the input is named by its accessibility label, or else by its placeholder, and keeps that name while focused; a rotating placeholder names it after its first prompt. Set an accessibility label when the placeholder does not say what the field is for.",
+        "jfs-components",
+        "0.1.78",
+        "TextInput.Search"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

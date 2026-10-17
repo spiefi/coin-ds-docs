@@ -1,0 +1,419 @@
+{
+  "slug": "tabitem",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "extractedBy": "Claude Code subagent, flow-kit extraction",
+  "extractedOn": "2026-10-17",
+  "notes": "Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot, so every rule assumes it sits in a Tabs row. Evidence spans 5 October (0.1.78-3795b4c), 8 October (0.1.78-636f3f5) and 13 October (0.1.78-c1fa197, the installed build); the 5 October 'Package' and 'DOM' lines (no testID, no badge, tabindex=0 on every tab, no aria-selected) are superseded by the later checks. Examples pass modes on Tabs only: the Tabs facts say it forwards them to TabItem children, and the evidence says the item's own modes win. The truncateLabel prop is set by Tabs on a non-scrollable row (package doc); the guide does not mention it, so no rule covers it. Guide problems: Configuration says a Tab Item has no 'style options', but the package declares style and labelStyle override props (the guide presumably means design options; not changed here). Sizing's title says 'Tabs sets the width' while its description says a Tab Item 'is as wide as its label' (in a row that doesn't fit, Tabs shrinks it, per the Tabs evidence). The guide's copy does not mention #272 (with no active tab, or a lone idle Tab Item, the keyboard can't reach it), which the evidence records; the Tabs guide's Sources note does. The Dark mode gap (#197) was last recorded on 5 October. Updated 17 October 2026 for a116616: #272 is fixed, so its gap and the 'keep one tab active' keyboard rule are gone.",
+  "useWhen": [
+    {
+      "text": "Use a Tab Item inside Tabs for each view: a short label that turns black with a gold underline while its view is showing.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Tab Item inside Tabs for each view: a short label that turns black with a gold underline while its view is showing."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "On its own, outside Tabs: a lone Tab Item stretches across its container with no row around it. Use it inside Tabs.",
+      "strength": "discouraged",
+      "useInstead": "Tabs",
+      "from": {
+        "section": "doDont",
+        "quote": "A lone Tab Item stretches across its container with no row around it."
+      }
+    },
+    {
+      "text": "The tab would do something, such as “Download”: it sounds like a button, but tabs only switch views.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "“Download” sounds like a button, but tabs only switch views."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" describes what tabs do (switch views), the reason an action label misleads; it is not a separate constraint."
+      }
+    },
+    {
+      "text": "The tab needs a disabled state: there is none.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "There is no disabled state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Selected tab",
+      "holds": "The tab whose view is on screen now (active).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Its view is on screen now."
+      }
+    },
+    {
+      "part": "Underline",
+      "holds": "A 2 px gold bar across the tab's full width, shown only while the tab is selected.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown only while the tab is selected."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "The label text, which names the view in a word or two.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the view in a word or two."
+      }
+    },
+    {
+      "part": "Idle tab",
+      "holds": "A tab that is not active: grey until someone presses it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey until someone presses it."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Always place a Tab Item inside Tabs.",
+      "strength": "required",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One view, one short label, and always inside Tabs."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "the principle has no condition, and the guide's Sources title (\"Use Tab Item through Tabs\") and Don't (\"Place one on its own\") agree: a Tab Item is a subcomponent that reaches designs through the Tabs slot."
+      }
+    },
+    {
+      "text": "Tabs places the tabs 16 px apart; a Tab Item is as wide as its label.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It is as wide as its label; Tabs places the tabs 16 px apart."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set label to name the view; the label is also what screen readers say.",
+      "strength": "recommended",
+      "target": "label",
+      "from": {
+        "section": "configuration",
+        "quote": "The label is also what screen readers say."
+      }
+    },
+    {
+      "text": "Set badge when a view needs a count: it shows the counter badge from Figma.",
+      "strength": "recommended",
+      "target": "badge",
+      "from": {
+        "section": "configuration",
+        "quote": "when a view needs a count, the counter badge from Figma"
+      }
+    },
+    {
+      "text": "Set active on the tab whose view is showing: the screen marks it, and a Tab Item never selects itself.",
+      "strength": "recommended",
+      "target": "active",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "The screen marks the tab whose view is showing as active; a Tab Item never selects itself."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "contextual",
+        "reason": "\"never\" describes what the component does (it does not select itself), which is why the screen sets active; it is not a constraint on the designer."
+      }
+    },
+    {
+      "text": "Mark one tab active: one underline shows the current view.",
+      "strength": "recommended",
+      "target": "active",
+      "from": {
+        "section": "doDont",
+        "quote": "One underline shows the current view."
+      }
+    },
+    {
+      "text": "Do not mark two tabs active: only the first is underlined, which may not be the view that’s showing.",
+      "strength": "discouraged",
+      "target": "active",
+      "from": {
+        "section": "doDont",
+        "quote": "Only the first is underlined, which may not be the view that’s showing."
+      },
+      "absolute": {
+        "word": "Only",
+        "scope": "contextual",
+        "reason": "\"Only\" describes what the component renders when two tabs are active, not a constraint."
+      }
+    },
+    {
+      "text": "Handle onPress on each tab: the screen marks one active and swaps the panel when another is pressed.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen marks one active and swaps the panel when another is pressed"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name the view in one or two words.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "One or two words that name the view"
+        }
+      },
+      {
+        "text": "Write a noun in sentence case, such as “Statements”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Write a noun in sentence case, such as “Statements”."
+        }
+      },
+      {
+        "text": "Don’t write actions like “Download” or long phrases.",
+        "strength": "discouraged",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Don’t write actions like “Download” or long phrases"
+        }
+      },
+      {
+        "text": "When a label must be abbreviated, give the tab a spoken name with accessibilityLabel.",
+        "strength": "recommended",
+        "target": "accessibilityLabel",
+        "from": {
+          "section": "content",
+          "quote": "when a label must be abbreviated, give the tab a spoken name."
+        },
+        "absolute": {
+          "word": "must",
+          "scope": "contextual",
+          "reason": "\"must\" is the condition (a label that has to be abbreviated), not the instruction; the rule applies only to abbreviated labels."
+        }
+      }
+    ],
+    "good": [
+      "Statements",
+      "Overview",
+      "Activity",
+      "Details"
+    ],
+    "bad": [
+      "Download"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "active is false (the default): grey label, no underline.",
+      "from": {
+        "section": "states",
+        "quote": "Grey label, no underline."
+      }
+    },
+    {
+      "state": "Active",
+      "when": "active is true, set by the screen for the view that is showing: black label and a gold underline across the tab.",
+      "from": {
+        "section": "states",
+        "quote": "Black label and a gold underline across the tab."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "While pressed: the tab dims to 70% until release.",
+      "from": {
+        "section": "states",
+        "quote": "Pressing dims it to 70% until release."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Give an abbreviated label a full spoken name with accessibilityLabel, such as AY24 as “Assessment year 2024”.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "configuration",
+        "quote": "Short labels such as AY24 get a full spoken name: “Assessment year 2024”."
+      }
+    },
+    {
+      "text": "On the web a tab is announced by its label or spoken name and whether it is selected.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "sources",
+        "quote": "On the web a tab is announced by its label or spoken name and whether it is selected."
+      },
+      "checkedVersion": "0.1.78",
+      "checkedOn": "2026-10-13"
+    },
+    {
+      "text": "Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"Only\" and \"always\" describe the component's keyboard behaviour, not a constraint on the designer."
+      },
+      "checkedVersion": "0.1.78-a116616",
+      "checkedOn": "2026-10-17"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use it inside Tabs",
+      "dont": "Place one on its own",
+      "why": "A lone Tab Item stretches across its container with no row around it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use it inside Tabs"
+      }
+    },
+    {
+      "do": "Mark one tab active",
+      "dont": "Mark two tabs active",
+      "why": "Only the first is underlined, which may not be the view that’s showing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Mark one tab active"
+      }
+    },
+    {
+      "do": "Name the view",
+      "dont": "Write an action",
+      "why": "“Download” sounds like a button, but tabs only switch views.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the view"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Tax years over one panel: abbreviated labels, each with a spoken name, and the showing year marked active.",
+      "jsx": "<Tabs modes={{ 'Color Mode': 'Light' }}>\n  <TabItem label=\"AY24\" accessibilityLabel=\"Assessment year 2024\" onPress={() => {}} />\n  <TabItem label=\"AY25\" accessibilityLabel=\"Assessment year 2025\" active onPress={() => {}} />\n  <TabItem label=\"AY26\" accessibilityLabel=\"Assessment year 2026\" onPress={() => {}} />\n</Tabs>",
+      "from": {
+        "section": "inContext",
+        "quote": "the abbreviated labels each have a spoken name."
+      }
+    },
+    {
+      "purpose": "Two views named by nouns, one active, inside a Tabs row.",
+      "jsx": "<Tabs modes={{ 'Color Mode': 'Light' }}>\n  <TabItem label=\"Overview\" active onPress={() => {}} />\n  <TabItem label=\"Statements\" onPress={() => {}} />\n</Tabs>",
+      "from": {
+        "section": "doDont",
+        "quote": "“Statements” says what the panel shows."
+      }
+    },
+    {
+      "purpose": "A view that needs a count, with the counter badge.",
+      "jsx": "<Tabs modes={{ 'Color Mode': 'Light' }}>\n  <TabItem label=\"Overview\" active onPress={() => {}} />\n  <TabItem label=\"Activity\" badge={3} onPress={() => {}} />\n</Tabs>",
+      "from": {
+        "section": "configuration",
+        "quote": "when a view needs a count, the counter badge from Figma"
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "active",
+      "description": "Set by the screen; a Tab Item never selects itself. In a row with two active items, the second is ignored: only the first is selected.",
+      "quote": "a second `active` item is ignored (only the first is selected)",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "badge",
+      "description": "Shows a CounterBadge beside the label.",
+      "quote": "`badge` shows a CounterBadge",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Becomes the tab's accessible name on the web; without it, the label names the tab.",
+      "quote": "`aria-label` = `accessibilityLabel ?? label`",
+      "checkedOn": "2026-10-05",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "Inside Tabs, a Tab Item receives the row's modes; its own modes win.",
+      "quote": "Inside Tabs it receives the row's `modes` (its own win)",
+      "checkedOn": "2026-10-05",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "Enter and Space each call it once (#209 fixed).",
+      "quote": "Enter and Space each call a tab's `onPress` once.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "testID",
+      "description": "Works since the 636f3f5 build (the 5 October check found none).",
+      "quote": "`testID` works",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The active label stays black in Dark mode (#197, To do); the guide shows Light only.",
+      "quote": "active label stays black in Dark mode.",
+      "checkedOn": "2026-10-05",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "No disabled state, icon or href.",
+      "quote": "it has no icon, disabled, href, or children",
+      "checkedOn": "2026-10-05",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "No hover or focus style of its own; keyboard focus shows the browser's ring.",
+      "quote": "No hover or focus style; keyboard focus shows the browser ring.",
+      "checkedOn": "2026-10-05",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ]
+}
