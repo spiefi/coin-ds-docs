@@ -109,7 +109,7 @@ function SkeletonGuide() {
         <ExampleCard title="Loading" description="Placeholders hold the layout, and the shimmer runs down them in a cascade."><Panel loading><Feed /></Panel></ExampleCard>
         <ExampleCard title="Loaded" description="The same components show their content in the same places."><Panel loading={false}><Feed /></Panel></ExampleCard>
         <ExampleCard title="Reduced motion" description="A slow white pulse every 3 s replaces the moving band."><Panel loading reducedMotion><Feed /></Panel></ExampleCard>
-        <ExampleCard title="Outside a group" description="loading on its own draws nothing: the first line vanishes until a group is active (#266)."><Surface width="wide"><div className="coin-new-stack">
+        <ExampleCard title="Outside a group" description="loading on its own draws that line’s placeholder too, and screen readers hear “Loading”."><Surface width="wide"><div className="coin-new-stack">
           <Text modes={LIGHT} loading>Reliance Industries</Text>
           <Text modes={LIGHT}>64 units · ₹1,52,900</Text>
         </div></Surface></ExampleCard>
@@ -166,7 +166,7 @@ function SkeletonGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Skeleton contract',
       description: 'The guide compares the Coin variables with the installed package and its Storybook stories.',
-      body: <Sources checked="12 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('skeleton')}
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('skeleton')}
         figmaDescription="No Skeleton component; only its colour and corner variables"
         stories={[
           { label: 'Kinds', id: 'components-skeleton--kinds' },
@@ -176,7 +176,7 @@ function SkeletonGuide() {
           { label: 'Card composition', id: 'components-skeleton--card-composition' },
           { label: 'Explicit loading prop', id: 'components-skeleton--explicit-loading-prop' },
           { label: 'Standalone atomic', id: 'components-skeleton--standalone-atomic' },
-        ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma has no Skeleton component: the Coin variables hold its grey and its corner radii, and the ticket’s Figma link opens the Stepper Item page. In code a SkeletonGroup switches every placeholder inside it; Text, Avatar, Badge, Button, Image, and other Coin components draw their own, and a Skeleton places one by hand. Blocks are light grey (#e7e7e7; the old Storybook page gives a lighter grey). A white band sweeps across them every 1.5 s in a 75 ms cascade, or they pulse every 3 s with reduced motion, as in Storybook. A component’s loading on its own draws nothing without a group, and on the web placeholders aren’t hidden from screen readers and nothing announces the loading (#266). The published Storybook page is still the old generated one.</Sources>,
+        ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma has no Skeleton component: the Coin variables hold its grey and its corner radii, and the ticket’s Figma link opens the Stepper Item page. In code a SkeletonGroup switches every placeholder inside it; Text, Avatar, Badge, Button, Image, and other Coin components draw their own, and a Skeleton places one by hand. Blocks are light grey (#e7e7e7; the old Storybook page gives a lighter grey). A white band sweeps across them every 1.5 s in a 75 ms cascade, or they pulse every 3 s with reduced motion, as in Storybook. Since the #266 fix a component’s loading draws its placeholder without a group too, named “Loading”; inside a group the blocks are hidden from screen readers and the group announces “Loading” once. A Skeleton placed by hand still needs a group. The published Storybook page is still the old generated one.</Sources>,
     },
   }
 

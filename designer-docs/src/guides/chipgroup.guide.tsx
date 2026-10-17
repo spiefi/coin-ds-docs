@@ -131,10 +131,10 @@ function ChipGroupGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Chip Group contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('chipgroup')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('chipgroup')} stories={[
         { label: 'Default', id: 'components-chipgroup--default' },
         { label: 'With active state', id: 'components-chipgroup--with-active-state' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Chip Group is one 370 × 32 component holding three Chip Selects in a slot, with no properties. The package wraps chips onto new rows with an 8 px gap; on the web the chips are slightly wider than in Figma, and a chip wider than the row wraps its label to stay inside it. Given an accessibility label, the row is announced as a named group; each chip is still announced as its own toggle button. The published Storybook predates the current stories, so two of its chips show no icon.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Chip Group is one 370 × 32 component holding three Chip Selects in a slot, with no properties. The package wraps chips onto new rows with an 8 px gap; on the web the chips are slightly wider than in Figma, and a chip wider than the row wraps its label to stay inside it. Given an accessibility label, the row is announced as a named group; each chip is still announced as its own toggle button. The published Storybook predates the current stories, so two of its chips show no icon.</Sources>,
     },
   }
 

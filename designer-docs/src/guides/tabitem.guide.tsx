@@ -113,10 +113,10 @@ function TabItemGuide() {
     sources: {
       header: 'Sources', title: 'Use Tab Item through Tabs',
       description: 'The guide compares the Figma subcomponent with the installed package and the Tabs stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
         { label: 'Tabs default', id: 'components-tabs--default' }, { label: 'Tabs with labels', id: 'components-tabs--with-labels' },
         { label: 'Tabs scrollable', id: 'components-tabs--scrollable' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected. Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected. Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.</Sources>,
     },
   }
 

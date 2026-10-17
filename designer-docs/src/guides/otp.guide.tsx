@@ -145,14 +145,14 @@ function OtpGuide() {
     sources: {
       header: 'Sources', title: 'Use the public OTP contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
         { label: 'Default', id: 'components-otp--default' },
         { label: 'Four digits', id: 'components-otp--four-digits' },
         { label: 'Invalid', id: 'components-otp--invalid' },
         { label: 'Disabled', id: 'components-otp--disabled' },
         { label: 'With resend countdown', id: 'components-otp--with-resend-countdown' },
         { label: 'Validation flow', id: 'components-otp--validation-flow' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma and the package agree on 48 px slots and 8 px gaps, and on a right-aligned support line with a small Resend button. In code the slots shrink in a narrow container, so all of Storybook’s 4–8 digit lengths fit a phone. In this build, support or error text longer than the row doesn’t wrap, so keep it to one line; this is reported to the Coin team. OTP has no verifying state; the screen checks the code and sets the error.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma and the package agree on 48 px slots and 8 px gaps, and on a right-aligned support line with a small Resend button. In code the slots shrink in a narrow container, so all of Storybook’s 4–8 digit lengths fit a phone. Since the #274 fix, longer support or error text wraps inside the field, while short text stays right-aligned. OTP has no verifying state; the screen checks the code and sets the error.</Sources>,
     },
   }
 

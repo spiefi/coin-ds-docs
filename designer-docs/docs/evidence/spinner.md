@@ -6,6 +6,8 @@ Package, Figma, and Storybook evidence for the Spinner guide (board ticket #73, 
 
 Checked 12 October 2026; re-checked 13 October 2026 for the review below. Installed `jfs-components` is now `0.1.78` from mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197); `Spinner.tsx` is identical to 636f3f5's. Biscuit's newest `main` 7020bf9 (13 October, not in the mirror or the docs) sets `STROKE_RATIO = 12.8 / 72` and corrects the `durationMs` JSDoc to 1500 (#276); it is not installed, so the guide still shows 11%.
 
+Re-checked 17 October 2026 for the #276 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `Spinner.tsx`: stroke = size × 12.8 / 72, and the `durationMs` JSDoc (and `Spinner.d.ts`) says "Defaults to 1500". Measured on the guide in headless Chrome: stroke-width 12.8 at 72, 5.69 at 32, 9.96 at 56, 15.64 at 88. The guide's anatomy, sizing and Sources copy now give these numbers.
+
 ## Sources
 
 - Package: `src/components/Spinner/Spinner.tsx` (274 lines); exports `Spinner`, `SpinnerProps`, `SpinnerColors` (`components/index.ts:195`). No Coin component uses it; Button's `loading` draws a Skeleton (`Button.tsx:19-20, 527`).
@@ -15,8 +17,8 @@ Checked 12 October 2026; re-checked 13 October 2026 for the review below. Instal
 
 ## Contract
 
-- Props: `size` (72, diameter in px, no clamp), `durationMs` (1500, one turn; JSDoc wrongly says 2400), `gravity` (0.45, clamped 0–0.9; 0 = even speed), `animating` (true), `colors` ({ primary, secondary, tertiary } overrides), `accessibilityLabel` ('Loading'), `modes`, `style`, View props (`testID` lands on the root).
-- Geometry: three 100° arcs with round caps, stroke = 0.11 × size (7.92 px at 72, measured in Chrome), outer edge on the box edge, no track. Leading arc gold (primary) is drawn on top, then purple, then teal.
+- Props: `size` (72, diameter in px, no clamp), `durationMs` (1500, one turn; the JSDoc said 2400 until a116616, #276), `gravity` (0.45, clamped 0–0.9; 0 = even speed), `animating` (true), `colors` ({ primary, secondary, tertiary } overrides), `accessibilityLabel` ('Loading'), `modes`, `style`, View props (`testID` lands on the root).
+- Geometry: three 100° arcs with round caps, stroke = 12.8/72 × size since a116616 (12.8 px at 72, measured in Chrome; 0.11 × size, 7.92 px, before #276), outer edge on the box edge, no track. Leading arc gold (primary) is drawn on top, then purple, then teal.
 - Motion: one linear clock warped by gravity: fastest over the top, slowest at the bottom (at 0.45: 1.45× and 0.55× the mean speed). The gap between arc heads breathes from 10° at the top to 84° and back.
 - Resting (`animating={false}` or reduced motion): a fixed, evenly spaced fan (heads at 0°, 240°, 120°), not a frame of the spin. Reduced motion comes from `prefers-reduced-motion` on the web; no prop overrides it.
 
@@ -30,9 +32,9 @@ The only tokens are the three `spiner/*/bg` colours in collection `Spinner / Out
 
 ## Discrepancies
 
-- Ring weight: Figma's ring measures radius ≈ 23 → 36 on its 72 × 72 render, about 12.8 px (≈ 0.17); code draws 7.92 px (0.11). Filed as #276.
+- Ring weight: Figma's ring measures radius ≈ 23 → 36 on its 72 × 72 render, about 12.8 px (≈ 0.17); code drew 7.92 px (0.11) until a116616 and now draws 12.8 px. Filed as #276, fixed.
 - Figma is one static pose (contiguous arcs, a ~69° gap); code's resting pose is three separate arcs 120° apart, and the live spin starts bunched at the top.
-- `durationMs` JSDoc says 2400; the default is 1500 (#276, item 2).
+- `durationMs` JSDoc said 2400; the default is 1500 (#276, item 2; fixed in a116616).
 - The published Storybook page is the old generated one.
 
 ## Hosting

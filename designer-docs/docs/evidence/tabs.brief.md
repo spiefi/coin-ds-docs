@@ -2,7 +2,7 @@
 
 slug: tabs · label: Tabs · public API: Tabs, TabItem (+ Card, VStack, ListItem for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3063-136 · storybook: docsUrl('tabs') · stories: Default=components-tabs--default, With labels=components-tabs--with-labels, Scrollable=components-tabs--scrollable, All idle=components-tabs--all-idle, In Range Track=components-rangetrack--scrollable-tabs
-checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
+checked: 17 October 2026 · jfs-components 0.1.78 (16 October build, mirror tag v0.1.78-a116616, Biscuit's main a116616; with no active tab the first tab is the Tab stop since #272)
 icon: two short labels with an underline under the first, over a baseline — `<path d="M3 7h4M11 7h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M2.5 11h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M2 14h14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />`
 keywords: tab bar, sub-navigation, views
 
@@ -63,7 +63,7 @@ Every preview is a host (`coin-new-host wide`).
 
 ## Sources
 header: Sources · title: Use the public Tabs contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected; Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home, and End select tabs. If no tab is selected, the keyboard can’t reach the row, which is reported to the Coin team. In a row that doesn’t scroll, labels that don’t fit end in an ellipsis.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. In Figma and in code, tabs hug their labels with 16 px gaps, and a tab can carry a counter badge. If two tabs are marked active, only the first is selected. The published Storybook predates 0.1.78, so its stories show older labels. On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected. Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home, and End select tabs. In a row that doesn’t scroll, labels that don’t fit end in an ellipsis.
 
 ## Limits
-Do not show Dark mode (the active label stays black in Dark, #197), a counter badge, icons, disabled or loading tabs, `style` or `labelStyle` overrides, or hover styles. Do not imply that a row with no selected tab can be reached by keyboard (#272). Do not link `components-tabitem--docs` (not published).
+Do not show Dark mode (the active label stays black in Dark, #197), a counter badge, icons, disabled or loading tabs, `style` or `labelStyle` overrides, or hover styles. Do not link `components-tabitem--docs` (not published).

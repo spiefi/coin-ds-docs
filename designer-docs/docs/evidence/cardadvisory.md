@@ -6,6 +6,8 @@ Package, Figma, and Storybook evidence for the Card Advisory guide (board ticket
 
 13 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197, 12 October). `CardAdvisory.tsx` is identical at c1fa197, 5990169 and Biscuit's newest `main` 7020bf9 (13 October, not in the mirror). 7020bf9 changes `Nudge.tsx` so Close shows only with `onClose` or `showClose` (#271), and rewrites `CardAdvisory.mdx`.
 
+17 October 2026 (publishing #271): the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which contains 7020bf9. `CardAdvisory.tsx` is unchanged; `Nudge.tsx` shows Close only with `onClose` or `showClose`. Re-test on #271: `<CardAdvisory showNudge />` renders no `[aria-label="Close"]`. The guide's Close anatomy part is removed.
+
 ## Sources
 
 - Package: `src/components/CardAdvisory/CardAdvisory.tsx` (292 lines, `React.memo`); export `CardAdvisory`, `CardAdvisoryProps` (`components/index.ts:27`). Composes `CircularProgressBar` (`state="Active"`), `Nudge` (`type="inline-compact"`) and `Icon ic_info`.
@@ -18,7 +20,7 @@ Package, Figma, and Storybook evidence for the Card Advisory guide (board ticket
 Props (`CardAdvisory.tsx:18-67, 184-207`): `title` ('Spending', one line unless `disableTruncation`), `description` (a default sentence; wraps, no clamp), `value` (70; the ring clamps 0–100), `valueLabel` (replaces the number in the ring), `showInfoIcon` (true), `showNudge` (true; also gates `nudgeSlot`), `nudgeBody`, `nudgeButtonLabel` ('Button'), `onPressNudgeButton`, `titleEndSlot`, `progressSlot`, `nudgeSlot` (all get `modes`), `modes`, `style`, `mainContentStyle`, `titleStyle`, `descriptionStyle`, `progressStyle`, `nudgeStyle`, `accessibilityLabel`, `disableTruncation` (title only), View props (`testID` on the root).
 
 - Not forwarded: ring `supportText`/state, nudge `title`, `showClose`, `onClose`, `buttonSlot`.
-- Installed Nudge shows Close by default (`showClose ?? true`, Nudge.tsx:289) and CardAdvisory passes neither `showClose` nor `onClose`, so the card's nudge has a Close button that does nothing (#271, open; fixed in 7020bf9, not installed).
+- CardAdvisory passes neither `showClose` nor `onClose`. Since a116616 the Nudge shows Close only with one of them, so the card's nudge has no Close button (#271, fixed). Before that (c1fa197) it showed a Close that did nothing.
 - Default accessible name on the root `div` (no role): `${title}. ${description}. ${round(value)} out of 100. ${nudgeBody}` — includes the nudge text when the nudge is hidden, a double period after a description ending in “.”, and the unclamped value.
 
 ## Modes and tokens
@@ -33,11 +35,11 @@ Modes reach the ring and the nudge:
 
 ## Web render
 
-`div[data-testid][aria-label]` (360 wide, gap 16) › main row `div` › content `div` › header `div` › title `div[dir=auto]`, icon `div > svg`; description `div[dir=auto]`; then `div[role=progressbar]` (60 × 60, `aria-valuenow`) › svg + value `div[dir=auto]`; then the nudge `div[role=presentation]` › sparkle, body `div[dir=auto]`, `button[aria-label="<nudgeButtonLabel>"]`, `button[aria-label="Close"]` (26 × 26). `nudge/radius` is a dangling alias (falls back to 12).
+`div[data-testid][aria-label]` (360 wide, gap 16) › main row `div` › content `div` › header `div` › title `div[dir=auto]`, icon `div > svg`; description `div[dir=auto]`; then `div[role=progressbar]` (60 × 60, `aria-valuenow`) › svg + value `div[dir=auto]`; then the nudge `div[role=presentation]` › sparkle, body `div[dir=auto]`, `button[aria-label="<nudgeButtonLabel>"]` (no Close since a116616). `nudge/radius` is a dangling alias (falls back to 12).
 
 ## Discrepancies
 
-- Close button: installed build shows a dead Close (#271); Figma, the published Storybook and Biscuit's 7020bf9 have none.
+- Close button: none since a116616, as in Figma and the published Storybook (c1fa197 showed a dead Close, #271, fixed).
 - 7020bf9 mdx says the description is clamped and `disableTruncation` wraps description and nudge text; in code only the title is clamped and only the title is affected.
 - Title line 32 in code vs 26 in Figma; main row about 70 vs 64.
 - Figma's nudge is the retired “Nudge Old”; Code Connect maps it to `Nudge`.

@@ -2,7 +2,7 @@
 
 slug: tabitem · label: Tab Item · public API: TabItem, always inside Tabs (+ Card, VStack, ListItem for composition)
 figma: https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=66-913 · storybook: `const STORYBOOK = 'https://jfs-components-storybook.vercel.app/?path=/docs/tabs-tabitem--docs'` (the published docs id; do not use docsUrl) · stories: Tabs default=components-tabs--default, Tabs with labels=components-tabs--with-labels, Tabs scrollable=components-tabs--scrollable
-checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
+checked: 17 October 2026 · jfs-components 0.1.78 (16 October build, mirror tag v0.1.78-a116616, Biscuit's main a116616; with no active tab the first tab is the Tab stop since #272)
 icon: one label with an underline — `<path d="M5 7h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M3 12h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />`
 keywords: tab, tab label
 
@@ -62,7 +62,7 @@ Every preview is a host (`coin-new-host wide`).
 
 ## Sources
 header: Sources · title: Use Tab Item through Tabs · description: The guide compares the Figma subcomponent with the installed package and the Tabs stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected. Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot. Figma’s variants are State Idle and Active, each with a counter badge; the package shows the badge when a count is set. The published Storybook has no Tab Item stories yet, so the story links show Tabs. On the web a tab is announced by its label or spoken name and whether it is selected. Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.
 
 ## Limits
-Do not show Dark mode (#197), a counter badge, icons, a disabled tab, `style` or `labelStyle` overrides, or hover styles. Do not imply that a lone idle Tab Item can be reached by keyboard (#272). Do not suggest using Tab Item outside Tabs.
+Do not show Dark mode (#197), a counter badge, icons, a disabled tab, `style` or `labelStyle` overrides, or hover styles. Do not suggest using Tab Item outside Tabs.

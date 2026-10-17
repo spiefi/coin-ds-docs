@@ -43,3 +43,11 @@ Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `ma
 - Strings and numbers among the children render as one-line text.
 - Regression #273 (open): every ChipGroup logs React's “unique key” error in development builds; the production docs build doesn't.
 - Guide: the Group anatomy note says the row has no state, only an optional spoken name; the In context row is named “Transaction filters” (it is now `role="group"`); the Sources note says a long chip wraps inside the row, the named row is announced as a group, and the published Storybook predates the stories. The brief's note, Group part, In context, and Limits match.
+
+## a116616 publish (17 October 2026, #273)
+
+The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `ChipGroup.tsx`: each flattened, cloned child keeps its own key or gets an index key.
+
+- #273 fixed (re-test 17 October, development build in headless Chrome): `<ChipGroup accessibilityLabel="Filters">` with two ChipSelects logs no "unique key" error; a control page with an unkeyed list logged it once. The production docs build never logged it.
+- Guide: no designer-visible change. Only the Sources note's checked date and build changed (17 October, 16 October build); the browser test passes at 1280 and 390 px.
+
