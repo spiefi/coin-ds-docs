@@ -1,0 +1,371 @@
+{
+  "slug": "step",
+  "label": "Step",
+  "guideCommit": "f72ec62472be267ef350470ed36a1ff13016fba8",
+  "files": [
+    "src/guides/step.guide.tsx"
+  ],
+  "evidence": "docs/evidence/step.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:51.413Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "stepper item",
+    "stage",
+    "timeline item",
+    "progress step"
+  ],
+  "title": "Step",
+  "summary": "Use a Step for one stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail.",
+  "corePrinciple": "One stage: its name, its state, and what happened.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-step--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An indicator, a connector, and three lines of text",
+      "description": "A 36 px circle shows the stage’s number or outcome, and a 2 px connector runs down to the next stage. Beside them sit the title, a line of supporting text, and a date.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Indicator",
+        "36 px circle; its colour shows the state.",
+        "Glyph",
+        "The stage number, or a check, cross, or alert.",
+        "Connector",
+        "A 2 px line to the next stage.",
+        "Title",
+        "14 px bold; names the stage.",
+        "Supporting text",
+        "12 px; what the stage involves or how it went.",
+        "Date",
+        "10 px bold; when it finished, started, or is due."
+      ],
+      "specimen": [
+        "1",
+        "Verify PAN",
+        "Match your PAN with your name",
+        "Started 5 Oct 2026"
+      ],
+      "anatomy": [
+        {
+          "part": "Indicator",
+          "note": "36 px circle; its colour shows the state."
+        },
+        {
+          "part": "Glyph",
+          "note": "The stage number, or a check, cross, or alert."
+        },
+        {
+          "part": "Connector",
+          "note": "A 2 px line to the next stage."
+        },
+        {
+          "part": "Title",
+          "note": "14 px bold; names the stage."
+        },
+        {
+          "part": "Supporting text",
+          "note": "12 px; what the stage involves or how it went."
+        },
+        {
+          "part": "Date",
+          "note": "10 px bold; when it finished, started, or is due."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "The text lines, custom content, and the connector",
+      "description": "Every Step has a title. Add supporting text and a date when they help, or replace the text with your own content. Stepper hides the connector on the last stage.",
+      "blocks": [
+        "Title only",
+        "Compact, when the title says enough.",
+        "With supporting text",
+        "Says what the stage involves or how it went.",
+        "With a date",
+        "When the stage finished, started, or is due.",
+        "Custom content",
+        "Children replace the text block; the row and its connector grow. Keep the title prop: it’s what screen readers hear.",
+        "Connector off",
+        "Stepper turns it off on the last stage; turn it off on a Step you place yourself."
+      ],
+      "specimen": [
+        "1",
+        "Verify PAN",
+        "Match your PAN with your name",
+        "Started 5 Oct 2026",
+        "Upload Form 16",
+        "Add the PDF from your employer",
+        "Upload",
+        "2",
+        "Review and submit",
+        "PAN details match your name"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Title only",
+          "description": "Compact, when the title says enough."
+        },
+        {
+          "title": "With supporting text",
+          "description": "Says what the stage involves or how it went."
+        },
+        {
+          "title": "With a date",
+          "description": "When the stage finished, started, or is due."
+        },
+        {
+          "title": "Custom content",
+          "description": "Children replace the text block; the row and its connector grow. Keep the title prop: it’s what screen readers hear."
+        },
+        {
+          "title": "Connector off",
+          "description": "Stepper turns it off on the last stage; turn it off on a Step you place yourself."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Five stage states",
+      "description": "A Step’s status sets its glyph and colour together; an upcoming stage needs the Step Status mode set to inactive. An explicit Step Status always wins, so keep it matched to the status.",
+      "blocks": [
+        "Current",
+        "Purple with the stage number.",
+        "Upcoming",
+        "Pale lavender: not started.",
+        "Done",
+        "Green with a check; read as “Completed”.",
+        "Needs attention",
+        "Orange alert; read as “Needs attention”.",
+        "Failed",
+        "Red cross; read as “Failed”."
+      ],
+      "specimen": [
+        "1",
+        "Add bank account",
+        "Link the account you’ll invest from",
+        "eSign",
+        "Sign the form with an Aadhaar OTP",
+        "Verify PAN",
+        "PAN details match your name",
+        "Add nominee",
+        "Nominee’s date of birth is missing",
+        "Account name doesn’t match your PAN"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Current",
+          "description": "Purple with the stage number."
+        },
+        {
+          "title": "Upcoming",
+          "description": "Pale lavender: not started."
+        },
+        {
+          "title": "Done",
+          "description": "Green with a check; read as “Completed”."
+        },
+        {
+          "title": "Needs attention",
+          "description": "Orange alert; read as “Needs attention”."
+        },
+        {
+          "title": "Failed",
+          "description": "Red cross; read as “Failed”."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "At least 52 px, growing with its text",
+      "description": "A Step fills its column and is at least 52 px tall. The indicator is 36 px with 16 px to the text; the connector is 2 px wide, starts 2 px under the circle, and stretches when the text wraps.",
+      "blocks": [
+        "312 × 52",
+        "36 × 36",
+        "Long text wraps",
+        "The title and supporting text wrap, and the row and connector grow with them."
+      ],
+      "specimen": [
+        "1",
+        "Verify PAN",
+        "Match your PAN with your name",
+        "Started 5 Oct 2026",
+        "Upload Form 16 and match your employer’s TAN",
+        "The name on Form 16 must match your PAN and the employer details you saved.",
+        "2",
+        "Review and submit"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Long text wraps",
+          "description": "The title and supporting text wrap, and the row and connector grow with them."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the stage, then say how it went",
+      "description": "Write the title as the stage in a few words, such as “Verify PAN”, not an action. Use the supporting text for what happens or what went wrong, and the date for when. The glyph only says that a stage failed, not why.",
+      "blocks": [
+        "Stage names and outcomes"
+      ],
+      "specimen": [
+        "Verify PAN",
+        "PAN details match your name",
+        "Add nominee",
+        "Nominee’s date of birth is missing",
+        "3",
+        "eSign",
+        "Sign the form with an Aadhaar OTP"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Stage names and outcomes",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Uploading Form 16 while filing ITR",
+      "description": "The current stage holds its own Upload button. Uploading marks the stage done, and the screen moves the current stage on.",
+      "blocks": [
+        "Stage 2 of 3: Upload Form 16"
+      ],
+      "specimen": [
+        "File your ITR",
+        "Verify PAN",
+        "PAN details match your name",
+        "Done 2 Oct 2026",
+        "2",
+        "Upload Form 16",
+        "Add the PDF from your employer",
+        "Upload",
+        "3",
+        "Review and submit",
+        "Check your income and file"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make every stage readable",
+      "description": "Each pair shows a stage people understand versus one that misleads them.",
+      "blocks": [
+        "Do",
+        "Match the icon and colour",
+        "A done stage shows a check on green.",
+        "Don’t",
+        "Put a check on purple",
+        "An explicit Step Status of active overrides the green.",
+        "Turn off the last connector",
+        "The stage ends cleanly.",
+        "Leave a hanging line",
+        "A connector with no next stage looks unfinished.",
+        "Name the stage",
+        "“Verify PAN” is shown and read aloud.",
+        "Leave the default title",
+        "“Stepper Item” tells people nothing, and it’s read as “Step 1”."
+      ],
+      "specimen": [
+        "Verify PAN",
+        "PAN details match your name",
+        "1",
+        "Stepper Item"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Match the icon and colour",
+            "caption": "A done stage shows a check on green.",
+            "specimen": "Verify PAN · PAN details match your name"
+          },
+          "dont": {
+            "title": "Put a check on purple",
+            "caption": "An explicit Step Status of active overrides the green.",
+            "specimen": "Verify PAN · PAN details match your name"
+          }
+        },
+        {
+          "do": {
+            "title": "Turn off the last connector",
+            "caption": "The stage ends cleanly.",
+            "specimen": "Verify PAN · PAN details match your name"
+          },
+          "dont": {
+            "title": "Leave a hanging line",
+            "caption": "A connector with no next stage looks unfinished.",
+            "specimen": "Verify PAN · PAN details match your name"
+          }
+        },
+        {
+          "do": {
+            "title": "Name the stage",
+            "caption": "“Verify PAN” is shown and read aloud.",
+            "specimen": "1 · Verify PAN"
+          },
+          "dont": {
+            "title": "Leave the default title",
+            "caption": "“Stepper Item” tells people nothing, and it’s read as “Step 1”.",
+            "specimen": "1 · Stepper Item"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Step contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Stepper, which places each Step",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Complete",
+        "Error",
+        "Warning",
+        "Last step",
+        "Custom slot",
+        "Checked 11 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. In Figma, designers place Steps through Stepper in the Components Library (linked above); Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code status sets both, and an explicit Step Status mode overrides the colour. On the web each Step is a list item read as its title plus “Completed”, “Failed”, or “Needs attention”; the supporting text and date aren’t read, and a Step with only a StepLabel child is read as “Step” and its number. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.",
+        "jfs-components",
+        "0.1.78",
+        "status"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

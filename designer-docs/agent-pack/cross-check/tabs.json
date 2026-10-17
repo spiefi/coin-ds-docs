@@ -1,0 +1,17 @@
+{
+  "slug": "tabs",
+  "entryHash": "8941342316c92fc1844272eface8132edeeac0de524155ce1a39c5bdb7e939a4",
+  "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
+  "checkedAt": "2026-10-17T10:57:35Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/2",
+      "reason": "lost-context: The item says modes set on Tabs \"are forwarded to every TabItem child\". The evidence limits this in two ways. Modes reach only direct TabItem children (\"Wrappers and Fragments around TabItems are not recognised\"). They are also merged under each item's own modes, so \"the item's modes win\". Setting modes once on Tabs does not guarantee every tab gets them."
+    }
+  ],
+  "notes": "Everything else matches the guide or the evidence. /placementAdvice/2 quotes only the first Sizing sentence, but the rest of the item (tabs as wide as their labels, 16 px apart) appears later in the same Sizing description, so it is supported. /facts/props/4 is dated 2026-10-13, which matches the c1fa197 check where the tab list is named by accessibilityLabel. The Sources note's counter badge (`badge`) is not extracted as an item; that is a coverage choice, not a misstatement."
+}

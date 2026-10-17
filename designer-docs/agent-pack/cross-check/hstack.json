@@ -1,0 +1,25 @@
+{
+  "slug": "hstack",
+  "entryHash": "80d029712bd1f720fecb1090afd9d314a1ebe70a626bbefc70db17d0c5d1efab",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "checkedAt": "2026-10-17T10:57:15Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/anatomy/3",
+      "reason": "misreads-source: The part is marked alwaysPresent=true, but the same anatomy line says to \"Use None when the surrounding owner already supplies that edge.\" The configuration section offers \"Padding · Default / None\", so the HStack's own inset is optional, not always present."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The example uses a `Badge` component. Nothing cited supports it: the evidence lists the public exports as Button, HStack, VStack, Stack, Icon and Text, plus the action-guide components, and Badge is not among them. The guide's live examples show only text labels (\"Paid | Due today | New\")."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: Same problem: it builds the wrapped row from `Badge` children. The evidence does not list Badge as a public export of jfs-components@0.1.60, so nothing cited supports using it."
+    }
+  ],
+  "notes": "/configuration/7 is tagged [required] and targets value=center. It is a package fact, and the item states its condition (\"To match Figma's Alignment Left\"), so it was not flagged. A human should confirm the pack doesn't read it as \"always set alignVertical to center\"; the default is flex-start (Top Left). In /examples/2, Padding: 'None' is also passed in the modes of each Text child. That is redundant given that children inherit mode context, but it is not a misreading. Also check whether Badge exists in the package types before the Badge flags are acted on."
+}

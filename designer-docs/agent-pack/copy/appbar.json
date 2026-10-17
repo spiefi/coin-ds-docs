@@ -1,0 +1,263 @@
+{
+  "slug": "appbar",
+  "label": "App Bar",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/appbar.guide.tsx",
+    "src/AppBarGuide.tsx"
+  ],
+  "evidence": "docs/evidence/appbar.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:45.725Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "header",
+    "top bar",
+    "navigation bar",
+    "nav bar",
+    "toolbar",
+    "title bar"
+  ],
+  "title": "App Bar",
+  "summary": "Keep page identity, navigation and a few relevant actions together at the top of a view.",
+  "corePrinciple": "Use the bar to orient people. Keep its title short and its actions focused.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1070-18571",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-appbar--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Three slots give the bar its hierarchy",
+      "description": "The leading slot orients people, the centered middle slot identifies the page, and the actions slot keeps only relevant actions in reach.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "Leading",
+        "Back or a product mark establishes where the page sits in the flow.",
+        "Middle",
+        "The SubPage title stays centered inside the 192px middle slot.",
+        "Actions",
+        "Use a small set of public actions that support the current page."
+      ],
+      "specimen": [
+        "Page title"
+      ],
+      "anatomy": [
+        {
+          "part": "Leading",
+          "note": "Back or a product mark establishes where the page sits in the flow."
+        },
+        {
+          "part": "Middle",
+          "note": "The SubPage title stays centered inside the 192px middle slot."
+        },
+        {
+          "part": "Actions",
+          "note": "Use a small set of public actions that support the current page."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the page relationship first",
+      "description": "MainPage gives a view its identity. SubPage supplies a back relationship and centers its title independently from the side slots.",
+      "blocks": [
+        "MainPage",
+        "Use the canonical MainPage identity",
+        "The published MainPage story pairs JioDot with low-emphasis add and Avatar actions and leaves the middle slot empty.",
+        "SubPage",
+        "Supply an accessible back action",
+        "The guide supplies a public IconButton with a Go back label so the leading action has a clear accessible name."
+      ],
+      "specimen": [
+        "Page title"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "State belongs to the child action",
+      "description": "AppBar owns the arrangement. Its IconButton children own enabled and disabled feedback, so the state communicates what is available on this page.",
+      "blocks": [
+        "Child action references · use the playground above for interaction feedback.",
+        "Enabled actions",
+        "Use the actions slot when the page has a useful next action.",
+        "Disabled child",
+        "Disable a child IconButton when its action is temporarily unavailable.",
+        "Availability belongs to each action.",
+        "Configure the bar type and slots, then configure availability on the public child action that needs it."
+      ],
+      "specimen": [
+        "Overview"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The host sets the available width",
+      "description": "AppBar derives its height from its public padding and children. On SubPage, the middle content is centered in a 192px box and clips or truncates when a crowded title has nowhere to go.",
+      "blocks": [
+        "Roomy host",
+        "Side slots have room while the middle remains centered.",
+        "Narrow host",
+        "At up to 360px of content width, one focused action leaves room; longer titles or extra actions compete with the side slots."
+      ],
+      "specimen": [
+        "Account overview",
+        "Investments"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Make the title and actions earn their space",
+      "description": "A short title helps people orient quickly. Each action should support the page they are on and remain understandable from its accessible label.",
+      "blocks": [
+        "01",
+        "Keep the title short",
+        "Use the page name people need to recognize, then move supporting detail into the page body.",
+        "02",
+        "Prioritize actions",
+        "Show only the few actions that help someone complete the current task.",
+        "03",
+        "Name icon actions",
+        "Use the public IconButton accessibilityLabel so icon-only controls remain discoverable."
+      ],
+      "specimen": [
+        "Bills"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Move between related pages with one contract",
+      "description": "The product flow owns navigation state. AppBar presents the current destination and invokes the public child actions supplied by that flow.",
+      "blocks": [
+        "Current page: Overview",
+        "Overview"
+      ],
+      "specimen": [
+        "Overview",
+        "See recent payments and transfers from this page.",
+        "Open transactions"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make the relationship easy to scan",
+      "description": "Use the page title, action count, and page type to make the next destination and its available actions clear.",
+      "blocks": [
+        "Do",
+        "Keep the destination concise",
+        "A short title stays readable in the centered middle slot.",
+        "Don’t",
+        "Put the page brief inside the bar",
+        "The centered slot clips extra words when a title carries the whole page brief.",
+        "Keep actions focused",
+        "One low-emphasis action leaves the destination and the next step easy to scan.",
+        "Overcrowd the actions slot",
+        "Every extra control competes with the few actions that support the current task.",
+        "Use SubPage for a child destination",
+        "The supplied Go back action makes the relationship to the parent page explicit.",
+        "Use MainPage identity for a detail view",
+        "JioDot and an empty middle slot describe a top-level destination, not a child page."
+      ],
+      "specimen": [
+        "Bills",
+        "Your complete investment dashboard",
+        "Payments",
+        "Payment details"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the destination concise",
+            "caption": "A short title stays readable in the centered middle slot.",
+            "specimen": "Bills"
+          },
+          "dont": {
+            "title": "Put the page brief inside the bar",
+            "caption": "The centered slot clips extra words when a title carries the whole page brief.",
+            "specimen": "Your complete investment dashboard"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep actions focused",
+            "caption": "One low-emphasis action leaves the destination and the next step easy to scan.",
+            "specimen": "Payments"
+          },
+          "dont": {
+            "title": "Overcrowd the actions slot",
+            "caption": "Every extra control competes with the few actions that support the current task.",
+            "specimen": "Payments"
+          }
+        },
+        {
+          "do": {
+            "title": "Use SubPage for a child destination",
+            "caption": "The supplied Go back action makes the relationship to the parent page explicit.",
+            "specimen": "Payment details"
+          },
+          "dont": {
+            "title": "Use MainPage identity for a detail view",
+            "caption": "JioDot and an empty middle slot describe a top-level destination, not a child page.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the published component",
+      "description": "This guide separates designer-configurable slots and page types from package behavior that affects sizing and accessibility.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "App Bar component set · node 1070:18571",
+        "02",
+        "Canonical Storybook",
+        "MainPage, SubPage, long title, and progress examples",
+        "Open default story",
+        "Open MainPage story",
+        "Open SubPage story",
+        "Open long-title story",
+        "Open progress story",
+        "Checked 21 September 2026",
+        "Examples use the public AppBar, IconButton, JioDot, and Avatar exports plus the published Storybook TitleText fixture for the middle slot. The source fixture uses explicit 16px bold text and a color literal keyed to its Light/Dark mode; this is documented provenance rather than a claim that Figma specifies the typography. Figma and package behavior differ on fixed reference heights and MainPage’s JioDot default; the guide also supplies a named public back action because the package default has no accessible name.",
+        "AppBar",
+        "IconButton",
+        "JioDot",
+        "Avatar",
+        "TitleText"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

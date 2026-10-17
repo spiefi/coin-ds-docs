@@ -1,0 +1,426 @@
+{
+  "slug": "actionfooter",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "extractedBy": "Claude Code subagent, flow-kit extraction",
+  "extractedOn": "2026-10-17",
+  "notes": "ActionFooter's page is rendered by the shared ActionGuides.tsx (with ActionTile and Additem); only text that renders on the ActionFooter page was used. Its Sources note says jfs-components 0.1.60, checked 19 September 2026; the evidence file (docs/evidence/actionfooter.md) states no check date or version, so its facts carry the Sources note's date and version. The installed package is 0.1.78. Guide problems: (1) the rendered copy never says how to give one action priority: the live examples set it with AppearanceBrand (Back Secondary, Continue Primary, both Emphasis High), and the Don't sets both to Primary, so no rule here names a mode for priority; (2) the Do 'Name the decision' uses Confirm payment as the action label, while the anatomy, In context and 'Keep the title concise' examples put Confirm payment in the title and use Continue as the action, and the Content section calls Continue a short label to lead with; the guide does not say which pattern to prefer; (3) the 0.1.78 types add avoidKeyboard (deprecated, no effect), style and accessibilityLabel, which the guide does not mention, and say a loose Button or IconButton child is the legacy shape; (4) the guide gives no accessibility guidance, so accessibility stays empty; (5) the summary and core principle are one short sentence each, and the summary is not phrased as when to use it. The guide names no other component to use instead.",
+  "useWhen": [
+    {
+      "text": "Keep the next step close to the decision.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Keep the next step close to the decision."
+      }
+    },
+    {
+      "text": "To keep the final decision of a composition, such as confirming a reviewed payment, at the bottom of the host.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The public footer follows a short Coin composition and keeps the final decision at the bottom of the host."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Confirmation or error feedback: keep it in the surrounding flow rather than inside the persistent footer.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "Keep confirmation or error feedback in the surrounding flow rather than inside the persistent footer."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "The optional title: context above the actions, omitted when the decision is already clear.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional context above the actions. Omit it when the decision is already clear."
+      }
+    },
+    {
+      "part": "Action group",
+      "holds": "A public ButtonGroup or Stack that owns the horizontal or vertical button layout.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A public ButtonGroup or Stack owns horizontal or vertical button layout."
+      }
+    },
+    {
+      "part": "Surface",
+      "holds": "The token-owned surface: ActionFooter owns background, shadow, padding, radius and mode resolution.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "ActionFooter owns background, shadow, padding, radius, and mode resolution."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "ActionFooter keeps the final decision at the bottom of the host.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "keeps the final decision at the bottom of the host."
+      }
+    },
+    {
+      "text": "The host supplies the width; the title and grouping change the footer's natural height.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The host supplies width; title and grouping change the natural height."
+      }
+    },
+    {
+      "text": "In a constrained host, the action composite changes its own height; ActionFooter stays full width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The composite changes its own height; ActionFooter remains full width."
+      }
+    },
+    {
+      "text": "On web the footer renders in normal flow; on native it pins itself to the bottom. Keyboard avoidance remains the consumer's job.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Web renders in normal flow, native pins the footer, and keyboard avoidance remains consumer-owned."
+      },
+      "checkedVersion": "0.1.60",
+      "checkedOn": "2026-09-19"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use a ButtonGroup for a row of actions.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "Use a ButtonGroup for a row."
+      }
+    },
+    {
+      "text": "Use Stack when the actions need a vertical reading order.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "Use Stack when the actions need a vertical reading order."
+      }
+    },
+    {
+      "text": "For new code, pass a single ButtonGroup or Stack (or Slot) child: ActionFooter does not re-stretch it, only cascades modes and stretches it to full width. Loose Button and IconButton children are the legacy shape: an IconButton keeps its square size and the rest stretch.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "fact": "props:children"
+      }
+    },
+    {
+      "text": "Leave out the title when the preceding content already names the decision, to keep the surface short.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep the surface short when the preceding content already names the decision."
+      }
+    },
+    {
+      "text": "Add a short title and stack the actions when horizontal space or hierarchy calls for it.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a short title and stack actions when horizontal space or hierarchy calls for it."
+      }
+    },
+    {
+      "text": "Set modes on ActionFooter: they are merged into every slot child.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "fact": "props:modes"
+      }
+    },
+    {
+      "text": "Configure disabled, loading or confirmation states on the footer's public child actions, and show feedback elsewhere: ActionFooter does not invent them.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "ActionFooter does not invent disabled, loading, or confirmation states. Configure those on its public child actions and show feedback elsewhere."
+      }
+    },
+    {
+      "text": "Do not make both actions primary: equal emphasis hides which action advances the decision.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Equal emphasis hides which action advances the decision."
+      }
+    },
+    {
+      "text": "Where a keyboard can cover the footer, handle keyboard avoidance in the consuming implementation: avoidKeyboard is deprecated and has no effect.",
+      "strength": "recommended",
+      "target": "avoidKeyboard",
+      "from": {
+        "fact": "props:avoidKeyboard"
+      }
+    },
+    {
+      "text": "Bottom spacing differs between Figma and the package: Figma's sample has 41px; the package defaults to 24px (bottomPadding) plus an optional safe-area inset (safeAreaBottom).",
+      "strength": "recommended",
+      "target": "bottomPadding",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s sample includes 41px bottom spacing; the package defaults to 24px plus an optional safe-area inset."
+      },
+      "checkedVersion": "0.1.60",
+      "checkedOn": "2026-09-19"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Give one action clear priority.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Give one action clear priority."
+        }
+      },
+      {
+        "text": "Lead with the decision: use one clear primary action, such as Continue or Confirm payment.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use one clear primary action such as Continue or Confirm payment."
+        }
+      },
+      {
+        "text": "Use short verb-led labels.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use short verb-led labels."
+        }
+      },
+      {
+        "text": "Keep labels short: Continue and Back scan faster than sentences that repeat the screen title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Continue and Back scan faster than sentences that repeat the screen title."
+        }
+      },
+      {
+        "text": "Name the decision: labels such as Back and Confirm payment describe both outcomes directly.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Back and Confirm payment describe both outcomes directly."
+        }
+      },
+      {
+        "text": "Avoid vague action labels such as Yes and Go: they make people infer what will happen next.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Yes and Go make people infer what will happen next."
+        }
+      },
+      {
+        "text": "Keep the title concise: a short title adds context without repeating the action.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "A short title adds context without repeating the action."
+        }
+      },
+      {
+        "text": "Do not repeat the instruction in the title: a long title slows scanning and duplicates the primary action.",
+        "strength": "discouraged",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "A long title slows scanning and duplicates the primary action."
+        }
+      },
+      {
+        "text": "Show confirmation, validation or failure near the content that changed.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Show confirmation, validation, or failure near the content that changed."
+        }
+      }
+    ],
+    "good": [
+      "Continue",
+      "Confirm payment",
+      "Back"
+    ],
+    "bad": [
+      "Yes",
+      "Go",
+      "Continue to continue with the next step of your payment"
+    ]
+  },
+  "states": [
+    {
+      "state": "One action",
+      "when": "A single next step: the lone action receives the full available width.",
+      "from": {
+        "section": "states",
+        "quote": "A lone Continue action receives the full available width."
+      }
+    },
+    {
+      "state": "Two actions",
+      "when": "Primary and supporting: Back supports the clearly prioritized Continue action.",
+      "from": {
+        "section": "states",
+        "quote": "Back supports the clearly prioritized Continue action."
+      }
+    },
+    {
+      "state": "Dark mode",
+      "when": "Color Mode Dark on the footer: the owner receives Dark and cascades it through the composite.",
+      "from": {
+        "section": "states",
+        "quote": "The owner receives Dark and cascades it through the composite."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Give Continue clear priority",
+      "dont": "Make both actions primary",
+      "why": "Equal emphasis hides which action advances the decision.",
+      "from": {
+        "section": "doDont",
+        "quote": "Give Continue clear priority"
+      }
+    },
+    {
+      "do": "Name the decision",
+      "dont": "Use vague action labels",
+      "why": "Yes and Go make people infer what will happen next.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the decision"
+      }
+    },
+    {
+      "do": "Keep the title concise",
+      "dont": "Repeat the instruction",
+      "why": "A long title slows scanning and duplicates the primary action.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the title concise"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A row of two actions in a ButtonGroup: Back supports the prioritized Continue.",
+      "jsx": "<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <ButtonGroup modes={{ 'Color Mode': 'Light' }}>\n    <Button label=\"Back\" onPress={() => {}} modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary' }} />\n    <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Primary' }} />\n  </ButtonGroup>\n</ActionFooter>",
+      "from": {
+        "section": "configuration",
+        "quote": "Use a ButtonGroup for a row."
+      }
+    },
+    {
+      "purpose": "A short title above a vertical Stack of actions.",
+      "jsx": "<ActionFooter title=\"Confirm payment\" modes={{ 'Color Mode': 'Light' }}>\n  <Stack layoutDirection=\"vertical\" fillWidth modes={{ 'Color Mode': 'Light' }}>\n    <Button label=\"Back\" onPress={() => {}} modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary' }} />\n    <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Primary' }} />\n  </Stack>\n</ActionFooter>",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a short title and stack actions when horizontal space or hierarchy calls for it."
+      }
+    },
+    {
+      "purpose": "A single next step that takes the full width.",
+      "jsx": "<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <ButtonGroup modes={{ 'Color Mode': 'Light' }}>\n    <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n  </ButtonGroup>\n</ActionFooter>",
+      "from": {
+        "section": "states",
+        "quote": "A lone Continue action receives the full available width."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "children",
+      "description": "A single ButtonGroup, Stack or Slot child owns its internal layout and receives the footer's modes.",
+      "quote": "A single public `ButtonGroup`, `Stack`, or `Slot` child owns its internal layout and receives the footer modes.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "bottomPadding",
+      "description": "Defaults to 24; the native safe-area inset is optionally added.",
+      "quote": "The package defaults `bottomPadding` to 24 and optionally adds the native safe-area inset.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "safeAreaBottom",
+      "description": "Optionally adds the native safe-area inset to the 24px bottom padding.",
+      "quote": "The package defaults `bottomPadding` to 24 and optionally adds the native safe-area inset.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "avoidKeyboard",
+      "description": "Keyboard avoidance is consumer-owned: the footer does not avoid the keyboard.",
+      "quote": "Keyboard avoidance is explicitly consumer-owned.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "modes",
+      "name": "Action Footer Radius",
+      "description": "The Figma reference selects False.",
+      "quote": "selected modes include `Color Mode=Light`, `context5=Default`, and `Action Footer Radius=False`.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "modes",
+      "name": "context5",
+      "description": "The Figma reference selects Default.",
+      "quote": "selected modes include `Color Mode=Light`, `context5=Default`, and `Action Footer Radius=False`.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "ActionFooter does not avoid the keyboard: keyboard avoidance is consumer-owned.",
+      "quote": "Keyboard avoidance is explicitly consumer-owned.",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "text": "Figma's sample has 41px bottom spacing, while the package defaults to 24px plus an optional safe-area inset.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s sample includes 41px bottom spacing; the package defaults to 24px plus an optional safe-area inset."
+      },
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

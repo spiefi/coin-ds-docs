@@ -7,9 +7,9 @@
 // Facts from docs/evidence (source `evidence`) and gaps are added by the build
 // from each guidance file, with the evidence quote they rest on.
 
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import ts from 'typescript'
 import { DOCS, norm } from './lib.mjs'
 
@@ -60,12 +60,52 @@ export function packageExports() {
 }
 
 const isPackageFile = (file) => file.includes('/node_modules/jfs-components/')
-const componentFile = (id) => `/components/${id}/${id}.d.ts`
 
-/** The declaration in the component's own file (RN base types can declare the same prop). */
-function ownDeclaration(symbol, id) {
-  return (symbol.declarations ?? []).find((declaration) =>
-    declaration.getSourceFile().fileName.endsWith(componentFile(id)))
+/**
+ * Where an export is declared: its .d.ts file, that file's folder (props
+ * declared there are the component's own), and its shipped source file.
+ */
+function locate(checker, probe, id) {
+  const importDecl = probe.statements.find((statement) => ts.isImportDeclaration(statement) &&
+    statement.moduleSpecifier.text === 'jfs-components')
+  const symbol = checker.getExportsOfModule(checker.getSymbolAtLocation(importDecl.moduleSpecifier))
+    .find((entry) => entry.getName() === id)
+  const target = symbol.flags & ts.SymbolFlags.Alias ? checker.getAliasedSymbol(symbol) : symbol
+  const dts = target.declarations[0].getSourceFile().fileName
+  const base = dts.replace('/lib/typescript/src/', '/src/').replace(/\.d\.ts$/, '')
+  const src = [`${base}.tsx`, `${base}.ts`].find((file) => existsSync(file)) ?? null
+  return { id, dts, dir: dirname(dts), src }
+}
+
+const inDir = (file, loc) => file.startsWith(loc.dir + '/')
+
+/** The declaration in the component's own folder (RN base types can declare the same prop). */
+function ownDeclaration(symbol, loc) {
+  return (symbol.declarations ?? []).find((declaration) => inDir(declaration.getSourceFile().fileName, loc))
+}
+
+/** Function-like declarations that are the component itself (function, Impl, arrow, forwardRef). */
+function componentNodes(source, id) {
+  const found = []
+  const named = (name) => name === id || name === `${id}Impl`
+  const unwrap = (node) => {
+    if (!node) return null
+    if (ts.isArrowFunction(node) || ts.isFunctionExpression(node)) return node
+    if (ts.isCallExpression(node)) return unwrap(node.arguments[0])
+    if (ts.isAsExpression(node) || ts.isParenthesizedExpression(node)) return unwrap(node.expression)
+    return null
+  }
+  const visit = (node) => {
+    if ((ts.isFunctionDeclaration(node) || ts.isFunctionExpression(node)) && node.name && named(node.name.text)) found.push(node)
+    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && named(node.name.text)) {
+      found.push(node)
+      const fn = unwrap(node.initializer)
+      if (fn) found.push(fn)
+    }
+    ts.forEachChild(node, visit)
+  }
+  visit(source)
+  return found
 }
 
 /** JSDoc of the component's own declaration, with any @deprecated note. */
@@ -85,10 +125,10 @@ function docOf(declaration) {
 }
 
 /** Reads `{ a = 1, b = 'x' }` defaults from the component's shipped source. */
-function sourceDefaults(id) {
-  const file = join(PACKAGE_DIR, 'src/components', id, `${id}.tsx`)
-  let code
-  try { code = readFileSync(file, 'utf8') } catch { return {} }
+function sourceDefaults(loc) {
+  const { id, src: file } = loc
+  if (!file) return {}
+  const code = readFileSync(file, 'utf8')
   const source = ts.createSourceFile(file, code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
   const constants = new Map()
   const literal = (node) => {
@@ -133,34 +173,24 @@ function sourceDefaults(id) {
       if (value && !(name in defaults)) defaults[name] = value
     }
   }
-  const visit = (node) => {
-    if ((ts.isFunctionDeclaration(node) || ts.isFunctionExpression(node)) && node.name &&
-      (node.name.text === id || node.name.text === `${id}Impl`)) visitParams(node)
-    ts.forEachChild(node, visit)
-  }
-  visit(source)
+  for (const node of componentNodes(source, id)) if (node.parameters) visitParams(node)
   return defaults
 }
 
 /** `@param {T} [props.name=default] - text` descriptions on the component's own JSDoc. */
-function paramDocs(id) {
-  const path = join(PACKAGE_DIR, 'lib/typescript/src/components', id, `${id}.d.ts`)
-  const source = ts.createSourceFile(path, readFileSync(path, 'utf8'), ts.ScriptTarget.Latest, true)
+function paramDocs(loc) {
+  const source = ts.createSourceFile(loc.dts, readFileSync(loc.dts, 'utf8'), ts.ScriptTarget.Latest, true)
   const docs = {}
-  const visit = (node) => {
-    if (ts.isFunctionDeclaration(node) && node.name && (node.name.text === id || node.name.text === `${id}Impl`)) {
-      // TypeScript's JSDoc parser drops `[props.x="…"]` tags, so read the raw comment.
-      for (const jsdoc of ts.getJSDocCommentsAndTags(node)) {
-        if (!ts.isJSDoc(jsdoc)) continue
-        const text = jsdoc.getText(source).replace(/^\s*\*\s?/gm, '')
-        for (const match of text.matchAll(/@param\s+\{[^}]*\}\s+\[?props\.(\w+)(?:=[^\]]*)?\]?\s*-\s*([^@]*)/g)) {
-          docs[match[1]] = norm(match[2].replace(/\*\/\s*$/, ''))
-        }
+  for (const node of componentNodes(source, loc.id)) {
+    // TypeScript's JSDoc parser drops `[props.x="…"]` tags, so read the raw comment.
+    for (const jsdoc of ts.getJSDocCommentsAndTags(node)) {
+      if (!ts.isJSDoc(jsdoc)) continue
+      const text = jsdoc.getText(source).replace(/^\s*\*\s?/gm, '')
+      for (const match of text.matchAll(/@param\s+\{[^}]*\}\s+\[?props\.(\w+)(?:=[^\]]*)?\]?\s*-\s*([^@]*)/g)) {
+        docs[match[1]] = norm(match[2].replace(/\*\/\s*$/, ''))
       }
     }
-    ts.forEachChild(node, visit)
   }
-  visit(source)
   return docs
 }
 
@@ -183,8 +213,8 @@ const isNodeType = (text) => /ReactNode|ReactElement|JSX\.Element/.test(text)
 const isFunctionType = (text) => /=>/.test(text)
 
 /** The inherited (non-component) parts of a props type, e.g. `Omit<ViewProps, …>`. */
-function inheritedBases(id) {
-  const path = join(PACKAGE_DIR, 'lib/typescript/src/components', id, `${id}.d.ts`)
+function inheritedBases(loc) {
+  const { id, dts: path } = loc
   const source = ts.createSourceFile(path, readFileSync(path, 'utf8'), ts.ScriptTarget.Latest, true)
   const bases = []
   const collect = (typeNode) => {
@@ -221,24 +251,20 @@ export function modeCollections() {
 }
 
 /** The component's own JSDoc (on its function declaration), as plain text. */
-function componentDoc(id) {
-  const path = join(PACKAGE_DIR, 'lib/typescript/src/components', id, `${id}.d.ts`)
-  const source = ts.createSourceFile(path, readFileSync(path, 'utf8'), ts.ScriptTarget.Latest, true)
-  let text = ''
-  const visit = (node) => {
-    if (ts.isFunctionDeclaration(node) && node.name && (node.name.text === id || node.name.text === `${id}Impl`)) {
-      for (const jsdoc of ts.getJSDocCommentsAndTags(node)) {
-        if (ts.isJSDoc(jsdoc)) text += ' ' + (ts.getTextOfJSDocComment(jsdoc.comment) ?? '')
-      }
+export function componentDoc(loc) {
+  const source = ts.createSourceFile(loc.dts, readFileSync(loc.dts, 'utf8'), ts.ScriptTarget.Latest, true)
+  const texts = new Set()
+  for (const node of componentNodes(source, loc.id)) {
+    for (const jsdoc of ts.getJSDocCommentsAndTags(node)) {
+      if (ts.isJSDoc(jsdoc)) texts.add(norm(ts.getTextOfJSDocComment(jsdoc.comment) ?? ''))
     }
-    ts.forEachChild(node, visit)
   }
-  visit(source)
-  return norm(text.replace(/\*\*/g, ''))
+  return norm([...texts].join(' ').replace(/\*\*/g, ''))
 }
 
-function modeFacts(id) {
-  const doc = componentDoc(id)
+function modeFacts(loc) {
+  const { id } = loc
+  const doc = componentDoc(loc)
   return (MODES.FIGMA_COMPONENT_MODES[id] ?? []).map((collection) => {
     // A sentence of the component's JSDoc that names this collection, if any.
     const said = doc.split(/(?<=\.)\s+/).filter((sentence) =>
@@ -291,8 +317,9 @@ export function generateFacts(ids) {
   for (const id of ids) {
     const alias = probe.statements.find((statement) => ts.isTypeAliasDeclaration(statement) && statement.name.text === `Props_${id}`)
     const propsType = checker.getTypeAtLocation(alias.name)
-    const defaults = sourceDefaults(id)
-    const params = paramDocs(id)
+    const loc = locate(checker, probe, id)
+    const defaults = sourceDefaults(loc)
+    const params = paramDocs(loc)
     const props = []
     const slots = []
     const events = []
@@ -302,11 +329,11 @@ export function generateFacts(ids) {
       const declarations = property.declarations ?? []
       const own = declarations.some((declaration) => {
         const file = declaration.getSourceFile().fileName
-        return isPackageFile(file) && file.endsWith(componentFile(id))
+        return isPackageFile(file) && inDir(file, loc)
       })
       if (!own) continue
       const name = property.getName()
-      const declaration = ownDeclaration(property, id)
+      const declaration = ownDeclaration(property, loc)
       const text = typeText(checker, property, probe, declaration)
       const fact = { name, type: text, required: !(property.flags & ts.SymbolFlags.Optional), source: 'types' }
       const values = literalValues(checker.getTypeOfSymbolAtLocation(property, probe))
@@ -338,7 +365,7 @@ export function generateFacts(ids) {
       }
     }
     for (const [typeName, usedBy] of itemTypes) props.push(...itemTypeFacts(checker, probe, typeName, usedBy))
-    for (const base of inheritedBases(id)) {
+    for (const base of inheritedBases(loc)) {
       props.push({
         name: `...${base}`,
         type: base,
@@ -358,7 +385,7 @@ export function generateFacts(ids) {
       const memberProps = memberType.getCallSignatures()[0]?.getParameters()[0]
       const ownMemberProps = memberProps
         ? checker.getTypeOfSymbolAtLocation(memberProps, probe).getProperties()
-          .filter((prop) => prop.declarations?.some((d) => d.getSourceFile().fileName.endsWith(componentFile(id))))
+          .filter((prop) => prop.declarations?.some((d) => inDir(d.getSourceFile().fileName, loc)))
           .map((prop) => prop.getName())
         : []
       props.push({
@@ -368,7 +395,7 @@ export function generateFacts(ids) {
         source: 'types',
       })
     }
-    result[id] = { props, modes: modeFacts(id), slots, events, gaps: [], allowedChildren }
+    result[id] = { props, modes: modeFacts(loc), slots, events, gaps: [], allowedChildren, doc: componentDoc(loc), declaredIn: loc.dts.slice(loc.dts.indexOf('/lib/typescript/') + 1) }
   }
   return result
 }

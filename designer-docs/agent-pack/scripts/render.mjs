@@ -154,70 +154,74 @@ export function componentMarkdown(entry, { packVersion, outsidePilot = [] }) {
   return lines.join('\n')
 }
 
-export function rulesMarkdown({ packVersion, packageVersion, packageSource, entries }) {
+export function rulesMarkdown({ packVersion, packageVersion, packageSource, entries, otherComponents }) {
+  const guided = entries.filter((entry) => entry.status.state !== 'undocumented')
+  const hints = entries.filter((entry) => entry.status.state === 'undocumented')
   return `# Coin agent pack: rules for agents (pilot)
 
 Pack ${packVersion} · jfs-components ${packageVersion} · schema version 1.
 
-**Pilot.** This pack covers ${entries.length} components (${entries.map((entry) => entry.id).join(', ')}).
-It is generated from the Coin designer guides and the installed package, and is
-being tested. Other jfs-components exports exist but have no entry here: see
-\`llms.txt\`.
+**Pilot.** This pack has ${entries.length} entries, generated from the Coin
+designer guides and the installed package, and is being tested.
+${guided.length} come from designer guides (${guided.map((entry) => entry.id).join(', ')}).
+${hints.length} are undocumented: public exports with no guide, facts only
+(${hints.map((entry) => entry.id).join(', ')}).
 
 ## Rules
 
 1. **Match the version.** Use this pack only when its jfs-components version
-   (\`${packageVersion}\`, in \`manifest.json\` as \`packageVersion\`) matches the
-   installed package (\`node_modules/jfs-components/package.json\`). If it does
-   not, find the matching release in \`/agent/index.json\`, or do not use the
-   pack. Built from ${packageSource}.
+   (\`${packageVersion}\`) matches the installed package
+   (\`node_modules/jfs-components/package.json\`). If it does not, find the
+   matching release in \`/agent/index.json\`, or do not use the pack. Built
+   from ${packageSource}.
 2. **Use only what the facts list.** Use only components, props, values and
-   slots that are in an entry's \`facts\` (or, for components without an entry,
-   in the package's exports and types). Never invent one.
+   slots that are in an entry's facts (or, for exports without an entry, in
+   the package types). Never invent one.
 3. **Follow strength.** Treat \`required\` rules as constraints. Follow
    \`recommended\` rules unless the request asks otherwise, and say so when you
    depart from one. Avoid \`discouraged\` configurations.
-4. **Follow avoidWhen.** When an \`avoidWhen\` rule matches the request, follow
-   it, and use its \`useInstead\` component when it names one. A \`useInstead\`
-   outside this pack has no entry here; read its types.
+4. **Follow avoidWhen.** When an avoidWhen rule matches the request, follow
+   it, and use its \`useInstead\` component when it names one.
 5. **Read facts by source.** \`types\`: the API accepts it, but nothing has
    proven how it behaves. \`evidence\`: checked behaviour, as of \`checkedOn\`.
-   \`unknown\`: nothing establishes it; do not promise it. A \`gap\`: behaviour
+   \`unknown\`: nothing establishes it; do not promise it. A gap: behaviour
    that was checked and found missing; report the gap instead of working
    around it.
 6. **Read entries by state.** Treat \`documented\` entries as guidance and
-   \`undocumented\` ones as hints. Do not rely on a flagged rule: each flag in
-   \`status.flags\` points (\`field\`, a JSON pointer) at the item it concerns; a
-   \`flagged\` entry is still guidance apart from those items. A flag on the
-   whole entry (\`field\` is empty) asks for review of the entry as a whole.
-7. **Keep copy within the content rules** (\`content.rules\`, with
-   \`content.good\` and \`content.bad\` as examples).
+   \`undocumented\` ones as hints. Do not rely on a flagged rule: each flag
+   points at the item it concerns; a \`flagged\` entry is still guidance apart
+   from those items.
+7. **Keep copy within the content rules.**
 8. **Pass modes to slot children.** Pass a component's \`modes\` to the Coin
    children in its slots.
 9. **Prefer what exists.** Use an existing component when it fits. Compose
    supported Coin components for layouts and patterns. Report a gap when the
    request needs unsupported API, or a replacement for a component Coin lacks.
 
-## Reading an entry
+## Reading the pack
 
-Each \`components/<slug>.json\` (Markdown alongside) has:
+- \`index.json\`: every entry's id, category, tags, state, summary and
+  useInstead targets. \`category\` is for discovery only, never a limit on
+  composition.
+- \`components/<slug>.brief.md\`: the short form of an entry (summary, when to
+  use and avoid, placement, key rules, one example, props and gaps). Start
+  there when you have briefs.
+- \`components/<slug>.md\` and \`.json\`: the full entry, with the guide sentence
+  behind every rule, all facts and all flags. Open it when the brief does not
+  answer the question.
+- \`components/<slug>.links.md\` and \`graph.json\`: which components an entry is
+  used with, placed in, or replaced by.
 
-- \`useWhen\`, \`avoidWhen\`, \`placementAdvice\`, \`configuration\`,
-  \`content.rules\`, \`accessibility\`: rules, each with \`strength\` and \`from\`.
-  \`from\` is the guide section and the exact sentence the rule was read from,
-  or a JSON pointer to the fact it rests on. \`target\` and \`value\` name the
-  prop or mode a rule is about.
-- \`anatomy\`, \`states\`, \`doDont\`: the guide's parts, states and pairs.
-- \`allowedChildren\`: what each slot accepts, from the types.
-- \`examples\`: public-API JSX that type-checks against this package version.
-- \`facts\`: \`props\`, \`modes\`, \`slots\`, \`events\` and \`gaps\`, each with a \`source\`.
-- \`status\`: \`state\`, \`flags\`, the guide commit and the package version.
+## Not in this pack
 
-\`category\` is for discovery only, never a limit on composition.
+These jfs-components component exports exist but have no entry, so this pack
+gives no guidance for them. They are not missing from Coin: work from their
+types and say they are undocumented here.
+${otherComponents.join(', ')}.
 `
 }
 
-export function llmsText({ packVersion, packageVersion, entries, otherComponents }) {
+export function llmsText({ packVersion, packageVersion, entries }) {
   return `# Coin agent pack ${packVersion} (pilot)
 
 > Machine-readable guidance for Coin, the Jio Finance design system's React Native components (jfs-components ${packageVersion}). Generated from the Coin designer guides and the installed package. Every rule cites the guide sentence it came from; every fact has a source.
@@ -226,20 +230,85 @@ Read rules.md first. Use this pack only with jfs-components ${packageVersion}.
 
 ## Pack
 
-- [rules.md](rules.md): how agents use this pack.
-- [manifest.json](manifest.json): versions, build time, and entry counts by state.
+- [rules.md](rules.md): how agents use this pack, and the exports it does not cover.
 - [index.json](index.json): every entry's id, category, tags, state, summary and useInstead targets.
+- [manifest.json](manifest.json): versions, build time, and entry counts by state.
+- [graph.json](graph.json): how the components relate (useInstead, placedIn, slotAccepts, usedWith).
+- [sizes.json](sizes.json): every file's size in bytes and tokens.
 
 ## Components
 
-${entries.map((entry) => `- [${entry.id}](components/${entry.slug}.md): ${entry.summary} (${entry.status.state}; JSON: components/${entry.slug}.json)`).join('\n')}
-
-## Not in this pilot
-
-These jfs-components component exports have no entry in this pack. They exist in the package; this pack gives no guidance for them, so treat them as undocumented and work from their types: ${otherComponents.join(', ')}.
+${entries.map((entry) => `- [${entry.id}](components/${entry.slug}.md): ${entry.summary} (${entry.status.state}; brief: components/${entry.slug}.brief.md; links: components/${entry.slug}.links.md)`).join('\n')}
 
 ## Schema
 
-- [schema/entry.schema.json](schema/entry.schema.json), [schema/manifest.schema.json](schema/manifest.schema.json), [schema/index.schema.json](schema/index.schema.json), [schema/releases.schema.json](schema/releases.schema.json), [schema/pilot-results.schema.json](schema/pilot-results.schema.json)
+${['entry', 'manifest', 'index', 'releases', 'graph', 'sizes', 'pilot-results'].map((name) => `- [schema/${name}.schema.json](schema/${name}.schema.json)`).join('\n')}
 `
+}
+
+const BRIEF_CAPS = { useWhen: 4, avoidWhen: 4, placementAdvice: 4, keyRules: 8, gaps: 5, props: 24 }
+
+function briefRule(rule) {
+  const about = rule.target ? `\`${rule.target}\`${rule.value !== undefined ? ` = \`${rule.value}\`` : ''}: ` : ''
+  const instead = rule.useInstead ? ` Use instead: ${rule.useInstead}.` : ''
+  return `- ${rule.strength === 'required' ? '**REQUIRED** ' : rule.strength === 'discouraged' ? 'Avoid: ' : ''}${about}${rule.text}${instead}`
+}
+
+/** The short form of an entry: about 800–1,200 tokens, no quotes, flags or full facts. */
+export function briefMarkdown(entry, { packVersion }) {
+  const all = [...entry.configuration, ...entry.content.rules, ...entry.accessibility, ...entry.placementAdvice]
+  const required = all.filter((rule) => rule.strength === 'required')
+  const key = [...required, ...entry.configuration.filter((rule) => rule.strength !== 'required'),
+    ...entry.accessibility.filter((rule) => rule.strength !== 'required'),
+    ...entry.content.rules.filter((rule) => rule.strength !== 'required')]
+    .filter((rule, index, list) => list.indexOf(rule) === index)
+    .slice(0, Math.max(BRIEF_CAPS.keyRules, required.length))
+  const props = entry.facts.props.filter((fact) => !fact.name.startsWith('...'))
+  const glance = props.slice(0, BRIEF_CAPS.props).map((fact) =>
+    `\`${fact.name}\`${fact.required ? '*' : ''}${fact.values ? ` (${fact.values.join(' | ')})` : ''}`)
+  const more = props.length > BRIEF_CAPS.props ? `, and ${props.length - BRIEF_CAPS.props} more` : ''
+  const modes = entry.facts.modes.map((fact) => fact.name)
+  const example = entry.examples[0]
+  const section = (title, lines) => (lines.length ? [`**${title}**`, ...lines, ''] : [])
+  return [
+    `# ${entry.id} (brief)`,
+    '',
+    `> Coin agent pack ${packVersion} · ${entry.status.state} · full entry: \`components/${entry.slug}.md\` (sources, all facts, flags)`,
+    '',
+    entry.summary,
+    '',
+    ...section('Use when', entry.useWhen.slice(0, BRIEF_CAPS.useWhen).map(briefRule)),
+    ...section('Avoid when', entry.avoidWhen.slice(0, BRIEF_CAPS.avoidWhen).map(briefRule)),
+    ...section('Placement', entry.placementAdvice.filter((rule) => !key.includes(rule)).slice(0, BRIEF_CAPS.placementAdvice).map(briefRule)),
+    ...section('Key rules', key.map(briefRule)),
+    ...(example ? [`**Example:** ${example.purpose}`, '', '```tsx', example.jsx, '```', ''] : []),
+    `**Props:** ${glance.join(', ')}${more}. (* required)`,
+    '',
+    ...(modes.length ? [`**Modes it reads:** ${modes.join(', ')}.`, ''] : []),
+    ...section('Gaps (report, do not work around)', entry.facts.gaps.slice(0, BRIEF_CAPS.gaps).map((gap) => `- ${gap.text}`)),
+    `Full entry: \`components/${entry.slug}.md\`. Links: \`components/${entry.slug}.links.md\`.`,
+    '',
+  ].join('\n')
+}
+
+/** An entry's neighbourhood in graph.json, as one-line triples. */
+export function linksMarkdown(entry, graph, { packVersion, triple }) {
+  const inPack = new Set(graph.nodes.filter((node) => node.inPack).map((node) => node.id))
+  const out = graph.edges.filter((edge) => edge.from === entry.id)
+  const incoming = graph.edges.filter((edge) => edge.to === entry.id)
+  const list = (edges) => (edges.length ? edges.map((edge) => `- ${triple(edge, inPack)}`) : ['- none'])
+  return [
+    `# ${entry.id} (links)`,
+    '',
+    `> Coin agent pack ${packVersion}. Edges from graph.json, derived by code from the entries. Brief: \`components/${entry.slug}.brief.md\` · full entry: \`components/${entry.slug}.md\``,
+    '',
+    '## Outgoing',
+    '',
+    ...list(out),
+    '',
+    '## Incoming',
+    '',
+    ...list(incoming),
+    '',
+  ].join('\n')
 }

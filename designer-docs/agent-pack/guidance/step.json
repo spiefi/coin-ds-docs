@@ -1,0 +1,550 @@
+{
+  "slug": "step",
+  "guideCommit": "f72ec62472be267ef350470ed36a1ff13016fba8",
+  "extractedBy": "Claude Code subagent, flow-kit extraction",
+  "extractedOn": "2026-10-17",
+  "notes": "Step's guide and evidence were checked on 0.1.78-636f3f5 (the 5 October build; evidence 10 October, Sources 11 October). The installed package is 0.1.78-c1fa197 (12 October build), the same version, so nothing is flagged as stale, but c1fa197 changed Step.tsx: the upstream diff 636f3f5..c1fa197 and the installed lib/module/components/Stepper/Step.js show that (a) a Step's spoken name is now its visible copy: the title, or with children a StepLabel child's title (else the children's visible text), plus a short supporting text (one line, up to 80 characters), plus the status word; (b) when children are present, the title prop is no longer used for the name; (c) a standalone Step is no longer a list item (withinStepper, declared in the installed types: \"Standalone Steps are not list items\"). So these guide sentences are stale for the installed build and were not extracted as rules: the Custom content caption \"Keep the title prop: it’s what screen readers hear.\", and the Sources clauses \"the supporting text and date aren’t read\" and \"a Step with only a StepLabel child is read as “Step” and its number\". The #235 gap (StepLabel child's title not spoken, title naming the row under children, standalone list item) is not recorded, because the installed source appears to fix it; re-check the guide and evidence against c1fa197. Other notes: the Sources card links Stepper (3228:457) because designers place Steps through Stepper in Figma; Step is a subcomponent, so avoidWhen points Figma use to Stepper. Dark mode is out of scope in the evidence (#197 in Review on 10 October). The evidence classes isCurrent, connectorStyle, style and testID as developer-only; the guide shows none of them.",
+  "useWhen": [
+    {
+      "text": "One stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Step for one stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Placing a stage on its own in Figma: Step itself is a subcomponent in Coin Subcomponents, which designers don't use directly; designers place Steps through Stepper.",
+      "strength": "discouraged",
+      "useInstead": "Stepper",
+      "from": {
+        "section": "sources",
+        "quote": "Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly."
+      },
+      "checkedVersion": "0.1.78-636f3f5",
+      "checkedOn": "2026-10-11"
+    },
+    {
+      "text": "The stage needs to be pressed or focused: Step is not interactive.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "Not interactive: no focus, no press."
+      },
+      "checkedVersion": "0.1.78-636f3f5",
+      "checkedOn": "2026-10-10"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Indicator",
+      "holds": "A 36 px circle; its colour shows the state.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "36 px circle; its colour shows the state."
+      }
+    },
+    {
+      "part": "Glyph",
+      "holds": "The stage number, or a check, cross, or alert.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The stage number, or a check, cross, or alert."
+      }
+    },
+    {
+      "part": "Connector",
+      "holds": "A 2 px line to the next stage; showLine turns it off.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 2 px line to the next stage."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "14 px bold; names the stage.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "14 px bold; names the stage."
+      }
+    },
+    {
+      "part": "Supporting text",
+      "holds": "12 px; what the stage involves or how it went.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px; what the stage involves or how it went."
+      }
+    },
+    {
+      "part": "Date",
+      "holds": "10 px bold; when it finished, started, or is due.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "10 px bold; when it finished, started, or is due."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In Figma, place Steps through Stepper in the Components Library.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "In Figma, designers place Steps through Stepper in the Components Library"
+      },
+      "checkedVersion": "0.1.78-636f3f5",
+      "checkedOn": "2026-10-11"
+    },
+    {
+      "text": "A Step fills its column and is at least 52 px tall.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A Step fills its column and is at least 52 px tall."
+      }
+    },
+    {
+      "text": "The current stage can hold its own action, such as an Upload button, in its children.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "inContext",
+        "quote": "The current stage holds its own Upload button."
+      }
+    },
+    {
+      "text": "In the guide's Form 16 example, uploading marks the stage done and the screen moves the current stage on.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Uploading marks the stage done, and the screen moves the current stage on."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Give every Step a title.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "Every Step has a title."
+      }
+    },
+    {
+      "text": "Use the title alone when it says enough; it is compact.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "Compact, when the title says enough."
+      }
+    },
+    {
+      "text": "Add supporting text when it helps, to say what the stage involves or how it went.",
+      "strength": "recommended",
+      "target": "supportingText",
+      "from": {
+        "section": "configuration",
+        "quote": "Add supporting text and a date when they help"
+      }
+    },
+    {
+      "text": "Add a date (metaText) for when the stage finished, started, or is due.",
+      "strength": "recommended",
+      "target": "metaText",
+      "from": {
+        "section": "configuration",
+        "quote": "When the stage finished, started, or is due."
+      }
+    },
+    {
+      "text": "Pass children to replace the text block with your own content; the row and its connector grow.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "Children replace the text block; the row and its connector grow."
+      }
+    },
+    {
+      "text": "Set showLine false on the last Step you place yourself; inside a Stepper, Stepper turns it off on the last stage.",
+      "strength": "recommended",
+      "target": "showLine",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "Stepper turns it off on the last stage; turn it off on a Step you place yourself."
+      }
+    },
+    {
+      "text": "Inside a Stepper, each Step gets its index, the Stepper's modes (its own win), isCurrent on the first step that isn't complete, and no connector on the last step; leave index, isCurrent and showLine to the Stepper.",
+      "strength": "recommended",
+      "target": "index",
+      "from": {
+        "section": "evidence",
+        "quote": "Inside a Stepper, each Step gets its index, the Stepper's modes (its own win), `isCurrent` on the first step that isn't complete, and no connector on the last step."
+      },
+      "checkedVersion": "0.1.78-636f3f5",
+      "checkedOn": "2026-10-10"
+    },
+    {
+      "text": "Set status to set the glyph and colour together.",
+      "strength": "recommended",
+      "target": "status",
+      "from": {
+        "section": "states",
+        "quote": "A Step’s status sets its glyph and colour together"
+      }
+    },
+    {
+      "text": "Set the Step Status mode to inactive on an upcoming stage.",
+      "strength": "recommended",
+      "target": "Step Status",
+      "value": "inactive",
+      "from": {
+        "section": "states",
+        "quote": "an upcoming stage needs the Step Status mode set to inactive."
+      }
+    },
+    {
+      "text": "If you set Step Status explicitly, keep it matched to the status: an explicit Step Status always wins.",
+      "strength": "recommended",
+      "target": "Step Status",
+      "from": {
+        "section": "states",
+        "quote": "An explicit Step Status always wins, so keep it matched to the status."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "the precedence holds for every Step; the advice to keep the mode matched stays a recommendation, since an upcoming stage pairs status number with inactive."
+      }
+    },
+    {
+      "text": "Do not set Step Status active on a done stage: an explicit Step Status of active overrides the green.",
+      "strength": "discouraged",
+      "target": "Step Status",
+      "value": "active",
+      "from": {
+        "section": "doDont",
+        "quote": "An explicit Step Status of active overrides the green."
+      }
+    },
+    {
+      "text": "Turn off the connector on the last stage: a connector with no next stage looks unfinished.",
+      "strength": "recommended",
+      "target": "showLine",
+      "value": "false",
+      "from": {
+        "section": "doDont",
+        "quote": "A connector with no next stage looks unfinished."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One stage: its name, its state, and what happened.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One stage: its name, its state, and what happened."
+        }
+      },
+      {
+        "text": "Write the title as the stage in a few words, such as “Verify PAN”, not an action.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Write the title as the stage in a few words, such as “Verify PAN”, not an action."
+        }
+      },
+      {
+        "text": "Use the supporting text for what happens or what went wrong, and the date for when.",
+        "strength": "recommended",
+        "target": "supportingText",
+        "from": {
+          "section": "content",
+          "quote": "Use the supporting text for what happens or what went wrong, and the date for when."
+        }
+      },
+      {
+        "text": "Say in the text why a stage failed: the glyph only says that it failed, not why.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The glyph only says that a stage failed, not why."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "\"only\" describes what the glyph conveys, not a limit on the designer."
+        }
+      },
+      {
+        "text": "Do not leave the default title: “Stepper Item” tells people nothing, and it's read as “Step 1”.",
+        "strength": "discouraged",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "“Stepper Item” tells people nothing, and it’s read as “Step 1”."
+        }
+      }
+    ],
+    "good": [
+      "Verify PAN",
+      "Upload Form 16",
+      "Review and submit",
+      "Add nominee",
+      "eSign",
+      "Match your PAN with your name",
+      "PAN details match your name",
+      "Add the PDF from your employer",
+      "Nominee’s date of birth is missing",
+      "Account name doesn’t match your PAN",
+      "Sign the form with an Aadhaar OTP",
+      "Started 5 Oct 2026",
+      "Done 2 Oct 2026"
+    ],
+    "bad": [
+      "Stepper Item"
+    ]
+  },
+  "states": [
+    {
+      "state": "Current",
+      "when": "status number with no Step Status mode: purple with the stage number.",
+      "from": {
+        "section": "states",
+        "quote": "Purple with the stage number."
+      }
+    },
+    {
+      "state": "Upcoming",
+      "when": "status number with the Step Status mode inactive: pale lavender, not started.",
+      "from": {
+        "section": "states",
+        "quote": "Pale lavender: not started."
+      }
+    },
+    {
+      "state": "Done",
+      "when": "status complete: green with a check; read as “Completed”.",
+      "from": {
+        "section": "states",
+        "quote": "Green with a check; read as “Completed”."
+      }
+    },
+    {
+      "state": "Needs attention",
+      "when": "status warning: an orange alert; read as “Needs attention”.",
+      "from": {
+        "section": "states",
+        "quote": "Orange alert; read as “Needs attention”."
+      }
+    },
+    {
+      "state": "Failed",
+      "when": "status error: a red cross; read as “Failed”.",
+      "from": {
+        "section": "states",
+        "quote": "Red cross; read as “Failed”."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Name the stage in the title: on the web a Step is read as its title plus “Completed”, “Failed”, or “Needs attention”.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "sources",
+        "quote": "read as its title plus “Completed”, “Failed”, or “Needs attention”"
+      },
+      "checkedVersion": "0.1.78-636f3f5",
+      "checkedOn": "2026-10-11"
+    },
+    {
+      "text": "Put the outcome in words: the glyph itself has no name.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "the glyph itself has no name"
+      },
+      "checkedVersion": "0.1.78-636f3f5",
+      "checkedOn": "2026-10-10"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Match the icon and colour",
+      "dont": "Put a check on purple",
+      "why": "An explicit Step Status of active overrides the green.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match the icon and colour"
+      }
+    },
+    {
+      "do": "Turn off the last connector",
+      "dont": "Leave a hanging line",
+      "why": "A connector with no next stage looks unfinished.",
+      "from": {
+        "section": "doDont",
+        "quote": "Turn off the last connector"
+      }
+    },
+    {
+      "do": "Name the stage",
+      "dont": "Leave the default title",
+      "why": "“Stepper Item” tells people nothing, and it’s read as “Step 1”.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the stage"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Filing an ITR: the current stage holds its own Upload button in its children, and the upcoming stage is inactive.",
+      "jsx": "<Stepper accessibilityLabel=\"File your ITR\" modes={{ 'Color Mode': 'Light' }}>\n  <Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" metaText=\"Done 2 Oct 2026\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n  <Step title=\"Upload Form 16\" modes={{ 'Color Mode': 'Light' }}>\n    <StepLabel title=\"Upload Form 16\" supportingText=\"Add the PDF from your employer\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Upload\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S' }} />\n  </Step>\n  <Step title=\"Review and submit\" supportingText=\"Check your income and file\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n</Stepper>",
+      "from": {
+        "section": "inContext",
+        "quote": "The current stage holds its own Upload button."
+      }
+    },
+    {
+      "purpose": "A done Step placed on its own, with its connector turned off.",
+      "jsx": "<Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" status=\"complete\" showLine={false} modes={{ 'Color Mode': 'Light' }} />",
+      "from": {
+        "section": "configuration",
+        "quote": "turn it off on a Step you place yourself."
+      }
+    },
+    {
+      "purpose": "A failed stage whose supporting text says what went wrong.",
+      "jsx": "<Step title=\"Add bank account\" supportingText=\"Account name doesn’t match your PAN\" status=\"error\" showLine={false} modes={{ 'Color Mode': 'Light' }} />",
+      "from": {
+        "section": "content",
+        "quote": "Use the supporting text for what happens or what went wrong, and the date for when."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "title",
+      "description": "StepLabel shows “Stepper Item” when title is unset.",
+      "quote": "`title` (StepLabel shows “Stepper Item” when unset)",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "subtitle",
+      "description": "Default true; false hides the supporting text.",
+      "quote": "`subtitle` (true; false hides the supporting text)",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "meta",
+      "description": "Default true; false hides the date.",
+      "quote": "`meta` (true; false hides the date)",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "status",
+      "description": "The glyph. With no Step Status mode it also picks the colour (complete green, error red, warning orange, number purple); an explicit Step Status mode always wins.",
+      "quote": "with no `Step Status` mode, `status` picks it (complete green, error red, warning orange, number purple); an explicit `Step Status` mode always wins.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Step Status",
+      "description": "Overrides the colour status picks; upcoming lavender (inactive) only comes from this mode.",
+      "quote": "Upcoming lavender (`inactive`) only comes from the mode.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "children",
+      "description": "Replace the default StepLabel and get Step's modes; the title, supporting text and date props are then not shown. A StepLabel child gives the same text block.",
+      "quote": "`children` replace the default StepLabel and get Step's modes; the title, supporting text, and date props are then not shown.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "index",
+      "description": "Default 0; the number shows index + 1. Inside a Stepper each Step gets its index.",
+      "quote": "`index` (0; the number shows index + 1)",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "isCurrent",
+      "description": "Set by Stepper on the first step that isn't complete; on the web the Step then has aria-current=\"step\".",
+      "quote": "`aria-current=\"step\"` when current.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "showLine",
+      "description": "Stepper sets it false on the last step; a standalone Step keeps index 0, a connector, and no current marker unless set.",
+      "quote": "A standalone Step keeps index 0, a connector, and no current marker unless set.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The glyph itself has no accessible name; the title and status word carry the meaning.",
+      "quote": "Each row is announced by its title and outcome word; the glyph itself has no name",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Step is not interactive: no focus and no press (no onPress).",
+      "quote": "Not interactive: no focus, no press.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Figma's done example shows a green date; the package keeps it grey.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s done example shows a green date; the package keeps it grey."
+      },
+      "checkedOn": "2026-10-11",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "The published Storybook predates 0.1.78.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook predates 0.1.78."
+      },
+      "checkedOn": "2026-10-11",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ]
+}

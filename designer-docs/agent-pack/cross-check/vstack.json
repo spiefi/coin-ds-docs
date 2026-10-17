@@ -1,0 +1,17 @@
+{
+  "slug": "vstack",
+  "entryHash": "525c84fa8130eeb5016636d85027de841192250b973a44bd6463134dcd82a588",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "checkedAt": "2026-10-17T10:57:15Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: The example passes `Padding: 'None'` in the modes of the inner `Text` children as well as the nested VStack. The guide only says \"A nested group can use None when the surrounding section owns the inset\", which is about the VStack owner. Nothing cited says Text takes a Padding mode or that children must repeat it."
+    }
+  ],
+  "notes": "/configuration/7 and /facts/props/1 repeat the declared prop doc: \"Pass `flex-start` for Top Left or `center` for Top\". The evidence file says the inspected Figma VStack \"does not expose an Alignment property\", so these Figma-style names (taken from HStack's `Aligment` variant) have no VStack Figma counterpart. The wording comes from the package declaration, so it is not flagged, but a human may want to check it so agents aren't misled. The examples use `Title` and `Badge`, which the evidence file's export list does not mention (it lists Button, HStack, VStack, Stack, Icon, Text and the action components). Confirm against the package types that they are public exports. /examples/2 reuses the guide's 92px illustration height as a concrete value. That is acceptable as an example but should not be read as a required height."
+}

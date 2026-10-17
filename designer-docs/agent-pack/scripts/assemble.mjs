@@ -72,7 +72,7 @@ function identifierTokens(text) {
   ].map((match) => match[0])
 }
 
-export function assemble({ builtAt = new Date().toISOString().replace(/\.\d+Z$/, 'Z') } = {}) {
+export function assemble({ builtAt = new Date().toISOString().replace(/\.\d+Z$/, 'Z'), only = null } = {}) {
   const pack = loadPack()
   const pkg = packageInfo()
   const errors = []
@@ -94,8 +94,114 @@ export function assemble({ builtAt = new Date().toISOString().replace(/\.\d+Z$/,
     }
   }
 
-  for (const component of pack.components) {
+  // Consistency: names, values, useInstead, and examples queued for type-checking.
+  function checkConsistency(slug, entry) {
+    const { facts } = entry
+    // Names a rule may use: the entry's props, slots, events and modes, and their values
+    // (AppBar's type values MainPage and SubPage are PascalCase too).
+    const ownNames = new Set()
+    for (const list of ['props', 'slots', 'events', 'modes']) {
+      for (const fact of facts[list]) {
+        ownNames.add(fact.name)
+        ownNames.add(fact.name.split('.').pop())
+        for (const value of fact.values ?? []) ownNames.add(value)
+      }
+    }
+    const findTarget = (target) => [...facts.props, ...facts.modes].find((fact) => fact.name === target)
+    for (const [pointer, item] of origins(entry)) {
+      if (item.target !== undefined) {
+        const fact = findTarget(item.target)
+        if (!fact) error(slug, `${pointer} targets "${item.target}", which is not a prop or mode in the facts`)
+        else if (item.value !== undefined && fact.values && !fact.values.includes(item.value)) {
+          error(slug, `${pointer} value "${item.value}" is not one of ${item.target}'s values (${fact.values.join(', ')})`)
+        } else if (item.value !== undefined && /^boolean$/.test(fact.type ?? '') && !['true', 'false'].includes(item.value)) {
+          error(slug, `${pointer} value "${item.value}" is not a boolean`)
+        }
+      }
+      if (item.useInstead !== undefined && !exports.has(item.useInstead)) {
+        error(slug, `${pointer} useInstead "${item.useInstead}" is not a jfs-components export`)
+      }
+      for (const text of [item.text, item.holds, item.when, item.purpose]) {
+        for (const token of identifierTokens(text ?? '')) {
+          if (ownNames.has(token) || exports.has(token) || collections.has(token) || pilotPropNames.has(token) || NOT_API.has(token)) continue
+          error(slug, `${pointer} names "${token}", which is not in the facts or the package exports`)
+        }
+      }
+      if (item.from && 'fact' in item.from && (!item.from.fact.startsWith('/facts/') || pointerGet(entry, item.from.fact) === undefined)) {
+        error(slug, `${pointer} cites fact ${item.from.fact}, which does not exist`)
+      }
+    }
+    entry.examples.forEach((example, index) => exampleJobs.push({ slug, index, example }))
+  }
+
+  /** Resolves guidance-file fact references ("props:button") to JSON pointers. */
+  function factResolver(slug, facts) {
+    return (from) => {
+      if (!from || !('fact' in from) || from.fact.startsWith('/')) return from
+      const [list, ...rest] = from.fact.split(':')
+      const name = rest.join(':')
+      const index = facts[list]?.findIndex((fact) => fact.name === name) ?? -1
+      if (index === -1) { error(slug, `guidance cites fact ${from.fact}, which does not exist`); return from }
+      return { fact: `/facts/${list}/${index}` }
+    }
+  }
+
+  const chosen = only ? pack.components.filter((component) => only.includes(component.slug)) : pack.components
+  for (const component of chosen) {
     const { slug, id } = component
+    if (component.undocumented) {
+      // An export with no designer guide: facts, and guidance only as hints
+      // that rest on facts (the package's own docs). Never cross-checked
+      // against a guide, because there is none.
+      const guidance = readJsonIfExists(join(PACK, 'guidance', `${slug}.json`))
+      if (!guidance) { error(slug, `no guidance file at agent-pack/guidance/${slug}.json`); continue }
+      const base = generated[id]
+      const facts = {
+        props: base.props.map((fact) => ({ ...fact })),
+        modes: base.modes.map((fact) => ({ ...fact })),
+        slots: base.slots.map((fact) => ({ ...fact })),
+        events: base.events.map((fact) => ({ ...fact })),
+        gaps: [],
+      }
+      const resolve = factResolver(slug, facts)
+      const hints = (list) => (guidance[list] ?? []).map((item) => {
+        const rule = pick({ ...item, from: resolve(item.from) }, RULE_KEYS)
+        if (!rule.from || !('fact' in rule.from)) error(slug, `/${list}: an undocumented entry's hints must rest on a fact`)
+        return rule
+      })
+      let summary
+      if (guidance.summary) {
+        if (!norm(base.doc).includes(norm(guidance.summary))) error(slug, `summary is not text from ${id}'s package docs: "${guidance.summary}"`)
+        summary = `${guidance.summary} (Package docs; Coin has no designer guide for ${id}.)`
+      } else {
+        summary = `Coin has no designer guide for ${id}; use its facts from the package types.`
+      }
+      const entry = {
+        schemaVersion: 1,
+        id,
+        slug,
+        category: component.category,
+        tags: [],
+        status: { state: 'undocumented', guideCommit: null, packageVersion: pkg.version, builtAt, flags: [] },
+        summary,
+        useWhen: hints('useWhen'),
+        avoidWhen: hints('avoidWhen'),
+        anatomy: [],
+        allowedChildren: base.allowedChildren.map((item) => ({ ...item })),
+        placementAdvice: hints('placementAdvice'),
+        configuration: hints('configuration'),
+        content: { rules: hints('contentRules'), good: [], bad: [] },
+        states: [],
+        accessibility: hints('accessibility'),
+        doDont: [],
+        examples: (guidance.examples ?? []).map((item) => ({ purpose: item.purpose, jsx: item.jsx, from: resolve(item.from ?? null) })),
+        facts,
+        sources: { guide: null, figma: null, storybook: component.storybook ?? null },
+      }
+      checkConsistency(slug, entry)
+      entries.push({ component, snapshot: null, guidance, entry, undocumented: true })
+      continue
+    }
     const dirty = uncommittedGuideFiles(component)
     if (dirty.length) error(slug, `uncommitted guide files: ${dirty.join(', ')}`)
     const snapshot = readJsonIfExists(join(PACK, 'copy', `${slug}.json`))
@@ -150,14 +256,7 @@ export function assemble({ builtAt = new Date().toISOString().replace(/\.\d+Z$/,
     }
 
     // Guidance files cite facts by name ("props:button"); entries carry JSON pointers.
-    const resolveFact = (from) => {
-      if (!from || !('fact' in from) || from.fact.startsWith('/')) return from
-      const [list, ...rest] = from.fact.split(':')
-      const name = rest.join(':')
-      const index = facts[list]?.findIndex((fact) => fact.name === name) ?? -1
-      if (index === -1) { error(slug, `guidance cites fact ${from.fact}, which does not exist`); return from }
-      return { fact: `/facts/${list}/${index}` }
-    }
+    const resolveFact = factResolver(slug, facts)
     for (const list of [...RULE_LISTS, 'anatomy', 'states', 'doDont', 'examples']) {
       for (const item of guidance[list] ?? []) item.from = resolveFact(item.from)
     }
@@ -292,36 +391,7 @@ export function assemble({ builtAt = new Date().toISOString().replace(/\.\d+Z$/,
       }
     }
 
-    // Consistency: names, values, useInstead.
-    const ownNames = new Set()
-    for (const list of ['props', 'slots', 'events', 'modes']) {
-      for (const fact of facts[list]) {
-        ownNames.add(fact.name)
-        ownNames.add(fact.name.split('.').pop())
-      }
-    }
-    const findTarget = (target) => [...facts.props, ...facts.modes].find((fact) => fact.name === target)
-    for (const [pointer, item] of origins(entry)) {
-      if (item.target !== undefined) {
-        const fact = findTarget(item.target)
-        if (!fact) error(slug, `${pointer} targets "${item.target}", which is not a prop or mode in the facts`)
-        else if (item.value !== undefined && fact.values && !fact.values.includes(item.value)) {
-          error(slug, `${pointer} value "${item.value}" is not one of ${item.target}'s values (${fact.values.join(', ')})`)
-        } else if (item.value !== undefined && /^boolean$/.test(fact.type ?? '') && !['true', 'false'].includes(item.value)) {
-          error(slug, `${pointer} value "${item.value}" is not a boolean`)
-        }
-      }
-      if (item.useInstead !== undefined && !exports.has(item.useInstead)) {
-        error(slug, `${pointer} useInstead "${item.useInstead}" is not a jfs-components export`)
-      }
-      for (const text of [item.text, item.holds, item.when, item.purpose]) {
-        for (const token of identifierTokens(text ?? '')) {
-          if (ownNames.has(token) || exports.has(token) || collections.has(token) || pilotPropNames.has(token) || NOT_API.has(token)) continue
-          error(slug, `${pointer} names "${token}", which is not in the facts or the package exports`)
-        }
-      }
-    }
-    entry.examples.forEach((example, index) => exampleJobs.push({ slug, index, example }))
+    checkConsistency(slug, entry)
 
     for (const field of FLAG_IF_EMPTY) {
       if (!entry[field].length) flag(`/${field}`, `The guide gives no ${field} guidance; left empty rather than guessed.`)
@@ -344,6 +414,11 @@ export function assemble({ builtAt = new Date().toISOString().replace(/\.\d+Z$/,
     const { slug } = component
     const hash = entryHash(entry)
     record.hash = hash
+    record.outsidePilot = [...new Set(entry.avoidWhen.map((rule) => rule.useInstead).filter((id) => id && !pilotIds.has(id)))]
+    if (record.undocumented) {
+      for (const problem of validate('entry', entry)) error(slug, `schema: ${problem}`)
+      continue
+    }
     const review = readJsonIfExists(join(PACK, 'cross-check', `${slug}.json`))
     const human = readJsonIfExists(join(PACK, 'reviews', `${slug}.json`), { flags: [], dismissed: [] })
     const dismissed = (item) => (human.dismissed ?? []).some((d) => d.field === item.field && d.reason === item.reason)
@@ -360,7 +435,6 @@ export function assemble({ builtAt = new Date().toISOString().replace(/\.\d+Z$/,
     for (const item of human.flags ?? []) entry.status.flags.push({ field: item.field, reason: item.reason, by: 'human' })
     entry.status.state = entry.status.flags.length ? 'flagged' : 'documented'
     for (const problem of validate('entry', entry)) error(slug, `schema: ${problem}`)
-    record.outsidePilot = [...new Set(entry.avoidWhen.map((rule) => rule.useInstead).filter((id) => id && !pilotIds.has(id)))]
   }
 
   return { pack, pkg, entries, errors, builtAt }

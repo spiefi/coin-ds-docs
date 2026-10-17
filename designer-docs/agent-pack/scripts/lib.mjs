@@ -11,7 +11,7 @@ import addFormats from 'ajv-formats'
 export const PACK = join(fileURLToPath(import.meta.url), '..', '..')
 export const DOCS = join(PACK, '..')
 export const PUBLIC_AGENT = join(DOCS, 'public', 'agent')
-export const SCHEMAS = ['entry', 'manifest', 'index', 'releases', 'pilot-results']
+export const SCHEMAS = ['entry', 'manifest', 'index', 'releases', 'graph', 'sizes', 'pilot-results']
 
 /** Guide section ids (`<section id>`) and the `from.section` name each maps to. */
 export const SECTION_NAMES = {

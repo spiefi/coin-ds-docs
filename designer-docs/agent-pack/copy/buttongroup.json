@@ -1,0 +1,321 @@
+{
+  "slug": "buttongroup",
+  "label": "Button Group",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/buttongroup.guide.tsx",
+    "src/ButtonGroupGuide.tsx"
+  ],
+  "evidence": "docs/evidence/buttongroup.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:30.443Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "button row",
+    "button bar",
+    "actions"
+  ],
+  "title": "Button Group",
+  "summary": "Keep a few related actions in one row with shared spacing and modes.",
+  "corePrinciple": "Give the group its width and modes; let only the key action stand out.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2018-4119",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-buttongroup--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A row that spaces and sizes its children",
+      "description": "ButtonGroup has no surface of its own. It places its children in one row, separates them with a token gap, and decides which children stretch.",
+      "blocks": [
+        "12",
+        "40",
+        "128",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Row",
+        "Fills the width its host provides, centers children vertically, and adds no padding or background.",
+        "Icon action",
+        "A direct IconButton child keeps its own circular size instead of stretching.",
+        "Gap",
+        "One token gap, buttonGroup/gap, separates every pair of neighbors.",
+        "Text actions",
+        "Every Button child stretches, so the Buttons share the remaining width equally.",
+        "Component bounds",
+        "Child bounds",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Request",
+        "Pay"
+      ],
+      "anatomy": [
+        {
+          "part": "Row",
+          "note": "Fills the width its host provides, centers children vertically, and adds no padding or background."
+        },
+        {
+          "part": "Icon action",
+          "note": "A direct IconButton child keeps its own circular size instead of stretching."
+        },
+        {
+          "part": "Gap",
+          "note": "One token gap, buttonGroup/gap, separates every pair of neighbors."
+        },
+        {
+          "part": "Text actions",
+          "note": "Every Button child stretches, so the Buttons share the remaining width equally."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the children; the group lays them out",
+      "description": "ButtonGroup exposes no layout options. The children you place and the modes you set on the group decide what people see.",
+      "blocks": [
+        "Children",
+        "Icon actions",
+        "Each IconButton keeps its size. The row starts at the leading edge and leaves the rest of the host empty.",
+        "Host 360",
+        "360",
+        "Scan 40",
+        "40",
+        "Photo 40",
+        "Share 40",
+        "Icon + buttons",
+        "The icon keeps its size and the two Buttons split what remains.",
+        "Split 40",
+        "Request 148",
+        "148",
+        "Pay 148",
+        "Buttons only",
+        "Both Buttons stretch to equal halves of the row.",
+        "Request 174",
+        "174",
+        "Pay 174",
+        "Group modes",
+        "Host 300",
+        "300",
+        "Request 118",
+        "118",
+        "Pay 118",
+        "Button / Size M · Emphasis Medium",
+        "The modes selected on the Figma master. Every child inherits them from the group.",
+        "Split 26",
+        "26",
+        "Request 125",
+        "125",
+        "Pay 125",
+        "Button / Size S · Emphasis High",
+        "Changing the group modes changes every child together: smaller controls and stronger fills."
+      ],
+      "specimen": [
+        "Request",
+        "Pay"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "State belongs to each child",
+      "description": "ButtonGroup has no enabled, disabled, or selected state of its own. Each child keeps its own disabled, hover, and pressed feedback.",
+      "blocks": [
+        "Default",
+        "All actions available",
+        "Every child resolves the group’s modes and responds on its own.",
+        "Child state",
+        "Request unavailable",
+        "The disabled Button fades to half opacity and ignores presses. It keeps its share of the row, so the layout does not shift."
+      ],
+      "specimen": [
+        "Request",
+        "Pay"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The host sets the width",
+      "description": "ButtonGroup fills the width it receives. IconButtons keep their size and Buttons divide the rest, so a narrow host can shorten labels.",
+      "blocks": [
+        "360 px host · Size M",
+        "Labels fit",
+        "Each Button has room for its full label.",
+        "Host 360",
+        "360",
+        "Split 40",
+        "40",
+        "Request 148",
+        "148",
+        "Pay 148",
+        "248 px host · Size M",
+        "Request is cut short",
+        "The equal share is narrower than “Request”, so the label ends in an ellipsis.",
+        "Host 248",
+        "248",
+        "Request 92",
+        "92",
+        "Pay 92",
+        "248 px host · Size S",
+        "A smaller size fits",
+        "Button / Size S on the group shrinks every child, so the labels fit again.",
+        "Split 26",
+        "26",
+        "Request 99",
+        "99",
+        "Pay 99"
+      ],
+      "specimen": [
+        "Request",
+        "Pay"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Short, related actions in a clear order",
+      "description": "Keep a group to a few actions that belong together. End with the action people are most likely to choose.",
+      "blocks": [
+        "01",
+        "End with the primary action",
+        "Supporting actions come first. Only Pay sets a stronger Emphasis mode, so it stands out.",
+        "02",
+        "Name every icon action",
+        "An IconButton without a label is announced by its icon name, such as “Qr Code”. Specify a task-based label, such as “Scan QR code”, for each icon action.",
+        "03",
+        "Use one or two words",
+        "Button labels stay on one line. When the share is too narrow, the end of the label is cut off with an ellipsis."
+      ],
+      "specimen": [
+        "Request",
+        "Pay"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Settle a shared bill",
+      "description": "A Coin Card holds the context. The ButtonGroup keeps split, request, and pay together, with Pay emphasized.",
+      "blocks": [
+        "Choose how to settle the bill."
+      ],
+      "specimen": [
+        "Team lunch",
+        "₹2,400 · 4 people · your share ₹600",
+        "Request",
+        "Pay"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep the row readable",
+      "description": "Most problems come from missing width or conflicting modes on individual children.",
+      "blocks": [
+        "Do",
+        "Give the group a width",
+        "In a 300 px host, both Buttons have room for their labels.",
+        "Don’t",
+        "Let the group shrink to its content",
+        "Without a host width, the Buttons divide the smallest possible row and “Request” is cut short.",
+        "Set the size once on the group",
+        "Every child inherits Button / Size M, so the row keeps one height.",
+        "Override one child’s size",
+        "Pay’s own Button / Size S wins over the group mode and leaves one short, mismatched action.",
+        "Emphasize one action",
+        "Only Pay sets Emphasis High, so the next step is obvious.",
+        "Emphasize every action",
+        "With Emphasis High on the group, all three actions compete for attention."
+      ],
+      "specimen": [
+        "Request",
+        "Pay"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Give the group a width",
+            "caption": "In a 300 px host, both Buttons have room for their labels.",
+            "specimen": "Request · Pay"
+          },
+          "dont": {
+            "title": "Let the group shrink to its content",
+            "caption": "Without a host width, the Buttons divide the smallest possible row and “Request” is cut short.",
+            "specimen": "Request · Pay"
+          }
+        },
+        {
+          "do": {
+            "title": "Set the size once on the group",
+            "caption": "Every child inherits Button / Size M, so the row keeps one height.",
+            "specimen": "Request · Pay"
+          },
+          "dont": {
+            "title": "Override one child’s size",
+            "caption": "Pay’s own Button / Size S wins over the group mode and leaves one short, mismatched action.",
+            "specimen": "Request · Pay"
+          }
+        },
+        {
+          "do": {
+            "title": "Emphasize one action",
+            "caption": "Only Pay sets Emphasis High, so the next step is obvious.",
+            "specimen": "Request · Pay"
+          },
+          "dont": {
+            "title": "Emphasize every action",
+            "caption": "With Emphasis High on the group, all three actions compete for attention.",
+            "specimen": "Request · Pay"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Public ButtonGroup, verified behavior",
+      "description": "The guide renders the public jfs-components ButtonGroup with public IconButton and Button children.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Button group master, node 2018:4119 · no exposed properties",
+        "02",
+        "Canonical Storybook",
+        "ButtonGroup docs, default, mixed-children, and modes stories",
+        "Default story",
+        "With icon and buttons",
+        "With modes",
+        "Checked 24 September 2026",
+        "Declared, installed, and npm latest are all jfs-components@0.1.60. The Figma master is a 150 × 42 row of three icon actions with Button / Size M, Emphasis Medium, and AppearanceBrand Primary. The package renders each IconButton at 40 px, so the same row measures 144 × 40. In Storybook, the default story’s third icon (ic_menu) is missing from the icon registry, and the modes story passes a token name that ButtonGroup does not read.",
+        "latest",
+        "jfs-components@0.1.60",
+        "ic_menu"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

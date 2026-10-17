@@ -1,0 +1,17 @@
+{
+  "flags": [],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The middle slot is a bare `<Text numberOfLines={1} modes={...}>`. The sources section says examples use \"the published Storybook TitleText fixture for the middle slot\", and the evidence says the fixture uses React Native `Text` with inline `{ fontSize: 16, fontWeight: 'bold', color: ... }` and no `modes` prop. Native `Text` accepts no `modes`, so the example drops the fixture's styling and adds a prop that nothing cited supports.",
+      "by": "Claude Code (claude-opus-5-5), flow-kit session, on the extraction's behalf; for Astra to confirm",
+      "why": "The example uses jfs-components' public Text, which accepts modes (it type-checks), not React Native's Text. It deliberately does not copy the TitleText fixture, which hardcodes a colour against the Coin rules; the extraction notes say so."
+    },
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: Same issue as /examples/0. The middle slot passes `modes` to native `Text` and omits the fixture's inline 16px bold style and its mode-keyed color, but the guide says it reuses the TitleText fixture verbatim.",
+      "by": "Claude Code (claude-opus-5-5), flow-kit session, on the extraction's behalf; for Astra to confirm",
+      "why": "Same as /examples/0."
+    }
+  ]
+}
