@@ -27,6 +27,7 @@ final copy (format in the `coin-component-docs` skill, `references/brief.md`).
 | button, hstack, vstack, stack, breadcrumbs | [button-and-layout.md](button-and-layout.md) |
 | buttongroup | [buttongroup.md](buttongroup.md) |
 | cardadvisory | [cardadvisory.md](cardadvisory.md) |
+| cardfeedback | [cardfeedback.md](cardfeedback.md) |
 | cardfinancialcondition | [cardfinancialcondition.md](cardfinancialcondition.md) |
 | cardinsight | [cardinsight.md](cardinsight.md) |
 | cardproviderinfo | [cardproviderinfo.md](cardproviderinfo.md) |
