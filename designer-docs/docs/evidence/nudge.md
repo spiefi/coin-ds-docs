@@ -48,3 +48,28 @@ The release that published #205, #255, #203, #252, and #250 moved the docs to mi
 ## a116616 install (17 October 2026, publishing #271)
 
 The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries the #271 fix (7020bf9): Close renders only when `onClose` is set or `showClose` is true, and `showClose={false}` hides it even with `onClose`. Re-test on #271: a bare stacked-prominent or inline-compact Nudge without `onClose` has no `[aria-label="Close"]`; with `onClose`, a click and Enter call it. The guide's playground passes `showClose` explicitly and every close example passes both `showClose` and `onClose`, so the page already matched; its Sources line "the package adds it only when asked" is true again. Composites that render a default Nudge without `onClose` (CircularRating, CardInsight, CardAdvisory, BenefitCard) no longer show a dead X; their guides were updated.
+
+## a116616 check (17 October 2026)
+
+Re-checked against `jfs-components` 0.1.78 from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October); `npm run coin:status` reports upstream, mirror, and docs in step. Since 636f3f5, `Nudge.tsx` changed in c1fa197 (#206) and 7020bf9 (#271), and `Nudge.mdx` and the stories were rewritten upstream; the published Storybook still serves the old generated page. Where this section differs from the Package and Accessibility bullets above, it replaces them. Headless Chrome, react-native-web 0.21.2, Light, 344 px column:
+
+- Copy: `title` and `body` default to empty. A bare `<Nudge />` is a 344 × 46 card with only the sparkle: no text and no button. The default button renders only with `buttonLabel` or `onPressButton`: `buttonLabel` alone gives a pill that does nothing (86 × 25 for "See plans"), and `onPressButton` without `buttonLabel` gives an empty 26 × 10 pill with no name.
+- `buttonSlot={null}` (or `false`) removes the button: title and body only, 344 × 63.
+- Context: when the merged modes have no `Context`, Nudge sets `Context: 'Nudge&Alert'` itself. Unset and explicit Nudge&Alert render the same: 344 × 96, button 86 × 25 (padding 4 × 12, 12 px label). `Context: 'Default'` on the Nudge, or on a VStack or Card around it (their modes reach it through `cloneChildrenWithModes`), gives 344 × 113 with a 42 px button (padding 8 × 20, 16 px label). A container whose modes have no `Context` keeps the small button.
+- Semantics: with a `title`, the card is a `<section role="region">` named by the title (`accessibilityRole: 'summary'`); without one it is a `div role="presentation"`. inline-compact never shows `title` but still uses it as the region's name (an invisible name). The sparkle SVG carries no `aria-hidden`, so Chrome's accessibility tree lists the sparkle as an unnamed image inside the region.
+- `testID` lands on the card as `data-testid`.
+- Close: shows with `onClose` or `showClose`, hidden by `showClose={false}` (#271, see the install note above). stacked-detailed still ignores `body`, the button props, and the close props without a warning (344 × 46, header only).
+- Unchanged: `nudge/radius` still aliases a missing variable (`VariableID:2892:386`), so every Nudge logs "Variable VariableID:2892:386 not found" in development and the code falls back to 12. `nudge/title/color` is still one literal #1e1a14 for every mode (#208).
+
+Guide changes:
+
+- Constants: the guide's modes no longer pass `Context: 'Nudge&Alert'` (renamed `NA` → `NEUTRAL`); every example renders as before.
+- Configuration: "pass the Nudge&Alert context" → Nudge sets it itself.
+- Content: "Nudge's own copy is a placeholder" → it has no copy of its own, and the title names the card for screen readers.
+- Do/Don't: "Leave the context unset" (which now rendered the same as the Do) → "Pass another Context", a `Context: 'Default'` Nudge with the 42 px button. "Ship the placeholder copy" → "Leave the copy out": an empty card with a sparkle and no button.
+- Sources: checked 17 October 2026, 16 October build; Nudge sets the context unless a container passes another; the card is a region named by its title. `nudge.brief.md` carries the same copy.
+
+Coin gaps (not filed; for the owner to decide):
+
+- #206 (Component Fix, In progress) still has open parts: silently ignored props per type (detailed: body, button, close; compact: `title`, now an invisible region name), no mode for Figma's white card with a purple icon, the dangling `nudge/radius` alias, the fixed "Close" label, title line height 17 vs Figma 15 and a 26 px close vs 28, and the published Storybook still predating the rewrite.
+- New, not on #206: `onPressButton` without `buttonLabel` renders an empty, unnamed button; the sparkle SVG isn't hidden from assistive tech on the web.

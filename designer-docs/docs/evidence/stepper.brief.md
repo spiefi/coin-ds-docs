@@ -2,7 +2,7 @@
 
 slug: stepper · label: Stepper · public API: Stepper, Step (+ Card, VStack, Button for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457 · storybook: docsUrl('stepper') · stories: Default=components-stepper--default, Order tracking=components-stepper--order-tracking, Three steps=components-stepper--three-steps, Step complete=components-step--complete, Step error=components-step--error-state, Step warning=components-step--warning-state
-checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
+checked: 17 October 2026 · jfs-components 0.1.78 (16 October build, mirror tag v0.1.78-a116616, Biscuit's main a116616)
 icon: two stage circles joined by a line, with text lines — `<circle cx="5" cy="4" r="2.2" fill="currentColor" /><path d="M5 6.7v4.6" stroke="currentColor" strokeWidth="1.5" /><circle cx="5" cy="14" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M10 4h6M10 14h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />`
 keywords: progress steps, timeline, onboarding steps, order tracking
 
@@ -43,7 +43,7 @@ Grid `coin-new-example-grid three`, each a host with stages 1 done, 2 current, 3
 - With dates — add supporting text and each stage’s date line — lesson: Shows when each stage finished, started, or is due.
 
 ## States
-header: States · title: Five stage states · description: Each stage shows one state. In Figma, pick it with the Step Status mode; in code the stage’s status sets both its icon and its colour, so a check is always green.
+header: States · title: Five stage states · description: Each stage shows one state. In Figma, pick it with the Step Status mode; in code the stage’s status sets both its icon and its colour. An upcoming stage needs Step Status set to inactive, and an explicit Step Status always wins, so keep it matched to the status.
 Grid `coin-new-example-grid three`; each ExampleCard holds a host with a one-stage Stepper:
 - Done — stage('done'), Verify PAN, “PAN details match your name” — lesson: Green circle with a check.
 - Current — stage('current'), Add bank account, its supporting text — lesson: Purple circle with the stage number.
@@ -73,7 +73,7 @@ Every preview is a host (`coin-new-host wide`) with a Stepper.
 
 ## Sources
 header: Sources · title: Use the public Stepper contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the stage’s <code>status</code> sets both, and an explicit Step Status mode overrides the colour. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is a list named by its accessibility label: each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current. The icons themselves have no names, so the text must say what happened. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the stage’s <code>status</code> sets both, and an explicit Step Status mode overrides the colour. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is a list named by its accessibility label: each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current. The icons themselves have no names, so the text must say what happened. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.
 
 ## Limits
 Do not show Dark mode (#197), a horizontal Stepper, pressable stages, custom content inside a Step, `connectorStyle` or `style`, or a Stepper-level Step Status. Do not show a glyph with a mismatched colour except in the Don’t above. Do not imply that the icons are announced or that the status word explains what happened.

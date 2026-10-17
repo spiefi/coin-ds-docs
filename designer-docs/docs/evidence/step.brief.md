@@ -2,7 +2,7 @@
 
 slug: step · label: Step · public API: Step, StepLabel (+ Stepper as the list; Card, VStack, HStack, Button for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457 (Stepper, which places each Step; the Sources card takes `figmaDescription="Stepper, which places each Step"`) · storybook: docsUrl('step') · stories: Default=components-step--default, Complete=components-step--complete, Error=components-step--error-state, Warning=components-step--warning-state, Last step=components-step--last-step, Custom slot=components-step--custom-slot
-checked: 11 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5)
+checked: 17 October 2026 · jfs-components 0.1.78 (16 October build, mirror v0.1.78-a116616, Biscuit's main a116616)
 icon: one stage circle with a line below it and two text lines — `<><circle cx="5" cy="5" r="2.75" stroke="currentColor" strokeWidth="1.5" /><path d="M5 8.5v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /><path d="M10 4h6M10 7h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>`
 keywords: stepper item, stage, timeline item, progress step
 
@@ -14,7 +14,7 @@ Selectors for a standalone Step with `testID` and `R = byTestId(id)`: circle `${
 ## Overview
 summary: Use a Step for one stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail.
 principle: One stage: its name, its state, and what happened.
-playground: `.preview-stage` › Host › Stepper with `<Step {...stage(state)} title="Verify PAN" supportingText={support ? copy : undefined} metaText={date ? date : undefined} />` and `<Step {...stage('upcoming')} title="Add bank account" supportingText="Link the account you’ll invest from" />`. Controls: Segment "State" `Current | Done | Attention | Failed` (default Current; the second stage already shows Upcoming, and five options don’t fit the controls panel; review, 10 October); OnOff "Supporting text" (on); OnOff "Date" (on). Readout title "Read as", value “Verify PAN” (Current), “Verify PAN, Completed”, “Verify PAN, Needs attention”, or “Verify PAN, Failed”; note: "Screen readers hear the title and the outcome, not the supporting text or the date." Stage label: "Live Coin Step".
+playground: `.preview-stage` › Host › Stepper with `<Step {...stage(state)} title="Verify PAN" supportingText={support ? copy : undefined} metaText={date ? date : undefined} />` and `<Step {...stage('upcoming')} title="Add bank account" supportingText="Link the account you’ll invest from" />`. Controls: Segment "State" `Current | Done | Attention | Failed` (default Current; the second stage already shows Upcoming, and five options don’t fit the controls panel; review, 10 October); OnOff "Supporting text" (on); OnOff "Date" (on). Readout title "Read as", value: “Verify PAN”, then the supporting text while Supporting text is on, then “Completed”, “Needs attention”, or “Failed” (Current has no word), joined by commas, e.g. “Verify PAN, PAN details match your name, Completed”; it equals the live list item’s name. Note: "Screen readers hear the title, supporting text of up to 80 characters, and the outcome, but not the date." Stage label: "Live Coin Step".
 
 ## Anatomy
 header: Anatomy · title: An indicator, a connector, and three lines of text · description: A 36 px circle shows the stage’s number or outcome, and a 2 px connector runs down to the next stage. Beside them sit the title, a line of supporting text, and a date.
@@ -34,7 +34,7 @@ Grid `coin-new-example-grid`, each an ExampleCard › Host:
 - Title only — Stepper › `<Step {...stage('current')} title="Verify PAN" />` — lesson: Compact, when the title says enough.
 - With supporting text — add “Match your PAN with your name” — lesson: Says what the stage involves or how it went.
 - With a date — add the supporting text and “Started 5 Oct 2026” — lesson: When the stage finished, started, or is due.
-- Custom content — Stepper › `<Step {...stage('current')} title="Upload Form 16"><StepLabel title="Upload Form 16" supportingText="Add the PDF from your employer" /><HStack modes={LIGHT}><Button label="Upload" onPress={noop} modes={BTN} /></HStack></Step>` then `<Step {...stage('upcoming')} title="Review and submit" />` — lesson: Children replace the text block; the row and its connector grow. Keep the title prop: it’s what screen readers hear.
+- Custom content — Stepper › `<Step {...stage('current')}><StepLabel title="Upload Form 16" supportingText="Add the PDF from your employer" /><HStack modes={LIGHT}><Button label="Upload" onPress={noop} modes={BTN} /></HStack></Step>` then `<Step {...stage('upcoming')} title="Review and submit" />` — lesson: Children replace the text block and the title prop; the row and its connector grow. Screen readers hear the StepLabel child’s text.
 - Connector off — standalone `<Step {...stage('done')} title="Verify PAN" supportingText="PAN details match your name" showLine={false} />` — lesson: Stepper turns it off on the last stage; turn it off on a Step you place yourself.
 
 ## States
@@ -53,7 +53,7 @@ Measured diagram: `<Anatomy legend={false} specimenWidth={312} marks={[{ kind: '
 Then ExampleCard "Long text wraps" (description: "The title and supporting text wrap, and the row and connector grow with them.") › narrow Host › Stepper › `<Step {...stage('current')} title="Upload Form 16 and match your employer’s TAN" supportingText="The name on Form 16 must match your PAN and the employer details you saved." metaText="Started 5 Oct 2026" />`, `<Step {...stage('upcoming')} title="Review and submit" />`.
 
 ## Content
-header: Content · title: Name the stage, then say how it went · description: Write the title as the stage in a few words, such as “Verify PAN”, not an action. Use the supporting text for what happens or what went wrong, and the date for when. The glyph only says that a stage failed, not why.
+header: Content · title: Name the stage, then say how it went · description: Write the title as the stage in a few words, such as “Verify PAN”, not an action. Use the supporting text for what happens or what went wrong, and the date for when. Screen readers hear supporting text of up to 80 characters with the title. The glyph only says that a stage failed, not why.
 One ExampleCard "Stage names and outcomes" › Host › Stepper › stage('done') Verify PAN “PAN details match your name”, stage('attention') Add nominee “Nominee’s date of birth is missing”, stage('upcoming') eSign “Sign the form with an Aadhaar OTP”.
 
 ## In context
@@ -69,7 +69,7 @@ Every preview is a Host.
 
 ## Sources
 header: Sources · title: Use the public Step contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. In Figma, designers place Steps through Stepper in the Components Library (linked above); Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step is a list item read as its title plus “Completed”, “Failed”, or “Needs attention”; the supporting text and date aren’t read, and a Step with only a StepLabel child is read as “Step” and its number. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. In Figma, designers place Steps through Stepper in the Components Library (linked above); Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”. The date isn’t read, and a Step on its own isn’t a list item. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.
 
 ## Limits
 Do not show Dark mode, `connectorStyle`, `style`, `isCurrent`, a Stepper-level Step Status, or a glyph with a mismatched colour outside the Don’t. Do not imply that a Step is pressable or that the glyph, supporting text, or date is announced.
