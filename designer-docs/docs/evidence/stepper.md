@@ -40,3 +40,12 @@ Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `ma
 
 - #211 fixed (verified 12 October, published here): Stepper keeps a key on each flattened Step, so plain Steps, Steps in a Fragment, Steps with StepLabel children, and mapped Steps log no React “unique key” error in development builds. The production docs build never logged it.
 - No designer-facing behaviour changed, so the guide copy stays; only the Sources check date and build are updated (13 October, 12 October build). The brief's checked line and note match.
+
+## a116616 check (17 October 2026)
+
+Re-checked against `jfs-components` 0.1.78 from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October) in headless Chrome with react-native-web 0.21.2; `npm run coin:status` reports upstream, mirror, and docs in step. `Stepper.tsx`, `Step.tsx`, and `StepLabel.tsx` are unchanged since c1fa197. See `step.md` › a116616 check for each Step's name.
+
+- Colour: with no `Step Status` mode, `status` sets it (complete green `rgb(38,171,33)`); an explicit `Step Status` wins, so `status="complete"` with `Step Status: active` renders a check on purple `rgb(93,0,181)`. The States description's "so a check is always green" contradicted the Sources note and the "Put a check on purple" Don't. It now says the status sets icon and colour, an upcoming stage needs `inactive`, and an explicit Step Status wins, so keep it matched (the Step guide's wording).
+- Semantics: `ul role="list"` named by `accessibilityLabel`; each Step is `li role="listitem"` read as its title, its supporting text when it is at most 80 characters with no line break, and the status word, never its date (KYC sample: "Verify PAN, PAN details match your name, Completed" / "Add bank account, Link the account you'll invest from" with `aria-current="step"` / "eSign"). The Sources line "each stage is read with its title, plus 'Completed' …" left out the supporting text, which c1fa197 added; it now names the supporting text of up to 80 characters and says the date is never read.
+- Unchanged and still true: the first unfinished stage is current; the glyphs have no names (they are exposed as unnamed images); the published Storybook Stepper docs page is the old stub.
+- Sources: checked 17 October 2026, 16 October build. `stepper.brief.md` carries the same copy.

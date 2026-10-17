@@ -105,7 +105,7 @@ function StepperGuide() {
     },
     states: {
       header: 'States', title: 'Five stage states',
-      description: 'Each stage shows one state. In Figma, pick it with the Step Status mode; in code the stage’s status sets both its icon and its colour, so a check is always green.',
+      description: 'Each stage shows one state. In Figma, pick it with the Step Status mode; in code the stage’s status sets both its icon and its colour. An upcoming stage needs Step Status set to inactive, and an explicit Step Status always wins, so keep it matched to the status.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Done" description="Green circle with a check."><Host><Stepper modes={LIGHT}>{step(1, 'done', 'Verify PAN', 'PAN details match your name')}</Stepper></Host></ExampleCard>
         <ExampleCard title="Current" description="Purple circle with the stage number."><Host><Stepper modes={LIGHT}>{step(1, 'current', KYC[1].title, KYC[1].text)}</Stepper></Host></ExampleCard>
@@ -169,11 +169,11 @@ function StepperGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Stepper contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('stepper')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('stepper')} stories={[
         { label: 'Default', id: 'components-stepper--default' }, { label: 'Order tracking', id: 'components-stepper--order-tracking' },
         { label: 'Three steps', id: 'components-stepper--three-steps' }, { label: 'Step complete', id: 'components-step--complete' },
         { label: 'Step error', id: 'components-step--error-state' }, { label: 'Step warning', id: 'components-step--warning-state' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the stage’s <code>status</code> sets both, and an explicit Step Status mode overrides the colour. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is a list named by its accessibility label: each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current. The icons themselves have no names, so the text must say what happened. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the stage’s <code>status</code> sets both, and an explicit Step Status mode overrides the colour. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is a list named by its accessibility label: each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current. The icons themselves have no names, so the text must say what happened. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.</Sources>,
     },
   }
 
