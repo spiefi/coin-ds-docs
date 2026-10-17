@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/stack.json`; the JSON is the source of truth.
 
 - **State:** flagged (6 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `09a45da` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `09a45da` · built 2026-10-17T15:28:09Z
 - **Category:** layout (for discovery only, not a limit on composition) · **Tags:** layout, spacing, gap, slot, auto layout
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=stack) · [Figma](https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=279-3) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-stack--docs)
 

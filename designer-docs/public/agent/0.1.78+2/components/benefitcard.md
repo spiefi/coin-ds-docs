@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/benefitcard.json`; the JSON is the source of truth.
 
 - **State:** flagged (2 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T15:28:09Z
 - **Category:** card (for discovery only, not a limit on composition) · **Tags:** benefits card, plan benefits, rewards card, upgrade card, perks, membership
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=benefitcard) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5352-1077) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-benefitcard--docs)
 

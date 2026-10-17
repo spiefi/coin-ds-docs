@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/stepper.json`; the JSON is the source of truth.
 
 - **State:** documented
-- **Package:** jfs-components 0.1.78 · guide commit `889444e` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `807973d` · built 2026-10-17T15:28:09Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** progress steps, timeline, onboarding steps, order tracking
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=stepper) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-stepper--docs)
 
@@ -59,8 +59,10 @@ What each slot accepts, from the package types (the API limit, not a design reco
   _From configuration: “a date when timing matters, as on an order tracker.”_
 - **recommended** Use titles alone for short processes whose titles say enough; it is compact.  
   _From configuration: “Compact, for short processes whose titles say enough.”_
-- **recommended** Set each stage's status: in code it sets both the stage's icon and its colour, so a check is green.  
-  _From states: “in code the stage’s status sets both its icon and its colour, so a check is always green.”_
+- **recommended** Set each stage's status: in code it sets both the stage's icon and its colour.  
+  _From states: “in code the stage’s status sets both its icon and its colour.”_
+- **recommended** `Step Status` = `inactive`: Set Step Status to inactive on an upcoming stage, and keep any explicit Step Status matched to the status: an explicit Step Status always wins.  
+  _From states: “An upcoming stage needs Step Status set to inactive, and an explicit Step Status always wins, so keep it matched to the status.”_
 - **recommended** Set the Step Status mode to inactive on each upcoming stage: upcoming steps render solid purple unless set to inactive.  
   _From evidence: “upcoming steps render solid purple unless set to `inactive`.”_
 - **discouraged** `Step Status`: Set Step Status on each Step, not in the Stepper's modes: a Stepper-level Step Status colours every step the same.  
@@ -99,8 +101,8 @@ Bad: “Stepper Item”, “Click to verify”
 
 - **recommended** `accessibilityLabel`: Give the Stepper a spoken name with accessibilityLabel, such as “KYC progress”.  
   _From inContext: “gives it a spoken name such as “KYC progress””_
-- **recommended** Give each stage a title that names it: on the web each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current.  
-  _From sources: “each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current.”_
+- **recommended** Give each stage a title that names it: on the web each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current.  
+  _From sources: “each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current.”_
 - **recommended** Say in the text what happened: the icons themselves have no names.  
   _From sources: “The icons themselves have no names, so the text must say what happened.”_
 - **discouraged** Do not rely on the icon: a red cross, or “Failed” read aloud, doesn't say what went wrong or how to fix it.  
@@ -193,7 +195,7 @@ Behaviour that was checked and found missing. Report these; do not work around t
 - The check, cross and alert glyphs are unnamed images. _(evidence, 2026-10-08)_
 - Stepper is vertical only and not interactive, and it owns no current step. _(evidence, 2026-10-05)_
 - In Dark mode, complete and warning stages turn red, and supporting text and dates stay near-black (#197); the guide shows Light only. _(evidence, 2026-10-05)_
-- The published Storybook predates 0.1.78: its done, error and warning examples show the icon on purple. _(evidence, 2026-10-13)_
+- The published Storybook predates 0.1.78: its done, error and warning examples show the icon on purple. _(evidence, 2026-10-17)_
 
 ## Flags
 

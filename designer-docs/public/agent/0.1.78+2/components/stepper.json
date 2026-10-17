@@ -11,9 +11,9 @@
   ],
   "status": {
     "state": "documented",
-    "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
+    "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
     "packageVersion": "0.1.78",
-    "builtAt": "2026-10-17T11:23:24Z",
+    "builtAt": "2026-10-17T15:28:09Z",
     "flags": []
   },
   "summary": "Use a Stepper to show where someone is in a process with several stages, such as KYC, and how each stage went.",
@@ -170,12 +170,22 @@
       }
     },
     {
-      "text": "Set each stage's status: in code it sets both the stage's icon and its colour, so a check is green.",
+      "text": "Set each stage's status: in code it sets both the stage's icon and its colour.",
       "strength": "recommended",
       "from": {
         "section": "states",
-        "quote": "in code the stage’s status sets both its icon and its colour, so a check is always green."
+        "quote": "in code the stage’s status sets both its icon and its colour."
       }
+    },
+    {
+      "text": "Set Step Status to inactive on an upcoming stage, and keep any explicit Step Status matched to the status: an explicit Step Status always wins.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "An upcoming stage needs Step Status set to inactive, and an explicit Step Status always wins, so keep it matched to the status."
+      },
+      "target": "Step Status",
+      "value": "inactive"
     },
     {
       "text": "Set the Step Status mode to inactive on each upcoming stage: upcoming steps render solid purple unless set to inactive.",
@@ -320,11 +330,11 @@
       "target": "accessibilityLabel"
     },
     {
-      "text": "Give each stage a title that names it: on the web each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current.",
+      "text": "Give each stage a title that names it: on the web each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current.",
       "strength": "recommended",
       "from": {
         "section": "sources",
-        "quote": "each stage is read with its title, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current."
+        "quote": "each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current."
       }
     },
     {
@@ -483,7 +493,7 @@
       {
         "text": "The published Storybook predates 0.1.78: its done, error and warning examples show the icon on purple.",
         "source": "evidence",
-        "checkedOn": "2026-10-13"
+        "checkedOn": "2026-10-17"
       }
     ]
   },

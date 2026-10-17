@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/actionfooter.json`; the JSON is the source of truth.
 
 - **State:** flagged (12 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `cba512f` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `cba512f` · built 2026-10-17T15:28:09Z
 - **Category:** layout (for discovery only, not a limit on composition) · **Tags:** sticky footer, bottom bar, call to action, CTA, primary action
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=actionfooter) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2904-8057) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-actionfooter--docs)
 

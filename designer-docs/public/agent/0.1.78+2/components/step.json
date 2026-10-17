@@ -11,9 +11,9 @@
   ],
   "status": {
     "state": "documented",
-    "guideCommit": "f72ec62472be267ef350470ed36a1ff13016fba8",
+    "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
     "packageVersion": "0.1.78",
-    "builtAt": "2026-10-17T11:23:24Z",
+    "builtAt": "2026-10-17T15:28:09Z",
     "flags": []
   },
   "summary": "Use a Step for one stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail.",
@@ -148,7 +148,7 @@
   ],
   "configuration": [
     {
-      "text": "Give every Step a title.",
+      "text": "Every Step has a title: set title, unless children replace the text block and the title prop.",
       "strength": "recommended",
       "from": {
         "section": "configuration",
@@ -184,11 +184,11 @@
       "target": "metaText"
     },
     {
-      "text": "Pass children to replace the text block with your own content; the row and its connector grow.",
+      "text": "Pass children to replace the text block and the title prop with your own content; the row and its connector grow.",
       "strength": "recommended",
       "from": {
         "section": "configuration",
-        "quote": "Children replace the text block; the row and its connector grow."
+        "quote": "Children replace the text block and the title prop; the row and its connector grow."
       },
       "target": "children"
     },
@@ -304,6 +304,15 @@
           "quote": "“Stepper Item” tells people nothing, and it’s read as “Step 1”."
         },
         "target": "title"
+      },
+      {
+        "text": "Screen readers hear supporting text of up to 80 characters with the title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Screen readers hear supporting text of up to 80 characters with the title."
+        },
+        "target": "supportingText"
       }
     ],
     "good": [
@@ -369,13 +378,22 @@
   ],
   "accessibility": [
     {
-      "text": "Name the stage in the title: on the web a Step is read as its title plus “Completed”, “Failed”, or “Needs attention”.",
+      "text": "Name the stage in its visible copy: in a Stepper a Step is read as its title (or a StepLabel child's title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”; the date isn't read.",
       "strength": "recommended",
       "from": {
         "section": "sources",
-        "quote": "read as its title plus “Completed”, “Failed”, or “Needs attention”"
+        "quote": "On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”."
       },
       "target": "title"
+    },
+    {
+      "text": "With custom children, screen readers hear the StepLabel child's text.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Screen readers hear the StepLabel child’s text."
+      },
+      "target": "children"
     }
   ],
   "doDont": [
@@ -410,7 +428,7 @@
   "examples": [
     {
       "purpose": "Filing an ITR: the current stage holds its own Upload button in its children, and the upcoming stage is inactive.",
-      "jsx": "<Stepper accessibilityLabel=\"File your ITR\" modes={{ 'Color Mode': 'Light' }}>\n  <Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" metaText=\"Done 2 Oct 2026\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n  <Step title=\"Upload Form 16\" modes={{ 'Color Mode': 'Light' }}>\n    <StepLabel title=\"Upload Form 16\" supportingText=\"Add the PDF from your employer\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Upload\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S' }} />\n  </Step>\n  <Step title=\"Review and submit\" supportingText=\"Check your income and file\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n</Stepper>",
+      "jsx": "<Stepper accessibilityLabel=\"File your ITR\" modes={{ 'Color Mode': 'Light' }}>\n  <Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" metaText=\"Done 2 Oct 2026\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n  <Step modes={{ 'Color Mode': 'Light' }}>\n    <StepLabel title=\"Upload Form 16\" supportingText=\"Add the PDF from your employer\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Upload\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S' }} />\n  </Step>\n  <Step title=\"Review and submit\" supportingText=\"Check your income and file\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n</Stepper>",
       "from": {
         "section": "inContext",
         "quote": "The current stage holds its own Upload button."
@@ -440,8 +458,8 @@
         "type": "React.ReactNode",
         "required": false,
         "source": "evidence",
-        "description": "Replace the default StepLabel and get Step's modes; the title, supporting text and date props are then not shown. A StepLabel child gives the same text block.",
-        "checkedOn": "2026-10-10"
+        "description": "Replace the default StepLabel and get Step's modes; title is then ignored for both display and name, and a StepLabel child's title and short supporting text give the name.",
+        "checkedOn": "2026-10-17"
       },
       {
         "name": "modes",
@@ -497,7 +515,9 @@
         "name": "metaText",
         "type": "string",
         "required": false,
-        "source": "types"
+        "source": "evidence",
+        "description": "The date; it is never read by screen readers.",
+        "checkedOn": "2026-10-17"
       },
       {
         "name": "subtitle",
@@ -529,8 +549,8 @@
           "warning"
         ],
         "default": "number",
-        "description": "The glyph. With no Step Status mode it also picks the colour (complete green, error red, warning orange, number purple); an explicit Step Status mode always wins. Declared: Default \"number\", from the component source.",
-        "checkedOn": "2026-10-10"
+        "description": "Sets the glyph, and the colour when no Step Status mode is set (complete green, error red, warning orange); an explicit Step Status still wins. Declared: Default \"number\", from the component source.",
+        "checkedOn": "2026-10-17"
       },
       {
         "name": "isCurrent",
@@ -545,9 +565,10 @@
         "name": "withinStepper",
         "type": "boolean",
         "required": false,
-        "source": "types",
+        "source": "evidence",
         "default": false,
-        "description": "Set by Stepper. Standalone Steps are not list items. Default false, from the component source."
+        "description": "Set by Stepper; only then is the Step a list item (with aria-current when current). A Step on its own has no role, so its status word isn't announced. Declared: Set by Stepper. Standalone Steps are not list items. Default false, from the component source.",
+        "checkedOn": "2026-10-17"
       },
       {
         "name": "testID",
@@ -594,9 +615,19 @@
     "events": [],
     "gaps": [
       {
-        "text": "The glyph itself has no accessible name; the title and status word carry the meaning.",
+        "text": "The status glyph is an unnamed image on the web rather than hidden; the title and status word carry the meaning.",
         "source": "evidence",
-        "checkedOn": "2026-10-10"
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "A Step on its own isn't a list item, and its name isn't announced.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "The published Storybook Step page is still the old stub.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
       },
       {
         "text": "Step is not interactive: no focus and no press (no onPress).",
@@ -605,11 +636,6 @@
       },
       {
         "text": "Figma's done example shows a green date; the package keeps it grey.",
-        "source": "evidence",
-        "checkedOn": "2026-10-11"
-      },
-      {
-        "text": "The published Storybook predates 0.1.78.",
         "source": "evidence",
         "checkedOn": "2026-10-11"
       }

@@ -1,12 +1,12 @@
 {
   "slug": "nudge",
-  "entryHash": "38cd7c2b03f43218e01cb44421a3a0ea0954c5744da72056797b517479a3e620",
-  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
-  "checkedAt": "2026-10-17T11:22:41Z",
+  "entryHash": "972e652ca516a4f625a695f49f8827f6843a137719f4db0f28ef12611e97b7d5",
+  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
+  "checkedAt": "2026-10-17T15:27:21Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
   "flags": [],
-  "notes": "No item misstates the guide. Several conflicts between the type-derived facts, the guide and the evidence are worth a human check. (1) /configuration/8 and /facts/props/3 come from the package types. They say the default button renders only when buttonLabel or onPressButton is set, and that buttonSlot={null} removes it. The 7 Oct evidence says the opposite: buttonSlot={null} still renders the default \"Button\", and the buttonLabel default is \"Button\". The guide's doDont also says that without props a Nudge reads \"Split payment\" and \"Button\". This is probably the #206 change landing in a later install. If so, the guide's placeholder-copy Don't, /content/rules/4 and /content/bad \"Button\" may be stale. (2) /facts/props/1 gives the title default as \"\" from the component source, but the guide and the 7 Oct evidence give the default as \"Split payment\". The same #206 change may explain this, and it should be confirmed. (3) /content/good lists \"Split payment\", which the guide's doDont names as placeholder copy. It is also used deliberately with real body text in the guide's live examples, so it is not clearly wrong. It is still an ambiguous 'good' example. (4) The guide's Sources line says the card has no role or name on the web. The 13 Oct evidence, and /facts/props/1, say the root is now a region named by its title, so the guide copy is stale on that point."
+  "notes": "Nothing is clearly misstated. Three borderline items for a human to look at: (1) /placementAdvice/2 is the inContext illustration (a lavender nudge between the amount and the Pay button) filed as recommended placement advice. Its wording keeps the scope ('On the guide's payment screen'), but it should not be read as a general placement or appearance rule. (2) /configuration/13 targets AppearanceBrand=Neutral at 'recommended'. The guide only says Neutral is the closest match to Figma's white card. It does not recommend Neutral as an appearance, and its own inContext example uses lavender (Secondary). (3) /configuration/16 marks Dark mode as 'discouraged'. The guide only says the title stays dark and that the page shows Light only. The evidence backs the concern (about 1.1:1 contrast, gap #208). Also, /facts/props/1 says that without a title the card 'has no role'. The evidence says it renders as `div role=\"presentation\"`, which is close in effect but not the same wording."
 }

@@ -1,9 +1,9 @@
 {
   "slug": "nudge",
-  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Much of the guide copy predates the installed build. The copy and most of the evidence were checked on 0.1.78-3795b4c (7 October 2026). The docs now install 0.1.78-c1fa197, which carries Biscuit's #206 Nudge changes, and the evidence's c1fa197 note says the copy was not re-checked against #206. The installed types and source contradict the guide in five places. (1) Resolved on a116616 (17 October 2026, the #271 fix): Close renders only when onClose is set or showClose is true, so the guide's \"Add a close button when people may dismiss it\" and \"the package adds it only when asked\" hold again; on c1fa197 showClose defaulted to true. (2) title and body default to empty, and the default button renders only when buttonLabel or onPressButton is set. The guide says \"Nudge’s own copy is a placeholder\", and its Don't caption says \"Without props it reads “Split payment” and “Button”\". (3) buttonSlot={null} now removes the button; the 3795b4c evidence says it still rendered. (4) The root is a region named by its title (c1fa197 evidence), while the Sources note says \"The card has no role or name on the web\". (5) Nudge now has testID. A further point comes from reading the installed Nudge source, not the types or the evidence, and it has not been checked in the browser: Nudge sets Context Nudge&Alert itself unless the caller or the theme already set a Context. That would make the Don't caption \"The button grows to 42 px and outweighs the message\" true only when a surrounding Context is set. So the guidance keeps the guide's intent but leans on package facts where they differ. The close button is shown when people may dismiss the nudge, through onClose; the fact-based rule follows the a116616 types. The Don't pairs about copy and context use the Do caption as their why, not the stale Don't caption. No evidence fact or gap is recorded for behaviour that #206 changed. The content sentence \"so always set all three\" is marked ambiguous: its stated reason (placeholder copy) is stale, and compact never renders a title while detailed ignores the body and button. The examples pass the Nudge's mode object to the ListItem children, although the evidence says slot children already get the Nudge's modes. The guide names no other component to use instead, so avoidWhen is empty.",
+  "notes": "Re-extracted 17 October 2026 from the guide and evidence as updated on main (807973d) for the a116616 build. The earlier extraction's five contradictions with the installed build (close default, placeholder copy, buttonSlot, region role, testID) are resolved in the guide, and the guide now says Nudge sets the Nudge&Alert context itself, confirmed in the evidence. The 'always set all three' sentence is gone, so nothing in this entry is ambiguous any more. The removal-announcement gap still rests on the 7 October check. The guide names no other component to use instead, so avoidWhen is empty. The examples pass only Color Mode and appearance: the Nudge sets its own Context.",
   "useWhen": [
     {
       "text": "A short suggestion with one action, such as splitting a payment, that sits within a screen's content.",
@@ -193,13 +193,23 @@
       }
     },
     {
-      "text": "Pass the Nudge&Alert context so the button is the small size from Figma.",
+      "text": "Leave Context to the Nudge: it sets the Nudge&Alert context itself, so its button is Figma's small size.",
       "strength": "recommended",
       "target": "Context",
       "value": "Nudge&Alert",
       "from": {
         "section": "configuration",
-        "quote": "pass the Nudge&Alert context so the button is the small size from Figma."
+        "quote": "Nudge sets the Nudge&Alert context itself, so its button is Figma’s small size."
+      }
+    },
+    {
+      "text": "Do not pass another Context on the Nudge or through a container around it: a Default Context makes the button 42 px, and it outweighs the message.",
+      "strength": "discouraged",
+      "target": "Context",
+      "value": "Default",
+      "from": {
+        "section": "doDont",
+        "quote": "A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message."
       }
     },
     {
@@ -228,10 +238,10 @@
       "value": "Neutral",
       "from": {
         "section": "sources",
-        "quote": "its white card with a purple icon matches no single appearance mode; Neutral is the closest."
+        "quote": "Figma’s white card with a purple icon matches no single appearance mode; Neutral is the closest."
       },
-      "checkedVersion": "0.1.78-3795b4c",
-      "checkedOn": "2026-10-07"
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "text": "Semantic Intent System colours the card for a status: positive, warning or negative (AppearanceSystem).",
@@ -320,16 +330,11 @@
         }
       },
       {
-        "text": "Set the title, body and button label yourself; the guide says to always set all three.",
+        "text": "Set the title, body and button label yourself: Nudge has no copy of its own, and the title also names the card for screen readers.",
         "strength": "recommended",
         "from": {
           "section": "content",
-          "quote": "Nudge’s own copy is a placeholder, so always set all three."
-        },
-        "absolute": {
-          "word": "always",
-          "scope": "ambiguous",
-          "reason": "the stated reason is stale (in the installed build title and body default to empty and the button renders only with buttonLabel or onPressButton), and inline-compact never renders a title while stacked-detailed ignores the body and button, so \"all three\" cannot apply to every type."
+          "quote": "Nudge has no copy of its own, so set all three; the title also names the card for screen readers."
         }
       },
       {
@@ -349,9 +354,7 @@
       "Pay ₹12,000 in 3 monthly instalments.",
       "See plans"
     ],
-    "bad": [
-      "Button"
-    ]
+    "bad": []
   },
   "states": [
     {
@@ -372,6 +375,17 @@
     }
   ],
   "accessibility": [
+    {
+      "text": "Give the card a title: on the web a card with a title is a region named by its title.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "sources",
+        "quote": "On the web a card with a title is a region named by its title"
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
     {
       "text": "Set onPressButton for the button and onClose for the close button: Enter and Space activate them only when those are set, and without them the button is focusable but does nothing.",
       "strength": "recommended",
@@ -400,24 +414,24 @@
         "scope": "contextual",
         "reason": "true of the default close IconButton; a closeSlot replaces it, so the sentence does not cover every close control."
       },
-      "checkedVersion": "0.1.78-3795b4c",
-      "checkedOn": "2026-10-07"
+      "checkedVersion": "0.1.78-a116616",
+      "checkedOn": "2026-10-17"
     }
   ],
   "doDont": [
     {
-      "do": "Use the Nudge&Alert context",
-      "dont": "Leave the context unset",
-      "why": "The button is Figma’s small pill and stays below the message.",
+      "do": "Keep Nudge’s own context",
+      "dont": "Pass another Context",
+      "why": "A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message.",
       "from": {
         "section": "doDont",
-        "quote": "Use the Nudge&Alert context"
+        "quote": "Keep Nudge’s own context"
       }
     },
     {
       "do": "Write your own copy",
-      "dont": "Ship the placeholder copy",
-      "why": "The title, body, and button say what’s on offer.",
+      "dont": "Leave the copy out",
+      "why": "Nudge has no placeholder: without copy it’s an empty card with a sparkle and no button.",
       "from": {
         "section": "doDont",
         "quote": "Write your own copy"
@@ -436,7 +450,7 @@
   "examples": [
     {
       "purpose": "A split-payment suggestion on a payment screen, in a lavender appearance; the screen handles the button and removes the nudge on close.",
-      "jsx": "<Nudge\n  title=\"Split payment\"\n  body=\"Pay ₹12,000 in 3 monthly instalments.\"\n  buttonLabel=\"See plans\"\n  onPressButton={() => {}}\n  onClose={() => {}}\n  modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert', AppearanceBrand: 'Secondary' }}\n/>",
+      "jsx": "<Nudge\n  title=\"Split payment\"\n  body=\"Pay ₹12,000 in 3 monthly instalments.\"\n  buttonLabel=\"See plans\"\n  onPressButton={() => {}}\n  onClose={() => {}}\n  modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary' }}\n/>",
       "from": {
         "section": "inContext",
         "quote": "The screen handles its button and removes it on close."
@@ -444,7 +458,7 @@
     },
     {
       "purpose": "Inline compact, with no close button: one line of text with the button beside it.",
-      "jsx": "<Nudge\n  type=\"inline-compact\"\n  body=\"Set up autopay so you never miss a bill.\"\n  buttonLabel=\"Set up\"\n  onPressButton={() => {}}\n  showClose={false}\n  modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }}\n/>",
+      "jsx": "<Nudge\n  type=\"inline-compact\"\n  body=\"Set up autopay so you never miss a bill.\"\n  buttonLabel=\"Set up\"\n  onPressButton={() => {}}\n  showClose={false}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
       "from": {
         "section": "configuration",
         "quote": "One line of text with the button beside it. It has no title."
@@ -452,7 +466,7 @@
     },
     {
       "purpose": "Stacked detailed: a title over list items, with no button or close.",
-      "jsx": "<Nudge type=\"stacked-detailed\" title=\"Why split this payment?\" modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }}>\n  <ListItem layout=\"Horizontal\" title=\"No extra cost\" supportText=\"You pay ₹12,000 in total\" modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }} />\n  <ListItem layout=\"Horizontal\" title=\"Three monthly payments\" supportText=\"₹4,000 on the 5th of each month\" modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }} />\n</Nudge>",
+      "jsx": "<Nudge type=\"stacked-detailed\" title=\"Why split this payment?\" modes={{ 'Color Mode': 'Light' }}>\n  <ListItem layout=\"Horizontal\" title=\"No extra cost\" supportText=\"You pay ₹12,000 in total\" modes={{ 'Color Mode': 'Light' }} />\n  <ListItem layout=\"Horizontal\" title=\"Three monthly payments\" supportText=\"₹4,000 on the 5th of each month\" modes={{ 'Color Mode': 'Light' }} />\n</Nudge>",
       "from": {
         "section": "doDont",
         "quote": "A title over list items explains the offer."
@@ -463,10 +477,10 @@
     {
       "list": "props",
       "name": "title",
-      "description": "Names the card: on the web the root is a region named by its title.",
-      "quote": "The Nudge root is now a `<section role=\"region\">` named by its title, and a close button shows by default.",
-      "checkedOn": "2026-10-13",
-      "checkedVersion": "0.1.78-c1fa197"
+      "description": "On the web, with a title the card is a region named by the title; without one it has no role.",
+      "quote": "with a `title`, the card is a `<section role=\"region\">` named by the title",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "list": "props",
@@ -501,20 +515,12 @@
       "checkedVersion": "0.1.78-3795b4c"
     },
     {
-      "list": "props",
-      "name": "startSlot",
-      "description": "The default sparkle icon is hidden from assistive tech.",
-      "quote": "the sparkle icon is hidden from assistive tech",
-      "checkedOn": "2026-10-07",
-      "checkedVersion": "0.1.78-3795b4c"
-    },
-    {
       "list": "modes",
       "name": "Context",
-      "description": "Changes only the inner Button: Nudge&Alert gives Figma's small button.",
-      "quote": "`Context` changes only the inner Button: `Nudge&Alert` gives Figma's small button.",
-      "checkedOn": "2026-10-07",
-      "checkedVersion": "0.1.78-3795b4c"
+      "description": "When the merged modes have no Context, Nudge sets Nudge&Alert itself (Figma's small button). A Default Context, on the Nudge or on a container whose modes reach it, gives a 42 px button.",
+      "quote": "when the merged modes have no `Context`, Nudge sets `Context: 'Nudge&Alert'` itself",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "list": "modes",
@@ -531,32 +537,58 @@
       "quote": "Close renders only when `onClose` is set or `showClose` is true, and `showClose={false}` hides it even with `onClose`.",
       "checkedOn": "2026-10-17",
       "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "buttonSlot",
+      "description": "null or false removes the button, leaving the title and body.",
+      "quote": "`buttonSlot={null}` (or `false`) removes the button",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     }
   ],
   "gaps": [
     {
-      "text": "In Color Mode Dark the title stays #1e1a14 on a dark card, about 1.1:1 and effectively invisible (#208).",
-      "quote": "Dark (Primary): card #120d05, body #fce8cc, but the title stays #1e1a14: about 1.1:1, effectively invisible.",
-      "checkedOn": "2026-10-07",
-      "checkedVersion": "0.1.78-3795b4c"
+      "text": "In Color Mode Dark the title stays #1e1a14 on a dark card (#208): the title colour is one literal for every mode.",
+      "quote": "`nudge/title/color` is still one literal #1e1a14 for every mode (#208)",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "text": "No appearance mode reproduces Figma's white card with a purple icon.",
-      "quote": "No mode reproduces Figma's white card with a purple icon.",
-      "checkedOn": "2026-10-07",
-      "checkedVersion": "0.1.78-3795b4c"
+      "quote": "no mode for Figma's white card with a purple icon",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
-      "text": "inline-compact never renders title, and stacked-detailed ignores body, the button props and the close props.",
-      "quote": "Per type: compact never renders `title`; detailed ignores `body`, the button props, and the close props.",
-      "checkedOn": "2026-10-07",
-      "checkedVersion": "0.1.78-3795b4c"
+      "text": "stacked-detailed ignores the body, the button props and the close props, without a warning.",
+      "quote": "stacked-detailed still ignores `body`, the button props, and the close props without a warning",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
-      "text": "The default close button's name, “Close”, cannot be overridden.",
-      "quote": "named \"Close\" (not overridable)",
-      "checkedOn": "2026-10-07",
-      "checkedVersion": "0.1.78-3795b4c"
+      "text": "inline-compact never shows the title, but still uses it as the region's name, an invisible name.",
+      "quote": "inline-compact never shows `title` but still uses it as the region's name (an invisible name)",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "The default close button's label, “Close”, is fixed.",
+      "quote": "the fixed \"Close\" label",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "onPressButton without buttonLabel renders an empty, unnamed button.",
+      "quote": "`onPressButton` without `buttonLabel` renders an empty, unnamed button",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "The sparkle icon isn't hidden from assistive tech on the web.",
+      "quote": "the sparkle SVG isn't hidden from assistive tech on the web",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "text": "Nothing is announced and focus is not managed when a nudge is removed.",

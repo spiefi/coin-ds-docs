@@ -32,7 +32,7 @@ Use a Nudge for a short suggestion with one action, such as splitting a payment,
   buttonLabel="See plans"
   onPressButton={() => {}}
   onClose={() => {}}
-  modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert', AppearanceBrand: 'Secondary' }}
+  modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary' }}
 />
 ```
 
@@ -41,10 +41,10 @@ Use a Nudge for a short suggestion with one action, such as splitting a payment,
 **Modes it reads:** AppearanceBrand, AppearanceSystem, Border Boolean, Button / Size, Button / State, Color Mode, Context, context 10, Context2, Emphasis, Nudge padding, Page type, Profile Card Appearance, Semantic Intent, Slot gap.
 
 **Gaps (report, do not work around)**
-- In Color Mode Dark the title stays #1e1a14 on a dark card, about 1.1:1 and effectively invisible (#208).
+- In Color Mode Dark the title stays #1e1a14 on a dark card (#208): the title colour is one literal for every mode.
 - No appearance mode reproduces Figma's white card with a purple icon.
-- inline-compact never renders title, and stacked-detailed ignores body, the button props and the close props.
-- The default close button's name, “Close”, cannot be overridden.
-- Nothing is announced and focus is not managed when a nudge is removed.
+- stacked-detailed ignores the body, the button props and the close props, without a warning.
+- inline-compact never shows the title, but still uses it as the region's name, an invisible name.
+- The default close button's label, “Close”, is fixed.
 
 Full entry: `components/nudge.md`. Links: `components/nudge.links.md`.

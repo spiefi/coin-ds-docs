@@ -1,12 +1,12 @@
 {
   "slug": "stepper",
-  "entryHash": "232a5b227be39115ecc2802ba09060fadd2986a36023d44f2cfddbd0766af70f",
-  "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
-  "checkedAt": "2026-10-17T11:02:58Z",
+  "entryHash": "80788d667989a47dbf2296395d940aa58cd1a4bb3360073c4adbd7560249880e",
+  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
+  "checkedAt": "2026-10-17T15:27:21Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
   "flags": [],
-  "notes": "No misreadings found. Two minor points for a human reviewer. (1) /facts/gaps/3 is dated 2026-10-13, but the evidence's 13 October section says nothing about Storybook. The stale-Storybook finding comes from the 5 October check: the published index.json was built before the 0.1.78 release commit, and the Complete, Error and Warning Step stories set only `status`, so they render purple. The content is accurate and matches the guide's Sources note (checked 13 October). Consider re-dating it to 2026-10-05. (2) /facts/gaps/1 lists 'vertical only, not interactive, owns no current step' as a gap. The evidence records these as package facts, not under 'Coin gaps'. Since 636f3f5, the first incomplete step gets aria-current, but Stepper still has no prop for choosing the current step. The wording is accurate; whether it counts as a gap is an editorial call."
+  "notes": "No misreadings found. Two points are worth a human look. First, /facts/gaps/1 is filed as a gap, but the evidence file does not list it under 'Coin gaps': 'vertical only, not interactive, and owns no current step' comes from the 5 October package description. The wording 'owns no current step' also predates 636f3f5. Since that build, Stepper marks the first incomplete step with aria-current (and the guide says 'the first unfinished stage is marked as current'). The statement still holds in the sense that no prop sets the current step, but a reader could take it to mean there is no current-step semantics; consider rewording or dating it. Second, /facts/gaps/3 is dated 2026-10-17, but the claim that the done, error and warning stories render purple was recorded on 5 October. The 17 October check only says the published Stepper docs page is still the old stub. The content is supported, both there and by the guide's Sources note, but the date attribution is loose."
 }

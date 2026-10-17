@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/step.json`; the JSON is the source of truth.
 
 - **State:** documented
-- **Package:** jfs-components 0.1.78 · guide commit `f72ec62` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `807973d` · built 2026-10-17T15:28:09Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** stepper item, stage, timeline item, progress step
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=step) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-step--docs)
 
@@ -53,7 +53,7 @@ What each slot accepts, from the package types (the API limit, not a design reco
 
 ## Configuration
 
-- **recommended** `title`: Give every Step a title.  
+- **recommended** `title`: Every Step has a title: set title, unless children replace the text block and the title prop.  
   _From configuration: “Every Step has a title.”_
 - **recommended** `title`: Use the title alone when it says enough; it is compact.  
   _From configuration: “Compact, when the title says enough.”_
@@ -61,8 +61,8 @@ What each slot accepts, from the package types (the API limit, not a design reco
   _From configuration: “Add supporting text and a date when they help”_
 - **recommended** `metaText`: When it helps, add a date (metaText) for when the stage finished, started, or is due.  
   _From configuration: “When the stage finished, started, or is due.”_
-- **recommended** `children`: Pass children to replace the text block with your own content; the row and its connector grow.  
-  _From configuration: “Children replace the text block; the row and its connector grow.”_
+- **recommended** `children`: Pass children to replace the text block and the title prop with your own content; the row and its connector grow.  
+  _From configuration: “Children replace the text block and the title prop; the row and its connector grow.”_
 - **recommended** `showLine` = `false`: Set showLine false on a Step you place yourself, outside a Stepper; inside a Stepper, Stepper turns it off on the last stage.  
   _From configuration: “Stepper turns it off on the last stage; turn it off on a Step you place yourself.”_
 - **recommended** `index`: Inside a Stepper, the Stepper passes each Step its index, isCurrent and showLine.  
@@ -90,6 +90,8 @@ What each slot accepts, from the package types (the API limit, not a design reco
   _From content: “The glyph only says that a stage failed, not why.”_
 - **discouraged** `title`: Do not leave the default title: “Stepper Item” tells people nothing, and it's read as “Step 1”.  
   _From doDont: ““Stepper Item” tells people nothing, and it’s read as “Step 1”.”_
+- **recommended** `supportingText`: Screen readers hear supporting text of up to 80 characters with the title.  
+  _From content: “Screen readers hear supporting text of up to 80 characters with the title.”_
 
 Good: “Verify PAN”, “Upload Form 16”, “Review and submit”, “Add nominee”, “eSign”, “Match your PAN with your name”, “PAN details match your name”, “Add the PDF from your employer”, “Nominee’s date of birth is missing”, “Account name doesn’t match your PAN”, “Sign the form with an Aadhaar OTP”, “Started 5 Oct 2026”, “Done 2 Oct 2026”
 
@@ -107,8 +109,10 @@ Bad: “Stepper Item”
 
 ## Accessibility
 
-- **recommended** `title`: Name the stage in the title: on the web a Step is read as its title plus “Completed”, “Failed”, or “Needs attention”.  
-  _From sources: “read as its title plus “Completed”, “Failed”, or “Needs attention””_
+- **recommended** `title`: Name the stage in its visible copy: in a Stepper a Step is read as its title (or a StepLabel child's title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”; the date isn't read.  
+  _From sources: “On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”.”_
+- **recommended** `children`: With custom children, screen readers hear the StepLabel child's text.  
+  _From configuration: “Screen readers hear the StepLabel child’s text.”_
 
 ## Do and don’t
 
@@ -125,7 +129,7 @@ Bad: “Stepper Item”
 ```tsx
 <Stepper accessibilityLabel="File your ITR" modes={{ 'Color Mode': 'Light' }}>
   <Step title="Verify PAN" supportingText="PAN details match your name" metaText="Done 2 Oct 2026" status="complete" modes={{ 'Color Mode': 'Light' }} />
-  <Step title="Upload Form 16" modes={{ 'Color Mode': 'Light' }}>
+  <Step modes={{ 'Color Mode': 'Light' }}>
     <StepLabel title="Upload Form 16" supportingText="Add the PDF from your employer" modes={{ 'Color Mode': 'Light' }} />
     <Button label="Upload" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S' }} />
   </Step>
@@ -159,7 +163,7 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 
 | Name | Type | Values | Default | Required | Source | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| `children` | `React.ReactNode` |  |  |  | evidence (2026-10-10) | Replace the default StepLabel and get Step's modes; the title, supporting text and date props are then not shown. A StepLabel child gives the same text block. |
+| `children` | `React.ReactNode` |  |  |  | evidence (2026-10-17) | Replace the default StepLabel and get Step's modes; title is then ignored for both display and name, and a StepLabel child's title and short supporting text give the name. |
 | `modes` | `Modes` |  |  |  | types |  |
 | `style` | `ViewStyle` |  |  |  | types |  |
 | `index` | `number` |  | `0` |  | evidence (2026-10-10) | Default 0; the number shows index + 1. Inside a Stepper each Step gets its index. Declared: Default 0, from the component source. |
@@ -167,12 +171,12 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | `connectorStyle` | `ViewStyle` |  |  |  | types |  |
 | `title` | `string` |  |  |  | evidence (2026-10-10) | StepLabel shows “Stepper Item” when title is unset. |
 | `supportingText` | `string` |  |  |  | types |  |
-| `metaText` | `string` |  |  |  | types |  |
+| `metaText` | `string` |  |  |  | evidence (2026-10-17) | The date; it is never read by screen readers. |
 | `subtitle` | `boolean` |  | `true` |  | evidence (2026-10-10) | Default true; false hides the supporting text. Declared: Default true, from the component source. |
 | `meta` | `boolean` |  | `true` |  | evidence (2026-10-10) | Default true; false hides the date. Declared: Default true, from the component source. |
-| `status` | `StepStatus` | number, complete, error, warning | `"number"` |  | evidence (2026-10-10) | The glyph. With no Step Status mode it also picks the colour (complete green, error red, warning orange, number purple); an explicit Step Status mode always wins. Declared: Default "number", from the component source. |
+| `status` | `StepStatus` | number, complete, error, warning | `"number"` |  | evidence (2026-10-17) | Sets the glyph, and the colour when no Step Status mode is set (complete green, error red, warning orange); an explicit Step Status still wins. Declared: Default "number", from the component source. |
 | `isCurrent` | `boolean` |  | `false` |  | evidence (2026-10-10) | Set by Stepper on the first step that isn't complete; on the web the Step then has aria-current="step". Declared: Set by Stepper: this is the current incomplete step. Default false, from the component source. |
-| `withinStepper` | `boolean` |  | `false` |  | types | Set by Stepper. Standalone Steps are not list items. Default false, from the component source. |
+| `withinStepper` | `boolean` |  | `false` |  | evidence (2026-10-17) | Set by Stepper; only then is the Step a list item (with aria-current when current). A Step on its own has no role, so its status word isn't announced. Declared: Set by Stepper. Standalone Steps are not list items. Default false, from the component source. |
 | `testID` | `string` |  |  |  | types |  |
 
 ### Modes
@@ -196,10 +200,11 @@ _No events._
 
 Behaviour that was checked and found missing. Report these; do not work around them.
 
-- The glyph itself has no accessible name; the title and status word carry the meaning. _(evidence, 2026-10-10)_
+- The status glyph is an unnamed image on the web rather than hidden; the title and status word carry the meaning. _(evidence, 2026-10-17)_
+- A Step on its own isn't a list item, and its name isn't announced. _(evidence, 2026-10-17)_
+- The published Storybook Step page is still the old stub. _(evidence, 2026-10-17)_
 - Step is not interactive: no focus and no press (no onPress). _(evidence, 2026-10-10)_
 - Figma's done example shows a green date; the package keeps it grey. _(evidence, 2026-10-11)_
-- The published Storybook predates 0.1.78. _(evidence, 2026-10-11)_
 
 ## Flags
 

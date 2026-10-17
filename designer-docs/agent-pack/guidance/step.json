@@ -1,9 +1,9 @@
 {
   "slug": "step",
-  "guideCommit": "f72ec62472be267ef350470ed36a1ff13016fba8",
+  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Step's guide and evidence were checked on 0.1.78-636f3f5 (the 5 October build; evidence 10 October, Sources 11 October). The installed package is 0.1.78-c1fa197 (12 October build), the same version, so nothing is flagged as stale, but c1fa197 changed Step.tsx: the upstream diff 636f3f5..c1fa197 and the installed lib/module/components/Stepper/Step.js show that (a) a Step's spoken name is now its visible copy: the title, or with children a StepLabel child's title (else the children's visible text), plus a short supporting text (one line, up to 80 characters), plus the status word; (b) when children are present, the title prop is no longer used for the name; (c) a standalone Step is no longer a list item (withinStepper, declared in the installed types: \"Standalone Steps are not list items\"). So these guide sentences are stale for the installed build and were not extracted as rules: the Custom content caption \"Keep the title prop: it’s what screen readers hear.\", and the Sources clauses \"the supporting text and date aren’t read\" and \"a Step with only a StepLabel child is read as “Step” and its number\". The #235 gap (StepLabel child's title not spoken, title naming the row under children, standalone list item) is not recorded, because the installed source appears to fix it; re-check the guide and evidence against c1fa197. Other notes: the Sources card links Stepper (3228:457) because designers place Steps through Stepper in Figma; Step is a subcomponent, so avoidWhen points Figma use to Stepper. Dark mode is out of scope in the evidence (#197 in Review on 10 October). The evidence classes isCurrent, connectorStyle, style and testID as developer-only; the guide shows none of them. After the cross-check, the 'Put the outcome in words' accessibility rule was removed: its quote only says the glyph has no name, which the gaps already record.",
+  "notes": "Re-extracted 17 October 2026 from the guide and evidence as updated on main (807973d) for the a116616 build. The three sentences the earlier extraction left out as stale ('Keep the title prop: it's what screen readers hear', 'the supporting text and date aren't read', and the StepLabel-only name) are gone from the guide; its new copy on the spoken name, children and a standalone Step is extracted here. #235's code parts are fixed; the evidence lists its remaining doc parts. The guide names Stepper as the way to place Steps in Figma (avoidWhen useInstead Stepper).",
   "useWhen": [
     {
       "text": "One stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail.",
@@ -132,7 +132,7 @@
   ],
   "configuration": [
     {
-      "text": "Give every Step a title.",
+      "text": "Every Step has a title: set title, unless children replace the text block and the title prop.",
       "strength": "recommended",
       "target": "title",
       "from": {
@@ -168,12 +168,12 @@
       }
     },
     {
-      "text": "Pass children to replace the text block with your own content; the row and its connector grow.",
+      "text": "Pass children to replace the text block and the title prop with your own content; the row and its connector grow.",
       "strength": "recommended",
       "target": "children",
       "from": {
         "section": "configuration",
-        "quote": "Children replace the text block; the row and its connector grow."
+        "quote": "Children replace the text block and the title prop; the row and its connector grow."
       }
     },
     {
@@ -300,6 +300,15 @@
           "section": "doDont",
           "quote": "“Stepper Item” tells people nothing, and it’s read as “Step 1”."
         }
+      },
+      {
+        "text": "Screen readers hear supporting text of up to 80 characters with the title.",
+        "strength": "recommended",
+        "target": "supportingText",
+        "from": {
+          "section": "content",
+          "quote": "Screen readers hear supporting text of up to 80 characters with the title."
+        }
       }
     ],
     "good": [
@@ -365,15 +374,24 @@
   ],
   "accessibility": [
     {
-      "text": "Name the stage in the title: on the web a Step is read as its title plus “Completed”, “Failed”, or “Needs attention”.",
+      "text": "Name the stage in its visible copy: in a Stepper a Step is read as its title (or a StepLabel child's title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”; the date isn't read.",
       "strength": "recommended",
       "target": "title",
       "from": {
         "section": "sources",
-        "quote": "read as its title plus “Completed”, “Failed”, or “Needs attention”"
+        "quote": "On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”."
       },
-      "checkedVersion": "0.1.78-636f3f5",
-      "checkedOn": "2026-10-11"
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "With custom children, screen readers hear the StepLabel child's text.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "Screen readers hear the StepLabel child’s text."
+      }
     }
   ],
   "doDont": [
@@ -408,7 +426,7 @@
   "examples": [
     {
       "purpose": "Filing an ITR: the current stage holds its own Upload button in its children, and the upcoming stage is inactive.",
-      "jsx": "<Stepper accessibilityLabel=\"File your ITR\" modes={{ 'Color Mode': 'Light' }}>\n  <Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" metaText=\"Done 2 Oct 2026\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n  <Step title=\"Upload Form 16\" modes={{ 'Color Mode': 'Light' }}>\n    <StepLabel title=\"Upload Form 16\" supportingText=\"Add the PDF from your employer\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Upload\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S' }} />\n  </Step>\n  <Step title=\"Review and submit\" supportingText=\"Check your income and file\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n</Stepper>",
+      "jsx": "<Stepper accessibilityLabel=\"File your ITR\" modes={{ 'Color Mode': 'Light' }}>\n  <Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" metaText=\"Done 2 Oct 2026\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n  <Step modes={{ 'Color Mode': 'Light' }}>\n    <StepLabel title=\"Upload Form 16\" supportingText=\"Add the PDF from your employer\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Upload\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S' }} />\n  </Step>\n  <Step title=\"Review and submit\" supportingText=\"Check your income and file\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n</Stepper>",
       "from": {
         "section": "inContext",
         "quote": "The current stage holds its own Upload button."
@@ -459,10 +477,10 @@
     {
       "list": "props",
       "name": "status",
-      "description": "The glyph. With no Step Status mode it also picks the colour (complete green, error red, warning orange, number purple); an explicit Step Status mode always wins.",
-      "quote": "with no `Step Status` mode, `status` picks it (complete green, error red, warning orange, number purple); an explicit `Step Status` mode always wins.",
-      "checkedOn": "2026-10-10",
-      "checkedVersion": "0.1.78-636f3f5"
+      "description": "Sets the glyph, and the colour when no Step Status mode is set (complete green, error red, warning orange); an explicit Step Status still wins.",
+      "quote": "`status` sets the glyph and, with no `Step Status` mode, the colour; an explicit `Step Status` still wins",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "list": "modes",
@@ -475,10 +493,10 @@
     {
       "list": "props",
       "name": "children",
-      "description": "Replace the default StepLabel and get Step's modes; the title, supporting text and date props are then not shown. A StepLabel child gives the same text block.",
-      "quote": "`children` replace the default StepLabel and get Step's modes; the title, supporting text, and date props are then not shown.",
-      "checkedOn": "2026-10-10",
-      "checkedVersion": "0.1.78-636f3f5"
+      "description": "Replace the default StepLabel and get Step's modes; title is then ignored for both display and name, and a StepLabel child's title and short supporting text give the name.",
+      "quote": "With children, `title` is ignored for both display and name.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "list": "props",
@@ -503,14 +521,42 @@
       "quote": "A standalone Step keeps index 0, a connector, and no current marker unless set.",
       "checkedOn": "2026-10-10",
       "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "withinStepper",
+      "description": "Set by Stepper; only then is the Step a list item (with aria-current when current). A Step on its own has no role, so its status word isn't announced.",
+      "quote": "Stepper sets it, and only then is the Step an `li role=\"listitem\"`",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "metaText",
+      "description": "The date; it is never read by screen readers.",
+      "quote": "The date (`metaText`) is never read.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     }
   ],
   "gaps": [
     {
-      "text": "The glyph itself has no accessible name; the title and status word carry the meaning.",
-      "quote": "Each row is announced by its title and outcome word; the glyph itself has no name",
-      "checkedOn": "2026-10-10",
-      "checkedVersion": "0.1.78-636f3f5"
+      "text": "The status glyph is an unnamed image on the web rather than hidden; the title and status word carry the meaning.",
+      "quote": "the glyph SVG is an unnamed image rather than hidden",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "A Step on its own isn't a list item, and its name isn't announced.",
+      "quote": "a standalone Step's name isn't announced",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "The published Storybook Step page is still the old stub.",
+      "quote": "the published Storybook Step page is still the old stub",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "text": "Step is not interactive: no focus and no press (no onPress).",
@@ -523,15 +569,6 @@
       "from": {
         "section": "sources",
         "quote": "Figma’s done example shows a green date; the package keeps it grey."
-      },
-      "checkedOn": "2026-10-11",
-      "checkedVersion": "0.1.78-636f3f5"
-    },
-    {
-      "text": "The published Storybook predates 0.1.78.",
-      "from": {
-        "section": "sources",
-        "quote": "The published Storybook predates 0.1.78."
       },
       "checkedOn": "2026-10-11",
       "checkedVersion": "0.1.78-636f3f5"

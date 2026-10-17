@@ -2,8 +2,8 @@
 
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/nudge.json`; the JSON is the source of truth.
 
-- **State:** flagged (2 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
+- **State:** flagged (1 flag, listed at the end)
+- **Package:** jfs-components 0.1.78 · guide commit `807973d` · built 2026-10-17T15:28:09Z
 - **Category:** feedback (for discovery only, not a limit on composition) · **Tags:** promo card, suggestion, tip, upsell, banner
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=nudge) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9177-4104) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-nudge--docs)
 
@@ -71,14 +71,16 @@ What each slot accepts, from the package types (the API limit, not a design reco
   _From fact `/facts/props/7` (showClose, source evidence)_
 - **REQUIRED** `buttonLabel`: The default button renders when buttonLabel or onPressButton is set; buttonSlot set to null removes it.  
   _From fact `/facts/props/3` (buttonLabel, source types)_
-- **recommended** `Context` = `Nudge&Alert`: Pass the Nudge&Alert context so the button is the small size from Figma.  
-  _From configuration: “pass the Nudge&Alert context so the button is the small size from Figma.”_
+- **recommended** `Context` = `Nudge&Alert`: Leave Context to the Nudge: it sets the Nudge&Alert context itself, so its button is Figma's small size.  
+  _From configuration: “Nudge sets the Nudge&Alert context itself, so its button is Figma’s small size.”_
+- **discouraged** `Context` = `Default`: Do not pass another Context on the Nudge or through a container around it: a Default Context makes the button 42 px, and it outweighs the message.  
+  _From doDont: “A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message.”_
 - **recommended** `startSlot` = `null`: Remove the sparkle when the message needs no accent: set startSlot to null.  
   _From configuration: “Remove the sparkle when the message needs no accent.”_
 - **recommended** `AppearanceBrand`: AppearanceBrand tints the card, body, icon and button together.  
   _From configuration: “AppearanceBrand tints the card, body, icon, and button together.”_
 - **recommended** `AppearanceBrand` = `Neutral`: Figma's white card with a purple icon matches no single appearance mode; Neutral is the closest.  
-  _From sources: “its white card with a purple icon matches no single appearance mode; Neutral is the closest.”_
+  _From sources: “Figma’s white card with a purple icon matches no single appearance mode; Neutral is the closest.”_
 - **recommended** `Semantic Intent` = `System`: Semantic Intent System colours the card for a status: positive, warning or negative (AppearanceSystem).  
   _From configuration: “System intent colours the card for a status: positive, warning, or negative.”_
 - **recommended** `Border Boolean` = `True`: Border Boolean True adds a 1 px grey border that separates a white card from a white screen.  
@@ -98,14 +100,12 @@ What each slot accepts, from the package types (the API limit, not a design reco
   _From content: “Write the title as the benefit, the body as one sentence of detail, and the button as a verb or two.”_
 - **recommended** `buttonLabel`: Write the button label as a verb or two.  
   _From content: “Write the title as the benefit, the body as one sentence of detail, and the button as a verb or two.”_
-- **recommended** Set the title, body and button label yourself; the guide says to always set all three. ⚑ flagged (trace-check)  
-  _From content: “Nudge’s own copy is a placeholder, so always set all three.”_
+- **recommended** Set the title, body and button label yourself: Nudge has no copy of its own, and the title also names the card for screen readers.  
+  _From content: “Nudge has no copy of its own, so set all three; the title also names the card for screen readers.”_
 - **recommended** Write your own copy: the title, body and button say what's on offer.  
   _From doDont: “The title, body, and button say what’s on offer.”_
 
 Good: “Turn on autopay”, “Pay your electricity bill on time, every month.”, “Turn on”, “Split payment”, “Pay ₹12,000 in 3 monthly instalments.”, “See plans”
-
-Bad: “Button”
 
 ## States
 
@@ -116,6 +116,8 @@ Bad: “Button”
 
 ## Accessibility
 
+- **recommended** `title`: Give the card a title: on the web a card with a title is a region named by its title.  
+  _From sources: “On the web a card with a title is a region named by its title”_
 - **recommended** Set onPressButton for the button and onClose for the close button: Enter and Space activate them only when those are set, and without them the button is focusable but does nothing.  
   _From evidence: “Enter and Space activate them only when `onPressButton` / `onClose` are set; without them the button is focusable but does nothing.”_
 - **recommended** `closeSlot`: The default close button is always labelled “Close”; a closeSlot replaces it.  
@@ -125,8 +127,8 @@ Bad: “Button”
 
 | Do | Don’t | Why |
 | --- | --- | --- |
-| Use the Nudge&Alert context | Leave the context unset | The button is Figma’s small pill and stays below the message. |
-| Write your own copy | Ship the placeholder copy | The title, body, and button say what’s on offer. |
+| Keep Nudge’s own context | Pass another Context | A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message. |
+| Write your own copy | Leave the copy out | Nudge has no placeholder: without copy it’s an empty card with a sparkle and no button. |
 | Use stacked detailed for a list | Expect an action on stacked detailed | It ignores the button and close, so people have nothing to tap. |
 
 ## Examples
@@ -140,7 +142,7 @@ Bad: “Button”
   buttonLabel="See plans"
   onPressButton={() => {}}
   onClose={() => {}}
-  modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert', AppearanceBrand: 'Secondary' }}
+  modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary' }}
 />
 ```
 
@@ -155,7 +157,7 @@ _From inContext: “The screen handles its button and removes it on close.”_
   buttonLabel="Set up"
   onPressButton={() => {}}
   showClose={false}
-  modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }}
+  modes={{ 'Color Mode': 'Light' }}
 />
 ```
 
@@ -164,9 +166,9 @@ _From configuration: “One line of text with the button beside it. It has no ti
 ### Stacked detailed: a title over list items, with no button or close.
 
 ```tsx
-<Nudge type="stacked-detailed" title="Why split this payment?" modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }}>
-  <ListItem layout="Horizontal" title="No extra cost" supportText="You pay ₹12,000 in total" modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }} />
-  <ListItem layout="Horizontal" title="Three monthly payments" supportText="₹4,000 on the 5th of each month" modes={{ 'Color Mode': 'Light', Context: 'Nudge&Alert' }} />
+<Nudge type="stacked-detailed" title="Why split this payment?" modes={{ 'Color Mode': 'Light' }}>
+  <ListItem layout="Horizontal" title="No extra cost" supportText="You pay ₹12,000 in total" modes={{ 'Color Mode': 'Light' }} />
+  <ListItem layout="Horizontal" title="Three monthly payments" supportText="₹4,000 on the 5th of each month" modes={{ 'Color Mode': 'Light' }} />
 </Nudge>
 ```
 
@@ -181,15 +183,15 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | Name | Type | Values | Default | Required | Source | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | `type` | `NudgeType` | stacked-prominent, stacked-detailed, inline-compact | `"stacked-prominent"` |  | types | Controls the layout type. - "stacked-prominent": icon + title/body/button content - "inline-compact": icon + body/button in one row - "stacked-detailed": header + children detail slot. Default "stacked-prominent", from the component source. |
-| `title` | `string` |  | `""` |  | evidence (2026-10-13) | Names the card: on the web the root is a region named by its title. Declared: Title text displayed in the nudge. Empty when omitted. Default "", from the component source. |
+| `title` | `string` |  | `""` |  | evidence (2026-10-17) | On the web, with a title the card is a region named by the title; without one it has no role. Declared: Title text displayed in the nudge. Empty when omitted. Default "", from the component source. |
 | `body` | `string` |  | `""` |  | types | Body text displayed in prominent and compact types when no children are provided. Empty when omitted. Default "", from the component source. |
 | `buttonLabel` | `string` |  |  |  | types | Label for the default button. The default button renders only when this or `onPressButton` is set. `buttonSlot={null}` removes it. |
 | `onPressButton` | `() => void` |  |  |  | types | Callback for the default button press. Also opts into the default button. |
-| `buttonSlot` | `React.ReactNode` |  |  |  | types | Custom button slot. `null` or `false` removes the button. Omit to use `buttonLabel` / `onPressButton` when one of those is set. |
+| `buttonSlot` | `React.ReactNode` |  |  |  | evidence (2026-10-17) | null or false removes the button, leaving the title and body. Declared: Custom button slot. `null` or `false` removes the button. Omit to use `buttonLabel` / `onPressButton` when one of those is set. |
 | `onClose` | `() => void` |  |  |  | evidence (2026-10-07) | Only reports the press; the screen removes the nudge. Declared: Called when the default close IconButton is pressed. When set, the close button is shown unless `showClose` is false. |
 | `showClose` | `boolean` |  |  |  | evidence (2026-10-17) | Since a116616 (the #271 fix), Close renders only when onClose is set or showClose is true, and showClose false hides it even with onClose. Declared: Show the trailing close button on `stacked-prominent` and `inline-compact`. When omitted, the button shows only if `onClose` is set. Pass true to force it, or false to hide it. `stacked-detailed` never renders it. |
 | `closeSlot` | `React.ReactNode` |  |  |  | evidence (2026-10-07) | Replaces the default close, an IconButton ic_close labelled “Close” with forced Neutral / Low / S modes. Declared: Custom close slot, overrides the default close IconButton. |
-| `startSlot` | `React.ReactNode \| false` |  |  |  | evidence (2026-10-07) | The default sparkle icon is hidden from assistive tech. Declared: Optional leading slot. Omit for the token-driven sparkle icon, pass null/false to hide. |
+| `startSlot` | `React.ReactNode \| false` |  |  |  | types | Optional leading slot. Omit for the token-driven sparkle icon, pass null/false to hide. |
 | `children` | `React.ReactNode` |  |  |  | evidence (2026-10-07) | Replaces the title, body and button in stacked-prominent; the body and button in inline-compact; the list in stacked-detailed. Declared: Content slot — overrides default content, or provides detailed list content. |
 | `modes` | `Modes` |  |  |  | evidence (2026-10-07) | Slot children get the Nudge's modes. Declared: Mode configuration for design token resolution. |
 | `style` | `StyleProp<ViewStyle>` |  |  |  | types | Optional container style overrides. |
@@ -205,7 +207,7 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | `Button / Size` | `mode collection` | M, S, XS | `"M"` |  | types | A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
 | `Button / State` | `mode collection` | Idle, Hover, Pressed, Disabled | `"Idle"` |  | types | A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
 | `Color Mode` | `mode collection` | Light, Dark | `"Light"` |  | types | A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
-| `Context` | `mode collection` | Default, Nudge&Alert, CTACard, ListItem | `"Default"` |  | evidence (2026-10-07) | Changes only the inner Button: Nudge&Alert gives Figma's small button. Declared: A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
+| `Context` | `mode collection` | Default, Nudge&Alert, CTACard, ListItem | `"Default"` |  | evidence (2026-10-17) | When the merged modes have no Context, Nudge sets Nudge&Alert itself (Figma's small button). A Default Context, on the Nudge or on a container whose modes reach it, gives a 42 px button. Declared: A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
 | `context 10` | `mode collection` | Default, jioPlus | `"Default"` |  | types | A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
 | `Context2` | `mode collection` | Default, AppBar | `"Default"` |  | types | A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
 | `Emphasis` | `mode collection` | High, Medium, Low | `"High"` |  | types | A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. |
@@ -235,15 +237,17 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 
 Behaviour that was checked and found missing. Report these; do not work around them.
 
-- In Color Mode Dark the title stays #1e1a14 on a dark card, about 1.1:1 and effectively invisible (#208). _(evidence, 2026-10-07)_
-- No appearance mode reproduces Figma's white card with a purple icon. _(evidence, 2026-10-07)_
-- inline-compact never renders title, and stacked-detailed ignores body, the button props and the close props. _(evidence, 2026-10-07)_
-- The default close button's name, “Close”, cannot be overridden. _(evidence, 2026-10-07)_
+- In Color Mode Dark the title stays #1e1a14 on a dark card (#208): the title colour is one literal for every mode. _(evidence, 2026-10-17)_
+- No appearance mode reproduces Figma's white card with a purple icon. _(evidence, 2026-10-17)_
+- stacked-detailed ignores the body, the button props and the close props, without a warning. _(evidence, 2026-10-17)_
+- inline-compact never shows the title, but still uses it as the region's name, an invisible name. _(evidence, 2026-10-17)_
+- The default close button's label, “Close”, is fixed. _(evidence, 2026-10-17)_
+- onPressButton without buttonLabel renders an empty, unnamed button. _(evidence, 2026-10-17)_
+- The sparkle icon isn't hidden from assistive tech on the web. _(evidence, 2026-10-17)_
 - Nothing is announced and focus is not managed when a nudge is removed. _(evidence, 2026-10-07)_
 
 ## Flags
 
 Do not rely on a flagged item. A flag with an empty field concerns the entry as a whole.
 
-- `/content/rules/4` · trace-check: The source says "always", but the stated reason is stale (in the installed build title and body default to empty and the button renders only with buttonLabel or onPressButton), and inline-compact never renders a title while stacked-detailed ignores the body and button, so "all three" cannot apply to every type. Read as recommended, not hardened into a constraint.
 - `/avoidWhen` · trace-check: The guide gives no avoidWhen guidance; left empty rather than guessed.

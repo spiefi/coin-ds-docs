@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/tabs.json`; the JSON is the source of truth.
 
 - **State:** documented
-- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T15:28:09Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** tab bar, sub-navigation, views
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=tabs) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3063-136) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-tabs--docs)
 

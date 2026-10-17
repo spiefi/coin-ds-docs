@@ -21,10 +21,10 @@ Use a Stepper to show where someone is in a process with several stages, such as
 - Add supporting text (supportingText) to say what the stage involves or how it went.
 - Add a date (metaText) when timing matters, as on an order tracker.
 - Use titles alone for short processes whose titles say enough; it is compact.
-- Set each stage's status: in code it sets both the stage's icon and its colour, so a check is green.
+- Set each stage's status: in code it sets both the stage's icon and its colour.
+- `Step Status` = `inactive`: Set Step Status to inactive on an upcoming stage, and keep any explicit Step Status matched to the status: an explicit Step Status always wins.
 - Set the Step Status mode to inactive on each upcoming stage: upcoming steps render solid purple unless set to inactive.
 - Avoid: `Step Status`: Set Step Status on each Step, not in the Stepper's modes: a Stepper-level Step Status colours every step the same.
-- Avoid: Do not put a check on purple, the current colour: a check in the current colour reads as both done and in progress.
 
 **Example:** KYC progress with a spoken name, upcoming stages set to inactive, and the next action as a separate Button.
 

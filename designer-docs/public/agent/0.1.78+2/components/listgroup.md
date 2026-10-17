@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/listgroup.json`; the JSON is the source of truth.
 
 - **State:** undocumented
-- **Package:** jfs-components 0.1.78 · guide commit `none` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `none` · built 2026-10-17T15:28:09Z
 - **Category:** content (for discovery only, not a limit on composition) · **Tags:** 
 - **Sources:** [guide](null) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-listgroup--docs)
 

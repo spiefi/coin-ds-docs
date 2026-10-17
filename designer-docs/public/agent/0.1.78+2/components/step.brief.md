@@ -18,11 +18,11 @@ Use a Step for one stage of a process inside a Stepper, such as Verify PAN, with
 - In the guide's Form 16 example, uploading marks the stage done and the screen moves the current stage on.
 
 **Key rules**
-- `title`: Give every Step a title.
+- `title`: Every Step has a title: set title, unless children replace the text block and the title prop.
 - `title`: Use the title alone when it says enough; it is compact.
 - `supportingText`: Add supporting text when it helps, to say what the stage involves or how it went.
 - `metaText`: When it helps, add a date (metaText) for when the stage finished, started, or is due.
-- `children`: Pass children to replace the text block with your own content; the row and its connector grow.
+- `children`: Pass children to replace the text block and the title prop with your own content; the row and its connector grow.
 - `showLine` = `false`: Set showLine false on a Step you place yourself, outside a Stepper; inside a Stepper, Stepper turns it off on the last stage.
 - `index`: Inside a Stepper, the Stepper passes each Step its index, isCurrent and showLine.
 - `status`: Set status to set the glyph and colour together.
@@ -32,7 +32,7 @@ Use a Step for one stage of a process inside a Stepper, such as Verify PAN, with
 ```tsx
 <Stepper accessibilityLabel="File your ITR" modes={{ 'Color Mode': 'Light' }}>
   <Step title="Verify PAN" supportingText="PAN details match your name" metaText="Done 2 Oct 2026" status="complete" modes={{ 'Color Mode': 'Light' }} />
-  <Step title="Upload Form 16" modes={{ 'Color Mode': 'Light' }}>
+  <Step modes={{ 'Color Mode': 'Light' }}>
     <StepLabel title="Upload Form 16" supportingText="Add the PDF from your employer" modes={{ 'Color Mode': 'Light' }} />
     <Button label="Upload" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S' }} />
   </Step>
@@ -45,9 +45,10 @@ Use a Step for one stage of a process inside a Stepper, such as Verify PAN, with
 **Modes it reads:** Color Mode, Step Status.
 
 **Gaps (report, do not work around)**
-- The glyph itself has no accessible name; the title and status word carry the meaning.
+- The status glyph is an unnamed image on the web rather than hidden; the title and status word carry the meaning.
+- A Step on its own isn't a list item, and its name isn't announced.
+- The published Storybook Step page is still the old stub.
 - Step is not interactive: no focus and no press (no onPress).
 - Figma's done example shows a green date; the package keeps it grey.
-- The published Storybook predates 0.1.78.
 
 Full entry: `components/step.md`. Links: `components/step.links.md`.

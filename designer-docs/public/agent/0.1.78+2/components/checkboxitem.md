@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/checkboxitem.json`; the JSON is the source of truth.
 
 - **State:** flagged (12 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `31f1c5e` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `31f1c5e` · built 2026-10-17T15:28:09Z
 - **Category:** input (for discovery only, not a limit on composition) · **Tags:** checkbox row, selectable row, list item, option row
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=checkboxitem) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4303-8392) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-checkboxitem--docs)
 

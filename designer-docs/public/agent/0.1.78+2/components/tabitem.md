@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/tabitem.json`; the JSON is the source of truth.
 
 - **State:** documented
-- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
+- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T15:28:09Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** tab, tab label
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=tabitem) · [Figma](https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=66-913) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/tabs-tabitem--docs)
 
