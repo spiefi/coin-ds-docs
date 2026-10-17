@@ -17,7 +17,10 @@ import {
   MobileComponentNav,
   MobilePageNav,
   useGuidePageNavigation,
+  useGuideView,
 } from './GuideNavigation'
+import { AgentGuidePage } from './agent/AgentGuidePage'
+import { ViewSwitch } from './agent/ViewSwitch'
 import { Anatomy, Segment, byTestId } from './guide-kit'
 
 export type LayoutGuideKey = 'hstack' | 'vstack' | 'stack' | 'breadcrumbs'
@@ -1568,6 +1571,7 @@ function GuideFooter() {
 }
 
 export function LayoutGuidePage({ guide }: { guide: LayoutGuideKey }) {
+  const view = useGuideView()
   useGuidePageNavigation()
 
   const meta = META[guide]
@@ -1664,6 +1668,8 @@ export function LayoutGuidePage({ guide }: { guide: LayoutGuideKey }) {
         ? 'These pairs keep Stack focused on one public slot and one intentional direction.'
         : 'These pairs keep the layout relationship visible as content and host constraints change.'
 
+  if (view === 'agent') return <AgentGuidePage slug={guide} name={meta.name} />
+
   return (
     <div className={classes('site-shell', 'layout-docs', 'layout-docs-' + guide)}>
       <a className="skip-link" href="#main-content">Skip to content</a>
@@ -1680,6 +1686,7 @@ export function LayoutGuidePage({ guide }: { guide: LayoutGuideKey }) {
                 <h1>{meta.name}</h1>
                 <span className="public-badge">{guide === 'stack' ? 'Layout anatomy' : 'Public component'}</span>
               </div>
+              <ViewSwitch slug={guide} view="designer" />
               <p className="hero-lede">{meta.lede}</p>
               <p className="recommendation-label">Usage recommendations</p>
               <div className="hero-links">

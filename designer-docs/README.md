@@ -13,6 +13,7 @@ and sources.
 | `src/guide-kit/` | Shared documentation chrome: `Anatomy`, `Sources`, `Segment`, `ExampleCard`, `DoDont`. Start with its [README](src/guide-kit/README.md). |
 | `src/ComponentGuideTemplate.tsx` | The page shell used by guides. |
 | `src/site/` | Site chrome outside the guides: the home page at `/`, an onboarding introduction to Coin with live examples (also shown for an unknown `?component=`), component search (⌘K or Ctrl K, `/`, or the Search buttons), and their CSS in `site.css`. |
+| `src/agent/` | The agent views of the Coin agent pack: the Designer / Agent switch on every guide page (`?view=agent`), the Agent view of each component's pack entry, and the shared pack pages at `/?agent=overview`, `rules`, `index`, and `pilot`. Types for the pack files are in `types.ts`; until the pack is published under `public/agent/`, every agent page reads the fixtures in `fixtures/` and says “Sample data”. |
 | `public/` | Favicons (`favicon.svg`, with `favicon.ico` and `apple-touch-icon.png` rendered from it). |
 | `docs/evidence/<slug>.md` | Verified package, Figma, Storybook, API, and accessibility evidence per guide ([index](docs/evidence/README.md)). |
 | `scripts/check-guides.mjs` | Guardrails run by `npm run build`. |
@@ -20,6 +21,22 @@ and sources.
 Guides use the kit and add no CSS. The build fails if a guide adds CSS, draws
 its own anatomy, pastes Storybook story URLs, defines its own segmented
 control, or reads the route itself.
+
+## Agent views
+
+Every guide page has a Designer / Agent switch. Designer is the guide as
+designers read it. Agent shows exactly what agents receive from the Coin
+agent pack for that component: its guidance (each rule with its strength and
+the guide sentence it came from), facts with their sources, examples rendered
+live with `jfs-components`, gaps, and flags. Each quoted source is checked
+against the guide as it is now, so a reviewer can tell a docs problem from an
+extraction problem.
+
+The views read `/agent/index.json` and then
+`/agent/<release>/components/<slug>.json`, `index.json`, `manifest.json`,
+`rules.md`, and `/agent/pilot/results.json`. The pack pipeline owns those
+files and their schemas; the views only read them. A page whose component has
+no entry says “No agent entry yet” and names the release it checked.
 
 ## Local development
 
@@ -38,9 +55,10 @@ npm run verify
 ```
 
 `verify` runs `build` (typecheck, guide check, Vite build) and then
-`test:browser`, which loads the home page, search, and every guide in
-headless Chrome at 1280 px and 390 px (`npm run test:browser home` checks only
-the home page and search). It needs Google Chrome (or
+`test:browser`, which loads the home page, search, the agent views, and every
+guide in headless Chrome at 1280 px and 390 px (`npm run test:browser home`
+checks only the home page and search; `npm run test:browser agent` only the
+agent views). It needs Google Chrome (or
 `npx playwright-core install chromium`).
 Vercel runs only `build`; run `verify` before committing.
 

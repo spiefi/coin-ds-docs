@@ -5,6 +5,14 @@ import {
   type MouseEvent,
   type ReactNode,
 } from 'react'
+import {
+  AGENT_PAGES,
+  agentPageHref,
+  guideViewHref,
+  readGuideView,
+  type AgentPage,
+  type GuideView,
+} from './agent/routes'
 import { listGuides } from './guides/store'
 import { SearchButton } from './site/SearchButton'
 
@@ -49,6 +57,11 @@ export function useGuideLocation() {
   }, [])
 
   return location
+}
+
+/** The guide view in the URL: Designer by default, Agent for ?view=agent. */
+export function useGuideView(): GuideView {
+  return readGuideView(useGuideLocation().search)
 }
 
 function locationPath(location: GuideLocation) {
@@ -138,8 +151,9 @@ export const PAGE_NAV = [
 
 export const HOME_HREF = '/'
 
-export function guideHref(slug: ComponentSlug) {
-  return `/?component=${slug}#overview`
+/** A guide's page; `view` keeps the Agent view when moving between guides. */
+export function guideHref(slug: ComponentSlug, view: GuideView = 'designer') {
+  return guideViewHref(slug, view, 'overview')
 }
 
 export function GuideIcon({ icon }: { icon: ReactNode }) {
@@ -157,6 +171,44 @@ export function GuideIcon({ icon }: { icon: ReactNode }) {
   )
 }
 
+const AGENT_ICONS: Record<AgentPage, ReactNode> = {
+  overview: (
+    <path
+      d="M3 3.5h12v11H3zM3 7.5h12M7.5 7.5v7"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+  ),
+  rules: (
+    <path
+      d="M4.5 2.75h6.75l2.25 2.25v10.25h-9zM7 8h4M7 11h4"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
+  index: (
+    <path
+      d="M6.75 3C5.25 3 4.75 3.75 4.75 5v1.75C4.75 7.75 4.25 8.5 3 9c1.25.5 1.75 1.25 1.75 2.25V13c0 1.25.5 2 2 2M11.25 3c1.5 0 2 .75 2 2v1.75c0 1 .5 1.75 1.75 2.25-1.25.5-1.75 1.25-1.75 2.25V13c0 1.25-.5 2-2 2"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
+  pilot: (
+    <path
+      d="M3 3h12v12H3zM6 9.25l2 2 4-4.5"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
+}
+
 const HOME_ICON = (
   <path
     d="M3 8.25 9 3.5l6 4.75V15h-4v-4H7v4H3z"
@@ -166,14 +218,22 @@ const HOME_ICON = (
   />
 )
 
-/** `active` is the current guide's slug; omit it on the home page. */
+/**
+ * `active` is the current guide's slug and `agentPage` the current pack page;
+ * omit both on the home page. `view` keeps guide links in the Agent view.
+ */
 export function GuideSidebar({
   active,
+  agentPage,
+  view = 'designer',
   pageNav = PAGE_NAV,
 }: {
   active?: ComponentSlug
+  agentPage?: AgentPage
+  view?: GuideView
   pageNav?: ReadonlyArray<readonly [string, string]>
 }) {
+  const home = !active && !agentPage
   return (
     <aside className="sidebar" aria-label="Documentation navigation">
       <a
@@ -193,9 +253,9 @@ export function GuideSidebar({
 
       <div className="sidebar-home">
         <a
-          className={'component-link ' + (active ? '' : 'is-active')}
+          className={'component-link ' + (home ? 'is-active' : '')}
           href={HOME_HREF}
-          aria-current={active ? undefined : 'page'}
+          aria-current={home ? 'page' : undefined}
           onClick={handleGuideNavigation}
         >
           <span className="component-icon" aria-hidden="true">
@@ -205,6 +265,24 @@ export function GuideSidebar({
         </a>
       </div>
 
+      <div className="sidebar-group sidebar-agent-group">
+        <p>Agent pack</p>
+        {AGENT_PAGES.map(([page, label]) => (
+          <a
+            className={'component-link ' + (page === agentPage ? 'is-active' : '')}
+            href={agentPageHref(page)}
+            aria-current={page === agentPage ? 'page' : undefined}
+            onClick={handleGuideNavigation}
+            key={page}
+          >
+            <span className="component-icon" aria-hidden="true">
+              <GuideIcon icon={AGENT_ICONS[page]} />
+            </span>
+            {label}
+          </a>
+        ))}
+      </div>
+
       <div className="sidebar-group">
         <p>
           Components <span className="nav-count">{listGuides().length}</span>
@@ -212,7 +290,7 @@ export function GuideSidebar({
         {listGuides().map((item) => (
           <a
             className={'component-link ' + (item.slug === active ? 'is-active' : '')}
-            href={guideHref(item.slug)}
+            href={guideHref(item.slug, view)}
             aria-current={item.slug === active ? 'page' : undefined}
             onClick={handleGuideNavigation}
             key={item.slug}
@@ -253,7 +331,13 @@ export function GuideMobileBar({ sources = true }: { sources?: boolean }) {
 }
 
 /** `active` is the current guide's slug; omit it on the home page. */
-export function MobileComponentNav({ active }: { active?: ComponentSlug }) {
+export function MobileComponentNav({
+  active,
+  view = 'designer',
+}: {
+  active?: ComponentSlug
+  view?: GuideView
+}) {
   return (
     <nav className="mobile-component-toc" aria-label="Components">
       <span className="mobile-component-toc-label">
@@ -263,7 +347,7 @@ export function MobileComponentNav({ active }: { active?: ComponentSlug }) {
         {listGuides().map((item) => (
           <a
             className={item.slug === active ? 'is-active' : ''}
-            href={guideHref(item.slug)}
+            href={guideHref(item.slug, view)}
             aria-current={item.slug === active ? 'page' : undefined}
             onClick={handleGuideNavigation}
             key={item.slug}
@@ -276,10 +360,14 @@ export function MobileComponentNav({ active }: { active?: ComponentSlug }) {
   )
 }
 
-export function MobilePageNav() {
+export function MobilePageNav({
+  items = PAGE_NAV,
+}: {
+  items?: ReadonlyArray<readonly [string, string]>
+}) {
   return (
     <nav className="mobile-toc" aria-label="Page sections">
-      {PAGE_NAV.map(([id, label]) => (
+      {items.map(([id, label]) => (
         <a href={'#' + id} key={id}>{label}</a>
       ))}
     </nav>

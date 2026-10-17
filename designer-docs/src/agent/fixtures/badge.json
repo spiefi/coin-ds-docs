@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "id": "Badge",
+  "slug": "badge",
+  "category": "feedback",
+  "tags": ["status", "label", "count", "tag", "pill"],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "2875a57777695e94bb697713e7c26b91de9e3f5a",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-16T00:00:00Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "Hand-written sample for the Designer / Agent views. The pack pipeline did not produce or check this entry.",
+        "by": "human"
+      },
+      {
+        "field": "/allowedChildren/0",
+        "reason": "The types accept any node in leading; only Icon is verified in the evidence. Do not read this as a limit.",
+        "by": "cross-check"
+      }
+    ]
+  },
+  "summary": "Use a Badge to make a short status, category, or count easy to scan beside the content it describes.",
+  "useWhen": [
+    {
+      "text": "A short status, category, or count describes nearby content.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Badge to make a short status, category, or count easy to scan beside the content it describes."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A sentence inside the Badge.",
+      "strength": "discouraged",
+      "useInstead": "Nudge",
+      "from": { "section": "doDont", "quote": "Avoid a sentence inside the Badge" }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Leading visual",
+      "holds": "An optional Icon before the label.",
+      "required": false,
+      "from": { "section": "anatomy", "quote": "Adds a recognizable cue without replacing the words." }
+    },
+    {
+      "part": "Label",
+      "holds": "The status, category, or count text.",
+      "required": true,
+      "from": { "section": "anatomy", "quote": "Names the status or category." }
+    },
+    {
+      "part": "Surface",
+      "holds": "The token-owned shape around the label.",
+      "required": true,
+      "from": { "section": "anatomy", "quote": "Groups the message into one compact shape." }
+    }
+  ],
+  "allowedChildren": [
+    { "slot": "leading", "accepts": ["Icon"], "source": "evidence" }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the Badge beside its subject, such as next to a row title.",
+      "strength": "recommended",
+      "from": { "section": "inContext", "quote": "Keep status beside its subject" }
+    },
+    {
+      "text": "Pass the Badge's own modes object to an Icon in leading.",
+      "strength": "required",
+      "target": "leading",
+      "from": {
+        "section": "evidence",
+        "quote": "It renders a supplied leading node verbatim, so the guide passes the same owner mode object to the public Icon and selects the matching `Context4` for Solid or Glass."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use the solid type beside ordinary content.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "default",
+      "from": { "section": "configuration", "quote": "Use a solid Badge beside ordinary content." }
+    },
+    {
+      "text": "Use the glass type only where the image or surface underneath stays part of the composition.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "glass",
+      "from": {
+        "section": "configuration",
+        "quote": "Use glass where the underlying image or surface remains part of the composition."
+      }
+    },
+    {
+      "text": "Choose Badge Size for the density of the surrounding content.",
+      "strength": "recommended",
+      "target": "Badge Size",
+      "from": { "fact": "/facts/modes/0" }
+    },
+    {
+      "text": "Give High emphasis only to the status that needs attention.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "High",
+      "from": { "section": "doDont", "quote": "Give the status needing attention the strongest emphasis." }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write the status in a few familiar words, not a sentence.",
+        "strength": "recommended",
+        "from": { "section": "content", "quote": "Write the status, not a sentence" }
+      },
+      {
+        "text": "Keep tense and capitalization consistent across a set of badges.",
+        "strength": "recommended",
+        "from": { "section": "content", "quote": "Keep tense and capitalization consistent across the same set." }
+      }
+    ],
+    "good": ["Paid", "Due today", "3 new"],
+    "bad": ["Payment successfully completed", "Awaiting payment processing", "FAILURE"]
+  },
+  "states": [
+    {
+      "state": "Informational",
+      "when": "The default. The Badge only shows information.",
+      "from": { "section": "states", "quote": "Most badges communicate information." }
+    },
+    {
+      "state": "Action",
+      "when": "Only when opening related detail is useful. Pass onPress.",
+      "from": { "section": "states", "quote": "Add an action only when opening related detail is useful." }
+    },
+    {
+      "state": "Loading",
+      "when": "While the value is still arriving. Pass loading.",
+      "from": { "section": "states", "quote": "Loading shows that the value is still arriving." }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Write a meaningful visible label. Badge ignores accessibilityLabel, so the label is its accessible name.",
+      "strength": "required",
+      "from": {
+        "section": "evidence",
+        "quote": "The current Badge implementation ignores its `accessibilityLabel` argument on the rendered wrapper; the interactive example keeps a meaningful visible label."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use a short status, such as Paid.",
+      "dont": "Put the whole explanation inside the Badge.",
+      "why": "Keep the status concise.",
+      "from": { "section": "doDont", "quote": "Avoid putting the whole explanation inside the Badge." }
+    },
+    {
+      "do": "Match the system meaning to the words.",
+      "dont": "Show Paid as negative or Failed as positive.",
+      "why": "Conflicting words and tone make the status harder to trust.",
+      "from": { "section": "doDont", "quote": "Conflicting words and tone make the status harder to trust." }
+    },
+    {
+      "do": "Reserve High emphasis for the status that needs attention.",
+      "dont": "Give every status the same High emphasis.",
+      "why": "If every status competes, the urgent one is harder to find.",
+      "from": { "section": "doDont", "quote": "If every status competes, the urgent one is harder to find." }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A status beside a row title",
+      "jsx": "<Card variant=\"slim\" modes={{ 'Color Mode': 'Light' }}>\n  <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\" modes={{ 'Color Mode': 'Light' }}>\n    <Text>September payment</Text>\n    <Badge\n      label=\"Paid\"\n      modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', 'Semantic Intent': 'System', AppearanceSystem: 'positive', Emphasis: 'High', Context4: 'Badge' }}\n    />\n  </HStack>\n</Card>",
+      "from": { "section": "inContext", "quote": "Place the compact status next to the item it describes." }
+    },
+    {
+      "purpose": "A leading Icon that shares the Badge's modes",
+      "jsx": "<Badge\n  label=\"New\"\n  leading={\n    <Icon\n      iconName=\"ic_card\"\n      accessibilityElementsHidden\n      importantForAccessibility=\"no\"\n      modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', 'Semantic Intent': 'Brand', AppearanceBrand: 'Primary', Emphasis: 'High', Context4: 'Badge' }}\n    />\n  }\n  modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', 'Semantic Intent': 'Brand', AppearanceBrand: 'Primary', Emphasis: 'High', Context4: 'Badge' }}\n/>",
+      "from": { "section": "anatomy", "quote": "Adds a recognizable cue without replacing the words." }
+    },
+    {
+      "purpose": "An action that opens related detail",
+      "jsx": "<Badge\n  label=\"View details\"\n  onPress={() => {}}\n  modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', 'Semantic Intent': 'Brand', AppearanceBrand: 'Primary', Emphasis: 'High', Context4: 'Badge' }}\n/>",
+      "from": null
+    }
+  ],
+  "facts": {
+    "props": [
+      { "name": "label", "type": "string", "required": false, "description": "Visible label text shown inside the badge.", "source": "types" },
+      { "name": "type", "type": "BadgeType", "values": ["default", "glass"], "default": "default", "required": false, "source": "types" },
+      { "name": "modes", "type": "Modes", "required": false, "description": "Modes used to resolve design tokens.", "source": "types" },
+      { "name": "leading", "type": "ReactNode", "required": false, "description": "Optional node rendered before the label, inside the surface.", "source": "types" },
+      { "name": "loading", "type": "boolean", "required": false, "description": "Shows a badge-shaped skeleton instead of the badge.", "source": "types" },
+      { "name": "onPress", "type": "() => void", "required": false, "description": "Makes the badge interactive.", "source": "types" },
+      { "name": "accessibilityLabel", "type": "string", "required": false, "description": "Accepted by the types, but ignored when rendered. See gaps.", "source": "runtime", "checkedOn": "2026-09-23" }
+    ],
+    "modes": [
+      { "name": "Badge Size", "values": ["Medium", "Small"], "source": "types" },
+      { "name": "Semantic Intent", "values": ["Brand", "System"], "source": "types" },
+      { "name": "AppearanceBrand", "values": ["Primary", "Secondary", "Neutral", "Tertiary"], "source": "types" },
+      { "name": "AppearanceSystem", "values": ["positive", "warning", "negative"], "source": "types" },
+      { "name": "Emphasis", "values": ["High", "Medium", "Low"], "source": "types" },
+      { "name": "Context4", "values": ["Badge", "Badge/glass"], "description": "Badge for the solid type, Badge/glass for glass.", "source": "evidence", "checkedOn": "2026-09-23" }
+    ],
+    "slots": [
+      { "name": "leading", "type": "ReactNode", "description": "Rendered verbatim; it does not receive the Badge's modes.", "source": "evidence", "checkedOn": "2026-09-23" }
+    ],
+    "events": [
+      { "name": "onPress", "type": "() => void", "source": "types" }
+    ],
+    "gaps": [
+      { "text": "accessibilityLabel is ignored", "source": "evidence", "checkedOn": "2026-09-23" }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=badge",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5607-5484",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-badge--docs"
+  }
+}

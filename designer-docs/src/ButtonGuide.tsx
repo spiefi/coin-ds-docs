@@ -17,7 +17,10 @@ import {
   MobileComponentNav,
   MobilePageNav,
   useGuidePageNavigation,
+  useGuideView,
 } from './GuideNavigation'
+import { AgentGuidePage } from './agent/AgentGuidePage'
+import { ViewSwitch } from './agent/ViewSwitch'
 import { Anatomy, Segment, byTestId } from './guide-kit'
 
 const FIGMA_URL =
@@ -174,6 +177,7 @@ function SourceLink({ href, children }: { href: string; children: string }) {
 }
 
 export function ButtonGuide() {
+  const view = useGuideView()
   useGuidePageNavigation()
 
   useLayoutEffect(() => {
@@ -206,6 +210,8 @@ export function ButtonGuide() {
     intent === 'Brand' ? brandAppearance : systemAppearance
   const previewIsDark = colorMode === 'Dark' || type === 'glass'
 
+  if (view === 'agent') return <AgentGuidePage slug="button" name="Button" />
+
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">
@@ -228,6 +234,7 @@ export function ButtonGuide() {
                 <h1>Button</h1>
                 <span className="public-badge">Public component</span>
               </div>
+              <ViewSwitch slug="button" view="designer" />
               <p className="hero-lede">
                 Use Button when one clear action moves someone forward,
                 confirms a choice, or completes a task.

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "packVersion": "0.1.78+0",
+  "runAt": "2026-10-16T00:00:00Z",
+  "questions": [
+    {
+      "id": "badge-choose-status",
+      "kind": "choose",
+      "question": "A payment row needs to show that the payment went through. Which Coin component marks it?",
+      "expected": {
+        "validAnswers": ["Badge"],
+        "required": ["Names Badge", "Places it beside the row title"],
+        "recommended": ["System intent with positive appearance"],
+        "settledBy": "Hand-written sample"
+      },
+      "withPack": {
+        "answer": "A Badge labelled Paid beside the row title, with Semantic Intent System and AppearanceSystem positive.",
+        "read": ["rules.md", "index.json", "components/badge.json"],
+        "pass": true,
+        "failed": [],
+        "notes": ""
+      },
+      "withoutPack": {
+        "answer": "A green chip at the end of the row that says Payment successful.",
+        "read": [],
+        "pass": false,
+        "failed": ["Names Badge"],
+        "notes": "Picked a generic chip and wrote a sentence."
+      }
+    },
+    {
+      "id": "badge-configure-failed",
+      "kind": "configure",
+      "question": "Configure a Badge that tells someone a payment failed.",
+      "expected": {
+        "validAnswers": ["Badge with Semantic Intent System, AppearanceSystem negative, and a short label"],
+        "required": ["AppearanceSystem negative", "A short label such as Failed"],
+        "recommended": ["High emphasis"],
+        "settledBy": null
+      },
+      "withPack": {
+        "answer": "<Badge label=\"Failed\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative', Emphasis: 'High' }} />",
+        "read": ["rules.md", "components/badge.json"],
+        "pass": true,
+        "failed": [],
+        "notes": ""
+      },
+      "withoutPack": {
+        "answer": "<Badge label=\"Payment failed, please try again\" color=\"red\" />",
+        "read": [],
+        "pass": false,
+        "failed": ["AppearanceSystem negative", "A short label such as Failed"],
+        "notes": "Invented a color prop."
+      }
+    },
+    {
+      "id": "badge-compose-icon",
+      "kind": "compose",
+      "question": "Add a status with an icon before its label to a Card row.",
+      "expected": {
+        "validAnswers": ["A Badge in the row's HStack, with an Icon in leading that gets the Badge's modes"],
+        "required": ["The Icon gets the Badge's modes"],
+        "recommended": ["The Badge sits beside the row title"],
+        "settledBy": null
+      },
+      "withPack": {
+        "answer": "<HStack><Text>September payment</Text><Badge label=\"Paid\" leading={<Icon iconName=\"ic_card\" />} /></HStack>",
+        "read": ["rules.md", "components/badge.json"],
+        "pass": false,
+        "failed": ["The Icon gets the Badge's modes"],
+        "notes": "Read the entry but left the Icon without modes."
+      },
+      "withoutPack": {
+        "answer": "<View style={{ flexDirection: 'row' }}><Text>September payment</Text><Badge icon=\"card\" label=\"Paid\" /></View>",
+        "read": [],
+        "pass": false,
+        "failed": ["The Icon gets the Badge's modes"],
+        "notes": "Used a View and an icon prop that Badge does not have."
+      }
+    },
+    {
+      "id": "badge-gap-label",
+      "kind": "gap",
+      "question": "Give an interactive Badge a screen-reader label that differs from its visible text.",
+      "expected": {
+        "validAnswers": ["Not supported: Badge ignores accessibilityLabel"],
+        "required": ["Says accessibilityLabel is ignored"],
+        "recommended": ["Suggests a meaningful visible label"],
+        "settledBy": null
+      },
+      "withPack": {
+        "answer": "Badge ignores accessibilityLabel, so it can't differ from the visible text. Write a visible label that makes sense on its own, and report the gap.",
+        "read": ["components/badge.json"],
+        "pass": true,
+        "failed": [],
+        "notes": ""
+      },
+      "withoutPack": {
+        "answer": "Set accessibilityLabel=\"Open payment details\" on the Badge.",
+        "read": [],
+        "pass": false,
+        "failed": ["Says accessibilityLabel is ignored"],
+        "notes": ""
+      }
+    }
+  ]
+}

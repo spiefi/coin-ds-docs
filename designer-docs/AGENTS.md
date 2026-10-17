@@ -47,7 +47,8 @@ Do not read other guides or `src/styles.css` unless the task is about them.
   which loads every guide in headless Chrome at 1280 px and 390 px and fails
   on render errors, title/navigation mismatches, Anatomy self-check issues,
   pin/legend mismatches, horizontal scroll, or runtime errors.
-  A full run also checks the home page and search.
+  A full run also checks the home page, search, and the agent views
+  (`src/agent/`; `npm run test:browser agent` checks only those).
   `npm run test:browser <slug>` checks selected guides on its own private
   build, so parallel workers can run it at the same time;
   `npm run test:browser home` checks only the home page and search.

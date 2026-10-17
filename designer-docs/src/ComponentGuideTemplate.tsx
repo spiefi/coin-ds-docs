@@ -1,4 +1,6 @@
 import { useLayoutEffect, type ReactNode } from 'react'
+import { AgentGuidePage } from './agent/AgentGuidePage'
+import { ViewSwitch } from './agent/ViewSwitch'
 import {
   GuideMobileBar,
   GuideSidebar,
@@ -6,6 +8,7 @@ import {
   MobilePageNav,
   PAGE_NAV,
   useGuidePageNavigation,
+  useGuideView,
   type ComponentSlug,
 } from './GuideNavigation'
 import { findGuide } from './guides/store'
@@ -74,15 +77,29 @@ export function ComponentGuideTemplate({
   const registered = findGuide(metadata.slug)
   const name = registered?.label ?? metadata.name ?? metadata.slug
 
+  const view = useGuideView()
+
   useLayoutEffect(() => {
+    // The Agent view page sets its own title.
+    if (view === 'agent') return
     const previousTitle = document.title
     document.title = `${name} · Coin designer documentation`
     return () => {
       document.title = previousTitle
     }
-  }, [name])
+  }, [name, view])
 
   useGuidePageNavigation()
+
+  if (view === 'agent') {
+    return (
+      <AgentGuidePage
+        slug={metadata.slug}
+        name={name}
+        copy={{ summary: registered?.summary ?? '', corePrinciple: metadata.corePrinciple, sections }}
+      />
+    )
+  }
 
   return (
     <div className="site-shell">
@@ -105,6 +122,7 @@ export function ComponentGuideTemplate({
                 <h1>{name}</h1>
                 <span className="public-badge">Public component</span>
               </div>
+              <ViewSwitch slug={metadata.slug} view="designer" />
               <p className="hero-lede">{registered?.summary}</p>
               <p className="recommendation-label">Usage recommendations</p>
               <div className="hero-links">
