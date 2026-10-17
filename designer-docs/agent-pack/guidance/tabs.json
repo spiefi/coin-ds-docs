@@ -1,9 +1,9 @@
 {
   "slug": "tabs",
-  "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Evidence spans three checks: 5 October (0.1.78-3795b4c), 8 October (0.1.78-636f3f5) and 13 October (0.1.78-c1fa197, the installed build). Later checks supersede earlier ones: the 5 October 'Check' section's claims that Tabs accepts only children, modes, scrollable and style (no testID), that JFSThemeProvider has no effect, that non-scrollable tabs get equal width (flex: 1), and that every tab is its own Tab stop are all stale; the facts now declare accessibilityLabel and testID, and the 13 October check confirms hugging tabs, ellipsis, and a single Tab stop. Facts versus evidence: the package doc says modes are forwarded to every TabItem child, but the evidence says only direct TabItem children are recognised (wrappers and fragments are not); the configuration rule keeps the evidence's narrower reading. Examples pass modes on Tabs only, because the facts say Tabs forwards them to its TabItem children. Selected tab and Underline are marked not required: the package does not enforce a selection (TabItem active defaults to false, and an all-idle row is possible); the guide's 'exactly one selected' is a configuration rule. Guide problems: the Sources note has a stray capital after a semicolon ('…whether it is selected; Only the selected tab is in the Tab order'); Sizing opens with 'Tabs stretches to the width of its container' while the tabs themselves hug their labels (not a contradiction, but easy to misread as equal-width tabs, which the 5 October evidence measured). The Dark mode gap (#197) was last recorded on 5 October and is not mentioned in the guide copy, which shows Light only.",
+  "notes": "Evidence spans three checks: 5 October (0.1.78-3795b4c), 8 October (0.1.78-636f3f5) and 13 October (0.1.78-c1fa197, the installed build). Later checks supersede earlier ones: the 5 October 'Check' section's claims that Tabs accepts only children, modes, scrollable and style (no testID), that JFSThemeProvider has no effect, that non-scrollable tabs get equal width (flex: 1), and that every tab is its own Tab stop are all stale; the facts now declare accessibilityLabel and testID, and the 13 October check confirms hugging tabs, ellipsis, and a single Tab stop. Facts versus evidence: the package doc says modes are forwarded to every TabItem child, but the evidence says only direct TabItem children are recognised (wrappers and fragments are not); the configuration rule keeps the evidence's narrower reading. Examples pass modes on Tabs only, because the facts say Tabs forwards them to its TabItem children. Selected tab and Underline are marked not required: the package does not enforce a selection (TabItem active defaults to false, and an all-idle row is possible); the guide's 'exactly one selected' is a configuration rule. Guide problems: the Sources note has a stray capital after a semicolon ('…whether it is selected; Only the selected tab is in the Tab order'); Sizing opens with 'Tabs stretches to the width of its container' while the tabs themselves hug their labels (not a contradiction, but easy to misread as equal-width tabs, which the 5 October evidence measured). The Dark mode gap (#197) was last recorded on 5 October and is not mentioned in the guide copy, which shows Light only. Updated 17 October 2026 for a116616: #272 is fixed (with no tab selected, the first tab is reachable), so its gap and the 'keep a tab selected' rule are gone.",
   "useWhen": [
     {
       "text": "Switch between a few peer views of the same content, such as an account’s overview, activity and details.",
@@ -265,29 +265,19 @@
       "checkedOn": "2026-10-13"
     },
     {
-      "text": "Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home and End select tabs.",
+      "text": "Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home and End select tabs.",
       "strength": "recommended",
       "from": {
         "section": "sources",
-        "quote": "Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home, and End select tabs."
+        "quote": "Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home, and End select tabs."
       },
       "absolute": {
-        "word": "Only",
+        "word": "only",
         "scope": "contextual",
-        "reason": "\"Only\" describes the keyboard behaviour the package provides, not a constraint on the designer."
+        "reason": "\"Only\" describes the component's Tab order, not a limit on the designer."
       },
-      "checkedVersion": "0.1.78",
-      "checkedOn": "2026-10-13"
-    },
-    {
-      "text": "Keep a tab selected: if no tab is selected, the keyboard can’t reach the row (reported to the Coin team).",
-      "strength": "recommended",
-      "from": {
-        "section": "sources",
-        "quote": "If no tab is selected, the keyboard can’t reach the row, which is reported to the Coin team."
-      },
-      "checkedVersion": "0.1.78",
-      "checkedOn": "2026-10-13"
+      "checkedVersion": "0.1.78-a116616",
+      "checkedOn": "2026-10-17"
     }
   ],
   "doDont": [
@@ -397,12 +387,6 @@
     }
   ],
   "gaps": [
-    {
-      "text": "With no active tab, every tab has tabindex -1, so the keyboard can't reach the row (#272, In progress).",
-      "quote": "so the keyboard can't reach the row",
-      "checkedOn": "2026-10-13",
-      "checkedVersion": "0.1.78-c1fa197"
-    },
     {
       "text": "The active label stays black in Dark mode (#197, To do); the guide shows Light only.",
       "quote": "`tabItem/active/label/color` is black in Dark mode too.",

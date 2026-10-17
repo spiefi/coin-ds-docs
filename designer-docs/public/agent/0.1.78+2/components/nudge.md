@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/nudge.json`; the JSON is the source of truth.
 
 - **State:** flagged (2 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `8f8313d` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
 - **Category:** feedback (for discovery only, not a limit on composition) · **Tags:** promo card, suggestion, tip, upsell, banner
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=nudge) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9177-4104) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-nudge--docs)
 
@@ -67,8 +67,8 @@ What each slot accepts, from the package types (the API limit, not a design reco
   _From doDont: “It ignores the button and close, so people have nothing to tap.”_
 - **recommended** `showClose` = `true`: Show the close button when people may dismiss the nudge.  
   _From configuration: “Add a close button when people may dismiss it”_
-- **REQUIRED** `showClose` = `false`: showClose defaults to true on stacked-prominent and inline-compact: set showClose false to hide the close button. onClose does not control visibility, and stacked-detailed never renders it.  
-  _From fact `/facts/props/7` (showClose, source types)_
+- **REQUIRED** `showClose`: On stacked-prominent and inline-compact, the close button shows only when onClose is set or showClose is true; showClose false hides it even with onClose, and stacked-detailed never renders it.  
+  _From fact `/facts/props/7` (showClose, source evidence)_
 - **REQUIRED** `buttonLabel`: The default button renders when buttonLabel or onPressButton is set; buttonSlot set to null removes it.  
   _From fact `/facts/props/3` (buttonLabel, source types)_
 - **recommended** `Context` = `Nudge&Alert`: Pass the Nudge&Alert context so the button is the small size from Figma.  
@@ -186,8 +186,8 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | `buttonLabel` | `string` |  |  |  | types | Label for the default button. The default button renders only when this or `onPressButton` is set. `buttonSlot={null}` removes it. |
 | `onPressButton` | `() => void` |  |  |  | types | Callback for the default button press. Also opts into the default button. |
 | `buttonSlot` | `React.ReactNode` |  |  |  | types | Custom button slot. `null` or `false` removes the button. Omit to use `buttonLabel` / `onPressButton` when one of those is set. |
-| `onClose` | `() => void` |  |  |  | evidence (2026-10-07) | Only reports the press; the screen removes the nudge. Declared: Callback fired when the default close IconButton is pressed. Does not control visibility — use `showClose` (or `closeSlot`) for that. |
-| `showClose` | `boolean` |  |  |  | types | Show the trailing close button on `stacked-prominent` and `inline-compact`. Defaults to `true`. `stacked-detailed` never renders it. `onClose` does not control visibility. |
+| `onClose` | `() => void` |  |  |  | evidence (2026-10-07) | Only reports the press; the screen removes the nudge. Declared: Called when the default close IconButton is pressed. When set, the close button is shown unless `showClose` is false. |
+| `showClose` | `boolean` |  |  |  | evidence (2026-10-17) | Since a116616 (the #271 fix), Close renders only when onClose is set or showClose is true, and showClose false hides it even with onClose. Declared: Show the trailing close button on `stacked-prominent` and `inline-compact`. When omitted, the button shows only if `onClose` is set. Pass true to force it, or false to hide it. `stacked-detailed` never renders it. |
 | `closeSlot` | `React.ReactNode` |  |  |  | evidence (2026-10-07) | Replaces the default close, an IconButton ic_close labelled “Close” with forced Neutral / Low / S modes. Declared: Custom close slot, overrides the default close IconButton. |
 | `startSlot` | `React.ReactNode \| false` |  |  |  | evidence (2026-10-07) | The default sparkle icon is hidden from assistive tech. Declared: Optional leading slot. Omit for the token-driven sparkle icon, pass null/false to hide. |
 | `children` | `React.ReactNode` |  |  |  | evidence (2026-10-07) | Replaces the title, body and button in stacked-prominent; the body and button in inline-compact; the list in stacked-detailed. Declared: Content slot — overrides default content, or provides detailed list content. |
@@ -229,7 +229,7 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | Name | Type | Values | Default | Required | Source | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | `onPressButton` | `() => void` |  |  |  | types | Callback for the default button press. Also opts into the default button. |
-| `onClose` | `() => void` |  |  |  | types | Callback fired when the default close IconButton is pressed. Does not control visibility — use `showClose` (or `closeSlot`) for that. |
+| `onClose` | `() => void` |  |  |  | types | Called when the default close IconButton is pressed. When set, the close button is shown unless `showClose` is false. |
 
 ### Gaps
 

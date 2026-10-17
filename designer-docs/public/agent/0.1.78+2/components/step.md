@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/step.json`; the JSON is the source of truth.
 
 - **State:** documented
-- **Package:** jfs-components 0.1.78 · guide commit `f72ec62` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `f72ec62` · built 2026-10-17T11:23:24Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** stepper item, stage, timeline item, progress step
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=step) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-step--docs)
 

@@ -12,9 +12,9 @@
   ],
   "status": {
     "state": "flagged",
-    "guideCommit": "8f8313d23d006d725301a0690ff2ef863f963d77",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
     "packageVersion": "0.1.78",
-    "builtAt": "2026-10-17T11:10:07Z",
+    "builtAt": "2026-10-17T11:23:24Z",
     "flags": [
       {
         "field": "/content/rules/4",
@@ -232,13 +232,12 @@
       "value": "true"
     },
     {
-      "text": "showClose defaults to true on stacked-prominent and inline-compact: set showClose false to hide the close button. onClose does not control visibility, and stacked-detailed never renders it.",
+      "text": "On stacked-prominent and inline-compact, the close button shows only when onClose is set or showClose is true; showClose false hides it even with onClose, and stacked-detailed never renders it.",
       "strength": "required",
       "from": {
         "fact": "/facts/props/7"
       },
-      "target": "showClose",
-      "value": "false"
+      "target": "showClose"
     },
     {
       "text": "The default button renders when buttonLabel or onPressButton is set; buttonSlot set to null removes it.",
@@ -543,15 +542,16 @@
         "type": "() => void",
         "required": false,
         "source": "evidence",
-        "description": "Only reports the press; the screen removes the nudge. Declared: Callback fired when the default close IconButton is pressed. Does not control visibility — use `showClose` (or `closeSlot`) for that.",
+        "description": "Only reports the press; the screen removes the nudge. Declared: Called when the default close IconButton is pressed. When set, the close button is shown unless `showClose` is false.",
         "checkedOn": "2026-10-07"
       },
       {
         "name": "showClose",
         "type": "boolean",
         "required": false,
-        "source": "types",
-        "description": "Show the trailing close button on `stacked-prominent` and `inline-compact`. Defaults to `true`. `stacked-detailed` never renders it. `onClose` does not control visibility."
+        "source": "evidence",
+        "description": "Since a116616 (the #271 fix), Close renders only when onClose is set or showClose is true, and showClose false hides it even with onClose. Declared: Show the trailing close button on `stacked-prominent` and `inline-compact`. When omitted, the button shows only if `onClose` is set. Pass true to force it, or false to hide it. `stacked-detailed` never renders it.",
+        "checkedOn": "2026-10-17"
       },
       {
         "name": "closeSlot",
@@ -818,7 +818,7 @@
       {
         "name": "onClose",
         "type": "() => void",
-        "description": "Callback fired when the default close IconButton is pressed. Does not control visibility — use `showClose` (or `closeSlot`) for that.",
+        "description": "Called when the default close IconButton is pressed. When set, the close button is shown unless `showClose` is false.",
         "source": "types"
       }
     ],

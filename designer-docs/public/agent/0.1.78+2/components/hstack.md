@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/hstack.json`; the JSON is the source of truth.
 
 - **State:** flagged (5 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `09a45da` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `09a45da` · built 2026-10-17T11:23:24Z
 - **Category:** layout (for discovery only, not a limit on composition) · **Tags:** horizontal stack, row, layout, auto layout, spacing
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=hstack) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9243-2201) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-hstack--docs)
 

@@ -39,7 +39,6 @@ Use Tabs to switch between a few peer views of the same content, such as an acco
 **Props:** `children`*, `modes`, `scrollable`, `style`, `accessibilityLabel`, `testID`. (* required)
 
 **Gaps (report, do not work around)**
-- With no active tab, every tab has tabindex -1, so the keyboard can't reach the row (#272, In progress).
 - The active label stays black in Dark mode (#197, To do); the guide shows Light only.
 - A scrollable row has no scrollbar or edge hint.
 - Tabs has no disabled or loading prop.

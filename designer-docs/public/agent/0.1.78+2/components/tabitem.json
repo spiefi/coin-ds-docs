@@ -9,9 +9,9 @@
   ],
   "status": {
     "state": "documented",
-    "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
     "packageVersion": "0.1.78",
-    "builtAt": "2026-10-17T11:10:07Z",
+    "builtAt": "2026-10-17T11:23:24Z",
     "flags": []
   },
   "summary": "Use a Tab Item inside Tabs for each view: a short label that turns black with a gold underline while its view is showing.",
@@ -261,21 +261,12 @@
       "target": "accessibilityLabel"
     },
     {
-      "text": "Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs.",
+      "text": "Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.",
       "strength": "recommended",
       "from": {
         "section": "sources",
-        "quote": "Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs."
+        "quote": "Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs."
       }
-    },
-    {
-      "text": "Keep one tab in the row active: with no active tab, every tab has tabindex -1 and the keyboard can't reach the row; a lone idle Tab Item is also unreachable (#272).",
-      "strength": "recommended",
-      "from": {
-        "section": "evidence",
-        "quote": "with no active tab every tab has `tabindex=\"-1\"`, so the keyboard can't reach the row; a lone idle Tab Item is also unreachable."
-      },
-      "target": "active"
     }
   ],
   "doDont": [
@@ -413,6 +404,13 @@
         "source": "types",
         "default": false,
         "description": "Set by Tabs on a non-scrollable row so a long label ellipsizes instead of pushing the last tab outside the row. Standalone items keep hugging. Default false, from the component source."
+      },
+      {
+        "name": "isTabStop",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Set by Tabs. When omitted, a standalone item stays in the tab order. Inside a row, only the active tab (or the first tab when none is active) is true."
       }
     ],
     "modes": [
@@ -438,11 +436,6 @@
       }
     ],
     "gaps": [
-      {
-        "text": "A lone idle Tab Item, or a row with no active tab, can't be reached by keyboard: every tab has tabindex -1 (#272, In progress).",
-        "source": "evidence",
-        "checkedOn": "2026-10-13"
-      },
       {
         "text": "The active label stays black in Dark mode (#197, To do); the guide shows Light only.",
         "source": "evidence",

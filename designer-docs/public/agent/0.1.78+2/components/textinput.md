@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/textinput.json`; the JSON is the source of truth.
 
 - **State:** flagged (6 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `cba512f` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `cba512f` · built 2026-10-17T11:23:24Z
 - **Category:** input (for discovery only, not a limit on composition) · **Tags:** input, text field, search field, search bar
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=textinput) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=506-10017) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-textinput--docs)
 

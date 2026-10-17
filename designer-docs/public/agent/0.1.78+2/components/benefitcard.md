@@ -2,8 +2,8 @@
 
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/benefitcard.json`; the JSON is the source of truth.
 
-- **State:** flagged (1 flag, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `4566d7e` · built 2026-10-17T11:10:07Z
+- **State:** flagged (2 flags, listed at the end)
+- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
 - **Category:** card (for discovery only, not a limit on composition) · **Tags:** benefits card, plan benefits, rewards card, upgrade card, perks, membership
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=benefitcard) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5352-1077) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-benefitcard--docs)
 
@@ -25,7 +25,7 @@ _None in the guide._
 | Header title | headerTitle at 12 px, a label for the rows below it. | no | anatomy: “headerTitle at 12 px, a label for the rows below it.” |
 | Earnings row | A headerItems row: an icon, a short title, and the figure on the right. | no | anatomy: “A headerItems row: an icon, a short title, and the figure on the right.” |
 | Divider | Separates what you earn from what the plan includes; goes with the header. | no | anatomy: “Separates what you earn from what the plan includes.” |
-| Upsell | The bodyHeader slot: a Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it. | no | anatomy: “A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it.” |
+| Upsell | The bodyHeader slot: a Nudge by default, with no Close; bodyHeader replaces or removes it. | no | anatomy: “A Nudge by default, with no Close; bodyHeader replaces or removes it.” |
 | Benefit row | An items row: an icon and a short perk. | yes | anatomy: “An items row: an icon and a short perk.” |
 | Button | The call to action: buttonLabel and onButtonPress; showButton hides it. | no | anatomy: “buttonLabel and onButtonPress; showButton hides it.” |
 
@@ -89,12 +89,11 @@ Bad: “Pay abroad with any of your cards and get zero forex markup”, “Up to
 | --- | --- | --- |
 | Default | The card has no state of its own; only its button acts, through onButtonPress, with Button's states. | states: “The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states.” |
 | Without the button | showButton false: a summary of the plan. | states: “showButton off: a summary of the plan.” |
-| Pressable card | onPress set: the whole card is one button that dims while pressed. | states: “onPress makes the whole card one button that dims while pressed” |
+| Pressable card | onPress set: the header becomes a button named by its title, and pressing the header or the lists dims them and calls onPress; the upsell and the card's button stay separate buttons. | states: “onPress makes the header a button named by its title, and pressing the header or the lists dims them and calls it; the upsell and the card’s button stay separate buttons beside it.” |
 
 ## Accessibility
 
-- **discouraged** `onPress`: Avoid onPress while the card has a button: on the web the card's own buttons then sit inside it (#280).  
-  _From states: “on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280).”_
+_None in the guide._
 
 ## Do and don’t
 
@@ -178,7 +177,7 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | `onButtonPress` | `() => void` |  |  |  | types | CTA press handler. |
 | `button` | `React.ReactNode` |  |  |  | evidence (2026-10-13) | Replaces the call to action; null still renders the default button, so hide it with showButton false. Declared: Full override for the CTA. Takes precedence over `buttonLabel`. |
 | `showButton` | `boolean` |  | `true` |  | types | Toggles the CTA button. Mirrors the Figma `showButton` property. Defaults to `true`. Default true, from the component source. |
-| `onPress` | `() => void` |  |  |  | evidence (2026-10-13) | Makes the root a Pressable button (opacity 0.92 while pressed), named by accessibilityLabel or else headerTitle. Declared: Press handler for the whole card. When set, the card becomes pressable. |
+| `onPress` | `() => void` |  |  |  | evidence (2026-10-17) | Since a116616 the header becomes a Pressable button named by accessibilityLabel, else headerTitle, else bodyTitle; the lists become a pointer-only press region with no role or Tab stop, and each dims to 0.92 opacity while pressed. With showHeader false the lists are the button. The upsell and the card's button are siblings, not children. Declared: Press handler for the card body. The upgrade button and the upsell stay siblings of this control, so they are not nested inside it. |
 | `width` | `number \| ˋ${number}%ˋ` |  | `344` |  | types | Card width. Defaults to the Figma spec (`344`). Pass `'100%'` to fill the parent. Default 344, from the component source. |
 | `modes` | `Modes` |  |  |  | evidence (2026-10-13) | Cascades to the card's children, each over its own defaults: rows (List Item Style Minimal, Nudge padding None), icons (AppearanceBrand Secondary), figures (Text Sizes Small, Weight Regular), the button (Button / Size S) and the upsell (AppearanceBrand Neutral). A consumer AppearanceBrand overrides all three brand defaults at once. Declared: Modes object for design-token resolution. Cascaded to all children. |
 | `style` | `StyleProp<ViewStyle>` |  |  |  | types | Style overrides for the card container. |
@@ -235,14 +234,12 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | Name | Type | Values | Default | Required | Source | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | `onButtonPress` | `() => void` |  |  |  | types | CTA press handler. |
-| `onPress` | `() => void` |  |  |  | types | Press handler for the whole card. When set, the card becomes pressable. |
+| `onPress` | `() => void` |  |  |  | types | Press handler for the card body. The upgrade button and the upsell stay siblings of this control, so they are not nested inside it. |
 
 ### Gaps
 
 Behaviour that was checked and found missing. Report these; do not work around them.
 
-- The default upsell's Close button does nothing: it has no handler, and the card passes no onClose (#271; fixed upstream in 7020bf9, which is not installed). _(evidence, 2026-10-13)_
-- With onPress, the card nests its Button and the upsell's Close inside a role=button element on the web (#280). _(evidence, 2026-10-13)_
 - No mode changes the card's white surface or black title, including Color Mode Dark. _(evidence, 2026-10-13)_
 
 ## Flags
@@ -250,3 +247,4 @@ Behaviour that was checked and found missing. Report these; do not work around t
 Do not rely on a flagged item. A flag with an empty field concerns the entry as a whole.
 
 - `/avoidWhen` · trace-check: The guide gives no avoidWhen guidance; left empty rather than guessed.
+- `/accessibility` · trace-check: The guide gives no accessibility guidance; left empty rather than guessed.

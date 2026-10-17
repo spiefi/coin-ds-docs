@@ -1,9 +1,9 @@
 {
   "slug": "tabitem",
-  "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot, so every rule assumes it sits in a Tabs row. Evidence spans 5 October (0.1.78-3795b4c), 8 October (0.1.78-636f3f5) and 13 October (0.1.78-c1fa197, the installed build); the 5 October 'Package' and 'DOM' lines (no testID, no badge, tabindex=0 on every tab, no aria-selected) are superseded by the later checks. Examples pass modes on Tabs only: the Tabs facts say it forwards them to TabItem children, and the evidence says the item's own modes win. The truncateLabel prop is set by Tabs on a non-scrollable row (package doc); the guide does not mention it, so no rule covers it. Guide problems: Configuration says a Tab Item has no 'style options', but the package declares style and labelStyle override props (the guide presumably means design options; not changed here). Sizing's title says 'Tabs sets the width' while its description says a Tab Item 'is as wide as its label' (in a row that doesn't fit, Tabs shrinks it, per the Tabs evidence). The guide's copy does not mention #272 (with no active tab, or a lone idle Tab Item, the keyboard can't reach it), which the evidence records; the Tabs guide's Sources note does. The Dark mode gap (#197) was last recorded on 5 October.",
+  "notes": "Tab Item is a subcomponent: in Figma it lives in Coin Subcomponents and reaches designs through the Tabs slot, so every rule assumes it sits in a Tabs row. Evidence spans 5 October (0.1.78-3795b4c), 8 October (0.1.78-636f3f5) and 13 October (0.1.78-c1fa197, the installed build); the 5 October 'Package' and 'DOM' lines (no testID, no badge, tabindex=0 on every tab, no aria-selected) are superseded by the later checks. Examples pass modes on Tabs only: the Tabs facts say it forwards them to TabItem children, and the evidence says the item's own modes win. The truncateLabel prop is set by Tabs on a non-scrollable row (package doc); the guide does not mention it, so no rule covers it. Guide problems: Configuration says a Tab Item has no 'style options', but the package declares style and labelStyle override props (the guide presumably means design options; not changed here). Sizing's title says 'Tabs sets the width' while its description says a Tab Item 'is as wide as its label' (in a row that doesn't fit, Tabs shrinks it, per the Tabs evidence). The guide's copy does not mention #272 (with no active tab, or a lone idle Tab Item, the keyboard can't reach it), which the evidence records; the Tabs guide's Sources note does. The Dark mode gap (#197) was last recorded on 5 October. Updated 17 October 2026 for a116616: #272 is fixed, so its gap and the 'keep one tab active' keyboard rule are gone.",
   "useWhen": [
     {
       "text": "Use a Tab Item inside Tabs for each view: a short label that turns black with a gold underline while its view is showing.",
@@ -276,30 +276,19 @@
       "checkedOn": "2026-10-13"
     },
     {
-      "text": "Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs.",
+      "text": "Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.",
       "strength": "recommended",
       "from": {
         "section": "sources",
-        "quote": "Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs."
+        "quote": "Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs."
       },
       "absolute": {
-        "word": "Only",
+        "word": "only",
         "scope": "contextual",
-        "reason": "\"Only\" describes the keyboard behaviour the package provides, not a constraint on the designer."
+        "reason": "\"Only\" and \"always\" describe the component's keyboard behaviour, not a constraint on the designer."
       },
-      "checkedVersion": "0.1.78",
-      "checkedOn": "2026-10-13"
-    },
-    {
-      "text": "Keep one tab in the row active: with no active tab, every tab has tabindex -1 and the keyboard can't reach the row; a lone idle Tab Item is also unreachable (#272).",
-      "strength": "recommended",
-      "target": "active",
-      "from": {
-        "section": "evidence",
-        "quote": "with no active tab every tab has `tabindex=\"-1\"`, so the keyboard can't reach the row; a lone idle Tab Item is also unreachable."
-      },
-      "checkedVersion": "0.1.78-c1fa197",
-      "checkedOn": "2026-10-13"
+      "checkedVersion": "0.1.78-a116616",
+      "checkedOn": "2026-10-17"
     }
   ],
   "doDont": [
@@ -408,12 +397,6 @@
     }
   ],
   "gaps": [
-    {
-      "text": "A lone idle Tab Item, or a row with no active tab, can't be reached by keyboard: every tab has tabindex -1 (#272, In progress).",
-      "quote": "a lone idle Tab Item is also unreachable.",
-      "checkedOn": "2026-10-13",
-      "checkedVersion": "0.1.78-c1fa197"
-    },
     {
       "text": "The active label stays black in Dark mode (#197, To do); the guide shows Light only.",
       "quote": "active label stays black in Dark mode.",

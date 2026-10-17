@@ -18,8 +18,8 @@ Use a Benefit Card to list what a plan or offer gives, with an optional upsell a
 - `bodyHeader` = `null`: Set bodyHeader to null to remove the upsell, or pass a node to replace it.
 - `AppearanceBrand`: Use AppearanceBrand to recolour the icons, the upsell and the button together; the card stays white.
 - `modes`: Set modes once on the card: they cascade to its rows, icons, upsell and button.
-- Avoid: `onPress`: Avoid onPress while the card has a button: on the web the card's own buttons then sit inside it (#280).
 - Show what people get, then one way to get it.
+- `headerTitle`: Write the header title as a label, such as “You will earn”.
 
 **Example:** A plan card with its own earnings rows, perks and an upgrade button.
 
@@ -45,8 +45,6 @@ Use a Benefit Card to list what a plan or offer gives, with an optional upsell a
 **Modes it reads:** AppearanceBrand, AppearanceSystem, Avatar Size, Badge Size, Border Boolean, Button / Size, Button / State, Color Mode, Context, context 10, Context2, Context4, Emphasis, Icon Size, Nudge padding, Page type, Profile Card Appearance, Semantic Intent, Slot gap, Text Appearance, Text Sizes, Weight, List Item Style.
 
 **Gaps (report, do not work around)**
-- The default upsell's Close button does nothing: it has no handler, and the card passes no onClose (#271; fixed upstream in 7020bf9, which is not installed).
-- With onPress, the card nests its Button and the upsell's Close inside a role=button element on the web (#280).
 - No mode changes the card's white surface or black title, including Color Mode Dark.
 
 Full entry: `components/benefitcard.md`. Links: `components/benefitcard.links.md`.

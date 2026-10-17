@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/tabitem.json`; the JSON is the source of truth.
 
 - **State:** documented
-- **Package:** jfs-components 0.1.78 · guide commit `889444e` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** tab, tab label
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=tabitem) · [Figma](https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=66-913) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/tabs-tabitem--docs)
 
@@ -89,10 +89,8 @@ Bad: “Download”
   _From configuration: “Short labels such as AY24 get a full spoken name: “Assessment year 2024”.”_
 - **recommended** `accessibilityLabel`: On the web a tab is announced by its label or spoken name and whether it is selected.  
   _From sources: “On the web a tab is announced by its label or spoken name and whether it is selected.”_
-- **recommended** Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs.  
-  _From sources: “Only the selected tab is in the Tab order; Enter and Space select a tab, and the arrow keys move between tabs.”_
-- **recommended** `active`: Keep one tab in the row active: with no active tab, every tab has tabindex -1 and the keyboard can't reach the row; a lone idle Tab Item is also unreachable (#272).  
-  _From evidence: “with no active tab every tab has `tabindex="-1"`, so the keyboard can't reach the row; a lone idle Tab Item is also unreachable.”_
+- **recommended** Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.  
+  _From sources: “Only the selected tab is in the Tab order, or the first one when none is selected, and a Tab Item on its own is always reachable; Enter and Space select a tab, and the arrow keys move between tabs.”_
 
 ## Do and don’t
 
@@ -156,6 +154,7 @@ Source `types`: read from the installed package (accepted, not proven at runtime
 | `badge` | `string \| number` |  |  |  | evidence (2026-10-08) | Shows a CounterBadge beside the label. Declared: Optional counter shown beside the label. Matches the Figma tab badge. |
 | `testID` | `string` |  |  |  | evidence (2026-10-08) | Works since the 636f3f5 build (the 5 October check found none). Declared: Test identifier. |
 | `truncateLabel` | `boolean` |  | `false` |  | types | Set by Tabs on a non-scrollable row so a long label ellipsizes instead of pushing the last tab outside the row. Standalone items keep hugging. Default false, from the component source. |
+| `isTabStop` | `boolean` |  |  |  | types | Set by Tabs. When omitted, a standalone item stays in the tab order. Inside a row, only the active tab (or the first tab when none is active) is true. |
 
 ### Modes
 
@@ -177,7 +176,6 @@ _No slots._
 
 Behaviour that was checked and found missing. Report these; do not work around them.
 
-- A lone idle Tab Item, or a row with no active tab, can't be reached by keyboard: every tab has tabindex -1 (#272, In progress). _(evidence, 2026-10-13)_
 - The active label stays black in Dark mode (#197, To do); the guide shows Light only. _(evidence, 2026-10-05)_
 - No disabled state, icon or href. _(evidence, 2026-10-05)_
 - No hover or focus style of its own; keyboard focus shows the browser's ring. _(evidence, 2026-10-05)_

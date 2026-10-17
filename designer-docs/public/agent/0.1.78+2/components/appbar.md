@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/appbar.json`; the JSON is the source of truth.
 
 - **State:** flagged (12 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `31f1c5e` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `31f1c5e` · built 2026-10-17T11:23:24Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** header, top bar, navigation bar, nav bar, toolbar, title bar
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=appbar) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1070-18571) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-appbar--docs)
 

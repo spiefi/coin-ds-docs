@@ -1,9 +1,9 @@
 {
   "slug": "benefitcard",
-  "guideCommit": "4566d7e6672a8b5800ad90eb149390206487d229",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
   "extractedBy": "Claude Code (claude-opus-5-5), agent pack POC session",
   "extractedOn": "2026-10-17",
-  "notes": "Picked over AccountCard for the pilot: BenefitCard's headerItems and items take typed BenefitCardItem rows with their own leading and trailing slots, it has four node slots (header, bodyHeader, children, button), and it cascades modes into composed ListItem, Nudge and Button children. Evidence was checked on the installed build (0.1.78-c1fa197, 13 October 2026). The guide names no other component to use instead.",
+  "notes": "Picked over AccountCard for the pilot: BenefitCard's headerItems and items take typed BenefitCardItem rows with their own leading and trailing slots, it has four node slots (header, bodyHeader, children, button), and it cascades modes into composed ListItem, Nudge and Button children. Evidence was checked on the installed build (0.1.78-c1fa197, 13 October 2026). The guide names no other component to use instead. Updated 17 October 2026 for a116616: #271 (dead Close on the upsell) and #280 (a pressable card nested its buttons) are fixed, so their gaps and the 'avoid onPress while the card has a button' rule are gone.",
   "useWhen": [
     {
       "text": "List what a plan or offer gives, with an optional upsell and one button to upgrade.",
@@ -45,11 +45,11 @@
     },
     {
       "part": "Upsell",
-      "holds": "The bodyHeader slot: a Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it.",
+      "holds": "The bodyHeader slot: a Nudge by default, with no Close; bodyHeader replaces or removes it.",
       "required": false,
       "from": {
         "section": "anatomy",
-        "quote": "A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it."
+        "quote": "A Nudge by default, with no Close; bodyHeader replaces or removes it."
       }
     },
     {
@@ -242,24 +242,14 @@
     },
     {
       "state": "Pressable card",
-      "when": "onPress set: the whole card is one button that dims while pressed.",
+      "when": "onPress set: the header becomes a button named by its title, and pressing the header or the lists dims them and calls onPress; the upsell and the card's button stay separate buttons.",
       "from": {
         "section": "states",
-        "quote": "onPress makes the whole card one button that dims while pressed"
+        "quote": "onPress makes the header a button named by its title, and pressing the header or the lists dims them and calls it; the upsell and the card’s button stay separate buttons beside it."
       }
     }
   ],
-  "accessibility": [
-    {
-      "text": "Avoid onPress while the card has a button: on the web the card's own buttons then sit inside it (#280).",
-      "strength": "discouraged",
-      "target": "onPress",
-      "from": {
-        "section": "states",
-        "quote": "on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280)."
-      }
-    }
-  ],
+  "accessibility": [],
   "doDont": [
     {
       "do": "Keep each perk short",
@@ -342,10 +332,10 @@
     {
       "list": "props",
       "name": "onPress",
-      "description": "Makes the root a Pressable button (opacity 0.92 while pressed), named by accessibilityLabel or else headerTitle.",
-      "quote": "`onPress` (root becomes a Pressable button, opacity 0.92 while pressed, named `accessibilityLabel ?? headerTitle`)",
-      "checkedOn": "2026-10-13",
-      "checkedVersion": "0.1.78-c1fa197"
+      "description": "Since a116616 the header becomes a Pressable button named by accessibilityLabel, else headerTitle, else bodyTitle; the lists become a pointer-only press region with no role or Tab stop, and each dims to 0.92 opacity while pressed. With showHeader false the lists are the button. The upsell and the card's button are siblings, not children.",
+      "quote": "since a116616: the header becomes a Pressable button named `accessibilityLabel ?? headerTitle ?? bodyTitle`, and the lists a pointer-only press region with no role or Tab stop",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     },
     {
       "list": "props",
@@ -407,18 +397,6 @@
     }
   ],
   "gaps": [
-    {
-      "text": "The default upsell's Close button does nothing: it has no handler, and the card passes no onClose (#271; fixed upstream in 7020bf9, which is not installed).",
-      "quote": "#271 confirmed in the browser here: the upsell's Close (26 × 26) has no handler, and clicking it leaves the upsell in place.",
-      "checkedOn": "2026-10-13",
-      "checkedVersion": "0.1.78-c1fa197"
-    },
-    {
-      "text": "With onPress, the card nests its Button and the upsell's Close inside a role=button element on the web (#280).",
-      "quote": "A pressable card nests its Button and Close inside a `role=button` element on the web.",
-      "checkedOn": "2026-10-13",
-      "checkedVersion": "0.1.78-c1fa197"
-    },
     {
       "text": "No mode changes the card's white surface or black title, including Color Mode Dark.",
       "quote": "No mode changes the card's surface or title.",

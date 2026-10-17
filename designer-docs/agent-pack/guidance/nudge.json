@@ -1,9 +1,9 @@
 {
   "slug": "nudge",
-  "guideCommit": "8f8313d23d006d725301a0690ff2ef863f963d77",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Much of the guide copy predates the installed build. The copy and most of the evidence were checked on 0.1.78-3795b4c (7 October 2026). The docs now install 0.1.78-c1fa197, which carries Biscuit's #206 Nudge changes, and the evidence's c1fa197 note says the copy was not re-checked against #206. The installed types and source contradict the guide in five places. (1) showClose defaults to true, so the close button shows by default on stacked-prominent and inline-compact. The guide says \"Add a close button when people may dismiss it\", and its Sources note says \"the package adds it only when asked\". (2) title and body default to empty, and the default button renders only when buttonLabel or onPressButton is set. The guide says \"Nudge’s own copy is a placeholder\", and its Don't caption says \"Without props it reads “Split payment” and “Button”\". (3) buttonSlot={null} now removes the button; the 3795b4c evidence says it still rendered. (4) The root is a region named by its title (c1fa197 evidence), while the Sources note says \"The card has no role or name on the web\". (5) Nudge now has testID. A further point comes from reading the installed Nudge source, not the types or the evidence, and it has not been checked in the browser: Nudge sets Context Nudge&Alert itself unless the caller or the theme already set a Context. That would make the Don't caption \"The button grows to 42 px and outweighs the message\" true only when a surrounding Context is set. So the guidance keeps the guide's intent but leans on package facts where they differ. The close button is shown when people may dismiss the nudge; the fact-based rule says to set showClose false otherwise. The Don't pairs about copy and context use the Do caption as their why, not the stale Don't caption. No evidence fact or gap is recorded for behaviour that #206 changed. The content sentence \"so always set all three\" is marked ambiguous: its stated reason (placeholder copy) is stale, and compact never renders a title while detailed ignores the body and button. The examples pass the Nudge's mode object to the ListItem children, although the evidence says slot children already get the Nudge's modes. The guide names no other component to use instead, so avoidWhen is empty.",
+  "notes": "Much of the guide copy predates the installed build. The copy and most of the evidence were checked on 0.1.78-3795b4c (7 October 2026). The docs now install 0.1.78-c1fa197, which carries Biscuit's #206 Nudge changes, and the evidence's c1fa197 note says the copy was not re-checked against #206. The installed types and source contradict the guide in five places. (1) Resolved on a116616 (17 October 2026, the #271 fix): Close renders only when onClose is set or showClose is true, so the guide's \"Add a close button when people may dismiss it\" and \"the package adds it only when asked\" hold again; on c1fa197 showClose defaulted to true. (2) title and body default to empty, and the default button renders only when buttonLabel or onPressButton is set. The guide says \"Nudge’s own copy is a placeholder\", and its Don't caption says \"Without props it reads “Split payment” and “Button”\". (3) buttonSlot={null} now removes the button; the 3795b4c evidence says it still rendered. (4) The root is a region named by its title (c1fa197 evidence), while the Sources note says \"The card has no role or name on the web\". (5) Nudge now has testID. A further point comes from reading the installed Nudge source, not the types or the evidence, and it has not been checked in the browser: Nudge sets Context Nudge&Alert itself unless the caller or the theme already set a Context. That would make the Don't caption \"The button grows to 42 px and outweighs the message\" true only when a surrounding Context is set. So the guidance keeps the guide's intent but leans on package facts where they differ. The close button is shown when people may dismiss the nudge, through onClose; the fact-based rule follows the a116616 types. The Don't pairs about copy and context use the Do caption as their why, not the stale Don't caption. No evidence fact or gap is recorded for behaviour that #206 changed. The content sentence \"so always set all three\" is marked ambiguous: its stated reason (placeholder copy) is stale, and compact never renders a title while detailed ignores the body and button. The examples pass the Nudge's mode object to the ListItem children, although the evidence says slot children already get the Nudge's modes. The guide names no other component to use instead, so avoidWhen is empty.",
   "useWhen": [
     {
       "text": "A short suggestion with one action, such as splitting a payment, that sits within a screen's content.",
@@ -177,10 +177,9 @@
       }
     },
     {
-      "text": "showClose defaults to true on stacked-prominent and inline-compact: set showClose false to hide the close button. onClose does not control visibility, and stacked-detailed never renders it.",
+      "text": "On stacked-prominent and inline-compact, the close button shows only when onClose is set or showClose is true; showClose false hides it even with onClose, and stacked-detailed never renders it.",
       "strength": "required",
       "target": "showClose",
-      "value": "false",
       "from": {
         "fact": "props:showClose"
       }
@@ -524,6 +523,14 @@
       "quote": "`Border Boolean: True` adds a #ebebed border.",
       "checkedOn": "2026-10-07",
       "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "showClose",
+      "description": "Since a116616 (the #271 fix), Close renders only when onClose is set or showClose is true, and showClose false hides it even with onClose.",
+      "quote": "Close renders only when `onClose` is set or `showClose` is true, and `showClose={false}` hides it even with `onClose`.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
     }
   ],
   "gaps": [

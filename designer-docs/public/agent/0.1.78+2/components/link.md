@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/link.json`; the JSON is the source of truth.
 
 - **State:** flagged (10 flags, listed at the end)
-- **Package:** jfs-components 0.1.78 · guide commit `4e470cf` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `4e470cf` · built 2026-10-17T11:23:24Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** hyperlink, text link, inline link, anchor
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=link) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=6981-5) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-link--docs)
 

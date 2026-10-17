@@ -14,7 +14,7 @@ Use a Nudge for a short suggestion with one action, such as splitting a payment,
 - `onClose`: The screen handles the nudge's button and removes the nudge on close.
 
 **Key rules**
-- **REQUIRED** `showClose` = `false`: showClose defaults to true on stacked-prominent and inline-compact: set showClose false to hide the close button. onClose does not control visibility, and stacked-detailed never renders it.
+- **REQUIRED** `showClose`: On stacked-prominent and inline-compact, the close button shows only when onClose is set or showClose is true; showClose false hides it even with onClose, and stacked-detailed never renders it.
 - **REQUIRED** `buttonLabel`: The default button renders when buttonLabel or onPressButton is set; buttonSlot set to null removes it.
 - `type`: Choose the type for the space and content you have, and an appearance mode for its colour.
 - `type` = `stacked-prominent`: stacked-prominent, the default: a title and body stacked beside the icon, the button below.

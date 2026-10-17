@@ -35,12 +35,11 @@ Use a Tab Item inside Tabs for each view: a short label that turns black with a 
 </Tabs>
 ```
 
-**Props:** `label`, `active`, `onPress`, `modes`, `style`, `labelStyle`, `accessibilityLabel`, `badge`, `testID`, `truncateLabel`. (* required)
+**Props:** `label`, `active`, `onPress`, `modes`, `style`, `labelStyle`, `accessibilityLabel`, `badge`, `testID`, `truncateLabel`, `isTabStop`. (* required)
 
 **Modes it reads:** Color Mode.
 
 **Gaps (report, do not work around)**
-- A lone idle Tab Item, or a row with no active tab, can't be reached by keyboard: every tab has tabindex -1 (#272, In progress).
 - The active label stays black in Dark mode (#197, To do); the guide shows Light only.
 - No disabled state, icon or href.
 - No hover or focus style of its own; keyboard focus shows the browser's ring.

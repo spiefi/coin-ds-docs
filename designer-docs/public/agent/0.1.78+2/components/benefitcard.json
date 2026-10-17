@@ -13,13 +13,18 @@
   ],
   "status": {
     "state": "flagged",
-    "guideCommit": "4566d7e6672a8b5800ad90eb149390206487d229",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
     "packageVersion": "0.1.78",
-    "builtAt": "2026-10-17T11:10:07Z",
+    "builtAt": "2026-10-17T11:23:24Z",
     "flags": [
       {
         "field": "/avoidWhen",
         "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
         "by": "trace-check"
       }
     ]
@@ -66,11 +71,11 @@
     },
     {
       "part": "Upsell",
-      "holds": "The bodyHeader slot: a Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it.",
+      "holds": "The bodyHeader slot: a Nudge by default, with no Close; bodyHeader replaces or removes it.",
       "required": false,
       "from": {
         "section": "anatomy",
-        "quote": "A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it."
+        "quote": "A Nudge by default, with no Close; bodyHeader replaces or removes it."
       }
     },
     {
@@ -302,24 +307,14 @@
     },
     {
       "state": "Pressable card",
-      "when": "onPress set: the whole card is one button that dims while pressed.",
+      "when": "onPress set: the header becomes a button named by its title, and pressing the header or the lists dims them and calls onPress; the upsell and the card's button stay separate buttons.",
       "from": {
         "section": "states",
-        "quote": "onPress makes the whole card one button that dims while pressed"
+        "quote": "onPress makes the header a button named by its title, and pressing the header or the lists dims them and calls it; the upsell and the card’s button stay separate buttons beside it."
       }
     }
   ],
-  "accessibility": [
-    {
-      "text": "Avoid onPress while the card has a button: on the web the card's own buttons then sit inside it (#280).",
-      "strength": "discouraged",
-      "from": {
-        "section": "states",
-        "quote": "on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280)."
-      },
-      "target": "onPress"
-    }
-  ],
+  "accessibility": [],
   "doDont": [
     {
       "do": "Keep each perk short",
@@ -472,8 +467,8 @@
         "type": "() => void",
         "required": false,
         "source": "evidence",
-        "description": "Makes the root a Pressable button (opacity 0.92 while pressed), named by accessibilityLabel or else headerTitle. Declared: Press handler for the whole card. When set, the card becomes pressable.",
-        "checkedOn": "2026-10-13"
+        "description": "Since a116616 the header becomes a Pressable button named by accessibilityLabel, else headerTitle, else bodyTitle; the lists become a pointer-only press region with no role or Tab stop, and each dims to 0.92 opacity while pressed. With showHeader false the lists are the button. The upsell and the card's button are siblings, not children. Declared: Press handler for the card body. The upgrade button and the upsell stay siblings of this control, so they are not nested inside it.",
+        "checkedOn": "2026-10-17"
       },
       {
         "name": "width",
@@ -884,21 +879,11 @@
       {
         "name": "onPress",
         "type": "() => void",
-        "description": "Press handler for the whole card. When set, the card becomes pressable.",
+        "description": "Press handler for the card body. The upgrade button and the upsell stay siblings of this control, so they are not nested inside it.",
         "source": "types"
       }
     ],
     "gaps": [
-      {
-        "text": "The default upsell's Close button does nothing: it has no handler, and the card passes no onClose (#271; fixed upstream in 7020bf9, which is not installed).",
-        "source": "evidence",
-        "checkedOn": "2026-10-13"
-      },
-      {
-        "text": "With onPress, the card nests its Button and the upsell's Close inside a role=button element on the web (#280).",
-        "source": "evidence",
-        "checkedOn": "2026-10-13"
-      },
       {
         "text": "No mode changes the card's white surface or black title, including Color Mode Dark.",
         "source": "evidence",

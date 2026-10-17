@@ -3,7 +3,7 @@
 > Coin agent pack 0.1.78+2 (pilot). Generated from `components/tabs.json`; the JSON is the source of truth.
 
 - **State:** documented
-- **Package:** jfs-components 0.1.78 · guide commit `889444e` · built 2026-10-17T11:10:07Z
+- **Package:** jfs-components 0.1.78 · guide commit `622cd82` · built 2026-10-17T11:23:24Z
 - **Category:** navigation (for discovery only, not a limit on composition) · **Tags:** tab bar, sub-navigation, views
 - **Sources:** [guide](https://coin-designer-docs.vercel.app/?component=tabs) · [Figma](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3063-136) · [Storybook](https://jfs-components-storybook.vercel.app/?path=/docs/components-tabs--docs)
 
@@ -92,10 +92,8 @@ Bad: “Pay”, “Cancel”, “Tab 1”, “Tab 2”, “Tab 3”
 
 - **recommended** `accessibilityLabel`: On the web the row is a tab list named by its accessibilityLabel, and each tab is announced by its label and whether it is selected.  
   _From sources: “On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected”_
-- **recommended** Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home and End select tabs.  
-  _From sources: “Only the selected tab is in the Tab order; Space, Enter, the arrow keys, Home, and End select tabs.”_
-- **recommended** Keep a tab selected: if no tab is selected, the keyboard can’t reach the row (reported to the Coin team).  
-  _From sources: “If no tab is selected, the keyboard can’t reach the row, which is reported to the Coin team.”_
+- **recommended** Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home and End select tabs.  
+  _From sources: “Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home, and End select tabs.”_
 
 ## Do and don’t
 
@@ -168,7 +166,6 @@ _No events._
 
 Behaviour that was checked and found missing. Report these; do not work around them.
 
-- With no active tab, every tab has tabindex -1, so the keyboard can't reach the row (#272, In progress). _(evidence, 2026-10-13)_
 - The active label stays black in Dark mode (#197, To do); the guide shows Light only. _(evidence, 2026-10-05)_
 - A scrollable row has no scrollbar or edge hint. _(evidence, 2026-10-05)_
 - Tabs has no disabled or loading prop. _(evidence, 2026-10-05)_
