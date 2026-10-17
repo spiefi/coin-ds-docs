@@ -1,0 +1,400 @@
+{
+  "slug": "button",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "extractedBy": "Claude Code (claude-opus-5-5), agent pack POC session",
+  "extractedOn": "2026-10-17",
+  "notes": "The Button page is a hand-built page (not ComponentGuideTemplate); its copy was read from the rendered sections. Its Sources note says jfs-components 0.1.60, checked 13 September 2026, and the shared evidence file (button-and-layout.md) records almost nothing about Button's own behaviour, so most facts stay at source types. The guide names no other component to use instead.",
+  "useWhen": [
+    {
+      "text": "One clear action moves someone forward, confirms a choice, or completes a task.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Button when one clear action moves someone forward, confirms a choice, or completes a task."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Avoid loading as a substitute for transaction progress; it is for while required content is being prepared.",
+      "strength": "discouraged",
+      "target": "loading",
+      "from": {
+        "section": "states",
+        "quote": "Use loading while required content is being prepared, not as a substitute for transaction progress."
+      },
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "\"required\" describes the content being prepared, not a constraint on the rule."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Container",
+      "holds": "Holds the action and resolves its visual treatment.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Holds the action and resolves its visual treatment."
+      }
+    },
+    {
+      "part": "Start slot",
+      "holds": "Optional leading node: an icon that clarifies the action.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional. Use for an icon that clarifies the action."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "The label: names the outcome in one to three words.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Required. Name the outcome in one to three words."
+      }
+    },
+    {
+      "part": "End icon",
+      "holds": "Optional icon after the label, for direction or continuation.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional. Use when direction or continuation matters."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the action where the decision happens, and let surrounding content explain the choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use surrounding content to explain the choice. Let the button stay concise."
+      }
+    },
+    {
+      "text": "In a wide container, keep the action close to the content it completes.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Keep the action close to the content it completes."
+      }
+    },
+    {
+      "text": "Make one action the strongest; competing actions should not share equal emphasis.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Two dominant actions make the choice harder to read."
+      }
+    },
+    {
+      "text": "Let container width resolve the layout: the same action can fill a narrow container's width. There is no separate desktop or mobile Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Container width resolves the layout. Designers choose the label, hierarchy, and size—not a separate “desktop” or “mobile” Button."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use type default for most actions; it hugs its label or fills its container when the layout asks it to.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "default",
+      "from": {
+        "section": "configuration",
+        "quote": "The standard solid action. It hugs its label or fills its container when the layout asks it to."
+      }
+    },
+    {
+      "text": "Use type fixed for aligned, bounded actions: it keeps long content within the system width limit.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "fixed",
+      "from": {
+        "section": "configuration",
+        "quote": "Keeps long content within the system width limit. It remains responsive rather than using a hand-set pixel width."
+      }
+    },
+    {
+      "text": "Do not use type fixed for a full-width action: fixed is bounded by the system and will not fill. Use type default for a footer action that fills its container.",
+      "strength": "discouraged",
+      "target": "type",
+      "value": "fixed",
+      "from": {
+        "section": "doDont",
+        "quote": "Fixed is bounded by the system and will not behave like Fill."
+      }
+    },
+    {
+      "text": "Use type glass only over a meaningful backdrop such as rich media or a coloured surface.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "glass",
+      "from": {
+        "section": "configuration",
+        "quote": "Use only over a meaningful backdrop"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "ambiguous",
+        "reason": "the line is a short card caption under the Glass example; it is unclear whether it is a hard limit or advice, and the guide does not define a meaningful backdrop."
+      }
+    },
+    {
+      "text": "Do not place type glass on a plain, low-contrast surface: it loses its purpose and can become hard to read.",
+      "strength": "discouraged",
+      "target": "type",
+      "value": "glass",
+      "from": {
+        "section": "doDont",
+        "quote": "The treatment loses its purpose and can become hard to read."
+      }
+    },
+    {
+      "text": "Appearance identifies the family; Emphasis sets how loudly the action speaks within it.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "from": {
+        "section": "configuration",
+        "quote": "Appearance identifies the family. Emphasis decides how loudly the action speaks within that family."
+      }
+    },
+    {
+      "text": "Reserve Semantic Intent System (AppearanceSystem positive, warning or negative) for an outcome with clear positive, warning or negative meaning.",
+      "strength": "recommended",
+      "target": "Semantic Intent",
+      "value": "System",
+      "from": {
+        "section": "configuration",
+        "quote": "Reserve these appearances for an outcome with clear positive, warning, or negative meaning."
+      }
+    },
+    {
+      "text": "Button / Size M: the action leads a screen, sheet or key step.",
+      "strength": "recommended",
+      "target": "Button / Size",
+      "value": "M",
+      "from": {
+        "section": "sizing",
+        "quote": "The action leads a screen, sheet, or key step."
+      }
+    },
+    {
+      "text": "Button / Size S: the action sits inside a card or compact group.",
+      "strength": "recommended",
+      "target": "Button / Size",
+      "value": "S",
+      "from": {
+        "section": "sizing",
+        "quote": "The action sits inside a card or compact group."
+      }
+    },
+    {
+      "text": "Button / Size XS: space is dense and the surrounding touch area stays usable.",
+      "strength": "recommended",
+      "target": "Button / Size",
+      "value": "XS",
+      "from": {
+        "section": "sizing",
+        "quote": "Space is dense and the surrounding touch area stays usable."
+      }
+    },
+    {
+      "text": "Most actions need at most one of the start slot and end icon, and many need neither.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Most actions need one at most, and many need neither."
+      }
+    },
+    {
+      "text": "Give disabled a clear condition; hover and pressed happen automatically and are not configured.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "section": "states",
+        "quote": "Hover and pressed happen automatically. Disabled should have a clear condition."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make the action clear before choosing its appearance; the label should explain what happens next.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Make the action clear before choosing its appearance. The label should explain what happens next."
+        }
+      },
+      {
+        "text": "Lead with a verb, such as “Save details”, “Transfer money” or “View statement”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Use clear actions such as “Save details”, “Transfer money”, or “View statement”."
+        }
+      },
+      {
+        "text": "Aim for one to three words. Put the explanation beside the button, not inside it.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Aim for one to three words. Put explanation beside the button, not inside it."
+        }
+      },
+      {
+        "text": "Add an icon only when it improves recognition, direction, or the action's meaning.",
+        "strength": "recommended",
+        "target": "icon",
+        "from": {
+          "section": "content",
+          "quote": "Add one only when it improves recognition, direction, or the action’s meaning."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "\"only when it improves recognition\" is a judgement call; it limits icons to a purpose rather than stating a checkable constraint."
+        }
+      },
+      {
+        "text": "Be specific: prefer “Pay ₹500” or “Download report” over a vague “OK” when the outcome can be named.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Prefer “Pay ₹500” or “Download report” over a vague “OK” when the outcome can be named."
+        }
+      }
+    ],
+    "good": [
+      "Save details",
+      "Transfer money",
+      "Pay ₹1,250",
+      "Confirm payment"
+    ],
+    "bad": [
+      "Click here to transfer your money now"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "Ready for action.",
+      "from": {
+        "section": "states",
+        "quote": "Ready for action."
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "Appears automatically under a pointer; not configured.",
+      "from": {
+        "section": "states",
+        "quote": "Appears automatically under a pointer."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "Appears while the action is held; not configured.",
+      "from": {
+        "section": "states",
+        "quote": "Appears while the action is held."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled is true; unavailable until a condition is met.",
+      "from": {
+        "section": "states",
+        "quote": "Unavailable until a condition is met."
+      }
+    },
+    {
+      "state": "Loading",
+      "when": "loading is true while required content is being prepared; a shape-preserving skeleton holds the action's place.",
+      "from": {
+        "section": "states",
+        "quote": "A shape-preserving skeleton holds the action’s place."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Write a short, verb-led label",
+      "dont": "Put the explanation inside the button",
+      "why": "Long labels are slower to scan and can truncate.",
+      "from": {
+        "section": "doDont",
+        "quote": "Write a short, verb-led label"
+      }
+    },
+    {
+      "do": "Make one action strongest",
+      "dont": "Give competing actions equal emphasis",
+      "why": "Two dominant actions make the choice harder to read.",
+      "from": {
+        "section": "doDont",
+        "quote": "Make one action strongest"
+      }
+    },
+    {
+      "do": "Use Default when a footer action fills the container",
+      "dont": "Use Fixed as a substitute for a full-width action",
+      "why": "Fixed is bounded by the system and will not behave like Fill.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Default when a footer action fills the container"
+      }
+    },
+    {
+      "do": "Use Glass over a visible backdrop",
+      "dont": "Place Glass on a plain, low-contrast surface",
+      "why": "The treatment loses its purpose and can become hard to read.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Glass over a visible backdrop"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A primary action that leads a step, filling its container's width.",
+      "jsx": "<Button\n  label=\"Pay ₹1,250\"\n  onPress={() => {}}\n  style={{ width: '100%' }}\n  modes={{ 'Color Mode': 'Light', 'Button / Size': 'M', Emphasis: 'High', 'Semantic Intent': 'Brand', AppearanceBrand: 'Primary' }}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Default · M · full available width"
+      }
+    },
+    {
+      "purpose": "One strongest action beside a quieter one.",
+      "jsx": "<HStack modes={{ 'Color Mode': 'Light' }}>\n  <Button label=\"Back\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'Low', AppearanceBrand: 'Neutral' }} />\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'High', AppearanceBrand: 'Primary' }} />\n</HStack>",
+      "from": {
+        "section": "doDont",
+        "quote": "Make one action strongest"
+      }
+    },
+    {
+      "purpose": "A positive system action with clear meaning, in a card.",
+      "jsx": "<Button label=\"Confirm\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S', 'Semantic Intent': 'System', AppearanceSystem: 'positive' }} />",
+      "from": {
+        "section": "configuration",
+        "quote": "Reserve these appearances for an outcome with clear positive, warning, or negative meaning."
+      }
+    }
+  ],
+  "evidenceFacts": [],
+  "gaps": []
+}

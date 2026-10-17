@@ -13,7 +13,11 @@
     "verify": "npm run build && npm run test:browser",
     "coin:status": "node scripts/coin-components.mjs status",
     "coin:sync": "node scripts/coin-components.mjs sync",
-    "coin:use": "node scripts/coin-components.mjs use"
+    "coin:use": "node scripts/coin-components.mjs use",
+    "build:agent-pack": "node agent-pack/scripts/build.mjs",
+    "agent-pack:copy": "node agent-pack/scripts/copy.mjs",
+    "agent-pack:cross-check": "node agent-pack/scripts/cross-check.mjs",
+    "agent-pack:pilot": "node agent-pack/pilot/run.mjs"
   },
   "dependencies": {
     "@react-native-community/blur": "4.4.1",
@@ -28,6 +32,8 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.5.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "playwright-core": "1.63.0",
     "typescript": "^5.8.0",
     "vite": "^6.1.0"

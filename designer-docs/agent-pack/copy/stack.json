@@ -1,0 +1,270 @@
+{
+  "slug": "stack",
+  "label": "Stack",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/stack.guide.tsx",
+    "src/LayoutGuides.tsx"
+  ],
+  "evidence": "docs/evidence/button-and-layout.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-16T22:29:25.672Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "layout",
+    "spacing",
+    "gap",
+    "slot",
+    "auto layout"
+  ],
+  "title": "Stack",
+  "summary": "Use Stack when a public component slot needs one token-driven gap and an intentional vertical or horizontal direction.",
+  "corePrinciple": "Choose direction from the content role. Stack stays direction-locked; it does not switch because the viewport changed.",
+  "figma": "https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=279-3",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-stack--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Stack has one job",
+      "description": "See the slot, direction, gap, and cross-axis fit that make Stack useful.",
+      "blocks": [
+        "16",
+        "1",
+        "2",
+        "3",
+        "Direction",
+        "Set layoutDirection to vertical or horizontal. The default is vertical.",
+        "Token gap",
+        "Slot gap provides repeated separation. Stack has no padding, wrap, or reverse control.",
+        "Cross-axis fit",
+        "fillWidth makes these vertical children share the host edge. Fixed child dimensions still win.",
+        "Component bounds",
+        "Child bounds",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Paid",
+        "Due today"
+      ],
+      "anatomy": [
+        {
+          "part": "Direction",
+          "note": "Set layoutDirection to vertical or horizontal. The default is vertical."
+        },
+        {
+          "part": "Token gap",
+          "note": "Slot gap provides repeated separation. Stack has no padding, wrap, or reverse control."
+        },
+        {
+          "part": "Cross-axis fit",
+          "note": "fillWidth makes these vertical children share the host edge. Fixed child dimensions still win."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Configure the owner, then read the result",
+      "description": "Set direction and cross-axis behavior for the public slot that owns this Stack.",
+      "blocks": [
+        "Vertical",
+        "Use the default direction for a column of actions or supporting content inside a public slot.",
+        "Default direction",
+        "Horizontal",
+        "Use a row when sibling actions or content belong on one line. Direction is explicit.",
+        "Direction does not auto-switch",
+        "Cross-axis fit",
+        "equalHeight stretches a horizontal row; fillWidth stretches a vertical column. Fixed child sizes still win.",
+        "Use only for the active direction",
+        "Public consumer boundary",
+        "Use Stack through a public component slot",
+        "Stack is a public JFS export and a documented layout primitive. The Figma source is a Coin Subcomponents anatomy reference, so designers should consume public components and patterns that own the slot.",
+        "Direction · vertical / horizontal",
+        "Slot gap · XS–XL",
+        "equalHeight · horizontal",
+        "fillWidth · vertical"
+      ],
+      "specimen": [
+        "Paid",
+        "Due today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Stack responds to its host",
+      "description": "Compare default, changed rhythm, host-owned edge, and constrained outcomes without recreating the layout primitive.",
+      "blocks": [
+        "Vertical",
+        "Default column direction for grouped slot content.",
+        "Horizontal",
+        "Explicit row direction for sibling content.",
+        "Equal height",
+        "Horizontal children share the tallest height when they can stretch.",
+        "Fill width",
+        "Vertical children stretch across the stack when they can.",
+        "Direction is a configuration choice.",
+        "Stack does not add overlap, z-order, wrapping, padding, or automatic viewport switching. Use the public component that owns the slot."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The parent supplies the constraint",
+      "description": "Stack keeps its chosen direction at every width. Responsive intent belongs to the owning public composition.",
+      "blocks": [
+        "Wide parent",
+        "Narrow parent",
+        "Stack keeps the configured direction in both hosts. Choose a different public composition when the content role changes; the viewport does not switch layoutDirection for you."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Make the relationship visible",
+      "description": "Stack works when a public slot has a clear group and direction.",
+      "blocks": [
+        "01",
+        "Name the slot role",
+        "Use Stack for a clear group such as actions, metadata, or supporting copy.",
+        "02",
+        "Choose one direction",
+        "Direction expresses the content relationship and remains stable through viewport changes.",
+        "03",
+        "Stretch with intent",
+        "Use equalHeight for a row or fillWidth for a column when the content benefits from shared edges.",
+        "04",
+        "Stay on the public path",
+        "Designers consume public patterns and component slots; hidden Subcomponents are anatomy references."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Place the primitive where the relationship happens",
+      "description": "Use Stack in the slot owned by a public component, where direction and gap carry product meaning.",
+      "blocks": [
+        "Action footer",
+        "One group, one direction",
+        "Use a vertical Stack when actions belong under supporting copy.",
+        "Vertical · fillWidth",
+        "Action row",
+        "Siblings share an edge",
+        "Use horizontal direction when actions are a deliberate row.",
+        "Horizontal · equalHeight",
+        "Public slot ownership",
+        "Let the component own the slot",
+        "A public ActionFooter or related component gives this primitive its product meaning.",
+        "Public component",
+        "↓",
+        "Stack slot",
+        "Coin children"
+      ],
+      "specimen": [
+        "Paid",
+        "Due today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Protect structure and clarity",
+      "description": "These pairs keep Stack focused on one public slot and one intentional direction.",
+      "blocks": [
+        "Do",
+        "Let a vertical slot fill its width",
+        "Use fill width when the children should share the column edge.",
+        "Don’t",
+        "Fix child widths when the column should fill",
+        "Fixed child dimensions still win, so the column edge no longer aligns.",
+        "Use fill width when column edges should align",
+        "Vertical children can share the stack width when they support stretch.",
+        "Use Stack as a catch-all page canvas",
+        "Stack has no wrap, padding, or overlap semantics for unrelated sections."
+      ],
+      "specimen": [
+        "Paid",
+        "Due today"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Let a vertical slot fill its width",
+            "caption": "Use fill width when the children should share the column edge.",
+            "specimen": "Paid · Due today"
+          },
+          "dont": {
+            "title": "Fix child widths when the column should fill",
+            "caption": "Fixed child dimensions still win, so the column edge no longer aligns.",
+            "specimen": "Paid · Due today"
+          }
+        },
+        {
+          "do": {
+            "title": "Use fill width when column edges should align",
+            "caption": "Vertical children can share the stack width when they support stretch.",
+            "specimen": "Paid · Due today"
+          },
+          "dont": {
+            "title": "Use Stack as a catch-all page canvas",
+            "caption": "Stack has no wrap, padding, or overlap semantics for unrelated sections.",
+            "specimen": "Paid · Due today"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the published component",
+      "description": "The guide separates designer choices from behavior supplied by the public library at runtime.",
+      "blocks": [
+        "01",
+        "Figma source",
+        "Coin Subcomponents anatomy reference · node 279:3",
+        "02",
+        "Published Storybook",
+        "Stack export and live behavior",
+        "Checked 15 September 2026",
+        "Live layout examples use public exports from jfs-components 0.1.60. Stack uses its public package export with token-driven modes; documentation controls change owner configuration, not component internals."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

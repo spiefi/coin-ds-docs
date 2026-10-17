@@ -1,0 +1,429 @@
+{
+  "slug": "benefitcard",
+  "guideCommit": "4566d7e6672a8b5800ad90eb149390206487d229",
+  "extractedBy": "Claude Code (claude-opus-5-5), agent pack POC session",
+  "extractedOn": "2026-10-17",
+  "notes": "Picked over AccountCard for the pilot: BenefitCard's headerItems and items take typed BenefitCardItem rows with their own leading and trailing slots, it has four node slots (header, bodyHeader, children, button), and it cascades modes into composed ListItem, Nudge and Button children. Evidence was checked on the installed build (0.1.78-c1fa197, 13 October 2026). The guide names no other component to use instead.",
+  "useWhen": [
+    {
+      "text": "List what a plan or offer gives, with an optional upsell and one button to upgrade.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Benefit Card to list what a plan or offer gives, with an optional upsell and one button to upgrade."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Header title",
+      "holds": "headerTitle at 12 px, a label for the rows below it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "headerTitle at 12 px, a label for the rows below it."
+      }
+    },
+    {
+      "part": "Earnings row",
+      "holds": "A headerItems row: an icon, a short title, and the figure on the right.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A headerItems row: an icon, a short title, and the figure on the right."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "Separates what you earn from what the plan includes; goes with the header.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Separates what you earn from what the plan includes."
+      }
+    },
+    {
+      "part": "Upsell",
+      "holds": "The bodyHeader slot: a Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it."
+      }
+    },
+    {
+      "part": "Benefit row",
+      "holds": "An items row: an icon and a short perk.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "An items row: an icon and a short perk."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "The call to action: buttonLabel and onButtonPress; showButton hides it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "buttonLabel and onButtonPress; showButton hides it."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card is 344 px wide by default; to fill its container, set width to '100%'.",
+      "strength": "recommended",
+      "target": "width",
+      "from": {
+        "section": "sizing",
+        "quote": "It's 344 px wide unless you set width to another number or a percentage, such as 100% to fill its container."
+      }
+    },
+    {
+      "text": "Let the screen own the next step through onButtonPress; the card doesn't act on its own.",
+      "strength": "recommended",
+      "target": "onButtonPress",
+      "from": {
+        "section": "inContext",
+        "quote": "The card doesn't act on its own."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass your own rows (headerItems and items, or the header and children slots) whenever those sections show: the default rows repeat one placeholder.",
+      "strength": "required",
+      "target": "items",
+      "from": {
+        "section": "sources",
+        "quote": "Its default rows repeat one placeholder, so always pass your own."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "the sentence has no condition: any card that shows its default rows shows placeholder content."
+      }
+    },
+    {
+      "text": "Set showHeader false to drop the header title, its rows and the divider together.",
+      "strength": "recommended",
+      "target": "showHeader",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "showHeader drops the title, its rows, and the divider"
+      }
+    },
+    {
+      "text": "Set bodyHeader to null to remove the upsell, or pass a node to replace it.",
+      "strength": "recommended",
+      "target": "bodyHeader",
+      "value": "null",
+      "from": {
+        "section": "configuration",
+        "quote": "bodyHeader set to null removes the upsell"
+      }
+    },
+    {
+      "text": "To hide the button, set showButton false; button={null} still renders the default button.",
+      "strength": "required",
+      "target": "showButton",
+      "value": "false",
+      "from": {
+        "fact": "props:button"
+      }
+    },
+    {
+      "text": "Use AppearanceBrand to recolour the icons, the upsell and the button together; the card stays white.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand recolours the icons, the upsell, and the button together; the card stays white."
+      }
+    },
+    {
+      "text": "Set modes once on the card: they cascade to its rows, icons, upsell and button.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "fact": "props:modes"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Show what people get, then one way to get it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Show what people get, then one way to get it."
+        }
+      },
+      {
+        "text": "Write the header title as a label, such as “You will earn”.",
+        "strength": "recommended",
+        "target": "headerTitle",
+        "from": {
+          "section": "content",
+          "quote": "Write the header title as a label, such as “You will earn”."
+        }
+      },
+      {
+        "text": "Keep each row title to a short noun phrase, one benefit per row.",
+        "strength": "recommended",
+        "target": "BenefitCardItem.title",
+        "from": {
+          "section": "content",
+          "quote": "Keep each row to a short noun phrase"
+        }
+      },
+      {
+        "text": "Put a row's figure in trailingText, where the figures line up on the right, not in its title.",
+        "strength": "recommended",
+        "target": "BenefitCardItem.trailingText",
+        "from": {
+          "section": "content",
+          "quote": "put its number in trailingText, where the figures line up on the right."
+        }
+      },
+      {
+        "text": "Do not write a sentence as a row title: a long title is cut off, and the benefit with it.",
+        "strength": "discouraged",
+        "target": "BenefitCardItem.title",
+        "from": {
+          "section": "doDont",
+          "quote": "A long title is cut off, and the benefit with it."
+        }
+      },
+      {
+        "text": "Label the button with a verb, such as “Upgrade”.",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "section": "content",
+          "quote": "Label the button with a verb, such as “Upgrade”."
+        }
+      }
+    ],
+    "good": [
+      "You will earn",
+      "JioPoints",
+      "Up to 2000 pts",
+      "Zero forex markup on cards",
+      "Priority support, 24/7",
+      "Upgrade"
+    ],
+    "bad": [
+      "Pay abroad with any of your cards and get zero forex markup",
+      "Up to 2000 JioPoints",
+      "Up to ₹5000 cashback"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "The card has no state of its own; only its button acts, through onButtonPress, with Button's states.",
+      "from": {
+        "section": "states",
+        "quote": "The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states."
+      }
+    },
+    {
+      "state": "Without the button",
+      "when": "showButton false: a summary of the plan.",
+      "from": {
+        "section": "states",
+        "quote": "showButton off: a summary of the plan."
+      }
+    },
+    {
+      "state": "Pressable card",
+      "when": "onPress set: the whole card is one button that dims while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button that dims while pressed"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Avoid onPress while the card has a button: on the web the card's own buttons then sit inside it (#280).",
+      "strength": "discouraged",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280)."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep each perk short",
+      "dont": "Write a sentence as a row",
+      "why": "A long title is cut off, and the benefit with it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep each perk short"
+      }
+    },
+    {
+      "do": "Put the figure in trailingText",
+      "dont": "Put the figure in the title",
+      "why": "The amounts are buried in the text.",
+      "from": {
+        "section": "doDont",
+        "quote": "Put the figure in trailingText"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A plan card with its own earnings rows, perks and an upgrade button.",
+      "jsx": "<BenefitCard\n  headerTitle=\"You will earn\"\n  headerItems={[\n    { icon: 'ic_jewellery_diamond', title: 'JioPoints', trailingText: 'Up to 2000 pts' },\n    { icon: 'ic_offer', title: 'Cashback', trailingText: 'Up to ₹5000' },\n  ]}\n  items={[\n    { icon: 'ic_card', title: 'Zero forex markup on cards' },\n    { icon: 'ic_support', title: 'Priority support, 24/7' },\n  ]}\n  buttonLabel=\"Upgrade\"\n  onButtonPress={() => {}}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "“JioPoints” with “Up to 2000 pts”, two perks, and “Upgrade”."
+      }
+    },
+    {
+      "purpose": "Full width on a plan screen, without the upsell, in one brand.",
+      "jsx": "<BenefitCard\n  width=\"100%\"\n  bodyHeader={null}\n  headerItems={[{ icon: 'ic_offer', title: 'Cashback', trailingText: 'Up to ₹5000' }]}\n  items={[{ icon: 'ic_support', title: 'Priority support, 24/7' }]}\n  onButtonPress={() => {}}\n  modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Tertiary' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "bodyHeader set to null closes the gap between the lists."
+      }
+    },
+    {
+      "purpose": "A summary of the plan: no header and no button.",
+      "jsx": "<BenefitCard\n  showHeader={false}\n  showButton={false}\n  items={[\n    { icon: 'ic_card', title: 'Zero forex markup on cards' },\n    { icon: 'ic_support', title: 'Priority support, 24/7' },\n  ]}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "showButton off: a summary of the plan."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "headerItems",
+      "description": "Defaults to two duplicate JioPoints rows, a placeholder.",
+      "quote": "`headerItems` (default two duplicate JioPoints rows)",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "items",
+      "description": "Defaults to two placeholder rows; children wins over items.",
+      "quote": "`items` (default two rows) or `children` (wins)",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "bodyHeader",
+      "description": "Defaults to the upsell Nudge; null or false removes it; a node replaces it.",
+      "quote": "`bodyHeader` (default upsell Nudge; `null`/`false` removes it; a node replaces it)",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "button",
+      "description": "Replaces the call to action; null still renders the default button, so hide it with showButton false.",
+      "quote": "`button` (replaces the CTA; `null` still renders the default)",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "Makes the root a Pressable button (opacity 0.92 while pressed), named by accessibilityLabel or else headerTitle.",
+      "quote": "`onPress` (root becomes a Pressable button, opacity 0.92 while pressed, named `accessibilityLabel ?? headerTitle`)",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "Cascades to the card's children, each over its own defaults: rows (List Item Style Minimal, Nudge padding None), icons (AppearanceBrand Secondary), figures (Text Sizes Small, Weight Regular), the button (Button / Size S) and the upsell (AppearanceBrand Neutral). A consumer AppearanceBrand overrides all three brand defaults at once.",
+      "quote": "A consumer AppearanceBrand overrides all three defaults at once.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "Recolours the icons, the upsell and the button; no mode changes the card's surface or title.",
+      "quote": "No mode changes the card's surface or title.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "Avatar Size",
+      "description": "Listed for BenefitCard, but changes nothing on the card.",
+      "quote": "Avatar Size, Badge Size, Profile Card Appearance, Slot gap: nothing.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "Badge Size",
+      "description": "Listed for BenefitCard, but changes nothing on the card.",
+      "quote": "Avatar Size, Badge Size, Profile Card Appearance, Slot gap: nothing.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "Profile Card Appearance",
+      "description": "Listed for BenefitCard, but changes nothing on the card.",
+      "quote": "Avatar Size, Badge Size, Profile Card Appearance, Slot gap: nothing.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "Slot gap",
+      "description": "Listed for BenefitCard, but changes nothing on the card.",
+      "quote": "Avatar Size, Badge Size, Profile Card Appearance, Slot gap: nothing.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "List Item Style",
+      "create": true,
+      "type": "mode collection",
+      "description": "Not in the package's mode list for BenefitCard, but it changes the rows; the card sets Minimal.",
+      "quote": "Not listed but effective: List Item Style, context5, Draggable List.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The default upsell's Close button does nothing: it has no handler, and the card passes no onClose (#271; fixed upstream in 7020bf9, which is not installed).",
+      "quote": "#271 confirmed in the browser here: the upsell's Close (26 × 26) has no handler, and clicking it leaves the upsell in place.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "With onPress, the card nests its Button and the upsell's Close inside a role=button element on the web (#280).",
+      "quote": "A pressable card nests its Button and Close inside a `role=button` element on the web.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "No mode changes the card's white surface or black title, including Color Mode Dark.",
+      "quote": "No mode changes the card's surface or title.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ]
+}
