@@ -1,29 +1,12 @@
 {
   "slug": "actionfooter",
-  "entryHash": "60804821e3d1ec510b8691c77476b23c5928c9cf993210604a22d7adefb29fea",
+  "entryHash": "9967c51a8f9ce07fc5880b221369e89cdbb321dc760f45a09d578e98fc265881",
   "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
-  "checkedAt": "2026-10-17T10:57:56Z",
+  "checkedAt": "2026-10-17T11:02:58Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/configuration/2",
-      "reason": "misreads-source: The cited fact says that with loose children \"IconButtons keep their intrinsic square size; everything else is auto-stretched\". The item says loose Button and IconButton children are both \"stretched to share the row\", which contradicts the fact for IconButton."
-    },
-    {
-      "field": "/placementAdvice/0",
-      "reason": "generalises-example: \"follows a short Coin composition\" describes the inContext payment example. The item turns it into a placement rule (\"Put the footer after a short composition\"). The guide never limits the footer to short compositions."
-    },
-    {
-      "field": "/useWhen/1",
-      "reason": "generalises-example: The inContext sentence describes one illustrated composition, a reviewed payment. The item makes it a general rule that the final decision of a short composition \"belongs at the bottom of the host\"."
-    },
-    {
-      "field": "/configuration/8",
-      "reason": "lost-context: The source only says keyboard avoidance \"remains consumer-owned\" and that avoidKeyboard has no effect. Marking \"Handle keyboard avoidance\" as required everywhere drops the implied condition that this matters only when a keyboard can cover the footer. It should be conditional, or a recommendation."
-    }
-  ],
-  "notes": "/facts/props/6 describes the inset as added \"to the 24px bottom padding\". 24 is only the bottomPadding default, so this wording is acceptable but slightly narrow. The examples pass modes to child components, which is redundant because modes cascade, but that is not a misreading."
+  "flags": [],
+  "notes": "/placementAdvice/0 and /placementAdvice/3 restate the same sources sentence (web normal flow, native pins), so one could be merged into the other. /states/2 names the 'Color Mode' collection, which the guide only implies by saying 'The owner receives Dark'. That collection does appear in the evidence, so this was not flagged."
 }

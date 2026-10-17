@@ -1,21 +1,12 @@
 {
   "slug": "link",
-  "entryHash": "9d1813404a26d4b8bba7586ea0c0fdfe6e9cc4408cc15050fbb504918917acdd",
+  "entryHash": "de88ddd5d562d33376d2935862e5cdc28d421581e6d9c65b0223739685410faa",
   "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
-  "checkedAt": "2026-10-17T10:57:15Z",
+  "checkedAt": "2026-10-17T10:59:59Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/placementAdvice/3",
-      "reason": "generalises-example: The evidence describes how the guide page is set up: \"so the page hosts every link in a Coin `VStack`, as an app would.\" The entry turns that page fixture into general placement advice. The inline-element behaviour is web-only and applies to a plain block parent, not to app layouts in general."
-    },
-    {
-      "field": "/configuration/6",
-      "reason": "stronger-than-source: The evidence says only that \"the page does not recommend recolouring links\". Not recommending something is not the same as discouraging it. The stated reason is also specific to Primary (\"low-contrast gold on white\"), but the item marks all Text Appearance recolouring as discouraged, including Secondary and Error, which the evidence does not criticise."
-    }
-  ],
-  "notes": "/facts/gaps/2 is dated 2026-10-01, but the claim about Figma variants comes from the 29 September sources section. The guide's 1 October sources line repeats it, so this is minor. /accessibility/1 describes 0.1.78 behaviour; on 0.1.77, Enter did not fire onPress and a disabled link stayed focusable (#174)."
+  "flags": [],
+  "notes": "Borderline items, not flagged: (1) /configuration/2 is marked [required]. The guide's \"the only width where Center has room to work\" and the evidence (\"Center shows only with Fill. Hug + Center renders at the left edge\") support it as a constraint whenever Center is used. Center with Hug is ineffective rather than harmful, so a human may prefer [recommended]. (2) /content/rules/0 (\"Links take people somewhere.\") is the core principle filed as a content rule; it is not guidance about label text. (3) /facts/gaps/2 is dated 2026-10-01, but the evidence file records the Figma gaps (no disabled or Center + Hug variant) under the 29 September check. The 0.1.78 check did not re-examine Figma. Similarly, /facts/props/3's opacity 0.4 comes from the 0.1.77 check, and only the aria-disabled/tabindex part was confirmed on 0.1.78."
 }

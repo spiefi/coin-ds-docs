@@ -1,17 +1,12 @@
 {
   "slug": "stepper",
-  "entryHash": "2a34a563eddfaf19c300a0122c38d9cae38146db154fe73e5ee11503d2543b9f",
+  "entryHash": "232a5b227be39115ecc2802ba09060fadd2986a36023d44f2cfddbd0766af70f",
   "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
-  "checkedAt": "2026-10-17T10:57:57Z",
+  "checkedAt": "2026-10-17T11:02:58Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/facts/modes/0",
-      "reason": "misreads-source: The evidence never says Step Status is missing from the package's mode list for Stepper. It only says colour comes from \"the `Step Status` mode on each Step\" and that \"A Stepper-level `Step Status` colours every step the same.\" The 'not in the mode list' claim adds a package fact the evidence does not support. The item is also dated 2026-10-05 but includes the 636f3f5 (2026-10-08) behaviour."
-    }
-  ],
-  "notes": "/facts/gaps/1 is dated 2026-10-13, but the package evidence that Stepper is vertical only and not interactive is from the 5 October check (the guide's Sources note, checked 13 October, repeats it). The evidence's 'Coin gaps' section does not list it as a gap. /configuration/5 cites a 5 October browser observation from before 636f3f5. It probably still holds, because the default number status maps to the active purple colour, but the evidence does not re-verify it after the fix."
+  "flags": [],
+  "notes": "No misreadings found. Two minor points for a human reviewer. (1) /facts/gaps/3 is dated 2026-10-13, but the evidence's 13 October section says nothing about Storybook. The stale-Storybook finding comes from the 5 October check: the published index.json was built before the 0.1.78 release commit, and the Complete, Error and Warning Step stories set only `status`, so they render purple. The content is accurate and matches the guide's Sources note (checked 13 October). Consider re-dating it to 2026-10-05. (2) /facts/gaps/1 lists 'vertical only, not interactive, owns no current step' as a gap. The evidence records these as package facts, not under 'Coin gaps'. Since 636f3f5, the first incomplete step gets aria-current, but Stepper still has no prop for choosing the current step. The wording is accurate; whether it counts as a gap is an editorial call."
 }

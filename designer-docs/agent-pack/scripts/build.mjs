@@ -184,7 +184,7 @@ for (const problem of validate('releases', nextReleases)) {
 for (const { entry } of entries) {
   const kinds = entry.status.flags.reduce((acc, flag) => ({ ...acc, [flag.by]: (acc[flag.by] ?? 0) + 1 }), {})
   const summary = Object.entries(kinds).map(([by, n]) => `${n} ${by}`).join(', ')
-  console.log(`  ${entry.status.state === 'documented' ? '✓' : '⚑'} ${entry.slug.padEnd(12)} ${entry.status.state}${summary ? ` (${summary})` : ''}`)
+  console.log(`  ${entry.status.state === 'documented' ? '✓' : entry.status.state === 'undocumented' ? '·' : '⚑'} ${entry.slug.padEnd(12)} ${entry.status.state}${summary ? ` (${summary})` : ''}`)
 }
 const outside = [...new Set(entries.flatMap((record) => record.outsidePilot))]
 if (outside.length) console.log(`  useInstead targets outside the pilot: ${outside.join(', ')}`)

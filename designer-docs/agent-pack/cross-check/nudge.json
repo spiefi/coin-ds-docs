@@ -1,21 +1,12 @@
 {
   "slug": "nudge",
-  "entryHash": "ea158c9c94a7d3c399702b26dd3ed26484a9602bce882a994ef51564da4b0d92",
+  "entryHash": "003f19ab8a3d75d099054b2ad701b995672c2162d464afbd37c6fd0dcdb1c2ba",
   "guideCommit": "8f8313d23d006d725301a0690ff2ef863f963d77",
-  "checkedAt": "2026-10-17T10:57:38Z",
+  "checkedAt": "2026-10-17T11:00:25Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/configuration/8",
-      "reason": "misreads-source: The cited fact says only \"`buttonSlot={null}` removes it\". The item adds \"or false\", which nothing cited supports. The 0.1.78 evidence also says \"`buttonSlot={null}` still renders the default \\\"Button\\\"\", so the removal claim rests on the newer types alone."
-    },
-    {
-      "field": "/accessibility/1",
-      "reason": "lost-context: \"The close button is always labelled “Close”\" describes the default close IconButton. Facts /facts/props/8 and /facts/gaps/3 say closeSlot replaces that default. Targeting closeSlot applies the \"always\" to a custom close, which the source does not cover."
-    }
-  ],
-  "notes": "The package-type facts disagree with the guide and the 0.1.78 evidence. /facts/props/7 says showClose defaults to true, while the guide and evidence say the package \"adds it only when asked\" (default false). /facts/props/1 says title defaults to \"\", while the guide says \"Without props it reads “Split payment” and “Button”\". The 13 October evidence explains this: c1fa197 carries the #206 changes and the guide copy \"wasn't re-checked\". Items that rest on the old behaviour may be stale once #206 is published: /configuration/6 (add a close when people may dismiss it), /content/rules/4 (placeholder copy, so set all three) and /doDont/1. /configuration/15 marks Dark as discouraged. The guide only says the page shows Light only, but the evidence (title about 1.1:1, effectively invisible) makes avoiding Dark reasonable."
+  "flags": [],
+  "notes": "No misstatements found. Three things a human reviewer may want to check. (1) /content/good lists \"Split payment\" as good copy, but the guide's doDont names it as placeholder text: \"Without props it reads “Split payment” and “Button”.\" The guide also uses \"Split payment\" as real copy in its examples, so this is not a misreading. Still, an agent could mistake the default title for approved copy, and /content/bad lists only \"Button\". (2) The c1fa197 install (13 October) moved the close button to show by default, and the evidence says the guide copy may still describe it as optional. /configuration/6 (\"Show the close button when people may dismiss the nudge\") follows the guide, while /configuration/7 follows the package default of true. They are consistent with their sources but frame the close button differently. (3) /facts/props/1 cites the 13 October evidence (root is a region named by its title). The 7 October accessibility section, behind /facts/gaps and the guide's sources line (\"The card has no role or name on the web\"), is now out of date for the root role."
 }

@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "id": "Text",
+  "slug": "text",
+  "category": "content",
+  "tags": [],
+  "status": {
+    "state": "undocumented",
+    "guideCommit": null,
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-17T11:10:07Z",
+    "flags": []
+  },
+  "summary": "Coin has no designer guide for Text; use its facts from the package types.",
+  "useWhen": [],
+  "avoidWhen": [],
+  "anatomy": [],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [],
+  "configuration": [],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [],
+  "accessibility": [],
+  "doDont": [],
+  "examples": [
+    {
+      "purpose": "A line of body text.",
+      "jsx": "<Text text=\"Paid from your JioFinance account.\" modes={{ 'Color Mode': 'Light' }} />",
+      "from": null
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "text",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "The text content to display. You may also pass content as JSX children (e.g. `<Text>Hello</Text>`) — when both are provided, `children` wins."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Child nodes (string, number, or nested <Text>/<RNText> elements). This mirrors the standard React Native `<Text>` API so the component is a near-drop-in replacement."
+      },
+      {
+        "name": "textAlign",
+        "type": "'Left' | 'Center'",
+        "required": false,
+        "source": "types",
+        "values": [
+          "Left",
+          "Center"
+        ],
+        "default": "Left",
+        "description": "Horizontal alignment of the text. Default \"Left\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes configuration for design token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style override for the text."
+      },
+      {
+        "name": "numberOfLines",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Number of lines to limit the text to."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation entirely: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored. The text is also never shrunk by a tight parent — it keeps its full intrinsic size and overflows (even breaking the parent layout) rather than clipping into an ellipsis. It still wraps onto multiple lines."
+      },
+      {
+        "name": "singleLine",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, forces the text onto a single line with no wrapping (implies {@link disableTruncation}). On web the line overflows horizontally — brutally breaking the parent layout if it has to — instead of wrapping or truncating."
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Explicit per-instance loading override. When `true`, this `Text` renders a skeleton placeholder regardless of any surrounding `<SkeletonGroup>`. When `false`, the surrounding group is ignored for this instance. When omitted, the surrounding group's `loading` flag wins."
+      },
+      {
+        "name": "skeletonWidth",
+        "type": "number | `${number}%`",
+        "required": false,
+        "source": "types",
+        "description": "Optional width used while the skeleton is showing. Numbers are dp; `'100%'` (etc.) is a valid RN dimension. Defaults to a character-count heuristic based on the resolved font size and the supplied content."
+      },
+      {
+        "name": "skeletonLines",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Optional explicit line count for the skeleton placeholder. Defaults to `numberOfLines ?? 1`. Useful when `numberOfLines` is intentionally unbounded but you want a sensible multi-line placeholder."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Text reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection Text reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Text reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection Text reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection Text reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection Text reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Child nodes (string, number, or nested <Text>/<RNText> elements). This mirrors the standard React Native `<Text>` API so the component is a near-drop-in replacement.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": []
+  },
+  "sources": {
+    "guide": null,
+    "figma": null,
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-text--docs"
+  }
+}

@@ -1,14 +1,17 @@
 // The pack graph, derived by code from the entries (no AI step):
 //
 // - useInstead: an avoidWhen rule's useInstead.
-// - placedIn: a placementAdvice rule whose text names an exact component export.
+// - placedIn: a placementAdvice rule whose text names an exact component export
+//   (a word, not part of a longer name).
 // - slotAccepts: an allowedChildren slot that names a component export
 //   (ReactNode, or a row type such as BenefitCardItem, makes no edge).
 // - usedWith: another component in the same example's JSX.
 //
 // Each edge's source is a JSON pointer into the from-component's entry.
 
-const words = (text) => [...String(text).matchAll(/\b[A-Z][A-Za-z0-9]*\b/g)].map((match) => match[0])
+// A capitalised word followed by another capitalised word or a number is part
+// of a longer name ("Text Input", "Form Field", "Form 16"), not the export it spells.
+const words = (text) => [...String(text).matchAll(/\b[A-Z][A-Za-z0-9]*\b(?!\s+(?:[A-Z]|\d))/g)].map((match) => match[0])
 const jsxTags = (jsx) => [...new Set([...jsx.matchAll(/<([A-Z][A-Za-z0-9]*)/g)].map((match) => match[1]))]
 
 export function buildGraph({ packVersion, entries, componentNames }) {

@@ -1,21 +1,12 @@
 {
   "slug": "tabitem",
-  "entryHash": "74c42eaacaac0ad04584c4a517def84540f1af8c0753b1b4cc74f8a74f94d74c",
+  "entryHash": "ce432c82cc3f2679bf4b908d7dc59726022f0df288ef898284fc10e80bba4d8d",
   "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
-  "checkedAt": "2026-10-17T10:57:37Z",
+  "checkedAt": "2026-10-17T11:00:22Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/configuration/6",
-      "reason": "misreads-source: The evidence only says that inside Tabs a Tab Item \"receives the row's `modes` (its own win)\". It never advises setting modes on Tabs rather than on the item. The instruction \"Set modes on Tabs\" is the extractor's own advice, not something the evidence supports."
-    },
-    {
-      "field": "/facts/props/3",
-      "reason": "misreads-source: The evidence says the item \"receives the row's `modes` (its own win)\". It does not say the two are merged key by key. \"Merge under the item's own\" claims a specific merge behaviour, but \"its own win\" could just as well mean the item's modes replace the row's entirely."
-    }
-  ],
-  "notes": "/accessibility/2 (\"Only the selected tab is in the Tab order\") quotes the Sources note correctly. A human may still want to pair it with /facts/gaps/0 (#272): when no tab is active, no tab is in the Tab order at all. /accessibility/3 turns the #272 bug into a usage recommendation (\"Keep one tab in the row active\"). That is a reasonable inference and fits the doDont \"Mark one tab active\", but the evidence frames it as a defect, not as guidance."
+  "flags": [],
+  "notes": "/accessibility/3 turns an open regression (#272, In progress) into advice to keep one tab active. The evidence supports the consequence, and the guide's \"The screen marks one active\" fits it. But once #272 is fixed, this item should be revisited or moved to gaps, since it duplicates /facts/gaps/0. /examples/2 uses badge={3}: the guide only says to set the counter badge when a view needs a count, so the prop name and value come from the package facts, not the guide."
 }

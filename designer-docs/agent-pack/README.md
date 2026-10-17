@@ -187,3 +187,10 @@ last results when the pack version and model match.
   Coin". The index lists only entries.
 - **Package version** comparisons for stale evidence use the version
   (`0.1.78`), not the build; the build is kept in `guidance/<slug>.json`.
+- **The flow kit** (0.1.78+2) adds 15 guides to the pilot six. These are the guides a short flow such as a personal loan needs: VStack, HStack, ButtonGroup, IconButton, Link, FormField, CheckboxItem, Tabs, TabItem, Nudge, AppBar, ActionFooter and Stepper, plus Step (Stepper's children) and Slider (loan amount and tenure).
+- **Undocumented entries** are the public primitives a flow needs but no guide covers. They have facts, one example (`from: null`), and a summary only when the component's own JSDoc has one, quoted verbatim. Any hint must rest on a fact. They are not cross-checked, since there is no guide to check them against.
+- **Briefs add two small extras to the contract list**: a props-and-modes line and the entry's gaps. Both are kept because agents need them to configure a component and to report gaps.
+- **`placedIn` matches whole names only.** A capitalised word followed by another capitalised word or a number is part of a longer name ("Text Input", "Form 16"), so it makes no edge. The rule still reads "contains" as placement in two places: ButtonGroup→IconButton and CheckboxItem→Checkbox.
+- **Variant contents.** The `brief` variant also holds the full `.md` files, to open on request. The `graph` variant holds only what the contract lists.
+- **Runner token totals** come from the session's closing `result` event. An assistant event's output count is the count when its message started, not the final one. The input-side sums over the assistant events must equal the result event's, and the runner checks that they do.
+- **Dismissals in `reviews/`** for this round were written by the extracting session, with reasons, for Astra to confirm or reverse.

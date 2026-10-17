@@ -159,27 +159,44 @@ function claude(prompt, { cwd, tools }) {
   })
 }
 
-/** Token use over every model call in a session's stream events. */
+/**
+ * Token use over every model call in a session's stream events.
+ *
+ * Each assistant event carries the usage known when its message started: its
+ * input, cache-read and cache-write counts are final, but its output count is
+ * not. A message can also arrive as several events sharing an id. So calls and
+ * peakContext come from the assistant events (once per message id), and the
+ * totals from the closing result event, which sums every call; the input-side
+ * sums of the two must agree.
+ */
 export function usageOf(events) {
-  // An API call's assistant message can arrive as several events (one per
-  // content block) sharing a message id; keep the last usage seen per id.
   const calls = new Map()
   for (const event of events) {
     if (event.type !== 'assistant' || !event.message?.usage) continue
     calls.set(event.message.id ?? `call-${calls.size}`, event.message.usage)
   }
-  const totals = { input: 0, cacheRead: 0, cacheWrite: 0, output: 0, peakContext: 0 }
+  const perCall = { input: 0, cacheRead: 0, cacheWrite: 0, peakContext: 0 }
   for (const usage of calls.values()) {
     const input = usage.input_tokens ?? 0
     const cacheRead = usage.cache_read_input_tokens ?? 0
     const cacheWrite = usage.cache_creation_input_tokens ?? 0
-    totals.input += input
-    totals.cacheRead += cacheRead
-    totals.cacheWrite += cacheWrite
-    totals.output += usage.output_tokens ?? 0
-    totals.peakContext = Math.max(totals.peakContext, input + cacheRead + cacheWrite)
+    perCall.input += input
+    perCall.cacheRead += cacheRead
+    perCall.cacheWrite += cacheWrite
+    perCall.peakContext = Math.max(perCall.peakContext, input + cacheRead + cacheWrite)
   }
-  return { ...totals, calls: calls.size }
+  const total = events.findLast((event) => event.type === 'result')?.usage
+  if (!total) throw new Error('the session ended without a result event carrying usage')
+  const totals = {
+    input: total.input_tokens ?? 0,
+    cacheRead: total.cache_read_input_tokens ?? 0,
+    cacheWrite: total.cache_creation_input_tokens ?? 0,
+    output: total.output_tokens ?? 0,
+  }
+  for (const key of ['input', 'cacheRead', 'cacheWrite']) {
+    if (totals[key] !== perCall[key]) throw new Error(`${key}: the calls sum to ${perCall[key]}, the result event says ${totals[key]}`)
+  }
+  return { ...totals, peakContext: perCall.peakContext, calls: calls.size }
 }
 
 /** Pack files the agent opened with Read, relative to the variant folder, each once. */

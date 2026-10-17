@@ -1,0 +1,337 @@
+{
+  "label": "UNSCORED measurement smoke test. Not graded and not a test result: it only shows that the token numbers work. Expected answers are not settled.",
+  "results": {
+    "schemaVersion": 2,
+    "packVersion": "0.1.78+2",
+    "runAt": "2026-10-17T11:10:49Z",
+    "model": "claude-sonnet-5-5",
+    "variants": [
+      "none",
+      "full",
+      "brief",
+      "graph"
+    ],
+    "questions": [
+      {
+        "id": "q23",
+        "kind": "choose",
+        "question": "Show applicants where they are in a four-stage loan application (Personal details, Income, Documents, Review) and which stages are done.",
+        "expected": {
+          "validAnswers": [
+            "A Stepper with four Step children, each titled with its stage and given a status (complete for done stages, the current stage marked, upcoming stages inactive)"
+          ],
+          "required": [
+            "Uses Stepper with Step children",
+            "Every Step gets its own title; none keeps the default 'Stepper Item'"
+          ],
+          "recommended": [
+            "Titles name the stage in a few words, not actions",
+            "A Step's status and its Step Status mode stay matched (no check on purple)",
+            "The last stage shows no connector",
+            "The next action is a separate Button; Stepper is not pressable",
+            "The Stepper gets a spoken name such as 'Loan application progress'"
+          ],
+          "settledBy": null
+        },
+        "runs": [
+          {
+            "variant": "none",
+            "answer": "I can't confirm a stepper component for this in jfs-components 0.1.78. I have no Coin docs here, and I don't want to invent prop names and present them as real. Here is what I'd do and what to check.\n\n**What the screen needs**\n- Four labelled stages: Personal details, Income, Documents, Review.\n- Each stage shows one of three states: done, current or upcoming.\n- The current stage is visually distinct from the others.\n\n**What I'd look for in Coin, in this order**\n1. A stepper or progress-steps component, which might be named `Stepper`, `Steps`, `ProgressSteps` or `StepIndicator`. If it exists, I'd expect something like this:\n   ```jsx\n   <Stepper currentStep={2}>   // prop names are guesses\n     <Step label=\"Personal details\" status=\"completed\" />\n     <Step label=\"Income\" status=\"current\" />\n     <Step label=\"Documents\" status=\"upcoming\" />\n     <Step label=\"Review\" status=\"upcoming\" />\n   </Stepper>\n   ```\n   Check the real name, whether state is derived from a current-index prop or set per step, and whether it supports a completed (check) state.\n\n2. If there is no stepper, a fallback built from Coin primitives. This would be a row or column of Coin's text and icon components, with a check icon for done stages, a highlighted marker for the current one and a muted marker for the rest. Use Coin's design tokens for colour and spacing, not hardcoded values.\n\n3. A plain progress bar, if Coin has one, only works as a supplement. It shows overall progress (\"2 of 4\"), but it can't label stages or mark which ones are done.\n\n**Things to confirm with the designer and developer**\n- Whether the stepper is horizontal or vertical. Four stages with long labels like \"Personal details\" may be cramped on narrow screens, and vertical is usually safer.\n- Whether done stages should be tappable to go back. If so, the component needs a press handler per step. If it doesn't have one, you'd wrap each step in a pressable.\n- Accessibility. Each step should announce its state, for example \"Income, step 2 of 4, current\". Verify that Coin does this, and add `accessibilityLabel` yourself if it doesn't.\n\nIf you can share the package's exports (the `index.d.ts` in `node_modules/jfs-components`) or the Coin docs, I can give you exact props and modes.",
+            "read": [],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 2,
+              "cacheRead": 2912,
+              "cacheWrite": 2494,
+              "output": 925,
+              "peakContext": 5408,
+              "coin": 0,
+              "coinEstimated": true
+            },
+            "calls": 1,
+            "durationMs": 24604
+          },
+          {
+            "variant": "full",
+            "answer": "Use **Stepper** with one **Step** per stage. It's vertical only. Coin has no horizontal step indicator, so a horizontal progress row can't be built with Coin.\n\n**Components and props**\n- `Stepper` is the container. Give it `accessibilityLabel=\"Loan application progress\"` and `modes={{ 'Color Mode': 'Light' }}`.\n- Each `Step` takes a `title` and a `status`:\n  - Done stages get `status=\"complete\"`, which renders a green circle with a check.\n  - The current stage keeps the default `status=\"number\"`, which renders a purple circle with the stage number. Stepper marks the first incomplete Step as current by itself.\n  - Upcoming stages need `modes={{ 'Step Status': 'inactive' }}` on that Step to get the pale lavender circle. Without it they render solid purple.\n- Optional text: `supportingText` for what the stage involves, and `metaText` for a date.\n- Set `Step Status` on each Step, not on the Stepper. A Stepper-level value colours every step the same.\n- Stepper turns off the last connector line for you.\n- Put the next action in a separate `Button`, because Stepper isn't pressable.\n\n**Example** (Personal details and Income done, Documents current, Review upcoming):\n\n```tsx\n<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Stepper accessibilityLabel=\"Loan application progress\" modes={{ 'Color Mode': 'Light' }}>\n    <Step title=\"Personal details\" supportingText=\"Name, address and PAN added\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Income\" supportingText=\"Employment and salary added\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Documents\" supportingText=\"Upload your salary slips and ID proof\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Review\" supportingText=\"Check everything and submit\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n  </Stepper>\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>\n```\n\n**What Coin can't do here**\n- **No horizontal layout.** Stepper is vertical only. The guide marks horizontal stages as discouraged, and no other Coin component fills that role.\n- **Not tappable.** Applicants can't tap a stage to jump back to it. Stepper and Step have no `onPress` and no focus.\n- **No tracking of the current stage.** Stepper owns no current step. Your screen has to work out each stage's `status` and `Step Status`, and update them as the applicant moves on.\n- **Dark mode is unreliable.** In Dark mode, complete and warning stages turn red, and supporting text and dates stay near-black. The guide only shows Light, so stay on Light.\n- **Accessibility.** The check, cross and alert glyphs have no accessible names. The title and the status word, such as \"Completed\", carry the meaning. Write titles and supporting text that say what happened.\n- **Stale Storybook.** The published Storybook predates 0.1.78. Its done, error and warning examples show the icon on purple, so don't copy it.\n\nI used the stage names you gave as titles. The supporting text above is placeholder copy that I wrote. Replace it with real copy.",
+            "read": [
+              {
+                "file": "components/step.md",
+                "tokens": 3916
+              },
+              {
+                "file": "components/stepper.md",
+                "tokens": 3607
+              },
+              {
+                "file": "index.json",
+                "tokens": 3140
+              },
+              {
+                "file": "rules.md",
+                "tokens": 1565
+              }
+            ],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 6,
+              "cacheRead": 21388,
+              "cacheWrite": 21419,
+              "output": 1571,
+              "peakContext": 24333,
+              "coin": 12228,
+              "coinEstimated": true
+            },
+            "calls": 3,
+            "durationMs": 27045
+          },
+          {
+            "variant": "brief",
+            "answer": "Use **Stepper** with one **Step** per stage. This fits Coin's documented pattern for showing progress and per-stage outcome.\n\n```tsx\n<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Stepper accessibilityLabel=\"Loan application progress\" modes={{ 'Color Mode': 'Light' }}>\n    <Step title=\"Personal details\" supportingText=\"Name, address and PAN\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Income\" supportingText=\"Employment and monthly income\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Documents\" supportingText=\"Upload your ID and income proof\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Review\" supportingText=\"Check everything and submit\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n  </Stepper>\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>\n```\n\n**How it maps to the four stages**\n- **Done stages (Personal details, Income):** set `status=\"complete\"`. The prop sets the check glyph and its green colour together.\n- **Current stage (Documents):** set no status and no `Step Status` mode. It renders in the current purple.\n- **Upcoming stage (Review):** set `'Step Status': 'inactive'` on that Step. Without it, upcoming steps render solid purple. Set this mode on each Step. Don't set it on the Stepper, because that colours every step the same.\n- **Optional text:** `supportingText` says what a stage involves or how it went. `metaText` adds a date if timing matters.\n- **Modes:** pass `modes` to each Step, as the pack's rules require.\n- **Next action:** put it in a separate `Button`, as above, because Stepper isn't pressable. The current stage can also hold its own button in `children`, for example an Upload button next to a `StepLabel`.\n- **Layout:** the Stepper fills its container with 8 px on each side. Allow at least 52 px per stage.\n\n**What Coin can't do here**\n- **Layout and interaction:** the Stepper is vertical only and not interactive. You can't have a horizontal bar or tappable stages to jump back. Step has no `onPress` and no focus.\n- **Current stage:** the Stepper doesn't track it. Your screen has to work out each stage's state and update the props as the applicant moves on.\n- **Dark mode:** complete and warning stages turn red, and supporting text and dates stay near-black. The guide only shows Light, so I'd stay in Light mode for now.\n- **Accessibility:** the check, cross and alert glyphs have no accessible name. The title and status word carry the meaning, so keep the titles clear.\n- **Storybook:** the published Storybook predates 0.1.78, so its done, error and warning examples show the icon on purple. Don't copy that.\n\nI used only the Stepper and Step briefs, plus `rules.md` and `index.json`. I didn't open the full entries, because the briefs answered the question.",
+            "read": [
+              {
+                "file": "components/step.brief.md",
+                "tokens": 922
+              },
+              {
+                "file": "components/stepper.brief.md",
+                "tokens": 906
+              },
+              {
+                "file": "index.json",
+                "tokens": 3140
+              },
+              {
+                "file": "rules.md",
+                "tokens": 1565
+              }
+            ],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 6,
+              "cacheRead": 21466,
+              "cacheWrite": 13175,
+              "output": 1609,
+              "peakContext": 16089,
+              "coin": 6533,
+              "coinEstimated": true
+            },
+            "calls": 3,
+            "durationMs": 22452
+          },
+          {
+            "variant": "graph",
+            "answer": "Use **Stepper** with one **Step** per stage. Stepper is the documented Coin component for showing where someone is in a multi-stage process and how each stage went.\n\n```tsx\n<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Stepper accessibilityLabel=\"Loan application progress\" modes={{ 'Color Mode': 'Light' }}>\n    <Step title=\"Personal details\" supportingText=\"Name, PAN and address\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Income\" supportingText=\"Employment and monthly income\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Documents\" supportingText=\"Upload your proofs\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Review\" supportingText=\"Check and submit\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n  </Stepper>\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>\n```\n\n**How the stages map to props**\n- **Done stages:** set `status=\"complete\"`. This sets the green check glyph and its colour together.\n- **Current stage:** leave `status` unset, as in the pack's KYC example. I'm assuming that renders the purple current style, but the pack's briefs don't spell it out. The `status` prop also accepts `number`, `error` and `warning`.\n- **Upcoming stages:** set `'Step Status': 'inactive'` in that Step's own `modes`. Without it, upcoming steps render solid purple.\n- **Titles and text:** give every Step a `title`. `supportingText` and `metaText` (a date) are optional.\n- **Modes:** pass `'Color Mode'` to Stepper and to each Step, per rule 8.\n- **Wrapper and action:** `VStack` is the wrapper, and the next action is a separate `Button`, because Stepper isn't pressable.\n\n**Rules and limits**\n- **Step Status:** don't set `'Step Status'` on the Stepper itself. That colours every step the same.\n- **No current-step state:** Stepper owns no current step. Your screen must work out each stage's state and update the `status` and `modes` as the applicant moves on.\n- **Orientation and interaction:** Stepper is vertical only and not interactive. You can't lay the four stages out horizontally, and applicants can't tap a stage to jump to it. If you need either, Coin has no component for it. I did not check the undocumented components, such as `SegmentedTrack` or `StepLabel`, for a horizontal option.\n- **Sizing:** allow at least 52 px per stage. A stage grows when its text wraps.\n- **Check glyph:** the check glyph has no accessible name. The title and status word carry the meaning, so keep titles clear.\n- **Dark mode:** complete stages turn red, and supporting text and dates stay near-black. The designer guide shows Light mode only, so stick to Light for now.\n- **Storybook:** the published Storybook predates 0.1.78, so its done, error and warning examples show the icon on purple. Trust the package behaviour over Storybook.\n\nI read only the Stepper and Step briefs and the Stepper links. The full entries (`components/step.md`) aren't in this folder.",
+            "read": [
+              {
+                "file": "components/step.brief.md",
+                "tokens": 922
+              },
+              {
+                "file": "components/stepper.brief.md",
+                "tokens": 906
+              },
+              {
+                "file": "components/stepper.links.md",
+                "tokens": 114
+              },
+              {
+                "file": "index.json",
+                "tokens": 3140
+              },
+              {
+                "file": "rules.md",
+                "tokens": 1565
+              }
+            ],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 8,
+              "cacheRead": 37937,
+              "cacheWrite": 14003,
+              "output": 1980,
+              "peakContext": 16917,
+              "coin": 6647,
+              "coinEstimated": true
+            },
+            "calls": 4,
+            "durationMs": 31735
+          }
+        ]
+      },
+      {
+        "id": "q27",
+        "kind": "compose",
+        "question": "The loan application's footer has 'Back' and 'Continue'. Build it so Continue clearly advances the application.",
+        "expected": {
+          "validAnswers": [
+            "ActionFooter holding a ButtonGroup with Back and then Continue, Continue with the stronger emphasis"
+          ],
+          "required": [
+            "One action is clearly primary; Back and Continue do not both get the strongest emphasis"
+          ],
+          "recommended": [
+            "ButtonGroup for a row of actions (Stack for a vertical order)",
+            "Size and modes set once on the group, not per child",
+            "The group is given a width",
+            "Short verb-led labels, ending with the action people are most likely to choose"
+          ],
+          "settledBy": null
+        },
+        "runs": [
+          {
+            "variant": "none",
+            "answer": "I can't verify the jfs-components 0.1.78 API from here, so the component and prop names below are my best recollection or a guess. Check them against the package's exported types before using them.\n\n**Approach:** make Continue the one primary action and Back a lower-emphasis action. Emphasis is what makes Continue read as \"advance\".\n\n```jsx\nimport { Button } from 'jfs-components';\n\n<View style={{ flexDirection: 'row', gap: 12, padding: 16 }}>\n  <Button\n    label=\"Back\"\n    appearance=\"secondary\"   // low emphasis: outlined or tonal\n    onPress={onBack}\n    style={{ flex: 1 }}\n  />\n  <Button\n    label=\"Continue\"\n    appearance=\"primary\"     // filled, the only primary on screen\n    onPress={onContinue}\n    disabled={!isStepValid}\n    style={{ flex: 2 }}\n  />\n</View>\n```\n\n**What I'm confident about:**\n- Use one filled primary button (Continue) and one secondary or ghost button (Back). Never give both the same emphasis.\n- Make Continue wider (`flex: 2` vs `flex: 1`) and place it on the trailing side. Back goes on the leading side.\n- Disable Continue until the step is valid. Add a loading state while submitting, if Button supports one.\n\n**What I'm unsure about:**\n- I don't know the exact prop names. The emphasis prop might be `appearance`, `variant`, `type`, or `kind`. The label might be `label` or `children`. The disabled and loading props may also differ.\n- I don't know whether Coin has a dedicated footer or action-bar component, such as a sticky bottom CTA, that handles safe-area insets and a divider. If it does, use it instead of the raw `View`. If it doesn't, you'll need to pin the footer yourself and add `useSafeAreaInsets` padding.\n- I don't know the exact Coin mode or token names (for example, a brand-primary mode). Use the design system's tokens for colors and spacing rather than hardcoding them.\n- I'm not aware of Coin providing a \"Continue\" or \"next\" icon. If you want a trailing arrow, check whether Button has an icon slot such as `iconRight`. If it doesn't, you can't add one without a custom wrapper.\n\n**Accessibility:** set `accessibilityRole=\"button\"` on both buttons. When Continue is disabled, give it an `accessibilityState={{ disabled: true }}` and make sure the user can see why it's disabled, such as inline validation messages.\n\nAsk the developer to confirm the Button prop names in the package's TypeScript definitions, and ask the designer whether Coin has a sticky footer pattern.",
+            "read": [],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 2,
+              "cacheRead": 2912,
+              "cacheWrite": 2489,
+              "output": 997,
+              "peakContext": 5403,
+              "coin": 0,
+              "coinEstimated": true
+            },
+            "calls": 1,
+            "durationMs": 20916
+          },
+          {
+            "variant": "full",
+            "answer": "Use `ActionFooter` containing a `ButtonGroup` with two `Button`s. Give Continue the strongest emphasis and Back a quieter one.\n\n```tsx\n<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <ButtonGroup modes={{ 'Color Mode': 'Light', 'Button / Size': 'M' }}>\n    <Button\n      label=\"Back\"\n      onPress={goBack}\n      modes={{ Emphasis: 'Low', AppearanceBrand: 'Neutral' }}\n    />\n    <Button\n      label=\"Continue\"\n      onPress={goNext}\n      modes={{ Emphasis: 'High', AppearanceBrand: 'Primary' }}\n    />\n  </ButtonGroup>\n</ActionFooter>\n```\n\n**Why it's built this way**\n- **ActionFooter:** it keeps the next step at the bottom of the screen. For new code, pass it a single `ButtonGroup` child. It cascades `modes` to its children, so set `Color Mode` there.\n- **ButtonGroup:** the Buttons share the row width equally. Back comes first and Continue last, because the group guidance says to end with the action people are most likely to choose.\n- **Emphasis on each Button:** I set `Emphasis` on each Button instead of relying on `AppearanceBrand` alone. The pack's ActionFooter example uses only `AppearanceBrand` Primary and Secondary. `Emphasis` is the control the Button entry documents for how loudly an action speaks, and the pack's Button example for this Back/Continue pair uses `Emphasis` Low and High. Continue gets `High` and Back gets `Low` with `Neutral`.\n- **Don't set `Emphasis: 'High'` on the group.** That would make both buttons loud, which the guidance discourages. Set `Button / Size` once on the group and don't override it per child.\n- **Labels:** \"Back\" and \"Continue\" are short, verb-led and named for the decision, which fits the content rules. Don't use \"Go\" or \"Yes\".\n\n**Limits and caveats**\n- **Disabled state:** ActionFooter doesn't invent disabled or loading states. If Continue should wait until the form is valid, set `disabled={!isValid}` on that Button. A disabled Button fades to half opacity and keeps its width.\n- **Validation errors and confirmations:** show them near the content that changed, not in the footer.\n- **Keyboard:** ActionFooter does not avoid the keyboard. `avoidKeyboard` is deprecated and does nothing, so the screen has to handle it.\n- **Bottom spacing:** it defaults to 24px (`bottomPadding`) plus an optional safe-area inset (`safeAreaBottom`). Figma's sample shows 41px. That gap was flagged in the pack.\n- **Version check:** the ActionFooter and ButtonGroup checks were made on jfs-components 0.1.60, not 0.1.78. Re-check that the footer's native pinning and the group's child handling still behave as described.\n- **Step progress:** Coin doesn't give Continue a built-in sense of \"advancing\". The clarity comes from emphasis and the label. To show where someone is in the loan flow, add `Stepper` or `Step` elsewhere on the screen. I haven't read those entries.",
+            "read": [
+              {
+                "file": "components/actionfooter.md",
+                "tokens": 4817
+              },
+              {
+                "file": "components/button.md",
+                "tokens": 5487
+              },
+              {
+                "file": "components/buttongroup.md",
+                "tokens": 3419
+              },
+              {
+                "file": "index.json",
+                "tokens": 3140
+              },
+              {
+                "file": "rules.md",
+                "tokens": 1565
+              }
+            ],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 6,
+              "cacheRead": 21382,
+              "cacheWrite": 30179,
+              "output": 1790,
+              "peakContext": 33093,
+              "coin": 18428,
+              "coinEstimated": true
+            },
+            "calls": 3,
+            "durationMs": 28290
+          },
+          {
+            "variant": "brief",
+            "answer": "Use `ActionFooter` containing one `ButtonGroup` with two `Button`s. Make Continue the only strong action and Back the quieter one.\n\n```tsx\n<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <ButtonGroup modes={{ 'Color Mode': 'Light', 'Button / Size': 'M' }}>\n    <Button\n      label=\"Back\"\n      onPress={goBack}\n      modes={{ AppearanceBrand: 'Secondary' }}\n    />\n    <Button\n      label=\"Continue\"\n      onPress={goNext}\n      modes={{ AppearanceBrand: 'Primary', Emphasis: 'High' }}\n    />\n  </ButtonGroup>\n</ActionFooter>\n```\n\n**Why this makes Continue the clear next step**\n- **One strong action:** The `ActionFooter` and `ButtonGroup` briefs both say not to give the two actions equal emphasis. Only Continue sets `Emphasis: 'High'` with `AppearanceBrand: 'Primary'`. Back uses `AppearanceBrand: 'Secondary'`.\n- **Where Emphasis goes:** I did not put `Emphasis: 'High'` on the group, because then both buttons would compete.\n- **Size:** `Button / Size: 'M'` is set once on the group so both buttons share one height. Don't override the size on a single button, because the child's own size wins and leaves a mismatched button.\n- **Modes:** `modes` on `ActionFooter` are merged into every slot child. `Color Mode` is repeated on the group to match the pack's example.\n- **Child:** Pass a single `ButtonGroup` as the footer's child. Loose `Button` children are the legacy shape.\n- **Width:** The host supplies the width. On native the footer pins to the bottom. On web it renders in normal flow.\n- **Title:** Leave out the `title` if the content above already names the step.\n\n**Optional states**\n- For an incomplete form, set `disabled` on Continue.\n- For required content still loading, set `loading` on Continue. The brief says not to use `loading` as transaction progress.\n- Configure these on the buttons themselves. `ActionFooter` doesn't invent them.\n\n**What Coin can't do here**\n- **Keyboard avoidance:** `ActionFooter` doesn't handle it, so you have to.\n- **Bottom spacing:** Figma's sample has 41px at the bottom, but the package defaults to 24px plus an optional safe-area inset. You can adjust it with the `bottomPadding` and `safeAreaBottom` props.\n- **Navigation:** The `goBack` and `goNext` handlers are yours to wire up. Coin has no application-flow logic.\n- **Progress:** The briefs I read don't cover showing \"step 2 of 4\". `Stepper` and `Step` exist for that, but I haven't read their briefs.\n\nI haven't opened the full `button.md` or `actionfooter.md` entries. Both entries are flagged, and the briefs don't say which items the flags concern.",
+            "read": [
+              {
+                "file": "components/actionfooter.brief.md",
+                "tokens": 820
+              },
+              {
+                "file": "components/button.brief.md",
+                "tokens": 812
+              },
+              {
+                "file": "components/buttongroup.brief.md",
+                "tokens": 682
+              },
+              {
+                "file": "index.json",
+                "tokens": 3140
+              },
+              {
+                "file": "rules.md",
+                "tokens": 1565
+              }
+            ],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 6,
+              "cacheRead": 21448,
+              "cacheWrite": 13998,
+              "output": 1721,
+              "peakContext": 16912,
+              "coin": 7019,
+              "coinEstimated": true
+            },
+            "calls": 3,
+            "durationMs": 26393
+          },
+          {
+            "variant": "graph",
+            "answer": "The full entries aren't in this folder, so this answer comes from the briefs and links.\n\n## Footer: Back and Continue\n\nUse `ActionFooter` with a single `ButtonGroup` child. Make Continue the one primary action and Back the secondary one.\n\n```tsx\n<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <ButtonGroup modes={{ 'Color Mode': 'Light', 'Button / Size': 'M' }}>\n    <Button\n      label=\"Back\"\n      onPress={onBack}\n      modes={{ AppearanceBrand: 'Secondary' }}\n    />\n    <Button\n      label=\"Continue\"\n      onPress={onContinue}\n      modes={{ AppearanceBrand: 'Primary', Emphasis: 'High' }}\n    />\n  </ButtonGroup>\n</ActionFooter>\n```\n\n**Why it's built this way**\n- **One strongest action.** The Coin rules say not to make both actions primary, because equal emphasis hides which one advances. Continue gets `AppearanceBrand: 'Primary'` and `Emphasis: 'High'`. Back gets `AppearanceBrand: 'Secondary'`.\n- **Emphasis on the child only.** The ButtonGroup guidance says not to set `Emphasis: 'High'` on the group, because then every action competes. I set it only on Continue's own `modes`.\n- **Same size for both.** Set `Button / Size` once on the group, so both buttons share a height. Don't override it on a single button, because the child's size wins and leaves a mismatched button. The brief's example uses `M` for a key step.\n- **Modes are passed down.** `ActionFooter` merges its `modes` into its slot children. I still repeat `Color Mode` on the group, as the pack's example does.\n- **Standard children.** The pack recommends a single `ButtonGroup` or `Stack` child for new code. Loose `Button` children are the legacy shape.\n- **Width.** `ButtonGroup` fills the width it is given, and `ActionFooter` stretches it to full width. Keep `type` at its default. `fixed` is capped at a system width and won't fill.\n- **Title.** Leave `title` out if the step content already names the decision. If you need one, add a short title and use a vertical `Stack`.\n\n**Limits to plan around**\n- **Disabled and loading states.** `ActionFooter` doesn't add them. If Continue should be blocked until the form is valid, set `disabled` on that `Button`. `loading` exists, but the guidance says not to use it to show transaction progress. Show errors and confirmation elsewhere in the flow, not in the footer.\n- **Keyboard.** `ActionFooter` doesn't avoid the keyboard. Your screen has to handle that.\n- **Bottom spacing.** The package defaults to 24px plus an optional safe-area inset. Figma's sample uses 41px. Use `bottomPadding` and `safeAreaBottom` if you need to match it.\n- **Opening the next step.** Coin doesn't provide navigation. `onBack` and `onContinue` are your own handlers.",
+            "read": [
+              {
+                "file": "components/actionfooter.brief.md",
+                "tokens": 820
+              },
+              {
+                "file": "components/actionfooter.links.md",
+                "tokens": 116
+              },
+              {
+                "file": "components/button.brief.md",
+                "tokens": 812
+              },
+              {
+                "file": "components/buttongroup.brief.md",
+                "tokens": 682
+              },
+              {
+                "file": "index.json",
+                "tokens": 3140
+              },
+              {
+                "file": "rules.md",
+                "tokens": 1565
+              }
+            ],
+            "pass": false,
+            "failed": [],
+            "notes": "Unscored smoke run: not graded.",
+            "tokens": {
+              "input": 8,
+              "cacheRead": 38732,
+              "cacheWrite": 14825,
+              "output": 1988,
+              "peakContext": 17739,
+              "coin": 7135,
+              "coinEstimated": true
+            },
+            "calls": 4,
+            "durationMs": 28434
+          }
+        ]
+      }
+    ]
+  }
+}

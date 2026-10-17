@@ -1,17 +1,12 @@
 {
   "slug": "iconbutton",
-  "entryHash": "9ba1bacc0b06570eb5bc707c273f54522e940c5da2748f28bcca9b56505d81a8",
+  "entryHash": "a22bae16ba9009dda2d354d98abec72eb847bc5824188ab2b7c1c8cdf7034cf8",
   "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
-  "checkedAt": "2026-10-17T10:57:15Z",
+  "checkedAt": "2026-10-17T10:59:59Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/examples/2",
-      "reason": "misreads-source: The cited summary only lists close as an example of a well-known action (\"such as add, share, or close\"). Nothing cited supports showing a close action as Size S with Low emphasis, and agents copying the example may treat those values as the standard for close."
-    }
-  ],
-  "notes": "The evidence file says `loading` renders a same-size skeleton only inside `<SkeletonGroup loading>`. Neither the guide nor the entry mentions this, so /states/4 (\"when: loading\") could mislead agents. It may be worth adding as a fact or gap. Everything else, including the dated facts and gaps, matches the guide and evidence."
+  "flags": [],
+  "notes": "No misstatements found. One thing for a human reviewer: /states/4 repeats the guide's 'a same-size placeholder while the action loads', but the evidence Contract says `loading` renders the skeleton only inside `<SkeletonGroup loading>`. The guide doesn't state that condition, so this isn't an extraction error. An agent using `loading` on its own may still see no placeholder, so it may be worth adding this condition to the guide or as a fact."
 }

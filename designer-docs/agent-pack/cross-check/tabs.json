@@ -1,17 +1,12 @@
 {
   "slug": "tabs",
-  "entryHash": "8941342316c92fc1844272eface8132edeeac0de524155ce1a39c5bdb7e939a4",
+  "entryHash": "9608b3adfdd8ee36e75d21a3532ffd26af3c902955e185e6242fac7509084aae",
   "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
-  "checkedAt": "2026-10-17T10:57:35Z",
+  "checkedAt": "2026-10-17T11:02:03Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/configuration/2",
-      "reason": "lost-context: The item says modes set on Tabs \"are forwarded to every TabItem child\". The evidence limits this in two ways. Modes reach only direct TabItem children (\"Wrappers and Fragments around TabItems are not recognised\"). They are also merged under each item's own modes, so \"the item's modes win\". Setting modes once on Tabs does not guarantee every tab gets them."
-    }
-  ],
-  "notes": "Everything else matches the guide or the evidence. /placementAdvice/2 quotes only the first Sizing sentence, but the rest of the item (tabs as wide as their labels, 16 px apart) appears later in the same Sizing description, so it is supported. /facts/props/4 is dated 2026-10-13, which matches the c1fa197 check where the tab list is named by accessibilityLabel. The Sources note's counter badge (`badge`) is not extracted as an item; that is a coverage choice, not a misstatement."
+  "flags": [],
+  "notes": "/placementAdvice/2 quotes only \"Tabs stretches to the width of its container.\" Its second clause, \"each tab is as wide as its label, with 16 px between tabs\", is not in that sentence. It comes from the next sentence of the same Sizing description (\"Each tab is 33 px tall: … and as wide as its label, with 16 px between tabs\"), so the claim is correct, but the citation should include that sentence. Several evidence facts are dated 2026-10-05 (/facts/props/2, /facts/gaps/2, /facts/gaps/3, /facts/gaps/4). They match the evidence file, but the later 636f3f5 and c1fa197 checks do not re-confirm them. A human may want to confirm that the missing scrollbar or edge hint, the missing disabled or loading prop, and the hover and press behaviour still hold in c1fa197."
 }

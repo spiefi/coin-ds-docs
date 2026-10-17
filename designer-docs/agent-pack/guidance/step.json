@@ -3,7 +3,7 @@
   "guideCommit": "f72ec62472be267ef350470ed36a1ff13016fba8",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Step's guide and evidence were checked on 0.1.78-636f3f5 (the 5 October build; evidence 10 October, Sources 11 October). The installed package is 0.1.78-c1fa197 (12 October build), the same version, so nothing is flagged as stale, but c1fa197 changed Step.tsx: the upstream diff 636f3f5..c1fa197 and the installed lib/module/components/Stepper/Step.js show that (a) a Step's spoken name is now its visible copy: the title, or with children a StepLabel child's title (else the children's visible text), plus a short supporting text (one line, up to 80 characters), plus the status word; (b) when children are present, the title prop is no longer used for the name; (c) a standalone Step is no longer a list item (withinStepper, declared in the installed types: \"Standalone Steps are not list items\"). So these guide sentences are stale for the installed build and were not extracted as rules: the Custom content caption \"Keep the title prop: it’s what screen readers hear.\", and the Sources clauses \"the supporting text and date aren’t read\" and \"a Step with only a StepLabel child is read as “Step” and its number\". The #235 gap (StepLabel child's title not spoken, title naming the row under children, standalone list item) is not recorded, because the installed source appears to fix it; re-check the guide and evidence against c1fa197. Other notes: the Sources card links Stepper (3228:457) because designers place Steps through Stepper in Figma; Step is a subcomponent, so avoidWhen points Figma use to Stepper. Dark mode is out of scope in the evidence (#197 in Review on 10 October). The evidence classes isCurrent, connectorStyle, style and testID as developer-only; the guide shows none of them.",
+  "notes": "Step's guide and evidence were checked on 0.1.78-636f3f5 (the 5 October build; evidence 10 October, Sources 11 October). The installed package is 0.1.78-c1fa197 (12 October build), the same version, so nothing is flagged as stale, but c1fa197 changed Step.tsx: the upstream diff 636f3f5..c1fa197 and the installed lib/module/components/Stepper/Step.js show that (a) a Step's spoken name is now its visible copy: the title, or with children a StepLabel child's title (else the children's visible text), plus a short supporting text (one line, up to 80 characters), plus the status word; (b) when children are present, the title prop is no longer used for the name; (c) a standalone Step is no longer a list item (withinStepper, declared in the installed types: \"Standalone Steps are not list items\"). So these guide sentences are stale for the installed build and were not extracted as rules: the Custom content caption \"Keep the title prop: it’s what screen readers hear.\", and the Sources clauses \"the supporting text and date aren’t read\" and \"a Step with only a StepLabel child is read as “Step” and its number\". The #235 gap (StepLabel child's title not spoken, title naming the row under children, standalone list item) is not recorded, because the installed source appears to fix it; re-check the guide and evidence against c1fa197. Other notes: the Sources card links Stepper (3228:457) because designers place Steps through Stepper in Figma; Step is a subcomponent, so avoidWhen points Figma use to Stepper. Dark mode is out of scope in the evidence (#197 in Review on 10 October). The evidence classes isCurrent, connectorStyle, style and testID as developer-only; the guide shows none of them. After the cross-check, the 'Put the outcome in words' accessibility rule was removed: its quote only says the glyph has no name, which the gaps already record.",
   "useWhen": [
     {
       "text": "One stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail.",
@@ -68,7 +68,7 @@
     {
       "part": "Title",
       "holds": "14 px bold; names the stage.",
-      "required": true,
+      "required": false,
       "from": {
         "section": "anatomy",
         "quote": "14 px bold; names the stage."
@@ -159,7 +159,7 @@
       }
     },
     {
-      "text": "Add a date (metaText) for when the stage finished, started, or is due.",
+      "text": "When it helps, add a date (metaText) for when the stage finished, started, or is due.",
       "strength": "recommended",
       "target": "metaText",
       "from": {
@@ -177,7 +177,7 @@
       }
     },
     {
-      "text": "Set showLine false on the last Step you place yourself; inside a Stepper, Stepper turns it off on the last stage.",
+      "text": "Set showLine false on a Step you place yourself, outside a Stepper; inside a Stepper, Stepper turns it off on the last stage.",
       "strength": "recommended",
       "target": "showLine",
       "value": "false",
@@ -187,7 +187,7 @@
       }
     },
     {
-      "text": "Inside a Stepper, each Step gets its index, the Stepper's modes (its own win), isCurrent on the first step that isn't complete, and no connector on the last step; leave index, isCurrent and showLine to the Stepper.",
+      "text": "Inside a Stepper, the Stepper passes each Step its index, isCurrent and showLine.",
       "strength": "recommended",
       "target": "index",
       "from": {
@@ -374,16 +374,6 @@
       },
       "checkedVersion": "0.1.78-636f3f5",
       "checkedOn": "2026-10-11"
-    },
-    {
-      "text": "Put the outcome in words: the glyph itself has no name.",
-      "strength": "recommended",
-      "from": {
-        "section": "evidence",
-        "quote": "the glyph itself has no name"
-      },
-      "checkedVersion": "0.1.78-636f3f5",
-      "checkedOn": "2026-10-10"
     }
   ],
   "doDont": [
