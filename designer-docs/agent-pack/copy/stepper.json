@@ -1,0 +1,361 @@
+{
+  "slug": "stepper",
+  "label": "Stepper",
+  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
+  "files": [
+    "src/guides/stepper.guide.tsx"
+  ],
+  "evidence": "docs/evidence/stepper.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T15:24:12.611Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "progress steps",
+    "timeline",
+    "onboarding steps",
+    "order tracking"
+  ],
+  "title": "Stepper",
+  "summary": "Use a Stepper to show where someone is in a process with several stages, such as KYC, and how each stage went.",
+  "corePrinciple": "Every stage named, its state shown in colour, icon, and words.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-stepper--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Stages joined by a line",
+      "description": "Each stage pairs a 36 px indicator with its text. A 2 px connector links it to the next stage; the last stage has none.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Indicator",
+        "Circle whose colour and icon show the stage’s state.",
+        "Connector",
+        "Links a stage to the next one.",
+        "Upcoming stage",
+        "Pale circle: not started yet.",
+        "Title",
+        "Names the stage.",
+        "Date",
+        "When the stage finished, started, or is due.",
+        "Supporting text",
+        "What the stage involves, or how it went."
+      ],
+      "specimen": [
+        "Verify PAN",
+        "Match your PAN with your name",
+        "Done 2 Oct 2026",
+        "2",
+        "Add bank account",
+        "Link the account you’ll invest from",
+        "3",
+        "Add nominee",
+        "Choose who receives your investments"
+      ],
+      "anatomy": [
+        {
+          "part": "Indicator",
+          "note": "Circle whose colour and icon show the stage’s state."
+        },
+        {
+          "part": "Connector",
+          "note": "Links a stage to the next one."
+        },
+        {
+          "part": "Upcoming stage",
+          "note": "Pale circle: not started yet."
+        },
+        {
+          "part": "Title",
+          "note": "Names the stage."
+        },
+        {
+          "part": "Date",
+          "note": "When the stage finished, started, or is due."
+        },
+        {
+          "part": "Supporting text",
+          "note": "What the stage involves, or how it went."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the text each stage shows",
+      "description": "Every stage has a title. Add supporting text to say what the stage involves or how it went, and a date when timing matters, as on an order tracker.",
+      "blocks": [
+        "Title only",
+        "Compact, for short processes whose titles say enough.",
+        "Title and supporting text",
+        "Explains what each stage asks for.",
+        "With dates",
+        "Shows when each stage finished, started, or is due."
+      ],
+      "specimen": [
+        "Verify PAN",
+        "2",
+        "Add bank account",
+        "3",
+        "Add nominee",
+        "Match your PAN with your name",
+        "Link the account you’ll invest from",
+        "Choose who receives your investments",
+        "Done 2 Oct 2026",
+        "Started 5 Oct 2026",
+        "Due by 12 Oct 2026"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Title only",
+          "description": "Compact, for short processes whose titles say enough."
+        },
+        {
+          "title": "Title and supporting text",
+          "description": "Explains what each stage asks for."
+        },
+        {
+          "title": "With dates",
+          "description": "Shows when each stage finished, started, or is due."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Five stage states",
+      "description": "Each stage shows one state. In Figma, pick it with the Step Status mode; in code the stage’s status sets both its icon and its colour. An upcoming stage needs Step Status set to inactive, and an explicit Step Status always wins, so keep it matched to the status.",
+      "blocks": [
+        "Done",
+        "Green circle with a check.",
+        "Current",
+        "Purple circle with the stage number.",
+        "Upcoming",
+        "Pale lavender circle: not started.",
+        "Needs attention",
+        "Orange alert: the person must act to continue.",
+        "Failed",
+        "Red cross: say what went wrong."
+      ],
+      "specimen": [
+        "Verify PAN",
+        "PAN details match your name",
+        "1",
+        "Add bank account",
+        "Link the account you’ll invest from",
+        "eSign",
+        "Sign the form with an Aadhaar OTP",
+        "Add nominee",
+        "Nominee’s date of birth is missing",
+        "Account name doesn’t match your PAN"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Done",
+          "description": "Green circle with a check."
+        },
+        {
+          "title": "Current",
+          "description": "Purple circle with the stage number."
+        },
+        {
+          "title": "Upcoming",
+          "description": "Pale lavender circle: not started."
+        },
+        {
+          "title": "Needs attention",
+          "description": "Orange alert: the person must act to continue."
+        },
+        {
+          "title": "Failed",
+          "description": "Red cross: say what went wrong."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, at least 52 px per stage",
+      "description": "Stepper fills its container with 8 px on each side. Each stage is at least 52 px tall and grows when its text wraps; the connector grows with it. The indicator is 36 px, with 16 px to the text.",
+      "blocks": [
+        "312 × 52",
+        "36 × 36"
+      ],
+      "specimen": [
+        "Verify PAN",
+        "Match your PAN with your name",
+        "2",
+        "Add bank account",
+        "Link the account you’ll invest from"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the stage, then say how it went",
+      "description": "Titles name the stage in a few words, such as “Verify PAN”, not an action like “Click to verify”. Supporting text says what happens or what went wrong: the indicator only says that a stage failed or needs attention, not why.",
+      "blocks": [
+        "Stage names and outcomes"
+      ],
+      "specimen": [
+        "Verify PAN",
+        "PAN details match your name",
+        "Add nominee",
+        "Nominee’s date of birth is missing",
+        "3",
+        "eSign",
+        "Sign the form with an Aadhaar OTP"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Stage names and outcomes",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "KYC progress on a card",
+      "description": "The screen works out each stage’s state and updates the Stepper as the person moves on, and gives it a spoken name such as “KYC progress”. Stepper isn’t pressable, so the next action is a separate button.",
+      "blocks": [
+        "Stage 2 of 4: Add bank account"
+      ],
+      "specimen": [
+        "Verify PAN",
+        "Match your PAN with your name",
+        "Done 2 Oct 2026",
+        "2",
+        "Add bank account",
+        "Link the account you’ll invest from",
+        "Started 5 Oct 2026",
+        "3",
+        "Add nominee",
+        "Choose who receives your investments",
+        "Due by 12 Oct 2026",
+        "4",
+        "eSign",
+        "Sign the form with an Aadhaar OTP",
+        "Continue"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make every stage readable",
+      "description": "Each pair shows a stage people understand versus one that misleads them.",
+      "blocks": [
+        "Do",
+        "Match the icon and colour",
+        "A done stage shows a check on green.",
+        "Don’t",
+        "Put a check on purple",
+        "A check in the current colour reads as both done and in progress.",
+        "Name each stage",
+        "“Verify PAN” and “Add bank account” say what happens.",
+        "Leave the default titles",
+        "“Stepper Item” tells people nothing.",
+        "Write the outcome",
+        "The text says what failed and what to fix.",
+        "Rely on the icon",
+        "A red cross, or “Failed” read aloud, doesn’t say what went wrong or how to fix it."
+      ],
+      "specimen": [
+        "Verify PAN",
+        "PAN details match your name",
+        "2",
+        "Add bank account",
+        "Stepper Item",
+        "Account name doesn’t match your PAN"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Match the icon and colour",
+            "caption": "A done stage shows a check on green.",
+            "specimen": "Verify PAN · PAN details match your name"
+          },
+          "dont": {
+            "title": "Put a check on purple",
+            "caption": "A check in the current colour reads as both done and in progress.",
+            "specimen": "Verify PAN · PAN details match your name"
+          }
+        },
+        {
+          "do": {
+            "title": "Name each stage",
+            "caption": "“Verify PAN” and “Add bank account” say what happens.",
+            "specimen": "Verify PAN · 2 · Add bank account"
+          },
+          "dont": {
+            "title": "Leave the default titles",
+            "caption": "“Stepper Item” tells people nothing.",
+            "specimen": "Stepper Item · 2 · Stepper Item"
+          }
+        },
+        {
+          "do": {
+            "title": "Write the outcome",
+            "caption": "The text says what failed and what to fix.",
+            "specimen": "Add bank account · Account name doesn’t match your PAN"
+          },
+          "dont": {
+            "title": "Rely on the icon",
+            "caption": "A red cross, or “Failed” read aloud, doesn’t say what went wrong or how to fix it.",
+            "specimen": "Add bank account"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Stepper contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Order tracking",
+        "Three steps",
+        "Step complete",
+        "Step error",
+        "Step warning",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. In Figma a stage’s Step Status mode sets both its colour and its icon; in code the stage’s status sets both, and an explicit Step Status mode overrides the colour. Stepper is vertical only and not interactive, and Figma’s numerals all read 1 while code numbers stages in order. On the web it is a list named by its accessibility label: each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current. The icons themselves have no names, so the text must say what happened. The published Storybook predates 0.1.78, and its done, error, and warning examples show the icon on purple.",
+        "jfs-components",
+        "0.1.78",
+        "status"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

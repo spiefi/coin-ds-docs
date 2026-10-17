@@ -1,0 +1,598 @@
+{
+  "slug": "formfield",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "extractedBy": "Claude Code subagent, flow-kit extraction",
+  "extractedOn": "2026-10-17",
+  "notes": "Evidence spans two checks: 2 October (0.1.78-3795b4c, the full Figma, Storybook, package and browser check) and 8 October (0.1.78-636f3f5, which re-tested #186 and supersedes the earlier accessibility findings: aria-invalid, aria-required, aria-describedby and the disabled tab order now work). The 8 October check says the 47 px height and the Light-only colours were not re-measured, so the Sources note's height and dark-mode statements rest on the 2 October measurements. The guide copy names no other component to use instead; the avoidWhen item comes from the Storybook MDX as the evidence records it (TextInput or InputSearch, OTP, FormUpload), so it carries no useInstead. The evidence also records two Storybook problems the guide works around: the MDX says the leading and trailing slots are hidden from assistive tech, but on the web they are not, and the trailing-button story uses a plain Pressable rather than a Coin Button. The guide's own In context section keeps the Verify button enabled, but only the Storybook MDX (in the evidence) states that as a general rule. The FormField States mode has a Disabled value that the package never uses (gap).",
+  "useWhen": [
+    {
+      "text": "Collect one labelled value, such as an account number, with a hint or an error message below it.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Form Field to collect one labelled value, such as an account number, with a hint or an error message below it."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The input is unlabelled chrome, a code, or a file: the Storybook docs (as the evidence records them) point to TextInput or InputSearch for unlabelled chrome, OTP for codes, and FormUpload for files.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "TextInput or InputSearch for unlabelled chrome, OTP for codes, FormUpload for files."
+      },
+      "checkedVersion": "0.1.78-3795b4c",
+      "checkedOn": "2026-10-02"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "The label text above the field; names the value and gives the field its accessible name.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the value and gives the field its accessible name."
+      }
+    },
+    {
+      "part": "Required mark",
+      "holds": "A red asterisk beside the label, for fields people must fill in (isRequired).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A red asterisk for fields people must fill in."
+      }
+    },
+    {
+      "part": "Start icon",
+      "holds": "An optional 18 px icon before the text, such as the rupee sign.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional 18 px icon, such as the rupee sign."
+      }
+    },
+    {
+      "part": "Input",
+      "holds": "The placeholder, which shows the format, then what people type.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The placeholder shows the format; then what people type."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "The white box; its border turns purple on focus and red on error.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White box; purple border on focus, red on error."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "A hint below the field; an error message replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A hint below the field; an error message replaces it."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Form Field fills its container's width; the screen sets the width. The field is 47 px tall, and the label and support text sit 8 px above and below it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Form Field fills its container’s width. The field is 47 px tall with 12 px of padding at each end, and the label and support text sit 8 px above and below it. The screen sets the width."
+      }
+    },
+    {
+      "text": "In a narrow column the field narrows with its column, and the hint wraps.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field narrows with its column, and the hint wraps."
+      }
+    },
+    {
+      "text": "Let the screen check the values (for example when people tap Verify) and set the error on the field; Form Field only shows it, and the button stays enabled.",
+      "strength": "recommended",
+      "target": "isInvalid",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen checks the values when people tap Verify and sets the error on the field. Form Field only shows it, and the button stays enabled."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" describes what the component does (it shows the error), not a limit on the designer."
+      }
+    },
+    {
+      "text": "Keep the primary action enabled and show the error on the field; the Storybook docs say disabled is not a validation strategy.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Keep the primary action enabled and show the error on the field"
+      },
+      "checkedVersion": "0.1.78-3795b4c",
+      "checkedOn": "2026-10-02"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Every option is off unless you set it. Add an icon, an action, or the required mark when it tells people something they need.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Every option is off unless you set it. Add an icon, an action, or the required mark when it tells people something they need."
+      },
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "\"the required mark\" names the asterisk that isRequired shows, not a constraint."
+      }
+    },
+    {
+      "text": "The default configuration is a label, a format example, and a hint below (label, placeholder and supportText).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: a label, a format example, and a hint below."
+      }
+    },
+    {
+      "text": "Turn on startIcon to show the rupee icon, which marks an amount before people type.",
+      "strength": "recommended",
+      "target": "startIcon",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "The rupee icon marks an amount before people type."
+      }
+    },
+    {
+      "text": "Put a small text button in trailing to act on the value without leaving the field.",
+      "strength": "recommended",
+      "target": "trailing",
+      "from": {
+        "section": "configuration",
+        "quote": "A small text button acts on the value without leaving the field."
+      }
+    },
+    {
+      "text": "For the end action, a Coin Button with AppearanceBrand Secondary, Emphasis Low and Button / Size S renders 74 × 32, transparent with purple text, matching Figma's end slot.",
+      "strength": "recommended",
+      "target": "trailing",
+      "from": {
+        "section": "evidence",
+        "quote": "A Coin `Button` with `AppearanceBrand: Secondary`, `Emphasis: Low`, `Button / Size: S` in `trailing` renders 74 × 32, transparent with purple `rgb(93,0,181)` text, matching Figma's end slot."
+      },
+      "checkedVersion": "0.1.78-3795b4c",
+      "checkedOn": "2026-10-02"
+    },
+    {
+      "text": "Set isRequired to show a red asterisk on a field people must fill in.",
+      "strength": "recommended",
+      "target": "isRequired",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "A red asterisk marks a field people must fill in."
+      },
+      "absolute": {
+        "word": "must",
+        "scope": "contextual",
+        "reason": "\"must\" describes the fields the mark is for (people must fill them in), not a constraint on how Form Field is configured; isRequired is a prop."
+      }
+    },
+    {
+      "text": "Set type password to hide the characters.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "password",
+      "from": {
+        "section": "configuration",
+        "quote": "The type hides the characters."
+      }
+    },
+    {
+      "text": "Set type to email, phone or number to pick the keyboard for those fields.",
+      "strength": "recommended",
+      "target": "type",
+      "from": {
+        "section": "configuration",
+        "quote": "It also picks the keyboard for email, phone, and number fields."
+      }
+    },
+    {
+      "text": "Do not show red without a message: colour alone does not say what is wrong.",
+      "strength": "discouraged",
+      "target": "isInvalid",
+      "from": {
+        "section": "doDont",
+        "quote": "Colour alone does not say what is wrong."
+      }
+    },
+    {
+      "text": "Show fixed values as read only (isReadOnly): full contrast keeps the value easy to read.",
+      "strength": "recommended",
+      "target": "isReadOnly",
+      "value": "true",
+      "from": {
+        "section": "doDont",
+        "quote": "Full contrast keeps the value easy to read."
+      }
+    },
+    {
+      "text": "Use isDisabled for a field that does not apply yet.",
+      "strength": "recommended",
+      "target": "isDisabled",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "Use it for a field that does not apply yet."
+      }
+    },
+    {
+      "text": "Do not disable a value people need to read: half opacity makes it hard to read.",
+      "strength": "discouraged",
+      "target": "isDisabled",
+      "value": "true",
+      "from": {
+        "section": "doDont",
+        "quote": "Half opacity makes it hard to read."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "A clear label, a format example, and help when it goes wrong.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "A clear label, a format example, and help when it goes wrong."
+        }
+      },
+      {
+        "text": "Write the label as the name of the value in sentence case, such as “Account number”, not “Enter your account number”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Write the label as the name of the value in sentence case, such as “Account number”, not “Enter your account number”."
+        }
+      },
+      {
+        "text": "Do not start a label with “Enter” or “Your”.",
+        "strength": "discouraged",
+        "target": "label",
+        "from": {
+          "section": "evidence",
+          "quote": "Labels name the value in sentence case and do not start with \"Enter\" or \"Your\""
+        },
+        "checkedVersion": "0.1.78-3795b4c",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "text": "Do not use the placeholder as the label: the name disappears as soon as people type.",
+        "strength": "discouraged",
+        "target": "placeholder",
+        "from": {
+          "section": "doDont",
+          "quote": "The name disappears as soon as people type."
+        }
+      },
+      {
+        "text": "Use the placeholder for a format example.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "content",
+          "quote": "Use the placeholder for a format example"
+        }
+      },
+      {
+        "text": "Use support text for a rule.",
+        "strength": "recommended",
+        "target": "supportText",
+        "from": {
+          "section": "content",
+          "quote": "support text for a rule"
+        }
+      },
+      {
+        "text": "Write an error that says how to fix the value.",
+        "strength": "recommended",
+        "target": "errorMessage",
+        "from": {
+          "section": "content",
+          "quote": "an error that says how to fix the value"
+        }
+      },
+      {
+        "text": "Say how to fix it: the error message names the fix.",
+        "strength": "recommended",
+        "target": "errorMessage",
+        "from": {
+          "section": "doDont",
+          "quote": "The message names the fix."
+        }
+      },
+      {
+        "text": "Write the error so it says how to fix the value in one sentence.",
+        "strength": "recommended",
+        "target": "errorMessage",
+        "from": {
+          "section": "evidence",
+          "quote": "error text says how to fix the value in one sentence"
+        },
+        "checkedVersion": "0.1.78-3795b4c",
+        "checkedOn": "2026-10-02"
+      }
+    ],
+    "good": [
+      "Account number",
+      "IFSC code",
+      "Mobile number",
+      "PAN",
+      "XXXX XXXX XXXX",
+      "SBIN0001234",
+      "98765 43210",
+      "11 characters, on your cheque book",
+      "We’ll send a code to this number",
+      "Enter all 10 characters of your PAN",
+      "IFSC codes have 11 characters",
+      "Up to ₹50,000 a day"
+    ],
+    "bad": [
+      "Enter your account number"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "No state prop set: a grey border.",
+      "from": {
+        "section": "states",
+        "quote": "A grey border. Select the field to see the purple focus border."
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "While the field has focus: a purple border.",
+      "from": {
+        "section": "states",
+        "quote": "Focus draws a purple border"
+      }
+    },
+    {
+      "state": "Error",
+      "when": "isInvalid: red border and fill; errorMessage replaces the hint.",
+      "from": {
+        "section": "states",
+        "quote": "Red border and fill; the message replaces the hint."
+      }
+    },
+    {
+      "state": "Read only",
+      "when": "isReadOnly: grey at full contrast; people can read the value but not change it.",
+      "from": {
+        "section": "states",
+        "quote": "Grey and full contrast: people can read the value but not change it."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: the read-only look at half opacity, and Tab skips it; for a field that does not apply yet.",
+      "from": {
+        "section": "states",
+        "quote": "The read-only look at half opacity, and Tab skips it. Use it for a field that does not apply yet."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Use label to name the value: it also gives the field its accessible name.",
+      "strength": "recommended",
+      "target": "label",
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the value and gives the field its accessible name."
+      }
+    },
+    {
+      "text": "On the web the label names the input, and screen readers announce required and invalid fields and read the support text or error with them.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the label names the input; screen readers also announce required and invalid fields and read the support text or error with them."
+      },
+      "checkedVersion": "0.1.78",
+      "checkedOn": "2026-10-08",
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "\"required ... fields\" describes fields marked with isRequired, a prop, not a constraint."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Label every field",
+      "dont": "Use the placeholder as the label",
+      "why": "The label stays visible while people type.",
+      "from": {
+        "section": "doDont",
+        "quote": "Label every field"
+      }
+    },
+    {
+      "do": "Say how to fix it",
+      "dont": "Show red without a message",
+      "why": "Colour alone does not say what is wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "Say how to fix it"
+      }
+    },
+    {
+      "do": "Show fixed values as read only",
+      "dont": "Disable a value people need to read",
+      "why": "Half opacity makes it hard to read.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show fixed values as read only"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A field the screen marks invalid after people tap Verify; the button stays enabled.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <FormField\n    label=\"IFSC code\"\n    placeholder=\"SBIN0001234\"\n    supportText=\"11 characters, on your cheque book\"\n    isInvalid\n    errorMessage=\"IFSC codes have 11 characters\"\n    onChangeText={(text) => {}}\n    modes={{ 'Color Mode': 'Light' }}\n  />\n  <Button label=\"Verify account\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen checks the values when people tap Verify and sets the error on the field."
+      }
+    },
+    {
+      "purpose": "A required amount field with the rupee start icon and a hint.",
+      "jsx": "<FormField\n  label=\"Amount\"\n  placeholder=\"0\"\n  startIcon\n  isRequired\n  supportText=\"Up to ₹50,000 a day\"\n  onChangeText={(text) => {}}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The rupee icon marks an amount before people type."
+      }
+    },
+    {
+      "purpose": "A promo code field with an Apply text button in the end slot; the Button gets the field's modes plus the end-slot styling.",
+      "jsx": "<FormField\n  label=\"Promo code\"\n  placeholder=\"JIO200\"\n  onChangeText={(text) => {}}\n  modes={{ 'Color Mode': 'Light' }}\n  trailing={<Button label=\"Apply\" onPress={() => {}} modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary', Emphasis: 'Low', 'Button / Size': 'S' }} />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "A small text button acts on the value without leaving the field."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "FormField States",
+      "description": "Set by the component from its props: invalid → Error; read only or disabled → Read Only; focused → Active; otherwise Idle. An explicit modes['FormField States'] overrides it.",
+      "quote": "State cascade: invalid → Error; read-only or disabled → Read Only; focused → Active; otherwise Idle.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "errorMessage",
+      "description": "Replaces supportText only while isInvalid (or a Form error) is set; with isInvalid and no errorMessage, the support text turns red.",
+      "quote": "`errorMessage` replaces `supportText` only while `isInvalid` (or a Form error) is set; with `isInvalid` and no `errorMessage`, the support text turns red.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "isInvalid",
+      "description": "Sets aria-invalid on the input, and aria-describedby points at the error message.",
+      "quote": "The input has `aria-invalid` and `aria-required`, and `aria-describedby` points at the error",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "isRequired",
+      "description": "Sets aria-required on the input; the asterisk uses the Negative token.",
+      "quote": "The asterisk uses the Negative token (`mode/Negative/1400 (base)`).",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "supportText",
+      "description": "Linked to the input (aria-describedby) while the field is valid.",
+      "quote": "the support text is linked while the field is valid",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "isDisabled",
+      "description": "Uses the Read Only colours at 50 % opacity rather than Figma's Disabled mode; sets aria-disabled and tabindex -1, so Tab skips the field.",
+      "quote": "Disabled sets `aria-disabled` and `tabindex -1`, and Tab skips the field.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "trailing",
+      "description": "Not hidden from assistive tech on the web: a Button there stays in the tab order after the input and keeps its name.",
+      "quote": "It stays in the tab order after the input and keeps its name; the slot is not hidden from assistive tech on the web.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "type",
+      "description": "password masks the value; email sets type=email; number sets inputmode=numeric.",
+      "quote": "`type=\"password\"` masks the value; `email` sets `type=email`; `number` sets `inputmode=numeric`.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "The input's accessible name is accessibilityLabel, then label, then the placeholder.",
+      "quote": "the input's name is `accessibilityLabel`, then `label`, then the placeholder.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "modes",
+      "name": "Color Mode",
+      "description": "Dark renders identically to Light: Form Field has no dark values.",
+      "quote": "Dark `Color Mode` renders identically to Light (no dark values).",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Dark mode is not supported: Color Mode Dark renders like Light.",
+      "from": {
+        "section": "sources",
+        "quote": "Dark mode is not supported."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "Disabled uses the read-only colours at half opacity instead of Figma's Disabled colours; the FormField States Disabled mode is never used.",
+      "from": {
+        "section": "sources",
+        "quote": "Disabled uses the read-only colours at half opacity instead of Figma’s Disabled colours."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78"
+    },
+    {
+      "text": "No live region: an error is read when people reach the field, not when it appears.",
+      "quote": "there is no live region, so an error is read when people reach the field, not when it appears.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "The package field is 47 px tall; Figma's is 45 px.",
+      "from": {
+        "section": "sources",
+        "quote": "The package field is 47 px tall (45 px in Figma)."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ]
+}

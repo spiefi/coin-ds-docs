@@ -7,11 +7,13 @@
     "schemaVersion",
     "packVersion",
     "runAt",
+    "model",
+    "variants",
     "questions"
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "const": 2
     },
     "packVersion": {
       "type": "string"
@@ -20,107 +22,138 @@
       "type": "string",
       "format": "date-time"
     },
+    "model": {
+      "type": "string"
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "none",
+          "full",
+          "brief",
+          "graph"
+        ]
+      }
+    },
     "questions": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/question"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "question",
+          "expected",
+          "runs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "choose",
+              "configure",
+              "compose",
+              "gap"
+            ]
+          },
+          "question": {
+            "type": "string"
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "validAnswers",
+              "required",
+              "recommended",
+              "settledBy"
+            ],
+            "properties": {
+              "validAnswers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "required": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "recommended": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "settledBy": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/run"
+            }
+          }
+        }
       }
     }
   },
   "$defs": {
-    "question": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "kind",
-        "question",
-        "expected",
-        "withPack",
-        "withoutPack"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "kind": {
-          "enum": [
-            "choose",
-            "configure",
-            "compose",
-            "gap"
-          ]
-        },
-        "question": {
-          "type": "string"
-        },
-        "expected": {
-          "$ref": "#/$defs/expected"
-        },
-        "withPack": {
-          "$ref": "#/$defs/run"
-        },
-        "withoutPack": {
-          "$ref": "#/$defs/run"
-        }
-      }
-    },
-    "expected": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "validAnswers",
-        "required",
-        "recommended",
-        "settledBy"
-      ],
-      "properties": {
-        "validAnswers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "required": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "recommended": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "settledBy": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      }
-    },
     "run": {
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "variant",
         "answer",
         "read",
         "pass",
         "failed",
-        "notes"
+        "notes",
+        "tokens",
+        "calls",
+        "durationMs"
       ],
       "properties": {
+        "variant": {
+          "enum": [
+            "none",
+            "full",
+            "brief",
+            "graph"
+          ]
+        },
         "answer": {
           "type": "string"
         },
         "read": {
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "description": "Pack files read; empty without the pack"
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "file",
+              "tokens"
+            ],
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "tokens": {
+                "type": "integer"
+              }
+            }
+          }
         },
         "pass": {
           "type": "boolean"
@@ -129,11 +162,55 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "description": "Expectations it missed"
+          }
         },
         "notes": {
           "type": "string"
+        },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "input",
+            "cacheRead",
+            "cacheWrite",
+            "output",
+            "peakContext",
+            "coin",
+            "coinEstimated"
+          ],
+          "properties": {
+            "input": {
+              "type": "integer"
+            },
+            "cacheRead": {
+              "type": "integer"
+            },
+            "cacheWrite": {
+              "type": "integer"
+            },
+            "output": {
+              "type": "integer"
+            },
+            "peakContext": {
+              "type": "integer",
+              "description": "Largest single model call: input + cacheRead + cacheWrite"
+            },
+            "coin": {
+              "type": "integer",
+              "description": "Tokens of the pack files the agent read, each file counted once"
+            },
+            "coinEstimated": {
+              "type": "boolean"
+            }
+          }
+        },
+        "calls": {
+          "type": "integer",
+          "description": "Model calls in the run"
+        },
+        "durationMs": {
+          "type": "integer"
         }
       }
     }

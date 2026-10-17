@@ -1,13 +1,13 @@
 {
   "slug": "benefitcard",
   "label": "Benefit Card",
-  "guideCommit": "4566d7e6672a8b5800ad90eb149390206487d229",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
   "files": [
     "src/guides/benefitcard.guide.tsx"
   ],
   "evidence": "docs/evidence/benefitcard.md",
   "packageVersion": "0.1.78",
-  "renderedAt": "2026-10-16T22:29:29.072Z",
+  "renderedAt": "2026-10-17T11:18:23.287Z",
   "viewport": "1280x900",
   "keywords": [
     "benefits card",
@@ -42,7 +42,7 @@
         "Divider",
         "Separates what you earn from what the plan includes.",
         "Upsell",
-        "A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it.",
+        "A Nudge by default, with no Close; bodyHeader replaces or removes it.",
         "Benefit row",
         "An items row: an icon and a short perk.",
         "Button",
@@ -76,7 +76,7 @@
         },
         {
           "part": "Upsell",
-          "note": "A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it."
+          "note": "A Nudge by default, with no Close; bodyHeader replaces or removes it."
         },
         {
           "part": "Benefit row",
@@ -143,7 +143,7 @@
       "id": "states",
       "header": "States",
       "title": "A summary with or without an action",
-      "description": "The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states. onPress makes the whole card one button that dims while pressed, but on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280).",
+      "description": "The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states. onPress makes the header a button named by its title, and pressing the header or the lists dims them and calls it; the upsell and the card’s button stay separate buttons beside it.",
       "blocks": [
         "With the button",
         "One next step at the bottom.",
@@ -182,7 +182,7 @@
       "title": "344 px wide, as tall as its content",
       "description": "It's 344 px wide unless you set width to another number or a percentage, such as 100% to fill its container. It has 12 px padding, 12 px corners, and 8 px between sections, and it's as tall as what it shows. Figma's card is 344 × 221.",
       "blocks": [
-        "344 × 229",
+        "344 × 223",
         "8"
       ],
       "specimen": [
@@ -339,8 +339,8 @@
         "Header hidden",
         "Button hidden",
         "Pressable card",
-        "Checked 13 October 2026",
-        "Installed jfs-components is 0.1.78 (12 October build) from the team’s private package repository. Figma’s BenefitCard is one 344 × 221 component with header and Button switches and two list slots; its upsell is the retired Nudge, with 12 px text and no close button. In this build the upsell has 14 px text and a Close button that does nothing (#271), so the card is a few pixels taller; Biscuit’s 13 October build hides Close but isn’t installed here. The header swaps Figma’s spacing: 4 px under the title and 8 px between rows, 8 and 4 in Figma. The card and its title stay white and black in every mode. Its default rows repeat one placeholder, so always pass your own. The published Storybook still shows the old page and the older nudge.",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma’s BenefitCard is one 344 × 221 component with header and Button switches and two list slots; its upsell is the retired Nudge, with 12 px text and no close button. In this build the upsell has 14 px text and, since the #271 fix, no Close button, as in Figma; the card is 223 px tall, 2 more than Figma. The header swaps Figma’s spacing: 4 px under the title and 8 px between rows, 8 and 4 in Figma. The card and its title stay white and black in every mode. Its default rows repeat one placeholder, so always pass your own. The published Storybook still shows the old page and the older nudge.",
         "jfs-components",
         "0.1.78"
       ],

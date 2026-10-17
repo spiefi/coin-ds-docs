@@ -27,7 +27,9 @@ const args = process.argv.slice(2)
 const promptOnly = args.includes('--prompt-only')
 const modelIndex = args.indexOf('--model')
 const model = modelIndex >= 0 ? args[modelIndex + 1] : null
-const slugs = args.filter((arg, index) => !arg.startsWith('--') && !(modelIndex >= 0 && index === modelIndex + 1))
+const valueOf = (name) => args.indexOf(name)
+const slugs = args.filter((arg, index) => !arg.startsWith('--') &&
+  !(modelIndex >= 0 && index === modelIndex + 1) && !(valueOf('--concurrency') >= 0 && index === valueOf('--concurrency') + 1))
 
 const KINDS = ['generalises-example', 'lost-context', 'stronger-than-source', 'misreads-source']
 
@@ -146,12 +148,15 @@ function parseReview(text) {
   return value
 }
 
-const { entries, errors } = assemble()
+const { entries, errors } = assemble({ only: slugs.length ? slugs : null })
 if (errors.length) fail(`fix the build problems first:\n  ${errors.join('\n  ')}`)
-const chosen = entries.filter((record) => !slugs.length || slugs.includes(record.component.slug))
+// Undocumented entries have no guide to check against.
+const chosen = entries.filter((record) => !record.undocumented)
 if (!chosen.length) fail(`no pilot entry matches ${slugs.join(', ')}`)
 
-await Promise.all(chosen.map(async ({ component, snapshot, entry }) => {
+const queue = [...chosen]
+const concurrency = Number(args[args.indexOf('--concurrency') + 1]) || 5
+async function review({ component, snapshot, entry }) {
   const evidence = showAt(snapshot.guideCommit, component.evidence)
   const text = prompt({ entry, snapshot, evidence })
   if (promptOnly) {
@@ -177,4 +182,7 @@ await Promise.all(chosen.map(async ({ component, snapshot, entry }) => {
     notes: norm(review.notes ?? ''),
   })
   console.log(`  ${component.slug}: ${flags.length} flag${flags.length === 1 ? '' : 's'}`)
+}
+await Promise.all(Array.from({ length: concurrency }, async () => {
+  while (queue.length) await review(queue.shift())
 }))

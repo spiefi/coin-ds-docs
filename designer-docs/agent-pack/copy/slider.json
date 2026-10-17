@@ -1,0 +1,310 @@
+{
+  "slug": "slider",
+  "label": "Slider",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/slider.guide.tsx"
+  ],
+  "evidence": "docs/evidence/slider.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-17T10:38:53.641Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "range",
+    "amount picker",
+    "seek bar"
+  ],
+  "title": "Slider",
+  "summary": "Use a Slider to pick a value from a wide range by dragging, such as a monthly SIP amount or a loan tenure.",
+  "corePrinciple": "A rough value, chosen by dragging, with the range in view.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5373-446",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-slider--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Track, fill, handle, and value",
+      "description": "A 4 px track fills in gold up to a 20 px handle. A rounded black bubble floats above the handle with the value, and the range’s ends sit below.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Fill",
+        "Gold from the minimum up to the value.",
+        "Track",
+        "Pale gold: the rest of the range.",
+        "Handle",
+        "Drag it, or tap anywhere on the track.",
+        "Value bubble",
+        "Shows the value above the handle.",
+        "End labels",
+        "The minimum and maximum, in the value’s format."
+      ],
+      "specimen": [
+        "₹15,000",
+        "₹500",
+        "₹50,000"
+      ],
+      "anatomy": [
+        {
+          "part": "Fill",
+          "note": "Gold from the minimum up to the value."
+        },
+        {
+          "part": "Track",
+          "note": "Pale gold: the rest of the range."
+        },
+        {
+          "part": "Handle",
+          "note": "Drag it, or tap anywhere on the track."
+        },
+        {
+          "part": "Value bubble",
+          "note": "Shows the value above the handle."
+        },
+        {
+          "part": "End labels",
+          "note": "The minimum and maximum, in the value’s format."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Range, step, format, and what shows",
+      "description": "Set the range, the step values snap to, and how the value is written. The bubble can stay visible or appear only while dragging, and the end labels can be hidden.",
+      "blocks": [
+        "Currency range",
+        "Values snap to ₹500 steps and read as rupees.",
+        "Custom format",
+        "A format function writes “10 years”; make it say “1 year” too.",
+        "Bubble while dragging",
+        "The value appears only while dragging or hovering, so show it elsewhere too.",
+        "Without end labels",
+        "Hide the ends only when the screen states the range nearby."
+      ],
+      "specimen": [
+        "₹5,000",
+        "₹500",
+        "₹50,000",
+        "10 years",
+        "1 year",
+        "30 years"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Currency range",
+          "description": "Values snap to ₹500 steps and read as rupees."
+        },
+        {
+          "title": "Custom format",
+          "description": "A format function writes “10 years”; make it say “1 year” too."
+        },
+        {
+          "title": "Bubble while dragging",
+          "description": "The value appears only while dragging or hovering, so show it elsewhere too."
+        },
+        {
+          "title": "Without end labels",
+          "description": "Hide the ends only when the screen states the range nearby."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Enabled and disabled",
+      "description": "Disable a slider only while its value can’t change, and say why nearby. There is no hover, pressed, or error style.",
+      "blocks": [
+        "Enabled",
+        "Gold fill and handle; drag, tap, or use the arrow keys.",
+        "Disabled",
+        "Dimmed to 50%; it keeps its value but can’t be changed."
+      ],
+      "specimen": [
+        "₹5,000",
+        "₹500",
+        "₹50,000"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Enabled",
+          "description": "Gold fill and handle; drag, tap, or use the arrow keys."
+        },
+        {
+          "title": "Disabled",
+          "description": "Dimmed to 50%; it keeps its value but can’t be changed."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 61 px tall, room above",
+      "description": "Slider fills its container and is 61 px tall with its end labels: 8 px of padding, a 20 px handle row, 16 px, then the labels. The bubble floats about 40 px above it and takes no space, so keep that area clear.",
+      "blocks": [
+        "300 × 61",
+        "20 × 20",
+        "16"
+      ],
+      "specimen": [
+        "₹500",
+        "₹50,000"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name it, and write the value as people say it",
+      "description": "A Slider has no label of its own, so put a title above it and use the same words as its spoken name. Write the value as people read it, such as ₹5,000 or 10 years; the end labels follow the same format.",
+      "blocks": [
+        "Loan tenure"
+      ],
+      "specimen": [
+        "Loan tenure",
+        "10 years",
+        "1 year",
+        "30 years"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Loan tenure",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A SIP amount card",
+      "description": "The heading shows the chosen amount, so the bubble appears only while dragging. The screen keeps the value and saves it when the person starts the SIP.",
+      "blocks": [
+        "₹5,000 a month"
+      ],
+      "specimen": [
+        "Monthly SIP amount",
+        "₹5,000",
+        "₹500",
+        "₹50,000",
+        "Start SIP"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make the value easy to read and reach",
+      "description": "Each pair shows a slider people can use versus one that trips them up.",
+      "blocks": [
+        "Do",
+        "Write the value as money",
+        "₹500 and ₹50,000 read as amounts.",
+        "Don’t",
+        "Show raw numbers",
+        "500 and 50,000 could be anything.",
+        "Leave room for the bubble",
+        "The value floats in clear space under the title.",
+        "Put the title right above it",
+        "The floating bubble covers the title.",
+        "Use it for a wide range",
+        "Dragging across ₹500 to ₹50,000 is quick.",
+        "Use it for a few fixed choices",
+        "Three positions read better as Radios."
+      ],
+      "specimen": [
+        "₹5,000",
+        "₹500",
+        "₹50,000",
+        "5,000",
+        "500",
+        "50,000",
+        "Monthly SIP amount",
+        "Medium",
+        "Low",
+        "High"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Write the value as money",
+            "caption": "₹500 and ₹50,000 read as amounts.",
+            "specimen": "₹5,000 · ₹500 · ₹50,000"
+          },
+          "dont": {
+            "title": "Show raw numbers",
+            "caption": "500 and 50,000 could be anything.",
+            "specimen": "5,000 · 500 · 50,000"
+          }
+        },
+        {
+          "do": {
+            "title": "Leave room for the bubble",
+            "caption": "The value floats in clear space under the title.",
+            "specimen": "Monthly SIP amount · ₹5,000 · ₹500 · ₹50,000"
+          },
+          "dont": {
+            "title": "Put the title right above it",
+            "caption": "The floating bubble covers the title.",
+            "specimen": "Monthly SIP amount · ₹5,000 · ₹500 · ₹50,000"
+          }
+        },
+        {
+          "do": {
+            "title": "Use it for a wide range",
+            "caption": "Dragging across ₹500 to ₹50,000 is quick.",
+            "specimen": "₹5,000 · ₹500 · ₹50,000"
+          },
+          "dont": {
+            "title": "Use it for a few fixed choices",
+            "caption": "Three positions read better as Radios.",
+            "specimen": "Medium · Low · High"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Slider contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Currency format",
+        "Bubble on interaction",
+        "Without labels",
+        "Disabled",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s Slider is 294 × 44; the package is 61 px tall because its handle row is 20 px. The value bubble matches Figma: a rounded black label that fits its value. On the web the slider announces its name, value, and disabled state, and works with the arrow, Page Up and Down, Home, and End keys. The published Storybook predates 0.1.78.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

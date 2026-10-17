@@ -5,23 +5,28 @@ Flow Visualizer's assistant, Claude Code doing design-to-code, and review
 agents. It is built here from the same guides and the installed
 `jfs-components`, so an agent reads guidance that matches the package.
 
-This proof of concept covers six components: Button, TextInput, Badge,
-Accordion, Stack and BenefitCard.
+Release `0.1.78+1` covered six pilot components. Release `0.1.78+2` is a flow
+kit for a short flow (for example a personal loan: offers, offer details,
+apply, confirmation). It has 21 entries from designer guides and 9
+`undocumented` entries for public primitives that have no guide (Screen,
+Text, Title, Card, ListItem, ListGroup, Icon, Image, Divider): facts only,
+guidance as hints.
 
 ## Where things are
 
 | Path | What it is |
 | --- | --- |
-| `schema/` | The five JSON schemas (entry, manifest, index, releases, pilot-results). Shared with the site's Designer and Agent views; do not change them here alone. |
-| `pack.json` | The pilot components (export id, slug, category, guide files, evidence file) and the release `revision`. |
+| `schema/` | The JSON schemas (entry, manifest, index, releases, graph, sizes, pilot-results v2). Shared with the site's Designer and Agent views; do not change them here alone. |
+| `pack.json` | The components (export id, slug, category, guide files, evidence file; or `undocumented: true` with a checked Storybook link) and the release `revision`. |
 | `copy/<slug>.json` | Generated: the copy each guide renders, by section, and the commit it was read at. |
-| `guidance/<slug>.json` | Extracted: the guidance read from the guide, every item with the exact sentence it came from. The only hand-written input. |
+| `guidance/<slug>.json` | Extracted: the guidance read from the guide, every item with the exact sentence it came from. For an undocumented entry: an optional summary taken verbatim from the component's JSDoc, an example, and any hints, each resting on a fact. The only hand-written input. |
 | `cross-check/<slug>.json` | Generated: the independent cross-check of each entry, with the hash of the entry it reviewed. |
 | `reviews/<slug>.json` | Optional, by people: flags to add, and cross-check flags to dismiss with a reason. |
-| `pilot/questions.json` | The with-and-without test questions and expected answers (draft until settled). |
-| `pilot/run.mjs` | The test runner. |
+| `pilot/questions.json` | The test questions and expected answers (draft until settled). |
+| `pilot/run.mjs` | The test runner (four variants, token measurements). |
+| `pilot/smoke.json` | An unscored measurement smoke test: proof that the token numbers work, not a result. |
 | `scripts/` | The pipeline. |
-| `../public/agent/<packVersion>/` | A release: `manifest.json`, `index.json`, `rules.md`, `llms.txt`, `components/<slug>.json` and `.md`, `schema/`. Never edited once committed. |
+| `../public/agent/<packVersion>/` | A release: `manifest.json`, `index.json`, `rules.md`, `llms.txt`, `graph.json`, `sizes.json`, `components/<slug>.json`, `.md`, `.brief.md` and `.links.md`, `schema/`. Never edited once committed. |
 | `../public/agent/index.json` | The list of releases and the current one. |
 | `../public/agent/pilot/results.json` | The last test run. |
 
@@ -34,7 +39,46 @@ npm run agent-pack:cross-check           # independent cross-check (claude -p), 
 npm run build:agent-pack                 # check, then write the release and the releases index
 npm run agent-pack:pilot -- --dry-run    # show the test plan
 npm run agent-pack:pilot                 # run the test (only once the answers are settled)
+npm run agent-pack:pilot -- --smoke --only q01,q21   # unscored measurement smoke test (2 questions at most)
+node agent-pack/scripts/show-facts.mjs <slug>        # the facts an extraction can name
+npm run build:agent-pack -- --check --only <slug>    # check some entries while extracting
 ```
+
+## Release outputs (contract v2)
+
+- `components/<slug>.brief.md`: the short form, generated from the entry
+  JSON (about 650–950 tokens for a guide entry). Summary; use when and avoid
+  when (with `useInstead`); placement; key rules, required first, capped at
+  eight; one example; props and modes at a glance; gaps; the state, and a
+  pointer to the full entry. No quotes, flags or full facts.
+- `components/<slug>.links.md`: the entry's neighbourhood in the graph, one
+  triple per line, outgoing and incoming.
+- `graph.json`: derived by code from the entries (`scripts/graph.mjs`):
+  `useInstead` from avoidWhen; `placedIn` from placement rules that name an
+  exact component export; `slotAccepts` from slots whose accepted type names
+  a component export (none in 0.1.78: every node slot is `ReactNode`);
+  `usedWith` from components in the same example. Each edge's `source`
+  points into the from-component's entry.
+- `sizes.json`: every release file, itself included, with bytes and tokens.
+  No token-counting API key is available here, so tokens are estimated at
+  chars/3.5 and marked `estimated: true`.
+
+## Test variants
+
+| Variant | The agent's folder holds |
+| --- | --- |
+| `none` | nothing |
+| `full` | rules.md, index.json, components/*.md |
+| `brief` | rules.md, index.json, components/*.brief.md, and components/*.md to open only when a brief does not answer |
+| `graph` | rules.md, index.json, graph.json, components/*.links.md, components/*.brief.md |
+
+Every run is a fresh `claude -p` session with the same model (default
+`claude-sonnet-5-5`), `--output-format stream-json --verbose`, and only
+Read, Grep and Glob. Tokens are summed over its model calls from the stream
+events (an assistant message's usage, once per message id). `peakContext` is
+the largest single call. `read` lists the pack files opened with Read, with
+their tokens from `sizes.json`; `coin` is their sum, each file once (a Grep
+over a file is not counted as reading it).
 
 ## How an entry is made
 
@@ -119,19 +163,15 @@ entry) and says who raised it:
 
 ## The pilot test
 
-`pilot/questions.json` holds 20 questions (choose, configure, compose, spot a
-gap) with expected answers drafted from the documentation: the answers Coin
-allows, the required constraints, and the recommendations, listed apart.
-Astra settles them through the owner; set `expected.settledBy` on each. The
-runner refuses to start until every question is settled.
-
-Each question then runs twice, in fresh `claude -p` sessions in empty
-folders: with the pack (the current release in `./coin-agent-pack/`, plus the
-package's type declarations) and without it (the type declarations only;
-`--baseline none` gives that run nothing). A third fresh session grades each
-answer against the expectations without knowing which run it is. The with-pack
-run records which pack files the agent read. A full run is 80 sessions of plan
-usage; `--only` reruns some questions.
+`pilot/questions.json` holds 30 questions (choose, configure, compose, spot a
+gap): q01–q20 from the first round and q21–q30 for the flow kit, with
+expected answers drafted from the documentation (the answers Coin allows, the
+required constraints, and the recommendations, listed apart). Astra settles
+them through the owner by setting `expected.settledBy` on each; the runner
+refuses an official run until every question is settled. A full run is 30
+questions × 4 variants, each graded by a fresh session: 240 sessions of plan
+usage. `--only` and `--variants` rerun part of it; other questions keep their
+last results when the pack version and model match.
 
 ## Decisions made in this POC
 
@@ -147,3 +187,10 @@ usage; `--only` reruns some questions.
   Coin". The index lists only entries.
 - **Package version** comparisons for stale evidence use the version
   (`0.1.78`), not the build; the build is kept in `guidance/<slug>.json`.
+- **The flow kit** (0.1.78+2) adds 15 guides to the pilot six. These are the guides a short flow such as a personal loan needs: VStack, HStack, ButtonGroup, IconButton, Link, FormField, CheckboxItem, Tabs, TabItem, Nudge, AppBar, ActionFooter and Stepper, plus Step (Stepper's children) and Slider (loan amount and tenure).
+- **Undocumented entries** are the public primitives a flow needs but no guide covers. They have facts, one example (`from: null`), and a summary only when the component's own JSDoc has one, quoted verbatim. Any hint must rest on a fact. They are not cross-checked, since there is no guide to check them against.
+- **Briefs add two small extras to the contract list**: a props-and-modes line and the entry's gaps. Both are kept because agents need them to configure a component and to report gaps.
+- **`placedIn` matches whole names only.** A capitalised word followed by another capitalised word or a number is part of a longer name ("Text Input", "Form 16"), so it makes no edge. The rule still reads "contains" as placement in two places: ButtonGroup→IconButton and CheckboxItem→Checkbox.
+- **Variant contents.** The `brief` variant also holds the full `.md` files, to open on request. The `graph` variant holds only what the contract lists.
+- **Runner token totals** come from the session's closing `result` event. An assistant event's output count is the count when its message started, not the final one. The input-side sums over the assistant events must equal the result event's, and the runner checks that they do.
+- **Dismissals in `reviews/`** for this round were written by the extracting session, with reasons, for Astra to confirm or reverse.

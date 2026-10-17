@@ -1,0 +1,12 @@
+{
+  "slug": "vstack",
+  "entryHash": "9c8ca690b4cd1cae640208621dfa544b384be0182e86e09a8d45f7eab7caf88c",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "checkedAt": "2026-10-17T10:59:59Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [],
+  "notes": "No misreadings found. Three things a human reviewer should know. (1) /configuration/7 and /facts/props/1 repeat the package's declared text 'Pass flex-start for Top Left or center for Top'. The evidence says the inspected Figma VStack 'exposes Slot only; it does not expose an Alignment property', so the 'Top Left' and 'Top' labels point at a Figma control VStack does not have. This came from the declared types, not the extraction, but agents may read it as a Figma mapping. Worth checking at the package/evidence level. (2) The examples use Title (with a subtitle prop) and Badge. Neither the guide nor the evidence file names them: the evidence lists Button, HStack, VStack, Stack, Icon, Text and the action components. The guide's fixtures only show the text 'Paid | Due today | New'. Confirm Title and Badge are public jfs-components 0.1.60 exports with those props. (3) /anatomy/3 marks Padding as alwaysPresent=true. That is defensible as a mode that always applies, but with None there is no visible inset."
+}

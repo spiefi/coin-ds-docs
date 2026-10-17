@@ -23,9 +23,11 @@ import { readRegistration } from './source-text.mjs'
 
 const pack = loadPack()
 const requested = process.argv.slice(2)
+// Undocumented entries have no guide to snapshot.
+const guided = pack.components.filter((component) => !component.undocumented)
 const components = requested.length
-  ? pack.components.filter((component) => requested.includes(component.slug))
-  : pack.components
+  ? guided.filter((component) => requested.includes(component.slug))
+  : guided
 if (!components.length) fail(`No pilot guide matches ${requested.join(', ')}`)
 
 for (const component of components) {

@@ -1,0 +1,415 @@
+{
+  "slug": "checkboxitem",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "extractedBy": "Claude Code subagent, flow-kit extraction",
+  "extractedOn": "2026-10-17",
+  "notes": "The guide's Sources note and its evidence were checked on 23 September 2026 against jfs-components 0.1.60; the docs now install 0.1.78, so everything resting on them is stale until re-checked. The Configuration, States, Sizing and Content examples carry titles only (no captions), so the states have no described behaviour beyond their names and the one description sentence. The guide gives no accessibility guidance, although its Sources note records duplicate checkbox roles and Space not toggling the row (both recorded as gaps). The evidence says mobile-fit visual QA of the expanded sections is still pending. The package marks label as deprecated in favour of children; the guide's Sources note still speaks of \"a string label\". The package docs describe a Figma default composition (Text plus Link in the label slot, \"I agree\" + \"Terms & Conditions\") that the guide does not cover. The guide names no other component to use instead, so avoidWhen is empty.",
+  "useWhen": [
+    {
+      "text": "A selectable row with a clear label and, when needed, a supporting action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Checkbox Item for a selectable row with a clear label and, when needed, a supporting action."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Control",
+      "holds": "The Checkbox; shows whether the option is selected.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows whether the option is selected."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "The children slot; describes the option and uses the remaining row width.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Describes the option and uses the remaining row width."
+      }
+    },
+    {
+      "part": "Action",
+      "holds": "The optional endSlot; opens related information without changing the choice.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Opens related information without changing the choice."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Give the label room to wrap.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Give the label room to wrap."
+      }
+    },
+    {
+      "text": "The row takes the available width of its host; the Checkbox keeps its own size.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The row takes the available width; the Checkbox keeps its own size."
+      }
+    },
+    {
+      "text": "In a list such as accounts to include, each row keeps its own selected value (its own checked).",
+      "strength": "recommended",
+      "target": "checked",
+      "from": {
+        "section": "inContext",
+        "quote": "Each account keeps its own selected value."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Choose the edge for the control (control leading or trailing) that fits the list.",
+      "strength": "recommended",
+      "target": "control",
+      "from": {
+        "section": "configuration",
+        "quote": "Choose the edge that fits the list."
+      }
+    },
+    {
+      "text": "Keep the control position consistent across neighbouring options.",
+      "strength": "recommended",
+      "target": "control",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep that position consistent across neighboring options."
+      }
+    },
+    {
+      "text": "Avoid mixed control placement: it makes people search for each control.",
+      "strength": "discouraged",
+      "target": "control",
+      "from": {
+        "section": "doDont",
+        "quote": "Avoid making people search for each control."
+      }
+    },
+    {
+      "text": "The end slot defaults to 80 px and swaps edges with the Checkbox when control changes.",
+      "strength": "recommended",
+      "target": "control",
+      "from": {
+        "section": "sources",
+        "quote": "the optional end slot defaults to 80 px and swaps edges with the Checkbox."
+      },
+      "checkedVersion": "0.1.60",
+      "checkedOn": "2026-09-23"
+    },
+    {
+      "text": "Use endSlot for a supporting action that opens related information without changing the choice.",
+      "strength": "recommended",
+      "target": "endSlot",
+      "from": {
+        "section": "anatomy",
+        "quote": "Opens related information without changing the choice."
+      }
+    },
+    {
+      "text": "Keep supporting actions distinct from the selection.",
+      "strength": "recommended",
+      "target": "endSlot",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Keep supporting actions distinct from the selection."
+      }
+    },
+    {
+      "text": "For an action Button in the 80 px end slot, the guide sets Button / Size XS through the row's modes so it fits.",
+      "strength": "recommended",
+      "target": "endSlot",
+      "from": {
+        "section": "evidence",
+        "quote": "The public action uses Button Size XS through the owner modes to fit the documented 80px slot."
+      },
+      "checkedVersion": "0.1.60",
+      "checkedOn": "2026-09-23"
+    },
+    {
+      "text": "Pass the label as children: label is deprecated and is used only when no children are given.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "fact": "props:label"
+      }
+    },
+    {
+      "text": "When a row is disabled and the reason is not obvious, explain it in nearby content.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "section": "states",
+        "quote": "Explain unavailable choices in nearby content when the reason is not obvious."
+      }
+    },
+    {
+      "text": "Avoid unexplained disabled rows: a disabled control alone does not explain what to do next.",
+      "strength": "discouraged",
+      "target": "disabled",
+      "value": "true",
+      "from": {
+        "section": "doDont",
+        "quote": "A disabled control alone does not explain what to do next."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make the whole choice easy to understand and select.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Make the whole choice easy to understand and select."
+        }
+      },
+      {
+        "text": "A plain label usually makes the row easiest to understand.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "A plain label usually makes the row easiest to understand."
+        }
+      },
+      {
+        "text": "Name the choice: say exactly what selecting the row enables.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "Say exactly what selecting the row enables."
+        }
+      },
+      {
+        "text": "Avoid vague labels such as “Enable this”: people should not have to guess what “this” means.",
+        "strength": "discouraged",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "People should not have to guess what “this” means."
+        }
+      },
+      {
+        "text": "Distinguish similar options: include the detail people need to choose the right account.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "Include the detail people need to choose the right account."
+        }
+      },
+      {
+        "text": "Avoid duplicate choices: identical labels hide which account will be selected.",
+        "strength": "discouraged",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "Identical labels hide which account will be selected."
+        }
+      },
+      {
+        "text": "Place the reason beside the unavailable option.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Place the reason beside the unavailable option."
+        }
+      }
+    ],
+    "good": [
+      "Send account updates by email",
+      "Email monthly statements",
+      "Send monthly account statements by email",
+      "Savings • 0245",
+      "Current • 1182",
+      "Fixed deposit • 9073",
+      "Unavailable while account verification is pending."
+    ],
+    "bad": [
+      "Enable this"
+    ]
+  },
+  "states": [
+    {
+      "state": "Unchecked",
+      "when": "The option is not selected (checked false).",
+      "from": {
+        "section": "states",
+        "quote": "Unchecked"
+      }
+    },
+    {
+      "state": "Checked",
+      "when": "The option is selected (checked true).",
+      "from": {
+        "section": "states",
+        "quote": "Checked"
+      }
+    },
+    {
+      "state": "Disabled, unchecked",
+      "when": "disabled true and not selected.",
+      "from": {
+        "section": "states",
+        "quote": "Disabled, unchecked"
+      }
+    },
+    {
+      "state": "Disabled, checked",
+      "when": "disabled true and selected: a disabled option can retain its selected value.",
+      "from": {
+        "section": "states",
+        "quote": "A disabled option can retain its selected value."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Align the controls",
+      "dont": "Avoid mixed placement",
+      "why": "Keep controls on the same edge.",
+      "from": {
+        "section": "doDont",
+        "quote": "Align the controls"
+      }
+    },
+    {
+      "do": "Name the choice",
+      "dont": "Avoid vague labels",
+      "why": "Say exactly what selecting the row enables.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the choice"
+      }
+    },
+    {
+      "do": "Explain unavailable choices",
+      "dont": "Avoid unexplained disabled rows",
+      "why": "A disabled control alone does not explain what to do next.",
+      "from": {
+        "section": "doDont",
+        "quote": "Explain unavailable choices"
+      }
+    },
+    {
+      "do": "Distinguish similar options",
+      "dont": "Avoid duplicate choices",
+      "why": "Identical labels hide which account will be selected.",
+      "from": {
+        "section": "doDont",
+        "quote": "Distinguish similar options"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A list of accounts to include; each row keeps its own selected value.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <CheckboxItem checked={false} onValueChange={(checked) => {}} modes={{ 'Color Mode': 'Light' }}>Savings • 0245</CheckboxItem>\n  <CheckboxItem checked onValueChange={(checked) => {}} modes={{ 'Color Mode': 'Light' }}>Current • 1182</CheckboxItem>\n  <CheckboxItem checked={false} onValueChange={(checked) => {}} modes={{ 'Color Mode': 'Light' }}>Fixed deposit • 9073</CheckboxItem>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Each account keeps its own selected value."
+      }
+    },
+    {
+      "purpose": "A row with a Details action in the end slot; Button / Size XS goes in the row's modes, and the Button gets the same modes.",
+      "jsx": "<CheckboxItem\n  defaultChecked={false}\n  onValueChange={(checked) => {}}\n  modes={{ 'Color Mode': 'Light', 'Button / Size': 'XS' }}\n  endSlot={<Button label=\"Details\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'XS' }} />}\n>\n  Savings • 0245\n</CheckboxItem>",
+      "from": {
+        "section": "anatomy",
+        "quote": "Opens related information without changing the choice."
+      }
+    },
+    {
+      "purpose": "A disabled, selected row with its reason beside it.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <CheckboxItem checked disabled modes={{ 'Color Mode': 'Light' }}>Savings • 0245</CheckboxItem>\n  <Text modes={{ 'Color Mode': 'Light' }}>Unavailable while account verification is pending.</Text>\n</VStack>",
+      "from": {
+        "section": "doDont",
+        "quote": "Place the reason beside the unavailable option."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "endSlot",
+      "description": "A press on the end-slot Button does not change the selection; a press on the row toggles it.",
+      "quote": "clicking the Details Button updated only its documentation status; the row stayed unselected.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "children",
+      "description": "Preferred over the legacy label; the row forwards its modes to slot children.",
+      "quote": "prefers `children` over legacy `label`, and forwards owner modes to slot children.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "control",
+      "description": "With control trailing, the end action comes first and the Checkbox last.",
+      "quote": "With Trailing control, the end action appears first and Checkbox last.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "label",
+      "description": "A string label wraps; the Long label story's name does not mean it truncates.",
+      "quote": "A string label wraps in the checked implementation; the story name does not establish ellipsis behavior.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "endSlotWidth",
+      "description": "Figma's end slot is 80 px, matching the default; the nested Checkbox is 18 px.",
+      "quote": "the nested Checkbox is 18px and the end slot is 80px",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "modes",
+      "name": "Button / Size",
+      "create": true,
+      "type": "mode collection",
+      "description": "Not in CheckboxItem's mode list; set in the row's modes, it reaches the end-slot Button, and XS fits the 80 px slot.",
+      "quote": "The public action uses Button Size XS through the owner modes to fit the documented 80px slot.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The row and its nested Checkbox each expose a checkbox role on the web, duplicating the semantics.",
+      "from": {
+        "section": "sources",
+        "quote": "The row and its nested Checkbox each expose a checkbox role on web."
+      },
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "text": "Space on the focused row does not toggle it on the web; Enter and a press do.",
+      "quote": "The focused row toggled on Enter but did not toggle after both locator Space and native browser `space` key input; this is a package/platform limitation left unpatched.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

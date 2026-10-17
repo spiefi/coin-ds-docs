@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "packVersion": "0.1.78+1",
-  "status": "Draft for review. Astra settles every expected answer (sets expected.settledBy) before the test runs.",
+  "packVersion": "0.1.78+2",
+  "status": "Draft for review. q01–q20 from the first round; q21–q30 added for the flow kit. Astra settles every expected answer (sets expected.settledBy) before the test runs.",
   "questions": [
     {
       "id": "q01",
@@ -383,6 +383,207 @@
         ],
         "recommended": [
           "Does not offer LottiePlayer, an animation player, as a video player"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q21",
+      "kind": "configure",
+      "question": "On a loan application, configure the field for the applicant's PAN. It must be filled in, should show the format, and should show an error when the PAN is invalid.",
+      "expected": {
+        "validAnswers": [
+          "FormField with label 'PAN', a placeholder that shows the format (such as 'ABCDE1234F'), isRequired, and isInvalid with an errorMessage that says how to fix the value"
+        ],
+        "required": [
+          "Uses FormField's own props: label, placeholder, isRequired, isInvalid, errorMessage",
+          "Does not use the placeholder as the label"
+        ],
+        "recommended": [
+          "The label names the value in sentence case ('PAN'), not an instruction such as 'Enter your PAN'",
+          "The placeholder carries the format example",
+          "The error message says how to fix the value, not only that it is wrong",
+          "The screen checks the value and sets the error; FormField only shows it"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q22",
+      "kind": "compose",
+      "question": "Before submitting a loan application, the person agrees to the loan terms. Show the consent row, a way to read the full terms, and the Submit action.",
+      "expected": {
+        "validAnswers": [
+          "A CheckboxItem for the consent with a specific label, a Link to the terms (in the row's end slot or beside it), and Submit as a Button, for example in an ActionFooter"
+        ],
+        "required": [
+          "Submit is a Button, not a Link",
+          "Uses public jfs-components exports only"
+        ],
+        "recommended": [
+          "The checkbox label names the choice specifically, not 'I agree to this'",
+          "The link label names the destination, such as 'Loan terms', not 'Click here'",
+          "The supporting link stays distinct from the selection",
+          "Submit is the one primary action"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q23",
+      "kind": "choose",
+      "question": "Show applicants where they are in a four-stage loan application (Personal details, Income, Documents, Review) and which stages are done.",
+      "expected": {
+        "validAnswers": [
+          "A Stepper with four Step children, each titled with its stage and given a status (complete for done stages, the current stage marked, upcoming stages inactive)"
+        ],
+        "required": [
+          "Uses Stepper with Step children",
+          "Every Step gets its own title; none keeps the default 'Stepper Item'"
+        ],
+        "recommended": [
+          "Titles name the stage in a few words, not actions",
+          "A Step's status and its Step Status mode stay matched (no check on purple)",
+          "The last stage shows no connector",
+          "The next action is a separate Button; Stepper is not pressable",
+          "The Stepper gets a spoken name such as 'Loan application progress'"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q24",
+      "kind": "configure",
+      "question": "Let people choose a loan amount between ₹50,000 and ₹5,00,000 in steps of ₹10,000.",
+      "expected": {
+        "validAnswers": [
+          "Slider with minValue 50000, maxValue 500000 and step 10000, with the value written as money, under a title"
+        ],
+        "required": [
+          "Uses Slider's own minValue, maxValue and step props; no invented range props"
+        ],
+        "recommended": [
+          "The value and the end labels are written as money (₹50,000), not raw numbers",
+          "A title sits above the slider, with room for the value bubble, and its words are the slider's spoken name (accessibilityLabel)"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q25",
+      "kind": "choose",
+      "question": "On a loan offer's details screen, people switch between Overview, EMI schedule and Documents for the same offer. What should I use?",
+      "expected": {
+        "validAnswers": [
+          "Tabs with three TabItem children; the screen keeps the selected tab, marks it active, and shows that view below"
+        ],
+        "required": [
+          "TabItems sit inside Tabs",
+          "Exactly one TabItem is active, set by the screen"
+        ],
+        "recommended": [
+          "Labels are short nouns in sentence case that name the view",
+          "Tabs switch views; actions such as 'Apply' stay Buttons",
+          "scrollable when the labels do not fit in one row"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q26",
+      "kind": "compose",
+      "question": "Build the top bar of the offer details screen. It is a child page of the Offers list, with a back button and a share action.",
+      "expected": {
+        "validAnswers": [
+          "AppBar with type 'SubPage', a short title, onLeadingPress for back, and an IconButton for share in actionsSlot with an accessibility label such as 'Share offer'"
+        ],
+        "required": [
+          "Uses AppBar type 'SubPage' for a child page, not 'MainPage'",
+          "Uses AppBar's own slots and props (middleSlot, actionsSlot, onLeadingPress)"
+        ],
+        "recommended": [
+          "A short title",
+          "Only actions that support the page",
+          "The share IconButton's accessibility label says the action"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q27",
+      "kind": "compose",
+      "question": "The loan application's footer has 'Back' and 'Continue'. Build it so Continue clearly advances the application.",
+      "expected": {
+        "validAnswers": [
+          "ActionFooter holding a ButtonGroup with Back and then Continue, Continue with the stronger emphasis"
+        ],
+        "required": [
+          "One action is clearly primary; Back and Continue do not both get the strongest emphasis"
+        ],
+        "recommended": [
+          "ButtonGroup for a row of actions (Stack for a vertical order)",
+          "Size and modes set once on the group, not per child",
+          "The group is given a width",
+          "Short verb-led labels, ending with the action people are most likely to choose"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q28",
+      "kind": "gap",
+      "question": "On the offer details tabs, the 'Documents' tab should be disabled until the application is approved. How do I do that?",
+      "expected": {
+        "validAnswers": [
+          "Report that Tabs and TabItem have no disabled state (a gap), rather than faking one"
+        ],
+        "required": [
+          "Does not invent a disabled prop on TabItem or Tabs",
+          "Does not fake a disabled look with styles"
+        ],
+        "recommended": [
+          "Reports it as a Coin gap"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q29",
+      "kind": "configure",
+      "question": "On the offer details screen, suggest adding a co-applicant to get a higher amount, with one action, and let people dismiss the suggestion.",
+      "expected": {
+        "validAnswers": [
+          "Nudge with its own title (the benefit), body (one sentence of detail) and buttonLabel (a verb), onPressButton, and onClose, which the screen uses to remove it"
+        ],
+        "required": [
+          "Sets its own title, body and button label; does not ship the placeholder copy",
+          "The screen removes the Nudge on close; it has no hidden state of its own"
+        ],
+        "recommended": [
+          "Context mode 'Nudge&Alert' so the button is the small size",
+          "One action",
+          "Uses a type that supports a button and close (not stacked-detailed)"
+        ],
+        "settledBy": null
+      }
+    },
+    {
+      "id": "q30",
+      "kind": "compose",
+      "question": "Compose the confirmation screen after a personal loan application is submitted: the title 'Application submitted', a line saying the decision arrives within 24 hours, the application's progress, and a 'Go to home' action.",
+      "expected": {
+        "validAnswers": [
+          "A Screen (or VStack page flow) with Title, Text, a Stepper of titled Steps showing the stages and their status, and a Button, for example in an ActionFooter"
+        ],
+        "required": [
+          "Uses public jfs-components exports only",
+          "The action is a separate Button; the Stepper is not pressable",
+          "Every Step has its own title"
+        ],
+        "recommended": [
+          "The Stepper gets a spoken name",
+          "Step titles name the stages",
+          "One primary action with a verb-led label"
         ],
         "settledBy": null
       }
