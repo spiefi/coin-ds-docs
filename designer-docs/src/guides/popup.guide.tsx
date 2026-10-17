@@ -105,15 +105,15 @@ function PopupGuide() {
       description: 'Closed, only the trigger shows. Opening fades in the scrim while the sheet springs up from the bottom; closing slides it down and fades the scrim over 250 ms. A tap on the scrim, Escape, or a button in the sheet closes it, and focus stays inside while it\'s open.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Closes from inside" description="Later closes it from inside; Claim would carry on with the task."><Triggered content={Rewards} /></ExampleCard>
-        <ExampleCard title="Scrim tap off" description="Only Later or Escape closes it. The dimmed page is still a button named “Close popup” that does nothing (#268)."><Triggered closeOnBackdropPress={false} content={Rewards} /></ExampleCard>
+        <ExampleCard title="Scrim tap off" description="Only Later or Escape closes it; a tap on the dimmed page does nothing."><Triggered closeOnBackdropPress={false} content={Rewards} /></ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: 'The window\'s width, its content\'s height',
-      description: 'The sheet spans the whole window, as it spans a phone screen, and grows with its content. There\'s no maximum height and no scroll, so content taller than the screen runs off the top (#268).',
+      description: 'The sheet spans the whole window, as it spans a phone screen, and grows with its content up to 90% of the window\'s height; taller content scrolls inside it.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Short content" description="A title and two buttons: the sheet hugs them at the bottom of the screen."><Triggered content={Rewards} /></ExampleCard>
-        <ExampleCard title="Tall content" description="Forty lines of terms run off the top of the window and can't be scrolled to."><Triggered label="Open tall content" content={Terms} /></ExampleCard>
+        <ExampleCard title="Tall content" description="Forty lines of terms stop at 90% of the window and scroll inside the sheet."><Triggered label="Open tall content" content={Terms} /></ExampleCard>
       </div>,
     },
     content: {
@@ -142,22 +142,22 @@ function PopupGuide() {
     },
     'dos-donts': {
       header: 'Do & Don’ts', title: 'Short, with a way out',
-      description: 'Each pair opens a popup people can read and leave next to one that traps them or runs off the screen.',
+      description: 'Each pair opens a popup people can read and leave next to one that traps them or makes them scroll.',
       body: <div className="coin-new-stack">
         <DoDont good={<Triggered content={Rewards} />} bad={<Triggered closeOnBackdropPress={false} noLater content={Rewards} />}
           goodTitle="Offer a way out" goodCaption="Later, a tap on the dimmed page, and Escape all close it."
           badTitle="Trap people in it" badCaption="With no Later and scrim taps off, only Escape closes it, and phones have no Escape key." />
         <DoDont good={<Triggered content={Rewards} />} bad={<Triggered content={Terms} />}
           goodTitle="Keep it short" goodCaption="A title and two buttons fit any screen."
-          badTitle="Fill it with text" badCaption="Long content runs off the top of the screen and can't be scrolled (#268)." />
+          badTitle="Fill it with text" badCaption="Long content fills the screen, and people must scroll to reach the buttons." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Popup contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="12 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('popup')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('popup')} stories={[
         { label: 'Default', id: 'components-popup--default' }, { label: 'Controlled', id: 'components-popup--controlled' }, { label: 'Custom content', id: 'components-popup--custom-content' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Popup is a 360 × 508 white sheet with 20 px top corners and 24 px at the bottom, holding an image, a title, and two buttons; it has no scrim or properties. In code it’s a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so these examples open it from a button, as Storybook does. The sheet spans the window, its scrim is 50% black from props (Overlay’s is 70%), and it springs up but slides away over its close speed. On the web Escape closes it and focus stays inside it, but focus starts on the dimmed page’s “Close popup” button, the dialog has no name, a scrim with taps off is still that button, doing nothing, and tall content runs off the screen (#268). The published Storybook page is still the old generated one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Popup is a 360 × 508 white sheet with 20 px top corners and 24 px at the bottom, holding an image, a title, and two buttons; it has no scrim or properties. In code it’s a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so these examples open it from a button, as Storybook does. The sheet spans the window, its scrim is 50% black from props (Overlay’s is 70%), and it springs up but slides away over its close speed. On the web Escape closes it, and focus moves into the sheet and stays there. Since the #268 fix the dialog is named by accessibilityLabel (“Popup” by default), the scrim is never a Tab stop, the sheet stops at 90% of the window and scrolls, and the trigger takes the popup’s modes. The published Storybook page is still the old generated one.</Sources>,
     },
   }
 

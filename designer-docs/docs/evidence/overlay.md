@@ -6,6 +6,8 @@ Package, Figma, and Storybook evidence for the Overlay guide (board ticket #8, D
 
 Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5). Biscuit's newer `main` commit c1fa197c (12 October) changes only `Overlay.mdx` (a handwritten rewrite) and adds `excludeStories` to `Overlay.stories.tsx`; `Overlay.tsx` is unchanged.
 
+Re-checked 17 October 2026 for the #269 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `Overlay.tsx` changes. New prop `dismissAccessibilityLabel` (default "Dismiss overlay", Overlay.tsx:39, 78). On the web the overlay is `role="dialog"` `aria-modal="true"` named `accessibilityLabel ?? dismissAccessibilityLabel` (Overlay.tsx:90); the scrim keeps `aria-label` but is `aria-hidden`, `tabIndex -1` (Overlay.tsx:194-197). A web effect moves focus inside on mount, keeps Tab and Shift+Tab inside, and Escape calls `onPress`. Re-test on #269: all three items pass. Regression #281 (Component Fix, To do): the effect runs for every mounted Overlay, with or without `onPress`, even one that dims only a region, and several overlays fight over focus. Measured on the built docs in headless Chrome (1280 px): on load the overlay guide has 17 `role="dialog"` overlays, focus lands on the Do & Don'ts "Pay" button and the page scrolls to y 7462; drawer focuses the "With a scrim" example's overlay (y 2437); contentsheet focuses a Do & Don'ts overlay (y 6335). The guides document this and name #281; they don't work around it.
+
 ## Sources
 
 - Package: `src/components/Overlay/Overlay.tsx` (114 lines); exports `Overlay` (memo) and `OverlayProps`.
@@ -18,8 +20,8 @@ Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 - Props: `children` (painted above the scrim; omitted = bare scrim), `contentPlacement` `center` (default) | `top` | `bottom` | `stretch`, `onPress`, `fill` (true), `modes`, `style`, and View props (`testID` lands on the root, which is the scrim).
 - Placement: center → content centred at its own width; top / bottom → docked to that edge, stretched across; stretch → centred vertically, stretched across.
 - `fill` true: absolute fill of the nearest positioned parent (every React Native View is positioned on the web), not the viewport. `fill={false}`: in the page's flow, sized by its content (or `style`).
-- `onPress` set: a full-size `button` named “Dismiss overlay” (fixed English, no prop) is the first child; content comes after it and sits above it, so presses on content don't dismiss. No `onPress`: the scrim is inert but still blocks presses to the page.
-- Not a Modal or portal; no open state (render to show, remove to hide); no animation; no focus move, focus containment, or Escape; no `role` or `aria-modal` (`accessibilityViewIsModal` is dropped on the web).
+- `onPress` set: a full-size scrim named by `dismissAccessibilityLabel` (default “Dismiss overlay”; fixed English with no prop before a116616, #269) is the first child; since a116616 it is `aria-hidden` and not a Tab stop; content comes after it and sits above it, so presses on content don't dismiss. No `onPress`: the scrim is inert but still blocks presses to the page.
+- Not a Modal or portal; no open state (render to show, remove to hide); no animation. Since a116616 on the web: `role="dialog"` `aria-modal="true"`, focus moves inside on mount, Tab is contained, Escape calls `onPress` (#269, fixed); this runs for every mounted overlay (#281, open).
 - Children get the overlay's `modes` merged under their own (`cloneChildrenWithModes`).
 
 ## Modes and tokens
@@ -28,13 +30,13 @@ One token, `overlay/background` = `rgba(0, 0, 0, 0.7)` (single mode); the same i
 
 ## Web render
 
-`div[data-testid]` (absolute, inset 0, background `rgba(0,0,0,0.7)`, overflow hidden, flex placement) › `button[aria-label="Dismiss overlay"]` (absolute fill, only with `onPress`) › children.
+`div[data-testid]` (absolute, inset 0, background `rgba(0,0,0,0.7)`, overflow hidden, flex placement) › scrim `[aria-label="Dismiss overlay"]` (absolute fill, only with `onPress`; a `button` before a116616, `aria-hidden` since) › children. Since a116616 the root is `role="dialog"` `aria-modal="true"` on the web.
 
 ## Discrepancies
 
 - Figma's 589 × 708 and 360 × 801 sizes aren't a specification; the code fills its parent.
-- c1fa197c's page says the region is always treated as modal; on the web nothing is announced as modal.
-- The full-size dismiss button is a Tab stop before the content; whether its focus ring outlines the whole screen is checked in the browser review.
+- c1fa197c's page says the region is always treated as modal; on the web nothing was announced as modal until a116616 (#269).
+- Before a116616 the full-size dismiss button was a Tab stop before the content with a screen-wide focus ring (#269, fixed).
 
 ## Hosting
 

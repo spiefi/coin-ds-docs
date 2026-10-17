@@ -54,7 +54,7 @@ function SpinnerGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'Three arcs chasing each other',
-      description: 'Three 100° arcs with round ends turn clockwise around an empty centre, with no track behind them. Each is 11% of the size thick, so 7.9 px at the default 72 px. The diagram shows the resting pose so the pins stay put.',
+      description: 'Three 100° arcs with round ends turn clockwise around an empty centre, with no track behind them. Each is about 18% of the size thick: 12.8 px at the default 72 px, as in Figma. The diagram shows the resting pose so the pins stay put.',
       body: <Anatomy marks={[{ kind: 'size', target: SP, side: 'bottom', label: 'both' }]} parts={[
         { name: 'Leading arc', note: 'Gold and drawn on top. It leads the turn: fastest over the top, slowest at the bottom.', target: `${SP} > div:nth-child(3) path`, side: 'top' },
         { name: 'Middle arc', note: 'Purple. It follows the gold arc; the gap between them opens and closes as it turns.', target: `${SP} > div:nth-child(2) path`, side: 'left' },
@@ -80,11 +80,11 @@ function SpinnerGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'You set the diameter',
-      description: 'Size is the diameter in px: 72 by default, with no minimum or maximum. The arcs stay 11% of it thick, so a 32 px spinner draws 3.5 px arcs. It keeps its size and doesn\'t stretch to fill its host.',
+      description: 'Size is the diameter in px: 72 by default, with no minimum or maximum. The arcs stay about 18% of it thick, so a 32 px spinner draws 5.7 px arcs. It keeps its size and doesn\'t stretch to fill its host.',
       body: <div className="coin-new-example-grid three">
-        <ExampleCard title="32 px" description="3.5 px arcs. Small enough to sit beside a line of text."><Spinner size={32} /></ExampleCard>
-        <ExampleCard title="56 px" description="6.2 px arcs, for a card or one section that's loading."><Spinner size={56} /></ExampleCard>
-        <ExampleCard title="88 px" description="9.7 px arcs, for a whole screen waiting on one thing."><Spinner size={88} /></ExampleCard>
+        <ExampleCard title="32 px" description="5.7 px arcs. Small enough to sit beside a line of text."><Spinner size={32} /></ExampleCard>
+        <ExampleCard title="56 px" description="10 px arcs, for a card or one section that's loading."><Spinner size={56} /></ExampleCard>
+        <ExampleCard title="88 px" description="15.6 px arcs, for a whole screen waiting on one thing."><Spinner size={88} /></ExampleCard>
       </div>,
     },
     content: {
@@ -125,11 +125,11 @@ function SpinnerGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Spinner contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('spinner')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('spinner')} stories={[
         { label: 'Default', id: 'components-spinner--default' }, { label: 'Sizes', id: 'components-spinner--sizes' },
         { label: 'Heavy', id: 'components-spinner--heavy' }, { label: 'Weightless', id: 'components-spinner--weightless' },
         { label: 'Resting', id: 'components-spinner--resting' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, gravity, and resting pose exist only in code. In code the arcs are 11% of the size thick, 7.9 px at 72, while Figma’s ring is about 12.8 px (#276); Biscuit’s 13 October build draws 12.8 px but isn’t installed here yet. No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The code’s description of durationMs says 2400 ms, but the default is 1500 ms. The published Storybook page is still the old generated one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, gravity, and resting pose exist only in code. Since the #276 fix the arcs match Figma’s ring: 12.8 px thick at 72, and in proportion at other sizes. No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The published Storybook page is still the old generated one.</Sources>,
     },
   }
 

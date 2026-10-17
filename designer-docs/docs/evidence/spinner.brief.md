@@ -2,7 +2,7 @@
 
 slug: spinner · label: Spinner · public API: Spinner (+ VStack, HStack, Title, Text, Button for composition; ScreenFrame from the kit for In context)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2729-1039 · storybook: docsUrl('spinner') · stories: Default=components-spinner--default, Sizes=components-spinner--sizes, Heavy=components-spinner--heavy, Weightless=components-spinner--weightless, Resting=components-spinner--resting
-checked: 13 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c1fa197, Biscuit's main c1fa197; Spinner.tsx unchanged since 636f3f5). Biscuit's main 7020bf9 changes the ring to 12.8/72 (#276) but isn't installed.
+checked: 17 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-a116616, Biscuit's main a116616; the ring is 12.8/72 of the size since the #276 fix)
 icon: an open ring, three quarters of a circle — `<path d="M9 2.5a6.5 6.5 0 1 1-6.5 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />`
 keywords: loader, loading indicator, activity indicator, progress spinner
 
@@ -15,7 +15,7 @@ principle: Show that something is happening, then get out of the way.
 playground: `.preview-stage` › `<Spinner size durationMs gravity animating />`; stage label "Live Coin Spinner". Controls: Segment "Size" `32 | 56 | 72 | 88 | 128` (72) → `size`; Segment "Turn" `1000 ms | 1500 ms | 2800 ms` (1500 ms) → `durationMs`; OnOff "Animating" (on) → `animating`. Readout title "Spinner", value "Spinning" or "Resting"; note when on: "It turns until the screen removes it or sets animating off."; off: "Resting: three evenly spaced arcs, which isn't a frame of the spin."
 
 ## Anatomy
-header: Anatomy · title: Three arcs chasing each other · description: Three 100° arcs with round ends turn clockwise around an empty centre, with no track behind them. Each is 11% of the size thick, so 7.9 px at the default 72 px. The diagram shows the resting pose so the pins stay put.
+header: Anatomy · title: Three arcs chasing each other · description: Three 100° arcs with round ends turn clockwise around an empty centre, with no track behind them. Each is about 18% of the size thick: 12.8 px at the default 72 px, as in Figma. The diagram shows the resting pose so the pins stay put.
 specimen: `<Anatomy marks={[{ kind: 'size', target: byTestId('sp-anatomy'), side: 'bottom', label: 'both' }]}>` › `<Spinner testID="sp-anatomy" animating={false} />`
 Root children render teal, purple, gold, so: SP = byTestId('sp-anatomy').
 parts:
@@ -37,11 +37,11 @@ Grid `coin-new-example-grid`:
 - Resting — `<Spinner animating={false} />` — lesson: Also what people who turn on reduced motion see.
 
 ## Sizing
-header: Sizing · title: You set the diameter · description: Size is the diameter in px: 72 by default, with no minimum or maximum. The arcs stay 11% of it thick, so a 32 px spinner draws 3.5 px arcs. It keeps its size and doesn't stretch to fill its host.
+header: Sizing · title: You set the diameter · description: Size is the diameter in px: 72 by default, with no minimum or maximum. The arcs stay about 18% of it thick, so a 32 px spinner draws 5.7 px arcs. It keeps its size and doesn't stretch to fill its host.
 Grid `coin-new-example-grid three`, each an ExampleCard › one spinning Spinner (a SpecimenRow with size marks crowds the stage, so the sizes are cards):
-- 32 px — `size={32}` — lesson: 3.5 px arcs. Small enough to sit beside a line of text.
-- 56 px — `size={56}` — lesson: 6.2 px arcs, for a card or one section that's loading.
-- 88 px — `size={88}` — lesson: 9.7 px arcs, for a whole screen waiting on one thing.
+- 32 px — `size={32}` — lesson: 5.7 px arcs. Small enough to sit beside a line of text.
+- 56 px — `size={56}` — lesson: 10 px arcs, for a card or one section that's loading.
+- 88 px — `size={88}` — lesson: 15.6 px arcs, for a whole screen waiting on one thing.
 
 ## Content
 header: Content · title: No text of its own · description: The spinner shows no words. Its spoken name is “Loading” unless you set accessibilityLabel; name what's loading, and add a short line of text next to it when the wait is more than a moment.
@@ -58,7 +58,7 @@ header: Do & Don’ts · title: One clear wait · description: Each pair shows a
 
 ## Sources
 header: Sources · title: Use the public Spinner contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, gravity, and resting pose exist only in code. In code the arcs are 11% of the size thick, 7.9 px at 72, while Figma’s ring is about 12.8 px (#276); Biscuit’s 13 October build draws 12.8 px but isn’t installed here yet. No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The code’s description of durationMs says 2400 ms, but the default is 1500 ms. The published Storybook page is still the old generated one.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, gravity, and resting pose exist only in code. Since the #276 fix the arcs match Figma’s ring: 12.8 px thick at 72, and in proportion at other sizes. No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The published Storybook page is still the old generated one.
 
 ## Limits
 Gravity appears only in Configuration, by its prop name; never as a playground control or under another name such as “weight” (review, 12 October). Don't demo `colors` (it needs hardcoded colours) or pass `modes`. Don't imply a progress value, a track, a label of its own, size variants, or that Button's loading state is a spinner (it's a Skeleton). Don't mention colour modes.

@@ -52,7 +52,7 @@ function BenefitCardGuide() {
         { name: 'Header title', note: 'headerTitle at 12 px, a label for the rows below it.', target: TITLE, side: 'top' },
         { name: 'Earnings row', note: 'A headerItems row: an icon, a short title, and the figure on the right.', target: EARN_ROW, side: 'right' },
         { name: 'Divider', note: 'Separates what you earn from what the plan includes.', target: DIVIDER, side: 'left' },
-        { name: 'Upsell', note: 'A Nudge by default, whose Close does nothing yet (#271); bodyHeader replaces or removes it.', target: UPSELL, side: 'right' },
+        { name: 'Upsell', note: 'A Nudge by default, with no Close; bodyHeader replaces or removes it.', target: UPSELL, side: 'right' },
         { name: 'Benefit row', note: 'An items row: an icon and a short perk.', target: BENEFIT_ROW, side: 'left' },
         { name: 'Button', note: 'buttonLabel and onButtonPress; showButton hides it.', target: BUTTON, side: 'bottom' },
       ]}>
@@ -71,7 +71,7 @@ function BenefitCardGuide() {
     },
     states: {
       header: 'States', title: 'A summary with or without an action',
-      description: 'The card has no state of its own: only its button acts, through onButtonPress, with Button\'s usual states. onPress makes the whole card one button that dims while pressed, but on the web its own buttons then sit inside it, so avoid onPress while the card has a button (#280).',
+      description: 'The card has no state of its own: only its button acts, through onButtonPress, with Button\'s usual states. onPress makes the header a button named by its title, and pressing the header or the lists dims them and calls it; the upsell and the card’s button stay separate buttons beside it.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="With the button" description="One next step at the bottom.">{Fit()}</ExampleCard>
         <ExampleCard title="Without the button" description="showButton off: a summary of the plan.">{Fit({ showButton: false })}</ExampleCard>
@@ -126,14 +126,14 @@ function BenefitCardGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Benefit Card contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('benefitcard')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('benefitcard')} stories={[
         { label: 'Default', id: 'components-benefitcard--default' },
         { label: 'Declarative arrays', id: 'components-benefitcard--declarative-arrays' },
         { label: 'Without upsell', id: 'components-benefitcard--without-upsell' },
         { label: 'Header hidden', id: 'components-benefitcard--header-hidden' },
         { label: 'Button hidden', id: 'components-benefitcard--button-hidden' },
         { label: 'Pressable card', id: 'components-benefitcard--pressable-card' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s BenefitCard is one 344 × 221 component with header and Button switches and two list slots; its upsell is the retired Nudge, with 12 px text and no close button. In this build the upsell has 14 px text and a Close button that does nothing (#271), so the card is a few pixels taller; Biscuit’s 13 October build hides Close but isn’t installed here. The header swaps Figma’s spacing: 4 px under the title and 8 px between rows, 8 and 4 in Figma. The card and its title stay white and black in every mode. Its default rows repeat one placeholder, so always pass your own. The published Storybook still shows the old page and the older nudge.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s BenefitCard is one 344 × 221 component with header and Button switches and two list slots; its upsell is the retired Nudge, with 12 px text and no close button. In this build the upsell has 14 px text and, since the #271 fix, no Close button, as in Figma; the card is 223 px tall, 2 more than Figma. The header swaps Figma’s spacing: 4 px under the title and 8 px between rows, 8 and 4 in Figma. The card and its title stay white and black in every mode. Its default rows repeat one placeholder, so always pass your own. The published Storybook still shows the old page and the older nudge.</Sources>,
     },
   }
 
@@ -158,7 +158,7 @@ function BenefitCardGuide() {
       <OnOff label="Upsell" value={upsell} onChange={setUpsell} />
       <OnOff label="Button" value={button} onChange={setButton} />
       <Readout title="Last action" value={action}>
-        Only the button acts. In this build the upsell's Close button does nothing (#271).
+        Only the button acts.
       </Readout>
     </div>
   </>} sections={sections} />

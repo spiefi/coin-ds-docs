@@ -35,3 +35,7 @@ Re-checked 13 October 2026 for the #203 publish: the docs now install mirror tag
 ## Coin gaps
 
 - #203 (Component Fix, Done, published 13 October 2026 with c1fa197): `contentSheet/gap` not applied; the title scrolled away; a hidden sheet was still focusable and readable; Dark title white on a white sheet; maximum height from the window rather than the parent; docs page not rewritten. Fixed. Guide change: the Title part, States, Sizing, and Sources describe the fixed title, the 8 px gap, the hidden sheet, and the parent-relative cap. Still open from it: whether the safe-area inset is meant to be added to the 41 px bottom padding (question 6).
+
+## Overlay focus trap (17 October 2026, #269 publish)
+
+The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October). Its Overlay fix for #269 adds a web focus trap that runs for every mounted Overlay (regression #281, Component Fix, To do). Measured on the built docs in headless Chrome at 1280 px: on load, focus lands on a Do & Don’ts overlay (`role="dialog"` “Dismiss overlay”) and the page scrolls to y 6335, and Tab stays there. The guide's Sources name #281; nothing works around it. The rest of this evidence was not re-checked against a116616.

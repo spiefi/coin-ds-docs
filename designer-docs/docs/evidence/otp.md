@@ -56,3 +56,10 @@ Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `ma
 - #210 fixed (verified 12 October, published here). The support line and the “Resend OTP in Ns” countdown are right-aligned again: in the guide's 334 px host the support row is 228.4 px wide, flush with the right content edge. When the countdown ends, Resend is an 87.3 × 32 pill at the right; the Ready to resend card is 123 px tall. Slots still shrink (8 digits fit 300 px).
 - Regression #274 (open): support or error text longer than the row no longer wraps and runs past the left edge. Every guide example's text fits its row at 1280 and 390 px (the longest, “Enter the code sent to your phone”, is 208.4 px in a 226 px row), so no example shows it.
 - Guide: the Support line anatomy note, the Ready to resend card, and the Sources note say the support line and a small Resend button are right-aligned, as in Figma, and that longer support or error text should stay on one line in this build. The brief matches.
+
+## a116616 publish (17 October 2026, #274)
+
+The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `OTP.tsx` and `SupportText.tsx` changes: the support row stretches to the OTP width and SupportText can shrink.
+
+- #274 fixed (re-test 17 October): in a 240 px OTP the error "The code you entered is incorrect. Check the SMS and try again." wraps to 3 lines inside the field (x 44–248); long supportText wraps the same way; short supportText ("Didn't get it?") stays one line, right-aligned (x 169–248).
+- Guide: the Sources note now says longer support or error text wraps inside the field and short text stays right-aligned, instead of asking for one line. No example changed; the browser test passes at 1280 and 390 px.

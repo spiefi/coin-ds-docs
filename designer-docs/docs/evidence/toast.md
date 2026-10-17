@@ -6,6 +6,8 @@ Package, Figma, and Storybook evidence for the Toast guide (board ticket #63, De
 
 Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5). Biscuit's newer `main` commit c1fa197c (12 October) changes only `Toast.mdx` (a handwritten rewrite) and adds `excludeStories` to `Toast.stories.tsx`; the Toast code is unchanged. Installed `src/` and `lib/module` match upstream byte for byte.
 
+Re-checked 17 October 2026 for the #267 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `Toast.tsx`, `ToastProvider.tsx` and `useToast.ts` changes. The icon uses AppearanceBrand Neutral unless the toast's modes set AppearanceBrand (Toast.tsx:73-80). `maxVisibleToasts` is floored and clamped at 0, and 0 shows none (ToastProvider.tsx:24-28). Each toast's timer starts in `addToast` (useToast.ts:77-80), including toasts waiting behind the cap. `addToast` accepts `disableTruncation` and the provider passes it to the view. Measured on the guide in headless Chrome: Configuration card icon `rgb(255, 255, 255)`, own `ic_confirm` icon `rgb(173, 132, 68)`, brand icons Primary `rgb(206, 161, 90)`, Secondary `rgb(93, 0, 181)`, Tertiary `rgb(3, 107, 153)`, Neutral `rgb(255, 255, 255)`; Show five shows Notification 3–5 at 0.7 s and nothing at 4.5 s or 8.5 s (Notification 1 and 2 time out unseen). Re-test on #267: `addToast({ title: <long>, disableTruncation: true })` shows all 5 lines.
+
 ## Sources
 
 - Package: `src/components/Toast/` — `Toast.tsx` (the pill), `ToastProvider.tsx`, `useToast.ts`; exports `Toast`, `ToastProvider`, `useToast`, `addToast`, `closeToast`, `closeAll`, and types `ToastProps`, `ToastProviderProps`, `ToastOptions`, `ToastEntry`, `ToastPlacement`.
@@ -15,17 +17,17 @@ Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 ## Contract
 
-- `addToast({ title, timeout = 4000, onClose, modes, startItem = false, slotItem })` returns an id. `timeout <= 0` keeps it until closed. `closeToast(id)`, `closeAll()`, `useToast()` (`{ toasts, addToast, closeToast, closeAll }`) work over one module-level queue.
+- `addToast({ title, timeout = 4000, onClose, modes, startItem = false, slotItem, disableTruncation })` returns an id (`disableTruncation` since a116616). `timeout <= 0` keeps it until closed. `closeToast(id)`, `closeAll()`, `useToast()` (`{ toasts, addToast, closeToast, closeAll }`) work over one module-level queue.
 - `ToastProvider` (`children`, `maxVisibleToasts` 3, `placement` `bottom` (default) | `top`, `modes` as a fallback for entries without their own). It wraps the screen and adds a region 8 px (plus the safe-area inset, 0 here) from that edge: centred, 8 px gap, oldest first. Every provider renders the whole queue, so two mounted providers show every toast twice; the docs mount one at a time.
-- Only the newest `maxVisibleToasts` are mounted; older ones wait without a timer and appear, with a fresh timeout, as visible ones close (#267). `maxVisibleToasts={0}` shows all (#267).
-- `Toast` view (`id`, `title`, `timeout`, `modes`, `placement`, `style`, `startItem`, `slotItem`, `disableTruncation`, `onClose` unused). `disableTruncation` can't be reached through `addToast` (#267). The docs use the view for static examples with `timeout={0}`.
+- Only the newest `maxVisibleToasts` are mounted. Since a116616 every toast's timer runs from `addToast`, so older ones wait behind the cap on their own timers and appear only if still due when a newer one closes; `maxVisibleToasts={0}` shows none (#267, fixed; on c1fa197 they waited without a timer and 0 showed all).
+- `Toast` view (`id`, `title`, `timeout`, `modes`, `placement`, `style`, `startItem`, `slotItem`, `disableTruncation`, `onClose` unused). `disableTruncation` is reachable through `addToast` since a116616 (#267, fixed). The docs use the view for static examples with `timeout={0}`.
 - No intent or type, no action, no close button, no swipe, no tap to dismiss. The title clamps at two lines with an ellipsis.
 - Animation: Reanimated layout animations, enter `SlideInUp` (top) or `SlideInDown` (bottom) over 250 ms, exit `FadeOut` over 250 ms. The 250 ms entry counts toward the timeout.
 
 ## Modes and tokens
 
 - Collection “Tost Output” (sic), one mode: background `#303338`, foreground `#ffffff`, border 1 px `rgba(255,255,255,0.1)`, padding 16 / 14, gap 8, radius 14, JioType Var 14 / 500 / 18, shadows as Figma. `toast/height` 46 is never read. The pill is the same in every mode.
-- `toast/icon/color` follows AppearanceBrand (Light): Primary `rgb(206,161,90)` gold (default), Secondary `rgb(93,0,181)`, Tertiary `rgb(3,107,153)`, Neutral `#ffffff` (Figma's value) (#267).
+- `toast/icon/color` follows AppearanceBrand (Light): Primary `rgb(206,161,90)` gold, Secondary `rgb(93,0,181)`, Tertiary `rgb(3,107,153)`, Neutral `#ffffff` (Figma's value; the default since a116616, #267).
 - A custom `slotItem` Icon without a colour takes `icon/color`: `rgb(173,132,68)` in Light Primary.
 - Toast never reads `JFSThemeProvider`; modes reach it through the entry or the provider.
 
@@ -39,7 +41,7 @@ The site replaces `react-native-reanimated` with a web stub; layout animations (
 
 ## Discrepancies
 
-- Icon colour: gold by default in code, white in Figma (#267).
+- Icon colour: white by default since a116616, as in Figma (gold before, #267, fixed).
 - Figma shows a 193 px example; the code's minimum width is 200.
 
 ## Limits

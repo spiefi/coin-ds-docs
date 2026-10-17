@@ -2,7 +2,7 @@
 
 slug: table · label: Table · public API: Table (+ Text for cells and the title; Surface from the kit)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5732-3710 · storybook: docsUrl('table') · stories: Default=components-table--default, Column alignment and widths=components-table--column-alignment-and-widths, Custom cell render=components-table--custom-cell-render, Pressable rows=components-table--pressable-rows, Scrollable=components-table--scrollable, Vertical scroll=components-table--vertical-scroll, Horizontal and vertical scroll=components-table--horizontal-and-vertical-scroll, Uniform column width=components-table--uniform-column-width, Trim outer borders=components-table--trim-outer-borders, Composition=components-table--composition
-checked: 12 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5; main's c1fa197c changes no Table file)
+checked: 17 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-a116616, Biscuit's main a116616; Weight, JioPlus and web roles fixed by #264)
 icon: a rounded grid with a header line and one column line — `<><rect x="2" y="3" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M2 7.5h14M7.5 7.5V15" stroke="currentColor" strokeWidth="1.5" /></>`
 keywords: data table, grid, holdings table, rows and columns
 
@@ -22,7 +22,7 @@ specimen: `<Anatomy surface="white" specimenWidth={334}>` › `<Table columns={C
 parts:
 1. Header row — Grey row of column names; it stays put when the rows scroll. — target: header row — side: left
 2. Column name — 14 px semibold, aligned like the values below it. — target: Units header text — side: top
-3. Row — One record, such as one holding; it can become a button. — target: second row — side: left
+3. Row — One record, such as one holding; it can be pressable. — target: second row — side: left
 4. Cell — White, 12 px padding, with 1 px lines on its right and below. — target: second row's Change cell — side: right
 5. Number — Right-aligned, so digits line up down the column. — target: last row's Value text — side: bottom
 
@@ -35,15 +35,15 @@ Grid `coin-new-example-grid`, each an ExampleCard › Host › Table with HOLDIN
 - Trimmed outer borders — COLUMNS, `trimOuterBorders` — lesson: The last column and the last row drop their outer lines, for a table inside a card.
 - Your own cells — COLOURED — lesson: The Change column renders Coin Text, here green for gains and red for losses.
 - Status appearances — `<div className="coin-new-stack">` of three Tables, each COLUMNS, `data={[HOLDINGS[0]]}`, `showHeader={false}`, with modes `'Text Appearance'` `'Success'`, `'Warning'`, and `'Error'` — lesson: Success, Warning, and Error tint every body cell green, amber, or red; to mark one value, render your own cells.
-- Bold weight — COLUMNS, modes `Weight: 'Bold'` — lesson: Text cells stay Regular: Weight reaches only content your own cells render (#264).
+- Bold weight — COLUMNS, modes `Weight: 'Bold'` — lesson: Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular.
 - List item context — COLUMNS, modes `Context: 'ListItem'` — lesson: Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px.
-- JioPlus page — COLUMNS, modes `'Page type': 'JioPlus'` — lesson: As it ships, the values turn white on the white cells and disappear (#264).
+- JioPlus page — COLUMNS, modes `'Page type': 'JioPlus'` — lesson: The values stay dark and readable on the white cells.
 
 ## States
-header: States · title: Static or pressable rows · description: Rows are static by default. When the screen handles a row press, every row becomes a button that fades while pressed. With no rows, only the header shows: the table has no empty message of its own.
+header: States · title: Static or pressable rows · description: Rows are static by default. When the screen handles a row press, every row takes focus and a press and fades while pressed; screen readers still hear it as a row. With no rows, only the header shows: the table has no empty message of its own.
 Grid `coin-new-example-grid`:
 - Static rows — COLUMNS, HOLDINGS — lesson: Rows only show values; they can't be focused or pressed.
-- Pressable rows — COLUMNS, HOLDINGS, `onRowPress={noop}` — lesson: Each row is a button: it fades to 60% while pressed and tells the screen which holding it is.
+- Pressable rows — COLUMNS, HOLDINGS, `onRowPress={noop}` — lesson: Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is.
 - No rows — COLUMNS, `data={[]}` — lesson: Only the header shows. Put an Empty State next to it to explain why.
 
 ## Sizing
@@ -72,7 +72,7 @@ Every preview is a Host with HOLDINGS and three columns, so values never break i
 
 ## Sources
 header: Sources · title: Use the public Table contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build changes nothing in Table. Figma’s Table is one 720 × 190 component: a full-width header over a grid of white cells with 1 px grey lines. In code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code. Developers can build the same table from data or from its parts. The app’s theme doesn’t reach the table, so it takes its modes directly, and they change body text only: Weight leaves text cells Regular, and Page type JioPlus turns them white on white (#264). On the web only the table itself is announced, not its rows and cells (#264). The published Storybook page is still the old generated one; the rewrite mentioned on the ticket isn’t on Biscuit’s main yet.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Table is one 720 × 190 component: a full-width header over a grid of white cells with 1 px grey lines. In code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code. Developers can build the same table from data or from its parts. The app’s theme doesn’t reach the table, so it takes its modes directly, and they change body text only. Since the #264 fix, Weight reaches text cells, Page type JioPlus keeps them dark on white, and on the web screen readers hear the header cells, rows, and cells as a table, with pressable rows still rows. Biscuit’s main has the handwritten Storybook page.
 
 ## Limits
-Do not show `getRowKey`, `accessibilityLabel`, `style`, the composition API (`Table.Header` …), or CompareTable. Never use raw React Native Text or hard-coded colours in cells; coloured values are Coin Text with Text Appearance. Show Weight and Page type JioPlus as they ship (#264); never restyle cells to hide it. Don't imply striping, sorting, selection, a sticky first column, an empty state, or truncation.
+Do not show `getRowKey`, `accessibilityLabel`, `style`, the composition API (`Table.Header` …), or CompareTable. Never use raw React Native Text or hard-coded colours in cells; coloured values are Coin Text with Text Appearance. Show Weight and Page type JioPlus as they ship; never restyle cells to hide it. Don't imply striping, sorting, selection, a sticky first column, an empty state, or truncation.

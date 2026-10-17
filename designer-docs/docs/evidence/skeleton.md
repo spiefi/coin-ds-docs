@@ -6,6 +6,8 @@ Package, Figma, and Storybook evidence for the Skeleton guide (board ticket #25,
 
 Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5). Biscuit's newer `main` commit c1fa197c (12 October) changes only `Skeleton.mdx` (a handwritten rewrite) and adds `excludeStories` to `Skeleton.stories.tsx`; no Skeleton code changed. Installed `src/` and `lib/module` match upstream byte for byte.
 
+Re-checked 17 October 2026 for the #266 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `Skeleton.tsx`, `SkeletonGroup.tsx` and primitive `loading` changes. `Skeleton` has a `visible` prop (default false) that primitives set from their own `loading`: a visible placeholder draws with no group, runs its own shimmer clock, and is `role="progressbar"` named "Loading" (Skeleton.tsx:130-160, 274-298). A bare `<Skeleton>` without a group still returns null. Inside a loading group, placeholders are `aria-hidden="true"` `role="presentation"`, and the group adds one hidden `progressbar` "Loading" with `aria-live="polite"` (SkeletonGroup.tsx:148-150). Re-test on #266: `<Text loading>` alone draws a 17 px placeholder; `<Image loading>` alone draws one too.
+
 ## Sources
 
 - Package: `src/skeleton/` (`Skeleton.tsx`, `SkeletonGroup.tsx`, `shimmer-tokens.ts`, `useReducedMotion.ts`), exported from the package root: `Skeleton`, `SkeletonGroup`, `useSkeleton`, `useStaggerIndex`, `useReducedMotion`, `SHIMMER`, `SKELETON_TOKEN`, `SKELETON_FALLBACK`, and types.
@@ -27,7 +29,7 @@ Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 ## Web render
 
-Each placeholder: `div[role="presentation"]` with the grey background, radius, overflow hidden, and size; no `testID`, no `aria-hidden` (#266). The band is an `svg` gradient inside, added after the first layout; reduced motion uses a white `div` instead.
+Each placeholder in a group: `div[role="presentation"][aria-hidden="true"]` (since a116616; no `aria-hidden` before, #266) with the grey background, radius, overflow hidden, and size; no `testID`. Outside a group a primitive's placeholder is `role="progressbar"` named "Loading". The band is an `svg` gradient inside, added after the first layout; reduced motion uses a white `div` instead.
 
 ## Docs site
 
@@ -35,7 +37,7 @@ The site replaces `react-native-reanimated` with a web stub. Its `withRepeat` re
 
 ## Discrepancies
 
-- c1fa197c's page says `loading={true}` draws a placeholder without a group; it doesn't (#266). The Explicit Loading Prop story shows nothing for 1.8 s for the same reason. Standalone Atomic's title says “outside any group” but the story is inside one.
+- c1fa197c's page says `loading={true}` draws a placeholder without a group; it didn't until a116616 (#266, fixed). The Explicit Loading Prop story shows nothing for 1.8 s for the same reason. Standalone Atomic's title says “outside any group” but the story is inside one.
 - The old published page gives the fill as `rgb(245, 245, 246)`; the token resolves to `#e7e7e7`.
 
 ## Limits

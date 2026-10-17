@@ -92,7 +92,7 @@ function TableGuide() {
       body: <Anatomy surface="white" specimenWidth={334} parts={[
         { name: 'Header row', note: 'Grey row of column names; it stays put when the rows scroll.', target: HEADER_ROW, side: 'left' },
         { name: 'Column name', note: '14 px semibold, aligned like the values below it.', target: `${T} > div:first-child > div:nth-child(2) [dir="auto"]`, side: 'top' },
-        { name: 'Row', note: 'One record, such as one holding; it can become a button.', target: SECOND_ROW, side: 'left' },
+        { name: 'Row', note: 'One record, such as one holding; it can be pressable.', target: SECOND_ROW, side: 'left' },
         { name: 'Cell', note: 'White, 12 px padding, with 1 px lines on its right and below.', target: `${SECOND_ROW} > div:nth-child(4)`, side: 'right' },
         { name: 'Number', note: 'Right-aligned, so digits line up down the column.', target: `${T} > div:nth-child(2) > div:last-child > div:nth-child(3) [dir="auto"]`, side: 'bottom' },
       ]}>{specimen}</Anatomy>,
@@ -107,17 +107,17 @@ function TableGuide() {
         <ExampleCard title="Trimmed outer borders" description="The last column and the last row drop their outer lines, for a table inside a card."><Host><Table columns={COLUMNS} data={HOLDINGS} trimOuterBorders modes={LIGHT} /></Host></ExampleCard>
         <ExampleCard title="Your own cells" description="The Change column renders Coin Text, here green for gains and red for losses."><Host><Table columns={COLOURED} data={HOLDINGS} modes={LIGHT} /></Host></ExampleCard>
         <ExampleCard title="Status appearances" description="Success, Warning, and Error tint every body cell green, amber, or red; to mark one value, render your own cells."><Host><div className="coin-new-stack">{(['Success', 'Warning', 'Error'] as const).map(tone => <Table key={tone} columns={COLUMNS} data={[HOLDINGS[0]]} showHeader={false} modes={{ ...LIGHT, 'Text Appearance': tone } as Modes} />)}</div></Host></ExampleCard>
-        <ExampleCard title="Bold weight" description="Text cells stay Regular: Weight reaches only content your own cells render (#264)."><Host><Table columns={COLUMNS} data={HOLDINGS} modes={{ ...LIGHT, Weight: 'Bold' } as Modes} /></Host></ExampleCard>
+        <ExampleCard title="Bold weight" description="Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular."><Host><Table columns={COLUMNS} data={HOLDINGS} modes={{ ...LIGHT, Weight: 'Bold' } as Modes} /></Host></ExampleCard>
         <ExampleCard title="List item context" description="Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px."><Host><Table columns={COLUMNS} data={HOLDINGS} modes={{ ...LIGHT, Context: 'ListItem' } as Modes} /></Host></ExampleCard>
-        <ExampleCard title="JioPlus page" description="As it ships, the values turn white on the white cells and disappear (#264)."><Host><Table columns={COLUMNS} data={HOLDINGS} modes={{ ...LIGHT, 'Page type': 'JioPlus' } as Modes} /></Host></ExampleCard>
+        <ExampleCard title="JioPlus page" description="The values stay dark and readable on the white cells."><Host><Table columns={COLUMNS} data={HOLDINGS} modes={{ ...LIGHT, 'Page type': 'JioPlus' } as Modes} /></Host></ExampleCard>
       </div>,
     },
     states: {
       header: 'States', title: 'Static or pressable rows',
-      description: 'Rows are static by default. When the screen handles a row press, every row becomes a button that fades while pressed. With no rows, only the header shows: the table has no empty message of its own.',
+      description: 'Rows are static by default. When the screen handles a row press, every row takes focus and a press and fades while pressed; screen readers still hear it as a row. With no rows, only the header shows: the table has no empty message of its own.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Static rows" description="Rows only show values; they can't be focused or pressed."><Host><Table columns={COLUMNS} data={HOLDINGS} modes={LIGHT} /></Host></ExampleCard>
-        <ExampleCard title="Pressable rows" description="Each row is a button: it fades to 60% while pressed and tells the screen which holding it is."><Host><Table columns={COLUMNS} data={HOLDINGS} onRowPress={noop} modes={LIGHT} /></Host></ExampleCard>
+        <ExampleCard title="Pressable rows" description="Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is."><Host><Table columns={COLUMNS} data={HOLDINGS} onRowPress={noop} modes={LIGHT} /></Host></ExampleCard>
         <ExampleCard title="No rows" description="Only the header shows. Put an Empty State next to it to explain why."><Host><Table columns={COLUMNS} data={[]} modes={LIGHT} /></Host></ExampleCard>
       </div>,
     },
@@ -178,7 +178,7 @@ function TableGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Table contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="12 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('table')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('table')} stories={[
         { label: 'Default', id: 'components-table--default' },
         { label: 'Column alignment and widths', id: 'components-table--column-alignment-and-widths' },
         { label: 'Custom cell render', id: 'components-table--custom-cell-render' },
@@ -189,7 +189,7 @@ function TableGuide() {
         { label: 'Uniform column width', id: 'components-table--uniform-column-width' },
         { label: 'Trim outer borders', id: 'components-table--trim-outer-borders' },
         { label: 'Composition', id: 'components-table--composition' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build changes nothing in Table. Figma’s Table is one 720 × 190 component: a full-width header over a grid of white cells with 1 px grey lines. In code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code. Developers can build the same table from data or from its parts. The app’s theme doesn’t reach the table, so it takes its modes directly, and they change body text only: Weight leaves text cells Regular, and Page type JioPlus turns them white on white (#264). On the web only the table itself is announced, not its rows and cells (#264). The published Storybook page is still the old generated one; the rewrite mentioned on the ticket isn’t on Biscuit’s main yet.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Table is one 720 × 190 component: a full-width header over a grid of white cells with 1 px grey lines. In code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code. Developers can build the same table from data or from its parts. The app’s theme doesn’t reach the table, so it takes its modes directly, and they change body text only. Since the #264 fix, Weight reaches text cells, Page type JioPlus keeps them dark on white, and on the web screen readers hear the header cells, rows, and cells as a table, with pressable rows still rows. Biscuit’s main has the handwritten Storybook page.</Sources>,
     },
   }
 

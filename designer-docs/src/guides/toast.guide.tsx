@@ -58,9 +58,9 @@ function ToastGuide() {
       description: "A toast is one message with an optional leading icon. Only the icon follows AppearanceBrand; the pill is the same dark grey in every mode. Where toasts appear, top or bottom, is set once on the screen's provider: try it in the playground.",
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Message only" description="The default: one line of white text in a dark pill."><Surface width="wide" elevated><Pill id="toast-config-plain" title="Mobile number is invalid" /></Surface></ExampleCard>
-        <ExampleCard title="With the card icon" description="startItem adds the card icon before the message, gold by default."><Surface width="wide" elevated><Pill id="toast-config-card" title="Mobile number is invalid" startItem /></Surface></ExampleCard>
+        <ExampleCard title="With the card icon" description="startItem adds the card icon before the message, white by default, as in Figma."><Surface width="wide" elevated><Pill id="toast-config-card" title="Mobile number is invalid" startItem /></Surface></ExampleCard>
         <ExampleCard title="Your own icon" description="Swap in another 18 px icon; it takes the Coin icon colour, a deeper gold."><Surface width="wide" elevated><Pill id="toast-config-own" title="Payment successful" startItem slotItem={<Icon iconName="ic_confirm" size={18} />} /></Surface></ExampleCard>
-        <ExampleCard title="Icon by brand" description="Only the icon changes: gold, purple, blue, or white. Figma shows the white one (#267).">
+        <ExampleCard title="Icon by brand" description="AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default.">
           <Surface width="wide" elevated><div className="coin-new-stack">
             {(['Primary', 'Secondary', 'Tertiary', 'Neutral'] as const).map(b => <Pill key={b} id={`toast-brand-${b}`} title={b} startItem modes={{ ...LIGHT, AppearanceBrand: b } as Modes} />)}
           </div></Surface>
@@ -69,8 +69,8 @@ function ToastGuide() {
     },
     states: {
       header: 'States', title: 'Shown, stacked, and gone',
-      description: "A toast slides in from its edge and closes itself after 4 s, or after its own timeout; with no timeout it stays until the screen clears it. Up to three show at once, newest last. More wait their turn and appear, each with a fresh timeout, as others close. There's no close button and no swipe.",
-      body: <ExampleCard title="Stacked and queued" description="Five at once: three show, and the other two appear as the first ones close.">
+      description: "A toast slides in from its edge and closes itself after 4 s, or after its own timeout; with no timeout it stays until the screen clears it. Up to three show at once, newest last. Older ones wait behind them on their own timers, so they appear only if they’re still due when a newer one closes. There's no close button and no swipe.",
+      body: <ExampleCard title="Stacked and queued" description="Five at once: the newest three show; the first two time out behind them and never appear.">
         {live('states', { placement: 'bottom' }, <>
           <Button label="Show five" modes={LIGHT} onPress={() => { take('states'); for (let i = 1; i <= 5; i++) addToast({ title: `Notification ${i}`, timeout: 4000 }) }} />
           <Button label="Clear all" modes={TERTIARY} onPress={closeAll} />
@@ -79,7 +79,7 @@ function ToastGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Hugs its message, within 90% of the screen',
-      description: 'A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below. Long messages wrap to two lines, then end in an ellipsis; a third line never shows.',
+      description: 'A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below. Long messages wrap to two lines, then end in an ellipsis, unless the toast is added with disableTruncation, which shows every line.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} specimenWidth={300} marks={[{ kind: 'size', target: '[role="alert"]', side: 'right', label: 'both' }, { kind: 'padding', target: '[role="alert"]' }]}>
           <Pill id="toast-sizing" title="Mobile number is invalid" startItem />
@@ -128,14 +128,14 @@ function ToastGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Toast contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="12 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('toast')} stories={[
+      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('toast')} stories={[
         { label: 'Default', id: 'components-toast--default' },
         { label: 'Top placement', id: 'components-toast--top-placement' },
         { label: 'Multiple toasts', id: 'components-toast--multiple-toasts' },
         { label: 'Persistent toast', id: 'components-toast--persistent-toast' },
         { label: 'Custom timeout', id: 'components-toast--custom-timeout' },
         { label: 'With start item', id: 'components-toast--with-start-item' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Toast is one 291 × 46 component with a text, an optional start icon, and an icon swap; its icon resolves to white. In code the default icon is gold, following AppearanceBrand, while the pill stays the same dark grey in every mode (#267). Screens add toasts with addToast and show them through one ToastProvider: every provider shows the same queue, so this page mounts one at a time. Toasts slide in from their edge and fade out, as in the package, and messages stop at two lines. Each toast is announced as an alert. The published Storybook page is still the old generated one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Toast is one 291 × 46 component with a text, an optional start icon, and an icon swap; its icon resolves to white. Since the #267 fix the default icon is white too; an AppearanceBrand mode recolours it, while the pill stays the same dark grey in every mode. Screens add toasts with addToast and show them through one ToastProvider: every provider shows the same queue, so this page mounts one at a time. Toasts slide in from their edge and fade out, as in the package, and messages stop at two lines unless addToast sets disableTruncation. Each toast is announced as an alert. The published Storybook page is still the old generated one.</Sources>,
     },
   }
 
