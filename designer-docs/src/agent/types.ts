@@ -1,5 +1,6 @@
 // Types for the Coin agent pack, written from the shared JSON Schemas
-// (entry, manifest, index, releases, pilot results; schemaVersion 1). The pack
+// (entry, manifest, index, releases, graph, and sizes at schemaVersion 1;
+// pilot results at schemaVersion 2). The pack
 // pipeline owns the schemas and the published files under public/agent/; the
 // views only read them. Keep these in step with the schemas, never ahead.
 
@@ -176,14 +177,33 @@ export type Releases = {
 
 export type PilotKind = 'choose' | 'configure' | 'compose' | 'gap'
 
+/** What the agent may read in a pilot run. */
+export type PilotVariant = 'none' | 'full' | 'brief' | 'graph'
+
+export type PilotTokens = {
+  input: number
+  cacheRead: number
+  cacheWrite: number
+  output: number
+  /** Largest single model call: input + cacheRead + cacheWrite. */
+  peakContext: number
+  /** Tokens of the pack files the agent read, each file counted once. */
+  coin: number
+  coinEstimated: boolean
+}
+
 export type PilotRun = {
+  variant: PilotVariant
   answer: string
-  /** Pack files read; empty without the pack. */
-  read: string[]
+  read: Array<{ file: string; tokens: number }>
   pass: boolean
   /** Expectations it missed. */
   failed: string[]
   notes: string
+  tokens: PilotTokens
+  /** Model calls in the run. */
+  calls: number
+  durationMs: number
 }
 
 export type PilotQuestion = {
@@ -196,14 +216,62 @@ export type PilotQuestion = {
     recommended: string[]
     settledBy: string | null
   }
-  withPack: PilotRun
-  withoutPack: PilotRun
+  runs: PilotRun[]
 }
 
+/** /agent/pilot/results.json, schema version 2. */
 export type PilotResults = {
-  schemaVersion: 1
+  schemaVersion: 2
   packVersion: string
   /** ISO date-time. */
   runAt: string
+  model: string
+  variants: PilotVariant[]
   questions: PilotQuestion[]
+}
+
+export type GraphEdgeType = 'useInstead' | 'placedIn' | 'slotAccepts' | 'usedWith'
+
+export type GraphNode = {
+  id: string
+  slug: string | null
+  category: Category | null
+  state: EntryState | null
+  /** false for components named by edges but without an entry. */
+  inPack: boolean
+}
+
+export type GraphEdge = {
+  from: string
+  to: string
+  type: GraphEdgeType
+  /** slotAccepts only. */
+  slot?: string
+  strength?: Strength
+  /** JSON pointer into the from-component's entry. */
+  source: string
+}
+
+/** graph.json in a release. */
+export type PackGraph = {
+  schemaVersion: 1
+  packVersion: string
+  nodes: GraphNode[]
+  edges: GraphEdge[]
+}
+
+export type SizedFile = {
+  path: string
+  bytes: number
+  tokens: number
+  estimated: boolean
+}
+
+/** sizes.json in a release. */
+export type PackSizes = {
+  schemaVersion: 1
+  packVersion: string
+  /** How tokens were counted: the API counter and model, or 'estimate: chars/3.5'. */
+  tokenizer: string
+  files: SizedFile[]
 }

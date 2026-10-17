@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, type ReactNode } from 'react'
+import { useLayoutEffect, type ReactNode } from 'react'
 import {
   GuideMobileBar,
   GuideSidebar,
@@ -7,23 +7,26 @@ import {
   useGuidePageNavigation,
 } from '../GuideNavigation'
 import { Segment } from '../guide-kit'
+import { GraphPage } from './GraphPage'
 import { Markdown } from './Markdown'
 import {
-  PILOT_URL,
   loadEntry,
   loadIndex,
   loadManifest,
   loadPack,
-  loadPilot,
   loadRules,
+  loadSizes,
   packFileUrl,
+  renderingPath,
+  sizeOf,
   useLoaded,
-  type Loaded,
   type Pack,
 } from './pack'
-import { CommitLink, ComponentLink, Empty, SampleTag, StateChip, formatDate, guideSlugFor } from './parts'
-import { AGENT_PAGES, agentPageHref, guideViewHref, type AgentPage } from './routes'
-import type { AgentEntry, EntryState, IndexComponent, PilotQuestion, PilotRun } from './types'
+import { Loading, RawToggle, ReleaseLine, useUrlFilter } from './pageParts'
+import { CommitLink, ComponentLink, Empty, StateChip, Tokens, agentHrefFor, formatDate } from './parts'
+import { PilotPage } from './PilotPage'
+import { AGENT_PAGES, agentPageHref, type AgentPage } from './routes'
+import type { AgentEntry, EntryState, IndexComponent, PackSizes, SizedFile } from './types'
 import './agent.css'
 
 const PAGE_COPY: Record<AgentPage, { title: string; lede: string }> = {
@@ -39,84 +42,14 @@ const PAGE_COPY: Record<AgentPage, { title: string; lede: string }> = {
     title: 'Agent index',
     lede: 'What agents scan to choose a component: one row per component, with the components to use instead.',
   },
+  graph: {
+    title: 'Graph map',
+    lede: 'How the components in the pack relate: which to use instead, where each goes, what its slots accept, and what it is used with.',
+  },
   pilot: {
     title: 'Pilot results',
-    lede: 'The same questions answered with and without the agent pack, checked against answers people settled.',
+    lede: 'The same questions answered with no pack and with each form of it, checked against answers people settled, with what each answer cost in tokens.',
   },
-}
-
-/**
- * A filter kept in the URL (?filter=…) so a filtered page can be shared. It
- * replaces the URL without a route change, so focus stays on the control.
- */
-function useUrlFilter<T extends string>(param: string, fallback: NoInfer<T>, values: Record<T, string | null>) {
-  const [value, setValue] = useState<T>(() => {
-    const requested = new URLSearchParams(window.location.search).get(param)
-    return (Object.keys(values) as T[]).find((key) => values[key] === requested) ?? fallback
-  })
-  const update = (next: T) => {
-    setValue(next)
-    const url = new URL(window.location.href)
-    if (values[next] === null) url.searchParams.delete(param)
-    else url.searchParams.set(param, values[next]!)
-    window.history.replaceState(window.history.state, '', url)
-  }
-  return [value, update] as const
-}
-
-function Loading({ loaded, children }: { loaded: Loaded<unknown>; children: ReactNode }) {
-  if (loaded.status === 'loading') {
-    return (
-      <p className="agent-loading" role="status">
-        Loading…
-      </p>
-    )
-  }
-  if (loaded.status === 'error') {
-    return (
-      <p className="agent-error" role="alert">
-        Could not read the agent pack: {loaded.message}
-      </p>
-    )
-  }
-  return <>{children}</>
-}
-
-function ReleaseLine({ pack, file }: { pack: Pack; file?: string }) {
-  return (
-    <p className="agent-release-line">
-      <span>
-        Release <code>{pack.current}</code>
-      </span>
-      {pack.source === 'sample' && <SampleTag />}
-      {file &&
-        (pack.source === 'live' ? (
-          <a href={packFileUrl(pack.current, file)} target="_blank" rel="noreferrer">
-            <code>{file}</code>
-          </a>
-        ) : (
-          <code>{file}</code>
-        ))}
-    </p>
-  )
-}
-
-function RawToggle({ label, raw, children }: { label: string; raw: string; children: ReactNode }) {
-  const [mode, setMode] = useState<'Rendered' | 'Raw'>('Rendered')
-  return (
-    <>
-      <div className="agent-page-controls">
-        <Segment label={label} value={mode} options={['Rendered', 'Raw'] as const} onChange={setMode} />
-      </div>
-      {mode === 'Raw' ? (
-        <pre className="agent-raw-file" tabIndex={0}>
-          <code>{raw}</code>
-        </pre>
-      ) : (
-        children
-      )}
-    </>
-  )
 }
 
 function RulesPage({ pack }: { pack: Pack }) {
@@ -215,10 +148,65 @@ type OverviewRow = { component: IndexComponent; entry: AgentEntry | null | 'erro
 
 const STATES: EntryState[] = ['documented', 'flagged', 'undocumented', 'unsupported']
 
+function FileSize({ file, unit = true }: { file: SizedFile | undefined; unit?: boolean }) {
+  return file ? <Tokens tokens={file.tokens} estimated={file.estimated} unit={unit} /> : <span className="agent-muted">–</span>
+}
+
+/** What every agent loads before any entry, and what each variant adds. */
+function SizesSummary({ sizes, pack }: { sizes: PackSizes | null; pack: Pack }) {
+  if (!sizes) {
+    return (
+      <p className="agent-page-note">
+        Release <code>{pack.current}</code> has no <code>sizes.json</code>, so token sizes are not shown.
+      </p>
+    )
+  }
+  const rules = sizeOf(sizes, 'rules.md')
+  const index = sizeOf(sizes, 'index.json')
+  const graph = sizeOf(sizes, 'graph.json')
+  const menu = (rules?.tokens ?? 0) + (index?.tokens ?? 0)
+  const estimated = sizes.files.some((file) => file.estimated)
+  const files: Array<[string, SizedFile | undefined, string]> = [
+    ['rules.md', rules, 'Shared rules'],
+    ['index.json', index, 'Every component, for choosing'],
+    ['graph.json', graph, 'The graph variant also loads this'],
+  ]
+  return (
+    <section className="agent-sizes" aria-labelledby="agent-sizes-title">
+      <h2 id="agent-sizes-title">What agents load</h2>
+      <p className="agent-sizes-tokenizer">
+        Tokens counted with <strong>{sizes.tokenizer}</strong>
+        {estimated && <span className="agent-muted"> · ≈ marks estimated values</span>}
+      </p>
+      <div className="agent-sizes-grid">
+        <div className="agent-sizes-menu">
+          <p className="agent-run-label">Always loaded</p>
+          <p className="agent-sizes-total">
+            <Tokens tokens={menu} estimated={!!(rules?.estimated || index?.estimated)} />
+          </p>
+          <p className="agent-muted">rules.md and index.json, read before any entry.</p>
+        </div>
+        <ul className="agent-sizes-files">
+          {files.map(([path, file, note]) => (
+            <li key={path}>
+              <code>{path}</code>
+              <span className="agent-muted">{note}</span>
+              <FileSize file={file} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p className="agent-page-note">
+        Per component, the table below gives each rendering: full (<code>components/&lt;slug&gt;.md</code>), brief, and links.
+      </p>
+    </section>
+  )
+}
+
 function OverviewPage({ pack }: { pack: Pack }) {
   const [filter, setFilter] = useUrlFilter('filter', 'All', { All: null, Flagged: 'flagged' })
   const data = useLoaded(`overview:${pack.source}:${pack.current}`, async () => {
-    const [manifest, index] = await Promise.all([loadManifest(pack), loadIndex(pack)])
+    const [manifest, index, sizes] = await Promise.all([loadManifest(pack), loadIndex(pack), loadSizes(pack).catch(() => null)])
     // The index has no flag counts or guide commits, so read every entry.
     const rows: OverviewRow[] = await Promise.all(
       (index?.components ?? []).map(async (component) => ({
@@ -226,7 +214,7 @@ function OverviewPage({ pack }: { pack: Pack }) {
         entry: await loadEntry(pack, component.slug).catch(() => 'error' as const),
       })),
     )
-    return { manifest, index, rows }
+    return { manifest, index, rows, sizes }
   })
   const value = data.status === 'ready' ? data.value : null
   const flagCount = (row: OverviewRow) => (row.entry && row.entry !== 'error' ? row.entry.status?.flags?.length ?? 0 : 0)
@@ -288,6 +276,7 @@ function OverviewPage({ pack }: { pack: Pack }) {
             ))}
           </ul>
         )}
+        <SizesSummary sizes={value?.sizes ?? null} pack={pack} />
         {value?.index ? (
           <>
             <div className="agent-page-controls">
@@ -311,13 +300,16 @@ function OverviewPage({ pack }: { pack: Pack }) {
                       <th scope="col">State</th>
                       <th scope="col">Flags</th>
                       <th scope="col">Guide commit</th>
+                      <th scope="col">Full tokens</th>
+                      <th scope="col">Brief tokens</th>
+                      <th scope="col">Links tokens</th>
                       <th scope="col">Entry</th>
                     </tr>
                   </thead>
                   <tbody>
                     {rows.map((row) => {
                       const { component, entry } = row
-                      const slug = guideSlugFor(component.id, ids)
+                      const agentHref = agentHrefFor(component.id, ids)
                       return (
                         <tr key={component.id} className={isFlagged(row) ? 'is-flagged' : undefined}>
                           <th scope="row">
@@ -345,6 +337,11 @@ function OverviewPage({ pack }: { pack: Pack }) {
                               <span className="agent-muted">–</span>
                             )}
                           </td>
+                          {(['full', 'brief', 'links'] as const).map((rendering) => (
+                            <td key={rendering}>
+                              <FileSize file={sizeOf(value.sizes, renderingPath(component.slug, rendering))} unit={false} />
+                            </td>
+                          ))}
                           <td>
                             {entry && entry !== 'error' ? (
                               pack.source === 'live' ? (
@@ -357,8 +354,8 @@ function OverviewPage({ pack }: { pack: Pack }) {
                             ) : (
                               <span className="agent-trace is-warning">Missing</span>
                             )}
-                            {slug && entry && entry !== 'error' && (
-                              <a className="agent-row-link" href={guideViewHref(slug, 'agent', 'overview')} onClick={handleGuideNavigation}>
+                            {agentHref && entry && entry !== 'error' && (
+                              <a className="agent-row-link" href={agentHref} onClick={handleGuideNavigation}>
                                 Agent view
                               </a>
                             )}
@@ -383,219 +380,6 @@ function OverviewPage({ pack }: { pack: Pack }) {
   )
 }
 
-/** A pack file the agent read, linked to the file and, for entries, to the component's Agent view. */
-function ReadFile({ path, pack, release }: { path: string; pack: Pack; release: string }) {
-  const clean = path.replace(/^\/?agent\//, '').replace(/^\/+/, '')
-  const versioned = /^\d+\.\d+\.\d+\+[^/]+\//.test(clean)
-  const url = versioned ? `/agent/${clean}` : packFileUrl(release, clean)
-  const component = /components\/([\w-]+)\.(json|md)$/.exec(clean)?.[1]
-  const slug = component ? guideSlugFor(component) : undefined
-  return (
-    <li>
-      {pack.source === 'live' ? (
-        <a href={url} target="_blank" rel="noreferrer">
-          <code>{path}</code>
-        </a>
-      ) : (
-        <code>{path}</code>
-      )}
-      {slug && (
-        <a className="agent-row-link" href={guideViewHref(slug, 'agent', 'overview')} onClick={handleGuideNavigation}>
-          Agent view
-        </a>
-      )}
-    </li>
-  )
-}
-
-function RunCard({ title, run, pack, release }: { title: string; run: PilotRun; pack: Pack; release: string }) {
-  return (
-    <div className={`agent-run ${run.pass ? 'is-pass' : 'is-fail'}`}>
-      <div className="agent-run-head">
-        <h4>{title}</h4>
-        <span className={`agent-verdict ${run.pass ? 'is-pass' : 'is-fail'}`}>{run.pass ? 'Pass' : 'Fail'}</span>
-      </div>
-      <p className="agent-run-label">Answer</p>
-      <pre className="agent-answer" tabIndex={0}>
-        <code>{run.answer}</code>
-      </pre>
-      <p className="agent-run-label">Files read</p>
-      {run.read.length ? (
-        <ul className="agent-read-files">
-          {run.read.map((path) => (
-            <ReadFile path={path} pack={pack} release={release} key={path} />
-          ))}
-        </ul>
-      ) : (
-        <Empty>None.</Empty>
-      )}
-      {run.failed.length > 0 && (
-        <>
-          <p className="agent-run-label">Missed</p>
-          <ul className="agent-missed">
-            {run.failed.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </>
-      )}
-      {run.notes && (
-        <>
-          <p className="agent-run-label">Notes</p>
-          <p className="agent-run-notes">{run.notes}</p>
-        </>
-      )}
-    </div>
-  )
-}
-
-function Question({ question, pack, release }: { question: PilotQuestion; pack: Pack; release: string }) {
-  const { expected } = question
-  return (
-    <li className="agent-question" id={`question-${question.id}`}>
-      <div className="agent-question-head">
-        <span className="agent-kind-chip">{question.kind}</span>
-        <code className="agent-muted">{question.id}</code>
-      </div>
-      <h3>{question.question}</h3>
-      <div className="agent-expected">
-        <p className="agent-run-label">Expected</p>
-        <dl>
-          <div>
-            <dt>Valid answers</dt>
-            <dd>
-              <ul>
-                {expected.validAnswers.map((answer) => (
-                  <li key={answer}>{answer}</li>
-                ))}
-              </ul>
-            </dd>
-          </div>
-          <div>
-            <dt>Required</dt>
-            <dd>
-              {expected.required.length ? (
-                <ul>
-                  {expected.required.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              ) : (
-                <span className="agent-muted">–</span>
-              )}
-            </dd>
-          </div>
-          <div>
-            <dt>Recommended</dt>
-            <dd>
-              {expected.recommended.length ? (
-                <ul>
-                  {expected.recommended.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              ) : (
-                <span className="agent-muted">–</span>
-              )}
-            </dd>
-          </div>
-          <div>
-            <dt>Settled by</dt>
-            <dd>{expected.settledBy ?? <span className="agent-muted">Not settled yet</span>}</dd>
-          </div>
-        </dl>
-      </div>
-      <div className="agent-runs">
-        <RunCard title="With the pack" run={question.withPack} pack={pack} release={release} />
-        <RunCard title="Without the pack" run={question.withoutPack} pack={pack} release={release} />
-      </div>
-    </li>
-  )
-}
-
-function PilotPage({ pack }: { pack: Pack }) {
-  const [filter, setFilter] = useUrlFilter('filter', 'All', { All: null, 'Failed with pack': 'failed' })
-  const results = useLoaded(`pilot:${pack.source}:${pack.current}`, () => loadPilot(pack))
-  const value = results.status === 'ready' ? results.value : null
-  const questions = value?.questions ?? []
-  const shown = filter === 'All' ? questions : questions.filter((question) => !question.withPack.pass)
-  const withPack = questions.filter((question) => question.withPack.pass).length
-  const withoutPack = questions.filter((question) => question.withoutPack.pass).length
-
-  return (
-    <>
-      <p className="agent-release-line">
-        <span>
-          Release <code>{pack.current}</code>
-        </span>
-        {pack.source === 'sample' && <SampleTag />}
-        {value && (
-          <>
-            <span>
-              Run {formatDate(value.runAt)} on pack <code>{value.packVersion}</code>
-            </span>
-            {pack.source === 'live' ? (
-              <a href={PILOT_URL} target="_blank" rel="noreferrer">
-                <code>{PILOT_URL}</code>
-              </a>
-            ) : (
-              <code>pilot/results.json</code>
-            )}
-          </>
-        )}
-      </p>
-      <Loading loaded={results}>
-        {value ? (
-          <>
-            {value.packVersion !== pack.current && (
-              <p className="agent-notices-single">
-                These results are for pack <code>{value.packVersion}</code>; the current release is{' '}
-                <code>{pack.current}</code>.
-              </p>
-            )}
-            <ul className="agent-counts agent-pilot-counts" aria-label="Pilot score">
-              <li className="is-documented">
-                <strong>
-                  {withPack}/{questions.length}
-                </strong>
-                <span>Passed with the pack</span>
-              </li>
-              <li className="is-unsupported">
-                <strong>
-                  {withoutPack}/{questions.length}
-                </strong>
-                <span>Passed without it</span>
-              </li>
-            </ul>
-            <div className="agent-page-controls">
-              <Segment
-                label="Show"
-                value={filter}
-                options={['All', 'Failed with pack'] as const}
-                onChange={setFilter}
-              />
-              <p className="agent-muted" role="status">
-                {shown.length} of {questions.length} questions
-              </p>
-            </div>
-            {shown.length ? (
-              <ol className="agent-questions">
-                {shown.map((question) => (
-                  <Question question={question} pack={pack} release={value.packVersion} key={question.id} />
-                ))}
-              </ol>
-            ) : (
-              <Empty>Every question passed with the pack.</Empty>
-            )}
-          </>
-        ) : (
-          <Empty>No pilot results yet. The test run writes them to {PILOT_URL}.</Empty>
-        )}
-      </Loading>
-    </>
-  )
-}
-
 function AgentPagesNav({ page }: { page: AgentPage }) {
   return (
     <nav className="agent-pages-nav" aria-label="Agent pack pages">
@@ -614,7 +398,7 @@ function AgentPagesNav({ page }: { page: AgentPage }) {
   )
 }
 
-/** A shared agent pack page: overview, rules, index, or pilot results. */
+/** A shared agent pack page: overview, graph map, rules, index, or pilot results. */
 export function AgentPackPage({ page }: { page: AgentPage }) {
   const pack = useLoaded('pack', loadPack)
   useGuidePageNavigation()
@@ -656,6 +440,8 @@ export function AgentPackPage({ page }: { page: AgentPage }) {
                   <IndexPage pack={pack.value} />
                 ) : page === 'pilot' ? (
                   <PilotPage pack={pack.value} />
+                ) : page === 'graph' ? (
+                  <GraphPage pack={pack.value} />
                 ) : (
                   <OverviewPage pack={pack.value} />
                 ))}
