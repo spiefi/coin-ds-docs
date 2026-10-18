@@ -26,6 +26,7 @@ guidance as hints.
 | `pilot/run.mjs` | The test runner (four variants, token measurements). |
 | `pilot/smoke.json` | An unscored measurement smoke test: proof that the token numbers work, not a result. |
 | `scripts/` | The pipeline. |
+| `mcp/` | The Coin docs MCP server (`server.mjs`) and its test (`test.mjs`). `../api/mcp.js` serves it at `/mcp`. |
 | `../public/agent/<packVersion>/` | A release: `manifest.json`, `index.json`, `rules.md`, `llms.txt`, `graph.json`, `sizes.json`, `components/<slug>.json`, `.md`, `.brief.md` and `.links.md`, `schema/`. Never edited once committed. |
 | `../public/agent/index.json` | The list of releases and the current one. |
 | `../public/agent/pilot/results.json` | The last test run. |
@@ -42,6 +43,46 @@ npm run agent-pack:pilot                 # run the test (only once the answers a
 npm run agent-pack:pilot -- --smoke --only q01,q21   # unscored measurement smoke test (2 questions at most)
 node agent-pack/scripts/show-facts.mjs <slug>        # the facts an extraction can name
 npm run build:agent-pack -- --check --only <slug>    # check some entries while extracting
+npm run test:mcp                         # test the MCP server with the MCP client (part of npm run verify)
+npm run mcp:serve                        # run the MCP server locally on http://127.0.0.1:8787/mcp
+```
+
+## MCP server
+
+Agents read the pack through one read-only MCP server, served by the docs
+site itself: `https://coin-designer-docs.vercel.app/mcp` (Streamable HTTP, no
+sign-in). It reads the committed releases in `public/agent/`, so it serves
+exactly what the site publishes, and there is nothing to copy into an app.
+
+The URL picks the release, so an app pins it in its configuration rather than
+leaving it to the model:
+
+| URL | Serves |
+| --- | --- |
+| `/mcp` | the current release |
+| `/mcp?coin=0.1.78` | the newest release for that jfs-components version (what an app that renders a given Coin version uses) |
+| `/mcp?release=0.1.78+2` | exactly that release (tests and frozen baselines) |
+
+A release that does not exist fails at connection (HTTP 404), never silently.
+
+| Tool | Returns |
+| --- | --- |
+| `rules` | `rules.md` |
+| `components` | `index.json` |
+| `briefs` | the briefs of up to 30 components in one call (`components: ["AppBar", "Button"]`) |
+| `entry` | one full entry, Markdown (default) or JSON |
+| `links` | the graph neighbourhood of up to 30 components |
+| `releases` | every release, its jfs-components version, and the one this connection serves |
+
+Component names match an entry's id or slug, ignoring case, spaces and
+hyphens ("Benefit Card" is BenefitCard). Unknown names are listed in the
+answer, not guessed. On Vercel, each tool call is logged (tool, release,
+components), so the runtime logs show what agents read.
+
+Add it to Claude Code:
+
+```sh
+claude mcp add --transport http coin-docs "https://coin-designer-docs.vercel.app/mcp?coin=0.1.78"
 ```
 
 ## Release outputs (contract v2)
