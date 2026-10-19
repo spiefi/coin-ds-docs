@@ -1,8 +1,8 @@
 # Card Feedback brief
 
-slug: cardfeedback · label: Card Feedback · public API: CardFeedback with CardFeedback.Icon, .Content, .Title, .Body, .Action (+ Button inside Action; Title and ScreenFrame-free composition with the kit's `.coin-new-stack`)
+slug: cardfeedback · label: Card Feedback · public API: CardFeedback with CardFeedback.Icon, .Content, .Title, .Body, .Action (+ Button inside Action; VStack and Title for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1280-4481 · storybook: docsUrl('cardfeedback') · stories: Default=components-cardfeedback--default, Custom content=components-cardfeedback--with-custom-content, Multiple actions=components-cardfeedback--multiple-actions, Icon prop=components-cardfeedback--with-icon-prop
-checked: 17 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-a116616, Biscuit's main a116616, which has the 7b7c79f0 rewrite)
+checked: 19 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c7d3348, Biscuit's main c7d3348, which fixes #286)
 icon: a tinted panel with a tick — `<><rect x="2.5" y="3.5" width="13" height="11" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="m5.5 7.2 1 1 1.8-2M5.5 11.5h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" /></>`
 keywords: feedback card, status card, result card, success message, error message, inline alert
 
@@ -12,19 +12,20 @@ STATUS = {
   warning: { icon: 'ic_warning', title: 'KYC pending', body: 'Finish KYC by 31 October to keep investing.', action: 'Complete KYC' },
   negative: { icon: 'ic_error', title: 'Payment failed', body: 'Your bank declined the payment. No money was taken.', action: 'Try again' },
 }.
-“FB(status, { actions, icon, title, body })” =
+`QUIET = { 'Semantic Intent': 'Brand', AppearanceBrand: 'Neutral', Emphasis: 'Low' } as Modes` (a quiet text button: a Button's own modes win over the card's since #286; Emphasis alone doesn't change a System button).
+“FB(status, { actions, quiet, icon, title, body, card })” =
 ```tsx
-<CardFeedback modes={{ ...LIGHT, AppearanceSystem: status } as Modes} style={FRAME}>
+<CardFeedback modes={{ ...LIGHT, AppearanceSystem: status } as Modes} style={FRAME} {...card}>
   <CardFeedback.Icon icon={icon ?? STATUS[status].icon} />
   <CardFeedback.Content>
     <CardFeedback.Title>{title ?? STATUS[status].title}</CardFeedback.Title>
     <CardFeedback.Body>{body ?? STATUS[status].body}</CardFeedback.Body>
-    {actions?.length ? <CardFeedback.Action>{actions.map(a => <Button key={a} label={a} onPress={noop} />)}</CardFeedback.Action> : null}
+    {actions?.length ? <CardFeedback.Action>{actions.map(a => <Button key={a} label={a} modes={a === quiet ? QUIET : undefined} onPress={noop} />)}</CardFeedback.Action> : null}
   </CardFeedback.Content>
 </CardFeedback>
 ```
-`actions` defaults to `[STATUS[status].action]`; pass `[]` for none. Pass no `modes` to the Buttons: the card hands them its own.
-Important: never put a CardFeedback inside a VStack, HStack, Stack or any Coin component that passes modes down: its parts lose the card's modes and the buttons turn gold and large. Every card sits straight on the grey example stage; no Surface, FitWidth or host.
+`actions` defaults to `[STATUS[status].action]`; pass `[]` for none. Pass no `modes` to the Buttons except the quiet one: the card hands them its own. `card` takes root props: `onPress`, `disabled`, `accessibilityLabel`.
+Since #286 the card's parts keep its modes inside a VStack, HStack or Stack, so In context uses a Coin VStack. Every example card sits straight on the grey example stage; no Surface, FitWidth or host.
 Selectors (no testID; `R = ':scope > div'`, the card root): icon `${R} > div:first-child`; content `${R} > div:nth-child(2)`; title `${R} > div:nth-child(2) > [dir="auto"]:first-child`; body `${R} > div:nth-child(2) > [dir="auto"]:nth-child(2)`; action `${R} > div:nth-child(2) > div:last-child`.
 
 ## Overview
@@ -50,10 +51,12 @@ Grid `coin-new-example-grid three`:
 - Negative — FB('negative') — lesson: Red for something that failed.
 
 ## States
-header: States · title: With or without actions · description: The card itself is static: only the buttons you put in Action respond. onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel. The card doesn't change its look when pressed or disabled.
+header: States · title: With or without actions · description: The card itself is static: only the buttons you put in Action respond. onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel. A pressable card fades slightly on hover and more while pressed, and shows a ring on keyboard focus. disabled fades it to half and ignores presses.
 Grid `coin-new-example-grid` (two columns):
 - Message only — FB('positive', { actions: [] }) — lesson: Icon, title, and body: nothing to press.
-- Two actions — FB('negative', { actions: ['Try again', 'Change bank'] }) — lesson: Both buttons take the status colour and look the same.
+- Two actions — FB('negative', { actions: ['Try again', 'Change bank'], quiet: 'Change bank' }) — lesson: Buttons take the status colour; a Button’s own modes make the second one quieter.
+- Pressable card — FB('positive', { actions: [], card: { onPress: noop, accessibilityLabel: 'Payment successful. View receipt' } }) — lesson: onPress with no buttons inside: press it to see it fade.
+- Disabled — FB('positive', { actions: [], card: { onPress: noop, disabled: true, accessibilityLabel: 'Payment successful. View receipt' } }) — lesson: Half opacity, and presses are ignored.
 
 ## Sizing
 header: Sizing · title: Your screen sets the width · description: The card fills its host's width; Figma draws it at 328 px. It's as tall as its content and at least 59 px, with 12 px padding and 8 px between the icon, the text, and the actions. Title and body wrap, and buttons wrap onto a new row when they run out of room.
@@ -65,7 +68,7 @@ One ExampleCard "Outcome, detail, next step" › FB('negative'). Description: "�
 
 ## In context
 header: In context · title: A failed payment on the Pay screen · description: Try again runs the screen's own retry through the button's onPress. When the retry goes through, the screen swaps the card for a positive one; the card doesn't change itself or time out.
-Composition in `.coin-new-context` › `<div className="coin-new-stack">` (not a VStack: a Coin stack would pass its modes into the card's parts) with `<Title title="Pay Rahul Sharma" subtitle="₹1,250 from HDFC Bank" modes={LIGHT} />` and, when `paid` is false, FB('negative') whose Try again Button has `onPress={() => setPaid(true)}`; when `paid` is true, FB('positive') whose View receipt Button has `onPress={() => setPaid(false)}`. Below, `<p className="coin-new-readout" role="status">`: "Payment failed" or "Retried: payment successful".
+Composition in `.coin-new-context` › `<VStack modes={{ ...LIGHT, 'Slot gap': 'M' } as Modes}>` (since #286 a Coin stack no longer strips the card's modes) with `<Title title="Pay Rahul Sharma" subtitle="₹1,250 from HDFC Bank" modes={LIGHT} />` and, when `paid` is false, FB('negative') whose Try again Button has `onPress={() => setPaid(true)}`; when `paid` is true, FB('positive') whose View receipt Button has `onPress={() => setPaid(false)}`. Below, `<p className="coin-new-readout" role="status">`: "Payment failed" or "Retried: payment successful".
 
 ## Do & Don'ts
 header: Do & Don’ts · title: A clear result and one next step · description: Each pair shows a card people read at once next to one that sends mixed signals or crowds its actions.
@@ -75,7 +78,7 @@ header: Do & Don’ts · title: A clear result and one next step · description:
 
 ## Sources
 header: Sources · title: Use the public Card Feedback contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card/Feedback is one 328 × 123 component with no properties; its status comes from modes, and its icon is a solid circle, while the package draws whichever registry icon you pass. The card doesn’t read the app’s theme, so Color Mode has to come through its modes. Inside a VStack or another Coin container that passes modes down, its title, body, and buttons lose the card’s status modes and the buttons turn gold and large (reported), so these examples sit outside one. A second button can’t be made quieter than the first. The published Storybook renders every story as a pressable card with buttons inside it, and still shows the older generated page.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Card/Feedback is one 328 × 123 component with no properties; its status comes from modes, and its icon is a solid circle, while the package draws whichever registry icon you pass. The card doesn’t read the app’s theme, so Color Mode has to come through its modes. Inside a VStack or another Coin container that passes modes down, its parts keep the card’s status colours. Emphasis alone doesn’t quieten a button in the status colour, so the quieter action here switches to Brand Neutral at Emphasis Low. The published Storybook hasn’t been rebuilt: it still renders every story as a pressable card with buttons inside it, and shows the older generated page.
 
 ## Limits
-Don't show Dark, Context, Semantic Intent Brand, AppearanceBrand examples, onPress or disabled demos, or style props. Don't imply a pressed or disabled look, that the card times out, or that it picks an icon for a status.
+Don't show Dark, Context, Semantic Intent Brand on the card, AppearanceBrand examples, or style props. Don't put Buttons inside a pressable card. Don't imply that Emphasis alone quietens a System button, that the card times out, or that it picks an icon for a status.

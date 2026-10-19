@@ -2,13 +2,13 @@
 
 slug: tooltip · label: Tooltip · public API: Tooltip, TooltipTrigger, TooltipContent, TooltipPlacement (+ IconButton, Button, HStack, VStack, Text, Title for composition; ScreenFrame from the kit for In context)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=928-6036 · storybook: docsUrl('tooltip') · stories: Default=components-tooltip--default, Long text=components-tooltip--long-text, Slot=components-tooltip--slot, Edge detection=components-tooltip--edge-detection
-checked: 12 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-636f3f5, Biscuit's main 636f3f5; main's c1fa197c and a463361 only rewrite the Storybook page)
+checked: 19 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c7d3348, Biscuit's main c7d3348; Tooltip.tsx as rewritten in 7020bf9, which fixes #277)
 icon: a speech bubble with a small tail — `<><rect x="2" y="3" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none" /><path d="M7 12l2 2.5 2-2.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round" /></>`
 keywords: hint, info bubble, help text, popover
 
-Important: the bubble is a React Native Modal. On the web it opens over the whole window next to its trigger, and while it's open a clear layer covers the page until the next press. Every example is a closed trigger: never use `defaultOpen`, and never render a tooltip open at start.
+Important: the bubble is a React Native Modal on iOS and Android and a full-window layer on the web. It opens over the whole window next to its trigger, and while it's open a clear layer covers the page until the next press. Every example is a closed trigger: never use `defaultOpen`, and never render a tooltip open at start.
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; `const INFO = { ...LIGHT, Emphasis: 'Low', 'Button / Size': 'S' } as Modes`. Every Tooltip gets `modes={LIGHT}`.
-“Info(label, text, props)” = `<Tooltip modes={LIGHT} {...props}><TooltipTrigger asChild><IconButton iconName="ic_info" accessibilityLabel={label} modes={INFO} /></TooltipTrigger><TooltipContent>{text}</TooltipContent></Tooltip>` (props: placement, open, onOpenChange). Always `asChild` (a Coin button nested without it never opens, #277) and always a plain string as content (Coin Text renders black, #277).
+“Info(label, text, props)” = `<Tooltip modes={LIGHT} {...props}><TooltipTrigger asChild><IconButton iconName="ic_info" accessibilityLabel={label} modes={INFO} /></TooltipTrigger><TooltipContent width={width}>{text}</TooltipContent></Tooltip>` (props: placement, open, onOpenChange; `width` goes to TooltipContent only). Always `asChild` and a plain string as content, for consistency (since #277 a nested Coin button and Coin Text both work too).
 `const ROW = { ...LIGHT, Padding: 'None' } as Modes` (HStack's default padding made each row about 58 px tall and overflowed the screen).
 “Term(term, label, text, props)” = `<HStack modes={ROW} alignVertical="center"><Text modes={LIGHT}>{term}</Text>Info(label, text, props)</HStack>`.
 “Row(term, value, label, text)” = `<HStack modes={ROW} alignVertical="center" justifyHorizontal="space-between">Term(term, label, text)<Text modes={LIGHT}>{value}</Text></HStack>`.
@@ -27,27 +27,28 @@ parts:
 2. Term — The word it explains. Keep it visible: the bubble only adds detail. — target: `[dir="auto"]` (Coin Text renders `dir="auto"`; the first match is the term, before the button) — side: left
 
 ## Configuration
-header: Configuration · title: Side and alignment · description: Placement picks the side, top by default, and can line the bubble up with the trigger's start or end edge instead of its centre. When the bubble doesn't fit on that side it flips to the opposite one. Above or below, it stays 8 px inside the screen; beside the trigger it isn't kept on screen, so on a phone a wide bubble runs off the edge (#277).
+header: Configuration · title: Side and alignment · description: Placement picks the side, top by default, and can line the bubble up with the trigger's start or end edge instead of its centre. When the bubble doesn't fit on that side it flips to the opposite one, and beside the trigger with no room either way it moves above or below. It always stays 8 px inside the screen.
 Grid `coin-new-example-grid`, each an ExampleCard › Term("Expense ratio", "About expense ratio", EXPENSE, { placement }):
 - Above — default — lesson: The default: the bubble sits above, its arrow pointing down at the trigger.
 - Below — `placement="bottom"` — lesson: For triggers near the top of the screen, where there's no room above.
 - Start-aligned — `placement="top-start"` — lesson: The bubble's start edge lines up with the trigger's; the arrow still points at it.
-- Beside — `placement="right"` — lesson: Next to the trigger, for a row with room to its side. On a phone there rarely is: the bubble runs off the screen (#277).
+- Beside — `placement="right"` — lesson: Next to the trigger, for a row with room to its side. On a phone there rarely is, so it opens above or below instead.
 
 ## States
-header: States · title: Closed, open, and how it closes · description: A press on the trigger opens it; there's no hover, focus, or timer. While it's open a clear layer covers the page: the next press anywhere, Escape, or Android's back button closes it. The screen can also open it itself with open and hear every close through onOpenChange.
+header: States · title: Closed, open, and how it closes · description: A press on the trigger opens it; there's no hover, focus, or timer. While it's open a clear layer covers the page: the next press anywhere, or Android's back button, closes it. On the web Escape doesn't close it (#349). The screen can also open it itself with open and hear every close through onOpenChange.
 Grid `coin-new-example-grid`:
 - Opens on press — Term("Expense ratio", "About expense ratio", EXPENSE) — lesson: Press the i to open it; press anywhere to close it.
 - Opened by the screen — a component with `const [open, setOpen] = useState(false)`: `<VStack modes={{ ...LIGHT, 'Slot gap': 'M' } as Modes} alignHorizontal="center">` holding Term("Exit load", "About exit load", EXIT, { open, onOpenChange: setOpen }) and `<Button label="Show hint" modes={{ ...LIGHT, Emphasis: 'Medium' } as Modes} onPress={() => setOpen(true)} />` — lesson: The screen decides when it shows, for example a first-time hint, and hears every close.
 
 ## Sizing
-header: Sizing · title: Hugs short text, wraps at 280 px · description: The bubble is as wide as its text up to 280 px, then wraps; padding is 12 × 8 px and text 14 px on 18 px lines. Code has no width setting, though Figma has a Custom Width variant (#277).
-Grid `coin-new-example-grid`:
+header: Sizing · title: Hugs short text, wraps at 280 px · description: The bubble is as wide as its text up to 280 px, then wraps; padding is 12 × 8 px and text 14 px on 18 px lines. A width on the content sets it instead, like Figma's Custom Width variant.
+Grid `coin-new-example-grid three`:
 - Short text — Term("Exit load", "About exit load", EXIT) — lesson: One line: the bubble hugs it.
 - Long text — Term("XIRR", "About XIRR", XIRR) — lesson: Wraps at 280 px. Two or three lines is the most people will read.
+- Custom width — Term("XIRR", "About XIRR", XIRR, { width: 200 }) — lesson: A set width of 200 px, Figma's Custom Width On: the same text wraps sooner.
 
 ## Content
-header: Content · title: One plain explanation · description: Explain one term in a sentence or two of plain text, and keep the term itself on the page. The bubble takes plain text: Coin Text inside it is drawn black on the black bubble (#277). A press inside it just closes it, so never put an action there.
+header: Content · title: One plain explanation · description: Explain one term in a sentence or two of plain text, and keep the term itself on the page. Plain text and Coin Text both get the white label style. A press inside it just closes it, so never put an action there.
 One ExampleCard "Explain a term" › Term("NAV", "About NAV", NAV). Description: "One sentence that says what NAV means, opened from the i next to it."
 
 ## In context
@@ -61,7 +62,7 @@ header: Do & Don’ts · title: Short, and on an info button · description: Eac
 
 ## Sources
 header: Sources · title: Use the public Tooltip contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Tooltip is a near-black bubble with a downward arrow near its bottom left or right, in two variants, Custom Width Off (up to 280 px) and On; code has no width setting, caps the bubble at 280 px, centres the arrow on the trigger, and offers 12 placements, though beside the trigger it isn’t kept on screen. In code the bubble is a React Native Modal: it opens on press only, over the whole window, and the next press anywhere closes it. Storybook’s stories use a plain grey box as the trigger; these examples pass a Coin IconButton with asChild, because a Coin button nested inside the trigger never opens it. On the web the open bubble is an unnamed dialog that isn’t linked to its trigger, and Coin Text inside it is drawn black (#277). The published Storybook page is still the old generated one.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Tooltip is a near-black bubble with a downward arrow near its bottom left or right, in two variants, Custom Width Off (up to 280 px) and On. In code the bubble hugs its text up to 280 px or takes a set width, centres the arrow on the trigger, offers 12 placements, and stays 8 px inside the screen. It opens on press only, over the whole window, and the next press anywhere closes it. On the web the bubble is a tooltip tied to its trigger, but Escape doesn’t close it (#349). Storybook’s stories use a plain grey box as the trigger; these examples pass a Coin IconButton with asChild, though a Coin button nested inside the trigger opens it too.
 
 ## Limits
-Never start a tooltip open, use `defaultOpen`, or pass Coin Text or actions as content. Don't show `sideOffset`, `gap`, or `alignItems`, or any Color Mode but Light. Don't imply hover or focus opening, a timer, a width setting, a tooltip role, or that the bubble names the trigger.
+Never start a tooltip open, use `defaultOpen`, or pass actions as content. Don't show `sideOffset`, `gap`, or `alignItems`, or any Color Mode but Light. Don't imply hover or focus opening, a timer, that Escape closes it on the web (#349), or that the bubble names the trigger.

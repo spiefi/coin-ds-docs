@@ -4,6 +4,8 @@ Package, Figma, and Storybook evidence for the Card Insight guide (board ticket 
 
 ## Checked
 
+19 October 2026: the docs now install mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348). Only #283 (System badge label) was published to this guide: with System intent the badge label is white, re-tested 19 October (Penny run run_43afbe70). c7d3348 also changes `CardInsight.tsx`, `SavingsGoalSummary` and `LinearProgress` for #284, which isn't fixed yet (back to In progress on 19 October: the default footer still has no button). The #284 facts below are still the 17 October ones, and this guide's #284 copy waits for #284.
+
 17 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October); `npm run coin:status` reports it up to date. `CardInsight.tsx`, `Nudge`, `SavingsGoalSummary`, `Badge`, `Divider` and `LinearProgress` are identical to Biscuit's `main`. Rendered in the docs' own Vite + react-native-web 0.21.2 build in headless Chrome.
 
 ## Sources
@@ -28,7 +30,7 @@ Props (`:19-84`): `title` ('Emergency savings'), `subtitle` ('One line explanati
 `Card/Insight` (one mode): white, 1 px border `#ffffff`, radius 12, padding 16 / 12, gap 12, header gap 8, title 16/700 (line 20 in code), subtitle 12/400; card, title and subtitle don't change with modes.
 
 - AppearanceBrand (Primary by default): badge, bar, legend dots, and a Nudge footer — Primary gold `#cea15a` on `#fde8c9`, Secondary purple `#5d00b5` on `#ede7ff` (Figma's bar), Tertiary blue, Neutral grey.
-- Semantic Intent System + AppearanceSystem: badge, bar and footer take the status colour; the badge's label reads the missing token `Emphasis/badge/high/fg Copy` and renders black (Badge bug).
+- Semantic Intent System + AppearanceSystem: badge, bar and footer take the status colour; the badge's label is white (`Emphasis/badge/high/fg`, since #283; before, it read the missing `Emphasis/badge/high/fg Copy` and rendered black).
 - Emphasis Medium / Low: the bar's fill turns the same colour as its track, so the progress disappears (SavingsGoalSummary passes Emphasis to both).
 - LinearProgress Size (SavingsGoalSummary defaults to L, 23 px; M is Figma's 16 px), Nudge padding, Border Boolean, Badge Size, Page type SubPage / context 8 Section (border `#ebebed`), context 10 (divider), Text Appearance (the % colour).
 
@@ -41,7 +43,7 @@ Root `div` (padding 16 / 12, gap 12, border, radius 12) › header `div` (row) �
 - Default footer: the installed Nudge has no default text or button, and CardInsight passes none, so the default footer is an empty nudge with a lone sparkle. There's no prop for its text; a custom `footer` is needed. Reported.
 - Default figure caption "Credit usage" (`text/appearance/medium/color`) is `#ffffff` in every mode: invisible on the white card, leaving an empty line. Reported.
 - Emphasis Medium / Low hide the bar's fill (above). Reported.
-- Badge: Figma green with a white label; code gold (Primary). System gives green but a black label (Badge bug, reported).
+- Badge: Figma green with a white label; code gold (Primary). System gives green with a white label (since #283).
 - Bar: Figma purple, 16 px; code gold, 23 px.
 - mdx says `footer={false}` keeps the divider if you pass one; code never shows the divider without a footer. mdx says the default nudge can show Close; CardInsight can't pass `onClose`.
 - Figma 356 wide, 322 tall; code takes its host's width.
@@ -54,7 +56,7 @@ Storybook frames the white card on light grey with 16 px padding, which the guid
 ## Tickets
 
 - #284 (Component Bug, Biscuit): empty default footer; invisible default caption; Emphasis Medium / Low hide the bar's fill.
-- #283 (Component Bug, Biscuit): Badge System + High label reads a missing token (shared with Category Card).
+- #283 (Component Bug, Biscuit): Badge System + High label read a missing token (shared with Category Card). Fixed on c7d3348, verified 19 October, published to the docs 19 October.
 
 ## Limits
 

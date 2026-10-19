@@ -141,7 +141,7 @@ function CardInsightGuide() {
         { label: 'Without footer', id: 'components-cardinsight--without-footer' },
         { label: 'Custom footer', id: 'components-cardinsight--with-custom-footer' },
         { label: 'Without divider', id: 'components-cardinsight--without-divider' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card/Insight is one 356 × 322 component with a title, a subtitle, and a slot; its badge, divider, and footer are fixed, its badge is green, and its bar is purple, while the package defaults to gold. The default footer is an empty nudge with no text, and the default figure’s caption, “Credit usage”, is white on the white card, so these examples pass their own; Emphasis Medium or Low hide the bar’s fill, and a System badge shows black text. All four are reported. The published Storybook shows an older footer with text and still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card/Insight is one 356 × 322 component with a title, a subtitle, and a slot; its badge, divider, and footer are fixed, its badge is green, and its bar is purple, while the package defaults to gold. The default footer is an empty nudge with no text, and the default figure’s caption, “Credit usage”, is white on the white card, so these examples pass their own; Emphasis Medium or Low hide the bar’s fill. All three are reported. A System badge’s label is white, as in Figma. The published Storybook shows an older footer with text and still shows the older generated page.</Sources>,
     },
   }
 
