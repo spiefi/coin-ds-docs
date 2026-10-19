@@ -16,13 +16,13 @@ const NAV = 'The price of one unit of the fund, updated every working day.'
 const XIRR = 'Your yearly return, counting when each payment went in. It lets you compare investments made at different times and over different periods.'
 const WALL = 'The yearly fee the fund charges, as a share of your investment. It covers fund management, admin, and distribution. It\'s taken from the fund\'s value every day, so you never pay it separately. Lower is better over long periods.'
 
-type TipProps = { placement?: TooltipPlacement; open?: boolean; onOpenChange?: (open: boolean) => void }
+type TipProps = { placement?: TooltipPlacement; open?: boolean; onOpenChange?: (open: boolean) => void; width?: number }
 
-function Info({ label, text, ...props }: TipProps & { label: string; text: string }) {
+function Info({ label, text, width, ...props }: TipProps & { label: string; text: string }) {
   return (
     <Tooltip modes={LIGHT} {...props}>
       <TooltipTrigger asChild><IconButton iconName="ic_info" accessibilityLabel={label} modes={INFO} /></TooltipTrigger>
-      <TooltipContent>{text}</TooltipContent>
+      <TooltipContent width={width}>{text}</TooltipContent>
     </Tooltip>
   )
 }
@@ -78,17 +78,17 @@ function TooltipGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Side and alignment',
-      description: 'Placement picks the side, top by default, and can line the bubble up with the trigger\'s start or end edge instead of its centre. When the bubble doesn\'t fit on that side it flips to the opposite one. Above or below, it stays 8 px inside the screen; beside the trigger it isn\'t kept on screen, so on a phone a wide bubble runs off the edge (#277).',
+      description: 'Placement picks the side, top by default, and can line the bubble up with the trigger\'s start or end edge instead of its centre. When the bubble doesn\'t fit on that side it flips to the opposite one, and beside the trigger with no room either way it moves above or below. It always stays 8 px inside the screen.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Above" description="The default: the bubble sits above, its arrow pointing down at the trigger."><Term term="Expense ratio" label="About expense ratio" text={EXPENSE} /></ExampleCard>
         <ExampleCard title="Below" description="For triggers near the top of the screen, where there's no room above."><Term term="Expense ratio" label="About expense ratio" text={EXPENSE} placement="bottom" /></ExampleCard>
         <ExampleCard title="Start-aligned" description="The bubble's start edge lines up with the trigger's; the arrow still points at it."><Term term="Expense ratio" label="About expense ratio" text={EXPENSE} placement="top-start" /></ExampleCard>
-        <ExampleCard title="Beside" description="Next to the trigger, for a row with room to its side. On a phone there rarely is: the bubble runs off the screen (#277)."><Term term="Expense ratio" label="About expense ratio" text={EXPENSE} placement="right" /></ExampleCard>
+        <ExampleCard title="Beside" description="Next to the trigger, for a row with room to its side. On a phone there rarely is, so it opens above or below instead."><Term term="Expense ratio" label="About expense ratio" text={EXPENSE} placement="right" /></ExampleCard>
       </div>,
     },
     states: {
       header: 'States', title: 'Closed, open, and how it closes',
-      description: 'A press on the trigger opens it; there\'s no hover, focus, or timer. While it\'s open a clear layer covers the page: the next press anywhere, Escape, or Android\'s back button closes it. The screen can also open it itself with open and hear every close through onOpenChange.',
+      description: 'A press on the trigger opens it; there\'s no hover, focus, or timer. While it\'s open a clear layer covers the page: the next press anywhere, or Android\'s back button, closes it. On the web Escape doesn\'t close it (#349). The screen can also open it itself with open and hear every close through onOpenChange.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Opens on press" description="Press the i to open it; press anywhere to close it."><Term term="Expense ratio" label="About expense ratio" text={EXPENSE} /></ExampleCard>
         <ExampleCard title="Opened by the screen" description="The screen decides when it shows, for example a first-time hint, and hears every close."><ScreenOpened /></ExampleCard>
@@ -96,15 +96,16 @@ function TooltipGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Hugs short text, wraps at 280 px',
-      description: 'The bubble is as wide as its text up to 280 px, then wraps; padding is 12 × 8 px and text 14 px on 18 px lines. Code has no width setting, though Figma has a Custom Width variant (#277).',
-      body: <div className="coin-new-example-grid">
+      description: 'The bubble is as wide as its text up to 280 px, then wraps; padding is 12 × 8 px and text 14 px on 18 px lines. A width on the content sets it instead, like Figma\'s Custom Width variant.',
+      body: <div className="coin-new-example-grid three">
         <ExampleCard title="Short text" description="One line: the bubble hugs it."><Term term="Exit load" label="About exit load" text={EXIT} /></ExampleCard>
         <ExampleCard title="Long text" description="Wraps at 280 px. Two or three lines is the most people will read."><Term term="XIRR" label="About XIRR" text={XIRR} /></ExampleCard>
+        <ExampleCard title="Custom width" description="A set width of 200 px, Figma's Custom Width On: the same text wraps sooner."><Term term="XIRR" label="About XIRR" text={XIRR} width={200} /></ExampleCard>
       </div>,
     },
     content: {
       header: 'Content', title: 'One plain explanation',
-      description: 'Explain one term in a sentence or two of plain text, and keep the term itself on the page. The bubble takes plain text: Coin Text inside it is drawn black on the black bubble (#277). A press inside it just closes it, so never put an action there.',
+      description: 'Explain one term in a sentence or two of plain text, and keep the term itself on the page. Plain text and Coin Text both get the white label style. A press inside it just closes it, so never put an action there.',
       body: <ExampleCard title="Explain a term" description="One sentence that says what NAV means, opened from the i next to it."><Term term="NAV" label="About NAV" text={NAV} /></ExampleCard>,
     },
     context: {
@@ -139,10 +140,10 @@ function TooltipGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Tooltip contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="12 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tooltip')} stories={[
+      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tooltip')} stories={[
         { label: 'Default', id: 'components-tooltip--default' }, { label: 'Long text', id: 'components-tooltip--long-text' },
         { label: 'Slot', id: 'components-tooltip--slot' }, { label: 'Edge detection', id: 'components-tooltip--edge-detection' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository; Biscuit’s newer build only rewrites the Storybook page. Figma’s Tooltip is a near-black bubble with a downward arrow near its bottom left or right, in two variants, Custom Width Off (up to 280 px) and On; code has no width setting, caps the bubble at 280 px, centres the arrow on the trigger, and offers 12 placements, though beside the trigger it isn’t kept on screen. In code the bubble is a React Native Modal: it opens on press only, over the whole window, and the next press anywhere closes it. Storybook’s stories use a plain grey box as the trigger; these examples pass a Coin IconButton with asChild, because a Coin button nested inside the trigger never opens it. On the web the open bubble is an unnamed dialog that isn’t linked to its trigger, and Coin Text inside it is drawn black (#277). The published Storybook page is still the old generated one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Tooltip is a near-black bubble with a downward arrow near its bottom left or right, in two variants, Custom Width Off (up to 280 px) and On. In code the bubble hugs its text up to 280 px or takes a set width, centres the arrow on the trigger, offers 12 placements, and stays 8 px inside the screen. It opens on press only, over the whole window, and the next press anywhere closes it. On the web the bubble is a tooltip tied to its trigger, but Escape doesn’t close it (#349). Storybook’s stories use a plain grey box as the trigger; these examples pass a Coin IconButton with asChild, though a Coin button nested inside the trigger opens it too.</Sources>,
     },
   }
 

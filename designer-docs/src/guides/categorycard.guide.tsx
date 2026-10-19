@@ -76,7 +76,7 @@ function CategoryCardGuide() {
     },
     sizing: {
       header: 'Sizing', title: '60 px wide, as tall as its content',
-      description: 'The card is 60 px wide unless you set width, and as tall as its content: 4 px padding, the picture, a 6 px gap, and a 16 px label line. With the default 36 px image it’s 68 px tall; the 42 px capsule here makes it 74. A badge sits 11 px above the card, and the card keeps that room in its layout.',
+      description: 'The card is 60 px wide unless you set width, and as tall as its content: 4 px padding, the picture, a 6 px gap, and a 16 px label line. With the default 36 px image it’s 68 px tall; the 42 px capsule here makes it 74. A badge sits 11 px above the card, and every card keeps that room in its layout, with or without a badge.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} marks={[
           { kind: 'size', target: S, side: 'bottom', label: 'both' },
@@ -102,11 +102,11 @@ function CategoryCardGuide() {
     },
     context: {
       header: 'In context', title: 'A category rail on the Invest screen',
-      description: 'The screen keeps the selected category and sets active on that card; each card’s onPress selects it. The rail lines the cards up along the bottom, because a card with a badge keeps 11 px above it for the badge.',
+      description: 'The screen keeps the selected category and sets active on that card; each card’s onPress selects it. Every card keeps 11 px above it for a badge, so cards with and without one line up in the rail.',
       body: <div className="coin-new-context">
         <VStack modes={{ ...LIGHT, 'Slot gap': 'M' } as Modes}>
           <Title title="Invest" subtitle="Pick a category" modes={LIGHT} />
-          <HStack modes={LIGHT} style={{ alignItems: 'flex-end' }}>
+          <HStack modes={LIGHT}>
             {RAIL.map(c => CC({
               label: c.label, badge: c.badge, active: selected === c.label, onPress: () => setSelected(c.label),
             }, c.label))}
@@ -116,8 +116,8 @@ function CategoryCardGuide() {
       </div>,
     },
     'dos-donts': {
-      header: 'Do & Don’ts', title: 'Short words, lined-up rails',
-      description: 'Each pair shows a rail people scan at a glance next to one that spills, clips, or steps out of line.',
+      header: 'Do & Don’ts', title: 'Short words, one active card',
+      description: 'Each pair shows a rail people scan at a glance next to one that spills, clips, or marks two categories at once.',
       body: <div className="coin-new-stack">
         <DoDont
           good={CC({ badge: undefined })}
@@ -130,16 +130,16 @@ function CategoryCardGuide() {
           goodTitle="One short badge word" goodCaption="“New” fits the badge."
           badTitle="Write a long badge" badCaption="“Limited offer” is cut to a few letters." />
         <DoDont
-          good={<HStack modes={LIGHT} style={{ alignItems: 'flex-end' }}>{CC()}{CC({ label: 'Loans', badge: undefined })}</HStack>}
-          bad={<HStack modes={LIGHT}>{CC()}{CC({ label: 'Loans', badge: undefined })}</HStack>}
-          goodTitle="Line the rail up along the bottom" goodCaption="Cards with and without a badge line up."
-          badTitle="Line the rail up along the top" badCaption="The card with a badge sits 11 px lower." />
+          good={<HStack modes={LIGHT}>{CC({ active: true })}{CC({ label: 'Loans', badge: undefined })}</HStack>}
+          bad={<HStack modes={LIGHT}>{CC({ active: true })}{CC({ label: 'Loans', badge: undefined, active: true })}</HStack>}
+          goodTitle="Mark one card active" goodCaption="One gold border shows the category on screen."
+          badTitle="Mark several cards active" badCaption="Two gold borders leave people unsure which category is showing." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Category Card contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('categorycard')} stories={[
+      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('categorycard')} stories={[
         { label: 'Default', id: 'components-categorycard--default' },
         { label: 'Active', id: 'components-categorycard--active' },
         { label: 'Long label', id: 'components-categorycard--long-label' },
@@ -147,7 +147,7 @@ function CategoryCardGuide() {
         { label: 'Image slot', id: 'components-categorycard--image-slot' },
         { label: 'Horizontal rail', id: 'components-categorycard--horizontal-rail' },
         { label: 'Disabled', id: 'components-categorycard--disabled' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Category Card has a State variant (Idle, Active) and a badge on or off; in code, active and the badge text are props. The package’s default image is a placeholder, so these examples put a Coin Icon Capsule in imageSlot. The label’s font token is spelt “Jio Type Var”, so the label shows in a fallback serif font until the token is fixed. Figma ends a long label in an ellipsis; the package lets it spill unless you change singleLine and disableTruncation. A card with a badge is 11 px taller than one without, so a rail lines up only along the bottom; Storybook’s rail shows the step. On the web the active card isn’t announced as selected, and System badges show black text; both are reported. The published Storybook still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Category Card has a State variant (Idle, Active) and a badge on or off; in code, active and the badge text are props. Without an image the card shows a plain light square, so these examples put a Coin Icon Capsule in imageSlot. The label’s font token is spelt “Jio Type Var”, so the label shows in a fallback serif font until the token is fixed. Figma ends a long label in an ellipsis; the package lets it spill unless you change singleLine and disableTruncation. Every card keeps 11 px above it for a badge, so a rail lines up with or without badges, and on the web the active card is announced as pressed. The published Storybook still shows the older generated page.</Sources>,
     },
   }
 

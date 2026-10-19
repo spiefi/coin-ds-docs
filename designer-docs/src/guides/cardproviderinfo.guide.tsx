@@ -32,13 +32,13 @@ const grid = `${R} > div:nth-child(2)`
 const firstFact = `${R} > div:nth-child(2) > div:first-child > div:first-child`
 
 const APPEARANCES = ['Primary', 'Secondary', 'Neutral'] as const
-const AVATARS = ['L', 'S'] as const
+const AVATARS = ['S', 'L'] as const
 const COUNTS = ['2', '3', '4'] as const
 const GRID: Record<(typeof COUNTS)[number], string> = { '2': '1 row', '3': '2 rows, one fact alone', '4': '2 rows' }
 
 function CardProviderInfoGuide() {
   const [appearance, setAppearance] = useState<(typeof APPEARANCES)[number]>('Primary')
-  const [avatarSize, setAvatarSize] = useState<(typeof AVATARS)[number]>('L')
+  const [avatarSize, setAvatarSize] = useState<(typeof AVATARS)[number]>('S')
   const [facts, setFacts] = useState<(typeof COUNTS)[number]>('4')
   const [opened, setOpened] = useState(0)
   const [bought, setBought] = useState(false)
@@ -48,7 +48,7 @@ function CardProviderInfoGuide() {
       header: 'Anatomy', title: 'A provider and its facts',
       description: 'A rounded card puts the provider’s logo and name on top, then lays its children out two to a row. The facts are StatItem components: a small label over a large value.',
       body: <Anatomy specimenWidth={342} parts={[
-        { name: 'Avatar', note: 'imageSource in a round 42 px Avatar; Avatar Size S gives Figma’s 29 px.', target: avatar, side: 'left' },
+        { name: 'Avatar', note: 'imageSource in a round 29 px Avatar, as in Figma; showAvatar={false} hides it.', target: avatar, side: 'left' },
         { name: 'Label', note: 'label names the provider in 16 px bold.', target: label, side: 'top' },
         { name: 'Fact', note: 'A StatItem child: a 12 px label over a 26 px value.', target: firstFact, side: 'left' },
         { name: 'Grid', note: 'Children sit two to a row, 8 px apart, each half the width.', target: grid, side: 'right' },
@@ -59,12 +59,12 @@ function CardProviderInfoGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Brand and avatar size',
-      description: 'AppearanceBrand sets the card’s fill: Primary cream by default, Secondary lilac, and Neutral or Tertiary white with a light border. The label and the facts stay the same colour. Avatar Size S shrinks the logo to Figma’s 29 px; the package default is 42 px.',
+      description: 'AppearanceBrand sets the card’s fill: Primary cream by default, Secondary lilac, and Neutral or Tertiary white with a light border. The label and the facts stay the same colour. The logo is Figma’s 29 px; Avatar Size L makes it 42 px, and showAvatar={false} hides it.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Primary" description="The default: a cream card, as in Figma.">{CPI()}</ExampleCard>
         <ExampleCard title="Secondary" description="A lilac card.">{CPI({ modes: m({ AppearanceBrand: 'Secondary' }) })}</ExampleCard>
         <ExampleCard title="Neutral" description="White with a light border; Tertiary looks the same.">{CPI({ modes: m({ AppearanceBrand: 'Neutral' }) })}</ExampleCard>
-        <ExampleCard title="Avatar Size S" description="A 29 px logo, as in Figma.">{CPI({ modes: m({ 'Avatar Size': 'S' }) })}</ExampleCard>
+        <ExampleCard title="Avatar Size L" description="A larger 42 px logo.">{CPI({ modes: m({ 'Avatar Size': 'L' }) })}</ExampleCard>
       </div>,
     },
     states: {
@@ -80,7 +80,7 @@ function CardProviderInfoGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Your screen sets the width',
-      description: 'The card fills its host’s width; Figma draws it at 342 px. It has 20 px padding and 20 px between the header and the facts, and each fact takes half the width with 8 px between them. Height follows the content: 212 px with four facts and the default avatar.',
+      description: 'The card fills its host’s width; Figma draws it at 342 px. It has 20 px padding and 20 px between the header and the facts, and each fact takes half the width with 8 px between them. Height follows the content: 199 px with four facts and the 29 px logo.',
       body: <Anatomy legend={false} specimenWidth={342} marks={[
         { kind: 'size', target: R, side: 'bottom', label: 'both' },
         { kind: 'padding', target: R },
@@ -125,7 +125,7 @@ function CardProviderInfoGuide() {
           good={CPI({}, 2)}
           bad={CPI({ imageSource: undefined }, 2)}
           goodTitle="Pass the provider’s logo" goodCaption="imageSource shows who provides it."
-          badTitle="Leave out imageSource" badCaption="A stock portrait stands in for the logo." />
+          badTitle="Leave out imageSource" badCaption="The name stands alone, with nothing to show who provides it." />
         <DoDont
           good={CPI()}
           bad={CPI({}, 3)}
@@ -136,10 +136,10 @@ function CardProviderInfoGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Card Provider Info contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardproviderinfo')} stories={[
+      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardproviderinfo')} stories={[
         { label: 'Default', id: 'components-cardproviderinfo--default' },
         { label: 'Two stats', id: 'components-cardproviderinfo--two-stats' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card/Provider Info is one 342 × 185 component with no properties of its own; its Product Label can hide the avatar, but in code the header always comes from label and imageSource and the avatar can’t be hidden. Without imageSource the package shows a stock portrait, so this page passes the Jio Gold logo from the Figma component. Figma’s logo is 29 px (Avatar Size S); the package default is 42 px. Fact rows are 50 px in code and 44 in Figma. The avatar and portrait issues are reported. The published Storybook shows the placeholder portrait and still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Card/Provider Info is one 342 × 185 component with no properties of its own; its Product Label can hide the avatar, and in code showAvatar does the same. The header comes from label and imageSource: without imageSource it shows the name alone, so this page passes the Jio Gold logo from the Figma component. The logo is Figma’s 29 px (Avatar Size S) by default. Fact rows are 50 px in code and 44 in Figma. The published Storybook still shows the older build, with a placeholder portrait, and the older generated page.</Sources>,
     },
   }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, CardFeedback, Title, type Modes } from 'jfs-components'
+import { Button, CardFeedback, Title, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
 import { Anatomy, DoDont, ExampleCard, OnOff, Readout, Segment, Sources, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
@@ -17,16 +17,20 @@ const STATUS = {
 type Status = keyof typeof STATUS
 const STATUSES = ['positive', 'warning', 'negative'] as const
 
-type FBOpts = { actions?: string[]; icon?: string; title?: string; body?: string; onPress?: (label: string) => void }
-const FB = (status: Status, { actions, icon, title, body, onPress }: FBOpts = {}) => {
+// A Button's own modes win over the card's: Brand Neutral at Emphasis Low is a quiet text button.
+const QUIET = { 'Semantic Intent': 'Brand', AppearanceBrand: 'Neutral', Emphasis: 'Low' } as Modes
+
+type CardProps = { onPress?: () => void; disabled?: boolean; accessibilityLabel?: string }
+type FBOpts = { actions?: string[]; quiet?: string; icon?: string; title?: string; body?: string; onPress?: (label: string) => void; card?: CardProps }
+const FB = (status: Status, { actions, quiet, icon, title, body, onPress, card }: FBOpts = {}) => {
   const list = actions ?? [STATUS[status].action]
   return (
-    <CardFeedback modes={{ ...LIGHT, AppearanceSystem: status } as Modes} style={FRAME}>
+    <CardFeedback modes={{ ...LIGHT, AppearanceSystem: status } as Modes} style={FRAME} {...card}>
       <CardFeedback.Icon icon={icon ?? STATUS[status].icon} />
       <CardFeedback.Content>
         <CardFeedback.Title>{title ?? STATUS[status].title}</CardFeedback.Title>
         <CardFeedback.Body>{body ?? STATUS[status].body}</CardFeedback.Body>
-        {list.length ? <CardFeedback.Action>{list.map(a => <Button key={a} label={a} onPress={onPress ? () => onPress(a) : noop} />)}</CardFeedback.Action> : null}
+        {list.length ? <CardFeedback.Action>{list.map(a => <Button key={a} label={a} modes={a === quiet ? QUIET : undefined} onPress={onPress ? () => onPress(a) : noop} />)}</CardFeedback.Action> : null}
       </CardFeedback.Content>
     </CardFeedback>
   )
@@ -72,10 +76,12 @@ function CardFeedbackGuide() {
     },
     states: {
       header: 'States', title: 'With or without actions',
-      description: 'The card itself is static: only the buttons you put in Action respond. onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel. The card doesn’t change its look when pressed or disabled.',
+      description: 'The card itself is static: only the buttons you put in Action respond. onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel. A pressable card fades slightly on hover and more while pressed, and shows a ring on keyboard focus. disabled fades it to half and ignores presses.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Message only" description="Icon, title, and body: nothing to press.">{FB('positive', { actions: [] })}</ExampleCard>
-        <ExampleCard title="Two actions" description="Both buttons take the status colour and look the same.">{FB('negative', { actions: ['Try again', 'Change bank'] })}</ExampleCard>
+        <ExampleCard title="Two actions" description="Buttons take the status colour; a Button’s own modes make the second one quieter.">{FB('negative', { actions: ['Try again', 'Change bank'], quiet: 'Change bank' })}</ExampleCard>
+        <ExampleCard title="Pressable card" description="onPress with no buttons inside: press it to see it fade.">{FB('positive', { actions: [], card: { onPress: noop, accessibilityLabel: 'Payment successful. View receipt' } })}</ExampleCard>
+        <ExampleCard title="Disabled" description="Half opacity, and presses are ignored.">{FB('positive', { actions: [], card: { onPress: noop, disabled: true, accessibilityLabel: 'Payment successful. View receipt' } })}</ExampleCard>
       </div>,
     },
     sizing: {
@@ -100,10 +106,10 @@ function CardFeedbackGuide() {
       header: 'In context', title: 'A failed payment on the Pay screen',
       description: 'Try again runs the screen’s own retry through the button’s onPress. When the retry goes through, the screen swaps the card for a positive one; the card doesn’t change itself or time out.',
       body: <div className="coin-new-context">
-        <div className="coin-new-stack">
+        <VStack modes={{ ...LIGHT, 'Slot gap': 'M' } as Modes}>
           <Title title="Pay Rahul Sharma" subtitle="₹1,250 from HDFC Bank" modes={LIGHT} />
           {paid ? FB('positive', { onPress: () => setPaid(false) }) : FB('negative', { onPress: () => setPaid(true) })}
-        </div>
+        </VStack>
         <p className="coin-new-readout" role="status">{paid ? 'Retried: payment successful' : 'Payment failed'}</p>
       </div>,
     },
@@ -131,12 +137,12 @@ function CardFeedbackGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Card Feedback contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardfeedback')} stories={[
+      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardfeedback')} stories={[
         { label: 'Default', id: 'components-cardfeedback--default' },
         { label: 'Custom content', id: 'components-cardfeedback--with-custom-content' },
         { label: 'Multiple actions', id: 'components-cardfeedback--multiple-actions' },
         { label: 'Icon prop', id: 'components-cardfeedback--with-icon-prop' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card/Feedback is one 328 × 123 component with no properties; its status comes from modes, and its icon is a solid circle, while the package draws whichever registry icon you pass. The card doesn’t read the app’s theme, so Color Mode has to come through its modes. Inside a VStack or another Coin container that passes modes down, its title, body, and buttons lose the card’s status modes and the buttons turn gold and large (reported), so these examples sit outside one. A second button can’t be made quieter than the first. The published Storybook renders every story as a pressable card with buttons inside it, and still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Card/Feedback is one 328 × 123 component with no properties; its status comes from modes, and its icon is a solid circle, while the package draws whichever registry icon you pass. The card doesn’t read the app’s theme, so Color Mode has to come through its modes. Inside a VStack or another Coin container that passes modes down, its parts keep the card’s status colours. Emphasis alone doesn’t quieten a button in the status colour, so the quieter action here switches to Brand Neutral at Emphasis Low. The published Storybook hasn’t been rebuilt: it still renders every story as a pressable card with buttons inside it, and shows the older generated page.</Sources>,
     },
   }
 

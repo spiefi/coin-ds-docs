@@ -4,7 +4,9 @@ Package, Figma, and Storybook evidence for the Card Financial Condition guide (b
 
 ## Checked
 
-17 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October); `npm run coin:status` reports it up to date. `CardFinancialCondition.tsx` and the token JSON are byte-identical to Biscuit's `main`. Rendered in the docs' own Vite + react-native-web 0.21.2 build in headless Chrome.
+19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348), which fixes #285: the button is always Context CTACard, and the default spoken name comes from the new `financialConditionName.ts`. Re-tested in headless Chrome (react-native-web 0.21.2) at 1280 and 390 px on 19 October (Penny run run_43afbe70), and measured again in the guide while publishing.
+
+First checked 17 October 2026 against mirror tag `v0.1.78-a116616` in the docs' own Vite + react-native-web 0.21.2 build.
 
 ## Sources
 
@@ -15,7 +17,7 @@ Package, Figma, and Storybook evidence for the Card Financial Condition guide (b
 
 ## Contract
 
-Props (`:26-67`, defaults `:252-274`): `title` ('Protection'), `body` ('Check your coverage and gaps'), `value` (0; the ring clamps 0–100), `progressState` ('Inactive' | 'Active' | boolean; default 'Inactive'), `valueLabel` (replaces the number in the ring), `showNudge` (true; also gates `nudgeSlot`), `nudgeBody` (two default lines; `\n` breaks), `showDivider` (true), `showButton` (true; also gates `buttonSlot`), `buttonLabel` ('View Details'), `onPressButton`, `progressSlot`, `nudgeSlot`, `buttonSlot` (slots get the card's modes; `buttonSlot` gets the button modes), `modes`, `style`, `headerStyle`, `titleStyle`, `bodyStyle`, `accessibilityLabel` (default `${title}. ${body}.`), and View props on the root (`testID` works).
+Props (`:26-67`, defaults `:252-274`): `title` ('Protection'), `body` ('Check your coverage and gaps'), `value` (0; the ring clamps 0–100), `progressState` ('Inactive' | 'Active' | boolean; default 'Inactive'), `valueLabel` (replaces the number in the ring), `showNudge` (true; also gates `nudgeSlot`), `nudgeBody` (two default lines; `\n` breaks), `showDivider` (true), `showButton` (true; also gates `buttonSlot`), `buttonLabel` ('View Details'), `onPressButton`, `progressSlot`, `nudgeSlot`, `buttonSlot` (slots get the card's modes; `buttonSlot` gets the button modes), `modes`, `style`, `headerStyle`, `titleStyle`, `bodyStyle`, `accessibilityLabel` (default `financialConditionName(title, body, value, valueLabel)`: "Protection, 72 out of 100. Check your coverage and gaps", or `valueLabel` in place of "72 out of 100", with no doubled period; before #285 it was `${title}. ${body}.`), and View props on the root (`testID` works). The default ignores `progressState`, so an Inactive card still reads the value (#350; measured: the guide's Inactive Don't reads "Protection, 72 out of 100. …"). `financialConditionName` is also exported.
 
 - Not a pressable card: only the button acts. No disabled or loading for the button; no nudge title, button or close.
 - Inactive draws the track with a dash; Active draws the arc and the rounded value (or `valueLabel`).
@@ -23,35 +25,36 @@ Props (`:26-67`, defaults `:252-274`): `title` ('Protection'), `body` ('Check yo
 
 ## Modes and tokens
 
-Card defaults `AppearanceBrand: Neutral`, `Context: Nudge&Alert`, `Nudge padding: None` (`:72-76`), then the theme, then `modes`. The button always gets `AppearanceBrand: Secondary` (`:293-296`).
+Card defaults `AppearanceBrand: Neutral`, `Context: Nudge&Alert`, `Nudge padding: None` (`:72-76`), then the theme, then `modes`. The button always gets `AppearanceBrand: Secondary` and `Context: CTACard` (`:295-298`, since #285); the nudge keeps the card's Context.
 
 - Card tokens (`FinancialConditionCard / Output`, one mode): white, radius 16, padding 16, gap 8, header gap 16, text gap 8, title 16/700 (line 20 in code, 18 in Figma), body 14/17/400. No mode changes them.
 - AppearanceBrand: ring arc and nudge — Neutral `#303338` arc, white nudge, grey `#545961` sparkle; Primary gold arc, cream nudge; Secondary purple; Tertiary blue. Track stays `#EBEBED`. Button stays purple.
 - Semantic Intent System + AppearanceSystem: ring, nudge and button take the status colour (positive green, warning orange, negative red). AppearanceSystem alone does nothing.
 - Emphasis Medium / Low: paler button and arc.
-- Context: button size only — Nudge&Alert (default) 12/14, 25 px tall; CTACard 14/22, padding 16 × 4, 32 px (Figma's values); Default 42 px.
+- Context: no longer changes the button, which is always CTACard: 14/22, padding 16 × 4, gap 4, 32 px (Figma's values; measured 121 × 32 with "View details"). Before #285 the card's Nudge&Alert default made it 25 px with 12 px text.
 - circularProgressBar Size M: 164 px ring. Nudge padding Default: 12 px nudge padding. Border Boolean: nudge border. context 10 jioPlus: divider colour. Button / State: a static button restyle. Page type, Context2, Slot gap, Profile Card Appearance: nothing visible.
 
 ## Web render
 
-Root `div[data-testid][aria-label]` (padding 16, gap 8) › header `div` (row) › text `div` (title `div[dir=auto]`, body `div[dir=auto]`) + `div[role=progressbar]` 60 × 60; then the nudge `div`; `div[role=presentation]` (divider); `div` › `button[role=button]`. Measured in the guide at 343 px: 343 × 176 with all parts (padding 16, text-to-ring gap 16).
+Root `div[data-testid][aria-label]` (padding 16, gap 8) › header `div` (row) › text `div` (title `div[dir=auto]`, body `div[dir=auto]`) + `div[role=progressbar]` 60 × 60; then the nudge `div`; `div[role=presentation]` (divider); `div` › `button[role=button]`. Measured in the guide at 343 px on c7d3348: 343 × 183 with all parts (padding 16, text-to-ring gap 16; 176 before #285 with the 25 px button). At 390 px the card is 316 × 201.
 
 ## Discrepancies
 
-- Button size: Figma's button is 32 px (Context CTACard values); the package's default Context Nudge&Alert makes it 25 px with 12 px text. Reported.
+- Button size: matches Figma's 32 px since #285.
 - Sparkle: Figma's retired nudge has a purple sparkle on white; no mode reproduces it (Neutral gives a grey sparkle on white, as in Storybook).
 - Figma shows only the Inactive ring and has no properties; code adds the props, booleans and slots above.
 - Figma is 343 wide; code takes its host's width (Storybook 320).
-- Default spoken name omits the score; a body ending in "." gives "..".
+- Default spoken name: includes the score since #285, with no "..", but also on an Inactive card (#350).
 - Published Storybook docs page is the older generated one (lists collection defaults Primary / Default / Default, not the card's Neutral / Nudge&Alert / None).
 
 ## Hosting
 
-Storybook shows the white card on white inside a 360 px frame. The guide puts the card straight on the grey example stages, where the white card reads as a card on a screen, with `style={{ width: '100%', maxWidth: 343 }}` (Figma's width) so it fills narrow screens and stops at 343 on wide ones.
+Storybook shows the white card on white inside a 360 px frame. The guide puts the card straight on the grey example stages, where the white card reads as a card on a screen, with `style={{ width: '100%', maxWidth: 343 }}` (Figma's width) so it fills narrow screens and stops at 343 on wide ones. Examples rely on the default spoken name, except Inactive cards, which pass `accessibilityLabel: 'Protection. No score yet'` (#350). The Sizing section no longer compares two Contexts.
 
 ## Tickets
 
-- #285 (Component Bug, Biscuit): default Context makes the button 25 px against Figma's 32 px; default spoken name has no score.
+- #285 (Component Bug, Biscuit): default Context made the button 25 px against Figma's 32 px; default spoken name had no score. Fixed on c7d3348, verified 19 October, published to the docs 19 October.
+- #350 (Component Bug, Biscuit; regression from the #285 fix, filed 19 October while publishing): an Inactive card's default spoken name reads a score the ring doesn't show.
 
 ## Limits
 

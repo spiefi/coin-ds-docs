@@ -19,7 +19,6 @@ const PROT = {
   value: 72,
   nudgeBody: NUDGE,
   buttonLabel: 'View details',
-  accessibilityLabel: 'Protection score 72 out of 100',
   onPressButton: noop,
 }
 
@@ -78,10 +77,10 @@ function CardFinancialConditionGuide() {
         <ExampleCard title="Neutral" description="The card’s default: a dark ring and a white nudge.">{CFC()}</ExampleCard>
         <ExampleCard title="Primary" description="A gold ring and a cream nudge; the button stays purple.">{CFC({ modes: m({ AppearanceBrand: 'Primary' }) })}</ExampleCard>
         <ExampleCard title="Positive" description="System with positive: green for a good score.">
-          {CFC({ modes: system('positive'), value: 90, body: 'Your cover looks complete', nudgeBody: 'Health and life cover are in place\nReview them once a year', accessibilityLabel: 'Protection score 90 out of 100' })}
+          {CFC({ modes: system('positive'), value: 90, body: 'Your cover looks complete', nudgeBody: 'Health and life cover are in place\nReview them once a year' })}
         </ExampleCard>
         <ExampleCard title="Negative" description="System with negative: red for a score to act on.">
-          {CFC({ modes: system('negative'), value: 30, body: 'You have gaps in your cover', accessibilityLabel: 'Protection score 30 out of 100' })}
+          {CFC({ modes: system('negative'), value: 30, body: 'You have gaps in your cover' })}
         </ExampleCard>
         <ExampleCard title="Without the nudge" description="The score, a rule, and the button.">{CFC({ showNudge: false })}</ExampleCard>
         <ExampleCard title="Without the divider" description="The button sits right under the nudge.">{CFC({ showDivider: false })}</ExampleCard>
@@ -98,24 +97,18 @@ function CardFinancialConditionGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Your screen sets the width',
-      description: 'The card has no width of its own: it fills its host, and Figma draws it at 343 px. It’s as tall as its content, with 16 px padding, 8 px between parts, and 16 px between the text and the 60 px ring. At the card’s default Context, Nudge&Alert, the button is 25 px tall; Context CTACard gives Figma’s 32 px button.',
-      body: <div className="coin-new-stack">
-        <Anatomy legend={false} specimenWidth={343} marks={[
-          { kind: 'size', target: S.R, side: 'bottom', label: 'both' },
-          { kind: 'padding', target: S.R },
-          { kind: 'gap', from: S.text, to: S.score },
-        ]}>
-          {CFC({ testID: 'cfc-size', style: undefined })}
-        </Anatomy>
-        <div className="coin-new-example-grid">
-          <ExampleCard title="Nudge&Alert, the default" description="A 25 px button with 12 px text.">{CFC()}</ExampleCard>
-          <ExampleCard title="Context CTACard" description="A 32 px button, as in Figma.">{CFC({ modes: m({ Context: 'CTACard' }) })}</ExampleCard>
-        </div>
-      </div>,
+      description: 'The card has no width of its own: it fills its host, and Figma draws it at 343 px. It’s as tall as its content, with 16 px padding, 8 px between parts, and 16 px between the text and the 60 px ring. The button is always Figma’s 32 px, with 14 px text, whatever Context the card has.',
+      body: <Anatomy legend={false} specimenWidth={343} marks={[
+        { kind: 'size', target: S.R, side: 'bottom', label: 'both' },
+        { kind: 'padding', target: S.R },
+        { kind: 'gap', from: S.text, to: S.score },
+      ]}>
+        {CFC({ testID: 'cfc-size', style: undefined })}
+      </Anatomy>,
     },
     content: {
       header: 'Content', title: 'Name it, read it, act on it',
-      description: 'Use a one- or two-word title for the topic and one short line for the body. Keep the nudge to two lines with a line break between them, and label the button with a verb. The default spoken name reads only the title and the body, so set accessibilityLabel to include the score, such as “Protection score 72 out of 100”.',
+      description: 'Use a one- or two-word title for the topic and one short line for the body. Keep the nudge to two lines with a line break between them, and label the button with a verb. The default spoken name reads the title, the score, and the body, such as “Protection, 72 out of 100. Check your coverage and gaps”. While the ring is Inactive, set accessibilityLabel yourself, such as “Protection. No score yet”: the default still reads the value (#350).',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Short copy" description="“Protection”, one line, two nudge lines, and “View details”.">{CFC()}</ExampleCard>
         <ExampleCard title="Long copy wraps" description="Nothing is cut off: the title and body wrap and the card grows.">
@@ -133,7 +126,6 @@ function CardFinancialConditionGuide() {
             value: added ? 90 : 72,
             body: added ? 'Your cover looks complete' : 'Check your coverage and gaps',
             showNudge: !added,
-            accessibilityLabel: `Protection score ${added ? 90 : 72} out of 100`,
             onPressButton: () => setAdded(true),
           })}
         </VStack>
@@ -159,14 +151,14 @@ function CardFinancialConditionGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Card Financial Condition contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardfinancialcondition')} stories={[
+      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardfinancialcondition')} stories={[
         { label: 'Default', id: 'components-cardfinancialcondition--default' },
         { label: 'Active progress', id: 'components-cardfinancialcondition--active-progress' },
         { label: 'Without nudge', id: 'components-cardfinancialcondition--without-nudge' },
         { label: 'Without divider', id: 'components-cardfinancialcondition--without-divider' },
         { label: 'Custom progress slot', id: 'components-cardfinancialcondition--with-custom-progress-slot' },
         { label: 'Long content', id: 'components-cardfinancialcondition--long-content' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card/FinancialCondition is one 343 × 181 component with no properties and an Inactive ring; its nudge is the retired Nudge with a purple sparkle, which no mode reproduces, so this page follows the package’s Neutral default. Figma’s button is 32 px, which matches Context CTACard; the card’s default Context makes it 25 px (reported). The card stays white in every mode, and its default spoken name leaves out the score. The published Storybook still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Card/FinancialCondition is one 343 × 181 component with no properties and an Inactive ring; its nudge is the retired Nudge with a purple sparkle, which no mode reproduces, so this page follows the package’s Neutral default. The button is Figma’s 32 px at any Context. The card stays white in every mode, and its default spoken name includes the score. The published Storybook still shows the older generated page.</Sources>,
     },
   }
 
@@ -179,7 +171,7 @@ function CardFinancialConditionGuide() {
       {CFC({
         progressState: ring,
         value: Number(value),
-        accessibilityLabel: ring === 'Active' ? `Protection score ${value} out of 100` : 'Protection. No score yet',
+        accessibilityLabel: ring === 'Active' ? undefined : 'Protection. No score yet',
         modes: m({ AppearanceBrand: appearance }),
         showNudge: nudge,
         showButton: button,
