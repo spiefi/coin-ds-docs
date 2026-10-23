@@ -57,7 +57,7 @@ function ContextFrame() {
   const pay = () => { setShown(false); setStatus('Paid ₹250 to Ravi Stores') }
   const cancel = () => { setShown(false); setStatus('Payment cancelled') }
   return <div className="coin-new-context">
-    <ScreenFrame footer={shown && <Overlay modes={LIGHT} onPress={cancel}><Dialog pay={pay} cancel={cancel} /></Overlay>}>
+    <ScreenFrame footer={shown && <Overlay modes={LIGHT} onPress={cancel} trapFocus dismissAccessibilityLabel="Cancel payment"><Dialog pay={pay} cancel={cancel} /></Overlay>}>
       <Screen open={() => setShown(true)} />
     </ScreenFrame>
     <p className="coin-new-readout" role="status">{status}</p>
@@ -99,7 +99,7 @@ function OverlayGuide() {
     },
     states: {
       header: 'States', title: 'Shown, dismissible, or blocking',
-      description: 'The screen shows an overlay by rendering it and hides it by removing it; it appears and goes at once, with no fade. With onPress, a tap on the scrim or Escape calls it; without, the scrim still blocks the page but does nothing. On the web, Tab stays inside the overlay while it’s shown.',
+      description: 'The screen shows an overlay by rendering it and hides it by removing it; it appears and goes at once, with no fade. With onPress, a tap on the scrim calls it; without, the scrim still blocks the page but does nothing. With trapFocus it’s a dialog: on the web focus moves inside, Tab stays there, and Escape calls onPress.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Tap to dismiss" description="A tap on the dimmed page hides it; Pay ₹250 brings it back."><Frame /></ExampleCard>
         <ExampleCard title="Blocking" description="Taps on the dimmed page do nothing, and the page underneath can’t be pressed."><Frame tap={false} /></ExampleCard>
@@ -115,14 +115,14 @@ function OverlayGuide() {
     },
     content: {
       header: 'Content', title: 'One focused task above the scrim',
-      description: 'Put one small surface on the scrim, such as a confirmation with two buttons, and give people a way back: a Cancel button and onPress on the scrim. Name it for screen readers with dismissAccessibilityLabel, such as “Cancel payment”; the default is “Dismiss overlay”.',
+      description: 'Put one small surface on the scrim, such as a confirmation with two buttons, and give people a way back: a Cancel button and onPress on the scrim. When it’s a dialog (trapFocus), name it for screen readers with dismissAccessibilityLabel, such as “Cancel payment”; the default is “Dismiss overlay”.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Confirm or cancel" description="One question, one main action, and Cancel."><Frame /></ExampleCard>
       </div>,
     },
     context: {
       header: 'In context', title: 'Confirming a payment',
-      description: 'Pay ₹250 dims Home and asks for confirmation. Pay completes it; Cancel or a tap on the dimmed screen backs out. The screen removes the overlay either way.',
+      description: 'Pay ₹250 dims Home and asks for confirmation in a dialog that holds keyboard focus (trapFocus). Pay completes it; Cancel, Escape, or a tap on the dimmed screen backs out. The screen removes the overlay either way.',
       body: <ContextFrame />,
     },
     'dos-donts': {
@@ -140,11 +140,11 @@ function OverlayGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Overlay contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('overlay')} stories={[
+      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('overlay')} stories={[
         { label: 'Default', id: 'components-overlay--default' },
         { label: 'Bare backdrop', id: 'components-overlay--bare-backdrop' },
         { label: 'Bottom sheet', id: 'components-overlay--bottom-sheet' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Overlay is a fill of 70% black with no properties; placement, content, fill, and tap to dismiss exist only in code. In code it fills its nearest positioned parent, not the device screen, and its colour is the same in every mode. It has no animation. Since the #269 fix it’s a modal on the web, named by dismissAccessibilityLabel: the scrim is no longer a Tab stop or a screen-wide focus ring, Tab stays inside, and Escape calls onPress. Every overlay takes focus as soon as it shows, even one that dims only part of a screen, so this page opens scrolled down to Do & Don’ts and Tab can’t leave that example (#281). Drawer uses it for its scrim. The examples host it as the Storybook stories do, over a small white screen; the dialog is a Coin Card instead of the stories’ hand-made box. The published Storybook page is still the old generated one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. Figma’s Overlay is a fill of 70% black with no properties; placement, content, fill, and tap to dismiss exist only in code. In code it fills its nearest positioned parent, not the device screen, and its colour is the same in every mode. It has no animation. On the web the scrim is never a Tab stop. With trapFocus the overlay is a modal dialog named by dismissAccessibilityLabel: focus moves inside, Tab stays inside, and Escape calls onPress, and only the newest such overlay holds focus. Without it, as for a dimmed region or Drawer’s scrim, it leaves focus alone; on this page only the In context dialog uses it. Drawer uses Overlay for its scrim. The examples host it as the Storybook stories do, over a small white screen; the dialog is a Coin Card instead of the stories’ hand-made box. The published Storybook predates this build.</Sources>,
     },
   }
 

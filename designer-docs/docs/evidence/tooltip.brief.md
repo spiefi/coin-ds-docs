@@ -66,3 +66,9 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code>, built from B
 
 ## Limits
 Never start a tooltip open, use `defaultOpen`, or pass actions as content. Don't show `sideOffset`, `gap`, or `alignItems`, or any Color Mode but Light. Don't imply hover or focus opening, a timer, that Escape closes it on the web (#349), or that the bubble names the trigger.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/tooltip.md`.
+
+- Sources: checked 23 October 2026; built from c8526ae (23 October); “It measures its text each time it opens, so a bubble whose text has grown still sits clear of its trigger.”

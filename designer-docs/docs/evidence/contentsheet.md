@@ -39,3 +39,7 @@ Re-checked 13 October 2026 for the #203 publish: the docs now install mirror tag
 ## Overlay focus trap (17 October 2026, #269 publish)
 
 The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October). Its Overlay fix for #269 adds a web focus trap that runs for every mounted Overlay (regression #281, Component Fix, To do). Measured on the built docs in headless Chrome at 1280 px: on load, focus lands on a Do & Don’ts overlay (`role="dialog"` “Dismiss overlay”) and the page scrolls to y 6335, and Tab stays there. The guide's Sources name #281; nothing works around it. The rest of this evidence was not re-checked against a116616.
+
+## c8526ae install (23 October 2026, publishing #281)
+
+The docs now install mirror tag `v0.1.78-c8526ae`. Overlay traps focus only with `trapFocus` (#281, fixed and published 23 October), and this guide's overlays don't pass it: on load focus stays on the page (re-test: scroll 0, 12 Tabs move through the page). The Sources sentence about #281 became “The examples dim their screens with Coin Overlay, which leaves keyboard focus on the page.” `ContentSheet.tsx` itself wasn't re-checked against this build; `npm run verify` passes.

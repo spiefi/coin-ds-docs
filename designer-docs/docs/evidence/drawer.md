@@ -2,6 +2,20 @@
 
 Package, Figma, Storybook, and browser evidence for the Drawer guide (board ticket #67, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## c8526ae publish (23 October 2026, #202 and #281)
+
+The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October). `Drawer.tsx` changed in c1fa197 and c8526ae for #202, and `Overlay.tsx` in c7d3348 and c8526ae for #281 (both verified 23 October, Penny run run_5a688e4d; closed by Marcin). Where this section differs from the sections below, it replaces them. Measured on this guide in headless Chrome (react-native-web 0.21.2, 1280 px), every drawer in a 318 px `ScreenFrame`:
+
+- Geometry from the parent (the host layer's `onLayout`), not the window: `collapsedHeight` 140 shows 140 px, 200 shows 200; expanded is 286 px (0.9 × 318), top 32. The guide's window-height fitting (`useFit`) is gone; Frame passes `collapsedHeight={peek}` and the default `expandedRatio`.
+- A controlled `state="expanded"` applies at mount (anatomy, sizing, and the With a scrim example render expanded).
+- Handle: a `role="button"` named “Expand drawer” / “Collapse drawer”; press or Enter toggles, Escape collapses an expanded sheet. No `aria-expanded` (the label changes instead).
+- The sheet is `role="dialog"` named `accessibilityLabel || title || 'Drawer'`: “Recent transactions”, or “Drawer” without a title.
+- Content starts 71 px below the sheet top (Figma 71; was 63); without a title, 38. The two shadow layers use their own values (secondary 0 12 24, primary 0 16 48). Color Mode Dark: white title on `rgb(13, 13, 15)` (re-test; not shown here).
+- On the web `scrollEnabled` reaches the scroll view as a plain prop: expanded content scrolls (re-test: a wheel scrolls it 347 px). The published Storybook (built 17 October) still predates this.
+- #281: Drawer's `showOverlay` scrim no longer traps focus (Overlay traps only with `trapFocus`). On load focus stays on the page body at scroll 0; the 17 October “page opens at the With a scrim example” note below no longer applies.
+
+Guide changes: `useFit` and `useWindowDimensions` removed; Handle note (a button); Without a title card (screen readers hear “Drawer”); States (handle press, Escape); Sizing (sizes from its screen; content at 71 px); In context description; Do & Don'ts “Add a button that opens it / Rely on dragging alone” → “Give it a title / Leave the title out”; playground note; Sources rewritten (checked 23 October; the #281 sentence removed).
+
 ## Check
 
 Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-3795b4c` (Biscuit's `main` at 3795b4c). `Drawer.tsx` is identical to upstream 636f3f5; no `drawer/*` or `overlay/*` token changed there.
@@ -32,7 +46,7 @@ Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 ## Coin gaps
 
-- #202 (Component Fix, To do, Component Bug, medium; Mr. Biscuit, Anagha Ghotkar): positions from the window height instead of its parent; controlled `state` ignored at mount; `accessibilityLabel` dropped; no keyboard/screen-reader way to resize; content does not scroll in the published Storybook; Dark title white on grey; title font and secondary shadow tokens ignored; content 8 px higher than Figma; docs page stale.
+- #202 (Component Fix; Mr. Biscuit): fixed on c8526ae, verified 23 October, published to the docs 23 October. It covered: positions from the window height instead of its parent; controlled `state` ignored at mount; `accessibilityLabel` dropped; no keyboard/screen-reader way to resize; content does not scroll in the published Storybook; Dark title white on grey; title font and secondary shadow tokens ignored; content 8 px higher than Figma; docs page stale.
 
 ## Overlay focus trap (17 October 2026, #269 publish)
 

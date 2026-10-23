@@ -2,6 +2,17 @@
 
 Package, Figma, Storybook, and browser evidence for the Disclaimer guide (board ticket #71, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## c8526ae publish (23 October 2026, #198)
+
+The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October). `Disclaimer.tsx` changed in c1fa197 and c8526ae for #198 (verified 23 October, Penny run run_5a688e4d; closed by Marcin). Where this section differs from the sections below, it replaces them. Measured on this guide in headless Chrome (react-native-web 0.21.2, 1280 px):
+
+- Second line: the text is `disclaimer`, a line break, then `children` if passed, else “Jio Payments Bank Pvt. Ltd.” unless the copy already contains it. “Terms apply.” renders “Terms apply.⏎Jio Payments Bank Pvt. Ltd.” (24 px, two lines). The guide's BANK, LONG, and default copy already name the bank and gain nothing.
+- Layout: a full-width wrapper (`width: 100%`, `alignSelf: stretch`, centring) holds a column `maxWidth: 281`, `width: 100%`; the text hugs and centres inside. In a 318 px host the column is 281 px; in the guide's narrow three-column cards it is the card's width (191 px). It centres inside a vertical Stack with `fillWidth` (re-test: a 281 px column at x 40 of 360). Long unbroken strings wrap (`overflowWrap: anywhere`).
+- Accessibility (web): root `role="group"`, accessible, named by `accessibilityLabel` or by the copy plus the second line (“Terms apply. Jio Payments Bank Pvt. Ltd.”); the text itself is `aria-hidden`. Native: the root is `accessible` with role text, so VoiceOver gets the same name (not device-tested). Element children are in the name and also stay exposed, so a screen reader reads them twice; string children don't.
+- The root is now always 100% wide, which matters in row parents.
+
+Guide changes: Anatomy description and Column note (281 px column, second line); Configuration description and the Screen terms card; Sizing description (fixed 281 px column, centres in a stretching stack) and “Short copy hugs” → “Short copy gains a line”; playground note; Sources (23 October build, the added bank line, the accessible name; the orange Dark claim removed).
+
 ## Check
 
 Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-3795b4c` (Biscuit's `main` at 3795b4c). Biscuit's `main` is now at 636f3f5 (5 October); that commit does not change `Disclaimer.tsx`, its stories, or its mdx, but its token file changes `mode/Grey/400` Dark from #FF9900 to #F1F1F1, which fixes Disclaimer's Dark text colour (ticket #177).
@@ -37,5 +48,5 @@ Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 ## Coin gaps
 
-- #198 (Component Fix, To do, Component Bug, medium; Mr. Biscuit, Anagha Ghotkar): `accessibilityLabel` ignored and documented wrongly; text possibly hidden from native screen readers; `children` accepted but ignored; JSDoc/story describe a fixed second line that does not exist; long unbroken strings overflow the 281 px box; the board's Storybook rewrite is not on `main`; inside a vertical `Stack` with `fillWidth` (as in the ActionFooter `WithStackedContent` story) it sits at the left instead of centring.
+- #198 (Component Fix; Mr. Biscuit): fixed on c8526ae, verified 23 October, published to the docs 23 October. It covered: `accessibilityLabel` ignored and documented wrongly; text possibly hidden from native screen readers; `children` accepted but ignored; JSDoc/story describe a fixed second line that does not exist; long unbroken strings overflow the 281 px box; the board's Storybook rewrite is not on `main`; inside a vertical `Stack` with `fillWidth` (as in the ActionFooter `WithStackedContent` story) it sits at the left instead of centring.
 - #177 (Components, Review): Dark text orange; fixed on Biscuit's `main` at 636f3f5, not yet in the mirror.

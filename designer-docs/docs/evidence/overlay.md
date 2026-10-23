@@ -8,6 +8,16 @@ Checked 12 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 Re-checked 17 October 2026 for the #269 publish: the docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October), which carries 7020bf9's `Overlay.tsx` changes. New prop `dismissAccessibilityLabel` (default "Dismiss overlay", Overlay.tsx:39, 78). On the web the overlay is `role="dialog"` `aria-modal="true"` named `accessibilityLabel ?? dismissAccessibilityLabel` (Overlay.tsx:90); the scrim keeps `aria-label` but is `aria-hidden`, `tabIndex -1` (Overlay.tsx:194-197). A web effect moves focus inside on mount, keeps Tab and Shift+Tab inside, and Escape calls `onPress`. Re-test on #269: all three items pass. Regression #281 (Component Fix, To do): the effect runs for every mounted Overlay, with or without `onPress`, even one that dims only a region, and several overlays fight over focus. Measured on the built docs in headless Chrome (1280 px): on load the overlay guide has 17 `role="dialog"` overlays, focus lands on the Do & Don'ts "Pay" button and the page scrolls to y 7462; drawer focuses the "With a scrim" example's overlay (y 2437); contentsheet focuses a Do & Don'ts overlay (y 6335). The guides document this and name #281; they don't work around it.
 
+## c8526ae publish (23 October 2026, #281)
+
+The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October). `Overlay.tsx` changed in c7d3348 and c8526ae for #281 (verified 23 October, Penny run run_5a688e4d; closed by Marcin). Where this section differs from the rest of this file, it replaces it.
+
+- New prop `trapFocus` (default false). Only with it is the overlay `role="dialog"` `aria-modal="true"` named `accessibilityLabel ?? dismissAccessibilityLabel` (`accessibilityViewIsModal` on native), with a web focus trap: focus moves inside on mount, Tab and Shift+Tab stay inside, Escape calls `onPress`, and focus returns to the opener when it's removed. Only the newest mounted trapFocus overlay handles Tab and Escape (re-test: dialog over dialog).
+- Without `trapFocus` (region dimmers, Drawer's `showOverlay` scrim) it doesn't move focus, trap Tab, or take a dialog role. The scrim with `onPress` keeps `aria-label` = `dismissAccessibilityLabel`, `aria-hidden`, `tabIndex -1`.
+- Measured on this guide (headless Chrome, react-native-web 0.21.2, 1280 px): on load focus stays on the page body at scroll 0 (it jumped to y 7462 on a116616). In context (the only `trapFocus` example, mounted by Pay ₹250, `dismissAccessibilityLabel="Cancel payment"`): the dialog is named “Cancel payment”, `aria-modal="true"`; focus moves to Pay; Escape cancels (“Payment cancelled”) and focus returns to Pay ₹250.
+
+Guide changes: In context passes `trapFocus` and `dismissAccessibilityLabel="Cancel payment"` and its description names Escape; States (Escape and the Tab trap only with trapFocus); Content (name it when it's a dialog); Sources (23 October build; trapFocus; the #281 sentence removed). The ContentSheet and Drawer guides dropped their #281 sentences too.
+
 ## Sources
 
 - Package: `src/components/Overlay/Overlay.tsx` (114 lines); exports `Overlay` (memo) and `OverlayProps`.
@@ -53,6 +63,7 @@ Checked in Chrome at 1280 and 390 px. The scrim measures 358 × 318 inside the 3
 
 ## Coin gaps
 
+- #281 (Component Fix; Mr. Biscuit): regression from #269, every mounted Overlay took focus and trapped Tab. Fixed on c8526ae (opt-in `trapFocus`), verified 23 October, published to the docs 23 October.
 - #269 (Component Fix, To do, Component Bug; Mr. Biscuit): “Dismiss overlay” is fixed English with no prop; the dismiss button's focus ring outlines the whole screen; Tab reaches the page behind and Escape does nothing; nothing marks the region as modal on the web.
 
 ## Fix loop 12 October 2026

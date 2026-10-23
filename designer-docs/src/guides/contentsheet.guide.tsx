@@ -126,7 +126,7 @@ function ContentSheetGuide() {
         { label: 'With title', id: 'components-contentsheet--with-title' },
         { label: 'Rich content', id: 'components-contentsheet--rich-content' },
         { label: 'Bottom pop-up', id: 'components-contentsheet--bottom-pop-up' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Content Sheet is one 360 × 350 component with a fixed header and a slot. In the package, as in Figma, the title stays fixed 8 px above the content, and the items in the slot are 8 px apart. The title is a page heading. The sheet has no role, scrim, or close control of its own; a hidden sheet leaves the Tab order and is hidden from screen readers. Its 70% height limit is measured against its screen. The examples dim their screens with Coin Overlay, which since the 16 October build takes keyboard focus as soon as it shows and keeps Tab inside it, so this page opens scrolled down to Do & Don’ts (#281).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Content Sheet is one 360 × 350 component with a fixed header and a slot. In the package, as in Figma, the title stays fixed 8 px above the content, and the items in the slot are 8 px apart. The title is a page heading. The sheet has no role, scrim, or close control of its own; a hidden sheet leaves the Tab order and is hidden from screen readers. Its 70% height limit is measured against its screen. The examples dim their screens with Coin Overlay, which leaves keyboard focus on the page.</Sources>,
     },
   }
 

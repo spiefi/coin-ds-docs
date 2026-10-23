@@ -74,3 +74,16 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team
 
 ## Limits
 Do not show Dark mode, Page type modes, the `header` slot, the ref API, `bottomInset`, or a Drawer outside a fitted Frame. Do not imply it closes, responds to Escape or the keyboard, has an accessible name, or passes modes to its content.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/drawer.md`.
+
+- Frame passes `collapsedHeight={peek}` and the default `expandedRatio`; the window-height fitting is gone.
+- Handle note: “A button: press it, or drag it or the content, to resize.” Without a title card: “The content starts under the handle; screen readers hear only “Drawer”.”
+- States: springs between sizes when dragged or when the handle is pressed; Escape collapses it.
+- Sizing: sizes from the screen it sits in; content 71 px below the sheet top, as in Figma.
+- In context: “People drag it or press its handle to expand it, and the screen’s See all transactions button opens it too.”
+- Do & Don'ts title “Show enough, and say what it holds”; pair 2: Do “Give it a title” | Don't “Leave the title out”.
+- Playground note: “Drag it or press the handle to resize it. …”
+- Sources: checked 23 October 2026; sizes from its screen; content at 71 px; handle button and Escape; dialog named by its title; scrim leaves focus alone (the #281 sentence removed).

@@ -100,7 +100,7 @@ function NudgeGuide() {
           { kind: 'padding', target: R },
           { kind: 'gap', from: `${R} > div:first-child`, to: `${R} > div:nth-child(2)` },
         ]}><Nudge modes={NEUTRAL} {...SPLIT} onPressButton={noop} /></Anatomy>
-        <ExampleCard title="Long copy wraps" description="At 344 px, a two-line title and body make the card 129 px tall; the close button stays centred."><Host>
+        <ExampleCard title="Long copy wraps" description="At 344 px, a two-line title and body make the card 125 px tall; the close button stays centred."><Host>
           <Nudge modes={NEUTRAL} showClose onClose={noop} onPressButton={noop} title="Split this ₹12,000 purchase into easy monthly instalments" body="Pay in 3, 6 or 9 months at no extra cost with your Jio credit card." buttonLabel="See plans" />
         </Host></ExampleCard>
       </div>,
@@ -147,13 +147,13 @@ function NudgeGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Nudge contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('nudge')} stories={[
+      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('nudge')} stories={[
         { label: 'Default', id: 'components-nudge--default' },
         { label: 'Without icon', id: 'components-nudge--without-icon' },
         { label: 'With close button', id: 'components-nudge--with-close-button' },
         { label: 'Inline compact', id: 'components-nudge--inline-compact' },
         { label: 'Stacked detailed', id: 'components-nudge--stacked-detailed' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Nudge sets the Nudge&amp;Alert context for Figma’s small button unless a container passes another Context. Figma’s white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. On the web a card with a title is a region named by its title, and the close button is always labelled “Close”.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. Figma’s Nudge is a component set with three types, 344 px wide, and the package matches its spacing. Figma shows a close button on every prominent and compact card; the package adds it only when asked. Nudge sets the Nudge&amp;Alert context for Figma’s small button unless a container passes another Context. Figma’s white card with a purple icon matches no single appearance mode; Neutral is the closest. In Dark mode the title stays dark on a dark card, so this page shows Light only. On the web a card with a title is a region named by its title. The close button is 28 px, as in Figma, and its label for screen readers can be changed. Props a type ignores, such as a button on stacked detailed, log a warning for developers.</Sources>,
     },
   }
 

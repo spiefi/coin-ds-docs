@@ -66,3 +66,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Do not show `style` or `modes` as designer settings (the scrim ignores modes). Don't imply an animation or a scrim colour per mode, and don't work around the focus trap on every overlay (#281). Dialog content is Coin components only.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/overlay.md`.
+
+- In context passes `trapFocus` and `dismissAccessibilityLabel="Cancel payment"`; description: “…asks for confirmation in a dialog that holds keyboard focus (trapFocus). Pay completes it; Cancel, Escape, or a tap on the dimmed screen backs out.…”
+- States: Escape and the Tab trap only with trapFocus. Content: name it with dismissAccessibilityLabel when it’s a dialog (trapFocus).
+- Sources: checked 23 October 2026; scrim never a Tab stop; trapFocus dialog, newest holds focus; without it focus is left alone; only In context uses it (the #281 sentence removed).

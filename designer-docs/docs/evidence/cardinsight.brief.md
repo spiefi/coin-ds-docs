@@ -67,3 +67,16 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Don't show Dark, Semantic Intent System, Emphasis, LinearProgress Size, Nudge padding, Border Boolean, Badge Size, Page type, context 8 or 10, Text Appearance, a SavingsGoalSummary label, style props, or onPress demos. Don't imply a pressed look, or a divider without a footer.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/cardinsight.md`.
+
+- Examples use the default footer: `footerBody="Add ₹10,000 a month to reach it by June."`, `footerButtonLabel="Set up"`, `onPressFooter`. No custom Nudge footer.
+- Anatomy description ends “…a footer under a divider: a hint with one action.” Footer note: “A hint and one action, set with footerBody and footerButtonLabel; false removes it.”
+- Configuration: AppearanceBrand colours the badge and the bar; the footer is grey with a dark button until AppearanceBrand is set on the card. Primary card: “The default: a gold badge and bar, with a grey footer.”
+- States: footer={false} removes the rule too unless you pass a divider.
+- In context: Set up runs onPressFooter; afterwards a new hint and no button label.
+- Do/Don't 2: Do “Write the footer’s hint” (“Your hint, and a Set up button that runs the screen’s action.”) | Don't “Keep the default footer copy” (“One line of guidance.” and a “Button” that does nothing).
+- Playground note: “With the footer off, the divider stays while Divider is on.”
+- Sources: checked 23 October 2026; default footer placeholder hint and “Button”, set via props; caption visible; fill at every Emphasis; Storybook predates the build.

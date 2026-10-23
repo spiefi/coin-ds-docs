@@ -21,20 +21,20 @@ function DisclaimerGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'Small print in a narrow column',
-      description: 'One string of 10 px grey text, centred line by line. The column grows with the copy up to 281 px, then the text wraps.',
+      description: 'One string of 10 px grey text, centred line by line in a column up to 281 px wide. Copy that doesn’t name Jio Payments Bank gets the bank’s name on a second line.',
       body: <Anatomy parts={[
         { name: 'Copy', note: 'One string; a line break is the only formatting it takes.', target: `${byTestId('disclaimer-anatomy')} > div`, side: 'top' },
-        { name: 'Column', note: 'Grows with the copy up to 281 px, then wraps.', target: byTestId('disclaimer-anatomy'), side: 'left' },
+        { name: 'Column', note: 'At most 281 px wide; the text wraps there and centres.', target: byTestId('disclaimer-anatomy'), side: 'left' },
       ]} marks={[{ kind: 'size', target: byTestId('disclaimer-anatomy'), side: 'bottom', label: 'both' }]}>
         <Disclaimer testID="disclaimer-anatomy" disclaimer={BANK} modes={LIGHT} />
       </Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'The copy is the only choice',
-      description: 'Disclaimer has no variants, icon, or size. Write the copy for the screen; without it, the package shows a generic Jio Payments Bank line.',
+      description: 'Disclaimer has no variants, icon, or size. Write the copy for the screen; without it, the package shows a generic Jio Payments Bank line. Copy that doesn’t name the bank gets “Jio Payments Bank Pvt. Ltd.” on a line below.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Figma copy" description="A line break before the bank’s name keeps it on one line, as in Figma."><Host><Disclaimer disclaimer={BANK} modes={LIGHT} /></Host></ExampleCard>
-        <ExampleCard title="Screen terms" description="Say what continuing means for this screen."><Host><Disclaimer disclaimer={TERMS} modes={LIGHT} /></Host></ExampleCard>
+        <ExampleCard title="Screen terms" description="Say what continuing means; the package adds the bank’s name below."><Host><Disclaimer disclaimer={TERMS} modes={LIGHT} /></Host></ExampleCard>
         <ExampleCard title="Package default" description="Without copy it shows “All financial services…”, which differs from Figma."><Host><Disclaimer modes={LIGHT} /></Host></ExampleCard>
       </div>,
     },
@@ -45,13 +45,13 @@ function DisclaimerGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Up to 281 px wide, 12 px a line',
-      description: 'The column hugs short copy and stops at 281 px, even on wider screens. Each line adds 12 px. Place it in a vertical stack so it centres; a stack that stretches its children pins it to the left.',
+      description: 'The column is 281 px wide, or as wide as a narrower host, and the text centres inside it. Each line adds 12 px. It centres in any vertical stack, including one that stretches its children.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} marks={[{ kind: 'size', target: byTestId('disclaimer-size'), side: 'bottom', label: 'both' }]}>
           <Disclaimer testID="disclaimer-size" modes={LIGHT} />
         </Anatomy>
         <div className="coin-new-example-grid">
-          <ExampleCard title="Short copy hugs" description="“Terms apply.” is 64 px wide and one line."><Host><Disclaimer disclaimer="Terms apply." modes={LIGHT} /></Host></ExampleCard>
+          <ExampleCard title="Short copy gains a line" description="“Terms apply.” takes two lines: the package adds the bank’s name below it."><Host><Disclaimer disclaimer="Terms apply." modes={LIGHT} /></Host></ExampleCard>
           <ExampleCard title="Long copy wraps" description="At 281 px this copy takes five lines, 60 px of small print."><Host><Disclaimer disclaimer={LONG} modes={LIGHT} /></Host></ExampleCard>
         </div>
       </div>,
@@ -89,9 +89,9 @@ function DisclaimerGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Disclaimer contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="6 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('disclaimer')} stories={[
+      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('disclaimer')} stories={[
         { label: 'Default', id: 'components-disclaimer--default' }, { label: 'Custom copy', id: 'components-disclaimer--custom-copy' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Disclaimer is one 281 × 24 component with no properties, and the package matches its type and width; their default copy differs. The copy is a single string: links and formatting are not supported. On the web the text reads as plain text, and <code>accessibilityLabel</code> has no effect. In the installed package Dark mode turns the text orange, so this page shows Light only.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. Figma’s Disclaimer is one 281 × 24 component with no properties, and the package matches its type and width; their default copy differs. The package adds “Jio Payments Bank Pvt. Ltd.” on a second line to copy that doesn’t name the bank. The copy is a single string: links and formatting are not supported. Screen readers read the copy and that line as one label, or <code>accessibilityLabel</code> when it’s set. This page shows Light only.</Sources>,
     },
   }
 
@@ -106,7 +106,7 @@ function DisclaimerGuide() {
     </div>
     <div className="controls-panel">
       <label className="text-control"><span>Copy</span><input value={copy} onChange={event => setCopy(event.target.value)} maxLength={240} /></label>
-      <Readout title="Length" value={`${copy.length} characters`}>It wraps at 281 px, about 50 characters a line, and never truncates.</Readout>
+      <Readout title="Length" value={`${copy.length} characters`}>It wraps at 281 px, about 50 characters a line, and never truncates. Copy without the bank’s name gets it on a second line.</Readout>
     </div>
   </>} sections={sections} />
 }

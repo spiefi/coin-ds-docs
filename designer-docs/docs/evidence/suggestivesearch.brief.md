@@ -69,3 +69,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October bu
 
 ## Limits
 Do not show Dark mode, `renderItem`, a custom `filter`, controlled `open`, `menuMaxHeight`, `menuOffset`, or style props. Do not imply keyboard selection, arrow-key navigation, Escape, or announced required and error states.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/suggestivesearch.md`.
+
+- Required mark note: “Shown on screen; screen readers hear “required” from the field.” Required card: “A red asterisk after the label; screen readers hear “required”.”
+- Playground note: “Type to filter, then click or tap a bank, or use the arrow keys and Enter.”
+- Sources: checked 23 October 2026; combobox with arrow keys, Enter, Escape, focus kept after a pick; options announced by label; required and error announced and tied to the field; Storybook predates the build.
