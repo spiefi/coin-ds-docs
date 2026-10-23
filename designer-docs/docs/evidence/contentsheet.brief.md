@@ -62,3 +62,9 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October b
 
 ## Limits
 Do not show Dark mode, Page type modes, `maxHeightPercent`, `safeAreaBottom`, keyboard handling, or a sheet tall enough to scroll. Use `pinToBottom={false}` only in the two diagrams. Do not imply the sheet closes itself, traps focus, or has a handle or gestures.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/contentsheet.md`.
+
+- Sources: the #281 sentence became “The examples dim their screens with Coin Overlay, which leaves keyboard focus on the page.”

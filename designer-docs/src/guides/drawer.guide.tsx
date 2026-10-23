@@ -1,5 +1,4 @@
 import { useState, type ReactNode } from 'react'
-import { useWindowDimensions } from 'react-native'
 import { Button, Drawer, ListGroup, ListItem, MoneyValue, Text, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
 import { Anatomy, DoDont, ExampleCard, OnOff, Readout, ScreenFrame, Segment, Sources, docsUrl } from '../guide-kit'
@@ -23,13 +22,6 @@ const TITLE = '[role="dialog"] [dir="auto"]'
 const CONTENT = '[role="dialog"] [role="list"]'
 const SHEET = '[role="dialog"]'
 
-const FRAME = 318
-function useFit(peek: number) {
-  const { height: w } = useWindowDimensions()
-  const top = Math.max(48, Math.ceil(w * 0.05))
-  return { collapsedHeight: w - FRAME + peek, expandedRatio: 1 - top / w, sheetStyle: { height: FRAME - top } }
-}
-
 type DrawerState = 'collapsed' | 'expanded'
 
 function Rows({ count = 6 }: { count?: number }) {
@@ -42,8 +34,7 @@ function Frame({ peek = 140, title = 'Recent transactions', count = 6, screen, i
   peek?: number; title?: string | null; count?: number; screen?: ReactNode; initialState?: DrawerState
   state?: DrawerState; onStateChange?: (s: DrawerState) => void; showOverlay?: boolean; onOverlayPress?: () => void
 }) {
-  const fit = useFit(peek)
-  return <ScreenFrame footer={<Drawer modes={LIGHT} title={title ?? undefined} {...fit} initialState={initialState} state={state} onStateChange={onStateChange} showOverlay={showOverlay} onOverlayPress={onOverlayPress}><Rows count={count} /></Drawer>}>
+  return <ScreenFrame footer={<Drawer modes={LIGHT} title={title ?? undefined} collapsedHeight={peek} initialState={initialState} state={state} onStateChange={onStateChange} showOverlay={showOverlay} onOverlayPress={onOverlayPress}><Rows count={count} /></Drawer>}>
     {screen ?? <Text modes={LIGHT}>Home</Text>}
   </ScreenFrame>
 }
@@ -70,7 +61,7 @@ function DrawerGuide() {
       header: 'Anatomy', title: 'A handle, a title, and scrolling content',
       description: 'The grey sheet carries a drag handle and an optional title that stay put while the content scrolls. Collapsed, only its top peeks above the screen’s bottom edge.',
       body: <Anatomy specimenWidth={360} parts={[
-        { name: 'Handle', note: 'Drag it, or the content, to resize; tapping does nothing.', target: HANDLE, side: 'top' },
+        { name: 'Handle', note: 'A button: press it, or drag it or the content, to resize.', target: HANDLE, side: 'top' },
         { name: 'Title', note: 'Optional; stays in place while the content scrolls.', target: TITLE, side: 'right' },
         { name: 'Content', note: 'Scrolls inside the sheet; give each item its own modes.', target: CONTENT, side: 'left' },
         { name: 'Sheet', note: 'Grey, with 12 px top corners and a soft shadow.', target: SHEET, side: 'bottom', at: 0.8 },
@@ -82,13 +73,13 @@ function DrawerGuide() {
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Peek 140" description="The title and the first transaction show."><Frame peek={140} /></ExampleCard>
         <ExampleCard title="Peek 200" description="A taller peek shows two transactions."><Frame peek={200} /></ExampleCard>
-        <ExampleCard title="Without a title" description="The content starts under the handle."><Frame peek={140} title={null} /></ExampleCard>
+        <ExampleCard title="Without a title" description="The content starts under the handle; screen readers hear only “Drawer”."><Frame peek={140} title={null} /></ExampleCard>
         <ExampleCard title="With a scrim" description="The screen dims behind the drawer and taps on it don’t get through."><Frame initialState="expanded" showOverlay /></ExampleCard>
       </div>,
     },
     states: {
       header: 'States', title: 'Collapsed or expanded',
-      description: 'A Drawer has two sizes and moves between them with a spring when dragged. It never closes: collapsed is its smallest size.',
+      description: 'A Drawer has two sizes and springs between them when dragged or when its handle is pressed; Escape collapses it. It never closes: collapsed is its smallest size.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Collapsed" description="The peek shows what’s inside and invites a drag."><Frame peek={140} initialState="collapsed" /></ExampleCard>
         <ExampleCard title="Expanded" description="The sheet rises to near the top; the list scrolls inside it."><Frame initialState="expanded" /></ExampleCard>
@@ -96,7 +87,7 @@ function DrawerGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Full width, sized by the screen',
-      description: 'The drawer spans the screen. Collapsed, it shows 200 px by default; expanded, it is 90% of the screen’s height, and never more than 95%. Here each drawer is fitted to its frame.',
+      description: 'The drawer spans the screen it sits in. Collapsed, it shows 200 px by default; expanded, it is 90% of that screen’s height, and never more than 95%. Its content starts 71 px below the top of the sheet, as in Figma.',
       body: <Anatomy legend={false} specimenWidth={360} marks={[
         { kind: 'size', target: HANDLE, side: 'bottom', label: 'both' },
         { kind: 'gap', from: TITLE, to: CONTENT },
@@ -109,28 +100,28 @@ function DrawerGuide() {
     },
     context: {
       header: 'In context', title: 'Recent transactions on a home screen',
-      description: 'The drawer peeks under the home screen. It can only be resized by dragging, so the screen adds a button that opens it for keyboard and screen-reader users.',
+      description: 'The drawer peeks under the home screen. People drag it or press its handle to expand it, and the screen’s See all transactions button opens it too.',
       body: <div className="coin-new-context"><Controlled screen={open => <OpenScreen open={open} />}>
         {s => <p className="coin-new-readout" role="status">{s === 'expanded' ? 'Drawer expanded' : 'Drawer collapsed'}</p>}
       </Controlled></div>,
     },
     'dos-donts': {
-      header: 'Do & Don’ts', title: 'Show enough, and offer another way in',
-      description: 'Each pair shows a drawer people understand and can open versus one that hides its content or its controls.',
+      header: 'Do & Don’ts', title: 'Show enough, and say what it holds',
+      description: 'Each pair shows a drawer people understand versus one that hides what it holds.',
       body: <div className="coin-new-stack">
         <DoDont good={<Frame peek={140} />} bad={<Frame peek={24} />} goodTitle="Peek enough to read" badTitle="Peek only the handle" goodCaption="The title and the first item say what’s inside." badCaption="People can’t tell what the drawer holds." />
-        <DoDont good={<Controlled screen={open => <OpenScreen open={open} />} />} bad={<Frame />} goodTitle="Add a button that opens it" badTitle="Rely on dragging alone" goodCaption="Keyboard and screen-reader users can reach the content." badCaption="Without a button, only a drag opens it." />
+        <DoDont good={<Frame peek={140} />} bad={<Frame peek={140} title={null} />} goodTitle="Give it a title" badTitle="Leave the title out" goodCaption="The title says what’s inside and names the drawer for screen readers." badCaption="The peek shows a bare list, and screen readers hear only “Drawer”." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Drawer contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="6 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('drawer')} stories={[
+      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('drawer')} stories={[
         { label: 'Interactive', id: 'components-drawer--interactive-drawer' },
         { label: 'With overlay', id: 'components-drawer--with-overlay' },
         { label: 'With carousel', id: 'components-drawer--drawer-with-carousel' },
         { label: 'Programmatic control', id: 'components-drawer--programmatic-control' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Drawer is one 360 × 722 component with a fixed header and a scrolling content slot. The package places the drawer by the window’s height, so on this page each drawer is fitted to its frame through its peek and expanded height. It can be dragged with a mouse or a finger, but it has no keyboard control, no accessible name, and no way to close. Its content starts 8 px higher than in Figma. On this site drags spring slightly differently from Storybook because the site uses a simplified animation library. Since the 16 October build its scrim (showOverlay) takes keyboard focus as soon as it shows and keeps Tab there, so this page opens scrolled to the With a scrim example and the drawer can’t be reached by keyboard (#281).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. Figma’s Drawer is one 360 × 722 component with a fixed header and a scrolling content slot. The package sizes the drawer from the screen it sits in, and its content starts 71 px from the top, as in Figma. It can be dragged with a mouse or a finger; its handle is a button that expands or collapses it, and Escape collapses it. On the web it’s a dialog named by its title. It has no way to close, and its scrim leaves keyboard focus alone. On this site drags spring slightly differently from Storybook because the site uses a simplified animation library.</Sources>,
     },
   }
 
@@ -147,7 +138,7 @@ function DrawerGuide() {
       <Segment label="State" value={state === 'expanded' ? 'Expanded' : 'Collapsed'} options={['Collapsed', 'Expanded'] as const} onChange={v => setState(v === 'Expanded' ? 'expanded' : 'collapsed')} />
       <Segment label="Peek" value={peek} options={['100', '140', '200'] as const} onChange={setPeek} />
       <OnOff label="Scrim" value={scrim} onChange={setScrim} />
-      <Readout title="State" value={state === 'expanded' ? 'Expanded' : 'Collapsed'}>Drag the handle or the list to resize it. A Drawer never closes; its smallest size is the peek.</Readout>
+      <Readout title="State" value={state === 'expanded' ? 'Expanded' : 'Collapsed'}>Drag it or press the handle to resize it. A Drawer never closes; its smallest size is the peek.</Readout>
     </div>
   </>} sections={sections} />
 }

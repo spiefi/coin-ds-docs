@@ -42,8 +42,20 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 ## Coin gaps
 
-- #231 (Component Fix, To do, Component Bug; Mr. Biscuit): placeholder copy and a “Button” that does nothing by default; slots can't be removed with `null`; custom slots don't receive EmptyState's modes; Figma's red L capsule and S button need custom slots and modes; `emptyState/slot/gap` unused; title line height 20 vs Figma 18; no role, heading, or capsule name; Storybook Custom slots story uses a non-existent mode; the Storybook rewrite is not on `main`.
+- #231 (Component Fix; Mr. Biscuit): fixed on c8526ae, verified 23 October, published to the docs 23 October. It covered: placeholder copy and a “Button” that does nothing by default; slots can't be removed with `null`; custom slots don't receive EmptyState's modes; Figma's red L capsule and S button need custom slots and modes; `emptyState/slot/gap` unused; title line height 20 vs Figma 18; no role, heading, or capsule name; Storybook Custom slots story uses a non-existent mode; the Storybook rewrite is not on `main`.
 
 ## c1fa197 install (13 October 2026)
 
 The release that published #205, #255, #203, #252, and #250 moved the docs to mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197), which also carries Biscuit's EmptyState changes for #231. The title and description now sit in their own group, and the title is an `h1` (`role="heading"`). Only the guide's title and description selectors changed so the anatomy and sizing diagrams find them again. The copy wasn't re-checked against #231, which goes through its own Component Fix loop.
+
+## c8526ae publish (23 October 2026, #231)
+
+The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October). `EmptyState.tsx` changed in c1fa197 and c8526ae for #231 (verified 23 October, Penny run run_5a688e4d; closed by Marcin). Where this section differs from the sections above, it replaces them. Measured on this guide in headless Chrome (react-native-web 0.21.2, 1280 px):
+
+- Props: `title` and `description` default to empty; new `buttonLabel` and `onPress` give a default Button (modes from Empty State) only when one of them is set; `accessibilityLabel` and `accessibilityRole`. A bare EmptyState is only the default capsule (re-test: 360 × 66).
+- Slots: `iconSlot={null}` / `buttonSlot={null}` (or `false`) remove the slot; custom slots get Empty State's modes through `cloneChildrenWithModes`, and the slot's own `modes` win.
+- Semantics (web): a titled Empty State is `section role="region"` named by its title (`accessibilityRole: 'summary'`); the title is an `h1`. Without a title (and no `accessibilityLabel`) there is no role or name. The default icon is wrapped `aria-hidden`; an IconCapsule passed in `iconSlot` stays an unnamed `role="img"`.
+- Spacing: icon → title 16 (`emptyState/content/gap`), title → description 16, content → button 24, padding 4; the title's line height is 18. The guide's Figma-style specimen (red L capsule, Button / Size S, 236 wide) measures 236 × 211 with “Couldn’t load payments” on one line; re-test measured Figma's own copy at 236 × 227 (Figma 229 adds 1 px around the button in its Action slot).
+- The CustomSlots story on `main` passes real collections. The published Storybook (built 17 October) predates c8526ae.
+
+Guide changes: `ES` passes `buttonLabel` and `onPress` with `Button / Size: S` on Empty State instead of a button slot; Anatomy description and Button note; Content (no copy of its own; a button only with a label); Do & Don'ts “Pass your own button / Leave the default button” → “Offer the next step / Leave out the button”, and “Give each slot its own modes / Set sizes on Empty State only” (now works either way) → “Write a title / Leave the title out”; Sources rewritten (23 October build).

@@ -1,5 +1,5 @@
 import { useState, type ComponentProps } from 'react'
-import { CardInsight, Nudge, SavingsGoalSummary, Title, VStack, type Modes } from 'jfs-components'
+import { CardInsight, SavingsGoalSummary, Title, VStack, type Modes } from 'jfs-components'
 import { ComponentGuideTemplate, type GuideSectionSlots } from '../ComponentGuideTemplate'
 import { Anatomy, DoDont, ExampleCard, OnOff, Readout, Segment, Sources, docsUrl } from '../guide-kit'
 import { defineGuide } from './define'
@@ -11,13 +11,11 @@ const noop = () => {}
 const FRAME = { width: '100%', maxWidth: 356 } as const
 
 const FIGURE = <SavingsGoalSummary current={{ label: 'Saved (4 months)', value: 240000 }} target={{ label: 'Goal (8 months)', value: 480000 }} />
-const HINT = (button = true, onPress: () => void = noop) => (
-  <Nudge type="inline-compact" body="Add ₹10,000 a month to reach it by June." {...(button ? { buttonLabel: 'Set up', onPressButton: onPress } : {})} />
-)
+const HINT = 'Add ₹10,000 a month to reach it by June.'
 
 type CIProps = Partial<ComponentProps<typeof CardInsight>>
 const CI = (o: CIProps = {}) => (
-  <CardInsight title="Emergency savings" subtitle="Four of the eight months we suggest." badge="On track" modes={LIGHT} style={FRAME} footer={HINT()} {...o}>
+  <CardInsight title="Emergency savings" subtitle="Four of the eight months we suggest." badge="On track" modes={LIGHT} style={FRAME} footerBody={HINT} footerButtonLabel="Set up" onPressFooter={noop} {...o}>
     {o.children ?? FIGURE}
   </CardInsight>
 )
@@ -46,23 +44,23 @@ function CardInsightGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'A finding, its figure, and a hint',
-      description: 'A white card puts a title, one line of context, and a badge on top. Below sit the figure, here a Savings Goal Summary, and a footer under a divider, here an inline Nudge with one action.',
+      description: 'A white card puts a title, one line of context, and a badge on top. Below sit the figure, here a Savings Goal Summary, and a footer under a divider: a hint with one action.',
       body: <Anatomy specimenWidth={356} parts={[
         { name: 'Title', note: 'The topic in 16 px bold; it wraps rather than cutting off.', target: S.title, side: 'top' },
         { name: 'Subtitle', note: 'One sentence of context at 12 px.', target: S.subtitle, side: 'left' },
         { name: 'Badge', note: 'A string becomes a Badge; false removes it.', target: S.badge, side: 'right' },
         { name: 'Figure', note: 'children: here a Savings Goal Summary with a bar and two legend rows.', target: S.figure, side: 'right' },
         { name: 'Divider', note: 'A 1 px rule, shown only with a footer.', target: S.divider, side: 'left' },
-        { name: 'Footer', note: 'footer: here an inline Nudge with one action; false removes it.', target: S.footer, side: 'bottom' },
+        { name: 'Footer', note: 'A hint and one action, set with footerBody and footerButtonLabel; false removes it.', target: S.footer, side: 'bottom' },
       ]}>
         {CI()}
       </Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'Brand colour',
-      description: 'AppearanceBrand colours the badge, the bar, and a Nudge footer together: Primary gold by default, Secondary purple as in Figma, Tertiary blue, or Neutral grey. The card, its title, and its subtitle stay the same. badge takes a string, your own node, or false; children replaces the figure, and footer takes your own node or false.',
+      description: 'AppearanceBrand colours the badge and the bar: Primary gold by default, Secondary purple as in Figma, Tertiary blue, or Neutral grey. The footer is grey with a dark button, as in Figma, until you set AppearanceBrand on the card; then it takes that colour too. The card, its title, and its subtitle stay the same. badge takes a string, your own node, or false; children replaces the figure, and footer takes your own node or false.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Primary" description="The default: gold badge, bar, and footer.">{CI()}</ExampleCard>
+        <ExampleCard title="Primary" description="The default: a gold badge and bar, with a grey footer.">{CI()}</ExampleCard>
         <ExampleCard title="Secondary" description="Purple, the colour of Figma’s bar.">{CI({ modes: m({ AppearanceBrand: 'Secondary' }) })}</ExampleCard>
         <ExampleCard title="Tertiary" description="Blue throughout.">{CI({ modes: m({ AppearanceBrand: 'Tertiary' }) })}</ExampleCard>
         <ExampleCard title="Neutral" description="Grey for a quieter card.">{CI({ modes: m({ AppearanceBrand: 'Neutral' }) })}</ExampleCard>
@@ -70,7 +68,7 @@ function CardInsightGuide() {
     },
     states: {
       header: 'States', title: 'Leave out what you don\'t need',
-      description: 'badge={false} removes the badge, and the title takes its width. footer={false} removes the footer and the divider above it; divider={false} keeps the footer without the rule. onPress makes the whole card one button with no pressed look; don\'t use it when the footer has a button.',
+      description: 'badge={false} removes the badge, and the title takes its width. footer={false} removes the footer and, unless you pass a divider, the rule above it; divider={false} keeps the footer without the rule. onPress makes the whole card one button with no pressed look; don\'t use it when the footer has a button.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Without the badge" description="The title runs the full width.">{CI({ badge: false })}</ExampleCard>
         <ExampleCard title="Without the footer" description="The divider goes with it.">{CI({ footer: false })}</ExampleCard>
@@ -97,15 +95,13 @@ function CardInsightGuide() {
     },
     context: {
       header: 'In context', title: 'A savings insight on the Insights screen',
-      description: 'Set up runs the screen\'s own action through the footer\'s onPressButton. Once the plan is set, the screen passes a new footer without a button; the card doesn\'t change itself.',
+      description: 'Set up runs the screen\'s own action through onPressFooter. Once the plan is set, the screen passes a new hint and no button label, so the footer has no button; the card doesn\'t change itself.',
       body: <div className="coin-new-context">
         <VStack modes={{ ...LIGHT, 'Slot gap': 'M' } as Modes}>
           <Title title="Insights" subtitle="October 2026" modes={LIGHT} />
-          {CI({
-            footer: planned
-              ? <Nudge type="inline-compact" body="₹10,000 moves to savings on the 1st of each month." />
-              : <Nudge type="inline-compact" body="Add ₹10,000 a month to reach it by June." buttonLabel="Set up" onPressButton={() => setPlanned(true)} />,
-          })}
+          {CI(planned
+            ? { footerBody: '₹10,000 moves to savings on the 1st of each month.', footerButtonLabel: '', onPressFooter: undefined }
+            : { onPressFooter: () => setPlanned(true) })}
         </VStack>
         <p className="coin-new-readout" role="status">{planned ? 'Plan set: the footer has no button' : 'No plan yet'}</p>
       </div>,
@@ -121,9 +117,9 @@ function CardInsightGuide() {
           badTitle="Write a long badge" badCaption="“On track to finish by June” squeezes the title onto two lines." />
         <DoDont
           good={CI()}
-          bad={CI({ footer: undefined })}
-          goodTitle="Write the footer’s hint" goodCaption="An inline Nudge with text and one action."
-          badTitle="Rely on the default footer" badCaption="It shows a lone sparkle with no text." />
+          bad={CI({ footerBody: undefined, footerButtonLabel: undefined, onPressFooter: undefined })}
+          goodTitle="Write the footer’s hint" goodCaption="Your hint, and a Set up button that runs the screen’s action."
+          badTitle="Keep the default footer copy" badCaption="“One line of guidance.” and a “Button” that does nothing." />
         <DoDont
           good={CI({ footer: false })}
           bad={CI({ footer: false, subtitle: 'You have saved four of the eight months of expenses we suggest keeping aside, based on what you spent over the last six months.' })}
@@ -134,14 +130,14 @@ function CardInsightGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Card Insight contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardinsight')} stories={[
+      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardinsight')} stories={[
         { label: 'Default', id: 'components-cardinsight--default' },
         { label: 'Custom savings goal', id: 'components-cardinsight--with-custom-savings-goal' },
         { label: 'Without badge', id: 'components-cardinsight--without-badge' },
         { label: 'Without footer', id: 'components-cardinsight--without-footer' },
         { label: 'Custom footer', id: 'components-cardinsight--with-custom-footer' },
         { label: 'Without divider', id: 'components-cardinsight--without-divider' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card/Insight is one 356 × 322 component with a title, a subtitle, and a slot; its badge, divider, and footer are fixed, its badge is green, and its bar is purple, while the package defaults to gold. The default footer is an empty nudge with no text, and the default figure’s caption, “Credit usage”, is white on the white card, so these examples pass their own; Emphasis Medium or Low hide the bar’s fill. All three are reported. A System badge’s label is white, as in Figma. The published Storybook shows an older footer with text and still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. Figma’s Card/Insight is one 356 × 322 component with a title, a subtitle, and a slot; its badge, divider, and footer are fixed, its badge is green, and its bar is purple, while the package defaults to gold. The default footer shows Figma’s placeholder hint and “Button”; set its hint, button label, and action, as these examples do. The default figure’s caption, “Credit usage”, reads on the white card, and the bar keeps its fill at every Emphasis. A System badge’s label is white, as in Figma. The published Storybook predates this build.</Sources>,
     },
   }
 
@@ -154,7 +150,8 @@ function CardInsightGuide() {
       {CI({
         modes: m({ AppearanceBrand: appearance }),
         badge: badge ? 'On track' : false,
-        footer: footer ? HINT(true, () => setAction('Set up pressed')) : false,
+        footer: footer ? undefined : false,
+        onPressFooter: () => setAction('Set up pressed'),
         divider,
       })}
       <span className="stage-label">Live Coin Card Insight</span>
@@ -165,7 +162,7 @@ function CardInsightGuide() {
       <OnOff label="Footer" value={footer} onChange={setFooter} />
       <OnOff label="Divider" value={divider} onChange={setDivider} />
       <Readout title="Last action" value={action}>
-        The divider shows only with a footer.
+        With the footer off, the divider stays while Divider is on.
       </Readout>
     </div>
   </>} sections={sections} />

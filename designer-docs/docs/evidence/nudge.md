@@ -37,7 +37,7 @@ Checked 7 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 ## Coin gaps
 
-- #206 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): close shown in every Figma prominent/compact variant but off by default in code; the Figma button size needs `Context: Nudge&Alert`, which Nudge doesn't set; no mode matches Figma's white card with purple icon; `buttonSlot={null}` can't remove the button; placeholder default copy; detailed silently ignores button/close props and compact ignores `title`; `nudge/radius` alias dangling; card has no role/name/testID; the Storybook rewrite is not on `main`.
+- #206 (Component Fix; Mr. Biscuit): fixed on c8526ae, verified 23 October, published to the docs 23 October. Originally filed (To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): close shown in every Figma prominent/compact variant but off by default in code; the Figma button size needs `Context: Nudge&Alert`, which Nudge doesn't set; no mode matches Figma's white card with purple icon; `buttonSlot={null}` can't remove the button; placeholder default copy; detailed silently ignores button/close props and compact ignores `title`; `nudge/radius` alias dangling; card has no role/name/testID; the Storybook rewrite is not on `main`.
 - #208 (Components, To do; Marcin Śpiewak), token problem shared with Note Input and Segmented Control: `nudge/title/color` is a literal #1e1a14 in Dark.
 - Existing: #179 (IconButton keeps a focus border after a click); #177 (Dark close icon orange, fixed upstream).
 
@@ -81,3 +81,14 @@ Coin gaps (not filed; for the owner to decide):
 
 - #206 (Component Fix, In progress) still has open parts: silently ignored props per type (detailed: body, button, close; compact: `title`, now an invisible region name), no mode for Figma's white card with a purple icon, the dangling `nudge/radius` alias, the fixed "Close" label, title line height 17 vs Figma 15 and a 26 px close vs 28, and the published Storybook still predating the rewrite.
 - New, not on #206: `onPressButton` without `buttonLabel` renders an empty, unnamed button; the sparkle SVG isn't hidden from assistive tech on the web.
+
+## c8526ae publish (23 October 2026, #206)
+
+The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October), which finishes #206 (verified 23 October, Penny run run_5a688e4d; closed by Marcin). Where this section differs from the sections above, it replaces them. Measured on this guide in headless Chrome (react-native-web 0.21.2, 1280 px):
+
+- Title line height 15 (Figma 15; was 17). The default prominent card is 344 × 94 (Figma 91: a 25 px button against 24, and a 1 px border); the Sizing long-copy card is 125 px tall (was 129).
+- Close is 28 × 28 (Figma 28; was 26) and shows with `onClose` or `showClose`. New prop `closeAccessibilityLabel` renames it (re-test: “Dismiss split payment tip”).
+- Ignored props warn in development: stacked-detailed with `body`, `buttonLabel`, `showClose`, or `onClose` logs “Nudge: stacked-detailed ignores body, buttonLabel, showClose, onClose. Put that content in children.”; inline-compact warns that `title` isn't shown. Rendering is unchanged.
+- Still open, not claimed by #206's fix: no mode gives Figma's white card with a purple icon; `nudge/radius` still aliases the missing `VariableID:2892:386` (logged on every render, falls back to 12); the sparkle SVG isn't hidden from assistive tech; `onPressButton` without `buttonLabel` renders an empty, unnamed pill.
+
+Guide changes: Sizing long-copy height (129 → 125); Sources (23 October build; 28 px close with a changeable label; ignored props warn) replacing “the close button is always labelled ‘Close’”. Composites that render a Nudge (CardInsight, CardAdvisory, BenefitCard, CircularRating) were re-tested by `npm run verify`.

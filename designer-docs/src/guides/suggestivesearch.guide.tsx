@@ -88,7 +88,7 @@ function SuggestiveSearchGuide() {
       description: 'A label names the field. As people type, matches from your list appear in a floating list under it, with the typed text in bold.',
       body: <Anatomy specimenWidth={328} parts={[
         { name: 'Label', note: 'Names the value, such as “Bank name”.', target: A.label, side: 'top' },
-        { name: 'Required mark', note: 'Shown only; screen readers don’t hear it.', target: A.required, side: 'right' },
+        { name: 'Required mark', note: 'Shown on screen; screen readers hear “required” from the field.', target: A.required, side: 'right' },
         { name: 'Field', note: 'Where people type; its border shows the state.', target: A.input, side: 'left' },
         { name: 'Suggestions', note: 'Matches from your list, in your order.', target: A.list, side: 'right' },
         { name: 'Match', note: 'The typed text, in bold.', target: A.match, side: 'left' },
@@ -103,7 +103,7 @@ function SuggestiveSearchGuide() {
       description: 'Add a hint or mark the field required, say what happens when nothing matches, and cap or simplify the list. Any option can be shown but not chosen.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="With support text" description="A short hint under the field."><Host><Search supportText={SUPPORT} /></Host></ExampleCard>
-        <ExampleCard title="Required" description="A red asterisk after the label. It isn’t announced."><Host><Search isRequired /></Host></ExampleCard>
+        <ExampleCard title="Required" description="A red asterisk after the label; screen readers hear “required”."><Host><Search isRequired /></Host></ExampleCard>
         <ExampleCard title="No-match message" description="Says so when nothing matches; without it the list just disappears."><Host h={H(1)}><Search emptyMessage={EMPTY} defaultInputValue="Paytm" open /></Host></ExampleCard>
         <ExampleCard title="Fewer suggestions" description="Caps the list; otherwise it scrolls after about five rows."><Host h={H(3)}><Search maxResults={3} defaultInputValue="Bank" open /></Host></ExampleCard>
         <ExampleCard title="Without highlight" description="Matches show in plain text."><Host h={H(3)}><Search highlightMatch={false} defaultInputValue="Bank of" open /></Host></ExampleCard>
@@ -172,13 +172,13 @@ function SuggestiveSearchGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Suggestive Search contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="11 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('suggestivesearch')} stories={[
+      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('suggestivesearch')} stories={[
         { label: 'Default', id: 'components-suggestivesearch--default' },
         { label: 'Prefilled', id: 'components-suggestivesearch--prefilled' },
         { label: 'Empty message', id: 'components-suggestivesearch--with-empty-message' },
         { label: 'Invalid', id: 'components-suggestivesearch--invalid' },
         { label: 'Object items', id: 'components-suggestivesearch--object-items' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Suggestive search has Idle, Open, and Active variants. The package bolds the typed text where Figma greys it, uses a grey placeholder, and marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check). On the web the arrow keys and Escape do nothing and the list closes as soon as focus leaves the field, so keyboard users can’t pick a suggestion. Every suggestion is announced as “Dropdown item”, and required and error aren’t announced. The published Storybook still shows the old page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. Figma’s Suggestive search has Idle, Open, and Active variants. The package bolds the typed text where Figma greys it, uses a grey placeholder, and marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check). On the web the field is a combobox: the arrow keys move through the suggestions, Enter picks one, Escape closes the list, and focus stays in the field after a pick. Each suggestion is announced by its label, and required and error are announced, with the message tied to the field. The published Storybook predates this build.</Sources>,
     },
   }
 
@@ -198,7 +198,7 @@ function SuggestiveSearchGuide() {
       <OnOff label="Support text" value={support} onChange={setSupport} />
       <OnOff label="No-match message" value={empty} onChange={setEmpty} />
       <OnOff label="Highlight match" value={highlight} onChange={setHighlight} />
-      <Readout title="Selected bank" value={play.label ?? 'None'}>Type to filter, then click or tap a bank. The arrow keys don’t move through the list.</Readout>
+      <Readout title="Selected bank" value={play.label ?? 'None'}>Type to filter, then click or tap a bank, or use the arrow keys and Enter.</Readout>
     </div>
   </>} sections={sections} />
 }

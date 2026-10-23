@@ -67,3 +67,10 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Do not show Dark mode, `Nudge padding: None`, `buttonSlot`, `closeSlot`, a custom `startSlot`, or `style`. Do not show another `Context` outside the Don’t. Do not imply the card closes itself, that compact shows a title, or that detailed has a button or close.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/nudge.md`.
+
+- Sizing long-copy card: 125 px tall (was 129).
+- Sources: checked 23 October 2026; 23 October build; close 28 px with a changeable label; ignored props warn for developers (replaces “the close button is always labelled “Close””).

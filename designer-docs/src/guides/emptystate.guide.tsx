@@ -20,9 +20,9 @@ const FAILED: Reason = { icon: 'ic_error', modes: ERR, title: 'Couldn’t load p
 function ES({ r, testID, showDescription, onPress = noop, buttonSlot, iconSlot }: {
   r: Reason; testID?: string; showDescription?: boolean; onPress?: () => void; buttonSlot?: ReactNode; iconSlot?: ReactNode
 }) {
-  return <EmptyState modes={LIGHT} testID={testID} title={r.title} description={r.description} showDescription={showDescription}
+  return <EmptyState modes={BTN} testID={testID} title={r.title} description={r.description} showDescription={showDescription}
     iconSlot={iconSlot ?? <IconCapsule iconName={r.icon} modes={r.modes} />}
-    buttonSlot={buttonSlot ?? <Button label={r.button} onPress={onPress} modes={BTN} />} />
+    buttonLabel={r.button} onPress={onPress} buttonSlot={buttonSlot} />
 }
 
 function Host({ children }: { children: ReactNode }) {
@@ -56,12 +56,12 @@ function EmptyStateGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'An icon, a message, and one button',
-      description: 'An icon sits above a bold title and a line of description, with one button below. The icon and the button are components you pass in.',
+      description: 'An icon sits above a bold title and a line of description, with one button below. You pass in the icon; the button comes from a label and an action.',
       body: <Anatomy specimenWidth={236} parts={[
         { name: 'Icon', note: 'An Icon Capsule you pass in; its own modes set size and colour.', target: A.icon, side: 'top' },
         { name: 'Title', note: '16 px bold; says what’s missing.', target: A.title, side: 'right' },
         { name: 'Description', note: '12 px; why it’s empty or what to do.', target: A.description, side: 'left' },
-        { name: 'Button', note: 'A Button you pass in, with your label and action.', target: A.button, side: 'bottom' },
+        { name: 'Button', note: 'Set with buttonLabel and onPress; without them there’s no button.', target: A.button, side: 'bottom' },
       ]}><ES r={FAILED} testID="es-anatomy" /></Anatomy>,
     },
     configuration: {
@@ -93,7 +93,7 @@ function EmptyStateGuide() {
     },
     content: {
       header: 'Content', title: 'What’s missing, why, and what next',
-      description: 'Write the title as what’s missing, in a few words. Use the description for why it’s empty or what will appear, and label the button with the next step. Empty State’s own copy and button are placeholders, so always set all of them.',
+      description: 'Write the title as what’s missing, in a few words. Use the description for why it’s empty or what will appear, and label the button with the next step. Empty State has no copy of its own and shows a button only when you give it a label, so set all three.',
       body: <ExampleCard title="What’s missing, why, what next"><Host><ES r={EMPTY} /></Host></ExampleCard>,
     },
     context: {
@@ -120,9 +120,9 @@ function EmptyStateGuide() {
       body: <div className="coin-new-stack">
         <DoDont
           good={<Host><ES r={EMPTY} /></Host>}
-          bad={<Host><EmptyState modes={LIGHT} title={EMPTY.title} description={EMPTY.description} iconSlot={<IconCapsule iconName={EMPTY.icon} modes={CAP} />} /></Host>}
-          goodTitle="Pass your own button" badTitle="Leave the default button"
-          goodCaption="“Make a payment” names the next step, and the screen handles the press." badCaption="It reads “Button” and does nothing when pressed." />
+          bad={<Host><EmptyState modes={BTN} title={EMPTY.title} description={EMPTY.description} iconSlot={<IconCapsule iconName={EMPTY.icon} modes={CAP} />} /></Host>}
+          goodTitle="Offer the next step" badTitle="Leave out the button"
+          goodCaption="“Make a payment” names the next step, and the screen handles the press." badCaption="Without a button label there’s no button, so people have no way forward." />
         <DoDont
           good={<Host><ES r={EMPTY} /></Host>}
           bad={<Host><ES r={EMPTY} iconSlot={<IconCapsule iconName="ic_error" modes={ERR} />} /></Host>}
@@ -130,19 +130,19 @@ function EmptyStateGuide() {
           goodCaption="A soft icon for an empty list; red only when something failed." badCaption="A red alert makes “No payments yet” look like a failure." />
         <DoDont
           good={<Host><ES r={EMPTY} /></Host>}
-          bad={<Host><EmptyState modes={{ ...LIGHT, 'Icon Capsule Size': 'L', 'Button / Size': 'S' } as Modes} title="No payments yet" description="Payments you make will show up here." iconSlot={<IconCapsule iconName="ic_wallet" />} buttonSlot={<Button label="Make a payment" onPress={noop} />} /></Host>}
-          goodTitle="Give each slot its own modes" badTitle="Set sizes on Empty State only"
-          goodCaption="The icon and button get Figma’s sizes." badCaption="It doesn’t pass them on, so the icon stays small and the button large." />
+          bad={<Host><EmptyState modes={BTN} description={EMPTY.description} iconSlot={<IconCapsule iconName={EMPTY.icon} modes={CAP} />} buttonLabel={EMPTY.button} onPress={noop} /></Host>}
+          goodTitle="Write a title" badTitle="Leave the title out"
+          goodCaption="“No payments yet” is the heading and names the area for screen readers." badCaption="The area has no heading or name, so screen readers can’t say what’s empty." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Empty State contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="10 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('emptystate')} stories={[
+      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('emptystate')} stories={[
         { label: 'Default', id: 'components-emptystate--default' },
         { label: 'Without description', id: 'components-emptystate--without-description' },
         { label: 'Custom slots', id: 'components-emptystate--custom-slots' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Empty state is one 236 px component with a red 81 px icon and a 32 px button. In the package both slots default to placeholders, a small gold card icon and a button labelled “Button” with no action, and passing <code>null</code> keeps them. Empty State doesn’t pass its modes to the icon and button you give it, so set each one’s size and colour on it. Its title renders with a 20 px line height (18 in Figma). It has no background, so this page shows Light only, and on the web it has no role or heading and its icon has no name. The published Storybook still shows the old page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. Figma’s Empty state is one 236 px component with a red 81 px icon and a 32 px button. The package has no copy of its own and shows a button only when given a label or an action; passing <code>null</code> removes the icon or the button. Its modes reach the icon and button you pass in, and their own modes win. It has no background, so this page shows Light only. On the web a titled Empty State is a region named by its title, which is a heading. Its default icon is hidden from screen readers, but an icon you pass in is read as an unnamed image. The published Storybook predates this build.</Sources>,
     },
   }
 

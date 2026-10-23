@@ -62,3 +62,13 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team
 
 ## Limits
 Do not show Dark mode, `context5` modes, `style`, `textStyle`, `accessibilityLabel`, or links or bold inside the copy (a type error). Do not imply the copy is announced with a custom label, or that a second line is fixed. Do not put a Disclaimer in a row parent or directly in a kit stage (it loses its centring).
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/disclaimer.md`.
+
+- Anatomy description: column up to 281 px; copy that doesn’t name Jio Payments Bank gets the bank’s name on a second line. Column note: “At most 281 px wide; the text wraps there and centres.”
+- Configuration adds: copy that doesn’t name the bank gets “Jio Payments Bank Pvt. Ltd.” below. Screen terms card: “Say what continuing means; the package adds the bank’s name below.”
+- Sizing: a 281 px column (or a narrower host’s width), text centred, 12 px a line, centres in any vertical stack. “Short copy hugs” → “Short copy gains a line”: ““Terms apply.” takes two lines: the package adds the bank’s name below it.”
+- Playground note adds: “Copy without the bank’s name gets it on a second line.”
+- Sources: checked 23 October 2026; the added bank line; screen readers read the copy and that line as one label, or accessibilityLabel; Light only (the orange Dark claim removed).

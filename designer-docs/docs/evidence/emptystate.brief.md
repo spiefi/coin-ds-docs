@@ -69,3 +69,13 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October bu
 
 ## Limits
 Do not show Dark mode, `null` or empty-fragment slots, `style`, or the default icon outside the Don’ts. Do not imply that Empty State hides its own button, announces itself, or passes modes to its slots.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/emptystate.md`.
+
+- `ES` passes `buttonLabel` and `onPress`, with `Button / Size: S` on Empty State (no button slot).
+- Anatomy description: “You pass in the icon; the button comes from a label and an action.” Button note: “Set with buttonLabel and onPress; without them there’s no button.”
+- Content: “Empty State has no copy of its own and shows a button only when you give it a label, so set all three.”
+- Do/Don't 1: Do “Offer the next step” | Don't “Leave out the button” (“Without a button label there’s no button, so people have no way forward.”). Do/Don't 3: Do “Write a title” | Don't “Leave the title out” (“The area has no heading or name, so screen readers can’t say what’s empty.”).
+- Sources: checked 23 October 2026; no copy of its own; button only with a label or action; null removes a slot; its modes reach the slots; titled region and heading; default icon hidden, a passed icon unnamed; Storybook predates the build.

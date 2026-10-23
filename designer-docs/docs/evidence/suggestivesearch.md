@@ -2,6 +2,18 @@
 
 Package, Figma, Storybook, and browser evidence for the Suggestive Search guide (board ticket #4, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## c8526ae publish (23 October 2026, #233)
+
+The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October). `SuggestiveSearch.tsx` changed in c1fa197 and c8526ae for #233 (verified 23 October, Penny run run_5a688e4d; closed by Marcin). Where this section differs from the sections below, it replaces them. Measured on this guide in headless Chrome (react-native-web 0.21.2, 1280 px):
+
+- DOM: the input is `role="combobox"` with `aria-autocomplete="list"`, `aria-expanded`, `aria-controls` (the listbox id), `aria-activedescendant`, `aria-required`, `aria-invalid`, and `aria-describedby` when there's support or error text. Options are `role="option"` named by their labels (“State Bank of India”…). The field wrapper is no longer a tab stop. The red asterisk is visible text; the requirement reaches screen readers through `aria-required`.
+- Keyboard (re-test): ArrowDown + Enter in the field picks the active option; Tab into the list keeps it open; arrow keys move focus between options; Enter picks once; Escape on an option or in the field closes the list and it stays closed; after a pick (keyboard or click) focus stays in the field.
+- `onOpenChange` fires on open and close; the default and custom filters get the trimmed query (“HDF ” lists HDFC Bank).
+- Sizes unchanged: label row 17, gap 8, field 47, rows 44.
+- Still open, not claimed by #233's fix: the Figma differences (bold match, `#888a8d` placeholder, grey selected row with a 16 px check, 44 px rows); the published Storybook (built 17 October) predates `main`.
+
+Guide changes: Required mark note and Required card (announced now); playground note (arrow keys and Enter); Sources (23 October build; combobox keyboard and announcements).
+
 ## Checked
 
 Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5); `npm run coin:status` reports the mirror and the docs up to date. `SuggestiveSearch.tsx` is identical to upstream.
@@ -47,5 +59,5 @@ Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag 
 
 ## Coin gaps
 
-- #233 (Component Fix, To do, Component Bug; Mr. Biscuit): keyboard users can't pick a suggestion (no arrow keys or Escape; Tab closes the list); every option named “Dropdown item”; search role instead of a combobox; required and invalid not announced and the error not linked; an extra tab stop on the field wrapper; `onOpenChange` only fires on selection; the default filter uses the untrimmed query (“HDF ” matches nothing); Figma differences (grey vs bold match, placeholder colour, 20 vs 16 px check, white vs grey selected row, 43 vs 44 px rows); the rewritten Storybook page and two stories are not published.
+- #233 (Component Fix; Mr. Biscuit): fixed on c8526ae, verified 23 October, published to the docs 23 October. It covered: keyboard users can't pick a suggestion (no arrow keys or Escape; Tab closes the list); every option named “Dropdown item”; search role instead of a combobox; required and invalid not announced and the error not linked; an extra tab stop on the field wrapper; `onOpenChange` only fires on selection; the default filter uses the untrimmed query (“HDF ” matches nothing); Figma differences (grey vs bold match, placeholder colour, 20 vs 16 px check, white vs grey selected row, 43 vs 44 px rows); the rewritten Storybook page and two stories are not published.
 - Existing: #209 (Enter fires `onPress` twice on DropdownItem).

@@ -2,6 +2,12 @@
 
 Package, Figma, and Storybook evidence for the Tooltip guide (board ticket #20, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## c8526ae publish (23 October 2026, #278)
+
+The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October). `Tooltip.tsx` changed in c8526ae for #278: closing clears the measured bubble size, so the next open measures the current text before placing it (5990169 had added a second measuring pass inside the max width). Verified 23 October (Penny run run_5a688e4d; closed by Marcin) on this guide's playground at 1280 and 390 px: Side Top, Text Short, open, close, Text Long, open again: the long bubble spans y 331–437, 12 px above the trigger at 449–475, and doesn't cover it. Re-checked in this run (see the run report). Everything else in this file still holds for c8526ae; Escape still doesn't close an open bubble on the web (#349).
+
+Guide changes: Sources only (23 October build; the bubble measures its text on each open). No other copy described the overlap.
+
 ## Checked
 
 Checked 19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348). `Tooltip.tsx` is the rewrite from 7020bf9 that fixes #277. It was already in the docs' previous build `v0.1.78-a116616` (the guide copy waited for #277's approval) and is unchanged in c7d3348. It was re-tested in headless Chrome (react-native-web 0.21.2) on 19 October, Penny run run_43afbe70.
@@ -63,6 +69,7 @@ Like Popup, the bubble is drawn over the whole window (a React Native Modal on n
 
 ## Coin gaps
 
+- #278 (Component Fix; Mr. Biscuit): with Side Top, a bubble whose text grew after its first open covered its own trigger. Fixed on c8526ae, verified 23 October, published to the docs 23 October.
 - #277 (Component Fix, Component Bug; Mr. Biscuit): fixed on Biscuit's main (7020bf9), verified 19 October on c7d3348 and published to the docs on 19 October. It covered: Coin Text invisible inside; nested Coin buttons never opening it; TooltipTrigger `onPress` replacing the toggle; an unnamed modal with no tooltip semantics; no Custom Width; side placements running off the screen.
 - #349 (Component Bug, regression from the #277 rewrite): Escape no longer closes an open bubble on the web.
 - From the code, not tested: `Tooltip.tsx` imports `createPortal` from `react-dom` at the top, and `react-dom` is only a devDependency (raised on #277, 16 October).

@@ -68,3 +68,14 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October bu
 
 ## Limits
 Do not show Dark mode, Page type overrides, `modes`, LottiePlayer heroes, `closeOffsetY`, `style`, or `contentContainerStyle`. Do not imply that the modal opens, closes, or animates itself, traps focus, or that a close button without `onClose` does anything.
+
+## c8526ae publish (23 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/fullscreenmodal.md`.
+
+- Anatomy description: hero text on the modal’s own black surface; the footer stays at the bottom. Headline note: “29 px heavy; the heading, and the modal’s name for screen readers.” Close button note: “Shown when the screen handles it, which closes the modal.” Selectors: headline `[role="heading"]`, footer `[role="toolbar"]` (now inside a wrapper).
+- With hero media: “Media fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas.”
+- Sizing: 532 px hero space; 28 px close.
+- Content: “A line you leave unset doesn’t show.”
+- Do/Don't 1 good caption: “The modal’s own black surface keeps the white text readable.” Do/Don't 2: Do “Write a headline” (GOLD) | Don't “Leave the headline out” (`{...GOLD} headline=""`): “It’s the modal’s heading and names it for screen readers.” / “The offer has no heading, and screen readers get no name for the modal.”
+- Sources: checked 23 October 2026; 23 October build; black surface; 532 px hero and 28 px close as in Figma; close only with a handler; empty copy by default; dialog named by the headline; focus handling with a close button; page opens at its last example (#392); Storybook predates the build.
