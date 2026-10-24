@@ -154,7 +154,8 @@ export function componentMarkdown(entry, { packVersion, outsidePilot = [] }) {
   return lines.join('\n')
 }
 
-export function rulesMarkdown({ packVersion, packageVersion, packageSource, entries, otherComponents }) {
+/** rules.md: how to build with Coin (agent-pack/building.md, as written), then how to read the pack. */
+export function rulesMarkdown({ packVersion, packageVersion, packageSource, entries, otherComponents, building }) {
   const guided = entries.filter((entry) => entry.status.state !== 'undocumented')
   const hints = entries.filter((entry) => entry.status.state === 'undocumented')
   return `# Coin agent pack: rules for agents (pilot)
@@ -167,7 +168,9 @@ ${guided.length} come from designer guides (${guided.map((entry) => entry.id).jo
 ${hints.length} are undocumented: public exports with no guide, facts only
 (${hints.map((entry) => entry.id).join(', ')}).
 
-## Rules
+${building.trim()}
+
+## Reading the pack
 
 1. **Match the version.** Use this pack only when its jfs-components version
    (\`${packageVersion}\`) matches the installed package
@@ -175,8 +178,7 @@ ${hints.length} are undocumented: public exports with no guide, facts only
    matching release in \`/agent/index.json\`, or do not use the pack. Built
    from ${packageSource}.
 2. **Use only what the facts list.** Use only components, props, values and
-   slots that are in an entry's facts (or, for exports without an entry, in
-   the package types). Never invent one.
+   slots that are in an entry's facts. Never invent one.
 3. **Follow strength.** Treat \`required\` rules as constraints. Follow
    \`recommended\` rules unless the request asks otherwise, and say so when you
    depart from one. Avoid \`discouraged\` configurations.
@@ -192,13 +194,11 @@ ${hints.length} are undocumented: public exports with no guide, facts only
    points at the item it concerns; a \`flagged\` entry is still guidance apart
    from those items.
 7. **Keep copy within the content rules.**
-8. **Pass modes to slot children.** Pass a component's \`modes\` to the Coin
-   children in its slots.
-9. **Prefer what exists.** Use an existing component when it fits. Compose
-   supported Coin components for layouts and patterns. Report a gap when the
-   request needs unsupported API, or a replacement for a component Coin lacks.
+8. **Pass modes on where the owner does not.** When a slot's owner does not
+   pass its \`modes\` to the Coin children in the slot, pass them the owner's
+   modes unchanged. Never add your own.
 
-## Reading the pack
+## Files
 
 - \`index.json\`: every entry's id, category, tags, state, summary and
   useInstead targets. \`category\` is for discovery only, never a limit on
@@ -214,9 +214,10 @@ ${hints.length} are undocumented: public exports with no guide, facts only
 
 ## Not in this pack
 
-These jfs-components component exports exist but have no entry, so this pack
-gives no guidance for them. They are not missing from Coin: work from their
-types and say they are undocumented here.
+These jfs-components component exports have no entry, so this pack gives no
+guidance for them. Some are Coin components this pack does not cover yet;
+others exist only in code and are not part of Coin. Do not build with them:
+ask, or report that the request needs one.
 ${otherComponents.join(', ')}.
 `
 }
@@ -230,7 +231,7 @@ Read rules.md first. Use this pack only with jfs-components ${packageVersion}.
 
 ## Pack
 
-- [rules.md](rules.md): how agents use this pack, and the exports it does not cover.
+- [rules.md](rules.md): how to build with Coin, how to read this pack, and the exports it does not cover.
 - [index.json](index.json): every entry's id, category, tags, state, summary and useInstead targets.
 - [manifest.json](manifest.json): versions, build time, and entry counts by state.
 - [graph.json](graph.json): how the components relate (useInstead, placedIn, slotAccepts, usedWith).

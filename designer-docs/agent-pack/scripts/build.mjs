@@ -123,6 +123,7 @@ const files = new Map([
     packageSource: pkg.source,
     entries: allEntries,
     otherComponents: components.filter((name) => !pilotIds.has(name)),
+    building: readFileSync(join(PACK, 'building.md'), 'utf8'),
   })],
   ['llms.txt', llmsText({ packVersion, packageVersion: pkg.version, entries: allEntries })],
   ['graph.json', json(graph)],

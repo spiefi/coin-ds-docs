@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "id": "Card",
+  "slug": "card",
+  "category": "card",
+  "tags": [],
+  "status": {
+    "state": "undocumented",
+    "guideCommit": null,
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-24T12:04:18Z",
+    "flags": []
+  },
+  "summary": "Slots: optional `header`, optional `media` (Default only), and `children` for the content stack. (Package docs; Coin has no designer guide for Card.)",
+  "useWhen": [],
+  "avoidWhen": [],
+  "anatomy": [],
+  "allowedChildren": [
+    {
+      "slot": "header",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "media",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [],
+  "configuration": [],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [],
+  "accessibility": [],
+  "doDont": [],
+  "examples": [
+    {
+      "purpose": "A slim card holding a line of content.",
+      "jsx": "<Card variant=\"slim\" modes={{ 'Color Mode': 'Light' }}>\n  <Text text=\"September payment\" modes={{ 'Color Mode': 'Light' }} />\n</Card>",
+      "from": null
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "CardVariantInput",
+        "required": false,
+        "source": "types",
+        "values": [
+          "default",
+          "slim",
+          "Default",
+          "Slim"
+        ],
+        "default": "default",
+        "description": "Visual layout variant matching Figma `Property 1`. - `'default'` — header + optional media + content (Figma Default) - `'slim'` — header + content only; `media` is ignored (Figma Slim) Defaults to `'default'`. Existing call sites that omit `media` continue to render a media-less default card (backward compatible). Prefer `variant=\"slim\"` when you want the Slim contract explicitly. Default \"default\", from the component source."
+      },
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Content rendered in the header slot at the top of the card (e.g. a brand logo). Sits above the media slot, padded with `card/content/padding/*`."
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Media slot content (e.g. `<Image />`). Wrapped in a container that respects `mediaAspectRatio`. Ignored when `variant=\"slim\"`."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Content slot (e.g. `Card.Title`, `Card.SupportText`)."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object for token resolution. Cascades into all slots."
+      },
+      {
+        "name": "mediaAspectRatio",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 1.3276,
+        "description": "Aspect ratio for the media slot container. Defaults to the Figma Ratio 154/116 (~1.328). Default 1.3276 (154 / 116), from the component source."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the card container."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Press handler for the whole card. When set, the card becomes pressable (`Pressable` + `accessibilityRole=\"button\"`)."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Disable interaction when `onPress` is set."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label forwarded to the root."
+      },
+      {
+        "name": "Card.Title",
+        "type": "component",
+        "description": "A static sub-component of Card. Its own props: children, style, modes, numberOfLines.",
+        "source": "types"
+      },
+      {
+        "name": "Card.SupportText",
+        "type": "component",
+        "description": "A static sub-component of Card. Its own props: children, style, modes, numberOfLines.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Card Container",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Plain"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 8",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Section"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "None"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "description": "Content rendered in the header slot at the top of the card (e.g. a brand logo). Sits above the media slot, padded with `card/content/padding/*`.",
+        "source": "types"
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "description": "Media slot content (e.g. `<Image />`). Wrapped in a container that respects `mediaAspectRatio`. Ignored when `variant=\"slim\"`.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Content slot (e.g. `Card.Title`, `Card.SupportText`).",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the whole card. When set, the card becomes pressable (`Pressable` + `accessibilityRole=\"button\"`).",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": null,
+    "figma": null,
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-card--docs"
+  }
+}

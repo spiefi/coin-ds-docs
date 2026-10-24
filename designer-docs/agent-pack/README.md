@@ -10,7 +10,10 @@ kit for a short flow (for example a personal loan: offers, offer details,
 apply, confirmation). It has 21 entries from designer guides and 9
 `undocumented` entries for public primitives that have no guide (Screen,
 Text, Title, Card, ListItem, ListGroup, Icon, Image, Divider): facts only,
-guidance as hints.
+guidance as hints. Release `0.1.78+3` adds how to build with Coin
+(`building.md`) to `rules.md`. It is built on the same Coin build as +2
+(`v0.1.78-a116616`, the one Flow Visualizer renders), so its entries are
+unchanged.
 
 ## Where things are
 
@@ -19,7 +22,8 @@ guidance as hints.
 | `schema/` | The JSON schemas (entry, manifest, index, releases, graph, sizes, pilot-results v2). Shared with the site's Designer and Agent views; do not change them here alone. |
 | `pack.json` | The components (export id, slug, category, guide files, evidence file; or `undocumented: true` with a checked Storybook link) and the release `revision`. |
 | `copy/<slug>.json` | Generated: the copy each guide renders, by section, and the commit it was read at. |
-| `guidance/<slug>.json` | Extracted: the guidance read from the guide, every item with the exact sentence it came from. For an undocumented entry: an optional summary taken verbatim from the component's JSDoc, an example, and any hints, each resting on a fact. The only hand-written input. |
+| `guidance/<slug>.json` | Extracted: the guidance read from the guide, every item with the exact sentence it came from. For an undocumented entry: an optional summary taken verbatim from the component's JSDoc, an example, and any hints, each resting on a fact. Hand-written, like `building.md`; everything else is generated. |
+| `building.md` | How to build with Coin: the judgment half of `rules.md`, written by hand and copied into it as is. The building rules live only here; agents read them in `rules.md` (Flow Visualizer puts it in its assistant's prompt; the MCP server's `rules` tool returns it). |
 | `cross-check/<slug>.json` | Generated: the independent cross-check of each entry, with the hash of the entry it reviewed. |
 | `reviews/<slug>.json` | Optional, by people: flags to add, and cross-check flags to dismiss with a reason. |
 | `pilot/questions.json` | The test questions and expected answers (draft until settled). |
@@ -195,8 +199,9 @@ entry) and says who raised it:
      way, then `npm run agent-pack:copy -- <slug>` and re-extract the
      changed sections in `guidance/<slug>.json`.
    - **The extraction** misread it: edit `guidance/<slug>.json`.
-   - **The agent** ignored correct guidance: look at `rules.md` (in
-     `scripts/render.mjs`) or the question.
+   - **The agent** ignored correct guidance: look at `rules.md` (building
+     rules in `building.md`, the rest in `scripts/render.mjs`) or the
+     question.
 4. Rerun what is affected: `npm run agent-pack:cross-check -- <slug>`, raise
    `revision` in `pack.json` if the release is committed,
    `npm run build:agent-pack`, then
@@ -223,9 +228,22 @@ last results when the pack version and model match.
   shipped source (`{ label = 'Button' }`), noted in each description.
 - **anatomy `required`** means the part is always present (false for an
   optional prop or slot).
-- **Exports without an entry** are listed in `llms.txt` as undocumented in
-  this pack, so an agent does not mistake "not in the pilot" for "not in
-  Coin". The index lists only entries.
+- **Exports without an entry** are listed in `rules.md` as exports this pack
+  does not cover, and agents do not build with them (since 0.1.78+3). Some
+  are Coin components with no entry yet; some exist only in code and are not
+  part of Coin (`Section`). The list does not say which is which, so it never
+  calls one "not in Coin". The index lists only entries.
+- **Building rules** (`building.md`, since 0.1.78+3), decided on 24 October
+  2026: components stay on their default modes; a parent's context styles
+  only what goes in its slots; a component's built-in parts take only their
+  props; Color Mode comes from the device, never a component; Color Mode
+  primitives by name are allowed on surfaces Coin has no component for, until
+  Coin has semantic tokens; and a screen uses the largest block that fits for
+  each part. "Two actions in one place" (Emphasis Medium on the second) is
+  provisional. Still open: whether a built-in part should always keep its own
+  settings, whether contexts should be forced or only defaults, which source
+  says what counts as a Coin component, and whether Coin should read the
+  device's colour scheme itself.
 - **Package version** comparisons for stale evidence use the version
   (`0.1.78`), not the build; the build is kept in `guidance/<slug>.json`.
 - **The flow kit** (0.1.78+2) adds 15 guides to the pilot six. These are the guides a short flow such as a personal loan needs: VStack, HStack, ButtonGroup, IconButton, Link, FormField, CheckboxItem, Tabs, TabItem, Nudge, AppBar, ActionFooter and Stepper, plus Step (Stepper's children) and Slider (loan amount and tenure).
