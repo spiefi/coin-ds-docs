@@ -2,6 +2,15 @@
 
 Package, Figma, and Storybook evidence for the Bubble Chart guide (board ticket #121, Design documentation — Marcin; Storybook coverage — Biscuit).
 
+## dbe0e02 publish (28 October 2026, #412)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #412 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- ClusterBubble's inside text uses the Page type or Text Appearance colour only where it reaches 4.5:1 on the fill, otherwise black or white (checked on 462 bubbles; JioPlus on Tertiary is `#0f0d0a` at 10.97:1, Success on Primary white at 9.85:1). Inside BubbleChart the same; outside labels still follow the mode, and insideTextColor still overrides. White on Secondary High is 4.29:1 (tracked on #347).
+- The chart's first child is now a hidden (`aria-hidden`) label-measuring block, so every bubble moved one child down; the anatomy selectors now count from child 2. #347 (sizes, labels, gaps) is not in this release; its copy is unchanged.
+
+Guide changes: bubble selectors `B(n)` → `:nth-child(n + 1)`; Sources (28 October, 27 October build; Page type and Text Appearance recolour inside text only where it stays readable on the bubble, otherwise black or white).
+
 ## Checked
 
 Checked 19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616). `BubbleChart.tsx`, `bubblePacking.ts`, and `ClusterBubble.tsx` are byte-identical to Biscuit's clone; his newer `main` (c7d3348) doesn't touch them. Both components were added in 0.0.85 (3 June 2026, `CHANGELOG.md:349-350`). Runtime facts below come from the hosted Storybook and from the installed source in react-native-web 0.21.2, both in headless Chrome.

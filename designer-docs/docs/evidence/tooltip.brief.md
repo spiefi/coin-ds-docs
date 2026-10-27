@@ -72,3 +72,11 @@ Never start a tooltip open, use `defaultOpen`, or pass actions as content. Don't
 These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/tooltip.md`.
 
 - Sources: checked 23 October 2026; built from c8526ae (23 October); “It measures its text each time it opens, so a bubble whose text has grown still sits clear of its trigger.”
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/tooltip.md`.
+
+- States description: “… While it's open a clear layer covers the page: the next press anywhere, Escape on the web, or Android's back button closes it. After Escape, focus stays on the trigger. …”
+- Sources: checked 28 October 2026; built from dbe0e02 (27 October); “On the web the bubble is a tooltip tied to its trigger, and Escape closes it.”
+- Limits: Escape now closes it on the web; still don't imply hover or focus opening, a timer, or that the bubble names the trigger.

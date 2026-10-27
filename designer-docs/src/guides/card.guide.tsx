@@ -28,10 +28,11 @@ type COpts = {
   style?: object
   mediaAspectRatio?: number
   onPress?: () => void
+  disabled?: boolean
   accessibilityLabel?: string
 }
-const C = ({ variant, header, media, modes = NEUTRAL, text = SAVINGS, style = W, mediaAspectRatio, onPress, accessibilityLabel }: COpts = {}) => (
-  <Card variant={variant} header={header as never} media={media as never} modes={modes} style={style as never} mediaAspectRatio={mediaAspectRatio} onPress={onPress} accessibilityLabel={accessibilityLabel}>
+const C = ({ variant, header, media, modes = NEUTRAL, text = SAVINGS, style = W, mediaAspectRatio, onPress, disabled, accessibilityLabel }: COpts = {}) => (
+  <Card variant={variant} header={header as never} media={media as never} modes={modes} style={style as never} mediaAspectRatio={mediaAspectRatio} onPress={onPress} disabled={disabled} accessibilityLabel={accessibilityLabel}>
     <Card.SupportText>{text[0]}</Card.SupportText>
     <Card.Title>{text[1]}</Card.Title>
     <Card.SupportText>{text[2]}</Card.SupportText>
@@ -80,7 +81,7 @@ function CardGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Two variants, three slots, and a fill',
-      description: 'variant default shows a picture when you pass media; slim never does. Pass header for a logo or a label, media for a picture, and children for the text, and leave out what you don’t need. AppearanceBrand sets the fill: with no modes the card is Primary cream, and Figma draws it Neutral white. Semantic Intent System tints it with AppearanceSystem’s status colour. Card Container Plain removes the panel; Page type SubPage and context 8 Section add a grey border.',
+      description: 'variant default shows a picture when you pass media; slim never does. Pass header for a logo or a label, media for a picture, and children for the text, and leave out what you don’t need. AppearanceBrand sets the fill: with no modes the card is Neutral white, as Figma draws it. Semantic Intent System tints it with AppearanceSystem’s status colour. Card Container Plain removes the panel; Page type SubPage and context 8 Section add a grey border.',
       body: <div className="coin-new-stack">
         <div className="coin-new-example-grid three">
           <ExampleCard title="Default" description="A logo, a picture, and the text, for an offer that leads with an image.">{C({ header: HEADER, media: MEDIA })}</ExampleCard>
@@ -88,8 +89,8 @@ function CardGuide() {
           <ExampleCard title="Text only" description="Just children: a plain panel for a few lines.">{C({ text: FD })}</ExampleCard>
         </div>
         <div className="coin-new-example-grid">
-          <ExampleCard title="Primary (default)" description="With no AppearanceBrand the card is cream.">{C({ variant: 'slim', header: HEADER, text: GOLD, modes: LIGHT })}</ExampleCard>
-          <ExampleCard title="Neutral" description="White, as Figma and Storybook draw it.">{C({ variant: 'slim', header: HEADER, text: GOLD, modes: NEUTRAL })}</ExampleCard>
+          <ExampleCard title="Neutral (default)" description="With no AppearanceBrand the card is white, as Figma and Storybook draw it.">{C({ variant: 'slim', header: HEADER, text: GOLD, modes: LIGHT })}</ExampleCard>
+          <ExampleCard title="Primary" description="A cream fill.">{C({ variant: 'slim', header: HEADER, text: GOLD, modes: { ...LIGHT, AppearanceBrand: 'Primary' } as Modes })}</ExampleCard>
           <ExampleCard title="Secondary" description="A light purple fill.">{C({ variant: 'slim', header: HEADER, text: GOLD, modes: { ...LIGHT, AppearanceBrand: 'Secondary' } as Modes })}</ExampleCard>
           <ExampleCard title="Tertiary" description="A light blue fill.">{C({ variant: 'slim', header: HEADER, text: GOLD, modes: { ...LIGHT, AppearanceBrand: 'Tertiary' } as Modes })}</ExampleCard>
         </div>
@@ -107,11 +108,12 @@ function CardGuide() {
     },
     states: {
       header: 'States', title: 'Static or pressable',
-      description: 'Without onPress the card is static. With onPress the whole card is one button: give it an accessibilityLabel when the title isn’t its whole name, and don’t put buttons inside it. disabled stops presses. The card shows no pressed, hover, or disabled look.',
+      description: 'Without onPress the card is static. With onPress the whole card is one button: give it an accessibilityLabel when the title isn’t its whole name, and don’t put buttons inside it. It dims a little on hover and more while pressed, and a thin dark outline shows its focus. disabled dims it to half, stops presses, and takes it out of the Tab order; without onPress it does nothing.',
       body: <>
-        <div className="coin-new-example-grid">
+        <div className="coin-new-example-grid three">
           <ExampleCard title="Static" description="Text to read: nothing responds.">{C({ variant: 'slim', header: HEADER, text: GOLD })}</ExampleCard>
-          <ExampleCard title="Pressable" description="One button; it looks the same as the static card.">{C({ variant: 'slim', header: HEADER, text: GOLD, onPress: () => setPresses(n => n + 1), accessibilityLabel: '24K digital gold, from ₹10' })}</ExampleCard>
+          <ExampleCard title="Pressable" description="One button that dims while you press it.">{C({ variant: 'slim', header: HEADER, text: GOLD, onPress: () => setPresses(n => n + 1), accessibilityLabel: '24K digital gold, from ₹10' })}</ExampleCard>
+          <ExampleCard title="Disabled" description="Dimmed to half; presses and Tab skip it.">{C({ variant: 'slim', header: HEADER, text: FD, onPress: () => setPresses(n => n + 1), disabled: true, accessibilityLabel: 'Fixed deposit, earn 7.25% a year' })}</ExampleCard>
         </div>
         <p className="coin-new-readout" role="status">{presses === 0 ? 'Pressable card not pressed yet' : `Pressable card pressed ${presses} ${presses === 1 ? 'time' : 'times'}`}</p>
       </>,
@@ -144,7 +146,7 @@ function CardGuide() {
     },
     context: {
       header: 'In context', title: 'Offers on the Home screen',
-      description: 'Two offers share a row, each card taking half of it. The cards use the package default, Primary cream. Each card’s onPress opens its offer: the screen does the navigation, and the card only reports the press.',
+      description: 'Two offers share a row, each card taking half of it. The cards use the package default, Neutral white. Each card’s onPress opens its offer: the screen does the navigation, and the card only reports the press.',
       body: <div className="coin-new-context">
         <VStack modes={{ ...LIGHT, 'Slot gap': 'M' } as Modes}>
           <Title title="Offers for you" subtitle="Picked for your savings" modes={LIGHT} />
@@ -157,8 +159,8 @@ function CardGuide() {
       </div>,
     },
     'dos-donts': {
-      header: 'Do & Don’ts', title: 'A picture, a name, and nothing empty',
-      description: 'Each pair shows a card that reads at a glance next to one that loses its picture, its name, or its spacing.',
+      header: 'Do & Don’ts', title: 'A picture, a name, and one title',
+      description: 'Each pair shows a card that reads at a glance next to one that loses its picture or its name.',
       body: <div className="coin-new-stack">
         <DoDont
           good={C({ header: HEADER, media: MEDIA })}
@@ -171,22 +173,22 @@ function CardGuide() {
           goodTitle="A name and one fact" goodCaption="“24K digital gold”, from ₹10."
           badTitle="A paragraph of support text" badCaption="Support text never stops, so the card grows and the name gets lost." />
         <DoDont
-          good={C({ variant: 'slim', text: GOLD })}
-          bad={C({ variant: 'slim', header: false, text: GOLD })}
-          goodTitle="Leave out a slot" goodCaption="No header, so the text starts at the top."
-          badTitle="Pass false to hide a slot" badCaption="An empty 24 px band stays where the header was." />
+          good={C({ variant: 'slim', header: HEADER, text: FD })}
+          bad={C({ variant: 'slim', header: <Card.Title>Grow your savings</Card.Title>, text: FD })}
+          goodTitle="A logo in the header" goodCaption="The header names the brand; the title names the product."
+          badTitle="A second title in the header" badCaption="Two titles compete, and the product name gets lost." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Card contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('card')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('card')} stories={[
         { label: 'Default', id: 'components-card--default' },
         { label: 'Slim', id: 'components-card--slim' },
         { label: 'Real image', id: 'components-card--with-real-image' },
         { label: 'Header', id: 'components-card--with-header' },
         { label: 'Custom content', id: 'components-card--custom-content' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Card has two variants, Default and Slim, drawn white (AppearanceBrand Neutral) at 200 px with fixed heights; in code the card hugs its content, and with no modes it is cream (Primary). Figma’s header and media switches are the <code>header</code> and <code>media</code> props in code: pass them or leave them out. Passing <code>false</code> leaves an empty band, and the card shows no pressed or disabled look (both reported). The card doesn’t read the app’s theme, so pass modes on the card or place it in a Coin stack. The published Storybook still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. Figma’s Card has two variants, Default and Slim, drawn white (AppearanceBrand Neutral) at 200 px with fixed heights; in code the card hugs its content and is white by default too. Figma’s header and media switches are the <code>header</code> and <code>media</code> props in code: pass them or leave them out (<code>false</code> also hides a slot). The card doesn’t read the app’s theme, so pass modes on the card or place it in a Coin stack. The published Storybook still shows the older generated page.</Sources>,
     },
   }
 

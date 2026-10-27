@@ -51,6 +51,7 @@ function FullscreenModalGuide() {
   const [close, setClose] = useState(true)
   const [action, setAction] = useState('None')
   const [shown, setShown] = useState(true)
+  const [reshown, setReshown] = useState(false)
   const [ctxOpen, setCtxOpen] = useState(false)
   const [status, setStatus] = useState('On Profile')
 
@@ -68,16 +69,16 @@ function FullscreenModalGuide() {
         { name: 'Body', note: 'Your Sections, styled for the dark modal.', target: A.BODY, side: 'left' },
         { name: 'Footer', note: 'The main button, with an optional disclaimer.', target: A.footer, side: 'bottom' },
         { name: 'Close button', note: 'Shown when the screen handles it, which closes the modal.', target: A.close, side: 'top' },
-      ]}><FullscreenModal testID="fm-anatomy" {...OFFER} heroHeight={260} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Anatomy>,
+      ]}><FullscreenModal trapFocus={false} testID="fm-anatomy" {...OFFER} heroHeight={260} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'Hero, body, and footer',
       description: 'Set the hero copy, add Sections for the details, and choose the footer’s button and disclaimer. Hero media fills the width behind the hero text, and heroHeight sets how much space the text sits at the bottom of.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Hero, body, and footer" description="The full layout: Sections scroll under the hero, and the footer stays at the bottom."><Frame><FullscreenModal {...OFFER} onClose={noop} onPrimaryAction={noop}>{BENEFITS}{PLANS}</FullscreenModal></Frame></ExampleCard>
-        <ExampleCard title="Without a body" description="Hero text and one button make a confirmation screen."><Frame><FullscreenModal eyebrow="JioFinance+" headline="You’re all set" supportingText="Your benefits are active on every linked account." priceText="" primaryActionLabel="Done" disclaimer="" onClose={noop} onPrimaryAction={noop} /></Frame></ExampleCard>
-        <ExampleCard title="Shorter hero" description="A lower heroHeight brings the body up; the text stays at the bottom of its space."><Frame><FullscreenModal {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame></ExampleCard>
-        <ExampleCard title="With hero media" description="Media fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas."><Frame><FullscreenModal {...OFFER} heroMedia={HERO_IMAGE} heroHeight={460} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame></ExampleCard>
+        <ExampleCard title="Hero, body, and footer" description="The full layout: Sections scroll under the hero, and the footer stays at the bottom."><Frame><FullscreenModal trapFocus={false} {...OFFER} onClose={noop} onPrimaryAction={noop}>{BENEFITS}{PLANS}</FullscreenModal></Frame></ExampleCard>
+        <ExampleCard title="Without a body" description="Hero text and one button make a confirmation screen."><Frame><FullscreenModal trapFocus={false} eyebrow="JioFinance+" headline="You’re all set" supportingText="Your benefits are active on every linked account." priceText="" primaryActionLabel="Done" disclaimer="" onClose={noop} onPrimaryAction={noop} /></Frame></ExampleCard>
+        <ExampleCard title="Shorter hero" description="A lower heroHeight brings the body up; the text stays at the bottom of its space."><Frame><FullscreenModal trapFocus={false} {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame></ExampleCard>
+        <ExampleCard title="With hero media" description="Media fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas."><Frame><FullscreenModal trapFocus={false} {...OFFER} heroMedia={HERO_IMAGE} heroHeight={460} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame></ExampleCard>
       </div>,
     },
     states: {
@@ -85,8 +86,8 @@ function FullscreenModalGuide() {
       description: 'Fullscreen Modal has no open or closed state. The screen shows it and removes it; its close button and main button only report the press.',
       body: <ExampleCard title="The screen closes it" description="Press close or Upgrade for free: the screen removes the modal. Show it again with the button."><Frame>
         {shown
-          ? <FullscreenModal {...OFFER} onClose={() => setShown(false)} onPrimaryAction={() => setShown(false)}>{BENEFITS}</FullscreenModal>
-          : <VStack modes={LIGHT} alignHorizontal="center" style={{ flex: 1, justifyContent: 'center' }}><Button label="Show the offer" onPress={() => setShown(true)} modes={LIGHT} /></VStack>}
+          ? <FullscreenModal trapFocus={reshown} {...OFFER} onClose={() => setShown(false)} onPrimaryAction={() => setShown(false)}>{BENEFITS}</FullscreenModal>
+          : <VStack modes={LIGHT} alignHorizontal="center" style={{ flex: 1, justifyContent: 'center' }}><Button label="Show the offer" onPress={() => { setReshown(true); setShown(true) }} modes={LIGHT} /></VStack>}
       </Frame></ExampleCard>,
     },
     sizing: {
@@ -96,12 +97,12 @@ function FullscreenModalGuide() {
         { kind: 'size', target: S.close, side: 'bottom', label: 'both' },
         { kind: 'size', target: S.HERO, side: 'right', label: 'both' },
         { kind: 'gap', from: S.HERO, to: `${S.BODY} > :first-child` },
-      ]}><FullscreenModal testID="fm-size" {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Anatomy>,
+      ]}><FullscreenModal trapFocus={false} testID="fm-size" {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Anatomy>,
     },
     content: {
       header: 'Content', title: 'An offer in four lines and one action',
       description: 'Use the eyebrow for the product or offer, the headline for the benefit in a few words, one supporting sentence, and the price on its own line. Label the button with the action. A line you leave unset doesn’t show.',
-      body: <ExampleCard title="Four lines, one action"><Frame><FullscreenModal {...GOLD} onClose={noop} onPrimaryAction={noop} /></Frame></ExampleCard>,
+      body: <ExampleCard title="Four lines, one action"><Frame><FullscreenModal trapFocus={false} {...GOLD} onClose={noop} onPrimaryAction={noop} /></Frame></ExampleCard>,
     },
     context: {
       header: 'In context', title: 'An upgrade offer from Profile',
@@ -123,18 +124,18 @@ function FullscreenModalGuide() {
       description: 'Each pair shows a modal that reads as one message versus one that hides or muddles it.',
       body: <div className="coin-new-stack">
         <DoDont
-          good={<Frame><FullscreenModal {...OFFER} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame>}
-          bad={<Frame><FullscreenModal {...OFFER} heroMedia={HERO_IMAGE} heroHeight={300} onClose={noop} onPrimaryAction={noop} /></Frame>}
+          good={<Frame><FullscreenModal trapFocus={false} {...OFFER} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame>}
+          bad={<Frame><FullscreenModal trapFocus={false} {...OFFER} heroMedia={HERO_IMAGE} heroHeight={300} onClose={noop} onPrimaryAction={noop} /></Frame>}
           goodTitle="Keep the text on a dark background" badTitle="Put the text over a light photo"
           goodCaption="The modal’s own black surface keeps the white text readable." badCaption="The white text gets lost in the image." />
         <DoDont
-          good={<Frame><FullscreenModal {...GOLD} onClose={noop} onPrimaryAction={noop} /></Frame>}
-          bad={<Frame><FullscreenModal {...GOLD} headline="" onClose={noop} onPrimaryAction={noop} /></Frame>}
+          good={<Frame><FullscreenModal trapFocus={false} {...GOLD} onClose={noop} onPrimaryAction={noop} /></Frame>}
+          bad={<Frame><FullscreenModal trapFocus={false} {...GOLD} headline="" onClose={noop} onPrimaryAction={noop} /></Frame>}
           goodTitle="Write a headline" badTitle="Leave the headline out"
           goodCaption="It’s the modal’s heading and names it for screen readers." badCaption="The offer has no heading, and screen readers get no name for the modal." />
         <DoDont
-          good={<Frame><FullscreenModal {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame>}
-          bad={<Frame><FullscreenModal {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}><Wrapped /></FullscreenModal></Frame>}
+          good={<Frame><FullscreenModal trapFocus={false} {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}>{BENEFITS}</FullscreenModal></Frame>}
+          bad={<Frame><FullscreenModal trapFocus={false} {...OFFER} heroHeight={240} onClose={noop} onPrimaryAction={noop}><Wrapped /></FullscreenModal></Frame>}
           goodTitle="Put Sections straight in the body" badTitle="Wrap Sections in your own component"
           goodCaption="They take the modal’s dark styling." badCaption="They miss the styling and stay white cards." />
       </div>,
@@ -142,11 +143,11 @@ function FullscreenModalGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Fullscreen Modal contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('fullscreenmodal')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('fullscreenmodal')} stories={[
         { label: 'Default', id: 'components-fullscreenmodal--default' },
         { label: 'Minimal no body', id: 'components-fullscreenmodal--minimal-no-body' },
         { label: 'Lottie hero', id: 'components-fullscreenmodal--lottie-hero' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build) from the team’s private package repository. In Figma the modal is 1228 px tall with a full-height image behind everything; in the package it has its own black surface, so the hero text reads without media, and media you add sits behind the hero and the body. As in Figma, its hero space is 532 px and its close button 28 px. The close button shows only when the screen handles it, and copy you leave unset stays empty. On the web it’s a dialog named by its headline, which is a heading. When it has a close button, focus moves into it, Tab stays inside, Escape closes it, and focus returns when it’s removed. The examples here have one, so this page opens scrolled to its last example and Tab can’t leave it (#392). The published Storybook predates this build.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. In Figma the modal is 1228 px tall with a full-height image behind everything; in the package it has its own black surface, so the hero text reads without media, and media you add sits behind the hero and the body. As in Figma, its hero space is 532 px and its close button 28 px. The close button shows only when the screen handles it, and copy you leave unset stays empty. On the web it’s a dialog named by its headline, which is a heading. When it has a close button, focus moves to its scrolling body, Tab cycles the body, the main button, and the close button, the arrow and Page keys scroll the body, Escape closes it, and focus returns when it’s removed. trapFocus={false} turns that off for a modal shown inside a page, as in these examples; In context, and the States example once you show it again, keep it. The published Storybook predates this build.</Sources>,
     },
   }
 
@@ -157,7 +158,7 @@ function FullscreenModalGuide() {
   }} playground={<>
     <div className="preview-stage">
       <Frame>
-        <FullscreenModal {...OFFER} {...footerProps} showClose={close} onClose={() => setAction('Close pressed')} onPrimaryAction={() => setAction('Upgrade for free pressed')}>
+        <FullscreenModal trapFocus={false} {...OFFER} {...footerProps} showClose={close} onClose={() => setAction('Close pressed')} onPrimaryAction={() => setAction('Upgrade for free pressed')}>
           {body ? BENEFITS : null}{body ? PLANS : null}
         </FullscreenModal>
       </Frame>

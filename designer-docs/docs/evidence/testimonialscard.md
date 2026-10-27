@@ -2,6 +2,18 @@
 
 Package, Figma, and Storybook evidence for the Testimonials Card guide (board ticket #86, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main 475ae733").
 
+## dbe0e02 publish (28 October 2026, #406)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #406 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- The name and the quote are both `#0d0d0f`, as in Figma. A one-line card is 180 × 112 (the name 14 px on a 16 px line, 2 px above the quote; the 1 px `#e8e8e8` stroke is drawn inside the frame); two quote lines give 128.
+- `avatarProps={{ monogram: 'AS' }}` alone shows the initials; without avatarProps the initials come from the title; imageSource still shows a photo. avatarProps.modes merge with the card's modes, and the avatar's own Avatar Size wins.
+- Pressed dims to 0.7; disabled is 0.5 with `aria-disabled` and `tabindex -1`; Enter and Space press it; no hover look. Disabled without onPress leaves a static card alone. The card reads once as the group “Testimonial from Aarav S.: …”.
+- The avatar is now wrapped in an `aria-hidden` div after an absolute stroke layer, so the anatomy's avatar target is `${R} [role="img"]`.
+- New, filed in this run as #418 (Component Bug, To do; Mr. Biscuit): every render warns “Variable with name "testimonialsCard/title/lineHeight" not found” (the component looks the missing token up before falling back to the subtitle's 16).
+
+Guide changes: the avatar selector; Configuration (monogram alone, initials from the title without avatarProps, the avatar's own Avatar Size wins); States (pressed and disabled looks) and both captions; Sizing (16 px name line, 2 px, 112 px as in Figma) and the A short quote caption; the first Do & Don't (“The sample photo” no longer happens) is now “The brand’s initials”; the Readout; Sources rewritten (28 October, 27 October build).
+
 ## Checked
 
 26 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae); `npm run coin:status` reports the mirror up to date with upstream. Rendered the installed package in the docs site's Vite setup (react-native-web 0.21.2) in headless Chrome.

@@ -72,3 +72,12 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code>, built from B
 
 ## Limits
 Don't show Dark, circularProgressBar Size, Nudge padding, Border Boolean, Button / State, context 10, style props, or demos of progressSlot, nudgeSlot, or buttonSlot. Don't imply a pressed, disabled, or loading state on the card or a disabled button.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/cardfinancialcondition.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October).
+- States, Inactive example: CFC({ progressState: 'Inactive' }) (no accessibilityLabel). The playground no longer passes accessibilityLabel.
+- Content: “… The default spoken name reads the title, the score, and the body, such as “Protection, 72 out of 100. Check your coverage and gaps”. While the ring is Inactive, it leaves out the score: “Protection. Check your coverage and gaps”.”
+- Sources: “… The card stays white in every mode, and its default spoken name includes the score only while the ring is Active. …”

@@ -2,6 +2,15 @@
 
 Package, Figma, and Storybook evidence for the Transaction Details guide (board ticket #9, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main 475ae733").
 
+## dbe0e02 publish (28 October 2026, #396)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #396 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- Web: the list is `ul role="list"` named by `accessibilityLabel` (no name without it); each Item is `li role="listitem"` named “label: value” (its own accessibilityLabel wins), its text hidden so it is read once, and not a Tab stop. Native (source): each Item is accessible with role text and label “label: value”; the list is `accessible={false}`, so iOS probably never says the list's name (not checked on a device). Layout unchanged.
+- From this fix, filed by the re-test run as #413 (Component Fix, To do): a TransactionDetails.Item on its own renders an `li` with no list. The guide never shows a standalone Item.
+
+Guide changes: In context names its list “Payment details” through accessibilityLabel and says so; Sources (28 October, 27 October build; a list named by its accessibilityLabel, each item read once as its label and value, phone screen readers read the items). The “never applied … reported” sentence is gone.
+
 ## Checked
 
 25 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, which contains 475ae733); the mirror is up to date with upstream. Rendered the installed package in the docs site's Vite setup (react-native-web 0.21.2) in headless Chrome, and the published Storybook story.

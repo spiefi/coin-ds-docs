@@ -2,6 +2,14 @@
 
 Package, Figma, and Storybook evidence for the Tooltip guide (board ticket #20, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## dbe0e02 publish (28 October 2026, #349)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). Verified 27 October on dbe0e02 (Penny run run_beaf2324; closed by Marcin); published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- Escape closes an open tooltip on the web again, with focus left on the trigger and `aria-describedby` removed: opened with Enter or Space after Tab, or with the mouse, and after Tabbing away. Controlled, onOpenChange gets [true, false]; Escape while closed calls nothing. Inside a ModalSheet one Escape still closes both, as before.
+
+Guide changes: States (“the next press anywhere, Escape on the web, or Android's back button closes it. After Escape, focus stays on the trigger.”); Sources (28 October, built from dbe0e02, Escape closes it). The #349 caveat is gone from the page.
+
 ## c8526ae publish (23 October 2026, #278)
 
 The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 23 October). `Tooltip.tsx` changed in c8526ae for #278: closing clears the measured bubble size, so the next open measures the current text before placing it (5990169 had added a second measuring pass inside the max width). Verified 23 October (Penny run run_5a688e4d; closed by Marcin) on this guide's playground at 1280 and 390 px: Side Top, Text Short, open, close, Text Long, open again: the long bubble spans y 331–437, 12 px above the trigger at 449–475, and doesn't cover it. Re-checked in this run (see the run report). Everything else in this file still holds for c8526ae; Escape still doesn't close an open bubble on the web (#349).

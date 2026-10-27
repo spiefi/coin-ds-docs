@@ -22,14 +22,15 @@ const F = (overrides: CardProps = {}) => <FitWidth>{M(overrides)}</FitWidth>
 
 const R = ':scope > div'
 const SEL = {
-  photo: `${R} > div:nth-child(1)`,
-  header: `${R} > div:nth-child(2)`,
-  avatar: `${R} > div:nth-child(2) [role="img"]`,
-  corner: `${R} > div:nth-child(2) > div:last-child`,
-  footer: `${R} > div:nth-child(3)`,
-  glass: `${R} > div:nth-child(3) > div:nth-child(2)`,
-  text: `${R} > div:nth-child(3) > div:last-child > div:first-child`,
-  button: `${R} > div:nth-child(3) > div:last-child > div:last-child`,
+  // Children: a press layer, the photo, the header, the blurred band, then the footer's content.
+  photo: `${R} > div:nth-child(2)`,
+  header: `${R} > div:nth-child(3)`,
+  avatar: `${R} > div:nth-child(3) [role="img"]`,
+  corner: `${R} > div:nth-child(3) > div:last-child`,
+  footer: `${R} > div:nth-child(5)`,
+  glass: `${R} > div:nth-child(5) > div:first-child`,
+  text: `${R} > div:nth-child(5) > div:last-child > div:first-child`,
+  button: `${R} > div:nth-child(5) > div:last-child > div:last-child`,
 }
 
 type Avatar = 'avatarSource' | 'avatarMonogram' | 'none'

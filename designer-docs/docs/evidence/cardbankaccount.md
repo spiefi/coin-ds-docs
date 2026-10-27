@@ -2,6 +2,10 @@
 
 Package, Figma, and Storybook evidence for the Card Bank Account guide (board ticket #7, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Rewrote CardBankAccount to the handwritten Storybook outline").
 
+## dbe0e02 install (28 October 2026, not this guide's tickets)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02) to publish the Component Fix batch #343–#406 (Penny run run_92acfa9d). Biscuit's ace46ca and dbe0e02 also changed CardBankAccount for #344, which isn't in that release, so this guide's copy wasn't re-checked and waits for #344's own publish. Only the anatomy selectors changed, so the page passes on this build: each row’s value now sits in its own wrapper, so the Value target is `${R} > div:nth-child(2) > div:first-child > div:last-child`. `npm run verify` passes.
+
 ## Checked
 
 19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October). `npm run coin:status` shows one newer upstream commit (c7d3348); `CardBankAccount.tsx`, `InstitutionBadge.tsx`, `Badge.tsx`, `Button.tsx` and the token JSON are byte-identical there. Rendered with react-native-web 0.21.2 in headless Chrome.

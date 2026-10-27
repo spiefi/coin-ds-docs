@@ -2,6 +2,10 @@
 
 Package, Figma, and Storybook evidence for the Page Hero guide (board ticket #159, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main 475ae733").
 
+## dbe0e02 install (28 October 2026, not this guide's tickets)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02) to publish the Component Fix batch #343–#406 (Penny run run_92acfa9d). Biscuit's ace46ca and dbe0e02 also changed PageHero for #405, which isn't in that release, so this guide's copy wasn't re-checked and waits for #405's own publish. Only the anatomy selectors changed, so the page passes on this build: the hero no longer has its 16 px horizontal padding (“Figma’s Page Hero has no horizontal inset”), so the Sizing diagram drops its padding mark. The Sizing copy (“keeps 16 px clear on each side”) and the 328 × 225 figure are now out of date and wait for #405. `npm run verify` passes.
+
 ## Checked
 
 26 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae); `npm run coin:status` reports the mirror up to date with upstream. Rendered the installed package in the docs site's Vite setup (react-native-web 0.21.2) in headless Chrome.

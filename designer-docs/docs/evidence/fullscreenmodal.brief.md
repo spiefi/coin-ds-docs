@@ -79,3 +79,11 @@ These replace the matching lines above; the guide file has the exact strings. Ev
 - Content: “A line you leave unset doesn’t show.”
 - Do/Don't 1 good caption: “The modal’s own black surface keeps the white text readable.” Do/Don't 2: Do “Write a headline” (GOLD) | Don't “Leave the headline out” (`{...GOLD} headline=""`): “It’s the modal’s heading and names it for screen readers.” / “The offer has no heading, and screen readers get no name for the modal.”
 - Sources: checked 23 October 2026; 23 October build; black surface; 532 px hero and 28 px close as in Figma; close only with a handler; empty copy by default; dialog named by the headline; focus handling with a close button; page opens at its last example (#392); Storybook predates the build.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/fullscreenmodal.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Every FullscreenModal rendered at page load gets `trapFocus={false}`. States keeps a `reshown` flag: `trapFocus={reshown}`, set true by “Show the offer”. In context keeps the default.
+- Sources: “… When it has a close button, focus moves to its scrolling body, Tab cycles the body, the main button, and the close button, the arrow and Page keys scroll the body, Escape closes it, and focus returns when it’s removed. trapFocus={false} turns that off for a modal shown inside a page, as in these examples; In context, and the States example once you show it again, keep it. …”

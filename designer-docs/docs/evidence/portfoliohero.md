@@ -2,6 +2,14 @@
 
 Package, Figma, and Storybook evidence for the Portfolio Hero guide (board ticket #135, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main 475ae733").
 
+## dbe0e02 publish (28 October 2026, #346)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #346 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- Money Value's amount is announced once with its currency (web: `role="img"`, axe-core clean on PortfolioHero; native, from the source: an accessible text element with the same label). PortfolioHero only groups its children when it has an `accessibilityLabel`.
+
+Guide changes: Sources only (28 October, 27 October build; “phone screen readers skip the amount” replaced by “Screen readers read the amount once, with its currency”).
+
 ## Checked
 
 26 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae); `npm run coin:status` reports the mirror up to date with upstream. Rendered the installed package in the docs site's Vite setup (react-native-web 0.21.2) in headless Chrome.

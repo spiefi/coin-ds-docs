@@ -125,10 +125,10 @@ function StepLabelGuide() {
       header: 'Do & Don’ts', title: 'Keep the label readable and named',
       description: 'Each pair shows a Step Label people can read and hear versus one that lets them down.',
       body: <div className="coin-new-stack">
-        <DoDont goodTitle="Keep the Step’s title" goodCaption="The stage is read as “Add nominee”."
+        <DoDont goodTitle="Keep the detail short" goodCaption="The stage is read as “Add nominee, Someone who can claim this account”."
           good={<Host><Stepper modes={LIGHT}>{labelled('current', 'Add nominee', 'Someone who can claim this account')}</Stepper></Host>}
-          badTitle="Rely on the label alone" badCaption="Without the Step’s title, it’s read as “Step 1”."
-          bad={<Host><Stepper modes={LIGHT}><Step {...stage('current')}><StepLabel title="Add nominee" supportingText="Someone who can claim this account" modes={LIGHT} /></Step></Stepper></Host>} />
+          badTitle="Write a long detail line" badCaption="Over 80 characters, the detail is shown but not read: only “Add nominee” is heard."
+          bad={<Host><Stepper modes={LIGHT}>{labelled('current', 'Add nominee', 'Choose someone who can claim this account and its investments if anything happens to you')}</Stepper></Host>} />
         <DoDont goodTitle="Leave the brand mode unset" goodCaption="The supporting text stays dark grey."
           good={<Host><StepLabel title="Verify PAN" supportingText="Match your PAN with your name" modes={LIGHT} /></Host>}
           badTitle="Pass a Primary brand mode" badCaption="AppearanceBrand Primary, even on the Stepper, turns the detail gold: 2.4:1 on white."
@@ -142,11 +142,11 @@ function StepLabelGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Step Label contract',
       description: 'The guide compares Step’s text frame in Figma with the installed package and its Storybook stories.',
-      body: <Sources checked="10 October 2026" figmaUrl={FIGMA} figmaDescription="Step’s text frame, in Coin Subcomponents" storybookUrl={docsUrl('steplabel')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} figmaDescription="Step’s text frame, in Coin Subcomponents" storybookUrl={docsUrl('steplabel')} stories={[
         { label: 'Default', id: 'components-steplabel--default' }, { label: 'Title only', id: 'components-steplabel--title-only' },
         { label: 'With supporting text', id: 'components-steplabel--with-supporting-text' }, { label: 'With meta', id: 'components-steplabel--with-meta' },
         { label: 'Long text', id: 'components-steplabel--long-text' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma has no Step Label component: it is the text frame inside Step in Coin Subcomponents, whose title, supporting text, and Meta text and subtitle and meta switches match the props. Only Color Mode, and AppearanceBrand for the supporting line, change the label, and it takes modes from its own prop or its Step, not from JFSThemeProvider. It has no role or name of its own: the Step around it is announced by the Step’s title. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. Figma has no Step Label component: it is the text frame inside Step in Coin Subcomponents, whose title, supporting text, and Meta text and subtitle and meta switches match the props. Only Color Mode, and AppearanceBrand for the supporting line, change the label, and it takes modes from its own prop, its Step, or JFSThemeProvider. It has no role or name of its own: the Step around it is announced by the label’s title, supporting text of up to 80 characters, and date, and the Step’s own title is ignored. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.</Sources>,
     },
   }
 

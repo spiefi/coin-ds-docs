@@ -34,7 +34,7 @@ const Fit = (overrides: PDPProps = {}) => <FitWidth>{PDP(overrides)}</FitWidth>
 
 const R = ':scope > div'
 const MEDIA = `${R} > div:nth-child(1)`
-const HEADING = `${R} > [role="heading"]`
+const HEADING = `${R} [role="heading"]`
 
 function PdpCcCardGuide() {
   const [count, setCount] = useState<'1' | '2' | '3'>('2')

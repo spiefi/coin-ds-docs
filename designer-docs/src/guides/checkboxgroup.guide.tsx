@@ -43,7 +43,7 @@ function CheckboxGroupGuide() {
       body: <Anatomy specimenWidth={272} marks={[GAP]} parts={[
         { name: 'Group', note: 'Full-width column with no padding of its own.', target: LIST, side: 'left' },
         { name: 'Checkbox Item', note: 'One independent choice.', target: `${LIST} > :nth-child(1)`, side: 'top' },
-        { name: 'Checkbox', note: 'Shows whether this option is selected.', target: `${LIST} > :nth-child(2) > [role="checkbox"]`, side: 'left' },
+        { name: 'Checkbox', note: 'Shows whether this option is selected.', target: `${LIST} > :nth-child(2) > [role="presentation"]`, side: 'left' },
         { name: 'Label', note: 'Names the option so it can be told apart.', target: `${LIST} > :nth-child(3) [dir="auto"]`, side: 'bottom' },
       ]}><Group labels={ACCOUNTS.slice(0, 3)} checkedFirst /></Anatomy>,
     },
@@ -111,9 +111,9 @@ function CheckboxGroupGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Checkbox Group contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="28 September 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('checkboxgroup')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('checkboxgroup')} stories={[
         { label: 'Default', id: 'components-checkboxgroup--default' }, { label: 'Controlled', id: 'components-checkboxgroup--controlled' }, { label: 'With end slot', id: 'components-checkboxgroup--with-end-slot' }, { label: 'With disabled items', id: 'components-checkboxgroup--with-disabled-items' }, { label: 'Empty', id: 'components-checkboxgroup--empty' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. The group forwards <code>modes</code> to every item and end-slot child and uses a 12 px gap with no padding. Figma rows are 18 px tall; the installed rows render 19 px. On the web, rows repeat the checkbox role inside the row, do not expose their checked state, and sit in a list without list items; the group’s name comes only from <code>accessibilityLabel</code>. Row behaviour is covered in the Checkbox Item guide.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. The group forwards <code>modes</code> to every item and end-slot child and uses a 12 px gap with no padding. Figma rows are 18 px tall; the installed rows render 19 px. On the web each row is one checkbox with one Tab stop that announces whether it is selected, and the rows sit in a list without list items; the group’s name comes only from <code>accessibilityLabel</code>. Row behaviour is covered in the Checkbox Item guide.</Sources>,
     },
   }
 

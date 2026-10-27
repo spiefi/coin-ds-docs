@@ -46,8 +46,8 @@ const DATE: Record<State, string> = {
 const WORD: Record<State, string | undefined> = {
   current: undefined, upcoming: undefined, done: 'Completed', attention: 'Needs attention', failed: 'Failed',
 }
-/** What a Step in a Stepper is read as: its title, supporting text of up to 80 characters, and the outcome. */
-const readAs = (s: State, support: boolean) => ['Verify PAN', support ? COPY[s] : undefined, WORD[s]].filter(Boolean).join(', ')
+/** What a Step in a Stepper is read as: its title, supporting text of up to 80 characters, the date, and the outcome. */
+const readAs = (s: State, support: boolean, date: boolean) => ['Verify PAN', support ? COPY[s] : undefined, date ? DATE[s] : undefined, WORD[s]].filter(Boolean).join(', ')
 
 const connectorOff = <Step {...stage('done')} title="Verify PAN" {...lines('PAN details match your name')} showLine={false} />
 const uploadStep = (onPress: () => void) => <Step {...stage('current')}>
@@ -128,7 +128,7 @@ function StepGuide() {
     },
     content: {
       header: 'Content', title: 'Name the stage, then say how it went',
-      description: 'Write the title as the stage in a few words, such as “Verify PAN”, not an action. Use the supporting text for what happens or what went wrong, and the date for when. Screen readers hear supporting text of up to 80 characters with the title. The glyph only says that a stage failed, not why.',
+      description: 'Write the title as the stage in a few words, such as “Verify PAN”, not an action. Use the supporting text for what happens or what went wrong, and the date for when. Screen readers hear the title, supporting text of up to 80 characters, and the date. The glyph only says that a stage failed, not why.',
       body: <ExampleCard title="Stage names and outcomes"><Host><Stepper modes={LIGHT}>
         <Step {...stage('done')} title="Verify PAN" {...lines('PAN details match your name')} />
         <Step {...stage('attention')} title="Add nominee" {...lines('Nominee’s date of birth is missing')} />
@@ -176,11 +176,11 @@ function StepGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Step contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="17 October 2026" figmaUrl={FIGMA} figmaDescription="Stepper, which places each Step" storybookUrl={docsUrl('step')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} figmaDescription="Stepper, which places each Step" storybookUrl={docsUrl('step')} stories={[
         { label: 'Default', id: 'components-step--default' }, { label: 'Complete', id: 'components-step--complete' },
         { label: 'Error', id: 'components-step--error-state' }, { label: 'Warning', id: 'components-step--warning-state' },
         { label: 'Last step', id: 'components-step--last-step' }, { label: 'Custom slot', id: 'components-step--custom-slot' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. In Figma, designers place Steps through Stepper in the Components Library (linked above); Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”. The date isn’t read, and a Step on its own isn’t a list item. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. In Figma, designers place Steps through Stepper in the Components Library (linked above); Step itself is a subcomponent in Coin Subcomponents, which designers don’t use directly. In Figma the Step Status mode sets the colour and a nested glyph variant the icon; in code <code>status</code> sets both, and an explicit Step Status mode overrides the colour. On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, the date, and “Completed”, “Failed”, or “Needs attention”. A Step on its own is a group with the same name. Figma’s done example shows a green date; the package keeps it grey. The published Storybook predates 0.1.78.</Sources>,
     },
   }
 
@@ -200,7 +200,7 @@ function StepGuide() {
       <Segment label="State" value={state} options={LABELS} onChange={setState} />
       <OnOff label="Supporting text" value={support} onChange={setSupport} />
       <OnOff label="Date" value={date} onChange={setDate} />
-      <Readout title="Read as" value={readAs(s, support)}>Screen readers hear the title, supporting text of up to 80 characters, and the outcome, but not the date.</Readout>
+      <Readout title="Read as" value={readAs(s, support, date)}>Screen readers hear the title, supporting text of up to 80 characters, the date, and the outcome.</Readout>
     </div>
   </>} sections={sections} />
 }

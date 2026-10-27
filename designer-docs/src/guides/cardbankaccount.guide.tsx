@@ -37,7 +37,7 @@ const P = {
   badge: `${R} > div:first-child > div:nth-child(2)`,
   rows: `${R} > div:nth-child(2)`,
   label: `${R} > div:nth-child(2) > div:first-child > div:first-child`,
-  value: `${R} > div:nth-child(2) > div:first-child > [dir="auto"]:last-child`,
+  value: `${R} > div:nth-child(2) > div:first-child > div:last-child`,
   button: `${R} > button`,
 }
 

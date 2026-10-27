@@ -7,7 +7,8 @@ import { defineGuide } from './define'
 const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4920-12956'
 const STORYBOOK = docsUrl('bubblechart')
 const R = ':scope > div'
-const B = (n: number) => `${R} > div:nth-child(${n})`
+/** The chart's first child is its hidden label-measuring block, so bubble n is child n + 1. */
+const B = (n: number) => `${R} > div:nth-child(${n + 1})`
 const CIRCLE = (n: number) => `${B(n)} [role="img"] > div > div:first-child`
 const VALUE = (n: number) => `${CIRCLE(n)} > div > div:first-child`
 const CAPTION = (n: number) => `${CIRCLE(n)} > div > div:last-child`
@@ -122,12 +123,12 @@ function BubbleChartGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Bubble Chart contract',
       description: 'The guide compares the Figma cluster bubble with the installed package and its Storybook stories.',
-      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
         { label: 'Default', id: 'components-bubblechart--default' }, { label: 'Uniform', id: 'components-bubblechart--uniform' },
         { label: 'Skewed', id: 'components-bubblechart--skewed' }, { label: 'All labels outside', id: 'components-bubblechart--all-labels-outside' },
         { label: 'Constrained', id: 'components-bubblechart--constrained' }, { label: 'Wide pool', id: 'components-bubblechart--wide-pool' },
         { label: 'Pressable', id: 'components-bubblechart--pressable' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma has no Bubble Chart: the Coin Components Library has the Cluster Bubble that each bubble is, with its label inside (Default) or outside (Freeform). Figma’s bubble text is 20 px with a 10 px caption at weight 800; the package scales the inside text with the bubble and sets outside labels at 24 and 14 px, weight 700. Sizes run from the smallest to the largest value, not in proportion to them. Appearance / DataViz and Context in the chart’s modes change nothing, and Page type and Text Appearance recolour only outside labels, so the guide doesn’t show them. Outside labels can be cut at the chart’s edge or overlap when there are many small bubbles. In Storybook every story’s bubbles are buttons, because Storybook adds onBubblePress to all of them.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. Figma has no Bubble Chart: the Coin Components Library has the Cluster Bubble that each bubble is, with its label inside (Default) or outside (Freeform). Figma’s bubble text is 20 px with a 10 px caption at weight 800; the package scales the inside text with the bubble and sets outside labels at 24 and 14 px, weight 700. Sizes run from the smallest to the largest value, not in proportion to them. Appearance / DataViz and Context in the chart’s modes change nothing. Page type and Text Appearance recolour outside labels, and inside text only where that colour stays readable on the bubble; otherwise inside text stays black or white. The guide doesn’t show them. Outside labels can be cut at the chart’s edge or overlap when there are many small bubbles. In Storybook every story’s bubbles are buttons, because Storybook adds onBubblePress to all of them.</Sources>,
     },
   }
 

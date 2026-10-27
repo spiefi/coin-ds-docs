@@ -2,6 +2,17 @@
 
 Package, Figma, and Storybook evidence for the Debit Card guide (board ticket #31, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main e60f8bd8").
 
+## dbe0e02 publish (28 October 2026, #363)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #363 verified 27 October on ace46ca (run_c79cb190) and again on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- SBI text is `#ffffff` on the `#5d00b5` brand (9.85:1), also when the brand comes from JFSThemeProvider; JFS stays `#141414` on `#cea15a` (7.78:1).
+- `cardArtSource={null}` and `showArt={false}` drop the art strip; the card stays 224 px. The art still doesn't change with the brand, and there's no brand foreground token.
+- The header is 73 px without a logo (Figma 73); a 29 px logo keeps 73; a 40 px logo grows it to 84.
+- Long bankName and cardType end in an ellipsis on one line. Pressed opacity 0.75; without onPress the root is a named group; disabled dims to 0.5 with `aria-disabled`.
+
+Guide changes: Configuration (showArt removes the strip; SBI has white text; new “Without the art” example; “Without a bank logo” keeps Figma's 73 px); States (pressed and disabled looks); Sizing (73 px with or without a 29 px logo); the Long names Don't now says each ends in an ellipsis; Sources rewritten for the fixes (28 October, 27 October build).
+
 ## Checked
 
 21 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348). `npm run coin:status` shows one newer upstream commit, e60f8bd8, which changes only Storybook MDX pages (`DebitCard.mdx` among them); the component last changed on 8 September. Rendered both the published Storybook and the installed package (docs site Vite config, react-native-web 0.21.2) in headless Chrome; the numbers match.

@@ -63,7 +63,7 @@ function SegmentedControlGuide() {
     },
     sizing: {
       header: 'Sizing', title: 'Full width, 43 px tall, equal segments',
-      description: 'The track fills its container and splits it equally, with 8 px between segments and no padding of its own. Each segment is 43 px tall: 12 px above and below a 19 px label, with 16 px at each side. A label that doesn’t fit ends in an ellipsis. In a row, give the track a width: on its own it is too narrow for its longer labels.',
+      description: 'The track fills its container and splits it equally, with 8 px between segments and no padding of its own. Each segment is 43 px tall: 12 px above and below a 19 px label, with 16 px at each side. A label that doesn’t fit ends in an ellipsis, and the track never runs past its column. In a row, the track is as wide as its labels need, 304 px for Daily, Weekly, and Monthly, and a narrower row ends them in an ellipsis.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} surface="white" specimenWidth={328} marks={[
           { kind: 'size', target: '[role="tab"]:nth-child(1)', side: 'bottom', label: 'both' },
@@ -111,11 +111,11 @@ function SegmentedControlGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Segmented Control contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedcontrol')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('segmentedcontrol')} stories={[
         { label: 'Default', id: 'components-segmentedcontrol--default' },
         { label: 'Two segments', id: 'components-segmentedcontrol--two-segments' },
         { label: 'Interactive', id: 'components-segmentedcontrol--interactive' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Segmented Control is one 393 × 43 component whose slot holds the segments; the package matches its colours, its 43 px height, and its equal widths. Labels that don’t fit end in an ellipsis. On the web the control is a tab list: the selected segment is announced as selected and is the only one in the Tab order, and Enter, Space, and the arrow keys select. Dark mode shows the same colours as Light, so this page shows Light only. The published Storybook predates the current stories.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. Figma’s Segmented Control is one 393 × 43 component whose slot holds the segments; the package matches its colours, its 43 px height, and its equal widths. Labels that don’t fit end in an ellipsis. On the web the control is a tab list: the selected segment is announced as selected and is the only one in the Tab order, and Enter, Space, and the arrow keys select. Dark mode shows the same colours as Light, so this page shows Light only. The published Storybook predates the current stories.</Sources>,
     },
   }
 

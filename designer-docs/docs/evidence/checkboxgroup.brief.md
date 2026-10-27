@@ -62,3 +62,11 @@ note: Declared, installed, and registry <code>jfs-components</code> versions are
 
 ## Limits
 Do not describe select-all, maximum selections, validation, or an error state. Do not show `style` overrides. Do not claim checked state is announced.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/checkboxgroup.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Anatomy part 3 (Checkbox) target: `${LIST} > :nth-child(2) > [role="presentation"]`.
+- Sources note: “Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. … On the web each row is one checkbox with one Tab stop that announces whether it is selected, and the rows sit in a list without list items; …”

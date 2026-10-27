@@ -31,7 +31,7 @@ function ExpandableCheckboxGuide() {
       header: 'Anatomy', title: 'A checkbox row with its own toggle',
       description: 'The checkbox item holds the box, the consent label, and an optional link to the document. Read more sits at the end of the row and only opens or closes the text.',
       body: <Anatomy specimenWidth={328} parts={[
-        { name: 'Checkbox', note: 'Ticking it gives consent; the label and row tick it too.', target: '[role="checkbox"] [role="checkbox"]', side: 'left' },
+        { name: 'Checkbox', note: 'Ticking it gives consent; the label and row tick it too.', target: '[role="checkbox"] > [role="presentation"]', side: 'left' },
         { name: 'Label', note: 'The consent phrase, cut to one line with an ellipsis when long.', target: '[role="checkbox"] [dir="auto"]', side: 'top' },
         { name: 'Terms link', note: 'Opens the document; pressing it doesn’t tick the box.', target: '[role="link"]', side: 'bottom' },
         { name: 'Read more', note: 'Shows the full text; it never ticks the box.', target: 'button', side: 'right' },
@@ -108,7 +108,7 @@ function ExpandableCheckboxGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Expandable Checkbox contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('expandablecheckbox')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('expandablecheckbox')} stories={[
         { label: 'Default', id: 'components-expandablecheckbox--default' },
         { label: 'Expanded', id: 'components-expandablecheckbox--expanded' },
         { label: 'Checked', id: 'components-expandablecheckbox--checked' },
@@ -116,7 +116,7 @@ function ExpandableCheckboxGuide() {
         { label: 'Long label', id: 'components-expandablecheckbox--long-label' },
         { label: 'Two-line collapse', id: 'components-expandablecheckbox--two-line-collapse' },
         { label: 'Custom button labels', id: 'components-expandablecheckbox--custom-button-labels' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Expandable Checkbox has two states, Idle and Open; checked, disabled, the number of collapsed lines, and the toggle labels exist only in the package. Figma and the package both set the label in regular weight. On the web the row is one checkbox that announces whether it is ticked, Read more announces whether the text is open, and Enter or Space ticks the box. The Terms link opens with the keyboard, and an open sentence wraps inside the row.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. Figma’s Expandable Checkbox has two states, Idle and Open; checked, disabled, the number of collapsed lines, and the toggle labels exist only in the package. Figma and the package both set the label in regular weight. On the web the row is one checkbox that announces whether it is ticked, Read more announces whether the text is open, and Enter or Space ticks or unticks the box once. The Terms link opens with the keyboard, and an open sentence wraps inside the row.</Sources>,
     },
   }
 

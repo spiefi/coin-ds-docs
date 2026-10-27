@@ -2,6 +2,14 @@
 
 Package, Figma, and Storybook evidence for the Card Financial Condition guide (board ticket #65, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Rewrote CardFinancialCondition to the handwritten outline. On GitHub main 7b7c79f0").
 
+## dbe0e02 publish (28 October 2026, #350)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). Verified 27 October on dbe0e02 (Penny run run_beaf2324; closed by Marcin); published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- While Inactive the default spoken name leaves out the score: the defaults, Inactive with 72, `progressState={false}`, and Inactive with valueLabel all read “Protection. Check your coverage and gaps”; the ring reads “Inactive progress”. Active still reads “Protection, 72 out of 100. Check your coverage and gaps”; valueLabel “Good” reads “Protection, Good. …”.
+
+Guide changes: the Inactive example and the playground no longer set accessibilityLabel; Content says that while the ring is Inactive the name leaves out the score; Sources (28 October, built from dbe0e02, the name includes the score only while Active).
+
 ## Checked
 
 19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348), which fixes #285: the button is always Context CTACard, and the default spoken name comes from the new `financialConditionName.ts`. Re-tested in headless Chrome (react-native-web 0.21.2) at 1280 and 390 px on 19 October (Penny run run_43afbe70), and measured again in the guide while publishing.

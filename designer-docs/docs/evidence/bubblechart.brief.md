@@ -71,3 +71,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Do not show Color Mode, Page type, Text Appearance, Context, Appearance / DataViz in the chart’s modes, `color`, `iterations`, `labelGap`, `appearanceCycle`, or `style`. Do not imply that bubble area is proportional to the value, that bubbles never overlap or clip, that positions mean anything, or that there is a selected state, legend, tooltip, or animation.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/bubblechart.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- `B(n)` = `${R} > div:nth-child(${n + 1})` (the first child is the hidden label-measuring block).
+- Sources: “… Appearance / DataViz and Context in the chart’s modes change nothing. Page type and Text Appearance recolour outside labels, and inside text only where that colour stays readable on the bubble; otherwise inside text stays black or white. The guide doesn’t show them. …”

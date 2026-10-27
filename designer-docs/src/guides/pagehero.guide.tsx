@@ -102,7 +102,6 @@ function PageHeroGuide() {
       body: <Anatomy legend={false} specimenWidth={328} marks={[
         { kind: 'size', target: S, side: 'bottom', label: 'both' },
         { kind: 'gap', from: S_EYEBROW, to: S_HEADLINE },
-        { kind: 'padding', target: S },
       ]}>{PG({ testID: 'pg-sizing' })}</Anatomy>,
     },
     content: {

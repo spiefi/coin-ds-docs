@@ -73,3 +73,13 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Do not show Dark mode, `connectorStyle`, `style`, `isCurrent`, a Stepper-level Step Status, or a glyph with a mismatched colour outside the Don’t. Do not imply that a Step is pressable or that the glyph, supporting text, or date is announced.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/step.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- `readAs(s, support, date)` joins 'Verify PAN', the supporting text (if on), the date (if on), and the outcome word.
+- Readout note: “Screen readers hear the title, supporting text of up to 80 characters, the date, and the outcome.”
+- Content: “… Screen readers hear the title, supporting text of up to 80 characters, and the date. …”
+- Sources note: “… (27 October build) … supporting text of up to 80 characters, the date, and “Completed”, “Failed”, or “Needs attention”. A Step on its own is a group with the same name. …”

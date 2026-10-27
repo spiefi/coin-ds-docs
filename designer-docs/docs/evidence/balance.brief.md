@@ -64,3 +64,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Do not show Color Mode, Page type JioPlus, `style` overrides, or non-Coin children in the slot. Do not imply that the Balance formats the amount, that it is pressable or has states, that a slotted Money Value can take another Context3, or that the title changes with any mode.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/balance.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Selectors: CURRENCY = `${R} > div:nth-child(2) [role="img"] > [dir="auto"]`; AMOUNT = `${R} > div:nth-child(2) [role="img"] > div:last-child > [dir="auto"]`.
+- Sources: “… (27 October build) … The package’s default amount is “50,000.67”, as in Figma and Storybook. … Page type JioPlus turns both the title and the amount white. On the web the amount is announced once, with its currency, such as “₹50,000.67”. The published Storybook docs page for Balance still doesn’t load: the fix is in Biscuit’s source but not yet deployed; its stories load.”

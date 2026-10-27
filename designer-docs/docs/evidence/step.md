@@ -2,6 +2,20 @@
 
 Package, Figma, Storybook, and browser evidence for the Step guide (board ticket #36, Design documentation — Marcin; Storybook coverage — Biscuit, done). The Stepper guide's evidence (`stepper.md`) covers the list as a whole.
 
+## dbe0e02 publish (28 October 2026, #235)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). Verified 27 October on dbe0e02 (Penny run run_beaf2324; closed by Marcin); published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- A Step's spoken name is its title, supporting text of up to 80 characters (no line break), its date, and the outcome word: “Verify PAN, PAN details match your name, Done 2 Oct 2026, Completed”. The date (`metaText`) is read now.
+- A standalone Step is `role="group"` with that name, not a list item; inside a Stepper it is `li role="listitem"` with the same name.
+- With a StepLabel child, the child's title, supporting text and date make the name, and the Step's own title and date are ignored.
+- Step.mdx's Accessibility table matches the code. Unchanged edge rules: supporting text over 80 characters isn't read; a Step with no title shows “Stepper Item” and is read “Step 1”.
+- Checked in this run on the guide (headless Chrome, 1280 px): every list item and group name on the page matches the playground's “Read as” value.
+
+Guide changes: the playground's “Read as” value now includes the date and its note says the date is read; Content says screen readers hear the title, supporting text and date; Sources: 28 October, 27 October build, the date is read, a Step on its own is a group with the same name.
+
+Not changed in this publish: the agent pack's released guidance (`agent-pack/guidance/step.json`, release 0.1.78+2) still quotes the old copy that the date is never read. It is re-extracted through the pack's own pipeline (`agent-pack/README.md`), as after earlier publishes.
+
 ## Checked
 
 Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5); `npm run coin:status` reports the mirror and the docs up to date. `Step.tsx`, `StepLabel.tsx`, and `Stepper.tsx` are identical to upstream.

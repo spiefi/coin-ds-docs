@@ -88,7 +88,7 @@ function TooltipGuide() {
     },
     states: {
       header: 'States', title: 'Closed, open, and how it closes',
-      description: 'A press on the trigger opens it; there\'s no hover, focus, or timer. While it\'s open a clear layer covers the page: the next press anywhere, or Android\'s back button, closes it. On the web Escape doesn\'t close it (#349). The screen can also open it itself with open and hear every close through onOpenChange.',
+      description: 'A press on the trigger opens it; there\'s no hover, focus, or timer. While it\'s open a clear layer covers the page: the next press anywhere, Escape on the web, or Android\'s back button closes it. After Escape, focus stays on the trigger. The screen can also open it itself with open and hear every close through onOpenChange.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Opens on press" description="Press the i to open it; press anywhere to close it."><Term term="Expense ratio" label="About expense ratio" text={EXPENSE} /></ExampleCard>
         <ExampleCard title="Opened by the screen" description="The screen decides when it shows, for example a first-time hint, and hears every close."><ScreenOpened /></ExampleCard>
@@ -140,10 +140,10 @@ function TooltipGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Tooltip contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="23 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tooltip')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('tooltip')} stories={[
         { label: 'Default', id: 'components-tooltip--default' }, { label: 'Long text', id: 'components-tooltip--long-text' },
         { label: 'Slot', id: 'components-tooltip--slot' }, { label: 'Edge detection', id: 'components-tooltip--edge-detection' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c8526ae (23 October) and taken from the team’s private package repository. Figma’s Tooltip is a near-black bubble with a downward arrow near its bottom left or right, in two variants, Custom Width Off (up to 280 px) and On. In code the bubble hugs its text up to 280 px or takes a set width, centres the arrow on the trigger, offers 12 placements, and stays 8 px inside the screen. It opens on press only, over the whole window, and the next press anywhere closes it. It measures its text each time it opens, so a bubble whose text has grown still sits clear of its trigger. On the web the bubble is a tooltip tied to its trigger, but Escape doesn’t close it (#349). Storybook’s stories use a plain grey box as the trigger; these examples pass a Coin IconButton with asChild, though a Coin button nested inside the trigger opens it too.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at dbe0e02 (27 October) and taken from the team’s private package repository. Figma’s Tooltip is a near-black bubble with a downward arrow near its bottom left or right, in two variants, Custom Width Off (up to 280 px) and On. In code the bubble hugs its text up to 280 px or takes a set width, centres the arrow on the trigger, offers 12 placements, and stays 8 px inside the screen. It opens on press only, over the whole window, and the next press anywhere closes it. It measures its text each time it opens, so a bubble whose text has grown still sits clear of its trigger. On the web the bubble is a tooltip tied to its trigger, and Escape closes it. Storybook’s stories use a plain grey box as the trigger; these examples pass a Coin IconButton with asChild, though a Coin button nested inside the trigger opens it too.</Sources>,
     },
   }
 

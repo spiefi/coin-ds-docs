@@ -66,3 +66,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October b
 
 ## Limits
 Don't show or mention Color Mode or dark mode. Don't imply the hero presses, copies the number, has a default avatar, or that the title truncates.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/threadhero.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October).
+- Configuration: “… The hero passes its modes to the avatar, and the avatar’s own modes win, so set Avatar Size on the hero or on the avatar; Figma uses L, 42 px.”
+- Sources: “… The title wraps, as in Figma, and the avatar’s own modes win over the hero’s. In Biscuit’s source, Storybook’s page now says the title wraps and its stories show a Monogram avatar.”

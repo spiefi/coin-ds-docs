@@ -48,17 +48,17 @@ function TransactionBubbleGuide() {
       body: <Anatomy parts={[
         { name: 'Description', note: 'description, 14 px on one line; it ellipsizes unless disableTruncation.', target: DESCRIPTION, side: 'top' },
         { name: 'Amount', note: 'A Money Value from value and currency, at the bubble’s size.', target: AMOUNT, side: 'left' },
-        { name: 'Status', note: 'A Transaction Status from status and date; the mode colours its mark.', target: STATUS, side: 'bottom' },
+        { name: 'Status', note: 'A Transaction Status from status and date; the mode sets its mark.', target: STATUS, side: 'bottom' },
         { name: 'Chevron', note: 'A Nav Arrow that says the bubble opens; statusSlot removes it.', target: CHEVRON, side: 'right' },
         { name: 'Bubble', note: 'White, with a 1 px grey border, 23 px corners and 16 px padding.', target: R, side: 'right', at: 0.25 },
       ]}>{TB()}</Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'Status, a note, your own status line',
-      description: 'Set the Transaction Status mode on the bubble to colour its status mark: Request orange (the default), Paid green, Declined red, Expired grey; status and date give the words. children add a row between the amount and the status, such as the note sent with the payment. statusSlot replaces the status line and the chevron with your own content. No other mode changes the bubble.',
+      description: 'Set the Transaction Status mode on the bubble to set its status mark: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”; status and date give the words. children add a row between the amount and the status, such as the note sent with the payment. statusSlot replaces the status line and the chevron with your own content. No other mode changes the bubble.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Paid" description="A green mark beside Paid.">{TB()}</ExampleCard>
-        <ExampleCard title="Declined" description="A red mark; the words come from status.">{TB({ description: 'Payment to Uber India', value: '56', status: 'Declined', date: '20 Mar 2025', modes: ts('Declined') })}</ExampleCard>
+        <ExampleCard title="Paid" description="A green tick beside Paid.">{TB()}</ExampleCard>
+        <ExampleCard title="Declined" description="A red cross; the words come from status.">{TB({ description: 'Payment to Uber India', value: '56', status: 'Declined', date: '20 Mar 2025', modes: ts('Declined') })}</ExampleCard>
         <ExampleCard title="With a note" description="children sit between the amount and the status.">{TB({ children: NOTE })}</ExampleCard>
         <ExampleCard title="Without the chevron" description="statusSlot replaces the line and the chevron.">{TB({ statusSlot: <TransactionStatus status="Paid" date="21 Oct 2026" /> })}</ExampleCard>
       </div>,
@@ -103,18 +103,18 @@ function TransactionBubbleGuide() {
       header: 'Do & Don’ts', title: 'One payment, said once',
       description: 'Each pair shows a bubble people read at a glance next to one that contradicts or buries the payment.',
       body: <div className="coin-new-stack">
-        <DoDont good={TB()} bad={TB({ modes: LIGHT })} goodTitle="The mode with the word" goodCaption="Paid with the Paid mode: a green mark." badTitle="Only the word" badCaption="Paid keeps the orange Request mark." />
+        <DoDont good={TB()} bad={TB({ modes: LIGHT })} goodTitle="The mode with the word" goodCaption="Paid with the Paid mode: a green mark." badTitle="Only the word" badCaption="Paid gets the default Expired mode’s grey “!”." />
         <DoDont good={TB()} bad={TB({ children: <Text text="UPI ID 101674916166 · HDFC Bank ··4821" /> })} goodTitle="Who and how much" goodCaption="The receipt opens from the bubble." badTitle="Receipt fields inside" badCaption="The bubble becomes a receipt; put these in Transaction Details." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Transaction Bubble contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="25 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('transactionbubble')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('transactionbubble')} stories={[
         { label: 'Default', id: 'components-transactionbubble--default' },
         { label: 'Successful transaction', id: 'components-transactionbubble--successful-transaction' },
         { label: 'With press and slot', id: 'components-transactionbubble--with-press-and-slot' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build of Biscuit’s main) from the team’s private package repository. Figma’s Transaction Bubble exposes one property, <code>Description</code>; its amount and status line are nested instances, and its status comes from the Transaction Status variable mode. The package takes <code>description</code>, <code>value</code>, <code>currency</code>, <code>status</code>, and <code>date</code> as props, and the mode only colours a “!” mark, where Figma swaps the icon. The bubble is 119 px tall where Figma’s is 109, its description is Regular where Figma’s is Medium, and its default accessible name leaves out the amount and date. In Storybook, the Successful story keeps the orange mark and the slot story shows two amounts (all reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Transaction Bubble exposes one property, <code>Description</code>; its amount and status line are nested instances, and its status comes from the Transaction Status variable mode. The package takes <code>description</code>, <code>value</code>, <code>currency</code>, <code>status</code>, and <code>date</code> as props, and the mode sets the status mark’s icon and colour, as in Figma. The bubble is 119 px tall where Figma’s is 109, its description is Regular where Figma’s is Medium, and its default accessible name leaves out the amount and date. In Storybook, the Successful story keeps the orange mark and the slot story shows two amounts (all reported).</Sources>,
     },
   }
 

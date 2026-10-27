@@ -137,11 +137,11 @@ function PortfolioHeroGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Portfolio Hero contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="26 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('portfoliohero')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('portfoliohero')} stories={[
         { label: 'Default', id: 'components-portfoliohero--default' },
         { label: 'Without Slot', id: 'components-portfoliohero--without-slot' },
         { label: 'Custom Slot Content', id: 'components-portfoliohero--custom-slot-content' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build of Biscuit’s main) from the team’s private package repository. Figma’s Portfolio Hero has <code>Top Slot</code>, <code>Bottom Slot</code>, and <code>Action Slot</code> switches; the package has a fixed label and amount, <code>children</code> for the slot, and no action. Figma shows the Jio logo by default; the package shows an avatar only with <code>imageSource</code>, and Storybook’s Default story shows a stock photo there instead. The amount sits on a 44 px line, so the hero is taller than Figma’s 159 px, and phone screen readers skip the amount (all reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Portfolio Hero has <code>Top Slot</code>, <code>Bottom Slot</code>, and <code>Action Slot</code> switches; the package has a fixed label and amount, <code>children</code> for the slot, and no action. Figma shows the Jio logo by default; the package shows an avatar only with <code>imageSource</code>, and Storybook’s Default story shows a stock photo there instead. The amount sits on a 44 px line, so the hero is taller than Figma’s 159 px (all reported). Screen readers read the amount once, with its currency.</Sources>,
     },
   }
 

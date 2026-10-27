@@ -2,6 +2,16 @@
 
 Package, Figma, Storybook, and browser evidence for the Fullscreen Modal guide (board ticket #28, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## dbe0e02 publish (28 October 2026, #393, #392)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #393 verified 27 October on ace46ca and dbe0e02; #392 verified on dbe0e02 (run_beaf2324); both closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- #393: with onClose the scroll area has `tabindex="0"`, gets focus on open, and is in the Tab cycle (scroll area → Upgrade for free → Close); ArrowDown, Page Down, End and Home scroll it. Without onClose, or with `trapFocus={false}`, Chrome makes the scroll area a Tab stop itself.
+- #392: with `trapFocus={false}`, a modal shown from the first render leaves focus on the page at scroll 0 and Tab passes through it. With default props one shown at load still takes focus (unchanged on purpose), so the guide passes `trapFocus={false}` to every modal shown at load. With `trapFocus={false}` Escape doesn't close it (Escape belongs to the trap), and it is still `role="dialog" aria-modal="true"`.
+- Checked in this run: after loading the guide at 1280 px, focus is on the body and the page is at scroll 0 (it used to land on the last example's “Upgrade for free” at y 10175).
+
+Guide changes: every FullscreenModal shown at load (anatomy, configuration, sizing, content, Do & Don'ts, playground) takes `trapFocus={false}`; the States example traps again once it is shown again with its button; In context keeps the default trap. Sources: 28 October, 27 October build, focus moves to the scrolling body and Tab cycles the body, the main button and the close button, the keys scroll the body, and trapFocus={false} turns that off for a modal shown inside a page; the #392 sentence is gone.
+
 ## Checked
 
 Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5); `npm run coin:status` reports the mirror and the docs up to date. `FullscreenModal.tsx` is identical to upstream.

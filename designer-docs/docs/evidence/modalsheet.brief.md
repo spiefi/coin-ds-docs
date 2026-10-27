@@ -67,3 +67,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October b
 
 ## Limits
 Do not show `presentationProgress` or the page-stack hook as designer settings (the kit wires them, as Storybook does), `style`, or `topInset` outside its Configuration example. Show Page type JioPlus as it ships (dark text and a white HelloJio pill since the 12 October build); never restyle or re-mode the slot content to hide #255. Page type and drag to close appear only where this brief puts them. Do not imply a title, handle, or close button of its own, focus trapping, Escape, or that the scrim calls `onRequestClose`.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/modalsheet.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Frame and the playground keep a `reopened` flag: `trapFocus={reopened}`, set true by the screen's open button. The anatomy and sizing sheets take `trapFocus={false}`. In context keeps the default.
+- Sources: “… On the web it’s a dialog named by its App Bar title, and a hidden sheet leaves the Tab order. When the screen shows it, focus moves to its first control (the X here) and Tab stays inside; Escape, even from the text field, the X, or the scrim closes it and returns focus to what opened it. trapFocus={false} turns that off for a sheet shown inside a page, as these examples are until you open them again; In context keeps it. …”

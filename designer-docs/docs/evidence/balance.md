@@ -2,6 +2,18 @@
 
 Package, Figma, and Storybook evidence for the Balance guide (board ticket #48, Design documentation — Marcin; Storybook coverage — Biscuit).
 
+## dbe0e02 publish (28 October 2026, #346)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #346 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- A static amount is announced once with its currency: Money Value's row is `role="img"` named “₹50,000.67”, with the visible ₹ and digits `aria-hidden`; no `aria-disabled`, no tabindex; axe-core reports nothing. Pressable and editable amounts are still buttons. Native (source): the row is accessible with role text and the same label.
+- Page type JioPlus turns the title white with the amount. Under Color Mode Dark the title token stays `#0c0d10` over a `#fff5e8` amount (single-mode title token: Marcin's part).
+- Balance.mdx imports every block it uses (source). Checked in this run: the published Storybook docs page (`components-balance--docs`) still fails with “Expected component `Controls` to be defined”: the hosted Storybook hasn't been redeployed with the fix.
+- testID and accessibilityLabel work; the default amount is 50,000.67. `data-node-id` is still dropped on the web.
+- The anatomy's Currency and Amount targets used `[tabindex]`, which the static amount no longer has; they now use `[role="img"]`.
+
+Guide changes: the anatomy selectors; Sources (28 October, 27 October build; default amount 50,000.67; JioPlus turns both title and amount white; the amount is announced once with its currency; the published docs page still doesn't load because the fix isn't deployed yet).
+
 ## Checked
 
 Checked 19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October). `npm run coin:status` reports Biscuit's `main` at c7d3348 (19 October), which the mirror lacks; that commit touches 20 files (Badge, CardFeedback, CategoryCard, SegmentedControl and others) and nothing under `Balance/`, `MoneyValue/`, `utils/react-utils.ts`, `utils/typography.ts`, or the tokens. The installed `Balance.tsx` is identical to upstream; it was last changed in v0.1.72 (caae7523, 13 August).

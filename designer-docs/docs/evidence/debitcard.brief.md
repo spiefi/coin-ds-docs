@@ -71,3 +71,14 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (19 October b
 
 ## Limits
 Don't show or mention Color Mode or dark mode. Don't imply the brand mode changes the art or text, that the art can be removed, that header text truncates, or that the card flips, freezes, or shows a CVV.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/debitcard.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October).
+- Configuration description: “… cardArtSource replaces it with your picture, and showArt={false} removes it while the card keeps its 224 px. The DebitCard brand mode colours the card: JFS gold with dark text by default, or SBI purple with white text. …” Examples: Without a bank logo — “The top band keeps Figma’s 73 px.”; new Without the art — Fit({ showArt: false }) — “showArt={false} removes the strip; the card stays 224 px tall.”; DebitCard brand SBI — “A purple card with white text.”
+- States: “… A pressable card dims while pressed, and disabled stops it and dims it to half. The card doesn’t flip, freeze, or show a CVV.” Button — “The whole card presses and dims while you press it.”
+- Sizing: “… The top band is 73 px with or without a 29 px bank logo; a taller logo makes it taller.”
+- Do & Don'ts, Long names: “Each ends in an ellipsis, so the card type is lost.”
+- Sources: “… The package ships no logos; the top band keeps Figma’s 73 px without one. On the SBI brand the text is white. <code>cardArtSource</code> replaces the art strip and <code>showArt={false}</code> removes it, though the art doesn’t change with the brand. Long bank or type text ends in an ellipsis, and a pressable card dims while pressed. Every published Storybook story …”

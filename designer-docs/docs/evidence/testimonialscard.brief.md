@@ -64,3 +64,15 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October b
 
 ## Limits
 Don't show or mention Color Mode or dark mode. Don't imply the card stretches to its host, truncates, has a pressed or disabled look, a rating, a date, or a link, or that monogram alone shows initials.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/testimonialscard.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October). AVATAR = `${R} [role="img"]`.
+- Configuration: “The card always shows an Avatar, and avatarProps sets it: monogram shows the person’s initials, and imageSource shows their photo. Without avatarProps it shows the initials of the title. Avatar Size on the card’s modes sets it to 42, 36, or 29 px; an Avatar Size in avatarProps’ own modes wins.”
+- States: “… With onPress the whole card is one button, so give it an accessibilityLabel that says where it goes; it dims while pressed and has no hover look. disabled dims it to half, stops presses, and takes it out of the Tab order.” onPress — “One button; it dims while you press it.”; disabled — “Dimmed to half; presses do nothing.”
+- Sizing: “… 12 px of padding, the 42 px avatar, 12 px, the name on a 16 px line, 2 px, then 16 px for each line of the quote. With a one-line quote it is 112 px tall, as in Figma.” Content, A short quote — “One line: 112 px tall.”
+- Do & Don'ts, first pair: Don't The brand’s initials — TC({ avatarProps: MONO('JF') }) — “JF” beside Aarav S. reads as the company, not the customer.
+- Readout: “onPress makes the whole card one button, which dims while pressed.”
+- Sources: “… The package matches Figma’s <code>#0d0d0f</code> for the name and the quote and its 112 px one-line card. <code>monogram</code> alone in <code>avatarProps</code> shows initials, and a pressable card dims while pressed.”

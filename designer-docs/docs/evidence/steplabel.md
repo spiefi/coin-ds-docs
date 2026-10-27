@@ -2,6 +2,16 @@
 
 Package, Figma, Storybook, and browser evidence for the Step Label guide (board ticket #162, Design documentation — Marcin; Storybook coverage — Biscuit, done). The Step guide's evidence (`step.md`) covers the row around it and the Stepper guide's (`stepper.md`) the list.
 
+## dbe0e02 publish (28 October 2026, #235)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). Verified 27 October on dbe0e02 (Penny run run_beaf2324; closed by Marcin); published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- Step, StepLabel and Stepper read JFSThemeProvider (fixed in c1fa197, unchanged since): Dark on the provider turns the label white.
+- With a StepLabel child, the Step is announced by the label's title, supporting text of up to 80 characters, and date; the Step's own title is ignored. Checked in this run on the guide: “Add nominee, Someone who can claim this account”; with an 88-character detail line, only “Add nominee”.
+- StepLabel.mdx lists `testID`, and its modes table says Emphasis, Semantic Intent and AppearanceSystem don't change the text.
+
+Guide changes: the first Do & Don't pair (“Keep the Step's title” / “Rely on the label alone … read as Step 1”) no longer held and is replaced by “Keep the detail short” / “Write a long detail line” (over 80 characters the detail is shown but not read); Sources: 28 October, 27 October build, the label takes modes from JFSThemeProvider too, and the Step is announced by the label's title, supporting text and date.
+
 ## Checked
 
 Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5); `npm run coin:status` reports the mirror and the docs up to date. `StepLabel.tsx` is byte-identical to upstream.

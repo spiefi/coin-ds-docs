@@ -65,3 +65,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October b
 
 ## Limits
 Don't show or mention Color Mode or dark mode. Don't imply the list presses, copies, collapses, or pages, that it has a surface or dividers, or that it names itself for screen readers.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/transactiondetails.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October). `TD(items, accessibilityLabel?)` passes the label to TransactionDetails; In context uses TD(UPI, 'Payment details').
+- In context: “… The screen adds the heading and the action; the list only holds the facts, and its accessibilityLabel, Payment details, names it for screen readers.”
+- Sources: “… On the web it’s a list named by its <code>accessibilityLabel</code>, and each item is read once as its label and value, unless the item’s own <code>accessibilityLabel</code> replaces them; phone screen readers read the items too.”

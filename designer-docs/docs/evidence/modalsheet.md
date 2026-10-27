@@ -2,6 +2,17 @@
 
 Package, Figma, Storybook, and browser evidence for the Modal Sheet guide (board ticket #3, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## dbe0e02 publish (28 October 2026, #234, #392)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #234 and #392 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- #234: with fillHeight and a top inset of 40 the sheet spans y 40–640 in a 640 px host; two Text children are 12 px apart; a hidden sheet is out of the Tab order, its host inert and `aria-hidden`; the sheet is `role="dialog"` named by its App Bar title (“Ask HelloJio”), with `aria-modal="true"` only while open; the scrim is `tabindex="-1"`, `aria-hidden` and never a Tab stop. Opened from a button, focus goes to the X (or the first button; the dialog when it holds only text), Tab cycles input → Send → X, and Escape (also from the input), the X and a scrim click return focus to the opener. ModalSheet.mdx's Focus row matches. Not this ticket: the App Bar heading's name is “Jio Close Ask HelloJio”, and the drag hint has no web mapping.
+- #392: with `trapFocus={false}`, a sheet shown from the first render leaves focus on the page; user-opened sheets with default props still trap. With `trapFocus={false}` Escape doesn't close the sheet. With default props one shown at load still takes focus, so the guide passes `trapFocus={false}` to sheets shown at load.
+- Checked in this run: after loading the guide at 1280 px, focus is on the body and the page is at scroll 0 (it used to land on the last sheet's X at y 7790).
+- New, filed in this run as #417 (Component Bug, To do; Mr. Biscuit): a hidden sheet sets `inert="true"` as a string, so React 19 logs “Received the string `true` for the boolean attribute `inert`” in development (this guide logs it on load). The sheet still works.
+
+Guide changes: the anatomy and sizing sheets take `trapFocus={false}`; the configuration, states, content and Do & Don'ts frames and the playground start with `trapFocus={false}` and trap once reopened from their screen's button; In context keeps the default. Sources: 28 October, 27 October build, the dialog name, focus moved in and kept in, Escape from the text field, the X and the scrim return focus, and trapFocus={false} for sheets shown inside a page; the #234 sentence is gone.
+
 ## Checked
 
 Checked 10 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-636f3f5` (Biscuit's `main` at 636f3f5); `npm run coin:status` reports the mirror and the docs up to date. `ModalSheet.tsx` is identical to upstream. Re-checked 11 and 12 October 2026: still up to date with Biscuit's `main` (636f3f5).

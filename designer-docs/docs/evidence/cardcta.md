@@ -2,6 +2,10 @@
 
 Package, Figma, and Storybook evidence for the Card CTA guide (board ticket #150, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Rewrote CardCTA to the handwritten outline. On GitHub main 7b7c79f0").
 
+## dbe0e02 install (28 October 2026, not this guide's tickets)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02) to publish the Component Fix batch #343–#406 (Penny run run_92acfa9d). Biscuit's ace46ca and dbe0e02 also changed CardCTA for #345, which isn't in that release, so this guide's copy wasn't re-checked and waits for #345's own publish. Only the anatomy selectors changed, so the page passes on this build: the IconCapsule is now `role="presentation"` and `aria-hidden`, so the Icon target is `${R} > div:last-child > div:first-child`. `npm run verify` passes.
+
 ## Checked
 
 19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October, which includes 7b7c79f0). `npm run coin:status` shows one newer upstream commit (c7d3348); `CardCTA.tsx` is byte-identical there. Rendered with react-native-web 0.21.2 in headless Chrome with JioType Var loaded.

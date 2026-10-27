@@ -2,6 +2,15 @@
 
 Package, Figma, and Storybook evidence for the Thread Hero guide (board ticket #58, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main 475ae733").
 
+## dbe0e02 publish (28 October 2026, #397)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #397 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- renderAvatar's own modes win: an avatar set to Size S stays 29 px, and a hero at S with an avatar at M gives 36. Fragments and arrays get the hero's modes; `renderAvatar={false}` shows no avatar.
+- In Biscuit's source the WithoutCaption and Default stories pass `<Avatar style="Monogram" monogram="SR" />` (no stock photo), the MDX says only the subtitle and the caption ellipsize, and the MDX Anatomy specimen and Code Connect pass renderAvatar. The title wraps (two lines, 40 px).
+
+Guide changes: Configuration (the avatar's own modes win, so set Avatar Size on the hero or on the avatar); Sources (28 October, 27 October build; the title wraps as in Figma, the avatar's modes win, and in Biscuit's source Storybook says the title wraps and its stories show a Monogram avatar).
+
 ## Checked
 
 25 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, which contains 475ae733); the mirror is up to date with upstream. Rendered the installed package in the docs site's Vite setup (react-native-web 0.21.2) in headless Chrome, and the published Storybook stories.
