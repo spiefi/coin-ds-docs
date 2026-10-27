@@ -2,6 +2,16 @@
 
 Package, Figma, Storybook, and browser evidence for the Stepper guide (board ticket #17, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## dbe0e02 publish (28 October 2026, #235)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). Verified 27 October on dbe0e02 (Penny run run_beaf2324; closed by Marcin); published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- Stepper is `ul role="list"` named by `accessibilityLabel`; each stage is `li role="listitem"` named by its title, supporting text of up to 80 characters, its date, and the outcome word, and the first unfinished stage has `aria-current`. Stepper.mdx says so.
+
+Guide changes: Sources only: 28 October, 27 October build, and each stage's date is read (it said “never its date”).
+
+Not changed in this publish: the agent pack's released guidance (`agent-pack/guidance/stepper.json`, release 0.1.78+2) still quotes the old copy that the date is never read. It is re-extracted through the pack's own pipeline (`agent-pack/README.md`), as after earlier publishes.
+
 ## Check
 
 Checked 5 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-3795b4c` (Biscuit's `main` at 3795b4c). `Stepper.tsx`, `Step.tsx`, and `StepLabel.tsx` are identical to upstream.

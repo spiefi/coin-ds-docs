@@ -68,3 +68,13 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October b
 
 ## Limits
 Don't show or mention Color Mode, dark mode, or the Dark mode story. Don't imply the bubble aligns or sizes itself, that the mode changes the words or the icon shape, that statusSlot keeps the chevron, or that children replace the amount.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/transactionbubble.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October).
+- Status part: “A Transaction Status from status and date; the mode sets its mark.”
+- Configuration: “Set the Transaction Status mode on the bubble to set its status mark: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”; status and date give the words. …” Paid — “A green tick beside Paid.”; Declined — “A red cross; the words come from status.”
+- Do & Don'ts, Only the word: “Paid gets the default Expired mode’s grey “!”.”
+- Sources: “… and the mode sets the status mark’s icon and colour, as in Figma. …”

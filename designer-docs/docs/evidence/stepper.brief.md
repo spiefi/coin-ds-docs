@@ -77,3 +77,10 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Do not show Dark mode (#197), a horizontal Stepper, pressable stages, custom content inside a Step, `connectorStyle` or `style`, or a Stepper-level Step Status. Do not show a glyph with a mismatched colour except in the Don’t above. Do not imply that the icons are announced or that the status word explains what happened.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/stepper.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Sources note: “… (27 October build) … each stage is read with its title, supporting text of up to 80 characters, and date, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current. …”

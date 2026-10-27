@@ -91,3 +91,15 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October b
 
 ## Limits
 Don't show Dark or Color Mode examples, Page type JioPlus, numberOfLines overrides, or style beyond width and flex. Don't imply a pressed, hover, or disabled look, that the card navigates, or that Card.Title is a heading.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/card.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02). `C()` also passes `disabled`.
+- Configuration: “AppearanceBrand sets the fill: with no modes the card is Neutral white, as Figma draws it.” The fill grid: Neutral (default) — modes LIGHT — “With no AppearanceBrand the card is white, as Figma and Storybook draw it.”; Primary — { ...LIGHT, AppearanceBrand: 'Primary' } — “A cream fill.”; Secondary and Tertiary unchanged.
+- States: description ends “It dims a little on hover and more while pressed, and a thin dark outline shows its focus. disabled dims it to half, stops presses, and takes it out of the Tab order; without onPress it does nothing.” Grid `three`: Static (unchanged); Pressable — “One button that dims while you press it.”; Disabled — C({ variant: 'slim', header: HEADER, text: FD, onPress, disabled: true, accessibilityLabel: 'Fixed deposit, earn 7.25% a year' }) — “Dimmed to half; presses and Tab skip it.”
+- In context: “The cards use the package default, Neutral white.”
+- Do & Don'ts: title “A picture, a name, and one title”; description “Each pair shows a card that reads at a glance next to one that loses its picture or its name.” Third pair: Do A logo in the header: The header names the brand; the title names the product. — C({ variant: 'slim', header: HEADER, text: FD }) | Don't A second title in the header: Two titles compete, and the product name gets lost. — C({ variant: 'slim', header: <Card.Title>Grow your savings</Card.Title>, text: FD })
+- Sources note: “… (27 October build) … in code the card hugs its content and is white by default too. … pass them or leave them out (<code>false</code> also hides a slot).” The empty-band and no-pressed-look sentence is gone.
+- Limits: the card now has hover, pressed, focus and disabled looks; don't imply that it navigates or that Card.Title is a heading.

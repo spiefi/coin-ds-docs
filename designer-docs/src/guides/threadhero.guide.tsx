@@ -40,7 +40,7 @@ function ThreadHeroGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Avatar and caption',
-      description: 'renderAvatar takes an Avatar: the person’s photo, or their initials with style Monogram. There’s no default, so without one the name moves to the top. caption shows only when you pass it, and an empty subtitle hides the banking line. No mode changes the hero’s text. The hero passes its modes to the avatar and replaces the avatar’s own, so set Avatar Size on the hero; Figma uses L, 42 px.',
+      description: 'renderAvatar takes an Avatar: the person’s photo, or their initials with style Monogram. There’s no default, so without one the name moves to the top. caption shows only when you pass it, and an empty subtitle hides the banking line. No mode changes the hero’s text. The hero passes its modes to the avatar, and the avatar’s own modes win, so set Avatar Size on the hero or on the avatar; Figma uses L, 42 px.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Full" description="Initials, name, banking name, and number.">{TH()}</ExampleCard>
         <ExampleCard title="Without a caption" description="It ends at the banking name.">{TH({ caption: undefined })}</ExampleCard>
@@ -94,10 +94,10 @@ function ThreadHeroGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Thread Hero contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="25 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('threadhero')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('threadhero')} stories={[
         { label: 'Default', id: 'components-threadhero--default' },
         { label: 'Without caption', id: 'components-threadhero--without-caption' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build of Biscuit’s main) from the team’s private package repository. Figma’s Thread Hero has <code>Title</code>, <code>Subtitle</code>, and <code>Caption</code> text properties, a <code>caption</code> switch, and a nested Avatar, drawn 360 px wide. The package takes <code>title</code>, <code>subtitle</code>, <code>caption</code>, and <code>renderAvatar</code>: with no <code>renderAvatar</code> there’s no avatar, and the caption shows only when you pass one. The title wraps, as in Figma, though Storybook’s page says it ellipsizes. The hero replaces the avatar’s own modes, and both Storybook stories pass Avatar props that don’t exist, so they show the Avatar’s stock photo (reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Thread Hero has <code>Title</code>, <code>Subtitle</code>, and <code>Caption</code> text properties, a <code>caption</code> switch, and a nested Avatar, drawn 360 px wide. The package takes <code>title</code>, <code>subtitle</code>, <code>caption</code>, and <code>renderAvatar</code>: with no <code>renderAvatar</code> there’s no avatar, and the caption shows only when you pass one. The title wraps, as in Figma, and the avatar’s own modes win over the hero’s. In Biscuit’s source, Storybook’s page now says the title wraps and its stories show a Monogram avatar.</Sources>,
     },
   }
 

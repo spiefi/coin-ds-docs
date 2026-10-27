@@ -2,6 +2,15 @@
 
 Package, Figma, and Storybook evidence for the Transaction Bubble guide (board ticket #77, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main 475ae733").
 
+## dbe0e02 publish (28 October 2026, #394, #346)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #394 and #346 verified 27 October on dbe0e02 (run_beaf2324); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- #394: the status mark is a tick (Paid), a cross (Declined) or “!” (Request, Expired), coloured by the mode. With only Color Mode Light the bubble is the Expired mode: a grey “!” (checked in this run). In a 231 px bubble “Declined · 21 October 2026, 4:15 pm” ellipsizes (text 39–204 px) and the chevron stays inside (208–214).
+- #346: the amount is announced once as an image named “₹1,200” (its visible ₹ and digits are hidden); no `aria-disabled`; axe-core reports nothing on TransactionBubble.
+
+Guide changes: the Status part note (the mode sets its mark); Configuration (tick, cross, “!”; Expired is the default) and the Paid and Declined captions; the “Only the word” Don't (Paid gets the default Expired mode's grey “!”); Sources (28 October, 27 October build, the mode sets the mark's icon and colour).
+
 ## Checked
 
 25 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, which contains 475ae733); the mirror is up to date with upstream. Rendered the installed package in the docs site's Vite setup (react-native-web 0.21.2) in headless Chrome, and the published Storybook stories.

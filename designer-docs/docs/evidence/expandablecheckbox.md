@@ -2,6 +2,14 @@
 
 Package, Figma, Storybook, and browser evidence for the Expandable Checkbox guide (board ticket #10, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## dbe0e02 publish (28 October 2026, #409, #357)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #409 verified 27 October on dbe0e02 (run_beaf2324); #357 verified on ace46ca and dbe0e02; both closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- Space ticks and unticks the box with one onValueChange per press, controlled or not, open or closed; Enter does the same and Space doesn't scroll the page. The Terms link and Read more / Read less never tick it. One checkbox Tab stop per row; Tab goes box → link → Read more. The inner box is `role="presentation"`.
+
+Guide changes: the Checkbox anatomy target is now `[role="checkbox"] > [role="presentation"]`; Sources: 28 October, 27 October build, “Enter or Space ticks or unticks the box once”.
+
 ## Check
 
 Checked 6 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-3795b4c` (Biscuit's `main` at 3795b4c). `ExpandableCheckbox.tsx` is identical to upstream. Biscuit's `main` is now at 636f3f5: no change to this component, Checkbox, CheckboxItem, Button, Link, or ScrollArea; its token file turns the Dark label and link from black to white (Light unchanged).

@@ -2,6 +2,21 @@
 
 Package, Figma, and Storybook evidence for the Card guide (board ticket #32, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Rewrote Card to the handwritten Storybook outline").
 
+## dbe0e02 publish (28 October 2026, #343)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). `Card.tsx` changed in ace46ca for #343 and is unchanged in dbe0e02. Verified 27 October on ace46ca (Penny run run_c79cb190) and again on dbe0e02 (run_beaf2324); closed by Marcin. At 1280 and 390 px in headless Chrome (react-native-web 0.21.2):
+
+- `header={false}`, `""`, `null` and `{cond && …}` leave no header band (86 px, as with no header); `media={false}`, `""` and a false condition leave no media box (148 px).
+- A pressable card has a look: opacity 0.92 on hover, 0.8 pressed (mouse and Space), and a 1 px `#0c0d10` focus outline at offset 2 (it also shows after a mouse click until blur). Disabled: opacity 0.5, `disabled` and `aria-disabled`, `tabindex -1`, skipped by Tab, no hover or press change. `disabled` without `onPress` still does nothing.
+- With no modes, or Color Mode Light only, the fill is `#ffffff` (Neutral); AppearanceBrand Primary, on the card or from a VStack, gives `#fef4e5`.
+- `testID` reaches `data-testid`; `accessibilityLabel` without `onPress` gives a `group` with that name.
+- A raw-string header is wrapped in Text; no console warnings.
+- Storybook source: WithHeader differs from Default, the meta args use FIGMA_CARD_MODES, and Code Connect maps the variant and the Header, Media and Content slots. The deployed Storybook still predates ace46ca.
+
+Guide changes: Configuration (Neutral white is the default; the fill grid starts with Neutral (default), then Primary cream); States (hover, pressed, focus and disabled looks; a new Disabled example); In context (the package default is now white); the third Do & Don't pair (empty band from `false`) is replaced by “A logo in the header” / “A second title in the header”, from Card.mdx's rule that the header is a logo or a label; Sources (27 October build, white default, `false` hides a slot). Sections below that describe the empty band, the missing pressed look, the cream default or the missing `testID` are superseded by this section.
+
+Other guides that host content in a Card with only Color Mode Light (Step, Toggle, form fields and others) now show it white instead of cream; none of their copy names the card's fill.
+
 ## Checked
 
 19 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October). `npm run coin:status` shows one newer upstream commit (c7d3348, 19 October, "Fix the remaining open component tickets"); `Card.tsx` is byte-identical in the installed package and in c7d3348, so the guide is not affected. Rendered with react-native-web 0.21.2 in headless Chrome.
@@ -55,9 +70,9 @@ Storybook shows a 200 px Neutral card on a dark grey frame. The guide shows card
 
 ## Tickets
 
-- #343 (Component Bug, Biscuit): empty bands from `false` slots, no pressed or disabled look, cream default against Figma's white, no `testID`, raw-string header error, Storybook duplicates.
+- #343 (Component Fix, Component Bug; Mr. Biscuit): empty bands from `false` slots, no pressed or disabled look, cream default against Figma's white, no `testID`, raw-string header error, Storybook duplicates. Fixed on ace46ca, verified 27 October (also on dbe0e02), published to the docs 28 October.
 
 ## Limits
 
 - Not shown: Dark, Color Mode, Page type JioPlus text colour (described only), `numberOfLines` overrides, `style` beyond width and flex.
-- No pressed, hover or disabled look; the title is not a heading.
+- The title is not a heading.

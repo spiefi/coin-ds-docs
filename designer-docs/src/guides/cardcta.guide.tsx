@@ -33,7 +33,7 @@ const P = {
   title: `${R} > div:first-child > div:first-child > [dir="auto"]:first-child`,
   body: `${R} > div:first-child > div:first-child > [dir="auto"]:last-child`,
   button: `${R} > div:first-child > div:last-child`,
-  icon: `${R} > div:last-child > [role="img"]`,
+  icon: `${R} > div:last-child > div:first-child`,
 }
 
 function CardCTAGuide() {

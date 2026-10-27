@@ -19,7 +19,7 @@ function TC(overrides: TCProps = {}) {
 }
 
 const R = ':scope > div'
-const AVATAR = `${R} > [role="img"]`
+const AVATAR = `${R} [role="img"]`
 const TEXT = `${R} > div:last-child`
 const NAME = `${R} > div:last-child > [dir="auto"]:first-child`
 const QUOTE = `${R} > div:last-child > [dir="auto"]:last-child`
@@ -46,7 +46,7 @@ function TestimonialsCardGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Initials or a photo, at three sizes',
-      description: 'The card always shows an Avatar, and avatarProps sets it: style Monogram with monogram shows the person’s initials, and imageSource shows their photo. Without avatarProps it shows the Avatar’s bundled sample photo, so always set one. Avatar Size on the card’s modes sets it to 42, 36, or 29 px.',
+      description: 'The card always shows an Avatar, and avatarProps sets it: monogram shows the person’s initials, and imageSource shows their photo. Without avatarProps it shows the initials of the title. Avatar Size on the card’s modes sets it to 42, 36, or 29 px; an Avatar Size in avatarProps’ own modes wins.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Avatar Size L" description="42 px, the default.">{TC()}</ExampleCard>
         <ExampleCard title="Avatar Size M" description="36 px.">{TC({ modes: { ...LIGHT, 'Avatar Size': 'M' } as Modes })}</ExampleCard>
@@ -55,16 +55,16 @@ function TestimonialsCardGuide() {
     },
     states: {
       header: 'States', title: 'A quote, or one button',
-      description: 'Without onPress the card is text, and screen readers read it once: “Testimonial from Aarav S.: …”. With onPress the whole card is one button, so give it an accessibilityLabel that says where it goes. disabled stops presses. Neither changes how the card looks: it has no pressed or disabled style.',
+      description: 'Without onPress the card is text, and screen readers read it once: “Testimonial from Aarav S.: …”. With onPress the whole card is one button, so give it an accessibilityLabel that says where it goes; it dims while pressed and has no hover look. disabled dims it to half, stops presses, and takes it out of the Tab order.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Quote" description="Read as one line of text.">{TC()}</ExampleCard>
-        <ExampleCard title="onPress" description="One button; it looks the same.">{TC({ onPress: () => {}, accessibilityLabel: 'Read Aarav S.’s full review' })}</ExampleCard>
-        <ExampleCard title="disabled" description="Presses do nothing; it looks the same.">{TC({ onPress: () => {}, disabled: true })}</ExampleCard>
+        <ExampleCard title="onPress" description="One button; it dims while you press it.">{TC({ onPress: () => {}, accessibilityLabel: 'Read Aarav S.’s full review' })}</ExampleCard>
+        <ExampleCard title="disabled" description="Dimmed to half; presses do nothing.">{TC({ onPress: () => {}, disabled: true })}</ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: '180 px wide, as tall as its quote',
-      description: 'The card is always 180 px wide and never stretches to its host. Its height follows the quote: 12 px of padding, the 42 px avatar, 12 px, the name on a 17 px line, 4 px, then 16 px for each line of the quote. With a one-line quote it is 117 px tall; Figma’s is 112, with the name on a 16 px line and 2 px under it.',
+      description: 'The card is always 180 px wide and never stretches to its host. Its height follows the quote: 12 px of padding, the 42 px avatar, 12 px, the name on a 16 px line, 2 px, then 16 px for each line of the quote. With a one-line quote it is 112 px tall, as in Figma.',
       body: <Anatomy legend={false} marks={[
         { kind: 'size', target: R, side: 'bottom', label: 'both' },
         { kind: 'gap', from: AVATAR, to: TEXT },
@@ -75,7 +75,7 @@ function TestimonialsCardGuide() {
       header: 'Content', title: 'Their name, their words',
       description: 'Write title as the person’s name the way they’d sign it, such as Aarav S., not the product. Write body as what they said, in a sentence or two. Screen readers read the name and the whole quote together, and cards in a row look best with quotes of similar length.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="A short quote" description="One line: 117 px tall.">{TC(PRIYA)}</ExampleCard>
+        <ExampleCard title="A short quote" description="One line: 112 px tall.">{TC(PRIYA)}</ExampleCard>
         <ExampleCard title="A longer quote" description="It wraps, and the card grows to fit.">{TC(ROHAN)}</ExampleCard>
       </div>,
     },
@@ -101,9 +101,9 @@ function TestimonialsCardGuide() {
       header: 'Do & Don’ts', title: 'A person, not an advert',
       description: 'Each pair shows a quote that reads as a real customer next to one that doesn’t.',
       body: <div className="coin-new-stack">
-        <DoDont good={TC()} bad={TC({ avatarProps: undefined })}
+        <DoDont good={TC()} bad={TC({ avatarProps: MONO('JF') })}
           goodTitle="Their initials" goodCaption="A face or initials that belong to the name."
-          badTitle="The sample photo" badCaption="Without avatarProps, every card shows the same stranger." />
+          badTitle="The brand’s initials" badCaption="“JF” beside Aarav S. reads as the company, not the customer." />
         <DoDont good={TC()} bad={TC({ body: 'JioFinance brings your bank accounts, cards, insurance, loans, and digital gold together in one secure app, with instant payments, smart insights, and rewards on every transaction you make.' })}
           goodTitle="A sentence or two" goodCaption="Short enough to read in a row."
           badTitle="A paragraph of marketing" badCaption="The card grows tall and stops sounding like a person." />
@@ -112,13 +112,13 @@ function TestimonialsCardGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Testimonials Card contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="26 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('testimonialscard')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('testimonialscard')} stories={[
         { label: 'Default', id: 'components-testimonialscard--default' },
         { label: 'With Author', id: 'components-testimonialscard--with-author' },
         { label: 'Short Body', id: 'components-testimonialscard--short-body' },
         { label: 'Long Body', id: 'components-testimonialscard--long-body' },
         { label: 'Carousel Row', id: 'components-testimonialscard--carousel-row' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build of Biscuit’s main) from the team’s private package repository. Figma’s card has <code>Title</code> and <code>Body</code> text properties and <code>Show Footer Text</code> and <code>Show Button</code> switches, but none of them changes a layer. The package’s name is <code>#1a1c1f</code> and its quote <code>#010101</code> where Figma’s are both <code>#0d0d0f</code>, and its name line and gap make a one-line card 117 px tall where Figma’s is 112. Initials need <code>style: 'Monogram'</code> in <code>avatarProps</code>, not just <code>monogram</code> as the Storybook docs say, and the card has no pressed look (all reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s card has <code>Title</code> and <code>Body</code> text properties and <code>Show Footer Text</code> and <code>Show Button</code> switches, but none of them changes a layer. The package matches Figma’s <code>#0d0d0f</code> for the name and the quote and its 112 px one-line card. <code>monogram</code> alone in <code>avatarProps</code> shows initials, and a pressable card dims while pressed.</Sources>,
     },
   }
 
@@ -138,7 +138,7 @@ function TestimonialsCardGuide() {
       <Segment label="Avatar Size" value={size} options={['L', 'M', 'S'] as const} onChange={setSize} />
       <Segment label="body" value={quote} options={['Short', 'Long'] as const} onChange={setQuote} />
       <OnOff label="onPress" value={pressable} onChange={setPressable} />
-      <Readout title="Role" value={pressable ? `Button · pressed ${presses} times` : 'Text'}>onPress makes the whole card one button. It looks the same either way.</Readout>
+      <Readout title="Role" value={pressable ? `Button · pressed ${presses} times` : 'Text'}>onPress makes the whole card one button, which dims while pressed.</Readout>
     </div>
   </>} sections={sections} />
 }

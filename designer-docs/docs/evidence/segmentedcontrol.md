@@ -2,6 +2,16 @@
 
 Package, Figma, Storybook, and browser evidence for the Segmented Control guide (board ticket #156, Design documentation — Marcin; Storybook coverage — Biscuit, done).
 
+## dbe0e02 publish (28 October 2026, #348, #279, #411)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #348, #279 and #411 verified 27 October on dbe0e02 (run_beaf2324, 4–8 loads each, half in StrictMode); closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- #348, columns fill: in a 328 px column Buy/Sell is 160/160, three segments 104 each, five 59.2 each; a stretching column, a VStack and a centred column fill; a 214 px column fills and ends Daily, Weekly and Monthly in an ellipsis. Once in about 45 loads at 1280 every track stayed at its unmeasured width 0.7 s after the fonts loaded; not seen again in 20 loads.
+- #279, rows hug their labels: Daily / Weekly / Monthly 304 px (96 px segments), five segments 317 px, Buy / Sell 134 px, nothing cut; a row with less room ends 3M and 6M in an ellipsis and the track stays inside the row. An explicit style width wins. The hidden label-measuring text is `aria-hidden`.
+- #411, slightly narrow columns: the track always matches the column (296 → 296, 305 → 305, Buy / Sell 100–160 → the same), and nothing runs into a card's padding.
+
+Guide changes: Sizing now says the track never runs past its column, and in a row it is as wide as its labels need (304 px for Daily, Weekly, and Monthly), with a narrower row ending them in an ellipsis (it said to give the track a width in a row); Sources: 28 October, 27 October build.
+
 ## Check
 
 Checked 7 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-3795b4c` (Biscuit's `main` at 3795b4c). Biscuit's `main` is now at 636f3f5 (5 October); `SegmentedControl.tsx`, its stories, and its mdx are byte-identical there, and none of that commit's token changes touch `segment/*` or `segmentedControl/*`.

@@ -67,3 +67,15 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October b
 
 ## Limits
 Don't show or mention Color Mode or dark mode. Don't imply the mark changes shape, that the mode changes the words, that the line presses, or that it has its own chevron.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/transactionstatus.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October). MARK = `${R} > div:first-child`. MARKS = { Request: 'Orange “!”', Paid: 'Green tick', Declined: 'Red cross', Expired: 'Grey “!”' } for the Readout.
+- Anatomy, Mark: “18 px; the mode picks a tick, a cross, or “!”, and its colour.”
+- Configuration: “The Transaction Status mode sets the mark, as in Figma: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”. status and date are free text that the mode doesn’t change, so set the word and the mode together.” Captions: “An orange “!”: a request still waiting.”, “A green tick: the money went through.”, “A red cross: the bank turned it down.”, “A grey “!”: the request ran out.”
+- States, One line: “The date is cut; the mark keeps its 18 px.” Sizing: “… A narrower column, or a Transaction Bubble, cuts them at the end, and the mark keeps its 18 px.” Content: “… Request and Expired share the “!” mark, so the word has to say which.”
+- Do & Don'ts: first Don't — TS({ status: 'Expired', date: '20 Mar 2025', modes: ts('Request') }) — A mode that disagrees: “Expired with the Request mode gets an orange mark, as if it still needs action.” Second Don't caption: “In a bubble, the line is cut and the date is lost.”
+- Readout: “The mode sets the mark’s icon and colour and nothing else: the words are whatever you pass in status.”
+- Sources: “… In the package the mode picks the mark’s icon and colour, as in Figma, and <code>status</code> and <code>date</code> are free text; with no mode it is Expired: a grey “!” beside “Expired”. … When the words don’t fit a column or a Transaction Bubble, they end in an ellipsis and the mark keeps its 18 px.”

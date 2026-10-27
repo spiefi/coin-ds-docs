@@ -1,5 +1,13 @@
 # Checkbox Group source evidence
 
+## dbe0e02 publish (28 October 2026, #357)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #357 verified 27 October on ace46ca and dbe0e02; closed by Marcin; published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- CheckboxGroup is the list named by `accessibilityLabel` (“Accounts”); each row is one `role="checkbox"` with `aria-checked` and one Tab stop, and the inner box is `role="presentation"`. The rows still sit directly in the `ul`, without list items.
+
+Guide changes: the Checkbox anatomy target is now `${LIST} > :nth-child(2) > [role="presentation"]`; Sources: 28 October, installed 0.1.78 (27 October build) instead of 0.1.60, and each row is one checkbox with one Tab stop that announces whether it is selected.
+
 ## Checked
 
 28 September 2026. Declared, installed, and registry `latest` `jfs-components` are `0.1.60`. No dependency change. Board ticket #72 (Design documentation — Marcin). Row-level behaviour is in [checkboxitem.md](checkboxitem.md) and [checkbox.md](checkbox.md).

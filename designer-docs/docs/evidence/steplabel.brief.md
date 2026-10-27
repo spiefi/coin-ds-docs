@@ -73,3 +73,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October bu
 
 ## Limits
 Light only. Do not show Dark, `style`, AppearanceBrand outside the Don’t, Emphasis, Semantic Intent, or AppearanceSystem. Do not imply that the label is pressable, is announced on its own, or changes colour with the stage.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/steplabel.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Do & Don'ts, first pair: Do Keep the detail short: The stage is read as “Add nominee, Someone who can claim this account”. — labelled('current', 'Add nominee', 'Someone who can claim this account') | Don't Write a long detail line: Over 80 characters, the detail is shown but not read: only “Add nominee” is heard. — labelled('current', 'Add nominee', 'Choose someone who can claim this account and its investments if anything happens to you')
+- Sources note: “… (27 October build) … change the label, and it takes modes from its own prop, its Step, or JFSThemeProvider. It has no role or name of its own: the Step around it is announced by the label’s title, supporting text of up to 80 characters, and date, and the Step’s own title is ignored. …”

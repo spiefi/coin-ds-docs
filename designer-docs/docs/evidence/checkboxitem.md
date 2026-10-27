@@ -2,6 +2,15 @@
 
 Package, Figma, Storybook, API, and verification evidence for this guide. Split from the former `docs/SOURCE_EVIDENCE.md` on 26 September 2026; implementation notes about anatomy markup predate the guide-kit migration.
 
+## dbe0e02 publish (28 October 2026, #357, #409)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02, 27 October). #357 verified 27 October on ace46ca (run_c79cb190) and again on dbe0e02 (run_beaf2324); #409 verified on dbe0e02 (run_beaf2324); both closed by Marcin and published to the docs 28 October in Penny run run_92acfa9d. Where the sections below say otherwise, this section replaces them.
+
+- On the web each row is one focusable `role="checkbox"` with `aria-checked` and one Tab stop; the inner box is `role="presentation"` and `aria-hidden`, so there is no nested checkbox. Space and Enter toggle once (plain, Text + Link, trailing, controlled, group rows, ExpandableCheckbox). Disabled: `aria-disabled`, `tabindex -1`, skipped by Tab. A Link or an end-slot Button keeps its own Tab stop and doesn't toggle the row.
+- A focused row shows the browser's focus outline; the box's Figma Focus state (green spread) no longer appears because the box isn't a Tab stop. A standalone Checkbox is unchanged (Space does nothing, no `aria-checked`): a known gap outside these tickets.
+
+Guide changes (legacy `src/CheckboxItemGuide.tsx`): the Control anatomy target is now `[role="checkbox"] > [role="presentation"]` (the old nested-checkbox selector matched nothing); Sources: 28 October, installed 0.1.78 (27 October build) instead of 0.1.60, and the row is one checkbox with one Tab stop that announces its state, toggled once by Space, Enter or a click.
+
 ## Batch check
 
 Checked 23 September 2026. `designer-docs/package.json` declares `jfs-components@0.1.60`; the resolved local install is `0.1.60`, and a fresh `npm view jfs-components version` returned registry `latest=0.1.60`. No dependency change was made. The four canonical Storybook docs IDs and their cited stories were confirmed in the published index. All examples use public Coin exports and component-owned modes; the annotation frames and callouts are documentation chrome.

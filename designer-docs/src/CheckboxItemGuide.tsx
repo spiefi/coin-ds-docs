@@ -28,7 +28,7 @@ export function CheckboxItemGuide() {
       header: 'Anatomy', title: 'One choice, three regions',
       description: 'The row combines a control, label, and optional supporting action.',
       body: <Anatomy specimenWidth={300} parts={[
-        { name: 'Control', note: 'Shows whether the option is selected.', target: '[role="checkbox"] [role="checkbox"]', side: 'left' },
+        { name: 'Control', note: 'Shows whether the option is selected.', target: '[role="checkbox"] > [role="presentation"]', side: 'left' },
         { name: 'Label', note: 'Describes the option and uses the remaining row width.', target: '[dir="auto"]', side: 'top' },
         { name: 'Action', note: 'Opens related information without changing the choice.', target: '[role="button"]', side: 'right' },
       ]}><Row label="Savings • 0245" checked action onAction={() => {}} /></Anatomy>,
@@ -82,9 +82,9 @@ export function CheckboxItemGuide() {
     sources: {
       header: 'Sources', title: 'Use the public row contract',
       description: 'The guide follows the component’s exposed control placement, slot, and state behavior.',
-      body: <Sources checked="23 September 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
         { label: 'Default', id: 'components-checkboxitem--default' }, { label: 'String label', id: 'components-checkboxitem--string-label' }, { label: 'Custom slot', id: 'components-checkboxitem--custom-slot-content' }, { label: 'End slot', id: 'components-checkboxitem--with-end-slot' }, { label: 'Trailing', id: 'components-checkboxitem--trailing' }, { label: 'Trailing action', id: 'components-checkboxitem--trailing-with-end-slot' }, { label: 'Interactive', id: 'components-checkboxitem--interactive' }, { label: 'Long label', id: 'components-checkboxitem--long-label-truncation' },
-      ]}>Declared, installed, and registry <code>jfs-components</code> versions are <code>0.1.60</code>. The row fills its host; the optional end slot defaults to 80 px and swaps edges with the Checkbox. A string label wraps in this version; a story name alone does not imply ellipsis. The row and its nested Checkbox each expose a checkbox role on web. In the local preview, Details did not change selection and pointer or Enter toggled the row; native Space on the focused row did not. This is a current package/web interaction limitation.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. The row fills its host; the optional end slot defaults to 80 px and swaps edges with the Checkbox. A string label wraps in this version; a story name alone does not imply ellipsis. On the web the row is one checkbox with one Tab stop that announces whether it is selected; Space, Enter, or a click toggles it once, and Details keeps its own Tab stop without changing the selection.</Sources>,
     },
   }
 

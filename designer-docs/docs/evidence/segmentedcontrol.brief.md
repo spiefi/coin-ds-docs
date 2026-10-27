@@ -61,3 +61,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October b
 
 ## Limits
 Do not show Dark mode, `style`, icons, disabled segments, or more than five options outside the Don’t. Do not imply that it switches panels like Tabs, or that a control in a row sizes itself to fit its labels (#279). Do not describe `onSelectionChange` as firing only on change (it also fires when the selected segment is pressed again).
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/segmentedcontrol.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Sizing description: “… A label that doesn’t fit ends in an ellipsis, and the track never runs past its column. In a row, the track is as wide as its labels need, 304 px for Daily, Weekly, and Monthly, and a narrower row ends them in an ellipsis.”
+- Sources: “Installed … (27 October build) …”

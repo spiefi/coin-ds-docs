@@ -2,6 +2,10 @@
 
 Package, Figma, and Storybook evidence for the Plan Comparison Card guide (board ticket #70, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main e60f8bd8").
 
+## dbe0e02 install (28 October 2026, not this guide's tickets)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02) to publish the Component Fix batch #343–#406 (Penny run run_92acfa9d). Biscuit's ace46ca and dbe0e02 also changed PlanComparisonCard for #360, which isn't in that release, so this guide's copy wasn't re-checked and waits for #360's own publish. Only the anatomy selectors changed, so the page passes on this build: it is now a `role="table"` with rows, column headers and cells, each cell wrapping its content in a padded div, so the Plan names, Recommended plan, Feature, Value, Info icon and Not included targets read inside the cells and the padding mark targets the cell’s inner div. `npm run verify` passes.
+
 ## Checked
 
 21 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348). `npm run coin:status` shows one newer upstream commit, e60f8bd8, which changes only Storybook MDX pages (`PlanComparisonCard.mdx` among them); component code and stories are identical. The published Storybook was measured in headless Chrome (react-native-web, JioType Var loaded).

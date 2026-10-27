@@ -73,3 +73,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October b
 
 ## Limits
 Don't show or mention Color Mode, dark mode, Page type JioPlus, or Context. Don't imply a status prop, a button, that AppearanceBrand or Emphasis change the mark, that renderMedia keeps the amount, or that leaving subtitle out hides it.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/statushero.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October).
+- Content: “… Give value as the number alone: currency adds the sign, and INR or ₹ both show ₹. Screen readers read the amount once, with its currency.” Outcome and amount — “The title gives the outcome; the subtitle says where the money went.”
+- Sources: “… It is 269 px tall where Figma’s is 259, and Storybook’s Without subtitle story still shows the default subtitle (both reported). Screen readers read the amount once, with its currency.”

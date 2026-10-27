@@ -70,3 +70,11 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October b
 
 ## Limits
 Do not show Dark mode, `children`, `disableTruncation`, `collapsedLines={0}`, `style`, `labelStyle`, or the Text Appearance, Text Sizes, and Weight modes. Do not imply an indeterminate state, nested checkboxes, a chevron, animation, or that ticking and opening are linked. Do not imply that a disabled row can’t be opened.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/expandablecheckbox.md`.
+
+- checked: 28 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-dbe0e02).
+- Anatomy part 1 (Checkbox) target: `[role="checkbox"] > [role="presentation"]`.
+- Sources note: “… (27 October build) … and Enter or Space ticks or unticks the box once. …”

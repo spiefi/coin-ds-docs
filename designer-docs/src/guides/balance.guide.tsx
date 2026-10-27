@@ -9,8 +9,8 @@ const STORYBOOK = docsUrl('balance')
 const R = ':scope > div'
 const TITLE = `${R} > div:first-child`
 const MONEY = `${R} > div:nth-child(2)`
-const CURRENCY = `${R} > div:nth-child(2) [tabindex] > [dir="auto"]`
-const AMOUNT = `${R} > div:nth-child(2) [tabindex] > div:last-child > [dir="auto"]`
+const CURRENCY = `${R} > div:nth-child(2) [role="img"] > [dir="auto"]`
+const AMOUNT = `${R} > div:nth-child(2) [role="img"] > div:last-child > [dir="auto"]`
 
 type Context3 = 'Balance & Cards' | 'Default'
 type Currency = 'INR' | 'USD' | 'EUR'
@@ -111,9 +111,9 @@ function BalanceGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Balance contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={STORYBOOK} stories={[
         { label: 'Default', id: 'components-balance--default' }, { label: 'Custom slot', id: 'components-balance--custom-slot' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Balance is one component with a Title property and a nested Money Value; the package adds amount and currency props and a slot for your own Money Value. Figma draws the amount on a 36 px line, the package on a 44 px one, so a Balance is 68 px tall instead of 60. The package’s default amount is “500”; Figma and Storybook show “50,000.67”. A Money Value in the slot always gets Context3 Balance & Cards. Page type JioPlus turns the amount white but not the title, so the guide doesn’t show it. The published Storybook docs page for Balance doesn’t load; its stories do.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. Figma’s Balance is one component with a Title property and a nested Money Value; the package adds amount and currency props and a slot for your own Money Value. Figma draws the amount on a 36 px line, the package on a 44 px one, so a Balance is 68 px tall instead of 60. The package’s default amount is “50,000.67”, as in Figma and Storybook. A Money Value in the slot always gets Context3 Balance & Cards. Page type JioPlus turns both the title and the amount white. On the web the amount is announced once, with its currency, such as “₹50,000.67”. The published Storybook docs page for Balance still doesn’t load: the fix is in Biscuit’s source but not yet deployed; its stories load.</Sources>,
     },
   }
 

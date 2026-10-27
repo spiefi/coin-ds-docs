@@ -90,7 +90,7 @@ function CardFinancialConditionGuide() {
       header: 'States', title: 'Inactive or Active',
       description: 'progressState decides whether the ring shows a score. Inactive, the default, draws an empty ring with a dash; Active fills value out of 100 and prints the number, or valueLabel in its place. The card has no pressed or disabled state: only the button acts.',
       body: <div className="coin-new-example-grid three">
-        <ExampleCard title="Inactive" description="No score yet: an empty ring with a dash, as in Figma.">{CFC({ progressState: 'Inactive', accessibilityLabel: 'Protection. No score yet' })}</ExampleCard>
+        <ExampleCard title="Inactive" description="No score yet: an empty ring with a dash, as in Figma.">{CFC({ progressState: 'Inactive' })}</ExampleCard>
         <ExampleCard title="Active" description="The ring fills to 72 and shows the number.">{CFC()}</ExampleCard>
         <ExampleCard title="valueLabel" description="valueLabel replaces the number, here with a percent sign.">{CFC({ valueLabel: '72%' })}</ExampleCard>
       </div>,
@@ -108,7 +108,7 @@ function CardFinancialConditionGuide() {
     },
     content: {
       header: 'Content', title: 'Name it, read it, act on it',
-      description: 'Use a one- or two-word title for the topic and one short line for the body. Keep the nudge to two lines with a line break between them, and label the button with a verb. The default spoken name reads the title, the score, and the body, such as “Protection, 72 out of 100. Check your coverage and gaps”. While the ring is Inactive, set accessibilityLabel yourself, such as “Protection. No score yet”: the default still reads the value (#350).',
+      description: 'Use a one- or two-word title for the topic and one short line for the body. Keep the nudge to two lines with a line break between them, and label the button with a verb. The default spoken name reads the title, the score, and the body, such as “Protection, 72 out of 100. Check your coverage and gaps”. While the ring is Inactive, it leaves out the score: “Protection. Check your coverage and gaps”.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Short copy" description="“Protection”, one line, two nudge lines, and “View details”.">{CFC()}</ExampleCard>
         <ExampleCard title="Long copy wraps" description="Nothing is cut off: the title and body wrap and the card grows.">
@@ -151,14 +151,14 @@ function CardFinancialConditionGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Card Financial Condition contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="19 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardfinancialcondition')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('cardfinancialcondition')} stories={[
         { label: 'Default', id: 'components-cardfinancialcondition--default' },
         { label: 'Active progress', id: 'components-cardfinancialcondition--active-progress' },
         { label: 'Without nudge', id: 'components-cardfinancialcondition--without-nudge' },
         { label: 'Without divider', id: 'components-cardfinancialcondition--without-divider' },
         { label: 'Custom progress slot', id: 'components-cardfinancialcondition--with-custom-progress-slot' },
         { label: 'Long content', id: 'components-cardfinancialcondition--long-content' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Card/FinancialCondition is one 343 × 181 component with no properties and an Inactive ring; its nudge is the retired Nudge with a purple sparkle, which no mode reproduces, so this page follows the package’s Neutral default. The button is Figma’s 32 px at any Context. The card stays white in every mode, and its default spoken name includes the score. The published Storybook still shows the older generated page.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code>, built from Biscuit’s main at dbe0e02 (27 October) and taken from the team’s private package repository. Figma’s Card/FinancialCondition is one 343 × 181 component with no properties and an Inactive ring; its nudge is the retired Nudge with a purple sparkle, which no mode reproduces, so this page follows the package’s Neutral default. The button is Figma’s 32 px at any Context. The card stays white in every mode, and its default spoken name includes the score only while the ring is Active. The published Storybook still shows the older generated page.</Sources>,
     },
   }
 
@@ -171,7 +171,6 @@ function CardFinancialConditionGuide() {
       {CFC({
         progressState: ring,
         value: Number(value),
-        accessibilityLabel: ring === 'Active' ? undefined : 'Protection. No score yet',
         modes: m({ AppearanceBrand: appearance }),
         showNudge: nudge,
         showButton: button,

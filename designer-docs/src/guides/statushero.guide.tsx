@@ -86,9 +86,9 @@ function StatusHeroGuide() {
     },
     content: {
       header: 'Content', title: 'The outcome, then one fact',
-      description: 'Write title as the outcome in a few words, such as Payment successful. Write subtitle as the one fact that follows; a line break in it stays. Give value as the number alone: currency adds the sign, and INR or ₹ both show ₹. Phone screen readers skip the amount, so say it in the subtitle too.',
+      description: 'Write title as the outcome in a few words, such as Payment successful. Write subtitle as the one fact that follows; a line break in it stays. Give value as the number alone: currency adds the sign, and INR or ₹ both show ₹. Screen readers read the amount once, with its currency.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Outcome and amount" description="The subtitle repeats the amount for screen readers.">{H(PAID)}</ExampleCard>
+        <ExampleCard title="Outcome and amount" description="The title gives the outcome; the subtitle says where the money went.">{H(PAID)}</ExampleCard>
         <ExampleCard title="A long subtitle" description="It wraps, centred, in its column.">{H({ title: 'Daily savings started', subtitle: '₹50 will move from HDFC Bank ··4821 to your gold locker every morning.', value: '50' })}</ExampleCard>
       </div>,
     },
@@ -126,13 +126,13 @@ function StatusHeroGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Status Hero contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="25 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('statushero')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('statushero')} stories={[
         { label: 'Default', id: 'components-statushero--default' },
         { label: 'Without title', id: 'components-statushero--without-title' },
         { label: 'Without subtitle', id: 'components-statushero--without-subtitle' },
         { label: 'Custom media slot', id: 'components-statushero--custom-media-slot' },
         { label: 'Large amount', id: 'components-statushero--large-amount' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build of Biscuit’s main) from the team’s private package repository. Figma’s Status Hero has <code>Title</code> and <code>Subtitle</code> text properties and a <code>title</code> switch, over a nested Icon Capsule and Money Value; the package adds <code>iconName</code>, <code>value</code>, <code>currency</code>, and <code>renderMedia</code>. Its mark is gold where Figma’s is dark grey with a white tick: the hero fixes the capsule’s brand mode, so only Semantic Intent System recolours it. It is 269 px tall where Figma’s is 259, and phone screen readers skip the amount. Storybook’s Without subtitle story still shows the default subtitle (all reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Status Hero has <code>Title</code> and <code>Subtitle</code> text properties and a <code>title</code> switch, over a nested Icon Capsule and Money Value; the package adds <code>iconName</code>, <code>value</code>, <code>currency</code>, and <code>renderMedia</code>. Its mark is gold where Figma’s is dark grey with a white tick: the hero fixes the capsule’s brand mode, so only Semantic Intent System recolours it. It is 269 px tall where Figma’s is 259, and Storybook’s Without subtitle story still shows the default subtitle (both reported). Screen readers read the amount once, with its currency.</Sources>,
     },
   }
 

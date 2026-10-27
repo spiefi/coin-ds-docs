@@ -51,27 +51,28 @@ function DebitCardGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Type, logo, art, and brand',
-      description: 'cardType is free text: write Debit or Credit, and nothing else changes. bankLogoSlot puts your bank’s mark before its name, and providerLogoSlot puts a network mark after the type; the package ships neither. The art strip is the package’s own: cardArtSource replaces it with your picture, and there’s no supported way to remove it. The DebitCard brand mode colours the card: JFS gold by default, or SBI purple. No other mode changes it.',
+      description: 'cardType is free text: write Debit or Credit, and nothing else changes. bankLogoSlot puts your bank’s mark before its name, and providerLogoSlot puts a network mark after the type; the package ships neither. The art strip is the package’s own: cardArtSource replaces it with your picture, and showArt={false} removes it while the card keeps its 224 px. The DebitCard brand mode colours the card: JFS gold with dark text by default, or SBI purple with white text. No other mode changes it.',
       body: <div className="coin-new-stack">
         <div className="coin-new-example-grid">
           <ExampleCard title="Debit" description="The bank’s mark and name, then the card type.">{Fit()}</ExampleCard>
           <ExampleCard title="Credit" description="Only the word changes.">{Fit({ cardType: 'Credit', cardNumber: '•••• 7350' })}</ExampleCard>
-          <ExampleCard title="Without a bank logo" description="The top band is 12 px shorter than Figma’s.">{Fit({ bankLogoSlot: undefined })}</ExampleCard>
-          <ExampleCard title="DebitCard brand SBI" description="A purple card. The text stays black, so it’s hard to read.">{Fit({ modes: SBI })}</ExampleCard>
+          <ExampleCard title="Without a bank logo" description="The top band keeps Figma’s 73 px.">{Fit({ bankLogoSlot: undefined })}</ExampleCard>
+          <ExampleCard title="Without the art" description="showArt={false} removes the strip; the card stays 224 px tall.">{Fit({ showArt: false })}</ExampleCard>
+          <ExampleCard title="DebitCard brand SBI" description="A purple card with white text.">{Fit({ modes: SBI })}</ExampleCard>
         </div>
       </div>,
     },
     states: {
       header: 'States', title: 'A picture, or a button',
-      description: 'Without onPress the card is a picture: it doesn’t press, and screen readers read its text. onPress makes the whole card one button, named by its bank, type, and number unless you set accessibilityLabel. disabled stops a pressable card without changing its look. The card shows no pressed state, and it doesn’t flip, freeze, or show a CVV.',
+      description: 'Without onPress the card is a picture: it doesn’t press, and screen readers read its text. onPress makes the whole card one button, named by its bank, type, and number unless you set accessibilityLabel. A pressable card dims while pressed, and disabled stops it and dims it to half. The card doesn’t flip, freeze, or show a CVV.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Picture" description="No onPress: nothing to press.">{Fit()}</ExampleCard>
-        <ExampleCard title="Button" description="Looks the same, but the whole card presses.">{Fit({ onPress: noop, accessibilityLabel: 'Debit card, JioFinance, ending 4821' })}</ExampleCard>
+        <ExampleCard title="Button" description="The whole card presses and dims while you press it.">{Fit({ onPress: noop, accessibilityLabel: 'Debit card, JioFinance, ending 4821' })}</ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: 'Always 328 × 224',
-      description: 'The card is a fixed 328 × 224, as in Figma, and doesn’t grow or shrink with its host or its text. The top band has 16 px of padding above and 28 px below; the art strip is 50 px tall; the details sit 16 px apart with 20 px at the sides. Without a 29 px bank logo, the top band is 12 px shorter and everything below moves up.',
+      description: 'The card is a fixed 328 × 224, as in Figma, and doesn’t grow or shrink with its host or its text. The top band has 16 px of padding above and 28 px below; the art strip is 50 px tall; the details sit 16 px apart with 20 px at the sides. The top band is 73 px with or without a 29 px bank logo; a taller logo makes it taller.',
       body: <Anatomy legend={false} marks={[
         { kind: 'size', target: R, side: 'bottom', label: 'both' },
         { kind: 'size', target: ART, side: 'right', label: 'both' },
@@ -105,17 +106,17 @@ function DebitCardGuide() {
       description: 'Each pair shows a card face that keeps the number private and reads cleanly next to one that exposes it or cuts a label.',
       body: <div className="coin-new-stack">
         <DoDont good={Fit()} bad={Fit({ cardNumber: '4111 1111 1111 4821' })} goodTitle="Mask the number" goodCaption="Only the last four digits show." badTitle="The full number" badCaption="The card shows it exactly as passed." />
-        <DoDont good={Fit()} bad={Fit({ bankName: 'JioFinance Payments Bank', cardType: 'Debit Platinum Select' })} goodTitle="Short bank and type" goodCaption="Both fit the top band." badTitle="Long names" badCaption="They don’t shorten, so the card’s edge cuts the type off." />
+        <DoDont good={Fit()} bad={Fit({ bankName: 'JioFinance Payments Bank', cardType: 'Debit Platinum Select' })} goodTitle="Short bank and type" goodCaption="Both fit the top band." badTitle="Long names" badCaption="Each ends in an ellipsis, so the card type is lost." />
       </div>,
     },
     sources: {
       header: 'Sources', title: 'Use the public Debit Card contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="21 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('debitcard')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('debitcard')} stories={[
         { label: 'Default', id: 'components-debitcard--default' },
         { label: 'Credit card', id: 'components-debitcard--credit-card' },
         { label: 'No card art', id: 'components-debitcard--no-card-art' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Debit Card exposes <code>cardholderName</code>, <code>cardNumber</code>, and <code>expireDate</code>; its bank and network logos are nested instances, and its brand is a variable mode. The package ships no logos, so without a 29 px <code>bankLogoSlot</code> the top band is 12 px shorter than Figma’s. On the SBI brand the text stays black on purple, which is hard to read. <code>cardArtSource</code> can replace the art strip but not remove it, long bank or type text is cut off instead of shortened, and the card has no pressed state. Every published Storybook story renders the card as a button, and the published page is the older generated one (all reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Debit Card exposes <code>cardholderName</code>, <code>cardNumber</code>, and <code>expireDate</code>; its bank and network logos are nested instances, and its brand is a variable mode. The package ships no logos; the top band keeps Figma’s 73 px without one. On the SBI brand the text is white. <code>cardArtSource</code> replaces the art strip and <code>showArt={false}</code> removes it, though the art doesn’t change with the brand. Long bank or type text ends in an ellipsis, and a pressable card dims while pressed. Every published Storybook story renders the card as a button, and the published page is the older generated one (all reported).</Sources>,
     },
   }
 

@@ -2,6 +2,10 @@
 
 Package, Figma, and Storybook evidence for the Product Merchandising Card guide (board ticket #139, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main e60f8bd8").
 
+## dbe0e02 install (28 October 2026, not this guide's tickets)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02) to publish the Component Fix batch #343–#406 (Penny run run_92acfa9d). Biscuit's ace46ca and dbe0e02 also changed ProductMerchandisingCard for #356, which isn't in that release, so this guide's copy wasn't re-checked and waits for #356's own publish. Only the anatomy selectors changed, so the page passes on this build: the card now has a press layer first and a separate blurred band before the footer’s content, so the targets count from child 2 (photo), 3 (header) and 5 (footer content); a gradient now sits over the blur, so the Footer note (“no dark shade”) may be out of date and waits for #356. `npm run verify` passes.
+
 ## Checked
 
 20 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348). `npm run coin:status` shows one newer upstream commit, e60f8bd8, which changes only `ProductMerchandisingCard.mdx`. Rendered with react-native-web 0.21.2 in headless Chrome with JioType Var loaded; the published Storybook (built 17 October) was measured the same way and matches the installed code.

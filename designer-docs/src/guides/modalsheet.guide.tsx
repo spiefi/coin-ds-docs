@@ -38,18 +38,20 @@ function Frame({ fill = true, scrim = true, visible = true, topInset, closeButto
   fill?: boolean; scrim?: boolean; visible?: boolean; topInset?: number; closeButton?: boolean; field?: boolean; pageType?: PageType; drag?: boolean
 }) {
   const [shown, setShown] = useState(visible)
+  const [reopened, setReopened] = useState(false)
   const progress = usePresentationProgress()
   const hide = () => setShown(false)
   const chat = useChat({ close: hide, fill, closeButton, field })
   return <ScreenFrame receded={progress} footer={
-    <ModalSheet visible={shown} fillHeight={fill} showOverlay={scrim} enableDismissGesture={drag} onOverlayPress={hide} onRequestClose={hide} topInset={topInset} presentationProgress={progress} modes={sheetModes(pageType)}>
+    <ModalSheet visible={shown} trapFocus={reopened} fillHeight={fill} showOverlay={scrim} enableDismissGesture={drag} onOverlayPress={hide} onRequestClose={hide} topInset={topInset} presentationProgress={progress} modes={sheetModes(pageType)}>
       {chat}
     </ModalSheet>
-  }><Screen open={() => setShown(true)} /></ScreenFrame>
+  }><Screen open={() => { setReopened(true); setShown(true) }} /></ScreenFrame>
 }
 
 function ModalSheetGuide() {
   const [shown, setShown] = useState(true)
+  const [reopened, setReopened] = useState(false)
   const [height, setHeight] = useState<'Fill' | 'Fit content'>('Fill')
   const [scrim, setScrim] = useState(true)
   const [pageType, setPageType] = useState<PageType>('MainPage')
@@ -78,7 +80,7 @@ function ModalSheetGuide() {
         { name: 'Close button', note: 'Yours: a named IconButton that hides the sheet.', target: `${MS} [aria-label="Close"]`, side: 'right' },
         { name: 'Field', note: 'Yours: the main input or action, at the bottom.', target: `${MS} input`, side: 'bottom' },
       ]}>
-        <ModalSheet testID="ms-anatomy" fillHeight={false} modes={LIGHT}>{anatomyChat}</ModalSheet>
+        <ModalSheet testID="ms-anatomy" trapFocus={false} fillHeight={false} modes={LIGHT}>{anatomyChat}</ModalSheet>
       </Anatomy>,
     },
     configuration: {
@@ -109,7 +111,7 @@ function ModalSheetGuide() {
         { kind: 'size', target: SZ, side: 'right', label: 'both' },
         { kind: 'padding', target: SZ },
       ]}>
-        <ModalSheet testID="ms-size" fillHeight={false} modes={LIGHT}>{sizeChat}</ModalSheet>
+        <ModalSheet testID="ms-size" trapFocus={false} fillHeight={false} modes={LIGHT}>{sizeChat}</ModalSheet>
       </Anatomy>,
     },
     content: {
@@ -142,9 +144,9 @@ function ModalSheetGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Modal Sheet contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('modalsheet')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('modalsheet')} stories={[
         { label: 'Default', id: 'components-modalsheet--default' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Modal Sheet is one 360 × 728 white surface with one slot. In the package it renders in place until it’s given <code>visible</code>; then it slides over its screen with an optional scrim and can be dragged down. It puts its 12 px gap between the slot’s items, and a top inset shortens the sheet so its bottom stays on the screen. On the web it’s a dialog and a hidden sheet leaves the Tab order, but focus isn’t moved into it, kept in it, or returned, and Escape doesn’t close it from a text field (#234). Page type JioPlus turns it light grey and stays off its slot, except the App Bar: text stays dark, and the HelloJio Input turns white to show on the grey. Turning the drag off leaves the X and the scrim. The examples host the sheet as the Storybook story does: on a black screen whose page steps back with the sheet, through the package’s page-stack hook (the screen’s job, not the sheet’s). The screen’s corners are rounder than the sheet’s, like a phone’s. The published Docs page is still the old generated one. The slide runs the package’s own spring settings, as in Storybook.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build) from the team’s private package repository. Figma’s Modal Sheet is one 360 × 728 white surface with one slot. In the package it renders in place until it’s given <code>visible</code>; then it slides over its screen with an optional scrim and can be dragged down. It puts its 12 px gap between the slot’s items, and a top inset shortens the sheet so its bottom stays on the screen. On the web it’s a dialog named by its App Bar title, and a hidden sheet leaves the Tab order. When the screen shows it, focus moves to its first control (the X here) and Tab stays inside; Escape, even from the text field, the X, or the scrim closes it and returns focus to what opened it. trapFocus={false} turns that off for a sheet shown inside a page, as these examples are until you open them again; In context keeps it. Page type JioPlus turns it light grey and stays off its slot, except the App Bar: text stays dark, and the HelloJio Input turns white to show on the grey. Turning the drag off leaves the X and the scrim. The examples host the sheet as the Storybook story does: on a black screen whose page steps back with the sheet, through the package’s page-stack hook (the screen’s job, not the sheet’s). The screen’s corners are rounder than the sheet’s, like a phone’s. The published Docs page is still the old generated one. The slide runs the package’s own spring settings, as in Storybook.</Sources>,
     },
   }
 
@@ -155,10 +157,10 @@ function ModalSheetGuide() {
   }} playground={<>
     <div className="preview-stage">
       <ScreenFrame receded={progress} footer={
-        <ModalSheet visible={shown} fillHeight={fill} showOverlay={scrim} enableDismissGesture={drag} onOverlayPress={hide} onRequestClose={hide} presentationProgress={progress} modes={sheetModes(pageType)}>
+        <ModalSheet visible={shown} trapFocus={reopened} fillHeight={fill} showOverlay={scrim} enableDismissGesture={drag} onOverlayPress={hide} onRequestClose={hide} presentationProgress={progress} modes={sheetModes(pageType)}>
           {playChat}
         </ModalSheet>
-      }><Screen open={() => setShown(true)} /></ScreenFrame>
+      }><Screen open={() => { setReopened(true); setShown(true) }} /></ScreenFrame>
       <span className="stage-label">Live Coin Modal Sheet</span>
     </div>
     <div className="controls-panel">

@@ -74,3 +74,10 @@ note: Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October b
 
 ## Limits
 Don't show or mention Color Mode, dark mode, Page type JioPlus, or Context3. Don't imply the hero presses, has an action button, replaces its label row, left-aligns, wraps or shrinks the amount, or that screen readers announce the amount.
+
+## dbe0e02 publish (28 October 2026): copy changes
+
+These replace the matching lines above; the guide file has the exact strings. Evidence: `docs/evidence/portfoliohero.md`.
+
+- checked: 28 October 2026 · built from dbe0e02 (27 October).
+- Sources: “… The amount sits on a 44 px line, so the hero is taller than Figma’s 159 px (all reported). Screen readers read the amount once, with its currency.”

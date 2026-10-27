@@ -2,6 +2,10 @@
 
 Package, Figma, and Storybook evidence for the PDP Card guide (board ticket #5, Design documentation — Marcin; Storybook coverage — Biscuit, done: "Storybook page rewritten to the handwritten outline on main e60f8bd8").
 
+## dbe0e02 install (28 October 2026, not this guide's tickets)
+
+The docs now install mirror tag `v0.1.78-dbe0e02` (Biscuit's `main` at dbe0e02) to publish the Component Fix batch #343–#406 (Penny run run_92acfa9d). Biscuit's ace46ca and dbe0e02 also changed PdpCcCard for #361, which isn't in that release, so this guide's copy wasn't re-checked and waits for #361's own publish. Only the anatomy selectors changed, so the page passes on this build: the heading now sits in a wrapper (and has 8/12 px padding), so HEADING is `${R} [role="heading"]`. `npm run verify` passes.
+
 ## Checked
 
 21 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `v0.1.78-c7d3348` (Biscuit's `main` at c7d3348). `npm run coin:status` shows one newer upstream commit, e60f8bd8, which changes only Storybook MDX pages (`PdpCcCard.mdx` among them). The published Storybook (built 17 October; no PdpCcCard file changed since) was measured in headless Chrome with JioType Var loaded.

@@ -31,8 +31,8 @@ const BILL: Pair[] = [
 const SETS = { 'UPI payment': UPI, Transfer: TRANSFER, Bill: BILL }
 type SetName = keyof typeof SETS
 
-function TD(items: Pair[]) {
-  return <TransactionDetails modes={LIGHT} testID="td">
+function TD(items: Pair[], accessibilityLabel?: string) {
+  return <TransactionDetails modes={LIGHT} testID="td" accessibilityLabel={accessibilityLabel}>
     {items.map(([label, value], i) => <TransactionDetails.Item key={label} testID={`td-${i + 1}`} label={label} value={value} />)}
   </TransactionDetails>
 }
@@ -98,13 +98,13 @@ function TransactionDetailsGuide() {
     },
     context: {
       header: 'In context', title: 'The receipt behind a payment',
-      description: 'The details sit on the screen a payment opens, under its amount and outcome. The screen adds the heading and the action; the list only holds the facts.',
+      description: 'The details sit on the screen a payment opens, under its amount and outcome. The screen adds the heading and the action; the list only holds the facts, and its accessibilityLabel, Payment details, names it for screen readers.',
       body: <div className="coin-new-context">
         <ScreenFrame size="full">
           <VStack modes={{ ...LIGHT, 'Slot gap': 'L' } as Modes} style={{ flex: 1, padding: 16 }} justifyVertical="space-between">
             <VStack modes={{ ...LIGHT, 'Slot gap': 'L' } as Modes}>
               <Title title="Paid ₹1,200" subtitle="To Rahul Verma · 21 Oct 2026, 4:15 pm" modes={LIGHT} />
-              {TD(UPI)}
+              {TD(UPI, 'Payment details')}
             </VStack>
             <Button label="Share receipt" modes={LIGHT} onPress={() => setShared(true)} />
           </VStack>
@@ -127,12 +127,12 @@ function TransactionDetailsGuide() {
     sources: {
       header: 'Sources', title: 'Use the public Transaction Details contract',
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
-      body: <Sources checked="25 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('transactiondetails')} stories={[
+      body: <Sources checked="28 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('transactiondetails')} stories={[
         { label: 'Default', id: 'components-transactiondetails--default' },
         { label: 'Single item', id: 'components-transactiondetails--single-item' },
         { label: 'Account transfer', id: 'components-transactiondetails--account-transfer' },
         { label: 'Bill payment', id: 'components-transactiondetails--bill-payment' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (23 October build of Biscuit’s main) from the team’s private package repository. Figma’s Transaction Details is one component with no properties: a slot of Detail Items, each with a Label and a Value, drawn 315 px wide. The package takes <code>TransactionDetails.Item</code> children with <code>label</code> and <code>value</code> and sizes them to their text. No mode changes it. Its <code>accessibilityLabel</code> props are never applied, so the list has no name, and on phones screen readers skip the items (reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Transaction Details is one component with no properties: a slot of Detail Items, each with a Label and a Value, drawn 315 px wide. The package takes <code>TransactionDetails.Item</code> children with <code>label</code> and <code>value</code> and sizes them to their text. No mode changes it. On the web it’s a list named by its <code>accessibilityLabel</code>, and each item is read once as its label and value, unless the item’s own <code>accessibilityLabel</code> replaces them; phone screen readers read the items too.</Sources>,
     },
   }
 
