@@ -1,9 +1,9 @@
 {
   "slug": "stepper",
-  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Stepper's own props are only children, modes, style, testID and accessibilityLabel; each stage's text, status and colour are Step props and modes, so rules about them carry no target here (the Step entry targets them). The package declares no mode collections for Stepper, but the evidence shows Stepper merges its modes into every Step (the Step's own win), so Step Status is recorded as an evidence-created mode. Evidence spans three checks: 5 October (0.1.78-3795b4c), 8 October (0.1.78-636f3f5, which fixed #195: list semantics, current step, status words, status setting the colour) and 13 October (0.1.78-c1fa197, installed; no designer-facing change recorded). The 5 October line that a complete status without the Step Status mode renders a check on purple is superseded by the 8 October check; only its second clause (upcoming steps stay purple unless set to inactive) is used. Guide problems: (1) the States description says the status sets the colour \"so a check is always green\", but the Sources note says an explicit Step Status mode overrides the colour, and the Don't \"Put a check on purple\" depends on that override; \"always\" holds only without an explicit Step Status mode. (2) The Stepper guide never says that upcoming stages need Step Status inactive (only the Step guide and this guide's evidence do); its States table shows Upcoming as a state without saying how to get it. (3) The Sources note says each stage is read with its title plus the status word; in the installed c1fa197 source, Step also reads a short supporting text (up to 80 characters, one line) and, with a StepLabel child, that child's title. The 13 October evidence says no designer-facing behaviour changed, so the guide and evidence were not updated for this. (4) Dark mode (#197) was last checked on 5 October; the Step evidence lists #197 as in Review on 10 October, so the Dark gap may be stale. The guide names no other component to use instead. Updated 17 October 2026 for main 807973d (a116616): the States copy no longer says a check is always green, and Sources now names the supporting text in each stage's spoken name; both are extracted from the new copy.",
+  "notes": "Stepper's own props are only children, modes, style, testID and accessibilityLabel; each stage's text, status and colour are Step props and modes, so rules about them carry no target here (the Step entry targets them). The package declares no mode collections for Stepper, but the evidence shows Stepper merges its modes into every Step (the Step's own win), so Step Status is recorded as an evidence-created mode. Evidence spans three checks: 5 October (0.1.78-3795b4c), 8 October (0.1.78-636f3f5, which fixed #195: list semantics, current step, status words, status setting the colour) and 13 October (0.1.78-c1fa197, installed; no designer-facing change recorded). The 5 October line that a complete status without the Step Status mode renders a check on purple is superseded by the 8 October check; only its second clause (upcoming steps stay purple unless set to inactive) is used. Guide problems: (1) the States description says the status sets the colour \"so a check is always green\", but the Sources note says an explicit Step Status mode overrides the colour, and the Don't \"Put a check on purple\" depends on that override; \"always\" holds only without an explicit Step Status mode. (2) The Stepper guide never says that upcoming stages need Step Status inactive (only the Step guide and this guide's evidence do); its States table shows Upcoming as a state without saying how to get it. (3) The Sources note says each stage is read with its title plus the status word; in the installed c1fa197 source, Step also reads a short supporting text (up to 80 characters, one line) and, with a StepLabel child, that child's title. The 13 October evidence says no designer-facing behaviour changed, so the guide and evidence were not updated for this. (4) Dark mode (#197) was last checked on 5 October; the Step evidence lists #197 as in Review on 10 October, so the Dark gap may be stale. The guide names no other component to use instead. Updated 17 October 2026 for main 807973d (a116616): the States copy no longer says a check is always green, and Sources now names the supporting text in each stage's spoken name; both are extracted from the new copy. Re-extracted 29 October 2026 (Penny run run_19b90d38) for the dbe0e02 publish (#235): each stage's date is now read, so the accessibility item quotes the new Sources sentence.",
   "useWhen": [
     {
       "text": "Show where someone is in a process with several stages, such as KYC, and how each stage went.",
@@ -329,19 +329,14 @@
       }
     },
     {
-      "text": "Give each stage a title that names it: on the web each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current.",
+      "text": "Give each stage a title that names it: on the web each stage is read with its title, supporting text of up to 80 characters, and date, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current.",
       "strength": "recommended",
       "from": {
         "section": "sources",
-        "quote": "each stage is read with its title and supporting text of up to 80 characters, plus “Completed”, “Failed”, or “Needs attention” (never its date), and the first unfinished stage is marked as current."
+        "quote": "each stage is read with its title, supporting text of up to 80 characters, and date, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current."
       },
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616",
-      "absolute": {
-        "word": "never",
-        "scope": "contextual",
-        "reason": "\"never its date\" says what screen readers skip, not a constraint on the designer."
-      }
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
     },
     {
       "text": "Say in the text what happened: the icons themselves have no names.",
@@ -481,10 +476,10 @@
       "checkedVersion": "0.1.78-636f3f5"
     },
     {
-      "text": "Stepper is vertical only and not interactive, and it owns no current step.",
+      "text": "Stepper is vertical only and not interactive.",
       "checkedOn": "2026-10-05",
       "checkedVersion": "0.1.78-3795b4c",
-      "quote": "it is vertical only, not interactive, and owns no current step"
+      "quote": "it is vertical only, not interactive"
     },
     {
       "text": "In Dark mode, complete and warning stages turn red, and supporting text and dates stay near-black (#197); the guide shows Light only.",

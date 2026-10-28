@@ -1,0 +1,300 @@
+{
+  "slug": "modalsheet",
+  "label": "Modal Sheet",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/modalsheet.guide.tsx"
+  ],
+  "evidence": "docs/evidence/modalsheet.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:01:36.778Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "page sheet",
+    "modal",
+    "sheet",
+    "overlay page",
+    "HelloJio sheet"
+  ],
+  "title": "Modal Sheet",
+  "summary": "Use a Modal Sheet for a task that slides up over the page, such as asking HelloJio, and goes away when it’s done.",
+  "corePrinciple": "A page over the page, with a clear way to close it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9559-28121",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-modalsheet--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A white sheet with one slot",
+      "description": "The sheet is a rounded white surface with one slot. It has no title or close button of its own: put an App Bar with a close button at the top and the main field at the bottom.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Sheet",
+        "White, with 20 px corners and no handle.",
+        "Slot",
+        "One column of your content; it gets the sheet’s modes, without Page type.",
+        "App bar",
+        "Yours: the top of the slot, holding the close button.",
+        "Close button",
+        "Yours: a named IconButton that hides the sheet.",
+        "Field",
+        "Yours: the main input or action, at the bottom."
+      ],
+      "specimen": [
+        "Ask about your spends, bills, or investments.",
+        "Ask me anything"
+      ],
+      "anatomy": [
+        {
+          "part": "Sheet",
+          "note": "White, with 20 px corners and no handle."
+        },
+        {
+          "part": "Slot",
+          "note": "One column of your content; it gets the sheet’s modes, without Page type."
+        },
+        {
+          "part": "App bar",
+          "note": "Yours: the top of the slot, holding the close button."
+        },
+        {
+          "part": "Close button",
+          "note": "Yours: a named IconButton that hides the sheet."
+        },
+        {
+          "part": "Field",
+          "note": "Yours: the main input or action, at the bottom."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Height, scrim, top inset, and page type",
+      "description": "A sheet fills the screen by default; fit it to short content instead. A scrim dims the page around a fitted sheet, and a top inset lets the page peek above it. Page type sets the sheet’s colour.",
+      "blocks": [
+        "Fills the screen",
+        "The default: the sheet covers the screen and the field sits at its foot.",
+        "Fits its content",
+        "The sheet hugs its content and docks to the bottom.",
+        "Without a scrim",
+        "The page stays bright behind the sheet, as in the Storybook story.",
+        "Top inset",
+        "The page peeks 40 px above, and the sheet shortens to keep its bottom on the screen.",
+        "Main or sub page",
+        "MainPage, the default used everywhere else here, and SubPage both give a white sheet.",
+        "JioPlus",
+        "A light grey sheet. Its text stays dark, and the HelloJio field turns white to stand out."
+      ],
+      "specimen": [
+        "Home",
+        "Ask HelloJio",
+        "Ask about your spends, bills, or investments.",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Fills the screen",
+          "description": "The default: the sheet covers the screen and the field sits at its foot."
+        },
+        {
+          "title": "Fits its content",
+          "description": "The sheet hugs its content and docks to the bottom."
+        },
+        {
+          "title": "Without a scrim",
+          "description": "The page stays bright behind the sheet, as in the Storybook story."
+        },
+        {
+          "title": "Top inset",
+          "description": "The page peeks 40 px above, and the sheet shortens to keep its bottom on the screen."
+        },
+        {
+          "title": "Main or sub page",
+          "description": "MainPage, the default used everywhere else here, and SubPage both give a white sheet."
+        },
+        {
+          "title": "JioPlus",
+          "description": "A light grey sheet. Its text stays dark, and the HelloJio field turns white to stand out."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Shown, hidden, and how it closes",
+      "description": "The screen shows and hides the sheet: it slides up from the bottom and settles without a bounce, then slides back down. A drag down asks to close it, unless drag to close is turned off. A hidden sheet waits below the screen, out of the Tab order and hidden from screen readers.",
+      "blocks": [
+        "Shown",
+        "Over a dimmed page, docked to the bottom.",
+        "Hidden",
+        "Below the screen; only the page shows.",
+        "Drag to close off",
+        "A drag down does nothing; the X and the scrim still close it, so a stray drag can’t lose a half-typed question."
+      ],
+      "specimen": [
+        "Home",
+        "Ask HelloJio",
+        "Ask about your spends, bills, or investments.",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Shown",
+          "description": "Over a dimmed page, docked to the bottom."
+        },
+        {
+          "title": "Hidden",
+          "description": "Below the screen; only the page shows."
+        },
+        {
+          "title": "Drag to close off",
+          "description": "A drag down does nothing; the X and the scrim still close it, so a stray drag can’t lose a half-typed question."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, filling or fitting the screen",
+      "description": "The sheet spans its screen with 12 px of padding at the top, 8 px at the sides, and 32 px at the bottom, and puts 12 px between the items in its slot. It fills the screen’s height unless it fits its content.",
+      "blocks": [
+        "360 × 183"
+      ],
+      "specimen": [
+        "Ask about your spends, bills, or investments.",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "A title, a way out, and one task",
+      "description": "Start the slot with an App Bar that holds a named close button, keep one task in the middle, and put the main field or action at the bottom. Keep it to one task; a new flow deserves its own screen.",
+      "blocks": [
+        "One task, with a way out"
+      ],
+      "specimen": [
+        "Home",
+        "Ask HelloJio",
+        "Ask about your spends, bills, or investments.",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "One task, with a way out",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Asking HelloJio from Home",
+      "description": "Ask HelloJio opens the sheet over Home, and Home steps back behind it. Sending a question or pressing the X closes it; the screen keeps what was asked.",
+      "blocks": [
+        "On Home"
+      ],
+      "specimen": [
+        "Home",
+        "Ask HelloJio",
+        "Ask about your spends, bills, or investments.",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Always a visible way out",
+      "description": "Each pair shows a sheet people can leave and read versus one that traps or wastes their attention.",
+      "blocks": [
+        "Do",
+        "Add a named close button",
+        "The X closes the sheet for everyone, including keyboard users.",
+        "Don’t",
+        "Rely on dragging",
+        "Without an X, people must drag, tap the scrim, or know to press Escape.",
+        "Fit short content",
+        "A one-line sheet docks to the bottom.",
+        "Fill the screen for one line",
+        "The sheet covers the page and leaves it empty."
+      ],
+      "specimen": [
+        "Home",
+        "Ask HelloJio",
+        "Ask about your spends, bills, or investments.",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Add a named close button",
+            "caption": "The X closes the sheet for everyone, including keyboard users.",
+            "specimen": "Home · Ask HelloJio · Ask about your spends, bills, or investments."
+          },
+          "dont": {
+            "title": "Rely on dragging",
+            "caption": "Without an X, people must drag, tap the scrim, or know to press Escape.",
+            "specimen": "Home · Ask HelloJio · Ask about your spends, bills, or investments."
+          }
+        },
+        {
+          "do": {
+            "title": "Fit short content",
+            "caption": "A one-line sheet docks to the bottom.",
+            "specimen": "Home · Ask HelloJio · Ask about your spends, bills, or investments."
+          },
+          "dont": {
+            "title": "Fill the screen for one line",
+            "caption": "The sheet covers the page and leaves it empty.",
+            "specimen": "Home · Ask HelloJio · Ask about your spends, bills, or investments."
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Modal Sheet contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build) from the team’s private package repository. Figma’s Modal Sheet is one 360 × 728 white surface with one slot. In the package it renders in place until it’s given visible; then it slides over its screen with an optional scrim and can be dragged down. It puts its 12 px gap between the slot’s items, and a top inset shortens the sheet so its bottom stays on the screen. On the web it’s a dialog named by its App Bar title, and a hidden sheet leaves the Tab order. When the screen shows it, focus moves to its first control (the X here) and Tab stays inside; Escape, even from the text field, the X, or the scrim closes it and returns focus to what opened it. trapFocus= turns that off for a sheet shown inside a page, as these examples are until you open them again; In context keeps it. Page type JioPlus turns it light grey and stays off its slot, except the App Bar: text stays dark, and the HelloJio Input turns white to show on the grey. Turning the drag off leaves the X and the scrim. The examples host the sheet as the Storybook story does: on a black screen whose page steps back with the sheet, through the package’s page-stack hook (the screen’s job, not the sheet’s). The screen’s corners are rounder than the sheet’s, like a phone’s. The published Docs page is still the old generated one. The slide runs the package’s own spring settings, as in Storybook.",
+        "jfs-components",
+        "0.1.78",
+        "visible"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

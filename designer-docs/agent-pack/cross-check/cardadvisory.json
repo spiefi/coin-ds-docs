@@ -1,0 +1,17 @@
+{
+  "slug": "cardadvisory",
+  "entryHash": "c1fdeb0adb9f91bf53f17ffba0ae2017139c070b5e822c35f3b029cdb6dd0e92",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "checkedAt": "2026-10-28T23:23:16Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: The guide never gives an updated reading for the Insights screen. The invented description \"Based on all 3 of your accounts.\" does not say what the score means, which breaks the guide's own rule \"Say what the score means in one sentence\". It also sits oddly beside the guide's \"2 accounts linked\"."
+    }
+  ],
+  "notes": "/configuration/15 says the card passes its modes to \"the components in its slots\". The cited fact /facts/props/13 only says modes \"Reach the ring and the nudge\". The slot claim is supported by the declared slot facts (/facts/props/11 and /facts/props/12, \"Receives `modes` recursively\") and by the evidence (\"all get `modes`\"), so a human may want to add that citation rather than treat it as wrong. /facts/props/8 says the nudgeButtonLabel names the button \"for screen readers\", but the evidence only shows the web aria-label, with nothing for native. /facts/props/11 says the card \"forwards no ... state\" to its default ring, while the evidence notes the card hardcodes state=\"Active\". The wording is accurate in that no prop is forwarded, but it could be read as the ring having no state."
+}

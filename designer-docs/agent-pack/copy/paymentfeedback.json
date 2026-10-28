@@ -1,0 +1,331 @@
+{
+  "slug": "paymentfeedback",
+  "label": "Payment Feedback",
+  "guideCommit": "2bae394cec05b83d6daa0c71d168ae3fb58f61df",
+  "files": [
+    "src/guides/paymentfeedback.guide.tsx"
+  ],
+  "evidence": "docs/evidence/paymentfeedback.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:01:35.114Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "payment status",
+    "payment result",
+    "transaction result",
+    "success screen",
+    "payment confirmation",
+    "receipt"
+  ],
+  "title": "Payment Feedback",
+  "summary": "Use a Payment Feedback on the screen after a payment to show the amount, whether it went through, and its reference.",
+  "corePrinciple": "Lead with the amount, then say the outcome in words.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1056-3084",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-paymentfeedback--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An icon, an amount, and the outcome",
+      "description": "A status icon sits above the amount, with the outcome and an optional sentence under it and the date and reference at the bottom, all centred. The icon and the words are separate settings.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Icon",
+        "An 81 px Icon Capsule coloured by AppearanceSystem; renderMedia replaces it.",
+        "Amount",
+        "The title: 36 px heavy text. The component adds no currency sign.",
+        "Status",
+        "The subtitle: the outcome in words, at 16 px.",
+        "Body",
+        "Optional: one sentence under the status, at 14 px.",
+        "Details",
+        "One line per line break in details; showDetails hides them."
+      ],
+      "specimen": [
+        "₹1,250",
+        "Payment successful",
+        "Sent to Rahul Sharma.",
+        "13 October 2026, 4:15 pm",
+        "Transaction ID: TXN121466784"
+      ],
+      "anatomy": [
+        {
+          "part": "Icon",
+          "note": "An 81 px Icon Capsule coloured by AppearanceSystem; renderMedia replaces it."
+        },
+        {
+          "part": "Amount",
+          "note": "The title: 36 px heavy text. The component adds no currency sign."
+        },
+        {
+          "part": "Status",
+          "note": "The subtitle: the outcome in words, at 16 px."
+        },
+        {
+          "part": "Body",
+          "note": "Optional: one sentence under the status, at 14 px."
+        },
+        {
+          "part": "Details",
+          "note": "One line per line break in details; showDetails hides them."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Three outcomes and your own mark",
+      "description": "Set the outcome with AppearanceSystem in modes: positive is green, warning orange, and negative red. The icon and the words don't follow it, so set iconName and the status line to match. renderMedia replaces the icon with your own.",
+      "blocks": [
+        "Paid",
+        "positive with ic_confirm, the default: a check on green.",
+        "Pending",
+        "warning with ic_info, while the bank hasn't confirmed it.",
+        "Failed",
+        "negative with ic_close: a white cross on red.",
+        "Your own mark",
+        "renderMedia swaps in your own, here a gold brand capsule."
+      ],
+      "specimen": [
+        "₹1,250",
+        "Payment successful",
+        "Sent to Rahul Sharma.",
+        "13 October 2026, 4:15 pm",
+        "Transaction ID: TXN121466784",
+        "Payment pending",
+        "Your bank is still processing it.",
+        "Payment failed",
+        "Something went wrong. Please try again.",
+        "₹10,000",
+        "Transfer complete",
+        "Moved to your savings account."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Paid",
+          "description": "positive with ic_confirm, the default: a check on green."
+        },
+        {
+          "title": "Pending",
+          "description": "warning with ic_info, while the bank hasn't confirmed it."
+        },
+        {
+          "title": "Failed",
+          "description": "negative with ic_close: a white cross on red."
+        },
+        {
+          "title": "Your own mark",
+          "description": "renderMedia swaps in your own, here a gold brand capsule."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Shown once, with optional lines",
+      "description": "Payment Feedback has no pressed, disabled, or loading state: the screen shows it once the payment has a result. The body appears only when you set it, and showDetails turns the details off.",
+      "blocks": [
+        "Everything",
+        "Amount, status, body, and details.",
+        "No details",
+        "showDetails off hides the date and reference.",
+        "Amount and status",
+        "The shortest version: the amount and the outcome."
+      ],
+      "specimen": [
+        "₹1,250",
+        "Payment successful",
+        "Sent to Rahul Sharma.",
+        "13 October 2026, 4:15 pm",
+        "Transaction ID: TXN121466784"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Everything",
+          "description": "Amount, status, body, and details."
+        },
+        {
+          "title": "No details",
+          "description": "showDetails off hides the date and reference."
+        },
+        {
+          "title": "Amount and status",
+          "description": "The shortest version: the amount and the outcome."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "As wide as its container",
+      "description": "It has no width of its own: it fills its container, or shrinks to its longest line when centred, as in the examples above and in Storybook. The 81 px icon sits 46 px above the amount, 12 px separate the amount from the status, and the details come 46 px below. Figma's version is 328 px wide.",
+      "blocks": [
+        "328 × 308",
+        "46",
+        "12"
+      ],
+      "specimen": [
+        "₹1,250",
+        "Payment successful",
+        "Sent to Rahul Sharma.",
+        "13 October 2026, 4:15 pm",
+        "Transaction ID: TXN121466784"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Amount, outcome, reference",
+      "description": "Write the amount as it was paid, with its currency sign: the component adds none. Put the outcome in the status line in sentence case, keep the body to one sentence, and give the details one fact per line, split with a line break.",
+      "blocks": [
+        "Amount, outcome, reference",
+        "₹1,250, “Payment successful”, who it went to, then the date and transaction ID."
+      ],
+      "specimen": [
+        "₹1,250",
+        "Payment successful",
+        "Sent to Rahul Sharma.",
+        "13 October 2026, 4:15 pm",
+        "Transaction ID: TXN121466784"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Amount, outcome, reference",
+          "description": "₹1,250, “Payment successful”, who it went to, then the date and transaction ID."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A payment result screen",
+      "description": "Pay swaps the payment screen for the result: the amount, the outcome, and the reference, with Done below to leave. Payment Feedback has no button of its own, so the screen adds one.",
+      "blocks": [
+        "Ready to pay"
+      ],
+      "specimen": [
+        "Pay Rahul Sharma",
+        "HDFC Bank ··4821",
+        "Pay ₹1,250"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "The outcome at a glance",
+      "description": "Each pair shows a result people read correctly next to one that hides or contradicts the outcome.",
+      "blocks": [
+        "Do",
+        "Say the outcome in words",
+        "“Payment failed” tells everyone what happened, not only people who see the red.",
+        "Don’t",
+        "Rely on the colour",
+        "Only the red icon says this payment failed.",
+        "Match the icon to the outcome",
+        "A cross on red for a failed payment.",
+        "Keep the default check",
+        "A check mark on red says success and failure at once.",
+        "Keep the title to the amount",
+        "“₹1,250” reads at a glance.",
+        "Write a sentence in the title",
+        "36 px heavy text wraps into a block nobody reads first."
+      ],
+      "specimen": [
+        "₹1,250",
+        "Payment failed",
+        "Something went wrong. Please try again.",
+        "13 October 2026, 4:15 pm",
+        "Transaction ID: TXN121466784",
+        "To Rahul Sharma",
+        "Payment successful",
+        "Sent to Rahul Sharma.",
+        "Your payment of ₹1,250 was successful"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Say the outcome in words",
+            "caption": "“Payment failed” tells everyone what happened, not only people who see the red.",
+            "specimen": "₹1,250 · Payment failed · Something went wrong. Please try again. · 13 October 2026, 4:15 pm · Transaction ID: TXN121466784"
+          },
+          "dont": {
+            "title": "Rely on the colour",
+            "caption": "Only the red icon says this payment failed.",
+            "specimen": "₹1,250 · To Rahul Sharma · 13 October 2026, 4:15 pm · Transaction ID: TXN121466784"
+          }
+        },
+        {
+          "do": {
+            "title": "Match the icon to the outcome",
+            "caption": "A cross on red for a failed payment.",
+            "specimen": "₹1,250 · Payment failed · Something went wrong. Please try again. · 13 October 2026, 4:15 pm · Transaction ID: TXN121466784"
+          },
+          "dont": {
+            "title": "Keep the default check",
+            "caption": "A check mark on red says success and failure at once.",
+            "specimen": "₹1,250 · Payment failed · Something went wrong. Please try again. · 13 October 2026, 4:15 pm · Transaction ID: TXN121466784"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the title to the amount",
+            "caption": "“₹1,250” reads at a glance.",
+            "specimen": "₹1,250 · Payment successful · Sent to Rahul Sharma. · 13 October 2026, 4:15 pm · Transaction ID: TXN121466784"
+          },
+          "dont": {
+            "title": "Write a sentence in the title",
+            "caption": "36 px heavy text wraps into a block nobody reads first.",
+            "specimen": "Your payment of ₹1,250 was successful · Payment successful · Sent to Rahul Sharma. · 13 October 2026, 4:15 pm · Transaction ID: TXN121466784"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Payment Feedback contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Without details",
+        "Failed payment",
+        "Warning payment",
+        "Custom media",
+        "Checked 13 October 2026",
+        "Installed jfs-components is 0.1.78 (12 October build) from the team’s private package repository. Figma’s Payment Feedback is one 328 × 316 component showing a successful payment, with Title, Subtitle, Body and Details text and a details switch; pending and failed exist only in code, through AppearanceSystem. Storybook’s stories use a cross for failed and an info icon for pending; Biscuit’s newer Storybook page, not yet published, suggests the error and warning icons instead. In code the amount sits on a 44 px line (36 in Figma). Of the modes, set only AppearanceSystem: AppearanceBrand and Page type change nothing, and the default icon keeps its own size, emphasis and intent. It has no label of its own and doesn’t announce the result: its text is read in order, and the icon is an image with no name. The published Storybook still shows the old page.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,9 +1,9 @@
 {
   "slug": "step",
-  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Re-extracted 17 October 2026 from the guide and evidence as updated on main (807973d) for the a116616 build. The three sentences the earlier extraction left out as stale ('Keep the title prop: it's what screen readers hear', 'the supporting text and date aren't read', and the StepLabel-only name) are gone from the guide; its new copy on the spoken name, children and a standalone Step is extracted here. #235's code parts are fixed; the evidence lists its remaining doc parts. The guide names Stepper as the way to place Steps in Figma (avoidWhen useInstead Stepper).",
+  "notes": "Re-extracted 17 October 2026 from the guide and evidence as updated on main (807973d) for the a116616 build. The three sentences the earlier extraction left out as stale ('Keep the title prop: it's what screen readers hear', 'the supporting text and date aren't read', and the StepLabel-only name) are gone from the guide; its new copy on the spoken name, children and a standalone Step is extracted here. #235's code parts are fixed; the evidence lists its remaining doc parts. The guide names Stepper as the way to place Steps in Figma (avoidWhen useInstead Stepper). Re-extracted 29 October 2026 (Penny run run_19b90d38) for the dbe0e02 publish (#235): the date is now read, so the accessibility item, the content rule and the metaText fact follow the new copy and evidence.",
   "useWhen": [
     {
       "text": "One stage of a process inside a Stepper, such as Verify PAN, with its number or outcome and a line of detail.",
@@ -68,7 +68,7 @@
     {
       "part": "Title",
       "holds": "14 px bold; names the stage.",
-      "required": false,
+      "required": true,
       "from": {
         "section": "anatomy",
         "quote": "14 px bold; names the stage."
@@ -241,7 +241,7 @@
       }
     },
     {
-      "text": "Turn off the connector on the last stage: a connector with no next stage looks unfinished.",
+      "text": "On the last Step you place yourself, turn off the connector: a connector with no next stage looks unfinished (inside a Stepper, Stepper does this).",
       "strength": "recommended",
       "target": "showLine",
       "value": "false",
@@ -302,12 +302,12 @@
         }
       },
       {
-        "text": "Screen readers hear supporting text of up to 80 characters with the title.",
+        "text": "Screen readers hear the title, supporting text of up to 80 characters, and the date.",
         "strength": "recommended",
         "target": "supportingText",
         "from": {
           "section": "content",
-          "quote": "Screen readers hear supporting text of up to 80 characters with the title."
+          "quote": "Screen readers hear the title, supporting text of up to 80 characters, and the date."
         }
       }
     ],
@@ -374,15 +374,15 @@
   ],
   "accessibility": [
     {
-      "text": "Name the stage in its visible copy: in a Stepper a Step is read as its title (or a StepLabel child's title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”; the date isn't read.",
+      "text": "Name the stage in its visible copy: in a Stepper a Step is read as its title (or a StepLabel child's title), supporting text of up to 80 characters, the date, and “Completed”, “Failed”, or “Needs attention”.",
       "strength": "recommended",
       "target": "title",
       "from": {
         "section": "sources",
-        "quote": "On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, and “Completed”, “Failed”, or “Needs attention”."
+        "quote": "On the web each Step in a Stepper is a list item read as its visible copy: the title (or a StepLabel child’s title), supporting text of up to 80 characters, the date, and “Completed”, “Failed”, or “Needs attention”."
       },
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616"
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
     },
     {
       "text": "With custom children, screen readers hear the StepLabel child's text.",
@@ -493,10 +493,10 @@
     {
       "list": "props",
       "name": "children",
-      "description": "Replace the default StepLabel and get Step's modes; title is then ignored for both display and name, and a StepLabel child's title and short supporting text give the name.",
-      "quote": "With children, `title` is ignored for both display and name.",
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616"
+      "description": "Replace the default StepLabel and get Step's modes; the Step's own title and date are then ignored, and a StepLabel child's title, supporting text and date make the name.",
+      "quote": "With a StepLabel child, the child's title, supporting text and date make the name, and the Step's own title and date are ignored.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
     },
     {
       "list": "props",
@@ -525,30 +525,24 @@
     {
       "list": "props",
       "name": "withinStepper",
-      "description": "Set by Stepper; only then is the Step a list item (with aria-current when current). A Step on its own has no role, so its status word isn't announced.",
-      "quote": "Stepper sets it, and only then is the Step an `li role=\"listitem\"`",
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616"
+      "description": "Set by Stepper; then the Step is a list item (with aria-current when current). A Step on its own is a group with the same name.",
+      "quote": "A standalone Step is `role=\"group\"` with that name, not a list item; inside a Stepper it is `li role=\"listitem\"` with the same name.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
     },
     {
       "list": "props",
       "name": "metaText",
-      "description": "The date; it is never read by screen readers.",
-      "quote": "The date (`metaText`) is never read.",
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616"
+      "description": "The date; screen readers read it with the title, the supporting text and the outcome word.",
+      "quote": "The date (`metaText`) is read now.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
     }
   ],
   "gaps": [
     {
       "text": "The status glyph is an unnamed image on the web rather than hidden; the title and status word carry the meaning.",
       "quote": "the glyph SVG is an unnamed image rather than hidden",
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616"
-    },
-    {
-      "text": "A Step on its own isn't a list item, and its name isn't announced.",
-      "quote": "a standalone Step's name isn't announced",
       "checkedOn": "2026-10-17",
       "checkedVersion": "0.1.78-a116616"
     },

@@ -1,0 +1,408 @@
+{
+  "slug": "pdpcccard",
+  "label": "PDP Card",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/pdpcccard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/pdpcccard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:01:39.958Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "product card",
+    "product detail",
+    "PDP",
+    "product summary",
+    "gold coin",
+    "PdpCcCard"
+  ],
+  "title": "PDP Card",
+  "summary": "Use a PDP Card at the top of a product page: the product’s picture, name, two or three key facts, and one action.",
+  "corePrinciple": "One product, its key facts, one action.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5352-935",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-pdpcccard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A centred stack on a white panel",
+      "description": "The picture, the name and its subtitle, a row of facts, and one button sit centred on a white panel, 12 px apart.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Picture",
+        "imageSource, in an imageWidth × imageHeight box (100 × 60 by default).",
+        "Title",
+        "title: 26 px heavy, on one line with an ellipsis.",
+        "Subtitle",
+        "subtitle: one qualifier, 14 px; it wraps.",
+        "Metric",
+        "One metrics entry: its title, icon and value, and caption.",
+        "Action",
+        "A small light purple Button from buttonLabel and buttonIcon.",
+        "Panel",
+        "A white panel with square corners, 344 px wide."
+      ],
+      "specimen": [
+        "5 g gold coin",
+        "24K · 99.9% pure",
+        "Weight",
+        "5 g",
+        "one coin",
+        "Price",
+        "₹31,200",
+        "incl. GST",
+        "Add to cart"
+      ],
+      "anatomy": [
+        {
+          "part": "Picture",
+          "note": "imageSource, in an imageWidth × imageHeight box (100 × 60 by default)."
+        },
+        {
+          "part": "Title",
+          "note": "title: 26 px heavy, on one line with an ellipsis."
+        },
+        {
+          "part": "Subtitle",
+          "note": "subtitle: one qualifier, 14 px; it wraps."
+        },
+        {
+          "part": "Metric",
+          "note": "One metrics entry: its title, icon and value, and caption."
+        },
+        {
+          "part": "Action",
+          "note": "A small light purple Button from buttonLabel and buttonIcon."
+        },
+        {
+          "part": "Panel",
+          "note": "A white panel with square corners, 344 px wide."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Facts and the action",
+      "description": "metrics takes one entry per fact: a title, a value, an optional caption, and an optional icon from the Coin icon set. Entries share the row in equal columns. The card makes its Button small, light purple, and Emphasis Medium, with a plus icon before the label: buttonIcon changes the icon, and null removes it. showButton false removes the button. On the card, AppearanceBrand changes the button and the metric icons, and Emphasis changes the button. media replaces the picture with your own component, and button replaces the Button.",
+      "blocks": [
+        "Two metrics",
+        "Weight and price side by side, in equal columns.",
+        "One metric",
+        "A single fact takes the whole row.",
+        "Three metrics",
+        "Each fact gets a third of the width, so values stay short.",
+        "Without icons",
+        "Leave out icon for text-only facts.",
+        "No button",
+        "The card ends at the facts, 44 px shorter.",
+        "No button icon",
+        "buttonIcon null leaves the label on its own.",
+        "AppearanceBrand Primary",
+        "A gold button and gold metric icons.",
+        "Emphasis High",
+        "A solid purple button."
+      ],
+      "specimen": [
+        "5 g gold coin",
+        "24K · 99.9% pure",
+        "Weight",
+        "5 g",
+        "one coin",
+        "Price",
+        "₹31,200",
+        "incl. GST",
+        "Add to cart",
+        "Purity",
+        "24K",
+        "99.9% pure",
+        "Delivery",
+        "Free",
+        "in 2 days"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Two metrics",
+          "description": "Weight and price side by side, in equal columns."
+        },
+        {
+          "title": "One metric",
+          "description": "A single fact takes the whole row."
+        },
+        {
+          "title": "Three metrics",
+          "description": "Each fact gets a third of the width, so values stay short."
+        },
+        {
+          "title": "Without icons",
+          "description": "Leave out icon for text-only facts."
+        },
+        {
+          "title": "No button",
+          "description": "The card ends at the facts, 44 px shorter."
+        },
+        {
+          "title": "No button icon",
+          "description": "buttonIcon null leaves the label on its own."
+        },
+        {
+          "title": "AppearanceBrand Primary",
+          "description": "A gold button and gold metric icons."
+        },
+        {
+          "title": "Emphasis High",
+          "description": "A solid purple button."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Its button acts, or the whole card does",
+      "description": "The card isn’t pressable: its button is. onPress makes the whole card one button, named by its title. Use one or the other: a pressable card with its button puts a button inside a button. The card has no disabled, selected, or loading state.",
+      "blocks": [
+        "Button acts",
+        "Only Add to cart presses.",
+        "Whole card",
+        "The card is one button, named 5 g gold coin."
+      ],
+      "specimen": [
+        "5 g gold coin",
+        "24K · 99.9% pure",
+        "Weight",
+        "5 g",
+        "one coin",
+        "Price",
+        "₹31,200",
+        "incl. GST",
+        "Add to cart"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Button acts",
+          "description": "Only Add to cart presses."
+        },
+        {
+          "title": "Whole card",
+          "description": "The card is one button, named 5 g gold coin."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "344 px wide, centred content",
+      "description": "The card is 344 px wide, as in Figma; width sets another number or a percentage of its host. Everything inside is centred, 12 px apart, with 20 px of padding at the top and bottom and 16 px at the sides. The picture box is imageWidth × imageHeight, and the height follows the content.",
+      "blocks": [
+        "344 × 316",
+        "12",
+        "width 280",
+        "The facts share less room, and a long title is cut sooner.",
+        "Bigger picture",
+        "The picture box sets the space above the title."
+      ],
+      "specimen": [
+        "5 g gold coin",
+        "24K · 99.9% pure",
+        "Weight",
+        "5 g",
+        "one coin",
+        "Price",
+        "₹31,200",
+        "incl. GST",
+        "Add to cart"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "width 280",
+          "description": "The facts share less room, and a long title is cut sooner."
+        },
+        {
+          "title": "Bigger picture",
+          "description": "The picture box sets the space above the title."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "A name, one qualifier, short facts",
+      "description": "Make the title the product’s name, short enough for one line, and the subtitle one qualifier, such as its purity. Name each fact with a noun, such as Weight or Price, and keep values to a number or a word. Label the button with what it does, such as Add to cart. A title longer than one line is cut with an ellipsis; numberOfLines gives it more lines, and disableTruncation lets it wrap in full.",
+      "blocks": [
+        "Long title",
+        "Cut at one line with an ellipsis.",
+        "numberOfLines 2",
+        "Two lines before the ellipsis; the card grows."
+      ],
+      "specimen": [
+        "24K gold coin, 5 g, with a certificate of purity",
+        "24K · 99.9% pure",
+        "Weight",
+        "5 g",
+        "one coin",
+        "Price",
+        "₹31,200",
+        "incl. GST",
+        "Add to cart"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Long title",
+          "description": "Cut at one line with an ellipsis."
+        },
+        {
+          "title": "numberOfLines 2",
+          "description": "Two lines before the ellipsis; the card grows."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Top of a product page",
+      "description": "The card opens the product page, under the page’s heading. Add to cart calls the screen’s own cart through onButtonPress; the card only lays out the product.",
+      "blocks": [
+        "Your cart is empty"
+      ],
+      "specimen": [
+        "Gold coins",
+        "Insured delivery to your door",
+        "5 g gold coin",
+        "24K · 99.9% pure",
+        "Weight",
+        "5 g",
+        "one coin",
+        "Price",
+        "₹31,200",
+        "incl. GST",
+        "Add to cart"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A short name, a real picture, a title that fits",
+      "description": "Each pair shows a card that reads cleanly next to one that loses the end of its title, leaves an empty box, or spills past its edges.",
+      "blocks": [
+        "Do",
+        "A name in the title",
+        "The details go in the subtitle and the facts.",
+        "Don’t",
+        "A sentence in the title",
+        "It’s cut at one line, and the end is lost.",
+        "Show the product",
+        "The picture says what it is at a glance.",
+        "Leave out the picture",
+        "An empty box still takes its space above the title.",
+        "Let a long title wrap",
+        "disableTruncation shows all of it, and the card grows.",
+        "singleLine with a long title",
+        "The title runs past both edges of the card."
+      ],
+      "specimen": [
+        "5 g gold coin",
+        "24K · 99.9% pure",
+        "Weight",
+        "5 g",
+        "one coin",
+        "Price",
+        "₹31,200",
+        "incl. GST",
+        "Add to cart",
+        "Buy a 5 g 24K gold coin with free insured delivery",
+        "24K gold coin, 5 g, with a certificate of purity"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "A name in the title",
+            "caption": "The details go in the subtitle and the facts.",
+            "specimen": "5 g gold coin · 24K · 99.9% pure · Weight · 5 g · one coin · Price · ₹31,200 · incl. GST · Add to cart"
+          },
+          "dont": {
+            "title": "A sentence in the title",
+            "caption": "It’s cut at one line, and the end is lost.",
+            "specimen": "Buy a 5 g 24K gold coin with free insured delivery · 24K · 99.9% pure · Weight · 5 g · one coin · Price · ₹31,200 · incl. GST · Add to cart"
+          }
+        },
+        {
+          "do": {
+            "title": "Show the product",
+            "caption": "The picture says what it is at a glance.",
+            "specimen": "5 g gold coin · 24K · 99.9% pure · Weight · 5 g · one coin · Price · ₹31,200 · incl. GST · Add to cart"
+          },
+          "dont": {
+            "title": "Leave out the picture",
+            "caption": "An empty box still takes its space above the title.",
+            "specimen": "5 g gold coin · 24K · 99.9% pure · Weight · 5 g · one coin · Price · ₹31,200 · incl. GST · Add to cart"
+          }
+        },
+        {
+          "do": {
+            "title": "Let a long title wrap",
+            "caption": "disableTruncation shows all of it, and the card grows.",
+            "specimen": "24K gold coin, 5 g, with a certificate of purity · 24K · 99.9% pure · Weight · 5 g · one coin · Price · ₹31,200 · incl. GST · Add to cart"
+          },
+          "dont": {
+            "title": "singleLine with a long title",
+            "caption": "The title runs past both edges of the card.",
+            "specimen": "24K gold coin, 5 g, with a certificate of purity · 24K · 99.9% pure · Weight · 5 g · one coin · Price · ₹31,200 · incl. GST · Add to cart"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public PDP Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Single metric",
+        "Metrics without icons",
+        "Button hidden",
+        "Pressable card",
+        "Title truncation",
+        "Checked 21 October 2026",
+        "Installed jfs-components is 0.1.78 (19 October build of Biscuit’s main) from the team’s private package repository. Its export is PdpCcCard. Figma’s PDP cc card has no component properties; its parts are nested instances. In the package, the divider between metrics has no height on the web, so no line shows (Figma draws one 46 px tall); the button’s plus icon is 18 px where Figma’s is 16; and the card is 316 px tall where Figma’s is 310, because its text lines are taller. Without imageSource an empty box keeps its space, and title and subtitle fall back to the words Title and Subtitle. Every published Storybook story but Title truncation renders the card as a pressable button with its own button inside, and the published page is the older generated one (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "PdpCcCard",
+        "imageSource",
+        "title",
+        "subtitle"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

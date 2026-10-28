@@ -1,0 +1,25 @@
+{
+  "slug": "modalsheet",
+  "entryHash": "130c33dc74a9ebffbadd9bbedfb191441af4c26ba1ebb76b5ea0057dc0b4d2fd",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "checkedAt": "2026-10-28T23:23:34Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The AppBar has no title, but Sources says the sheet is \"a dialog named by its App Bar title\", and the content section is \"A title, a way out, and one task\". Without a title, the example's dialog is unnamed, which contradicts /accessibility/4 and the guide's own App Bar (\"Ask HelloJio\")."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: Same problem as /examples/0: the AppBar has no title, so the dialog would be unnamed. Sources says it is \"named by its App Bar title\", and the guide's examples show \"Ask HelloJio\"."
+    },
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: Same problem as /examples/0: the AppBar has no title, so the dialog would be unnamed, contrary to Sources (\"a dialog named by its App Bar title\")."
+    }
+  ],
+  "notes": "/configuration/8 relies on the types fact that an omitted onOverlayPress makes the scrim call onRequestClose. The evidence's #234 entry (13 October) lists \"the scrim press doesn't call onRequestClose\" as still open, and the 27 October dbe0e02 section doesn't say this was fixed. A human should confirm which behaviour ships in 0.1.78-dbe0e02. Separately, /content/good is taken from the live examples' placeholder text, not from guidance the guide gives about content."
+}

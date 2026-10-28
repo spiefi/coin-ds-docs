@@ -1,9 +1,9 @@
 {
   "slug": "checkboxitem",
-  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "The guide's Sources note and its evidence were checked on 23 September 2026 against jfs-components 0.1.60; the docs now install 0.1.78, so everything resting on them is stale until re-checked. The Configuration, States, Sizing and Content examples carry titles only (no captions), so the states have no described behaviour beyond their names and the one description sentence. The guide gives no accessibility guidance, although its Sources note records duplicate checkbox roles and Space not toggling the row (both recorded as gaps). The evidence says mobile-fit visual QA of the expanded sections is still pending. The package marks label as deprecated in favour of children; the guide's Sources note still speaks of \"a string label\". The package docs describe a Figma default composition (Text plus Link in the label slot, \"I agree\" + \"Terms & Conditions\") that the guide does not cover. The guide names no other component to use instead, so avoidWhen is empty.",
+  "notes": "The guide's Sources note and its evidence were checked on 23 September 2026 against jfs-components 0.1.60; the docs now install 0.1.78, so everything resting on them is stale until re-checked. The Configuration, States, Sizing and Content examples carry titles only (no captions), so the states have no described behaviour beyond their names and the one description sentence. The guide gives no accessibility guidance, although its Sources note records duplicate checkbox roles and Space not toggling the row (both recorded as gaps). The evidence says mobile-fit visual QA of the expanded sections is still pending. The package marks label as deprecated in favour of children; the guide's Sources note still speaks of \"a string label\". The package docs describe a Figma default composition (Text plus Link in the label slot, \"I agree\" + \"Terms & Conditions\") that the guide does not cover. The guide names no other component to use instead, so avoidWhen is empty. Re-extracted 29 October 2026 (Penny run run_19b90d38) for the dbe0e02 publish (#357, #409): the nested-checkbox and Space gaps are fixed and removed; the new Sources sentence on keyboard and screen-reader behaviour is the accessibility item.",
   "useWhen": [
     {
       "text": "A selectable row with a clear label and, when needed, a supporting action.",
@@ -278,7 +278,18 @@
       }
     }
   ],
-  "accessibility": [],
+  "accessibility": [
+    {
+      "text": "On the web the row is one checkbox with one Tab stop that announces whether it is selected; Space, Enter or a click toggles it once, and Details keeps its own Tab stop without changing the selection.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the row is one checkbox with one Tab stop that announces whether it is selected; Space, Enter, or a click toggles it once, and Details keeps its own Tab stop without changing the selection."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
   "doDont": [
     {
       "do": "Align the controls",
@@ -395,21 +406,5 @@
       "checkedVersion": "0.1.60"
     }
   ],
-  "gaps": [
-    {
-      "text": "The row and its nested Checkbox each expose a checkbox role on the web, duplicating the semantics.",
-      "from": {
-        "section": "sources",
-        "quote": "The row and its nested Checkbox each expose a checkbox role on web."
-      },
-      "checkedOn": "2026-09-23",
-      "checkedVersion": "0.1.60"
-    },
-    {
-      "text": "Space on the focused row does not toggle it on the web; Enter and a press do.",
-      "quote": "The focused row toggled on Enter but did not toggle after both locator Space and native browser `space` key input; this is a package/platform limitation left unpatched.",
-      "checkedOn": "2026-09-23",
-      "checkedVersion": "0.1.60"
-    }
-  ]
+  "gaps": []
 }

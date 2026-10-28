@@ -1,0 +1,345 @@
+{
+  "slug": "suggestivesearch",
+  "label": "Suggestive Search",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "files": [
+    "src/guides/suggestivesearch.guide.tsx"
+  ],
+  "evidence": "docs/evidence/suggestivesearch.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:01:38.369Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "autocomplete",
+    "typeahead",
+    "combobox",
+    "search with suggestions",
+    "bank search"
+  ],
+  "title": "Suggestive Search",
+  "summary": "Use a Suggestive Search to let people type and pick one item from a known list, such as their bank, with matches shown as they type.",
+  "corePrinciple": "Type a little, then pick the right one.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4579-8094",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-suggestivesearch--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A labelled field over a list of matches",
+      "description": "A label names the field. As people type, matches from your list appear in a floating list under it, with the typed text in bold.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Label",
+        "Names the value, such as “Bank name”.",
+        "Required mark",
+        "Shown on screen; screen readers hear “required” from the field.",
+        "Field",
+        "Where people type; its border shows the state.",
+        "Suggestions",
+        "Matches from your list, in your order.",
+        "Match",
+        "The typed text, in bold."
+      ],
+      "specimen": [
+        "Bank name",
+        "*",
+        "State Bank of India",
+        "Bank of",
+        "Bank of Baroda",
+        "Union Bank of India",
+        "Search bank name"
+      ],
+      "anatomy": [
+        {
+          "part": "Label",
+          "note": "Names the value, such as “Bank name”."
+        },
+        {
+          "part": "Required mark",
+          "note": "Shown on screen; screen readers hear “required” from the field."
+        },
+        {
+          "part": "Field",
+          "note": "Where people type; its border shows the state."
+        },
+        {
+          "part": "Suggestions",
+          "note": "Matches from your list, in your order."
+        },
+        {
+          "part": "Match",
+          "note": "The typed text, in bold."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Help text, limits, and options",
+      "description": "Add a hint or mark the field required, say what happens when nothing matches, and cap or simplify the list. Any option can be shown but not chosen.",
+      "blocks": [
+        "With support text",
+        "A short hint under the field.",
+        "Required",
+        "A red asterisk after the label; screen readers hear “required”.",
+        "No-match message",
+        "Says so when nothing matches; without it the list just disappears.",
+        "Fewer suggestions",
+        "Caps the list; otherwise it scrolls after about five rows.",
+        "Without highlight",
+        "Matches show in plain text.",
+        "An option that can’t be chosen",
+        "Ananya Iyer is listed but disabled, such as a payee still being verified."
+      ],
+      "specimen": [
+        "Bank name",
+        "Pick the bank your account is with.",
+        "*",
+        "No matching banks",
+        "HDFC Bank",
+        "Bank",
+        "Himachal Pradesh Gramin Bank",
+        "ICICI Bank",
+        "State Bank of India",
+        "Bank of Baroda",
+        "Union Bank of India",
+        "Beneficiary",
+        "Aarav Sharma",
+        "A",
+        "Aditi Verma",
+        "Rohan Mehta",
+        "a",
+        "Ananya Iyer",
+        "Search bank name",
+        "Search beneficiary"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "With support text",
+          "description": "A short hint under the field."
+        },
+        {
+          "title": "Required",
+          "description": "A red asterisk after the label; screen readers hear “required”."
+        },
+        {
+          "title": "No-match message",
+          "description": "Says so when nothing matches; without it the list just disappears."
+        },
+        {
+          "title": "Fewer suggestions",
+          "description": "Caps the list; otherwise it scrolls after about five rows."
+        },
+        {
+          "title": "Without highlight",
+          "description": "Matches show in plain text."
+        },
+        {
+          "title": "An option that can’t be chosen",
+          "description": "Ananya Iyer is listed but disabled, such as a payee still being verified."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Rest, focus, error, read only, disabled",
+      "description": "The field shows its state with its border and fill: grey at rest, purple while focused, red when invalid. Read only and disabled can’t be typed in or opened; disabled is also faded.",
+      "blocks": [
+        "Idle",
+        "Grey border; it turns purple when focused.",
+        "Error",
+        "A red field and a message that says how to fix it.",
+        "Read only",
+        "Grey, shows the chosen bank, and can’t be changed.",
+        "Disabled",
+        "Faded and unavailable."
+      ],
+      "specimen": [
+        "Bank name",
+        "Choose your bank from the list.",
+        "Search bank name"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Idle",
+          "description": "Grey border; it turns purple when focused."
+        },
+        {
+          "title": "Error",
+          "description": "A red field and a message that says how to fix it."
+        },
+        {
+          "title": "Read only",
+          "description": "Grey, shows the chosen bank, and can’t be changed."
+        },
+        {
+          "title": "Disabled",
+          "description": "Faded and unavailable."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, with a floating list",
+      "description": "Suggestive Search fills its container. The label is 17 px tall with 8 px to a 47 px field. The list opens 6 px below the field with 44 px rows, floats over what follows, and scrolls after 240 px.",
+      "blocks": [
+        "328 × 47",
+        "8"
+      ],
+      "specimen": [
+        "Bank name",
+        "Search bank name"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the value, hint the search",
+      "description": "Label the field with what it holds, such as “Bank name”, and use the placeholder for a search hint. Keep options short and unique, write the no-match message as what happened, and make errors say how to fix the pick.",
+      "blocks": [
+        "Label, hint, and options"
+      ],
+      "specimen": [
+        "Bank name",
+        "Pick the bank your account is with.",
+        "Search bank name"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Label, hint, and options",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Adding a bank account",
+      "description": "People find their bank by typing part of its name. Continue checks that a bank was picked from the list and shows an error if not; the list floats over the button while it’s open.",
+      "blocks": [
+        "Choose a bank"
+      ],
+      "specimen": [
+        "Add a bank account",
+        "Bank name",
+        "Continue",
+        "Search bank name"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A named field that explains itself",
+      "description": "Each pair shows a field people can understand and fix versus one that leaves them guessing.",
+      "blocks": [
+        "Do",
+        "Label the field",
+        "“Bank name” stays visible while people type.",
+        "Don’t",
+        "Use the placeholder as the label",
+        "It disappears as soon as people type.",
+        "Say when nothing matches",
+        "“No matching banks” explains the empty list.",
+        "Let the list vanish",
+        "People can’t tell whether anything matched.",
+        "Explain the error",
+        "The message says how to fix the pick.",
+        "Rely on red alone",
+        "A red field doesn’t say what’s wrong."
+      ],
+      "specimen": [
+        "Bank name",
+        "No matching banks",
+        "Choose your bank from the list.",
+        "Search bank name"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Label the field",
+            "caption": "“Bank name” stays visible while people type.",
+            "specimen": "Bank name"
+          },
+          "dont": {
+            "title": "Use the placeholder as the label",
+            "caption": "It disappears as soon as people type.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Say when nothing matches",
+            "caption": "“No matching banks” explains the empty list.",
+            "specimen": "Bank name · No matching banks"
+          },
+          "dont": {
+            "title": "Let the list vanish",
+            "caption": "People can’t tell whether anything matched.",
+            "specimen": "Bank name"
+          }
+        },
+        {
+          "do": {
+            "title": "Explain the error",
+            "caption": "The message says how to fix the pick.",
+            "specimen": "Bank name · Choose your bank from the list."
+          },
+          "dont": {
+            "title": "Rely on red alone",
+            "caption": "A red field doesn’t say what’s wrong.",
+            "specimen": "Bank name"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Suggestive Search contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Prefilled",
+        "Empty message",
+        "Invalid",
+        "Object items",
+        "Checked 23 October 2026",
+        "Installed jfs-components is 0.1.78 (23 October build) from the team’s private package repository. Figma’s Suggestive search has Idle, Open, and Active variants. The package bolds the typed text where Figma greys it, uses a grey placeholder, and marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check). On the web the field is a combobox: the arrow keys move through the suggestions, Enter picks one, Escape closes the list, and focus stays in the field after a pick. Each suggestion is announced by its label, and required and error are announced, with the message tied to the field. The published Storybook predates this build.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
