@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "id": "Title",
+  "slug": "title",
+  "category": "content",
+  "tags": [],
+  "status": {
+    "state": "undocumented",
+    "guideCommit": null,
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-28T23:26:25Z",
+    "flags": []
+  },
+  "summary": "Coin has no designer guide for Title; use its facts from the package types.",
+  "useWhen": [],
+  "avoidWhen": [],
+  "anatomy": [],
+  "allowedChildren": [],
+  "placementAdvice": [],
+  "configuration": [],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [],
+  "accessibility": [],
+  "doDont": [],
+  "examples": [
+    {
+      "purpose": "A screen title with a subtitle.",
+      "jsx": "<Title title=\"Accounts\" subtitle=\"Linked to JioFinance\" modes={{ 'Color Mode': 'Light' }} />",
+      "from": null
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Title",
+        "description": "Default \"Title\", from the component source."
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Optional subtitle displayed below the title."
+      },
+      {
+        "name": "textAlign",
+        "type": "'Left' | 'Center'",
+        "required": false,
+        "source": "types",
+        "values": [
+          "Left",
+          "Center"
+        ],
+        "default": "Left",
+        "description": "Horizontal alignment of the title text. Default \"Left\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "textStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "subtitleStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the subtitle text."
+      },
+      {
+        "name": "numberOfLines",
+        "type": "number",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables truncation for both the title and subtitle: the trailing ellipsis (`…`) is never shown and the `numberOfLines` clamp is ignored. The text is also never shrunk by a tight parent — it keeps its full intrinsic size and overflows (even breaking the parent layout) rather than ever clipping into an ellipsis. The text still wraps onto multiple lines."
+      },
+      {
+        "name": "singleLine",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, forces both the title and subtitle onto a single line with no wrapping (implies {@link disableTruncation}). On web the line overflows horizontally — brutally breaking the parent layout if it has to — instead of wrapping or truncating."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...React.ComponentProps<typeof View>",
+        "type": "React.ComponentProps<typeof View>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Title reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context7",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Card",
+          "Page Hero"
+        ],
+        "description": "A token collection Title reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Title reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      }
+    ],
+    "slots": [],
+    "events": [],
+    "gaps": []
+  },
+  "sources": {
+    "guide": null,
+    "figma": null,
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-title--docs"
+  }
+}

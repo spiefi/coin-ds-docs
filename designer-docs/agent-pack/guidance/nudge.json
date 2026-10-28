@@ -1,9 +1,9 @@
 {
   "slug": "nudge",
-  "guideCommit": "807973d31ced4668744c9b48fbd776b477aadd54",
+  "guideCommit": "9a7d2c48b849b20658f0a19c31f5aa626f72c1c8",
   "extractedBy": "Claude Code subagent, flow-kit extraction",
   "extractedOn": "2026-10-17",
-  "notes": "Re-extracted 17 October 2026 from the guide and evidence as updated on main (807973d) for the a116616 build. The earlier extraction's five contradictions with the installed build (close default, placeholder copy, buttonSlot, region role, testID) are resolved in the guide, and the guide now says Nudge sets the Nudge&Alert context itself, confirmed in the evidence. The 'always set all three' sentence is gone, so nothing in this entry is ambiguous any more. The removal-announcement gap still rests on the 7 October check. The guide names no other component to use instead, so avoidWhen is empty. The examples pass only Color Mode and appearance: the Nudge sets its own Context.",
+  "notes": "Re-extracted 17 October 2026 from the guide and evidence as updated on main (807973d) for the a116616 build. The earlier extraction's five contradictions with the installed build (close default, placeholder copy, buttonSlot, region role, testID) are resolved in the guide, and the guide now says Nudge sets the Nudge&Alert context itself, confirmed in the evidence. The 'always set all three' sentence is gone, so nothing in this entry is ambiguous any more. The removal-announcement gap still rests on the 7 October check. The guide names no other component to use instead, so avoidWhen is empty. The examples pass only Color Mode and appearance: the Nudge sets its own Context. Re-extracted 29 October 2026 (Penny run run_19b90d38) for the c8526ae publish (#206): the close label is no longer fixed (closeAccessibilityLabel) and stacked-detailed now warns about ignored props, so those two gaps are removed; the Sources quote on the close label is replaced.",
   "useWhen": [
     {
       "text": "A short suggestion with one action, such as splitting a payment, that sits within a screen's content.",
@@ -264,23 +264,6 @@
       }
     },
     {
-      "text": "In Color Mode Dark the title stays dark on a dark card; the guide shows Light only.",
-      "strength": "discouraged",
-      "target": "Color Mode",
-      "value": "Dark",
-      "from": {
-        "section": "sources",
-        "quote": "In Dark mode the title stays dark on a dark card, so this page shows Light only."
-      },
-      "absolute": {
-        "word": "only",
-        "scope": "contextual",
-        "reason": "\"only\" says what the guide page shows (Light), not a limit stated for every screen."
-      },
-      "checkedVersion": "0.1.78-3795b4c",
-      "checkedOn": "2026-10-07"
-    },
-    {
       "text": "children replaces the title, body and button in stacked-prominent, the body and button in inline-compact, and supplies the list in stacked-detailed.",
       "strength": "recommended",
       "target": "children",
@@ -376,7 +359,7 @@
   ],
   "accessibility": [
     {
-      "text": "Give the card a title: on the web a card with a title is a region named by its title.",
+      "text": "Give a stacked card a title: on the web a card with a title is a region named by its title (inline-compact shows no title).",
       "strength": "recommended",
       "target": "title",
       "from": {
@@ -402,20 +385,15 @@
       "checkedOn": "2026-10-07"
     },
     {
-      "text": "The default close button is always labelled “Close”; a closeSlot replaces it.",
+      "text": "The close button's label for screen readers can be changed with closeAccessibilityLabel.",
       "strength": "recommended",
-      "target": "closeSlot",
+      "target": "closeAccessibilityLabel",
       "from": {
         "section": "sources",
-        "quote": "the close button is always labelled “Close”."
+        "quote": "its label for screen readers can be changed."
       },
-      "absolute": {
-        "word": "always",
-        "scope": "contextual",
-        "reason": "true of the default close IconButton; a closeSlot replaces it, so the sentence does not cover every close control."
-      },
-      "checkedVersion": "0.1.78-a116616",
-      "checkedOn": "2026-10-17"
+      "checkedVersion": "0.1.78-c8526ae",
+      "checkedOn": "2026-10-23"
     }
   ],
   "doDont": [
@@ -561,20 +539,8 @@
       "checkedVersion": "0.1.78-a116616"
     },
     {
-      "text": "stacked-detailed ignores the body, the button props and the close props, without a warning.",
-      "quote": "stacked-detailed still ignores `body`, the button props, and the close props without a warning",
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616"
-    },
-    {
       "text": "inline-compact never shows the title, but still uses it as the region's name, an invisible name.",
       "quote": "inline-compact never shows `title` but still uses it as the region's name (an invisible name)",
-      "checkedOn": "2026-10-17",
-      "checkedVersion": "0.1.78-a116616"
-    },
-    {
-      "text": "The default close button's label, “Close”, is fixed.",
-      "quote": "the fixed \"Close\" label",
       "checkedOn": "2026-10-17",
       "checkedVersion": "0.1.78-a116616"
     },

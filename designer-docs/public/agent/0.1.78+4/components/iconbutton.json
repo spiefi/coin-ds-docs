@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 1,
+  "id": "IconButton",
+  "slug": "iconbutton",
+  "category": "action",
+  "tags": [
+    "icon",
+    "icon only",
+    "close button",
+    "share button",
+    "add button"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-28T23:26:25Z",
+    "flags": [
+      {
+        "field": "/facts/modes/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use an Icon Button for a frequent, well-known action where an icon alone is clear, such as add, share, or close.",
+  "useWhen": [
+    {
+      "text": "A frequent, well-known action where an icon alone is clear, such as add, share or close.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Icon Button for a frequent, well-known action where an icon alone is clear, such as add, share, or close."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Container",
+      "holds": "A circle whose size comes from the Button / Size mode.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Circle whose size comes from the Button / Size mode."
+      }
+    },
+    {
+      "part": "Icon",
+      "holds": "One registry icon (iconName) that names the action.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One registry icon that names the action."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "The button is a fixed square: it never stretches with its container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The button never stretches with its container."
+      }
+    },
+    {
+      "text": "In the guide's statement-card example, Icon Buttons sit together at the end of a row; the strongest one is the main action, and the screen handles each press.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Icon Buttons sit together at the end of a row. The strongest one is the main action; the screen handles each press."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use Emphasis High for the main action in a group and Medium or Low for the rest.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use High for the main action in a group and Medium or Low for the rest."
+      },
+      "target": "Emphasis",
+      "value": "High"
+    },
+    {
+      "text": "Emphasis sets how loud the button is: it steps the fill from solid gold (High) to tint (Medium) to none (Low).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Emphasis steps the fill from solid gold to tint to none."
+      },
+      "target": "Emphasis"
+    },
+    {
+      "text": "Do not make every action loud: three High buttons compete for attention.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Three High buttons compete for attention."
+      },
+      "target": "Emphasis",
+      "value": "High"
+    },
+    {
+      "text": "AppearanceBrand picks the brand colour family; it changes the colour family, not the importance.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Appearance changes the colour family, not the importance."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "Button / Size gives two sizes: Medium is 40 px and Small is 26 px in the installed package (Figma draws Medium at 42 px); XS renders the same as Small.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Medium is 40 px and Small is 26 px in the installed package; Figma draws Medium at 42 px. XS renders the same as Small."
+      },
+      "target": "Button / Size"
+    },
+    {
+      "text": "Keep sizes consistent in a row: one size reads as one group.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "One size reads as one group."
+      },
+      "target": "Button / Size"
+    },
+    {
+      "text": "Do not mix sizes in one row: mixed sizes look like different kinds of action.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Mixed sizes look like different kinds of action."
+      },
+      "target": "Button / Size"
+    },
+    {
+      "text": "A toggle (isToggle) swaps between two icons, inactiveIcon and activeIcon; its On state (isActive) turns into a white circle with a black icon.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "A toggle swaps between two icons, and its On state turns into a white circle with a black icon."
+      },
+      "target": "isToggle",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One familiar icon, one clear action, and a label for people who cannot see it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One familiar icon, one clear action, and a label for people who cannot see it."
+        }
+      },
+      {
+        "text": "Use icons with one common meaning.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use icons with one common meaning and give each button a label that says the action, such as “Share statement”, not the icon’s name."
+        },
+        "target": "iconName"
+      },
+      {
+        "text": "Give each button a label that says the action, such as “Share statement”, not the icon's name.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use icons with one common meaning and give each button a label that says the action, such as “Share statement”, not the icon’s name."
+        },
+        "target": "accessibilityLabel"
+      },
+      {
+        "text": "Use a familiar icon: a download arrow says what happens.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "A download arrow says what happens."
+        },
+        "target": "iconName"
+      },
+      {
+        "text": "Do not use an unclear icon: a card icon does not say it downloads a statement.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A card icon does not say it downloads a statement."
+        },
+        "target": "iconName"
+      }
+    ],
+    "good": [
+      "Share statement",
+      "Download statement",
+      "Filter transactions"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "One press, one action.",
+      "from": {
+        "section": "states",
+        "quote": "One press, one action."
+      }
+    },
+    {
+      "state": "Toggle off",
+      "when": "isToggle true, isActive false: gold fill with the inactive icon.",
+      "from": {
+        "section": "states",
+        "quote": "Gold fill with the inactive icon."
+      }
+    },
+    {
+      "state": "Toggle on",
+      "when": "isToggle and isActive true: white fill with the active icon, announced as pressed.",
+      "from": {
+        "section": "states",
+        "quote": "White fill with the active icon, announced as pressed."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled is true: dimmed to half opacity and skipped by keyboard focus.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to half opacity and skipped by keyboard focus."
+      }
+    },
+    {
+      "state": "Loading",
+      "when": "loading: a same-size placeholder while the action loads.",
+      "from": {
+        "section": "states",
+        "quote": "A same-size placeholder while the action loads."
+      }
+    },
+    {
+      "state": "Keyboard focus",
+      "when": "Keyboard focus draws a thin ring without changing the button's size; a mouse click leaves no ring.",
+      "from": {
+        "section": "sources",
+        "quote": "Keyboard focus draws a thin ring without changing the button’s size; a mouse click leaves no ring."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Always set accessibilityLabel: without a label, the accessible name is the icon's name.",
+      "strength": "required",
+      "from": {
+        "section": "sources",
+        "quote": "Without a label, the accessible name is the icon’s name, so always set one."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "A toggle keeps one name in both states and is announced as pressed or not pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "It keeps one name and is announced as pressed or not pressed."
+      },
+      "target": "isToggle"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Make one action strongest",
+      "dont": "Make every action loud",
+      "why": "Three High buttons compete for attention.",
+      "from": {
+        "section": "doDont",
+        "quote": "Make one action strongest"
+      }
+    },
+    {
+      "do": "Use a familiar icon",
+      "dont": "Use an unclear icon",
+      "why": "A card icon does not say it downloads a statement.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a familiar icon"
+      }
+    },
+    {
+      "do": "Keep sizes consistent in a row",
+      "dont": "Mix sizes in one row",
+      "why": "Mixed sizes look like different kinds of action.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep sizes consistent in a row"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Actions at the end of a statement row: one High main action, the rest Medium, one size, each with a label that says the action.",
+      "jsx": "<HStack modes={{ 'Color Mode': 'Light' }}>\n  <IconButton iconName=\"ic_share\" accessibilityLabel=\"Share statement\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'Medium' }} />\n  <IconButton iconName=\"ic_filter\" accessibilityLabel=\"Filter transactions\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'Medium' }} />\n  <IconButton iconName=\"ic_download\" accessibilityLabel=\"Download statement\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'High' }} />\n</HStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The strongest one is the main action; the screen handles each press."
+      }
+    },
+    {
+      "purpose": "A toggle that swaps two icons and keeps one label in both states.",
+      "jsx": "<IconButton\n  isToggle\n  isActive={false}\n  inactiveIcon=\"ic_flash\"\n  activeIcon=\"ic_flash_off\"\n  accessibilityLabel=\"Flash\"\n  onPress={() => {}}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "A toggle swaps between two icons, and its On state turns into a white circle with a black icon."
+      }
+    },
+    {
+      "purpose": "A close action with an accessibility label.",
+      "jsx": "<IconButton iconName=\"ic_close\" accessibilityLabel=\"Close\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Icon Button for a frequent, well-known action where an icon alone is clear, such as add, share, or close."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "iconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Built-in icon name from the registry (default state)."
+      },
+      {
+        "name": "source",
+        "type": "UnifiedSource",
+        "required": false,
+        "source": "types",
+        "description": "Unified fallback source for the default state, used when `iconName` is missing or not in the registry. Accepts a remote URI, an inline SVG XML string, a `require()` asset, an SVG React component, or a React element. The result is tinted with the button's mode-resolved icon color so it follows design tokens just like a built-in icon. See {@link UnifiedSource}."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Default false, from the component source."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Without it, the name is derived from the icon (ic_flash gives “Flash”); a toggle keeps the same derived name in both states.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityState",
+        "type": "AccessibilityState",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "isToggle",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Whether the button behaves as a toggle button. Default false, from the component source."
+      },
+      {
+        "name": "activeIcon",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Icon to display when isToggle is true and isActive is true."
+      },
+      {
+        "name": "activeSource",
+        "type": "UnifiedSource",
+        "required": false,
+        "source": "types",
+        "description": "Unified fallback source for the active state. Used when `activeIcon` is missing or not in the registry (and only when `isToggle` is true and `isActive` is true). Falls back to the default `source` if not provided. See {@link UnifiedSource}."
+      },
+      {
+        "name": "inactiveIcon",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Icon to display when isToggle is true and isActive is false."
+      },
+      {
+        "name": "inactiveSource",
+        "type": "UnifiedSource",
+        "required": false,
+        "source": "types",
+        "description": "Unified fallback source for the inactive state. Used when `inactiveIcon` is missing or not in the registry (and only when `isToggle` is true and `isActive` is false). Falls back to the default `source` if not provided. See {@link UnifiedSource}."
+      },
+      {
+        "name": "isActive",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "On a toggle, the On state reads the toggle tokens (white fill in Light), and aria-pressed follows isActive on the web. Declared: Whether the toggle button is in active state (only used when isToggle is true) Default false, from the component source.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "webAccessibilityProps",
+        "type": "WebAccessibilityProps",
+        "required": false,
+        "source": "types",
+        "description": "Web-specific accessibility props (only used on web platform)"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Explicit per-instance loading override. When `true`, renders a same-size pill-shaped skeleton instead of the button. Defaults to inheriting from the surrounding `<SkeletonGroup>`."
+      },
+      {
+        "name": "...SafePressableProps",
+        "type": "SafePressableProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection IconButton reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "M renders 40 × 40 (Figma 42 × 42); S and XS both render 26 × 26 with a 16 px icon. Declared: A token collection IconButton reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "M",
+        "checkedOn": "2026-09-28"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection IconButton reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection IconButton reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection IconButton reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection IconButton reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection IconButton reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      }
+    ],
+    "slots": [],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma's Glass variant has no package equivalent.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Size M renders 40 px, not Figma's 42 px.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Sizes S and XS render the same.",
+        "source": "evidence",
+        "checkedOn": "2026-09-28"
+      },
+      {
+        "text": "On a freshly loaded page the first Tab shows the browser's default focus ring instead of the token ring; later Tabs show the token ring.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=iconbutton",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2018-4301",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-iconbutton--docs"
+  }
+}

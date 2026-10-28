@@ -1,0 +1,25 @@
+{
+  "slug": "pdpcccard",
+  "entryHash": "fe9c11955348a9c903990f8a4c40dcbc81bf01f7d09ad1232ad13862604baa82",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "checkedAt": "2026-10-28T23:20:07Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/anatomy/1",
+      "reason": "misreads-source: alwaysPresent=false implies the title can be left off, but the guide says \"title and subtitle fall back to the words Title and Subtitle\". The evidence says \"there is no way to hide either\", and its Limits say not to imply the title can be hidden."
+    },
+    {
+      "field": "/anatomy/2",
+      "reason": "misreads-source: alwaysPresent=false implies the subtitle can be absent, but per the guide it falls back to the word \"Subtitle\" when left out. The evidence says it cannot be hidden, and its Limits forbid implying it can."
+    },
+    {
+      "field": "/doDont/2",
+      "reason": "misreads-source: The why gives the Do caption (\"disableTruncation shows all of it, and the card grows\") rather than the reason against the Don't. The guide's reason is \"The title runs past both edges of the card.\" The other doDont items use the Don't caption as the why."
+    }
+  ],
+  "notes": "The type-derived facts /facts/props/4 and /facts/props/5 say \"Pass '' or null to hide the line\". This contradicts the evidence (\"undefined brings the placeholder back; there is no way to hide either\") and its Limits. The content rules citing them don't repeat the hiding claim, but a human should reconcile the type docs with the measured behaviour (#361). Picture alwaysPresent=false is arguable: without imageSource an empty box still keeps its space, and only media replaces it."
+}

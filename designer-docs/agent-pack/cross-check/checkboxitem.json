@@ -1,12 +1,17 @@
 {
   "slug": "checkboxitem",
-  "entryHash": "1ba8c46d2e3085b287fb0ed464e1d1976353e42a6070ae4271ab5e2b280e1d3c",
-  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
-  "checkedAt": "2026-10-17T11:00:16Z",
+  "entryHash": "82a4344227c465f879717c92c9319f7dad1899bd66434bdf875cde301846c5a5",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "checkedAt": "2026-10-28T23:19:42Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [],
-  "notes": "No misreadings found. Two minor points for a human reviewer. (1) /configuration/3 is a behavioural fact about the end slot defaulting to 80 px and swapping edges with the Checkbox, not guidance, so the 'recommended' strength label is a category mismatch rather than an overstatement. (2) /content/good includes 'Send monthly account statements by email', which comes from the sizing section's wrapping fixture rather than a content example. It is a reasonable specific label, but the guide does not present it as a content model. /content/bad lists only 'Enable this'; the doDont duplicate-choice example (a bare 'Savings') is omitted, which is incomplete rather than wrong."
+  "flags": [
+    {
+      "field": "/facts/modes/3",
+      "reason": "misreads-source: The evidence file only says \"The public action uses Button Size XS through the owner modes to fit the documented 80px slot\" and that the row \"forwards owner modes to slot children\". It never says Button / Size is \"Not in CheckboxItem's mode list\". That part needs a package-types source, or it should be dropped from this evidence-dated fact."
+    }
+  ],
+  "notes": "/configuration/9 is tagged target=disabled value=true with strength discouraged. A machine reader could take that as discouraging disabled={true} in general. The guide only discourages *unexplained* disabled rows (\"A disabled control alone does not explain what to do next\") and shows a disabled, checked row as a valid state. The text keeps the 'unexplained' condition, so it isn't flagged, but the structured target/value may be worth reviewing. The entry's accessibility and endSlot behaviour follow the 28 October dbe0e02 section, which replaces the older 23 September notes about nested checkbox roles and Space not toggling. That is correct."
 }

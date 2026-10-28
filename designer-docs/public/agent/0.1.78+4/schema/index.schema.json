@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coin agent pack component index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packVersion",
+    "components"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "packVersion": {
+      "type": "string"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "slug",
+          "category",
+          "tags",
+          "state",
+          "summary",
+          "useInstead"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "action",
+              "input",
+              "content",
+              "card",
+              "navigation",
+              "feedback",
+              "layout",
+              "data"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "state": {
+            "enum": [
+              "documented",
+              "flagged",
+              "undocumented",
+              "unsupported"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          },
+          "useInstead": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The ids its avoidWhen rules name"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,520 @@
+{
+  "slug": "suggestivesearch",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "extractedBy": "Claude Code (claude-opus-5-5), Penny run run_19b90d38, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). The guide's Sources note and the evidence's newest section were checked on the 23 October build (v0.1.78-c8526ae), where the #233 fixes were verified (combobox keyboard, options named by their labels, required and error announced, trimmed filter query); the evidence records no SuggestiveSearch change after c8526ae. Older evidence (Contract, 10 October; Review, 11 October) is from v0.1.78-636f3f5, the build the evidence names for that period, and is used only where the 23 October section does not replace it: the old keyboard, DOM and accessibility notes and the blur after a pick are not used. #209 (Enter firing twice) is not recorded as a gap: the 23 October re-test says Enter picks once. The Figma file's lack of Error, Read only and Disabled variants is a Figma-library fact, not a package gap, so it is not recorded. The published Storybook predating the build is not a component gap either. The guide names no other component to use instead, so avoidWhen is empty. Examples set no modes: the guide's configuration names none this content needs, and the in-context Card's AppearanceBrand Neutral only repeats the white fill Card has with no modes on this build.",
+  "useWhen": [
+    {
+      "text": "Let people type and pick one item from a known list, such as their bank, with matches shown as they type.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Suggestive Search to let people type and pick one item from a known list, such as their bank, with matches shown as they type."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "label: names the value, such as “Bank name”.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the value, such as “Bank name”."
+      }
+    },
+    {
+      "part": "Required mark",
+      "holds": "isRequired: a red asterisk shown on screen; screen readers hear “required” from the field.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown on screen; screen readers hear “required” from the field."
+      },
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "“required” is the word screen readers announce for a required field, not a rule about using the component."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "Where people type; its border shows the state.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Where people type; its border shows the state."
+      }
+    },
+    {
+      "part": "Suggestions",
+      "holds": "A floating list of the matches from your items, in your order.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Matches from your list, in your order."
+      }
+    },
+    {
+      "part": "Match",
+      "holds": "The typed text, in bold (highlightMatch).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The typed text, in bold."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "supportText: a short hint under the field.",
+      "required": false,
+      "from": {
+        "section": "configuration",
+        "quote": "A short hint under the field."
+      }
+    },
+    {
+      "part": "Error message",
+      "holds": "errorMessage, shown when isInvalid: a message that says how to fix it, under the red field.",
+      "required": false,
+      "from": {
+        "section": "states",
+        "quote": "A red field and a message that says how to fix it."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Suggestive Search fills its container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Suggestive Search fills its container."
+      }
+    },
+    {
+      "text": "The label is 17 px tall with 8 px to a 47 px field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The label is 17 px tall with 8 px to a 47 px field."
+      }
+    },
+    {
+      "text": "The list opens 6 px below the field with 44 px rows, floats over what follows, and scrolls after 240 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The list opens 6 px below the field with 44 px rows, floats over what follows, and scrolls after 240 px."
+      }
+    },
+    {
+      "text": "On the guide's add-a-bank-account screen, Continue checks that a bank was picked from the list and, if not, shows the field's error (isInvalid with errorMessage); the open list floats over the button.",
+      "strength": "recommended",
+      "target": "isInvalid",
+      "value": "true",
+      "from": {
+        "section": "inContext",
+        "quote": "Continue checks that a bank was picked from the list and shows an error if not; the list floats over the button while it’s open."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Add supportText for a short hint under the field.",
+      "strength": "recommended",
+      "target": "supportText",
+      "from": {
+        "section": "configuration",
+        "quote": "A short hint under the field."
+      }
+    },
+    {
+      "text": "Set isRequired to mark the field required: a red asterisk after the label, and screen readers hear “required”.",
+      "strength": "recommended",
+      "target": "isRequired",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "A red asterisk after the label; screen readers hear “required”."
+      },
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "“required” is the word screen readers announce when isRequired is set, not a rule about when to use it."
+      }
+    },
+    {
+      "text": "Set emptyMessage to say so when nothing matches; without it the list just disappears.",
+      "strength": "recommended",
+      "target": "emptyMessage",
+      "from": {
+        "section": "configuration",
+        "quote": "Says so when nothing matches; without it the list just disappears."
+      }
+    },
+    {
+      "text": "Do not leave emptyMessage out and let the list vanish: people can’t tell whether anything matched.",
+      "strength": "discouraged",
+      "target": "emptyMessage",
+      "from": {
+        "section": "doDont",
+        "quote": "People can’t tell whether anything matched."
+      }
+    },
+    {
+      "text": "Set maxResults to cap the list; otherwise it scrolls after about five rows.",
+      "strength": "recommended",
+      "target": "maxResults",
+      "from": {
+        "section": "configuration",
+        "quote": "Caps the list; otherwise it scrolls after about five rows."
+      }
+    },
+    {
+      "text": "Set highlightMatch to false to show matches in plain text.",
+      "strength": "recommended",
+      "target": "highlightMatch",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "Matches show in plain text."
+      }
+    },
+    {
+      "text": "Pass an option as { value, label, disabled: true } to keep it listed but not choosable, such as a payee still being verified.",
+      "strength": "recommended",
+      "target": "items",
+      "from": {
+        "section": "configuration",
+        "quote": "Ananya Iyer is listed but disabled, such as a payee still being verified."
+      }
+    },
+    {
+      "text": "Do not set isInvalid without an errorMessage: a red field doesn’t say what’s wrong.",
+      "strength": "discouraged",
+      "target": "isInvalid",
+      "value": "true",
+      "from": {
+        "section": "doDont",
+        "quote": "A red field doesn’t say what’s wrong."
+      }
+    },
+    {
+      "text": "Show states with isInvalid, isReadOnly and isDisabled: the component sets FormField States itself (invalid gives Error, read only or disabled give Read Only with disabled at 50 % opacity, focus gives Active, otherwise Idle).",
+      "strength": "recommended",
+      "target": "FormField States",
+      "from": {
+        "section": "evidence",
+        "quote": "`FormField States` is forced: invalid → Error, read-only or disabled → Read Only (disabled adds 50 % opacity), focused → Active, else Idle."
+      },
+      "absolute": {
+        "word": "Only",
+        "scope": "contextual",
+        "reason": "“Read Only” is the name of a FormField States value, not a limit on anything."
+      },
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "To show the list open in a static example, pass the controlled open prop: on the web an uncontrolled list (defaultOpen) closes on the first mousedown outside it.",
+      "strength": "recommended",
+      "target": "open",
+      "value": "true",
+      "from": {
+        "section": "evidence",
+        "quote": "on the web the component closes an uncontrolled list on any mousedown outside it"
+      },
+      "checkedOn": "2026-10-11",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Type a little, then pick the right one.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Type a little, then pick the right one."
+        }
+      },
+      {
+        "text": "Label the field with what it holds, such as “Bank name”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Label the field with what it holds, such as “Bank name”"
+        }
+      },
+      {
+        "text": "Use the placeholder for a search hint.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "content",
+          "quote": "use the placeholder for a search hint."
+        }
+      },
+      {
+        "text": "Do not use the placeholder as the label: it disappears as soon as people type.",
+        "strength": "discouraged",
+        "target": "placeholder",
+        "from": {
+          "section": "doDont",
+          "quote": "It disappears as soon as people type."
+        }
+      },
+      {
+        "text": "Keep options short and unique.",
+        "strength": "recommended",
+        "target": "items",
+        "from": {
+          "section": "content",
+          "quote": "Keep options short and unique"
+        }
+      },
+      {
+        "text": "Write the no-match message as what happened.",
+        "strength": "recommended",
+        "target": "emptyMessage",
+        "from": {
+          "section": "content",
+          "quote": "write the no-match message as what happened"
+        }
+      },
+      {
+        "text": "Make error messages say how to fix the pick.",
+        "strength": "recommended",
+        "target": "errorMessage",
+        "from": {
+          "section": "content",
+          "quote": "make errors say how to fix the pick."
+        }
+      }
+    ],
+    "good": [
+      "Bank name",
+      "Search bank name",
+      "Pick the bank your account is with.",
+      "No matching banks",
+      "Choose your bank from the list.",
+      "HDFC Bank",
+      "State Bank of India",
+      "Beneficiary",
+      "Search beneficiary"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "At rest: a grey border; it turns purple when focused.",
+      "from": {
+        "section": "states",
+        "quote": "Grey border; it turns purple when focused."
+      }
+    },
+    {
+      "state": "Open",
+      "when": "As people type, matches from the items appear in a floating list under the field, with the typed text in bold.",
+      "from": {
+        "section": "anatomy",
+        "quote": "As people type, matches from your list appear in a floating list under it, with the typed text in bold."
+      }
+    },
+    {
+      "state": "No matches",
+      "when": "With emptyMessage the list says so when nothing matches; without it the list just disappears.",
+      "from": {
+        "section": "configuration",
+        "quote": "Says so when nothing matches; without it the list just disappears."
+      }
+    },
+    {
+      "state": "Option chosen",
+      "when": "The list marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check).",
+      "from": {
+        "section": "sources",
+        "quote": "marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check)."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "state": "Error",
+      "when": "isInvalid with errorMessage: a red field and a message that says how to fix it.",
+      "from": {
+        "section": "states",
+        "quote": "A red field and a message that says how to fix it."
+      }
+    },
+    {
+      "state": "Read only",
+      "when": "isReadOnly: grey, shows the chosen bank, and can’t be changed.",
+      "from": {
+        "section": "states",
+        "quote": "Grey, shows the chosen bank, and can’t be changed."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: faded and unavailable; like read only, it can’t be typed in or opened.",
+      "from": {
+        "section": "states",
+        "quote": "Read only and disabled can’t be typed in or opened; disabled is also faded."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the field is a combobox: the arrow keys move through the suggestions, Enter picks one, Escape closes the list, and focus stays in the field after a pick.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the field is a combobox: the arrow keys move through the suggestions, Enter picks one, Escape closes the list, and focus stays in the field after a pick."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "Each suggestion is announced by its label; isRequired and isInvalid are announced, with the errorMessage tied to the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Each suggestion is announced by its label, and required and error are announced, with the message tied to the field."
+      },
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "“required” names the state that screen readers announce; the sentence sets no rule."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "The field's accessible name defaults to the visible label, then the placeholder; accessibilityLabel overrides it.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Label the field",
+      "dont": "Use the placeholder as the label",
+      "why": "It disappears as soon as people type.",
+      "from": {
+        "section": "doDont",
+        "quote": "Label the field"
+      }
+    },
+    {
+      "do": "Say when nothing matches",
+      "dont": "Let the list vanish",
+      "why": "People can’t tell whether anything matched.",
+      "from": {
+        "section": "doDont",
+        "quote": "Say when nothing matches"
+      }
+    },
+    {
+      "do": "Explain the error",
+      "dont": "Rely on red alone",
+      "why": "A red field doesn’t say what’s wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "Explain the error"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Adding a bank account: people type part of their bank’s name and pick it, then press Continue. The screen checks that a bank was picked; errorMessage shows only once it sets isInvalid, as in the error state.",
+      "jsx": "<Card>\n  <Card.Title>Add a bank account</Card.Title>\n  <SuggestiveSearch\n    label=\"Bank name\"\n    placeholder=\"Search bank name\"\n    items={['HDFC Bank', 'Himachal Pradesh Gramin Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra Bank', 'Punjab National Bank', 'Bank of Baroda', 'Canara Bank', 'Union Bank of India', 'IndusInd Bank', 'Yes Bank']}\n    emptyMessage=\"No matching banks\"\n    errorMessage=\"Choose your bank from the list.\"\n    onValueChange={() => {}}\n  />\n  <Button label=\"Continue\" onPress={() => {}} />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "Continue checks that a bank was picked from the list and shows an error if not"
+      }
+    },
+    {
+      "purpose": "The error state: the typed bank is not in the list, so the field is red and the message says how to fix the pick.",
+      "jsx": "<SuggestiveSearch\n  label=\"Bank name\"\n  placeholder=\"Search bank name\"\n  items={['HDFC Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Bank of Baroda']}\n  defaultInputValue=\"Paytm Bank\"\n  isInvalid\n  errorMessage=\"Choose your bank from the list.\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "A red field and a message that says how to fix it."
+      }
+    },
+    {
+      "purpose": "Object items with an option that can’t be chosen: Ananya Iyer stays listed but disabled, such as a payee still being verified.",
+      "jsx": "<SuggestiveSearch\n  label=\"Beneficiary\"\n  placeholder=\"Search beneficiary\"\n  items={[\n    { value: 'u1', label: 'Aarav Sharma' },\n    { value: 'u2', label: 'Aditi Verma' },\n    { value: 'u3', label: 'Rohan Mehta' },\n    { value: 'u4', label: 'Ananya Iyer', disabled: true },\n  ]}\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Ananya Iyer is listed but disabled, such as a payee still being verified."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "items",
+      "description": "The screen owns the items and any loading; the component filters, caps, highlights the first match in bold, and shows a check on the selected row. An option object may set disabled: it stays listed and can't be chosen.",
+      "quote": "The consumer owns `items` and any loading; the component filters, caps, highlights the first match in bold, and shows a check on the selected row.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "onValueChange",
+      "description": "Choosing an option sets the query to its label and closes the list; typing anything else clears the selection.",
+      "quote": "typing anything else clears the selection",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "filter",
+      "description": "Since c8526ae the default and custom filters get the trimmed query (“HDF ” lists HDFC Bank).",
+      "quote": "the default and custom filters get the trimmed query (“HDF ” lists HDFC Bank)",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "defaultOpen",
+      "description": "On the web an uncontrolled list closes on any mousedown outside it, as designed; the guide's static examples pass the controlled open prop to keep their lists open.",
+      "quote": "on the web the component closes an uncontrolled list on any mousedown outside it",
+      "checkedOn": "2026-10-11",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "isRequired",
+      "description": "The red asterisk is visible text; screen readers get the requirement from the field (aria-required on the web).",
+      "quote": "The red asterisk is visible text; the requirement reaches screen readers through `aria-required`.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "modes",
+      "name": "FormField States",
+      "description": "Forced by the component from its props and focus: invalid gives Error, read only or disabled give Read Only (disabled adds 50 % opacity), focused gives Active, otherwise Idle.",
+      "quote": "`FormField States` is forced: invalid → Error, read-only or disabled → Read Only (disabled adds 50 % opacity), focused → Active, else Idle.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Suggestive Search still differs from Figma (raised in #233, not claimed by its fix): it bolds the typed text where Figma greys it, its placeholder colour (#888a8d) differs, it marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check), and its rows are 44 px (Figma: 43 px).",
+      "quote": "Still open, not claimed by #233's fix: the Figma differences (bold match, `#888a8d` placeholder, grey selected row with a 16 px check, 44 px rows)",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ]
+}
