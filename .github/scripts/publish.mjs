@@ -2,6 +2,7 @@
 // with the DUETWORKS_BOARD_KEY secret (it may only read and update tickets). The workflow checks
 // this file's SHA-256 before running it, so the reviewed workflow pins this exact script.
 //
+//   reach                            the board answers at all (GitHub's network to it can drop for a while)
 //   check <confirmation> <tickets>   the board confirms the batch is unchanged and names each approved commit
 //   pick                             the commits to put on main: each ticket's, up to its approved commit
 //   mark <main commit> <request>     marks exactly the checked tickets Live, at their checked versions
@@ -24,14 +25,46 @@ function fail(message) {
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();
 const gitOk = (...args) => { try { execFileSync("git", args, { stdio: "ignore" }); return true; } catch { return false; } };
 
+// GitHub's runners once couldn't connect to the board for a while (2026-10-28, connect ETIMEDOUT):
+// a dropped connection or a busy board is tried again, five times over about two minutes.
+const TRIES = 5;
+const RETRY = new Set([429, 502, 503, 504]);
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** A request to the board that tries again when the network drops or the board is busy. */
+async function reachBoard(url, init, what) {
+  for (let attempt = 1; ; attempt += 1) {
+    let problem;
+    try {
+      const response = await fetch(url, { ...init, signal: AbortSignal.timeout(30_000) });
+      if (!RETRY.has(response.status)) return response;
+      problem = `HTTP ${response.status}`;
+    } catch (error) {
+      problem = error?.cause?.code ?? error?.cause?.errors?.[0]?.code ?? (error?.name === "TimeoutError" ? "no answer in 30 s" : "no connection");
+    }
+    if (attempt === TRIES) fail(`GitHub couldn't reach the board for ${what} (${problem}), even after ${TRIES} tries.`);
+    console.log(`The board didn't answer ${what} (${problem}); trying again (${attempt + 1} of ${TRIES}).`);
+    await wait(attempt * 10_000);
+  }
+}
+
+/** The board answers at all, before anything is checked or changed. */
+async function reach() {
+  if (!env.DUETWORKS_MCP_URL) fail("DUETWORKS_MCP_URL is needed to talk to the board.");
+  const response = await reachBoard(new URL("/", env.DUETWORKS_MCP_URL), { method: "GET", redirect: "manual" }, "its home page");
+  if (response.status >= 500) fail(`The board answered ${response.status}.`);
+  console.log(`The board answered (${response.status}).`);
+}
+
 /** One MCP tool call to the board; a refusal ends the step with the board's own words. */
 async function board(tool, args) {
   if (!env.DUETWORKS_MCP_URL || !env.DUETWORKS_BOARD_KEY) fail("DUETWORKS_MCP_URL and the DUETWORKS_BOARD_KEY secret are needed to talk to the board.");
-  const response = await fetch(env.DUETWORKS_MCP_URL, {
+  // mark_published carries an idempotency key, so a call tried again never marks twice.
+  const response = await reachBoard(env.DUETWORKS_MCP_URL, {
     method: "POST",
     headers: { authorization: `Bearer ${env.DUETWORKS_BOARD_KEY}`, "content-type": "application/json", accept: "application/json, text/event-stream" },
     body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: tool, arguments: args } }),
-  });
+  }, tool);
   const text = await response.text();
   const data = (response.headers.get("content-type") ?? "").includes("text/event-stream")
     ? text.split("\n").find((line) => line.startsWith("data:"))?.slice(5).trim() ?? ""
@@ -97,7 +130,8 @@ async function mark(mainCommit, request) {
 }
 
 const [command, ...args] = process.argv.slice(2);
-if (command === "check") await check(args[0] ?? "", args[1] ?? "");
+if (command === "reach") await reach();
+else if (command === "check") await check(args[0] ?? "", args[1] ?? "");
 else if (command === "pick") pick();
 else if (command === "mark") await mark(args[0] ?? "", args[1] ?? "");
 else fail(`Unknown step “${command}”.`);
