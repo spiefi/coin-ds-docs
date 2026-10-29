@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "id": "NumberPagination",
+  "slug": "numberpagination",
+  "category": "navigation",
+  "tags": [
+    "pagination",
+    "page indicator",
+    "carousel",
+    "pager",
+    "slides"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T03:24:15Z",
+    "flags": [
+      {
+        "field": "/accessibility/2",
+        "reason": "Checked on jfs-components 0.1.77 (2026-09-29); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use Number Pagination to show which slide of a short media carousel is in view, and to jump to another.",
+  "useWhen": [
+    {
+      "text": "Show which slide of a short media carousel is in view, and let people jump to another.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Number Pagination to show which slide of a short media carousel is in view, and to jump to another."
+      }
+    },
+    {
+      "text": "A photo carousel on a product card.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A photo carousel on a product card"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "On a light surface: the white numbers disappear on white.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "White numbers disappear on white."
+      }
+    },
+    {
+      "text": "Showing every page of a long set: twelve pages don't fit, so people have to scroll the pill to find the rest.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Twelve pages don’t fit, so people must scroll the pill to find the rest."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Glass pill",
+      "holds": "Frosted, translucent surface with a thin light border; it holds one circular number per page.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Frosted, translucent surface with a thin light border."
+      }
+    },
+    {
+      "part": "Active page",
+      "holds": "White circle with a dark number for the slide in view (activePage).",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White circle with a dark number for the slide in view."
+      }
+    },
+    {
+      "part": "Page number",
+      "holds": "Other pages in white; each is a 32 px pressable circle.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Other pages in white; each is a 32 px pressable circle."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "A few pages, over imagery.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "A few pages, over imagery."
+      }
+    },
+    {
+      "text": "Place it on imagery: white numbers stand out on a photo.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "White numbers stand out on a photo."
+      }
+    },
+    {
+      "text": "The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide."
+      }
+    },
+    {
+      "text": "It does not wrap: pages that do not fit scroll sideways inside the pill.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It does not wrap: pages that do not fit scroll sideways inside the pill."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set how many pages with totalPages; each page adds a 32 px circle.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Each page adds a 32 px circle."
+      },
+      "target": "totalPages"
+    },
+    {
+      "text": "Keep the count small so the pill stays compact over the image.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep the count small so the pill stays compact over the image."
+      },
+      "target": "totalPages"
+    },
+    {
+      "text": "Three pages for a short set, such as three offers.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For a short set, such as three offers."
+      },
+      "target": "totalPages",
+      "value": "3"
+    },
+    {
+      "text": "Four pages is the Figma default.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma default."
+      },
+      "target": "totalPages",
+      "value": "4"
+    },
+    {
+      "text": "Five pages is about the most that stays compact.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "About the most that stays compact."
+      },
+      "target": "totalPages",
+      "value": "5"
+    },
+    {
+      "text": "In the package totalPages and activePage both default to 1, so a pagination with neither set shows a single number.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "totalPages"
+    },
+    {
+      "text": "The screen tracks the page and passes it as activePage (1-based); the component shows it.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "The screen tracks the page; the component shows it."
+      },
+      "target": "activePage"
+    },
+    {
+      "text": "The screen passes the active page (activePage) and updates it when a number is pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The screen passes the active page and updates it when a number is pressed."
+      },
+      "target": "activePage"
+    },
+    {
+      "text": "Number Pagination only reports the press: onPageChange gives the page pressed, and the screen shows that slide and passes it back as activePage.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Number Pagination only reports the press."
+      },
+      "target": "onPageChange"
+    },
+    {
+      "text": "There is no disabled state.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "There is no disabled state."
+      }
+    },
+    {
+      "text": "It has no arrows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It has no arrows"
+      }
+    },
+    {
+      "text": "children replaces the default page buttons; activePage and totalPages are then ignored. The guide doesn’t show custom children.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "children"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "The component writes the numbers from the page count (totalPages); there is no text to add.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The component writes the numbers from the page count; there is no text to add."
+        },
+        "target": "totalPages"
+      },
+      {
+        "text": "Let the image or card above say what each slide is.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Let the image or card above say what each slide is."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Active",
+      "when": "The page the screen passes as activePage is the white circle; the white circle follows the page as the screen updates it.",
+      "from": {
+        "section": "states",
+        "quote": "The white circle follows the page"
+      }
+    },
+    {
+      "state": "Inactive",
+      "when": "Every other page: a white number; each is a 32 px pressable circle.",
+      "from": {
+        "section": "anatomy",
+        "quote": "Other pages in white; each is a 32 px pressable circle."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "A number dims to 70% while it is pressed.",
+      "from": {
+        "section": "states",
+        "quote": "Pressed numbers dim to 70%."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the group of numbers; it defaults to “Pagination”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Each number is a button named “Page n”; on the web Enter presses it.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Pages: `button` 32 × 32 named \"Page n\", Enter activates"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Place it on imagery",
+      "dont": "Place it on a light surface",
+      "why": "White numbers disappear on white.",
+      "from": {
+        "section": "doDont",
+        "quote": "White numbers stand out on a photo."
+      }
+    },
+    {
+      "do": "Keep to a few pages",
+      "dont": "Show every page of a long set",
+      "why": "Twelve pages don’t fit, so people must scroll the pill to find the rest.",
+      "from": {
+        "section": "doDont",
+        "quote": "Five numbers fit comfortably."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A photo carousel on a product card, the guide's In context: four photos with the first in view. The screen draws the photo and puts the pill over it (the component draws only the numbers); it passes activePage and, when a number is pressed, onPageChange gives that page; the screen shows that photo and passes the page back.",
+      "jsx": "<NumberPagination totalPages={4} activePage={1} onPageChange={() => {}} />",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen passes activePage and, when a number is pressed, shows that photo"
+      }
+    },
+    {
+      "purpose": "A short set, such as three offers: three pages, the first in view.",
+      "jsx": "<NumberPagination totalPages={3} activePage={1} onPageChange={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "For a short set, such as three offers."
+      }
+    },
+    {
+      "purpose": "Five pages, about the most that stays compact, with the last slide in view: the white circle moves to the last number.",
+      "jsx": "<NumberPagination totalPages={5} activePage={5} onPageChange={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "About the most that stays compact."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "activePage",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 1,
+        "description": "On the web the page with this number has aria-current=\"page\", so it is announced as the current page. Declared: The 1-based active page index. Ignored if `children` is supplied. Defaults to 1. Default 1, from the component source.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "totalPages",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 1,
+        "description": "Pages that don't fit scroll sideways inside the pill: twelve pages in a 360 px host scroll horizontally, and the last page can be scrolled into view. Declared: The total number of pages. Ignored if `children` is supplied. Defaults to 1. Default 1, from the component source.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "onPageChange",
+        "type": "(page: number) => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback fired when a page button is pressed. Ignored if `children` is supplied."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom children to override the default page buttons."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Pagination",
+        "description": "On the web the container is a navigation landmark (nav) named “Pagination” by default; on native it is a toolbar. Declared: Accessible name for the pagination group. Defaults to `\"Pagination\"`. Default \"Pagination\", from the component source.",
+        "checkedOn": "2026-10-01"
+      }
+    ],
+    "modes": [],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Custom children to override the default page buttons.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPageChange",
+        "type": "(page: number) => void",
+        "description": "Callback fired when a page button is pressed. Ignored if `children` is supplied.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Number Pagination has no arrows and no disabled state; pages that do not fit scroll inside the pill.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Figma's four-page pill is 136 px wide; the package's is 138 px, because its 1 px border is added.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=numberpagination",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7522-7652",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-numberpagination--docs"
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "slug": "comparisonbar",
+  "label": "Comparison Bar",
+  "guideCommit": "ea46f6883c97d1016d0abd671590f7b078ee7955",
+  "files": [
+    "src/guides/comparisonbar.guide.tsx"
+  ],
+  "evidence": "docs/evidence/comparisonbar.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:08:51.779Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "compare tray",
+    "compare drawer",
+    "add to compare",
+    "product comparison"
+  ],
+  "title": "Comparison Bar",
+  "summary": "Use a Comparison Bar to collect the items people pick to compare, as pictures in slots, and let them start the comparison.",
+  "corePrinciple": "Show what’s picked; compare when there’s something to show.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5350-360",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-comparisonbar--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Slots, then the button",
+      "description": "A white card holds a row of slots and a Compare button. A filled slot shows its picture; an empty one shows a + for adding the next item.",
+      "blocks": [
+        "12",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Card",
+        "A white card as wide as its slots and button.",
+        "Filled slot",
+        "A picture; pressing anywhere on the slot removes it.",
+        "Remove mark",
+        "Shows the slot removes; it isn’t a separate button.",
+        "Empty slot",
+        "A + that asks your screen to add an item.",
+        "Compare",
+        "A Coin Button that stays off until a slot has a picture.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Compare"
+      ],
+      "anatomy": [
+        {
+          "part": "Card",
+          "note": "A white card as wide as its slots and button."
+        },
+        {
+          "part": "Filled slot",
+          "note": "A picture; pressing anywhere on the slot removes it."
+        },
+        {
+          "part": "Remove mark",
+          "note": "Shows the slot removes; it isn’t a separate button."
+        },
+        {
+          "part": "Empty slot",
+          "note": "A + that asks your screen to add an item."
+        },
+        {
+          "part": "Compare",
+          "note": "A Coin Button that stays off until a slot has a picture."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Slots and the button",
+      "description": "Pass one item per slot: an item with an imageSource is filled, and one without is empty. compareLabel names the button, which is Coin’s Button at size M; Button / Size S gives the smaller button Figma draws. Radius rounds the pictures’ corners, which shows on square photos.",
+      "blocks": [
+        "Four slots",
+        "Figma’s layout: one picture and three to add.",
+        "Two slots",
+        "Fewer slots make a shorter bar.",
+        "Button / Size S",
+        "A 32 px button, as in Figma.",
+        "compareLabel",
+        "The button widens with its label.",
+        "Radius None",
+        "Square corners.",
+        "Radius L",
+        "Fully rounded corners."
+      ],
+      "specimen": [
+        "Compare",
+        "Compare 4"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Four slots",
+          "description": "Figma’s layout: one picture and three to add."
+        },
+        {
+          "title": "Two slots",
+          "description": "Fewer slots make a shorter bar."
+        },
+        {
+          "title": "Button / Size S",
+          "description": "A 32 px button, as in Figma."
+        },
+        {
+          "title": "compareLabel",
+          "description": "The button widens with its label."
+        },
+        {
+          "title": "Radius None",
+          "description": "Square corners."
+        },
+        {
+          "title": "Radius L",
+          "description": "Fully rounded corners."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Empty, filled, and off",
+      "description": "Each slot is a button. Pressing an empty one asks your screen to add an item (onItemPress), and pressing a filled one asks it to remove that item (onItemRemove). The bar keeps no list of its own, so your screen changes items. Compare stays dimmed and can’t be pressed until a slot has a picture; one is enough.",
+      "blocks": [
+        "Nothing added",
+        "Compare is dimmed and can’t be pressed.",
+        "One added",
+        "One picture turns Compare on.",
+        "All added",
+        "Every slot shows a picture and a remove mark.",
+        "Two needed",
+        "compareDisabled keeps it off, say until two are added."
+      ],
+      "specimen": [
+        "Compare"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Nothing added",
+          "description": "Compare is dimmed and can’t be pressed."
+        },
+        {
+          "title": "One added",
+          "description": "One picture turns Compare on."
+        },
+        {
+          "title": "All added",
+          "description": "Every slot shows a picture and a remove mark."
+        },
+        {
+          "title": "Two needed",
+          "description": "compareDisabled keeps it off, say until two are added."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "As wide as its slots",
+      "description": "The bar hugs its content: 10 and 12 px of padding, 45 × 44 px slots 12 px apart, then the button. Four slots and the default button make it 369 × 66 px; Figma draws 344 × 64 with the smaller button. Each slot adds 57 px, and the bar never wraps or scrolls.",
+      "blocks": [
+        "369 × 66",
+        "12"
+      ],
+      "specimen": [
+        "Compare"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Pictures people recognise, a short verb",
+      "description": "Use each item’s own picture, so people can tell at a glance what they picked. Keep compareLabel to a short verb such as Compare: a long label makes the bar wider than a phone. Give each item an accessibilityLabel with its name, or every slot is read out the same.",
+      "blocks": [
+        "A short verb",
+        "“Compare” keeps the bar 369 px wide.",
+        "Shown at 80%",
+        "A sentence",
+        "The bar grows past a 390 px phone."
+      ],
+      "specimen": [
+        "Compare",
+        "Compare these 4 coins"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "A short verb",
+          "description": "“Compare” keeps the bar 369 px wide."
+        },
+        {
+          "title": "A sentence",
+          "description": "The bar grows past a 390 px phone."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Comparing gold coins",
+      "description": "People add coins from the list, and the bar fills from the left. Tapping a picture in the bar takes that coin out. Compare turns on with the first coin; your screen opens the comparison.",
+      "blocks": [],
+      "specimen": [
+        "Gold coins",
+        "1 g gold coin",
+        "₹7,850 · 24K",
+        "Add",
+        "2 g gold coin",
+        "₹15,640 · 24K",
+        "5 g gold coin",
+        "₹38,900 · 24K",
+        "10 g gold coin",
+        "₹77,500 · 24K",
+        "Compare",
+        "Add coins to compare"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep every slot usable",
+      "description": "Each pair shows a bar people can use next to one that hides its own controls.",
+      "blocks": [
+        "Do",
+        "Shown at 96%",
+        "Leave the colour modes alone",
+        "The + stays dark on the grey slots.",
+        "Don’t",
+        "Set a brand colour on the bar",
+        "AppearanceBrand Secondary turns the + white, so the empty slots look blank.",
+        "Four slots or fewer",
+        "The bar fits a phone screen.",
+        "Shown at 83%",
+        "Five or more slots",
+        "The bar doesn’t wrap or scroll, so it’s wider than a 390 px phone."
+      ],
+      "specimen": [
+        "Compare"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Leave the colour modes alone",
+            "caption": "The + stays dark on the grey slots.",
+            "specimen": "Compare · Shown at 96%"
+          },
+          "dont": {
+            "title": "Set a brand colour on the bar",
+            "caption": "AppearanceBrand Secondary turns the + white, so the empty slots look blank.",
+            "specimen": "Compare · Shown at 96%"
+          }
+        },
+        {
+          "do": {
+            "title": "Four slots or fewer",
+            "caption": "The bar fits a phone screen.",
+            "specimen": "Compare · Shown at 96%"
+          },
+          "dont": {
+            "title": "Five or more slots",
+            "caption": "The bar doesn’t wrap or scroll, so it’s wider than a 390 px phone.",
+            "specimen": "Compare · Shown at 83%"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Comparison Bar contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "All empty",
+        "All filled",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Comparison Bar is one component, 344 × 64: four slots, the first filled, and a small pale purple Compare button. The package takes items and draws Coin’s Button at size M in gold, so the bar is 369 × 66; Button / Size S gives Figma’s button size. Its empty-slot + is 18 px where Figma’s is 29, its pictures are 28 px tall where Figma’s are 20, and brand modes on the bar turn the + white (reported).",
+        "jfs-components",
+        "0.1.78",
+        "items",
+        "Button / Size"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

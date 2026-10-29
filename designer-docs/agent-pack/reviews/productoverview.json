@@ -1,0 +1,22 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The guide (checked 20 October on 0.1.78-c7d3348) still describes Component Bug #355 problems that the installed 0.1.78-dbe0e02 fixes, read from source: the description is readable (card/supportive-text/color, #1a1c1f in every Text Appearance mode, not the white text/appearance/medium/color), the picture sits in a 288 px centred frame instead of filling the card’s width, and the name (1 line) and description (2 lines) end in … unless disableTruncation is set. The entry follows the package, so it does not say “white on white” or “disableTruncation affects only the stats”. The guide changes when #355 is closed and published. Added by Claude Code in the overnight run agentpack-batch7, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/configuration/11",
+      "reason": "misreads-source: The guide says \"disableTruncation affects only the stats\" and \"The name and description wrap\" by default. The evidence also says neither the name nor the description truncates and that the mdx's two-line claim is wrong. The item repeats the stale type comment, which says the name is one line and the description at most two, and claims disableTruncation wraps them. That contradicts /configuration/10 and the evidence's Limits.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch7, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The item follows the installed package, which the cross-check cannot see. In 0.1.78-dbe0e02 ProductOverview.tsx passes resolveTruncation(disableTruncation, 1) to the product name and resolveTruncation(disableTruncation, 2) to the description (lines 226 and 233), so by default the name is one line and the description at most two, and disableTruncation lifts both; the type comment (the props:disableTruncation fact) says the same. The guide’s “disableTruncation affects only the stats” and the evidence’s “never truncated” describe the 19 October build (c7d3348) and are stale: this is #355’s fix. A human flag on the entry points at #355."
+    },
+    {
+      "field": "/anatomy/3",
+      "reason": "lost-context: The anatomy row reads \"description, 14 px, centred; it renders white on white today.\" The item drops the white-on-white clause, so it implies a readable description. The evidence's Limits say not to imply \"that the description is readable today\".",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch7, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The white-on-white clause is stale on the installed build: 0.1.78-dbe0e02 ProductOverview.tsx (lines 99-103) colours the description with card/supportive-text/color, which the package’s resolver gives as #1a1c1f in every Text Appearance mode; the old text/appearance/medium/color is still white but no longer read. Repeating “white on white” would tell agents the description can’t be read when it can. A human flag on the entry points at #355, whose fix this is."
+    }
+  ]
+}

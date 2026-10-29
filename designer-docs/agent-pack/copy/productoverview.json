@@ -1,0 +1,398 @@
+{
+  "slug": "productoverview",
+  "label": "Product Overview",
+  "guideCommit": "6d52ca836c3834529cfc4ea2059d423846771061",
+  "files": [
+    "src/guides/productoverview.guide.tsx"
+  ],
+  "evidence": "docs/evidence/productoverview.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:08:47.029Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "product summary",
+    "product header",
+    "PDP",
+    "product detail",
+    "gold coin"
+  ],
+  "title": "Product Overview",
+  "summary": "Use a Product Overview to introduce one product: its picture, a chip, its name, a line of trust, and two or three key facts.",
+  "corePrinciple": "One product, and the facts that matter.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2768-56",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-productoverview--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A picture, a chip, a name, and facts",
+      "description": "A white panel centres the product’s picture, a chip naming the metal or brand, the product’s name, a description, and a row of stats, 12 px apart.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Picture",
+        "imageSource, fitted inside the full width at 288:170.",
+        "Chip",
+        "A ProductLabel from label, with labelImageSource as its picture.",
+        "Name",
+        "productName, 26 px, centred: the page’s heading.",
+        "Description",
+        "description, 14 px, centred; it renders white on white today.",
+        "Stats",
+        "stats: a value over a label each, in equal columns.",
+        "Panel",
+        "A white panel, 24 px padding, no corners or border."
+      ],
+      "specimen": [
+        "Gold",
+        "5g Gold Coin",
+        "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "995",
+        "Purity",
+        "3%",
+        "GST"
+      ],
+      "anatomy": [
+        {
+          "part": "Picture",
+          "note": "imageSource, fitted inside the full width at 288:170."
+        },
+        {
+          "part": "Chip",
+          "note": "A ProductLabel from label, with labelImageSource as its picture."
+        },
+        {
+          "part": "Name",
+          "note": "productName, 26 px, centred: the page’s heading."
+        },
+        {
+          "part": "Description",
+          "note": "description, 14 px, centred; it renders white on white today."
+        },
+        {
+          "part": "Stats",
+          "note": "stats: a value over a label each, in equal columns."
+        },
+        {
+          "part": "Panel",
+          "note": "A white panel, 24 px padding, no corners or border."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Picture, chip, facts, and colour",
+      "description": "imageSource adds the product’s picture at the top, fitted inside the full width at 288:170 unless imageRatio says otherwise; without it the card starts at the chip. labelImageSource puts a small round picture in the chip. stats takes any number of facts in equal columns, and [] removes the row. children adds your own content between the description and the stats, with the card’s modes. Text Appearance colours the name and the stat labels.",
+      "blocks": [
+        "Picture",
+        "The product’s picture leads.",
+        "No picture",
+        "The chip leads.",
+        "Three stats",
+        "Three equal columns.",
+        "No stats",
+        "The name and description only.",
+        "imageRatio 2",
+        "A wider frame, so a smaller coin.",
+        "No chip picture",
+        "The chip shows only its label.",
+        "Text Appearance Primary",
+        "A gold name and stat labels.",
+        "Text Appearance Secondary",
+        "A purple name and stat labels."
+      ],
+      "specimen": [
+        "Gold",
+        "5g Gold Coin",
+        "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "995",
+        "Purity",
+        "3%",
+        "GST",
+        "5g",
+        "Weight"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Picture",
+          "description": "The product’s picture leads."
+        },
+        {
+          "title": "No picture",
+          "description": "The chip leads."
+        },
+        {
+          "title": "Three stats",
+          "description": "Three equal columns."
+        },
+        {
+          "title": "No stats",
+          "description": "The name and description only."
+        },
+        {
+          "title": "imageRatio 2",
+          "description": "A wider frame, so a smaller coin."
+        },
+        {
+          "title": "No chip picture",
+          "description": "The chip shows only its label."
+        },
+        {
+          "title": "Text Appearance Primary",
+          "description": "A gold name and stat labels."
+        },
+        {
+          "title": "Text Appearance Secondary",
+          "description": "A purple name and stat labels."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Nothing to press",
+      "description": "Product Overview has no states: it isn’t pressable and has no selected, disabled, or loading look. Put the product’s action on the screen next to it, not inside it.",
+      "blocks": [
+        "Read-only",
+        "Nothing on the card responds to a press."
+      ],
+      "specimen": [
+        "Gold",
+        "5g Gold Coin",
+        "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "995",
+        "Purity",
+        "3%",
+        "GST"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Read-only",
+          "description": "Nothing on the card responds to a press."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The host sets the width",
+      "description": "The card fills its host’s width; Figma draws it at 343 px. The picture fills the width inside 24 px of padding, so a wider card has a taller picture, and the parts are 12 px apart. The name and description wrap. Stat values and labels stay on one line and end in … unless disableTruncation is set.",
+      "blocks": [
+        "343 × 405",
+        "12",
+        "Narrow host",
+        "At 240 px the picture shrinks with the card.",
+        "Wide host",
+        "At 360 px the picture grows with the card.",
+        "Long stats",
+        "Stat values and labels end in … on one line.",
+        "disableTruncation",
+        "The stats wrap instead."
+      ],
+      "specimen": [
+        "Gold",
+        "5g Gold Coin",
+        "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "995",
+        "Purity",
+        "3%",
+        "GST",
+        "₹7,812.50",
+        "Price per gram today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Narrow host",
+          "description": "At 240 px the picture shrinks with the card."
+        },
+        {
+          "title": "Wide host",
+          "description": "At 360 px the picture grows with the card."
+        },
+        {
+          "title": "Long stats",
+          "description": "Stat values and labels end in … on one line."
+        },
+        {
+          "title": "disableTruncation",
+          "description": "The stats wrap instead."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The product, its metal, and its figures",
+      "description": "Make productName the product with its size, such as 5g Gold Coin, and the chip’s label the metal or brand, not the product again. The description is a sentence or two on why to trust it. A stat value is the figure, such as 995 or 3%, and its label a word or two, such as Purity or GST.",
+      "blocks": [
+        "Gold coin",
+        "Gold in the chip, the size in the name.",
+        "Silver coin",
+        "Silver in the chip, three figures."
+      ],
+      "specimen": [
+        "Gold",
+        "5g Gold Coin",
+        "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "995",
+        "Purity",
+        "3%",
+        "GST",
+        "Silver",
+        "10g Silver Coin",
+        "Insured delivery to your door, with a purity certificate.",
+        "999",
+        "10g",
+        "Weight"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Gold coin",
+          "description": "Gold in the chip, the size in the name."
+        },
+        {
+          "title": "Silver coin",
+          "description": "Silver in the chip, three figures."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A gold coin’s product page",
+      "description": "The overview explains the product; the Buy button under it belongs to the screen, because the card has no action of its own. Buy opens the screen’s own checkout.",
+      "blocks": [
+        "Not bought yet"
+      ],
+      "specimen": [
+        "Gold",
+        "5g Gold Coin",
+        "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "995",
+        "Purity",
+        "3%",
+        "GST",
+        "Buy for ₹38,750"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Figures, a chip that adds, an action outside",
+      "description": "Each pair shows a card that reads at a glance next to one that cuts a fact short, repeats itself, or pushes an action into the card.",
+      "blocks": [
+        "Do",
+        "Figures in stats",
+        "A number and a word or two each.",
+        "Don’t",
+        "A sentence in a stat",
+        "Stats stay on one line, so it’s cut short.",
+        "The metal in the chip",
+        "Gold, then the product’s name.",
+        "The name twice",
+        "The chip repeats 5g Gold Coin.",
+        "The action under the card",
+        "Keep Buy on the screen, below the overview.",
+        "A Button in children",
+        "It lands between the description and the facts."
+      ],
+      "specimen": [
+        "Gold",
+        "5g Gold Coin",
+        "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "995",
+        "Purity",
+        "3%",
+        "GST",
+        "Insured from our vault to you",
+        "Promise",
+        "Buy"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Figures in stats",
+            "caption": "A number and a word or two each.",
+            "specimen": "Gold · 5g Gold Coin · Your gold is insured from our vault to you. If lost or damaged, we’ll replace it. · 995 · Purity · 3% · GST"
+          },
+          "dont": {
+            "title": "A sentence in a stat",
+            "caption": "Stats stay on one line, so it’s cut short.",
+            "specimen": "Gold · 5g Gold Coin · Your gold is insured from our vault to you. If lost or damaged, we’ll replace it. · Insured from our vault to you · Promise · 3% · GST"
+          }
+        },
+        {
+          "do": {
+            "title": "The metal in the chip",
+            "caption": "Gold, then the product’s name.",
+            "specimen": "Gold · 5g Gold Coin · Your gold is insured from our vault to you. If lost or damaged, we’ll replace it. · 995 · Purity · 3% · GST"
+          },
+          "dont": {
+            "title": "The name twice",
+            "caption": "The chip repeats 5g Gold Coin.",
+            "specimen": "5g Gold Coin · 5g Gold Coin · Your gold is insured from our vault to you. If lost or damaged, we’ll replace it. · 995 · Purity · 3% · GST"
+          }
+        },
+        {
+          "do": {
+            "title": "The action under the card",
+            "caption": "Keep Buy on the screen, below the overview.",
+            "specimen": "Gold · 5g Gold Coin · Your gold is insured from our vault to you. If lost or damaged, we’ll replace it. · 995 · Purity · 3% · GST"
+          },
+          "dont": {
+            "title": "A Button in children",
+            "caption": "It lands between the description and the facts.",
+            "specimen": "Gold · 5g Gold Coin · Your gold is insured from our vault to you. If lost or damaged, we’ll replace it. · Buy · 995 · Purity · 3% · GST"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Product Overview contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "No image",
+        "Three stats",
+        "No stats",
+        "Checked 20 October 2026",
+        "Installed jfs-components is 0.1.78 (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Product Overview has no properties; the picture, chip, text, and two stats are layers there, and the coin picture here is Figma’s own. The description’s colour token is white in every Text Appearance mode, so the description can’t be read on the white card, here and in Storybook; Figma’s is dark grey. The package’s picture fills the card’s width (Figma’s is 288 × 170, centred), and its text lines are taller, so the card is about 409 px tall where Figma’s is 396. disableTruncation affects only the stats. The published Storybook is older than the installed package and still shows the older generated page (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "disableTruncation"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

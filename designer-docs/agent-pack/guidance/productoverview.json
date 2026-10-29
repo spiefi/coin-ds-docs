@@ -1,0 +1,510 @@
+{
+  "slug": "productoverview",
+  "guideCommit": "6d52ca836c3834529cfc4ea2059d423846771061",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch7, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/productoverview.guide.tsx) and docs/evidence/productoverview.md at 6d52ca8. The guide's Sources note was checked on 20 October 2026 on the 19 October build of Biscuit's main, the build the evidence names (mirror v0.1.78-c7d3348, Biscuit's main at c7d3348), so items citing the note or the evidence carry that build. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c7d3348 and v0.1.78-dbe0e02 changes ProductOverview (built lib and ProductOverview.d.ts), apparently with Component Bug #355's fix; ProductLabel, Image and react-utils are unchanged. Installed ProductOverview.tsx and ProductLabel.tsx still match most guide sentences used here, read from source, not run (token values through the package's own resolver): a white panel (productOverview/background #ffffff), 24 px padding, 12 px gap, no radius or border, width 100% of the host, everything centred; the picture only with imageSource, at imageRatio (default 288/170), resizeMode contain; the chip is a ProductLabel that always renders, with a 29 px round Avatar only when labelImageSource is set; the name 26 px heavy, a header (accessibilityRole header); the description 14 px, centred; children cloned with the card's modes between the description and the stats; stats in equal flex-1 columns, a 20 px value over a 12 px label, each one line ending in … unless disableTruncation, and [] removes the row; the root is a View with no onPress and no selected, disabled or loading prop; Text Appearance changes text/appearance/high/color, which colours the name and the stat labels (Neutral #000000, Primary gold #cea15a, Secondary purple #5d00b5, Tertiary blue #026b9a, Success, Warning, Error), not the description or the stat values (#141414). Where the guide states the problems of #355, the installed source contradicts three of them, and they are not encoded: (1) the description is no longer white on white: ProductOverview.tsx lines 99–103 read card/supportive-text/color, which resolves to #1a1c1f (Figma's Text/Medium) in all seven Text Appearance modes; text/appearance/medium/color itself is still white in all seven but no longer read. So the Sources sentence “The description’s colour token is white in every Text Appearance mode, so the description can’t be read on the white card”, the anatomy note “it renders white on white today” and the playground readout are out of date for the package (the published Storybook, built 17 October, still shows the old card). The Description part takes only “description, 14 px, centred”. (2) the picture no longer fills the card's width: lines 195–213 wrap the Image in a View 288 px wide (maxWidth 100%, aspectRatio imageRatio, centred), so at Figma's 343 px the picture is Figma's 288 × 170, centred, and only a card narrower than 336 px shrinks it. Sources “The package’s picture fills the card’s width (Figma’s is 288 × 170, centred)” and Sizing “The picture fills the width inside 24 px of padding, so a wider card has a taller picture” are out of date; the configuration rule says “fitted inside the card's width”, which holds. With the 288 × 170 picture the card is about 405 px tall at 343 (the copy snapshot itself renders “343 × 405”), not “about 409”. (3) disableTruncation no longer affects only the stats: lines 226 and 233 give the name one line and the description two lines, each ending in …, unless disableTruncation is set, as the d.ts JSDoc (the props:disableTruncation fact) says; so Sources “disableTruncation affects only the stats” and Sizing “The name and description wrap.” are out of date, and the configuration item rests on the fact. Evidence lines out of date the same way, not used: the picture's width: 100%, the never-truncated name and description, the description's token, 343 × ~409 with a 295 × 174 picture, the mdx truncation discrepancy, and “A Badge there keeps its own alignSelf: flex-start and sits at the left” (lines 178–180 and 238–240 now centre children with alignSelf center). Still present on dbe0e02, kept as gaps with the 20 October build: the taller text lines (safeTextLineHeight raises the name's 26 px token to 32 and a stat value's 20 to 24, #355) and the published Storybook (index.json last modified 17 October 2026, checked 29 October; #355). The Figma-vs-code gaps (Figma has no properties; no children, imageRatio or disableTruncation; no picture or chip picture by default in code) still match the installed props and defaults; Figma itself was not re-checked. Examples follow the building rules: no Color Mode (the guide sets Light on every ProductOverview, VStack and Button), no maxWidth style (the guide caps its specimens at 343 px for the page), no Text Appearance (no guide sentence says which content needs it; its configuration facts are kept as rules), the In context VStack's Slot gap M is left out, and the Buy Button's style alignSelf stretch is dropped (VStack stretches its children by default). The guide's pictures are docs assets (gold-coin.png, Figma's own coin, and jio-gold-logo.png); the examples pass { uri } sources that stand for the product's own picture and the brand's logo, as the ProfileCard entry does. Copy is the guide's own (Gold, 5g Gold Coin, the insured-delivery description, 995 Purity, 3% GST, Silver, 10g Silver Coin, 999, 10g Weight, Buy for ₹38,750). Left out of examples (three at most): the playground and its readout, Picture, No picture, Three stats, imageRatio 2, No chip picture, the two Text Appearance cards, Read-only, the hosts and Long stats, and the Don'ts. Not recorded: style (the building rules keep style off Coin components); the modes the evidence says change the chip or do nothing (Page type, Avatar Size, Context2, Context4, Context, Badge Size, context 10, Profile Card Appearance), which its Limits keep out of the guide; the picture's hidden-from-screen-readers detail (the guide doesn't state it) and dark mode (the pack's rules); Biscuit's handwritten ProductOverview.mdx (not for a buy button on the summary, or a campaign photo), since the guide doesn't say it and that page isn't deployed, so avoidWhen holds only the guide's missing states and press. The Sources blocks that end “jfs-components”, “0.1.78”, “disableTruncation” are the note's code elements; the paragraph renders whole, so no value is missing.",
+  "useWhen": [
+    {
+      "text": "Introduce one product: its picture, a chip, its name, a line of trust, and two or three key facts.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Product Overview to introduce one product: its picture, a chip, its name, a line of trust, and two or three key facts."
+      }
+    },
+    {
+      "text": "One product, and the facts that matter.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One product, and the facts that matter."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A card that should respond to a press: Product Overview isn't pressable.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Product Overview has no states: it isn’t pressable"
+      }
+    },
+    {
+      "text": "A card that needs a selected, disabled, or loading look: Product Overview has none.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "has no selected, disabled, or loading look."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Picture",
+      "holds": "imageSource, fitted inside the card's width at 288:170.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource, fitted inside the full width at 288:170."
+      }
+    },
+    {
+      "part": "Chip",
+      "holds": "A ProductLabel from label, with labelImageSource as its picture.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A ProductLabel from label, with labelImageSource as its picture."
+      }
+    },
+    {
+      "part": "Name",
+      "holds": "productName, 26 px, centred: the page's heading.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "productName, 26 px, centred: the page’s heading."
+      }
+    },
+    {
+      "part": "Description",
+      "holds": "description, 14 px, centred.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "description, 14 px, centred"
+      }
+    },
+    {
+      "part": "Stats",
+      "holds": "stats: a value over a label each, in equal columns.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "stats: a value over a label each, in equal columns."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A white panel, 24 px padding, no corners or border.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white panel, 24 px padding, no corners or border."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put the product's action on the screen next to the overview, not inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Put the product’s action on the screen next to it, not inside it."
+      }
+    },
+    {
+      "text": "On a product page, the Buy button goes under the overview and belongs to the screen, because the card has no action of its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The overview explains the product; the Buy button under it belongs to the screen, because the card has no action of its own."
+      }
+    },
+    {
+      "text": "The card fills its host's width; Figma draws it at 343 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills its host’s width; Figma draws it at 343 px."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "imageSource adds the product's picture at the top, fitted inside the card's width at 288:170 unless imageRatio says otherwise; without it the card starts at the chip.",
+      "strength": "recommended",
+      "target": "imageSource",
+      "from": {
+        "section": "configuration",
+        "quote": "imageSource adds the product’s picture at the top, fitted inside the full width at 288:170 unless imageRatio says otherwise; without it the card starts at the chip."
+      }
+    },
+    {
+      "text": "imageRatio 2 gives the picture a wider frame, so a smaller coin.",
+      "strength": "recommended",
+      "target": "imageRatio",
+      "value": "2",
+      "from": {
+        "section": "configuration",
+        "quote": "A wider frame, so a smaller coin."
+      }
+    },
+    {
+      "text": "labelImageSource puts a small round picture in the chip.",
+      "strength": "recommended",
+      "target": "labelImageSource",
+      "from": {
+        "section": "configuration",
+        "quote": "labelImageSource puts a small round picture in the chip."
+      }
+    },
+    {
+      "text": "Without labelImageSource, the chip shows only its label.",
+      "strength": "recommended",
+      "target": "labelImageSource",
+      "from": {
+        "section": "configuration",
+        "quote": "The chip shows only its label."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" says what the chip shows without labelImageSource in any use: its label, with no picture. It describes the component, so it is read as recommended, not as a constraint."
+      }
+    },
+    {
+      "text": "stats takes any number of facts in equal columns, and [] removes the row.",
+      "strength": "recommended",
+      "target": "stats",
+      "from": {
+        "section": "configuration",
+        "quote": "stats takes any number of facts in equal columns, and [] removes the row."
+      }
+    },
+    {
+      "text": "children adds your own content between the description and the stats, with the card's modes.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "children adds your own content between the description and the stats, with the card’s modes."
+      }
+    },
+    {
+      "text": "Don't put a Button in children: it lands between the description and the facts. Keep the action on the screen, below the overview.",
+      "strength": "discouraged",
+      "target": "children",
+      "from": {
+        "section": "doDont",
+        "quote": "It lands between the description and the facts."
+      }
+    },
+    {
+      "text": "Text Appearance colours the name and the stat labels.",
+      "strength": "recommended",
+      "target": "Text Appearance",
+      "from": {
+        "section": "configuration",
+        "quote": "Text Appearance colours the name and the stat labels."
+      }
+    },
+    {
+      "text": "Text Appearance Primary gives a gold name and stat labels.",
+      "strength": "recommended",
+      "target": "Text Appearance",
+      "value": "Primary",
+      "from": {
+        "section": "configuration",
+        "quote": "A gold name and stat labels."
+      }
+    },
+    {
+      "text": "Text Appearance Secondary gives a purple name and stat labels.",
+      "strength": "recommended",
+      "target": "Text Appearance",
+      "value": "Secondary",
+      "from": {
+        "section": "configuration",
+        "quote": "A purple name and stat labels."
+      }
+    },
+    {
+      "text": "Stat values and labels stay on one line and end in … unless disableTruncation is set; with it, the stats wrap instead.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "from": {
+        "section": "sizing",
+        "quote": "Stat values and labels stay on one line and end in … unless disableTruncation is set."
+      }
+    },
+    {
+      "text": "disableTruncation true lets the product name and description wrap instead of ending in …; by default the name is one line and the description at most two.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "value": "true",
+      "from": {
+        "fact": "props:disableTruncation"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make productName the product with its size, such as 5g Gold Coin.",
+        "strength": "recommended",
+        "target": "productName",
+        "from": {
+          "section": "content",
+          "quote": "Make productName the product with its size, such as 5g Gold Coin"
+        }
+      },
+      {
+        "text": "Make the chip's label the metal or brand, not the product again.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "the chip’s label the metal or brand, not the product again."
+        }
+      },
+      {
+        "text": "Don't repeat the product's name in the chip.",
+        "strength": "discouraged",
+        "target": "label",
+        "from": {
+          "section": "doDont",
+          "quote": "The chip repeats 5g Gold Coin."
+        }
+      },
+      {
+        "text": "Write the description as a sentence or two on why to trust the product.",
+        "strength": "recommended",
+        "target": "description",
+        "from": {
+          "section": "content",
+          "quote": "The description is a sentence or two on why to trust it."
+        }
+      },
+      {
+        "text": "A stat value is the figure, such as 995 or 3%, and its label a word or two, such as Purity or GST.",
+        "strength": "recommended",
+        "target": "stats",
+        "from": {
+          "section": "content",
+          "quote": "A stat value is the figure, such as 995 or 3%, and its label a word or two, such as Purity or GST."
+        }
+      },
+      {
+        "text": "Don't put a sentence in a stat: stats stay on one line, so it's cut short.",
+        "strength": "discouraged",
+        "target": "stats",
+        "from": {
+          "section": "doDont",
+          "quote": "Stats stay on one line, so it’s cut short."
+        }
+      },
+      {
+        "text": "Set productName yourself: left out, the card shows the sample “0.5g Gold Coin”.",
+        "strength": "required",
+        "target": "productName",
+        "from": {
+          "fact": "props:productName"
+        }
+      },
+      {
+        "text": "Set description yourself: left out, the card shows the sample “Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.”",
+        "strength": "required",
+        "target": "description",
+        "from": {
+          "fact": "props:description"
+        }
+      },
+      {
+        "text": "Pass your own stats, or [] to remove the row: left out, the card shows two sample stats, 995 Purity and 3% GST.",
+        "strength": "recommended",
+        "target": "stats",
+        "from": {
+          "section": "evidence",
+          "quote": "`stats` (995 Purity, 3% GST; `[]` removes the row)"
+        },
+        "checkedOn": "2026-10-20",
+        "checkedVersion": "0.1.78-c7d3348"
+      },
+      {
+        "text": "Set label to the product's metal or brand: left out, the chip shows “Gold”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "fact": "props:label"
+        }
+      }
+    ],
+    "good": [
+      "Gold",
+      "5g Gold Coin",
+      "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+      "995",
+      "Purity",
+      "3%",
+      "GST",
+      "Silver",
+      "10g Silver Coin",
+      "Insured delivery to your door, with a purity certificate.",
+      "999",
+      "10g",
+      "Weight"
+    ],
+    "bad": [
+      "Insured from our vault to you"
+    ]
+  },
+  "states": [
+    {
+      "state": "Read-only",
+      "when": "Always: Product Overview has no states, isn't pressable, and nothing on the card responds to a press.",
+      "from": {
+        "section": "states",
+        "quote": "Product Overview has no states: it isn’t pressable"
+      }
+    },
+    {
+      "state": "Selected, disabled, loading",
+      "when": "Not available: it has no selected, disabled, or loading look.",
+      "from": {
+        "section": "states",
+        "quote": "has no selected, disabled, or loading look."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "productName is the page's heading.",
+      "strength": "recommended",
+      "target": "productName",
+      "from": {
+        "section": "anatomy",
+        "quote": "productName, 26 px, centred: the page’s heading."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Figures in stats",
+      "dont": "A sentence in a stat",
+      "why": "Stats stay on one line, so it’s cut short.",
+      "from": {
+        "section": "doDont",
+        "quote": "A number and a word or two each."
+      }
+    },
+    {
+      "do": "The metal in the chip",
+      "dont": "The name twice",
+      "why": "The chip repeats 5g Gold Coin.",
+      "from": {
+        "section": "doDont",
+        "quote": "Gold, then the product’s name."
+      }
+    },
+    {
+      "do": "The action under the card",
+      "dont": "A Button in children",
+      "why": "It lands between the description and the facts.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep Buy on the screen, below the overview."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A gold coin's product page, the guide's In context: the overview explains the product, and the Buy button under it belongs to the screen, because the card has no action of its own; Buy opens the screen's own checkout. The image URIs stand for the product's own picture and the brand's logo.",
+      "jsx": "<VStack>\n  <ProductOverview\n    imageSource={{ uri: 'https://example.com/gold-coin.png' }}\n    labelImageSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n    label=\"Gold\"\n    productName=\"5g Gold Coin\"\n    description=\"Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.\"\n    stats={[\n      { value: '995', label: 'Purity' },\n      { value: '3%', label: 'GST' },\n    ]}\n  />\n  <Button label=\"Buy for ₹38,750\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The overview explains the product; the Buy button under it belongs to the screen, because the card has no action of its own."
+      }
+    },
+    {
+      "purpose": "A silver coin, the guide's Content example: Silver in the chip, the size in the name, and three figures. With no imageSource the card starts at the chip, and with no labelImageSource the chip shows only its label.",
+      "jsx": "<ProductOverview\n  label=\"Silver\"\n  productName=\"10g Silver Coin\"\n  description=\"Insured delivery to your door, with a purity certificate.\"\n  stats={[\n    { value: '999', label: 'Purity' },\n    { value: '3%', label: 'GST' },\n    { value: '10g', label: 'Weight' },\n  ]}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Silver in the chip, three figures."
+      }
+    },
+    {
+      "purpose": "No stats: stats={[]} removes the row, leaving the name and description.",
+      "jsx": "<ProductOverview\n  imageSource={{ uri: 'https://example.com/gold-coin.png' }}\n  labelImageSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  label=\"Gold\"\n  productName=\"5g Gold Coin\"\n  description=\"Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.\"\n  stats={[]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "stats takes any number of facts in equal columns, and [] removes the row."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Text Appearance",
+      "description": "Colours the product name and the stat labels: Primary gold, Secondary purple (#5d00b5), Tertiary blue, and Success, Warning and Error. It doesn't colour the description or the stat values.",
+      "quote": "Text Appearance colours the name and the stat labels (Primary gold, Secondary purple `#5d00b5`, Tertiary blue, Success, Warning, Error); not the description or stat values.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "productName",
+      "description": "The name is a header (accessibilityRole header; an h1 on the web), centred.",
+      "quote": "Name: `accessibilityRole=\"header\"` (an `h1` on the web), centred",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "label",
+      "description": "The chip always shows; label defaults to “Gold”.",
+      "quote": "`label` (\"Gold\"; the chip always shows)",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "stats",
+      "description": "Each stat is an equal column (flex 1): a 20 px heavy value over a 12 px label, each on one line ending in … unless disableTruncation is set.",
+      "quote": "Stats: each `flex: 1` (equal columns), value 20/900 over label 12/400, one line each with … unless `disableTruncation`",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The name's line is 32 px where Figma's is 26, and a stat value's 24 where Figma's is 20, so the card is taller than Figma's 396 px (Component Bug #355).",
+      "quote": "Name line 32 (Figma 26) and stat value line 24 (Figma 20): 409 vs 396.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Left out, imageSource and labelImageSource give no picture and no chip picture, where Figma's component shows the coin and the Jio dot.",
+      "quote": "Component default has no picture (Figma shows the coin) and no chip picture (Figma shows the Jio dot).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Figma's Product Overview has no properties: the picture, chip, text, and two stats are layers there.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Product Overview has no properties; the picture, chip, text, and two stats are layers there"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Figma has no children, imageRatio or disableTruncation, and its frame holds a fixed two stats; the package takes any number of stats.",
+      "quote": "Figma has no `children`, `imageRatio` or `disableTruncation` and a fixed two-stat frame; the package takes any number of stats.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The published Storybook is older than the installed package and still shows the older generated page (Component Bug #355).",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook is older than the installed package and still shows the older generated page (all reported)."
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ]
+}

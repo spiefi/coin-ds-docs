@@ -1,0 +1,669 @@
+{
+  "schemaVersion": 1,
+  "id": "AppBar",
+  "slug": "appbar",
+  "category": "navigation",
+  "tags": [
+    "header",
+    "top bar",
+    "navigation bar",
+    "nav bar",
+    "toolbar",
+    "title bar"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T03:24:15Z",
+    "flags": [
+      {
+        "field": "/facts/props/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/3",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/5",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/modes/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/3",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/10",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Keep page identity, navigation and a few relevant actions together at the top of a view.",
+  "useWhen": [
+    {
+      "text": "Keep page identity, navigation and a few relevant actions together at the top of a view.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Keep page identity, navigation and a few relevant actions together at the top of a view."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Leading",
+      "holds": "The leadingSlot: back or a product mark, such as JioDot, that establishes where the page sits in the flow.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Back or a product mark establishes where the page sits in the flow."
+      }
+    },
+    {
+      "part": "Middle",
+      "holds": "The middleSlot: on a sub page, the title, centered inside the 192px middle slot.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The SubPage title stays centered inside the 192px middle slot."
+      }
+    },
+    {
+      "part": "Actions",
+      "holds": "The actionsSlot: a small set of public actions that support the current page.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use a small set of public actions that support the current page."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "leadingSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "middleSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "actionsSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the App Bar at the top of a view.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "at the top of a view"
+      }
+    },
+    {
+      "text": "The host sets the available width; AppBar derives its height from its padding and children.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "AppBar derives its height from its public padding and children."
+      }
+    },
+    {
+      "text": "At up to 360px of content width, one focused action leaves room; longer titles or extra actions compete with the side slots.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "At up to 360px of content width, one focused action leaves room; longer titles or extra actions compete with the side slots."
+      },
+      "target": "actionsSlot"
+    },
+    {
+      "text": "Let the product flow own navigation state: AppBar presents the current destination and invokes the child actions the flow supplies.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The product flow owns navigation state."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Choose the page relationship first: the main page type gives a view its identity.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "MainPage gives a view its identity."
+      },
+      "target": "type",
+      "value": "MainPage"
+    },
+    {
+      "text": "Use the sub page type for a child destination: it supplies a back relationship and centers its title independently from the side slots.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "SubPage supplies a back relationship and centers its title independently from the side slots."
+      },
+      "target": "type",
+      "value": "SubPage"
+    },
+    {
+      "text": "Do not give a detail view the main page identity: JioDot and an empty middle slot describe a top-level destination, not a child page.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "JioDot and an empty middle slot describe a top-level destination, not a child page."
+      },
+      "target": "type",
+      "value": "MainPage"
+    },
+    {
+      "text": "For a main page, the published story pairs JioDot with low-emphasis add and Avatar actions and leaves the middle slot empty.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The published MainPage story pairs JioDot with low-emphasis add and Avatar actions and leaves the middle slot empty."
+      },
+      "target": "leadingSlot"
+    },
+    {
+      "text": "A main page has no default leading node: pass JioDot, or another mark, in leadingSlot.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "leadingSlot"
+    },
+    {
+      "text": "On a sub page, supply an accessible back action: an IconButton with a Go back label in leadingSlot, so the leading action has a clear accessible name.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The guide supplies a public IconButton with a Go back label so the leading action has a clear accessible name."
+      },
+      "target": "leadingSlot"
+    },
+    {
+      "text": "The sub page middle slot is 192 px wide by default; middleSlotWidth changes it and has no effect on a main page.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "middleSlotWidth"
+    },
+    {
+      "text": "Keep actions focused: one low-emphasis action leaves the destination and the next step easy to scan.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "One low-emphasis action leaves the destination and the next step easy to scan."
+      },
+      "target": "actionsSlot"
+    },
+    {
+      "text": "Do not overcrowd the actions slot: every extra control competes with the few actions that support the current task.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Every extra control competes with the few actions that support the current task."
+      },
+      "target": "actionsSlot"
+    },
+    {
+      "text": "Configure the bar type and slots, then configure availability on the child action that needs it: AppBar owns the arrangement, and its IconButton children own enabled and disabled feedback.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Configure the bar type and slots, then configure availability on the public child action that needs it."
+      }
+    },
+    {
+      "text": "Set modes on AppBar: it resolves its own modes with Context2 AppBar and cascades the result to its direct slot children.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "AppBar resolves its own modes with `Context2=AppBar` and cascades the resulting mode object to direct slot children."
+      },
+      "target": "modes"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Use the bar to orient people. Keep its title short and its actions focused.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Use the bar to orient people. Keep its title short and its actions focused."
+        }
+      },
+      {
+        "text": "Keep the title short: use the page name people need to recognize, then move supporting detail into the page body.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the page name people need to recognize, then move supporting detail into the page body."
+        },
+        "target": "middleSlot"
+      },
+      {
+        "text": "Do not put the page brief inside the bar: the centered slot clips extra words when a title carries the whole page brief.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The centered slot clips extra words when a title carries the whole page brief."
+        },
+        "target": "middleSlot"
+      },
+      {
+        "text": "Show only the few actions that help someone complete the current task.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Show only the few actions that help someone complete the current task."
+        },
+        "target": "actionsSlot"
+      },
+      {
+        "text": "Each action should support the page people are on and remain understandable from its accessible label.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Each action should support the page they are on and remain understandable from its accessible label."
+        },
+        "target": "actionsSlot"
+      }
+    ],
+    "good": [
+      "Bills",
+      "Payments",
+      "Payment details",
+      "Overview",
+      "Go back"
+    ],
+    "bad": [
+      "Your complete investment dashboard"
+    ]
+  },
+  "states": [
+    {
+      "state": "Enabled actions",
+      "when": "The page has a useful next action: its IconButton in the actions slot is enabled.",
+      "from": {
+        "section": "states",
+        "quote": "Use the actions slot when the page has a useful next action."
+      }
+    },
+    {
+      "state": "Disabled child",
+      "when": "A child action is temporarily unavailable: disable that child IconButton.",
+      "from": {
+        "section": "states",
+        "quote": "Disable a child IconButton when its action is temporarily unavailable."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On a sub page, supply a named back action in leadingSlot, such as an IconButton with accessibilityLabel “Go back”: the package default back arrow has no accessible name.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "the guide also supplies a named public back action because the package default has no accessible name."
+      },
+      "target": "leadingSlot"
+    },
+    {
+      "text": "Name icon actions with the IconButton accessibilityLabel so icon-only controls remain discoverable.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Use the public IconButton accessibilityLabel so icon-only controls remain discoverable."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the destination concise",
+      "dont": "Put the page brief inside the bar",
+      "why": "The centered slot clips extra words when a title carries the whole page brief.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the destination concise"
+      }
+    },
+    {
+      "do": "Keep actions focused",
+      "dont": "Overcrowd the actions slot",
+      "why": "Every extra control competes with the few actions that support the current task.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep actions focused"
+      }
+    },
+    {
+      "do": "Use SubPage for a child destination",
+      "dont": "Use MainPage identity for a detail view",
+      "why": "JioDot and an empty middle slot describe a top-level destination, not a child page.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use SubPage for a child destination"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A child destination: a named Go back action, a short centered title, and one low-emphasis action.",
+      "jsx": "<AppBar\n  type=\"SubPage\"\n  modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage' }}\n  leadingSlot={\n    <IconButton\n      iconName=\"ic_arrow_back\"\n      accessibilityLabel=\"Go back\"\n      onPress={() => {}}\n      modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage' }}\n    />\n  }\n  middleSlot={\n    <Text numberOfLines={1} modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage' }}>\n      Payment details\n    </Text>\n  }\n  actionsSlot={\n    <IconButton\n      iconName=\"ic_more_horizontal\"\n      accessibilityLabel=\"More options\"\n      onPress={() => {}}\n      modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage', Emphasis: 'Low' }}\n    />\n  }\n/>",
+      "from": {
+        "section": "doDont",
+        "quote": "The supplied Go back action makes the relationship to the parent page explicit."
+      }
+    },
+    {
+      "purpose": "A top-level destination: JioDot in the leading slot, low-emphasis add and Avatar actions, and an empty middle slot.",
+      "jsx": "<AppBar\n  type=\"MainPage\"\n  modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'MainPage' }}\n  leadingSlot={<JioDot modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'MainPage' }} />}\n  actionsSlot={[\n    <IconButton\n      key=\"add\"\n      iconName=\"ic_add\"\n      accessibilityLabel=\"Add item\"\n      onPress={() => {}}\n      modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'MainPage', Emphasis: 'Low' }}\n    />,\n    <Avatar key=\"avatar\" modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'MainPage' }} />,\n  ]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The published MainPage story pairs JioDot with low-emphasis add and Avatar actions and leaves the middle slot empty."
+      }
+    },
+    {
+      "purpose": "A child action that is temporarily unavailable, disabled on the IconButton itself.",
+      "jsx": "<AppBar\n  type=\"SubPage\"\n  modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage' }}\n  leadingSlot={\n    <IconButton\n      iconName=\"ic_arrow_back\"\n      accessibilityLabel=\"Go back\"\n      onPress={() => {}}\n      modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage' }}\n    />\n  }\n  middleSlot={\n    <Text numberOfLines={1} modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage' }}>\n      Bills\n    </Text>\n  }\n  actionsSlot={\n    <IconButton\n      iconName=\"ic_more_horizontal\"\n      accessibilityLabel=\"More options\"\n      disabled\n      onPress={() => {}}\n      modes={{ 'Color Mode': 'Light', Context2: 'AppBar', 'Page type': 'SubPage', Emphasis: 'Low' }}\n    />\n  }\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Disable a child IconButton when its action is temporarily unavailable."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "type",
+        "type": "AppBarType",
+        "required": false,
+        "source": "evidence",
+        "values": [
+          "MainPage",
+          "SubPage"
+        ],
+        "default": "MainPage",
+        "description": "Figma's main page variant includes the JioDot mark; the package makes JioDot opt-in through leadingSlot. Declared: Type of the App Bar. - `MainPage`: Taller bar; no default leading (pass `JioDot` or your logo via `leadingSlot`). - `SubPage`: Shorter bar with default back arrow and centered middle slot. Default \"MainPage\", from the component source.",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "name": "leadingSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "On a sub page, omitting leadingSlot gives a default back arrow whose button has no accessible name; a main page has no default leading node. Declared: Slot for the leading element. Defaults: - MainPage: none (opt in with `<JioDot />` or any custom node) - SubPage: Back `NavArrow`.",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "name": "middleSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Slot for the middle content. Often used for a page title on SubPage. On `SubPage` this is rendered as an absolutely-centered box (Figma \"slot wrap\"): it stays centered regardless of leading/actions width, and content fills/shrinks within {@link middleSlotWidth}."
+      },
+      {
+        "name": "middleSlotWidth",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 192,
+        "description": "Defaults to 192; the sub page middle is centered in an absolute overlay with 21px horizontal inner padding and clips overflow. Declared: Width of the centered `SubPage` middle slot, in px. Defaults to the Figma value (192). Has no effect on `MainPage`. Default 192, from the component source.",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "name": "actionsSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Slot for the actions on the right (IconButtons, Avatar, etc.)."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "AppBar resolves its own modes with Context2=AppBar and cascades the resulting mode object to its direct slot children. Declared: Token modes to override.",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "name": "onLeadingPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback for the default SubPage leading back arrow."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityRole' | 'accessibilityLabel' | 'accessibilityHint'>",
+        "type": "Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityRole' | 'accessibilityLabel' | 'accessibilityHint'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "Both Figma variants own Context2=AppBar; AppBar resolves its own modes with it. Declared: A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "name": "context5",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Fullscreen Modal",
+          "Mode 1"
+        ],
+        "description": "A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "List Item Style",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Boxed",
+          "Minimal"
+        ],
+        "description": "A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "NavArrow Direction",
+        "type": "mode collection",
+        "values": [
+          "Left&Right",
+          "Top&Bottom"
+        ],
+        "description": "A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Left&Right"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection AppBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      }
+    ],
+    "slots": [
+      {
+        "name": "leadingSlot",
+        "type": "React.ReactNode",
+        "description": "Slot for the leading element. Defaults: - MainPage: none (opt in with `<JioDot />` or any custom node) - SubPage: Back `NavArrow`",
+        "source": "types"
+      },
+      {
+        "name": "middleSlot",
+        "type": "React.ReactNode",
+        "description": "Slot for the middle content. Often used for a page title on SubPage. On `SubPage` this is rendered as an absolutely-centered box (Figma \"slot wrap\"): it stays centered regardless of leading/actions width, and content fills/shrinks within {@link middleSlotWidth}.",
+        "source": "types"
+      },
+      {
+        "name": "actionsSlot",
+        "type": "React.ReactNode",
+        "description": "Slot for the actions on the right (IconButtons, Avatar, etc.).",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onLeadingPress",
+        "type": "() => void",
+        "description": "Callback for the default SubPage leading back arrow.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The default sub page back arrow has no accessible name: its button passes no accessibilityLabel.",
+        "source": "evidence",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "text": "Figma's main page shows the JioDot mark; the package renders none unless leadingSlot is given JioDot.",
+        "source": "evidence",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "text": "Figma's fixed reference heights (main page 68 px, sub page 52 px) are not fixed in code: the bar's height comes from its padding plus its children.",
+        "source": "evidence",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "text": "A long sub page title is constrained by the centered 192px middle box and clips or truncates.",
+        "source": "evidence",
+        "checkedOn": "2026-09-21"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=appbar",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1070-18571",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-appbar--docs"
+  }
+}
