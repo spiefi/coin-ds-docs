@@ -1,0 +1,297 @@
+{
+  "slug": "accountcard",
+  "label": "Account Card",
+  "guideCommit": "207d6e70d4428d9181d3b194e4d4aeb662d02662",
+  "files": [
+    "src/guides/accountcard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/accountcard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T00:45:24.246Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "account tile",
+    "linked accounts",
+    "add account",
+    "bank account",
+    "account picker"
+  ],
+  "title": "Account Card",
+  "summary": "Use an Account Card for one linked account in a row of accounts, or as the tile that adds another.",
+  "corePrinciple": "One account per tile, and one tile to add another.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4271-3515",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-accountcard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Art, a name, and a masked number",
+      "description": "A connected tile shows the account's art above its name and masked number. The add tile swaps the art for a lavender field with a plus and drops the number.",
+      "blocks": [
+        "Connected",
+        "Add",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Card art",
+        "imageSource, cropped to a 125 : 82 box; cardSlot can replace it.",
+        "Title",
+        "The account name, bold, on one line.",
+        "Subtitle",
+        "The masked number; connected tiles only.",
+        "Add field",
+        "A lavender field with a plus: the tile that links another account."
+      ],
+      "specimen": [
+        "Joint account",
+        "**** 4821",
+        "Add account"
+      ],
+      "anatomy": [
+        {
+          "part": "Card art",
+          "note": "imageSource, cropped to a 125 : 82 box; cardSlot can replace it."
+        },
+        {
+          "part": "Title",
+          "note": "The account name, bold, on one line."
+        },
+        {
+          "part": "Subtitle",
+          "note": "The masked number; connected tiles only."
+        },
+        {
+          "part": "Add field",
+          "note": "A lavender field with a plus: the tile that links another account."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Connected or add",
+      "description": "state picks the tile: connected shows art, a name, and a masked number; add shows a lavender field with a plus and a title, with no number. imageRatio sets the art's shape, 125 : 82 by default, and cardSlot can replace the art or the field with your own content. Modes only recolour the add tile's plus.",
+      "blocks": [
+        "Connected",
+        "Art, a name, and a masked number.",
+        "Add",
+        "A field with a plus, then the action.",
+        "Square art",
+        "imageRatio 1 makes the art square."
+      ],
+      "specimen": [
+        "Joint account",
+        "**** 4821",
+        "Add account"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Connected",
+          "description": "Art, a name, and a masked number."
+        },
+        {
+          "title": "Add",
+          "description": "A field with a plus, then the action."
+        },
+        {
+          "title": "Square art",
+          "description": "imageRatio 1 makes the art square."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "A preview or a button",
+      "description": "Without onPress the tile is a preview, named by its title. onPress makes the whole tile one button that fades to 70% while pressed. disabled dims it to half and, on a pressable tile, stops presses. It has no selected state.",
+      "blocks": [
+        "Pressable",
+        "The whole tile is one button.",
+        "Disabled",
+        "Dimmed to half; it doesn't press."
+      ],
+      "specimen": [
+        "Joint account",
+        "**** 4821"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Pressable",
+          "description": "The whole tile is one button."
+        },
+        {
+          "title": "Disabled",
+          "description": "Dimmed to half; it doesn't press."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "As wide as where you put it",
+      "description": "It fills its host's width, so set the width where you place it: Figma's tiles are 125 px, as in Storybook and the Card Accounts carousel. The art keeps its ratio, with 8 px to the text, so at 125 px a connected tile is 122 px tall and an add tile 106.",
+      "blocks": [
+        "Connected",
+        "Add",
+        "125 × 122",
+        "125 × 106",
+        "8"
+      ],
+      "specimen": [
+        "Joint account",
+        "**** 4821",
+        "Add account"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "A name and a mask",
+      "description": "Title each tile with the account's name in a few words, such as “Joint account”: it's cut to one line. Show only the masked number, in the bank's own format. Title the add tile with its action, “Add account”, because its title is also what screen readers announce.",
+      "blocks": [
+        "One account, then the action",
+        "“Joint account” with “**** 4821”, then “Add account”."
+      ],
+      "specimen": [
+        "Joint account",
+        "**** 4821",
+        "Add account"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "One account, then the action",
+          "description": "“Joint account” with “**** 4821”, then “Add account”."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Linked accounts",
+      "description": "The Accounts screen shows each linked account as a tile, with the add tile last. Each tile's onPress is the screen's own action: open the account, or start linking a new one. For more tiles than fit, CarouselCardAccounts scrolls them.",
+      "blocks": [
+        "Nothing opened yet"
+      ],
+      "specimen": [
+        "Accounts",
+        "Linked to JioFinance",
+        "Joint account",
+        "**** 4821",
+        "Add account"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A tile people can trust",
+      "description": "Each pair shows a tile that says what it is next to one that exposes too much, says the wrong thing, or hides its plus.",
+      "blocks": [
+        "Do",
+        "Show a masked number",
+        "“**** 4821” tells two accounts apart.",
+        "Don’t",
+        "Show the full number",
+        "A preview tile exposes the whole account number.",
+        "Title the add tile with its action",
+        "“Add account” says what pressing it does.",
+        "Leave the default title",
+        "It reads “Personal account”, the code's default.",
+        "Keep the plus as it is",
+        "The default purple plus stands out on the field.",
+        "Set Emphasis High",
+        "The plus turns white and disappears on the field."
+      ],
+      "specimen": [
+        "Joint account",
+        "**** 4821",
+        "50100234564821",
+        "Add account",
+        "Personal account"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Show a masked number",
+            "caption": "“**** 4821” tells two accounts apart.",
+            "specimen": "Joint account · **** 4821"
+          },
+          "dont": {
+            "title": "Show the full number",
+            "caption": "A preview tile exposes the whole account number.",
+            "specimen": "Joint account · 50100234564821"
+          }
+        },
+        {
+          "do": {
+            "title": "Title the add tile with its action",
+            "caption": "“Add account” says what pressing it does.",
+            "specimen": "Add account"
+          },
+          "dont": {
+            "title": "Leave the default title",
+            "caption": "It reads “Personal account”, the code's default.",
+            "specimen": "Personal account"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the plus as it is",
+            "caption": "The default purple plus stands out on the field.",
+            "specimen": "Add account"
+          },
+          "dont": {
+            "title": "Set Emphasis High",
+            "caption": "The plus turns white and disappears on the field.",
+            "specimen": "Add account"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Account Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Connected",
+        "Add",
+        "Pair",
+        "From URL",
+        "Pressable",
+        "Disabled",
+        "Checked 13 October 2026",
+        "Installed jfs-components is 0.1.78 (12 October build) from the team’s private package repository. Figma’s Account Card is a component set with Connected and Add tiles, 125 px wide, and Title and Subtitle text. Its card art has rounded corners; the code doesn’t round the art, only the add field. The package ships no card art, so this page uses a photo, as Storybook’s From URL story does. Modes only recolour the add tile’s plus; the text and the lavender field don’t change. The tile ignores the theme provider, so pass modes on it. The published Storybook still shows the old page.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "slug": "otp",
+  "label": "OTP",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/otp.guide.tsx"
+  ],
+  "evidence": "docs/evidence/otp.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T00:45:27.367Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "one-time code",
+    "verification code",
+    "PIN input",
+    "passcode",
+    "OTP input"
+  ],
+  "title": "OTP",
+  "summary": "Use OTP to enter a one-time verification code, one digit per slot, with an optional resend timer.",
+  "corePrinciple": "One digit per slot. The screen checks the code; OTP only shows the result.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2759-330",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-otp--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Slots and a support line",
+      "description": "A row of slots, one per digit, over a single support line. One hidden number-pad field takes the typing; the slots only display it.",
+      "blocks": [
+        "36",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Digit",
+        "An entered digit, centred above its underline.",
+        "Underline",
+        "Lit in the brand colour when filled or active; red when invalid.",
+        "Empty slot",
+        "Waits for the next digit; its underline stays neutral.",
+        "Slot gap",
+        "A fixed 8 px between slots.",
+        "Support line",
+        "Guidance, resend timer, or error, right-aligned under the slots.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "4",
+        "8",
+        "Enter the code sent to your phone"
+      ],
+      "anatomy": [
+        {
+          "part": "Digit",
+          "note": "An entered digit, centred above its underline."
+        },
+        {
+          "part": "Underline",
+          "note": "Lit in the brand colour when filled or active; red when invalid."
+        },
+        {
+          "part": "Empty slot",
+          "note": "Waits for the next digit; its underline stays neutral."
+        },
+        {
+          "part": "Slot gap",
+          "note": "A fixed 8 px between slots."
+        },
+        {
+          "part": "Support line",
+          "note": "Guidance, resend timer, or error, right-aligned under the slots."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Length and what sits below",
+      "description": "Match the number of slots to the code the service sends. Below the slots, show guidance, a resend timer, or nothing.",
+      "blocks": [
+        "6 digits",
+        "The default, and the length most SMS codes use.",
+        "4 digits",
+        "For 4-digit codes. Slots stay 48 px, so the row is shorter, not wider-spaced.",
+        "Resend timer",
+        "A countdown replaces the support text and becomes a Resend button when it ends.",
+        "Status line",
+        "Give the line a status when it reports something; keep Neutral for instructions."
+      ],
+      "specimen": [
+        "Enter the code sent to your phone",
+        "Enter the 4-digit code",
+        "Resend OTP in 29s",
+        "Code sent"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "6 digits",
+          "description": "The default, and the length most SMS codes use."
+        },
+        {
+          "title": "4 digits",
+          "description": "For 4-digit codes. Slots stay 48 px, so the row is shorter, not wider-spaced."
+        },
+        {
+          "title": "Resend timer",
+          "description": "A countdown replaces the support text and becomes a Resend button when it ends."
+        },
+        {
+          "title": "Status line",
+          "description": "Give the line a status when it reports something; keep Neutral for instructions."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Typing, error, disabled, and resend",
+      "description": "Filled slots stay lit, and the active slot lights with a caret while focused. The other states are set by the screen.",
+      "blocks": [
+        "Typing",
+        "Click and type: filled slots stay lit; delete a digit and its slot fades back.",
+        "Invalid",
+        "Every underline turns red, and the error replaces the support text or resend timer.",
+        "Disabled",
+        "The whole field dims to 40% and takes no input, for example while the code is checked.",
+        "Ready to resend",
+        "After the countdown, a small Resend button at the right. It reads “Sending…” while the request runs, then counts down again."
+      ],
+      "specimen": [
+        "4",
+        "8",
+        "1",
+        "Enter the code sent to your phone",
+        "9",
+        "0",
+        "2",
+        "Incorrect code. Try again.",
+        "Verifying code…",
+        "Resend"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Typing",
+          "description": "Click and type: filled slots stay lit; delete a digit and its slot fades back."
+        },
+        {
+          "title": "Invalid",
+          "description": "Every underline turns red, and the error replaces the support text or resend timer."
+        },
+        {
+          "title": "Disabled",
+          "description": "The whole field dims to 40% and takes no input, for example while the code is checked."
+        },
+        {
+          "title": "Ready to resend",
+          "description": "After the countdown, a small Resend button at the right. It reads “Sending…” while the request runs, then counts down again."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Fills its container, slots up to 48 px",
+      "description": "OTP fills its container. Slots are up to 48 px wide with 8 px gaps, plus 8 px padding, so 6 digits need 344 px at full size. In a narrower container the slots shrink: 8 digits fit a 334 px phone column at about 33 px each. In a wider one, slots stay 48 px at the left.",
+      "blocks": [
+        "344 × 107",
+        "48 × 39",
+        "8"
+      ],
+      "specimen": [
+        "Enter the code sent to your phone"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Short, specific support text",
+      "description": "The support line is one short line under the slots. Say where the code went before entry, and what to do when it is wrong.",
+      "blocks": [
+        "Say where the code went",
+        "Name the channel, so people know where to look.",
+        "Say how to recover",
+        "Say what went wrong and what to do next, in one line."
+      ],
+      "specimen": [
+        "Enter the code sent to your phone",
+        "4",
+        "8",
+        "1",
+        "9",
+        "0",
+        "2",
+        "Incorrect code. Try again."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Say where the code went",
+          "description": "Name the channel, so people know where to look."
+        },
+        {
+          "title": "Say how to recover",
+          "description": "Say what went wrong and what to do next, in one line."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Verifying a phone number",
+      "description": "The screen keeps the code, checks it when the last digit is entered, and sets the error. On phones, the keyboard offers the SMS code automatically. Enter 123456 to see success, anything else to see the error.",
+      "blocks": [
+        "Waiting for the code"
+      ],
+      "specimen": [
+        "Verify your number",
+        "We sent a 6-digit code to your phone.",
+        "Resend OTP in 29s"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep entry clear",
+      "description": "Each pair shows a choice that helps people finish verification versus one that stalls them.",
+      "blocks": [
+        "Do",
+        "Match the code length",
+        "Six slots for a 6-digit code; people know when they are done.",
+        "Don’t",
+        "Add spare slots",
+        "Empty slots left after the code make people think a digit is missing.",
+        "Explain the error",
+        "The message says what went wrong and what to do.",
+        "Show red underlines alone",
+        "Without a message, people cannot tell what went wrong.",
+        "Use the resend timer",
+        "It counts down, then becomes a Resend button.",
+        "Write the timer as text",
+        "A static line never counts down or becomes tappable."
+      ],
+      "specimen": [
+        "4",
+        "8",
+        "1",
+        "9",
+        "0",
+        "2",
+        "Enter the code sent to your phone",
+        "Incorrect code. Try again.",
+        "Resend OTP in 29s",
+        "Didn’t get it? Resend in 30s"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Match the code length",
+            "caption": "Six slots for a 6-digit code; people know when they are done.",
+            "specimen": "4 · 8 · 1 · 9 · 0 · 2 · Enter the code sent to your phone"
+          },
+          "dont": {
+            "title": "Add spare slots",
+            "caption": "Empty slots left after the code make people think a digit is missing.",
+            "specimen": "4 · 8 · 1 · 9 · 0 · 2 · Enter the code sent to your phone"
+          }
+        },
+        {
+          "do": {
+            "title": "Explain the error",
+            "caption": "The message says what went wrong and what to do.",
+            "specimen": "4 · 8 · 1 · 9 · 0 · 2 · Incorrect code. Try again."
+          },
+          "dont": {
+            "title": "Show red underlines alone",
+            "caption": "Without a message, people cannot tell what went wrong.",
+            "specimen": "4 · 8 · 1 · 9 · 0 · 2"
+          }
+        },
+        {
+          "do": {
+            "title": "Use the resend timer",
+            "caption": "It counts down, then becomes a Resend button.",
+            "specimen": "Resend OTP in 29s"
+          },
+          "dont": {
+            "title": "Write the timer as text",
+            "caption": "A static line never counts down or becomes tappable.",
+            "specimen": "Didn’t get it? Resend in 30s"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public OTP contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Four digits",
+        "Invalid",
+        "Disabled",
+        "With resend countdown",
+        "Validation flow",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma and the package agree on 48 px slots and 8 px gaps, and on a right-aligned support line with a small Resend button. In code the slots shrink in a narrow container, so all of Storybook’s 4–8 digit lengths fit a phone. Since the #274 fix, longer support or error text wraps inside the field, while short text stays right-aligned. OTP has no verifying state; the screen checks the code and sets the error.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

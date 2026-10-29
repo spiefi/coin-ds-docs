@@ -1,0 +1,21 @@
+{
+  "slug": "dropdowninput",
+  "entryHash": "0a97120eec336bd0f63fd3b3ab1fae4b7f9d964e0c6e66a887af3aedfcab1d08",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "checkedAt": "2026-10-29T00:51:59Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/anatomy/0",
+      "reason": "misreads-source: The configuration section says \"Every field has a label.\" Marking the Label part alwaysPresent=false contradicts this. /configuration/0 makes the same point as \"Give every field a label.\""
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The In context section shows only \"Transfer money | From | Select an account | To | Continue\". Nothing in the guide says the screen uses a Card, that From and To share \"the same four accounts\", or that the To error reads \"Choose an account to transfer to\". The description presents these as the guide's own example."
+    }
+  ],
+  "notes": "/placementAdvice/3 adds \"as a layer over the page\". The cited anatomy sentence does not say this, but the sources section does (\"in code the list opens as a layer over the page\"), so it was not flagged. In /examples/0 errorMessage is set without isInvalid. That is consistent with the pre-continue state, but a human may want the example to show both states or to explain this."
+}

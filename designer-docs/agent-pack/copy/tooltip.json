@@ -1,0 +1,274 @@
+{
+  "slug": "tooltip",
+  "label": "Tooltip",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/tooltip.guide.tsx"
+  ],
+  "evidence": "docs/evidence/tooltip.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T00:45:25.792Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "hint",
+    "info bubble",
+    "help text",
+    "popover"
+  ],
+  "title": "Tooltip",
+  "summary": "Use a Tooltip to explain a term or icon in a short line that opens from an info button and closes with the next press.",
+  "corePrinciple": "One short explanation, on request.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=928-6036",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-tooltip--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A trigger, then a bubble over the page",
+      "description": "Only the trigger sits in the page. Pressing it opens a near-black bubble 12 px away, with 8 px corners, 12 × 8 px of padding, white 14 px text that wraps at 280 px, and a 16 × 8 px arrow pointing at the trigger. React Native draws the bubble over the page, so this diagram can't frame it; press the trigger to see it.",
+      "blocks": [
+        "Shown at 2×",
+        "1",
+        "2",
+        "Trigger",
+        "Yours: an info IconButton passed with asChild. Pressing it opens or closes the bubble.",
+        "Term",
+        "The word it explains. Keep it visible: the bubble only adds detail."
+      ],
+      "specimen": [
+        "Expense ratio"
+      ],
+      "anatomy": [
+        {
+          "part": "Trigger",
+          "note": "Yours: an info IconButton passed with asChild. Pressing it opens or closes the bubble."
+        },
+        {
+          "part": "Term",
+          "note": "The word it explains. Keep it visible: the bubble only adds detail."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Side and alignment",
+      "description": "Placement picks the side, top by default, and can line the bubble up with the trigger's start or end edge instead of its centre. When the bubble doesn't fit on that side it flips to the opposite one, and beside the trigger with no room either way it moves above or below. It always stays 8 px inside the screen.",
+      "blocks": [
+        "Above",
+        "The default: the bubble sits above, its arrow pointing down at the trigger.",
+        "Below",
+        "For triggers near the top of the screen, where there's no room above.",
+        "Start-aligned",
+        "The bubble's start edge lines up with the trigger's; the arrow still points at it.",
+        "Beside",
+        "Next to the trigger, for a row with room to its side. On a phone there rarely is, so it opens above or below instead."
+      ],
+      "specimen": [
+        "Expense ratio"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Above",
+          "description": "The default: the bubble sits above, its arrow pointing down at the trigger."
+        },
+        {
+          "title": "Below",
+          "description": "For triggers near the top of the screen, where there's no room above."
+        },
+        {
+          "title": "Start-aligned",
+          "description": "The bubble's start edge lines up with the trigger's; the arrow still points at it."
+        },
+        {
+          "title": "Beside",
+          "description": "Next to the trigger, for a row with room to its side. On a phone there rarely is, so it opens above or below instead."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Closed, open, and how it closes",
+      "description": "A press on the trigger opens it; there's no hover, focus, or timer. While it's open a clear layer covers the page: the next press anywhere, Escape on the web, or Android's back button closes it. After Escape, focus stays on the trigger. The screen can also open it itself with open and hear every close through onOpenChange.",
+      "blocks": [
+        "Opens on press",
+        "Press the i to open it; press anywhere to close it.",
+        "Opened by the screen",
+        "The screen decides when it shows, for example a first-time hint, and hears every close."
+      ],
+      "specimen": [
+        "Expense ratio",
+        "Exit load",
+        "Show hint"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Opens on press",
+          "description": "Press the i to open it; press anywhere to close it."
+        },
+        {
+          "title": "Opened by the screen",
+          "description": "The screen decides when it shows, for example a first-time hint, and hears every close."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Hugs short text, wraps at 280 px",
+      "description": "The bubble is as wide as its text up to 280 px, then wraps; padding is 12 × 8 px and text 14 px on 18 px lines. A width on the content sets it instead, like Figma's Custom Width variant.",
+      "blocks": [
+        "Short text",
+        "One line: the bubble hugs it.",
+        "Long text",
+        "Wraps at 280 px. Two or three lines is the most people will read.",
+        "Custom width",
+        "A set width of 200 px, Figma's Custom Width On: the same text wraps sooner."
+      ],
+      "specimen": [
+        "Exit load",
+        "XIRR"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short text",
+          "description": "One line: the bubble hugs it."
+        },
+        {
+          "title": "Long text",
+          "description": "Wraps at 280 px. Two or three lines is the most people will read."
+        },
+        {
+          "title": "Custom width",
+          "description": "A set width of 200 px, Figma's Custom Width On: the same text wraps sooner."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One plain explanation",
+      "description": "Explain one term in a sentence or two of plain text, and keep the term itself on the page. Plain text and Coin Text both get the white label style. A press inside it just closes it, so never put an action there.",
+      "blocks": [
+        "Explain a term",
+        "One sentence that says what NAV means, opened from the i next to it."
+      ],
+      "specimen": [
+        "NAV"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Explain a term",
+          "description": "One sentence that says what NAV means, opened from the i next to it."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Explaining fund terms",
+      "description": "A fund's details list three terms, each with an info button. Pressing one explains it above its row; the next press anywhere closes it. Each tooltip keeps its own open state.",
+      "blocks": [],
+      "specimen": [
+        "Nifty 50 Index Fund",
+        "Direct plan · Growth",
+        "NAV",
+        "₹182.40",
+        "Expense ratio",
+        "0.45%",
+        "Exit load",
+        "1%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Short, and on an info button",
+      "description": "Each pair opens a tooltip people can read at a glance next to one that buries them in text or gets in the way of an action.",
+      "blocks": [
+        "Do",
+        "Keep it to a sentence",
+        "One short line explains the term and gets out of the way.",
+        "Don’t",
+        "Write a paragraph",
+        "Four sentences fill the bubble and cover the screen behind it.",
+        "Open it from an info button",
+        "The i says there's more to read and does nothing else.",
+        "Put it on the main action",
+        "Every press on Invest now also pops a bubble over the screen."
+      ],
+      "specimen": [
+        "Expense ratio",
+        "Invest now"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep it to a sentence",
+            "caption": "One short line explains the term and gets out of the way.",
+            "specimen": "Expense ratio"
+          },
+          "dont": {
+            "title": "Write a paragraph",
+            "caption": "Four sentences fill the bubble and cover the screen behind it.",
+            "specimen": "Expense ratio"
+          }
+        },
+        {
+          "do": {
+            "title": "Open it from an info button",
+            "caption": "The i says there's more to read and does nothing else.",
+            "specimen": "Expense ratio"
+          },
+          "dont": {
+            "title": "Put it on the main action",
+            "caption": "Every press on Invest now also pops a bubble over the screen.",
+            "specimen": "Invest now"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Tooltip contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Long text",
+        "Slot",
+        "Edge detection",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78, built from Biscuit’s main at dbe0e02 (27 October) and taken from the team’s private package repository. Figma’s Tooltip is a near-black bubble with a downward arrow near its bottom left or right, in two variants, Custom Width Off (up to 280 px) and On. In code the bubble hugs its text up to 280 px or takes a set width, centres the arrow on the trigger, offers 12 placements, and stays 8 px inside the screen. It opens on press only, over the whole window, and the next press anywhere closes it. It measures its text each time it opens, so a bubble whose text has grown still sits clear of its trigger. On the web the bubble is a tooltip tied to its trigger, and Escape closes it. Storybook’s stories use a plain grey box as the trigger; these examples pass a Coin IconButton with asChild, though a Coin button nested inside the trigger opens it too.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

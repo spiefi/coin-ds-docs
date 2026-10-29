@@ -1,0 +1,394 @@
+{
+  "slug": "arealinechart",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch4, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/arealinechart.guide.tsx and src/AreaLineChartGuide.tsx) and docs/evidence/arealinechart.md at 4e470cf. The guide was built by Codex on 22 September from jfs-components 0.1.60; its Sources note was re-checked on 1 October 2026 on 0.1.78 (mirror v0.1.78, built from 5b6894b, the #166 fix), and the evidence's 0.1.78 check was run the same day on the same build, so items citing either carry that build. The evidence's Batch check (22 September, 0.1.60) is not cited: everything it says that this entry needs is restated by the 0.1.78 check or the Sources note. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Its AreaLineChart.tsx and chartMath.ts still match every guide sentence used here, read from source, not run: an in-flow probe sizes the Y-axis column to its widest tick label; the goal pin's 32 px bubble is clamped inside the plot; height is the plot only, with the x-axis row below it; the y ticks come from a nice-tick helper over the data (from 0 when every value is positive) unless yMin or yMax is given; the line segment ending at a projected point is dashed; the x-axis labels are Pressables that select their point (pressing the active label clears it) and update onActiveIndexChange; on the web hovering the plot selects the nearest point and leaving it clears the selection; the legend shows only with more than one series; series colours come from the Appearance / DataViz cycle (Primary, Secondary, …) unless a series sets its own. Not contradicted, but worth knowing and not recorded as guidance because no source states it: a supplied yMin or yMax is itself rounded out to a nice tick (yMax 725 with four ticks draws the axis to 800), so a bound is not an exact axis end. The 0.1.78 check's last-x-label overflow still follows from the source on dbe0e02 (the last point sits 8 px from the plot's right edge and its label is centred on it), so it is kept as a gap. Examples follow the building rules: no Color Mode, and no Appearance / DataViz or Emphasis / DataViz modes (the guide sets Light, Primary and High on every chart, and Primary and High are the defaults); series leave appearance to the default cycle (the guide's Primary and Secondary are the cycle's first two); no style (the guide's width 100% is the container's default) and no interactive (on by default). They keep the guide's data, labels, heights and the k unit through formatY. The In context Card drops the guide's Neutral AppearanceBrand and Light Color Mode, which the guide doesn't explain. The projected example writes the observed points as bare numbers: the guide's x strings are ignored by the package, which places points by index and labels them from xLabels. Left out of examples: the guide's readout line (“Select an x-axis point to inspect its values.”) and its “View plotted values” table, both page HTML rather than Coin; the Don't specimens (mixed units, a hidden legend, long labels); the playground. Not recorded: the composable parts (AreaLineChart.Grid, .XAxis, .YAxis, .GoalPin) and children, which the guide doesn't use or describe; numberOfTicks, contentInset, showXAxis, showYAxis and disableTruncation, which it doesn't mention; per-series colour overrides, which the building rules keep off Coin components. Content bad is the guide's long Don't labels; good is its short labels and series names.",
+  "useWhen": [
+    {
+      "text": "Show a continuous trend, such as an account balance over a few months, and make a comparison between series legible.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Show a continuous trend and make series comparison legible."
+      }
+    },
+    {
+      "text": "Put a trend beside the decision it informs, for example inside a card or an account summary.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Put a trend beside the decision it informs"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Comparing series in unrelated units, such as income in rupees and a conversion rate in percent: they don't belong on one comparison scale.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Income in rupees and conversion rate in percent do not belong on one comparison scale."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Y axis",
+      "holds": "Tick labels for one unit on a readable scale, so the direction is honest; on by default (showYAxis), formatted by formatY.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use one unit and a readable scale so the direction is honest."
+      }
+    },
+    {
+      "part": "Plot",
+      "holds": "Area and line show the trend; projected points use the dashed treatment. The plot owns pointer and x-axis selection.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Area and line show the trend; projected points use the dashed treatment. The plot owns pointer and x-axis selection."
+      }
+    },
+    {
+      "part": "Goal pin",
+      "holds": "A value bubble anchored to one data point (goalPin), to call out a meaningful point, not a decorative maximum.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use a goal pin to call out a meaningful point, not a decorative maximum."
+      }
+    },
+    {
+      "part": "X axis",
+      "holds": "Labels from xLabels, short enough to select and read at the host width; on by default (showXAxis).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep labels short enough to select and read at the host width."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Use a card or account summary to give the chart a clear unit and decision context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use a card or account summary to give the chart a clear unit and decision context."
+      }
+    },
+    {
+      "text": "A Card can provide the account label and unit context while the chart stays responsible for the plotted data.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the account label and unit context while the chart stays responsible for the plotted data."
+      }
+    },
+    {
+      "text": "The chart owns plot height while the host supplies width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The chart owns plot height while the host supplies width."
+      }
+    },
+    {
+      "text": "Use the full available width when comparing two series.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Use full available width when comparing two series."
+      }
+    },
+    {
+      "text": "On a narrow host, use shorter labels and fewer points in the same order.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "On a narrow host, use shorter labels and fewer points in the same order."
+      }
+    },
+    {
+      "text": "Reduce labels and point count before shrinking the readable chart.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Reduce labels and point count before shrinking the readable chart."
+      }
+    },
+    {
+      "text": "The Y-axis column reserves the width of its widest tick label, and the goal pin stays inside the plot.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The Y-axis column reserves the width of its widest tick label, and the goal pin stays inside the plot."
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "series is required: one entry per series, each with its data; a series' label names it in the legend and when a point is selected.",
+      "strength": "required",
+      "target": "series",
+      "from": {
+        "fact": "props:series"
+      }
+    },
+    {
+      "text": "Use the series, area/line, grid, dots, curve, and x-label choices to make a trend or comparison legible.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the series, area/line, grid, dots, curve, and x-label choices to make a trend or comparison legible."
+      }
+    },
+    {
+      "text": "A single series keeps the direction prominent.",
+      "strength": "recommended",
+      "target": "series",
+      "from": {
+        "section": "configuration",
+        "quote": "A single series keeps the direction prominent."
+      }
+    },
+    {
+      "text": "A second labelled series adds comparison without hiding the units.",
+      "strength": "recommended",
+      "target": "series",
+      "from": {
+        "section": "configuration",
+        "quote": "A second labelled series adds comparison without hiding the units."
+      }
+    },
+    {
+      "text": "Mark projected points in the data (projected on a ChartPoint) so the chart can distinguish expectation from observed values; they are drawn dashed.",
+      "strength": "recommended",
+      "target": "series",
+      "from": {
+        "section": "configuration",
+        "quote": "Mark projected points in the data so the chart can distinguish expectation from observed values."
+      }
+    },
+    {
+      "text": "With more than one series the chart shows a legend of the series names (showLegend, on by default); a single series has none.",
+      "strength": "recommended",
+      "target": "showLegend",
+      "from": {
+        "fact": "props:showLegend"
+      }
+    },
+    {
+      "text": "Use a goal pin (goalPin, anchored to a data point) to call out a meaningful point, not a decorative maximum.",
+      "strength": "recommended",
+      "target": "goalPin",
+      "from": {
+        "section": "anatomy",
+        "quote": "Use a goal pin to call out a meaningful point, not a decorative maximum."
+      }
+    },
+    {
+      "text": "Keep the x labels (xLabels) short enough to select and read at the host width.",
+      "strength": "recommended",
+      "target": "xLabels",
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep labels short enough to select and read at the host width."
+      }
+    },
+    {
+      "text": "height sets the plot's height (218 px by default); the x-axis row is added below it.",
+      "strength": "recommended",
+      "target": "height",
+      "from": {
+        "section": "sources",
+        "quote": "its plot height excludes the x-axis row"
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "text": "The chart derives a nice tick domain from its data unless y bounds (yMin, yMax) are supplied.",
+      "strength": "recommended",
+      "target": "yMax",
+      "from": {
+        "section": "sources",
+        "quote": "The chart derives a nice tick domain from its data unless y bounds are supplied"
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "text": "formatY formats the y-axis tick labels, and formatValue the values a selected point shows (it defaults to formatY), so the unit can be written on the axis.",
+      "strength": "recommended",
+      "target": "formatY",
+      "from": {
+        "fact": "props:formatValue"
+      }
+    },
+    {
+      "text": "interactive (on by default) turns on hover and press-drag selection with a tooltip.",
+      "strength": "recommended",
+      "target": "interactive",
+      "from": {
+        "fact": "props:interactive"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Short x labels, one shared unit, and a visible legend help the chart communicate before a person inspects a point.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short x labels, one shared unit, and a visible legend help the chart communicate before a person inspects a point."
+        }
+      },
+      {
+        "text": "Use the same unit and scale for series that people need to compare.",
+        "strength": "recommended",
+        "target": "series",
+        "from": {
+          "section": "content",
+          "quote": "Use the same unit and scale for series that people need to compare."
+        }
+      },
+      {
+        "text": "Name every series (its label): a legend removes ambiguity when lines overlap or cross.",
+        "strength": "recommended",
+        "target": "series",
+        "from": {
+          "section": "content",
+          "quote": "A legend removes ambiguity when lines overlap or cross."
+        }
+      },
+      {
+        "text": "Keep the visible values available in text when SVG interaction is not enough for the task.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the visible values available in text when SVG interaction is not enough for the task."
+        }
+      }
+    ],
+    "good": [
+      "Apr",
+      "May",
+      "Jun",
+      "Income",
+      "Spending",
+      "Balance"
+    ],
+    "bad": [
+      "January month-end account balance",
+      "February month-end account balance"
+    ]
+  },
+  "states": [
+    {
+      "state": "Unselected",
+      "when": "No point is active, which is how the chart starts unless activeIndex or defaultActiveIndex names one: keep the plot quiet when no point needs focus.",
+      "from": {
+        "section": "states",
+        "quote": "Keep the plot quiet when no point needs focus."
+      }
+    },
+    {
+      "state": "Selected",
+      "when": "A point is active, set by activeIndex or by pointer and x-axis selection, which update onActiveIndexChange: the chart exposes the selected point and its readable series values.",
+      "from": {
+        "section": "states",
+        "quote": "Expose a selected point and its readable series values."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the x-axis labels are pressable and keyboard reachable, so a point can be selected without a pointer; the rendered accessibility tree does not expose the full series labels, so keep the values available in text when SVG interaction is not enough for the task.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "SVG interaction is keyboard reachable through the public x-axis Pressable in RN Web, but the rendered accessibility tree does not expose full series labels"
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "text": "accessibilityLabel names the whole chart.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use one shared unit",
+      "dont": "Mix unrelated units",
+      "why": "Income in rupees and conversion rate in percent do not belong on one comparison scale.",
+      "from": {
+        "section": "doDont",
+        "quote": "Income and spending share the same scale, so their directions can be compared."
+      }
+    },
+    {
+      "do": "Label the series",
+      "dont": "Hide the legend",
+      "why": "Two lines without labels force people to guess which series they are seeing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Visible names keep overlapping lines understandable."
+      }
+    },
+    {
+      "do": "Use short readable labels",
+      "dont": "Overpack the x axis",
+      "why": "Long repeated labels crowd the axis and hide the trend.",
+      "from": {
+        "section": "doDont",
+        "quote": "A few short labels leave room for the plotted direction and selected values."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "An account balance trend, the guide's In context: a Card gives the account label and the unit context, and the chart plots three months of balance with a goal pin on the last point. The guide also keeps the plotted values in a text table beside it; that table is page HTML, not Coin.",
+      "jsx": "<Card>\n  <Card.Title>Account balance</Card.Title>\n  <Card.SupportText>Direction over the last three months</Card.SupportText>\n  <AreaLineChart\n    series={[{ key: 'balance', label: 'Balance', data: [620, 590, 725] }]}\n    xLabels={['Apr', 'May', 'Jun']}\n    height={168}\n    goalPin={{ value: '725k', atIndex: 2 }}\n    formatY={(value) => `${value}k`}\n    accessibilityLabel=\"Account balance\"\n  />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the account label and unit context while the chart stays responsible for the plotted data."
+      }
+    },
+    {
+      "purpose": "Series comparison with a point selected, the guide's States: income and spending in the same unit over six months, so two series get the legend automatically. The screen keeps the active index, and the chart shows that point's series values (here February, Income 14k and Spending 8k); pressing an x-axis label or the plot reports the new index through onActiveIndexChange. With no activeIndex the plot stays quiet.",
+      "jsx": "<AreaLineChart\n  series={[\n    { key: 'income', label: 'Income', data: [1, 14, 12, 22, 33, 45] },\n    { key: 'spending', label: 'Spending', data: [1, 8, 9, 14, 22, 30] },\n  ]}\n  xLabels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']}\n  showDots\n  activeIndex={1}\n  onActiveIndexChange={() => {}}\n  formatY={(value) => `${value}k`}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Expose a selected point and its readable series values."
+      }
+    },
+    {
+      "purpose": "A projected tail: three observed months and two projected ones, marked projected in the data so their segments are dashed; the guide turns the area off and shows dots for this one.",
+      "jsx": "<AreaLineChart\n  series={[\n    {\n      key: 'balance',\n      label: 'Balance',\n      showArea: false,\n      data: [22, 28, 31, { y: 36, projected: true }, { y: 41, projected: true }],\n    },\n  ]}\n  xLabels={['Apr', 'May', 'Jun', 'Jul', 'Aug']}\n  showDots\n  goalPin={{ value: '31k', atIndex: 2 }}\n  formatY={(value) => `${value}k`}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Mark projected points in the data so the chart can distinguish expectation from observed values."
+      }
+    }
+  ],
+  "evidenceFacts": [],
+  "gaps": [
+    {
+      "text": "In a 320 px host the last x-axis label extends about 3 px past the chart's right edge.",
+      "quote": "the last x-axis label (\"Jun\") still extends about 3 px past the right edge in that host.",
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    }
+  ]
+}

@@ -1,0 +1,441 @@
+{
+  "slug": "dropdowninput",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch4, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/dropdowninput.md at 4e470cf. The guide was written on 28 September on 0.1.60 (0.1.77 in the board note) and its Sources note was re-checked on 2 October on 0.1.78 (Biscuit's main at 3795b4c, the #173 fix; #173 is Done), so items citing it carry that build. The evidence's Checked, Contract, Rendered and Limits sections describe 0.1.60 and are out of date where its later 0.1.78 and 3795b4c checks say so: the safe-area crash, the menu and menuitem roles, the missing arrow keys, the hidden “Close options” backdrop, the missing aria-invalid, aria-required and aria-disabled, and the missing focus ring are all fixed. None of those 0.1.60 sentences is used here. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Its DropdownInput.tsx and Dropdown.tsx still match every guide sentence used here, read from source, not run: the field reads SafeAreaInsetsContext and falls back to zero insets, so it renders with or without a provider; on the web the trigger is a combobox with aria-haspopup=listbox, the popup is a listbox of options with aria-selected on the chosen one, focus lands on the listbox when it opens, and a document key listener moves through the options with the arrow keys and chooses with Enter or Space; aria-invalid and aria-required are set, a disabled field gets tabIndex -1 and Pressable's disabled, and focus draws a 2 px ring; the wrapper is 100% wide; the label is followed by “ *” when isRequired; isInvalid sets the FormField States mode to Error and errorMessage replaces supportText; isDisabled sets 50% opacity and blocks presses; isReadOnly sets the Read Only state and does not open; the list is a Modal positioned below the field (placement bottom by default, flipping when there isn't room), matches the field's width by default (matchTriggerWidth) and scrolls past menuMaxHeight 240 (roughly five items); the chevron flips up while the list is open; the placeholder defaults to “Select an option”. The Sizing section says the field is 48 px tall: the row's minHeight is the 45 px line-height token with a 1.5 px border on each side. The page's own size mark at 1280 px reads 300 × 47 on dbe0e02, most likely because the browser draws the 1.5 px border at 1 px at 1× scale; the 48 px sentence is kept as the guide's figure. Examples follow the building rules: no Color Mode (the guide sets Light on every Coin component) and no other modes. They use the guide's own copy and its four accounts (Savings, Checking, Brokerage account, Recurring deposit). The In context form is the guide's TransferForm: a Card holding a title (Text), From and To fields and a Continue Button; the guide stacks them with a page div, written here as VStack. Left out of examples: a read-only field (an entry carries at most three examples), the playground's Label control and Selected readout, the In context readout line “Ready to transfer from … to …” (page copy, not Coin), the guide's Host wrapper (a docs-only width box), and the Don'ts. The open list is not shown in any example: the guide shows it only through interaction. Not recorded: style, inputStyle and menuStyle (the building rules keep style off Coin components), the ref handle, renderValue, children of DropdownItem, closeOnBackdropPress and menuOffset, which the guide does not describe. Gaps are empty: the guide's Sources lists no gap on 0.1.78, and #173's gaps are fixed.",
+  "useWhen": [
+    {
+      "text": "In a form, when people choose one option from a list of four or more.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Dropdown Input in a form when people choose one option from a list of four or more."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Two options, such as Yes or No: in a list they need an extra tap to see both answers.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Yes or No needs an extra tap to see both answers."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "Names the question the field answers (label).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the question the field answers."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "Pressable surface that opens the list; it shows the current choice and a chevron.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Pressable surface that opens the list."
+      }
+    },
+    {
+      "part": "Placeholder",
+      "holds": "Tells people what to choose until they have chosen (placeholder); the choice replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Tells people what to choose until they have chosen."
+      }
+    },
+    {
+      "part": "Chevron",
+      "holds": "Shows that the field opens a list.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows that the field opens a list."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "Explains the choice (supportText), or the error when invalid (errorMessage).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Explains the choice, or the error when invalid."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place it in a form, such as the In context transfer form, where From and To fields sit above a Continue button.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Dropdown Input in a form"
+      }
+    },
+    {
+      "text": "The field fills its container and is 48 px tall.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field fills its container and is 48 px tall."
+      }
+    },
+    {
+      "text": "The field narrows with its column; the chevron stays at the end.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field narrows with its column; the chevron stays at the end."
+      }
+    },
+    {
+      "text": "Pressing the field opens a Dropdown of the options just below it, as a layer over the page.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Pressing it opens a Dropdown of the options just below."
+      }
+    },
+    {
+      "text": "The open list matches the field’s width and scrolls after about five options.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The open list matches the field’s width and scrolls after about five options."
+      }
+    },
+    {
+      "text": "In the package the list opens below the field by default (placement bottom) and moves to the other side when there isn't room.",
+      "strength": "recommended",
+      "target": "placement",
+      "from": {
+        "fact": "props:placement"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Give every field a label.",
+      "strength": "recommended",
+      "target": "label",
+      "from": {
+        "section": "configuration",
+        "quote": "Every field has a label."
+      }
+    },
+    {
+      "text": "A label and a placeholder are the minimum for a clear field.",
+      "strength": "recommended",
+      "target": "placeholder",
+      "from": {
+        "section": "configuration",
+        "quote": "The minimum for a clear field."
+      }
+    },
+    {
+      "text": "Add support text when people need help choosing; it sits under the field.",
+      "strength": "recommended",
+      "target": "supportText",
+      "from": {
+        "section": "configuration",
+        "quote": "support text when people need help choosing."
+      }
+    },
+    {
+      "text": "Pass the options as items; the chosen option's label replaces the placeholder in the field.",
+      "strength": "recommended",
+      "target": "items",
+      "from": {
+        "section": "configuration",
+        "quote": "The choice replaces the placeholder."
+      }
+    },
+    {
+      "text": "The screen owns each value: pass value and update it in onValueChange, and check the form when people continue.",
+      "strength": "recommended",
+      "target": "value",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns each value and checks the form when people continue."
+      }
+    },
+    {
+      "text": "Leave the list closed until people press the field (open and defaultOpen are left unset).",
+      "strength": "recommended",
+      "target": "defaultOpen",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Label the question, show the choice, and open the list only when asked."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" is the guide's core principle for every Dropdown Input: the list opens when people ask for it. It is a design principle rather than a package constraint, so it stays recommended."
+      }
+    },
+    {
+      "text": "Mark a field the form needs with isRequired: an asterisk follows the label.",
+      "strength": "recommended",
+      "target": "isRequired",
+      "from": {
+        "section": "states",
+        "quote": "An asterisk follows the label."
+      }
+    },
+    {
+      "text": "When a field is invalid (isInvalid), errorMessage replaces the support text.",
+      "strength": "recommended",
+      "target": "errorMessage",
+      "from": {
+        "section": "states",
+        "quote": "Invalid replaces the support text with the error"
+      }
+    },
+    {
+      "text": "Mark an empty field invalid when people continue, and show how to fix it.",
+      "strength": "recommended",
+      "target": "isInvalid",
+      "from": {
+        "section": "inContext",
+        "quote": "It marks an empty field invalid and shows how to fix it."
+      }
+    },
+    {
+      "text": "Use isReadOnly to show a value that cannot change right now.",
+      "strength": "recommended",
+      "target": "isReadOnly",
+      "from": {
+        "section": "states",
+        "quote": "shows a value that cannot change right now."
+      }
+    },
+    {
+      "text": "It works with or without a safe-area provider at the app root.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It works with or without a SafeAreaProvider."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write the label as a noun for the thing being chosen, such as “Account” or “Transfer from”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Write the label as a noun for the thing being chosen"
+        }
+      },
+      {
+        "text": "Write the placeholder as an instruction that starts with a verb, such as “Select an account”.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "configuration",
+          "quote": "Add a placeholder that starts with a verb"
+        }
+      },
+      {
+        "text": "Write error messages as a way to fix the problem, such as “Choose an account to transfer from”.",
+        "strength": "recommended",
+        "target": "errorMessage",
+        "from": {
+          "section": "content",
+          "quote": "error messages as a way to fix the problem."
+        }
+      },
+      {
+        "text": "Do not write a vague error: “Invalid” does not say what went wrong.",
+        "strength": "discouraged",
+        "target": "errorMessage",
+        "from": {
+          "section": "doDont",
+          "quote": "“Invalid” does not say what went wrong."
+        }
+      },
+      {
+        "text": "Keep a visible label: “Account” still explains the value after a choice, while a placeholder disappears once people choose.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "doDont",
+          "quote": "“Account” still explains the value after a choice."
+        }
+      }
+    ],
+    "good": [
+      "Account",
+      "Transfer from",
+      "Select an account",
+      "Choose where to transfer funds",
+      "Choose an account to transfer from"
+    ],
+    "bad": [
+      "Invalid"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "The field shows the placeholder and a chevron; pressing it opens a Dropdown of the options just below.",
+      "from": {
+        "section": "anatomy",
+        "quote": "The field shows the current choice and a chevron. Pressing it opens a Dropdown of the options just below."
+      }
+    },
+    {
+      "state": "Chosen",
+      "when": "After a choice, the chosen option replaces the placeholder.",
+      "from": {
+        "section": "configuration",
+        "quote": "The choice replaces the placeholder."
+      }
+    },
+    {
+      "state": "Required",
+      "when": "isRequired: an asterisk follows the label.",
+      "from": {
+        "section": "states",
+        "quote": "An asterisk follows the label."
+      }
+    },
+    {
+      "state": "Invalid",
+      "when": "isInvalid: red border, tinted field, and the error (errorMessage) in place of support text.",
+      "from": {
+        "section": "states",
+        "quote": "Red border, tinted field, and the error in place of support text."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: the whole field is dimmed and does not open.",
+      "from": {
+        "section": "states",
+        "quote": "The whole field is dimmed and does not open."
+      }
+    },
+    {
+      "state": "Read-only",
+      "when": "isReadOnly: a grey field that shows the value but does not open.",
+      "from": {
+        "section": "states",
+        "quote": "A grey field that shows the value but does not open."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the field is a combobox that opens a listbox; arrow keys move through the open list and Enter chooses.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the field is a combobox that opens a listbox; arrow keys move through the open list and Enter chooses."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "The chosen option is announced as selected; invalid, required and disabled are announced; a disabled field leaves the tab order; and focus shows a ring.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The chosen option is announced as selected, invalid, required, and disabled are announced, a disabled field leaves the tab order, and focus shows a ring."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c",
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "\"required\" names one of the states the field announces (isRequired), not a constraint on the designer."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the field; without it the field is named by its label, then its placeholder.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep a visible label",
+      "dont": "Rely on the placeholder",
+      "why": "Once chosen, “Savings account” sits in the field with no question.",
+      "from": {
+        "section": "doDont",
+        "quote": "“Account” still explains the value after a choice."
+      }
+    },
+    {
+      "do": "Say how to fix an error",
+      "dont": "Write a vague error",
+      "why": "“Invalid” does not say what went wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "The message tells people what to do next."
+      }
+    },
+    {
+      "do": "Use it for longer lists",
+      "dont": "Hide two options in a list",
+      "why": "Yes or No needs an extra tap to see both answers.",
+      "from": {
+        "section": "doDont",
+        "quote": "Four or more options fit well in a list."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context: choose accounts for a transfer. A Card holds a title, a From and a To field with the same four accounts, and a Continue button. The screen owns each value (value and onValueChange); when people continue it marks an empty field invalid (isInvalid) and its errorMessage says how to fix it.",
+      "jsx": "<Card>\n  <VStack>\n    <Text text=\"Transfer money\" />\n    <DropdownInput\n      label=\"From\"\n      placeholder=\"Select an account\"\n      items={[\n        { value: 'savings', label: 'Savings account' },\n        { value: 'checking', label: 'Checking account' },\n        { value: 'brokerage', label: 'Brokerage account' },\n        { value: 'recurring', label: 'Recurring deposit' },\n      ]}\n      value={null}\n      onValueChange={() => {}}\n      errorMessage=\"Choose an account to transfer from\"\n    />\n    <DropdownInput\n      label=\"To\"\n      placeholder=\"Select an account\"\n      items={[\n        { value: 'savings', label: 'Savings account' },\n        { value: 'checking', label: 'Checking account' },\n        { value: 'brokerage', label: 'Brokerage account' },\n        { value: 'recurring', label: 'Recurring deposit' },\n      ]}\n      value={null}\n      onValueChange={() => {}}\n      errorMessage=\"Choose an account to transfer to\"\n    />\n    <Button label=\"Continue\" onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns each value and checks the form when people continue."
+      }
+    },
+    {
+      "purpose": "A label, a placeholder that starts with a verb, and support text for people who need help choosing; nothing is chosen yet.",
+      "jsx": "<DropdownInput\n  label=\"Account\"\n  placeholder=\"Select an account\"\n  supportText=\"Choose where to transfer funds\"\n  items={[\n    { value: 'savings', label: 'Savings account' },\n    { value: 'checking', label: 'Checking account' },\n    { value: 'brokerage', label: 'Brokerage account' },\n    { value: 'recurring', label: 'Recurring deposit' },\n  ]}\n  value={null}\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Extra guidance sits under the field."
+      }
+    },
+    {
+      "purpose": "Invalid: the field has no choice when people continue, so the error replaces the support text and says how to fix it.",
+      "jsx": "<DropdownInput\n  label=\"Account\"\n  placeholder=\"Select an account\"\n  items={[\n    { value: 'savings', label: 'Savings account' },\n    { value: 'checking', label: 'Checking account' },\n    { value: 'brokerage', label: 'Brokerage account' },\n    { value: 'recurring', label: 'Recurring deposit' },\n  ]}\n  value={null}\n  onValueChange={() => {}}\n  isInvalid\n  errorMessage=\"Choose an account to transfer from\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Red border, tinted field, and the error in place of support text."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "isDisabled",
+      "description": "On the web a disabled field has aria-disabled=true and tabindex=-1, so it is announced as disabled and leaves the tab order.",
+      "quote": "A disabled field has `aria-disabled=true` and `tabindex=-1`.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "gaps": []
+}
