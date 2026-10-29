@@ -1,0 +1,490 @@
+{
+  "slug": "overlay",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch2, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and its evidence at b4988c5. The guide's Sources note was checked on 23 October 2026 on the 23 October build (mirror v0.1.78-c8526ae, the #281 fix that made the dialog role and focus trap opt-in through trapFocus); the evidence's Contract was checked on 12 October on v0.1.78-636f3f5, its accessibility re-checked on a116616 (17 October) and c8526ae (23 October), and the c8526ae section replaces the older ones where they differ. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October); its Overlay.tsx and web focus trap still match the c8526ae contract (the placement styles, fill, the inert scrim without onPress, trapFocus as the only way to the dialog role, Tab and Escape handled by the newest trap only), read from source, not run. The guide names no other component to use instead, so the avoidWhen rule (stacked scrims) has no useInstead; ModalSheet is not named. The examples are the guide's own confirmation dialog (a Card holding a Title and a ButtonGroup with Pay and Cancel, the Card's 16 px margin and the Title's two lines kept) with the guide's modes except Color Mode Light: the Card's AppearanceBrand Neutral (white, the evidence's fix of the cream default after Marcin's 12 October review), the Buttons' AppearanceBrand Primary (a Card passes its modes to its children) and Cancel's Emphasis Low (the evidence: the low-emphasis way out Figma's Popup uses for Later). The first extraction dropped these for the building rules' slot defaults and Emphasis Medium; the cross-check flagged that as unsupported, and the guide decides this dialog, so the examples follow it. The docked example keeps trapFocus and the name because its content is still a dialog (the guide's Content names trapFocus for a dialog; its configuration previews leave trapFocus off because, as its Sources note says, only the In context dialog on that page uses it); the bare-scrim example leaves it off, as the package says for a scrim drawn under another surface. Not recorded as gaps: the scrim's colour being the same in every Color Mode (dark mode belongs to the brand team), and #269 and #281, both fixed (the evidence's Coin gaps list still shows #269 as To do, but its Checked and Contract sections say the re-test passed).",
+  "useWhen": [
+    {
+      "text": "Dim the screen behind a dialog, sheet or drawer, so attention goes to what sits above it.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Overlay to dim the screen behind a dialog, sheet, or drawer, so attention goes to what sits above it."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Over another overlay: two overlays add up to 91% black and hide the page; use one scrim.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Two overlays add up to 91% black and hide the page."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Scrim",
+      "holds": "The dim layer: 70% black over the whole screen; it doesn't change with mode.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "70% black over the whole screen; it doesn’t change with mode."
+      }
+    },
+    {
+      "part": "Dismiss area",
+      "holds": "With onPress, a tap anywhere on the scrim calls it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "With onPress, a tap anywhere on the scrim calls it."
+      }
+    },
+    {
+      "part": "Content",
+      "holds": "Yours (children), placed above the scrim; presses on it don't dismiss.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours, placed above the scrim; presses on it don’t dismiss."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "With fill on (the default), the overlay covers the nearest parent that sets a position and nothing outside it; it has no size of its own.",
+      "strength": "recommended",
+      "target": "fill",
+      "value": "true",
+      "from": {
+        "section": "sizing",
+        "quote": "With fill on, the overlay covers the nearest parent that sets a position, here the screen, and nothing outside it; it has no size of its own."
+      }
+    },
+    {
+      "text": "It fills its nearest positioned parent, not the device screen: place it inside the screen it dims.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "In code it fills its nearest positioned parent, not the device screen"
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "In the guide's payment confirmation, Pay completes the task and Cancel, Escape or a tap on the dimmed screen backs out; the screen removes the overlay either way.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pay completes it; Cancel, Escape, or a tap on the dimmed screen backs out. The screen removes the overlay either way."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Centred, the default (contentPlacement center): content sits in the middle at its own width.",
+      "strength": "recommended",
+      "target": "contentPlacement",
+      "value": "center",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: content sits in the middle at its own width."
+      }
+    },
+    {
+      "text": "At the top: content docks to the top and stretches across the screen.",
+      "strength": "recommended",
+      "target": "contentPlacement",
+      "value": "top",
+      "from": {
+        "section": "configuration",
+        "quote": "Content docks to the top and stretches across the screen."
+      }
+    },
+    {
+      "text": "At the bottom: content docks to the bottom and stretches across, like a sheet.",
+      "strength": "recommended",
+      "target": "contentPlacement",
+      "value": "bottom",
+      "from": {
+        "section": "configuration",
+        "quote": "Content docks to the bottom and stretches across, like a sheet."
+      }
+    },
+    {
+      "text": "Stretched: content stays in the middle but spans the screen's width.",
+      "strength": "recommended",
+      "target": "contentPlacement",
+      "value": "stretch",
+      "from": {
+        "section": "configuration",
+        "quote": "Content stays in the middle but spans the screen’s width."
+      }
+    },
+    {
+      "text": "Leave the overlay empty (no children) when a sheet or drawer draws its own surface: a bare scrim.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave the overlay empty when a sheet or drawer draws its own surface."
+      }
+    },
+    {
+      "text": "With fill off, the overlay stays in the page's flow instead of covering its screen.",
+      "strength": "recommended",
+      "target": "fill",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "With fill off it stays in the page’s flow instead of covering its screen."
+      }
+    },
+    {
+      "text": "With fill off, the overlay is as big as its content.",
+      "strength": "recommended",
+      "target": "fill",
+      "value": "false",
+      "from": {
+        "section": "sizing",
+        "quote": "With fill off it is as big as its content."
+      }
+    },
+    {
+      "text": "Set onPress to let a tap on the scrim dismiss: the scrim calls it. Without onPress, the scrim still blocks the page but does nothing.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "With onPress, a tap on the scrim calls it; without, the scrim still blocks the page but does nothing."
+      }
+    },
+    {
+      "text": "Leave trapFocus off (the default) for a regional dimmer or a scrim drawn under another surface, such as a Drawer's: several mounted overlays must not each grab the page.",
+      "strength": "required",
+      "target": "trapFocus",
+      "value": "false",
+      "from": {
+        "fact": "props:trapFocus"
+      }
+    },
+    {
+      "text": "Modes set on the overlay cascade to its children, merged under their own; no mode changes the scrim.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "fact": "props:modes"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Dim the page so one thing stands out.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Dim the page so one thing stands out."
+        }
+      },
+      {
+        "text": "Put one small surface on the scrim, such as a confirmation with two buttons.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put one small surface on the scrim, such as a confirmation with two buttons"
+        }
+      },
+      {
+        "text": "Give people a way back: a Cancel button and onPress on the scrim.",
+        "strength": "recommended",
+        "target": "onPress",
+        "from": {
+          "section": "content",
+          "quote": "give people a way back: a Cancel button and onPress on the scrim."
+        }
+      },
+      {
+        "text": "For a confirmation: one question, one main action, and Cancel.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "One question, one main action, and Cancel."
+        }
+      },
+      {
+        "text": "Dim the page, and always offer a way back.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Dim the page, and always offer a way back"
+        },
+        "absolute": {
+          "word": "always",
+          "scope": "contextual",
+          "reason": "\"always\" heads the Do & Don'ts, whose pairs show an overlay over the whole screen holding a dialog; the guide doesn't say whether a dimmer over one region (fill off) needs a way back, and the Blocking state (no onPress) is still documented when the content offers Cancel."
+        }
+      },
+      {
+        "text": "Do not leave people without a way back: without onPress or Cancel, only finishing the task closes the overlay.",
+        "strength": "discouraged",
+        "target": "onPress",
+        "from": {
+          "section": "doDont",
+          "quote": "Without onPress or Cancel, only finishing the task closes it."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "\"only\" describes what is left when an overlay has neither onPress nor a Cancel button, not a limit on the designer."
+        }
+      }
+    ],
+    "good": [
+      "Confirm payment",
+      "₹250 to Ravi Stores",
+      "Pay",
+      "Cancel",
+      "Cancel payment"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Shown",
+      "when": "The screen shows the overlay by rendering it; it appears at once, with no fade.",
+      "from": {
+        "section": "states",
+        "quote": "The screen shows an overlay by rendering it and hides it by removing it; it appears and goes at once, with no fade."
+      }
+    },
+    {
+      "state": "Tap to dismiss",
+      "when": "With onPress: a tap on the dimmed page hides it.",
+      "from": {
+        "section": "states",
+        "quote": "A tap on the dimmed page hides it"
+      }
+    },
+    {
+      "state": "Blocking",
+      "when": "Without onPress: taps on the dimmed page do nothing, and the page underneath can't be pressed.",
+      "from": {
+        "section": "states",
+        "quote": "Taps on the dimmed page do nothing, and the page underneath can’t be pressed."
+      }
+    },
+    {
+      "state": "Dialog",
+      "when": "With trapFocus it's a dialog: on the web focus moves inside, Tab stays there, and Escape calls onPress.",
+      "from": {
+        "section": "states",
+        "quote": "With trapFocus it’s a dialog: on the web focus moves inside, Tab stays there, and Escape calls onPress."
+      }
+    },
+    {
+      "state": "Hidden",
+      "when": "The screen removes the overlay: nothing is drawn, and the page is bright and can be pressed.",
+      "from": {
+        "section": "states",
+        "quote": "Nothing is drawn: the page is bright and can be pressed."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "When the overlay is the dialog, as in the guide's payment confirmation, set trapFocus: on the web focus moves inside, Tab stays there, and Escape calls onPress.",
+      "strength": "recommended",
+      "target": "trapFocus",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "With trapFocus it’s a dialog: on the web focus moves inside, Tab stays there, and Escape calls onPress."
+      }
+    },
+    {
+      "text": "When it's a dialog (trapFocus), name it for screen readers with dismissAccessibilityLabel, such as “Cancel payment”; the default is “Dismiss overlay”.",
+      "strength": "recommended",
+      "target": "dismissAccessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "When it’s a dialog (trapFocus), name it for screen readers with dismissAccessibilityLabel, such as “Cancel payment”; the default is “Dismiss overlay”."
+      }
+    },
+    {
+      "text": "With trapFocus the overlay is a modal dialog named by dismissAccessibilityLabel; when several such overlays are shown, only the newest holds focus.",
+      "strength": "recommended",
+      "target": "trapFocus",
+      "value": "true",
+      "from": {
+        "section": "sources",
+        "quote": "With trapFocus the overlay is a modal dialog named by dismissAccessibilityLabel: focus moves inside, Tab stays inside, and Escape calls onPress, and only the newest such overlay holds focus."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" says which of several mounted trapFocus overlays handles focus (the newest), not a limit on the designer."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "When a trapFocus overlay is removed, focus returns to the control that opened it.",
+      "strength": "recommended",
+      "target": "trapFocus",
+      "value": "true",
+      "from": {
+        "section": "evidence",
+        "quote": "focus returns to the opener when it's removed"
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "Without trapFocus, as for a dimmed region or a Drawer's scrim, the overlay leaves focus alone.",
+      "strength": "recommended",
+      "target": "trapFocus",
+      "value": "false",
+      "from": {
+        "section": "sources",
+        "quote": "Without it, as for a dimmed region or Drawer’s scrim, it leaves focus alone"
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "On the web the scrim is never a Tab stop.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the scrim is never a Tab stop."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it describes the scrim in every overlay, with or without onPress or trapFocus; it states behaviour rather than an instruction, so it stays recommended."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Offer a way back",
+      "dont": "Leave no way back",
+      "why": "Without onPress or Cancel, only finishing the task closes it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Offer a way back"
+      }
+    },
+    {
+      "do": "Use one scrim",
+      "dont": "Stack scrims",
+      "why": "Two overlays add up to 91% black and hide the page.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use one scrim"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Confirming a payment, the guide's In context dialog: the overlay dims the screen and holds a dialog that keeps keyboard focus (trapFocus), named “Cancel payment”. As in the guide, the Card is white (AppearanceBrand Neutral), its buttons set AppearanceBrand Primary because a Card passes its modes to its children, and Cancel is the low-emphasis way out (Emphasis Low). Pay completes it; Cancel, Escape or a tap on the scrim backs out, and the screen removes the overlay either way.",
+      "jsx": "<Overlay\n  trapFocus\n  dismissAccessibilityLabel=\"Cancel payment\"\n  onPress={() => {}}\n>\n  <Card modes={{ AppearanceBrand: 'Neutral' }} style={{ margin: 16 }}>\n    <Title title=\"Confirm payment\" subtitle=\"₹250 to Ravi Stores\" numberOfLines={2} />\n    <ButtonGroup>\n      <Button label=\"Pay\" onPress={() => {}} modes={{ AppearanceBrand: 'Primary' }} />\n      <Button label=\"Cancel\" onPress={() => {}} modes={{ AppearanceBrand: 'Primary', Emphasis: 'Low' }} />\n    </ButtonGroup>\n  </Card>\n</Overlay>",
+      "from": {
+        "section": "inContext",
+        "quote": "Pay ₹250 dims Home and asks for confirmation in a dialog that holds keyboard focus (trapFocus)."
+      }
+    },
+    {
+      "purpose": "The same confirmation docked to the bottom (contentPlacement bottom): it stretches across the screen, like a sheet. Shown on a screen as a dialog, it sets trapFocus and its name, as the guide's Content says for a dialog; the guide's own At the bottom preview leaves trapFocus off, since on that page only the In context dialog uses it.",
+      "jsx": "<Overlay\n  contentPlacement=\"bottom\"\n  trapFocus\n  dismissAccessibilityLabel=\"Cancel payment\"\n  onPress={() => {}}\n>\n  <Card modes={{ AppearanceBrand: 'Neutral' }} style={{ margin: 16 }}>\n    <Title title=\"Confirm payment\" subtitle=\"₹250 to Ravi Stores\" numberOfLines={2} />\n    <ButtonGroup>\n      <Button label=\"Pay\" onPress={() => {}} modes={{ AppearanceBrand: 'Primary' }} />\n      <Button label=\"Cancel\" onPress={() => {}} modes={{ AppearanceBrand: 'Primary', Emphasis: 'Low' }} />\n    </ButtonGroup>\n  </Card>\n</Overlay>",
+      "from": {
+        "section": "configuration",
+        "quote": "Content docks to the bottom and stretches across, like a sheet."
+      }
+    },
+    {
+      "purpose": "A bare scrim: only the dim layer, for a sheet or drawer that draws its own surface; a tap on it calls onPress. It leaves trapFocus off, since it is a scrim drawn under another surface.",
+      "jsx": "<Overlay onPress={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave the overlay empty when a sheet or drawer draws its own surface."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "contentPlacement",
+      "description": "center: content centred at its own width; top and bottom: docked to that edge and stretched across; stretch: centred vertically and stretched across.",
+      "quote": "stretch → centred vertically, stretched across.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "With onPress, a full-size scrim under the content calls it, so presses on the content don't dismiss; without it the scrim is inert but still blocks presses to the page.",
+      "quote": "No `onPress`: the scrim is inert but still blocks presses to the page.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "fill",
+      "description": "true: an absolute fill of the nearest positioned parent (on the web every React Native View is positioned), not the viewport. false: in the page's flow, sized by its content or style.",
+      "quote": "absolute fill of the nearest positioned parent (every React Native View is positioned on the web), not the viewport.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "trapFocus",
+      "description": "Only with trapFocus is the overlay a dialog: role dialog and aria-modal on the web (accessibilityViewIsModal on native), named accessibilityLabel ?? dismissAccessibilityLabel. On the web focus moves inside on mount, Tab and Shift+Tab stay inside, Escape calls onPress, and focus returns to the opener when it's removed; only the newest mounted trapFocus overlay handles Tab and Escape. Without it the overlay doesn't move focus, trap Tab or take a dialog role.",
+      "quote": "focus returns to the opener when it's removed",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "dismissAccessibilityLabel",
+      "description": "Names the dialog when trapFocus is set (accessibilityLabel wins when it is set). Without trapFocus it stays the label of the scrim with onPress, which is hidden from screen readers and is not a Tab stop.",
+      "quote": "The scrim with `onPress` keeps `aria-label` = `dismissAccessibilityLabel`, `aria-hidden`, `tabIndex -1`.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "Cascade to the children, merged under their own modes. The scrim reads one token, overlay/background (rgba(0, 0, 0, 0.7)), the same in every mode.",
+      "quote": "Children get the overlay's `modes` merged under their own (`cloneChildrenWithModes`).",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Overlay is a 70% black fill with no properties: placement, content, fill and tap to dismiss exist only in code.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Overlay is a fill of 70% black with no properties; placement, content, fill, and tap to dismiss exist only in code."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "The published Storybook predates the 23 October build the guide was checked on.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook predates this build."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ]
+}

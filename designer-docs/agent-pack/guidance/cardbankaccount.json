@@ -1,0 +1,673 @@
+{
+  "slug": "cardbankaccount",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch2, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted from the guide and docs/evidence/cardbankaccount.md at e7ed622. The evidence and the guide's Sources note were checked on 19 October 2026 on v0.1.78-a116616; the evidence's 28 October note says Biscuit's ace46ca and dbe0e02 changed CardBankAccount for #344 and this guide's copy wasn't re-checked, waiting for #344's own publish. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Where the installed package contradicts the 19 October guide and evidence, the package wins and those sentences are not used: buttonDisabled disables the footer button (the guide's States say the card can't); without buttonLabel the card shows no button, and institutionName and items have no placeholder copy (the Sources note says placeholder copy); a long value is now cut before its label is squeezed (the row layout in CardBankAccount/accountRowLayout.ts), so the guide's 'a value never shrinks' sentences are not recorded and the short-values pair takes its Do caption as the reason; without institutionAvatar the card shows a monogram of the bank's initials (the copy snapshot itself renders 'JP'), not a stock photo, so the logo pair also takes its Do caption; the row values are set with Context ListItem and resolve to 12 px, so the anatomy's '14 px' for the value is left out; and disableTruncation reaches the header name, the badge, the values and the button, not only the values. The two gaps were measured on a116616; on dbe0e02 the word badge still resolves to light purple and the label line to 17 px. The guide names no other component to use instead, so avoidWhen is empty (Biscuit's unpublished mdx, summarised in the evidence, points to other components; the guide doesn't). Examples use the guide's own content (Jio Payments Bank with its logo, the green Active status Badge, the masked number, View statement, and the card's spoken name from the guide's code), set no modes on the card, and keep the status Badge's Semantic Intent System and AppearanceSystem positive, which the configuration gives a status badge; the in-context example drops the guide's Color Mode Light and its VStack's Slot gap M. Not recorded: the role-less root and default spoken name (not Coin gaps here), the published Storybook's older page and gold Default story, and the value-size, placeholder, stock-photo, long-value and testID discrepancies that dbe0e02 changed.",
+  "useWhen": [
+    {
+      "text": "Summarise one linked bank account: the bank, a few facts such as the masked number, and one action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card Bank Account to summarise one linked bank account: the bank, a few facts such as the masked number, and one action."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Institution",
+      "holds": "institutionName and institutionAvatar: the bank's logo and name.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "institutionName and institutionAvatar: the bank’s logo and name."
+      }
+    },
+    {
+      "part": "Badge",
+      "holds": "badge: one word about the account, such as its status.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "badge: one word about the account, such as its status."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "Each row's field name, in 14 px bold; it wraps when space runs out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A field name in 14 px bold; it wraps when space runs out."
+      }
+    },
+    {
+      "part": "Value",
+      "holds": "Each row's fact, on one line.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The fact in 14 px, on one line."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "A small Button from buttonLabel and onButtonPress, full width.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A small Button from buttonLabel and onButtonPress, full width."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A white panel with 16 px corners and 16 by 12 px padding.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white panel with 16 px corners and 16 by 12 px padding."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card fills its host's width, so the screen sets it; Figma draws it at 292 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills its host’s width; Figma draws it at 292 px."
+      }
+    },
+    {
+      "text": "Its height follows the rows: each is 17 px, 12 px apart.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the rows: each is 17 px, 12 px apart."
+      }
+    },
+    {
+      "text": "The panel is padded 16 px top and bottom and 12 px at the sides, with 16 px between the header, the rows and the button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The panel is padded 16 px top and bottom and 12 px at the sides, with 16 px between the header, the rows, and the button."
+      }
+    },
+    {
+      "text": "In the guide, the Bank accounts screen in Settings shows the linked account with the card.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The Bank accounts screen shows the linked account."
+      }
+    },
+    {
+      "text": "The button runs the screen's own action through onButtonPress (in the guide, View statement opens the screen's statement view); the card doesn't fetch the account or change it.",
+      "strength": "recommended",
+      "target": "onButtonPress",
+      "from": {
+        "section": "inContext",
+        "quote": "View statement opens the screen’s own statement view through onButtonPress; the card doesn’t fetch the account or change it."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "badge takes a word, which becomes a Badge in the button's colours, or a Badge you set up yourself, such as a green status; leave it out for none.",
+      "strength": "recommended",
+      "target": "badge",
+      "from": {
+        "section": "configuration",
+        "quote": "badge takes a word, which becomes a Badge in the button’s colours, or a Badge you set up yourself, such as a green status; leave it out for none."
+      }
+    },
+    {
+      "text": "For a status badge, a Badge with Semantic Intent System and AppearanceSystem positive turns green.",
+      "strength": "recommended",
+      "target": "badge",
+      "from": {
+        "section": "configuration",
+        "quote": "A Badge with Semantic Intent System and AppearanceSystem positive turns green."
+      }
+    },
+    {
+      "text": "Leave badge out for no badge; the bank's name then has the row.",
+      "strength": "recommended",
+      "target": "badge",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave badge out; the bank’s name has the row."
+      }
+    },
+    {
+      "text": "AppearanceBrand and Emphasis colour the footer button and a word badge; the card's defaults, Secondary at Medium emphasis, are light purple.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand and Emphasis colour the footer button and a word badge; the defaults, Secondary at Medium emphasis, are light purple."
+      }
+    },
+    {
+      "text": "Emphasis, with AppearanceBrand, colours the footer button and a word badge; the card's default is Medium.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand and Emphasis colour the footer button and a word badge; the defaults, Secondary at Medium emphasis, are light purple."
+      }
+    },
+    {
+      "text": "AppearanceBrand and Emphasis don't change the panel or the rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The panel and the rows don’t change."
+      }
+    },
+    {
+      "text": "Secondary, the card's default: a light purple button and badge.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Secondary",
+      "from": {
+        "section": "configuration",
+        "quote": "A light purple button and badge."
+      }
+    },
+    {
+      "text": "Primary: a light gold button and badge.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Primary",
+      "from": {
+        "section": "configuration",
+        "quote": "Light gold."
+      }
+    },
+    {
+      "text": "Neutral: a dark grey button and a light grey badge.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Neutral",
+      "from": {
+        "section": "configuration",
+        "quote": "A dark grey button and a light grey badge."
+      }
+    },
+    {
+      "text": "Tertiary: a blue button and a light blue badge.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Tertiary",
+      "from": {
+        "section": "configuration",
+        "quote": "A blue button and a light blue badge."
+      }
+    },
+    {
+      "text": "Emphasis High: solid purple, the strongest call.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "High",
+      "from": {
+        "section": "configuration",
+        "quote": "Solid purple, the strongest call."
+      }
+    },
+    {
+      "text": "Emphasis Medium, the card's default: light purple.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Medium",
+      "from": {
+        "section": "configuration",
+        "quote": "Light purple."
+      }
+    },
+    {
+      "text": "Emphasis Low: a text button and a pale badge.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Low",
+      "from": {
+        "section": "configuration",
+        "quote": "A text button and a pale badge."
+      }
+    },
+    {
+      "text": "headerSlot replaces the whole header.",
+      "strength": "recommended",
+      "target": "headerSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "headerSlot replaces the whole header, children replace the rows, and footer replaces the button."
+      }
+    },
+    {
+      "text": "children replace the rows.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "headerSlot replaces the whole header, children replace the rows, and footer replaces the button."
+      }
+    },
+    {
+      "text": "footer replaces the button.",
+      "strength": "recommended",
+      "target": "footer",
+      "from": {
+        "section": "configuration",
+        "quote": "headerSlot replaces the whole header, children replace the rows, and footer replaces the button."
+      }
+    },
+    {
+      "text": "footer={false} removes the button, for a summary to read.",
+      "strength": "recommended",
+      "target": "footer",
+      "value": "false",
+      "from": {
+        "section": "states",
+        "quote": "footer={false} removes it for a summary to read."
+      }
+    },
+    {
+      "text": "To show the footer button, set buttonLabel: the default button is hidden when it is omitted or empty.",
+      "strength": "required",
+      "target": "buttonLabel",
+      "from": {
+        "fact": "props:buttonLabel"
+      }
+    },
+    {
+      "text": "With the default header, set institutionName: omitted or empty, the header has no bank name, as there is no placeholder (headerSlot replaces the header instead).",
+      "strength": "required",
+      "target": "institutionName",
+      "from": {
+        "fact": "props:institutionName"
+      }
+    },
+    {
+      "text": "items gives one row per entry, a label and a value; omit it, or pass an empty list, for no rows. There is no placeholder copy.",
+      "strength": "recommended",
+      "target": "items",
+      "from": {
+        "fact": "props:items"
+      }
+    },
+    {
+      "text": "buttonDisabled disables the default footer button; it is ignored when footer is provided.",
+      "strength": "recommended",
+      "target": "buttonDisabled",
+      "from": {
+        "fact": "props:buttonDisabled"
+      }
+    },
+    {
+      "text": "disableTruncation lets the header name, the badge, the row values and the default footer button wrap instead of ending in an ellipsis.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "value": "true",
+      "from": {
+        "fact": "props:disableTruncation"
+      }
+    },
+    {
+      "text": "The card's own defaults are Button / Size S, AppearanceBrand Secondary and Emphasis Medium; modes you pass are merged on top, and the same modes reach the badge, the button and the slots.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "fact": "props:modes"
+      }
+    },
+    {
+      "text": "Button / Size S, the card's default, makes a 32 px button; M makes it 42 px and XS 24 px.",
+      "strength": "recommended",
+      "target": "Button / Size",
+      "from": {
+        "section": "sizing",
+        "quote": "Button / Size S, the default, is 32 px tall; M is 42 and XS 24."
+      }
+    },
+    {
+      "text": "Avatar Size L makes the logo 42 px.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "value": "L",
+      "from": {
+        "section": "sizing",
+        "quote": "Avatar Size L makes the logo 42 px."
+      }
+    },
+    {
+      "text": "List Item Style Minimal tightens the rows to 4 px apart, with 12 px regular labels.",
+      "strength": "recommended",
+      "target": "List Item Style",
+      "value": "Minimal",
+      "from": {
+        "section": "sizing",
+        "quote": "List Item Style Minimal tightens the rows to 4 px apart with 12 px regular labels."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One account, a few facts, one action.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One account, a few facts, one action."
+        }
+      },
+      {
+        "text": "Label each row with a field name, such as Account type, and give the fact as its value.",
+        "strength": "recommended",
+        "target": "items",
+        "from": {
+          "section": "content",
+          "quote": "Label each row with a field name, such as Account type, and give the fact as its value."
+        }
+      },
+      {
+        "text": "Show only the last four digits of the account number, such as “•••• 4521”.",
+        "strength": "required",
+        "target": "items",
+        "from": {
+          "section": "content",
+          "quote": "Show only the last four digits of the account number."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "everywhere",
+          "reason": "the sentence has no condition: any card that shows the account number shows only its last four digits, and the Do & Don't pair gives the reason (\"Anyone near the screen can read it\")."
+        }
+      },
+      {
+        "text": "Do not show the full account number: anyone near the screen can read it.",
+        "strength": "discouraged",
+        "target": "items",
+        "from": {
+          "section": "doDont",
+          "quote": "Anyone near the screen can read it."
+        }
+      },
+      {
+        "text": "Keep values short.",
+        "strength": "recommended",
+        "target": "items",
+        "from": {
+          "section": "content",
+          "quote": "Keep values short"
+        }
+      },
+      {
+        "text": "Do not give a sentence as a value, such as “Savings account with auto-sweep”.",
+        "strength": "discouraged",
+        "target": "items",
+        "from": {
+          "section": "doDont",
+          "quote": "A sentence as a value"
+        }
+      },
+      {
+        "text": "Label the button with a verb, such as “View statement”.",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "section": "content",
+          "quote": "Label the button with a verb, such as View statement"
+        }
+      },
+      {
+        "text": "Pass the bank's own logo through institutionAvatar.",
+        "strength": "recommended",
+        "target": "institutionAvatar",
+        "from": {
+          "section": "content",
+          "quote": "and pass the bank’s own logo."
+        }
+      },
+      {
+        "text": "Do not leave out the logo: institutionAvatar shows the bank's own mark.",
+        "strength": "discouraged",
+        "target": "institutionAvatar",
+        "from": {
+          "section": "doDont",
+          "quote": "Leave out the logo"
+        }
+      }
+    ],
+    "good": [
+      "Jio Payments Bank",
+      "Active",
+      "Account type",
+      "Savings",
+      "Account number",
+      "•••• 4521",
+      "IFSC",
+      "JIOP0000001",
+      "Last updated",
+      "Today, 9:14 AM",
+      "View statement"
+    ],
+    "bad": [
+      "123456784521",
+      "Savings account with auto-sweep"
+    ]
+  },
+  "states": [
+    {
+      "state": "With an action",
+      "when": "The card itself isn't pressable: the footer button is its one action, with the Button's own hover and pressed colours.",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable: the footer button is its one action, with the Button’s own hover and pressed colours."
+      }
+    },
+    {
+      "state": "Read only",
+      "when": "footer={false}: no button, a summary to read.",
+      "from": {
+        "section": "states",
+        "quote": "footer={false} removes it for a summary to read."
+      }
+    },
+    {
+      "state": "Button disabled",
+      "when": "buttonDisabled: the default footer button is disabled; ignored when footer is provided.",
+      "from": {
+        "fact": "props:buttonDisabled"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "accessibilityLabel labels the card region; without it, the card is named by institutionName.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Mask the account number",
+      "dont": "The full account number",
+      "why": "Anyone near the screen can read it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Mask the account number"
+      }
+    },
+    {
+      "do": "Pass the bank’s logo",
+      "dont": "Leave out the logo",
+      "why": "institutionAvatar shows the bank’s own mark.",
+      "from": {
+        "section": "doDont",
+        "quote": "Pass the bank’s logo"
+      }
+    },
+    {
+      "do": "Short values",
+      "dont": "A sentence as a value",
+      "why": "Each label and value fits on one line.",
+      "from": {
+        "section": "doDont",
+        "quote": "Short values"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A linked savings account with four facts, the number masked, a green Active status Badge, and View statement as its one action; named for screen readers by the account.",
+      "jsx": "<CardBankAccount\n  institutionName=\"Jio Payments Bank\"\n  institutionAvatar={require('../assets/jio-gold-logo.png')}\n  badge={<Badge label=\"Active\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'positive' }} />}\n  items={[\n    { label: 'Account type', value: 'Savings' },\n    { label: 'Account number', value: '•••• 4521' },\n    { label: 'IFSC', value: 'JIOP0000001' },\n    { label: 'Last updated', value: 'Today, 9:14 AM' },\n  ]}\n  buttonLabel=\"View statement\"\n  onButtonPress={() => {}}\n  accessibilityLabel=\"Jio Payments Bank savings account ending 4521\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Field names on the left, short facts on the right, the number masked."
+      }
+    },
+    {
+      "purpose": "Read only: footer={false} removes the button, leaving a summary to read.",
+      "jsx": "<CardBankAccount\n  institutionName=\"Jio Payments Bank\"\n  institutionAvatar={require('../assets/jio-gold-logo.png')}\n  badge={<Badge label=\"Active\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'positive' }} />}\n  items={[\n    { label: 'Account type', value: 'Savings' },\n    { label: 'Account number', value: '•••• 4521' },\n    { label: 'Last updated', value: 'Today, 9:14 AM' },\n  ]}\n  footer={false}\n  accessibilityLabel=\"Jio Payments Bank savings account ending 4521\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "No button: a summary to read."
+      }
+    },
+    {
+      "purpose": "On the guide's Bank accounts screen in Settings, under the page's heading: View statement opens the screen's own statement view through onButtonPress.",
+      "jsx": "<VStack>\n  <Title title=\"Bank accounts\" subtitle=\"Used for UPI payments and transfers\" />\n  <CardBankAccount\n    institutionName=\"Jio Payments Bank\"\n    institutionAvatar={require('../assets/jio-gold-logo.png')}\n    badge={<Badge label=\"Active\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'positive' }} />}\n    items={[\n      { label: 'Account type', value: 'Savings' },\n      { label: 'Account number', value: '•••• 4521' },\n      { label: 'Last updated', value: 'Today, 9:14 AM' },\n    ]}\n    buttonLabel=\"View statement\"\n    onButtonPress={() => {}}\n    accessibilityLabel=\"Jio Payments Bank savings account ending 4521\"\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "View statement opens the screen’s own statement view through onButtonPress; the card doesn’t fetch the account or change it."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "badge",
+      "description": "A word becomes a Badge with the card's modes; a Badge you pass is given the card's modes with its own on top, so a status Badge keeps its green while the button stays purple.",
+      "quote": "a Badge node with its own `{ 'Semantic Intent': 'System', AppearanceSystem: 'positive' }` keeps them (`#D4F6D0`/`#00773D`) while the button stays purple.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Defaults to institutionName.",
+      "quote": "`accessibilityLabel` (default `institutionName`, on a role-less root)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "The card's defaults (Button / Size S, AppearanceBrand Secondary, Emphasis Medium) sit under the modes you pass, and the same modes go to the badge, the button and the slots; the card itself doesn't read the theme provider.",
+      "quote": "with the caller's `modes` merged on top; the same object goes to the badge, button and slots. The card doesn't read the theme provider.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "With Emphasis, colours the footer button and a word badge. At Medium: Secondary (the card's default) light purple, Primary light gold, Neutral a dark grey button and a light grey badge, Tertiary a blue button and a light blue badge.",
+      "quote": "AppearanceBrand × Emphasis colour the Button and a word Badge",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Emphasis",
+      "description": "With AppearanceBrand, colours the footer button and a word badge: High a solid button with a white label, Medium (the card's default) light, Low a transparent button and a pale badge.",
+      "quote": "High Secondary `#5D00B5`/white; Low transparent button, badge `#F6F3FF`",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Semantic Intent",
+      "description": "System, with AppearanceSystem, turns the card's footer button green, orange or red.",
+      "quote": "Semantic Intent System + AppearanceSystem: Button `#26AB21` / `#F06E0F` / `#F50030`",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceSystem",
+      "description": "With Semantic Intent System on the card: positive green, warning orange, negative red, on the footer button.",
+      "quote": "Semantic Intent System + AppearanceSystem: Button `#26AB21` / `#F06E0F` / `#F50030`",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Button / Size",
+      "description": "The footer button's height: S 32 px (the card's default), M 42, XS 24.",
+      "quote": "Button / Size: S 32 px (default), M 42, XS 24.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "List Item Style",
+      "description": "Minimal sets the rows 4 px apart, with 12 px regular labels.",
+      "quote": "List Item Style Minimal: row gap 4, labels 12/16/400.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Avatar Size",
+      "description": "L makes the bank's logo 42 px.",
+      "quote": "Avatar Size L: 42 px logo.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Badge Size",
+      "description": "Small makes the badge's text 10 px on a 12 px line.",
+      "quote": "Badge Size Small: 10/12 badge.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Text Sizes",
+      "description": "Changes the size of the row values' text.",
+      "quote": "Text Sizes, Weight and Context change the value text",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Weight",
+      "description": "Changes the weight of the row values' text.",
+      "quote": "Text Sizes, Weight and Context change the value text",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's badge is amber, a colour the package tokens don't have; the package's word badge takes the button's colours, light purple by default (#344).",
+      "quote": "Badge: Figma amber `#F7AB21`/`#402608` (not in the package tokens); code takes the button's Secondary / Medium colours.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Rows are 17 px tall in code against Figma's 16, so at 292 px wide the card is 207 px tall against Figma's 204.",
+      "quote": "Rows 17 px (Figma 16), card 207 (204).",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ]
+}

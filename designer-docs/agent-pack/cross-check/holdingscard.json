@@ -1,0 +1,21 @@
+{
+  "slug": "holdingscard",
+  "entryHash": "06e836592dad81dc35dd4951394a9e9b4601bd094d537e745051e5deed556de2",
+  "guideCommit": "dd348618b44309d7f0f1eec37043594508c86470",
+  "checkedAt": "2026-10-29T00:01:30Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: The gold-holding example has no onPress. The guide says \"A card without onPress is disabled too\". The evidence's Limits say not to imply \"that a card without onPress works\", and its Hosting gives every card onPress. So this example renders as a disabled button, which the guide's Gold holding example is not."
+    },
+    {
+      "field": "/states/2",
+      "reason": "lost-context: The Disabled state says it comes only from `disabled`. The guide also says \"A card without onPress is disabled too, and then its footer links and button don't respond to clicks either\", which is the condition most likely to catch an agent out."
+    }
+  ],
+  "notes": "/placementAdvice/2 and /placementAdvice/4 describe layout (padding, gaps, row height) rather than advise, so the [recommended] strength reads oddly but misstates nothing. The [required] items (/configuration/15, /content/rules/1-4) rest on package facts (component-source defaults and the declared onPress contract), so the strength seems justified. If /examples/1 is kept without onPress, it should at least note that the card is then a disabled button; adding onPress is simpler, as the evidence's hosting does."
+}
