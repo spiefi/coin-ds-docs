@@ -26,9 +26,9 @@ function ToggleGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'A track and a thumb',
-      description: 'Toggle is a 52 × 31 px pill. Off, the track is grey with the thumb on the left; on, it turns purple and the thumb slides right.',
+      description: 'Toggle is 52 × 31 px with fully rounded ends. Off, the track is grey with the thumb on the left; on, it turns purple and the thumb slides right.',
       body: <Anatomy parts={[
-        { name: 'Track', note: 'Pill that is grey when off and purple when on.', target: '.gk-specimen:last-child [role="switch"]', side: 'top' },
+        { name: 'Track', note: 'Fully rounded; grey when off and purple when on.', target: '.gk-specimen:last-child [role="switch"]', side: 'top' },
         { name: 'Thumb', note: 'White circle; its side shows the state.', target: '.gk-specimen:last-child [role="switch"] > div', side: 'right' },
         { name: 'Off position', note: 'Thumb on the left of a grey track.', target: '.gk-specimen:first-child [role="switch"] > div', side: 'left' },
       ]}>

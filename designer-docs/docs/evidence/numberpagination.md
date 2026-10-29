@@ -6,8 +6,8 @@
 
 ## Sources
 
-- Figma: [Coin Components Library · number pagination](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7522-7652), symbol `7522:7652` (136 × 39) with a `Slot` of four `control toggle number` instances (32 × 32). Screenshot: a translucent grey pill; "1" in a white circle with a black number, "2"–"4" in white. Tokens: `numberPagination/background/color` #8d8d8d66, `numberPagination/border/color` #ffffff26, radius 9999, padding 4/4, `blur/minimal` 29, JioType Var 16/18 500, `controlNumber` 32 × 32 round, `control/active/text/color` #000000, `control/text/default` #ffffff. Read through the Figma MCP (jiofinance.in account).
-- Storybook: `components-numberpagination--docs` (container: pill-shaped frosted glass; page items: circular targets, active page white; use for paginating horizontal media slides, lists, or card carousels; announce selection). Stories: `--default` (1 of 4), `--active-page` (3 of 5), `--custom-children`, all on a #333 surface.
+- Figma: [Coin Components Library · number pagination](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7522-7652), symbol `7522:7652` (136 × 39) with a `Slot` of four `control toggle number` instances (32 × 32). Screenshot: a translucent grey, fully rounded background; "1" in a white circle with a black number, "2"–"4" in white. Tokens: `numberPagination/background/color` #8d8d8d66, `numberPagination/border/color` #ffffff26, radius 9999, padding 4/4, `blur/minimal` 29, JioType Var 16/18 500, `controlNumber` 32 × 32 round, `control/active/text/color` #000000, `control/text/default` #ffffff. Read through the Figma MCP (jiofinance.in account).
+- Storybook: `components-numberpagination--docs` (container: fully rounded frosted glass; page items: circular targets, active page white; use for paginating horizontal media slides, lists, or card carousels; announce selection). Stories: `--default` (1 of 4), `--active-page` (3 of 5), `--custom-children`, all on a #333 surface.
 - Package source `src/components/NumberPagination/NumberPagination.tsx` (0.1.77). `Carousel` uses its own pagination, not this component.
 
 ## Contract
@@ -30,25 +30,25 @@
 
 ## Verification
 
-`npm run verify` passed on 29 September 2026 (38 guides at 1280 and 390 px) on jfs-components 0.1.77; `guideKitSurvey` returned `{}`. Planner review of desktop and 390 px captures. Playground Pages control and presses update "Slide n of m"; anatomy pins on the pill, active page, and a page number (shown at 2×); Sizing reads 138 × 39 and 32 × 32. Review fixes (brief errors): In context copy no longer promises a photo swap the demo does not show; the 12-page Don't says some pages are cut off (the Backdrop clips the first ones).
+`npm run verify` passed on 29 September 2026 (38 guides at 1280 and 390 px) on jfs-components 0.1.77; `guideKitSurvey` returned `{}`. Planner review of desktop and 390 px captures. Playground Pages control and presses update "Slide n of m"; anatomy pins on the glass background, active page, and a page number (shown at 2×); Sizing reads 138 × 39 and 32 × 32. Review fixes (brief errors): In context copy no longer promises a photo swap the demo does not show; the 12-page Don't says some pages are cut off (the Backdrop clips the first ones).
 
 ## 0.1.78 check
 
 Checked 1 October 2026 against `jfs-components` 0.1.78 (mirror tag `v0.1.78`, built from Biscuit's `fix/component-bugs-v0.1.78` at `5b6894b`) in headless Chrome with react-native-web 0.21.2, on a test page and on this guide. The same checks were run against 0.1.77 as a baseline.
 
 - #176, accessibility part fixed. The active page has `aria-current=page`. The container renders as `<nav aria-label="Pagination">` (a toolbar on native). Twelve pages in a 360 px host scroll horizontally, and the last page can be scrolled into view; 0.1.77 clipped pages 11–12. The guide's anatomy targets moved from `:scope > div` to `[role="navigation"]`.
-- #176 regression; the ticket was moved back to In-Progress with a work note. The new horizontal ScrollView is as tall as the pill's padded content box (29 px) and clips vertically, so the 32 px page circles lose about 2 px at the top and 1 px at the bottom. In the "Four pages" example the button spans 447–479 px and the ScrollView 449–478 px. 0.1.77 drew the full circle, and Storybook still runs the older code.
-- Open Coin gap #180 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar), present in both 0.1.77 and 0.1.78. The blur layer (`backdrop-filter: blur(9px)`, border-radius 0) is not clipped to the rounded pill, so on a photo the blur shows square corners. On Storybook's plain background it is invisible.
+- #176 regression; the ticket was moved back to In-Progress with a work note. The new horizontal ScrollView is as tall as the glass background's padded content box (29 px) and clips vertically, so the 32 px page circles lose about 2 px at the top and 1 px at the bottom. In the "Four pages" example the button spans 447–479 px and the ScrollView 449–478 px. 0.1.77 drew the full circle, and Storybook still runs the older code.
+- Open Coin gap #180 (Components, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar), present in both 0.1.77 and 0.1.78. The blur layer (`backdrop-filter: blur(9px)`, border-radius 0) is not clipped to the rounded glass background, so on a photo the blur shows square corners. On Storybook's plain background it is invisible.
 
 ## 3795b4c check
 
 Checked 2 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `3795b4c` (mirror tag `v0.1.78-3795b4c`) in headless Chrome with react-native-web 0.21.2.
 
-- #176 regression resolved. The scroll viewport is now the 32 px item height, with vertical padding clamped, so the active circle is no longer clipped. The four-page pill is 138 × 39 again. `aria-current`, the Pagination landmark, and the 12-page scroll still pass. #180 (square blur corners) is still open.
+- #176 regression resolved. The scroll viewport is now the 32 px item height, with vertical padding clamped, so the active circle is no longer clipped. The four-page Number Pagination is 138 × 39 again. `aria-current`, the Pagination landmark, and the 12-page scroll still pass. #180 (square blur corners) is still open.
 
 ## 636f3f5 check
 
 Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
 
-- #180 fixed. The blur layer (`backdrop-filter: blur(9px)`) now has the pill's 19.5 px radius with overflow hidden. On the docs photo the frost follows the rounded ends, with no square corners.
+- #180 fixed. The blur layer (`backdrop-filter: blur(9px)`) now has the glass background's 19.5 px radius with overflow hidden. On the docs photo the frost follows the rounded ends, with no square corners.
 - Guide: no page copy described the square corners, so only the Sources note changed (5 October build; checked date 8 October 2026). The brief, which still described 0.1.77, now matches the page: the `[role="navigation"]` target, scrolling pages, the announced active page, and the 12-page Don’t caption.

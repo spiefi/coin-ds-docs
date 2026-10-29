@@ -23,7 +23,7 @@
 - Root `div[role=presentation]` (no testID), column, `align-items: flex-end`, 8 px padding, 36 px gap; hidden `input[aria-label="OTP input, N digits"]` first; then the slot row; then the support area. `aria-disabled="true"` and opacity 0.4 when disabled.
 - Slots 48 × 39: a 48 × 29 digit box (JioType Var 24/29, 500, black) above a 48 × 2 underline. Idle underline rgb(48, 51, 56); lit rgb(160, 122, 63); invalid rgb(204, 0, 38). Error label rgb(245, 0, 48).
 - Natural width = 48 × length + 8 × (length − 1) + 16: 232 (4), 344 (6), 400 (7), 456 (8). Slots never shrink: in a 334 px parent a 6-digit OTP overflows by 2 px and an 8-digit one by 114 px. Figma differs slightly: its slot wrap is a fixed 344 px frame (slots fill 328 px of it), so the symbol is 360 px; in code the row hugs the slots, so a 6-digit OTP is 344 px. In a wider parent, slots stay left-aligned and the support area right-aligned.
-- Resend: countdown "Resend OTP in Ns" with the clock (Loading) icon; when ready, a 32 px pill Button "Resend".
+- Resend: countdown "Resend OTP in Ns" with the clock (Loading) icon; when ready, a 32 px Button "Resend".
 - Support text 12/16. Without support content an OTP is 55 px tall; with it, 107 px.
 
 ## Kit
@@ -53,7 +53,7 @@ Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `mai
 
 Checked 13 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at c1fa197 (mirror tag `v0.1.78-c1fa197`, installed since the 13 October release) in headless Chrome with react-native-web 0.21.2, on the guide pages at 1280 and 390 px. The newer mirror build `v0.1.78-5990169` changes only `Tooltip.tsx` (#277, not approved), so it was not installed.
 
-- #210 fixed (verified 12 October, published here). The support line and the “Resend OTP in Ns” countdown are right-aligned again: in the guide's 334 px host the support row is 228.4 px wide, flush with the right content edge. When the countdown ends, Resend is an 87.3 × 32 pill at the right; the Ready to resend card is 123 px tall. Slots still shrink (8 digits fit 300 px).
+- #210 fixed (verified 12 October, published here). The support line and the “Resend OTP in Ns” countdown are right-aligned again: in the guide's 334 px host the support row is 228.4 px wide, flush with the right content edge. When the countdown ends, Resend is an 87.3 × 32 Button at the right; the Ready to resend card is 123 px tall. Slots still shrink (8 digits fit 300 px).
 - Regression #274 (open): support or error text longer than the row no longer wraps and runs past the left edge. Every guide example's text fits its row at 1280 and 390 px (the longest, “Enter the code sent to your phone”, is 208.4 px in a 226 px row), so no example shows it.
 - Guide: the Support line anatomy note, the Ready to resend card, and the Sources note say the support line and a small Resend button are right-aligned, as in Figma, and that longer support or error text should stay on one line in this build. The brief matches.
 

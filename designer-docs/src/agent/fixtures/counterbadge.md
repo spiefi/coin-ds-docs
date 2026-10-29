@@ -4,7 +4,7 @@
 
 State: undocumented · guide commit none · jfs-components 0.1.78 · category feedback
 
-Counter Badge: a small token-driven pill that displays a value.
+Counter Badge: a small token-driven badge that displays a value.
 
 ## Use when
 

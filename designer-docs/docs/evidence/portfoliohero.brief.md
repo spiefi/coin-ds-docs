@@ -3,7 +3,7 @@
 slug: portfoliohero · label: Portfolio Hero · public API: PortfolioHero (+ Badge, Icon, Text in `children`; VStack, HStack, Button and the kit's ScreenFrame)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2705-14040 · storybook: docsUrl('portfoliohero') · stories: Default=components-portfoliohero--default, Without Slot=components-portfoliohero--without-slot, Custom Slot Content=components-portfoliohero--custom-slot-content
 checked: 26 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c8526ae = Biscuit’s main c8526ae)
-icon: a small circle and a short line over a long bar and a pill — `<><circle cx="6.5" cy="4" r="1.75" stroke="currentColor" strokeWidth="1.5" fill="none" /><path d="M9.5 4h3M3.5 9h11M6.5 13.5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" /></>`
+icon: a small circle and a short line over a long bar and a short rounded bar — `<><circle cx="6.5" cy="4" r="1.75" stroke="currentColor" strokeWidth="1.5" fill="none" /><path d="M9.5 4h3M3.5 9h11M6.5 13.5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" /></>`
 keywords: holding value, portfolio value, investment total, gold value, asset hero
 
 Setup: `import jioLogo from '../assets/jio-gold-logo.png'`. `LIGHT = { 'Color Mode': 'Light' } as Modes`; `BADGE = { ...LIGHT, Context4: 'Badge' } as Modes`; `LOSS = { ...BADGE, 'Semantic Intent': 'System', AppearanceSystem: 'negative' } as Modes`.

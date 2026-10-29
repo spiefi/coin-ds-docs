@@ -59,11 +59,11 @@ function SkeletonGuide() {
       header: 'Anatomy', title: 'Grey blocks with a moving highlight',
       description: 'Each placeholder is a light grey block whose kind sets its corners. While the group loads, a white band sweeps across every block, one after another.',
       body: <Anatomy surface="white" parts={[
-        { name: 'Text bar', note: 'kind text: a full pill, one per line of text.', target: `${A} > :nth-child(1)`, side: 'top' },
+        { name: 'Text bar', note: 'kind text: a bar with fully rounded ends, one per line of text.', target: `${A} > :nth-child(1)`, side: 'top' },
         { name: 'Image block', note: 'kind image: 10 px corners, as big as the image it replaces.', target: `${A} > :nth-child(2)`, side: 'left' },
         { name: 'Shimmer', note: 'A white band sweeps across every block each 1.5 s.', target: `${A} > :nth-child(2)`, side: 'right', at: 0.3 },
         { name: 'Badge block', note: 'kind badge: 4 px corners, like a badge.', target: `${A} > :nth-child(3)`, side: 'right' },
-        { name: 'Circle or pill', note: 'kind other, the default: a circle when square, else a pill.', target: `${A} > :nth-child(4)`, side: 'left' },
+        { name: 'Circle or rounded bar', note: 'kind other, the default: a circle when square, else a rounded bar.', target: `${A} > :nth-child(4)`, side: 'left' },
       ]}>
         <SkeletonGroup loading><VStack testID="sk-anatomy" modes={LIGHT}>
           <Skeleton kind="text" width={220} height={20} modes={LIGHT} />
@@ -77,7 +77,7 @@ function SkeletonGuide() {
       header: 'Configuration', title: 'Four kinds, or components that draw their own',
       description: "A Skeleton's kind sets only its corners; its width and height are yours. Inside a group, Coin components such as Text, Avatar, Badge, and Button draw their own placeholder at their own size, so you rarely place a Skeleton by hand.",
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Text" description="Full pills, one per line; match each line's height."><Panel loading><div className="coin-new-stack">
+        <ExampleCard title="Text" description="Rounded bars, one per line; match each line's height."><Panel loading><div className="coin-new-stack">
           <Skeleton kind="text" width="80%" height={16} modes={LIGHT} />
           <Skeleton kind="text" width="60%" height={14} modes={LIGHT} />
         </div></Panel></ExampleCard>
@@ -87,7 +87,7 @@ function SkeletonGuide() {
         <ExampleCard title="Badge" description="4 px corners, the size of a badge."><Panel loading>
           <Skeleton kind="badge" width={56} height={20} modes={LIGHT} />
         </Panel></ExampleCard>
-        <ExampleCard title="Circle or pill" description="The default kind: square sizes make a circle, wide ones a pill, for avatars and buttons."><Panel loading><div className="coin-new-row">
+        <ExampleCard title="Circle or rounded bar" description="The default kind: square sizes make a circle, wide ones a rounded bar, for avatars and buttons."><Panel loading><div className="coin-new-row">
           <Skeleton kind="other" width={48} height={48} modes={LIGHT} />
           <Skeleton kind="other" width={120} height={40} modes={LIGHT} />
         </div></Panel></ExampleCard>

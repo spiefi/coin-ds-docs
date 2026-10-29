@@ -4,7 +4,7 @@
 
 State: undocumented. No guide documents this component: its facts come from the package, and any guidance is a hint.
 
-Counter Badge: a small token-driven pill that displays a value.
+Counter Badge: a small token-driven badge that displays a value.
 
 ## Configuration (hints)
 

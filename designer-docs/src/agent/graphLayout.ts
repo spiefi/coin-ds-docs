@@ -143,7 +143,7 @@ export function layoutGraph(nodes: GraphNode[], edges: GraphEdge[]): GraphLayout
       }
     }
 
-    // Push overlapping labels apart, keeping a gap between pills.
+    // Push overlapping labels apart, keeping a gap between labels.
     for (let pass = 0; pass < 400; pass++) {
       let moved = false
       for (let i = 0; i < connected.length; i++) {

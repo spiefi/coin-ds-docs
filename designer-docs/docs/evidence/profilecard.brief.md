@@ -26,7 +26,7 @@ parts:
 1. Avatar — monogram, or a photo from avatarSource, 42 px. — target: avatar — side: left
 2. QR badge — badgeIcon on a white disc; null removes it. — target: badge — side: bottom
 3. Name — name, 14 px bold, on one line. — target: name — side: top
-4. UPI handles — upiHandles: a pill each; onPress makes a pill a button. — target: handles — side: right
+4. UPI handles — upiHandles: a UPI Handle each; onPress makes a UPI Handle a button. — target: handles — side: right
 5. Divider — Drawn only when there’s a body; showDivider hides it. — target: divider — side: left
 6. Body — children: your rows, given the card’s on-dark modes. — target: first body row — side: right
 7. Panel — A navy panel, 12 px corners, 20 px padding, 344 px wide. — target: R — side: left, at 0.9
@@ -68,12 +68,12 @@ Composition in `.coin-new-context` › `<FitWidth>` › `<VStack modes={{ ...LIG
 ## Do & Don'ts
 header: Do & Don’ts · title: Light rows, short handles, the card’s own style · description: Each pair shows a card that reads on its navy panel next to one that hides its text, lets a handle run past the panel, or covers it. Both sides sit in `<FitWidth>`.
 - Do Titles and Buttons in the body: They turn white and gold on the navy panel. — PC({ children: BODY() }) | Don't Support text or plain Text in the body: They stay dark and almost disappear. — PC({ children: BODY_DARK })
-- Do Short handles: Each fits its pill. — PC() | Don't A sentence as a handle: It never ends in …, so the pill runs past the panel. — PC({ upiHandles: [{ label: 'Tap to copy my UPI ID priya@jio and pay me back', iconName: 'ic_copy' }] })
+- Do Short handles: Each fits its UPI Handle. — PC() | Don't A sentence as a handle: It never ends in …, so the UPI Handle runs past the panel. — PC({ upiHandles: [{ label: 'Tap to copy my UPI ID priya@jio and pay me back', iconName: 'ic_copy' }] })
 - Do The card’s own row style: Rows sit on the navy panel. — PC({ children: BODY() }) | Don't List Item Style Boxed: White boxes cover the header and rows, and the name disappears. — PC({ children: BODY(), modes: { ...LIGHT, 'List Item Style': 'Boxed' } })
 
 ## Sources
 header: Sources · title: Use the public Profile Card contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Profile Card has one property, the body slot; the name, handles, badge, and photo are overrides there, and Premium is a variable mode. The card gives its children on-dark modes, but plain Text and ListItem support text stay dark on the navy panel, as in Figma’s own sample, and a child’s own modes override the card’s. The header is 48 px tall where Figma’s is 47, and the QR glyph is near-black, not grey. List Item Style Boxed covers the card in white boxes, and a long handle never ends in …, so its pill runs past the card. The published Storybook is older than the installed package and still shows the older generated page (all reported).
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Profile Card has one property, the body slot; the name, handles, badge, and photo are overrides there, and Premium is a variable mode. The card gives its children on-dark modes, but plain Text and ListItem support text stay dark on the navy panel, as in Figma’s own sample, and a child’s own modes override the card’s. The header is 48 px tall where Figma’s is 47, and the QR glyph is near-black, not grey. List Item Style Boxed covers the card in white boxes, and a long handle never ends in …, so its UPI Handle runs past the card. The published Storybook is older than the installed package and still shows the older generated page (all reported).
 
 ## Limits
 Don't show Dark, Page type, Context, Badge Size, Avatar Size, Icon Capsule Size, Attached Border, Slot gap, AppearanceBrand, Emphasis or Semantic Intent; List Item Style only in its Don't. Don't recommend Page type JioPlus to make body text light. Don't show a `header` override, or imply the card is pressable or that body text turns light.

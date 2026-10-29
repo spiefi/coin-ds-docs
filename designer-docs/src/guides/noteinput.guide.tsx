@@ -8,7 +8,7 @@ const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Componen
 const LIGHT = { 'Color Mode': 'Light' } as Modes
 const CARD = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes
 const AMOUNT = { 'Color Mode': 'Light', Context3: 'Amount Input' } as Modes
-const pill = (id: string) => `div:has(> div > ${byTestId(id)})`
+const noteBackground = (id: string) => `div:has(> div > ${byTestId(id)})`
 
 function Note({ initial = '', ...props }: { initial?: string } & Partial<ComponentProps<typeof NoteInput>>) {
   const [value, setValue] = useState(initial)
@@ -28,12 +28,12 @@ function NoteInputGuide() {
 
   const sections: GuideSectionSlots = {
     anatomy: {
-      header: 'Anatomy', title: 'A grey pill around the note',
-      description: 'The pill hugs its text: the placeholder until people type, then the note itself. Tapping anywhere on it starts typing, and a long note wraps inside it.',
+      header: 'Anatomy', title: 'A grey background around the note',
+      description: 'The background hugs its text: the placeholder until people type, then the note itself. Tapping anywhere on it starts typing, and a long note wraps inside it.',
       body: <Anatomy surface="white" parts={[
-        { name: 'Pill', note: 'Light grey with round ends; tap anywhere on it to type.', target: pill('note-anatomy'), side: 'bottom' },
+        { name: 'Background', note: 'Light grey with round ends; tap anywhere on it to type.', target: noteBackground('note-anatomy'), side: 'bottom' },
         { name: 'Note text', note: '14 px bold; the placeholder looks the same.', target: byTestId('note-anatomy'), side: 'top' },
-      ]} marks={[{ kind: 'padding', target: pill('note-anatomy') }]}>
+      ]} marks={[{ kind: 'padding', target: noteBackground('note-anatomy') }]}>
         <NoteInput testID="note-anatomy" value="Rent for April" onChangeText={() => {}} accessibilityLabel="Add note" modes={LIGHT} />
       </Anatomy>,
     },
@@ -48,24 +48,24 @@ function NoteInputGuide() {
     },
     states: {
       header: 'States', title: 'Empty, typing, filled, and read only',
-      description: 'Focus doesn’t change the pill’s colour: the placeholder disappears and a caret shows. A read-only note is faded and can’t be focused or changed.',
+      description: 'Focus doesn’t change the background’s colour: the placeholder disappears and a caret shows. A read-only note is faded and can’t be focused or changed.',
       body: <div className="coin-new-example-grid three">
-        <ExampleCard title="Empty" description="Tap it: the placeholder clears and the pill shrinks to the caret."><Host><Note /></Host></ExampleCard>
+        <ExampleCard title="Empty" description="Tap it: the placeholder clears and the background shrinks to the caret."><Host><Note /></Host></ExampleCard>
         <ExampleCard title="Filled" description="Same colour and weight as the placeholder."><Host><Note initial="Rent for April" /></Host></ExampleCard>
         <ExampleCard title="Read only" description="Faded to 60%; it can’t be focused or changed."><Host><NoteInput value="Gift" editable={false} accessibilityLabel="Note" modes={LIGHT} /></Host></ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: '35 px tall, as wide as its text',
-      description: 'The pill is 35 px tall for one line, with 8 px above and below the text and 16 px at each end. Its width follows the text up to the width of its container; a longer note wraps onto more lines.',
+      description: 'Note Input is 35 px tall for one line, with 8 px above and below the text and 16 px at each end. Its width follows the text up to the width of its container; a longer note wraps onto more lines.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} surface="white" marks={[
-          { kind: 'size', target: pill('note-size'), side: 'bottom', label: 'both' },
-          { kind: 'padding', target: pill('note-size') },
+          { kind: 'size', target: noteBackground('note-size'), side: 'bottom', label: 'both' },
+          { kind: 'padding', target: noteBackground('note-size') },
         ]}>
           <NoteInput testID="note-size" value="" onChangeText={() => {}} accessibilityLabel="Add note" modes={LIGHT} />
         </Anatomy>
-        <ExampleCard title="It grows as people type" description="Type in the note: the pill widens with each character."><Host><Note initial="Dinner" /></Host></ExampleCard>
+        <ExampleCard title="It grows as people type" description="Type in the note: the background widens with each character."><Host><Note initial="Dinner" /></Host></ExampleCard>
       </div>,
     },
     content: {
@@ -92,10 +92,10 @@ function NoteInputGuide() {
       header: 'Do & Don’ts', title: 'Keep notes short and optional',
       description: 'Each pair shows a note people can use versus one that crowds the screen or hides what they need.',
       body: <div className="coin-new-stack">
-        <DoDont goodTitle="Keep it to a few words" goodCaption="The pill hugs the note on one line." good={<Host narrow><Note initial="Rent for April" /></Host>}
+        <DoDont goodTitle="Keep it to a few words" goodCaption="The background hugs the note on one line." good={<Host narrow><Note initial="Rent for April" /></Host>}
           badTitle="Write a sentence" badCaption="A long note wraps onto a second line and takes more room under the amount." bad={<Host narrow><Note initial="Rent for April and the maintenance" /></Host>} />
         <DoDont goodTitle="Ask for required details in a Form Field" goodCaption="A label and a required mark say it must be filled in." good={<Host><VStack modes={LIGHT} style={{ width: '100%', padding: 0 }}><FormField label="Reason for transfer" isRequired placeholder="For example, rent" modes={LIGHT} /></VStack></Host>}
-          badTitle="Hide a required detail in a note" badCaption="The pill has no label, required mark, or error, so people skip it." bad={<Host><Note placeholder="Reason (required)" /></Host>} />
+          badTitle="Hide a required detail in a note" badCaption="Note Input has no label, required mark, or error, so people skip it." bad={<Host><Note placeholder="Reason (required)" /></Host>} />
       </div>,
     },
     sources: {
@@ -103,7 +103,7 @@ function NoteInputGuide() {
       description: 'The guide compares the Figma component with the installed package and its Storybook stories.',
       body: <Sources checked="13 October 2026" figmaUrl={FIGMA} storybookUrl={docsUrl('noteinput')} stories={[
         { label: 'Default', id: 'components-noteinput--default' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Note Input has Idle and Editing variants, 95 × 34; the package has none: it follows focus, grows with the text, wraps a long note inside the pill, and is 35 px tall for one line. Its colours are the same in Dark mode, so this page shows Light only. It keeps what people type on its own, or takes its value from the screen. On the web each note is one Tab stop, its text is read once, and it keeps its name, the placeholder or yours, while focused. A read-only note is faded and can’t be focused. Enter starts a new line in the note. The published Storybook has one story; newer stories are not deployed yet.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Note Input has Idle and Editing variants, 95 × 34; the package has none: it follows focus, grows with the text, wraps a long note inside its background, and is 35 px tall for one line. Its colours are the same in Dark mode, so this page shows Light only. It keeps what people type on its own, or takes its value from the screen. On the web each note is one Tab stop, its text is read once, and it keeps its name, the placeholder or yours, while focused. A read-only note is faded and can’t be focused. Enter starts a new line in the note. The published Storybook has one story; newer stories are not deployed yet.</Sources>,
     },
   }
 
@@ -119,7 +119,7 @@ function NoteInputGuide() {
     <div className="controls-panel">
       <label className="text-control"><span>Placeholder</span><input value={placeholder} onChange={event => setPlaceholder(event.target.value)} maxLength={24} /></label>
       <OnOff label="Read only" value={readOnly} onChange={setReadOnly} />
-      <Readout title="Note" value={note || 'Empty'}>Tap the pill to type. It grows with the text and wraps at the width of its column.</Readout>
+      <Readout title="Note" value={note || 'Empty'}>Tap the grey background to type. It grows with the text and wraps at the width of its column.</Readout>
     </div>
   </>} sections={sections} />
 }

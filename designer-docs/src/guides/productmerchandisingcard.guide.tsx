@@ -57,7 +57,7 @@ function ProductMerchandisingCardGuide() {
         { name: 'Photo', note: 'imageSource, cropped to fill the card.', target: SEL.photo, side: 'right', at: 0.35 },
         { name: 'Avatar', note: 'avatarSource, or avatarMonogram’s initials, 36 px.', target: SEL.avatar, side: 'left' },
         { name: 'Corner badge', note: 'badgeLabel: a lilac Badge; hidden without a label.', target: SEL.corner, side: 'top' },
-        { name: 'Glass badge', note: 'specialBadgeLabel: a frosted pill above the title.', target: SEL.glass, side: 'left' },
+        { name: 'Glass badge', note: 'specialBadgeLabel: a frosted glass Badge above the title.', target: SEL.glass, side: 'left' },
         { name: 'Title', note: 'title, 14 px bold white, over subtitle; one line each.', target: SEL.text, side: 'bottom' },
         { name: 'Button', note: 'A small purple Button from ctaLabel and onCtaPress.', target: SEL.button, side: 'right' },
         { name: 'Footer', note: 'A blurred copy of the photo behind the text; no dark shade.', target: SEL.footer, side: 'bottom', at: 0.9 },
@@ -65,7 +65,7 @@ function ProductMerchandisingCardGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Badges, an avatar, and one look for both',
-      description: 'imageSource is the photo; the card has none of its own. badgeLabel adds a lilac badge at the top right and specialBadgeLabel a frosted pill above the title; each stays hidden without a label, and badgeIcon and specialBadgeIcon put an Icon before it. avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it. ctaLabel and onCtaPress make the small purple Button. One modes object styles the corner badge and the Button together: AppearanceBrand Primary turns both gold, and Emphasis, Badge Size, and Button / Size change them too. badge, avatar, specialBadge, and cta replace those parts and don’t get the card’s modes.',
+      description: 'imageSource is the photo; the card has none of its own. badgeLabel adds a lilac badge at the top right and specialBadgeLabel a frosted glass Badge above the title; each stays hidden without a label, and badgeIcon and specialBadgeIcon put an Icon before it. avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it. ctaLabel and onCtaPress make the small purple Button. One modes object styles the corner badge and the Button together: AppearanceBrand Primary turns both gold, and Emphasis, Badge Size, and Button / Size change them too. badge, avatar, specialBadge, and cta replace those parts and don’t get the card’s modes.',
       body: <div className="coin-new-stack">
         <div className="coin-new-example-grid">
           <ExampleCard title="Full card" description="An avatar, both badges, and an action.">{F()}</ExampleCard>

@@ -3,7 +3,7 @@
 slug: chipgroup · label: Chip Group · public API: ChipGroup (+ ChipSelect children; VStack for hosting)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1905-5123 · storybook: docsUrl('chipgroup') · stories: Default=components-chipgroup--default, With active state=components-chipgroup--with-active-state
 checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
-icon: three small pills, two on the first row and one below — `<rect x="2" y="3.5" width="6" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" /><rect x="10" y="3.5" width="6" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" /><rect x="2" y="10.5" width="9" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" />`
+icon: three small rounded rectangles, two on the first row and one below — `<rect x="2" y="3.5" width="6" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" /><rect x="10" y="3.5" width="6" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" /><rect x="2" y="10.5" width="9" height="4" rx="2" stroke="currentColor" strokeWidth="1.5" />`
 keywords: filter chips, chip row, filters
 
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`. Every ChipGroup gets `modes={LIGHT}`; chips inside take no `modes` (the group passes its modes to them). Every chip gets an `icon`.

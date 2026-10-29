@@ -28,10 +28,10 @@ function NumberPaginationGuide() {
 
   const sections: GuideSectionSlots = {
     anatomy: {
-      header: 'Anatomy', title: 'Numbers on a glass pill',
-      description: 'A frosted, translucent pill holds one circular number per page. The page in view is a white circle with a dark number.',
+      header: 'Anatomy', title: 'Numbers on rounded glass',
+      description: 'A frosted, translucent, fully rounded background holds one circular number per page. The page in view is a white circle with a dark number.',
       body: <Anatomy surface="dark" parts={[
-        { name: 'Glass pill', note: 'Frosted, translucent surface with a thin light border.', target: '[role="navigation"]', side: 'left' },
+        { name: 'Glass background', note: 'Frosted, translucent surface with a thin light border.', target: '[role="navigation"]', side: 'left' },
         { name: 'Active page', note: 'White circle with a dark number for the slide in view.', target: '[aria-label="Page 1"]', side: 'top' },
         { name: 'Page number', note: 'Other pages in white; each is a 32 px pressable circle.', target: '[aria-label="Page 3"]', side: 'bottom' },
       ]} marks={[{ kind: 'size', target: '[aria-label="Page 4"]', side: 'right' }]}>
@@ -40,7 +40,7 @@ function NumberPaginationGuide() {
     },
     configuration: {
       header: 'Configuration', title: 'Set how many pages',
-      description: 'Each page adds a 32 px circle. Keep the count small so the pill stays compact over the image.',
+      description: 'Each page adds a 32 px circle. Keep the count small so Number Pagination stays compact over the image.',
       body: <div className="coin-new-example-grid three">
         <ExampleCard title="Three pages" description="For a short set, such as three offers."><OnImage total={3} initial={1} /></ExampleCard>
         <ExampleCard title="Four pages" description="The Figma default."><OnImage total={4} initial={2} /></ExampleCard>
@@ -57,7 +57,7 @@ function NumberPaginationGuide() {
     },
     sizing: {
       header: 'Sizing', title: '39 px tall, 32 px per page',
-      description: 'The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide. It does not wrap: pages that do not fit scroll sideways inside the pill.',
+      description: 'Number Pagination is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide. It does not wrap: pages that do not fit scroll sideways inside the glass background.',
       body: <Anatomy legend={false} surface="dark" marks={[
         { kind: 'size', target: '[role="navigation"]', side: 'top', label: 'both' },
         { kind: 'size', target: '[aria-label="Page 1"]', side: 'bottom', label: 'both' },
@@ -87,7 +87,7 @@ function NumberPaginationGuide() {
           goodCaption="White numbers stand out on a photo." badCaption="White numbers disappear on white." />
         <DoDont good={<OnImage total={5} initial={1} />} bad={<OnImage total={12} initial={1} />}
           goodTitle="Keep to a few pages" badTitle="Show every page of a long set"
-          goodCaption="Five numbers fit comfortably." badCaption="Twelve pages don’t fit, so people must scroll the pill to find the rest." />
+          goodCaption="Five numbers fit comfortably." badCaption="Twelve pages don’t fit, so people must scroll the numbers to find the rest." />
       </div>,
     },
     sources: {
@@ -97,7 +97,7 @@ function NumberPaginationGuide() {
         { label: 'Default', id: 'components-numberpagination--default' },
         { label: 'Active page', id: 'components-numberpagination--active-page' },
         { label: 'Custom children', id: 'components-numberpagination--custom-children' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the pill. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the glass background. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.</Sources>,
     },
   }
 

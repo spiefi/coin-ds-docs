@@ -15,7 +15,7 @@ type Message = 'Short' | 'Long'
 type Timeout = '4 s' | '8 s' | 'Stays'
 const TIMEOUTS: Record<Timeout, number> = { '4 s': 4000, '8 s': 8000, Stays: 0 }
 
-function Pill({ id, title, startItem, slotItem, modes = LIGHT }: { id: string; title: string; startItem?: boolean; slotItem?: ReactNode; modes?: Modes }) {
+function StaticToast({ id, title, startItem, slotItem, modes = LIGHT }: { id: string; title: string; startItem?: boolean; slotItem?: ReactNode; modes?: Modes }) {
   return <Toast id={id} title={title} timeout={0} modes={modes} startItem={startItem} slotItem={slotItem} />
 }
 
@@ -45,24 +45,24 @@ function ToastGuide() {
 
   const sections: GuideSectionSlots = {
     anatomy: {
-      header: 'Anatomy', title: 'A dark pill with a message',
-      description: 'A toast is a dark pill holding one message and, if you ask for it, a leading icon. It has no buttons; it closes itself.',
+      header: 'Anatomy', title: 'A dark surface with a message',
+      description: 'A toast is a dark rounded surface holding one message and, if you ask for it, a leading icon. It has no buttons; it closes itself.',
       body: <Anatomy specimenWidth={300} parts={[
-        { name: 'Pill', note: 'Dark grey with 14 px corners and a soft shadow; the same in every mode.', target: '[role="alert"]', side: 'left' },
+        { name: 'Surface', note: 'Dark grey with 14 px corners and a soft shadow; the same in every mode.', target: '[role="alert"]', side: 'left' },
         { name: 'Leading icon', note: 'Optional 18 px icon; the card icon unless you swap it.', target: '[role="alert"] svg', side: 'top' },
         { name: 'Message', note: 'White 14 px text, up to two lines.', target: '[role="alert"] [dir="auto"]', side: 'bottom' },
       ]}><Toast id="toast-anatomy" title="Mobile number is invalid" startItem timeout={0} modes={LIGHT} /></Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'Message, icon, and brand',
-      description: "A toast is one message with an optional leading icon. Only the icon follows AppearanceBrand; the pill is the same dark grey in every mode. Where toasts appear, top or bottom, is set once on the screen's provider: try it in the playground.",
+      description: "A toast is one message with an optional leading icon. Only the icon follows AppearanceBrand; the surface is the same dark grey in every mode. Where toasts appear, top or bottom, is set once on the screen's provider: try it in the playground.",
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Message only" description="The default: one line of white text in a dark pill."><Surface width="wide" elevated><Pill id="toast-config-plain" title="Mobile number is invalid" /></Surface></ExampleCard>
-        <ExampleCard title="With the card icon" description="startItem adds the card icon before the message, white by default, as in Figma."><Surface width="wide" elevated><Pill id="toast-config-card" title="Mobile number is invalid" startItem /></Surface></ExampleCard>
-        <ExampleCard title="Your own icon" description="Swap in another 18 px icon; it takes the Coin icon colour, a deeper gold."><Surface width="wide" elevated><Pill id="toast-config-own" title="Payment successful" startItem slotItem={<Icon iconName="ic_confirm" size={18} />} /></Surface></ExampleCard>
+        <ExampleCard title="Message only" description="The default: one line of white text on a dark surface."><Surface width="wide" elevated><StaticToast id="toast-config-plain" title="Mobile number is invalid" /></Surface></ExampleCard>
+        <ExampleCard title="With the card icon" description="startItem adds the card icon before the message, white by default, as in Figma."><Surface width="wide" elevated><StaticToast id="toast-config-card" title="Mobile number is invalid" startItem /></Surface></ExampleCard>
+        <ExampleCard title="Your own icon" description="Swap in another 18 px icon; it takes the Coin icon colour, a deeper gold."><Surface width="wide" elevated><StaticToast id="toast-config-own" title="Payment successful" startItem slotItem={<Icon iconName="ic_confirm" size={18} />} /></Surface></ExampleCard>
         <ExampleCard title="Icon by brand" description="AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default.">
           <Surface width="wide" elevated><div className="coin-new-stack">
-            {(['Primary', 'Secondary', 'Tertiary', 'Neutral'] as const).map(b => <Pill key={b} id={`toast-brand-${b}`} title={b} startItem modes={{ ...LIGHT, AppearanceBrand: b } as Modes} />)}
+            {(['Primary', 'Secondary', 'Tertiary', 'Neutral'] as const).map(b => <StaticToast key={b} id={`toast-brand-${b}`} title={b} startItem modes={{ ...LIGHT, AppearanceBrand: b } as Modes} />)}
           </div></Surface>
         </ExampleCard>
       </div>,
@@ -82,11 +82,11 @@ function ToastGuide() {
       description: 'A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below. Long messages wrap to two lines, then end in an ellipsis, unless the toast is added with disableTruncation, which shows every line.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} specimenWidth={300} marks={[{ kind: 'size', target: '[role="alert"]', side: 'right', label: 'both' }, { kind: 'padding', target: '[role="alert"]' }]}>
-          <Pill id="toast-sizing" title="Mobile number is invalid" startItem />
+          <StaticToast id="toast-sizing" title="Mobile number is invalid" startItem />
         </Anatomy>
         <div className="coin-new-example-grid">
-          <ExampleCard title="Short message" description="Even one word gets a 200 px pill."><Surface width="wide" elevated><Pill id="toast-size-short" title="Saved" /></Surface></ExampleCard>
-          <ExampleCard title="Long message" description="It wraps to two lines, then ends in an ellipsis; the rest is lost."><Surface width="wide" elevated><Pill id="toast-size-long" title={LONG} /></Surface></ExampleCard>
+          <ExampleCard title="Short message" description="Even one word gets a 200 px toast."><Surface width="wide" elevated><StaticToast id="toast-size-short" title="Saved" /></Surface></ExampleCard>
+          <ExampleCard title="Long message" description="It wraps to two lines, then ends in an ellipsis; the rest is lost."><Surface width="wide" elevated><StaticToast id="toast-size-long" title={LONG} /></Surface></ExampleCard>
         </div>
       </div>,
     },
@@ -95,9 +95,9 @@ function ToastGuide() {
       description: 'Say what happened in a few words, such as Payment successful or UPI ID copied. A toast has no buttons and closes itself, so never ask for a decision or put anything in it that people must read twice.',
       body: <ExampleCard title="Confirmations" description="Short, specific, and about something that already happened.">
         <Surface width="wide" elevated><div className="coin-new-stack">
-          <Pill id="toast-content-1" title="Payment successful" />
-          <Pill id="toast-content-2" title="UPI ID copied" />
-          <Pill id="toast-content-3" title="Mobile number is invalid" />
+          <StaticToast id="toast-content-1" title="Payment successful" />
+          <StaticToast id="toast-content-2" title="UPI ID copied" />
+          <StaticToast id="toast-content-3" title="Mobile number is invalid" />
         </div></Surface>
       </ExampleCard>,
     },
@@ -117,10 +117,10 @@ function ToastGuide() {
       header: 'Do & Don’ts', title: 'Short, and about what already happened',
       description: "Each pair shows a toast people take in at a glance next to one they can't finish reading or act on.",
       body: <div className="coin-new-stack">
-        <DoDont good={<Pill id="toast-do-1" title="Payment successful" />} bad={<Pill id="toast-dont-1" title={LONG} />}
+        <DoDont good={<StaticToast id="toast-do-1" title="Payment successful" />} bad={<StaticToast id="toast-dont-1" title={LONG} />}
           goodTitle="Keep it to one line" badTitle="Write a paragraph"
           goodCaption="“Payment successful” reads at a glance." badCaption="Past two lines the message is cut off, and nothing shows the rest." />
-        <DoDont good={<Pill id="toast-do-2" title="UPI ID copied" />} bad={<Pill id="toast-dont-2" title="Retry the payment?" />}
+        <DoDont good={<StaticToast id="toast-do-2" title="UPI ID copied" />} bad={<StaticToast id="toast-dont-2" title="Retry the payment?" />}
           goodTitle="Confirm what happened" badTitle="Ask for a decision"
           goodCaption="The action is done; the toast just says so." badCaption="A toast has no buttons and disappears in 4 s, so people can't answer." />
       </div>,
@@ -135,7 +135,7 @@ function ToastGuide() {
         { label: 'Persistent toast', id: 'components-toast--persistent-toast' },
         { label: 'Custom timeout', id: 'components-toast--custom-timeout' },
         { label: 'With start item', id: 'components-toast--with-start-item' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Toast is one 291 × 46 component with a text, an optional start icon, and an icon swap; its icon resolves to white. Since the #267 fix the default icon is white too; an AppearanceBrand mode recolours it, while the pill stays the same dark grey in every mode. Screens add toasts with addToast and show them through one ToastProvider: every provider shows the same queue, so this page mounts one at a time. Toasts slide in from their edge and fade out, as in the package, and messages stop at two lines unless addToast sets disableTruncation. Each toast is announced as an alert. The published Storybook page is still the old generated one.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (16 October build) from the team’s private package repository. Figma’s Toast is one 291 × 46 component with a text, an optional start icon, and an icon swap; its icon resolves to white. Since the #267 fix the default icon is white too; an AppearanceBrand mode recolours it, while the surface stays the same dark grey in every mode. Screens add toasts with addToast and show them through one ToastProvider: every provider shows the same queue, so this page mounts one at a time. Toasts slide in from their edge and fade out, as in the package, and messages stop at two lines unless addToast sets disableTruncation. Each toast is announced as an alert. The published Storybook page is still the old generated one.</Sources>,
     },
   }
 
@@ -166,7 +166,7 @@ export default defineGuide({
   slug: 'toast',
   label: 'Toast',
   summary: 'Use a Toast to confirm something that just happened, such as a payment or a copy, in a short message that closes itself.',
-  keywords: ['snackbar', 'notification', 'confirmation message', 'alert pill'],
+  keywords: ['snackbar', 'notification', 'confirmation message', 'alert'],
   icon: <><rect x="2.5" y="10" width="13" height="5" rx="2.5" stroke="currentColor" strokeWidth="1.5" /><path d="M5 6h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>,
   Component: ToastGuide,
 })

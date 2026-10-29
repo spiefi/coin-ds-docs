@@ -62,7 +62,7 @@ function NudgeGuide() {
         { name: 'Icon', note: 'A 20 px sparkle by default; it can be swapped or removed.', target: `${R} > div:first-child`, side: 'left' },
         { name: 'Title', note: '14 px bold; says what’s on offer in a line.', target: `${R} > div:nth-child(2) > div:first-child > div:first-child`, side: 'top' },
         { name: 'Body', note: '12 px; one sentence of detail.', target: `${R} > div:nth-child(2) > div:first-child > div:nth-child(2)`, side: 'right' },
-        { name: 'Button', note: 'The one next step, as a small pill.', target: `${R} [role="button"]`, side: 'bottom' },
+        { name: 'Button', note: 'The one next step, as a small Button.', target: `${R} [role="button"]`, side: 'bottom' },
         { name: 'Card', note: 'Tinted by its appearance mode, with 12 px padding.', target: R, side: 'top', at: 0.9 },
       ]}><Nudge modes={NEUTRAL} {...SPLIT} onPressButton={noop} /></Anatomy>,
     },
@@ -131,7 +131,7 @@ function NudgeGuide() {
           good={<Host><Nudge modes={NEUTRAL} {...SPLIT} onPressButton={noop} /></Host>}
           bad={<Host><Nudge modes={{ ...NEUTRAL, Context: 'Default' } as Modes} {...SPLIT} onPressButton={noop} /></Host>}
           goodTitle="Keep Nudge’s own context" badTitle="Pass another Context"
-          goodCaption="The button is Figma’s small pill and stays below the message." badCaption="A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message." />
+          goodCaption="The button is Figma’s small Button and stays below the message." badCaption="A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message." />
         <DoDont
           good={<Host><Nudge modes={NEUTRAL} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" onPressButton={noop} /></Host>}
           bad={<Host><Nudge modes={NEUTRAL} /></Host>}

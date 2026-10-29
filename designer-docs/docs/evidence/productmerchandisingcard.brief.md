@@ -23,13 +23,13 @@ parts:
 1. Photo — imageSource, cropped to fill the card. — target: photo — side: right, at 0.35
 2. Avatar — avatarSource, or avatarMonogram’s initials, 36 px. — target: avatar — side: left
 3. Corner badge — badgeLabel: a lilac Badge; hidden without a label. — target: corner badge — side: top
-4. Glass badge — specialBadgeLabel: a frosted pill above the title. — target: glass badge — side: left
+4. Glass badge — specialBadgeLabel: a frosted glass Badge above the title. — target: glass badge — side: left
 5. Title — title, 14 px bold white, over subtitle; one line each. — target: text — side: bottom
 6. Button — A small purple Button from ctaLabel and onCtaPress. — target: button — side: right
 7. Footer — A blurred copy of the photo behind the text; no dark shade. — target: footer — side: bottom, at 0.9
 
 ## Configuration
-header: Configuration · title: Badges, an avatar, and one look for both · description: imageSource is the photo; the card has none of its own. badgeLabel adds a lilac badge at the top right and specialBadgeLabel a frosted pill above the title; each stays hidden without a label, and badgeIcon and specialBadgeIcon put an Icon before it. avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it. ctaLabel and onCtaPress make the small purple Button. One modes object styles the corner badge and the Button together: AppearanceBrand Primary turns both gold, and Emphasis, Badge Size, and Button / Size change them too. badge, avatar, specialBadge, and cta replace those parts and don’t get the card’s modes.
+header: Configuration · title: Badges, an avatar, and one look for both · description: imageSource is the photo; the card has none of its own. badgeLabel adds a lilac badge at the top right and specialBadgeLabel a frosted glass Badge above the title; each stays hidden without a label, and badgeIcon and specialBadgeIcon put an Icon before it. avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it. ctaLabel and onCtaPress make the small purple Button. One modes object styles the corner badge and the Button together: AppearanceBrand Primary turns both gold, and Emphasis, Badge Size, and Button / Size change them too. badge, avatar, specialBadge, and cta replace those parts and don’t get the card’s modes.
 Body: `<div className="coin-new-stack">` with two `coin-new-example-grid` grids (two columns), each card in `<FitWidth>`.
 Grid 1:
 - Full card — M() — lesson: An avatar, both badges, and an action.

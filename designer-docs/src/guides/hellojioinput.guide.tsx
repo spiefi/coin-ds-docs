@@ -6,7 +6,7 @@ import { defineGuide } from './define'
 
 const LIGHT = { 'Color Mode': 'Light' } as Modes
 const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7584-1796'
-const PILL = ':scope > div'
+const FIELD = ':scope > div'
 const FILES = [
   { title: 'Statement_Sep', subtitle: 'PDF file' },
   { title: 'PAN_card', subtitle: 'PDF file' },
@@ -46,10 +46,10 @@ function Field(props: InputProps) {
 function AnatomySpecimen() {
   const [value, setValue] = useState('')
   return <Anatomy surface="white" specimenWidth={300} parts={[
-    { name: 'Brand icon', note: 'The HelloJio mark; it can be turned off.', target: `${PILL} > div:first-child`, side: 'left' },
+    { name: 'Brand icon', note: 'The HelloJio mark; it can be turned off.', target: `${FIELD} > div:first-child`, side: 'left' },
     { name: 'Prompt', note: 'The placeholder, then the question people type; one line.', target: byTestId('hj-anatomy'), side: 'top' },
-    { name: 'Send', note: 'Gold button that sends the text; Return sends too.', target: `${PILL} > div:last-child`, side: 'right' },
-    { name: 'Pill', note: 'Grey rounded surface; white with a border while focused.', target: PILL, side: 'bottom' },
+    { name: 'Send', note: 'Gold button that sends the text; Return sends too.', target: `${FIELD} > div:last-child`, side: 'right' },
+    { name: 'Field', note: 'Grey rounded surface; white with a border while focused.', target: FIELD, side: 'bottom' },
   ]}>
     <HelloJioInput modes={LIGHT} testID="hj-anatomy" value={value} onChangeText={setValue} />
   </Anatomy>
@@ -88,24 +88,24 @@ function HelloJioInputGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'A brand icon, the prompt, and a send button',
-      description: 'A grey pill holds the HelloJio mark, one line for the question, and a gold send button.',
+      description: 'A grey rounded field holds the HelloJio mark, one line for the question, and a gold send button.',
       body: <AnatomySpecimen />,
     },
     configuration: {
-      header: 'Configuration', title: 'Choose what the pill shows',
-      description: 'The brand icon and send button are on by default and can each be turned off. Attachments people add sit inside the pill, above the prompt.',
+      header: 'Configuration', title: 'Choose what the field shows',
+      description: 'The brand icon and send button are on by default and can each be turned off. Attachments people add sit inside the field, above the prompt.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="Default" description="The brand icon, the prompt, and the send button."><Field /></ExampleCard>
         <ExampleCard title="Without the brand icon" description="For screens that already show the HelloJio mark."><Field leading={null} /></ExampleCard>
         <ExampleCard title="Without send" description="The Return key still sends the text."><Field trailing={null} /></ExampleCard>
-        <ExampleCard title="With an attachment" description="Files people added sit above the prompt, and the pill grows to fit."><Field files={1} /></ExampleCard>
+        <ExampleCard title="With an attachment" description="Files people added sit above the prompt, and the field grows to fit."><Field files={1} /></ExampleCard>
       </div>,
     },
     states: {
       header: 'States', title: 'Idle, focused, Jio Plus, and disabled',
-      description: 'The pill is grey while idle and turns white with a border while people type. Over imagery, Jio Plus makes the idle pill frosted glass.',
+      description: 'The field is grey while idle and turns white with a border while people type. Over imagery, Jio Plus makes the idle field frosted glass.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Idle" description="Grey pill. Select it to see the white focused pill."><Field /></ExampleCard>
+        <ExampleCard title="Idle" description="Grey field. Select it to see the white focused field."><Field /></ExampleCard>
         <ExampleCard title="Jio Plus" description="Frosted glass over imagery while not focused. The prompt and typed text stay readable."><PhotoHost><Input jioPlus /></PhotoHost></ExampleCard>
         <ExampleCard title="Disabled" description="Half opacity; typing and sending are off."><Field disabled /></ExampleCard>
       </div>,
@@ -115,12 +115,12 @@ function HelloJioInputGuide() {
       description: 'HelloJio Input fills its container’s width and is 38 px tall (36 px in Jio Plus, which has no border), with an 18 px brand icon and a 26 px send button. Attachments add height above the prompt.',
       body: <div className="coin-new-stack">
         <Anatomy legend={false} surface="white" specimenWidth={300} marks={[
-          { kind: 'size', target: PILL, side: 'bottom', label: 'both' },
-          { kind: 'padding', target: PILL },
+          { kind: 'size', target: FIELD, side: 'bottom', label: 'both' },
+          { kind: 'padding', target: FIELD },
         ]}>
           <HelloJioInput modes={LIGHT} value="" onChangeText={() => {}} />
         </Anatomy>
-        <ExampleCard title="With two attachments" description="The pill grows, and the chips scroll sideways when they run out of room."><Field files={2} /></ExampleCard>
+        <ExampleCard title="With two attachments" description="The field grows, and the chips scroll sideways when they run out of room."><Field files={2} /></ExampleCard>
       </div>,
     },
     content: {
@@ -140,8 +140,8 @@ function HelloJioInputGuide() {
       header: 'Do & Don’ts', title: 'Keep the prompt clear',
       description: 'Each pair shows a prompt people understand versus one that misleads them.',
       body: <div className="coin-new-stack">
-        <DoDont goodTitle="Keep the prompt short" goodCaption="The whole prompt fits in the pill." good={<Field placeholder="Ask me anything" />}
-          badTitle="Write a long prompt" badCaption="It is cut off in the pill." bad={<Field placeholder="Ask me anything about your gold, savings, loans, or bills" />} />
+        <DoDont goodTitle="Keep the prompt short" goodCaption="The whole prompt fits in the field." good={<Field placeholder="Ask me anything" />}
+          badTitle="Write a long prompt" badCaption="It is cut off in the field." bad={<Field placeholder="Ask me anything about your gold, savings, loans, or bills" />} />
         <DoDont goodTitle="Use it to ask HelloJio" goodCaption="The brand mark and send button promise an answer." good={<Field placeholder="Ask about your gold savings" />}
           badTitle="Use it for search" badCaption="People expect an answer, not a list of results." bad={<Field placeholder="Search transactions" />} />
         <DoDont goodTitle="Let people remove attachments" goodCaption="The close button takes the file out." good={<Field files={1} />}
@@ -158,7 +158,7 @@ function HelloJioInputGuide() {
         { label: 'Submit log', id: 'components-hellojioinput--submit-log' },
         { label: 'Without send', id: 'components-hellojioinput--without-send' },
         { label: 'With attachments', id: 'components-hellojioinput--with-attachments' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s HelloJio Input is a set with Idle, Active, and IdleJioPlus states, start and end slot options, and an attachment slot. The package sets the state from focus and the Jio Plus option. The pill is 38 px tall, or 36 px in Jio Plus, as in Figma; the send button is 26 px (28 px in Figma). Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field. On the web Tab goes from the input straight to Send. Dark mode is not shown.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s HelloJio Input is a set with Idle, Active, and IdleJioPlus states, start and end slot options, and an attachment slot. The package sets the state from focus and the Jio Plus option. The field is 38 px tall, or 36 px in Jio Plus, as in Figma; the send button is 26 px (28 px in Figma). Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field. On the web Tab goes from the input straight to Send. Dark mode is not shown.</Sources>,
     },
   }
 

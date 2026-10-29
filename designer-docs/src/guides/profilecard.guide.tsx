@@ -61,7 +61,7 @@ function ProfileCardGuide() {
         { name: 'Avatar', note: 'monogram, or a photo from avatarSource, 42 px.', target: AVATAR, side: 'left' },
         { name: 'QR badge', note: 'badgeIcon on a white disc; null removes it.', target: BADGE, side: 'bottom' },
         { name: 'Name', note: 'name, 14 px bold, on one line.', target: NAME, side: 'top' },
-        { name: 'UPI handles', note: 'upiHandles: a pill each; onPress makes a pill a button.', target: HANDLES_SEL, side: 'right' },
+        { name: 'UPI handles', note: 'upiHandles: a UPI Handle each; onPress makes a UPI Handle a button.', target: HANDLES_SEL, side: 'right' },
         { name: 'Divider', note: 'Drawn only when there’s a body; showDivider hides it.', target: DIVIDER, side: 'left' },
         { name: 'Body', note: 'children: your rows, given the card’s on-dark modes.', target: FIRST_ROW, side: 'right' },
         { name: 'Panel', note: 'A navy panel, 12 px corners, 20 px padding, 344 px wide.', target: R, side: 'left', at: 0.9 },
@@ -129,7 +129,7 @@ function ProfileCardGuide() {
       description: 'Each pair shows a card that reads on its navy panel next to one that hides its text, lets a handle run past the panel, or covers it.',
       body: <div className="coin-new-stack">
         <DoDont good={Fit({ children: BODY() })} bad={Fit({ children: BODY_DARK })} goodTitle="Titles and Buttons in the body" badTitle="Support text or plain Text in the body" goodCaption="They turn white and gold on the navy panel." badCaption="They stay dark and almost disappear." />
-        <DoDont good={Fit()} bad={Fit({ upiHandles: [{ label: 'Tap to copy my UPI ID priya@jio and pay me back', iconName: 'ic_copy' }] })} goodTitle="Short handles" badTitle="A sentence as a handle" goodCaption="Each fits its pill." badCaption="It never ends in …, so the pill runs past the panel." />
+        <DoDont good={Fit()} bad={Fit({ upiHandles: [{ label: 'Tap to copy my UPI ID priya@jio and pay me back', iconName: 'ic_copy' }] })} goodTitle="Short handles" badTitle="A sentence as a handle" goodCaption="Each fits its UPI Handle." badCaption="It never ends in …, so the UPI Handle runs past the panel." />
         <DoDont good={Fit({ children: BODY() })} bad={Fit({ children: BODY(), modes: { ...LIGHT, 'List Item Style': 'Boxed' } as Modes })} goodTitle="The card’s own row style" badTitle="List Item Style Boxed" goodCaption="Rows sit on the navy panel." badCaption="White boxes cover the header and rows, and the name disappears." />
       </div>,
     },
@@ -142,7 +142,7 @@ function ProfileCardGuide() {
         { label: 'Header only', id: 'components-profilecard--header-only' },
         { label: 'Pressable handles', id: 'components-profilecard--pressable-handles' },
         { label: 'With image avatar', id: 'components-profilecard--with-image-avatar' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Profile Card has one property, the body slot; the name, handles, badge, and photo are overrides there, and Premium is a variable mode. The card gives its children on-dark modes, but plain Text and ListItem support text stay dark on the navy panel, as in Figma’s own sample, and a child’s own modes override the card’s. The header is 48 px tall where Figma’s is 47, and the QR glyph is near-black, not grey. List Item Style Boxed covers the card in white boxes, and a long handle never ends in …, so its pill runs past the card. The published Storybook is older than the installed package and still shows the older generated page (all reported).</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Profile Card has one property, the body slot; the name, handles, badge, and photo are overrides there, and Premium is a variable mode. The card gives its children on-dark modes, but plain Text and ListItem support text stay dark on the navy panel, as in Figma’s own sample, and a child’s own modes override the card’s. The header is 48 px tall where Figma’s is 47, and the QR glyph is near-black, not grey. List Item Style Boxed covers the card in white boxes, and a long handle never ends in …, so its UPI Handle runs past the card. The published Storybook is older than the installed package and still shows the older generated page (all reported).</Sources>,
     },
   }
 

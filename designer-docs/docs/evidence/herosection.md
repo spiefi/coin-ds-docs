@@ -26,7 +26,7 @@ Package, Figma, and Storybook evidence for the Hero Section guide (board ticket 
 
 ## Web render
 
-Root `div[data-testid]` (column, padding 16/12/16/12, gap 16, white) › `h1[role=heading]` title block (gap 2) › [`div[dir=auto]` title, `div[dir=auto]` subtitle] · `div` row (gap 16) › [`div` InputSearch (flex 1, 42 tall, `#f5f5f5` pill) › `input[aria-label]`; `button[aria-label="Filter"]` 40 × 40] · `div` body.
+Root `div[data-testid]` (column, padding 16/12/16/12, gap 16, white) › `h1[role=heading]` title block (gap 2) › [`div[dir=auto]` title, `div[dir=auto]` subtitle] · `div` row (gap 16) › [`div` InputSearch (flex 1, 42 tall, `#f5f5f5`, fully rounded) › `input[aria-label]`; `button[aria-label="Filter"]` 40 × 40] · `div` body.
 
 - 360 px host, defaults: 360 × 140 (title block 50, field 42, filter 40). With `subtitle=""`: 124.
 - A long title ellipsizes on one line.

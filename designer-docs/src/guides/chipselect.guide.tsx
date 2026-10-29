@@ -31,12 +31,12 @@ function ChipSelectGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'Icon, label, and a way out',
-      description: 'One pill holds a leading icon, the label, and, when Active, a close icon. The whole chip is a single press target.',
+      description: 'One rounded container holds a leading icon, the label, and, when Active, a close icon. The whole chip is a single press target.',
       body: <Anatomy parts={[
         { name: 'Leading icon', note: 'Hints at the kind of filter, such as a date.', target: `${ROOT} > div:first-child`, side: 'left' },
         { name: 'Label', note: 'Names the filter, or the value once applied.', target: `${ROOT} [dir="auto"]`, side: 'top' },
         { name: 'Close icon', note: 'Shows that pressing again clears the filter.', target: `${ROOT} > div:last-child`, side: 'right' },
-        { name: 'Container', note: 'Pill that turns lavender when Active.', target: ROOT, side: 'bottom' },
+        { name: 'Container', note: 'Fully rounded shape that turns lavender when Active.', target: ROOT, side: 'bottom' },
       ]} marks={[{ kind: 'gap', from: `${ROOT} > div:first-child`, to: `${ROOT} [dir="auto"]` }]}>
         <ChipSelect active label="Date" icon={CAL} modes={modes} testID="chip-anatomy" />
       </Anatomy>,
@@ -55,8 +55,8 @@ function ChipSelectGuide() {
       header: 'States', title: 'Idle and Active',
       description: 'One property switches the chip between Idle and Active. There is no disabled state; hide a filter that does not apply instead.',
       body: <div className="coin-new-example-grid">
-        <ExampleCard title="Idle" description="Grey pill, dark text."><Chip label="Date" /></ExampleCard>
-        <ExampleCard title="Active" description="Lavender pill, purple icon, text, and close icon."><Chip active label="Date" /></ExampleCard>
+        <ExampleCard title="Idle" description="Grey background, dark text."><Chip label="Date" /></ExampleCard>
+        <ExampleCard title="Active" description="Lavender background, purple icon, text, and close icon."><Chip active label="Date" /></ExampleCard>
       </div>,
     },
     sizing: {
@@ -130,7 +130,7 @@ export default defineGuide({
   slug: 'chipselect',
   label: 'Chip Select',
   summary: 'Use a Chip Select to show one filter, such as a date range, and whether it is applied.',
-  keywords: ['filter chip', 'chip', 'pill', 'date range', 'filter'],
+  keywords: ['filter chip', 'chip', 'date range', 'filter'],
   icon: <><rect x="2" y="5" width="14" height="8" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M11 7.8 13 10.2M13 7.8 11 10.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>,
   Component: ChipSelectGuide,
 })

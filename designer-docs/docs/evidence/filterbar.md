@@ -12,8 +12,8 @@
 ## Contract
 
 - Public `FilterBar` props: `placeholder` (default `Search`), `value` (default `''`), `onChangeText`, `modes`, `style`, `accessibilityLabel`, `accessibilityHint`, `children`, `renderInput`, plus View props (`testID` reaches the root).
-- Designer-configurable: the placeholder text, and whether the bar starts with a query. System-driven: padding (tokens), the pill field, search icon, and focus outline. Developer-only: `value`/`onChangeText` wiring, `renderInput` and `children` (full input overrides; `children` disconnects `value`/`onChangeText`).
-- The bar is a column with `width: 100%`, padding 10/16, `role="search"`. It contains the public TextInput (search icon leading, pill field).
+- Designer-configurable: the placeholder text, and whether the bar starts with a query. System-driven: padding (tokens), the fully rounded field, search icon, and focus outline. Developer-only: `value`/`onChangeText` wiring, `renderInput` and `children` (full input overrides; `children` disconnects `value`/`onChangeText`).
+- The bar is a column with `width: 100%`, padding 10/16, `role="search"`. It contains the public TextInput (search icon leading, fully rounded field).
 - FilterBar only reports the typed text. Filtering results is the screen's job.
 
 ## Rendered (installed package, web, 360 px host)

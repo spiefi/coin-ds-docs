@@ -8,8 +8,8 @@ Package, Figma, and Storybook evidence for the Profile Card guide (board ticket 
 
 ## Sources
 
-- Package: `src/components/ProfileCard/ProfileCard.tsx` (268 lines, `React.memo`). Exports `ProfileCard`, `ProfileCardProps`, `ProfileCardUpiHandle` (`components/index.ts:343`). The header is a `ListItem` (navArrow off) whose leading slot is `Attached` (`Avatar` + an `IconCapsule` badge) and whose support slot is a wrapping row of `UpiHandle` pills; a `Divider` separates the body.
-- Figma: [Coin Components Library · Profile Card](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=6914-38498), node `6914:38498`, a single component (no variants), 344 × 347. Header List Item (Attached avatar "MS" with an 18 px QR badge, name, two UPI Handle pills), Divider, and one slot (the body) holding sample List Items and Dividers. No Premium property (it's the Profile Card Appearance collection).
+- Package: `src/components/ProfileCard/ProfileCard.tsx` (268 lines, `React.memo`). Exports `ProfileCard`, `ProfileCardProps`, `ProfileCardUpiHandle` (`components/index.ts:343`). The header is a `ListItem` (navArrow off) whose leading slot is `Attached` (`Avatar` + an `IconCapsule` badge) and whose support slot is a wrapping row of `UpiHandle` components; a `Divider` separates the body.
+- Figma: [Coin Components Library · Profile Card](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=6914-38498), node `6914:38498`, a single component (no variants), 344 × 347. Header List Item (Attached avatar "MS" with an 18 px QR badge, name, two UPI Handles), Divider, and one slot (the body) holding sample List Items and Dividers. No Premium property (it's the Profile Card Appearance collection).
 - Storybook (published `index.json`): `components-profilecard--default`, `--premium`, `--header-only`, `--pressable-handles`, `--with-image-avatar`, in a 16 px padded frame on the page background. Default body: two "JioFinance+" rows with "78 / 100" and Upgrade, two "Health Rating" rows. The published docs page is the older one; e60f8bd8's handwritten page isn't deployed.
 - Biscuit's handwritten `ProfileCard.mdx` (e60f8bd8): "a dark identity summary: an avatar, a name, UPI handles, and a body slot." Use for "a profile header on a dark surface" with account rows in the body; not for a light product card or a settings form.
 
@@ -17,8 +17,8 @@ Package, Figma, and Storybook evidence for the Profile Card guide (board ticket 
 
 All props optional: `name` ("Name"), `monogram` ("MS"), `avatarSource` (photo instead of the monogram), `badgeIcon` (`'ic_qr_code'`; `null` removes the badge), `upiHandles` (two sample handles; `[]` removes the row), `header` (replaces avatar, name and handles together; not wrapped in a ListItem), `children` (body), `showDivider` (true; no divider without children), `width` (344; a number or a percentage), `modes`, `style`, `accessibilityLabel`. No `testID` or `...rest`.
 
-- `ProfileCardUpiHandle`: `label` (required), `iconName` (UpiHandle's default `ic_scan_qr_code`), `showIcon` (true), `onPress` (makes the pill a `button`, scale 0.98 while pressed). No picture on a handle.
-- Name: one line with … (ListItem title). Handles wrap onto more lines, but one long label never shrinks or ends in …: its pill runs past the card (276 px in a 254 px column for a 38-character label).
+- `ProfileCardUpiHandle`: `label` (required), `iconName` (UpiHandle's default `ic_scan_qr_code`), `showIcon` (true), `onPress` (makes the UPI Handle a `button`, scale 0.98 while pressed). No picture on a handle.
+- Name: one line with … (ListItem title). Handles wrap onto more lines, but one long label never shrinks or ends in …: its UPI Handle runs past the card (276 px in a 254 px column for a 38-character label).
 - Card: not pressable; `accessibilityLabel` only. Avatar and badge are `role=img` without names.
 
 ## Modes and tokens
@@ -26,14 +26,14 @@ All props optional: `name` ("Name"), `monogram` ("MS"), `avatarSource` (photo in
 Merges the theme provider's modes with `modes`, then gives its children `{ ...modes, 'context 10': 'jioPlus' }` (the badge also `Icon Capsule Size: XS` unless set). Body children are cloned with those modes; a child's own `modes` win.
 
 - Panel (`profileCard/*`): navy `#00065a`, radius 12, padding 20, gap 12, width 344.
-- Profile Card Appearance Premium: gold panel `#cea15a`, darker gold avatar, pills and divider, dark text.
-- Under jioPlus: ListItem titles white, Icons and NavArrows white, Divider `#191f6e`, Button gold `#cea15a` with dark label, UpiHandle navy `#021891` pills, avatar `#021891` with white initials.
+- Profile Card Appearance Premium: gold panel `#cea15a`, darker gold avatar, UPI Handles and divider, dark text.
+- Under jioPlus: ListItem titles white, Icons and NavArrows white, Divider `#191f6e`, Button gold `#cea15a` with dark label, UPI Handles navy `#021891`, avatar `#021891` with white initials.
 - Not switched by jioPlus: `Text` (black) and ListItem support text (`#1a1c1f`) stay dark on the navy panel and nearly disappear. Figma's own sample shows the same dark "78 / 100" and "Korem ipsum".
-- Also change the look: Avatar Size, Icon Capsule Size, Attached Border False (removes the white disc), Slot gap (pill gap), List Item Style (Boxed paints white boxes over the header and rows, hiding the white name). AppearanceBrand / Emphasis / Semantic Intent only recolour the badge glyph. Page type, Context, Badge Size do nothing to the card.
+- Also change the look: Avatar Size, Icon Capsule Size, Attached Border False (removes the white disc), Slot gap (gap between UPI Handles), List Item Style (Boxed paints white boxes over the header and rows, hiding the white name). AppearanceBrand / Emphasis / Semantic Intent only recolour the badge glyph. Page type, Context, Badge Size do nothing to the card.
 
 ## Web render
 
-Root `div` (column, 344 wide, navy, padding 20, gap 12) › header `div` (ListItem) › row › leading `div` (avatar `div[role=img]` 42 px; badge disc `div` 22 px with `div[role=img]` 18 px) + text `div` (name `div[dir=auto]` 14/17/700; handles row `div` with `button` or `div[aria-label]` pills 29 high) › `div[role=presentation]` divider › body children. No `data-testid`.
+Root `div` (column, 344 wide, navy, padding 20, gap 12) › header `div` (ListItem) › row › leading `div` (avatar `div[role=img]` 42 px; badge disc `div` 22 px with `div[role=img]` 18 px) + text `div` (name `div[dir=auto]` 14/17/700; handles row `div` with `button` or `div[aria-label]` UPI Handles 29 high) › `div[role=presentation]` divider › body children. No `data-testid`.
 
 Header only: 344 × 88. With a two-row body (JioFinance+ with an S Upgrade button, Linked bank accounts with a chevron): 344 × 190.
 
@@ -45,9 +45,9 @@ Header only: 344 × 88. With a two-row body (JioFinance+ with an S Upgrade butto
 - Badge glyph `#0f0d0a` on a white disc vs Figma `#24262b`; badge anchored at the 45° point (26.85) vs Figma (25, 24).
 - Figma exposes only the body slot; name, handles, badge, divider and photo are overrides, and Premium is a variable mode.
 - List Item Style Boxed breaks the card (white boxes, the name disappears).
-- A long UPI handle label never shrinks or truncates: the pill runs past the card (UpiHandle `maxWidth: 100%` has no effect in the wrapping row).
+- A long UPI handle label never shrinks or truncates: the UPI Handle runs past the card (UpiHandle `maxWidth: 100%` has no effect in the wrapping row).
 - The handwritten mdx's Anatomy specimen has no children, so its Body part and divider don't render.
-- Published Storybook is older than the package (pills without button role) and shows the older docs page.
+- Published Storybook is older than the package (UPI Handles without button role) and shows the older docs page.
 
 ## Hosting
 
