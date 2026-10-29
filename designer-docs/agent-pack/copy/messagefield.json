@@ -1,0 +1,341 @@
+{
+  "slug": "messagefield",
+  "label": "Message Field",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/messagefield.guide.tsx"
+  ],
+  "evidence": "docs/evidence/messagefield.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T01:09:03.863Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "textarea",
+    "multiline",
+    "comment box",
+    "feedback",
+    "message"
+  ],
+  "title": "Message Field",
+  "summary": "Use a Message Field for a few sentences of free text, such as feedback or a description of a problem.",
+  "corePrinciple": "Room to explain, with a clear limit.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4835-2564",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-messagefield--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A label, a text area, and a counter",
+      "description": "The label names the message. The text area holds a few lines of text, and a counter below shows how much room is left.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Label",
+        "Names the message and gives the field its accessible name.",
+        "Required mark",
+        "A red asterisk for a message people must write.",
+        "Placeholder",
+        "A writing hint that disappears when people type.",
+        "Text area",
+        "White box, four lines tall; purple border on focus.",
+        "Counter",
+        "Characters used out of the limit; shown when a limit is set."
+      ],
+      "specimen": [
+        "Describe your issue",
+        "*",
+        "0/140",
+        "What happened, and when?"
+      ],
+      "anatomy": [
+        {
+          "part": "Label",
+          "note": "Names the message and gives the field its accessible name."
+        },
+        {
+          "part": "Required mark",
+          "note": "A red asterisk for a message people must write."
+        },
+        {
+          "part": "Placeholder",
+          "note": "A writing hint that disappears when people type."
+        },
+        {
+          "part": "Text area",
+          "note": "White box, four lines tall; purple border on focus."
+        },
+        {
+          "part": "Counter",
+          "note": "Characters used out of the limit; shown when a limit is set."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Set the limit and the height",
+      "description": "A limit adds a counter and stops typing when it is reached. Rows set how tall the text area is; longer text scrolls inside it.",
+      "blocks": [
+        "With a limit",
+        "The counter shows how much room is left.",
+        "No limit",
+        "Without a limit there is no counter.",
+        "Taller",
+        "Six rows for a longer description."
+      ],
+      "specimen": [
+        "Reason for cancelling",
+        "0/140",
+        "Notes for the agent",
+        "Describe your issue",
+        "0/1000",
+        "Help us understand why you’re leaving",
+        "Anything else we should know?",
+        "What happened, and when?"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "With a limit",
+          "description": "The counter shows how much room is left."
+        },
+        {
+          "title": "No limit",
+          "description": "Without a limit there is no counter."
+        },
+        {
+          "title": "Taller",
+          "description": "Six rows for a longer description."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Default, filled, error, read only, and disabled",
+      "description": "Focus draws a purple border. An error turns the label and border red and shows its message below the field. Read only and disabled lock the text.",
+      "blocks": [
+        "Default",
+        "Select the field to see the purple focus border.",
+        "Filled",
+        "The counter tracks the length, and the text stays dark when people leave the field.",
+        "Error",
+        "Red label and border, with the message below the field.",
+        "Read only",
+        "Grey label and border; people can read the text but not change it.",
+        "Disabled",
+        "Grey text and border, and Tab skips it. Use it for a field that does not apply yet."
+      ],
+      "specimen": [
+        "Describe your issue",
+        "0/140",
+        "I was charged twice for one gold purchase.",
+        "42/140",
+        "Charged twice",
+        "Add a few more details, at least 20 characters",
+        "13/140",
+        "Your message",
+        "Your request was received on 28 September.",
+        "What happened, and when?"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "Select the field to see the purple focus border."
+        },
+        {
+          "title": "Filled",
+          "description": "The counter tracks the length, and the text stays dark when people leave the field."
+        },
+        {
+          "title": "Error",
+          "description": "Red label and border, with the message below the field."
+        },
+        {
+          "title": "Read only",
+          "description": "Grey label and border; people can read the text but not change it."
+        },
+        {
+          "title": "Disabled",
+          "description": "Grey text and border, and Tab skips it. Use it for a field that does not apply yet."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, four lines tall",
+      "description": "Message Field fills its container’s width. The text area is 108 px tall, room for four lines, with 12 px of padding; each extra row adds 21 px. The counter sits 8 px below.",
+      "blocks": [
+        "300 × 108",
+        "Six rows",
+        "150 px tall: six rows of 21 px plus padding."
+      ],
+      "specimen": [
+        "Describe your issue",
+        "What happened, and when?"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Six rows",
+          "description": "150 px tall: six rows of 21 px plus padding."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Ask for one thing, with a fitting limit",
+      "description": "Name the message in the label, such as “Describe your issue”, and use the placeholder for a writing hint. Pick a limit that fits the task: 140 characters for a short reason, 1,000 for a detailed description.",
+      "blocks": [
+        "Labels, hints, and limits"
+      ],
+      "specimen": [
+        "Reason for cancelling",
+        "0/140",
+        "Describe your issue",
+        "0/1000",
+        "Help us understand why you’re leaving",
+        "What happened, and when?"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Labels, hints, and limits",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Report a problem",
+      "description": "The screen checks the message when people tap Submit and sets the error on the field. Message Field only shows it, and the button stays enabled.",
+      "blocks": [],
+      "specimen": [
+        "Describe your issue",
+        "*",
+        "0/500",
+        "Submit",
+        "What happened, and when?"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make the limits and errors visible",
+      "description": "Each pair shows a field people can complete versus one that stops them without saying why.",
+      "blocks": [
+        "Do",
+        "Show the limit",
+        "The counter shows how much room is left.",
+        "Don’t",
+        "Hide the counter on a limit",
+        "Typing stops at the limit with no warning.",
+        "Say what to fix",
+        "The message below says what is missing.",
+        "Rely on red alone",
+        "The red border does not say what is wrong.",
+        "Use a Form Field for a short value",
+        "One line for one value.",
+        "Ask for a short value in a Message Field",
+        "A four-line box suggests a long answer."
+      ],
+      "specimen": [
+        "Reason for cancelling",
+        "The app is too slow",
+        "19/140",
+        "Describe your issue",
+        "Charged twice",
+        "Add a few more details, at least 20 characters",
+        "13/140",
+        "Order number",
+        "JF-0000000"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Show the limit",
+            "caption": "The counter shows how much room is left.",
+            "specimen": "Reason for cancelling · The app is too slow · 19/140"
+          },
+          "dont": {
+            "title": "Hide the counter on a limit",
+            "caption": "Typing stops at the limit with no warning.",
+            "specimen": "Reason for cancelling · The app is too slow"
+          }
+        },
+        {
+          "do": {
+            "title": "Say what to fix",
+            "caption": "The message below says what is missing.",
+            "specimen": "Describe your issue · Charged twice · Add a few more details, at least 20 characters · 13/140"
+          },
+          "dont": {
+            "title": "Rely on red alone",
+            "caption": "The red border does not say what is wrong.",
+            "specimen": "Describe your issue · Charged twice · 13/140"
+          }
+        },
+        {
+          "do": {
+            "title": "Use a Form Field for a short value",
+            "caption": "One line for one value.",
+            "specimen": "Order number"
+          },
+          "dont": {
+            "title": "Ask for a short value in a Message Field",
+            "caption": "A four-line box suggests a long answer.",
+            "specimen": "Order number"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Message Field contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Required",
+        "Invalid",
+        "Read only",
+        "Disabled",
+        "No counter",
+        "Custom rows",
+        "All states",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s Message Field is a 328 × 159 component with a label, a 108 px text area, and a fixed “0/140” counter; its states are variable modes. The package adds the required mark, a rows option, a counter that shows only with a limit, and support text or an error message below the text area. Dark mode is not supported. On the web the label names the text area; screen readers also announce required and invalid fields and read the error or support text with them. Tab skips a disabled field.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

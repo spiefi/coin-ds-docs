@@ -1,0 +1,16 @@
+{
+  "flags": [
+    {
+      "field": "/anatomy/4",
+      "reason": "The guide fills the body with Sections (\"Your Sections, styled for the dark modal.\"; Do & Don't \"Put Sections straight in the body\"), but the pack's building rules say Section exists only in code and is not part of Coin, so agents don't build with it. The entry's examples therefore have no body. Guide fix #519 asks Marcin to decide which holds. Added by Claude Code in the overnight run agentpack-batch5, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: The item says \"heroHeight 460 is the value that example gives its 328 : 223 image\", but neither the guide nor the evidence gives 460 anywhere. The guide's With hero media description only says media \"fills the width at its own ratio behind the hero and the body\", and the evidence measures the 328/223 image against the default hero region.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch5, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "The guide's With hero media example sets exactly this: in src/guides/fullscreenmodal.guide.tsx at e7ed622 the With hero media ExampleCard passes heroMedia={HERO_IMAGE}, an Image with ratio={328 / 223}, and heroHeight={460}. The cross-check reads the rendered copy only, which shows no prop values, so it could not see it. The purpose says it is the example's value, not a guide rule."
+    }
+  ]
+}

@@ -1,0 +1,470 @@
+{
+  "slug": "skeleton",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch5, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/skeleton.md at 622cd82. The guide's Sources note was checked on 17 October 2026 on the 16 October build (mirror v0.1.78-a116616, Biscuit's main at a116616, the #266 fix), so items citing it carry that build. The evidence's Checked, Contract and Modes and tokens sections are from 12 October on 0.1.78-636f3f5; its 17 October re-check on a116616 replaces them where they differ: a component's loading now draws its placeholder without a group, so the Contract's “`loading` on its own, without a group, renders nothing (#266)” is out of date and not used, and a loading group now adds one hidden “Loading” announcement, so its “renders no element” is not used either. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-a116616 and v0.1.78-dbe0e02 changes no skeleton file and none of Text, Avatar, Button, Image, IconButton or Icon; Badge changes only its System + High label colour, and FullscreenModal.tsx shows no line changes. Installed Skeleton.tsx, SkeletonGroup.tsx and shimmer-tokens.ts still match every guide sentence used here, read from source, not run: kind defaults to other and sets only the radius token (text and other 9999, image 10, badge 4); width and height are set only when given; the block colour is bg/defaultSkeleton, which resolves through context5 to #e7e7e7 by default and to rgb(44, 37, 27) for Fullscreen Modal in Light, and FullscreenModal forces context5 Fullscreen Modal on its content; the band is a 1500 ms linear loop with a 75 ms stagger that wraps at 600 ms, and reduced motion is a 3000 ms white pulse with no stagger; the group's reducedMotion overrides the device setting when set; a Skeleton draws only while a loading group is around it or visible is set, and returns null otherwise; Text, Avatar, Badge, Button, Image, IconButton, Icon and FavoriteToggle read the group, and their own loading wins in both directions; inside a loading group the blocks are hidden from screen readers (aria-hidden and role presentation on the web) and the group adds one hidden progressbar named Loading in a polite live region; a placeholder drawn by a component's own loading is a progressbar named Loading. No guide sentence is contradicted, but two read wider than the code: Text draws one block as tall as all its lines (line height × lines), not one pill per line, so “one per line” holds for bars placed by hand; and the public visible prop lets a hand-placed Skeleton draw with no group, which “A Skeleton placed by hand still needs a group” leaves out (the package docs say a hand-placed Skeleton leaves visible unset). From the source, not tested: Image and Icon take no modes and pass none to their placeholder, so inside a FullscreenModal their placeholders would stay light grey while Text, Avatar, Badge and Button turn deep brown; no guide or evidence sentence covers this, so it is not a gap here. SkeletonGroup has no facts of its own, so its two props, loading and reducedMotion, are evidence facts from the evidence's Contract; context5 is not in Skeleton's mode list, so it is an evidence fact from Modes and tokens. Examples follow the building rules: no Color Mode (the guide sets Light on every component) and no other modes; the guide's Text Sizes Large title and Small detail lines are left out, since no guide sentence says the content needs them. The guide's rows start with an Avatar monogram; Avatar has no entry in this pack, so the example rows keep the name, the detail line and the Badge. Copy and data are the guide's own (Your holdings, Reliance Industries, HDFC Bank, their units and the Equity badge). The rows' VStack keeps the guide's flex 1 (layout only). Left out of examples: the playground and its Readout, the In context status line (page copy), the fullscreen-modal card (it sets context5 by hand, which FullscreenModal does itself), the Outside a group card (covered by the state and accessibility items) and the Don'ts. Not recorded: style (the building rules keep style off Coin components); the hooks and constants (useSkeleton, useStaggerIndex, useReducedMotion, SHIMMER, SKELETON_TOKEN, SKELETON_FALLBACK), which the guide leaves out; nested groups (an inner group replaces the outer one), which the guide doesn't cover; the evidence's Storybook story and control problems under #266, since it doesn't say whether they remain after the fix; the fallback grey rgb(245, 245, 246), used only when the token resolver fails. Not recorded as gaps, per the pack's rules: dark mode (Color Mode alone doesn't change the grey). Content good and bad are empty: the guide shows sample holdings data, not copy to write or avoid.",
+  "useWhen": [
+    {
+      "text": "Show the shape of content while it loads, with a SkeletonGroup, so the screen doesn't jump when it arrives.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Skeleton group to show the shape of content while it loads, so the screen doesn't jump when it arrives."
+      }
+    },
+    {
+      "text": "Show the shape of what's coming, then fill it in place.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Show the shape of what's coming, then fill it in place."
+      }
+    },
+    {
+      "text": "Refreshing a list, such as holdings: the rows go into their loading state, then the content swaps back in place.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Refresh puts the holdings into their loading state for two seconds, then swaps the content back in place."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Covering the loading area with one block: it hides how much is coming, and the layout jumps when it loads.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "One block hides how much is coming, and the layout jumps when it loads."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Text bar",
+      "holds": "A Skeleton with kind text: a full pill, one per line of text.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "kind text: a full pill, one per line of text."
+      }
+    },
+    {
+      "part": "Image block",
+      "holds": "A Skeleton with kind image: 10 px corners, as big as the image it replaces.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "kind image: 10 px corners, as big as the image it replaces."
+      }
+    },
+    {
+      "part": "Shimmer",
+      "holds": "A white band that sweeps across every block each 1.5 s while the group loads.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white band sweeps across every block each 1.5 s."
+      }
+    },
+    {
+      "part": "Badge block",
+      "holds": "A Skeleton with kind badge: 4 px corners, like a badge.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "kind badge: 4 px corners, like a badge."
+      }
+    },
+    {
+      "part": "Circle or pill",
+      "holds": "A Skeleton with kind other, the default: a circle when square, else a pill.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "kind other, the default: a circle when square, else a pill."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put the same components in the SkeletonGroup that will show the content, so the placeholders mirror the real layout.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Put the same components in the group that will show the content"
+      }
+    },
+    {
+      "text": "Keep the real layout while loading: each row keeps its shape, so nothing jumps when content arrives.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Each row keeps its shape, so nothing jumps when content arrives."
+      }
+    },
+    {
+      "text": "A Skeleton placed by hand still needs a group (SkeletonGroup) around it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "A Skeleton placed by hand still needs a group."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "A Skeleton's kind sets only its corners; its width and height are yours.",
+      "strength": "recommended",
+      "target": "kind",
+      "from": {
+        "section": "configuration",
+        "quote": "A Skeleton's kind sets only its corners; its width and height are yours."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" describes what kind does in every use: it picks the corner radius and nothing else. It states behaviour, not an instruction, so it stays recommended."
+      }
+    },
+    {
+      "text": "kind text: full pills, one per line; match each line's height.",
+      "strength": "recommended",
+      "target": "kind",
+      "value": "text",
+      "from": {
+        "section": "configuration",
+        "quote": "Full pills, one per line; match each line's height."
+      }
+    },
+    {
+      "text": "kind image: 10 px corners, as big as the image it stands in for.",
+      "strength": "recommended",
+      "target": "kind",
+      "value": "image",
+      "from": {
+        "section": "configuration",
+        "quote": "10 px corners, as big as the image it stands in for."
+      }
+    },
+    {
+      "text": "kind badge: 4 px corners, the size of a badge.",
+      "strength": "recommended",
+      "target": "kind",
+      "value": "badge",
+      "from": {
+        "section": "configuration",
+        "quote": "4 px corners, the size of a badge."
+      }
+    },
+    {
+      "text": "kind other is the default: square sizes make a circle, wide ones a pill, for avatars and buttons.",
+      "strength": "recommended",
+      "target": "kind",
+      "value": "other",
+      "from": {
+        "section": "configuration",
+        "quote": "The default kind: square sizes make a circle, wide ones a pill, for avatars and buttons."
+      }
+    },
+    {
+      "text": "Inside a group, Coin components such as Text, Avatar, Badge, and Button draw their own placeholder at their own size, so you rarely place a Skeleton by hand.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Inside a group, Coin components such as Text, Avatar, Badge, and Button draw their own placeholder at their own size, so you rarely place a Skeleton by hand."
+      }
+    },
+    {
+      "text": "A SkeletonGroup switches every placeholder inside it; Text, Avatar, Badge, Button, Image and other Coin components draw their own, and a Skeleton places one by hand.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "In code a SkeletonGroup switches every placeholder inside it; Text, Avatar, Badge, Button, Image, and other Coin components draw their own, and a Skeleton places one by hand."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Coin components size their own placeholders: a Text bar is as tall as its line and about as long as its words, and an Avatar's is its own size.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Coin components size their own placeholders: a Text bar is as tall as its line and about as long as its words, and an Avatar's is its own size."
+      }
+    },
+    {
+      "text": "A hand-placed Skeleton has no size until you give it a width and height; percentages follow its host.",
+      "strength": "recommended",
+      "target": "width",
+      "from": {
+        "section": "sizing",
+        "quote": "A hand-placed Skeleton has no size until you give it a width and height; percentages follow its host."
+      }
+    },
+    {
+      "text": "The group's loading flag switches every placeholder inside it at once.",
+      "strength": "recommended",
+      "target": "SkeletonGroup.loading",
+      "from": {
+        "section": "states",
+        "quote": "The group's loading flag switches every placeholder inside it at once."
+      }
+    },
+    {
+      "text": "Reduced motion follows the device, or the group sets it (reducedMotion); then the blocks pulse gently instead of the moving band.",
+      "strength": "recommended",
+      "target": "SkeletonGroup.reducedMotion",
+      "from": {
+        "section": "states",
+        "quote": "When the device asks for reduced motion, or the group sets it, the blocks pulse gently instead."
+      }
+    },
+    {
+      "text": "Inside a FullscreenModal, the modal gives its content this context (context5 Fullscreen Modal), which turns the blocks deep brown for dark media.",
+      "strength": "recommended",
+      "target": "context5",
+      "value": "Fullscreen Modal",
+      "from": {
+        "section": "configuration",
+        "quote": "Fullscreen Modal gives its content this context, which turns the blocks deep brown for dark media."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Give the components in the group realistic sample text, so each placeholder has the right length.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "with realistic sample text, so each placeholder has the right length."
+        }
+      },
+      {
+        "text": "Anything already known, such as a heading, stays real with loading off (loading={false} on that component).",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Anything already known, such as a heading, stays real with loading off."
+        }
+      },
+      {
+        "text": "Keep known text real: people can read the heading while the values load.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "People can read the heading while the values load."
+        }
+      },
+      {
+        "text": "Don't grey out everything: turning known text grey makes people wait for nothing.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Turning known text grey makes people wait for nothing."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Loading",
+      "when": "While the group loads, placeholders hold the layout and a white band sweeps across them every 1.5 s, each a little after the one before.",
+      "from": {
+        "section": "states",
+        "quote": "Placeholders hold the layout, and the shimmer runs down them in a cascade."
+      }
+    },
+    {
+      "state": "Loaded",
+      "when": "With loading off, the same components show their content in the same places.",
+      "from": {
+        "section": "states",
+        "quote": "The same components show their content in the same places."
+      }
+    },
+    {
+      "state": "Reduced motion",
+      "when": "When the device asks for reduced motion, or the group sets reducedMotion, a slow white pulse every 3 s replaces the moving band.",
+      "from": {
+        "section": "states",
+        "quote": "A slow white pulse every 3 s replaces the moving band."
+      }
+    },
+    {
+      "state": "Outside a group",
+      "when": "A component's own loading draws its placeholder with no group, and screen readers hear “Loading”.",
+      "from": {
+        "section": "states",
+        "quote": "loading on its own draws that line’s placeholder too, and screen readers hear “Loading”."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Inside a group the blocks are hidden from screen readers, and the group announces “Loading” once.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "inside a group the blocks are hidden from screen readers and the group announces “Loading” once."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Outside a group, a component's own loading draws its placeholder, named “Loading”.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Since the #266 fix a component’s loading draws its placeholder without a group too, named “Loading”"
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "When the device asks for reduced motion, or the group sets it, the blocks pulse gently instead of the moving band.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "When the device asks for reduced motion, or the group sets it, the blocks pulse gently instead."
+      }
+    },
+    {
+      "text": "On the web, placeholders in a loading group are aria-hidden with role presentation, and the group adds one hidden progressbar named “Loading” in a polite live region.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Inside a loading group, placeholders are `aria-hidden=\"true\"` `role=\"presentation\"`, and the group adds one hidden `progressbar` \"Loading\" with `aria-live=\"polite\"`"
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the real layout",
+      "dont": "Cover it with one block",
+      "why": "One block hides how much is coming, and the layout jumps when it loads.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each row keeps its shape, so nothing jumps when content arrives."
+      }
+    },
+    {
+      "do": "Keep known text real",
+      "dont": "Grey out everything",
+      "why": "Turning known text grey makes people wait for nothing.",
+      "from": {
+        "section": "doDont",
+        "quote": "People can read the heading while the values load."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Refreshing holdings, the guide's In context: the screen sets the group's loading while it refreshes the holdings, then turns it off and the content swaps back in place. The title and the button sit outside the group and stay real; each Text and Badge in the rows draws its own placeholder.",
+      "jsx": "<VStack>\n  <Text>Your holdings</Text>\n  <SkeletonGroup loading>\n    <HStack alignVertical=\"center\">\n      <VStack style={{ flex: 1 }}>\n        <Text>Reliance Industries</Text>\n        <Text>64 units · ₹1,52,900</Text>\n      </VStack>\n      <Badge label=\"Equity\" />\n    </HStack>\n    <HStack alignVertical=\"center\">\n      <VStack style={{ flex: 1 }}>\n        <Text>HDFC Bank</Text>\n        <Text>120 units · ₹1,98,400</Text>\n      </VStack>\n      <Badge label=\"Equity\" />\n    </HStack>\n  </SkeletonGroup>\n  <Button label=\"Refresh\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Refresh puts the holdings into their loading state for two seconds, then swaps the content back in place. The title and the button stay real."
+      }
+    },
+    {
+      "purpose": "Known title, loading values: the heading is inside the loading group but keeps loading={false}, so it stays readable; only the values still loading turn into placeholders.",
+      "jsx": "<SkeletonGroup loading>\n  <VStack>\n    <Text loading={false}>Your holdings</Text>\n    <HStack alignVertical=\"center\">\n      <VStack style={{ flex: 1 }}>\n        <Text>Reliance Industries</Text>\n        <Text>64 units · ₹1,52,900</Text>\n      </VStack>\n      <Badge label=\"Equity\" />\n    </HStack>\n    <HStack alignVertical=\"center\">\n      <VStack style={{ flex: 1 }}>\n        <Text>HDFC Bank</Text>\n        <Text>120 units · ₹1,98,400</Text>\n      </VStack>\n      <Badge label=\"Equity\" />\n    </HStack>\n  </VStack>\n</SkeletonGroup>",
+      "from": {
+        "section": "content",
+        "quote": "The title stays readable; only the values still loading turn into placeholders."
+      }
+    },
+    {
+      "purpose": "Placeholders placed by hand, the guide's anatomy: one Skeleton of each kind inside a loading group, each given its own width and height. kind sets only the corners.",
+      "jsx": "<SkeletonGroup loading>\n  <VStack>\n    <Skeleton kind=\"text\" width={220} height={20} />\n    <Skeleton kind=\"image\" width={220} height={120} />\n    <Skeleton kind=\"badge\" width={70} height={20} />\n    <Skeleton kind=\"other\" width={48} height={48} />\n  </VStack>\n</SkeletonGroup>",
+      "from": {
+        "section": "anatomy",
+        "quote": "Each placeholder is a light grey block whose kind sets its corners."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "SkeletonGroup.loading",
+      "create": true,
+      "type": "boolean",
+      "required": true,
+      "description": "On SkeletonGroup, required: while true, every Skeleton and every Coin component that draws its own placeholder inside the group shows its placeholder, except a component that sets loading={false}; a nested group replaces the outer one. false shows the content.",
+      "quote": "`SkeletonGroup` (`loading` required, `reducedMotion?`: undefined follows the device, true/false forces, `children`)",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "SkeletonGroup.reducedMotion",
+      "create": true,
+      "type": "boolean",
+      "description": "On SkeletonGroup: left unset, the group follows the device's reduced-motion setting; true or false forces it.",
+      "quote": "`SkeletonGroup` (`loading` required, `reducedMotion?`: undefined follows the device, true/false forces, `children`)",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "visible",
+      "description": "A visible placeholder draws with no group, runs its own shimmer, and is a progressbar named “Loading”. Primitives set it from their own loading.",
+      "quote": "`Skeleton` has a `visible` prop (default false) that primitives set from their own `loading`: a visible placeholder draws with no group, runs its own shimmer clock, and is `role=\"progressbar\"` named \"Loading\"",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "kind",
+      "description": "kind sets only the corner radius: text and other 9999 (a full pill, or a circle when square), image 10, badge 4.",
+      "quote": "kind sets only the corners (text and other 9999, image 10, badge 4). No size unless given.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "context5",
+      "create": true,
+      "type": "mode collection",
+      "values": [
+        "Default",
+        "Fullscreen Modal",
+        "Mode 1"
+      ],
+      "default": "Default",
+      "description": "Not in the package's mode list for Skeleton, but it sets the block colour: Default is light grey (#e7e7e7) in every Color Mode; Fullscreen Modal is deep brown (rgb(44, 37, 27)) in Light. FullscreenModal always passes it to its content.",
+      "quote": "`bg/defaultSkeleton` aliases `context5 / shimmerColor`: Default → `rgb(231, 231, 231)` (`#e7e7e7`) in every Color Mode; Fullscreen Modal (or Mode 1) → `rgb(44, 37, 27)` in Light. FullscreenModal always passes `context5: 'Fullscreen Modal'` to its content.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma has no Skeleton component: the Coin variables hold its grey and its corner radii, and the ticket's Figma link opens the Stepper Item page.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma has no Skeleton component: the Coin variables hold its grey and its corner radii, and the ticket’s Figma link opens the Stepper Item page."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "The published Storybook page is still the old generated one, and it gives a lighter grey than the code's #e7e7e7.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook page is still the old generated one."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ]
+}

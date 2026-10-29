@@ -1,0 +1,16 @@
+{
+  "flags": [
+    {
+      "field": "/configuration/1",
+      "reason": "\"Without a limit there is no counter.\" is true only by default: with showCounter set and no maxLength the installed MessageField shows a plain count (MessageField.tsx, 0.1.78-dbe0e02, read from source). An agent reading this rule would think showCounter does nothing without a limit. Guide fix #518. Added by Claude Code in the overnight run agentpack-batch5, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The cited inContext text only says \"The screen checks the message when people tap Submit and sets the error on the field. Message Field only shows it, and the button stays enabled.\" Nothing cited says a Card (or VStack) holds the field, so the Card is an unsupported claim about the composition.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch5, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "The guide's In context renders exactly this composition: ReportProblem() in src/guides/messagefield.guide.tsx at cba512f returns a Card holding a VStack with the MessageField (label, placeholder, maxLength 500, isRequired, errorMessage), the Submit Button and the thank-you Text. The cross-check reads the rendered copy only, which has no containers, so it could not see the Card. The same dismissal was made for DropdownInput's In context in 0.1.78+7."
+    }
+  ]
+}

@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 1,
+  "id": "TextInput",
+  "slug": "textinput",
+  "category": "input",
+  "tags": [
+    "input",
+    "text field",
+    "search field",
+    "search bar"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T01:27:42Z",
+    "flags": [
+      {
+        "field": "/facts/props/3",
+        "reason": "Checked on jfs-components 0.1.77 (2026-10-01); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/5",
+        "reason": "Checked on jfs-components 0.1.77 (2026-10-01); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/14",
+        "reason": "Checked on jfs-components 0.1.77 (2026-10-01); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.77 (2026-10-01); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/3",
+        "reason": "Checked on jfs-components 0.1.77 (2026-10-01); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility/1",
+        "reason": "Checked on jfs-components 0.1.77 (2026-10-01); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Text Input for a single line of text, such as a search, with an icon that hints at what to type.",
+  "useWhen": [
+    {
+      "text": "A single line of text, such as a search, with an icon that hints at what to type.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Text Input for a single line of text, such as a search, with an icon that hints at what to type."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The field needs a disabled or an error state: Text Input has neither.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled or error state."
+      }
+    },
+    {
+      "text": "The field needs a visible label: Text Input has none.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "The field has no visible label, error, or disabled state"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Leading icon",
+      "holds": "An icon that hints at what to type; a search icon by default. Always present.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Hints at what to type; a search icon by default."
+      }
+    },
+    {
+      "part": "Text",
+      "holds": "The placeholder, then what people type; one line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The placeholder, then what people type; one line."
+      }
+    },
+    {
+      "part": "End slot",
+      "holds": "Optional trailing content after the text, such as a filter icon.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional content after the text, such as a filter icon."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "The grey, fully rounded surface; a darker grey border shows focus.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey rounded surface; a darker grey border shows focus."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "leading",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "trailing",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Text Input fills its container's width; set the width with the container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Text Input fills its container’s width and is 42 px tall, with 14 px of padding at each end and 18 px icons. The screen sets the width."
+      }
+    },
+    {
+      "text": "Let the screen act on the text (for example filter a list) through onChangeText; Text Input only reports the text.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen filters the list as people type; Text Input only reports the text."
+      },
+      "target": "onChangeText"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Keep the search icon, or set leadingIconName to an icon that matches what people type. The leading icon cannot be removed.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The leading icon is always there: keep the search icon or pick one that matches what people type."
+      },
+      "target": "leadingIconName"
+    },
+    {
+      "text": "Do not keep the search icon on a field that is not a search, such as an amount.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A search icon on an amount field misleads."
+      },
+      "target": "leadingIconName",
+      "value": "ic_search"
+    },
+    {
+      "text": "Use trailing for a cue at the end of the field, such as a filter icon. It is empty unless you add content.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The end slot is empty unless you add content."
+      },
+      "target": "trailing"
+    },
+    {
+      "text": "Give a trailing Icon its own modes: without them it is gold; AppearanceBrand Neutral gives the grey the guide uses.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "A custom trailing `Icon` defaults to gold. `AppearanceBrand: Neutral` gives the grey `rgb(84,89,97)` used in the guide."
+      },
+      "target": "trailing"
+    },
+    {
+      "text": "Do not pass an array to placeholder to rotate the prompt: the changing text distracts, and screen readers hear only the first prompt.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Changing text distracts, and screen readers hear only the first prompt."
+      },
+      "target": "placeholder"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "A short prompt, the right icon, and room to type.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "A short prompt, the right icon, and room to type."
+        }
+      },
+      {
+        "text": "Write a short placeholder that names what to type, such as “Search transactions”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write a short placeholder that names what to type, such as “Search transactions”."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Keep instructions out of the placeholder: it disappears as soon as people start typing.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep instructions out of it: it disappears as soon as people start typing."
+        },
+        "target": "placeholder"
+      }
+    ],
+    "good": [
+      "Search transactions",
+      "Search funds or stocks",
+      "Amount"
+    ],
+    "bad": [
+      "Enter the 12-digit number exactly as printed on your card"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty",
+      "when": "No value: the field shows its placeholder.",
+      "from": {
+        "section": "states",
+        "quote": "Empty, the field shows its placeholder."
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "While focused: a darker grey border appears and the placeholder clears.",
+      "from": {
+        "section": "states",
+        "quote": "Focused, a darker grey border appears and the placeholder clears."
+      }
+    },
+    {
+      "state": "Filled",
+      "when": "With a value: the field shows the text.",
+      "from": {
+        "section": "states",
+        "quote": "Filled, it shows the text."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Set accessibilityLabel when the placeholder does not say what the field is for; otherwise, on the web, the placeholder names the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Set an accessibility label when the placeholder does not say what the field is for."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Keep slot icons decorative and put no focusable controls inside leading or trailing.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "They ask for `accessibilityLabel` when the placeholder is empty or not descriptive, decorative slot icons, and no focusable controls inside the slots."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Prompt with what to type",
+      "dont": "Put instructions in the placeholder",
+      "why": "It is cut off and disappears as people type.",
+      "from": {
+        "section": "doDont",
+        "quote": "Prompt with what to type"
+      }
+    },
+    {
+      "do": "Match the icon to the task",
+      "dont": "Keep the search icon everywhere",
+      "why": "A search icon on an amount field misleads.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match the icon to the task"
+      }
+    },
+    {
+      "do": "Keep one fixed prompt",
+      "dont": "Rotate the prompt",
+      "why": "Changing text distracts, and screen readers hear only the first prompt.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep one fixed prompt"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A search field whose text the screen uses to filter a list.",
+      "jsx": "<TextInput placeholder=\"Search transactions\" onChangeText={(text) => {}} modes={{ 'Color Mode': 'Light' }} />",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen filters the list as people type; Text Input only reports the text."
+      }
+    },
+    {
+      "purpose": "An amount field with a matching leading icon.",
+      "jsx": "<TextInput placeholder=\"Amount\" leadingIconName=\"ic_rupee\" modes={{ 'Color Mode': 'Light' }} />",
+      "from": {
+        "section": "doDont",
+        "quote": "The rupee icon says an amount goes here."
+      }
+    },
+    {
+      "purpose": "A search field with a filter cue in the end slot; the Icon gets its own modes.",
+      "jsx": "<TextInput\n  placeholder=\"Search funds\"\n  modes={{ 'Color Mode': 'Light' }}\n  trailing={<Icon iconName=\"ic_filter\" size={18} modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Neutral' }} />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "A cue at the end, such as filters."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "placeholder",
+        "type": "string | readonly string[]",
+        "required": false,
+        "source": "evidence",
+        "default": "",
+        "description": "The placeholder text disappears on focus. Without accessibilityLabel, the field keeps the placeholder as its accessible name; a rotating placeholder names it after its first item. Declared: Placeholder when empty. A string is static; a string array (2+) cycles with a vertical slide (2000ms dwell, 500ms ease-out), using the same placeholder color/typography as the native placeholder. Default \"\", from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "",
+        "description": "Default \"\", from the component source."
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "leadingIconName",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "ic_search",
+        "description": "The leading slot is always filled, by leading or by an Icon from leadingIconName; it cannot be hidden. Declared: Default \"ic_search\", from the component source.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "A custom trailing Icon defaults to gold; AppearanceBrand Neutral gives grey.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "inputStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onFocus",
+        "type": "(e: any) => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onBlur",
+        "type": "(e: any) => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Names the input and wins over the placeholder; without it the placeholder names the field and keeps that name while focused.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...Omit<RNTextInputProps, \"style\" | \"onBlur\" | \"onFocus\" | \"value\" | \"placeholder\" | \"onChangeText\">",
+        "type": "Omit<RNTextInputProps, \"style\" | \"onBlur\" | \"onFocus\" | \"value\" | \"placeholder\" | \"onChangeText\">",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      },
+      {
+        "name": "TextInput.Search",
+        "type": "component",
+        "description": "The same field with a fixed ic_search leading icon. Declared: A static sub-component of TextInput. Its own props: placeholder, value, onChangeText, leading, modes, style, inputStyle, accessibilityLabel, accessibilityHint, onFocus, onBlur.",
+        "source": "evidence",
+        "checkedOn": "2026-10-01"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection TextInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "InputState",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "The component sets Active itself for its focus border (rgb(181,181,181)); the guide does not set it. Declared: A token collection TextInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Idle",
+        "checkedOn": "2026-10-08"
+      }
+    ],
+    "slots": [
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "source": "types"
+      },
+      {
+        "name": "onFocus",
+        "type": "(e: any) => void",
+        "source": "types"
+      },
+      {
+        "name": "onBlur",
+        "type": "(e: any) => void",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "No visible label, error state or disabled state.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "editable={false} makes the field read-only with no visual change, so it cannot stand in for a disabled state.",
+        "source": "evidence",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "text": "The field renders 42 px tall; Figma's is 44 px (open, lower priority, in #183).",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=textinput",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=506-10017",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-textinput--docs"
+  }
+}

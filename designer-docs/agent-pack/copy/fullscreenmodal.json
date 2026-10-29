@@ -1,0 +1,378 @@
+{
+  "slug": "fullscreenmodal",
+  "label": "Fullscreen Modal",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/fullscreenmodal.guide.tsx"
+  ],
+  "evidence": "docs/evidence/fullscreenmodal.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T01:08:59.141Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "full-screen offer",
+    "takeover",
+    "upsell screen",
+    "onboarding screen",
+    "success screen"
+  ],
+  "title": "Fullscreen Modal",
+  "summary": "Use a Fullscreen Modal for a focused, full-screen moment, such as an upgrade offer, with a hero, details, and one main action.",
+  "corePrinciple": "One big moment, one main action, and always a way out.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4534-7558",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-fullscreenmodal--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Hero text, a body, a footer, and a close button",
+      "description": "Centred hero text sits at the bottom of a space reserved for hero media, on the modal’s own black surface. Your Sections follow and scroll; the footer stays at the bottom with the main button, and a close button floats top right.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "Eyebrow",
+        "A short line above the headline, such as the product name.",
+        "Headline",
+        "29 px heavy; the heading, and the modal’s name for screen readers.",
+        "Supporting text",
+        "One sentence of detail.",
+        "Price line",
+        "Optional; the price or the offer.",
+        "Body",
+        "Your Sections, styled for the dark modal.",
+        "Footer",
+        "The main button, with an optional disclaimer.",
+        "Close button",
+        "Shown when the screen handles it, which closes the modal."
+      ],
+      "specimen": [
+        "JioFinance+",
+        "Get more from your money",
+        "Extra cashback, JioPoints, and JioGold every time you pay.",
+        "₹999 a year · free until 2027",
+        "Key benefits",
+        "Up to ₹5,000 cashback",
+        "On bills and recharges",
+        "1.25× JioPoints",
+        "On every UPI payment",
+        "1% extra JioGold",
+        "On gold you buy above ₹1,000",
+        "Upgrade for free",
+        "We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [
+        {
+          "part": "Eyebrow",
+          "note": "A short line above the headline, such as the product name."
+        },
+        {
+          "part": "Headline",
+          "note": "29 px heavy; the heading, and the modal’s name for screen readers."
+        },
+        {
+          "part": "Supporting text",
+          "note": "One sentence of detail."
+        },
+        {
+          "part": "Price line",
+          "note": "Optional; the price or the offer."
+        },
+        {
+          "part": "Body",
+          "note": "Your Sections, styled for the dark modal."
+        },
+        {
+          "part": "Footer",
+          "note": "The main button, with an optional disclaimer."
+        },
+        {
+          "part": "Close button",
+          "note": "Shown when the screen handles it, which closes the modal."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Hero, body, and footer",
+      "description": "Set the hero copy, add Sections for the details, and choose the footer’s button and disclaimer. Hero media fills the width behind the hero text, and heroHeight sets how much space the text sits at the bottom of.",
+      "blocks": [
+        "Hero, body, and footer",
+        "The full layout: Sections scroll under the hero, and the footer stays at the bottom.",
+        "Without a body",
+        "Hero text and one button make a confirmation screen.",
+        "Shorter hero",
+        "A lower heroHeight brings the body up; the text stays at the bottom of its space.",
+        "With hero media",
+        "Media fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas."
+      ],
+      "specimen": [
+        "JioFinance+",
+        "Get more from your money",
+        "Extra cashback, JioPoints, and JioGold every time you pay.",
+        "₹999 a year · free until 2027",
+        "Key benefits",
+        "Up to ₹5,000 cashback",
+        "On bills and recharges",
+        "1.25× JioPoints",
+        "On every UPI payment",
+        "1% extra JioGold",
+        "On gold you buy above ₹1,000",
+        "Compare plans",
+        "Your plan",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "Upto ₹5000",
+        "Bonus JioGold",
+        "1%",
+        "Bonus JioSilver",
+        "Upgrade for free",
+        "We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd.",
+        "You’re all set",
+        "Your benefits are active on every linked account.",
+        "Done"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Hero, body, and footer",
+          "description": "The full layout: Sections scroll under the hero, and the footer stays at the bottom."
+        },
+        {
+          "title": "Without a body",
+          "description": "Hero text and one button make a confirmation screen."
+        },
+        {
+          "title": "Shorter hero",
+          "description": "A lower heroHeight brings the body up; the text stays at the bottom of its space."
+        },
+        {
+          "title": "With hero media",
+          "description": "Media fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Shown until the screen removes it",
+      "description": "Fullscreen Modal has no open or closed state. The screen shows it and removes it; its close button and main button only report the press.",
+      "blocks": [
+        "The screen closes it",
+        "Press close or Upgrade for free: the screen removes the modal. Show it again with the button."
+      ],
+      "specimen": [
+        "JioFinance+",
+        "Get more from your money",
+        "Extra cashback, JioPoints, and JioGold every time you pay.",
+        "₹999 a year · free until 2027",
+        "Key benefits",
+        "Up to ₹5,000 cashback",
+        "On bills and recharges",
+        "1.25× JioPoints",
+        "On every UPI payment",
+        "1% extra JioGold",
+        "On gold you buy above ₹1,000",
+        "Upgrade for free",
+        "We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "The screen closes it",
+          "description": "Press close or Upgrade for free: the screen removes the modal. Show it again with the button."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The whole screen",
+      "description": "Fullscreen Modal fills its screen and scrolls inside it. The hero text sits at the bottom of a 532 px space by default, the body starts 16 px below it with 16 px between Sections, and the footer stays at the bottom. The close button is 28 px, 12 px from the top and right.",
+      "blocks": [
+        "28 × 28",
+        "360 × 240",
+        "16"
+      ],
+      "specimen": [
+        "JioFinance+",
+        "Get more from your money",
+        "Extra cashback, JioPoints, and JioGold every time you pay.",
+        "₹999 a year · free until 2027",
+        "Key benefits",
+        "Up to ₹5,000 cashback",
+        "On bills and recharges",
+        "1.25× JioPoints",
+        "On every UPI payment",
+        "1% extra JioGold",
+        "On gold you buy above ₹1,000",
+        "Upgrade for free",
+        "We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "An offer in four lines and one action",
+      "description": "Use the eyebrow for the product or offer, the headline for the benefit in a few words, one supporting sentence, and the price on its own line. Label the button with the action. A line you leave unset doesn’t show.",
+      "blocks": [
+        "Four lines, one action"
+      ],
+      "specimen": [
+        "JioGold",
+        "Save in gold every month",
+        "Start a monthly SIP from ₹100. Buy and sell any time.",
+        "No making charges",
+        "Start a SIP",
+        "Gold prices change with the market. Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Four lines, one action",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "An upgrade offer from Profile",
+      "description": "Profile opens the offer from its JioFinance+ row. Close takes people back; Upgrade for free starts the upgrade. The screen removes the modal either way.",
+      "blocks": [
+        "On Profile"
+      ],
+      "specimen": [
+        "Profile",
+        "JioFinance+",
+        "Cashback, JioPoints, and JioGold"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Readable, complete, and styled",
+      "description": "Each pair shows a modal that reads as one message versus one that hides or muddles it.",
+      "blocks": [
+        "Do",
+        "Keep the text on a dark background",
+        "The modal’s own black surface keeps the white text readable.",
+        "Don’t",
+        "Put the text over a light photo",
+        "The white text gets lost in the image.",
+        "Write a headline",
+        "It’s the modal’s heading and names it for screen readers.",
+        "Leave the headline out",
+        "The offer has no heading, and screen readers get no name for the modal.",
+        "Put Sections straight in the body",
+        "They take the modal’s dark styling.",
+        "Wrap Sections in your own component",
+        "They miss the styling and stay white cards."
+      ],
+      "specimen": [
+        "JioFinance+",
+        "Get more from your money",
+        "Extra cashback, JioPoints, and JioGold every time you pay.",
+        "₹999 a year · free until 2027",
+        "Key benefits",
+        "Up to ₹5,000 cashback",
+        "On bills and recharges",
+        "1.25× JioPoints",
+        "On every UPI payment",
+        "1% extra JioGold",
+        "On gold you buy above ₹1,000",
+        "Upgrade for free",
+        "We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd.",
+        "JioGold",
+        "Save in gold every month",
+        "Start a monthly SIP from ₹100. Buy and sell any time.",
+        "No making charges",
+        "Start a SIP",
+        "Gold prices change with the market. Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the text on a dark background",
+            "caption": "The modal’s own black surface keeps the white text readable.",
+            "specimen": "JioFinance+ · Get more from your money · Extra cashback, JioPoints, and JioGold every time you pay. · ₹999 a year · free until 2027 · Key benefits · Up to ₹5,000 cashback · On bills and recharges · 1.25× JioPoints · On every UPI payment · 1% extra JioGold · On gold you buy above ₹1,000 · Upgrade for free · We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd."
+          },
+          "dont": {
+            "title": "Put the text over a light photo",
+            "caption": "The white text gets lost in the image.",
+            "specimen": "JioFinance+ · Get more from your money · Extra cashback, JioPoints, and JioGold every time you pay. · ₹999 a year · free until 2027 · Upgrade for free · We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd."
+          }
+        },
+        {
+          "do": {
+            "title": "Write a headline",
+            "caption": "It’s the modal’s heading and names it for screen readers.",
+            "specimen": "JioGold · Save in gold every month · Start a monthly SIP from ₹100. Buy and sell any time. · No making charges · Start a SIP · Gold prices change with the market. Jio Payments Bank Pvt. Ltd."
+          },
+          "dont": {
+            "title": "Leave the headline out",
+            "caption": "The offer has no heading, and screen readers get no name for the modal.",
+            "specimen": "JioGold · Start a monthly SIP from ₹100. Buy and sell any time. · No making charges · Start a SIP · Gold prices change with the market. Jio Payments Bank Pvt. Ltd."
+          }
+        },
+        {
+          "do": {
+            "title": "Put Sections straight in the body",
+            "caption": "They take the modal’s dark styling.",
+            "specimen": "JioFinance+ · Get more from your money · Extra cashback, JioPoints, and JioGold every time you pay. · ₹999 a year · free until 2027 · Key benefits · Up to ₹5,000 cashback · On bills and recharges · 1.25× JioPoints · On every UPI payment · 1% extra JioGold · On gold you buy above ₹1,000 · Upgrade for free · We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd."
+          },
+          "dont": {
+            "title": "Wrap Sections in your own component",
+            "caption": "They miss the styling and stay white cards.",
+            "specimen": "JioFinance+ · Get more from your money · Extra cashback, JioPoints, and JioGold every time you pay. · ₹999 a year · free until 2027 · Key benefits · Up to ₹5,000 cashback · On bills and recharges · 1.25× JioPoints · On every UPI payment · 1% extra JioGold · On gold you buy above ₹1,000 · Upgrade for free · We’ll check your eligibility with Experian. Jio Payments Bank Pvt. Ltd."
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Fullscreen Modal contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Minimal no body",
+        "Lottie hero",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build) from the team’s private package repository. In Figma the modal is 1228 px tall with a full-height image behind everything; in the package it has its own black surface, so the hero text reads without media, and media you add sits behind the hero and the body. As in Figma, its hero space is 532 px and its close button 28 px. The close button shows only when the screen handles it, and copy you leave unset stays empty. On the web it’s a dialog named by its headline, which is a heading. When it has a close button, focus moves to its scrolling body, Tab cycles the body, the main button, and the close button, the arrow and Page keys scroll the body, Escape closes it, and focus returns when it’s removed. trapFocus= turns that off for a modal shown inside a page, as in these examples; In context, and the States example once you show it again, keep it. The published Storybook predates this build.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

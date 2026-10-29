@@ -1,0 +1,567 @@
+{
+  "slug": "fullscreenmodal",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch5, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/fullscreenmodal.md at e7ed622. The guide's Sources note was checked on 28 October 2026 on the installed build itself (jfs-components 0.1.78, mirror v0.1.78-dbe0e02, Biscuit's main at dbe0e02, 27 October), so items citing it carry that build. The evidence's 10 October sections (Checked, Sources, Contract, Browser measurements, Accessibility, Limits, on 0.1.78-636f3f5) are replaced where they differ by its c8526ae section (23 October, #232: black surface, 532 px hero, 28 px close shown only with onClose, empty copy defaults, dialog role, heading and focus trap) and its dbe0e02 section (27-28 October, #392 and #393: the trap focuses the scrolling body, the keys scroll it, trapFocus false for a modal shown inside a page). None of the superseded 10 October sentences is used; the four 10 October sentences used here (a block parent sizes it to its content, a wrapped Section stays a white card, context5 is forced with Page type JioPlus as the default, the Animated warning) still hold on the installed source. Installed FullscreenModal.tsx, web-focus-trap.ts and cloneChildrenWithModes still match every guide sentence used here, read from source, not run (the token values were resolved with the package's own resolver): copy props default to empty strings and an empty line isn't rendered; heroHeight defaults to 532 and is the hero region's minimum height with the text anchored to its bottom; the root's surface is body/background under Page type JioPlus and Color Mode Dark, rgb(0, 0, 0), and the hero text is white (29 px, weight 900); heroMedia sits at the root behind the scroll area and the footer, translated by the scroll offset; the body has a 16 px gap and top padding; the footer is a pinned ActionFooter with 41 px bottom padding, and it renders only with primaryActionLabel or footer; the close button renders only when showClose and onClose are both set, 28 px, 12 px from the top and right; the root has role dialog, aria-modal and the headline as its label, and the headline has the header role; with onClose and trapFocus the scroll area gets tabIndex 0 and the trap focuses it first, keeps Tab inside, calls onClose on Escape and returns focus when removed; modes cascade into children through their children props, so a wrapper component that doesn't forward modes leaves its Sections unstyled. No guide sentence is contradicted. One package doc mismatch: heroHeight's doc comment still says it defaults to 420, while the source default is 532, the guide's figure. Examples follow the building rules: no Color Mode and no other modes (the guide sets none on the modal; Color Mode Light appears only on its In context Profile screen and the States demo's button, both left out). Left out of examples: the body. The guide's body is Sections (Key benefits, a ListGroup of ListItems with IconCapsule leading icons, and Compare plans, a PlanComparisonCard); Section exists only in code and is not part of Coin, and IconCapsule and PlanComparisonCard have no entry in this pack, so no body is composed rather than invent one the guide doesn't show. Also left out: trapFocus false (the guide's setting for previews shown inside its page; a screen keeps the default trap, as In context does), priceText and disclaimer set to empty strings in the confirmation (they repeat the defaults), the ScreenFrame, the playground and its readout, and the States demo's Show the offer button. The hero media example uses a URL string in place of the guide's bank-hero.png asset. Copy is the guide's own (the JioGold SIP offer, the JioFinance+ upgrade offer and the You're all set confirmation). Not recorded: footer, closeOffsetY, style, contentContainerStyle and testID, which the guide doesn't cover (the evidence classes them as developer-only, and the building rules keep style off Coin components), and Page type overrides, which the evidence lists as not shown. avoidWhen is empty: the guide names no situation that calls for another component, and its Don'ts are about configuring the modal, so they are recorded under configuration and accessibility. Not recorded as gaps, per the pack's rules: #232, #392 and #393, all fixed and verified on dbe0e02 (the evidence's Coin gaps list still shows #392 as To do, but its dbe0e02 section replaces it), dark mode, and screen-reader names. The guide's Sources note renders “trapFocus= turns that off”, because the {false} in its JSX text renders nothing; the quote used here starts after it.",
+  "useWhen": [
+    {
+      "text": "A focused, full-screen moment, such as an upgrade offer, with a hero, details and one main action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Fullscreen Modal for a focused, full-screen moment, such as an upgrade offer, with a hero, details, and one main action."
+      }
+    },
+    {
+      "text": "A confirmation screen: hero text and one button, with no body.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Hero text and one button make a confirmation screen."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Eyebrow",
+      "holds": "A short line above the headline (eyebrow), such as the product name.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A short line above the headline, such as the product name."
+      }
+    },
+    {
+      "part": "Headline",
+      "holds": "The heading (headline): 29 px heavy, and the modal's name for screen readers.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "29 px heavy; the heading, and the modal’s name for screen readers."
+      }
+    },
+    {
+      "part": "Supporting text",
+      "holds": "One sentence of detail (supportingText).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One sentence of detail."
+      }
+    },
+    {
+      "part": "Price line",
+      "holds": "Optional (priceText): the price or the offer.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional; the price or the offer."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "Your Sections (children), styled for the dark modal. They follow the hero and scroll.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Your Sections, styled for the dark modal."
+      }
+    },
+    {
+      "part": "Footer",
+      "holds": "The main button (primaryActionLabel, pressed through onPrimaryAction), with an optional disclaimer. It stays at the bottom.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The main button, with an optional disclaimer."
+      }
+    },
+    {
+      "part": "Close button",
+      "holds": "Shown when the screen handles it (onClose), which closes the modal. It floats top right.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown when the screen handles it, which closes the modal."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "It fills its screen and scrolls inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Fullscreen Modal fills its screen and scrolls inside it."
+      }
+    },
+    {
+      "text": "In a block parent it is as tall as its content, with no inner scroll.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "In a block parent it is as tall as its content (no inner scroll)"
+      },
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "The hero text sits at the bottom of a 532 px space by default; the body starts 16 px below it with 16 px between Sections, and the footer stays at the bottom.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The hero text sits at the bottom of a 532 px space by default, the body starts 16 px below it with 16 px between Sections, and the footer stays at the bottom."
+      }
+    },
+    {
+      "text": "The close button floats top right: 28 px, 12 px from the top and right.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The close button is 28 px, 12 px from the top and right."
+      }
+    },
+    {
+      "text": "In the guide, Profile opens the offer from its JioFinance+ row. Close takes people back, Upgrade for free starts the upgrade, and the screen removes the modal either way.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Profile opens the offer from its JioFinance+ row. Close takes people back; Upgrade for free starts the upgrade. The screen removes the modal either way."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set the hero copy (eyebrow, headline, supportingText, priceText), add Sections to the body for the details, and choose the footer's button and disclaimer.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Set the hero copy, add Sections for the details, and choose the footer’s button and disclaimer."
+      }
+    },
+    {
+      "text": "heroHeight sets how much space the hero text sits at the bottom of; hero media fills the width behind the hero text.",
+      "strength": "recommended",
+      "target": "heroHeight",
+      "from": {
+        "section": "configuration",
+        "quote": "Hero media fills the width behind the hero text, and heroHeight sets how much space the text sits at the bottom of."
+      }
+    },
+    {
+      "text": "A lower heroHeight brings the body up; the text stays at the bottom of its space.",
+      "strength": "recommended",
+      "target": "heroHeight",
+      "from": {
+        "section": "configuration",
+        "quote": "A lower heroHeight brings the body up; the text stays at the bottom of its space."
+      }
+    },
+    {
+      "text": "Hero media (heroMedia) fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas.",
+      "strength": "recommended",
+      "target": "heroMedia",
+      "from": {
+        "section": "configuration",
+        "quote": "Media fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas."
+      }
+    },
+    {
+      "text": "Keep the hero text on a dark background: the modal's own black surface keeps the white text readable.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The modal’s own black surface keeps the white text readable."
+      }
+    },
+    {
+      "text": "Do not put the hero text over a light photo: the white text gets lost in the image.",
+      "strength": "discouraged",
+      "target": "heroMedia",
+      "from": {
+        "section": "doDont",
+        "quote": "The white text gets lost in the image."
+      }
+    },
+    {
+      "text": "Put Sections straight in the body (children): they take the modal's dark styling.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "doDont",
+        "quote": "They take the modal’s dark styling."
+      }
+    },
+    {
+      "text": "Do not wrap Sections in your own component: they miss the styling and stay white cards.",
+      "strength": "discouraged",
+      "target": "children",
+      "from": {
+        "section": "doDont",
+        "quote": "They miss the styling and stay white cards."
+      }
+    },
+    {
+      "text": "Set primaryActionLabel for the main button: with no label and no custom footer, the modal has no footer.",
+      "strength": "recommended",
+      "target": "primaryActionLabel",
+      "from": {
+        "section": "evidence",
+        "quote": "`primaryActionLabel` empty, so no footer without a label or `footer`."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "The close button shows only when the screen handles it: set onClose, and the screen removes the modal when it's pressed.",
+      "strength": "recommended",
+      "target": "onClose",
+      "from": {
+        "section": "sources",
+        "quote": "The close button shows only when the screen handles it"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" describes when every Fullscreen Modal draws its close button (with onClose set). It states behaviour, not an instruction, so it stays recommended."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "showClose is on by default; the close button renders only when showClose and onClose are both set.",
+      "strength": "recommended",
+      "target": "showClose",
+      "from": {
+        "section": "evidence",
+        "quote": "rendered only when `showClose` and `onClose` are both set"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" states the component's condition for drawing the close button in every case. It describes behaviour, not an instruction, so it stays recommended."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "The close button and the main button only report the press (onClose, onPrimaryAction); the screen shows the modal and removes it.",
+      "strength": "recommended",
+      "target": "onPrimaryAction",
+      "from": {
+        "section": "states",
+        "quote": "The screen shows it and removes it; its close button and main button only report the press."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" says what both buttons do on every Fullscreen Modal: they report the press and never close it themselves. It states behaviour, not an instruction, so it stays recommended."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One big moment, one main action, and always a way out.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One big moment, one main action, and always a way out."
+        },
+        "absolute": {
+          "word": "always",
+          "scope": "everywhere",
+          "reason": "\"always\" applies to every Fullscreen Modal: the principle asks each one for a way out. It is the guide's core principle rather than a rule it states elsewhere, and the package doesn't enforce it (the close button needs onClose), so it stays recommended."
+        }
+      },
+      {
+        "text": "Use the eyebrow for the product or offer, the headline for the benefit in a few words, one supporting sentence, and the price on its own line.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the eyebrow for the product or offer, the headline for the benefit in a few words, one supporting sentence, and the price on its own line."
+        }
+      },
+      {
+        "text": "Label the button with the action.",
+        "strength": "recommended",
+        "target": "primaryActionLabel",
+        "from": {
+          "section": "content",
+          "quote": "Label the button with the action."
+        }
+      },
+      {
+        "text": "A line you leave unset doesn't show: every copy line is empty by default.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "A line you leave unset doesn’t show."
+        }
+      }
+    ],
+    "good": [
+      "JioGold",
+      "Save in gold every month",
+      "Start a monthly SIP from ₹100. Buy and sell any time.",
+      "No making charges",
+      "Start a SIP"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Shown",
+      "when": "The screen shows it; the modal has no open or closed state of its own.",
+      "from": {
+        "section": "states",
+        "quote": "Fullscreen Modal has no open or closed state."
+      }
+    },
+    {
+      "state": "Removed",
+      "when": "Close or the main button is pressed: the screen removes the modal. The buttons only report the press.",
+      "from": {
+        "section": "states",
+        "quote": "Press close or Upgrade for free: the screen removes the modal."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web it's a dialog named by its headline, which is a heading.",
+      "strength": "recommended",
+      "target": "headline",
+      "from": {
+        "section": "sources",
+        "quote": "On the web it’s a dialog named by its headline, which is a heading."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Write a headline: it's the modal's heading and names it for screen readers.",
+      "strength": "recommended",
+      "target": "headline",
+      "from": {
+        "section": "doDont",
+        "quote": "It’s the modal’s heading and names it for screen readers."
+      }
+    },
+    {
+      "text": "Do not leave the headline out: the offer has no heading, and screen readers get no name for the modal.",
+      "strength": "discouraged",
+      "target": "headline",
+      "from": {
+        "section": "doDont",
+        "quote": "The offer has no heading, and screen readers get no name for the modal."
+      }
+    },
+    {
+      "text": "With a close button (onClose), focus moves to the scrolling body, Tab cycles the body, the main button and the close button, the arrow and Page keys scroll the body, Escape closes it, and focus returns when it's removed.",
+      "strength": "recommended",
+      "target": "onClose",
+      "from": {
+        "section": "sources",
+        "quote": "When it has a close button, focus moves to its scrolling body, Tab cycles the body, the main button, and the close button, the arrow and Page keys scroll the body, Escape closes it, and focus returns when it’s removed."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "trapFocus false turns that focus handling off, for a modal shown inside a page such as a preview; a modal the screen shows keeps it (the default), as In context does.",
+      "strength": "recommended",
+      "target": "trapFocus",
+      "value": "false",
+      "from": {
+        "section": "sources",
+        "quote": "turns that off for a modal shown inside a page, as in these examples; In context, and the States example once you show it again, keep it."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The close button is named by closeAccessibilityLabel, Close by default.",
+      "strength": "recommended",
+      "target": "closeAccessibilityLabel",
+      "from": {
+        "fact": "props:closeAccessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the text on a dark background",
+      "dont": "Put the text over a light photo",
+      "why": "The white text gets lost in the image.",
+      "from": {
+        "section": "doDont",
+        "quote": "The modal’s own black surface keeps the white text readable."
+      }
+    },
+    {
+      "do": "Write a headline",
+      "dont": "Leave the headline out",
+      "why": "The offer has no heading, and screen readers get no name for the modal.",
+      "from": {
+        "section": "doDont",
+        "quote": "It’s the modal’s heading and names it for screen readers."
+      }
+    },
+    {
+      "do": "Put Sections straight in the body",
+      "dont": "Wrap Sections in your own component",
+      "why": "They miss the styling and stay white cards.",
+      "from": {
+        "section": "doDont",
+        "quote": "They take the modal’s dark styling."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "An offer in four lines and one action, the guide's Content example: the eyebrow names the product, the headline gives the benefit in a few words, then one supporting sentence, the price line on its own, and a button labelled with the action. The screen shows it and removes it when close (onClose) or the main button (onPrimaryAction) is pressed.",
+      "jsx": "<FullscreenModal\n  eyebrow=\"JioGold\"\n  headline=\"Save in gold every month\"\n  supportingText=\"Start a monthly SIP from ₹100. Buy and sell any time.\"\n  priceText=\"No making charges\"\n  primaryActionLabel=\"Start a SIP\"\n  disclaimer=\"Gold prices change with the market.\"\n  onClose={() => {}}\n  onPrimaryAction={() => {}}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Use the eyebrow for the product or offer, the headline for the benefit in a few words, one supporting sentence, and the price on its own line."
+      }
+    },
+    {
+      "purpose": "Without a body: hero text and one button make a confirmation screen. The price line and the disclaimer are left unset, so they don't show.",
+      "jsx": "<FullscreenModal\n  eyebrow=\"JioFinance+\"\n  headline=\"You’re all set\"\n  supportingText=\"Your benefits are active on every linked account.\"\n  primaryActionLabel=\"Done\"\n  onClose={() => {}}\n  onPrimaryAction={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Hero text and one button make a confirmation screen."
+      }
+    },
+    {
+      "purpose": "With hero media, as the guide's With hero media example sets it up: an Image fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas. heroHeight 460 is the value that example gives its 328 : 223 image. The guide's Key benefits body is left out.",
+      "jsx": "<FullscreenModal\n  eyebrow=\"JioFinance+\"\n  headline=\"Get more from your money\"\n  supportingText=\"Extra cashback, JioPoints, and JioGold every time you pay.\"\n  priceText=\"₹999 a year · free until 2027\"\n  heroMedia={<Image imageSource=\"https://example.com/bank-hero.png\" ratio={328 / 223} />}\n  heroHeight={460}\n  primaryActionLabel=\"Upgrade for free\"\n  disclaimer=\"We’ll check your eligibility with Experian.\"\n  onClose={() => {}}\n  onPrimaryAction={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Media fills the width at its own ratio behind the hero and the body, and scrolls with them; keep the text off light areas."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "heroHeight",
+      "description": "The hero text region is 532 px tall by default, as in Figma; the package's own doc comment still says 420.",
+      "quote": "`heroHeight` 532 (measured 532)",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "heroMedia",
+      "description": "A full-bleed background at the root, pinned to the top at the modal's width (height = width ÷ an Image's ratio), behind the hero text, the body and the footer. It adds no scroll height and moves with the scroll.",
+      "quote": "`heroMedia` is now a full-bleed background at the root, pinned to the top at the modal's width (height = width ÷ `ratio`), behind the hero text, the body, and the footer; it adds no scroll height and moves with the scroll.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "showClose",
+      "description": "The close button (28 × 28, 12 px from the top and right) renders only when showClose and onClose are both set.",
+      "quote": "Close: 28 × 28 (Button / Size S), 12 px from the top and right, rendered only when `showClose` and `onClose` are both set.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "onClose",
+      "description": "Shows the close button. On the web, with trapFocus on (the default), a focus trap moves focus inside on mount (to the scrolling body), keeps Tab and Shift+Tab inside, calls onClose on Escape, and returns focus to the opener when the modal is removed. Without onClose it is still aria-modal but doesn't take or keep focus.",
+      "quote": "With `onClose`, a web focus trap moves focus inside on mount, keeps Tab and Shift+Tab inside, Escape calls `onClose`, and focus returns to the opener on unmount.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "trapFocus",
+      "description": "With trapFocus false, a modal shown from the first render leaves focus on the page and Tab passes through it; Escape doesn't close it, and it is still a modal dialog. With the default, one shown at load takes focus.",
+      "quote": "With `trapFocus={false}` Escape doesn't close it (Escape belongs to the trap), and it is still `role=\"dialog\" aria-modal=\"true\"`.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "primaryActionLabel",
+      "description": "Empty by default, so there is no footer until a label or a custom footer is given.",
+      "quote": "`primaryActionLabel` empty, so no footer without a label or `footer`.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "headline",
+      "description": "Names the dialog on the web (aria-label) and renders as the heading. Left empty, the modal has no heading and no name.",
+      "quote": "named by the headline (`aria-label`); the headline is an `h1`",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "children",
+      "description": "The modal's modes cascade into its children, through their children props, but not into a component that doesn't forward modes: a Section inside a wrapper component stays a white card with black text.",
+      "quote": "A Section inside a wrapper component that doesn't forward `modes` stays a white card with black text.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "context5",
+      "default": "Fullscreen Modal",
+      "description": "Always Fullscreen Modal: the modal forces it and modes can't override it. It gives the components in the body and the footer their white-on-dark look.",
+      "quote": "Modes: `context5: 'Fullscreen Modal'` is forced; `Page type: JioPlus` is the default.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Page type",
+      "default": "JioPlus",
+      "description": "FullscreenModal sets Page type JioPlus itself, which gives the white hero text; modes can override it.",
+      "quote": "Modes: `context5: 'Fullscreen Modal'` is forced; `Page type: JioPlus` is the default.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Color Mode",
+      "description": "The surface is black in every Color Mode. In Dark the hero text drops Color Mode and stays white.",
+      "quote": "In Color Mode Dark the hero text drops Color Mode and stays white.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma draws the modal 1228 px tall with a full-height image behind everything; the package gives it its own black surface, so the hero text reads without media, and media you add sits behind the hero and the body.",
+      "from": {
+        "section": "sources",
+        "quote": "In Figma the modal is 1228 px tall with a full-height image behind everything; in the package it has its own black surface, so the hero text reads without media, and media you add sits behind the hero and the body."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The published Storybook predates the 27 October build the guide was checked on.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook predates this build."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "In development, React Native's Animated logs a useNativeDriver warning.",
+      "quote": "RN Animated logs a `useNativeDriver` warning in development.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ]
+}
