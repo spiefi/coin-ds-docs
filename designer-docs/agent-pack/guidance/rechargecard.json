@@ -1,0 +1,516 @@
+{
+  "slug": "rechargecard",
+  "guideCommit": "0615fbf45d463766fe3247400cb76d1bb465f640",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch3, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/rechargecard.md at 0615fbf. The guide's Sources note and the evidence were checked on 20 October 2026 on 0.1.78-c7d3348 (Biscuit's main, the 19 October build); the evidence has no later section. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Its RechargeCard.tsx is not the one the evidence describes: the file is the same on c7d3348 and c8526ae and was rewritten in ace46ca and dbe0e02 (the mirror tags' history; the package CHANGELOG has no entry for it), and the changes look like #353's fixes. Read from the installed source, rechargeCardUtils.ts, ButtonGroup and the rechargeCard tokens, not rendered. On dbe0e02: each action Button hugs its label (the card overrides ButtonGroup's equal flex: 1), so of two labels neither is cut short; with no actions (or false, '' or an empty fragment) there is no group and no extra 20 px; a string price that already starts with ₹ is not prefixed again (no ₹₹349); currency, validityLabel, dataLabel and subscriptionsLabel exist, so the ₹ and the three labels are no longer fixed; subscriptionContent false, '' or an empty fragment hides the column; disabled dims the card to half opacity, a static card too; a static card is named by accessibilityLabel or else its title. So the guide sentences these contradict are not recorded: the buttons always splitting their row into equal widths, the empty actions row adding 20 px (the Sizing sentence and the Whole card and No actions captions), the fixed labels (Content; the Plan facts anatomy note says 'fixed labels', so that part cites Sizing instead), disabled not changing the card's look, and all three Do & Don't pairs, whose reasons (View details cut short, ₹₹349, the empty row) no longer happen on dbe0e02. doDont and content.bad are therefore empty. Their advice stays where the guide gives it otherwise: give price as a number, label the main action Recharge, and give a second action Emphasis Low, as Figma does (the guide's own rule for this card; the building rules' provisional 'Two actions' rule says Emphasis Medium). Still true on dbe0e02 and recorded (read from the source and tokens): the 312 px minimum; 20 px padding top and bottom, 16 px at the sides, 20 px between rows, 20 px radius, 1 px border; title 12 px bold and disclaimer 10 px; the price at 36 px through the card's default Context3 Balance & Cards; the Avatars forced to size S; the buttons' AppearanceBrand Secondary, Button / Size S and Emphasis High defaults under the card's modes, with a Button's own modes winning; and the height gap with Figma (line heights still raised to 1.2 × the font size; not re-measured). The panel, border and text tokens alias Color Mode greys (on c7d3348 too), so 'The card's own text and panel don't change with modes' holds for every mode but Color Mode, which the app sets from the device. The guide names no other component to use instead, so the avoidWhen rule (selected or loading) has no useInstead; Biscuit's mdx (HoldingsCard, CcCard), as the evidence summarises it, is not used. Examples follow the building rules: no Color Mode, no style width (the guide's 312 px hosts its specimens; the card fills its host and never goes below 312 px), no Slot gap M on the In context VStack, and each action Button gets only its label and a stub onPress. Left out of examples: the guide's two-action card (it sets Emphasis Low on a Button in the actions slot) and its mode previews (Button / Size M, AppearanceBrand Primary, Emphasis Medium), which set modes on the card to restyle its buttons. Copy and plans are the guide's own: Unlimited 5G at ₹349 with the JH, JS and +2 monogram Avatars standing in for app logos (the package has no app logos), the ₹19 Data pack, and Popular plans for 98765 43210. Not recorded as gaps: the published Storybook (pressable stories, its older page, its mode controls) and the #353 items dbe0e02 fixed.",
+  "useWhen": [
+    {
+      "text": "Show one prepaid plan: its price, validity, data, the apps it includes, and the action to buy it.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Recharge Card to show one prepaid plan: its price, validity, data, the apps it includes, and the action to buy it."
+      }
+    },
+    {
+      "text": "A small top-up, such as a data pack, with its limit in the fine print.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "A small top-up, with its limit in the fine print."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A plan people select, or one that shows loading: the card has no selected or loading state.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The card has no selected or loading state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "title: the plan's name, 12 px bold.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "title: the plan’s name, 12 px bold."
+      }
+    },
+    {
+      "part": "Price",
+      "holds": "A MoneyValue from price, 36 px; the card adds the ₹.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A MoneyValue from price, 36 px; the card adds the ₹."
+      }
+    },
+    {
+      "part": "Plan facts",
+      "holds": "validity and data, each under its label, sharing the width in equal columns.",
+      "required": true,
+      "from": {
+        "section": "sizing",
+        "quote": "The facts share the width in equal columns"
+      }
+    },
+    {
+      "part": "Apps",
+      "holds": "subscriptionContent: your Avatars, overlapped at size S, in a third column.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "subscriptionContent: your Avatars, overlapped at size S."
+      }
+    },
+    {
+      "part": "Fine print",
+      "holds": "disclaimer, 10 px; a line break in the text starts a new line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "disclaimer, 10 px; a line break in the text starts a new line."
+      }
+    },
+    {
+      "part": "Actions",
+      "holds": "actions: your Buttons, purple and size S.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "actions: your Buttons, purple and size S."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A white panel, 20 px corners, 1 px border, at least 312 px wide.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white panel, 20 px corners, 1 px border, at least 312 px wide."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "On a Recharge screen, list the plans one under another.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists plans one under another."
+      }
+    },
+    {
+      "text": "Each Recharge starts the screen's own payment through the Button's onPress; the card only lays out the plan.",
+      "strength": "recommended",
+      "target": "actions",
+      "from": {
+        "section": "inContext",
+        "quote": "Each Recharge starts the screen’s own payment through the Button’s onPress; the card only lays out the plan."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" describes the card itself on any screen: it lays out the plan and has no payment of its own; it states behaviour rather than an instruction, so it stays recommended."
+      }
+    },
+    {
+      "text": "The card is never narrower than 312 px, as Figma draws it, and fills a wider host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is never narrower than 312 px, as Figma draws it, and fills a wider host."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it describes the card's 312 px minimum width, which holds in every host; it states behaviour rather than an instruction, so it stays recommended."
+      }
+    },
+    {
+      "text": "The facts share the width in equal columns, and the price stays at the left.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The facts share the width in equal columns, and the price stays at the left."
+      }
+    },
+    {
+      "text": "In a wider host the fact columns get wider; the price stays at the left.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The fact columns get wider; the price stays at the left."
+      }
+    },
+    {
+      "text": "Height follows the content: 20 px between the rows, 20 px of padding at the top and bottom, and 16 px at the sides.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the content: 20 px between the rows and 20 px of padding at the top and bottom, 16 px at the sides."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "subscriptionContent adds a third column, Subscriptions, for the apps the plan includes: pass Avatars, and the card overlaps them at size S.",
+      "strength": "recommended",
+      "target": "subscriptionContent",
+      "from": {
+        "section": "configuration",
+        "quote": "subscriptionContent adds a third column, Subscriptions, for the apps the plan includes: pass Avatars, and the card overlaps them at size S."
+      }
+    },
+    {
+      "text": "Leave subscriptionContent out for two columns, for a plan without apps.",
+      "strength": "recommended",
+      "target": "subscriptionContent",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave it out for two columns."
+      }
+    },
+    {
+      "text": "subscriptionContent false, '' or an empty fragment hides the Subscriptions column, the same as leaving it out.",
+      "strength": "recommended",
+      "target": "subscriptionContent",
+      "from": {
+        "fact": "props:subscriptionContent"
+      }
+    },
+    {
+      "text": "actions takes your Buttons, and the card makes them purple, size S, and Emphasis High.",
+      "strength": "recommended",
+      "target": "actions",
+      "from": {
+        "section": "configuration",
+        "quote": "actions takes your Buttons, and the card makes them purple, size S, and Emphasis High"
+      }
+    },
+    {
+      "text": "With a second action, give that Button Emphasis Low, as Figma does.",
+      "strength": "recommended",
+      "target": "actions",
+      "from": {
+        "section": "configuration",
+        "quote": "give a second one Emphasis Low, as Figma does."
+      }
+    },
+    {
+      "text": "Leave actions out (or pass false, '' or an empty fragment) for no buttons: the card then adds no button row and no extra gap.",
+      "strength": "recommended",
+      "target": "actions",
+      "from": {
+        "fact": "props:actions"
+      }
+    },
+    {
+      "text": "Don't give a card both onPress and actions: a pressable card with actions puts buttons inside a button.",
+      "strength": "discouraged",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "Use one or the other: a pressable card with actions puts buttons inside a button."
+      }
+    },
+    {
+      "text": "On the card, Button / Size M makes its buttons bigger, and AppearanceBrand and Emphasis change all of them.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "On the card, Button / Size M makes them bigger, and AppearanceBrand and Emphasis change all of them."
+      }
+    },
+    {
+      "text": "The card's own text and panel don't change with modes.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "The card’s own text and panel don’t change with modes."
+      }
+    },
+    {
+      "text": "currency sets the symbol before price (₹ by default); a string price that already starts with it is not prefixed again.",
+      "strength": "recommended",
+      "target": "currency",
+      "from": {
+        "fact": "props:currency"
+      }
+    },
+    {
+      "text": "validityLabel sets the label above the validity value (Validity by default).",
+      "strength": "recommended",
+      "target": "validityLabel",
+      "from": {
+        "fact": "props:validityLabel"
+      }
+    },
+    {
+      "text": "dataLabel sets the label above the data value (Data by default).",
+      "strength": "recommended",
+      "target": "dataLabel",
+      "from": {
+        "fact": "props:dataLabel"
+      }
+    },
+    {
+      "text": "subscriptionsLabel sets the label above the apps (Subscriptions by default).",
+      "strength": "recommended",
+      "target": "subscriptionsLabel",
+      "from": {
+        "fact": "props:subscriptionsLabel"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One plan, priced up front.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One plan, priced up front."
+        }
+      },
+      {
+        "text": "Make the title the plan's name.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the plan’s name"
+        }
+      },
+      {
+        "text": "Give price as a number: the card adds the ₹.",
+        "strength": "recommended",
+        "target": "price",
+        "from": {
+          "section": "content",
+          "quote": "the price a number: the card adds the ₹."
+        }
+      },
+      {
+        "text": "Keep validity and data to one value each, such as “28 days” and “2 GB/day”.",
+        "strength": "recommended",
+        "target": "validity",
+        "from": {
+          "section": "content",
+          "quote": "Keep validity and data to one value each, such as 28 days and 2 GB/day"
+        }
+      },
+      {
+        "text": "Put the plan's limits in the disclaimer, in a line or two of fine print.",
+        "strength": "recommended",
+        "target": "disclaimer",
+        "from": {
+          "section": "content",
+          "quote": "Put the plan’s limits in the disclaimer, in a line or two of fine print."
+        }
+      },
+      {
+        "text": "A line break in disclaimer starts a new line of fine print.",
+        "strength": "recommended",
+        "target": "disclaimer",
+        "from": {
+          "section": "anatomy",
+          "quote": "a line break in the text starts a new line."
+        }
+      },
+      {
+        "text": "Label the main action Recharge.",
+        "strength": "recommended",
+        "target": "actions",
+        "from": {
+          "section": "content",
+          "quote": "Label the main action Recharge."
+        }
+      },
+      {
+        "text": "Set title yourself: left out, the card shows the sample “Unlimited 5G”.",
+        "strength": "required",
+        "target": "title",
+        "from": {
+          "fact": "props:title"
+        }
+      },
+      {
+        "text": "Set price yourself: left out, the card shows the sample ₹500.",
+        "strength": "required",
+        "target": "price",
+        "from": {
+          "fact": "props:price"
+        }
+      },
+      {
+        "text": "Set validity yourself: left out, the card shows the sample “365 days”.",
+        "strength": "required",
+        "target": "validity",
+        "from": {
+          "fact": "props:validity"
+        }
+      },
+      {
+        "text": "Set data yourself: left out, the card shows the sample “2 GB/Day”.",
+        "strength": "required",
+        "target": "data",
+        "from": {
+          "fact": "props:data"
+        }
+      },
+      {
+        "text": "Set disclaimer yourself: left out, the card shows sample fine print for a data-only pack.",
+        "strength": "required",
+        "target": "disclaimer",
+        "from": {
+          "fact": "props:disclaimer"
+        }
+      }
+    ],
+    "good": [
+      "Unlimited 5G",
+      "349",
+      "28 days",
+      "2 GB/day",
+      "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+      "Recharge",
+      "Data pack",
+      "19",
+      "1 day",
+      "1.5 GB",
+      "Data only. No voice or SMS."
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "The default: the card isn't pressable; its action Buttons are.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t pressable: its buttons are."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress: the whole card is one button, announced by its title.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, announced by its title"
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled: the card is dimmed, a static card too; with onPress set, it doesn't fire.",
+      "from": {
+        "fact": "props:disabled"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "With onPress, the whole card is one button, announced by its title.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, announced by its title"
+      }
+    },
+    {
+      "text": "accessibilityLabel names the card for screen readers, pressable or not; without it, the card is named by its title.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [],
+  "examples": [
+    {
+      "purpose": "Plans on the Recharge screen, one under another under a Title: the Unlimited 5G plan with the apps it includes (monogram Avatars stand in for app logos, as in the guide) and a Data pack without apps. Each Recharge starts the screen's own payment through the Button's onPress (stubs here); the card only lays out the plan.",
+      "jsx": "<VStack>\n  <Title title=\"Popular plans\" subtitle=\"For 98765 43210\" />\n  <RechargeCard\n    title=\"Unlimited 5G\"\n    price={349}\n    validity=\"28 days\"\n    data=\"2 GB/day\"\n    disclaimer={'Unlimited voice and 100 SMS a day.\\nSpeed drops to 64 kbps after 2 GB.'}\n    subscriptionContent={\n      <>\n        <Avatar style=\"Monogram\" monogram=\"JH\" />\n        <Avatar style=\"Monogram\" monogram=\"JS\" />\n        <Avatar style=\"Monogram\" monogram=\"+2\" />\n      </>\n    }\n    actions={<Button label=\"Recharge\" onPress={() => {}} />}\n  />\n  <RechargeCard\n    title=\"Data pack\"\n    price={19}\n    validity=\"1 day\"\n    data=\"1.5 GB\"\n    disclaimer=\"Data only. No voice or SMS.\"\n    actions={<Button label=\"Recharge\" onPress={() => {}} />}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Each Recharge starts the screen’s own payment through the Button’s onPress; the card only lays out the plan."
+      }
+    },
+    {
+      "purpose": "The whole card as one button: onPress, announced by its title, and no actions, since a pressable card with actions would put buttons inside a button.",
+      "jsx": "<RechargeCard\n  title=\"Data pack\"\n  price={19}\n  validity=\"1 day\"\n  data=\"1.5 GB\"\n  disclaimer=\"Data only. No voice or SMS.\"\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, announced by its title"
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "subscriptionContent",
+      "description": "Wrapped in an AvatarGroup at Avatar Size S whatever the card's modes: 29 px Avatars, overlapping by 6 px.",
+      "quote": "It is wrapped in `AvatarGroup` with `{ ...modes, 'Avatar Size': 'S' }` (29 px, −6 px overlap).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "actions",
+      "description": "The Buttons get AppearanceBrand Secondary (purple), Button / Size S and Emphasis High, with the card's modes on top; a Button's own modes win.",
+      "quote": "with `{ AppearanceBrand: 'Secondary', 'Button / Size': 'S', Emphasis: 'High', ...modes }`; a child's own modes win.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "The root becomes a Pressable with the button role, named by accessibilityLabel or else title.",
+      "quote": "`onPress`: root `Pressable`, `role=button`, name `accessibilityLabel ?? title`",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Context3",
+      "description": "The card gives its price Context3 Balance & Cards by default: 36 px, weight 900. Context3 Default on the card shrinks the price to 14 px.",
+      "quote": "Price: `MoneyValue` with `Context3: 'Balance & Cards'` by default → 36 px, weight 900 (line 44). `Context3: Default` shrinks it to 14 px.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Avatar Size",
+      "description": "Has no effect on the card's Avatars: the card forces them to S.",
+      "quote": "Avatar Size from the card has no effect (forced S)",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The card is 271 px tall where Figma's is 261 (three columns, one action, 312 px wide), because its text lines are taller: line heights are raised to 1.2 × the font size.",
+      "quote": "Height 271 vs Figma 261 (line heights raised to 1.2 × font size).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Figma's Recharge Card exposes only title and disclaimer as properties; the price, facts, apps and buttons are layers there.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Recharge Card exposes only title and disclaimer as properties; the price, facts, apps, and buttons are layers there."
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ]
+}
