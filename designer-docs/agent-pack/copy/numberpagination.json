@@ -1,0 +1,282 @@
+{
+  "slug": "numberpagination",
+  "label": "Number Pagination",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/numberpagination.guide.tsx"
+  ],
+  "evidence": "docs/evidence/numberpagination.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T00:16:19.948Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "pagination",
+    "page indicator",
+    "carousel",
+    "pager",
+    "slides"
+  ],
+  "title": "Number Pagination",
+  "summary": "Use Number Pagination to show which slide of a short media carousel is in view, and to jump to another.",
+  "corePrinciple": "A few pages, over imagery. The screen tracks the page; the component shows it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7522-7652",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-numberpagination--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Numbers on a glass pill",
+      "description": "A frosted, translucent pill holds one circular number per page. The page in view is a white circle with a dark number.",
+      "blocks": [
+        "Shown at 2×",
+        "32",
+        "1",
+        "2",
+        "3",
+        "Glass pill",
+        "Frosted, translucent surface with a thin light border.",
+        "Active page",
+        "White circle with a dark number for the slide in view.",
+        "Page number",
+        "Other pages in white; each is a 32 px pressable circle.",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "anatomy": [
+        {
+          "part": "Glass pill",
+          "note": "Frosted, translucent surface with a thin light border."
+        },
+        {
+          "part": "Active page",
+          "note": "White circle with a dark number for the slide in view."
+        },
+        {
+          "part": "Page number",
+          "note": "Other pages in white; each is a 32 px pressable circle."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Set how many pages",
+      "description": "Each page adds a 32 px circle. Keep the count small so the pill stays compact over the image.",
+      "blocks": [
+        "Three pages",
+        "For a short set, such as three offers.",
+        "Four pages",
+        "The Figma default.",
+        "Five pages",
+        "About the most that stays compact."
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Three pages",
+          "description": "For a short set, such as three offers."
+        },
+        {
+          "title": "Four pages",
+          "description": "The Figma default."
+        },
+        {
+          "title": "Five pages",
+          "description": "About the most that stays compact."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "The white circle follows the page",
+      "description": "The screen passes the active page and updates it when a number is pressed. Pressed numbers dim to 70%. There is no disabled state.",
+      "blocks": [
+        "First slide",
+        "The first number is white.",
+        "Last slide",
+        "The white circle moves to the last number."
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "First slide",
+          "description": "The first number is white."
+        },
+        {
+          "title": "Last slide",
+          "description": "The white circle moves to the last number."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "39 px tall, 32 px per page",
+      "description": "The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide. It does not wrap: pages that do not fit scroll sideways inside the pill.",
+      "blocks": [
+        "Shown at 2×",
+        "138 × 39",
+        "32 × 32"
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Numbers only",
+      "description": "The component writes the numbers from the page count; there is no text to add. Let the image or card above say what each slide is.",
+      "blocks": [
+        "Five slides"
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Five slides",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A photo carousel on a product card",
+      "description": "The screen passes activePage and, when a number is pressed, shows that photo; here the line below reports the change. Number Pagination only reports the press.",
+      "blocks": [
+        "Photo 1 of 4"
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep it readable",
+      "description": "Each pair shows pagination people can read versus pagination they can’t.",
+      "blocks": [
+        "Do",
+        "Place it on imagery",
+        "White numbers stand out on a photo.",
+        "Don’t",
+        "Place it on a light surface",
+        "White numbers disappear on white.",
+        "Keep to a few pages",
+        "Five numbers fit comfortably.",
+        "Show every page of a long set",
+        "Twelve pages don’t fit, so people must scroll the pill to find the rest."
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Place it on imagery",
+            "caption": "White numbers stand out on a photo.",
+            "specimen": "1 · 2 · 3 · 4"
+          },
+          "dont": {
+            "title": "Place it on a light surface",
+            "caption": "White numbers disappear on white.",
+            "specimen": "1 · 2 · 3 · 4"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep to a few pages",
+            "caption": "Five numbers fit comfortably.",
+            "specimen": "1 · 2 · 3 · 4 · 5"
+          },
+          "dont": {
+            "title": "Show every page of a long set",
+            "caption": "Twelve pages don’t fit, so people must scroll the pill to find the rest.",
+            "specimen": "1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · 9 · 10 · 11 · 12"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Number Pagination contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Active page",
+        "Custom children",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the pill. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

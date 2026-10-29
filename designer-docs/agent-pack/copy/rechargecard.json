@@ -1,0 +1,442 @@
+{
+  "slug": "rechargecard",
+  "label": "Recharge Card",
+  "guideCommit": "0615fbf45d463766fe3247400cb76d1bb465f640",
+  "files": [
+    "src/guides/rechargecard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/rechargecard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T00:16:23.098Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "plan card",
+    "prepaid plan",
+    "recharge plan",
+    "mobile plan",
+    "data pack"
+  ],
+  "title": "Recharge Card",
+  "summary": "Use a Recharge Card to show one prepaid plan: its price, validity, data, the apps it includes, and the action to buy it.",
+  "corePrinciple": "One plan, priced up front.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2235-937",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-rechargecard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A plan in four rows",
+      "description": "A white panel stacks the plan’s name and price, a row of facts, the fine print, and the actions, 20 px apart. The facts row has a third column when the plan includes apps.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "Title",
+        "title: the plan’s name, 12 px bold.",
+        "Price",
+        "A MoneyValue from price, 36 px; the card adds the ₹.",
+        "Plan facts",
+        "validity and data under fixed labels, in equal columns.",
+        "Apps",
+        "subscriptionContent: your Avatars, overlapped at size S.",
+        "Fine print",
+        "disclaimer, 10 px; a line break in the text starts a new line.",
+        "Actions",
+        "actions: your Buttons, purple and size S.",
+        "Panel",
+        "A white panel, 20 px corners, 1 px border, at least 312 px wide."
+      ],
+      "specimen": [
+        "Unlimited 5G",
+        "₹",
+        "349",
+        "Validity",
+        "28 days",
+        "Data",
+        "2 GB/day",
+        "Subscriptions",
+        "JH",
+        "JS",
+        "+2",
+        "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+        "Recharge"
+      ],
+      "anatomy": [
+        {
+          "part": "Title",
+          "note": "title: the plan’s name, 12 px bold."
+        },
+        {
+          "part": "Price",
+          "note": "A MoneyValue from price, 36 px; the card adds the ₹."
+        },
+        {
+          "part": "Plan facts",
+          "note": "validity and data under fixed labels, in equal columns."
+        },
+        {
+          "part": "Apps",
+          "note": "subscriptionContent: your Avatars, overlapped at size S."
+        },
+        {
+          "part": "Fine print",
+          "note": "disclaimer, 10 px; a line break in the text starts a new line."
+        },
+        {
+          "part": "Actions",
+          "note": "actions: your Buttons, purple and size S."
+        },
+        {
+          "part": "Panel",
+          "note": "A white panel, 20 px corners, 1 px border, at least 312 px wide."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Facts, apps, and actions",
+      "description": "subscriptionContent adds a third column, Subscriptions, for the apps the plan includes: pass Avatars, and the card overlaps them at size S. Leave it out for two columns. actions takes your Buttons, and the card makes them purple, size S, and Emphasis High; give a second one Emphasis Low, as Figma does. The buttons always split their row into equal widths, so with two, the longer label is cut short. On the card, Button / Size M makes them bigger, and AppearanceBrand and Emphasis change all of them. The card’s own text and panel don’t change with modes.",
+      "blocks": [
+        "With apps",
+        "Three columns, with the apps the plan includes.",
+        "No apps",
+        "Two columns for a plan without apps.",
+        "Two actions",
+        "Equal halves: the longer label, View details, is cut short.",
+        "Button / Size M",
+        "A bigger, 42 px button.",
+        "AppearanceBrand Primary",
+        "A gold button.",
+        "Emphasis Medium",
+        "A light purple button."
+      ],
+      "specimen": [
+        "Unlimited 5G",
+        "₹",
+        "349",
+        "Validity",
+        "28 days",
+        "Data",
+        "2 GB/day",
+        "Subscriptions",
+        "JH",
+        "JS",
+        "+2",
+        "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+        "Recharge",
+        "Data pack",
+        "19",
+        "1 day",
+        "1.5 GB",
+        "Data only. No voice or SMS.",
+        "View details"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "With apps",
+          "description": "Three columns, with the apps the plan includes."
+        },
+        {
+          "title": "No apps",
+          "description": "Two columns for a plan without apps."
+        },
+        {
+          "title": "Two actions",
+          "description": "Equal halves: the longer label, View details, is cut short."
+        },
+        {
+          "title": "Button / Size M",
+          "description": "A bigger, 42 px button."
+        },
+        {
+          "title": "AppearanceBrand Primary",
+          "description": "A gold button."
+        },
+        {
+          "title": "Emphasis Medium",
+          "description": "A light purple button."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Its buttons act, or the whole card does",
+      "description": "The card isn’t pressable: its buttons are. onPress makes the whole card one button, announced by its title, and disabled then stops it firing without changing its look. Use one or the other: a pressable card with actions puts buttons inside a button. The card has no selected or loading state.",
+      "blocks": [
+        "Buttons act",
+        "Only Recharge presses.",
+        "Whole card",
+        "The card is the button; the empty actions row still leaves space below."
+      ],
+      "specimen": [
+        "Unlimited 5G",
+        "₹",
+        "349",
+        "Validity",
+        "28 days",
+        "Data",
+        "2 GB/day",
+        "Subscriptions",
+        "JH",
+        "JS",
+        "+2",
+        "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+        "Recharge"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Buttons act",
+          "description": "Only Recharge presses."
+        },
+        {
+          "title": "Whole card",
+          "description": "The card is the button; the empty actions row still leaves space below."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "At least 312 px wide",
+      "description": "The card is never narrower than 312 px, as Figma draws it, and fills a wider host. The facts share the width in equal columns, and the price stays at the left. Height follows the content: 20 px between the rows and 20 px of padding at the top and bottom, 16 px at the sides. Without actions, the empty row still adds 20 px at the bottom.",
+      "blocks": [
+        "312 × 271",
+        "20",
+        "Wide host",
+        "The fact columns get wider; the price stays at the left.",
+        "No actions",
+        "An empty row still leaves 20 px under the fine print."
+      ],
+      "specimen": [
+        "Unlimited 5G",
+        "₹",
+        "349",
+        "Validity",
+        "28 days",
+        "Data",
+        "2 GB/day",
+        "Subscriptions",
+        "JH",
+        "JS",
+        "+2",
+        "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+        "Recharge",
+        "Data pack",
+        "19",
+        "1 day",
+        "1.5 GB",
+        "Data only. No voice or SMS."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Wide host",
+          "description": "The fact columns get wider; the price stays at the left."
+        },
+        {
+          "title": "No actions",
+          "description": "An empty row still leaves 20 px under the fine print."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "A name, a number, and short facts",
+      "description": "Make the title the plan’s name and the price a number: the card adds the ₹. Keep validity and data to one value each, such as 28 days and 2 GB/day; the labels Validity, Data, and Subscriptions are fixed. Put the plan’s limits in the disclaimer, in a line or two of fine print. Label the main action Recharge.",
+      "blocks": [
+        "Unlimited plan",
+        "Price, validity, data, and the apps included.",
+        "Data pack",
+        "A small top-up, with its limit in the fine print."
+      ],
+      "specimen": [
+        "Unlimited 5G",
+        "₹",
+        "349",
+        "Validity",
+        "28 days",
+        "Data",
+        "2 GB/day",
+        "Subscriptions",
+        "JH",
+        "JS",
+        "+2",
+        "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+        "Recharge",
+        "Data pack",
+        "19",
+        "1 day",
+        "1.5 GB",
+        "Data only. No voice or SMS."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Unlimited plan",
+          "description": "Price, validity, data, and the apps included."
+        },
+        {
+          "title": "Data pack",
+          "description": "A small top-up, with its limit in the fine print."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Plans on the Recharge screen",
+      "description": "The screen lists plans one under another. Each Recharge starts the screen’s own payment through the Button’s onPress; the card only lays out the plan.",
+      "blocks": [
+        "No plan picked"
+      ],
+      "specimen": [
+        "Popular plans",
+        "For 98765 43210",
+        "Unlimited 5G",
+        "₹",
+        "349",
+        "Validity",
+        "28 days",
+        "Data",
+        "2 GB/day",
+        "Subscriptions",
+        "JH",
+        "JS",
+        "+2",
+        "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+        "Recharge",
+        "Data pack",
+        "19",
+        "1 day",
+        "1.5 GB",
+        "Data only. No voice or SMS."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One clear action, a plain price, no empty rows",
+      "description": "Each pair shows a card that reads cleanly next to one that cuts a label, doubles the ₹, or leaves a gap.",
+      "blocks": [
+        "Do",
+        "One main action",
+        "Recharge fits its button.",
+        "Don’t",
+        "Two actions",
+        "The row splits equally, so View details is cut short.",
+        "Price as a number",
+        "price 349 shows ₹349.",
+        "₹ in the price",
+        "The card adds its own, so it shows ₹₹349.",
+        "Pass your actions",
+        "The card ends at its buttons.",
+        "Leave out actions",
+        "An empty row still leaves space under the fine print."
+      ],
+      "specimen": [
+        "Unlimited 5G",
+        "₹",
+        "349",
+        "Validity",
+        "28 days",
+        "Data",
+        "2 GB/day",
+        "Subscriptions",
+        "JH",
+        "JS",
+        "+2",
+        "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+        "Recharge",
+        "View details"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "One main action",
+            "caption": "Recharge fits its button.",
+            "specimen": "Unlimited 5G · ₹ · 349 · Validity · 28 days · Data · 2 GB/day · Subscriptions · JH · JS · +2 · Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB. · Recharge"
+          },
+          "dont": {
+            "title": "Two actions",
+            "caption": "The row splits equally, so View details is cut short.",
+            "specimen": "Unlimited 5G · ₹ · 349 · Validity · 28 days · Data · 2 GB/day · Subscriptions · JH · JS · +2 · Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB. · Recharge · View details"
+          }
+        },
+        {
+          "do": {
+            "title": "Price as a number",
+            "caption": "price 349 shows ₹349.",
+            "specimen": "Unlimited 5G · ₹ · 349 · Validity · 28 days · Data · 2 GB/day · Subscriptions · JH · JS · +2 · Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB. · Recharge"
+          },
+          "dont": {
+            "title": "₹ in the price",
+            "caption": "The card adds its own, so it shows ₹₹349.",
+            "specimen": "Unlimited 5G · ₹ · 349 · Validity · 28 days · Data · 2 GB/day · Subscriptions · JH · JS · +2 · Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB. · Recharge"
+          }
+        },
+        {
+          "do": {
+            "title": "Pass your actions",
+            "caption": "The card ends at its buttons.",
+            "specimen": "Unlimited 5G · ₹ · 349 · Validity · 28 days · Data · 2 GB/day · Subscriptions · JH · JS · +2 · Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB. · Recharge"
+          },
+          "dont": {
+            "title": "Leave out actions",
+            "caption": "An empty row still leaves space under the fine print.",
+            "specimen": "Unlimited 5G · ₹ · 349 · Validity · 28 days · Data · 2 GB/day · Subscriptions · JH · JS · +2 · Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB."
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Recharge Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Without subscriptions",
+        "Button group size override",
+        "Checked 20 October 2026",
+        "Installed jfs-components is 0.1.78 (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Recharge Card exposes only title and disclaimer as properties; the price, facts, apps, and buttons are layers there. In the package, actions always split their row into equal widths, so of two different labels the longer is cut short (Biscuit’s own Storybook shows “View Det…”), while Figma’s buttons fit their labels. Without actions an empty row still adds space. The card is 271 px tall where Figma’s is 261, because its text lines are taller. The ₹ and the labels Validity, Data, and Subscriptions are fixed, a card without onPress isn’t announced by its title, and disabled has no look of its own. The published Storybook renders every story as a pressable card and still shows the older generated page (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "title",
+        "disclaimer",
+        "actions",
+        "onPress",
+        "disabled"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

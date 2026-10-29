@@ -1,0 +1,305 @@
+{
+  "slug": "formupload",
+  "label": "Form Upload",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/formupload.guide.tsx"
+  ],
+  "evidence": "docs/evidence/formupload.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T00:16:16.811Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "upload",
+    "attachment",
+    "file upload",
+    "photo upload",
+    "image picker",
+    "receipt"
+  ],
+  "title": "Form Upload",
+  "summary": "Use a Form Upload to collect photos, such as receipts or ID proof, with a label, previews, and a hint about what to add.",
+  "corePrinciple": "Show what was added and how much more fits.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7217-11616",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-formupload--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A label, a row of files, and a hint",
+      "description": "The label names what to add. Each file shows as a preview with a remove button, an add cell follows, and support text sits below.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Label",
+        "Names what to add; plain text above the row.",
+        "Preview",
+        "A 44 px thumbnail of each added image.",
+        "Remove",
+        "A button named after the file that takes it out of the row.",
+        "Add cell",
+        "Opens the app’s picker; hidden once the limit is reached.",
+        "Support text",
+        "File rules; an error message replaces it."
+      ],
+      "specimen": [
+        "Receipts",
+        "JPG or PNG, up to 5 MB each"
+      ],
+      "anatomy": [
+        {
+          "part": "Label",
+          "note": "Names what to add; plain text above the row."
+        },
+        {
+          "part": "Preview",
+          "note": "A 44 px thumbnail of each added image."
+        },
+        {
+          "part": "Remove",
+          "note": "A button named after the file that takes it out of the row."
+        },
+        {
+          "part": "Add cell",
+          "note": "Opens the app’s picker; hidden once the limit is reached."
+        },
+        {
+          "part": "Support text",
+          "note": "File rules; an error message replaces it."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Set how many files fit",
+      "description": "Each added file becomes a preview, and the add cell stays at the end until the limit is reached. Without a limit, the add cell never goes away.",
+      "blocks": [
+        "Empty",
+        "One add cell until people pick a file. Tap it to add a sample.",
+        "With files",
+        "Previews line up, and the add cell follows them.",
+        "At the limit",
+        "Reaching the limit hides the add cell."
+      ],
+      "specimen": [
+        "Receipts",
+        "JPG or PNG, up to 5 MB each",
+        "PAN card, front and back"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Empty",
+          "description": "One add cell until people pick a file. Tap it to add a sample."
+        },
+        {
+          "title": "With files",
+          "description": "Previews line up, and the add cell follows them."
+        },
+        {
+          "title": "At the limit",
+          "description": "Reaching the limit hides the add cell."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Default, error, and disabled",
+      "description": "An error shows its message in place of the support text; the cells do not change colour. Disabled fades the cells and stops adding and removing; the label stays at full contrast.",
+      "blocks": [
+        "Default",
+        "Ready to add more files.",
+        "Error",
+        "The message turns red and replaces the hint.",
+        "Disabled",
+        "Faded cells, with adding and removing turned off."
+      ],
+      "specimen": [
+        "Receipts",
+        "JPG or PNG, up to 5 MB each",
+        "Add at least one receipt"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "Ready to add more files."
+        },
+        {
+          "title": "Error",
+          "description": "The message turns red and replaces the hint."
+        },
+        {
+          "title": "Disabled",
+          "description": "Faded cells, with adding and removing turned off."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "44 px cells that wrap",
+      "description": "Each cell is 44 × 44 px with 8 px between cells. The row fills its container and wraps to a new line when it runs out of room.",
+      "blocks": [
+        "44 × 44",
+        "8",
+        "In a narrow column",
+        "The row wraps; without a limit, the add cell stays."
+      ],
+      "specimen": [
+        "Receipts"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "In a narrow column",
+          "description": "The row wraps; without a limit, the add cell stays."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the document, state the rules",
+      "description": "Name what to add in the label, such as “Receipts” or “PAN card”, without “Upload” or “Your”. Use the support text for file types and size, and an error that says how to fix it.",
+      "blocks": [
+        "Labels and rules"
+      ],
+      "specimen": [
+        "Receipts",
+        "Up to 6 photos, JPG or PNG",
+        "PAN card",
+        "Front and back, JPG or PNG"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Labels and rules",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Claim an expense",
+      "description": "The app opens its own picker and keeps the list of files. When people tap Submit without a receipt, the screen sets the error; the button stays enabled.",
+      "blocks": [],
+      "specimen": [
+        "Receipts",
+        "Up to 3 photos, JPG or PNG",
+        "Submit claim"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make the rules and errors visible",
+      "description": "Each pair shows a field people can complete versus one that leaves them guessing.",
+      "blocks": [
+        "Do",
+        "Set a limit",
+        "The add cell disappears when the row is full.",
+        "Don’t",
+        "Leave the limit open",
+        "The add cell never goes away, so people can’t tell when they’re done.",
+        "Say what to fix",
+        "The message names what is missing.",
+        "Mark an error without a message",
+        "Nothing on screen changes.",
+        "Name the document",
+        "A short label says what belongs here.",
+        "Put instructions in the label",
+        "The rules crowd out the name."
+      ],
+      "specimen": [
+        "PAN card",
+        "Receipts",
+        "Add at least one receipt",
+        "JPG or PNG, up to 5 MB each",
+        "Upload your receipts here in JPG or PNG format, up to 5 MB each"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Set a limit",
+            "caption": "The add cell disappears when the row is full.",
+            "specimen": "PAN card"
+          },
+          "dont": {
+            "title": "Leave the limit open",
+            "caption": "The add cell never goes away, so people can’t tell when they’re done.",
+            "specimen": "PAN card"
+          }
+        },
+        {
+          "do": {
+            "title": "Say what to fix",
+            "caption": "The message names what is missing.",
+            "specimen": "Receipts · Add at least one receipt"
+          },
+          "dont": {
+            "title": "Mark an error without a message",
+            "caption": "Nothing on screen changes.",
+            "specimen": "Receipts"
+          }
+        },
+        {
+          "do": {
+            "title": "Name the document",
+            "caption": "A short label says what belongs here.",
+            "specimen": "Receipts · JPG or PNG, up to 5 MB each"
+          },
+          "dont": {
+            "title": "Put instructions in the label",
+            "caption": "The rules crowd out the name.",
+            "specimen": "Upload your receipts here in JPG or PNG format, up to 5 MB each"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Form Upload contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With previews",
+        "Invalid",
+        "Disabled",
+        "Inside form",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s FormUpload is a 328 × 93 component with label and support text options and a slot of Add Item cells in one clipped row; the package wraps the row and always puts the add cell last. The app supplies the picker and keeps the list of files. Previews show images only, and file type and size are not checked. Figma has no error or disabled design: an error only changes the support text, and disabled fades the cells to half opacity. On the web the field is a group named by its label, and the add cell says which field it adds to. Each file’s remove button is named after it, such as “Remove Receipt 1”, and works with a click, a tap, or Enter.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

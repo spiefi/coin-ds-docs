@@ -1,0 +1,406 @@
+{
+  "slug": "transactionstatus",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch3, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted from the guide and docs/evidence/transactionstatus.md at e7ed622. The evidence was checked on 0.1.78-c8526ae (25 October); its dbe0e02 section (#394, verified on dbe0e02 and published 28 October) replaces the older sections where they differ, so the older Contract, Web render and Discrepancies lines that say the mark is one “!” in every mode, that Request is the default, that the mark shrinks to 14 px, and that the line runs past a bubble's edge were not used. The guide's Sources were checked on 28 October on the installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Its TransactionStatus.tsx matches every behaviour the guide states, read from source and its tokens, not run: a tick, a cross or the shared “!” by mode, coloured orange, green, red or grey; an 18 px mark that does not shrink; 4 px, then 12 px text on a 16 px line; one line with a tail ellipsis unless disableTruncation; no press handler. With modes that leave Transaction Status unset, the component sets Expired itself (and TransactionBubble does too), so the generated mode fact's default, Request (the token collection's default), does not apply: the evidence fact on the Transaction Status mode records Expired. With status left out the word comes from the mode's copy token, and Request's is “Expired”, as the evidence says. The guide's “Every Transaction Bubble ends with a Transaction Status” holds for the bubble's default status row only: in the installed TransactionBubble a status slot replaces the line and the chevron; the guide does not say so, so it is not recorded. The guide names no other component to use instead, so the avoidWhen rule (a line that presses, selects or loads) has no useInstead; Biscuit's Storybook page, as the evidence quotes it, also rules out the success screen (StatusHero) and a word-only badge (Badge), and says not to use colour alone; the guide does not say these, so they are not recorded, and accessibility stays empty. Not recorded either: #394's MDX words (Successful, Pending), which the evidence neither marks fixed nor still open now that #394 is closed. Examples follow the building rules: no Color Mode (the guide sets Light everywhere), the In context VStack drops the guide's Slot gap M, and the Expired line sets no mode because Expired is the default; the Paid line and the bubbles set the Transaction Status mode because the guide's rule says to set the word and the mode together. The bubbles keep the guide's 231 px width (Figma's bubble width). TransactionBubble has no entry in this pack (rules.md lists it under exports the pack does not cover), but the guide's In context shows the line only inside it, so the thread example keeps it. Dropped: the guide's Request and Declined lines on their own (the thread shows both modes), and the States examples (One line, Wrapped), whose long date “21 October 2026, 4:15 pm” only demonstrates cutting and goes against the content rule to write the date short.",
+  "useWhen": [
+    {
+      "text": "Show the state and date of one payment on one line, as at the foot of a TransactionBubble.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Transaction Status for the state and date of one payment on one line, as at the foot of a Transaction Bubble."
+      }
+    },
+    {
+      "text": "On the payments in a thread, at the foot of each payment's TransactionBubble.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "On the payments in a thread"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A status people press or select, or one that shows loading: the line has no states of its own, and it doesn't press, select, or load.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The line has no states of its own: it doesn’t press, select, or load."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Mark",
+      "holds": "18 px; the mode picks a tick, a cross, or “!”, and its colour.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "18 px; the mode picks a tick, a cross, or “!”, and its colour."
+      }
+    },
+    {
+      "part": "Status and date",
+      "holds": "status, a middle dot, then date: one text on one line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "status, a middle dot, then date: one text on one line."
+      }
+    },
+    {
+      "part": "Line",
+      "holds": "The row of mark and text. No width of its own: as wide as its words.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "No width of its own: as wide as its words."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Every TransactionBubble ends with a TransactionStatus of its own: the bubble draws the line from its own status, date and modes.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Every Transaction Bubble ends with a Transaction Status."
+      }
+    },
+    {
+      "text": "The line is 18 px tall: an 18 px mark, 4 px of space, then 12 px text on a 16 px line.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The line is 18 px tall: an 18 px mark, 4 px of space, then 12 px text on a 16 px line."
+      }
+    },
+    {
+      "text": "The line has no width of its own and grows with its words.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It has no width of its own and grows with its words."
+      }
+    },
+    {
+      "text": "A narrower column, or a TransactionBubble, cuts the words at the end, and the mark keeps its 18 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A narrower column, or a Transaction Bubble, cuts them at the end, and the mark keeps its 18 px."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The Transaction Status mode sets the mark: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”.",
+      "strength": "recommended",
+      "target": "Transaction Status",
+      "from": {
+        "section": "configuration",
+        "quote": "The Transaction Status mode sets the mark, as in Figma: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”."
+      }
+    },
+    {
+      "text": "Request for a request still waiting: an orange “!”.",
+      "strength": "recommended",
+      "target": "Transaction Status",
+      "value": "Request",
+      "from": {
+        "section": "configuration",
+        "quote": "An orange “!”: a request still waiting."
+      }
+    },
+    {
+      "text": "Paid when the money went through: a green tick.",
+      "strength": "recommended",
+      "target": "Transaction Status",
+      "value": "Paid",
+      "from": {
+        "section": "configuration",
+        "quote": "A green tick: the money went through."
+      }
+    },
+    {
+      "text": "Declined when the bank turned it down: a red cross.",
+      "strength": "recommended",
+      "target": "Transaction Status",
+      "value": "Declined",
+      "from": {
+        "section": "configuration",
+        "quote": "A red cross: the bank turned it down."
+      }
+    },
+    {
+      "text": "Expired when the request ran out: a grey “!”.",
+      "strength": "recommended",
+      "target": "Transaction Status",
+      "value": "Expired",
+      "from": {
+        "section": "configuration",
+        "quote": "A grey “!”: the request ran out."
+      }
+    },
+    {
+      "text": "With no mode the line is Expired: a grey “!” beside “Expired”.",
+      "strength": "recommended",
+      "target": "Transaction Status",
+      "value": "Expired",
+      "from": {
+        "section": "sources",
+        "quote": "with no mode it is Expired: a grey “!” beside “Expired”."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "status and date are free text that the mode doesn't change, so set the word and the mode together.",
+      "strength": "recommended",
+      "target": "status",
+      "from": {
+        "section": "configuration",
+        "quote": "status and date are free text that the mode doesn’t change, so set the word and the mode together."
+      }
+    },
+    {
+      "text": "With status left out the word follows the mode, except Request, which still shows “Expired” beside an orange “!”.",
+      "strength": "recommended",
+      "target": "status",
+      "from": {
+        "section": "evidence",
+        "quote": "With `status` left out the word follows the mode, except Request, which still shows “Expired” beside an orange “!” (token copy; Marcin's call)."
+      },
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Set disableTruncation to let the line wrap instead of ending in an ellipsis.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "disableTruncation lets it wrap instead."
+      }
+    },
+    {
+      "text": "In a TransactionBubble, set the Transaction Status mode on the bubble: the bubble passes its modes to the line, and its status and date props give the words.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Set the Transaction Status mode on the bubble, as in Figma: the bubble passes its modes to the line, and its status and date props give the words."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One word for the state; the mode colours the mark.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One word for the state; the mode colours the mark."
+        }
+      },
+      {
+        "text": "Write status as one word that matches the mode: Requested, Paid, Declined, or Expired.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write status as one word that matches the mode: Requested, Paid, Declined, or Expired."
+        }
+      },
+      {
+        "text": "Write date short, such as 21 Oct 2026, or Today for a recent payment.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write date short, such as 21 Oct 2026, or Today for a recent payment"
+        }
+      },
+      {
+        "text": "Pass only the word and the date: the line adds the middle dot.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "the line adds the middle dot."
+        }
+      },
+      {
+        "text": "Request and Expired share the “!” mark, so the word has to say which.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Request and Expired share the “!” mark, so the word has to say which."
+        }
+      },
+      {
+        "text": "The word and the colour agree.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The word and the colour agree"
+        }
+      },
+      {
+        "text": "Do not pair a word with a mode that disagrees: Expired with the Request mode gets an orange mark, as if it still needs action.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Expired with the Request mode gets an orange mark, as if it still needs action."
+        }
+      },
+      {
+        "text": "Do not write a sentence as status: in a bubble, the line is cut and the date is lost.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "In a bubble, the line is cut and the date is lost."
+        }
+      }
+    ],
+    "good": [
+      "Requested",
+      "Paid",
+      "Declined",
+      "Expired",
+      "21 Oct 2026",
+      "Today",
+      "Paid · 21 Oct 2026",
+      "Requested · Today"
+    ],
+    "bad": [
+      "Declined by your bank · 21 Oct 2026"
+    ]
+  },
+  "states": [
+    {
+      "state": "One line",
+      "when": "By default. In a column narrower than the words it ellipsizes at the end, so the date is cut first; the mark keeps its 18 px.",
+      "from": {
+        "section": "states",
+        "quote": "In a column narrower than the words, it ellipsizes at the end, so the date goes first"
+      }
+    },
+    {
+      "state": "Wrapped",
+      "when": "With disableTruncation: the text wraps and the date moves to a second line.",
+      "from": {
+        "section": "states",
+        "quote": "The date moves to a second line."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Mode matches the word",
+      "dont": "A mode that disagrees",
+      "why": "Expired with the Request mode gets an orange mark, as if it still needs action.",
+      "from": {
+        "section": "doDont",
+        "quote": "Expired with the Expired mode: a grey mark."
+      }
+    },
+    {
+      "do": "One word",
+      "dont": "A sentence",
+      "why": "In a bubble, the line is cut and the date is lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "Declined and a short date fit beside the chevron."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A paid payment: the word and the Paid mode set together, for a green tick beside “Paid · 21 Oct 2026”.",
+      "jsx": "<TransactionStatus status=\"Paid\" date=\"21 Oct 2026\" modes={{ 'Transaction Status': 'Paid' }} />",
+      "from": {
+        "section": "configuration",
+        "quote": "A green tick: the money went through."
+      }
+    },
+    {
+      "purpose": "A request that ran out: Expired is the default mode, so the line sets no mode and shows a grey “!”.",
+      "jsx": "<TransactionStatus status=\"Expired\" date=\"20 Mar 2025\" />",
+      "from": {
+        "section": "configuration",
+        "quote": "Expired, the default, a grey “!”."
+      }
+    },
+    {
+      "purpose": "Payments in a thread: each TransactionBubble ends with its own status line, so the words go in the bubble's status and date and the Transaction Status mode is set on the bubble.",
+      "jsx": "<VStack alignHorizontal=\"flex-end\">\n  <TransactionBubble\n    style={{ width: 231, maxWidth: '100%' }}\n    description=\"Paid to Priya Sharma\"\n    value=\"1,200\"\n    status=\"Paid\"\n    date=\"21 Oct 2026\"\n    modes={{ 'Transaction Status': 'Paid' }}\n  />\n  <TransactionBubble\n    style={{ width: 231, maxWidth: '100%' }}\n    description=\"Request to Rahul Verma\"\n    value=\"450\"\n    status=\"Requested\"\n    date=\"Today\"\n    modes={{ 'Transaction Status': 'Request' }}\n  />\n  <TransactionBubble\n    style={{ width: 231, maxWidth: '100%' }}\n    description=\"Payment to Uber India\"\n    value=\"56\"\n    status=\"Declined\"\n    date=\"20 Mar 2025\"\n    modes={{ 'Transaction Status': 'Declined' }}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Set the Transaction Status mode on the bubble, as in Figma: the bubble passes its modes to the line, and its status and date props give the words."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Transaction Status",
+      "default": "Expired",
+      "description": "Picks the mark at 18 × 18: Request an orange “!”, Paid a green tick, Declined a red cross, Expired a grey “!”. With no mode the line is the Expired mode: a grey “!” beside “Expired · 20 Mar 2025”.",
+      "quote": "With no mode (or Color Mode Light only) the line is the Expired mode: a grey “!” beside “Expired · 20 Mar 2025” (checked in this run).",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "status",
+      "description": "With status left out the word follows the mode (its copy token), except Request, which still shows “Expired” beside an orange “!” (the token's copy, kept by Marcin's decision).",
+      "quote": "With `status` left out the word follows the mode, except Request, which still shows “Expired” beside an orange “!” (token copy; Marcin's call).",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "disableTruncation",
+      "description": "The mark stays 18 × 18 when the line is cut (a 120 px column and row, a 200 px VStack) and when disableTruncation lets the text wrap.",
+      "quote": "The mark stays 18 × 18 when the line is cut (a 120 px column and row, a 200 px VStack, disableTruncation).",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "style",
+      "description": "style goes last on the root. The line takes no onPress, accessibility props, testID, or rest props.",
+      "quote": "`style` goes last on the root. No `onPress`, accessibility props, `testID`, or rest props.",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Transaction Status line ends in a chevron; in the package the chevron belongs to TransactionBubble, so a TransactionStatus on its own has none.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s line ends in a chevron; in the package the chevron belongs to Transaction Bubble."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "In Figma the mode picks the icon, the colour and the word together; in the package the mode picks the mark, and status and date are free text, so code passes the word.",
+      "from": {
+        "section": "sources",
+        "quote": "In Figma, Transaction Status is a subcomponent (Coin Subcomponents) with no properties: its mode picks the icon, the colour, and the word together."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The Coin Components Library has no Transaction Status: it is a Coin Subcomponents part that designers meet inside Transaction Bubble.",
+      "quote": "There is no Transaction Status in the Coin Components Library: designers meet it inside Transaction Bubble.",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ]
+}

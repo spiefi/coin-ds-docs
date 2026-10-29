@@ -1,0 +1,57 @@
+{
+  "slug": "rechargecard",
+  "entryHash": "cedc085e11e64366f561dd8df10e3ddd1f594887de6d4464a17b27680da3ff85",
+  "guideCommit": "0615fbf45d463766fe3247400cb76d1bb465f640",
+  "checkedAt": "2026-10-29T00:31:07Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/facts/props/9",
+      "reason": "misreads-source: The evidence says the opposite: subscriptionContent adds the third column when React.Children.count > 0, and \"`false`, `''` or an empty fragment still add an empty column\". The fact says they hide the column like `null`."
+    },
+    {
+      "field": "/configuration/2",
+      "reason": "misreads-source: This rests on the wrong /facts/props/9. The evidence (and its Discrepancies: \"`subscriptionContent={false}` shows an empty column\") says false, '' or an empty fragment still render an empty Subscriptions column. Limits also say not to show `subscriptionContent={false}`."
+    },
+    {
+      "field": "/facts/props/10",
+      "reason": "misreads-source: The evidence says \"Without actions the empty group still takes a 20 px gap\", with a no-actions height of 227 because \"the empty group's 20 px gap remains\". The fact claims omitted or empty actions \"leave no group and no extra gap\"."
+    },
+    {
+      "field": "/configuration/5",
+      "reason": "misreads-source: This contradicts the guide: \"Without actions, the empty row still adds 20 px at the bottom\". doDont also lists \"Leave out actions\" as a Don't, because \"An empty row still leaves space under the fine print.\" The item recommends leaving actions out and claims no extra gap."
+    },
+    {
+      "field": "/configuration/4",
+      "reason": "lost-context: It recommends a second action without the guide's caveat that \"with two, the longer label is cut short\". doDont lists \"Two actions\" as a Don't (\"The row splits equally, so View details is cut short\")."
+    },
+    {
+      "field": "/configuration/9",
+      "reason": "misreads-source: The guide says \"the card adds the ₹\" and that the ₹ is fixed, and doDont says a ₹ in the price \"shows ₹₹349\". The evidence says there are no currency props. A currency prop that avoids double prefixing contradicts the guide for the installed 0.1.78."
+    },
+    {
+      "field": "/configuration/10",
+      "reason": "misreads-source: The guide says \"the labels Validity, Data, and Subscriptions are fixed\", and the evidence says there are no label props. Limits: \"Don't imply the currency or labels can change\"."
+    },
+    {
+      "field": "/configuration/11",
+      "reason": "misreads-source: The guide says the Data label is fixed, and the evidence says there are no label props."
+    },
+    {
+      "field": "/configuration/12",
+      "reason": "misreads-source: The guide says the Subscriptions label is fixed, and the evidence says there are no label props."
+    },
+    {
+      "field": "/accessibility/1",
+      "reason": "misreads-source: The guide's sources section says \"a card without onPress isn't announced by its title\". The evidence says \"Static: `accessibilityLabel` only (title not used)\". \"pressable or not; without it, the card is named by its title\" contradicts both."
+    },
+    {
+      "field": "/states/2",
+      "reason": "misreads-source: The guide says disabled \"stops it firing without changing its look\" and \"disabled has no look of its own\". Limits: \"Don't show `disabled` as a visual state\". The item says the card is dimmed, even when static."
+    }
+  ],
+  "notes": "Several type-sourced facts (/facts/props/2, 5, 6, 7, 14, 15: currency, the label props, a dimmed disabled state, and accessibilityLabel defaulting to title) contradict both the guide and the evidence for the installed jfs-components 0.1.78. The evidence lists no currency or label props, gives disabled no visual, and gives a static card no title-based name. These types may come from a different package version or from JSDoc rather than behaviour (the evidence notes JSDoc and the mdx overstate behaviour elsewhere). They need a human check before the items built on them ship. Also: /content/bad is empty although doDont gives clear Don'ts (₹ in the price, two actions, leaving out actions). /examples/0 renders the header as a `Title` component with a subtitle, which the guide's in-context text does not name; confirm it matches the guide's example."
+}
