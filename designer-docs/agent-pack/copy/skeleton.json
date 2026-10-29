@@ -1,0 +1,304 @@
+{
+  "slug": "skeleton",
+  "label": "Skeleton",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/skeleton.guide.tsx"
+  ],
+  "evidence": "docs/evidence/skeleton.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T01:08:57.499Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "loading placeholder",
+    "shimmer",
+    "ghost content",
+    "loading state"
+  ],
+  "title": "Skeleton",
+  "summary": "Use a Skeleton group to show the shape of content while it loads, so the screen doesn't jump when it arrives.",
+  "corePrinciple": "Show the shape of what's coming, then fill it in place.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-skeleton--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Grey blocks with a moving highlight",
+      "description": "Each placeholder is a light grey block whose kind sets its corners. While the group loads, a white band sweeps across every block, one after another.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Text bar",
+        "kind text: a full pill, one per line of text.",
+        "Image block",
+        "kind image: 10 px corners, as big as the image it replaces.",
+        "Shimmer",
+        "A white band sweeps across every block each 1.5 s.",
+        "Badge block",
+        "kind badge: 4 px corners, like a badge.",
+        "Circle or pill",
+        "kind other, the default: a circle when square, else a pill."
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Text bar",
+          "note": "kind text: a full pill, one per line of text."
+        },
+        {
+          "part": "Image block",
+          "note": "kind image: 10 px corners, as big as the image it replaces."
+        },
+        {
+          "part": "Shimmer",
+          "note": "A white band sweeps across every block each 1.5 s."
+        },
+        {
+          "part": "Badge block",
+          "note": "kind badge: 4 px corners, like a badge."
+        },
+        {
+          "part": "Circle or pill",
+          "note": "kind other, the default: a circle when square, else a pill."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Four kinds, or components that draw their own",
+      "description": "A Skeleton's kind sets only its corners; its width and height are yours. Inside a group, Coin components such as Text, Avatar, Badge, and Button draw their own placeholder at their own size, so you rarely place a Skeleton by hand.",
+      "blocks": [
+        "Text",
+        "Full pills, one per line; match each line's height.",
+        "Image",
+        "10 px corners, as big as the image it stands in for.",
+        "Badge",
+        "4 px corners, the size of a badge.",
+        "Circle or pill",
+        "The default kind: square sizes make a circle, wide ones a pill, for avatars and buttons.",
+        "Coin components",
+        "Avatar, Text, and Badge draw their own placeholders, sized from their own tokens.",
+        "On a fullscreen modal",
+        "Fullscreen Modal gives its content this context, which turns the blocks deep brown for dark media."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Text",
+          "description": "Full pills, one per line; match each line's height."
+        },
+        {
+          "title": "Image",
+          "description": "10 px corners, as big as the image it stands in for."
+        },
+        {
+          "title": "Badge",
+          "description": "4 px corners, the size of a badge."
+        },
+        {
+          "title": "Circle or pill",
+          "description": "The default kind: square sizes make a circle, wide ones a pill, for avatars and buttons."
+        },
+        {
+          "title": "Coin components",
+          "description": "Avatar, Text, and Badge draw their own placeholders, sized from their own tokens."
+        },
+        {
+          "title": "On a fullscreen modal",
+          "description": "Fullscreen Modal gives its content this context, which turns the blocks deep brown for dark media."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Loading, loaded, and reduced motion",
+      "description": "The group's loading flag switches every placeholder inside it at once. While loading, a white band sweeps across the blocks every 1.5 s, each a little after the one before. When the device asks for reduced motion, or the group sets it, the blocks pulse gently instead.",
+      "blocks": [
+        "Loading",
+        "Placeholders hold the layout, and the shimmer runs down them in a cascade.",
+        "Loaded",
+        "The same components show their content in the same places.",
+        "Reduced motion",
+        "A slow white pulse every 3 s replaces the moving band.",
+        "Outside a group",
+        "loading on its own draws that line’s placeholder too, and screen readers hear “Loading”."
+      ],
+      "specimen": [
+        "RI",
+        "Reliance Industries",
+        "64 units · ₹1,52,900",
+        "Equity",
+        "HB",
+        "HDFC Bank",
+        "120 units · ₹1,98,400",
+        "View all holdings"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Loading",
+          "description": "Placeholders hold the layout, and the shimmer runs down them in a cascade."
+        },
+        {
+          "title": "Loaded",
+          "description": "The same components show their content in the same places."
+        },
+        {
+          "title": "Reduced motion",
+          "description": "A slow white pulse every 3 s replaces the moving band."
+        },
+        {
+          "title": "Outside a group",
+          "description": "loading on its own draws that line’s placeholder too, and screen readers hear “Loading”."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The size of what it replaces",
+      "description": "Coin components size their own placeholders: a Text bar is as tall as its line and about as long as its words, and an Avatar's is its own size. A hand-placed Skeleton has no size until you give it a width and height; percentages follow its host.",
+      "blocks": [
+        "42 × 42",
+        "146.5 × 17"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Mirror the real layout",
+      "description": "Put the same components in the group that will show the content, with realistic sample text, so each placeholder has the right length. Anything already known, such as a heading, stays real with loading off.",
+      "blocks": [
+        "Known title, loading values",
+        "The title stays readable; only the values still loading turn into placeholders."
+      ],
+      "specimen": [
+        "Your holdings"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Known title, loading values",
+          "description": "The title stays readable; only the values still loading turn into placeholders."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Refreshing holdings",
+      "description": "Refresh puts the holdings into their loading state for two seconds, then swaps the content back in place. The title and the button stay real.",
+      "blocks": [
+        "Holdings up to date"
+      ],
+      "specimen": [
+        "Your holdings",
+        "RI",
+        "Reliance Industries",
+        "64 units · ₹1,52,900",
+        "Equity",
+        "HB",
+        "HDFC Bank",
+        "120 units · ₹1,98,400",
+        "Refresh"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Hold the layout, keep what's known",
+      "description": "Each pair shows a loading state that previews the screen next to one that hides it or makes people wait for nothing.",
+      "blocks": [
+        "Do",
+        "Keep the real layout",
+        "Each row keeps its shape, so nothing jumps when content arrives.",
+        "Don’t",
+        "Cover it with one block",
+        "One block hides how much is coming, and the layout jumps when it loads.",
+        "Keep known text real",
+        "People can read the heading while the values load.",
+        "Grey out everything",
+        "Turning known text grey makes people wait for nothing."
+      ],
+      "specimen": [
+        "Your holdings"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the real layout",
+            "caption": "Each row keeps its shape, so nothing jumps when content arrives.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Cover it with one block",
+            "caption": "One block hides how much is coming, and the layout jumps when it loads.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Keep known text real",
+            "caption": "People can read the heading while the values load.",
+            "specimen": "Your holdings"
+          },
+          "dont": {
+            "title": "Grey out everything",
+            "caption": "Turning known text grey makes people wait for nothing.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Skeleton contract",
+      "description": "The guide compares the Coin variables with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "No Skeleton component; only its colour and corner variables",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Kinds",
+        "Reduced motion",
+        "Primitives",
+        "Cascade",
+        "Card composition",
+        "Explicit loading prop",
+        "Standalone atomic",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma has no Skeleton component: the Coin variables hold its grey and its corner radii, and the ticket’s Figma link opens the Stepper Item page. In code a SkeletonGroup switches every placeholder inside it; Text, Avatar, Badge, Button, Image, and other Coin components draw their own, and a Skeleton places one by hand. Blocks are light grey (#e7e7e7; the old Storybook page gives a lighter grey). A white band sweeps across them every 1.5 s in a 75 ms cascade, or they pulse every 3 s with reduced motion, as in Storybook. Since the #266 fix a component’s loading draws its placeholder without a group too, named “Loading”; inside a group the blocks are hidden from screen readers and the group announces “Loading” once. A Skeleton placed by hand still needs a group. The published Storybook page is still the old generated one.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

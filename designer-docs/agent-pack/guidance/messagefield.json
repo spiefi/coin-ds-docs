@@ -1,0 +1,515 @@
+{
+  "slug": "messagefield",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch5, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/messagefield.md at cba512f. The guide's Sources note was checked on 8 October 2026 on the 5 October build, which the evidence's 636f3f5 check names (mirror v0.1.78-636f3f5, Biscuit's main at 636f3f5), so items citing it carry that build. The evidence's first check (2 October, 0.1.78-3795b4c) is out of date where its 636f3f5 section says #187 is fixed: typed text no longer looks like a placeholder when idle, the field now has errorMessage and supportText, aria-invalid and aria-required are set, and a disabled field leaves the tab order; the Storybook MDX line that there is no errorMessage or support-text API is out of date too. None of those sentences is used. The 2 October lines used here (the state cascade, maxLength stopping typing, showCounter without a limit, the rows height, and the MDX's label and placeholder advice) still hold on the installed source. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub shows MessageField.tsx, the token file and typography.ts byte-identical at v0.1.78-636f3f5 and v0.1.78-dbe0e02; of what the field uses, only SupportText changed (long text may shrink and wrap). Installed MessageField.tsx matches every guide sentence used here, read from source, not run: the wrapper and text area are 100% wide; the text area is the 108 px token tall, or rows × 21 plus 2 × 12 px padding when rows is set, with a multiline input and overflow hidden; the wrapper gap is 8 px; the counter shows count/maxLength when maxLength is set and showCounter isn't false, and maxLength goes to the input, so typing stops at the limit; isRequired adds “ *” after the label in the Negative token; the state is derived (invalid, disabled, read only, focus, idle) and overrides FormField States in modes; typed text keeps the Active (dark) colour unless disabled, while the placeholder uses Idle; isReadOnly and isDisabled make the input not editable, and isDisabled also turns off pointer events and, on the web, sets aria-disabled and tabIndex -1; on the web aria-invalid, aria-required and aria-describedby (pointing at the line under the text area) are set; the accessible name is accessibilityLabel, then label, then placeholder; errorMessage replaces supportText while invalid, in the Error status. The tokens give a white fill in every state, a purple Active border, a red Error label and border, a grey Read Only label and border, and grey Disabled text and border. No guide sentence is contradicted. Two guide sentences describe only the default: “a counter that shows only with a limit” (Sources) and “Without a limit there is no counter” (Configuration); showCounter shows a bare count without a limit (evidence fact). Sizing's “The counter sits 8 px below” holds for a field with no message; with support text or an error, the message sits between the text area and the counter (evidence fact on errorMessage). Examples follow the building rules: no Color Mode (the guide sets Light on every MessageField, Card, VStack, Button, Text and FormField) and no other modes. They use the guide's own copy. The In context example repeats the guide's composition (a Card holding a VStack with the field and a Submit Button) with the screen's state reduced to an empty message and no error. Left out of examples: the thanks Text the screen shows after a valid submit (screen state), the guide's Host and Surface wrapper (docs-only), the playground (Label, Limit, Rows, State and Required controls and the Characters readout), the Read only, Disabled, With a limit, No limit and Content cards (an entry carries at most three examples), and the Don'ts. Not recorded: name and Form validation errors (the evidence brief's Limits keep them out of the guide), defaultValue, autoFocus, accessibilityHint, testID, onFocus and onBlur, which the guide doesn't cover; style, textareaStyle and inputStyle, which the building rules keep off Coin components; the evidence's measured Light colours; dark mode, per the pack's rules. The label and placeholder content rule rests on the Storybook MDX as the evidence records it (2 October), not on the guide. Content bad is empty: the Don'ts show configurations (a hidden counter, an error with no message, a short value in a four-line box), not bad wording, so they are recorded as configuration rules and avoidWhen. Gaps hold only the Figma differences the Sources note states; #187 is fixed and verified on 636f3f5, so it is not a gap.",
+  "useWhen": [
+    {
+      "text": "A few sentences of free text, such as feedback or a description of a problem.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Message Field for a few sentences of free text, such as feedback or a description of a problem."
+      }
+    },
+    {
+      "text": "Reporting a problem, as in the guide's In context screen: people describe the issue, then tap Submit.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Report a problem"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A short value, such as an order number: use a FormField, one line for one value. A four-line box suggests a long answer.",
+      "strength": "discouraged",
+      "useInstead": "FormField",
+      "from": {
+        "section": "doDont",
+        "quote": "A four-line box suggests a long answer."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "Names the message and gives the field its accessible name (label).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the message and gives the field its accessible name."
+      }
+    },
+    {
+      "part": "Required mark",
+      "holds": "A red asterisk after the label for a message people must write (isRequired).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A red asterisk for a message people must write."
+      }
+    },
+    {
+      "part": "Placeholder",
+      "holds": "A writing hint that disappears when people type (placeholder).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A writing hint that disappears when people type."
+      }
+    },
+    {
+      "part": "Text area",
+      "holds": "White box, four lines tall unless rows is set; purple border on focus.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White box, four lines tall; purple border on focus."
+      }
+    },
+    {
+      "part": "Counter",
+      "holds": "Characters used out of the limit (maxLength); shown when a limit is set.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Characters used out of the limit; shown when a limit is set."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Message Field fills its container’s width; set the width with the container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Message Field fills its container’s width."
+      }
+    },
+    {
+      "text": "The text area is 108 px tall, room for four lines, with 12 px of padding; each extra row adds 21 px. The counter sits 8 px below.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The text area is 108 px tall, room for four lines, with 12 px of padding; each extra row adds 21 px. The counter sits 8 px below."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set a limit with maxLength: it adds a counter and stops typing when the limit is reached.",
+      "strength": "recommended",
+      "target": "maxLength",
+      "from": {
+        "section": "configuration",
+        "quote": "A limit adds a counter and stops typing when it is reached."
+      }
+    },
+    {
+      "text": "Without a limit (maxLength unset) there is no counter.",
+      "strength": "recommended",
+      "target": "maxLength",
+      "from": {
+        "section": "configuration",
+        "quote": "Without a limit there is no counter."
+      }
+    },
+    {
+      "text": "Do not hide the counter on a field with a limit (showCounter false): typing stops at the limit with no warning.",
+      "strength": "discouraged",
+      "target": "showCounter",
+      "value": "false",
+      "from": {
+        "section": "doDont",
+        "quote": "Typing stops at the limit with no warning."
+      }
+    },
+    {
+      "text": "Set rows for a taller text area, such as six rows for a longer description; longer text scrolls inside it.",
+      "strength": "recommended",
+      "target": "rows",
+      "from": {
+        "section": "configuration",
+        "quote": "Rows set how tall the text area is; longer text scrolls inside it."
+      }
+    },
+    {
+      "text": "Mark a message people must write with isRequired: a red asterisk follows the label.",
+      "strength": "recommended",
+      "target": "isRequired",
+      "from": {
+        "section": "anatomy",
+        "quote": "A red asterisk for a message people must write."
+      },
+      "absolute": {
+        "word": "must",
+        "scope": "contextual",
+        "reason": "\"must write\" describes a message the form needs (the field marked with isRequired), not a constraint on the designer."
+      }
+    },
+    {
+      "text": "The screen checks the message when people tap Submit and sets the error on the field (isInvalid with errorMessage); Message Field only shows it. In the guide's Report a problem screen the Submit button stays enabled.",
+      "strength": "recommended",
+      "target": "isInvalid",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen checks the message when people tap Submit and sets the error on the field. Message Field only shows it, and the button stays enabled."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" says what the component does (it shows the error the screen sets, it does not validate), not a limit on the designer."
+      }
+    },
+    {
+      "text": "Say what to fix: give an invalid field an errorMessage, so the message below says what is missing.",
+      "strength": "recommended",
+      "target": "errorMessage",
+      "from": {
+        "section": "doDont",
+        "quote": "The message below says what is missing."
+      }
+    },
+    {
+      "text": "Do not rely on red alone (isInvalid without errorMessage): the red border does not say what is wrong.",
+      "strength": "discouraged",
+      "target": "isInvalid",
+      "from": {
+        "section": "doDont",
+        "quote": "The red border does not say what is wrong."
+      }
+    },
+    {
+      "text": "supportText adds a supporting line under the field; errorMessage replaces it while the field is invalid.",
+      "strength": "recommended",
+      "target": "supportText",
+      "from": {
+        "fact": "props:supportText"
+      }
+    },
+    {
+      "text": "Use isReadOnly for text people can read but not change.",
+      "strength": "recommended",
+      "target": "isReadOnly",
+      "from": {
+        "section": "states",
+        "quote": "people can read the text but not change it."
+      }
+    },
+    {
+      "text": "Use isDisabled for a field that does not apply yet.",
+      "strength": "recommended",
+      "target": "isDisabled",
+      "from": {
+        "section": "states",
+        "quote": "Use it for a field that does not apply yet."
+      }
+    },
+    {
+      "text": "Set the state with isInvalid, isDisabled and isReadOnly, not with the FormField States mode: the field derives that mode itself (with focus) and ignores it in modes.",
+      "strength": "discouraged",
+      "target": "FormField States",
+      "from": {
+        "section": "evidence",
+        "quote": "State cascade: invalid → Error; disabled → Disabled; read-only → Read Only; focused → Active; otherwise Idle. `modes['FormField States']` is ignored."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c",
+      "absolute": {
+        "word": "Only",
+        "scope": "contextual",
+        "reason": "\"Only\" is part of the mode value name Read Only, not an absolute claim."
+      }
+    },
+    {
+      "text": "With value, the screen owns the text and updates it in onChangeText.",
+      "strength": "recommended",
+      "target": "value",
+      "from": {
+        "fact": "props:value"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Room to explain, with a clear limit.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Room to explain, with a clear limit."
+        }
+      },
+      {
+        "text": "Ask for one thing, with a fitting limit.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Ask for one thing, with a fitting limit"
+        }
+      },
+      {
+        "text": "Name the message in the label, such as “Describe your issue”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Name the message in the label, such as “Describe your issue”"
+        }
+      },
+      {
+        "text": "Use the placeholder for a writing hint, such as “What happened, and when?”.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "content",
+          "quote": "use the placeholder for a writing hint"
+        }
+      },
+      {
+        "text": "Pick a limit that fits the task: 140 characters for a short reason, 1,000 for a detailed description.",
+        "strength": "recommended",
+        "target": "maxLength",
+        "from": {
+          "section": "content",
+          "quote": "Pick a limit that fits the task: 140 characters for a short reason, 1,000 for a detailed description."
+        }
+      },
+      {
+        "text": "Write the label in sentence case; the placeholder is a writing hint, never the only name for the field.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "evidence",
+          "quote": "Labels name the message in sentence case; the placeholder is a writing hint, never the only name."
+        },
+        "checkedOn": "2026-10-02",
+        "checkedVersion": "0.1.78-3795b4c",
+        "absolute": {
+          "word": "never",
+          "scope": "everywhere",
+          "reason": "The Storybook guidance applies it to every Message Field: the placeholder disappears when people type, so it cannot be the field's only name. It comes from Storybook rather than the guide and is kept recommended."
+        }
+      }
+    ],
+    "good": [
+      "Describe your issue",
+      "What happened, and when?",
+      "Reason for cancelling",
+      "Help us understand why you’re leaving",
+      "Add a few more details, at least 20 characters"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "No state prop set; selecting the field draws the purple focus border.",
+      "from": {
+        "section": "states",
+        "quote": "Select the field to see the purple focus border."
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "While the field has focus: a purple border.",
+      "from": {
+        "section": "states",
+        "quote": "Focus draws a purple border."
+      }
+    },
+    {
+      "state": "Filled",
+      "when": "With text: the counter tracks the length, and the text stays dark when people leave the field.",
+      "from": {
+        "section": "states",
+        "quote": "The counter tracks the length, and the text stays dark when people leave the field."
+      }
+    },
+    {
+      "state": "Error",
+      "when": "isInvalid: red label and border, with the message (errorMessage) below the field.",
+      "from": {
+        "section": "states",
+        "quote": "Red label and border, with the message below the field."
+      }
+    },
+    {
+      "state": "Read only",
+      "when": "isReadOnly: grey label and border; people can read the text but not change it.",
+      "from": {
+        "section": "states",
+        "quote": "Grey label and border; people can read the text but not change it."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: grey text and border, and Tab skips it; for a field that does not apply yet.",
+      "from": {
+        "section": "states",
+        "quote": "Grey text and border, and Tab skips it. Use it for a field that does not apply yet."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The label names the message and gives the field its accessible name.",
+      "strength": "recommended",
+      "target": "label",
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the message and gives the field its accessible name."
+      }
+    },
+    {
+      "text": "On the web the label names the text area; screen readers also announce required and invalid fields and read the error or support text with them. Tab skips a disabled field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the label names the text area; screen readers also announce required and invalid fields and read the error or support text with them. Tab skips a disabled field."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5",
+      "absolute": {
+        "word": "required",
+        "scope": "contextual",
+        "reason": "\"required ... fields\" names fields marked with isRequired, a state the field announces, not a constraint on the designer."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the text area; without it the field is named by its label, then its placeholder.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Show the limit",
+      "dont": "Hide the counter on a limit",
+      "why": "Typing stops at the limit with no warning.",
+      "from": {
+        "section": "doDont",
+        "quote": "The counter shows how much room is left."
+      }
+    },
+    {
+      "do": "Say what to fix",
+      "dont": "Rely on red alone",
+      "why": "The red border does not say what is wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "The message below says what is missing."
+      }
+    },
+    {
+      "do": "Use a Form Field for a short value",
+      "dont": "Ask for a short value in a Message Field",
+      "why": "A four-line box suggests a long answer.",
+      "from": {
+        "section": "doDont",
+        "quote": "One line for one value."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Report a problem, the guide's In context: a Card holds a required field with a 500-character limit and a Submit Button. The screen owns the text (value and onChangeText); when people tap Submit it checks the message and sets isInvalid, and errorMessage says what to fix. The button stays enabled.",
+      "jsx": "<Card>\n  <VStack>\n    <MessageField\n      label=\"Describe your issue\"\n      placeholder=\"What happened, and when?\"\n      maxLength={500}\n      isRequired\n      value=\"\"\n      onChangeText={() => {}}\n      isInvalid={false}\n      errorMessage=\"Add a few more details, at least 20 characters\"\n    />\n    <Button label=\"Submit\" onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen checks the message when people tap Submit and sets the error on the field."
+      }
+    },
+    {
+      "purpose": "Error, the guide's Error state and its Do “Say what to fix”: the screen sets isInvalid, and errorMessage below the field says what is missing.",
+      "jsx": "<MessageField\n  label=\"Describe your issue\"\n  value=\"Charged twice\"\n  onChangeText={() => {}}\n  maxLength={140}\n  isInvalid\n  errorMessage=\"Add a few more details, at least 20 characters\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Red label and border, with the message below the field."
+      }
+    },
+    {
+      "purpose": "Taller: six rows (150 px) and a 1,000-character limit for a longer description.",
+      "jsx": "<MessageField\n  label=\"Describe your issue\"\n  placeholder=\"What happened, and when?\"\n  rows={6}\n  maxLength={1000}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Six rows for a longer description."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "FormField States",
+      "description": "MessageField sets this mode itself from its props and focus: invalid gives Error, then disabled gives Disabled, read-only gives Read Only, focus gives Active, otherwise Idle. A value passed in modes is ignored.",
+      "quote": "State cascade: invalid → Error; disabled → Disabled; read-only → Read Only; focused → Active; otherwise Idle. `modes['FormField States']` is ignored.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "errorMessage",
+      "description": "Replaces supportText only while the field is invalid; the message sits between the text area and the counter.",
+      "quote": "`errorMessage` replaces `supportText` only while the field is invalid (as in FormField). The message sits between the text area and the counter.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "maxLength",
+      "description": "Typing stops at the limit, and the counter then reads the limit out of the limit (200/200 for 200).",
+      "quote": "`maxLength={200}` stops typing at 200 and shows `200/200`.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "showCounter",
+      "description": "With showCounter and no maxLength, the counter shows a bare count.",
+      "quote": "Without `maxLength`, `showCounter` shows a bare count.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "rows",
+      "description": "The text area is rows × 21 + 24 px tall when rows is set, otherwise the 108 px token (four rows); text scrolls inside it.",
+      "quote": "Height: `rows × 21 + 24` when `rows` is set; otherwise the 108 px token (four rows). Text scrolls inside the box.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "isDisabled",
+      "description": "On the web a disabled field has aria-disabled and tabindex -1, so Tab skips it.",
+      "quote": "Disabled: `aria-disabled`, `tabindex -1`.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "isRequired",
+      "description": "On the web the text area has aria-required, and the asterisk uses the Negative (red) token.",
+      "quote": "`aria-invalid` and `aria-required` are set, and the asterisk uses the Negative token.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Message Field has a fixed “0/140” counter and its states are variable modes; the package adds the required mark, a rows option, a counter that shows only with a limit, and support text or an error message below the text area, none of which Figma has.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Message Field is a 328 × 159 component with a label, a 108 px text area, and a fixed “0/140” counter; its states are variable modes. The package adds the required mark, a rows option, a counter that shows only with a limit, and support text or an error message below the text area."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ]
+}

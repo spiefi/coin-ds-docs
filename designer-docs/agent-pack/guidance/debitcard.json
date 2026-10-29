@@ -1,0 +1,633 @@
+{
+  "slug": "debitcard",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch5, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/debitcard.md at e7ed622. The guide's Sources note was checked on 28 October 2026 on the installed build itself (jfs-components 0.1.78, mirror v0.1.78-dbe0e02, Biscuit's main at dbe0e02, 27 October), so items citing it carry that build. The evidence's dbe0e02 section (#363 verified 27 October on dbe0e02, published 28 October) replaces its 21 October sections (0.1.78-c7d3348) where they differ; from those older sections only facts still true on dbe0e02 are used (the default art strip, the two logo slots, the number shown as passed, the wrapping name, style). Installed DebitCard.tsx and the debitCard/* tokens still match every guide sentence used here, read from source, not run: 328 × 224 with radius 16 from single-mode tokens; header padding 16 top, 20 sides, 28 bottom, with a minimum height of 16 + 29 + 28 = 73, so the top band is 73 px with or without a 29 px logo and grows with a taller one; the art strip is 50 px tall with 4 px corners and cover fit, the bundled strip when cardArtSource is undefined, your picture otherwise, and dropped by showArt false or cardArtSource null while the card keeps its height; footer gap 16 and side padding 20; bankName and cardType sit on one line and end in an ellipsis; cardNumber is shown exactly as passed; cardholderName wraps; bankLogoSlot comes before the name (gap 4) and providerLogoSlot after the type (gap 8), both given the card's modes; DebitCard brand changes only debitCard/background (JFS #cea15a by default, SBI #5d00b5), the SBI text is white through a check on the brand mode in code, and the art doesn't change; with onPress the card is a Pressable button named by accessibilityLabel or bank, type and number, at 0.75 opacity while pressed, and disabled stops it; without onPress it is a View with role group and the same name; disabled dims to 0.5 either way. No guide sentence is contradicted. Two details the guide leaves out: the picture state is also a named group (recorded from the evidence), and disabled dims a card without onPress too (the prop's JSDoc says so; the guide speaks of a pressable card). The evidence's 21 October Contract, Discrepancies and Limits still say cardArtSource null isn't in the type, there's no pressed feedback, disabled works only with onPress, header text is clipped and a picture card has no name; the installed types and the dbe0e02 section supersede them, so they are not used. The guide removes the art with showArt false, so null appears only on the showArt evidence fact. Examples follow the building rules: no Color Mode (the guide sets Light on every card, Title and VStack) and no DebitCard brand (the guide's SBI example keeps the JioFinance copy, and no guide sentence says which content needs the SBI brand, so an example would have to invent an SBI card); the In context VStack's Slot gap M, Padding None and 328 px width are left out. The guide's bank mark is a docs asset (jio-gold-logo.png) in a 29 × 29 Coin Image; examples pass a Coin Image with a { uri } source that stands for the app's own mark, since the package ships no logos. Copy is the guide's own (JioFinance, Priya Sharma, •••• 4821, •••• 7350, 09/29, the two spoken names). Left out of examples, since the pack allows three: the playground, the SBI brand, the Long name, a disabled card and the two Don'ts; Credit is shown inside the In context example. Not recorded: Biscuit's handwritten Storybook page summarised in the evidence (use instead CcCard, CardBankAccount or Balance), because the guide doesn't say it and that page isn't published, so avoidWhen holds only the guide's flip, freeze and CVV limit; the published Storybook's stories all rendering as buttons and its older generated page (a Storybook issue, reported); the header and footer paddings beyond what the rules name; and, per the pack's rules, dark mode and screen-reader names. The #363 problems fixed and verified on dbe0e02 are not gaps. The Sources note's showArt={false} renders as “showArt=” (JSX drops {false} inside its code element), so no quote spans it.",
+  "useWhen": [
+    {
+      "text": "Show a card the user already holds: its bank, type, last four digits, cardholder, and expiry.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Debit Card to show a card the user already holds: its bank, type, last four digits, cardholder, and expiry."
+      }
+    },
+    {
+      "text": "Listing the cards the user holds, such as on a profile screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists the cards the user holds."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A card that has to flip, freeze, or show its CVV: the Debit Card does none of these.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The card doesn’t flip, freeze, or show a CVV."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Bank",
+      "holds": "bankLogoSlot, then bankName: the bank's mark, if you pass one, then its name.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "bankLogoSlot, then bankName."
+      }
+    },
+    {
+      "part": "Card type",
+      "holds": "cardType, then providerLogoSlot (a network mark, empty in the guide).",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "cardType, then providerLogoSlot (empty here)."
+      }
+    },
+    {
+      "part": "Card art",
+      "holds": "The package's art strip, 50 px tall, across the middle; cardArtSource replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The package’s art strip, 50 px tall; cardArtSource replaces it."
+      }
+    },
+    {
+      "part": "Card number",
+      "holds": "cardNumber, shown exactly as you pass it.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "cardNumber, shown exactly as you pass it."
+      }
+    },
+    {
+      "part": "Cardholder",
+      "holds": "cardholderName; a long name wraps.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "cardholderName; a long name wraps."
+      }
+    },
+    {
+      "part": "Expiry",
+      "holds": "expireDate, as MM/YY, beside the cardholder.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "expireDate, as MM/YY."
+      }
+    },
+    {
+      "part": "Card",
+      "holds": "The card face: 328 × 224 with 16 px corners; the DebitCard brand mode sets its colour.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "328 × 224 with 16 px corners; DebitCard brand sets its colour."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Let the screen own the details: each card's onPress opens its details on the screen, and the card only shows the plastic.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "inContext",
+        "quote": "Each card’s onPress opens its details on the screen; the card only shows the plastic."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" says what the card itself does in any use: it shows the plastic, and the screen shows the details. It describes the card's role, so it is read as recommended, not as a constraint."
+      }
+    },
+    {
+      "text": "The card is a fixed 328 × 224, as in Figma, and doesn't grow or shrink with its host or its text.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is a fixed 328 × 224, as in Figma, and doesn’t grow or shrink with its host or its text."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "cardType is free text: write Debit or Credit, and nothing else on the card changes.",
+      "strength": "recommended",
+      "target": "cardType",
+      "from": {
+        "section": "configuration",
+        "quote": "cardType is free text: write Debit or Credit, and nothing else changes."
+      }
+    },
+    {
+      "text": "bankLogoSlot puts your bank's mark before its name; the package ships no logo, so the app passes its own.",
+      "strength": "recommended",
+      "target": "bankLogoSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "bankLogoSlot puts your bank’s mark before its name, and providerLogoSlot puts a network mark after the type; the package ships neither."
+      }
+    },
+    {
+      "text": "providerLogoSlot puts a network mark after the card type; the package ships none, so the app passes its own.",
+      "strength": "recommended",
+      "target": "providerLogoSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "bankLogoSlot puts your bank’s mark before its name, and providerLogoSlot puts a network mark after the type; the package ships neither."
+      }
+    },
+    {
+      "text": "The top band is 73 px with or without a 29 px bank logo; a taller logo makes it taller.",
+      "strength": "recommended",
+      "target": "bankLogoSlot",
+      "from": {
+        "section": "sizing",
+        "quote": "The top band is 73 px with or without a 29 px bank logo; a taller logo makes it taller."
+      }
+    },
+    {
+      "text": "The art strip is the package's own; cardArtSource replaces it with your picture.",
+      "strength": "recommended",
+      "target": "cardArtSource",
+      "from": {
+        "section": "configuration",
+        "quote": "The art strip is the package’s own: cardArtSource replaces it with your picture"
+      }
+    },
+    {
+      "text": "showArt={false} removes the art strip; the card stays 224 px tall.",
+      "strength": "recommended",
+      "target": "showArt",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "showArt={false} removes the strip; the card stays 224 px tall."
+      }
+    },
+    {
+      "text": "The DebitCard brand mode colours the card: JFS gold with dark text by default, or SBI purple with white text.",
+      "strength": "recommended",
+      "target": "DebitCard brand",
+      "from": {
+        "section": "configuration",
+        "quote": "The DebitCard brand mode colours the card: JFS gold with dark text by default, or SBI purple with white text."
+      }
+    },
+    {
+      "text": "DebitCard brand SBI: a purple card with white text.",
+      "strength": "recommended",
+      "target": "DebitCard brand",
+      "value": "SBI",
+      "from": {
+        "section": "configuration",
+        "quote": "A purple card with white text."
+      }
+    },
+    {
+      "text": "The art strip doesn't change with the brand.",
+      "strength": "recommended",
+      "target": "DebitCard brand",
+      "from": {
+        "section": "sources",
+        "quote": "though the art doesn’t change with the brand."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "No mode other than DebitCard brand changes the card.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "No other mode changes it."
+      }
+    },
+    {
+      "text": "onPress makes the whole card one button, named by its bank, type, and number unless you set accessibilityLabel.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its bank, type, and number unless you set accessibilityLabel."
+      }
+    },
+    {
+      "text": "disabled stops a pressable card and dims it to half.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "section": "states",
+        "quote": "A pressable card dims while pressed, and disabled stops it and dims it to half."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Never show the full card number on the card.",
+        "strength": "required",
+        "target": "cardNumber",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "The card in their wallet, never the full number."
+        },
+        "absolute": {
+          "word": "never",
+          "scope": "everywhere",
+          "reason": "The core principle has no condition: no Debit Card shows the full number. The Content section says how (mask cardNumber to its last four digits) and the Do & Don't pair says why (the card shows the number exactly as passed)."
+        }
+      },
+      {
+        "text": "Mask cardNumber to its last four digits: four dots, then the last four, such as “•••• 4821”.",
+        "strength": "recommended",
+        "target": "cardNumber",
+        "from": {
+          "section": "content",
+          "quote": "Mask cardNumber to its last four digits"
+        }
+      },
+      {
+        "text": "Do not pass the full number: the card shows it exactly as passed.",
+        "strength": "discouraged",
+        "target": "cardNumber",
+        "from": {
+          "section": "doDont",
+          "quote": "The card shows it exactly as passed."
+        }
+      },
+      {
+        "text": "Set cardNumber yourself: left out, the card shows the sample “•••• 1234”.",
+        "strength": "required",
+        "target": "cardNumber",
+        "from": {
+          "fact": "props:cardNumber"
+        }
+      },
+      {
+        "text": "Write bankName as the issuer and cardType as Debit or Credit.",
+        "strength": "recommended",
+        "target": "bankName",
+        "from": {
+          "section": "content",
+          "quote": "Write bankName as the issuer and cardType as Debit or Credit."
+        }
+      },
+      {
+        "text": "Keep the bank and type short, so both fit the top band.",
+        "strength": "recommended",
+        "target": "cardType",
+        "from": {
+          "section": "doDont",
+          "quote": "Both fit the top band."
+        }
+      },
+      {
+        "text": "Do not pass long bank or type names: each ends in an ellipsis, so the card type is lost.",
+        "strength": "discouraged",
+        "target": "cardType",
+        "from": {
+          "section": "doDont",
+          "quote": "Each ends in an ellipsis, so the card type is lost."
+        }
+      },
+      {
+        "text": "Write expireDate as MM/YY.",
+        "strength": "recommended",
+        "target": "expireDate",
+        "from": {
+          "section": "content",
+          "quote": "write expireDate as MM/YY."
+        }
+      },
+      {
+        "text": "Set expireDate yourself: left out, the card shows the sample “02/28”.",
+        "strength": "required",
+        "target": "expireDate",
+        "from": {
+          "fact": "props:expireDate"
+        }
+      },
+      {
+        "text": "Give cardholderName as it appears on the card.",
+        "strength": "recommended",
+        "target": "cardholderName",
+        "from": {
+          "section": "content",
+          "quote": "Give cardholderName as it appears on the card."
+        }
+      },
+      {
+        "text": "A long cardholder name wraps to a second line beside the expiry.",
+        "strength": "recommended",
+        "target": "cardholderName",
+        "from": {
+          "section": "content",
+          "quote": "The name wraps to a second line beside the expiry."
+        }
+      },
+      {
+        "text": "Set cardholderName yourself: left out, the card shows the sample “Shruti Shukla”.",
+        "strength": "required",
+        "target": "cardholderName",
+        "from": {
+          "fact": "props:cardholderName"
+        }
+      }
+    ],
+    "good": [
+      "JioFinance",
+      "Debit",
+      "Credit",
+      "•••• 4821",
+      "•••• 7350",
+      "Priya Sharma",
+      "09/29",
+      "Debit card, JioFinance, ending 4821"
+    ],
+    "bad": [
+      "4111 1111 1111 4821",
+      "JioFinance Payments Bank",
+      "Debit Platinum Select"
+    ]
+  },
+  "states": [
+    {
+      "state": "Picture",
+      "when": "No onPress: the card doesn't press, and screen readers read its text.",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the card is a picture: it doesn’t press, and screen readers read its text."
+      }
+    },
+    {
+      "state": "Button",
+      "when": "onPress set: the whole card is one button, named by its bank, type, and number unless you set accessibilityLabel.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its bank, type, and number unless you set accessibilityLabel."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "A pressable card dims while you press it.",
+      "from": {
+        "section": "states",
+        "quote": "The whole card presses and dims while you press it."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled stops a pressable card and dims it to half.",
+      "from": {
+        "section": "states",
+        "quote": "A pressable card dims while pressed, and disabled stops it and dims it to half."
+      }
+    },
+    {
+      "state": "Flipped, frozen, CVV",
+      "when": "Not available: the card doesn't flip, freeze, or show a CVV.",
+      "from": {
+        "section": "states",
+        "quote": "The card doesn’t flip, freeze, or show a CVV."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Without onPress the card is a picture, and screen readers read its text.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the card is a picture: it doesn’t press, and screen readers read its text."
+      }
+    },
+    {
+      "text": "With onPress the whole card is one button, named by its bank, type, and number unless you set accessibilityLabel.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its bank, type, and number unless you set accessibilityLabel."
+      }
+    },
+    {
+      "text": "When the card presses, set accessibilityLabel to the type, bank, and last four, such as “Debit card, JioFinance, ending 4821”, never the full number.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "When the card presses, set accessibilityLabel to the type, bank, and last four, such as Debit card, JioFinance, ending 4821, never the full number."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "contextual",
+        "reason": "the sentence is about the label of a card that presses (\"When the card presses\"); \"never\" says what that label leaves out. The core principle keeps the full number off every card."
+      }
+    },
+    {
+      "text": "Without onPress the card is a named group, not a button.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "without onPress the root is a named group"
+      },
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "A disabled card dims to half and is marked disabled for screen readers (aria-disabled on the web).",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "section": "evidence",
+        "quote": "disabled dims to 0.5 with `aria-disabled`"
+      },
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Mask the number",
+      "dont": "The full number",
+      "why": "The card shows it exactly as passed.",
+      "from": {
+        "section": "doDont",
+        "quote": "Only the last four digits show."
+      }
+    },
+    {
+      "do": "Short bank and type",
+      "dont": "Long names",
+      "why": "Each ends in an ellipsis, so the card type is lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "Both fit the top band."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A card the user holds, shown as a picture (no onPress): the bank's 29 px mark and name, then the type at the top, the art strip across the middle, and the masked number, cardholder and expiry at the bottom. The package ships no logo, so the app passes its own; the URI stands for it.",
+      "jsx": "<DebitCard\n  bankName=\"JioFinance\"\n  bankLogoSlot={<Image imageSource={{ uri: 'https://example.com/jiofinance-logo.png' }} width={29} height={29} />}\n  cardType=\"Debit\"\n  cardNumber=\"•••• 4821\"\n  cardholderName=\"Priya Sharma\"\n  expireDate=\"09/29\"\n/>",
+      "from": {
+        "section": "anatomy",
+        "quote": "The bank and the card type sit at the top, the art strip runs across the middle, and the number, cardholder, and expiry fill the bottom."
+      }
+    },
+    {
+      "purpose": "The cards on a profile screen, the guide's In context: the screen lists the cards the user holds. Each card's onPress opens its details on the screen, and each is named for screen readers by its type, bank and last four.",
+      "jsx": "<VStack>\n  <Title title=\"Your cards\" subtitle=\"2 cards\" />\n  <DebitCard\n    bankName=\"JioFinance\"\n    bankLogoSlot={<Image imageSource={{ uri: 'https://example.com/jiofinance-logo.png' }} width={29} height={29} />}\n    cardType=\"Debit\"\n    cardNumber=\"•••• 4821\"\n    cardholderName=\"Priya Sharma\"\n    expireDate=\"09/29\"\n    onPress={() => {}}\n    accessibilityLabel=\"Debit card, JioFinance, ending 4821\"\n  />\n  <DebitCard\n    bankName=\"JioFinance\"\n    bankLogoSlot={<Image imageSource={{ uri: 'https://example.com/jiofinance-logo.png' }} width={29} height={29} />}\n    cardType=\"Credit\"\n    cardNumber=\"•••• 7350\"\n    cardholderName=\"Priya Sharma\"\n    expireDate=\"09/29\"\n    onPress={() => {}}\n    accessibilityLabel=\"Credit card, JioFinance, ending 7350\"\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Each card’s onPress opens its details on the screen; the card only shows the plastic."
+      }
+    },
+    {
+      "purpose": "Without the art: showArt false removes the strip, and the card stays 224 px tall.",
+      "jsx": "<DebitCard\n  bankName=\"JioFinance\"\n  bankLogoSlot={<Image imageSource={{ uri: 'https://example.com/jiofinance-logo.png' }} width={29} height={29} />}\n  cardType=\"Debit\"\n  cardNumber=\"•••• 4821\"\n  cardholderName=\"Priya Sharma\"\n  expireDate=\"09/29\"\n  showArt={false}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "showArt={false} removes the strip; the card stays 224 px tall."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "DebitCard brand",
+      "description": "Sets the card's brand colours: JFS gold #cea15a (the default) with #141414 text, or SBI purple #5d00b5 with white text, also when the brand comes from JFSThemeProvider.",
+      "quote": "SBI text is `#ffffff` on the `#5d00b5` brand (9.85:1), also when the brand comes from JFSThemeProvider; JFS stays `#141414` on `#cea15a` (7.78:1).",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "showArt",
+      "description": "showArt={false}, like cardArtSource={null}, drops the art strip; the card stays 224 px tall.",
+      "quote": "`cardArtSource={null}` and `showArt={false}` drop the art strip; the card stays 224 px.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "cardArtSource",
+      "description": "Left out (undefined), the card shows the package's own strip: 328 × 50, cover, 4 px corners.",
+      "quote": "the bundled strip by default (328 × 50, cover, 4 px corners); `undefined` keeps it.",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "bankLogoSlot",
+      "description": "Before bankName, 4 px apart; takes any node and passes it the card's modes. The package ships no logo for it.",
+      "quote": "`bankLogoSlot` (before bankName, gap 4) and `providerLogoSlot` (after cardType, gap 8): any node, given the card's modes. Nothing ships for either.",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "providerLogoSlot",
+      "description": "After cardType, 8 px apart; takes any node and passes it the card's modes. The package ships no network logo for it.",
+      "quote": "`bankLogoSlot` (before bankName, gap 4) and `providerLogoSlot` (after cardType, gap 8): any node, given the card's modes. Nothing ships for either.",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "bankName",
+      "description": "Shown on one line; long text ends in an ellipsis.",
+      "quote": "Long bankName and cardType end in an ellipsis on one line.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "cardType",
+      "description": "Shown on one line; long text ends in an ellipsis.",
+      "quote": "Long bankName and cardType end in an ellipsis on one line.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "cardNumber",
+      "description": "Shown exactly as passed: the card doesn't mask it.",
+      "quote": "`cardNumber` ('•••• 1234', shown exactly as passed)",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "cardholderName",
+      "description": "A long name wraps.",
+      "quote": "`cardholderName` ('Shruti Shukla'; wraps)",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "While pressed the card dims to 0.75 opacity.",
+      "quote": "Pressed opacity 0.75",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "disabled",
+      "description": "Dims the card to 0.5 opacity, with aria-disabled on the web.",
+      "quote": "disabled dims to 0.5 with `aria-disabled`",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "style",
+      "description": "The card's size comes from its tokens (328 × 224, radius 16). style goes last and can change the box, but the content doesn't reflow.",
+      "quote": "`style` goes last and can change the box, but the content doesn't reflow.",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The package ships no bank or network logos, where Figma's card shows them; the app passes its own through bankLogoSlot and providerLogoSlot.",
+      "from": {
+        "section": "sources",
+        "quote": "The package ships no logos; the top band keeps Figma’s 73 px without one."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The art strip doesn't change with the brand, and there is no brand foreground (text) token.",
+      "quote": "The art still doesn't change with the brand, and there's no brand foreground token.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Figma's Debit Card exposes cardholderName, cardNumber and expireDate as properties; its bank and network logos are nested instances and its brand is a variable mode. In code bankName and cardType are props, and the logos go in bankLogoSlot and providerLogoSlot.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Debit Card exposes cardholderName, cardNumber, and expireDate; its bank and network logos are nested instances, and its brand is a variable mode."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ]
+}

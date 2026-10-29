@@ -1,0 +1,338 @@
+{
+  "slug": "debitcard",
+  "label": "Debit Card",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/debitcard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/debitcard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T01:09:00.708Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "card face",
+    "payment card",
+    "credit card",
+    "bank card",
+    "plastic",
+    "card art"
+  ],
+  "title": "Debit Card",
+  "summary": "Use a Debit Card to show a card the user already holds: its bank, type, last four digits, cardholder, and expiry.",
+  "corePrinciple": "The card in their wallet, never the full number.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2766-25",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-debitcard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A card face in three bands",
+      "description": "The bank and the card type sit at the top, the art strip runs across the middle, and the number, cardholder, and expiry fill the bottom.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "Bank",
+        "bankLogoSlot, then bankName.",
+        "Card type",
+        "cardType, then providerLogoSlot (empty here).",
+        "Card art",
+        "The package’s art strip, 50 px tall; cardArtSource replaces it.",
+        "Card number",
+        "cardNumber, shown exactly as you pass it.",
+        "Cardholder",
+        "cardholderName; a long name wraps.",
+        "Expiry",
+        "expireDate, as MM/YY.",
+        "Card",
+        "328 × 224 with 16 px corners; DebitCard brand sets its colour."
+      ],
+      "specimen": [
+        "JioFinance",
+        "Debit",
+        "•••• 4821",
+        "Priya Sharma",
+        "09/29"
+      ],
+      "anatomy": [
+        {
+          "part": "Bank",
+          "note": "bankLogoSlot, then bankName."
+        },
+        {
+          "part": "Card type",
+          "note": "cardType, then providerLogoSlot (empty here)."
+        },
+        {
+          "part": "Card art",
+          "note": "The package’s art strip, 50 px tall; cardArtSource replaces it."
+        },
+        {
+          "part": "Card number",
+          "note": "cardNumber, shown exactly as you pass it."
+        },
+        {
+          "part": "Cardholder",
+          "note": "cardholderName; a long name wraps."
+        },
+        {
+          "part": "Expiry",
+          "note": "expireDate, as MM/YY."
+        },
+        {
+          "part": "Card",
+          "note": "328 × 224 with 16 px corners; DebitCard brand sets its colour."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Type, logo, art, and brand",
+      "description": "cardType is free text: write Debit or Credit, and nothing else changes. bankLogoSlot puts your bank’s mark before its name, and providerLogoSlot puts a network mark after the type; the package ships neither. The art strip is the package’s own: cardArtSource replaces it with your picture, and showArt={false} removes it while the card keeps its 224 px. The DebitCard brand mode colours the card: JFS gold with dark text by default, or SBI purple with white text. No other mode changes it.",
+      "blocks": [
+        "Debit",
+        "The bank’s mark and name, then the card type.",
+        "Credit",
+        "Only the word changes.",
+        "Without a bank logo",
+        "The top band keeps Figma’s 73 px.",
+        "Without the art",
+        "showArt={false} removes the strip; the card stays 224 px tall.",
+        "DebitCard brand SBI",
+        "A purple card with white text."
+      ],
+      "specimen": [
+        "JioFinance",
+        "Debit",
+        "•••• 4821",
+        "Priya Sharma",
+        "09/29",
+        "Credit",
+        "•••• 7350"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Debit",
+          "description": "The bank’s mark and name, then the card type."
+        },
+        {
+          "title": "Credit",
+          "description": "Only the word changes."
+        },
+        {
+          "title": "Without a bank logo",
+          "description": "The top band keeps Figma’s 73 px."
+        },
+        {
+          "title": "Without the art",
+          "description": "showArt={false} removes the strip; the card stays 224 px tall."
+        },
+        {
+          "title": "DebitCard brand SBI",
+          "description": "A purple card with white text."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "A picture, or a button",
+      "description": "Without onPress the card is a picture: it doesn’t press, and screen readers read its text. onPress makes the whole card one button, named by its bank, type, and number unless you set accessibilityLabel. A pressable card dims while pressed, and disabled stops it and dims it to half. The card doesn’t flip, freeze, or show a CVV.",
+      "blocks": [
+        "Picture",
+        "No onPress: nothing to press.",
+        "Button",
+        "The whole card presses and dims while you press it."
+      ],
+      "specimen": [
+        "JioFinance",
+        "Debit",
+        "•••• 4821",
+        "Priya Sharma",
+        "09/29"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Picture",
+          "description": "No onPress: nothing to press."
+        },
+        {
+          "title": "Button",
+          "description": "The whole card presses and dims while you press it."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Always 328 × 224",
+      "description": "The card is a fixed 328 × 224, as in Figma, and doesn’t grow or shrink with its host or its text. The top band has 16 px of padding above and 28 px below; the art strip is 50 px tall; the details sit 16 px apart with 20 px at the sides. The top band is 73 px with or without a 29 px bank logo; a taller logo makes it taller.",
+      "blocks": [
+        "328 × 224",
+        "328 × 50"
+      ],
+      "specimen": [
+        "JioFinance",
+        "Debit",
+        "•••• 4821",
+        "Priya Sharma",
+        "09/29"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Masked, short, as printed",
+      "description": "Write bankName as the issuer and cardType as Debit or Credit. Mask cardNumber to its last four digits, and write expireDate as MM/YY. Give cardholderName as it appears on the card. When the card presses, set accessibilityLabel to the type, bank, and last four, such as Debit card, JioFinance, ending 4821, never the full number.",
+      "blocks": [
+        "Masked number",
+        "Four dots, then the last four digits.",
+        "Long name",
+        "The name wraps to a second line beside the expiry."
+      ],
+      "specimen": [
+        "JioFinance",
+        "Debit",
+        "•••• 4821",
+        "Priya Sharma",
+        "09/29",
+        "Venkatasubramanian Ramakrishnan"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Masked number",
+          "description": "Four dots, then the last four digits."
+        },
+        {
+          "title": "Long name",
+          "description": "The name wraps to a second line beside the expiry."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "The cards on a profile screen",
+      "description": "The screen lists the cards the user holds. Each card’s onPress opens its details on the screen; the card only shows the plastic.",
+      "blocks": [
+        "No card opened"
+      ],
+      "specimen": [
+        "Your cards",
+        "2 cards",
+        "JioFinance",
+        "Debit",
+        "•••• 4821",
+        "Priya Sharma",
+        "09/29",
+        "Credit",
+        "•••• 7350"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A masked number and short labels",
+      "description": "Each pair shows a card face that keeps the number private and reads cleanly next to one that exposes it or cuts a label.",
+      "blocks": [
+        "Do",
+        "Mask the number",
+        "Only the last four digits show.",
+        "Don’t",
+        "The full number",
+        "The card shows it exactly as passed.",
+        "Short bank and type",
+        "Both fit the top band.",
+        "Long names",
+        "Each ends in an ellipsis, so the card type is lost."
+      ],
+      "specimen": [
+        "JioFinance",
+        "Debit",
+        "•••• 4821",
+        "Priya Sharma",
+        "09/29",
+        "4111 1111 1111 4821",
+        "JioFinance Payments Bank",
+        "Debit Platinum Select"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Mask the number",
+            "caption": "Only the last four digits show.",
+            "specimen": "JioFinance · Debit · •••• 4821 · Priya Sharma · 09/29"
+          },
+          "dont": {
+            "title": "The full number",
+            "caption": "The card shows it exactly as passed.",
+            "specimen": "JioFinance · Debit · 4111 1111 1111 4821 · Priya Sharma · 09/29"
+          }
+        },
+        {
+          "do": {
+            "title": "Short bank and type",
+            "caption": "Both fit the top band.",
+            "specimen": "JioFinance · Debit · •••• 4821 · Priya Sharma · 09/29"
+          },
+          "dont": {
+            "title": "Long names",
+            "caption": "Each ends in an ellipsis, so the card type is lost.",
+            "specimen": "JioFinance Payments Bank · Debit Platinum Select · •••• 4821 · Priya Sharma · 09/29"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Debit Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Credit card",
+        "No card art",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Debit Card exposes cardholderName, cardNumber, and expireDate; its bank and network logos are nested instances, and its brand is a variable mode. The package ships no logos; the top band keeps Figma’s 73 px without one. On the SBI brand the text is white. cardArtSource replaces the art strip and showArt= removes it, though the art doesn’t change with the brand. Long bank or type text ends in an ellipsis, and a pressable card dims while pressed. Every published Storybook story renders the card as a button, and the published page is the older generated one (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "cardholderName",
+        "cardNumber",
+        "expireDate",
+        "cardArtSource",
+        "showArt="
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
