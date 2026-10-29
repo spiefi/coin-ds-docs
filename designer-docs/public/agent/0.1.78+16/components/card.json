@@ -1,0 +1,917 @@
+{
+  "schemaVersion": 1,
+  "id": "Card",
+  "slug": "card",
+  "category": "card",
+  "tags": [
+    "product card",
+    "offer card",
+    "surface",
+    "panel",
+    "container"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T08:26:34Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Card to group one product, offer, or article on a panel, with an optional logo, a picture, and a few lines of text.",
+  "useWhen": [
+    {
+      "text": "Group one product, offer, or article on a panel, with an optional logo, a picture, and a few lines of text.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card to group one product, offer, or article on a panel, with an optional logo, a picture, and a few lines of text."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Header",
+      "holds": "The header slot: a logo or a label in a row padded 12 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "header: a logo or a label in a row padded 12 px."
+      }
+    },
+    {
+      "part": "Media",
+      "holds": "The media slot: a picture across the full width at 154:116 (mediaAspectRatio changes it). The default variant only; slim never shows it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "media: a picture across the full width at 154:116."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "Card.SupportText: a 12 px line for a category or a fact.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Card.SupportText: a 12 px line for a category or a fact."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "Card.Title: the name in 16 px heavy type, up to 3 lines.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Card.Title: the name in 16 px heavy type, up to 3 lines."
+      }
+    },
+    {
+      "part": "Content",
+      "holds": "children: a column padded 12 px, 4 px between lines, usually Card.SupportText and Card.Title.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "children: a column padded 12 px, 4 px between lines."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "The card itself: AppearanceBrand sets the fill; corners are 12 px.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "AppearanceBrand sets the fill; corners are 12 px."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "header",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "media",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card fills a column's width but hugs its content in a row, so give it a width there; Figma and Storybook draw it at 200 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills a column’s width but hugs its content in a row, so give it a width there; Figma and Storybook draw it at 200 px."
+      }
+    },
+    {
+      "text": "Height follows the content.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the content."
+      }
+    },
+    {
+      "text": "Two offers can share a row, each card taking half of it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Two offers share a row, each card taking half of it."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "variant default shows a picture when you pass media; slim never does.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "variant default shows a picture when you pass media; slim never does."
+      },
+      "target": "variant"
+    },
+    {
+      "text": "Default (the default variant): a logo, a picture, and the text, for an offer that leads with an image.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A logo, a picture, and the text, for an offer that leads with an image."
+      },
+      "target": "variant",
+      "value": "default"
+    },
+    {
+      "text": "Slim: the logo and the text, without a picture.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The logo and the text, without a picture."
+      },
+      "target": "variant",
+      "value": "slim"
+    },
+    {
+      "text": "To show a picture, use the default variant: slim ignores media.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/2"
+      },
+      "target": "media"
+    },
+    {
+      "text": "Do not put a picture on a slim card: slim drops the picture without a warning.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Slim drops the picture without a warning."
+      },
+      "target": "variant",
+      "value": "slim"
+    },
+    {
+      "text": "Pass header for a logo or a label, media for a picture, and children for the text, and leave out what you don't need.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Pass header for a logo or a label, media for a picture, and children for the text, and leave out what you don’t need."
+      }
+    },
+    {
+      "text": "Each slot shows only when you pass it.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Each slot shows only when you pass it."
+      }
+    },
+    {
+      "text": "Figma's header and media switches are the header and media props in code: pass them or leave them out; false also hides a slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s header and media switches are the header and media props in code: pass them or leave them out (false also hides a slot)."
+      }
+    },
+    {
+      "text": "Text only: just children, a plain panel for a few lines.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Just children: a plain panel for a few lines."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Give the media Image a width and height of 100%, as the guide does, so it fills the media slot at any mediaAspectRatio; an Image with its own ratio leaves a blank band.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "so it fills the media slot at any `mediaAspectRatio` (an Image with its own ratio leaves a blank band)"
+      },
+      "target": "media"
+    },
+    {
+      "text": "The picture keeps 154:116 of the width, and mediaAspectRatio changes that.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The picture keeps 154:116 of the width, and mediaAspectRatio changes that."
+      },
+      "target": "mediaAspectRatio"
+    },
+    {
+      "text": "mediaAspectRatio 1: a square picture.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A square picture."
+      },
+      "target": "mediaAspectRatio",
+      "value": "1"
+    },
+    {
+      "text": "AppearanceBrand sets the fill: with no modes the card is Neutral white, as Figma draws it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand sets the fill: with no modes the card is Neutral white, as Figma draws it."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "Neutral (the card's default): with no AppearanceBrand the card is white, as Figma and Storybook draw it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "With no AppearanceBrand the card is white, as Figma and Storybook draw it."
+      },
+      "target": "AppearanceBrand",
+      "value": "Neutral"
+    },
+    {
+      "text": "Primary: a cream fill.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A cream fill."
+      },
+      "target": "AppearanceBrand",
+      "value": "Primary"
+    },
+    {
+      "text": "Secondary: a light purple fill.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A light purple fill."
+      },
+      "target": "AppearanceBrand",
+      "value": "Secondary"
+    },
+    {
+      "text": "Tertiary: a light blue fill.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A light blue fill."
+      },
+      "target": "AppearanceBrand",
+      "value": "Tertiary"
+    },
+    {
+      "text": "Semantic Intent System tints the card with AppearanceSystem's status colour.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Semantic Intent System tints it with AppearanceSystem’s status colour."
+      },
+      "target": "Semantic Intent",
+      "value": "System"
+    },
+    {
+      "text": "With Semantic Intent System, AppearanceSystem positive tints the card green.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Semantic Intent System with AppearanceSystem positive: green."
+      },
+      "target": "AppearanceSystem",
+      "value": "positive"
+    },
+    {
+      "text": "With Semantic Intent System, AppearanceSystem warning tints the card orange.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "warning: orange."
+      },
+      "target": "AppearanceSystem",
+      "value": "warning"
+    },
+    {
+      "text": "With Semantic Intent System, AppearanceSystem negative tints the card red.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "negative: red."
+      },
+      "target": "AppearanceSystem",
+      "value": "negative"
+    },
+    {
+      "text": "Card Container Plain removes the panel: no fill, border, corners, or padding, so the text sits on what's behind it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "No fill, border, corners, or padding: the text sits on what’s behind it."
+      },
+      "target": "Card Container",
+      "value": "Plain"
+    },
+    {
+      "text": "Page type SubPage: a light grey border around the white card.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A light grey border around the white card."
+      },
+      "target": "Page type",
+      "value": "SubPage"
+    },
+    {
+      "text": "context 8 Section: the same grey border, for a card inside a section.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The same grey border, for a card inside a section."
+      },
+      "target": "context 8",
+      "value": "Section"
+    },
+    {
+      "text": "The header and the text are padded 12 px, with 4 px between slots and between lines; Gap M and L widen both, and Gap None removes them.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The header and the text are padded 12 px, with 4 px between slots and between lines; Gap M and L widen both, and Gap None removes them."
+      },
+      "target": "Gap"
+    },
+    {
+      "text": "Gap M: 14 px between slots, 18 px between lines.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "14 px between slots, 18 px between lines."
+      },
+      "target": "Gap",
+      "value": "M"
+    },
+    {
+      "text": "Gap L: 23 px between slots and between lines.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "23 px for both."
+      },
+      "target": "Gap",
+      "value": "L"
+    },
+    {
+      "text": "Without onPress the card is static; with onPress the whole card is one button.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the card is static. With onPress the whole card is one button"
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Do not put buttons inside a pressable card: with onPress the whole card is one button.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "don’t put buttons inside it"
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Each card's onPress opens its offer: the screen does the navigation, and the card only reports the press.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Each card’s onPress opens its offer: the screen does the navigation, and the card only reports the press."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "disabled acts on a pressable card: without onPress it does nothing.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "without onPress it does nothing"
+      },
+      "target": "disabled"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One card, one idea: a name and one fact.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One card, one idea: a name and one fact."
+        }
+      },
+      {
+        "text": "Make the title the product or offer name, and each support line one fact: a category, a price, a date, or a status.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the product or offer name, and each support line one fact: a category, a price, a date, or a status."
+        }
+      },
+      {
+        "text": "The header is a logo or a label, not a second title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The header is a logo or a label, not a second title."
+        },
+        "target": "header"
+      },
+      {
+        "text": "Do not put a second title in the header: two titles compete, and the product name gets lost.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Two titles compete, and the product name gets lost."
+        },
+        "target": "header"
+      },
+      {
+        "text": "Card.Title stops at three lines with an ellipsis.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Card.Title stops at three lines with an ellipsis"
+        },
+        "target": "Card.Title"
+      },
+      {
+        "text": "Keep Card.SupportText short: it never stops.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Card.SupportText never stops, so keep it short."
+        },
+        "target": "Card.SupportText"
+      },
+      {
+        "text": "Do not write a paragraph of support text: support text never stops, so the card grows and the name gets lost.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Support text never stops, so the card grows and the name gets lost."
+        },
+        "target": "Card.SupportText"
+      }
+    ],
+    "good": [
+      "Digital gold",
+      "24K digital gold",
+      "From ₹10",
+      "JioFinance",
+      "Fixed deposit",
+      "Earn 7.25% a year",
+      "From ₹1,000"
+    ],
+    "bad": [
+      "Buy and sell 24K gold any time, from as little as ₹10, and we keep it in an insured vault for you at no extra cost.",
+      "Grow your savings"
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Without onPress: text to read, nothing responds.",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the card is static."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress the whole card is one button.",
+      "from": {
+        "section": "states",
+        "quote": "With onPress the whole card is one button"
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "A pressable card dims a little on hover.",
+      "from": {
+        "section": "states",
+        "quote": "It dims a little on hover and more while pressed, and a thin dark outline shows its focus."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "A pressable card dims more while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "It dims a little on hover and more while pressed, and a thin dark outline shows its focus."
+      }
+    },
+    {
+      "state": "Focus",
+      "when": "A thin dark outline shows a pressable card's focus.",
+      "from": {
+        "section": "states",
+        "quote": "It dims a little on hover and more while pressed, and a thin dark outline shows its focus."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled dims it to half, stops presses, and takes it out of the Tab order; without onPress it does nothing.",
+      "from": {
+        "section": "states",
+        "quote": "disabled dims it to half, stops presses, and takes it out of the Tab order; without onPress it does nothing."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "A pressable card is one button: give it an accessibilityLabel when the title isn't its whole name.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "give it an accessibilityLabel when the title isn’t its whole name"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "A disabled pressable card is dimmed to half; presses and Tab skip it.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to half; presses and Tab skip it."
+      },
+      "target": "disabled"
+    },
+    {
+      "text": "Without onPress, an accessibilityLabel makes the card a group with that name on the web.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`accessibilityLabel` without `onPress` gives a `group` with that name."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Card.Title is not a heading.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The title is not a heading."
+      },
+      "target": "Card.Title"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Default for a picture",
+      "dont": "A picture on a slim card",
+      "why": "Slim drops the picture without a warning.",
+      "from": {
+        "section": "doDont",
+        "quote": "The picture leads the card."
+      }
+    },
+    {
+      "do": "A name and one fact",
+      "dont": "A paragraph of support text",
+      "why": "Support text never stops, so the card grows and the name gets lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "“24K digital gold”, from ₹10."
+      }
+    },
+    {
+      "do": "A logo in the header",
+      "dont": "A second title in the header",
+      "why": "Two titles compete, and the product name gets lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "The header names the brand; the title names the product."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Offers on the Home screen, the guide's In context: two offers share a row, each card taking half of it, under the section's Title. As in the guide's own In context example, the cards are Slim, each onPress opens its offer, and an accessibilityLabel names the whole card; the logo in the header is decorative.",
+      "jsx": "<VStack>\n  <Title title=\"Offers for you\" subtitle=\"Picked for your savings\" />\n  <HStack alignVertical=\"stretch\">\n    <Card\n      variant=\"slim\"\n      header={\n        <HStack alignVertical=\"center\">\n          <Image imageSource={{ uri: 'https://example.com/jiofinance-logo.png' }} width={18} height={18} accessibilityElementsHidden importantForAccessibility=\"no\" />\n          <Text text=\"JioFinance\" />\n        </HStack>\n      }\n      onPress={() => {}}\n      accessibilityLabel=\"24K digital gold, from ₹10\"\n      style={{ flex: 1 }}\n    >\n      <Card.SupportText>Digital gold</Card.SupportText>\n      <Card.Title>24K digital gold</Card.Title>\n      <Card.SupportText>From ₹10</Card.SupportText>\n    </Card>\n    <Card\n      variant=\"slim\"\n      header={\n        <HStack alignVertical=\"center\">\n          <Image imageSource={{ uri: 'https://example.com/jiofinance-logo.png' }} width={18} height={18} accessibilityElementsHidden importantForAccessibility=\"no\" />\n          <Text text=\"JioFinance\" />\n        </HStack>\n      }\n      onPress={() => {}}\n      accessibilityLabel=\"Fixed deposit, earn 7.25% a year\"\n      style={{ flex: 1 }}\n    >\n      <Card.SupportText>Fixed deposit</Card.SupportText>\n      <Card.Title>Earn 7.25% a year</Card.Title>\n      <Card.SupportText>From ₹1,000</Card.SupportText>\n    </Card>\n  </HStack>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Two offers share a row, each card taking half of it."
+      }
+    },
+    {
+      "purpose": "Default, for an offer that leads with an image: a logo, a picture, and the text, at Figma's 200 px. The media Image is 100% wide and tall so it fills the 154:116 slot. Static: no onPress.",
+      "jsx": "<Card\n  header={\n    <HStack alignVertical=\"center\">\n      <Image imageSource={{ uri: 'https://example.com/jiofinance-logo.png' }} width={18} height={18} accessibilityElementsHidden importantForAccessibility=\"no\" />\n      <Text text=\"JioFinance\" />\n    </HStack>\n  }\n  media={\n    <Image imageSource={{ uri: 'https://example.com/bank-hero.png' }} width=\"100%\" height=\"100%\" accessibilityLabel=\"Two people smiling at a phone\" />\n  }\n  style={{ width: 200 }}\n>\n  <Card.SupportText>Jio Payments Bank</Card.SupportText>\n  <Card.Title>Savings account</Card.Title>\n  <Card.SupportText>Zero balance</Card.SupportText>\n</Card>",
+      "from": {
+        "section": "configuration",
+        "quote": "A logo, a picture, and the text, for an offer that leads with an image."
+      }
+    },
+    {
+      "purpose": "A status, the guide's negative example: Semantic Intent System with AppearanceSystem negative tints the card red for a fixed deposit whose renewal failed. Text only: just children.",
+      "jsx": "<Card modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }} style={{ width: 200 }}>\n  <Card.SupportText>Fixed deposit</Card.SupportText>\n  <Card.Title>Renewal failed</Card.Title>\n  <Card.SupportText>Add ₹1,000 to try again</Card.SupportText>\n</Card>",
+      "from": {
+        "section": "configuration",
+        "quote": "Semantic Intent System tints it with AppearanceSystem’s status colour."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "CardVariantInput",
+        "required": false,
+        "source": "types",
+        "values": [
+          "default",
+          "slim",
+          "Default",
+          "Slim"
+        ],
+        "default": "default",
+        "description": "Visual layout variant matching Figma `Property 1`. - `'default'` — header + optional media + content (Figma Default) - `'slim'` — header + content only; `media` is ignored (Figma Slim) Defaults to `'default'`. Existing call sites that omit `media` continue to render a media-less default card (backward compatible). Prefer `variant=\"slim\"` when you want the Slim contract explicitly. Default \"default\", from the component source."
+      },
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "A plain string header is wrapped in Text. Declared: Content rendered in the header slot at the top of the card (e.g. a brand logo). Sits above the media slot, padded with `card/content/padding/*`. `false`, `''` and `null` hide the slot.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Media slot content (e.g. `<Image />`). Wrapped in a container that respects `mediaAspectRatio`. Ignored when `variant=\"slim\"`. `false`, `''` and `null` hide the slot."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Content slot (e.g. `Card.Title`, `Card.SupportText`)."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "The card doesn't read the app's theme: its modes come from this prop or from a Coin stack it is placed in. Declared: Modes object for token resolution. Cascades into all slots.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "mediaAspectRatio",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 1.3276,
+        "description": "Aspect ratio for the media slot container. Defaults to the Figma Ratio 154/116 (~1.328). Default 1.3276 (154 / 116), from the component source."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the card container."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "A pressable card dims to opacity 0.92 on hover and 0.8 while pressed (mouse and Space), and shows a 1 px #0c0d10 focus outline at offset 2, which also shows after a mouse click until blur. Declared: Press handler for the whole card. When set, the card becomes pressable (`Pressable` + `accessibilityRole=\"button\"`).",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "With onPress: opacity 0.5, disabled and aria-disabled, tabindex -1, skipped by Tab, no hover or press change. Without onPress it does nothing. Declared: Disable interaction when `onPress` is set.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Without onPress it makes the card a group with that name on the web; with onPress it names the button. Declared: Accessibility label forwarded to the root.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "...CardBaseProps",
+        "type": "CardBaseProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      },
+      {
+        "name": "Card.Title",
+        "type": "component",
+        "description": "16 px, weight 900, line height 20 (the 18 px token raised to fit the type); clamps at 3 lines, and its numberOfLines changes that (0 removes the clamp). Not a heading. Declared: A static sub-component of Card. Its own props: children, style, modes, numberOfLines.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "Card.SupportText",
+        "type": "component",
+        "description": "12 px on 16 px lines, weight 400, with no line limit unless numberOfLines sets one. Not a heading. Declared: A static sub-component of Card. Its own props: children, style, modes, numberOfLines.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Sets the card's fill. With no modes, or Color Mode Light only, the fill is Neutral white (#ffffff); AppearanceBrand Primary, on the card or from a VStack, gives cream #fef4e5. Declared: A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Neutral",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Card Container",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Plain"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 8",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Section"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "None"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection Card reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "description": "Content rendered in the header slot at the top of the card (e.g. a brand logo). Sits above the media slot, padded with `card/content/padding/*`. `false`, `''` and `null` hide the slot.",
+        "source": "types"
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "description": "Media slot content (e.g. `<Image />`). Wrapped in a container that respects `mediaAspectRatio`. Ignored when `variant=\"slim\"`. `false`, `''` and `null` hide the slot.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Content slot (e.g. `Card.Title`, `Card.SupportText`).",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the whole card. When set, the card becomes pressable (`Pressable` + `accessibilityRole=\"button\"`).",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma draws Default and Slim at 200 px with fixed heights; in code the card hugs its content.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "Card.Title's line height is 20 px in code and 18 px in Figma.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "text": "Figma has no header switch on Slim; code accepts a header there.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "text": "The published Storybook still shows the older generated Card page.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=card",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5739-794",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-card--docs"
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "slug": "popup",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch13, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/popup.guide.tsx) and docs/evidence/popup.md at 622cd82 (“docs: publish 11 Coin fixes on jfs-components v0.1.78-a116616”, 17 October), the same blobs on main and docs-next. The guide's Sources note was checked on 17 October 2026 on the build it calls the 16 October build (mirror v0.1.78-a116616, Biscuit's main at a116616, the #268 fix), so items citing it carry 2026-10-17 and 0.1.78-a116616. The evidence has two checks: 12 October on v0.1.78-636f3f5 (its Sources, Contract, Modes and tokens, Discrepancies, Coin gaps, Review and Fix loop sections) and 17 October on a116616 (the re-check paragraph under Checked, and the “since a116616” lines added to the Contract). Where they differ the 17 October lines win; evidence facts carry the date and build of the line they quote. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Popup.tsx is the same blob (386efb4) at v0.1.78-a116616, -c7d3348 and -dbe0e02; at 636f3f5 and c1fa197 it was 6bbcb6e, and the difference is exactly the #268 fix the 17 October re-check describes (accessibilityLabel, the scrim no longer a focusable “Close popup” button and a plain View when scrim taps are off, the sheet focused on the web, the trigger given the popup's modes, a 90% maximum height with a ScrollView). GitHub's compare v0.1.78-a116616...v0.1.78-dbe0e02 (4 commits, 222 files, complete) changes no Popup, VStack, Title, Button, design-tokens or react-utils file; it adds src/utils/web-focus-trap.ts, which ModalSheet, FullscreenModal and Overlay import and Popup does not (Popup's focus trap and Escape come from react-native-web's Modal). Every guide sentence quoted here was read against the installed Popup.tsx and VStack.tsx, with token values through the package's own getVariableByName (lib/commonjs): popup/background white in Light, popup/padding top and sides 0 and bottom 24, popup/cornerRadius/top 20 and bottom 0 (Popup.tsx 141–146, 211–221); the sheet is width 100% (252) with maxHeight 90% of the window's height on the sheet and its ScrollView (172, 221, 230–238), docked at the bottom (overlay justifyContent flex-end, 247–250); children sit in a VStack with the popup's modes and alignHorizontal center (235), and VStack passes its modes to every child (VStack.tsx 89–92); vStack padding is 8 on MainPage and 16 on SubPage and JioPlus (Stack Context Root, Padding Default), 12 Nested, 0 with Padding None; vStack/gap is 2, 8, 16, 24 and 32 for Slot gap XS to XL, S the default; the scrim is backdropColor (#000000) at backdropOpacity (0.5) from props (61–62, 186–206), where overlay/background is rgba(0, 0, 0, 0.7); opening is a spring that ignores animationDuration while the scrim fades in over it, and closing slides and fades over animationDuration (250) and then hides the Modal (101–139); the trigger is cloned with the popup's modes (its own modes win) and an onPress that opens it and keeps its own (158–170); onOpenChange is called by the trigger, the ref's open() and close(), the scrim and onRequestClose (80–91, 181, 195); on the web the sheet takes focus when it opens (148–156) and the scrim is never a Tab stop (192–205); the dialog's name is accessibilityLabel, “Popup” by default (65, 183, 227). Escape and the focus trap on the web come from react-native-web 0.21.2's Modal (ModalContent.js 26–35, ModalFocusTrap.js), which the docs site installs. No guide sentence used here is contradicted by the installed package, so there is no guide-fix flag. Not quoted, and why: the Anatomy's “Press the trigger to see them: React Native draws the popup over the page, so this diagram can’t frame it.” and the Do & Don't description (how the docs page hosts its examples); the Tall content card (the sizing description already says it); the Sources note's “The published Storybook page is still the old generated one.” (Storybook, not Coin) and its Figma description (only the scrim difference is kept, as a gap); the Sources note's “(Overlay’s is 70%)” is kept only through the evidence's backdropOpacity fact. Superseded evidence, not cited: the 12 October Review (focus moving to an invisible “Close popup” scrim button, an unnamed dialog), the Coin gaps line that still lists #268 as To do (all fixed by a116616 except the 50% scrim), and the Sources line's “(217 lines)” (257 lines on dbe0e02). Wording point, not stale: the Don't caption “With no Later and scrim taps off, only Escape closes it, and phones have no Escape key.” and the Scrim tap off card “Only Later or Escape closes it” describe the web; Popup also passes onRequestClose to React Native's Modal (Popup.tsx 181), which the evidence's own Contract lists as “Android back”, so both are recorded with a contextual scope and the Android back button named in the reason. Not recorded: defaultOpen (the evidence's Limits: the guide uses a trigger or controlled open instead), backdropColor (a product colour the guide doesn't show), style (the building rules keep style overrides off Coin components), Color Mode (building rules; the guide sets Light everywhere), the Background and Context modes (Background True paints the stack white on a white sheet; Context only changes Slot gap S, kept in the Slot gap fact), the playground's controls, Figma's 360 px width (the evidence's Discrepancies; the guide's Sizing takes the window's width as the design), the Storybook stories, the Code Connect snippet, the useNativeDriver warning and the headless note. Anatomy: the guide's anatomy names one part, Trigger (optional: a screen can open the popup with open and no trigger); the sheet's parts are those the Anatomy description names, kept under the guide's own words (scrim, white sheet, centred stack), always present while it's open. ref: PopupRef's open() and close() are not in the package-type facts (forwardRef), so they are an evidence fact from the evidence's Sources line, still true on dbe0e02 (Popup.tsx 20–23, 52, 91); the guide's own trigger examples close the popup with ref.current?.close() (popup.guide.tsx 48–52). Examples follow the building rules: no Color Mode (the guide sets Light on every component), Later at Emphasis Low rather than the building rules' Emphasis Medium for a second action, because the guide decides this choice: the evidence's 12 October fix loop made Later “Emphasis: 'Low'” after Marcin's review, as Figma's Popup shows it; the buttons sit in a VStack that stretches to the sheet's width, as the guide's Choice does (popup.guide.tsx 12–18), since the popup centres its children; Title is centred with textAlign Center, as in the guide and Figma. All three examples are opened by the screen (open and onOpenChange): the guide's trigger-opened cards close the popup from Claim and Later with ref.current?.close(), which a JSX-only example can't hold, so a trigger example would leave its buttons unable to close it; the trigger pattern stays in the configuration rules (trigger, and the ref's open() and close()). The In context example is the guide's rewards popup; the guide's screen behind it (a VStack with Slot gap L, a Title and a Done button) is left out, since it is the page, not the popup. The offer example is the guide's Opened by the screen card (ScreenOpened, popup.guide.tsx 57–65), which shows the Content section's offer, with its Show offer button. The third keeps Later with scrim taps off, the guide's Scrim tap off card, on a screen-opened popup. Left out of examples (three at most): the Lighter scrim, Wider spacing and Sub page padding cards, the Tall content card and the two Don'ts. All components used have an entry in this pack. useInstead: the Popup guide names no other component to use instead, so its avoidWhen carries none. Neighbours: CardFeedback's avoidWhen “A decision that blocks the screen … point to a Popup” has no useInstead because Popup had no entry; it agrees with this entry (a popup asks for one choice over the screen, with a way out) and could now carry useInstead Popup, which is CardFeedback's file to change. Overlay's entry keeps Cancel at Emphasis Low as “the low-emphasis way out Figma's Popup uses for Later”, which agrees; its 70% scrim token agrees with this entry's backdropOpacity fact. Gaps: the 50% scrim from props that Figma doesn't have, left open after #268 for Marcin's call. Sorting (batch 13, three cross-check runs). Round 1 flagged three items, all our misreadings, fixed: /avoidWhen/0 (lost-context) added the remedy “Keep Later, and scrim taps on”, though the guide's trap needs both conditions and its own Scrim tap off card keeps Later with taps off, so it now says “Offer a way out, such as Later”; /avoidWhen/1 (generalises-example) said “Keep it to a title and two buttons”, a cap the Content section doesn't set, now “Keep it short”; /examples/1 (misreads-source) was a trigger-opened popup whose buttons couldn't close it without the ref the JSX can't hold, so every example is now opened by the screen. Round 1's notes: the gap's “whether to keep it is Marcin's call” read as an open decision, now “the evidence records it as Marcin's call”; /placementAdvice/3 said “a preview opens it from a button”, now the guide's own examples, like Storybook's. Round 2 flagged /configuration/5 (generalises-example): the Scrim tap off card's “Only Later or Escape closes it” read as a general rule for closeOnBackdropPress false; it now says it is the guide's example with a Later button. Round 2's note on /configuration/9 (the 8 to 16 px padding holds at the default Padding and Stack Context, as the evidence says) is taken into the item. Round 3 ran on this final entry: no flags. Its notes, not flags: /content/rules/2 copies “Figma's example also puts an image above the title” as a recommended content rule, though the guide only describes Figma's example and doesn't advise an image; /useWhen/2 (rewards after a payment) is the guide's one In context illustration of the summary's “offer or a reward”; the examples add details the rendered copy doesn't state (the stretched VStack, the Titles' supporting lines and the Show offer button come from the guide's code, Later at Emphasis Low from the evidence's fix loop). Both items are left as they are, since three rounds is the limit; Astra may want to drop or reword /content/rules/2. No dismissals and no human flags.",
+  "useWhen": [
+    {
+      "text": "A short, focused moment, such as an offer or a reward, that slides up over the screen and asks for one choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Popup for a short, focused moment, such as an offer or a reward, that slides up over the screen and asks for one choice."
+      }
+    },
+    {
+      "text": "One short message and a choice, then back to the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One short message and a choice, then back to the screen."
+      }
+    },
+    {
+      "text": "Rewards after a payment: once the payment is done, the screen opens a rewards popup.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "After a payment the screen opens a rewards popup."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Leaving people no way out: with no Later and scrim taps off, only Escape closes it, and phones have no Escape key. Offer a way out, such as Later.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "With no Later and scrim taps off, only Escape closes it, and phones have no Escape key."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "it describes the guide's Don't, a popup with closeOnBackdropPress false and no button that closes it, seen on the web, where Escape reaches React Native's onRequestClose (react-native-web's Modal). Popup also passes onRequestClose to the Modal (Popup.tsx line 181, 0.1.78-dbe0e02), which the evidence's Contract lists as Android back too, and a screen can still close it through open or the ref; so “only” is the guide's web example, not every platform."
+      }
+    },
+    {
+      "text": "Long content: it fills the screen, and people must scroll to reach the buttons. Keep it short.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Long content fills the screen, and people must scroll to reach the buttons."
+      },
+      "absolute": {
+        "word": "must",
+        "scope": "contextual",
+        "reason": "it describes content taller than the sheet: the sheet stops at 90% of the window's height and its content scrolls (Popup.tsx lines 172, 221 and 230–238, 0.1.78-dbe0e02), so buttons placed after long content are reached by scrolling. It is the consequence of long content, not a rule the package enforces."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Trigger",
+      "holds": "Yours: any pressable (trigger). Pressing it opens the popup over the whole screen.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours: any pressable. Pressing it opens the popup over the whole screen."
+      }
+    },
+    {
+      "part": "scrim",
+      "holds": "Dims the whole screen behind the sheet while the popup is open.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Pressing it dims the whole screen with a scrim"
+      }
+    },
+    {
+      "part": "white sheet",
+      "holds": "Slides up from the bottom: white, with 20 px top corners and 24 px of space at the bottom.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "slides up a white sheet with 20 px top corners and 24 px of space at the bottom."
+      }
+    },
+    {
+      "part": "centred stack",
+      "holds": "One centred stack of your content (children), with 8 px of padding and 8 px between items.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The sheet holds one centred stack of your content, with 8 px of padding and 8 px between items."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Only the trigger sits in the page; the popup itself opens over the whole screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Only the trigger sits in the page."
+      },
+      "absolute": {
+        "word": "Only",
+        "scope": "everywhere",
+        "reason": "it describes every Popup: it renders its trigger in place and everything else inside a React Native Modal over the window (Popup.tsx lines 174–241, 0.1.78-dbe0e02); with no trigger nothing of it takes space in the page."
+      }
+    },
+    {
+      "text": "The sheet spans the whole window, as it spans a phone screen, and grows with its content up to 90% of the window's height; taller content scrolls inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The sheet spans the whole window, as it spans a phone screen, and grows with its content up to 90% of the window's height; taller content scrolls inside it."
+      }
+    },
+    {
+      "text": "With short content, such as a title and two buttons, the sheet hugs it at the bottom of the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A title and two buttons: the sheet hugs them at the bottom of the screen."
+      }
+    },
+    {
+      "text": "It is a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so the guide's examples, like Storybook's, open it from a button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "In code it’s a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so these examples open it from a button, as Storybook does."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it describes every Popup on the web: it always renders through React Native's Modal (Popup.tsx lines 177–241, 0.1.78-dbe0e02), which react-native-web portals to the document body over the whole window, as the evidence's Contract records."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Opened by its trigger: the popup opens when its trigger is pressed and keeps its own open state.",
+      "strength": "recommended",
+      "target": "trigger",
+      "from": {
+        "section": "configuration",
+        "quote": "The popup opens when its trigger is pressed and keeps its own open state."
+      }
+    },
+    {
+      "text": "Opened by the screen: the screen decides when it's open (open), for example after a payment, and hears every close (onOpenChange).",
+      "strength": "recommended",
+      "target": "open",
+      "from": {
+        "section": "configuration",
+        "quote": "The screen decides when it's open, for example after a payment, and hears every close."
+      }
+    },
+    {
+      "text": "Its ref, PopupRef, has open() and close(), which open and close the popup.",
+      "strength": "recommended",
+      "target": "ref",
+      "from": {
+        "fact": "props:ref"
+      }
+    },
+    {
+      "text": "A button in the sheet closes it from inside: Later closes it; Claim would carry on with the task.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Later closes it from inside; Claim would carry on with the task."
+      }
+    },
+    {
+      "text": "The scrim's strength is a setting, backdropOpacity: 0.3, 30% black, lets more of the page show through than the default 50%.",
+      "strength": "recommended",
+      "target": "backdropOpacity",
+      "value": "0.3",
+      "from": {
+        "section": "configuration",
+        "quote": "30% black lets more of the page show through than the default 50%."
+      }
+    },
+    {
+      "text": "With scrim taps off (closeOnBackdropPress false), a tap on the dimmed page does nothing: in the guide's example, which has a Later button, only Later or Escape closes it.",
+      "strength": "recommended",
+      "target": "closeOnBackdropPress",
+      "value": "false",
+      "from": {
+        "section": "states",
+        "quote": "Only Later or Escape closes it; a tap on the dimmed page does nothing."
+      },
+      "absolute": {
+        "word": "Only",
+        "scope": "contextual",
+        "reason": "it describes the guide's Scrim tap off example on the web, with a Later button that closes the popup. With closeOnBackdropPress false the scrim is a plain View that ignores presses (Popup.tsx lines 192–205, 0.1.78-dbe0e02); Android back (onRequestClose, line 181), the ref's close() and the screen's open also close it."
+      }
+    },
+    {
+      "text": "The sheet springs up when it opens, but slides away over its close speed, animationDuration (250 ms by default).",
+      "strength": "recommended",
+      "target": "animationDuration",
+      "from": {
+        "section": "sources",
+        "quote": "it springs up but slides away over its close speed"
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Modes on the popup reach its stack: Slot gap sets the space between items, and Page type the stack's padding.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "Modes on the popup reach its stack: Slot gap sets the space between items, and Page type the stack's padding."
+      }
+    },
+    {
+      "text": "Slot gap L puts 24 px between the title and the buttons; the default, S, is 8 px.",
+      "strength": "recommended",
+      "target": "Slot gap",
+      "value": "L",
+      "from": {
+        "section": "configuration",
+        "quote": "Slot gap L puts 24 px between the title and the buttons; the default, S, is 8 px."
+      }
+    },
+    {
+      "text": "On a sub page (Page type SubPage), or JioPlus, the stack's padding grows from 8 to 16 px, at the default Padding and Stack Context.",
+      "strength": "recommended",
+      "target": "Page type",
+      "value": "SubPage",
+      "from": {
+        "section": "configuration",
+        "quote": "On a sub page, or JioPlus, the stack's padding grows from 8 to 16 px."
+      }
+    },
+    {
+      "text": "The trigger takes the popup's modes.",
+      "strength": "recommended",
+      "target": "trigger",
+      "from": {
+        "section": "sources",
+        "quote": "the trigger takes the popup’s modes"
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Lead with what's in it for people, add one supporting line, then a main action and a quiet way out.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Lead with what's in it for people, add one supporting line, then a main action and a quiet way out."
+        }
+      },
+      {
+        "text": "An offer: one headline, one line of detail, a main action such as Avail now, and a quiet way out such as Maybe later.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "One headline, one line of detail, Avail now, and Maybe later."
+        }
+      },
+      {
+        "text": "Figma's example also puts an image above the title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Figma's example also puts an image above the title."
+        }
+      },
+      {
+        "text": "Keep it short: a title and two buttons fit any screen.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "A title and two buttons fit any screen."
+        }
+      }
+    ],
+    "good": [
+      "Avail now",
+      "Maybe later",
+      "Claim",
+      "Later"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Closed",
+      "when": "Only the trigger shows.",
+      "from": {
+        "section": "states",
+        "quote": "Closed, only the trigger shows."
+      }
+    },
+    {
+      "state": "Opening",
+      "when": "The scrim fades in while the sheet springs up from the bottom.",
+      "from": {
+        "section": "states",
+        "quote": "Opening fades in the scrim while the sheet springs up from the bottom"
+      }
+    },
+    {
+      "state": "Open",
+      "when": "Focus stays inside the sheet while it's open.",
+      "from": {
+        "section": "states",
+        "quote": "focus stays inside while it's open"
+      }
+    },
+    {
+      "state": "Closing",
+      "when": "A tap on the scrim, Escape, or a button in the sheet closes it: the sheet slides down and the scrim fades over 250 ms.",
+      "from": {
+        "section": "states",
+        "quote": "closing slides it down and fades the scrim over 250 ms. A tap on the scrim, Escape, or a button in the sheet closes it"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web, Escape closes it, and focus moves into the sheet and stays there.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web Escape closes it, and focus moves into the sheet and stays there."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "accessibilityLabel is the dialog's accessible name; it defaults to “Popup”.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    },
+    {
+      "text": "The scrim is never a Tab stop.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "the scrim is never a Tab stop"
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it describes every Popup: with closeOnBackdropPress the scrim is a Pressable that is not accessible and, on the web, has tabIndex −1 and is not focusable; with it off it is a plain View with no pointer events (Popup.tsx lines 192–205, 0.1.78-dbe0e02)."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Offer a way out",
+      "dont": "Trap people in it",
+      "why": "With no Later and scrim taps off, only Escape closes it, and phones have no Escape key.",
+      "from": {
+        "section": "doDont",
+        "quote": "Offer a way out"
+      }
+    },
+    {
+      "do": "Keep it short",
+      "dont": "Fill it with text",
+      "why": "Long content fills the screen, and people must scroll to reach the buttons.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep it short"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Rewards after a payment, the guide's In context: the screen opens the popup (open) once the payment is done. Claim or Later closes it and the screen notes the choice; a tap on the dimmed page or Escape just closes it, which the screen hears through onOpenChange. A centred Title with one supporting line, then Claim and, under it, Later at Emphasis Low, the quiet way out, in a VStack that stretches to the sheet's width, as the guide builds it. The literal open and the empty handlers stand for the screen's own state.",
+      "jsx": "<Popup open onOpenChange={(open) => {}}>\n  <Title title=\"Your rewards are waiting\" subtitle=\"Claim your points and enjoy the benefits now.\" textAlign=\"Center\" />\n  <VStack style={{ alignSelf: 'stretch' }}>\n    <Button label=\"Claim\" onPress={() => {}} />\n    <Button label=\"Later\" onPress={() => {}} modes={{ Emphasis: 'Low' }} />\n  </VStack>\n</Popup>",
+      "from": {
+        "section": "inContext",
+        "quote": "After a payment the screen opens a rewards popup. Claim or Later closes it and the screen notes the choice; a tap on the dimmed page or Escape just closes it."
+      }
+    },
+    {
+      "purpose": "An offer, the guide's Content example, opened by the screen as its Opened by the screen card shows it: the screen's own Show offer button sets open to true, and Avail now or Maybe later (Emphasis Low, the quiet way out) sets it back to false; onOpenChange tells the screen about a tap on the scrim or Escape. One headline, one line of detail, then the two buttons in a VStack that stretches to the sheet's width. The literal open and the empty handlers stand for the screen's own state.",
+      "jsx": "<Button label=\"Show offer\" onPress={() => {}} />\n<Popup open onOpenChange={(open) => {}}>\n  <Title title=\"Get 50% cashback\" subtitle=\"On your next three bill payments this month.\" textAlign=\"Center\" />\n  <VStack style={{ alignSelf: 'stretch' }}>\n    <Button label=\"Avail now\" onPress={() => {}} />\n    <Button label=\"Maybe later\" onPress={() => {}} modes={{ Emphasis: 'Low' }} />\n  </VStack>\n</Popup>",
+      "from": {
+        "section": "configuration",
+        "quote": "The screen decides when it's open, for example after a payment, and hears every close."
+      }
+    },
+    {
+      "purpose": "Scrim taps off (closeOnBackdropPress false), as the guide's Scrim tap off card sets it, on a popup the screen opens: a tap on the dimmed page does nothing, so Later stays as the way out; Later or Escape closes it. The screen sets open back to false from Claim or Later, and onOpenChange tells it about Escape.",
+      "jsx": "<Popup open onOpenChange={(open) => {}} closeOnBackdropPress={false}>\n  <Title title=\"Your rewards are waiting\" subtitle=\"Claim your points and enjoy the benefits now.\" textAlign=\"Center\" />\n  <VStack style={{ alignSelf: 'stretch' }}>\n    <Button label=\"Claim\" onPress={() => {}} />\n    <Button label=\"Later\" onPress={() => {}} modes={{ Emphasis: 'Low' }} />\n  </VStack>\n</Popup>",
+      "from": {
+        "section": "states",
+        "quote": "Only Later or Escape closes it; a tap on the dimmed page does nothing."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "ref",
+      "create": true,
+      "type": "React.Ref<PopupRef>",
+      "description": "Popup forwards a ref of type PopupRef, with open() and close().",
+      "quote": "exports `Popup` (forwardRef), `PopupProps`, `PopupRef` (`open()`, `close()`).",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "onOpenChange",
+      "description": "Called by the trigger, the ref, the scrim, and Escape (web) or back (Android).",
+      "quote": "`onOpenChange(open)` (called by the trigger, the ref, the scrim, and Escape/back)",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "trigger",
+      "description": "Rendered in place before the modal and cloned with an onPress that opens the popup; it receives the popup's modes.",
+      "quote": "`trigger` (an element cloned with `onPress` that opens; rendered in place before the modal; since a116616 it receives the popup's modes)",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "children",
+      "description": "One slot, wrapped in a VStack with the popup's modes, centred horizontally.",
+      "quote": "`children` (one slot, wrapped in `VStack modes alignHorizontal=\"center\"`)",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "closeOnBackdropPress",
+      "description": "Off, a click on the scrim does nothing and Tab stays on the sheet; on, the scrim isn't a Tab stop and a click closes.",
+      "quote": "Re-test on #268: `closeOnBackdropPress={false}` scrim clicks do nothing and Tab stays on the sheet; with it on, the scrim isn't a Tab stop and a click closes.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "backdropOpacity",
+      "description": "The scrim's colour and opacity are props, not tokens; Overlay's scrim token is 70% black.",
+      "quote": "Scrim colour and opacity are props, not tokens; Overlay's token is 70% black.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "animationDuration",
+      "description": "The opening spring ignores it; the scrim fades in over it, and closing slides the sheet and fades the scrim over it (ease in-out), then unmounts.",
+      "quote": "ignores `animationDuration`) from the window's height, with the scrim fading to `backdropOpacity` over `animationDuration`. Close: slide and fade over `animationDuration` (ease in-out), then unmount.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "On the web the dialog has role dialog and aria-modal true, named by accessibilityLabel (“Popup” by default).",
+      "quote": "Web accessibility: `role=\"dialog\"` `aria-modal=\"true\"` on react-native-web's wrapper, named by `accessibilityLabel` (\"Popup\" by default) since a116616",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Slot gap",
+      "description": "The inner stack's gap: XS 2, S 8 (the default), M 16, L 24, XL 32 px; Context ListItem makes S 2.",
+      "quote": "Slot gap XS 2, S 8 (default), M 16, L 24, XL 32 (Context ListItem makes S 2).",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Page type",
+      "description": "With Padding Default and Stack Context Root, the inner stack's padding is 8 px on MainPage and 16 px on SubPage and JioPlus.",
+      "quote": "Padding Default + Stack Context Root gives 8 px on MainPage and 16 px on SubPage and JioPlus; Nested 12; Padding None 0.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Stack Context",
+      "description": "Nested gives the inner stack 12 px of padding (Root: 8 px on MainPage, 16 px on SubPage and JioPlus).",
+      "quote": "Padding Default + Stack Context Root gives 8 px on MainPage and 16 px on SubPage and JioPlus; Nested 12; Padding None 0.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Padding",
+      "description": "None removes the inner stack's padding (0).",
+      "quote": "Padding Default + Stack Context Root gives 8 px on MainPage and 16 px on SubPage and JioPlus; Nested 12; Padding None 0.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Popup has no scrim; the code adds a 50% black one from props. The #268 fix left it unchanged; the evidence records it as Marcin's call.",
+      "quote": "The 50% scrim is unchanged (Biscuit: Figma has none; Marcin's call).",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The States description says “Pressed feedback is shown only while a pointer is down.” On the web, holding Enter or Space on the focused control shows it too: AutoplayControl drops to 70% opacity whenever its Pressable reports pressed (AutoplayControl.tsx line 72, 0.1.78-dbe0e02), and react-native-web 0.21.2's Pressable sets pressed from keyboard presses as well (PressResponder.js lines 236–243 start a press on an Enter or Space keydown and lines 209–213 end it on keyup; Pressable index.js lines 66 and 131). Confirmed in headless Chrome on the installed build on 29 October: on this guide, the focused live Pause control went from opacity 1 to 0.7 while Enter was held and back to 1 on release, and the same with Space. Every other sentence the guide renders still holds on dbe0e02, so the entry quotes the States card “While pressed, the control drops to 70% opacity.” and leaves the “only while a pointer is down” sentence out. Fix the sentence (for example “Pressed feedback is shown only while the control is being pressed, by pointer or by Enter or Space.”), publish, and re-extract the States section. Added by Claude Code in the overnight run agentpack-batch13, for Marcin to confirm. Guide fix #537."
+    }
+  ]
+}

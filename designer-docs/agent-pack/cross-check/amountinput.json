@@ -1,0 +1,21 @@
+{
+  "slug": "amountinput",
+  "entryHash": "1490c05e34c8baa4cc367a112f009466d530071c16a8c9fb958b317a6baf4eeb",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "checkedAt": "2026-10-29T08:16:33Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/4",
+      "reason": "misreads-source: The anatomy section only says \"The component passes its context to both children so their tokens resolve together.\" The added claim that modes set on the slotted MoneyValue or NoteInput \"are replaced by AmountInput's own\" describes runtime override behaviour that nothing cited supports."
+    },
+    {
+      "field": "/configuration/6",
+      "reason": "misreads-source: The cited fact only says the resolver falls back to the collection's default mode (Default). The 'renders smaller' observation in the evidence is about Storybook's default story, which \"relies on ambient context\". That is not shown to be Context3=Default, so the general claim that an unset Context3 renders smaller than 56 px / 32 px goes beyond the evidence."
+    }
+  ],
+  "notes": "/anatomy/0 says an empty currency is something \"the Do & Don'ts rule out\". The guide's Don't (\"Hide the unit\") is guidance, so 'rule out' reads a little strong. /content/good mixes placeholder labels (\"Add note\", \"Add transfer note\", \"Add investment note\") with actual note text; a human may want to separate placeholder wording from note content. /configuration/5's claim that Color Mode=Light is the default was assumed to be a package fact and was not checked."
+}

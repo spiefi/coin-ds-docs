@@ -1,0 +1,306 @@
+{
+  "slug": "bottomnav",
+  "label": "Bottom Nav",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/bottomnav.guide.tsx"
+  ],
+  "evidence": "docs/evidence/bottomnav.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T08:00:03.287Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "tab bar",
+    "bottom navigation",
+    "navigation bar",
+    "tabs"
+  ],
+  "title": "Bottom Nav",
+  "summary": "Use a Bottom Nav to move between the top-level sections of an app from any screen.",
+  "corePrinciple": "Three to five destinations, exactly one Active, always at the bottom.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=302-79",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-bottomnav--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A bar of equal destinations",
+      "description": "The bar lays out BottomNavItems in equal shares, marks one Active, and sits on the bottom edge of the screen.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Bar",
+        "White surface with a hairline top border.",
+        "Active item",
+        "The destination people are on, in the accent colour.",
+        "Idle item",
+        "Another destination, one tap away.",
+        "Label",
+        "Names the destination in one or two words.",
+        "Padding"
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Pay",
+        "Invest",
+        "Explore"
+      ],
+      "anatomy": [
+        {
+          "part": "Bar",
+          "note": "White surface with a hairline top border."
+        },
+        {
+          "part": "Active item",
+          "note": "The destination people are on, in the accent colour."
+        },
+        {
+          "part": "Idle item",
+          "note": "Another destination, one tap away."
+        },
+        {
+          "part": "Label",
+          "note": "Names the destination in one or two words."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Three to five destinations",
+      "description": "Every destination gets an equal share of the bar. Fewer destinations mean wider tap targets; five is the most that stays comfortable.",
+      "blocks": [
+        "3 destinations",
+        "Each item is about 109 px wide.",
+        "4 destinations",
+        "About 82 px each.",
+        "5 destinations",
+        "About 66 px each, the Figma layout."
+      ],
+      "specimen": [
+        "Home",
+        "Pay",
+        "Explore",
+        "Finances",
+        "Invest"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "3 destinations",
+          "description": "Each item is about 109 px wide."
+        },
+        {
+          "title": "4 destinations",
+          "description": "About 82 px each."
+        },
+        {
+          "title": "5 destinations",
+          "description": "About 66 px each, the Figma layout."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "One Active, the rest Idle",
+      "description": "The screen tells Bottom Nav which destination is Active through its value. A destination can be disabled while it is temporarily unavailable.",
+      "blocks": [
+        "Active destination",
+        "Only the matching item switches to Active.",
+        "Disabled destination",
+        "Dimmed and skipped by keyboard focus."
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Pay",
+        "Invest",
+        "Explore"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Active destination",
+          "description": "Only the matching item switches to Active."
+        },
+        {
+          "title": "Disabled destination",
+          "description": "Dimmed and skipped by keyboard focus."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, fixed height",
+      "description": "Bottom Nav spans its screen and anchors to the bottom edge. Its height comes from the items and the padding, 78 px in the installed package.",
+      "blocks": [
+        "358 × 78"
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Pay",
+        "Invest",
+        "Explore"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One or two words per destination",
+      "description": "Use short nouns people already know, each with an icon that matches it. A long label wraps and makes that item taller than the rest.",
+      "blocks": [
+        "Short labels",
+        "A long label wraps"
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Pay",
+        "Invest",
+        "Explore",
+        "Investments & savings"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short labels",
+          "description": ""
+        },
+        {
+          "title": "A long label wraps",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Switch sections of the app",
+      "description": "The app keeps the Active value and swaps the screen above when it changes. Bottom Nav only reports which destination was pressed.",
+      "blocks": [],
+      "specimen": [
+        "Home",
+        "Your balances and recent activity",
+        "Finances",
+        "Pay",
+        "Invest",
+        "Explore"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep navigation calm and predictable",
+      "description": "Each pair shows a change you can see in the bar.",
+      "blocks": [
+        "Do",
+        "Keep three to five destinations",
+        "Every item keeps a comfortable tap width.",
+        "Don’t",
+        "Crowd in a sixth",
+        "Items shrink to about 55 px and labels crowd each other.",
+        "Keep one destination Active",
+        "People always see where they are.",
+        "Leave nothing Active",
+        "With no match for the value, every item looks Idle.",
+        "Give each destination its own icon",
+        "Icons help people find a section at a glance.",
+        "Reuse one icon everywhere",
+        "Identical icons force people to read every label."
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Pay",
+        "Invest",
+        "Explore",
+        "Rewards"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep three to five destinations",
+            "caption": "Every item keeps a comfortable tap width.",
+            "specimen": "Home · Finances · Pay · Invest · Explore"
+          },
+          "dont": {
+            "title": "Crowd in a sixth",
+            "caption": "Items shrink to about 55 px and labels crowd each other.",
+            "specimen": "Home · Finances · Pay · Invest · Explore · Rewards"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep one destination Active",
+            "caption": "People always see where they are.",
+            "specimen": "Home · Finances · Pay · Invest · Explore"
+          },
+          "dont": {
+            "title": "Leave nothing Active",
+            "caption": "With no match for the value, every item looks Idle.",
+            "specimen": "Home · Finances · Pay · Invest · Explore"
+          }
+        },
+        {
+          "do": {
+            "title": "Give each destination its own icon",
+            "caption": "Icons help people find a section at a glance.",
+            "specimen": "Home · Finances · Pay · Invest · Explore"
+          },
+          "dont": {
+            "title": "Reuse one icon everywhere",
+            "caption": "Identical icons force people to read every label.",
+            "specimen": "Home · Finances · Pay · Invest · Explore"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Bottom Nav contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With disabled item",
+        "Mobile app simulation",
+        "Checked 28 September 2026",
+        "Declared, installed, and registry jfs-components versions are 0.1.60. Bottom Nav sets each item’s BottomNavItem / State mode from value and anchors itself to the bottom of its nearest positioned container. Figma draws the bar at 77 px; the installed package renders 78 px. On the web the tab list has no accessible name, even with accessibilityLabel, and the Active tab is not exposed as selected. The guide stays in Light mode because the installed Dark tokens turn Idle labels orange. Item details are in the Bottom Nav Item guide.",
+        "jfs-components",
+        "0.1.60",
+        "BottomNavItem / State",
+        "value",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,635 @@
+{
+  "schemaVersion": 1,
+  "id": "Popup",
+  "slug": "popup",
+  "category": "layout",
+  "tags": [
+    "bottom sheet popup",
+    "modal",
+    "promo sheet",
+    "rewards popup"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T08:26:34Z",
+    "flags": []
+  },
+  "summary": "Use a Popup for a short, focused moment, such as an offer or a reward, that slides up over the screen and asks for one choice.",
+  "useWhen": [
+    {
+      "text": "A short, focused moment, such as an offer or a reward, that slides up over the screen and asks for one choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Popup for a short, focused moment, such as an offer or a reward, that slides up over the screen and asks for one choice."
+      }
+    },
+    {
+      "text": "One short message and a choice, then back to the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One short message and a choice, then back to the screen."
+      }
+    },
+    {
+      "text": "Rewards after a payment: once the payment is done, the screen opens a rewards popup.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "After a payment the screen opens a rewards popup."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Leaving people no way out: with no Later and scrim taps off, only Escape closes it, and phones have no Escape key. Offer a way out, such as Later.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "With no Later and scrim taps off, only Escape closes it, and phones have no Escape key."
+      }
+    },
+    {
+      "text": "Long content: it fills the screen, and people must scroll to reach the buttons. Keep it short.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Long content fills the screen, and people must scroll to reach the buttons."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Trigger",
+      "holds": "Yours: any pressable (trigger). Pressing it opens the popup over the whole screen.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours: any pressable. Pressing it opens the popup over the whole screen."
+      }
+    },
+    {
+      "part": "scrim",
+      "holds": "Dims the whole screen behind the sheet while the popup is open.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Pressing it dims the whole screen with a scrim"
+      }
+    },
+    {
+      "part": "white sheet",
+      "holds": "Slides up from the bottom: white, with 20 px top corners and 24 px of space at the bottom.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "slides up a white sheet with 20 px top corners and 24 px of space at the bottom."
+      }
+    },
+    {
+      "part": "centred stack",
+      "holds": "One centred stack of your content (children), with 8 px of padding and 8 px between items.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The sheet holds one centred stack of your content, with 8 px of padding and 8 px between items."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "trigger",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Only the trigger sits in the page; the popup itself opens over the whole screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Only the trigger sits in the page."
+      }
+    },
+    {
+      "text": "The sheet spans the whole window, as it spans a phone screen, and grows with its content up to 90% of the window's height; taller content scrolls inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The sheet spans the whole window, as it spans a phone screen, and grows with its content up to 90% of the window's height; taller content scrolls inside it."
+      }
+    },
+    {
+      "text": "With short content, such as a title and two buttons, the sheet hugs it at the bottom of the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A title and two buttons: the sheet hugs them at the bottom of the screen."
+      }
+    },
+    {
+      "text": "It is a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so the guide's examples, like Storybook's, open it from a button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "In code it’s a React Native Modal: on the web it opens over the whole browser window, never inside a frame, so these examples open it from a button, as Storybook does."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Opened by its trigger: the popup opens when its trigger is pressed and keeps its own open state.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The popup opens when its trigger is pressed and keeps its own open state."
+      },
+      "target": "trigger"
+    },
+    {
+      "text": "Opened by the screen: the screen decides when it's open (open), for example after a payment, and hears every close (onOpenChange).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The screen decides when it's open, for example after a payment, and hears every close."
+      },
+      "target": "open"
+    },
+    {
+      "text": "Its ref, PopupRef, has open() and close(), which open and close the popup.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/12"
+      },
+      "target": "ref"
+    },
+    {
+      "text": "A button in the sheet closes it from inside: Later closes it; Claim would carry on with the task.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Later closes it from inside; Claim would carry on with the task."
+      }
+    },
+    {
+      "text": "The scrim's strength is a setting, backdropOpacity: 0.3, 30% black, lets more of the page show through than the default 50%.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "30% black lets more of the page show through than the default 50%."
+      },
+      "target": "backdropOpacity",
+      "value": "0.3"
+    },
+    {
+      "text": "With scrim taps off (closeOnBackdropPress false), a tap on the dimmed page does nothing: in the guide's example, which has a Later button, only Later or Escape closes it.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Only Later or Escape closes it; a tap on the dimmed page does nothing."
+      },
+      "target": "closeOnBackdropPress",
+      "value": "false"
+    },
+    {
+      "text": "The sheet springs up when it opens, but slides away over its close speed, animationDuration (250 ms by default).",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "it springs up but slides away over its close speed"
+      },
+      "target": "animationDuration"
+    },
+    {
+      "text": "Modes on the popup reach its stack: Slot gap sets the space between items, and Page type the stack's padding.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Modes on the popup reach its stack: Slot gap sets the space between items, and Page type the stack's padding."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "Slot gap L puts 24 px between the title and the buttons; the default, S, is 8 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Slot gap L puts 24 px between the title and the buttons; the default, S, is 8 px."
+      },
+      "target": "Slot gap",
+      "value": "L"
+    },
+    {
+      "text": "On a sub page (Page type SubPage), or JioPlus, the stack's padding grows from 8 to 16 px, at the default Padding and Stack Context.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "On a sub page, or JioPlus, the stack's padding grows from 8 to 16 px."
+      },
+      "target": "Page type",
+      "value": "SubPage"
+    },
+    {
+      "text": "The trigger takes the popup's modes.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "the trigger takes the popup’s modes"
+      },
+      "target": "trigger"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Lead with what's in it for people, add one supporting line, then a main action and a quiet way out.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Lead with what's in it for people, add one supporting line, then a main action and a quiet way out."
+        }
+      },
+      {
+        "text": "An offer: one headline, one line of detail, a main action such as Avail now, and a quiet way out such as Maybe later.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "One headline, one line of detail, Avail now, and Maybe later."
+        }
+      },
+      {
+        "text": "Figma's example also puts an image above the title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Figma's example also puts an image above the title."
+        }
+      },
+      {
+        "text": "Keep it short: a title and two buttons fit any screen.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "A title and two buttons fit any screen."
+        }
+      }
+    ],
+    "good": [
+      "Avail now",
+      "Maybe later",
+      "Claim",
+      "Later"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Closed",
+      "when": "Only the trigger shows.",
+      "from": {
+        "section": "states",
+        "quote": "Closed, only the trigger shows."
+      }
+    },
+    {
+      "state": "Opening",
+      "when": "The scrim fades in while the sheet springs up from the bottom.",
+      "from": {
+        "section": "states",
+        "quote": "Opening fades in the scrim while the sheet springs up from the bottom"
+      }
+    },
+    {
+      "state": "Open",
+      "when": "Focus stays inside the sheet while it's open.",
+      "from": {
+        "section": "states",
+        "quote": "focus stays inside while it's open"
+      }
+    },
+    {
+      "state": "Closing",
+      "when": "A tap on the scrim, Escape, or a button in the sheet closes it: the sheet slides down and the scrim fades over 250 ms.",
+      "from": {
+        "section": "states",
+        "quote": "closing slides it down and fades the scrim over 250 ms. A tap on the scrim, Escape, or a button in the sheet closes it"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web, Escape closes it, and focus moves into the sheet and stays there.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web Escape closes it, and focus moves into the sheet and stays there."
+      }
+    },
+    {
+      "text": "accessibilityLabel is the dialog's accessible name; it defaults to “Popup”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "The scrim is never a Tab stop.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "the scrim is never a Tab stop"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Offer a way out",
+      "dont": "Trap people in it",
+      "why": "With no Later and scrim taps off, only Escape closes it, and phones have no Escape key.",
+      "from": {
+        "section": "doDont",
+        "quote": "Offer a way out"
+      }
+    },
+    {
+      "do": "Keep it short",
+      "dont": "Fill it with text",
+      "why": "Long content fills the screen, and people must scroll to reach the buttons.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep it short"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Rewards after a payment, the guide's In context: the screen opens the popup (open) once the payment is done. Claim or Later closes it and the screen notes the choice; a tap on the dimmed page or Escape just closes it, which the screen hears through onOpenChange. A centred Title with one supporting line, then Claim and, under it, Later at Emphasis Low, the quiet way out, in a VStack that stretches to the sheet's width, as the guide builds it. The literal open and the empty handlers stand for the screen's own state.",
+      "jsx": "<Popup open onOpenChange={(open) => {}}>\n  <Title title=\"Your rewards are waiting\" subtitle=\"Claim your points and enjoy the benefits now.\" textAlign=\"Center\" />\n  <VStack style={{ alignSelf: 'stretch' }}>\n    <Button label=\"Claim\" onPress={() => {}} />\n    <Button label=\"Later\" onPress={() => {}} modes={{ Emphasis: 'Low' }} />\n  </VStack>\n</Popup>",
+      "from": {
+        "section": "inContext",
+        "quote": "After a payment the screen opens a rewards popup. Claim or Later closes it and the screen notes the choice; a tap on the dimmed page or Escape just closes it."
+      }
+    },
+    {
+      "purpose": "An offer, the guide's Content example, opened by the screen as its Opened by the screen card shows it: the screen's own Show offer button sets open to true, and Avail now or Maybe later (Emphasis Low, the quiet way out) sets it back to false; onOpenChange tells the screen about a tap on the scrim or Escape. One headline, one line of detail, then the two buttons in a VStack that stretches to the sheet's width. The literal open and the empty handlers stand for the screen's own state.",
+      "jsx": "<Button label=\"Show offer\" onPress={() => {}} />\n<Popup open onOpenChange={(open) => {}}>\n  <Title title=\"Get 50% cashback\" subtitle=\"On your next three bill payments this month.\" textAlign=\"Center\" />\n  <VStack style={{ alignSelf: 'stretch' }}>\n    <Button label=\"Avail now\" onPress={() => {}} />\n    <Button label=\"Maybe later\" onPress={() => {}} modes={{ Emphasis: 'Low' }} />\n  </VStack>\n</Popup>",
+      "from": {
+        "section": "configuration",
+        "quote": "The screen decides when it's open, for example after a payment, and hears every close."
+      }
+    },
+    {
+      "purpose": "Scrim taps off (closeOnBackdropPress false), as the guide's Scrim tap off card sets it, on a popup the screen opens: a tap on the dimmed page does nothing, so Later stays as the way out; Later or Escape closes it. The screen sets open back to false from Claim or Later, and onOpenChange tells it about Escape.",
+      "jsx": "<Popup open onOpenChange={(open) => {}} closeOnBackdropPress={false}>\n  <Title title=\"Your rewards are waiting\" subtitle=\"Claim your points and enjoy the benefits now.\" textAlign=\"Center\" />\n  <VStack style={{ alignSelf: 'stretch' }}>\n    <Button label=\"Claim\" onPress={() => {}} />\n    <Button label=\"Later\" onPress={() => {}} modes={{ Emphasis: 'Low' }} />\n  </VStack>\n</Popup>",
+      "from": {
+        "section": "states",
+        "quote": "Only Later or Escape closes it; a tap on the dimmed page does nothing."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Whether the popup is open (controlled mode)."
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial open state for uncontrolled mode. Default false, from the component source."
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Called by the trigger, the ref, the scrim, and Escape (web) or back (Android). Declared: Called when the open state changes.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "trigger",
+        "type": "React.ReactElement",
+        "required": false,
+        "source": "evidence",
+        "description": "Rendered in place before the modal and cloned with an onPress that opens the popup; it receives the popup's modes. Declared: Element that triggers the popup when pressed. Its existing onPress is preserved.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "One slot, wrapped in a VStack with the popup's modes, centred horizontally. Declared: Slot content displayed inside the popup.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration for design token resolution."
+      },
+      {
+        "name": "closeOnBackdropPress",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "Off, a click on the scrim does nothing and Tab stays on the sheet; on, the scrim isn't a Tab stop and a click closes. Declared: Whether pressing the backdrop closes the popup. Default true, from the component source.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "backdropColor",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "#000000",
+        "description": "Backdrop overlay color. Default \"#000000\", from the component source."
+      },
+      {
+        "name": "backdropOpacity",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 0.5,
+        "description": "The scrim's colour and opacity are props, not tokens; Overlay's scrim token is 70% black. Declared: Maximum backdrop opacity when fully visible. Default 0.5, from the component source.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "animationDuration",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 250,
+        "description": "The opening spring ignores it; the scrim fades in over it, and closing slides the sheet and fades the scrim over it (ease in-out), then unmounts. Declared: Animation duration in ms for transitions. Default 250, from the component source.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the popup container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Popup",
+        "description": "On the web the dialog has role dialog and aria-modal true, named by accessibilityLabel (“Popup” by default). Declared: Accessible name for the dialog. Defaults to \"Popup\". Default \"Popup\", from the component source.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "ref",
+        "source": "evidence",
+        "type": "React.Ref<PopupRef>",
+        "description": "Popup forwards a ref of type PopupRef, with open() and close().",
+        "checkedOn": "2026-10-12"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Background",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "A token collection Popup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "False"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Popup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection Popup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Padding",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "None"
+        ],
+        "description": "None removes the inner stack's padding (0). Declared: A token collection Popup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "With Padding Default and Stack Context Root, the inner stack's padding is 8 px on MainPage and 16 px on SubPage and JioPlus. Declared: A token collection Popup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "The inner stack's gap: XS 2, S 8 (the default), M 16, L 24, XL 32 px; Context ListItem makes S 2. Declared: A token collection Popup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "Stack Context",
+        "type": "mode collection",
+        "values": [
+          "Root",
+          "Nested"
+        ],
+        "description": "Nested gives the inner stack 12 px of padding (Root: 8 px on MainPage, 16 px on SubPage and JioPlus). Declared: A token collection Popup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Root",
+        "checkedOn": "2026-10-12"
+      }
+    ],
+    "slots": [
+      {
+        "name": "trigger",
+        "type": "React.ReactElement",
+        "description": "Element that triggers the popup when pressed. Its existing onPress is preserved.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Slot content displayed inside the popup.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "description": "Called when the open state changes.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma's Popup has no scrim; the code adds a 50% black one from props. The #268 fix left it unchanged; the evidence records it as Marcin's call.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=popup",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3040-764",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-popup--docs"
+  }
+}
