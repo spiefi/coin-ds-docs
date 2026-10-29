@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 1,
+  "id": "Table",
+  "slug": "table",
+  "category": "data",
+  "tags": [
+    "data table",
+    "grid",
+    "holdings table",
+    "rows and columns"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T08:26:34Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The guide's Sources note was checked on 17 October on 0.1.78-a116616, whose Table.tsx is identical to the installed dbe0e02, but the #264 fix in that build also stopped Text Appearance from reaching the table's own values: every string or number body cell is Coin Text given colour: bodyTextColor(modes), the tableHeader/label/color token, after Text's token colour (Table.tsx lines 108–110 and 143; Text.tsx line 153 puts style after the token colour), and that token is black in every mode, so Success, Warning, Error and the brand appearances set on the table leave the values black. Only Coin Text that a column renders itself still takes its own Text Appearance (or the table's, through the modes merged into it). The 17 October re-check measured Weight, JioPlus and the roles, not Text Appearance. This entry follows the installed package and leaves out the guide sentences it contradicts: Configuration's Status appearances card (“Success, Warning, and Error tint every body cell green, amber, or red; to mark one value, render your own cells.”), the Configuration description's “text size and the brand appearances are in the playground above”, the third Do & Don't pair (its Don't “Colour the whole table”: “Text appearance on the table tints every value, so nothing stands out.”), and the evidence's 12 October Text Appearance colours for body text. Guide fix #534 (Documentation, To do), filed by this run; it also asks Marcin whether black values under every Text Appearance are intended or a Component Bug. Re-extract once #534 is fixed and published. Added by Claude Code in the overnight run agentpack-batch12, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Table to compare a few values across rows, such as holdings, with columns that line up and numbers aligned right.",
+  "useWhen": [
+    {
+      "text": "Compare a few values across rows, such as holdings, with columns that line up and numbers aligned right.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Table to compare a few values across rows, such as holdings, with columns that line up and numbers aligned right."
+      }
+    },
+    {
+      "text": "Line values up so they can be compared at a glance.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Line values up so they can be compared at a glance."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Header row",
+      "holds": "Grey row of column names; it stays put when the rows scroll.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey row of column names; it stays put when the rows scroll."
+      }
+    },
+    {
+      "part": "Column name",
+      "holds": "14 px semibold, aligned like the values below it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "14 px semibold, aligned like the values below it."
+      }
+    },
+    {
+      "part": "Row",
+      "holds": "One record, such as one holding; it can be pressable.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One record, such as one holding; it can be pressable."
+      }
+    },
+    {
+      "part": "Cell",
+      "holds": "White, 12 px padding, with 1 px lines on its right and below.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "White, 12 px padding, with 1 px lines on its right and below."
+      }
+    },
+    {
+      "part": "Number",
+      "holds": "Right-aligned, so digits line up down the column.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Right-aligned, so digits line up down the column."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "A table fills its host's width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A table fills its host’s width."
+      }
+    },
+    {
+      "text": "In a 240 px host each column keeps about 30 px for text, so words and numbers break apart: use fewer columns or sideways scroll.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In a 240 px host each column keeps about 30 px for text, so words and numbers break apart. Use fewer columns or sideways scroll."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Columns share the width unless one gets a flex or a fixed width, and each sets its own alignment.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Columns share the width unless one gets a flex or a fixed width, and each sets its own alignment."
+      }
+    },
+    {
+      "text": "In the guide's Default, columns share the width equally, and the number columns are set to align right so their digits line up.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Columns share the width equally; numbers sit right so their digits line up."
+      }
+    },
+    {
+      "text": "A column's flex gives it more room and its width fixes it: a fixed width beats flex (in the guide, Asset takes twice the room and Units keeps a fixed 70 px).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Asset takes twice the room and Units keeps a fixed 70 px; a fixed width beats flex."
+      }
+    },
+    {
+      "text": "columnWidth gives every column, header and body, the same fixed width; a column's own width still takes precedence. Leave it out to let columns flex.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/8"
+      },
+      "target": "columnWidth"
+    },
+    {
+      "text": "Turn the header off (showHeader false) when a title above already explains the values: only the rows remain.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the rows remain, for values that a title above already explains."
+      },
+      "target": "showHeader",
+      "value": "false"
+    },
+    {
+      "text": "For a table inside a card, trimOuterBorders drops the outer lines of the last column and the last row.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The last column and the last row drop their outer lines, for a table inside a card."
+      },
+      "target": "trimOuterBorders",
+      "value": "true"
+    },
+    {
+      "text": "A column can render its own cells: the guide's Change column renders Coin Text, green for gains and red for losses.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Change column renders Coin Text, here green for gains and red for losses."
+      }
+    },
+    {
+      "text": "Modes on the table reach its body text only.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Modes on the table reach its body text only"
+      },
+      "target": "modes"
+    },
+    {
+      "text": "Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular."
+      },
+      "target": "Weight",
+      "value": "Bold"
+    },
+    {
+      "text": "Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px."
+      },
+      "target": "Context",
+      "value": "ListItem"
+    },
+    {
+      "text": "On a JioPlus page (Page type JioPlus) the values stay dark and readable on the white cells.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The values stay dark and readable on the white cells."
+      },
+      "target": "Page type",
+      "value": "JioPlus"
+    },
+    {
+      "text": "Fixed widths that add up to more than the host need sideways scroll (scrollable), or the last column is cut off.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Fixed widths that add up to more than the host need sideways scroll, or the last column is cut off."
+      },
+      "target": "scrollable"
+    },
+    {
+      "text": "Don't fix widths that don't fit: three 130 px columns need 390 px; without scroll the last one is cut off.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Three 130 px columns need 390 px; without scroll the last one is cut off."
+      }
+    },
+    {
+      "text": "A maximum height (maxHeight) scrolls the rows under a pinned header.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A maximum height scrolls the rows under a pinned header."
+      },
+      "target": "maxHeight"
+    },
+    {
+      "text": "With both sideways scroll and a maximum height, the header moves sideways with the rows but stays at the top.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The header moves sideways with the rows but stays at the top."
+      },
+      "target": "maxHeight"
+    },
+    {
+      "text": "On the guide's portfolio screen, pressing a row opens that holding; the screen handles the press through onRowPress.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pressing a row opens that holding; the screen handles the press."
+      },
+      "target": "onRowPress"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name each column in a word or two and format values before they reach the table, with currency symbols, separators, and signs.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name each column in a word or two and format values before they reach the table, with currency symbols, separators, and signs."
+        }
+      },
+      {
+        "text": "Right-align numbers and keep text left.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Right-align numbers and keep text left."
+        }
+      },
+      {
+        "text": "Cells wrap instead of cutting text off, so keep values short.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Cells wrap instead of cutting text off, so keep values short."
+        }
+      },
+      {
+        "text": "Colour single values: Coin Text in the Change column marks gains and losses.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Coin Text in the Change column marks gains and losses."
+        }
+      }
+    ],
+    "good": [
+      "Date",
+      "Paid to",
+      "Amount",
+      "₹1,240",
+      "+2.4%"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Static rows",
+      "when": "Rows only show values; they can't be focused or pressed.",
+      "from": {
+        "section": "states",
+        "quote": "Rows only show values; they can't be focused or pressed."
+      }
+    },
+    {
+      "state": "Pressable rows",
+      "when": "Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is.",
+      "from": {
+        "section": "states",
+        "quote": "Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is."
+      }
+    },
+    {
+      "state": "No rows",
+      "when": "Only the header shows. Put an Empty State next to it to explain why.",
+      "from": {
+        "section": "states",
+        "quote": "Only the header shows. Put an Empty State next to it to explain why."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "When the screen handles a row press, every row takes focus and a press and fades while pressed; screen readers still hear it as a row.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "When the screen handles a row press, every row takes focus and a press and fades while pressed; screen readers still hear it as a row."
+      },
+      "target": "onRowPress"
+    },
+    {
+      "text": "On the web screen readers hear the header cells, rows, and cells as a table, with pressable rows still rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "on the web screen readers hear the header cells, rows, and cells as a table, with pressable rows still rows."
+      }
+    },
+    {
+      "text": "A pressable row activates with Enter or Space and fades to 60% while pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "With `onRowPress` a row stays `role=\"row\"`, gets `tabIndex 0` on the web, activates with Enter or Space, and fades to 60% while pressed"
+      },
+      "target": "onRowPress"
+    },
+    {
+      "text": "accessibilityLabel is the accessibility label for the table container.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/10"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Right-align numbers",
+      "dont": "Left-align numbers",
+      "why": "Ragged digits make values hard to compare down the column.",
+      "from": {
+        "section": "doDont",
+        "quote": "Right-align numbers"
+      }
+    },
+    {
+      "do": "Let columns share the width",
+      "dont": "Fix widths that don't fit",
+      "why": "Three 130 px columns need 390 px; without scroll the last one is cut off.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let columns share the width"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Holdings on a portfolio screen, the guide's In context: a heading over a Table whose Change column renders Coin Text, green for gains and red for losses (the Text Appearance comes from each value, as the guide's Do “Colour single values” shows); pressing a row opens that holding, and the screen handles the press. The empty press handler stands for the screen's own navigation.",
+      "jsx": "<VStack>\n  <Text>Your holdings</Text>\n  <Table\n    columns={[\n      { key: 'asset', header: 'Asset' },\n      { key: 'units', header: 'Units', align: 'right' },\n      { key: 'value', header: 'Value', align: 'right' },\n      {\n        key: 'change',\n        header: 'Change',\n        align: 'right',\n        render: (row) => (\n          <Text modes={{ 'Text Appearance': row.change.startsWith('-') ? 'Error' : 'Success' }}>{row.change}</Text>\n        ),\n      },\n    ]}\n    data={[\n      { asset: 'HDFC Bank', units: '120', value: '₹1,98,400', change: '+2.4%' },\n      { asset: 'Reliance', units: '64', value: '₹1,52,900', change: '-0.8%' },\n      { asset: 'Infosys', units: '210', value: '₹3,10,500', change: '+1.1%' },\n      { asset: 'TCS', units: '48', value: '₹1,84,200', change: '+0.3%' },\n    ]}\n    onRowPress={(row) => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The portfolio screen lists holdings with gains in green and losses in red. Pressing a row opens that holding; the screen handles the press."
+      }
+    },
+    {
+      "purpose": "Default, from the guide's Configuration: four columns share the width equally, and the three number columns are right-aligned so their digits line up.",
+      "jsx": "<Table\n  columns={[\n    { key: 'asset', header: 'Asset' },\n    { key: 'units', header: 'Units', align: 'right' },\n    { key: 'value', header: 'Value', align: 'right' },\n    { key: 'change', header: 'Change', align: 'right' },\n  ]}\n  data={[\n    { asset: 'HDFC Bank', units: '120', value: '₹1,98,400', change: '+2.4%' },\n    { asset: 'Reliance', units: '64', value: '₹1,52,900', change: '-0.8%' },\n    { asset: 'Infosys', units: '210', value: '₹3,10,500', change: '+1.1%' },\n    { asset: 'TCS', units: '48', value: '₹1,84,200', change: '+0.3%' },\n  ]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Columns share the width equally; numbers sit right so their digits line up."
+      }
+    },
+    {
+      "purpose": "Column widths, from the guide's Configuration: Asset takes twice the room (flex 2), Units keeps a fixed 70 px, centred, and Value flexes, right-aligned; a fixed width beats flex.",
+      "jsx": "<Table\n  columns={[\n    { key: 'asset', header: 'Asset', flex: 2 },\n    { key: 'units', header: 'Units', width: 70, align: 'center' },\n    { key: 'value', header: 'Value', align: 'right' },\n  ]}\n  data={[\n    { asset: 'HDFC Bank', units: '120', value: '₹1,98,400', change: '+2.4%' },\n    { asset: 'Reliance', units: '64', value: '₹1,52,900', change: '-0.8%' },\n    { asset: 'Infosys', units: '210', value: '₹3,10,500', change: '+1.1%' },\n    { asset: 'TCS', units: '48', value: '₹1,84,200', change: '+0.3%' },\n  ]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Asset takes twice the room and Units keeps a fixed 70 px; a fixed width beats flex."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "columns",
+        "type": "TableColumn<T>[]",
+        "required": false,
+        "source": "types",
+        "description": "Column definitions for the data-driven API."
+      },
+      {
+        "name": "data",
+        "type": "T[]",
+        "required": false,
+        "source": "evidence",
+        "description": "An empty data array renders the header only; there is no empty state. Declared: Row records, one per table row.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Composition (Table.Header, Table.HeaderCell, Table.Body, Table.Row, Table.Cell): with children, columns, data and showHeader are ignored. Same look; a developer's choice, not a designer setting. Declared: Composition children (`Table.Header`, `Table.Body`, `Table.Row`, `Table.Cell`, `Table.HeaderCell`). When provided, `columns`/`data` are ignored and the children are rendered as-is. Maps to the Figma Slot.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "showHeader",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Show the header row in the data-driven API. Default true, from the component source."
+      },
+      {
+        "name": "getRowKey",
+        "type": "(row: T, index: number) => React.Key",
+        "required": false,
+        "source": "types",
+        "description": "Resolve a stable key per row. Defaults to the row index."
+      },
+      {
+        "name": "onRowPress",
+        "type": "(row: T, index: number) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "With onRowPress each row stays a row (role row), is focusable on the web, activates with Enter or Space, and fades to 60% while pressed. Declared: Called when a row is pressed (data-driven API). Makes rows pressable.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "scrollable",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Wraps the table in a horizontal scroller with the scrollbar hidden. Declared: Wrap the table in a horizontal `ScrollView`. Use with fixed-width columns for wide tables that exceed the viewport on mobile. Default false, from the component source.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "maxHeight",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "description": "Scrolls the body under the header, which stays pinned vertically; with scrollable as well, the header scrolls sideways with the body. Declared: Cap the body height (px) and scroll rows vertically. The header stays pinned above the scroll region (data-driven and composition with `Table.Header`). Combine with `scrollable` for wide + tall tables on mobile.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "columnWidth",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "description": "A column's width beats columnWidth, which beats flex. Declared: Fixed width (px) applied to every column — header and body alike — so all columns share the same width. An explicit per-column `width` (on `TableColumn`, or on an individual `Table.Cell`/`Table.HeaderCell`) still takes precedence when set. Omit to let columns flex to share the available space.",
+        "checkedOn": "2026-10-12"
+      },
+      {
+        "name": "trimOuterBorders",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "When `true`, the data-driven API hides the right divider on the last column and the bottom divider on the last row (flush outer edge). Figma draws dividers on every cell — leave this `false` (default) to match. Composition consumers can still set `isLastColumn` / `isLastRow` per cell. Default false, from the component source."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the table container."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ \"Color Mode\": \"Light\" }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override the outer container style."
+      },
+      {
+        "name": "Table.Header",
+        "type": "component",
+        "description": "A static sub-component of Table. Its own props: children, modes, style.",
+        "source": "types"
+      },
+      {
+        "name": "Table.HeaderCell",
+        "type": "component",
+        "description": "A static sub-component of Table. Its own props: children, align, width, flex, modes, style.",
+        "source": "types"
+      },
+      {
+        "name": "Table.Body",
+        "type": "component",
+        "description": "A static sub-component of Table. Its own props: children, modes, style.",
+        "source": "types"
+      },
+      {
+        "name": "Table.Row",
+        "type": "component",
+        "description": "A static sub-component of Table. Its own props: children, onPress, modes, style.",
+        "source": "types"
+      },
+      {
+        "name": "Table.Cell",
+        "type": "component",
+        "description": "A static sub-component of Table. Its own props: children, align, width, flex, isLastColumn, isLastRow, modes, style.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Table reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection Table reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Table reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection Table reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection Table reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection Table reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Composition children (`Table.Header`, `Table.Body`, `Table.Row`, `Table.Cell`, `Table.HeaderCell`). When provided, `columns`/`data` are ignored and the children are rendered as-is. Maps to the Figma Slot.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onRowPress",
+        "type": "(row: T, index: number) => void",
+        "description": "Called when a row is pressed (data-driven API). Makes rows pressable.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma's Table is one 720 × 190 component with one full-width header; in code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "Figma rows are 38 px; the code's are about 42 px (body) and 45 px (header).",
+        "source": "evidence",
+        "checkedOn": "2026-10-12"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=table",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5732-3710",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-table--docs"
+  }
+}

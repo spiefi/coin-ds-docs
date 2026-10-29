@@ -1,0 +1,329 @@
+{
+  "slug": "amountinput",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch13, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/amountinput.guide.tsx, which registers src/AmountInputGuide.tsx) and docs/evidence/amountinput.md at 31f1c5e (“docs: add onboarding home page, component search, and favicon”, 29 September), the same files on main and docs-next. The guide's Sources note and the evidence were checked on 22 September 2026 on jfs-components 0.1.60, so items citing them carry 2026-09-22 and 0.1.60 and the trace check flags them; the mirror has no 0.1.60 tag, so no GitHub compare to the installed build is possible, and every sentence quoted here was read against the installed source instead. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Builds compared (blob SHAs through gh api): AmountInput.tsx is the same blob (3d7ccc3) at v0.1.78, -636f3f5, -c1fa197, -a116616, -c7d3348 and -dbe0e02. MoneyValue.tsx is 3f81f58 from v0.1.78 to c7d3348 and 7e013fd at dbe0e02; the change is accessibility only (the amount row is now a View with role img, or a Pressable with role button when editable or pressable, named by accessibilityLabel or the currency and amount, lines 330–375 and 434–450), with no change to its tokens, layout or editing. NoteInput.tsx is 49d956d at v0.1.78 and 636f3f5 (state accepted and never read; controlled only) and 09c1ecd from c1fa197 to dbe0e02. The design-tokens JSON is 0582bb0 at v0.1.78 and 4545aec from 636f3f5 to dbe0e02, and every amountInput/*, moneyValue/* and noteInput/* token resolves to the same value on both through the package's own getVariableByName (no modes, Context3 Amount Input, Transaction Bubble and Balance & Cards, Color Mode Dark, Page type SubPage); the resolver (d03e77c) is the same at every tag. Installed source read for each sentence used (read, not rendered; token values through lib/commonjs getVariableByName): AmountInput.tsx takes moneyValueSlot, noteInputSlot, modes and style and nothing else (lines 10–23); it merges the provider's modes with its own (36–37) and clones that set onto each slot element, replacing the child's own modes (54–57, 66–69); an omitted slot falls back to a MoneyValue or a NoteInput with those modes (59–61, 71–73); the container is a centred column with amountInput/gap 16 and padding 0 in every mode, and no width (40–51), the MoneyValue first and the note second (77–82). It sets no Context3 of its own (Balance, RechargeCard and TransactionBubble set theirs; nothing in the package sets Amount Input), so with none the moneyValue tokens are Default: currency and amount 14 px on an 18 px line, weight 500; with Context3 Amount Input the currency is 32 px and the amount 56 px (lines raised to 39 and 68 by safeTextLineHeight), weight 900, the evidence's Figma sizes. MoneyValue.tsx: value defaults to '500' and currency to '₹' (98–99); currency takes a symbol, or an ISO code it maps to a symbol (22–54, 188–195), drawn before the amount in a row (219–223, 384–386); editable defaults to false (103), and with it a tap opens an inline number field that accepts digits and one decimal point and calls onValueChange with the new amount on blur or submit (138–169, 322–328, 390–411); the display always shows the value prop (116–128), so the screen passes a new amount back. NoteInput.tsx: placeholder defaults to “Add note” (45); without value it keeps its own text and still calls onChangeText (55–57, 148–151); its text is 14 px, weight 700 in every mode (76–81, 122–131); maxWidth 100% and flexShrink 1, and a long note wraps (104–105, 110–120). Contradicted by the installed build and left out: the Sources sentence “The NoteInput state prop is accepted but unused by the implementation; its visible editing state is focus-driven.” (state Editing hides the placeholder as focus does: NoteInput.tsx 50, 68–69, 170, 177), and the States description's second sentence, “NoteInput responds to focus and controlled text; its internal state is runtime-driven.”, which says less than the package (a note with no value keeps its own text, 55–57 and 148–151). Both changed between the 8 October (636f3f5) and 12 October (c1fa197) builds; they are the guide fix in reviews/amountinput.json (human flag on the whole entry). Out of date and not used: the Sources “exports from jfs-components 0.1.60” and the evidence's batch line (declared and resolved 0.1.60). Not re-checked and not used: the Figma node and the Storybook story ids the Sources note lists (the Storybook gap keeps its 0.1.60 date). Not recorded: style (the building rules keep style off Coin components); Page type (no guide sentence covers it; JioPlus turns the amount white) and Color Mode (building rules); MoneyValue's hidden, focused, negative and style props, and NoteInput's props other than placeholder, value and onChangeText (they belong to those components; only the playground's “Hide amount for privacy” shows hidden); the playground and its readout; the accessibility labels the guide's code passes (“Edit amount”, “Add note”), which no copy explains; the CSS clip of the Don'ts' teaching frame. Strength: no quote holds must, never, always, only or required. Anatomy: Amount and Note are always present, because an omitted slot falls back to a default MoneyValue or NoteInput, so the Note is optional detail for people, not an optional part; Currency is not, because an empty currency leaves the amount without a unit (the guide's Hide the unit Don't sets currency to an empty string, AmountInputGuide.tsx line 90; MoneyValue.tsx 190). avoidWhen is empty: the guide names no case where another component fits better (slider.json's avoidWhen points typed exact amounts here). accessibility is empty: the guide has no accessibility copy. Content good keeps the guide's notes and placeholders; bad keeps the Don'ts' long note and unbroken value. Examples follow the building rules: no Color Mode (the guide sets Light on every AmountInput, MoneyValue, NoteInput and Card), no modes on the Card (the guide sets AppearanceBrand Neutral) or on the slot children (the guide sets its AMOUNT_MODES on them too, but AmountInput replaces them with its own). Context3 Amount Input is set on AmountInput in each example, as the guide's own source does (AMOUNT_MODES, line 21), because AmountInput doesn't set its own context and passes its modes to both children; without it the amount is 14 px instead of 56 px. MoneyValue has no entry in this pack, but it is the amount slot's own child and the only way to set the amount, as in the NoteInput, Balance, Drawer and List Group entries. The In context example drops the guide's Card style (width 100%). The MoneyValues are editable where the guide's are (In context, Custom slots); the In context note is uncontrolled with onChangeText, the guide's filled notes are controlled, and the literal values and empty handlers stand for the screen's own state. Copy is the guide's own (Review transfer, Enter the amount and an optional note before sending., ₹500, Add transfer note, $1000, Monthly investment, Add investment note, Rent). Left out of examples (three at most): the default slots (the default MoneyValue is a fixed sample ₹500 that can't be edited), Money edit and Note filled (the In context and Custom slots examples show them), the sizing hosts, the Do & Don'ts and the playground. Consistency with earlier entries that use AmountInput: noteinput examples[0] sets Context3 Amount Input on AmountInput only, with a MoneyValue and a NoteInput that carry no modes, which agrees with this entry. The Merchant Profile guide sets Color Mode Light and Context3 Amount Input on AmountInput and on both children (merchantprofile.guide.tsx lines 11 and 76–77); AmountInput's set is the one that reaches them, which agrees; that entry leaves AmountInput out because it had no entry then. slider's avoidWhen sends typed exact amounts to AmountInput or TextInput; that holds when the MoneyValue in moneyValueSlot is editable, as configuration says. Those entries are not changed in this batch. Sorting (batch 13, round 1): the cross-check raised five flags. Four were ours and are fixed: the Default-context rule gave 14 px, which is true on the installed tokens but in neither its fact nor the evidence, so it now says only that the amount and currency render smaller than the Amount Input entry's 56 px and 32 px (the 14 px stays in these notes); the Context3 rule added “Leave Color Mode to the device”, which is a building rule, not the guide's, and is gone; the Currency part was marked always present although the guide's Don't shows an amount without one, so it is now optional; and the Money view example said the view means a non-editable MoneyValue, where an editable one shows the same view until tapped (the guide's Money view card is not editable, AmountInputGuide.tsx line 86 with editable defaulting to false, line 30), so its purpose now says that. The fifth, that the modes rule says a child's modes are replaced, rests on the installed AmountInput.tsx (cloneElement with { modes }, lines 54–57 and 66–69), which the reviewer sees only as rendered copy; its wording is softened to state the behaviour without forbidding modes on children. Round 2 raised three: the Context3 rule dropped the Color Mode=Light the guide's owner passes with it, so it now says that Light is Color Mode's default (the facts' Color Mode default; the 56 px and 32 px come from Context3 alone, the same with and without Color Mode Light through the resolver); the modes rule and the Default-context rule were flagged again and are dismissed in reviews/amountinput.json, because both follow the installed source, which the reviewer doesn't see.",
+  "useWhen": [
+    {
+      "text": "Entering an amount of money as the primary value, with optional detail (a note) kept close.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Make monetary entry primary while keeping optional detail close."
+      }
+    },
+    {
+      "text": "An amount with a supporting note: amount first, note second.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Amount first, note second."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Currency",
+      "holds": "The currency symbol gives the amount a clear unit. It is the currency of the MoneyValue in the amount slot (₹ by default), drawn before the amount; an empty currency leaves the amount without a unit, which the Do & Don'ts rule out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The currency symbol gives the amount a clear unit."
+      }
+    },
+    {
+      "part": "Amount",
+      "holds": "MoneyValue is the primary editable value and owns its view/edit behavior.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "MoneyValue is the primary editable value and owns its view/edit behavior."
+      }
+    },
+    {
+      "part": "Note",
+      "holds": "NoteInput is optional supporting detail that becomes useful when focused or filled. It sits under the amount and is always drawn (an omitted slot falls back to a NoteInput); writing in it is up to people.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "NoteInput is optional supporting detail that becomes useful when focused or filled."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the amount entry in a Card or review composition so the person knows what they are completing.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Place the amount entry in a Card or review composition so the person knows what they are completing."
+      }
+    },
+    {
+      "text": "AmountInput takes its children's natural size: the currency, the amount's length, the note text and the owning context set its width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "AmountInput uses the children’s natural size."
+      }
+    },
+    {
+      "text": "Give the amount and note enough room to stay legible.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Give the amount and note enough room to stay legible."
+      }
+    },
+    {
+      "text": "In a narrow host, keep the content short: short content keeps the natural Hug-sized children readable.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Short content keeps the natural Hug-sized children readable."
+      }
+    },
+    {
+      "text": "Don't force an unbroken value into a narrow host.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sizing",
+        "quote": "avoid forcing an unbroken value into a narrow host"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "AmountInput exposes two slots, moneyValueSlot for the amount and noteInputSlot for the note, and an owning context: its modes.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The component exposes two slots and an owning context."
+      }
+    },
+    {
+      "text": "Choose the currency and the values through the MoneyValue and NoteInput in the slots; AmountInput has no props for them.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Choose the currency and child values through MoneyValue and NoteInput."
+      }
+    },
+    {
+      "text": "Omitted slots fall back to a default MoneyValue and NoteInput: a familiar entry to start from.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Omitted slots fall back to MoneyValue and NoteInput children."
+      }
+    },
+    {
+      "text": "Supply your own children when the entry needs another currency or note wording.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Supply children when the entry needs another currency or note wording."
+      }
+    },
+    {
+      "text": "Set modes on AmountInput: it passes its context to both children so their tokens resolve together. Modes set on the MoneyValue or NoteInput in its slots are replaced by AmountInput's own.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "anatomy",
+        "quote": "The component passes its context to both children so their tokens resolve together."
+      }
+    },
+    {
+      "text": "Set Context3 Amount Input on AmountInput, as the guide's owner does to reproduce the inspected Figma context (a 56 px amount with a 32 px currency). The Color Mode=Light the owner passes with it is Color Mode's default, so it needs no setting.",
+      "strength": "recommended",
+      "target": "Context3",
+      "value": "Amount Input",
+      "from": {
+        "section": "sources",
+        "quote": "The owner passes Context3=Amount Input with Color Mode=Light to reproduce the inspected Figma context."
+      },
+      "checkedOn": "2026-09-22",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "text": "With no Context3 set, AmountInput is in the Default context, not Amount Input, so the amount and currency render smaller than the Amount Input entry's 56 px amount and 32 px currency.",
+      "strength": "recommended",
+      "target": "Context3",
+      "value": "Default",
+      "from": {
+        "fact": "modes:Context3"
+      }
+    },
+    {
+      "text": "To let people type the amount, put a MoneyValue with editable in moneyValueSlot and read the new amount from its onValueChange: MoneyValue supplies view and edit behavior through its props.",
+      "strength": "recommended",
+      "target": "moneyValueSlot",
+      "from": {
+        "section": "states",
+        "quote": "MoneyValue supplies view and edit behavior through its props."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Currency belongs with the amount.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Currency belongs with the amount."
+        }
+      },
+      {
+        "text": "State the currency: keep the symbol or code visible so the amount does not depend on surrounding copy.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the symbol or code visible so the amount does not depend on surrounding copy."
+        }
+      },
+      {
+        "text": "Notes add supporting detail and should remain short enough to scan beside the primary value.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Notes add supporting detail and should remain short enough to scan beside the primary value."
+        }
+      },
+      {
+        "text": "Keep the note concise: use a short phrase that explains the reason or destination.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use a short phrase that explains the reason or destination."
+        }
+      },
+      {
+        "text": "Keep precision readable: show the amount precision the decision needs, without an unbroken string that cannot fit.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Show the amount precision the decision needs, without an unbroken string that cannot fit."
+        }
+      }
+    ],
+    "good": [
+      "Rent",
+      "Utilities",
+      "Monthly investment",
+      "Add note",
+      "Add transfer note",
+      "Add investment note"
+    ],
+    "bad": [
+      "Rent payment for the apartment and utilities",
+      "12345678901234567890"
+    ]
+  },
+  "states": [
+    {
+      "state": "Money view",
+      "when": "Use the quiet view when the amount is not being edited.",
+      "from": {
+        "section": "states",
+        "quote": "Use the quiet view when the amount is not being edited."
+      }
+    },
+    {
+      "state": "Money edit",
+      "when": "Tap the amount to enter the inline edit behavior (an editable MoneyValue).",
+      "from": {
+        "section": "states",
+        "quote": "Tap the amount to enter the inline edit behavior."
+      }
+    },
+    {
+      "state": "Note filled",
+      "when": "A short controlled note stays supporting detail.",
+      "from": {
+        "section": "states",
+        "quote": "A short controlled note stays supporting detail."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Show the currency",
+      "dont": "Hide the unit",
+      "why": "Without a currency, the number needs surrounding copy to become meaningful.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show the currency"
+      }
+    },
+    {
+      "do": "Use a short note",
+      "dont": "Write a note that takes over",
+      "why": "An oversized note competes with the primary amount and makes the natural width harder to manage.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a short note"
+      }
+    },
+    {
+      "do": "Use readable precision",
+      "dont": "Force an unbroken value",
+      "why": "An unbroken string clips inside a narrow teaching frame; widen the host or choose a meaningful precision.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use readable precision"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A transfer review, the guide's In context: a Card titled for the task gives the entry its context, the AmountInput keeps the amount primary with an editable ₹500 and a note under it, so the person knows what they are completing. AmountInput carries Context3 Amount Input, as the guide's own source sets it, because it doesn't set its own context and passes its modes to both children; the children carry none. The literal amount and the empty onValueChange stand for the screen's own state (MoneyValue shows the value it is given); the note keeps what people type and onChangeText gives the screen each change.",
+      "jsx": "<Card>\n  <Card.Title>Review transfer</Card.Title>\n  <Card.SupportText>Enter the amount and an optional note before sending.</Card.SupportText>\n  <AmountInput\n    modes={{ Context3: 'Amount Input' }}\n    moneyValueSlot={<MoneyValue value=\"500\" currency=\"₹\" editable onValueChange={(amount) => {}} />}\n    noteInputSlot={<NoteInput placeholder=\"Add transfer note\" onChangeText={(note) => {}} />}\n  />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card gives the entry a task context while AmountInput keeps amount primary."
+      }
+    },
+    {
+      "purpose": "Custom slots, the guide's Configuration: your own children for another currency and note wording, a $1000 monthly investment with its note filled in. The amount is editable. The literal values and the empty handlers stand for the screen's own state, which passes each new amount and note back.",
+      "jsx": "<AmountInput\n  modes={{ Context3: 'Amount Input' }}\n  moneyValueSlot={<MoneyValue value=\"1000\" currency=\"$\" editable onValueChange={(amount) => {}} />}\n  noteInputSlot={<NoteInput value=\"Monthly investment\" placeholder=\"Add investment note\" onChangeText={(note) => {}} />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Supply children when the entry needs another currency or note wording."
+      }
+    },
+    {
+      "purpose": "The quiet view, the guide's States (Money view): the amount as it shows when it is not being edited, with a short note, Rent. Like the guide's Money view card, this MoneyValue isn't editable; an editable one shows the same view until it is tapped. The literal note and the empty onChangeText stand for the screen's own state.",
+      "jsx": "<AmountInput\n  modes={{ Context3: 'Amount Input' }}\n  moneyValueSlot={<MoneyValue value=\"500\" currency=\"₹\" />}\n  noteInputSlot={<NoteInput value=\"Rent\" onChangeText={(note) => {}} />}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Use the quiet view when the amount is not being edited."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Context3",
+      "description": "Amount Input is the amount entry's context in Figma: the inspected parent owns Context3 Amount Input and shows a 56 px amount with a 32 px currency and a 14 px Add note label.",
+      "quote": "the inspected parent owns `Context3=Amount Input` and shows a 56px amount with a 32px currency and a 14px Add note label.",
+      "checkedOn": "2026-09-22",
+      "checkedVersion": "0.1.60"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The published Storybook's default AmountInput story relies on ambient context, not Context3 Amount Input, and renders smaller typography than the Figma parent.",
+      "from": {
+        "section": "sources",
+        "quote": "Storybook’s default fixture relies on ambient context and renders smaller typography than the Figma parent"
+      },
+      "checkedOn": "2026-09-22",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

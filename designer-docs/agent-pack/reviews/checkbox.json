@@ -1,0 +1,22 @@
+{
+  "dismissed": [
+    {
+      "field": "/placementAdvice/1",
+      "reason": "misreads-source: The cited sizing sentence says only \"Keep the Checkbox at its token-defined size.\" It gives no dimension. The 18 × 18 px figure comes from the sources section's note on \"18×18 px masters\" in Figma, which describes the Figma master, not the token value the cited text refers to.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch13, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The 18 × 18 px is the installed package’s token, not the Figma note: Checkbox.tsx line 125 sizes the box from checkbox/size, which the package’s own getVariableByName resolves to 18 on dbe0e02. The item names the size the cited “token-defined size” resolves to; the reviewer sees only rendered copy, not the package."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: The guide copy shown has no code and does not say the In context example uses Checkbox Item rows or how they are stacked. It shows only \"Email updates | SMS updates\" and \"0 channels selected\", so \"stacked as the guide's own code stacks them\" is unsupported. Choosing CheckboxItem is the extractor's inference from the sizing section.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch13, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The example follows the guide’s own code, which the reviewer sees only as rendered copy: the In context example in src/CheckboxGuide.tsx (line 60, at 31f1c5e) renders Checkbox Item rows (Email updates, SMS updates) stacked in a VStack, with the “channels selected” count under them."
+    },
+    {
+      "field": "/facts/gaps/0",
+      "reason": "misreads-source: The evidence file records the Space-key defect only \"in the checked runtime\" on 23 September 2026. It does not mention commit dbe0e02 or \"Component Bug #535\", so the claim that the defect is \"still there on dbe0e02 (Component Bug #535)\" goes beyond the evidence.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch13, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The gap rests on the evidence’s Space sentence (23 September, 0.1.60), which the trace check already flags as checked on 0.1.60, and on a re-run on the installed build: on 29 October, in headless Chrome on dbe0e02, the focused “Include savings account” Checkbox stayed unticked after Space and ticked after Enter (Checkbox.tsx 239–250 has no key handler; react-native-web 0.21.2 PressResponder.js 66–71 takes Space only on button roles). The flow says to list a filed Component Bug in the entry’s gaps, as other entries do (“Component Bug #421”), so the gap names #535."
+    }
+  ]
+}

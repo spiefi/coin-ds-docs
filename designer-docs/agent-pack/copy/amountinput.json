@@ -1,0 +1,286 @@
+{
+  "slug": "amountinput",
+  "label": "Amount Input",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/amountinput.guide.tsx",
+    "src/AmountInputGuide.tsx"
+  ],
+  "evidence": "docs/evidence/amountinput.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T07:59:58.558Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "money",
+    "currency",
+    "price",
+    "text field",
+    "input",
+    "rupee"
+  ],
+  "title": "Amount Input",
+  "summary": "Make monetary entry primary while keeping optional detail close.",
+  "corePrinciple": "Amount first, note second.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2217-6259",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-amountinput--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Amount first, note second",
+      "description": "AmountInput composes MoneyValue with NoteInput. The component passes its context to both children so their tokens resolve together.",
+      "blocks": [
+        "Shown at 2×",
+        "1",
+        "2",
+        "3",
+        "Currency",
+        "The currency symbol gives the amount a clear unit.",
+        "Amount",
+        "MoneyValue is the primary editable value and owns its view/edit behavior.",
+        "Note",
+        "NoteInput is optional supporting detail that becomes useful when focused or filled."
+      ],
+      "specimen": [
+        "₹",
+        "500",
+        "Rent",
+        "Add note"
+      ],
+      "anatomy": [
+        {
+          "part": "Currency",
+          "note": "The currency symbol gives the amount a clear unit."
+        },
+        {
+          "part": "Amount",
+          "note": "MoneyValue is the primary editable value and owns its view/edit behavior."
+        },
+        {
+          "part": "Note",
+          "note": "NoteInput is optional supporting detail that becomes useful when focused or filled."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Use the default children or supply focused slots",
+      "description": "The component exposes two slots and an owning context. Choose the currency and child values through MoneyValue and NoteInput.",
+      "blocks": [
+        "Default slots",
+        "Start with a familiar entry",
+        "Omitted slots fall back to MoneyValue and NoteInput children.",
+        "Custom slots",
+        "Adapt the detail to the task",
+        "Supply children when the entry needs another currency or note wording."
+      ],
+      "specimen": [
+        "₹",
+        "500",
+        "Add note",
+        "$",
+        "1000",
+        "Monthly investment",
+        "Add investment note"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Let each child own its interaction state",
+      "description": "MoneyValue supplies view and edit behavior through its props. NoteInput responds to focus and controlled text; its internal state is runtime-driven.",
+      "blocks": [
+        "Money view",
+        "Use the quiet view when the amount is not being edited.",
+        "Money edit",
+        "Tap the amount to enter the inline edit behavior.",
+        "Note filled",
+        "A short controlled note stays supporting detail."
+      ],
+      "specimen": [
+        "₹",
+        "500",
+        "Rent",
+        "Utilities",
+        "Add note"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Respect natural content size",
+      "description": "AmountInput uses the children’s natural size. Currency, amount length, note text, and the owning context affect the rendered width; avoid forcing an unbroken value into a narrow host.",
+      "blocks": [
+        "Roomy host",
+        "Give the amount and note enough room to stay legible.",
+        "Narrow host",
+        "Short content keeps the natural Hug-sized children readable."
+      ],
+      "specimen": [
+        "₹",
+        "500",
+        "Rent",
+        "$",
+        "Add note"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Make the unit and note easy to understand",
+      "description": "Currency belongs with the amount. Notes add supporting detail and should remain short enough to scan beside the primary value.",
+      "blocks": [
+        "01",
+        "State the currency",
+        "Keep the symbol or code visible so the amount does not depend on surrounding copy.",
+        "02",
+        "Keep the note concise",
+        "Use a short phrase that explains the reason or destination.",
+        "03",
+        "Keep precision readable",
+        "Show the amount precision the decision needs, without an unbroken string that cannot fit."
+      ],
+      "specimen": [
+        "₹",
+        "500",
+        "Rent",
+        "Add note"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Support a transfer review",
+      "description": "Place the amount entry in a Card or review composition so the person knows what they are completing.",
+      "blocks": [
+        "A Card gives the entry a task context while AmountInput keeps amount primary."
+      ],
+      "specimen": [
+        "Review transfer",
+        "Enter the amount and an optional note before sending.",
+        "₹",
+        "500",
+        "Add transfer note"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep amount primary and detail supporting",
+      "description": "The visual pairs use child choices and show the visible consequence of each content choice.",
+      "blocks": [
+        "Do",
+        "Show the currency",
+        "The amount reads as a monetary value immediately.",
+        "Don’t",
+        "Hide the unit",
+        "Without a currency, the number needs surrounding copy to become meaningful.",
+        "Use a short note",
+        "A concise reason remains secondary to the amount.",
+        "Write a note that takes over",
+        "An oversized note competes with the primary amount and makes the natural width harder to manage.",
+        "Use readable precision",
+        "The displayed precision fits the entry’s purpose.",
+        "Force an unbroken value",
+        "An unbroken string clips inside a narrow teaching frame; widen the host or choose a meaningful precision."
+      ],
+      "specimen": [
+        "₹",
+        "500",
+        "Rent",
+        "Rent payment for the apartment and utilities",
+        "$",
+        "500.00",
+        "Add note",
+        "12345678901234567890"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Show the currency",
+            "caption": "The amount reads as a monetary value immediately.",
+            "specimen": "₹ · 500 · Rent · Rent"
+          },
+          "dont": {
+            "title": "Hide the unit",
+            "caption": "Without a currency, the number needs surrounding copy to become meaningful.",
+            "specimen": "500 · Rent · Rent"
+          }
+        },
+        {
+          "do": {
+            "title": "Use a short note",
+            "caption": "A concise reason remains secondary to the amount.",
+            "specimen": "₹ · 500 · Rent · Rent"
+          },
+          "dont": {
+            "title": "Write a note that takes over",
+            "caption": "An oversized note competes with the primary amount and makes the natural width harder to manage.",
+            "specimen": "₹ · 500 · Rent payment for the apartment and utilities · Rent payment for the apartment and utilities"
+          }
+        },
+        {
+          "do": {
+            "title": "Use readable precision",
+            "caption": "The displayed precision fits the entry’s purpose.",
+            "specimen": "$ · 500.00 · Add note"
+          },
+          "dont": {
+            "title": "Force an unbroken value",
+            "caption": "An unbroken string clips inside a narrow teaching frame; widen the host or choose a meaningful precision.",
+            "specimen": "$ · 12345678901234567890 · Add note"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the public amount-entry contract",
+      "description": "This guide uses the published AmountInput API, the inspected Figma master, and the canonical Storybook fixtures.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Amount Input · node 2217:6259",
+        "02",
+        "Canonical Storybook",
+        "Default and custom slot examples",
+        "Open default story",
+        "Open custom slot story",
+        "Checked 22 September 2026",
+        "Examples use public AmountInput, MoneyValue, and NoteInput exports from jfs-components 0.1.60. The owner passes Context3=Amount Input with Color Mode=Light to reproduce the inspected Figma context. Storybook’s default fixture relies on ambient context and renders smaller typography than the Figma parent; the guide labels the owner context choice instead of claiming those defaults are identical. The NoteInput state prop is accepted but unused by the implementation; its visible editing state is focus-driven.",
+        "AmountInput",
+        "MoneyValue",
+        "NoteInput",
+        "jfs-components",
+        "Context3=Amount Input",
+        "Color Mode=Light",
+        "state"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

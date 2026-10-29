@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "id": "HStack",
+  "slug": "hstack",
+  "category": "layout",
+  "tags": [
+    "horizontal stack",
+    "row",
+    "layout",
+    "auto layout",
+    "spacing"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T08:26:34Z",
+    "flags": [
+      {
+        "field": "/facts/props/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/3",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/4",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/content/rules",
+        "reason": "The guide gives no content rules; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use HStack for a row of related content. It owns horizontal rhythm, alignment, and optional wrapping while the host decides how much room the row has.",
+  "useWhen": [
+    {
+      "text": "A row of related content.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use HStack for a row of related content."
+      }
+    },
+    {
+      "text": "Related actions and values that belong in one visual row.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Keep related actions and values in one visual row."
+      }
+    },
+    {
+      "text": "Items that belong to one row and should share a rhythm.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Use HStack when items belong to one row and should share a rhythm."
+      }
+    },
+    {
+      "text": "A value, status and action that describe one decision.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pair a value, status, and action when they describe one decision."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Unrelated page sections: use a horizontal stack for related siblings.",
+      "strength": "discouraged",
+      "from": {
+        "section": "inContext",
+        "quote": "Use a horizontal stack for related siblings, not unrelated page sections."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Row direction",
+      "holds": "The children, arranged left to right; reverse changes the visual direction only, and DOM order stays the same.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Children are arranged left to right. Reverse changes visual direction only; DOM order stays the same."
+      }
+    },
+    {
+      "part": "Token gap",
+      "holds": "The Slot gap that sets the row's rhythm, owned by HStack rather than child margins.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use Slot gap to set rhythm. Keep spacing owned by HStack instead of adding child margins."
+      }
+    },
+    {
+      "part": "Cross-axis alignment",
+      "holds": "The Figma variant named “Aligment”: Top Left maps to the top edge, and Left centers the row vertically.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Figma exposes the variant named “Aligment”: Top Left maps to the top edge and Left centers the row vertically."
+      }
+    },
+    {
+      "part": "Owner padding",
+      "holds": "The inset around the slot: Default supplies it; None when the surrounding owner already supplies that edge.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Default supplies the inset around the slot. Use None when the surrounding owner already supplies that edge."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the primitive where the relationship happens.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Place the primitive where the relationship happens"
+      }
+    },
+    {
+      "text": "HStack owns horizontal rhythm, alignment and optional wrapping; the host decides how much room the row has.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "It owns horizontal rhythm, alignment, and optional wrapping while the host decides how much room the row has."
+      }
+    },
+    {
+      "text": "Populate public component slots with HStack instead of recreating child margins.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Populate public component slots with HStack instead of recreating child margins."
+      }
+    },
+    {
+      "text": "Design the host relationship: make the container boundary and content order clear before changing gap or wrap.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Make the container boundary and content order clear before changing gap or wrap."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set the row's rhythm with Slot gap, XS through XL; the gap belongs to the HStack owner.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use XS through XL to set the rhythm of one row. The gap belongs to the HStack owner."
+      },
+      "target": "Slot gap"
+    },
+    {
+      "text": "Keep spacing owned by HStack instead of adding child margins.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep spacing owned by HStack instead of adding child margins."
+      },
+      "target": "Slot gap"
+    },
+    {
+      "text": "Use Padding None when the host already owns the edge; Default gives the row its component inset.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Default gives the row its component inset. None is useful when the host already owns the edge."
+      },
+      "target": "Padding",
+      "value": "None"
+    },
+    {
+      "text": "Do not stack component insets without a reason: nested owners can create an unintended double edge and weaken alignment.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Nested owners can create an unintended double edge and weaken alignment."
+      },
+      "target": "Padding"
+    },
+    {
+      "text": "Use wrap inside a constrained width: wrapping needs one.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Wrapping needs a constrained width."
+      },
+      "target": "wrap",
+      "value": "true"
+    },
+    {
+      "text": "Let the available container decide when a wrapped row needs a second line.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Let the available container decide when a wrapped row needs a second line."
+      },
+      "target": "wrap"
+    },
+    {
+      "text": "Do not let the row's children spill out of the owner: a row without a width constraint can overflow and lose its relationship to the parent.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A row without a width constraint can overflow and lose its relationship to the parent."
+      }
+    },
+    {
+      "text": "To match Figma's Alignment Left, set alignVertical to center; the default, flex-start, is Figma's Top Left.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "alignVertical",
+      "value": "center"
+    },
+    {
+      "text": "Alignment changes the cross-axis position; it never changes row direction.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Alignment changes the cross-axis position; it never changes row direction."
+      },
+      "target": "alignVertical"
+    },
+    {
+      "text": "Use alignment to support the row, not to replace content hierarchy.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Alignment supports the row; it does not replace content hierarchy."
+      },
+      "target": "alignVertical"
+    },
+    {
+      "text": "Keep Color Mode and Stack Context consistent with the surrounding public component: HStack and its children inherit the selected Coin mode context.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "HStack and its children inherit the selected Coin mode context. Keep color mode and stack context consistent with the surrounding public component."
+      }
+    }
+  ],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "No mode changes: HStack uses its default direction and token rhythm.",
+      "from": {
+        "section": "states",
+        "quote": "uses its default direction and token rhythm."
+      }
+    },
+    {
+      "state": "Roomy rhythm",
+      "when": "A larger Slot gap on the owner: the whole group's rhythm changes.",
+      "from": {
+        "section": "states",
+        "quote": "Changing the owner gap changes the whole group."
+      }
+    },
+    {
+      "state": "Host-owned edge",
+      "when": "Padding None: a containing pattern owns the edge inset.",
+      "from": {
+        "section": "states",
+        "quote": "None lets a containing pattern own the edge inset."
+      }
+    },
+    {
+      "state": "Constrained host",
+      "when": "wrap set and the host supplies a width constraint: wrapping appears.",
+      "from": {
+        "section": "states",
+        "quote": "Wrapping appears when the host supplies a constraint."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Keep the children's order meaningful: reverse changes visual order while assistive technology still follows the DOM order.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Reverse changes visual order while assistive technology still follows the DOM order."
+      },
+      "target": "reverse"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Wrap inside a real width boundary",
+      "dont": "Let children spill out of the owner",
+      "why": "A row without a width constraint can overflow and lose its relationship to the parent.",
+      "from": {
+        "section": "doDont",
+        "quote": "Wrap inside a real width boundary"
+      }
+    },
+    {
+      "do": "Let the host own the edge inset",
+      "dont": "Stack component insets without a reason",
+      "why": "Nested owners can create an unintended double edge and weaken alignment.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let the host own the edge inset"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A value, its status and the action for one decision, centered on the cross axis.",
+      "jsx": "<HStack alignVertical=\"center\" modes={{ 'Color Mode': 'Light' }}>\n  <Text text=\"₹2,499\" modes={{ 'Color Mode': 'Light' }} />\n  <Badge label=\"Due today\" modes={{ 'Color Mode': 'Light' }} />\n  <Button label=\"Pay\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</HStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Pair a value, status, and action when they describe one decision."
+      }
+    },
+    {
+      "purpose": "A row that wraps inside a bounded width.",
+      "jsx": "<HStack wrap style={{ width: 150 }} modes={{ 'Color Mode': 'Light' }}>\n  <Badge label=\"Paid\" modes={{ 'Color Mode': 'Light' }} />\n  <Badge label=\"Due today\" modes={{ 'Color Mode': 'Light' }} />\n  <Badge label=\"New\" modes={{ 'Color Mode': 'Light' }} />\n</HStack>",
+      "from": {
+        "section": "sizing",
+        "quote": "HStack can wrap when its width is constrained."
+      }
+    },
+    {
+      "purpose": "A row with Padding None inside a VStack that owns the edge inset.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <HStack justifyHorizontal=\"space-between\" modes={{ 'Color Mode': 'Light', Padding: 'None' }}>\n    <Text text=\"Amount\" modes={{ 'Color Mode': 'Light', Padding: 'None' }} />\n    <Text text=\"₹2,499\" modes={{ 'Color Mode': 'Light', Padding: 'None' }} />\n  </HStack>\n</VStack>",
+      "from": {
+        "section": "configuration",
+        "quote": "None is useful when the host already owns the edge."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "The content to display inside the stack."
+      },
+      {
+        "name": "alignVertical",
+        "type": "ViewStyle['alignItems']",
+        "required": false,
+        "source": "evidence",
+        "values": [
+          "center",
+          "flex-start",
+          "flex-end",
+          "stretch",
+          "baseline"
+        ],
+        "description": "Figma's variant is spelled Aligment; Top Left is the default and maps to top alignment, while Left centers the row. Declared: Alignment of children along the cross axis (vertical for HStack). Maps to alignItems. Defaults to `flex-start` (Figma Alignment=Top Left). Pass `center` for Figma Alignment=Left. This is a layout prop, not a Figma variant.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "justifyHorizontal",
+        "type": "ViewStyle['justifyContent']",
+        "required": false,
+        "source": "types",
+        "values": [
+          "center",
+          "flex-start",
+          "flex-end",
+          "space-between",
+          "space-around",
+          "space-evenly"
+        ],
+        "description": "Justification of children along the main axis (horizontal for HStack). Maps to justifyContent. Defaults to `flex-start`."
+      },
+      {
+        "name": "wrap",
+        "type": "boolean | 'wrap' | 'nowrap' | 'wrap-reverse'",
+        "required": false,
+        "source": "evidence",
+        "description": "Wrapping needs a constrained width. Declared: Controls whether children can wrap. Maps to flexWrap.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "reverse",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Reverses the visual direction. Declared: If true, reverses the direction of the stack (row-reverse). Default false, from the component source.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "as",
+        "type": "any",
+        "required": false,
+        "source": "types",
+        "description": "Prop for web semantics, often mapped to HTML tags."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object to override default variable values."
+      },
+      {
+        "name": "...ViewProps",
+        "type": "ViewProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Background",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "A token collection HStack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "False"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection HStack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection HStack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Padding",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "None"
+        ],
+        "description": "A token collection HStack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection HStack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection HStack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Stack Context",
+        "type": "mode collection",
+        "values": [
+          "Root",
+          "Nested"
+        ],
+        "description": "A token collection HStack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Root"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "The content to display inside the stack.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "HStack has no equalHeight control.",
+        "source": "evidence",
+        "checkedOn": "2026-09-19"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=hstack",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9243-2201",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-hstack--docs"
+  }
+}

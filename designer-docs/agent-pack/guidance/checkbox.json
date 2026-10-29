@@ -1,0 +1,394 @@
+{
+  "slug": "checkbox",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch13, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/checkbox.guide.tsx and src/CheckboxGuide.tsx) and docs/evidence/checkbox.md at 31f1c5e (“docs: add onboarding home page, component search, and favicon”, 29 September); the three files are unchanged from there to docs-next 3ec391a. The guide's Sources note and the evidence were checked on 23 September 2026 on jfs-components 0.1.60, so items citing them carry 2026-09-23 and 0.1.60 and the trace check flags them; the mirror has no 0.1.60 tag, so no GitHub compare to the installed build is possible. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Checkbox.tsx is blob 1e0df89 at v0.1.78, v0.1.78-a116616, -636f3f5 and -c1fa197 and blob 93dea2d at -dbe0e02 (the installed file). Its one change is the focusable prop (default true; on the web false gives role none, tabIndex −1, accessible false and aria-hidden; Checkbox.tsx 90–95, 116, 236–258); in the same change CheckboxItem passes focusable false to its inner Checkbox and gives its row aria-checked and its own Space handler on the web (CheckboxItem.tsx 230–255, 317–323). Every guide sentence quoted here was read against the installed Checkbox.tsx (read, not rendered), with token values through the package's own getVariableByName (lib/commonjs): the box is checkbox/size 18 × 18 with checkbox/radius 4, in Light and Dark (125–126, 156–164), the Sources note's 18×18 px Figma masters; the props are checked, defaultChecked (false), onValueChange, disabled (false), modes, style, accessibilityLabel and focusable (75–96, 108–117), so there is still no state, indeterminate or size prop; checked makes it controlled, and a press reports the next value through onValueChange, keeping it itself only when uncontrolled (118–120, 146–153); disabled ignores presses (147, 244); hover and focus change only the box's look (122–123, 181–223), and the focus ring shows only after Tab (useFocusVisible, 20–54), as the States copy says; the checkmark is drawn only when checked (261–268); a disabled checked box keeps its mark on checkbox/disabledActive rgb(219, 207, 255) (166–172, 231–233), and a disabled unchecked one has stroke rgb(153, 153, 153) (174–179), so the Do & Don't's Preserve the saved value holds; the hit area grows 13 px on each side towards 44 (56–73, 235), which the Sources note says the guide does not claim as a measured web target. Contradicted by the installed build: nothing, so there is no human flag. Missing from the guide and evidence: focusable (new in dbe0e02); the evidence's list of accepted props (“checked/defaultChecked, onValueChange, disabled, accessibilityLabel, and modes”) also leaves out style. The focusable rule rests on the package's own description of the prop. Keyboard: the evidence and the Sources note say Space did not toggle a focused Checkbox on 0.1.60, and by the source it still doesn't on dbe0e02: the Checkbox's Pressable has role checkbox and no key handler (Checkbox.tsx 238–258), and the installed react-native-web 0.21.2 counts Space as a press only on a button element or role button, Enter on any role (dist/modules/usePressEvents/PressResponder.js 66–71, 236–254). So the gap keeps its 0.1.60 evidence quote and date (flagged by the trace check), and it is reported to the coordinator as a possible Coin bug (CheckboxItem fixed the same for its row in dbe0e02). The Sources note's “In the local preview pointer and Enter toggled selection, but native Space on the focused control did not; this is a current package/web interaction limitation.” still holds and is not quoted: the gap and the onValueChange evidence fact carry it. Not recorded: style (the building rules keep style overrides off Coin components); Color Mode (building rules); the Figma state names in the States readout (the JSDoc's eight; the entry keeps the guide's described states), the Sources note's 0.1.60 version line and hit-area sentence (it claims nothing), the Storybook story list, the evidence's diagram and visual-QA notes (documentation chrome), and the playground. Anatomy: Boundary is always drawn; Checkmark only when checked. States are the guide's Configuration cards (Unchecked, Checked, Disabled unchecked, Disabled checked) and its States copy for hover and focus; Checked and Disabled checked cite the anatomy and Do & Don't sentences that describe them. Strength: “Always make the meaning of the choice clear.” applies everywhere but is a writing principle the package does not check, so it is recommended; the “only” in “Use a single-choice control when only one answer is allowed.” names the kind of question. avoidWhen: Sizing's “Use Checkbox Item when …” gives useInstead CheckboxItem; the single-choice rule has no useInstead, since the guide says “a single-choice control” and names no component (CheckboxGroup's entry does the same for its single-choice Don't). Consistency with the Checkbox Item and Checkbox Group entries: CheckboxItem's anatomy calls its Control “The Checkbox” and its accessibility item makes the row the one checkbox and Tab stop on the web; CheckboxGroup's rows are Checkbox Items only, and its notes read Checkbox.tsx 236–258 (the inner Checkbox is role none, tabIndex −1 and aria-hidden). This entry agrees: a Checkbox on its own leaves focusable at true, and a choice that needs a label and a larger selectable row is a Checkbox Item. Toggle's entry sends a setting that waits for a Save button to Checkbox (useInstead), which fits this entry's use when. No disagreement found. content.good is the guide's option copy; bad is its double negative; “Yes” and “No” are not bad copy in themselves (the rule is about mutually exclusive answers). Examples follow the building rules: no Color Mode (the guide sets Light on every component), no modes, no style. Name the choice and Preserve the saved value lay the guide's Choice (a Checkbox and an HTML span in a row, CheckboxGuide.tsx line 11) out with HStack and Text, which stand in for the guide's row and span; accessibilityLabel repeats the visible text, as Choice does. The In context example is the guide's own: CheckboxItem rows in a VStack (line 60), each controlled; its “0 channels selected” readout is the guide's demo and is left out. HStack, VStack and CheckboxItem have guide entries; Text has an undocumented entry. Left out of examples (three at most): the anatomy specimen, the Configuration and States cards, the Sizing pair, the isolated mark, the double-negative and Yes / No Don'ts, and the playground. Sorting (batch 13): one cross-check run, no flags. Its three notes, not flags: /placementAdvice/1's 18 × 18 px is the installed token (checkbox/size 18 through the package's getVariableByName; Checkbox.tsx 125), not only the Figma master; /examples/1's Checkbox Item rows in a VStack are the guide's own code (CheckboxGuide.tsx line 60), which the copy snapshot doesn't carry; /facts/gaps/0 is worded for the web, not only the checked runtime, because the installed source bears that out (Checkbox.tsx 238–258 has no key handler; react-native-web 0.21.2 PressResponder.js 66–71 takes Space only on buttons). Left: the four 0.1.60 trace-check flags (/facts/props/2, /facts/props/3, /facts/gaps/0 and /configuration/7), all still true on dbe0e02 as read here. Coordinator, 29 October: re-run in headless Chrome on the installed build (the Checkbox guide, the “Include savings account” control, focused), Space left it unticked and Enter ticked it, and the control had no aria-checked; filed as Component Bug #535 (Component Fix › To do, Mr. Biscuit), which the gap names. #357 fixed the same for CheckboxItem’s row only and called the standalone Checkbox a known gap outside that ticket.",
+  "useWhen": [
+    {
+      "text": "An independent yes-or-no choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Checkbox for an independent yes-or-no choice."
+      }
+    },
+    {
+      "text": "A set where people can select more than one option.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "People can select more than one option in a set."
+      }
+    },
+    {
+      "text": "Select any that apply: each option keeps its own value.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Each option keeps its own value."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Only one answer is allowed: use a single-choice control.",
+      "strength": "discouraged",
+      "from": {
+        "section": "inContext",
+        "quote": "Use a single-choice control when only one answer is allowed."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "the word names the kind of question (one that allows exactly one answer), and the rule applies to every such question; the guide names no component for it, so the rule has no useInstead."
+      }
+    },
+    {
+      "text": "The choice needs a label and a larger selectable row: use Checkbox Item.",
+      "strength": "discouraged",
+      "useInstead": "CheckboxItem",
+      "from": {
+        "section": "sizing",
+        "quote": "Use Checkbox Item when the choice needs a label and a larger selectable row."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Boundary",
+      "holds": "The box; locates the control in a list or form.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Locates the control in a list or form."
+      }
+    },
+    {
+      "part": "Checkmark",
+      "holds": "Shown when checked; makes the selected value explicit.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Makes the selected value explicit."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Keep the meaning next to the control: a visible description beside the Checkbox.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the meaning next to the control."
+      }
+    },
+    {
+      "text": "Keep the Checkbox at its token-defined size, 18 × 18 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Keep the Checkbox at its token-defined size."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Keep the selected value separate from hover, focus, and availability.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Keep the selected value separate from hover, focus, and availability."
+      }
+    },
+    {
+      "text": "Selection answers the question: checked says whether the choice is selected.",
+      "strength": "recommended",
+      "target": "checked",
+      "from": {
+        "section": "configuration",
+        "quote": "Selection answers the question"
+      }
+    },
+    {
+      "text": "checked makes the Checkbox controlled: the screen keeps the value, and onValueChange reports the next one.",
+      "strength": "recommended",
+      "target": "checked",
+      "from": {
+        "fact": "props:checked"
+      }
+    },
+    {
+      "text": "Without checked, the Checkbox keeps its own value, starting from defaultChecked (false by default).",
+      "strength": "recommended",
+      "target": "defaultChecked",
+      "from": {
+        "fact": "props:defaultChecked"
+      }
+    },
+    {
+      "text": "Availability controls whether that answer can change: disabled true keeps the value from changing.",
+      "strength": "recommended",
+      "target": "disabled",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "availability controls whether that answer can change."
+      }
+    },
+    {
+      "text": "A disabled Checkbox can still show the saved checked value.",
+      "strength": "recommended",
+      "target": "disabled",
+      "value": "true",
+      "from": {
+        "section": "doDont",
+        "quote": "An unavailable control can still show the saved checked value."
+      }
+    },
+    {
+      "text": "Don't clear the selection to show that a control is disabled: clearing the mark misrepresents a preference that is still selected.",
+      "strength": "discouraged",
+      "target": "checked",
+      "from": {
+        "section": "doDont",
+        "quote": "Clearing the mark misrepresents a preference that is still selected."
+      }
+    },
+    {
+      "text": "The package controls hover and keyboard focus itself; Checkbox has no state, indeterminate or size prop.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The package controls hover and keyboard focus internally; it exposes no state, indeterminate, or size prop."
+      },
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "text": "Leave focusable at its default (true) on a Checkbox of its own. On the web, false takes it out of the Tab order and hides it from assistive tech; CheckboxItem sets it on its own Checkbox so the row is the only checkbox.",
+      "strength": "recommended",
+      "target": "focusable",
+      "from": {
+        "fact": "props:focusable"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Always make the meaning of the choice clear.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Always make the meaning of the choice clear."
+        },
+        "absolute": {
+          "word": "Always",
+          "scope": "everywhere",
+          "reason": "it applies to every Checkbox; it is a writing principle that the visible description and accessible name carry out, and nothing in the package checks it, so it stays recommended."
+        }
+      },
+      {
+        "text": "Every choice needs a name.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Every choice needs a name"
+        }
+      },
+      {
+        "text": "Don't leave a checkmark bare: on its own it does not explain what was selected.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "A bare checkmark does not explain what was selected."
+        }
+      },
+      {
+        "text": "Avoid an isolated control: a control with no visible explanation.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Avoid a control with no visible explanation."
+        }
+      },
+      {
+        "text": "Use direct, positive wording: make the checked meaning easy to predict.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Make the checked meaning easy to predict."
+        }
+      },
+      {
+        "text": "Avoid double negatives: they make the selected value difficult to interpret.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Double negatives make the selected value difficult to interpret."
+        }
+      }
+    ],
+    "good": [
+      "Email me a monthly statement",
+      "Send email updates",
+      "Email updates",
+      "SMS updates"
+    ],
+    "bad": [
+      "Do not stop sending email updates"
+    ]
+  },
+  "states": [
+    {
+      "state": "Unchecked",
+      "when": "Not selected: the boundary with no checkmark.",
+      "from": {
+        "section": "configuration",
+        "quote": "Unchecked"
+      }
+    },
+    {
+      "state": "Checked",
+      "when": "Selected: the checkmark makes the selected value explicit.",
+      "from": {
+        "section": "anatomy",
+        "quote": "Makes the selected value explicit."
+      }
+    },
+    {
+      "state": "Disabled, unchecked",
+      "when": "disabled true and not selected: the answer can't change.",
+      "from": {
+        "section": "configuration",
+        "quote": "Disabled, unchecked"
+      }
+    },
+    {
+      "state": "Disabled, checked",
+      "when": "disabled true and selected: an unavailable control can still show the saved checked value.",
+      "from": {
+        "section": "doDont",
+        "quote": "An unavailable control can still show the saved checked value."
+      }
+    },
+    {
+      "state": "Hover and focus",
+      "when": "Temporary feedback while a pointer hovers or Tab reaches the control; they do not change the saved selection.",
+      "from": {
+        "section": "states",
+        "quote": "Hover and focus are temporary feedback. They do not change the saved selection."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Use a visible description and a matching accessible name: accessibilityLabel says the same words as the text beside the Checkbox.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "Use a visible description and a matching accessible name."
+      }
+    },
+    {
+      "text": "accessibilityLabel is the Checkbox's label for screen readers.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Name the choice",
+      "dont": "Avoid an isolated control",
+      "why": "Keep the meaning next to the control.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the choice"
+      }
+    },
+    {
+      "do": "Use direct, positive wording",
+      "dont": "Avoid double negatives",
+      "why": "Double negatives make the selected value difficult to interpret.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use direct, positive wording"
+      }
+    },
+    {
+      "do": "Use independent options",
+      "dont": "Avoid mutually exclusive answers",
+      "why": "Yes and No cannot both be true; use a single-choice control for this question.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use independent options"
+      }
+    },
+    {
+      "do": "Preserve the saved value",
+      "dont": "Do not clear selection to show disabled",
+      "why": "Clearing the mark misrepresents a preference that is still selected.",
+      "from": {
+        "section": "doDont",
+        "quote": "Preserve the saved value"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Name the choice, the guide's Do: the Checkbox with its meaning next to it in a Text, and accessibilityLabel in the same words, so the visible description and the accessible name match. checked and onValueChange stand for the screen's own wiring, which keeps the value and passes it back.",
+      "jsx": "<HStack alignVertical=\"center\">\n  <Checkbox checked={false} onValueChange={(checked) => {}} accessibilityLabel=\"Email me a monthly statement\" />\n  <Text text=\"Email me a monthly statement\" />\n</HStack>",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the meaning next to the control."
+      }
+    },
+    {
+      "purpose": "Select any that apply, the guide's In context: two update channels, each a Checkbox Item row (the guide's Sizing: Checkbox Item when the choice needs a label and a larger selectable row), stacked as the guide's own code stacks them. Each option keeps its own value; checked and onValueChange stand for the screen's own wiring.",
+      "jsx": "<VStack>\n  <CheckboxItem checked={false} onValueChange={(checked) => {}}>Email updates</CheckboxItem>\n  <CheckboxItem checked={false} onValueChange={(checked) => {}}>SMS updates</CheckboxItem>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Each option keeps its own value."
+      }
+    },
+    {
+      "purpose": "Preserve the saved value, the guide's Do: an unavailable control still shows the saved checked value, with the reason in a Text below it.",
+      "jsx": "<VStack>\n  <HStack alignVertical=\"center\">\n    <Checkbox checked disabled accessibilityLabel=\"Email updates\" />\n    <Text text=\"Email updates\" />\n  </HStack>\n  <Text text=\"Saved preference; editing is unavailable.\" />\n</VStack>",
+      "from": {
+        "section": "doDont",
+        "quote": "An unavailable control can still show the saved checked value."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "onValueChange",
+      "description": "On the web, a pointer click and Enter toggled the Checkbox.",
+      "quote": "The local web control toggled by pointer click and Enter.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "list": "props",
+      "name": "disabled",
+      "description": "On the web, a disabled Checkbox exposed aria-disabled true.",
+      "quote": "The disabled control exposed `aria-disabled=true`.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "On the web, a focused Checkbox does not toggle with Space (Enter does): a package and platform interaction defect, still there on dbe0e02 (Component Bug #535).",
+      "quote": "A focused Checkbox did not toggle after both locator Space and native browser `space` key input in the checked runtime; this is a package/platform interaction defect, not a guide shim.",
+      "checkedOn": "2026-09-23",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

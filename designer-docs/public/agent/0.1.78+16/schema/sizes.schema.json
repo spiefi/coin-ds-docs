@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coin agent pack file sizes",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packVersion",
+    "tokenizer",
+    "files"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "packVersion": {
+      "type": "string"
+    },
+    "tokenizer": {
+      "type": "string",
+      "description": "How tokens were counted: the API counter and model, or 'estimate: chars/3.5'"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "bytes",
+          "tokens",
+          "estimated"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "bytes": {
+            "type": "integer"
+          },
+          "tokens": {
+            "type": "integer"
+          },
+          "estimated": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

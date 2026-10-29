@@ -1,0 +1,242 @@
+{
+  "slug": "autoplaycontrol",
+  "label": "Autoplay Control",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "files": [
+    "src/guides/autoplaycontrol.guide.tsx",
+    "src/AutoplayControlGuide.tsx"
+  ],
+  "evidence": "docs/evidence/autoplaycontrol.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T08:00:01.718Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "play",
+    "pause",
+    "carousel",
+    "slideshow"
+  ],
+  "title": "Autoplay Control",
+  "summary": "Let people pause and resume content that advances on its own, such as a slideshow.",
+  "corePrinciple": "Show the action a press will take: pause while content plays, play while it is stopped.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7522-7658",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-autoplaycontrol--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A fixed circle around one icon",
+      "description": "The control is a single pressable circle. Its state property decides whether the icon is pause or play.",
+      "blocks": [
+        "Shown at 2.5×",
+        "pause",
+        "play",
+        "36 × 36",
+        "24",
+        "1",
+        "2",
+        "3",
+        "Container",
+        "A 36 × 36 circle. Width, height, radius, and the white fill come from Autoplay Control tokens.",
+        "Pause icon",
+        "Shown for state=\"pause\", the default, while content advances.",
+        "Play icon",
+        "Shown for state=\"play\", while content is stopped. Both icons are 24 px and black.",
+        "Component bounds",
+        "Measured size (px)"
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Container",
+          "note": "A 36 × 36 circle. Width, height, radius, and the white fill come from Autoplay Control tokens."
+        },
+        {
+          "part": "Pause icon",
+          "note": "Shown for state=\"pause\", the default, while content advances."
+        },
+        {
+          "part": "Play icon",
+          "note": "Shown for state=\"play\", while content is stopped. Both icons are 24 px and black."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "One property: the action to offer",
+      "description": "state swaps the icon between pause and play. Nothing else changes: tokens fix the circle and its colors in a single mode, and the icon is always 24 px.",
+      "blocks": [
+        "state=\"pause\"",
+        "Pause while content advances",
+        "The default. It tells people a press will stop the slideshow, video, or audio.",
+        "state=\"play\"",
+        "Play while content is stopped",
+        "Shown after playback stops. A press should start it again."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Enabled, pressed, and unavailable",
+      "description": "disabled fades the control and ignores presses. Pressed feedback is shown only while a pointer is down.",
+      "blocks": [
+        "Enabled",
+        "Ready",
+        "Full opacity and pressable.",
+        "disabled",
+        "Unavailable",
+        "Half opacity. Presses are ignored and the control leaves the Tab order.",
+        "Pressed, hover, and focus",
+        "While pressed, the control drops to 70% opacity. It adds no hover style of its own; keyboard focus shows the browser’s standard focus ring. Try it in the live example above."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Tokens fix the size",
+      "description": "The control does not stretch or shrink with its host. Leave room around the 36 px circle so it is easy to press.",
+      "blocks": [
+        "48 px square",
+        "36 × 36 px",
+        "160 px strip",
+        "Full-width media strip"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The icon is the whole message",
+      "description": "The control shows no text. Its icon has to describe what a press will do, and nearby content has to show what is playing.",
+      "blocks": [
+        "01",
+        "Show the action, not the status",
+        "While slides advance, show pause. When they stop, show play.",
+        "Slides advancing",
+        "02",
+        "Keep progress visible",
+        "Carousel’s Numbered type places the control beside NumberPagination, so people can see which slide is showing.",
+        "03",
+        "Use it for moving content",
+        "Canonical guidance names video, audio, and slideshow playback as its uses."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Pause and resume a slideshow",
+      "description": "The public Carousel’s Numbered type places AutoplayControl beside NumberPagination. The Carousel owns the timer and swaps the control’s state.",
+      "blocks": [
+        "Slide 1 of 3. Press play to start the slideshow."
+      ],
+      "specimen": [
+        "Start a SIP",
+        "Invest as little as ₹100 a month into top mutual funds.",
+        "Scan & Pay",
+        "Pay any QR code in seconds, right from your home screen.",
+        "Track expenses",
+        "Get a clear view of where your money goes each month.",
+        "1",
+        "2",
+        "3"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep the icon honest and visible",
+      "description": "The control only works when its icon matches what the content is doing and its white circle stands out from the surface.",
+      "blocks": [
+        "Do",
+        "Slides advancing",
+        "Show pause while slides advance",
+        "The icon matches what a press will do: stop the slides.",
+        "Don’t",
+        "Show play while slides advance",
+        "The play icon suggests the slides are already stopped, so people cannot tell how to pause them.",
+        "Place it on media or a dark surface",
+        "The white circle stands out, so the target is easy to find.",
+        "Place it on a white surface",
+        "The white circle disappears, leaving an unbounded glyph with no visible target."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Show pause while slides advance",
+            "caption": "The icon matches what a press will do: stop the slides.",
+            "specimen": "Slides advancing"
+          },
+          "dont": {
+            "title": "Show play while slides advance",
+            "caption": "The play icon suggests the slides are already stopped, so people cannot tell how to pause them.",
+            "specimen": "Slides advancing"
+          }
+        },
+        {
+          "do": {
+            "title": "Place it on media or a dark surface",
+            "caption": "The white circle stands out, so the target is easy to find.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Place it on a white surface",
+            "caption": "The white circle disappears, leaving an unbounded glyph with no visible target.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Public AutoplayControl and its Carousel composition",
+      "description": "The guide renders the public jfs-components AutoplayControl on its own and inside the public Carousel.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "autoplay control set, node 7522:7658 · state pause and play, 36 × 36",
+        "02",
+        "Canonical Storybook",
+        "AutoplayControl docs and stories; Carousel Numbered story",
+        "Default story",
+        "Play story",
+        "Disabled story",
+        "Carousel · Numbered",
+        "Checked 1 October 2026",
+        "Declared and installed jfs-components is 0.1.78 from the team’s private package repository. Figma’s state variants match the package’s state property. The control is named “Pause” or “Play” after its state; developers can set a more specific accessibilityLabel, such as “Pause slideshow”, as Storybook asks. The control has no timer: Carousel’s Numbered type owns autoplay, with a 4-second default interval.",
+        "jfs-components",
+        "0.1.78",
+        "state",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

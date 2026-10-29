@@ -1,0 +1,786 @@
+{
+  "schemaVersion": 1,
+  "id": "HelloJioInput",
+  "slug": "hellojioinput",
+  "category": "input",
+  "tags": [
+    "chat",
+    "assistant",
+    "prompt",
+    "composer",
+    "send message",
+    "ask"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T08:26:34Z",
+    "flags": []
+  },
+  "summary": "Use a HelloJio Input for the HelloJio assistant’s prompt: people type a question and send it, with optional attachments above.",
+  "useWhen": [
+    {
+      "text": "The assistant's prompt: people type a question and send it, with optional attachments above.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a HelloJio Input for the HelloJio assistant’s prompt: people type a question and send it, with optional attachments above."
+      }
+    },
+    {
+      "text": "One short question, one tap to send.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One short question, one tap to send."
+      }
+    },
+    {
+      "text": "Asking the assistant a question: the brand mark and send button promise an answer.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The brand mark and send button promise an answer."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Search: people expect an answer, not a list of results.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "People expect an answer, not a list of results."
+      }
+    },
+    {
+      "text": "A search row: the upstream Storybook docs, as the evidence records them, say it is not a search row and point to InputSearch for search.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "\"not a form field and not a search row\". Use FormField or MessageField for labelled input, InputSearch for search."
+      },
+      "useInstead": "InputSearch"
+    },
+    {
+      "text": "Labelled input, as in a form: the upstream Storybook docs, as the evidence records them, say it is not a form field and point to FormField or MessageField for labelled input.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "\"not a form field and not a search row\". Use FormField or MessageField for labelled input, InputSearch for search."
+      },
+      "useInstead": "FormField"
+    },
+    {
+      "text": "Labelled input, as in a form: the upstream Storybook docs, as the evidence records them, point to MessageField or FormField for labelled input.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "\"not a form field and not a search row\". Use FormField or MessageField for labelled input, InputSearch for search."
+      },
+      "useInstead": "MessageField"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Brand icon",
+      "holds": "The assistant's brand mark; it can be turned off.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The HelloJio mark; it can be turned off."
+      }
+    },
+    {
+      "part": "Prompt",
+      "holds": "The placeholder, then the question people type; one line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The placeholder, then the question people type; one line."
+      }
+    },
+    {
+      "part": "Send",
+      "holds": "Gold button that sends the text; Return sends too.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Gold button that sends the text; Return sends too."
+      }
+    },
+    {
+      "part": "Pill",
+      "holds": "Grey rounded surface; white with a border while focused.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey rounded surface; white with a border while focused."
+      }
+    },
+    {
+      "part": "Attachments",
+      "holds": "Files people add, inside the pill above the prompt.",
+      "required": false,
+      "from": {
+        "section": "configuration",
+        "quote": "Attachments people add sit inside the pill, above the prompt."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "leading",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "trailing",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "attachments",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "It fills its container's width and is 38 px tall (36 px in Jio Plus, which has no border), with an 18 px brand icon and a 26 px send button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "HelloJio Input fills its container’s width and is 38 px tall (36 px in Jio Plus, which has no border), with an 18 px brand icon and a 26 px send button."
+      }
+    },
+    {
+      "text": "Attachments add height above the prompt.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Attachments add height above the prompt."
+      },
+      "target": "attachments"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The brand icon and send button are on by default and can each be turned off.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The brand icon and send button are on by default and can each be turned off."
+      }
+    },
+    {
+      "text": "Turn the brand icon off (leading={null}) on screens that already show the assistant's brand mark.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For screens that already show the HelloJio mark."
+      },
+      "target": "leading"
+    },
+    {
+      "text": "Without send (trailing={null}), the Return key still sends the text.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Return key still sends the text."
+      },
+      "target": "trailing"
+    },
+    {
+      "text": "attachments holds the files people added: they sit above the prompt, and the pill grows to fit.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Files people added sit above the prompt, and the pill grows to fit."
+      },
+      "target": "attachments"
+    },
+    {
+      "text": "With two attachments the pill grows, and the chips scroll sideways when they run out of room; the chips sit in a ScrollArea › HStack, as in Figma's attachment slot and the guide's own chips.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The pill grows, and the chips scroll sideways when they run out of room."
+      },
+      "target": "attachments"
+    },
+    {
+      "text": "Let people remove attachments: the close button takes the file out.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The close button takes the file out."
+      },
+      "target": "attachments"
+    },
+    {
+      "text": "Don't show a close icon that does nothing: it looks tappable but nothing happens.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "It looks tappable but nothing happens."
+      },
+      "target": "attachments"
+    },
+    {
+      "text": "Over imagery, jioPlus makes the idle pill frosted glass.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Over imagery, Jio Plus makes the idle pill frosted glass."
+      },
+      "target": "jioPlus",
+      "value": "true"
+    },
+    {
+      "text": "Jio Plus needs content behind the pill; on a flat sheet the frost has no job (the upstream Storybook docs, as the evidence records them).",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Jio Plus needs content behind the pill; on a flat sheet \"the frost has no job\"."
+      },
+      "target": "jioPlus",
+      "value": "true"
+    },
+    {
+      "text": "The package sets the state from focus and the Jio Plus option.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The package sets the state from focus and the Jio Plus option."
+      }
+    },
+    {
+      "text": "Don't set Hello Jio Input State: states come from focus and jioPlus.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "States come from focus and `jioPlus`; do not author `Hello Jio Input State`."
+      },
+      "target": "Hello Jio Input State"
+    },
+    {
+      "text": "value makes the field controlled; pair it with onChangeText.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "value"
+    },
+    {
+      "text": "On send, the screen adds the question to the conversation and clears the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds the question to the conversation and clears the field."
+      },
+      "target": "onSubmit"
+    },
+    {
+      "text": "Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field."
+      },
+      "target": "onSubmit"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write a short, open prompt in sentence case with no full stop, such as “Ask me anything”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write a short, open prompt in sentence case with no full stop, such as “Ask me anything”."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Keep the prompt short: the whole prompt fits in the pill.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The whole prompt fits in the pill."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Don't write a long prompt: it is cut off in the pill.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It is cut off in the pill."
+        },
+        "target": "placeholder"
+      }
+    ],
+    "good": [
+      "Ask me anything",
+      "Ask about your gold savings"
+    ],
+    "bad": [
+      "Ask me anything about your gold, savings, loans, or bills",
+      "Search transactions"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "The pill is grey while idle.",
+      "from": {
+        "section": "states",
+        "quote": "The pill is grey while idle"
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "The pill turns white with a border while people type.",
+      "from": {
+        "section": "states",
+        "quote": "turns white with a border while people type"
+      }
+    },
+    {
+      "state": "Jio Plus",
+      "when": "With jioPlus, frosted glass over imagery while not focused; the prompt and typed text stay readable.",
+      "from": {
+        "section": "states",
+        "quote": "Frosted glass over imagery while not focused. The prompt and typed text stay readable."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "Half opacity; typing and sending are off.",
+      "from": {
+        "section": "states",
+        "quote": "Half opacity; typing and sending are off."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The prompt is also the field's accessible name, so keep it meaningful.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The prompt is also the field’s accessible name, so keep it meaningful."
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "accessibilityLabel names the field; left out, the name is the placeholder.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/15"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web Tab goes from the input straight to Send.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web Tab goes from the input straight to Send."
+      }
+    },
+    {
+      "text": "Disabled: on the web the input is read-only, and the send button is aria-disabled and out of the tab order.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`disabled`: opacity 0.5, input `readonly`, send `aria-disabled` and out of the tab order."
+      },
+      "target": "disabled"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the prompt short",
+      "dont": "Write a long prompt",
+      "why": "It is cut off in the pill.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the prompt short"
+      }
+    },
+    {
+      "do": "Use it to ask HelloJio",
+      "dont": "Use it for search",
+      "why": "People expect an answer, not a list of results.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use it to ask HelloJio"
+      }
+    },
+    {
+      "do": "Let people remove attachments",
+      "dont": "Show a close icon that does nothing",
+      "why": "It looks tappable but nothing happens.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let people remove attachments"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context: a Card holding a short conversation (a ChatBubble with the person's question, aligned to the end as in the guide, and one with the assistant's answer) and the prompt under it. On send, the screen adds the question to the conversation and clears the field, and it ignores an empty prompt. The literal value and the empty handlers stand for the screen's own state.",
+      "jsx": "<Card>\n  <VStack>\n    <ChatBubble role=\"user\" text=\"What is the gold rate today?\" style={{ alignSelf: 'flex-end' }} />\n    <ChatBubble role=\"assistant\" text=\"24K gold is ₹7,412 per gram today.\" />\n    <HelloJioInput value=\"\" onChangeText={(text) => {}} onSubmit={(text) => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds the question to the conversation and clears the field. It also ignores an empty prompt, because Send works even when the field is empty."
+      }
+    },
+    {
+      "purpose": "Without the brand icon, from the guide's Configuration: leading={null} for a screen that already shows the assistant's brand mark; the prompt and send button stay.",
+      "jsx": "<HelloJioInput leading={null} value=\"\" onChangeText={(text) => {}} onSubmit={(text) => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "For screens that already show the HelloJio mark."
+      }
+    },
+    {
+      "purpose": "With an attachment, from the guide's Configuration: a file people added sits above the prompt and the pill grows to fit. The chip is a ChatAttachment in a horizontal ScrollArea › HStack, as in Figma's attachment slot and the guide's own chips; its onClose lets people take the file out (the screen removes it from its list).",
+      "jsx": "<HelloJioInput\n  value=\"\"\n  onChangeText={(text) => {}}\n  onSubmit={(text) => {}}\n  attachments={\n    <ScrollArea direction=\"horizontal\">\n      <HStack alignVertical=\"center\">\n        <ChatAttachment title=\"Statement_Sep\" subtitle=\"PDF file\" onClose={() => {}} />\n      </HStack>\n    </ScrollArea>\n  }\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Files people added sit above the prompt, and the pill grows to fit."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Ask me anything",
+        "description": "Placeholder shown when empty. Defaults to `\"Ask me anything\"`. Default \"Ask me anything\", from the component source."
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Controlled value. Pair with `onChangeText`."
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "",
+        "description": "Uncontrolled initial value. Ignored when `value` is provided. Default \"\", from the component source."
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called whenever the text changes."
+      },
+      {
+        "name": "onSubmit",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Still receives empty text when the field is empty, and the field is not cleared after sending. Declared: Called when the user submits — either via the send button or the keyboard return key. Receives the current text. This is the primary action hook.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "leadingIconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_hellojio",
+        "description": "Leading icon name from the registry. Defaults to `\"ic_hellojio\"`. Ignored when `leading` is provided. Default \"ic_hellojio\", from the component source."
+      },
+      {
+        "name": "leading",
+        "type": "React.ReactNode | null",
+        "required": false,
+        "source": "types",
+        "description": "Slot replacing the default leading icon (Figma Slot \"start\"). Receives `modes` recursively. Pass `null` to hide the leading icon entirely (the design's `startSlot={false}`), mirroring `trailing`."
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode | null",
+        "required": false,
+        "source": "types",
+        "description": "Slot replacing the default send `IconButton` (Figma Slot \"end\"). Pass `null` to hide the trailing control entirely."
+      },
+      {
+        "name": "attachments",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional slot rendered inside the pill, stacked **above** the input row (Figma \"Slot\" / `attachmentSlot`). Use it for `ChatAttachment` chips the user has added to the prompt. `modes` cascade into the slotted children. When omitted, the pill is a single input row (default)."
+      },
+      {
+        "name": "sendIconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_send_message",
+        "description": "Icon name for the default send button. Defaults to `\"ic_send_message\"`. Ignored when `trailing` is provided. Default \"ic_send_message\", from the component source."
+      },
+      {
+        "name": "jioPlus",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "The input sits above the glass layer, so the prompt and typed text stay readable on a photo. Declared: When `true`, renders the IdleJioPlus glass surface while unfocused. Focus still switches to the Active (solid white + border) state. Default false, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Opacity 0.5; on the web the input is read-only and the send button is aria-disabled and out of the tab order. Declared: Disables typing and the send button. Default false, from the component source.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes. Visual Idle/Active/IdleJioPlus is derived from focus + `jioPlus`."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      },
+      {
+        "name": "inputStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Text input style override."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Defaults to the placeholder.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onFocus",
+        "type": "RNTextInputProps[\"onFocus\"]",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onBlur",
+        "type": "RNTextInputProps[\"onBlur\"]",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...Omit<RNTextInputProps, 'style' | 'value' | 'defaultValue' | 'onChangeText' | 'onFocus' | 'onBlur' | 'placeholder' | 'editable' | 'onSubmitEditing'>",
+        "type": "Omit<RNTextInputProps, 'style' | 'value' | 'defaultValue' | 'onChangeText' | 'onFocus' | 'onBlur' | 'placeholder' | 'editable' | 'onSubmitEditing'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Hello Jio Input State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Hello Jio Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "L",
+          "XL"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection HelloJioInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      }
+    ],
+    "slots": [
+      {
+        "name": "leading",
+        "type": "React.ReactNode | null",
+        "description": "Slot replacing the default leading icon (Figma Slot \"start\"). Receives `modes` recursively. Pass `null` to hide the leading icon entirely (the design's `startSlot={false}`), mirroring `trailing`.",
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode | null",
+        "description": "Slot replacing the default send `IconButton` (Figma Slot \"end\"). Pass `null` to hide the trailing control entirely.",
+        "source": "types"
+      },
+      {
+        "name": "attachments",
+        "type": "React.ReactNode",
+        "description": "Optional slot rendered inside the pill, stacked **above** the input row (Figma \"Slot\" / `attachmentSlot`). Use it for `ChatAttachment` chips the user has added to the prompt. `modes` cascade into the slotted children. When omitted, the pill is a single input row (default).",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "description": "Called whenever the text changes.",
+        "source": "types"
+      },
+      {
+        "name": "onSubmit",
+        "type": "(text: string) => void",
+        "description": "Called when the user submits — either via the send button or the keyboard return key. Receives the current text. This is the primary action hook.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The send button is 26 × 26 px against Figma's 28 px (IconButton's known 2 px size gap).",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Send works with an empty field and the text stays after sending: onSubmit receives empty text and the field is not cleared, so the screen ignores empty prompts and clears the field itself. The evidence records this as an open question.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Figma's component has no size or disabled property, while the package has a disabled prop.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=hellojioinput",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7584-1796",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-hellojioinput--docs"
+  }
+}
