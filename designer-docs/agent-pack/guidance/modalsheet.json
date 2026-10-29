@@ -1,9 +1,9 @@
 {
   "slug": "modalsheet",
-  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
   "extractedBy": "Claude Code (claude-opus-5-5), Penny run run_19b90d38, extraction worker",
   "extractedOn": "2026-10-29",
-  "notes": "Extracted from the guide and evidence at e7ed622 on the installed build: jfs-components 0.1.78, mirror tag v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October 2026), the build the guide's Sources were checked on (28 October). Where the evidence's older sections (Contract, Accessibility, the #234 'still open' list) disagree with its dbe0e02 section or the package types, the newer ones were used: focus is moved in, kept in and returned; Escape closes the sheet from the text field too; the scrim calls onRequestClose when onOverlayPress is omitted; and 'with the drag off the sheet never calls onRequestClose' no longer holds, since Escape calls it. The guide names no other component to use instead: 'a new flow deserves its own screen' means an app screen, not the Screen component, so the avoidWhen rule has no useInstead. The examples are the guide's own slot content (an AppBar with JioDot and a Close IconButton, the one line of Text, a VStack spacer when the sheet fills the screen, and a HelloJioInput), without the guide's Color Mode Light, the close IconButton's Emphasis Low (no guide copy says that content needs it), Page type MainPage and fillHeight true (both defaults), and without presentationProgress and the page-stack hook, which need a shared value from the screen. The guide's own App Bar has no title, so its dialogs are unnamed; the examples keep it that way rather than invent one.",
+  "notes": "Extracted from the guide and evidence at e7ed622 on the installed build: jfs-components 0.1.78, mirror tag v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October 2026), the build the guide's Sources were checked on (28 October). Where the evidence's older sections (Contract, Accessibility, the #234 'still open' list) disagree with its dbe0e02 section or the package types, the newer ones were used: focus is moved in, kept in and returned; Escape closes the sheet from the text field too; the scrim calls onRequestClose when onOverlayPress is omitted; and 'with the drag off the sheet never calls onRequestClose' no longer holds, since Escape calls it. The guide names no other component to use instead: 'a new flow deserves its own screen' means an app screen, not the Screen component, so the avoidWhen rule has no useInstead. The examples are the guide's own slot content (an AppBar with JioDot and a Close IconButton, the one line of Text, a VStack spacer when the sheet fills the screen, and a HelloJioInput), without the guide's Color Mode Light, the close IconButton's Emphasis Low (no guide copy says that content needs it), Page type MainPage and fillHeight true (both defaults), and without presentationProgress and the page-stack hook, which need a shared value from the screen. The guide's own App Bar has no title, so its dialogs are unnamed; the examples keep it that way rather than invent one. Refreshed 29 October 2026 for guide fix #543 (3f56271): the evidence now calls the HelloJio Input's surface its field; the gap quotes the new sentence and /configuration/12 and the gap say field in their own words.",
   "useWhen": [
     {
       "text": "A task that slides up over the page and goes away when it's done.",
@@ -225,7 +225,7 @@
       }
     },
     {
-      "text": "Put the AppBar and the HelloJioInput straight in the slot (or in a fragment), not inside a component of your own: the sheet adjusts only the children it can see, so under Page type JioPlus a nested AppBar shows white on the grey sheet and a nested field's pill matches the sheet.",
+      "text": "Put the AppBar and the HelloJioInput straight in the slot (or in a fragment), not inside a component of your own: the sheet adjusts only the children it can see, so under Page type JioPlus a nested AppBar shows white on the grey sheet and a nested HelloJioInput's field matches the sheet.",
       "strength": "recommended",
       "target": "children",
       "from": {
@@ -498,8 +498,8 @@
   ],
   "gaps": [
     {
-      "text": "Under Page type JioPlus, an AppBar or HelloJioInput rendered inside a consumer's own component in the slot isn't recognised: the AppBar loses Page type (white on the grey sheet) and the field's pill isn't repainted, so it still matches the sheet. The #255 fix doesn't reach them; the evidence leaves this limit for Marcin to judge.",
-      "quote": "an AppBar or a HelloJio Input it renders inside isn't recognised: the AppBar loses Page type (white on the grey sheet) and the pill isn't repainted, so it still matches the sheet.",
+      "text": "Under Page type JioPlus, an AppBar or HelloJioInput rendered inside a consumer's own component in the slot isn't recognised: the AppBar loses Page type (white on the grey sheet) and the HelloJioInput's field isn't repainted, so it still matches the sheet. The #255 fix doesn't reach them; the evidence leaves this limit for Marcin to judge.",
+      "quote": "an AppBar or a HelloJio Input it renders inside isn't recognised: the AppBar loses Page type (white on the grey sheet) and the field isn't repainted, so it still matches the sheet.",
       "checkedOn": "2026-10-13",
       "checkedVersion": "0.1.78-c1fa197"
     },

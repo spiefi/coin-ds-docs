@@ -1,9 +1,9 @@
 {
   "slug": "profilecard",
-  "guideCommit": "3542b1b255de6faac8e365d34c14d6f65a716707",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
   "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, extraction worker",
   "extractedOn": "2026-10-29",
-  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/profilecard.md at 3542b1b. The guide's Sources note was checked on 20 October 2026 on the 19 October build of Biscuit's main, the build the evidence names (mirror v0.1.78-c7d3348, Biscuit's main at c7d3348), so items citing the note or the evidence carry that build. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Installed ProfileCard.tsx, UpiHandle.tsx and the profileCard tokens still match most guide sentences used here, read from source, not run (token values through the package's own resolver): the panel is navy #00065a (Premium: gold #cea15a with darker gold pills #b78d49 and divider #ad8444, and dark #1e1a14 text), with 12 px corners, 20 px padding and a 12 px gap between the header, the divider and each body row (body children sit directly in the panel), 344 wide unless width says otherwise; the avatar is 42 px, a monogram unless avatarSource is set; the badge is badgeIcon in an Icon Capsule on a white disc, and null removes it; the name is a 14 px bold ListItem title on one line ending in …; the handles are UpiHandle pills in a wrapping row, a pill with onPress is a button that scales to 0.98 while pressed, one without is text, and [] removes the row; the divider shows only with a body and showDivider; header replaces the avatar, name and handles; the card root is a View, never pressable, with no selected, disabled or loading prop; under context 10 jioPlus ListItem titles, NavArrows and the avatar's initials are white, a Divider is #191f6e, a Button gold #cea15a with a dark label, and pills and the avatar #021891. Where the guide states #354's problems, the installed source contradicts it, apparently with #354's fix (the ticket is Component Fix, In progress, and no evidence verifies it on dbe0e02): (1) enhanceOnDark paints a plain Text and a ListItem's support text in the on-dark colour (context10/text/color: white, dark in Premium), so Configuration's “plain Text and support text don’t”, the Don't “They stay dark and almost disappear.” and the Sources sentence no longer hold; (2) context 10 jioPlus and List Item Style Default are forced on the header and on every body child (cloneChildrenWithModes with forced modes; the children JSDoc now says a child's own modes cannot unset the context), so “a child’s own modes override the card’s” holds only for other collections, and Boxed no longer reaches the rows (the Don't “White boxes cover the header and rows, and the name disappears.” and the Sources Boxed sentence); (3) the badge is forced to AppearanceBrand Neutral and Emphasis Low, which resolves the glyph to #24262b, Figma's grey, and is nudged to about Figma's (25, 24), so “the QR glyph is near-black, not grey” no longer holds; (4) each handle sits in a wrapper with flexShrink 1 and minWidth 0 and UpiHandle's label is one shrinking line ending in …, so a long handle should now end in … inside the card (not run), and the Don't “It never ends in …, so the pill runs past the panel.” and the Sources sentence look out of date; (5) the 48 px header still holds: the title token is 16 px, but safeTextLineHeight raises it to 17 (14 × 1.2, rounded up). The Storybook sentence was not checked. All eight problems are still recorded as gaps with their quotes and the 20 October build, as the guide and evidence state them, since nothing verifies the fixes, and the three Don'ts are extracted as the guide writes them. Examples follow the building rules: no Color Mode (the guide sets Light on every ProfileCard, Title and VStack), no Profile Card Appearance Premium (no guide sentence says which content needs it), and no Button / Size S on the Upgrade Button (a slot child takes its look from its parent); the In context VStack's Slot gap M is left out. Avatar has no entry in this pack, and ProfileCard takes the avatar through name, monogram and avatarSource, so none is needed; the body rows are ListItems (undocumented in this pack: facts only) and a Divider, as the guide composes them. The guide's photo is a docs asset (jio-gold-logo.png); the Photo example passes a { uri } that stands for the business's own logo. Copy is the guide's own (Profile, Your account and payments, Priya Sharma, PS, priya@jio, 98765 43210, JioFinance+, Upgrade, Linked bank accounts, Jio Gold, jiogold@jio). Left out of examples (the pack allows three): the playground and its Last press readout, With a body (shown inside In context), Premium and Premium with a body, Name only, Fills its host, Long name and handle, the readouts and the Don'ts. Not recorded: style (the building rules keep style off Coin components); the modes the evidence says also change the look (Avatar Size, Icon Capsule Size, Attached Border, Slot gap, AppearanceBrand, Emphasis, Semantic Intent) or do nothing (Page type, Context, Badge Size), which its Limits keep out of the guide; the header override's details; Biscuit's handwritten ProfileCard.mdx (a profile header on a dark surface, not a light product card or a settings form), since the guide doesn't say it and that page isn't deployed, so avoidWhen holds only the guide's missing states and whole-card press; the evidence's “a child's own modes win” as a children fact, which the installed source contradicts; the unnamed avatar and badge images and dark mode (the pack's rules). No Sources line renders with a missing value. Sorting (batch 6), after the cross-check: /accessibility/1 now says only that the card itself isn't pressable; the context 10 fact keeps “white” to the avatar's initials, as the evidence does; the gaps name Component Bug #354 as the evidence does, without a board status. Second cross-check (batch 6): the QR badge part no longer says where the badge sits (the guide does not; the evidence records its position as a discrepancy), the handle onPress item says only what its anatomy sentence says, and the long-handle gap no longer adds advice (that stays in the content rule from the Do). Third cross-check (batch 6): the Avatar and Name parts are not always present (header replaces the avatar, name and handles together), so their anatomy required is false.",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/profilecard.md at 3542b1b. The guide's Sources note was checked on 20 October 2026 on the 19 October build of Biscuit's main, the build the evidence names (mirror v0.1.78-c7d3348, Biscuit's main at c7d3348), so items citing the note or the evidence carry that build. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Installed ProfileCard.tsx, UpiHandle.tsx and the profileCard tokens still match most guide sentences used here, read from source, not run (token values through the package's own resolver): the panel is navy #00065a (Premium: gold #cea15a with darker gold UPI Handles #b78d49 and divider #ad8444, and dark #1e1a14 text), with 12 px corners, 20 px padding and a 12 px gap between the header, the divider and each body row (body children sit directly in the panel), 344 wide unless width says otherwise; the avatar is 42 px, a monogram unless avatarSource is set; the badge is badgeIcon in an Icon Capsule on a white disc, and null removes it; the name is a 14 px bold ListItem title on one line ending in …; the handles are UpiHandles in a wrapping row, a UPI Handle with onPress is a button that scales to 0.98 while pressed, one without is text, and [] removes the row; the divider shows only with a body and showDivider; header replaces the avatar, name and handles; the card root is a View, never pressable, with no selected, disabled or loading prop; under context 10 jioPlus ListItem titles, NavArrows and the avatar's initials are white, a Divider is #191f6e, a Button gold #cea15a with a dark label, and UPI Handles and the avatar #021891. Where the guide states #354's problems, the installed source contradicts it, apparently with #354's fix (the ticket is Component Fix, In progress, and no evidence verifies it on dbe0e02): (1) enhanceOnDark paints a plain Text and a ListItem's support text in the on-dark colour (context10/text/color: white, dark in Premium), so Configuration's “plain Text and support text don’t”, the Don't “They stay dark and almost disappear.” and the Sources sentence no longer hold; (2) context 10 jioPlus and List Item Style Default are forced on the header and on every body child (cloneChildrenWithModes with forced modes; the children JSDoc now says a child's own modes cannot unset the context), so “a child’s own modes override the card’s” holds only for other collections, and Boxed no longer reaches the rows (the Don't “White boxes cover the header and rows, and the name disappears.” and the Sources Boxed sentence); (3) the badge is forced to AppearanceBrand Neutral and Emphasis Low, which resolves the glyph to #24262b, Figma's grey, and is nudged to about Figma's (25, 24), so “the QR glyph is near-black, not grey” no longer holds; (4) each handle sits in a wrapper with flexShrink 1 and minWidth 0 and UpiHandle's label is one shrinking line ending in …, so a long handle should now end in … inside the card (not run), and the Don't “It never ends in …, so the UPI Handle runs past the panel.” and the Sources sentence look out of date; (5) the 48 px header still holds: the title token is 16 px, but safeTextLineHeight raises it to 17 (14 × 1.2, rounded up). The Storybook sentence was not checked. All eight problems are still recorded as gaps with their quotes and the 20 October build, as the guide and evidence state them, since nothing verifies the fixes, and the three Don'ts are extracted as the guide writes them. Examples follow the building rules: no Color Mode (the guide sets Light on every ProfileCard, Title and VStack), no Profile Card Appearance Premium (no guide sentence says which content needs it), and no Button / Size S on the Upgrade Button (a slot child takes its look from its parent); the In context VStack's Slot gap M is left out. Avatar has no entry in this pack, and ProfileCard takes the avatar through name, monogram and avatarSource, so none is needed; the body rows are ListItems (undocumented in this pack: facts only) and a Divider, as the guide composes them. The guide's photo is a docs asset (jio-gold-logo.png); the Photo example passes a { uri } that stands for the business's own logo. Copy is the guide's own (Profile, Your account and payments, Priya Sharma, PS, priya@jio, 98765 43210, JioFinance+, Upgrade, Linked bank accounts, Jio Gold, jiogold@jio). Left out of examples (the pack allows three): the playground and its Last press readout, With a body (shown inside In context), Premium and Premium with a body, Name only, Fills its host, Long name and handle, the readouts and the Don'ts. Not recorded: style (the building rules keep style off Coin components); the modes the evidence says also change the look (Avatar Size, Icon Capsule Size, Attached Border, Slot gap, AppearanceBrand, Emphasis, Semantic Intent) or do nothing (Page type, Context, Badge Size), which its Limits keep out of the guide; the header override's details; Biscuit's handwritten ProfileCard.mdx (a profile header on a dark surface, not a light product card or a settings form), since the guide doesn't say it and that page isn't deployed, so avoidWhen holds only the guide's missing states and whole-card press; the evidence's “a child's own modes win” as a children fact, which the installed source contradicts; the unnamed avatar and badge images and dark mode (the pack's rules). No Sources line renders with a missing value. Sorting (batch 6), after the cross-check: /accessibility/1 now says only that the card itself isn't pressable; the context 10 fact keeps “white” to the avatar's initials, as the evidence does; the gaps name Component Bug #354 as the evidence does, without a board status. Second cross-check (batch 6): the QR badge part no longer says where the badge sits (the guide does not; the evidence records its position as a discrepancy), the handle onPress item says only what its anatomy sentence says, and the long-handle gap no longer adds advice (that stays in the content rule from the Do). Third cross-check (batch 6): the Avatar and Name parts are not always present (header replaces the avatar, name and handles together), so their anatomy required is false. Refreshed 29 October 2026 for guide fix #543 (3f56271): the guide and evidence now say UPI Handle for each handle; /anatomy/3, /configuration/13, /content/rules/8–9, /doDont/1, the upiHandles, Profile Card Appearance and context 10 facts and the long-handle gap quote the new sentences. The human flag (the installed dbe0e02 source contradicts the guide) is unchanged.",
   "useWhen": [
     {
       "text": "Show who the user is on a dark panel: initials or a photo, a name, UPI handles, and account rows below.",
@@ -62,11 +62,11 @@
     },
     {
       "part": "UPI handles",
-      "holds": "upiHandles: a pill each; onPress makes a pill a button.",
+      "holds": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button.",
       "required": false,
       "from": {
         "section": "anatomy",
-        "quote": "upiHandles: a pill each; onPress makes a pill a button."
+        "quote": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button."
       }
     },
     {
@@ -270,12 +270,12 @@
       }
     },
     {
-      "text": "upiHandles: a pill each; onPress makes a pill a button.",
+      "text": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button.",
       "strength": "recommended",
       "target": "upiHandles",
       "from": {
         "section": "anatomy",
-        "quote": "upiHandles: a pill each; onPress makes a pill a button."
+        "quote": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button."
       }
     }
   ],
@@ -354,26 +354,26 @@
         "checkedVersion": "0.1.78-c7d3348"
       },
       {
-        "text": "Keep handles short, so each fits its pill.",
+        "text": "Keep handles short, so each fits its UPI Handle.",
         "strength": "recommended",
         "target": "upiHandles",
         "from": {
           "section": "doDont",
-          "quote": "Each fits its pill."
+          "quote": "Each fits its UPI Handle."
         }
       },
       {
-        "text": "Do not use a sentence as a handle: it never ends in …, so the pill runs past the panel.",
+        "text": "Do not use a sentence as a handle: it never ends in …, so the UPI Handle runs past the panel.",
         "strength": "discouraged",
         "target": "upiHandles",
         "from": {
           "section": "doDont",
-          "quote": "It never ends in …, so the pill runs past the panel."
+          "quote": "It never ends in …, so the UPI Handle runs past the panel."
         },
         "absolute": {
           "word": "never",
           "scope": "contextual",
-          "reason": "\"never\" describes what a handle too long for its pill does (the Don't's sentence-long handle) on the build the guide checked; it is about that case, not a rule for every handle."
+          "reason": "\"never\" describes what a handle too long for the panel does (the Don't's sentence-long handle) on the build the guide checked; it is about that case, not a rule for every handle."
         }
       },
       {
@@ -499,10 +499,10 @@
     {
       "do": "Short handles",
       "dont": "A sentence as a handle",
-      "why": "It never ends in …, so the pill runs past the panel.",
+      "why": "It never ends in …, so the UPI Handle runs past the panel.",
       "from": {
         "section": "doDont",
-        "quote": "Each fits its pill."
+        "quote": "Each fits its UPI Handle."
       }
     },
     {
@@ -545,8 +545,8 @@
     {
       "list": "props",
       "name": "upiHandles",
-      "description": "Each handle is { label (required), iconName (UpiHandle's default ic_scan_qr_code), showIcon (default true), onPress }; onPress makes the pill a button that scales to 0.98 while pressed. A handle has no picture.",
-      "quote": "`ProfileCardUpiHandle`: `label` (required), `iconName` (UpiHandle's default `ic_scan_qr_code`), `showIcon` (true), `onPress` (makes the pill a `button`, scale 0.98 while pressed). No picture on a handle.",
+      "description": "Each handle is { label (required), iconName (UpiHandle's default ic_scan_qr_code), showIcon (default true), onPress }; onPress makes the UPI Handle a button that scales to 0.98 while pressed. A handle has no picture.",
+      "quote": "`ProfileCardUpiHandle`: `label` (required), `iconName` (UpiHandle's default `ic_scan_qr_code`), `showIcon` (true), `onPress` (makes the UPI Handle a `button`, scale 0.98 while pressed). No picture on a handle.",
       "checkedOn": "2026-10-20",
       "checkedVersion": "0.1.78-c7d3348"
     },
@@ -561,16 +561,16 @@
     {
       "list": "modes",
       "name": "Profile Card Appearance",
-      "description": "Premium turns the panel gold (#cea15a), with a darker gold avatar, pills and divider, and dark text.",
-      "quote": "Profile Card Appearance Premium: gold panel `#cea15a`, darker gold avatar, pills and divider, dark text.",
+      "description": "Premium turns the panel gold (#cea15a), with a darker gold avatar, UPI Handles and divider, and dark text.",
+      "quote": "Profile Card Appearance Premium: gold panel `#cea15a`, darker gold avatar, UPI Handles and divider, dark text.",
       "checkedOn": "2026-10-20",
       "checkedVersion": "0.1.78-c7d3348"
     },
     {
       "list": "modes",
       "name": "context 10",
-      "description": "The card gives everything inside context 10 jioPlus. Under it ListItem titles, Icons and NavArrows are white, a Divider is #191f6e, a Button is gold (#cea15a) with a dark label, the UpiHandle pills are navy (#021891), and the avatar is navy (#021891) with white initials.",
-      "quote": "Under jioPlus: ListItem titles white, Icons and NavArrows white, Divider `#191f6e`, Button gold `#cea15a` with dark label, UpiHandle navy `#021891` pills, avatar `#021891` with white initials.",
+      "description": "The card gives everything inside context 10 jioPlus. Under it ListItem titles, Icons and NavArrows are white, a Divider is #191f6e, a Button is gold (#cea15a) with a dark label, the UPI Handles are navy (#021891), and the avatar is navy (#021891) with white initials.",
+      "quote": "Under jioPlus: ListItem titles white, Icons and NavArrows white, Divider `#191f6e`, Button gold `#cea15a` with dark label, UPI Handles navy `#021891`, avatar `#021891` with white initials.",
       "checkedOn": "2026-10-20",
       "checkedVersion": "0.1.78-c7d3348"
     }
@@ -601,10 +601,10 @@
       "checkedVersion": "0.1.78-c7d3348"
     },
     {
-      "text": "A long UPI handle never ends in …, so its pill runs past the card (Component Bug #354).",
+      "text": "A long UPI handle never ends in …, so its UPI Handle runs past the card (Component Bug #354).",
       "from": {
         "section": "sources",
-        "quote": "a long handle never ends in …, so its pill runs past the card."
+        "quote": "a long handle never ends in …, so its UPI Handle runs past the card."
       },
       "checkedOn": "2026-10-20",
       "checkedVersion": "0.1.78-c7d3348"

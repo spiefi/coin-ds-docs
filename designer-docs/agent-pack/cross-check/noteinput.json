@@ -1,12 +1,12 @@
 {
   "slug": "noteinput",
-  "entryHash": "f70298c1045cc7fffd75abb04c056d768a17b0d2643078bbbcab4168766a068b",
-  "guideCommit": "8f8313d23d006d725301a0690ff2ef863f963d77",
-  "checkedAt": "2026-10-29T04:26:16Z",
+  "entryHash": "8525b73983912d28763560cb5585e50d75cb680014fdab529162910bb3c3881f",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "checkedAt": "2026-10-29T10:48:13Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
   "flags": [],
-  "notes": "No misstatements found. Three things a human reviewer may want to check: (1) /content/good mixes placeholder copy (\"Add note\", \"Add a note for Asha\") with note text (\"Rent for April\", \"Dinner at Toit\", \"Gift for Asha\"). The Content section's live example does include \"Add note\", and the guide's content rules also cover the placeholder, so this is not wrong. Splitting placeholders from note values may still serve agents better. (2) /examples/0 says AmountInput carries Context3 'Amount Input' \"which the guide's own source sets on it\" and that AmountInput passes its modes to both children. Neither the guide text nor the evidence file covers this, and Card.Title is not covered either. Presumably these come from the package or the guide's source code. Verify them against the package. (3) /facts/gaps lists only the stale Storybook and the stale JSDoc. The evidence also records open gaps that the entry does not carry: no Dark values (#208), state=\"Editing\" only hiding the placeholder, the 35 vs 34 px and fixed 95 px Figma mismatch, and Enter inserting a new line instead of submitting. These are omissions rather than misstatements."
+  "notes": "/examples/0 says AmountInput carries modes={{ Context3: 'Amount Input' }} because \"the guide's own source sets on it\", that it \"doesn't set its own context and passes its modes to both of its children\", and that \"nothing else sets modes\". Neither the rendered guide nor the evidence file says any of this. The evidence says only that NoteInput has no useTokens() and that just 'NoteInput / Output' (one mode) applies, so modes don't change NoteInput's look. I did not flag it because it may come from the guide's page source or the AmountInput package code, which aren't shown here. A human should confirm it against those. In /content/bad, reading \"Reason (required)\" as the bad note in the \"Hide a required detail in a note\" Don't fits the order of the live-example text, but the rendered copy doesn't say which example belongs to which side of the pair. \"For example, rent\" could also belong to that Don't."
 }

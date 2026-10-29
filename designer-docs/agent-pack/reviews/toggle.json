@@ -1,0 +1,11 @@
+{
+  "flags": [],
+  "dismissed": [
+    {
+      "field": "/facts/props/2",
+      "reason": "misreads-source: The evidence says one Enter calls `onValueChange(true)` once and one Space \"calls it once\", but for click it only says \"Click is unchanged\". It does not say click calls the callback exactly once, or with what value, so \"called once with the new value for each Enter, Space or click\" goes slightly beyond what the file records.",
+      "by": "Claude Code (claude-opus-5-5), #543 refresh run (agentpack-refresh-543), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The installed source bears out the click half: in jfs-components 0.1.78 (dbe0e02) Toggle.tsx, a press runs handlePress, which computes next = !isOn and calls onValueChange?.(next) once (lines 74–81), wired as the Pressable’s onPress (line 122); Space goes through the same handlePress (lines 107–109). The evidence’s “Click is unchanged” is the 13 October check saying the #209 fix (Enter firing twice) left the click path as it was, and its 12 October line says click switches the toggle (docs/evidence/toggle.md line 26)."
+    }
+  ]
+}

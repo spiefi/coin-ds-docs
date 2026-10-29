@@ -1,17 +1,21 @@
 {
   "slug": "chipselect",
-  "entryHash": "a4cb9fa25fedf64d031421d5bd2e611d8f1fa825fa65bf5f954afa7d3ad6e465",
-  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
-  "checkedAt": "2026-10-29T08:57:11Z",
+  "entryHash": "1a3f5f5673772700923b7c1e623fbf0b9dd81d2fad2784f3fd8be38c20e1adb5",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "checkedAt": "2026-10-29T10:48:30Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
   "flags": [
     {
-      "field": "/configuration/11",
-      "reason": "misreads-source: The cited sentence \"For other attribute filters.\" names no icon. The value ic_filter appears nowhere in the rendered guide or the evidence file. The evidence lists only ic_calendar_week (default) and ic_home (Custom icon story). The item says \"ic_filter in the guide's code\", but nothing shown here supports that."
+      "field": "/content/good",
+      "reason": "lost-context: The list mixes the guide's \"Idle labels\" (Date, Category, Account) with its \"Applied labels\" without saying which state each belongs to. The guide says to use generic words only \"While Idle\" and to replace them \"Once applied\", and the do/don't warns that \"An Active “Date” chip does not say which dates.\" Listed unconditionally, \"Date\" reads as a good label for an Active chip too."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: Nothing cited supports wrapping the row in ChipGroup, calling it \"the pack's component for a row of Chip Select filters\", or giving it an accessibilityLabel. The guide's In context shows only filters above a transaction list, and the entry admits the guide's own code uses a plain wrapping row. The claim comes from another entry, not from this guide or its evidence."
     }
   ],
-  "notes": "The ic_filter flag may be a false positive. If the guide's example source code (not shown here) uses icon=\"ic_filter\", the value is fine. Confirm it, and confirm that the icon name exists in the package. /examples/0 and /examples/2 also use icon=\"ic_filter\" and depend on the same check. /examples/0 wraps the chips in a ChipGroup with accessibilityLabel \"Transaction filters\", citing the ChipGroup entry rather than this guide. It says openly that the guide's own code uses a plain wrapping row. That is a cross-entry choice, not a misreading of this guide, but a human should confirm it is wanted. The 28 September evidence sections (DOM div with no role, the 'page must not claim selection is announced' limit) are superseded by the 1 October 0.1.78 check (#169 fixed: button, aria-label, aria-pressed). /accessibility/0 and the facts correctly follow the newer check."
+  "notes": "/configuration/11 gives value=ic_filter from \"the guide's code\", but the rendered guide only says \"Filter icon\" and the evidence file never names ic_filter. A human should confirm the icon name in the guide source or the package. The evidence file's Limits section (28 Sept, 0.1.60) says the chip is not announced as a button and that the page \"must not claim selection is announced\". The 0.1.78 check (1 Oct) supersedes this: the chip is a <button> with aria-pressed. So /accessibility/0 is correct for 0.1.78, but the stale Limits text should be updated so later readers are not confused."
 }
