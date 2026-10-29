@@ -1,0 +1,548 @@
+{
+  "schemaVersion": 1,
+  "id": "Tooltip",
+  "slug": "tooltip",
+  "category": "content",
+  "tags": [
+    "hint",
+    "info bubble",
+    "help text",
+    "popover"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T07:47:24Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The cross-check reviewed an earlier version of this entry. Run npm run agent-pack:cross-check -- tooltip.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/anatomy/0",
+        "reason": "The guide's info buttons are IconButtons with Emphasis Low and Button / Size S (src/guides/tooltip.guide.tsx, INFO), but no guide sentence says so. Under the building rules the entry's examples leave modes at their defaults, so an agent builds the info button as a default IconButton (Emphasis High, size M), not the quiet small i the guide shows. Guide fix #517: say what the info button should look like. Added by Claude Code in the overnight run agentpack-batch4, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Tooltip to explain a term or icon in a short line that opens from an info button and closes with the next press.",
+  "useWhen": [
+    {
+      "text": "Explain a term or icon in a short line that opens from an info button and closes with the next press.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Tooltip to explain a term or icon in a short line that opens from an info button and closes with the next press."
+      }
+    },
+    {
+      "text": "One short explanation, on request.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One short explanation, on request."
+      }
+    },
+    {
+      "text": "Explaining terms in a list of details, such as a fund's NAV, expense ratio and exit load, each with its own info button.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A fund's details list three terms, each with an info button."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Writing a paragraph: four sentences fill the bubble and cover the screen behind it.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Four sentences fill the bubble and cover the screen behind it."
+      }
+    },
+    {
+      "text": "Putting it on the main action: every press on that action (such as Invest now) also pops a bubble over the screen.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Every press on Invest now also pops a bubble over the screen."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Trigger",
+      "holds": "Yours: an info IconButton passed to TooltipTrigger with asChild. Pressing it opens or closes the bubble. It is the only part that sits in the page.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours: an info IconButton passed with asChild. Pressing it opens or closes the bubble."
+      }
+    },
+    {
+      "part": "Term",
+      "holds": "The word it explains, beside the trigger on the screen. Keep it visible: the bubble only adds detail.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The word it explains. Keep it visible: the bubble only adds detail."
+      }
+    },
+    {
+      "part": "near-black bubble",
+      "holds": "The TooltipContent, drawn over the page 12 px from the trigger: 8 px corners, 12 × 8 px of padding, white 14 px text that wraps at 280 px, and a 16 × 8 px arrow pointing at the trigger.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Pressing it opens a near-black bubble 12 px away, with 8 px corners, 12 × 8 px of padding, white 14 px text that wraps at 280 px, and a 16 × 8 px arrow pointing at the trigger."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Open it from an info button next to the term: the i says there's more to read and does nothing else.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The i says there's more to read and does nothing else."
+      }
+    },
+    {
+      "text": "Keep the term it explains on the page, beside the trigger: the bubble only adds detail.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "keep the term itself on the page"
+      }
+    },
+    {
+      "text": "Only the trigger sits in the page; the bubble is drawn over the page, so it takes no space in the layout.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Only the trigger sits in the page."
+      }
+    },
+    {
+      "text": "In a list of terms, each row has its own Tooltip: pressing one explains it above its row, and each keeps its own open state.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pressing one explains it above its row; the next press anywhere closes it. Each tooltip keeps its own open state."
+      }
+    },
+    {
+      "text": "The bubble always stays 8 px inside the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "It always stays 8 px inside the screen."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "placement picks the side, top by default, and can line the bubble up with the trigger's start or end edge instead of its centre.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Placement picks the side, top by default, and can line the bubble up with the trigger's start or end edge instead of its centre."
+      },
+      "target": "placement"
+    },
+    {
+      "text": "Above (top) is the default: the bubble sits above, its arrow pointing down at the trigger.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: the bubble sits above, its arrow pointing down at the trigger."
+      },
+      "target": "placement",
+      "value": "top"
+    },
+    {
+      "text": "Below (bottom) is for triggers near the top of the screen, where there's no room above.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For triggers near the top of the screen, where there's no room above."
+      },
+      "target": "placement",
+      "value": "bottom"
+    },
+    {
+      "text": "Start-aligned (top-start): the bubble's start edge lines up with the trigger's; the arrow still points at it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The bubble's start edge lines up with the trigger's; the arrow still points at it."
+      },
+      "target": "placement",
+      "value": "top-start"
+    },
+    {
+      "text": "Beside the trigger (right) is for a row with room to its side. On a phone there rarely is, so it opens above or below instead.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Next to the trigger, for a row with room to its side. On a phone there rarely is, so it opens above or below instead."
+      },
+      "target": "placement",
+      "value": "right"
+    },
+    {
+      "text": "When the bubble doesn't fit on its side it flips to the opposite one; beside the trigger with no room either way, it moves above or below.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "When the bubble doesn't fit on that side it flips to the opposite one, and beside the trigger with no room either way it moves above or below."
+      },
+      "target": "placement"
+    },
+    {
+      "text": "Pass the info IconButton to TooltipTrigger with asChild, so the button itself is the trigger.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours: an info IconButton passed with asChild."
+      },
+      "target": "TooltipTrigger.asChild"
+    },
+    {
+      "text": "A Coin button nested inside TooltipTrigger without asChild opens it too.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "though a Coin button nested inside the trigger opens it too."
+      },
+      "target": "TooltipTrigger.asChild"
+    },
+    {
+      "text": "The bubble is as wide as its text up to 280 px, then wraps. A width on TooltipContent sets it instead, like Figma's Custom Width variant.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The bubble is as wide as its text up to 280 px, then wraps; padding is 12 × 8 px and text 14 px on 18 px lines. A width on the content sets it instead, like Figma's Custom Width variant."
+      },
+      "target": "TooltipContent.width"
+    },
+    {
+      "text": "A set width of 200 px (Figma's Custom Width On) makes the same text wrap sooner.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A set width of 200 px, Figma's Custom Width On: the same text wraps sooner."
+      },
+      "target": "TooltipContent.width",
+      "value": "200"
+    },
+    {
+      "text": "The screen can open it itself with open, for example for a first-time hint, and hears every close through onOpenChange.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The screen can also open it itself with open and hear every close through onOpenChange."
+      },
+      "target": "open"
+    },
+    {
+      "text": "A press on the trigger toggles the bubble; the trigger's and the child's own onPress run after the toggle.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The trigger's and the child's `onPress` are chained after the toggle (lines 205-217)."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Explain one term in a sentence or two of plain text, and keep the term itself on the page.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Explain one term in a sentence or two of plain text, and keep the term itself on the page."
+        }
+      },
+      {
+        "text": "Keep it to a sentence: one short line explains the term and gets out of the way.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "One short line explains the term and gets out of the way."
+        }
+      },
+      {
+        "text": "Long text wraps at 280 px; two or three lines is the most people will read.",
+        "strength": "recommended",
+        "from": {
+          "section": "sizing",
+          "quote": "Wraps at 280 px. Two or three lines is the most people will read."
+        }
+      },
+      {
+        "text": "Plain text and Coin Text in TooltipContent both get the white label style.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Plain text and Coin Text both get the white label style."
+        }
+      },
+      {
+        "text": "Never put an action in the bubble: a press inside it just closes it.",
+        "strength": "required",
+        "from": {
+          "section": "content",
+          "quote": "A press inside it just closes it, so never put an action there."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Closed",
+      "when": "Only the trigger sits in the page; the bubble isn't drawn.",
+      "from": {
+        "section": "anatomy",
+        "quote": "Only the trigger sits in the page."
+      }
+    },
+    {
+      "state": "Open",
+      "when": "A press on the trigger opens it; there's no hover, focus or timer. While it's open a clear layer covers the page.",
+      "from": {
+        "section": "states",
+        "quote": "A press on the trigger opens it; there's no hover, focus, or timer. While it's open a clear layer covers the page"
+      }
+    },
+    {
+      "state": "Closing",
+      "when": "The next press anywhere, Escape on the web, or Android's back button closes it. After Escape, focus stays on the trigger.",
+      "from": {
+        "section": "states",
+        "quote": "the next press anywhere, Escape on the web, or Android's back button closes it. After Escape, focus stays on the trigger."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the bubble is a tooltip tied to its trigger, and Escape closes it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the bubble is a tooltip tied to its trigger, and Escape closes it."
+      }
+    },
+    {
+      "text": "After Escape, focus stays on the trigger.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "After Escape, focus stays on the trigger."
+      }
+    },
+    {
+      "text": "On the web a keyboard user can Tab to the trigger and open the bubble with Enter or Space; Escape closes it and leaves focus on the trigger.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Escape closes an open tooltip on the web again, with focus left on the trigger and `aria-describedby` removed: opened with Enter or Space after Tab, or with the mouse, and after Tabbing away."
+      }
+    },
+    {
+      "text": "The bubble's text is not the trigger's accessible name: the trigger keeps its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Biscuit's #20 comment (“press-toggled label … not the trigger's accessible name”) matches the code."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep it to a sentence",
+      "dont": "Write a paragraph",
+      "why": "Four sentences fill the bubble and cover the screen behind it.",
+      "from": {
+        "section": "doDont",
+        "quote": "One short line explains the term and gets out of the way."
+      }
+    },
+    {
+      "do": "Open it from an info button",
+      "dont": "Put it on the main action",
+      "why": "Every press on Invest now also pops a bubble over the screen.",
+      "from": {
+        "section": "doDont",
+        "quote": "The i says there's more to read and does nothing else."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Explain a term: one sentence that says what NAV means, opened from the i next to it. The term stays on the page as Text; the info IconButton, passed with asChild, is the trigger.",
+      "jsx": "<HStack alignVertical=\"center\">\n  <Text>NAV</Text>\n  <Tooltip>\n    <TooltipTrigger asChild>\n      <IconButton iconName=\"ic_info\" accessibilityLabel=\"About NAV\" />\n    </TooltipTrigger>\n    <TooltipContent>The price of one unit of the fund, updated every working day.</TooltipContent>\n  </Tooltip>\n</HStack>",
+      "from": {
+        "section": "content",
+        "quote": "One sentence that says what NAV means, opened from the i next to it."
+      }
+    },
+    {
+      "purpose": "Explaining fund terms, the guide's In context: a fund's details list three terms, each with an info button. Pressing one explains it above its row; the next press anywhere closes it. Each Tooltip keeps its own open state.",
+      "jsx": "<VStack>\n  <Title title=\"Nifty 50 Index Fund\" subtitle=\"Direct plan · Growth\" />\n  <VStack>\n    <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\">\n      <HStack alignVertical=\"center\">\n        <Text>NAV</Text>\n        <Tooltip>\n          <TooltipTrigger asChild>\n            <IconButton iconName=\"ic_info\" accessibilityLabel=\"About NAV\" />\n          </TooltipTrigger>\n          <TooltipContent>The price of one unit of the fund, updated every working day.</TooltipContent>\n        </Tooltip>\n      </HStack>\n      <Text>₹182.40</Text>\n    </HStack>\n    <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\">\n      <HStack alignVertical=\"center\">\n        <Text>Expense ratio</Text>\n        <Tooltip>\n          <TooltipTrigger asChild>\n            <IconButton iconName=\"ic_info\" accessibilityLabel=\"About expense ratio\" />\n          </TooltipTrigger>\n          <TooltipContent>The yearly fee the fund charges, as a share of your investment.</TooltipContent>\n        </Tooltip>\n      </HStack>\n      <Text>0.45%</Text>\n    </HStack>\n    <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\">\n      <HStack alignVertical=\"center\">\n        <Text>Exit load</Text>\n        <Tooltip>\n          <TooltipTrigger asChild>\n            <IconButton iconName=\"ic_info\" accessibilityLabel=\"About exit load\" />\n          </TooltipTrigger>\n          <TooltipContent>A fee if you sell within a year of investing.</TooltipContent>\n        </Tooltip>\n      </HStack>\n      <Text>1%</Text>\n    </HStack>\n  </VStack>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "A fund's details list three terms, each with an info button. Pressing one explains it above its row; the next press anywhere closes it."
+      }
+    },
+    {
+      "purpose": "Custom width: a set width of 200 px, Figma's Custom Width On, so the longer XIRR explanation wraps sooner. Without width the bubble hugs its text up to 280 px.",
+      "jsx": "<HStack alignVertical=\"center\">\n  <Text>XIRR</Text>\n  <Tooltip>\n    <TooltipTrigger asChild>\n      <IconButton iconName=\"ic_info\" accessibilityLabel=\"About XIRR\" />\n    </TooltipTrigger>\n    <TooltipContent width={200}>Your yearly return, counting when each payment went in. It lets you compare investments made at different times and over different periods.</TooltipContent>\n  </Tooltip>\n</HStack>",
+      "from": {
+        "section": "sizing",
+        "quote": "A set width of 200 px, Figma's Custom Width On: the same text wraps sooner."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "source": "types"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Initial visibility state (controlled)"
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Called on every open and close, also when the Tooltip is uncontrolled. Declared: Callback when visibility changes.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Default false, from the component source."
+      },
+      {
+        "name": "placement",
+        "type": "Placement",
+        "required": false,
+        "source": "evidence",
+        "values": [
+          "left",
+          "right",
+          "top",
+          "bottom",
+          "top-start",
+          "top-end",
+          "bottom-start",
+          "bottom-end",
+          "left-start",
+          "left-end",
+          "right-start",
+          "right-end"
+        ],
+        "default": "top",
+        "description": "A bubble that doesn't fit flips to the opposite side; left or right with no room either way fall back to top or bottom, whichever has more space; every bubble is clamped 8 px inside the screen. Declared: Preferred placement of the tooltip. Default \"top\", from the component source.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "TooltipTrigger.asChild",
+        "source": "evidence",
+        "type": "boolean",
+        "description": "On TooltipTrigger: with asChild the child itself becomes the trigger (the guide passes an info IconButton). Without it the trigger is a Pressable wrapping the child, and the child gets pointerEvents none, so a press on a nested Coin Button or IconButton reaches the trigger and opens it too.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "TooltipContent.width",
+        "source": "evidence",
+        "type": "number",
+        "description": "On TooltipContent: a set bubble width in px, Figma's Custom Width On. Omit it and the bubble hugs its text up to 280 px.",
+        "checkedOn": "2026-10-19"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "The only collection Tooltip reads. Padding, type, arrow, radius and max width don't change with any mode. Declared: A token collection Tooltip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Light",
+        "checkedOn": "2026-10-19"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "description": "Callback when visibility changes",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma draws only a downward arrow near the bubble's bottom left or right, in two variants (Custom Width Off and On); in code the arrow points at the trigger's centre and the bubble takes 12 placements.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The code adds a fixed drop shadow and the full-window layer that closes it; Figma shows neither.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "text": "From the code, not tested: Tooltip imports react-dom's portal at the top of the file, and react-dom is only a devDependency of the package.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=tooltip",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=928-6036",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-tooltip--docs"
+  }
+}

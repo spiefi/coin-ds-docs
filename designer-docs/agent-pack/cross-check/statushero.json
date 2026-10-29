@@ -1,0 +1,21 @@
+{
+  "slug": "statushero",
+  "entryHash": "9ed6d9b70b5f7197fe9e6d214a0737093ccf6d6cb4bcddbf173658a5b9fec1d0",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "checkedAt": "2026-10-29T07:45:33Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/2",
+      "reason": "misreads-source: The cited guide text is only \"Orange: still waiting.\" Neither the guide nor that citation names the card's icon. The parenthetical \"the guide's card uses iconName ic_warning\" is unsupported. The evidence only says `ic_warning` renders in the capsule, not that the guide's card uses it."
+    },
+    {
+      "field": "/configuration/3",
+      "reason": "misreads-source: The cited text is \"Red: it didn’t happen.\" The claim that \"the guide's card uses iconName ic_close\" is not in the guide or the citation. The evidence only says `ic_close` renders in the capsule."
+    }
+  ],
+  "notes": "1. /configuration/7 (from the type fact /facts/props/0) says each element's own modes win, but the evidence contradicts it. The Contract says a single element gets `cloneElement(…, { modes })` and \"its own modes are replaced\", and Discrepancies and #398 say \"renderMedia replaces its child's modes\". The types may describe intended behaviour that the 0.1.78 build does not have; a human should check which is true before agents rely on it. 2. /accessibility/1 and /accessibility/2 rely on `accessibilityLabel`, but the 25 October Contract says \"No testID, onPress, accessibility props\". Only the 28 October #346 section mentions `accessibilityLabel`, and it supersedes the earlier sections, so the items look consistent with the latest evidence. The Contract line is stale and worth updating. 3. Discrepancies still lists \"the amount isn't announced\", which the 28 October publish section supersedes."
+}

@@ -1,0 +1,339 @@
+{
+  "slug": "statushero",
+  "label": "Status Hero",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/statushero.guide.tsx"
+  ],
+  "evidence": "docs/evidence/statushero.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:56:25.184Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "success screen",
+    "result screen",
+    "payment result",
+    "confirmation",
+    "done screen"
+  ],
+  "title": "Status Hero",
+  "summary": "Use a Status Hero at the top of a result screen to confirm what just happened: a mark, the amount, a title, and one line.",
+  "corePrinciple": "Say what happened, then the one thing that follows.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2594-13",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-statushero--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A mark, an amount, two lines",
+      "description": "The media, a mark over the amount, sits on top; the title and the subtitle follow. Everything is centred.",
+      "blocks": [
+        "46",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Mark",
+        "An 81 px Icon Capsule showing iconName.",
+        "Amount",
+        "A Money Value from value and currency, 36 px.",
+        "Media",
+        "renderMedia replaces the mark and the amount together.",
+        "Title",
+        "title, 20 px Bold; showTitle hides it.",
+        "Subtitle",
+        "subtitle; a line break in it stays.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "₹",
+        "50",
+        "You're set to make payments",
+        "₹50 will be auto-invested daily, stay consistent & stay golden."
+      ],
+      "anatomy": [
+        {
+          "part": "Mark",
+          "note": "An 81 px Icon Capsule showing iconName."
+        },
+        {
+          "part": "Amount",
+          "note": "A Money Value from value and currency, 36 px."
+        },
+        {
+          "part": "Media",
+          "note": "renderMedia replaces the mark and the amount together."
+        },
+        {
+          "part": "Title",
+          "note": "title, 20 px Bold; showTitle hides it."
+        },
+        {
+          "part": "Subtitle",
+          "note": "subtitle; a line break in it stays."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "The mark, or your own media",
+      "description": "The mark is gold by default: the hero fixes its Icon Capsule to AppearanceBrand Primary, so no brand mode changes it. Set Semantic Intent to System and AppearanceSystem colours it green, orange, or red; pick a matching iconName. renderMedia replaces the mark and the amount with your own content, such as a picture.",
+      "blocks": [
+        "Brand",
+        "The default gold mark.",
+        "System positive",
+        "Green: it went through.",
+        "System warning",
+        "Orange: still waiting.",
+        "System negative",
+        "Red: it didn’t happen.",
+        "Default media",
+        "An Icon Capsule over a Money Value.",
+        "renderMedia",
+        "A picture instead, and no amount."
+      ],
+      "specimen": [
+        "₹",
+        "50",
+        "You're set to make payments",
+        "₹50 will be auto-invested daily, stay consistent & stay golden.",
+        "Payment pending",
+        "We’ll tell you when your bank confirms it.",
+        "1,200",
+        "Payment failed",
+        "No money left your account.",
+        "5,000",
+        "Gold bought",
+        "It’s in your gold locker now."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Brand",
+          "description": "The default gold mark."
+        },
+        {
+          "title": "System positive",
+          "description": "Green: it went through."
+        },
+        {
+          "title": "System warning",
+          "description": "Orange: still waiting."
+        },
+        {
+          "title": "System negative",
+          "description": "Red: it didn’t happen."
+        },
+        {
+          "title": "Default media",
+          "description": "An Icon Capsule over a Money Value."
+        },
+        {
+          "title": "renderMedia",
+          "description": "A picture instead, and no amount."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Full, or shorter",
+      "description": "The hero has no states: it doesn’t press, load, or animate, and it has no button, so the screen adds the next action. showTitle={false} hides the title, and an empty subtitle hides the subtitle; leaving subtitle out shows the package’s default sentence instead.",
+      "blocks": [
+        "Full",
+        "Mark, amount, title, and subtitle.",
+        "Without a title",
+        "showTitle={false} hides the title.",
+        "Without a subtitle",
+        "An empty subtitle hides it."
+      ],
+      "specimen": [
+        "₹",
+        "1,200",
+        "Payment successful",
+        "₹1,200 sent to Rahul Verma."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Full",
+          "description": "Mark, amount, title, and subtitle."
+        },
+        {
+          "title": "Without a title",
+          "description": "showTitle={false} hides the title."
+        },
+        {
+          "title": "Without a subtitle",
+          "description": "An empty subtitle hides it."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "As wide as its words",
+      "description": "The hero has no width of its own: it centres its content and wraps text only when its host is narrower. With the default copy it is 302 × 269: 8 px of padding, an 81 px mark, 46 px to a 44 px amount, then 12 px to a 24 px title and 12 px to the subtitle. Figma’s is 259 px tall, because its amount and title sit on 36 and 22 px lines.",
+      "blocks": [
+        "302 × 269",
+        "46"
+      ],
+      "specimen": [
+        "₹",
+        "50",
+        "You're set to make payments",
+        "₹50 will be auto-invested daily, stay consistent & stay golden."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The outcome, then one fact",
+      "description": "Write title as the outcome in a few words, such as Payment successful. Write subtitle as the one fact that follows; a line break in it stays. Give value as the number alone: currency adds the sign, and INR or ₹ both show ₹. Screen readers read the amount once, with its currency.",
+      "blocks": [
+        "Outcome and amount",
+        "The title gives the outcome; the subtitle says where the money went.",
+        "A long subtitle",
+        "It wraps, centred, in its column."
+      ],
+      "specimen": [
+        "₹",
+        "1,200",
+        "Payment successful",
+        "₹1,200 sent to Rahul Verma.",
+        "50",
+        "Daily savings started",
+        "₹50 will move from HDFC Bank ··4821 to your gold locker every morning."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Outcome and amount",
+          "description": "The title gives the outcome; the subtitle says where the money went."
+        },
+        {
+          "title": "A long subtitle",
+          "description": "It wraps, centred, in its column."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "The screen after a setup",
+      "description": "Start saving swaps the setup screen for the result: the hero confirms it, and Done below leaves. The hero has no button of its own, so the screen adds one.",
+      "blocks": [
+        "Not started"
+      ],
+      "specimen": [
+        "Save in gold every day",
+        "₹50 a day from HDFC Bank ··4821",
+        "Start saving"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One result, said plainly",
+      "description": "Each pair shows a result people take in at a glance next to one that contradicts or overloads it.",
+      "blocks": [
+        "Do",
+        "The mark matches",
+        "A red cross for a failed payment.",
+        "Don’t",
+        "A success mark on a failure",
+        "The gold tick says it worked.",
+        "One next fact",
+        "What happened, then what follows.",
+        "A history in the subtitle",
+        "This hero is one result; put the history in Transaction Details."
+      ],
+      "specimen": [
+        "₹",
+        "1,200",
+        "Payment failed",
+        "No money left your account.",
+        "Payment successful",
+        "₹1,200 sent to Rahul Verma.",
+        "250",
+        "₹50 on 19 Oct, ₹50 on 20 Oct, ₹50 on 21 Oct, ₹50 on 22 Oct, ₹50 on 23 Oct"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "The mark matches",
+            "caption": "A red cross for a failed payment.",
+            "specimen": "₹ · 1,200 · Payment failed · No money left your account."
+          },
+          "dont": {
+            "title": "A success mark on a failure",
+            "caption": "The gold tick says it worked.",
+            "specimen": "₹ · 1,200 · Payment failed · No money left your account."
+          }
+        },
+        {
+          "do": {
+            "title": "One next fact",
+            "caption": "What happened, then what follows.",
+            "specimen": "₹ · 1,200 · Payment successful · ₹1,200 sent to Rahul Verma."
+          },
+          "dont": {
+            "title": "A history in the subtitle",
+            "caption": "This hero is one result; put the history in Transaction Details.",
+            "specimen": "₹ · 250 · Payment successful · ₹50 on 19 Oct, ₹50 on 20 Oct, ₹50 on 21 Oct, ₹50 on 22 Oct, ₹50 on 23 Oct"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Status Hero contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Without title",
+        "Without subtitle",
+        "Custom media slot",
+        "Large amount",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Status Hero has Title and Subtitle text properties and a title switch, over a nested Icon Capsule and Money Value; the package adds iconName, value, currency, and renderMedia. Its mark is gold where Figma’s is dark grey with a white tick: the hero fixes the capsule’s brand mode, so only Semantic Intent System recolours it. It is 269 px tall where Figma’s is 259, and Storybook’s Without subtitle story still shows the default subtitle (both reported). Screen readers read the amount once, with its currency.",
+        "jfs-components",
+        "0.1.78",
+        "Title",
+        "Subtitle",
+        "title",
+        "iconName",
+        "value",
+        "currency",
+        "renderMedia"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

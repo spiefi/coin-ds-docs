@@ -1,0 +1,499 @@
+{
+  "slug": "hellojioinput",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/hellojioinput.guide.tsx) and docs/evidence/hellojioinput.md at cba512f (“docs: publish the 5 October Coin build's component fixes”, 8 October), the same files on main and docs-next. The guide's Sources note was checked on 8 October 2026 on the build it calls the 5 October build (mirror v0.1.78-636f3f5, the evidence's “636f3f5 check”), so items citing it or that check carry 2026-10-08 and 0.1.78-636f3f5. The evidence's first section (2 October on 3795b4c) is partly superseded by the 636f3f5 check: #190 (the 36 px pill in every state, the Jio Plus text hidden under the glass, the wrapper's extra tab stop) and #179 (the send button's dark ring after a click) are fixed, so those browser lines are not cited. From that section only lines that still hold are cited, each with 2026-10-02 and 0.1.78-3795b4c: the upstream Storybook MDX (not a form field or search row; FormField or MessageField, InputSearch; states from focus and jioPlus, no Hello Jio Input State; Jio Plus needs content behind it), the package's accessibilityLabel default, the disabled measurement, and Figma's missing size and disabled properties. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). From 636f3f5 to dbe0e02 (diffed here for HelloJioInput.tsx; the rest from the coordinator's diff): HelloJioInput.tsx only gained container layout (alignSelf stretch, width 100% already there, flexGrow 0, flexShrink 1, flexBasis auto, minWidth 0; lines 345–353), so it fills its column and shrinks in a row; IconButton.tsx only gained visible={loading === true} on its loading skeleton (the send button has no loading); ChatAttachment.tsx is unchanged; Icon.tsx and Text.tsx changed in a116616 and web-platform-utils in c1fa197 (Toggle's Space key). Every guide and evidence sentence used here was read against the installed source (HelloJioInput.tsx, not run), with token values through the package's own getVariableByName on dbe0e02: Idle is rgb(245,245,245) with a border of the same colour and Active is white with an rgb(181,181,181) border (helloJioInput/background and /border/color under Hello Jio Input State); the pill is helloJioInput/height 36 plus the 1 px stroke on each side, so 38 (line 362), and Jio Plus drops the border (337), so 36; radius 20; the brand icon is 18 (textInput/icon/size); the send button is an IconButton with AppearanceBrand Primary and Button / Size S (39–42), iconButton/padding 5 on each side of a 16 px glyph, so 26 (IconButton.tsx 117), in gold rgb(206,161,90); the visual state comes from focus and jioPlus (445–450) and Hello Jio Input State is set after any modes passed in (452–459); the send button and Return (onSubmitEditing, 582) call onSubmit with the current text, with no empty check and no clearing, and nothing while disabled (481–484); leading={null} hides the icon (505–516) and trailing={null} the send button (532–537); attachments stack above the input row with no fixed height (546–551, 562–566, 634–636); the name is accessibilityLabel, else the placeholder (553–554), aria-label on the web (589), and stays when the placeholder clears on focus (576); disabled sets opacity 0.5 (568), editable false (584) and disables the send IconButton; the input sits above the GlassFill layer (585, 672–676); on the web the pill's Pressable is focusable false with tabIndex −1 (644–660), so Tab goes from the input to Send. ChatAttachment.tsx shows its close icon by default and makes it a “Remove attachment” button only with onClose (306–325), which is the Do & Don't on attachments. No guide or evidence sentence used here is contradicted on dbe0e02, so there is no human flag. The Sizing sentence “fills its container’s width” still holds and is now incomplete for a row, where the pill also shrinks to leave its neighbours room. Wording: Sizing's “the chips scroll sideways” comes from the guide's chips, which sit in a horizontal ScrollArea, not from the input, so that rule says so. States' “while people type” is the focused pill (Anatomy: “white with a border while focused”). The check reads “HelloJio” in item text as an identifier, so item texts say “the assistant” or “the assistant's brand mark”; quotes keep the guide's words. Modes: the facts list nine collections; no guide sentence sets one for any content, the package sets Hello Jio Input State itself, and the input's modes also reach the send button over its defaults (463–466; recorded here only). Jio Plus is a prop (jioPlus), not a mode. useInstead: the guide's Don't “Use it for search” names no component, so its item has none; InputSearch (a package export with no entry in this pack), FormField and MessageField (both have entries) come from the MDX as the evidence records it. SuggestiveSearch, which has an entry, is not named: no quoted source names it. Anatomy: Prompt and Pill are always drawn; Brand icon (leading={null}), Send (trailing={null}) and Attachments are optional. Content: good is the guide's two prompts; bad is the long prompt and the search prompt from its Don'ts. States are the guide's Idle, Jio Plus and Disabled cards, with the focused pill from its States description. Examples follow the building rules: no Color Mode (the guide sets Light on every component) and no modes. The In context example is the guide's Card › VStack with a user and an assistant ChatBubble and the prompt; it keeps the guide's alignSelf flex-end on the user's bubble, a layout style (ChatBubble aligns to the start by default, ChatBubble.tsx 187), as TransactionBubble's entry aligns sent bubbles. The attachment example drops the guide's width 100% on ScrollArea (the attachments slot fills the pill width, 679–683, and stretches it) and keeps HStack alignVertical center as the guide does. Card, VStack and HStack have entries; ChatBubble, ChatAttachment and ScrollArea have no entry in this pack, and the examples use them only where the guide does. The literal value and empty handlers stand for the screen's state, which clears the field and ignores empty prompts. Left out of examples: the Without send card (in a configuration rule), the Idle, Jio Plus and Disabled cards, the Anatomy and Sizing specimens, the Do & Don't pairs and the playground. Not recorded: Dark mode (the Sources note says it is not shown; the brand team's); Figma's hex values and variable names; the 110 px two-chip height (measured on 3795b4c, not re-checked); the 0.95 hover opacity; the Storybook story list; style and inputStyle (the building rules keep style overrides off Coin components); testID, leadingIconName, sendIconName and the inherited TextInput props (no guide sentence). Gaps: the send button's 26 px against Figma's 28 (IconButton's size gap) and the empty-send question, both still open in the 636f3f5 check and unchanged on dbe0e02 (the guide's In context and Sources note tell the screen to ignore empty prompts and clear the field); and Figma's missing size and disabled properties (2 October). Sorting (batch 12, rounds 1 and 2): two cross-check runs. Round 1 flagged /facts/gaps/2 (“disabled exists only in the package” overstates the evidence, which also notes the upstream Storybook source has disabled): our wording, now “Figma's component has no size or disabled property, while the package has a disabled prop.”; and /configuration/4 and /examples/2 for naming ScrollArea and ChatAttachment, which the cited sentences don't: they now also name Figma's attachment slot, which the evidence records. Round 2, on the final entry, flagged /configuration/4 and /examples/2 again because no guide text names that structure; both are dismissed in reviews/hellojioinput.json, because the guide's source builds its chips that way (hellojioinput.guide.tsx 23–29, 101, 123) and the reviewer reads only the rendered copy. Its notes, not flags, in both rounds: /useWhen/1 files the core principle as a use-when (kept, as Toggle's and SummaryTile's entries do); the In context Card and the end-aligned user bubble aren't in the rendered text (they are the guide's markup, lines 67–72). No trace-check flags remain and there is no human flag.",
+  "useWhen": [
+    {
+      "text": "The assistant's prompt: people type a question and send it, with optional attachments above.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a HelloJio Input for the HelloJio assistant’s prompt: people type a question and send it, with optional attachments above."
+      }
+    },
+    {
+      "text": "One short question, one tap to send.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One short question, one tap to send."
+      }
+    },
+    {
+      "text": "Asking the assistant a question: the brand mark and send button promise an answer.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The brand mark and send button promise an answer."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Search: people expect an answer, not a list of results.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "People expect an answer, not a list of results."
+      }
+    },
+    {
+      "text": "A search row: the upstream Storybook docs, as the evidence records them, say it is not a search row and point to InputSearch for search.",
+      "strength": "discouraged",
+      "useInstead": "InputSearch",
+      "from": {
+        "section": "evidence",
+        "quote": "\"not a form field and not a search row\". Use FormField or MessageField for labelled input, InputSearch for search."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "Labelled input, as in a form: the upstream Storybook docs, as the evidence records them, say it is not a form field and point to FormField or MessageField for labelled input.",
+      "strength": "discouraged",
+      "useInstead": "FormField",
+      "from": {
+        "section": "evidence",
+        "quote": "\"not a form field and not a search row\". Use FormField or MessageField for labelled input, InputSearch for search."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "Labelled input, as in a form: the upstream Storybook docs, as the evidence records them, point to MessageField or FormField for labelled input.",
+      "strength": "discouraged",
+      "useInstead": "MessageField",
+      "from": {
+        "section": "evidence",
+        "quote": "\"not a form field and not a search row\". Use FormField or MessageField for labelled input, InputSearch for search."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Brand icon",
+      "holds": "The assistant's brand mark; it can be turned off.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The HelloJio mark; it can be turned off."
+      }
+    },
+    {
+      "part": "Prompt",
+      "holds": "The placeholder, then the question people type; one line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The placeholder, then the question people type; one line."
+      }
+    },
+    {
+      "part": "Send",
+      "holds": "Gold button that sends the text; Return sends too.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Gold button that sends the text; Return sends too."
+      }
+    },
+    {
+      "part": "Pill",
+      "holds": "Grey rounded surface; white with a border while focused.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey rounded surface; white with a border while focused."
+      }
+    },
+    {
+      "part": "Attachments",
+      "holds": "Files people add, inside the pill above the prompt.",
+      "required": false,
+      "from": {
+        "section": "configuration",
+        "quote": "Attachments people add sit inside the pill, above the prompt."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "It fills its container's width and is 38 px tall (36 px in Jio Plus, which has no border), with an 18 px brand icon and a 26 px send button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "HelloJio Input fills its container’s width and is 38 px tall (36 px in Jio Plus, which has no border), with an 18 px brand icon and a 26 px send button."
+      }
+    },
+    {
+      "text": "Attachments add height above the prompt.",
+      "strength": "recommended",
+      "target": "attachments",
+      "from": {
+        "section": "sizing",
+        "quote": "Attachments add height above the prompt."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The brand icon and send button are on by default and can each be turned off.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The brand icon and send button are on by default and can each be turned off."
+      }
+    },
+    {
+      "text": "Turn the brand icon off (leading={null}) on screens that already show the assistant's brand mark.",
+      "strength": "recommended",
+      "target": "leading",
+      "from": {
+        "section": "configuration",
+        "quote": "For screens that already show the HelloJio mark."
+      }
+    },
+    {
+      "text": "Without send (trailing={null}), the Return key still sends the text.",
+      "strength": "recommended",
+      "target": "trailing",
+      "from": {
+        "section": "configuration",
+        "quote": "The Return key still sends the text."
+      }
+    },
+    {
+      "text": "attachments holds the files people added: they sit above the prompt, and the pill grows to fit.",
+      "strength": "recommended",
+      "target": "attachments",
+      "from": {
+        "section": "configuration",
+        "quote": "Files people added sit above the prompt, and the pill grows to fit."
+      }
+    },
+    {
+      "text": "With two attachments the pill grows, and the chips scroll sideways when they run out of room; the chips sit in a ScrollArea › HStack, as in Figma's attachment slot and the guide's own chips.",
+      "strength": "recommended",
+      "target": "attachments",
+      "from": {
+        "section": "sizing",
+        "quote": "The pill grows, and the chips scroll sideways when they run out of room."
+      }
+    },
+    {
+      "text": "Let people remove attachments: the close button takes the file out.",
+      "strength": "recommended",
+      "target": "attachments",
+      "from": {
+        "section": "doDont",
+        "quote": "The close button takes the file out."
+      }
+    },
+    {
+      "text": "Don't show a close icon that does nothing: it looks tappable but nothing happens.",
+      "strength": "discouraged",
+      "target": "attachments",
+      "from": {
+        "section": "doDont",
+        "quote": "It looks tappable but nothing happens."
+      }
+    },
+    {
+      "text": "Over imagery, jioPlus makes the idle pill frosted glass.",
+      "strength": "recommended",
+      "target": "jioPlus",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "Over imagery, Jio Plus makes the idle pill frosted glass."
+      }
+    },
+    {
+      "text": "Jio Plus needs content behind the pill; on a flat sheet the frost has no job (the upstream Storybook docs, as the evidence records them).",
+      "strength": "recommended",
+      "target": "jioPlus",
+      "value": "true",
+      "from": {
+        "section": "evidence",
+        "quote": "Jio Plus needs content behind the pill; on a flat sheet \"the frost has no job\"."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "The package sets the state from focus and the Jio Plus option.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The package sets the state from focus and the Jio Plus option."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Don't set Hello Jio Input State: states come from focus and jioPlus.",
+      "strength": "discouraged",
+      "target": "Hello Jio Input State",
+      "from": {
+        "section": "evidence",
+        "quote": "States come from focus and `jioPlus`; do not author `Hello Jio Input State`."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "value makes the field controlled; pair it with onChangeText.",
+      "strength": "recommended",
+      "target": "value",
+      "from": {
+        "fact": "props:value"
+      }
+    },
+    {
+      "text": "On send, the screen adds the question to the conversation and clears the field.",
+      "strength": "recommended",
+      "target": "onSubmit",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds the question to the conversation and clears the field."
+      }
+    },
+    {
+      "text": "Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field.",
+      "strength": "recommended",
+      "target": "onSubmit",
+      "from": {
+        "section": "sources",
+        "quote": "Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write a short, open prompt in sentence case with no full stop, such as “Ask me anything”.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "content",
+          "quote": "Write a short, open prompt in sentence case with no full stop, such as “Ask me anything”."
+        }
+      },
+      {
+        "text": "Keep the prompt short: the whole prompt fits in the pill.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "doDont",
+          "quote": "The whole prompt fits in the pill."
+        }
+      },
+      {
+        "text": "Don't write a long prompt: it is cut off in the pill.",
+        "strength": "discouraged",
+        "target": "placeholder",
+        "from": {
+          "section": "doDont",
+          "quote": "It is cut off in the pill."
+        }
+      }
+    ],
+    "good": [
+      "Ask me anything",
+      "Ask about your gold savings"
+    ],
+    "bad": [
+      "Ask me anything about your gold, savings, loans, or bills",
+      "Search transactions"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "The pill is grey while idle.",
+      "from": {
+        "section": "states",
+        "quote": "The pill is grey while idle"
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "The pill turns white with a border while people type.",
+      "from": {
+        "section": "states",
+        "quote": "turns white with a border while people type"
+      }
+    },
+    {
+      "state": "Jio Plus",
+      "when": "With jioPlus, frosted glass over imagery while not focused; the prompt and typed text stay readable.",
+      "from": {
+        "section": "states",
+        "quote": "Frosted glass over imagery while not focused. The prompt and typed text stay readable."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "Half opacity; typing and sending are off.",
+      "from": {
+        "section": "states",
+        "quote": "Half opacity; typing and sending are off."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The prompt is also the field's accessible name, so keep it meaningful.",
+      "strength": "recommended",
+      "target": "placeholder",
+      "from": {
+        "section": "content",
+        "quote": "The prompt is also the field’s accessible name, so keep it meaningful."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the field; left out, the name is the placeholder.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    },
+    {
+      "text": "On the web Tab goes from the input straight to Send.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web Tab goes from the input straight to Send."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Disabled: on the web the input is read-only, and the send button is aria-disabled and out of the tab order.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "section": "evidence",
+        "quote": "`disabled`: opacity 0.5, input `readonly`, send `aria-disabled` and out of the tab order."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the prompt short",
+      "dont": "Write a long prompt",
+      "why": "It is cut off in the pill.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the prompt short"
+      }
+    },
+    {
+      "do": "Use it to ask HelloJio",
+      "dont": "Use it for search",
+      "why": "People expect an answer, not a list of results.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use it to ask HelloJio"
+      }
+    },
+    {
+      "do": "Let people remove attachments",
+      "dont": "Show a close icon that does nothing",
+      "why": "It looks tappable but nothing happens.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let people remove attachments"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context: a Card holding a short conversation (a ChatBubble with the person's question, aligned to the end as in the guide, and one with the assistant's answer) and the prompt under it. On send, the screen adds the question to the conversation and clears the field, and it ignores an empty prompt. The literal value and the empty handlers stand for the screen's own state.",
+      "jsx": "<Card>\n  <VStack>\n    <ChatBubble role=\"user\" text=\"What is the gold rate today?\" style={{ alignSelf: 'flex-end' }} />\n    <ChatBubble role=\"assistant\" text=\"24K gold is ₹7,412 per gram today.\" />\n    <HelloJioInput value=\"\" onChangeText={(text) => {}} onSubmit={(text) => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds the question to the conversation and clears the field. It also ignores an empty prompt, because Send works even when the field is empty."
+      }
+    },
+    {
+      "purpose": "Without the brand icon, from the guide's Configuration: leading={null} for a screen that already shows the assistant's brand mark; the prompt and send button stay.",
+      "jsx": "<HelloJioInput leading={null} value=\"\" onChangeText={(text) => {}} onSubmit={(text) => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "For screens that already show the HelloJio mark."
+      }
+    },
+    {
+      "purpose": "With an attachment, from the guide's Configuration: a file people added sits above the prompt and the pill grows to fit. The chip is a ChatAttachment in a horizontal ScrollArea › HStack, as in Figma's attachment slot and the guide's own chips; its onClose lets people take the file out (the screen removes it from its list).",
+      "jsx": "<HelloJioInput\n  value=\"\"\n  onChangeText={(text) => {}}\n  onSubmit={(text) => {}}\n  attachments={\n    <ScrollArea direction=\"horizontal\">\n      <HStack alignVertical=\"center\">\n        <ChatAttachment title=\"Statement_Sep\" subtitle=\"PDF file\" onClose={() => {}} />\n      </HStack>\n    </ScrollArea>\n  }\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Files people added sit above the prompt, and the pill grows to fit."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "onSubmit",
+      "description": "Still receives empty text when the field is empty, and the field is not cleared after sending.",
+      "quote": "`onSubmit` still receives empty text and the field is not cleared.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "jioPlus",
+      "description": "The input sits above the glass layer, so the prompt and typed text stay readable on a photo.",
+      "quote": "In Jio Plus the input now sits above the glass layer, so the prompt and typed text stay readable on a photo.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Defaults to the placeholder.",
+      "quote": "`accessibilityLabel` (default the placeholder)",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "disabled",
+      "description": "Opacity 0.5; on the web the input is read-only and the send button is aria-disabled and out of the tab order.",
+      "quote": "`disabled`: opacity 0.5, input `readonly`, send `aria-disabled` and out of the tab order.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The send button is 26 × 26 px against Figma's 28 px (IconButton's known 2 px size gap).",
+      "quote": "Still open: the send button is 26 × 26 vs Figma's 28 (IconButton's known 2 px size gap)",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Send works with an empty field and the text stays after sending: onSubmit receives empty text and the field is not cleared, so the screen ignores empty prompts and clears the field itself. The evidence records this as an open question.",
+      "quote": "the empty-send question is unanswered: that code path is unchanged, so `onSubmit` still receives empty text and the field is not cleared.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Figma's component has no size or disabled property, while the package has a disabled prop.",
+      "quote": "No size or disabled property.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ]
+}

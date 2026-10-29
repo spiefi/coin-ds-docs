@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "id": "Balance",
+  "slug": "balance",
+  "category": "content",
+  "tags": [
+    "account balance",
+    "amount",
+    "total",
+    "money value",
+    "amount owed"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T07:47:24Z",
+    "flags": []
+  },
+  "summary": "Use a Balance to show one money amount, such as what someone owes or holds, in large type under a short title.",
+  "useWhen": [
+    {
+      "text": "Show one money amount, such as what someone owes or holds, in large type under a short title.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Balance to show one money amount, such as what someone owes or holds, in large type under a short title."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "An amount people press, or one that needs a selected, disabled or loading look: a Balance isn't pressable and has none of those looks.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "A Balance isn’t pressable and has no selected, disabled, or loading look."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "title: names the amount in 14 px medium text.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the amount in 14 px medium text."
+      }
+    },
+    {
+      "part": "Currency",
+      "holds": "The symbol for your currency code (currency), such as ₹ for INR. Your own Money Value in children replaces the default one.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The symbol for your currency code, such as ₹ for INR."
+      }
+    },
+    {
+      "part": "Amount",
+      "holds": "amount, exactly as you write it, in 36 px heavy type at the default size.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Your amount exactly as you write it, in 36 px heavy type."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place a Balance in a screen or card that has padding and a surface: it has neither of its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It has no padding or surface, so place it in a screen or card that has them."
+      }
+    },
+    {
+      "text": "The host sets the width: a Balance is as wide as its host and as tall as its text, 68 px at the default size.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A Balance is as wide as its host and as tall as its text: 68 px at the default size."
+      }
+    },
+    {
+      "text": "In a column host, such as a screen or a VStack, a Balance takes the host's width and a long title wraps. In a row host it is as wide as its text, so a long title runs past the host on one line.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "in a column host (a screen, a VStack, Storybook's padded View) the Balance takes the host's width and a long title wraps"
+      }
+    },
+    {
+      "text": "In the guide’s trip screen, Settle up is the screen’s own Button, not part of the Balance.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Settle up is the screen’s own Button."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass a currency code or symbol in currency.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Pass a currency code or symbol and the amount as text."
+      },
+      "target": "currency"
+    },
+    {
+      "text": "Pass the amount as text in amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Pass a currency code or symbol and the amount as text."
+      },
+      "target": "amount"
+    },
+    {
+      "text": "A currency code shows as its symbol: USD shows as $. Unknown codes print as typed.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "USD shows as $; unknown codes print as typed."
+      },
+      "target": "currency"
+    },
+    {
+      "text": "A leading minus in amount shows before the symbol.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A leading minus shows before the symbol."
+      },
+      "target": "amount"
+    },
+    {
+      "text": "To use a Money Value option, such as hiding the amount, pass your own MoneyValue inside the Balance (children).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "To use a Money Value option, such as hiding the amount, pass your own Money Value inside the Balance."
+      },
+      "target": "children"
+    },
+    {
+      "text": "A Money Value in the slot always gets Context3 Balance & Cards, so it is always the 36 px size.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "A Money Value in the slot always gets Context3 Balance & Cards."
+      },
+      "target": "Context3",
+      "value": "Balance & Cards"
+    },
+    {
+      "text": "Context3 sets the amount's size; the title stays 14 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Context3 sets the amount’s size; the title stays 14 px."
+      },
+      "target": "Context3"
+    },
+    {
+      "text": "Balance & Cards is the default: a 36 px amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The default: a 36 px amount."
+      },
+      "target": "Context3",
+      "value": "Balance & Cards"
+    },
+    {
+      "text": "Like the guide's trip screen, add up the amount in the screen and pass it as formatted text: the Balance only shows it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The trip screen adds up what you owe and passes it as formatted text; the Balance only shows it."
+      },
+      "target": "amount"
+    },
+    {
+      "text": "When the amount changes, pass the new amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "When the amount changes, pass the new amount."
+      },
+      "target": "amount"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One amount, named, at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One amount, named, at a glance."
+        }
+      },
+      {
+        "text": "Write the title as a short name for the amount, such as “Available balance” or “Total owed to people”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the title as a short name for the amount, such as “Available balance” or “Total owed to people”."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Pass the amount already formatted, with separators and decimals: the Balance shows it exactly as you write it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Pass the amount already formatted, with separators and decimals: the Balance shows it exactly as you write it."
+        },
+        "target": "amount"
+      },
+      {
+        "text": "Name the amount: “Available balance” says what the number is.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Available balance” says what the number is."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Keep the title short: two or three words name the amount.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Two or three words name the amount."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Do not leave the default title: a savings balance would still say “Total owed to people”.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A savings balance still says “Total owed to people”."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Do not write a sentence as the title: a long title wraps and buries the amount.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A long title wraps and buries the amount."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Do not pass a raw number such as 124500.5: the Balance doesn't format, so it shows as written.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The Balance doesn’t format, so 124500.5 shows as written."
+        },
+        "target": "amount"
+      }
+    ],
+    "good": [
+      "Available balance",
+      "1,24,500.50"
+    ],
+    "bad": [
+      "124500.5",
+      "Total amount you still owe to the friends on this trip after the last settlement"
+    ]
+  },
+  "states": [
+    {
+      "state": "No states of its own",
+      "when": "A Balance isn't pressable and has no selected, disabled, or loading look; when the amount changes, pass the new amount.",
+      "from": {
+        "section": "states",
+        "quote": "A Balance isn’t pressable and has no selected, disabled, or loading look."
+      }
+    },
+    {
+      "state": "Nothing owed",
+      "when": "A zero amount, such as 0.00, looks like any other amount.",
+      "from": {
+        "section": "states",
+        "quote": "Zero looks like any other amount."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the amount is announced once, with its currency, such as “₹50,000.67”.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the amount is announced once, with its currency, such as “₹50,000.67”."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Name the amount",
+      "dont": "Leave the default title",
+      "why": "A savings balance still says “Total owed to people”.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the amount"
+      }
+    },
+    {
+      "do": "Format the amount",
+      "dont": "Pass a raw number",
+      "why": "The Balance doesn’t format, so 124500.5 shows as written.",
+      "from": {
+        "section": "doDont",
+        "quote": "Format the amount"
+      }
+    },
+    {
+      "do": "Keep the title short",
+      "dont": "Write a sentence",
+      "why": "A long title wraps and buries the amount.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the title short"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "What you owe after a trip, the guide's In context: the screen adds up the amount and passes it as formatted text, the Balance shows it under the screen's Title, and Settle up is the screen's own Button.",
+      "jsx": "<VStack>\n  <Title title=\"Goa trip\" subtitle=\"4 friends · 12 expenses\" />\n  <VStack>\n    <Balance title=\"Total owed to people\" amount=\"2,450.00\" currency=\"INR\" />\n    <Button label=\"Settle up\" onPress={() => {}} />\n  </VStack>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Settle up is the screen’s own Button."
+      }
+    },
+    {
+      "purpose": "A currency code: USD shows as $.",
+      "jsx": "<Balance title=\"Total owed to you\" amount=\"1,250.00\" currency=\"USD\" />",
+      "from": {
+        "section": "configuration",
+        "quote": "USD shows as $; unknown codes print as typed."
+      }
+    },
+    {
+      "purpose": "A hidden amount: your own MoneyValue inside the Balance, with hidden on. The Balance gives it Context3 Balance & Cards.",
+      "jsx": "<Balance title=\"Available balance\">\n  <MoneyValue value=\"50,000.67\" currency=\"INR\" hidden />\n</Balance>",
+      "from": {
+        "section": "configuration",
+        "quote": "Your own Money Value, here with hidden on."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Total owed to people",
+        "description": "An empty title still leaves an 18 px line and the 6 px gap above the amount. Declared: Title text displayed above the balance amount. Default \"Total owed to people\", from the component source.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "amount",
+        "type": "string | number",
+        "required": false,
+        "source": "evidence",
+        "default": "50,000.67",
+        "description": "Shown exactly as passed: no grouping or decimals are added. A leading minus is drawn as its own sign before the symbol. Declared: Amount to display in the balance. Default \"50,000.67\", from the component source.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "₹",
+        "description": "ISO codes map to their symbols (INR ₹, USD $, EUR € and others); unknown codes print as typed. Declared: Currency symbol or code. Default \"₹\", from the component source.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration for design tokens."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the container."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional children content to render instead of the default MoneyValue. Use this slot for custom money value implementations."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Native / testing id for the root."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessible name for the title-and-amount block."
+      },
+      {
+        "name": "...Omit<React.ComponentProps<typeof View>, 'children' | 'style'>",
+        "type": "Omit<React.ComponentProps<typeof View>, 'children' | 'style'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Balance reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context3",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Transaction Bubble",
+          "Balance & Cards",
+          "Amount Input"
+        ],
+        "description": "Sets the amount's size; the title stays 14 px. Balance's Money Value defaults to Balance & Cards, not the collection's Default: a 36 px symbol and amount at weight 900 on a 44 px line. Default gives a 14 px amount, Transaction Bubble a 26 px amount with a 28 px symbol, Amount Input a 56 px amount with a 32 px symbol. Balance's modes can change the default Money Value's Context3, but a slotted Money Value always gets Balance & Cards. Declared: A token collection Balance reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Balance & Cards",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "JioPlus turns the amount white, and the title with it. Declared: A token collection Balance reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-27"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Children replace the default Money Value; amount and currency are then ignored. Declared: Optional children content to render instead of the default MoneyValue. Use this slot for custom money value implementations.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "Figma's Balance is one component with a Title property and a nested Money Value, whose amount and currency are overrides. In code amount and currency are props, and children takes your own Money Value.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The package draws the amount on a 44 px line where Figma's is 36 px, so a Balance is 68 px tall instead of Figma's 60.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The published Storybook docs page for Balance still doesn't load: the fix is in Biscuit's source but the hosted Storybook isn't redeployed; its stories load (#346).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=balance",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1986-6203",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-balance--docs"
+  }
+}

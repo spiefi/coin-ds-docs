@@ -1,0 +1,492 @@
+{
+  "slug": "table",
+  "label": "Table",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/table.guide.tsx"
+  ],
+  "evidence": "docs/evidence/table.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:56:26.821Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "data table",
+    "grid",
+    "holdings table",
+    "rows and columns"
+  ],
+  "title": "Table",
+  "summary": "Use a Table to compare a few values across rows, such as holdings, with columns that line up and numbers aligned right.",
+  "corePrinciple": "Line values up so they can be compared at a glance.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5732-3710",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-table--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A header row over rows of cells",
+      "description": "Each column has a grey header cell and a white cell in every row, with 1 px lines between them. Strings and numbers render as Coin Text; a column can render its own content instead.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Header row",
+        "Grey row of column names; it stays put when the rows scroll.",
+        "Column name",
+        "14 px semibold, aligned like the values below it.",
+        "Row",
+        "One record, such as one holding; it can be pressable.",
+        "Cell",
+        "White, 12 px padding, with 1 px lines on its right and below.",
+        "Number",
+        "Right-aligned, so digits line up down the column."
+      ],
+      "specimen": [
+        "Asset",
+        "Units",
+        "Value",
+        "Change",
+        "HDFC Bank",
+        "120",
+        "₹1,98,400",
+        "+2.4%",
+        "Reliance",
+        "64",
+        "₹1,52,900",
+        "-0.8%",
+        "Infosys",
+        "210",
+        "₹3,10,500",
+        "+1.1%"
+      ],
+      "anatomy": [
+        {
+          "part": "Header row",
+          "note": "Grey row of column names; it stays put when the rows scroll."
+        },
+        {
+          "part": "Column name",
+          "note": "14 px semibold, aligned like the values below it."
+        },
+        {
+          "part": "Row",
+          "note": "One record, such as one holding; it can be pressable."
+        },
+        {
+          "part": "Cell",
+          "note": "White, 12 px padding, with 1 px lines on its right and below."
+        },
+        {
+          "part": "Number",
+          "note": "Right-aligned, so digits line up down the column."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Columns, header, borders, and text modes",
+      "description": "Columns share the width unless one gets a flex or a fixed width, and each sets its own alignment. The header and the outer lines can go. Modes on the table reach its body text only; text size and the brand appearances are in the playground above, and the header never changes.",
+      "blocks": [
+        "Default",
+        "Columns share the width equally; numbers sit right so their digits line up.",
+        "Column widths",
+        "Asset takes twice the room and Units keeps a fixed 70 px; a fixed width beats flex.",
+        "Without a header",
+        "Only the rows remain, for values that a title above already explains.",
+        "Trimmed outer borders",
+        "The last column and the last row drop their outer lines, for a table inside a card.",
+        "Your own cells",
+        "The Change column renders Coin Text, here green for gains and red for losses.",
+        "Status appearances",
+        "Success, Warning, and Error tint every body cell green, amber, or red; to mark one value, render your own cells.",
+        "Bold weight",
+        "Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular.",
+        "List item context",
+        "Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px.",
+        "JioPlus page",
+        "The values stay dark and readable on the white cells."
+      ],
+      "specimen": [
+        "Asset",
+        "Units",
+        "Value",
+        "Change",
+        "HDFC Bank",
+        "120",
+        "₹1,98,400",
+        "+2.4%",
+        "Reliance",
+        "64",
+        "₹1,52,900",
+        "-0.8%",
+        "Infosys",
+        "210",
+        "₹3,10,500",
+        "+1.1%",
+        "TCS",
+        "48",
+        "₹1,84,200",
+        "+0.3%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "Columns share the width equally; numbers sit right so their digits line up."
+        },
+        {
+          "title": "Column widths",
+          "description": "Asset takes twice the room and Units keeps a fixed 70 px; a fixed width beats flex."
+        },
+        {
+          "title": "Without a header",
+          "description": "Only the rows remain, for values that a title above already explains."
+        },
+        {
+          "title": "Trimmed outer borders",
+          "description": "The last column and the last row drop their outer lines, for a table inside a card."
+        },
+        {
+          "title": "Your own cells",
+          "description": "The Change column renders Coin Text, here green for gains and red for losses."
+        },
+        {
+          "title": "Status appearances",
+          "description": "Success, Warning, and Error tint every body cell green, amber, or red; to mark one value, render your own cells."
+        },
+        {
+          "title": "Bold weight",
+          "description": "Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular."
+        },
+        {
+          "title": "List item context",
+          "description": "Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px."
+        },
+        {
+          "title": "JioPlus page",
+          "description": "The values stay dark and readable on the white cells."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Static or pressable rows",
+      "description": "Rows are static by default. When the screen handles a row press, every row takes focus and a press and fades while pressed; screen readers still hear it as a row. With no rows, only the header shows: the table has no empty message of its own.",
+      "blocks": [
+        "Static rows",
+        "Rows only show values; they can't be focused or pressed.",
+        "Pressable rows",
+        "Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is.",
+        "No rows",
+        "Only the header shows. Put an Empty State next to it to explain why."
+      ],
+      "specimen": [
+        "Asset",
+        "Units",
+        "Value",
+        "Change",
+        "HDFC Bank",
+        "120",
+        "₹1,98,400",
+        "+2.4%",
+        "Reliance",
+        "64",
+        "₹1,52,900",
+        "-0.8%",
+        "Infosys",
+        "210",
+        "₹3,10,500",
+        "+1.1%",
+        "TCS",
+        "48",
+        "₹1,84,200",
+        "+0.3%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Static rows",
+          "description": "Rows only show values; they can't be focused or pressed."
+        },
+        {
+          "title": "Pressable rows",
+          "description": "Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is."
+        },
+        {
+          "title": "No rows",
+          "description": "Only the header shows. Put an Empty State next to it to explain why."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Fills its host, scrolls when it can’t fit",
+      "description": "A table fills its host’s width. Cells have 12 px of padding and 1 px lines; rows are about 42 px tall at Medium text and the header about 45 px. Fixed widths that add up to more than the host need sideways scroll, or the last column is cut off. A maximum height scrolls the rows under a pinned header.",
+      "blocks": [
+        "334 × 188",
+        "42",
+        "Scrolls sideways",
+        "Columns keep 140, 90, 130, and 90 px; scroll sideways to reach Change. No scrollbar shows.",
+        "Scrolls down",
+        "Ten holdings in 152 px: the rows scroll and the header stays put.",
+        "Both ways",
+        "The header moves sideways with the rows but stays at the top.",
+        "Narrow host",
+        "In a 240 px host each column keeps about 30 px for text, so words and numbers break apart. Use fewer columns or sideways scroll."
+      ],
+      "specimen": [
+        "Asset",
+        "Units",
+        "Value",
+        "Change",
+        "HDFC Bank",
+        "120",
+        "₹1,98,400",
+        "+2.4%",
+        "Reliance",
+        "64",
+        "₹1,52,900",
+        "-0.8%",
+        "Infosys",
+        "210",
+        "₹3,10,500",
+        "+1.1%",
+        "TCS",
+        "48",
+        "₹1,84,200",
+        "+0.3%",
+        "ITC",
+        "300",
+        "₹1,32,600",
+        "+0.6%",
+        "SBI",
+        "150",
+        "₹1,21,800",
+        "-1.2%",
+        "Axis Bank",
+        "90",
+        "₹1,05,300",
+        "+0.9%",
+        "Wipro",
+        "200",
+        "₹96,400",
+        "-0.4%",
+        "HUL",
+        "40",
+        "₹1,02,500",
+        "+0.2%",
+        "Bajaj Finance",
+        "15",
+        "₹1,08,700",
+        "+1.8%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Scrolls sideways",
+          "description": "Columns keep 140, 90, 130, and 90 px; scroll sideways to reach Change. No scrollbar shows."
+        },
+        {
+          "title": "Scrolls down",
+          "description": "Ten holdings in 152 px: the rows scroll and the header stays put."
+        },
+        {
+          "title": "Both ways",
+          "description": "The header moves sideways with the rows but stays at the top."
+        },
+        {
+          "title": "Narrow host",
+          "description": "In a 240 px host each column keeps about 30 px for text, so words and numbers break apart. Use fewer columns or sideways scroll."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Short headers, formatted values",
+      "description": "Name each column in a word or two and format values before they reach the table, with currency symbols, separators, and signs. Right-align numbers and keep text left. Cells wrap instead of cutting text off, so keep values short.",
+      "blocks": [
+        "Recent payments",
+        "Three short headers; amounts carry ₹ and separators and sit right."
+      ],
+      "specimen": [
+        "Date",
+        "Paid to",
+        "Amount",
+        "12 Oct",
+        "Ravi Stores",
+        "₹250",
+        "11 Oct",
+        "Jio Mart",
+        "₹1,240",
+        "9 Oct",
+        "Electricity bill",
+        "₹2,180"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Recent payments",
+          "description": "Three short headers; amounts carry ₹ and separators and sit right."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Holdings on a portfolio screen",
+      "description": "The portfolio screen lists holdings with gains in green and losses in red. Pressing a row opens that holding; the screen handles the press.",
+      "blocks": [
+        "Press a holding to open it"
+      ],
+      "specimen": [
+        "Your holdings",
+        "Asset",
+        "Units",
+        "Value",
+        "Change",
+        "HDFC Bank",
+        "120",
+        "₹1,98,400",
+        "+2.4%",
+        "Reliance",
+        "64",
+        "₹1,52,900",
+        "-0.8%",
+        "Infosys",
+        "210",
+        "₹3,10,500",
+        "+1.1%",
+        "TCS",
+        "48",
+        "₹1,84,200",
+        "+0.3%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make values easy to compare",
+      "description": "Each pair shows a table that reads at a glance next to one that makes people work.",
+      "blocks": [
+        "Do",
+        "Right-align numbers",
+        "Digits line up, so ₹1,98,400 and ₹3,10,500 compare at a glance.",
+        "Don’t",
+        "Left-align numbers",
+        "Ragged digits make values hard to compare down the column.",
+        "Let columns share the width",
+        "Flex columns always fit, so every value shows.",
+        "Fix widths that don't fit",
+        "Three 130 px columns need 390 px; without scroll the last one is cut off.",
+        "Colour single values",
+        "Coin Text in the Change column marks gains and losses.",
+        "Colour the whole table",
+        "Text appearance on the table tints every value, so nothing stands out."
+      ],
+      "specimen": [
+        "Asset",
+        "Value",
+        "Change",
+        "HDFC Bank",
+        "₹1,98,400",
+        "+2.4%",
+        "Reliance",
+        "₹1,52,900",
+        "-0.8%",
+        "Infosys",
+        "₹3,10,500",
+        "+1.1%",
+        "TCS",
+        "₹1,84,200",
+        "+0.3%"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Right-align numbers",
+            "caption": "Digits line up, so ₹1,98,400 and ₹3,10,500 compare at a glance.",
+            "specimen": "Asset · Value · Change · HDFC Bank · ₹1,98,400 · +2.4% · Reliance · ₹1,52,900 · -0.8% · Infosys · ₹3,10,500 · +1.1% · TCS · ₹1,84,200 · +0.3%"
+          },
+          "dont": {
+            "title": "Left-align numbers",
+            "caption": "Ragged digits make values hard to compare down the column.",
+            "specimen": "Asset · Value · Change · HDFC Bank · ₹1,98,400 · +2.4% · Reliance · ₹1,52,900 · -0.8% · Infosys · ₹3,10,500 · +1.1% · TCS · ₹1,84,200 · +0.3%"
+          }
+        },
+        {
+          "do": {
+            "title": "Let columns share the width",
+            "caption": "Flex columns always fit, so every value shows.",
+            "specimen": "Asset · Value · Change · HDFC Bank · ₹1,98,400 · +2.4% · Reliance · ₹1,52,900 · -0.8% · Infosys · ₹3,10,500 · +1.1% · TCS · ₹1,84,200 · +0.3%"
+          },
+          "dont": {
+            "title": "Fix widths that don't fit",
+            "caption": "Three 130 px columns need 390 px; without scroll the last one is cut off.",
+            "specimen": "Asset · Value · Change · HDFC Bank · ₹1,98,400 · +2.4% · Reliance · ₹1,52,900 · -0.8% · Infosys · ₹3,10,500 · +1.1% · TCS · ₹1,84,200 · +0.3%"
+          }
+        },
+        {
+          "do": {
+            "title": "Colour single values",
+            "caption": "Coin Text in the Change column marks gains and losses.",
+            "specimen": "Asset · Value · Change · HDFC Bank · ₹1,98,400 · +2.4% · Reliance · ₹1,52,900 · -0.8% · Infosys · ₹3,10,500 · +1.1% · TCS · ₹1,84,200 · +0.3%"
+          },
+          "dont": {
+            "title": "Colour the whole table",
+            "caption": "Text appearance on the table tints every value, so nothing stands out.",
+            "specimen": "Asset · Value · Change · HDFC Bank · ₹1,98,400 · +2.4% · Reliance · ₹1,52,900 · -0.8% · Infosys · ₹3,10,500 · +1.1% · TCS · ₹1,84,200 · +0.3%"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Table contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Column alignment and widths",
+        "Custom cell render",
+        "Pressable rows",
+        "Scrollable",
+        "Vertical scroll",
+        "Horizontal and vertical scroll",
+        "Uniform column width",
+        "Trim outer borders",
+        "Composition",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma’s Table is one 720 × 190 component: a full-width header over a grid of white cells with 1 px grey lines. In code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code. Developers can build the same table from data or from its parts. The app’s theme doesn’t reach the table, so it takes its modes directly, and they change body text only. Since the #264 fix, Weight reaches text cells, Page type JioPlus keeps them dark on white, and on the web screen readers hear the header cells, rows, and cells as a table, with pressable rows still rows. Biscuit’s main has the handwritten Storybook page.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coin agent pack graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packVersion",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "packVersion": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "slug",
+          "category",
+          "state",
+          "inPack"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "slug": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "category": {
+            "enum": [
+              "action",
+              "input",
+              "content",
+              "card",
+              "navigation",
+              "feedback",
+              "layout",
+              "data",
+              null
+            ]
+          },
+          "state": {
+            "enum": [
+              "documented",
+              "flagged",
+              "undocumented",
+              "unsupported",
+              null
+            ]
+          },
+          "inPack": {
+            "type": "boolean",
+            "description": "false for components named by edges but without an entry"
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "from",
+          "to",
+          "type",
+          "source"
+        ],
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "useInstead",
+              "placedIn",
+              "slotAccepts",
+              "usedWith"
+            ]
+          },
+          "slot": {
+            "type": "string",
+            "description": "slotAccepts only"
+          },
+          "strength": {
+            "enum": [
+              "required",
+              "recommended",
+              "discouraged"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "description": "JSON pointer into the from-component's entry"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,873 @@
+{
+  "schemaVersion": 1,
+  "id": "Nudge",
+  "slug": "nudge",
+  "category": "feedback",
+  "tags": [
+    "promo card",
+    "suggestion",
+    "tip",
+    "upsell",
+    "banner"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "9a7d2c48b849b20658f0a19c31f5aa626f72c1c8",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T07:47:24Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Nudge for a short suggestion with one action, such as splitting a payment, that sits within a screen’s content.",
+  "useWhen": [
+    {
+      "text": "A short suggestion with one action, such as splitting a payment, that sits within a screen's content.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Nudge for a short suggestion with one action, such as splitting a payment, that sits within a screen’s content."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Icon",
+      "holds": "The startSlot: a 20 px sparkle by default; it can be swapped or removed.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 20 px sparkle by default; it can be swapped or removed."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title, 14 px bold; says what's on offer in a line.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "14 px bold; says what’s on offer in a line."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "body, 12 px; one sentence of detail.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px; one sentence of detail."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "The one next step, as a small pill (buttonLabel and onPressButton, or buttonSlot).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The one next step, as a small pill."
+      }
+    },
+    {
+      "part": "Card",
+      "holds": "The surface, tinted by its appearance mode, with 12 px padding.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Tinted by its appearance mode, with 12 px padding."
+      }
+    },
+    {
+      "part": "Close button",
+      "holds": "An X on the right (showClose, onClose); the screen removes the nudge when it's pressed.",
+      "required": false,
+      "from": {
+        "section": "configuration",
+        "quote": "Adds an X on the right. The screen removes the nudge when it’s pressed."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "buttonSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "closeSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "startSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "A Nudge fills its container: full width, and as tall as its content.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A Nudge fills its container."
+      }
+    },
+    {
+      "text": "Long copy wraps and the card grows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Long copy wraps and the card grows."
+      }
+    },
+    {
+      "text": "On the guide's payment screen, the nudge sits between the amount and the Pay button, in a lavender appearance that stands out on the white card.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The nudge sits between the amount and the Pay button, in a lavender appearance that stands out on the white card."
+      }
+    },
+    {
+      "text": "The screen handles the nudge's button and removes the nudge on close.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen handles its button and removes it on close."
+      },
+      "target": "onClose"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Choose the type for the space and content you have, and an appearance mode for its colour.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Choose the type for the space and content you have, and an appearance mode for its colour."
+      },
+      "target": "type"
+    },
+    {
+      "text": "stacked-prominent, the default: a title and body stacked beside the icon, the button below.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: a title and body stacked beside the icon, the button below."
+      },
+      "target": "type",
+      "value": "stacked-prominent"
+    },
+    {
+      "text": "inline-compact: one line of text with the button beside it; it has no title.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "One line of text with the button beside it. It has no title."
+      },
+      "target": "type",
+      "value": "inline-compact"
+    },
+    {
+      "text": "stacked-detailed: a title over your own content, such as list items; no button or close.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A title over your own content, such as list items. No button or close."
+      },
+      "target": "type",
+      "value": "stacked-detailed"
+    },
+    {
+      "text": "Use stacked-detailed for a list: a title over list items explains the offer.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "A title over list items explains the offer."
+      },
+      "target": "type",
+      "value": "stacked-detailed"
+    },
+    {
+      "text": "Do not expect an action on stacked-detailed: it ignores the button and close, so people have nothing to tap.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "It ignores the button and close, so people have nothing to tap."
+      },
+      "target": "type",
+      "value": "stacked-detailed"
+    },
+    {
+      "text": "Show the close button when people may dismiss the nudge.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a close button when people may dismiss it"
+      },
+      "target": "showClose",
+      "value": "true"
+    },
+    {
+      "text": "On stacked-prominent and inline-compact, the close button shows only when onClose is set or showClose is true; showClose false hides it even with onClose, and stacked-detailed never renders it.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/7"
+      },
+      "target": "showClose"
+    },
+    {
+      "text": "The default button renders when buttonLabel or onPressButton is set; buttonSlot set to null removes it.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "buttonLabel"
+    },
+    {
+      "text": "Leave Context to the Nudge: it sets the Nudge&Alert context itself, so its button is Figma's small size.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Nudge sets the Nudge&Alert context itself, so its button is Figma’s small size."
+      },
+      "target": "Context",
+      "value": "Nudge&Alert"
+    },
+    {
+      "text": "Do not pass another Context on the Nudge or through a container around it: a Default Context makes the button 42 px, and it outweighs the message.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message."
+      },
+      "target": "Context",
+      "value": "Default"
+    },
+    {
+      "text": "Remove the sparkle when the message needs no accent: set startSlot to null.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Remove the sparkle when the message needs no accent."
+      },
+      "target": "startSlot",
+      "value": "null"
+    },
+    {
+      "text": "AppearanceBrand tints the card, body, icon and button together.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand tints the card, body, icon, and button together."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "Figma's white card with a purple icon matches no single appearance mode; Neutral is the closest.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s white card with a purple icon matches no single appearance mode; Neutral is the closest."
+      },
+      "target": "AppearanceBrand",
+      "value": "Neutral"
+    },
+    {
+      "text": "Semantic Intent System colours the card for a status: positive, warning or negative (AppearanceSystem).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "System intent colours the card for a status: positive, warning, or negative."
+      },
+      "target": "Semantic Intent",
+      "value": "System"
+    },
+    {
+      "text": "Border Boolean True adds a 1 px grey border that separates a white card from a white screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A 1 px grey border separates a white card from a white screen."
+      },
+      "target": "Border Boolean",
+      "value": "True"
+    },
+    {
+      "text": "children replaces the title, body and button in stacked-prominent, the body and button in inline-compact, and supplies the list in stacked-detailed.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`children` (replaces title, body, and button in prominent; body and button in compact; the list in detailed)"
+      },
+      "target": "children"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One helpful suggestion, one clear next step.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One helpful suggestion, one clear next step."
+        }
+      },
+      {
+        "text": "Write the title as the benefit.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the title as the benefit, the body as one sentence of detail, and the button as a verb or two."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Write the body as one sentence of detail.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the title as the benefit, the body as one sentence of detail, and the button as a verb or two."
+        },
+        "target": "body"
+      },
+      {
+        "text": "Write the button label as a verb or two.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the title as the benefit, the body as one sentence of detail, and the button as a verb or two."
+        },
+        "target": "buttonLabel"
+      },
+      {
+        "text": "Set the title, body and button label yourself: Nudge has no copy of its own, and the title also names the card for screen readers.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Nudge has no copy of its own, so set all three; the title also names the card for screen readers."
+        }
+      },
+      {
+        "text": "Write your own copy: the title, body and button say what's on offer.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The title, body, and button say what’s on offer."
+        }
+      }
+    ],
+    "good": [
+      "Turn on autopay",
+      "Pay your electricity bill on time, every month.",
+      "Turn on",
+      "Split payment",
+      "Pay ₹12,000 in 3 monthly instalments.",
+      "See plans"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "The card isn't interactive; its button and close button have their own pressed and focus states.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t interactive. Its button and close button have their own pressed and focus states."
+      }
+    },
+    {
+      "state": "Close removes it",
+      "when": "Pressing the X calls onClose and the screen hides the nudge: Nudge has no hidden state of its own.",
+      "from": {
+        "section": "states",
+        "quote": "Nudge has no hidden state: after a close, the screen removes it."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Give a stacked card a title: on the web a card with a title is a region named by its title (inline-compact shows no title).",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web a card with a title is a region named by its title"
+      },
+      "target": "title"
+    },
+    {
+      "text": "Set onPressButton for the button and onClose for the close button: Enter and Space activate them only when those are set, and without them the button is focusable but does nothing.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Enter and Space activate them only when `onPressButton` / `onClose` are set; without them the button is focusable but does nothing."
+      }
+    },
+    {
+      "text": "The close button's label for screen readers can be changed with closeAccessibilityLabel.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "its label for screen readers can be changed."
+      },
+      "target": "closeAccessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep Nudge’s own context",
+      "dont": "Pass another Context",
+      "why": "A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep Nudge’s own context"
+      }
+    },
+    {
+      "do": "Write your own copy",
+      "dont": "Leave the copy out",
+      "why": "Nudge has no placeholder: without copy it’s an empty card with a sparkle and no button.",
+      "from": {
+        "section": "doDont",
+        "quote": "Write your own copy"
+      }
+    },
+    {
+      "do": "Use stacked detailed for a list",
+      "dont": "Expect an action on stacked detailed",
+      "why": "It ignores the button and close, so people have nothing to tap.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use stacked detailed for a list"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A split-payment suggestion on a payment screen, in a lavender appearance; the screen handles the button and removes the nudge on close.",
+      "jsx": "<Nudge\n  title=\"Split payment\"\n  body=\"Pay ₹12,000 in 3 monthly instalments.\"\n  buttonLabel=\"See plans\"\n  onPressButton={() => {}}\n  onClose={() => {}}\n  modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary' }}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen handles its button and removes it on close."
+      }
+    },
+    {
+      "purpose": "Inline compact, with no close button: one line of text with the button beside it.",
+      "jsx": "<Nudge\n  type=\"inline-compact\"\n  body=\"Set up autopay so you never miss a bill.\"\n  buttonLabel=\"Set up\"\n  onPressButton={() => {}}\n  showClose={false}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "One line of text with the button beside it. It has no title."
+      }
+    },
+    {
+      "purpose": "Stacked detailed: a title over list items, with no button or close.",
+      "jsx": "<Nudge type=\"stacked-detailed\" title=\"Why split this payment?\" modes={{ 'Color Mode': 'Light' }}>\n  <ListItem layout=\"Horizontal\" title=\"No extra cost\" supportText=\"You pay ₹12,000 in total\" modes={{ 'Color Mode': 'Light' }} />\n  <ListItem layout=\"Horizontal\" title=\"Three monthly payments\" supportText=\"₹4,000 on the 5th of each month\" modes={{ 'Color Mode': 'Light' }} />\n</Nudge>",
+      "from": {
+        "section": "doDont",
+        "quote": "A title over list items explains the offer."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "type",
+        "type": "NudgeType",
+        "required": false,
+        "source": "types",
+        "values": [
+          "stacked-prominent",
+          "stacked-detailed",
+          "inline-compact"
+        ],
+        "default": "stacked-prominent",
+        "description": "Controls the layout type. - \"stacked-prominent\": icon + title/body/button content - \"inline-compact\": icon + body/button in one row - \"stacked-detailed\": header + children detail slot. Default \"stacked-prominent\", from the component source."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "",
+        "description": "On the web, with a title the card is a region named by the title; without one it has no role. Declared: Title text displayed in the nudge. Empty when omitted. Default \"\", from the component source.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "",
+        "description": "Body text displayed in prominent and compact types when no children are provided. Empty when omitted. Default \"\", from the component source."
+      },
+      {
+        "name": "buttonLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Label for the default button. The default button renders only when this or `onPressButton` is set. `buttonSlot={null}` removes it."
+      },
+      {
+        "name": "onPressButton",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback for the default button press. Also opts into the default button."
+      },
+      {
+        "name": "buttonSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "null or false removes the button, leaving the title and body. Declared: Custom button slot. `null` or `false` removes the button. Omit to use `buttonLabel` / `onPressButton` when one of those is set.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Only reports the press; the screen removes the nudge. Declared: Called when the default close IconButton is pressed. When set, the close button is shown unless `showClose` is false.",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "showClose",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "Since a116616 (the #271 fix), Close renders only when onClose is set or showClose is true, and showClose false hides it even with onClose. Declared: Show the trailing close button on `stacked-prominent` and `inline-compact`. When omitted, the button shows only if `onClose` is set. Pass true to force it, or false to hide it. `stacked-detailed` never renders it.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "closeAccessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Close",
+        "description": "Accessible name for the default close button. Default \"Close\", from the component source."
+      },
+      {
+        "name": "closeSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the default close, an IconButton ic_close labelled “Close” with forced Neutral / Low / S modes. Declared: Custom close slot, overrides the default close IconButton.",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "startSlot",
+        "type": "React.ReactNode | false",
+        "required": false,
+        "source": "types",
+        "description": "Optional leading slot. Omit for the token-driven sparkle icon, pass null/false to hide."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the title, body and button in stacked-prominent; the body and button in inline-compact; the list in stacked-detailed. Declared: Content slot — overrides default content, or provides detailed list content.",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Slot children get the Nudge's modes. Declared: Mode configuration for design token resolution.",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional container style overrides."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test id for the card."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Border Boolean",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "True adds a #ebebed border. Declared: A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "False",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "When the merged modes have no Context, Nudge sets Nudge&Alert itself (Figma's small button). A Default Context, on the Nudge or on a container whose modes reach it, gives a 42 px button. Declared: A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Nudge padding",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "None"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection Nudge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      }
+    ],
+    "slots": [
+      {
+        "name": "buttonSlot",
+        "type": "React.ReactNode",
+        "description": "Custom button slot. `null` or `false` removes the button. Omit to use `buttonLabel` / `onPressButton` when one of those is set.",
+        "source": "types"
+      },
+      {
+        "name": "closeSlot",
+        "type": "React.ReactNode",
+        "description": "Custom close slot, overrides the default close IconButton.",
+        "source": "types"
+      },
+      {
+        "name": "startSlot",
+        "type": "React.ReactNode | false",
+        "description": "Optional leading slot. Omit for the token-driven sparkle icon, pass null/false to hide.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Content slot — overrides default content, or provides detailed list content",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPressButton",
+        "type": "() => void",
+        "description": "Callback for the default button press. Also opts into the default button.",
+        "source": "types"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "description": "Called when the default close IconButton is pressed. When set, the close button is shown unless `showClose` is false.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "In Color Mode Dark the title stays #1e1a14 on a dark card (#208): the title colour is one literal for every mode.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "No appearance mode reproduces Figma's white card with a purple icon.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "inline-compact never shows the title, but still uses it as the region's name, an invisible name.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "onPressButton without buttonLabel renders an empty, unnamed button.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "The sparkle icon isn't hidden from assistive tech on the web.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "Nothing is announced and focus is not managed when a nudge is removed.",
+        "source": "evidence",
+        "checkedOn": "2026-10-07"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=nudge",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9177-4104",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-nudge--docs"
+  }
+}

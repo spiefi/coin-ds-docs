@@ -1,0 +1,313 @@
+{
+  "slug": "chipgroup",
+  "label": "Chip Group",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/chipgroup.guide.tsx"
+  ],
+  "evidence": "docs/evidence/chipgroup.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:56:30.009Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "filter chips",
+    "chip row",
+    "filters"
+  ],
+  "title": "Chip Group",
+  "summary": "Use a Chip Group to lay out a row of Chip Select filters that wraps onto new lines with even gaps.",
+  "corePrinciple": "The group spaces the chips; each chip keeps its own state.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1905-5123",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-chipgroup--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Chips in a wrapping row",
+      "description": "The group holds Chip Selects in one row, 8 px apart. Chips that don’t fit move to the next line, also 8 px below.",
+      "blocks": [
+        "8",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Chip Select",
+        "Each chip keeps its own label, icon, and Active state.",
+        "Gap",
+        "8 px between chips, set by the group.",
+        "Wrapped chip",
+        "A chip that doesn’t fit starts the next row, on the left.",
+        "Group",
+        "Lays chips out; it has no state, only an optional spoken name.",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Date",
+        "Status",
+        "Payment methods"
+      ],
+      "anatomy": [
+        {
+          "part": "Chip Select",
+          "note": "Each chip keeps its own label, icon, and Active state."
+        },
+        {
+          "part": "Gap",
+          "note": "8 px between chips, set by the group."
+        },
+        {
+          "part": "Wrapped chip",
+          "note": "A chip that doesn’t fit starts the next row, on the left."
+        },
+        {
+          "part": "Group",
+          "note": "Lays chips out; it has no state, only an optional spoken name."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "The chips are the content",
+      "description": "Chip Group has no variants or size. Choose the filters, their order, and each chip’s icon; each chip turns Active on its own.",
+      "blocks": [
+        "Figma’s three filters",
+        "Date, Status, and Payment methods, each with its own icon.",
+        "Six filters",
+        "More filters wrap onto new rows with the same 8 px gaps."
+      ],
+      "specimen": [
+        "Date",
+        "Status",
+        "Payment methods",
+        "Category",
+        "Account",
+        "Amount"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Figma’s three filters",
+          "description": "Date, Status, and Payment methods, each with its own icon."
+        },
+        {
+          "title": "Six filters",
+          "description": "More filters wrap onto new rows with the same 8 px gaps."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "The group has none; each chip does",
+      "description": "Chip Group has no idle, active, or disabled state. When a chip applies, it shows its value and a close icon, grows 20 px, and the row may re-wrap.",
+      "blocks": [
+        "Nothing applied",
+        "Grey chips name the filters.",
+        "Two applied",
+        "Each Active chip shows its value; the others stay as they are."
+      ],
+      "specimen": [
+        "Date",
+        "Status",
+        "Payment methods",
+        "Last 30 days",
+        "UPI"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Nothing applied",
+          "description": "Grey chips name the filters."
+        },
+        {
+          "title": "Two applied",
+          "description": "Each Active chip shows its value; the others stay as they are."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 32 px rows, 8 px gaps",
+      "description": "The group fills its container and adds a 32 px row for each line of chips. On the web chips are a little wider than in Figma, so Figma’s three filters need 382 px for one row.",
+      "blocks": [
+        "300 × 72",
+        "8",
+        "Shown at 99%",
+        "Group 390 px wide",
+        "The three filters fit on one row, with 8 px to spare.",
+        "Group 370 px wide, as in Figma",
+        "Payment methods moves to a second row."
+      ],
+      "specimen": [
+        "Date",
+        "Status",
+        "Payment methods"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Group 390 px wide",
+          "description": "The three filters fit on one row, with 8 px to spare."
+        },
+        {
+          "title": "Group 370 px wide, as in Figma",
+          "description": "Payment methods moves to a second row."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Short filter names, then the value",
+      "description": "Name each filter in one or two words, in sentence case. Once a filter applies, its chip shows the chosen value, so the row reads as a summary of the list.",
+      "blocks": [
+        "Filter names",
+        "Applied values"
+      ],
+      "specimen": [
+        "Date",
+        "Status",
+        "Payment methods",
+        "Last 30 days",
+        "Pending",
+        "UPI"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Filter names",
+          "description": ""
+        },
+        {
+          "title": "Applied values",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Filters above a transaction list",
+      "description": "The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it. The group only keeps the chips spaced as they change width. The screen names the row “Transaction filters”, so it is announced as a group.",
+      "blocks": [
+        "Showing transactions"
+      ],
+      "specimen": [
+        "Date",
+        "Status",
+        "Payment methods"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep the row short and easy to scan",
+      "description": "Each pair shows a chip row people can read at a glance versus one that slows them down.",
+      "blocks": [
+        "Do",
+        "Match each icon to its filter",
+        "A calendar, a status, and a payment icon tell the filters apart.",
+        "Don’t",
+        "Leave the default icon",
+        "Every chip shows a calendar, so the filters look alike.",
+        "Keep labels short",
+        "Short names fit several filters to a row.",
+        "Write long labels",
+        "Each long name takes a row to itself.",
+        "Let filters combine",
+        "Date and Payment methods apply together.",
+        "Use chips for one choice",
+        "People expect several to apply, and each is announced as its own toggle."
+      ],
+      "specimen": [
+        "Date",
+        "Status",
+        "Payment methods",
+        "Method",
+        "Date of transaction",
+        "Transaction status",
+        "Payment method used",
+        "Last 30 days",
+        "UPI",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Match each icon to its filter",
+            "caption": "A calendar, a status, and a payment icon tell the filters apart.",
+            "specimen": "Date · Status · Payment methods"
+          },
+          "dont": {
+            "title": "Leave the default icon",
+            "caption": "Every chip shows a calendar, so the filters look alike.",
+            "specimen": "Date · Status · Payment methods"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep labels short",
+            "caption": "Short names fit several filters to a row.",
+            "specimen": "Date · Status · Method"
+          },
+          "dont": {
+            "title": "Write long labels",
+            "caption": "Each long name takes a row to itself.",
+            "specimen": "Date of transaction · Transaction status · Payment method used"
+          }
+        },
+        {
+          "do": {
+            "title": "Let filters combine",
+            "caption": "Date and Payment methods apply together.",
+            "specimen": "Last 30 days · Status · UPI"
+          },
+          "dont": {
+            "title": "Use chips for one choice",
+            "caption": "People expect several to apply, and each is announced as its own toggle.",
+            "specimen": "Daily · Weekly · Monthly"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Chip Group contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With active state",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma’s Chip Group is one 370 × 32 component holding three Chip Selects in a slot, with no properties. The package wraps chips onto new rows with an 8 px gap; on the web the chips are slightly wider than in Figma, and a chip wider than the row wraps its label to stay inside it. Given an accessibility label, the row is announced as a named group; each chip is still announced as its own toggle button. The published Storybook predates the current stories, so two of its chips show no icon.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

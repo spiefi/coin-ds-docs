@@ -1,0 +1,16 @@
+{
+  "dismissed": [
+    {
+      "field": "/configuration/4",
+      "reason": "misreads-source: The cited Sizing sentence says only \"The pill grows, and the chips scroll sideways when they run out of room.\" Neither it nor any other guide text says the chips sit in a ScrollArea › HStack or describes \"the guide's own chips\" that way. Only the evidence's Figma note records that structure, and nothing records it for the guide's examples.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The guide's own chips are that structure; the reviewer sees only the rendered copy, not the guide source. In src/guides/hellojioinput.guide.tsx at cba512f, Chips (lines 23–29) is a ScrollArea direction=\"horizontal\" holding an HStack of ChatAttachment chips, and Input passes it as attachments (33–39). The With an attachment card (101), the With two attachments card (123, whose caption is the cited sentence) and the playground (86) all render it. The Figma attachment slot in the evidence (ScrollArea › HStack › Chat Attachment chips) is the same, and the installed HelloJioInput.tsx (dbe0e02) has no scroll view of its own (546–551, 634–636), so the sideways scroll comes from that ScrollArea."
+    },
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: It claims the ScrollArea › HStack wrapper matches \"the guide's own chips\", but no guide text supports that. The cited Configuration line says only \"Files people added sit above the prompt, and the pill grows to fit.\" The structure is recorded only for Figma's attachment slot in the evidence.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "Same as /configuration/4: the guide source at cba512f builds its attachments as ScrollArea direction=\"horizontal\" › HStack › ChatAttachment (hellojioinput.guide.tsx lines 23–29), used by the With an attachment card that the example's cited sentence captions (line 101). The reviewer reads only the rendered copy, which carries no component names; the example follows the guide's markup minus its width 100% style."
+    }
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "slug": "testimonialscard",
+  "label": "Testimonials Card",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/testimonialscard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/testimonialscard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:56:23.575Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "testimonial",
+    "customer quote",
+    "review card",
+    "quote card"
+  ],
+  "title": "Testimonials Card",
+  "summary": "Use a Testimonials Card for one customer quote, their initials or photo, their name, and their words, usually in a sideways row.",
+  "corePrinciple": "A real person, in their own words.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5267-1880",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-testimonialscard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An avatar, a name, a quote",
+      "description": "A 180 px card with the avatar on top and the name and the quote under it, all starting at the left.",
+      "blocks": [
+        "Shown at 1.5×",
+        "12",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Avatar",
+        "An Avatar, 42 px; avatarProps sets its initials or photo.",
+        "Name",
+        "title, the person’s name, 14 px Bold.",
+        "Quote",
+        "body, 12 px; it wraps and never clips.",
+        "Card",
+        "180 px wide, white, a 1 px grey border, 8 px corners.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "AS",
+        "Aarav S.",
+        "Renewing my car insurance took a minute."
+      ],
+      "anatomy": [
+        {
+          "part": "Avatar",
+          "note": "An Avatar, 42 px; avatarProps sets its initials or photo."
+        },
+        {
+          "part": "Name",
+          "note": "title, the person’s name, 14 px Bold."
+        },
+        {
+          "part": "Quote",
+          "note": "body, 12 px; it wraps and never clips."
+        },
+        {
+          "part": "Card",
+          "note": "180 px wide, white, a 1 px grey border, 8 px corners."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Initials or a photo, at three sizes",
+      "description": "The card always shows an Avatar, and avatarProps sets it: monogram shows the person’s initials, and imageSource shows their photo. Without avatarProps it shows the initials of the title. Avatar Size on the card’s modes sets it to 42, 36, or 29 px; an Avatar Size in avatarProps’ own modes wins.",
+      "blocks": [
+        "Avatar Size L",
+        "42 px, the default.",
+        "Avatar Size M",
+        "36 px.",
+        "Avatar Size S",
+        "29 px."
+      ],
+      "specimen": [
+        "AS",
+        "Aarav S.",
+        "Renewing my car insurance took a minute."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Avatar Size L",
+          "description": "42 px, the default."
+        },
+        {
+          "title": "Avatar Size M",
+          "description": "36 px."
+        },
+        {
+          "title": "Avatar Size S",
+          "description": "29 px."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "A quote, or one button",
+      "description": "Without onPress the card is text, and screen readers read it once: “Testimonial from Aarav S.: …”. With onPress the whole card is one button, so give it an accessibilityLabel that says where it goes; it dims while pressed and has no hover look. disabled dims it to half, stops presses, and takes it out of the Tab order.",
+      "blocks": [
+        "Quote",
+        "Read as one line of text.",
+        "onPress",
+        "One button; it dims while you press it.",
+        "disabled",
+        "Dimmed to half; presses do nothing."
+      ],
+      "specimen": [
+        "AS",
+        "Aarav S.",
+        "Renewing my car insurance took a minute."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Quote",
+          "description": "Read as one line of text."
+        },
+        {
+          "title": "onPress",
+          "description": "One button; it dims while you press it."
+        },
+        {
+          "title": "disabled",
+          "description": "Dimmed to half; presses do nothing."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "180 px wide, as tall as its quote",
+      "description": "The card is always 180 px wide and never stretches to its host. Its height follows the quote: 12 px of padding, the 42 px avatar, 12 px, the name on a 16 px line, 2 px, then 16 px for each line of the quote. With a one-line quote it is 112 px tall, as in Figma.",
+      "blocks": [
+        "Shown at 1.5×",
+        "180 × 112",
+        "12"
+      ],
+      "specimen": [
+        "PM",
+        "Priya M.",
+        "Simple, fast, reliable."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Their name, their words",
+      "description": "Write title as the person’s name the way they’d sign it, such as Aarav S., not the product. Write body as what they said, in a sentence or two. Screen readers read the name and the whole quote together, and cards in a row look best with quotes of similar length.",
+      "blocks": [
+        "A short quote",
+        "One line: 112 px tall.",
+        "A longer quote",
+        "It wraps, and the card grows to fit."
+      ],
+      "specimen": [
+        "PM",
+        "Priya M.",
+        "Simple, fast, reliable.",
+        "RK",
+        "Rohan K.",
+        "Setting up my first SIP took less than two minutes."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "A short quote",
+          "description": "One line: 112 px tall."
+        },
+        {
+          "title": "A longer quote",
+          "description": "It wraps, and the card grows to fit."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A row of quotes",
+      "description": "Customer quotes scroll sideways under a section title, and each card opens that customer’s full review. The cards keep their 180 px, so the row scrolls instead of squeezing them.",
+      "blocks": [
+        "No review opened"
+      ],
+      "specimen": [
+        "What customers say",
+        "From people who switched this year",
+        "AS",
+        "Aarav S.",
+        "Renewing my car insurance took a minute.",
+        "PM",
+        "Priya M.",
+        "Simple, fast, reliable.",
+        "RK",
+        "Rohan K.",
+        "Setting up my first SIP took less than two minutes.",
+        "NJ",
+        "Neha J.",
+        "I see all my accounts and my gold in one place now."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A person, not an advert",
+      "description": "Each pair shows a quote that reads as a real customer next to one that doesn’t.",
+      "blocks": [
+        "Do",
+        "Their initials",
+        "A face or initials that belong to the name.",
+        "Don’t",
+        "The brand’s initials",
+        "“JF” beside Aarav S. reads as the company, not the customer.",
+        "A sentence or two",
+        "Short enough to read in a row.",
+        "A paragraph of marketing",
+        "The card grows tall and stops sounding like a person."
+      ],
+      "specimen": [
+        "AS",
+        "Aarav S.",
+        "Renewing my car insurance took a minute.",
+        "JF",
+        "JioFinance brings your bank accounts, cards, insurance, loans, and digital gold together in one secure app, with instant payments, smart insights, and rewards on every transaction you make."
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Their initials",
+            "caption": "A face or initials that belong to the name.",
+            "specimen": "AS · Aarav S. · Renewing my car insurance took a minute."
+          },
+          "dont": {
+            "title": "The brand’s initials",
+            "caption": "“JF” beside Aarav S. reads as the company, not the customer.",
+            "specimen": "JF · Aarav S. · Renewing my car insurance took a minute."
+          }
+        },
+        {
+          "do": {
+            "title": "A sentence or two",
+            "caption": "Short enough to read in a row.",
+            "specimen": "AS · Aarav S. · Renewing my car insurance took a minute."
+          },
+          "dont": {
+            "title": "A paragraph of marketing",
+            "caption": "The card grows tall and stops sounding like a person.",
+            "specimen": "AS · Aarav S. · JioFinance brings your bank accounts, cards, insurance, loans, and digital gold together in one secure app, with instant payments, smart insights, and rewards on every transaction you make."
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Testimonials Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With Author",
+        "Short Body",
+        "Long Body",
+        "Carousel Row",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s card has Title and Body text properties and Show Footer Text and Show Button switches, but none of them changes a layer. The package matches Figma’s #0d0d0f for the name and the quote and its 112 px one-line card. monogram alone in avatarProps shows initials, and a pressable card dims while pressed.",
+        "jfs-components",
+        "0.1.78",
+        "Title",
+        "Body",
+        "Show Footer Text",
+        "Show Button",
+        "#0d0d0f",
+        "monogram",
+        "avatarProps"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
