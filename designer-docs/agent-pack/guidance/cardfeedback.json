@@ -1,0 +1,582 @@
+{
+  "slug": "cardfeedback",
+  "guideCommit": "4a044e7567d826f9487e2a51a4f655630d5902a0",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/cardfeedback.guide.tsx) and docs/evidence/cardfeedback.md at 4a044e7 (“docs: publish 6 Coin fixes on jfs-components v0.1.78-c7d3348”, 19 October), the same blobs on main and docs-next. The guide's Sources note was checked on 19 October 2026 on the build it names (mirror v0.1.78-c7d3348, Biscuit's main at c7d3348, which fixed #286), and the evidence was re-tested on c7d3348 on 19 October (first checked 17 October on a116616), so items citing either carry 2026-10-19 and 0.1.78-c7d3348. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c7d3348 and v0.1.78-dbe0e02 (195 files, 3 commits, complete) touches no CardFeedback, Button, VStack, Title, design-tokens, resolver or icons file; the only utils file it touches is web-focus-trap.ts. Installed CardFeedback.tsx matches every guide and evidence sentence used here, read from source, not run, with token values through the package's own getVariableByName: the card's modes are AppearanceSystem positive, Context Nudge&Alert and Semantic Intent System, then its modes prop (lines 70–75); the panel has padding 12, radius 12, gap 8, minHeight 59, a column from the top left (77–93); panel and icon are rgb(219,240,217) / rgb(38,171,33) positive, rgb(255,227,214) / rgb(240,110,15) warning, rgb(255,224,222) / rgb(245,0,48) negative; AppearanceBrand changes only the title and body colours (Primary rgb(15,13,10) / rgb(30,26,20), Neutral rgb(13,13,15) / rgb(26,28,31), Secondary and Tertiary darker purple and navy bodies), never the panel, the icon or the buttons; with onPress the root is a Pressable with role button, hover opacity 0.92, pressed 0.8, a #0c0d10 focus ring on the web, and disabled gives 0.5 and ignores presses; without onPress it is a plain View, and disabled does nothing (95–137); Icon is a 20 px box drawing the registry icon in appearanceFeedback/cardFeedback/icon/color, or its children (147–170); Content is a full-width column, gap 8 (177–188); Title 14/17/500 and Body 12/16/400, plain Text that wraps (194–238); Action is a wrapping row, gap 4 (244–255); every part merges the card's modes with its own, and Icon, Content and Action give their children the part's modes under the child's own, so a Button's own modes win (9–21). A default Button in Action takes the status colour with a white label at 12/14 type, padding 12 × 4 (25 px). Contradicted by the installed build and left out: nothing. Out of date and not used: the Sources “Installed jfs-components is 0.1.78, built from Biscuit’s main at c7d3348” (the CardFeedback code is the same on dbe0e02). Not used as a rule: the Sources “The card doesn’t read the app’s theme, so Color Mode has to come through its modes.” It holds on dbe0e02 (CardFeedback never calls useTokens), but the building rules keep Color Mode off components, and dark mode belongs to the brand team, so it is neither a rule nor a gap; a VStack reads the app's modes and passes them to its children (VStack.tsx 63–64, 89–91). Not recorded: style and testID (the building rules keep style overrides off Coin components; the guide's 328 px maxWidth is the docs' hosting, as the evidence's Hosting says); Context and Semantic Intent on the card, Dark and AppearanceBrand examples, which the evidence's Limits say the guide doesn't show; Figma's 328 × 123 frame, its solid-circle icon and its Status variants, beyond the rule to pick a matching icon; the playground. Anatomy: the Panel is the root and always renders; Icon, Title, Body and Action are parts people compose as children (children is optional), so they are not always present, as in Attached's dismissal (agent-pack/README.md, Decisions); Content, which wraps Title, Body and Action, is not one of the guide's anatomy parts and is recorded as configuration. avoidWhen rests on the evidence's record of Biscuit's handwritten upstream CardFeedback.mdx (the mirror ships no mdx: CardFeedback/ holds only CardFeedback.tsx), as form.json's does; the guide's own copy names no other component. Toast and EmptyState have entries, so those rules carry useInstead; Popup is a package export with no entry in this pack, so that rule has none. Strength: the States sentence on onPress (“use it only when the card has no buttons inside”) is required with scope everywhere, since the evidence's Limits say never to put Buttons inside a pressable card and the mdx says not to set onPress when the card has Button children; the same sentence's naming clause is an accessibility recommendation. “AppearanceBrand only shifts the title and body colour slightly” is everywhere: on dbe0e02 it changes no other token. Examples follow the building rules: no Color Mode (the guide sets Light on every component), no style, and VStack's Slot gap M is dropped (no guide sentence says this content needs it; VStack's gap is 8 by default, 16 with M). AppearanceSystem negative is set on the failed-payment cards because the outcome failed (Configuration: red for something that failed); positive is the default, so the pressable card sets no modes. The quieter second action keeps the guide's own Button modes, Semantic Intent Brand, AppearanceBrand Neutral and Emphasis Low, because the guide says Emphasis alone doesn't quieten a button in the status colour. building.md's provisional “Two actions in one place” (Emphasis Medium on the other) doesn't work inside CardFeedback.Action: through the installed resolver, Emphasis Medium or Low under the card's Semantic Intent System gives the same red rgb(245,0,48) button with a white label as the leading one; the guide's three modes give a transparent rgba(235,235,237,0) button with rgb(36,38,43) text, and all three are needed (AppearanceBrand Neutral with Emphasis Low alone stays red). Title has an undocumented entry and takes title and subtitle; VStack and Button have entries. Copy is the guide's own (Pay Rahul Sharma, ₹1,250 from HDFC Bank, Payment failed, Your bank declined the payment. No money was taken., Try again, Change bank, Payment successful, ₹1,250 was sent to Rahul Sharma.); the pressable card's accessibilityLabel, “Payment successful. View receipt”, is the guide source's. The icons are the guide's (ic_error, ic_status_successful), all in the installed registry. Left out of examples (three at most): Message only, the warning card, the Configuration trio, the content example and the Do & Don'ts, which the rules cover. Gaps: the Sources note's stale Storybook (on 29 October the published index.json, last modified 17 October 2026, still lists the four stories and the docs page the guide names); and the evidence's token gap, Emphasis alone on a System button, which the evidence calls a token gap noted on #286's re-test, not CardFeedback's, and which still holds on dbe0e02 through the resolver. Sorting (batch 10, round 1): the cross-check raised no flags and noted two borderline items. The In context wiring sentence (“Try again runs the screen’s own retry through the button’s onPress.”) read as example narration in configuration; it is gone, and the In context example still carries it. The quieter-action rule drops the guide's “here”; it stays as a recommendation, since Emphasis alone fails on every button in the status colour through the installed resolver and the guide's modes are the only way it documents. Round 2 (the final entry): three flags said Icon, Title and Body should be always present, because the guide's anatomy calls only the buttons optional; dismissed in reviews/cardfeedback.json, since in this pack required means the package always renders the part (README, Decisions) and CardFeedback renders only the parts people compose, as Nudge's and Empty State's entries record and Attached's dismissal settles. The round-2 notes also call the onPress rule's required strength justified, and the avoidWhen items' “upstream Storybook docs” (Biscuit's mdx, not the published page) acceptable.",
+  "useWhen": [
+    {
+      "text": "Show the result of an action in the page, such as a payment that went through or failed, with one next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card Feedback to show the result of an action in the page, such as a payment that went through or failed, with one next step."
+      }
+    },
+    {
+      "text": "Something people need to finish soon, such as “KYC pending”, with the orange warning status.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Orange for something to finish soon."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A message that should disappear on its own: the upstream Storybook docs, as the evidence records them, point to Toast.",
+      "strength": "discouraged",
+      "useInstead": "Toast",
+      "from": {
+        "section": "evidence",
+        "quote": "Use Toast for messages that disappear, Popup for a blocking decision, EmptyState for an empty screen."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "An empty screen: the upstream Storybook docs, as the evidence records them, point to Empty State.",
+      "strength": "discouraged",
+      "useInstead": "EmptyState",
+      "from": {
+        "section": "evidence",
+        "quote": "Use Toast for messages that disappear, Popup for a blocking decision, EmptyState for an empty screen."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "A decision that blocks the screen: the upstream Storybook docs, as the evidence records them, point to a Popup.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "Use Toast for messages that disappear, Popup for a blocking decision, EmptyState for an empty screen."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Panel",
+      "holds": "A tinted panel with 12 px padding and corners; AppearanceSystem sets the tint.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A tinted panel with 12 px padding and corners; AppearanceSystem sets the tint."
+      }
+    },
+    {
+      "part": "Icon",
+      "holds": "CardFeedback.Icon: a 20 px registry icon in the status colour.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "CardFeedback.Icon: a 20 px registry icon in the status colour."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "CardFeedback.Title: the outcome in a few words, 14 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "CardFeedback.Title: the outcome in a few words, 14 px."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "CardFeedback.Body: one sentence of detail, 12 px; it wraps.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "CardFeedback.Body: one sentence of detail, 12 px; it wraps."
+      }
+    },
+    {
+      "part": "Action",
+      "holds": "CardFeedback.Action: an optional row of small buttons in the status colour.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "CardFeedback.Action: a row of small buttons in the status colour."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card fills its host’s width (Figma draws it at 328 px), so the screen sets the width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills its host’s width; Figma draws it at 328 px."
+      }
+    },
+    {
+      "text": "It’s as tall as its content and at least 59 px, with 12 px padding and 8 px between the icon, the text, and the actions.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It’s as tall as its content and at least 59 px, with 12 px padding and 8 px between the icon, the text, and the actions."
+      }
+    },
+    {
+      "text": "Title and body wrap, and buttons wrap onto a new row when they run out of room.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Title and body wrap, and buttons wrap onto a new row when they run out of room."
+      }
+    },
+    {
+      "text": "Inside a VStack or another Coin container that passes modes down, its parts keep the card’s status colours.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Inside a VStack or another Coin container that passes modes down, its parts keep the card’s status colours."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Build it from the card’s parts: Icon, Content, Title, Body, and Action.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "anatomy",
+        "quote": "You build it from the card’s parts: Icon, Content, Title, Body, and Action."
+      }
+    },
+    {
+      "text": "CardFeedback.Content is a full-width column, gap 8, that holds Title, Body and Action.",
+      "strength": "recommended",
+      "target": "CardFeedback.Content",
+      "from": {
+        "section": "evidence",
+        "quote": "`CardFeedback.Content` — full-width column, gap 8; holds Title, Body and Action."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "AppearanceSystem sets the status: positive, the default, is green; warning is orange; negative is red.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceSystem sets the status: positive, the default, is green; warning is orange; negative is red."
+      }
+    },
+    {
+      "text": "Positive, the default: green for a result that went through.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "positive",
+      "from": {
+        "section": "configuration",
+        "quote": "Green for a result that went through."
+      }
+    },
+    {
+      "text": "Warning: orange for something to finish soon.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "warning",
+      "from": {
+        "section": "configuration",
+        "quote": "Orange for something to finish soon."
+      }
+    },
+    {
+      "text": "Negative: red for something that failed.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "negative",
+      "from": {
+        "section": "configuration",
+        "quote": "Red for something that failed."
+      }
+    },
+    {
+      "text": "AppearanceSystem colours the panel, the icon, and the buttons in Action.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "from": {
+        "section": "configuration",
+        "quote": "It colours the panel, the icon, and the buttons in Action."
+      }
+    },
+    {
+      "text": "Pick an icon that matches the status: the card colours it but doesn’t choose it.",
+      "strength": "recommended",
+      "target": "CardFeedback.Icon",
+      "from": {
+        "section": "configuration",
+        "quote": "Pick an icon that matches: the card colours it but doesn’t choose it."
+      }
+    },
+    {
+      "text": "AppearanceBrand only shifts the title and body colour slightly.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand only shifts the title and body colour slightly."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes what the mode does on every card: on the installed build AppearanceBrand changes the title and body colours and no panel, icon or button token."
+      }
+    },
+    {
+      "text": "Buttons in Action take the status colour; a Button’s own modes make a second one quieter.",
+      "strength": "recommended",
+      "target": "CardFeedback.Action",
+      "from": {
+        "section": "states",
+        "quote": "Buttons take the status colour; a Button’s own modes make the second one quieter."
+      }
+    },
+    {
+      "text": "Emphasis alone doesn’t quieten a button in the status colour, so a quieter second action switches to Brand Neutral at Emphasis Low.",
+      "strength": "recommended",
+      "target": "CardFeedback.Action",
+      "from": {
+        "section": "sources",
+        "quote": "Emphasis alone doesn’t quieten a button in the status colour, so the quieter action here switches to Brand Neutral at Emphasis Low."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The quieter action's own modes, { 'Semantic Intent': 'Brand', AppearanceBrand: 'Neutral', Emphasis: 'Low' }, render it transparent with dark text, 25 px, beside the status-coloured one.",
+      "strength": "recommended",
+      "target": "CardFeedback.Action",
+      "from": {
+        "section": "evidence",
+        "quote": "Cancel-style `{ 'Semantic Intent': 'Brand', AppearanceBrand: 'Neutral', Emphasis: 'Low' }` renders transparent (`rgba(235, 235, 237, 0)`) with dark text, 25 px, beside the red `rgb(245, 0, 48)` primary."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel.",
+      "strength": "required",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it applies to every card: a pressable card is one button, so buttons inside it would be buttons in a button. The evidence's Limits say never to put Buttons inside a pressable card, and the upstream docs say not to set onPress when the card has Button children."
+      }
+    },
+    {
+      "text": "When the retry goes through, the screen swaps the card for a positive one; the card doesn’t change itself or time out.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "When the retry goes through, the screen swaps the card for a positive one; the card doesn’t change itself or time out."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Say what happened, then what to do next.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Say what happened, then what to do next."
+        }
+      },
+      {
+        "text": "Make the title the outcome, such as “Payment failed”, and the body one sentence on what it means for the person.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the outcome, such as “Payment failed”, and the body one sentence on what it means for the person."
+        }
+      },
+      {
+        "text": "Label each button with a verb, and keep to one or two.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Label each button with a verb, and keep to one or two."
+        }
+      },
+      {
+        "text": "Make the title the outcome: “Payment failed” says it in two words.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Payment failed” says it in two words."
+        }
+      },
+      {
+        "text": "Do not put the detail in the title: it wraps and the outcome gets lost.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The title wraps and the outcome gets lost."
+        }
+      },
+      {
+        "text": "Do not add three or more actions: they wrap onto a second row and look the same.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "They wrap onto a second row and look the same."
+        }
+      },
+      {
+        "text": "Do not reuse the success icon on another status: a tick on a red card contradicts the title.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A tick on a red card contradicts the title."
+        }
+      }
+    ],
+    "good": [
+      "Payment failed",
+      "Your bank declined the payment. No money was taken.",
+      "Try again",
+      "Payment successful",
+      "₹1,250 was sent to Rahul Sharma.",
+      "View receipt",
+      "KYC pending",
+      "Finish KYC by 31 October to keep investing.",
+      "Complete KYC"
+    ],
+    "bad": [
+      "Your bank declined your payment of ₹1,250 to Rahul Sharma"
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "The card itself is static: only the buttons you put in Action respond.",
+      "from": {
+        "section": "states",
+        "quote": "The card itself is static: only the buttons you put in Action respond."
+      }
+    },
+    {
+      "state": "Message only",
+      "when": "Icon, title, and body: nothing to press.",
+      "from": {
+        "section": "states",
+        "quote": "Icon, title, and body: nothing to press."
+      }
+    },
+    {
+      "state": "Two actions",
+      "when": "Buttons take the status colour; a Button’s own modes make the second one quieter.",
+      "from": {
+        "section": "states",
+        "quote": "Buttons take the status colour; a Button’s own modes make the second one quieter."
+      }
+    },
+    {
+      "state": "Pressable card",
+      "when": "With onPress and no buttons inside, the card fades slightly on hover and more while pressed, and shows a ring on keyboard focus.",
+      "from": {
+        "section": "states",
+        "quote": "A pressable card fades slightly on hover and more while pressed, and shows a ring on keyboard focus."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "On a pressable card, disabled fades it to half and ignores presses.",
+      "from": {
+        "section": "states",
+        "quote": "disabled fades it to half and ignores presses."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The colour alone doesn’t carry the status for everyone, so the title has to say it.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The colour alone doesn’t carry the status for everyone, so the title has to say it."
+      }
+    },
+    {
+      "text": "A pressable card is one button: name it with accessibilityLabel.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "the word restricts onPress to cards with no buttons inside, on every card (the configuration rule); this rule takes only the sentence's naming clause, which applies to every pressable card."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Match the icon to the status",
+      "dont": "Reuse the success icon",
+      "why": "A tick on a red card contradicts the title.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match the icon to the status"
+      }
+    },
+    {
+      "do": "Make the title the outcome",
+      "dont": "Put the detail in the title",
+      "why": "The title wraps and the outcome gets lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "Make the title the outcome"
+      }
+    },
+    {
+      "do": "One or two actions",
+      "dont": "Three or more actions",
+      "why": "They wrap onto a second row and look the same.",
+      "from": {
+        "section": "doDont",
+        "quote": "One or two actions"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A failed payment on the Pay screen, the guide's In context: a VStack column with the screen's Title and a negative Card Feedback (AppearanceSystem negative, because the payment failed; nothing else sets modes). Try again's onPress is a placeholder for the screen's own retry; when the retry goes through, the screen swaps the card for a positive one, since the card doesn't change itself or time out.",
+      "jsx": "<VStack>\n  <Title title=\"Pay Rahul Sharma\" subtitle=\"₹1,250 from HDFC Bank\" />\n  <CardFeedback modes={{ AppearanceSystem: 'negative' }}>\n    <CardFeedback.Icon icon=\"ic_error\" />\n    <CardFeedback.Content>\n      <CardFeedback.Title>Payment failed</CardFeedback.Title>\n      <CardFeedback.Body>Your bank declined the payment. No money was taken.</CardFeedback.Body>\n      <CardFeedback.Action>\n        <Button label=\"Try again\" onPress={() => {}} />\n      </CardFeedback.Action>\n    </CardFeedback.Content>\n  </CardFeedback>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Try again runs the screen’s own retry through the button’s onPress."
+      }
+    },
+    {
+      "purpose": "Two actions, the guide's States: Try again leads at its defaults and takes the status colour; Change bank is the quieter second action. Emphasis alone doesn't quieten a button in the status colour, so Change bank sets the guide's own modes, Semantic Intent Brand, AppearanceBrand Neutral and Emphasis Low, which render it transparent with dark text. The handlers are placeholders for the screen's own wiring.",
+      "jsx": "<CardFeedback modes={{ AppearanceSystem: 'negative' }}>\n  <CardFeedback.Icon icon=\"ic_error\" />\n  <CardFeedback.Content>\n    <CardFeedback.Title>Payment failed</CardFeedback.Title>\n    <CardFeedback.Body>Your bank declined the payment. No money was taken.</CardFeedback.Body>\n    <CardFeedback.Action>\n      <Button label=\"Try again\" onPress={() => {}} />\n      <Button\n        label=\"Change bank\"\n        modes={{ 'Semantic Intent': 'Brand', AppearanceBrand: 'Neutral', Emphasis: 'Low' }}\n        onPress={() => {}}\n      />\n    </CardFeedback.Action>\n  </CardFeedback.Content>\n</CardFeedback>",
+      "from": {
+        "section": "states",
+        "quote": "Buttons take the status colour; a Button’s own modes make the second one quieter."
+      }
+    },
+    {
+      "purpose": "A pressable card, the guide's States: onPress (a placeholder for the screen's own wiring) makes the whole card one button, so it has no buttons inside, and accessibilityLabel names it. Positive is the default status, so no modes are set.",
+      "jsx": "<CardFeedback onPress={() => {}} accessibilityLabel=\"Payment successful. View receipt\">\n  <CardFeedback.Icon icon=\"ic_status_successful\" />\n  <CardFeedback.Content>\n    <CardFeedback.Title>Payment successful</CardFeedback.Title>\n    <CardFeedback.Body>₹1,250 was sent to Rahul Sharma.</CardFeedback.Body>\n  </CardFeedback.Content>\n</CardFeedback>",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "AppearanceSystem",
+      "description": "The status (positive by default): panel and icon positive #DBF0D9 / #26AB21, warning #FFE3D6 / #F06E0F, negative #FFE0DE / #F50030. Buttons in Action take the same colour with a white label, at the small Nudge&Alert size (25 px).",
+      "quote": "AppearanceSystem: panel and icon — positive `#DBF0D9` / `#26AB21`, warning `#FFE3D6` / `#F06E0F`, negative `#FFE0DE` / `#F50030`; Buttons in Action take the same colour (white label) at the small Nudge&Alert size (25 px).",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "Changes only the title and body colour, a slight shift (Primary #0F0D0A / #1E1A14, Neutral #0D0D0F / #1A1C1F); the panel, the icon and the buttons keep the status colour.",
+      "quote": "AppearanceBrand: title and body colour only, a slight shift (Primary `#0F0D0A` / `#1E1A14`, Neutral `#0D0D0F` / `#1A1C1F`).",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "Merged over the card's own modes, AppearanceSystem positive, Context Nudge&Alert and Semantic Intent System. Every part merges the card's modes with its own, and Icon, Content and Action give their children those modes under the child's own, so a child's own modes win.",
+      "quote": "Parts merge the card's modes with their own (`mergeModes(context.modes, propModes)`), and Icon, Content and Action paint their children with `{ ...partModes, ...child.modes }`, so a child's own modes win.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "Makes the root a Pressable with role button: hover opacity 0.92, pressed 0.8, a 1 px #0c0d10 ring on keyboard focus. Without onPress the root is a plain view.",
+      "quote": "`onPress` makes the root a Pressable `role=\"button\"`: hover opacity 0.92, pressed 0.8, a 1 px `#0c0d10` ring on keyboard focus",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "disabled",
+      "description": "With onPress: opacity 0.5, aria-disabled, tabindex -1 on the web, and presses are ignored.",
+      "quote": "`disabled` gives opacity 0.5, `aria-disabled`, `tabindex -1` and ignores presses",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "CardFeedback.Icon",
+      "description": "icon, a registry name, drawn in a 20 px box in the status colour (appearanceFeedback/cardFeedback/icon/color); or children instead. The card doesn't pick an icon for a status.",
+      "quote": "`CardFeedback.Icon` — `icon` (registry name) in a 20 px box, coloured `appearanceFeedback/cardFeedback/icon/color`; or children. The card doesn't pick an icon for a status.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "CardFeedback.Content",
+      "description": "A full-width column, gap 8, that holds Title, Body and Action.",
+      "quote": "`CardFeedback.Content` — full-width column, gap 8; holds Title, Body and Action.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "CardFeedback.Title",
+      "description": "Text at 14/17, weight 500; it wraps.",
+      "quote": "`CardFeedback.Title` — 14/17/500. `CardFeedback.Body` — 12/16/400. Both wrap.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "CardFeedback.Body",
+      "description": "Text at 12/16, weight 400; it wraps.",
+      "quote": "`CardFeedback.Title` — 14/17/500. `CardFeedback.Body` — 12/16/400. Both wrap.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "CardFeedback.Action",
+      "description": "A wrapping row, gap 4; each child gets the card's modes under its own, so a Button's own modes win.",
+      "quote": "`CardFeedback.Action` — a wrapping row, gap 4; each child gets the card's modes under its own.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The published Storybook hasn’t been rebuilt: it still renders every story as a pressable card with buttons inside it, and shows the older generated page.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook hasn’t been rebuilt: it still renders every story as a pressable card with buttons inside it, and shows the older generated page."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Emphasis alone still changes nothing on a System button, such as a button in Action: button/background at Semantic Intent System branches only on AppearanceSystem. A token gap, noted on #286's re-test, not CardFeedback's.",
+      "quote": "`Emphasis` alone still changes nothing on a System button: `button/background` at Semantic Intent System resolves through `appearanceFeedback/globalButton/background`, which branches only on AppearanceSystem (a token gap, noted on #286's re-test, not CardFeedback's).",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ]
+}

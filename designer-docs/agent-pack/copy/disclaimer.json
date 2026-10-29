@@ -1,0 +1,275 @@
+{
+  "slug": "disclaimer",
+  "label": "Disclaimer",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "files": [
+    "src/guides/disclaimer.guide.tsx"
+  ],
+  "evidence": "docs/evidence/disclaimer.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:46:12.259Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "fine print",
+    "legal line",
+    "terms",
+    "small print"
+  ],
+  "title": "Disclaimer",
+  "summary": "Use a Disclaimer for one short legal line under an action, such as who provides a payment service.",
+  "corePrinciple": "Small print that says who stands behind the action, in one or two lines.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=208-2399",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-disclaimer--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Small print in a narrow column",
+      "description": "One string of 10 px grey text, centred line by line in a column up to 281 px wide. Copy that doesn’t name Jio Payments Bank gets the bank’s name on a second line.",
+      "blocks": [
+        "214 × 24",
+        "1",
+        "2",
+        "Copy",
+        "One string; a line break is the only formatting it takes.",
+        "Column",
+        "At most 281 px wide; the text wraps there and centres.",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [
+        {
+          "part": "Copy",
+          "note": "One string; a line break is the only formatting it takes."
+        },
+        {
+          "part": "Column",
+          "note": "At most 281 px wide; the text wraps there and centres."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "The copy is the only choice",
+      "description": "Disclaimer has no variants, icon, or size. Write the copy for the screen; without it, the package shows a generic Jio Payments Bank line. Copy that doesn’t name the bank gets “Jio Payments Bank Pvt. Ltd.” on a line below.",
+      "blocks": [
+        "Figma copy",
+        "A line break before the bank’s name keeps it on one line, as in Figma.",
+        "Screen terms",
+        "Say what continuing means; the package adds the bank’s name below.",
+        "Package default",
+        "Without copy it shows “All financial services…”, which differs from Figma."
+      ],
+      "specimen": [
+        "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd.",
+        "By continuing you agree to the terms for this payment. Jio Payments Bank Pvt. Ltd.",
+        "All financial services are provided by Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Figma copy",
+          "description": "A line break before the bank’s name keeps it on one line, as in Figma."
+        },
+        {
+          "title": "Screen terms",
+          "description": "Say what continuing means; the package adds the bank’s name below."
+        },
+        {
+          "title": "Package default",
+          "description": "Without copy it shows “All financial services…”, which differs from Figma."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Static text, no states",
+      "description": "Disclaimer isn’t interactive: it has no hover, pressed, focus, or disabled style, and Tab skips it. Inside a full-screen modal footer, the modal turns it light grey to suit its dark surface.",
+      "blocks": [
+        "Read-only",
+        "Only the copy changes."
+      ],
+      "specimen": [
+        "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Read-only",
+          "description": "Only the copy changes."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Up to 281 px wide, 12 px a line",
+      "description": "The column is 281 px wide, or as wide as a narrower host, and the text centres inside it. Each line adds 12 px. It centres in any vertical stack, including one that stretches its children.",
+      "blocks": [
+        "281 × 24",
+        "Short copy gains a line",
+        "“Terms apply.” takes two lines: the package adds the bank’s name below it.",
+        "Long copy wraps",
+        "At 281 px this copy takes five lines, 60 px of small print."
+      ],
+      "specimen": [
+        "All financial services are provided by Jio Payments Bank Pvt. Ltd.",
+        "Terms apply. Jio Payments Bank Pvt. Ltd.",
+        "Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing. Past performance does not guarantee future returns. Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short copy gains a line",
+          "description": "“Terms apply.” takes two lines: the package adds the bank’s name below it."
+        },
+        {
+          "title": "Long copy wraps",
+          "description": "At 281 px this copy takes five lines, 60 px of small print."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Say who provides it, in a sentence",
+      "description": "Name the provider or the condition in one or two short sentences. Put the full terms on their own page and add a Link below; the copy can’t hold links or bold text.",
+      "blocks": [
+        "Link below the copy"
+      ],
+      "specimen": [
+        "By continuing you agree to the terms for this payment. Jio Payments Bank Pvt. Ltd.",
+        "View terms"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Link below the copy",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Under a payment action",
+      "description": "A payment footer holds the Pay button and, below it, the provider line. The footer passes its modes to both; the screen handles the payment.",
+      "blocks": [
+        "Ready to pay ₹500"
+      ],
+      "specimen": [
+        "Confirm payment",
+        "Pay ₹500",
+        "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep small print small and legal",
+      "description": "Each pair shows a disclaimer people can read versus one that hides something.",
+      "blocks": [
+        "Do",
+        "Break before the bank’s name",
+        "The provider’s name stays on one line.",
+        "Don’t",
+        "Let the name split",
+        "The default copy breaks the bank’s name across two lines.",
+        "Keep it to a sentence or two",
+        "Two lines are read at a glance.",
+        "Paste the full terms",
+        "Five or more lines of 10 px text go unread.",
+        "Use Support Text for problems",
+        "A red message tells people what to fix.",
+        "Put problems in small print",
+        "Grey 10 px text hides an error."
+      ],
+      "specimen": [
+        "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd.",
+        "All financial services are provided by Jio Payments Bank Pvt. Ltd.",
+        "By continuing you agree to the terms for this payment. Jio Payments Bank Pvt. Ltd.",
+        "Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing. Past performance does not guarantee future returns. Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd.",
+        "UPI limit reached. Try a smaller amount.",
+        "UPI limit reached. Try a smaller amount. Jio Payments Bank Pvt. Ltd."
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Break before the bank’s name",
+            "caption": "The provider’s name stays on one line.",
+            "specimen": "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd."
+          },
+          "dont": {
+            "title": "Let the name split",
+            "caption": "The default copy breaks the bank’s name across two lines.",
+            "specimen": "All financial services are provided by Jio Payments Bank Pvt. Ltd."
+          }
+        },
+        {
+          "do": {
+            "title": "Keep it to a sentence or two",
+            "caption": "Two lines are read at a glance.",
+            "specimen": "By continuing you agree to the terms for this payment. Jio Payments Bank Pvt. Ltd."
+          },
+          "dont": {
+            "title": "Paste the full terms",
+            "caption": "Five or more lines of 10 px text go unread.",
+            "specimen": "Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing. Past performance does not guarantee future returns. Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd."
+          }
+        },
+        {
+          "do": {
+            "title": "Use Support Text for problems",
+            "caption": "A red message tells people what to fix.",
+            "specimen": "UPI limit reached. Try a smaller amount."
+          },
+          "dont": {
+            "title": "Put problems in small print",
+            "caption": "Grey 10 px text hides an error.",
+            "specimen": "UPI limit reached. Try a smaller amount. Jio Payments Bank Pvt. Ltd."
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Disclaimer contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Custom copy",
+        "Checked 23 October 2026",
+        "Installed jfs-components is 0.1.78 (23 October build) from the team’s private package repository. Figma’s Disclaimer is one 281 × 24 component with no properties, and the package matches its type and width; their default copy differs. The package adds “Jio Payments Bank Pvt. Ltd.” on a second line to copy that doesn’t name the bank. The copy is a single string: links and formatting are not supported. Screen readers read the copy and that line as one label, or accessibilityLabel when it’s set. This page shows Light only.",
+        "jfs-components",
+        "0.1.78",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

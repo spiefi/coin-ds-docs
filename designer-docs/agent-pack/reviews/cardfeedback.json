@@ -1,0 +1,22 @@
+{
+  "dismissed": [
+    {
+      "field": "/anatomy/1",
+      "reason": "misreads-source: The guide's anatomy says the panel \"stacks a status icon, a title, one line of detail, and an optional row of buttons\". Only the buttons are called optional, so marking Icon alwaysPresent=false misreads it.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "In this pack an anatomy part's required means the package always renders it (agent-pack/README.md, Decisions: false for an optional prop or slot). CardFeedback renders only the children it is given (children?: React.ReactNode, CardFeedback.tsx line 32, 0.1.78-dbe0e02; rendered as given at lines 124 and 128), and CardFeedback.Icon is a separate part people compose (lines 147–170, attached at 258), so a card without it has no icon. The guide's anatomy and its Message only state put an icon on every card it shows, and the entry keeps that in the Configuration rule “Build it from the card’s parts”, the Do “Match the icon to the status” and all three examples. Nudge's and Empty State's composed parts are recorded the same way, and reviews/attached.json dismisses the same question for Attached."
+    },
+    {
+      "field": "/anatomy/2",
+      "reason": "misreads-source: The anatomy description names only the row of buttons as optional. The content section also says \"the title has to say it\", so the Title is always present, not alwaysPresent=false.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "In this pack an anatomy part's required means the package always renders it (agent-pack/README.md, Decisions: false for an optional prop or slot). CardFeedback renders only the children it is given (children?: React.ReactNode, CardFeedback.tsx line 32, 0.1.78-dbe0e02; rendered as given at lines 124 and 128), and CardFeedback.Title is a separate part people compose (lines 194–213, attached at 260), so a card without it has no title. “The title has to say it” (Content) is advice on what a card should show, and the entry keeps it as content and accessibility rules and in all three examples; it doesn't make the package render a title. Nudge's and Empty State's titles are recorded the same way, and reviews/attached.json dismisses the same question for Attached."
+    },
+    {
+      "field": "/anatomy/3",
+      "reason": "misreads-source: The guide lists \"one line of detail\" as a standing part of the stack and calls only the buttons optional. Marking Body alwaysPresent=false isn't supported.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "In this pack an anatomy part's required means the package always renders it (agent-pack/README.md, Decisions: false for an optional prop or slot). CardFeedback renders only the children it is given (children?: React.ReactNode, CardFeedback.tsx line 32, 0.1.78-dbe0e02; rendered as given at lines 124 and 128), and CardFeedback.Body is a separate part people compose (lines 219–238, attached at 261), so a card without it has no body. The guide's anatomy and its Message only state put one line of detail on every card it shows, and the entry keeps that in the content rule on the body and in all three examples. Nudge's and Empty State's bodies are recorded the same way, and reviews/attached.json dismisses the same question for Attached."
+    }
+  ]
+}

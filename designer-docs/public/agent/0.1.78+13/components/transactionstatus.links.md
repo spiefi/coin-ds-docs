@@ -1,0 +1,13 @@
+# TransactionStatus (links)
+
+> Coin agent pack 0.1.78+13. Edges from graph.json, derived by code from the entries. Brief: `components/transactionstatus.brief.md` · full entry: `components/transactionstatus.md`
+
+## Outgoing
+
+- TransactionStatus —placedIn→ TransactionBubble (recommended; TransactionBubble has no entry)
+- TransactionStatus —usedWith→ VStack
+- TransactionStatus —usedWith→ TransactionBubble (TransactionBubble has no entry)
+
+## Incoming
+
+- none

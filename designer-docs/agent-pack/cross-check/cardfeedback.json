@@ -1,0 +1,25 @@
+{
+  "slug": "cardfeedback",
+  "entryHash": "68de339ba73f39b6041b14a6c57439e1215dd81f827f05d21b4b2cde98fc2497",
+  "guideCommit": "4a044e7567d826f9487e2a51a4f655630d5902a0",
+  "checkedAt": "2026-10-29T05:00:14Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/anatomy/1",
+      "reason": "misreads-source: The guide's anatomy says the panel \"stacks a status icon, a title, one line of detail, and an optional row of buttons\". Only the buttons are called optional, so marking Icon alwaysPresent=false misreads it."
+    },
+    {
+      "field": "/anatomy/2",
+      "reason": "misreads-source: The anatomy description names only the row of buttons as optional. The content section also says \"the title has to say it\", so the Title is always present, not alwaysPresent=false."
+    },
+    {
+      "field": "/anatomy/3",
+      "reason": "misreads-source: The guide lists \"one line of detail\" as a standing part of the stack and calls only the buttons optional. Marking Body alwaysPresent=false isn't supported."
+    }
+  ],
+  "notes": "/configuration/10 drops the guide's \"here\" (\"the quieter action here switches to Brand Neutral at Emphasis Low\"), which turns the guide's own example into general advice. I didn't flag it: it's only recommended, and the stated reason (Emphasis alone does nothing on a System button) does apply generally. /configuration/12 is marked required. That's justified by \"only\" for the no-buttons-inside rule, which the evidence backs with \"Never Buttons inside a pressable card\". The bundled \"name it with accessibilityLabel\" clause has no absolute word of its own. The avoidWhen items call Biscuit's handwritten upstream CardFeedback.mdx \"the upstream Storybook docs\", which is acceptable but not the published page."
+}

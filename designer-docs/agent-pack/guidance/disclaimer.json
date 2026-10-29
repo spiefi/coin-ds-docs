@@ -1,0 +1,317 @@
+{
+  "slug": "disclaimer",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/disclaimer.guide.tsx) and docs/evidence/disclaimer.md at b4988c5 (“docs: publish nine Component Fix fixes on jfs-components c8526ae”, 23 October), the same blobs on main and docs-next. The guide's Sources note was checked on 23 October 2026 on the build it calls the 23 October build (mirror v0.1.78-c8526ae, Biscuit's main at c8526ae, which the evidence's “c8526ae publish” section names), so items citing it carry 2026-10-23 and 0.1.78-c8526ae. The evidence's top section (“c8526ae publish”, 23 October, #198) replaces its 6 October sections (checked on 0.1.78-3795b4c) where they differ; items citing it carry 2026-10-23 and 0.1.78-c8526ae. One 6 October line is used, for the context5 fact (FullscreenModal's footer Disclaimer turns #EBEBED), and it carries 2026-10-06 and 0.1.78-3795b4c; it still holds on the installed build. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c8526ae and v0.1.78-dbe0e02 (163 files, 2 commits) touches no Disclaimer, ActionFooter, Stack, Link, design-tokens, resolver, typography or react-utils file; it changes FullscreenModal (lib +9/−1), whose installed source still forces context5 Fullscreen Modal (FullscreenModal.tsx line 37, merged last at 291–299) and renders its default footer Disclaimer with those modes (462–476). Installed Disclaimer.tsx matches every guide and evidence sentence used here, read from source, not run, with token values through the package's own getVariableByName: the props are disclaimer (default “All financial services are provided by Jio Payments Bank Pvt. Ltd.”), modes, style, textStyle, accessibilityLabel and accessibilityHint, plus View's props and children (30–37, 60–69); the text is disclaimer/color rgb(36,38,43) (#24262B) with no modes, 10 px, weight 500, JioType Var, line height 12 (safeTextLineHeight keeps 12, its minimum is ceil(10 × 1.2) = 12), centred, with overflowWrap anywhere on the web (87–102); under context5 Fullscreen Modal the colour is rgb(235,235,237) in Light and Dark; a full-width wrapper (width 100%, alignSelf stretch, alignItems center) holds a column maxWidth 281, width 100% (107–118), so the column is 281 px or a narrower host's width and centres in a stretching Stack; the text is the copy, a line break, then children if passed, else “Jio Payments Bank Pvt. Ltd.” unless the copy contains that exact string (120–126, 164–168); the root is accessible with role text (group on the web) and is named by a non-empty accessibilityLabel, else the copy plus the second line, and the text is hidden from screen readers (128–162). It is not a Tab stop: react-native-web 0.21.2's createDOMProps sets tabIndex only for focusable elements and roles, and group is neither. In context: ActionFooter clones its modes onto a single Stack child (enhanceCompositeChild, ActionFooter.tsx 167–173, 272–280), and Stack clones them onto its children (Stack.tsx 123); a vertical Stack without fillWidth stretches its children by default (stackAlignment.ts 25), so the Pay button fills and the Disclaimer centres. Contradicted by the installed build and left out: none of the guide's sentences. Out of date and not used: the Sources “Installed jfs-components is 0.1.78 (23 October build)” (the Disclaimer code is the same on the installed 27 October build); the evidence's 6 October lines the c8526ae section replaces (accessibilityLabel ignored, no name and no role on the web, the text possibly hidden from native screen readers, children ignored, no fixed second line, long unbroken strings overflowing, the container's alignSelf center with “Terms apply.” at 64 × 12, centring that needs a column parent, the left-aligned column in a Stack with fillWidth) and its Dark #FF9900 (#177; Dark now resolves rgb(241,241,241)). Imprecise and reported: the guide says copy that doesn't “name the bank” (Anatomy, Configuration, Sources) gets the bank's name added; the package checks for the exact, case-sensitive string “Jio Payments Bank Pvt. Ltd.” (line 121), so copy that names “Jio Payments Bank” without “Pvt. Ltd.” still gets the full name on a line below. The configuration item keeps the guide's words and adds the exact string from the evidence's “unless the copy already contains it”. Not recorded: style and textStyle (the building rules keep style overrides off Coin components), testID and the other View props, accessibilityHint (passed through, the guide doesn't cover it), children (the evidence: it replaces the second line, and element children are read twice by screen readers; the guide doesn't cover it, so it is only named in the disclaimer fact), context5 Mode 1 (resolves the same light grey; the guide doesn't cover it), and the Sources' Figma details (one 281 × 24 component with no properties; its default copy differs, which the configuration item says). Dark mode (#177) is kept out of gaps by the pack's rules. Anatomy: the Copy and the Column are always present (without copy the default shows). Strength: one quote holds an absolute word, “always” in the evidence's root width, recorded as everywhere because it describes every Disclaimer. content.good keeps the guide's Figma copy and its screen terms; the default copy is left out of bad, since its Don't is about the line break, not the words; bad keeps the full-terms Don't and the error Don't's copy. Examples follow the building rules: no Color Mode (the guide sets Light on every component) and no modes at all; Stack's layoutDirection vertical and Link's textAlign Center are props, as in the guide. Copy is the guide's own (Confirm payment, Pay ₹500, the Figma copy with its line break, the screen terms, View terms). SupportText has no entry in this pack; it is only avoidWhen's useInstead, from the guide's third Do, and appears in no example. Left out of examples (three at most): Figma copy alone, Package default, Short copy gains a line, Long copy wraps, Read-only, the Don'ts and the playground. Gaps: none. #198 (Component Fix) is fixed and published; #177 is dark mode. The published Storybook (index.json last modified 17 October 2026, checked 29 October) lists the guide's Default and Custom copy stories and the docs page; it predates c8526ae, but neither the guide nor the c8526ae evidence says so, so it is not recorded as a gap. Sorting (batch 10, round 1): the cross-check found one of our misreadings, fixed: the accessibilityLabel fact said the text is hidden from screen readers everywhere, where its evidence quote says aria-hidden on the web and, on native, only that the root is accessible with role text and gets the same name (not device-tested); the fact now quotes and says both. Round 2: no flags. Its note asks a person to confirm that the In context footer is an ActionFooter: it is (disclaimer.guide.tsx at b4988c5 renders ActionFooter title “Confirm payment” around a vertical Stack with the Button and the Disclaimer), so nothing changed.",
+  "useWhen": [
+    {
+      "text": "One short legal line under an action, such as who provides a payment service.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Disclaimer for one short legal line under an action, such as who provides a payment service."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A problem people need to fix, such as “UPI limit reached. Try a smaller amount.”: grey 10 px text hides an error. Use Support Text, whose red message tells people what to fix.",
+      "strength": "discouraged",
+      "useInstead": "SupportText",
+      "from": {
+        "section": "doDont",
+        "quote": "Grey 10 px text hides an error."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Copy",
+      "holds": "One string of 10 px grey text, centred line by line; a line break is the only formatting it takes.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One string; a line break is the only formatting it takes."
+      }
+    },
+    {
+      "part": "Column",
+      "holds": "At most 281 px wide; the text wraps there and centres.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "At most 281 px wide; the text wraps there and centres."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Under a payment action: a payment footer (an ActionFooter) holds the Pay button and, below it, the provider line.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment footer holds the Pay button and, below it, the provider line."
+      }
+    },
+    {
+      "text": "The footer passes its modes to both; the screen handles the payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The footer passes its modes to both; the screen handles the payment."
+      }
+    },
+    {
+      "text": "The column is 281 px wide, or as wide as a narrower host, and the text centres inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The column is 281 px wide, or as wide as a narrower host, and the text centres inside it."
+      }
+    },
+    {
+      "text": "Each line adds 12 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each line adds 12 px."
+      }
+    },
+    {
+      "text": "It centres in any vertical stack, including one that stretches its children (a Stack with fillWidth).",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It centres in any vertical stack, including one that stretches its children."
+      }
+    },
+    {
+      "text": "Its root is always 100% wide, which matters in row parents.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The root is now always 100% wide, which matters in row parents."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "it describes the component's layout on every use (the root's wrapper style is width 100%, Disclaimer.tsx lines 107–111 on 0.1.78-dbe0e02); it sets no restriction of its own."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Disclaimer has no variants, icon, or size: the copy is the only choice.",
+      "strength": "recommended",
+      "target": "disclaimer",
+      "from": {
+        "section": "configuration",
+        "quote": "Disclaimer has no variants, icon, or size."
+      }
+    },
+    {
+      "text": "Write the copy for the screen; without it, the package shows a generic Jio Payments Bank line.",
+      "strength": "recommended",
+      "target": "disclaimer",
+      "from": {
+        "section": "configuration",
+        "quote": "Write the copy for the screen; without it, the package shows a generic Jio Payments Bank line."
+      }
+    },
+    {
+      "text": "Copy that doesn’t name the bank (that doesn’t contain “Jio Payments Bank Pvt. Ltd.”) gets “Jio Payments Bank Pvt. Ltd.” on a line below.",
+      "strength": "recommended",
+      "target": "disclaimer",
+      "from": {
+        "section": "configuration",
+        "quote": "Copy that doesn’t name the bank gets “Jio Payments Bank Pvt. Ltd.” on a line below."
+      }
+    },
+    {
+      "text": "To name the bank in the copy, put a line break before the bank’s name: it keeps the name on one line, as in Figma.",
+      "strength": "recommended",
+      "target": "disclaimer",
+      "from": {
+        "section": "configuration",
+        "quote": "A line break before the bank’s name keeps it on one line, as in Figma."
+      }
+    },
+    {
+      "text": "Leaving the copy out shows “All financial services…”, which differs from Figma, and that default copy breaks the bank’s name across two lines.",
+      "strength": "discouraged",
+      "target": "disclaimer",
+      "from": {
+        "section": "doDont",
+        "quote": "The default copy breaks the bank’s name across two lines."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Small print that says who stands behind the action, in one or two lines.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Small print that says who stands behind the action, in one or two lines."
+        }
+      },
+      {
+        "text": "Name the provider or the condition in one or two short sentences.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name the provider or the condition in one or two short sentences."
+        }
+      },
+      {
+        "text": "For terms, say what continuing means; the package adds the bank’s name below.",
+        "strength": "recommended",
+        "from": {
+          "section": "configuration",
+          "quote": "Say what continuing means; the package adds the bank’s name below."
+        }
+      },
+      {
+        "text": "Put the full terms on their own page and add a Link below the disclaimer; the copy can’t hold links or bold text.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put the full terms on their own page and add a Link below; the copy can’t hold links or bold text."
+        }
+      },
+      {
+        "text": "Keep it to a sentence or two: two lines are read at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Two lines are read at a glance."
+        }
+      },
+      {
+        "text": "Do not paste the full terms: five or more lines of 10 px text go unread.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Five or more lines of 10 px text go unread."
+        }
+      }
+    ],
+    "good": [
+      "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd.",
+      "By continuing you agree to the terms for this payment."
+    ],
+    "bad": [
+      "Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing. Past performance does not guarantee future returns. Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd.",
+      "UPI limit reached. Try a smaller amount."
+    ]
+  },
+  "states": [
+    {
+      "state": "Read-only",
+      "when": "Disclaimer isn’t interactive: it has no hover, pressed, focus, or disabled style, and Tab skips it. Only the copy changes.",
+      "from": {
+        "section": "states",
+        "quote": "Disclaimer isn’t interactive: it has no hover, pressed, focus, or disabled style, and Tab skips it."
+      }
+    },
+    {
+      "state": "In a full-screen modal footer",
+      "when": "Inside a full-screen modal footer, the modal turns it light grey to suit its dark surface.",
+      "from": {
+        "section": "states",
+        "quote": "Inside a full-screen modal footer, the modal turns it light grey to suit its dark surface."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Screen readers read the copy and the added bank line as one label, or accessibilityLabel when it’s set.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "sources",
+        "quote": "Screen readers read the copy and that line as one label, or accessibilityLabel when it’s set."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Break before the bank’s name",
+      "dont": "Let the name split",
+      "why": "The default copy breaks the bank’s name across two lines.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let the name split"
+      }
+    },
+    {
+      "do": "Keep it to a sentence or two",
+      "dont": "Paste the full terms",
+      "why": "Five or more lines of 10 px text go unread.",
+      "from": {
+        "section": "doDont",
+        "quote": "Paste the full terms"
+      }
+    },
+    {
+      "do": "Use Support Text for problems",
+      "dont": "Put problems in small print",
+      "why": "Grey 10 px text hides an error.",
+      "from": {
+        "section": "doDont",
+        "quote": "Put problems in small print"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The provider line under a payment action, the guide's In context: an ActionFooter titled Confirm payment holds one vertical Stack with the Pay button and, below it, the Disclaimer. The copy breaks before the bank's name, so the name stays on one line and the package adds nothing. The footer passes its modes to both, so neither sets any. The empty onPress stands for the screen's own payment handling.",
+      "jsx": "<ActionFooter title=\"Confirm payment\">\n  <Stack layoutDirection=\"vertical\">\n    <Button label=\"Pay ₹500\" onPress={() => {}} />\n    <Disclaimer disclaimer={'Payment and UPI services are provided by\\nJio Payments Bank Pvt. Ltd.'} />\n  </Stack>\n</ActionFooter>",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment footer holds the Pay button and, below it, the provider line."
+      }
+    },
+    {
+      "purpose": "Terms for this screen with the full terms a link away, the guide's Content: the copy says what continuing means and the package adds “Jio Payments Bank Pvt. Ltd.” on a line below it; the full terms are on their own page, reached through a Link below the copy, because the copy can't hold links. The empty onPress stands for the screen's own navigation to that page.",
+      "jsx": "<VStack>\n  <Disclaimer disclaimer=\"By continuing you agree to the terms for this payment.\" />\n  <Link text=\"View terms\" textAlign=\"Center\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "content",
+        "quote": "Put the full terms on their own page and add a Link below; the copy can’t hold links or bold text."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "disclaimer",
+      "description": "The copy, one string; a line break is its only formatting. The package renders it, a line break, then the children if passed, else “Jio Payments Bank Pvt. Ltd.” unless the copy already contains it: “Terms apply.” renders two lines, 24 px.",
+      "quote": "Second line: the text is `disclaimer`, a line break, then `children` if passed, else “Jio Payments Bank Pvt. Ltd.” unless the copy already contains it.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Replaces the spoken name. Without it the name is the copy plus the second line (“Terms apply. Jio Payments Bank Pvt. Ltd.”). On the web the root is a group with that name and the text itself is aria-hidden; on native the root is accessible with role text, so VoiceOver gets the same name (not device-tested).",
+      "quote": "root `role=\"group\"`, accessible, named by `accessibilityLabel` or by the copy plus the second line (“Terms apply. Jio Payments Bank Pvt. Ltd.”); the text itself is `aria-hidden`. Native: the root is `accessible` with role text, so VoiceOver gets the same name (not device-tested).",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "modes",
+      "name": "context5",
+      "description": "FullscreenModal sets Fullscreen Modal on its footer Disclaimer, which makes the text #EBEBED, light grey for its dark surface, in both colour modes.",
+      "quote": "`FullscreenModal` renders its footer Disclaimer with `context5: 'Fullscreen Modal'`, which makes the text #EBEBED (light grey, for its dark surface) in both colour modes.",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "gaps": []
+}

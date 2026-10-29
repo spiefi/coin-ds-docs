@@ -1,0 +1,10 @@
+{
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The guide's In context says only that \"Refresh swaps the list for a spinner and a line of text while the statements load\". It gives no size, and the guide's sizing advice never mentions 40 px (it suggests 56 px for one section, 88 px for a whole screen). The guide also never says Refresh is off while loading, so \"Refresh is off while it loads, as in the guide's own example\" claims a disabled state nothing cited supports.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The example is the guide's own In context composition, which the reviewer can't see because it is code, not copy: at 622cd82, src/guides/spinner.guide.tsx line 102 swaps the list for <Waiting size={40} /> while loading (Waiting, lines 12–19, is the 40 px Spinner named “Loading your statements” with “Fetching your statements…” under it), and line 107 is <Button label=\"Refresh\" … disabled={loading} onPress={refresh} />, so Refresh is off while the statements load. The guide's Do & Don’ts use the same 40 px spinner (lines 117 and 120). Sizing sets no minimum or maximum (“Size is the diameter in px: 72 by default, with no minimum or maximum.”), and its 32, 56 and 88 px cards are examples, not the only sizes. The purpose says the literal disabled stands for the screen's own state."
+    }
+  ]
+}
