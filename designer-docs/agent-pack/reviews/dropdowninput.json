@@ -1,0 +1,17 @@
+{
+  "flags": [],
+  "dismissed": [
+    {
+      "field": "/anatomy/0",
+      "reason": "misreads-source: The configuration section says \"Every field has a label.\" Marking the Label part alwaysPresent=false contradicts this. /configuration/0 makes the same point as \"Give every field a label.\"",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch4, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "In this pack an anatomy part's required means the package always renders it (agent-pack/README.md, Decisions: false for an optional prop or slot). label is an optional prop, and DropdownInput renders no label row without it, so the part is not always present; FormField's and FormUpload's labels are recorded the same way. The guide's \"Every field has a label.\" is kept as advice in /configuration/0 and the Keep a visible label pair."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The In context section shows only \"Transfer money | From | Select an account | To | Continue\". Nothing in the guide says the screen uses a Card, that From and To share \"the same four accounts\", or that the To error reads \"Choose an account to transfer to\". The description presents these as the guide's own example.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch4, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "The guide's In context renders exactly this composition: TransferForm() in src/guides/dropdowninput.guide.tsx at 4e470cf puts a Text title, the From and To DropdownInputs (both items={accounts}, the four accounts) and the Continue Button in a Card, and the To field's errorMessage is \"Choose an account to transfer to\". The cross-check reads the rendered copy only, which has no containers or hidden error text, so it could not see them."
+    }
+  ]
+}
