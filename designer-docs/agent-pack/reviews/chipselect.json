@@ -1,0 +1,11 @@
+{
+  "flags": [],
+  "dismissed": [
+    {
+      "field": "/configuration/11",
+      "reason": "misreads-source: The cited sentence \"For other attribute filters.\" names no icon. The value ic_filter appears nowhere in the rendered guide or the evidence file. The evidence lists only ic_calendar_week (default) and ic_home (Custom icon story). The item says \"ic_filter in the guide's code\", but nothing shown here supports that.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The icon name is the guide's own, from its code, which the reviewer doesn't see: src/guides/chipselect.guide.tsx at 4e470cf, line 10 (const FILTER = 'ic_filter'), and the Configuration card “Filter icon” renders <Chip label=\"Category\" icon={FILTER} /> (line 49); the Content, In context and Do & Don't chips use the same constant (lines 76–77, 86, 97). ic_filter is in the installed icon registry (jfs-components 0.1.78-dbe0e02, src/icons/registry.ts line 1937, IconFilter.tsx), and ChipSelect draws any registry name it is given as the leading icon (ChipSelect.tsx lines 159–161). The item says where the name comes from; the copy calls it “Filter icon”."
+    }
+  ]
+}

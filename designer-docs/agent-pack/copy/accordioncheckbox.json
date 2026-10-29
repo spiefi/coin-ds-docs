@@ -1,0 +1,296 @@
+{
+  "slug": "accordioncheckbox",
+  "label": "Accordion Checkbox",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "files": [
+    "src/guides/accordioncheckbox.guide.tsx",
+    "src/AccordionCheckboxGuide.tsx"
+  ],
+  "evidence": "docs/evidence/accordioncheckbox.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T08:38:15.963Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "collapsible",
+    "expandable",
+    "nested options",
+    "grouped checkboxes"
+  ],
+  "title": "Accordion Checkbox",
+  "summary": "Group related choices behind a clear heading. People can select the group and open its options independently.",
+  "corePrinciple": "Selecting is not expanding.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4005-2906",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-accordioncheckbox--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Five parts make the relationship clear",
+      "description": "The header combines selection and disclosure. The divider and content slot only appear when the group is open.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Checkbox",
+        "Selects the group. It does not open the content.",
+        "Title + subtitle",
+        "Names the group and gives a short piece of supporting context.",
+        "Chevron",
+        "Shows whether the content slot is collapsed or open.",
+        "Divider",
+        "Separates the header from the options when expanded.",
+        "Content slot",
+        "Usually contains a public CheckboxGroup of CheckboxItems."
+      ],
+      "specimen": [
+        "Axis Bank",
+        "3 accounts",
+        "Savings • 0245",
+        "Current • 1182",
+        "Fixed deposit • 9073"
+      ],
+      "anatomy": [
+        {
+          "part": "Checkbox",
+          "note": "Selects the group. It does not open the content."
+        },
+        {
+          "part": "Title + subtitle",
+          "note": "Names the group and gives a short piece of supporting context."
+        },
+        {
+          "part": "Chevron",
+          "note": "Shows whether the content slot is collapsed or open."
+        },
+        {
+          "part": "Divider",
+          "note": "Separates the header from the options when expanded."
+        },
+        {
+          "part": "Content slot",
+          "note": "Usually contains a public CheckboxGroup of CheckboxItems."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose selection and expansion separately",
+      "description": "Agree how selecting a group affects its choices before using it in a flow.",
+      "blocks": [
+        "Header behavior",
+        "Two independent choices",
+        "A group can be selected while closed, or open while unselected.",
+        "Content behavior",
+        "Group related options",
+        "Keep related choices together in the content area."
+      ],
+      "specimen": [
+        "Axis Bank",
+        "3 accounts",
+        "Savings • 0245",
+        "Current • 1182",
+        "Fixed deposit • 9073"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "State is visible in both controls",
+      "description": "Compare the stable configured outcomes. The checked and expanded values can change independently while the runtime supplies pressed feedback during interaction.",
+      "blocks": [
+        "State references · use the playground above for interaction.",
+        "Collapsed · unchecked",
+        "The group is closed and the header is not selected.",
+        "Collapsed · checked",
+        "Selection can be visible while the options stay closed.",
+        "Expanded",
+        "The divider and content slot appear after the header.",
+        "Disabled",
+        "The parent header controls are unavailable until the condition changes.",
+        "Keep the two state changes separate.",
+        "When a product needs select-all behavior, connect the parent and child state explicitly in consumer code. Do not imply that checking this component automatically changes its descendants."
+      ],
+      "specimen": [
+        "Axis Bank",
+        "3 accounts",
+        "Savings • 0245",
+        "Current • 1182",
+        "Fixed deposit • 9073"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The host owns the width",
+      "description": "The Figma reference measures a 445px wide vertical HUG component. In a product layout, the parent supplies the available width and the component grows in height as content wraps or expands.",
+      "blocks": [
+        "Wide host",
+        "Figma reference measured 445px; observed collapsed 68px · open 179px",
+        "Constrained host",
+        "Allow long labels to wrap when the content decision needs more than one line."
+      ],
+      "specimen": [
+        "Axis Bank",
+        "3 accounts",
+        "Savings • 0245",
+        "Current • 1182",
+        "Fixed deposit • 9073",
+        "Longer investment account group",
+        "3 linked accounts"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Give each level a distinct job",
+      "description": "The heading identifies the group, the subtitle gives a short count or qualifier, and each row names one choice.",
+      "blocks": [
+        "01",
+        "Make the group scannable",
+        "Use a meaningful title and a compact subtitle that helps someone decide whether to open the group.",
+        "02",
+        "Keep row labels distinct",
+        "Use the account name and a short identifier so people can tell sibling choices apart.",
+        "03",
+        "Keep hierarchy short",
+        "Use one title, one subtitle, and one label per row. Move longer help text outside the row."
+      ],
+      "specimen": [
+        "Axis Bank",
+        "3 accounts",
+        "Savings • 0245",
+        "Current • 1182",
+        "Fixed deposit • 9073"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Select accounts as a group",
+      "description": "Here the group checkbox selects every account. Individual rows can still be changed; opening the group does not change the selection.",
+      "blocks": [
+        "Account selection",
+        "Choose the accounts to include",
+        "Open the group to review each account, or use the header checkbox to select all through the surrounding flow.",
+        "Consumer logic makes the header a select-all control. AccordionCheckbox itself only exposes the parent check and expand events.",
+        "Select-all is a decision made by the product flow.",
+        "Decision boundary",
+        "Make selection behavior visible",
+        "Component",
+        "Emits separate checked and expanded changes.",
+        "Consumer",
+        "Decides whether parent selection maps to child rows.",
+        "Rows",
+        "Keep their own checked state and labels."
+      ],
+      "specimen": [
+        "Axis Bank",
+        "3 accounts",
+        "Savings • 0245",
+        "Current • 1182",
+        "Fixed deposit • 9073"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Protect the group’s meaning",
+      "description": "Strong names and distinct choices make the disclosure useful before someone interacts with it.",
+      "blocks": [
+        "Do",
+        "Name the group and add a useful qualifier",
+        "People can predict what is inside before they open it.",
+        "Don’t",
+        "Use a vague heading and unexplained count",
+        "The group gives no clue about the choice or its consequence.",
+        "Give each child row a distinct name",
+        "Sibling options remain easy to scan after expansion.",
+        "Repeat generic row labels",
+        "People cannot tell which choice they are selecting."
+      ],
+      "specimen": [
+        "Axis Bank",
+        "3 accounts",
+        "Options",
+        "3 items",
+        "Savings • 0245",
+        "Current • 1182",
+        "Fixed deposit • 9073",
+        "Account"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Name the group and add a useful qualifier",
+            "caption": "People can predict what is inside before they open it.",
+            "specimen": "Axis Bank · 3 accounts"
+          },
+          "dont": {
+            "title": "Use a vague heading and unexplained count",
+            "caption": "The group gives no clue about the choice or its consequence.",
+            "specimen": "Options · 3 items"
+          }
+        },
+        {
+          "do": {
+            "title": "Give each child row a distinct name",
+            "caption": "Sibling options remain easy to scan after expansion.",
+            "specimen": "Axis Bank · 3 accounts · Savings • 0245 · Current • 1182 · Fixed deposit • 9073"
+          },
+          "dont": {
+            "title": "Repeat generic row labels",
+            "caption": "People cannot tell which choice they are selecting.",
+            "specimen": "Axis Bank · 3 accounts · Account · Account · Account"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the published component",
+      "description": "The guide separates documented Coin configuration from behavior supplied by the public package at runtime.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Accordion / Checkbox component set · node 4005:2906",
+        "02",
+        "Canonical Storybook",
+        "Default, Expanded, Disabled, and Controlled Select All stories",
+        "Open default story",
+        "Open controlled select-all story",
+        "Checked 18 September 2026",
+        "Examples use public AccordionCheckbox, CheckboxGroup, and CheckboxItem exports from jfs-components 0.1.60. The npm registry latest is also 0.1.60. The component forwards modes to its slot and exposes separate checked/expanded callbacks; consumer select-all wiring is shown explicitly in context. The public disabled prop disables the parent header controls; pass disabled to nested rows when those rows must also be unavailable. In the local React Native Web preview, open/close changes immediately because the package’s LayoutAnimation request does not produce a smooth transition here; the guide does not shim it. In this web build, checkbox keyboard activation can also toggle expansion; child choices do not respond to Space. This is a known package limitation.",
+        "AccordionCheckbox",
+        "CheckboxGroup",
+        "CheckboxItem"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

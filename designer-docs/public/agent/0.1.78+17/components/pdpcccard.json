@@ -1,0 +1,1006 @@
+{
+  "schemaVersion": 1,
+  "id": "PdpCcCard",
+  "slug": "pdpcccard",
+  "category": "card",
+  "tags": [
+    "product card",
+    "product detail",
+    "PDP",
+    "product summary",
+    "gold coin",
+    "PdpCcCard"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T09:06:00Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/anatomy/1",
+        "reason": "misreads-source: alwaysPresent=false implies the title can be left off, but the guide says \"title and subtitle fall back to the words Title and Subtitle\". The evidence says \"there is no way to hide either\", and its Limits say not to imply the title can be hidden.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/anatomy/2",
+        "reason": "misreads-source: alwaysPresent=false implies the subtitle can be absent, but per the guide it falls back to the word \"Subtitle\" when left out. The evidence says it cannot be hidden, and its Limits forbid implying it can.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/doDont/2",
+        "reason": "misreads-source: The why gives the Do caption (\"disableTruncation shows all of it, and the card grows\") rather than the reason against the Don't. The guide's reason is \"The title runs past both edges of the card.\" The other doDont items use the Don't caption as the why.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/facts/gaps",
+        "reason": "These gaps and the guide sentences they rest on were checked on 0.1.78-c7d3348. The installed build, dbe0e02, changed PdpCcCard for #361 (divider, icon size, empty picture box, two-line title), and the guide’s copy waits for #361’s own publish (evidence, 28 October). Re-extract after #361 is published. Added by Claude Code in Penny run run_19b90d38, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a PDP Card at the top of a product page: the product’s picture, name, two or three key facts, and one action.",
+  "useWhen": [
+    {
+      "text": "At the top of a product page: the product's picture, name, two or three key facts, and one action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a PDP Card at the top of a product page: the product’s picture, name, two or three key facts, and one action."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Picture",
+      "holds": "imageSource, in an imageWidth × imageHeight box (100 × 60 by default); media replaces it with your own component.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource, in an imageWidth × imageHeight box (100 × 60 by default)."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title: 26 px heavy, on one line with an ellipsis.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "title: 26 px heavy, on one line with an ellipsis."
+      }
+    },
+    {
+      "part": "Subtitle",
+      "holds": "subtitle: one qualifier, 14 px; it wraps.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "subtitle: one qualifier, 14 px; it wraps."
+      }
+    },
+    {
+      "part": "Metric",
+      "holds": "One metrics entry: its title, icon and value, and caption; the entries share the row in equal columns.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One metrics entry: its title, icon and value, and caption."
+      }
+    },
+    {
+      "part": "Action",
+      "holds": "A small light purple Button from buttonLabel and buttonIcon.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A small light purple Button from buttonLabel and buttonIcon."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A white panel with square corners, 344 px wide; everything on it is centred, 12 px apart.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white panel with square corners, 344 px wide."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "media",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "button",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Open the product page with the card, under the page's heading.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The card opens the product page, under the page’s heading."
+      }
+    },
+    {
+      "text": "Let the screen own the action: Add to cart calls the screen's own cart through onButtonPress, and the card only lays out the product.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Add to cart calls the screen’s own cart through onButtonPress; the card only lays out the product."
+      },
+      "target": "onButtonPress"
+    },
+    {
+      "text": "The card is 344 px wide, as in Figma; set width to another number or a percentage of its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 344 px wide, as in Figma; width sets another number or a percentage of its host."
+      },
+      "target": "width"
+    },
+    {
+      "text": "On a narrower card, such as width 280, the facts share less room and a long title is cut sooner.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The facts share less room, and a long title is cut sooner."
+      },
+      "target": "width"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass your own metrics: left out, the card shows two sample metrics.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/9"
+      },
+      "target": "metrics"
+    },
+    {
+      "text": "Use either the card's button or onPress, not both: a pressable card with its button puts a button inside a button.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Use one or the other: a pressable card with its button puts a button inside a button."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Show the product: pass imageSource with its picture, which says what it is at a glance.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The picture says what it is at a glance."
+      },
+      "target": "imageSource"
+    },
+    {
+      "text": "metrics takes one entry per fact: a title, a value, an optional caption, and an optional icon from the Coin icon set.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "metrics takes one entry per fact: a title, a value, an optional caption, and an optional icon from the Coin icon set."
+      },
+      "target": "metrics"
+    },
+    {
+      "text": "The entries share the row in equal columns; a single fact takes the whole row.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Entries share the row in equal columns."
+      },
+      "target": "metrics"
+    },
+    {
+      "text": "With three metrics each fact gets a third of the width, so values stay short.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Each fact gets a third of the width, so values stay short."
+      },
+      "target": "metrics"
+    },
+    {
+      "text": "Leave out a metric's icon for text-only facts.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave out icon for text-only facts."
+      },
+      "target": "metrics"
+    },
+    {
+      "text": "The card styles its own button: small, light purple and Emphasis Medium, with a plus icon before the label.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The card makes its Button small, light purple, and Emphasis Medium, with a plus icon before the label"
+      }
+    },
+    {
+      "text": "buttonIcon changes the button's icon; null removes it and leaves the label on its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "buttonIcon changes the icon, and null removes it."
+      },
+      "target": "buttonIcon",
+      "value": "null"
+    },
+    {
+      "text": "showButton false removes the button: the card ends at the facts, 44 px shorter.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "showButton false removes the button."
+      },
+      "target": "showButton",
+      "value": "false"
+    },
+    {
+      "text": "A title longer than one line is cut with an ellipsis; numberOfLines gives it more lines, and the card grows.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "A title longer than one line is cut with an ellipsis; numberOfLines gives it more lines"
+      },
+      "target": "numberOfLines"
+    },
+    {
+      "text": "Let a long title wrap: disableTruncation shows all of it, and the card grows.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "disableTruncation shows all of it, and the card grows."
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    },
+    {
+      "text": "Do not set singleLine with a long title.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "singleLine with a long title"
+      },
+      "target": "singleLine",
+      "value": "true"
+    },
+    {
+      "text": "The picture box is imageWidth × imageHeight and sets the space above the title; the card's height follows the content.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The picture box is imageWidth × imageHeight, and the height follows the content."
+      },
+      "target": "imageHeight"
+    },
+    {
+      "text": "media replaces the picture with your own component.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "media replaces the picture with your own component"
+      },
+      "target": "media"
+    },
+    {
+      "text": "button replaces the card's Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "button replaces the Button."
+      },
+      "target": "button"
+    },
+    {
+      "text": "On the card, AppearanceBrand changes the button and the metric icons.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "On the card, AppearanceBrand changes the button and the metric icons"
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "AppearanceBrand Primary gives a gold button and gold metric icons.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A gold button and gold metric icons."
+      },
+      "target": "AppearanceBrand",
+      "value": "Primary"
+    },
+    {
+      "text": "On the card, Emphasis changes the button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Emphasis changes the button."
+      },
+      "target": "Emphasis"
+    },
+    {
+      "text": "Emphasis High gives a solid purple button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A solid purple button."
+      },
+      "target": "Emphasis",
+      "value": "High"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Set title yourself: left out, the card shows the sample word “Title”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/4"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Set subtitle yourself: left out, the card shows the sample word “Subtitle”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/5"
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Set buttonLabel whenever the card shows its button: it defaults to “button”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/10"
+        },
+        "target": "buttonLabel"
+      },
+      {
+        "text": "One product, its key facts, one action.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One product, its key facts, one action."
+        }
+      },
+      {
+        "text": "Give the card two or three key facts and one action.",
+        "strength": "recommended",
+        "from": {
+          "section": "summary",
+          "quote": "the product’s picture, name, two or three key facts, and one action."
+        },
+        "target": "metrics"
+      },
+      {
+        "text": "Make the title the product's name, short enough for one line.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the product’s name, short enough for one line"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Make the subtitle one qualifier, such as the product's purity.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "and the subtitle one qualifier, such as its purity."
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Put the details in the subtitle and the facts, not in the title.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The details go in the subtitle and the facts."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Do not write a sentence as the title: it's cut at one line, and the end is lost.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It’s cut at one line, and the end is lost."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Name each fact with a noun, such as Weight or Price.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name each fact with a noun, such as Weight or Price"
+        },
+        "target": "metrics"
+      },
+      {
+        "text": "Keep each fact's value to a number or a word.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "keep values to a number or a word."
+        },
+        "target": "metrics"
+      },
+      {
+        "text": "Label the button with what it does, such as “Add to cart”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Label the button with what it does, such as Add to cart."
+        },
+        "target": "buttonLabel"
+      }
+    ],
+    "good": [
+      "5 g gold coin",
+      "24K · 99.9% pure",
+      "Weight",
+      "5 g",
+      "one coin",
+      "Price",
+      "₹31,200",
+      "incl. GST",
+      "Purity",
+      "Delivery",
+      "Add to cart"
+    ],
+    "bad": [
+      "Buy a 5 g 24K gold coin with free insured delivery"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "The card isn't pressable; its button is, through onButtonPress.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t pressable: its button is."
+      }
+    },
+    {
+      "state": "Pressable card",
+      "when": "onPress set: the whole card is one button, named by its title; use it without the card's own button (showButton false).",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      }
+    },
+    {
+      "state": "Disabled, selected, loading",
+      "when": "Not available: the card has no disabled, selected or loading state.",
+      "from": {
+        "section": "states",
+        "quote": "The card has no disabled, selected, or loading state."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "With onPress the whole card is one button, named by its title.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      },
+      "target": "onPress"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "A name in the title",
+      "dont": "A sentence in the title",
+      "why": "It’s cut at one line, and the end is lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "A name in the title"
+      }
+    },
+    {
+      "do": "Show the product",
+      "dont": "Leave out the picture",
+      "why": "An empty box still takes its space above the title.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show the product"
+      }
+    },
+    {
+      "do": "Let a long title wrap",
+      "dont": "singleLine with a long title",
+      "why": "disableTruncation shows all of it, and the card grows.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let a long title wrap"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A product card: the picture, the name, one qualifier, weight and price side by side, and Add to cart.",
+      "jsx": "<PdpCcCard\n  imageSource={require('../assets/gold-coin.png')}\n  imageWidth={60}\n  imageHeight={60}\n  title=\"5 g gold coin\"\n  subtitle=\"24K · 99.9% pure\"\n  metrics={[\n    { title: 'Weight', value: '5 g', caption: 'one coin', icon: 'ic_scale' },\n    { title: 'Price', value: '₹31,200', caption: 'incl. GST', icon: 'ic_rupee_coin' },\n  ]}\n  buttonLabel=\"Add to cart\"\n  onButtonPress={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Weight and price side by side, in equal columns."
+      }
+    },
+    {
+      "purpose": "Opening a product page under the page's heading; Add to cart calls the screen's own cart through onButtonPress.",
+      "jsx": "<VStack>\n  <Title title=\"Gold coins\" subtitle=\"Insured delivery to your door\" />\n  <PdpCcCard\n    imageSource={require('../assets/gold-coin.png')}\n    imageWidth={60}\n    imageHeight={60}\n    title=\"5 g gold coin\"\n    subtitle=\"24K · 99.9% pure\"\n    metrics={[\n      { title: 'Weight', value: '5 g', caption: 'one coin', icon: 'ic_scale' },\n      { title: 'Price', value: '₹31,200', caption: 'incl. GST', icon: 'ic_rupee_coin' },\n    ]}\n    buttonLabel=\"Add to cart\"\n    onButtonPress={() => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The card opens the product page, under the page’s heading."
+      }
+    },
+    {
+      "purpose": "The whole card as one button, named by its title: onPress on the card and no button of its own.",
+      "jsx": "<PdpCcCard\n  imageSource={require('../assets/gold-coin.png')}\n  imageWidth={60}\n  imageHeight={60}\n  title=\"5 g gold coin\"\n  subtitle=\"24K · 99.9% pure\"\n  metrics={[\n    { title: 'Weight', value: '5 g', caption: 'one coin', icon: 'ic_scale' },\n    { title: 'Price', value: '₹31,200', caption: 'incl. GST', icon: 'ic_rupee_coin' },\n  ]}\n  showButton={false}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "The card is one button, named 5 g gold coin."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "evidence",
+        "description": "The picture is shown with cover fit, its corners from image/radius (8 px; the Radius mode changes them), and hidden from screen readers. Declared: Image source for the default media slot. Accepts a URL string or any RN `ImageSourcePropType`. Ignored when `media` is provided.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "imageWidth",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 100,
+        "description": "Default media image width. Defaults to the Figma spec (`100`). Default 100, from the component source."
+      },
+      {
+        "name": "imageHeight",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 60,
+        "description": "Default media image height. Defaults to the Figma spec (`60`). Default 60, from the component source."
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the media slot (top of the card). Takes precedence over `imageSource`. `modes` cascade into it automatically."
+      },
+      {
+        "name": "title",
+        "type": "string | null",
+        "required": false,
+        "source": "types",
+        "description": "Headline title (26px black). Omit to keep the sample `\"Title\"`. Pass `''` or `null` to hide the line."
+      },
+      {
+        "name": "subtitle",
+        "type": "string | null",
+        "required": false,
+        "source": "types",
+        "description": "Subtitle rendered below the title (14px medium). Omit to keep the sample `\"Subtitle\"`. Pass `''` or `null` to hide the line."
+      },
+      {
+        "name": "numberOfLines",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Number of lines to limit the title to. The `Title` component defaults to `1` when this is unset, so the headline is a single line with an ellipsis by default. Pass a larger value (e.g. `2`) to allow the title to wrap onto that many lines before truncating, or set {@link disableTruncation} to remove the clamp entirely. The subtitle is never line-clamped."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables truncation for both the title and subtitle: the trailing ellipsis (`…`) is never shown and the `numberOfLines` clamp is ignored. The text wraps onto as many lines as it needs inside the card."
+      },
+      {
+        "name": "singleLine",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, forces both the title and subtitle onto a single line with no wrapping (implies {@link disableTruncation}). The line is clipped at the card edges rather than running past them."
+      },
+      {
+        "name": "metrics",
+        "type": "PdpCcCardMetric[]",
+        "required": false,
+        "source": "evidence",
+        "description": "One equal-width column per entry, each announced as “title, value, caption”. An empty list removes the row; there is no maximum. Declared: The metric columns rendered in the stats row. Vertical dividers are inserted automatically between adjacent metrics. Defaults to two sample metrics (with leading icons) matching the Figma default.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "buttonLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "button",
+        "description": "CTA button label. Defaults to `\"button\"`. Default \"button\", from the component source."
+      },
+      {
+        "name": "buttonIcon",
+        "type": "string | null",
+        "required": false,
+        "source": "types",
+        "default": "ic_add_circle",
+        "description": "Registry icon name for the button's leading glyph. Defaults to `'ic_add_circle'`. Pass `null` to hide the leading icon. Default \"ic_add_circle\", from the component source."
+      },
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "CTA press handler."
+      },
+      {
+        "name": "button",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the default Button; the node gets AppearanceBrand Secondary, Emphasis Medium and Button / Size S, with the card's own modes on top. Declared: Full override for the CTA. Takes precedence over `buttonLabel`.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "showButton",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "false removes the button and 44 px of the card's height. Declared: Toggles the CTA button. Defaults to `true`. Default true, from the component source.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "The whole card becomes one button, named by accessibilityLabel, else title, and dims to 0.92 opacity while pressed. With the default button still showing, that nests a button in a button. The card has no disabled prop. Declared: Press handler for the whole card. When set, the card becomes pressable.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "width",
+        "type": "number | `${number}%`",
+        "required": false,
+        "source": "types",
+        "default": 344,
+        "description": "Card width. Defaults to the Figma spec (`344`). Pass `'100%'` to fill the parent. Default 344, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "No mode changes the card's own white panel, padding or gap; modes reach the picture, title, metrics and button. Declared: Modes object for design-token resolution. Cascaded to all children.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the card container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the card."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "On the card it changes the button (Primary gold, Neutral grey, Tertiary blue) and the metric icons; left unset, the button and the icons are Secondary purple. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "No effect on its own; with Semantic Intent System, warning and negative turn the button and icons orange and red. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "positive",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "Listed for PdpCcCard, but changes nothing on the card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Medium",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "Changes the button: M makes it 42 px tall; the card's default is S. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "M",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "Changes inner tokens of the button, icons or title; not a designer choice on this card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "Changes inner tokens of the button, icons or title; not a designer choice on this card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "Listed for PdpCcCard, but changes nothing on the card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "Changes inner tokens of the button, icons or title; not a designer choice on this card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "context7",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Card",
+          "Page Hero"
+        ],
+        "description": "Changes inner tokens of the button, icons or title; not a designer choice on this card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "Changes the button: High is solid purple with a white label, Low is text only, and Medium, light purple, is the card's default. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "High",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Icon Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "Changes inner tokens of the button, icons or title; not a designer choice on this card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Medium",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "Listed for PdpCcCard, but changes nothing on the card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "Listed for PdpCcCard, but changes nothing on the card. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Radius",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "None"
+        ],
+        "description": "Changes the picture's corners: None 0, M 16, L 32 (8 px by default). Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "System turns the button and icons green (orange or red with AppearanceSystem warning or negative); not a product-card choice. Declared: A token collection PdpCcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Brand",
+        "checkedOn": "2026-10-21"
+      }
+    ],
+    "slots": [
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "description": "Full override for the media slot (top of the card). Takes precedence over `imageSource`. `modes` cascade into it automatically.",
+        "source": "types"
+      },
+      {
+        "name": "button",
+        "type": "React.ReactNode",
+        "description": "Full override for the CTA. Takes precedence over `buttonLabel`.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "description": "CTA press handler.",
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the whole card. When set, the card becomes pressable.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "No divider line shows between metrics on the web, where Figma draws one 46 px tall (#361).",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "text": "Without imageSource an empty picture box keeps its space above the title; the package ships no default picture (#361).",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "text": "The button's plus icon is 18 px where Figma's is 16 (#361).",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "text": "The card is 316 px tall where Figma's is 310, because its text lines are taller (#361).",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "text": "On the web, with numberOfLines 2 the title's ellipsis renders partly cut.",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=pdpcccard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5352-935",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-pdpcccard--docs"
+  }
+}

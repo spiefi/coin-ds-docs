@@ -1,0 +1,17 @@
+{
+  "slug": "favoritetoggle",
+  "entryHash": "d82cb5321901d4f21dac31ff91e07224ae4bb8b5baf4f543872fd6add96df51a",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "checkedAt": "2026-10-29T09:04:50Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/facts/gaps/0",
+      "reason": "misreads-source: The evidence's 0.1.78 check names mirror tag `v0.1.78` built from `5b6894b`. It never mentions a build '0.1.78-dbe0e02' or 'Component Bug #541'. It also says only that 'A 44 px `hitSlop` is set in code'. It does not say phones were tested or that they honour the slop. The gap adds a build id, a bug number and a phone-behaviour claim that the evidence does not support."
+    }
+  ],
+  "notes": "1) The evidence body above the '0.1.78 check' section describes 0.1.60. There, Active colours don't resolve, aria-checked is absent, there is no hit slop, and the default size is S. Its Limits say the guide 'must not show or claim a gold heart in the rendered examples'. The 0.1.78 check supersedes all of this (#168 fixed, aria-checked emitted, default M). The entry follows 0.1.78 correctly, but a human should update or retire the stale Limits so later reviewers aren't misled. 2) /configuration/11 faithfully restates the types fact /facts/props/12 ('loading true draws a same-size circular placeholder'). The 0.1.60 evidence says instead that `loading` 'renders a same-size circular skeleton only inside <SkeletonGroup loading>; on its own it renders nothing'. The 0.1.78 check did not re-test this, so standalone `loading` behaviour is unverified. 3) /examples/1 gives an already-saved toggle the label 'Save Nifty 50 Index Fund to favorites'. That matches the guide's sample labels, but a 'Save…' label on a saved toggle may read oddly to screen-reader users. The guide doesn't address it."
+}

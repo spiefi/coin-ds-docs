@@ -1,0 +1,744 @@
+{
+  "schemaVersion": 1,
+  "id": "Slider",
+  "slug": "slider",
+  "category": "input",
+  "tags": [
+    "range",
+    "amount picker",
+    "seek bar"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T09:06:00Z",
+    "flags": [
+      {
+        "field": "/configuration/4",
+        "reason": "The source says \"only\", but whether the screen states the range nearby is a judgement the package cannot check, though the sentence reads as a firm condition on any Slider that hides its end labels. Read as recommended, not hardened into a constraint.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/5",
+        "reason": "The source says \"only\", but whether the value can change is decided by the screen, which the package cannot check, though the sentence reads as a firm condition on any disabled Slider. Read as recommended, not hardened into a constraint.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Slider to pick a value from a wide range by dragging, such as a monthly SIP amount or a loan tenure.",
+  "useWhen": [
+    {
+      "text": "Pick a value from a wide range by dragging, such as a monthly SIP amount or a loan tenure.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Slider to pick a value from a wide range by dragging, such as a monthly SIP amount or a loan tenure."
+      }
+    },
+    {
+      "text": "A rough value, chosen by dragging, with the range in view.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "A rough value, chosen by dragging, with the range in view."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A few fixed choices, such as three positions: they read better as Radios.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Three positions read better as Radios."
+      },
+      "useInstead": "Radio"
+    },
+    {
+      "text": "The control needs a hover, pressed, or error style: Slider has none.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "There is no hover, pressed, or error style."
+      }
+    },
+    {
+      "text": "Typing an exact amount: the package's Slider docs say typed exact amounts belong in AmountInput or TextInput.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "typed exact amounts belong in AmountInput or TextInput"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Fill",
+      "holds": "Gold from the minimum up to the value.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Gold from the minimum up to the value."
+      }
+    },
+    {
+      "part": "Track",
+      "holds": "The 4 px track; pale gold for the rest of the range.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Pale gold: the rest of the range."
+      }
+    },
+    {
+      "part": "Handle",
+      "holds": "The 20 px handle; drag it, or tap anywhere on the track.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Drag it, or tap anywhere on the track."
+      }
+    },
+    {
+      "part": "Value bubble",
+      "holds": "Shows the value above the handle; alwaysShowTooltip false shows it only while dragging or hovering.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows the value above the handle."
+      }
+    },
+    {
+      "part": "End labels",
+      "holds": "The minimum and maximum, in the value's format; showLabels hides them.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The minimum and maximum, in the value’s format."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "renderTooltip",
+      "accepts": [
+        "((value: number) => React.ReactNode)"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "minLabel",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "maxLabel",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Slider fills its container and is 61 px tall with its end labels.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Slider fills its container and is 61 px tall with its end labels"
+      },
+      "target": "width"
+    },
+    {
+      "text": "Keep the area above the Slider clear: the bubble floats about 40 px above it and takes no space.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The bubble floats about 40 px above it and takes no space, so keep that area clear."
+      }
+    },
+    {
+      "text": "Do not put the title right above the Slider: the floating bubble covers the title.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The floating bubble covers the title."
+      }
+    },
+    {
+      "text": "Let the screen keep the value (value with onChange) and save it when the person acts, as when they start the SIP.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the value and saves it when the person starts the SIP."
+      },
+      "target": "value"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set the range (minValue, maxValue), the step values snap to (step), and how the value is written (formatOptions or formatValue).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Set the range, the step values snap to, and how the value is written."
+      }
+    },
+    {
+      "text": "When formatValue writes a unit, such as “10 years”, make it say “1 year” too.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A format function writes “10 years”; make it say “1 year” too."
+      },
+      "target": "formatValue"
+    },
+    {
+      "text": "With alwaysShowTooltip false the value appears only while dragging or hovering, so show it elsewhere too.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The value appears only while dragging or hovering, so show it elsewhere too."
+      },
+      "target": "alwaysShowTooltip",
+      "value": "false"
+    },
+    {
+      "text": "When a heading already shows the chosen value, let the bubble appear only while dragging (alwaysShowTooltip false).",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The heading shows the chosen amount, so the bubble appears only while dragging."
+      },
+      "target": "alwaysShowTooltip",
+      "value": "false"
+    },
+    {
+      "text": "Hide the end labels (showLabels false) only when the screen states the range nearby.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Hide the ends only when the screen states the range nearby."
+      },
+      "target": "showLabels",
+      "value": "false"
+    },
+    {
+      "text": "Disable a slider (isDisabled) only while its value can't change, and say why nearby.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Disable a slider only while its value can’t change, and say why nearby."
+      },
+      "target": "isDisabled",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Put a title above the Slider: it has no label of its own.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "A Slider has no label of its own, so put a title above it"
+        }
+      },
+      {
+        "text": "Write the value as people read it, such as ₹5,000 or 10 years; the end labels follow the same format.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the value as people read it, such as ₹5,000 or 10 years; the end labels follow the same format."
+        }
+      },
+      {
+        "text": "Write a money value as money: ₹500 and ₹50,000 read as amounts.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "₹500 and ₹50,000 read as amounts."
+        },
+        "target": "formatOptions"
+      },
+      {
+        "text": "Do not show raw numbers: 500 and 50,000 could be anything.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "500 and 50,000 could be anything."
+        },
+        "target": "formatOptions"
+      }
+    ],
+    "good": [
+      "₹5,000",
+      "₹500",
+      "₹50,000",
+      "10 years",
+      "1 year",
+      "30 years",
+      "Loan tenure",
+      "Monthly SIP amount",
+      "₹5,000 a month",
+      "Start SIP"
+    ],
+    "bad": [
+      "500",
+      "50,000",
+      "5,000"
+    ]
+  },
+  "states": [
+    {
+      "state": "Enabled",
+      "when": "Gold fill and handle; drag, tap, or use the arrow keys.",
+      "from": {
+        "section": "states",
+        "quote": "Gold fill and handle; drag, tap, or use the arrow keys."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: dimmed to 50%; it keeps its value but can't be changed.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to 50%; it keeps its value but can’t be changed."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Give the Slider a spoken name (accessibilityLabel) in the same words as the title above it.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "use the same words as its spoken name"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Write the value as money",
+      "dont": "Show raw numbers",
+      "why": "500 and 50,000 could be anything.",
+      "from": {
+        "section": "doDont",
+        "quote": "Write the value as money"
+      }
+    },
+    {
+      "do": "Leave room for the bubble",
+      "dont": "Put the title right above it",
+      "why": "The floating bubble covers the title.",
+      "from": {
+        "section": "doDont",
+        "quote": "Leave room for the bubble"
+      }
+    },
+    {
+      "do": "Use it for a wide range",
+      "dont": "Use it for a few fixed choices",
+      "why": "Three positions read better as Radios.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use it for a wide range"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A rupee amount from ₹500 to ₹50,000 that snaps to ₹500 steps.",
+      "jsx": "<Slider\n  accessibilityLabel=\"Monthly SIP amount\"\n  minValue={500}\n  maxValue={50000}\n  step={500}\n  defaultValue={5000}\n  formatOptions={{ style: 'currency', currency: 'INR', maximumFractionDigits: 0 }}\n  locale=\"en-IN\"\n  onChange={(value) => {}}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Values snap to ₹500 steps and read as rupees."
+      }
+    },
+    {
+      "purpose": "A loan tenure whose format function also writes “1 year”.",
+      "jsx": "<Slider\n  accessibilityLabel=\"Loan tenure\"\n  minValue={1}\n  maxValue={30}\n  defaultValue={10}\n  formatValue={(value) => (value === 1 ? '1 year' : `${value} years`)}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "A format function writes “10 years”; make it say “1 year” too."
+      }
+    },
+    {
+      "purpose": "A SIP amount card: the heading shows the amount, so the bubble shows only while dragging, and the screen keeps the value until Start SIP.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Text modes={{ 'Color Mode': 'Light' }}>Monthly SIP amount</Text>\n  <Text modes={{ 'Color Mode': 'Light' }}>₹5,000 a month</Text>\n  <Slider\n    accessibilityLabel=\"Monthly SIP amount\"\n    value={5000}\n    onChange={(value) => {}}\n    alwaysShowTooltip={false}\n    minValue={500}\n    maxValue={50000}\n    step={500}\n    formatOptions={{ style: 'currency', currency: 'INR', maximumFractionDigits: 0 }}\n    locale=\"en-IN\"\n    modes={{ 'Color Mode': 'Light' }}\n  />\n  <Button label=\"Start SIP\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The heading shows the chosen amount, so the bubble appears only while dragging."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Current value (controlled). Pair with `onChange`."
+      },
+      {
+        "name": "defaultValue",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Initial value (uncontrolled). Defaults to `minValue`."
+      },
+      {
+        "name": "onChange",
+        "type": "(value: number) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called continuously while the value changes (drag / keypress / track press)."
+      },
+      {
+        "name": "onChangeEnd",
+        "type": "(value: number) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Fires on release and on key presses; since 636f3f5 not when a key can't change the value. Ref methods do nothing while disabled. Declared: Called once when the interaction ends (drag release / keypress).",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "minValue",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 0,
+        "description": "Minimum selectable value. Defaults to `0`. Default 0, from the component source."
+      },
+      {
+        "name": "maxValue",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 100,
+        "description": "Maximum selectable value. Defaults to `100`. Default 100, from the component source."
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 1,
+        "description": "Arrow keys move one step, Page Up and Down 10% of the range, Home and End to the ends; tapping anywhere on the 20 px row jumps the handle there. Declared: Snap increment. Defaults to `1`. Use a smaller value for finer control. Default 1, from the component source.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "50% opacity, tabindex -1, no drag or key response; on the web it also sets aria-disabled (636f3f5). Declared: Disables interaction and dims the control. Default false, from the component source.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "formatOptions",
+        "type": "Intl.NumberFormatOptions",
+        "required": false,
+        "source": "evidence",
+        "description": "Formats the bubble and both end labels, like formatValue. Declared: `Intl.NumberFormat` options used to format the value bubble and the min/max labels (e.g. `{ style: 'currency', currency: 'USD' }`).",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "BCP-47 locale used with `formatOptions`. Defaults to the runtime locale."
+      },
+      {
+        "name": "formatValue",
+        "type": "(value: number) => string",
+        "required": false,
+        "source": "evidence",
+        "description": "Also formats the end labels, so a function that appends a unit must handle the singular: a plain `${v} years` writes “1 years” on the minimum label. Declared: Full override for value formatting. Takes precedence over `formatOptions`. Receives the raw numeric value, returns the string to display.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "renderTooltip",
+        "type": "(value: number) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Renders fully custom value-bubble content. Takes precedence over `formatValue`."
+      },
+      {
+        "name": "alwaysShowTooltip",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "Either way the bubble sits 12 px above the 20 px handle row and takes no layout space, so content directly above the Slider is covered. Declared: When `true` (default, matches the Figma design) the value bubble is always visible. When `false` it behaves like a normal tooltip — hidden at rest and revealed only while the user interacts (dragging on touch, or hovering/dragging on web), then dismissed as soon as the finger lifts. Either way the bubble floats above the track and never occupies layout space, so it will overlap content above the slider — leave room for it. Default true, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "showLabels",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggles the min/max labels below the track. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "minLabel",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Override for the left (min) label. Defaults to the formatted `minValue`."
+      },
+      {
+        "name": "maxLabel",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Override for the right (max) label. Defaults to the formatted `maxValue`."
+      },
+      {
+        "name": "width",
+        "type": "number | `${number}%`",
+        "required": false,
+        "source": "types",
+        "default": "100%",
+        "description": "Slider width. Defaults to `'100%'` so it fills its parent. Default \"100%\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Since 636f3f5, JFSThemeProvider's modes apply too, matching the modes prop. Declared: Design-token modes for theming.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style override for the outer container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Names the role=slider element, the only element carrying the name; it exposes aria-valuenow, aria-valuemin, aria-valuemax and aria-valuetext, and aria-disabled when disabled. Declared: Accessibility label for screen readers.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test identifier for the slider."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection Slider reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      }
+    ],
+    "slots": [
+      {
+        "name": "renderTooltip",
+        "type": "(value: number) => React.ReactNode",
+        "description": "Renders fully custom value-bubble content. Takes precedence over `formatValue`.",
+        "source": "types"
+      },
+      {
+        "name": "minLabel",
+        "type": "React.ReactNode",
+        "description": "Override for the left (min) label. Defaults to the formatted `minValue`.",
+        "source": "types"
+      },
+      {
+        "name": "maxLabel",
+        "type": "React.ReactNode",
+        "description": "Override for the right (max) label. Defaults to the formatted `maxValue`.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onChange",
+        "type": "(value: number) => void",
+        "description": "Called continuously while the value changes (drag / keypress / track press).",
+        "source": "types"
+      },
+      {
+        "name": "onChangeEnd",
+        "type": "(value: number) => void",
+        "description": "Called once when the interaction ends (drag release / keypress).",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The Slider is 61 px tall; Figma's is 44 px (open for a decision: change code or Figma).",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Every render logs four “Variable not found” console warnings for the bubble's radius and maxWidth tokens.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Single thumb and horizontal only, with no ticks.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "text": "In Dark mode the end labels resolve black (#197); the guide shows Light only.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "text": "The published Storybook predates 0.1.78.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=slider",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5373-446",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-slider--docs"
+  }
+}

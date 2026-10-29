@@ -1,0 +1,278 @@
+{
+  "slug": "favoritetoggle",
+  "label": "Favorite Toggle",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "files": [
+    "src/guides/favoritetoggle.guide.tsx"
+  ],
+  "evidence": "docs/evidence/favoritetoggle.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T08:38:14.386Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "heart",
+    "like",
+    "save",
+    "bookmark",
+    "wishlist"
+  ],
+  "title": "Favorite Toggle",
+  "summary": "Use a Favorite Toggle on an image card so people can save the item for later with one tap.",
+  "corePrinciple": "One heart per item, on imagery, saying exactly what gets saved.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7612-54663",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-favoritetoggle--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A heart on glass",
+      "description": "A frosted circle holds a single heart icon. There is no visible label.",
+      "blocks": [
+        "Shown at 3×",
+        "29 × 29",
+        "1",
+        "2",
+        "Glass surface",
+        "Frosted circle that keeps the heart readable over photos.",
+        "Heart",
+        "Filled heart; its colour is meant to change when saved.",
+        "Measured size (px)"
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Glass surface",
+          "note": "Frosted circle that keeps the heart readable over photos."
+        },
+        {
+          "part": "Heart",
+          "note": "Filled heart; its colour is meant to change when saved."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Pick a size for the card",
+      "description": "Size is the only visual choice. Medium matches the Figma component; use Small only on dense thumbnails and Large on hero images.",
+      "blocks": [
+        "Small · 14 px",
+        "Fits tiny thumbnails but is hard to tap.",
+        "Medium · 29 px",
+        "The Figma size, right for most cards.",
+        "Large · 41 px",
+        "For full-width hero images."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Small · 14 px",
+          "description": "Fits tiny thumbnails but is hard to tap."
+        },
+        {
+          "title": "Medium · 29 px",
+          "description": "The Figma size, right for most cards."
+        },
+        {
+          "title": "Large · 41 px",
+          "description": "For full-width hero images."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Saved, not saved, disabled, loading",
+      "description": "Saved is a white circle with a gold heart, as in Figma. Not saved is a frosted circle with a white heart.",
+      "blocks": [
+        "Not saved",
+        "Frosted circle, white heart.",
+        "Saved",
+        "White circle, gold heart.",
+        "Disabled",
+        "Dimmed to half opacity and skipped by keyboard focus.",
+        "Loading",
+        "A same-size circle holds the place while the item loads."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Not saved",
+          "description": "Frosted circle, white heart."
+        },
+        {
+          "title": "Saved",
+          "description": "White circle, gold heart."
+        },
+        {
+          "title": "Disabled",
+          "description": "Dimmed to half opacity and skipped by keyboard focus."
+        },
+        {
+          "title": "Loading",
+          "description": "A same-size circle holds the place while the item loads."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "A fixed square set by the size mode",
+      "description": "The toggle never stretches. On phones its tap area reaches 44 px around the circle; in a web browser only the visible circle responds, 14 px for Small and 29 px for Medium.",
+      "blocks": [
+        "Shown at 1.5×",
+        "S",
+        "M",
+        "L",
+        "14 × 14",
+        "29 × 29",
+        "41 × 41"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name what gets saved",
+      "description": "The toggle has no visible text. Give it an accessibility label that names the item, so screen reader users hear what they are saving.",
+      "blocks": [
+        "Save Gold savings plan to favorites",
+        "Save Nifty 50 Index Fund to favorites",
+        "Save Digital Gold to favorites"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Save Gold savings plan to favorites",
+          "description": ""
+        },
+        {
+          "title": "Save Nifty 50 Index Fund to favorites",
+          "description": ""
+        },
+        {
+          "title": "Save Digital Gold to favorites",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Save a plan from its card",
+      "description": "The toggle sits in the top-right corner of the card image. The screen keeps the list of saved items and passes each card its saved state and change handler.",
+      "blocks": [
+        "Not saved"
+      ],
+      "specimen": [
+        "Gold savings plan",
+        "Start from ₹100 a month"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep the heart visible and easy to hit",
+      "description": "Each pair shows a placement or size change you can see.",
+      "blocks": [
+        "Do",
+        "Place it on imagery",
+        "The frosted circle reads clearly over a photo.",
+        "Don’t",
+        "Put it on a plain white surface",
+        "White glass on white almost disappears.",
+        "Use Medium on cards",
+        "29 px is the Figma size and easier to tap.",
+        "Shrink it on a large card",
+        "A 14 px heart is hard to see and to hit.",
+        "Use one heart per item",
+        "One save action per card.",
+        "Repeat it on one card",
+        "Two hearts make people wonder which one saves."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Place it on imagery",
+            "caption": "The frosted circle reads clearly over a photo.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Put it on a plain white surface",
+            "caption": "White glass on white almost disappears.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Use Medium on cards",
+            "caption": "29 px is the Figma size and easier to tap.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Shrink it on a large card",
+            "caption": "A 14 px heart is hard to see and to hit.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Use one heart per item",
+            "caption": "One save action per card.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Repeat it on one card",
+            "caption": "Two hearts make people wonder which one saves.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Favorite Toggle contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "States",
+        "Disabled",
+        "Checked 1 October 2026",
+        "Declared and installed jfs-components is 0.1.78 from the team’s private package repository. Size comes from the Favorite Toggle Size mode (S 14, M 29, L 41 px) and defaults to M, the Figma size. Saved uses the Favorite Toggle Color Active mode: a white circle with a gold heart. On the web the saved state is announced (aria-checked). On iOS and Android a hit slop extends the tap area to 44 px; react-native-web ignores it, so in a browser the tap area equals the visible size.",
+        "jfs-components",
+        "0.1.78",
+        "Favorite Toggle Size",
+        "Favorite Toggle Color",
+        "aria-checked"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

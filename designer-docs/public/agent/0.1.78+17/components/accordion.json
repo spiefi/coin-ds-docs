@@ -1,0 +1,550 @@
+{
+  "schemaVersion": 1,
+  "id": "Accordion",
+  "slug": "accordion",
+  "category": "content",
+  "tags": [
+    "collapsible",
+    "expandable",
+    "disclosure",
+    "FAQ"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T09:06:00Z",
+    "flags": [
+      {
+        "field": "/facts/props/14",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/15",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-21); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Reveal supporting details when people need them, while keeping the page easy to scan.",
+  "useWhen": [
+    {
+      "text": "Reveal supporting details when people need them, while keeping the page easy to scan.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Reveal supporting details when people need them, while keeping the page easy to scan."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Hiding the page's main task: leave it in the page flow when hiding it would block progress or change the decision.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "Leave the main task in the page flow when hiding it would block progress or change the decision."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Header",
+      "holds": "The title: the promise people use to decide whether to open the section.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The title is the promise people use to decide whether to open the section."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "The header text, short enough to stay scannable in a narrow host.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep the header short enough to remain scannable in a narrow host."
+      }
+    },
+    {
+      "part": "Indicator",
+      "holds": "Add and minus icons the component switches as it opens and closes.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The public component switches between add and minus icons as it opens and closes."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "The bottom border that separates the open section from the following content.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The component’s bottom border separates the open section from the following content."
+      }
+    },
+    {
+      "part": "Content slot",
+      "holds": "children: supporting details or related public rows.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Put supporting details or related public rows here; keep primary actions visible in the page flow."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Keep the primary action outside the Accordion, in the page flow; use the Accordion for supporting details.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Use the Accordion for supporting details while the main payment action stays in the page flow."
+      }
+    },
+    {
+      "text": "Do not put the primary action in the content slot: it is unavailable until someone expands the section.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The button is unavailable until someone expands the section, so the task is harder to complete."
+      }
+    },
+    {
+      "text": "Several Accordions can sit together; each keeps its own expanded state, and the screen's wiring decides whether one, both or neither is open.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Two public Accordions can sit together while each keeps its own expanded state. Consumer wiring decides whether one, both, or neither is open."
+      }
+    },
+    {
+      "text": "Let the host supply the width; the Accordion grows with its title and open content.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In a product layout, the host supplies width and the component grows with its title and open content."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use the default treatment (contained false) when the heading can sit comfortably in the surrounding page structure.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the default when the heading can sit comfortably in the surrounding page structure."
+      },
+      "target": "contained",
+      "value": "false"
+    },
+    {
+      "text": "Use contained when the filled header should keep related supporting content together, so the group stands apart from its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use contained when the filled header should keep related supporting content together."
+      },
+      "target": "contained",
+      "value": "true"
+    },
+    {
+      "text": "Set expanded (or defaultExpanded) and disabled to reflect the product situation, and let the header show the result.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Choose the expanded or disabled condition that reflects the product situation and let the header communicate the result."
+      },
+      "target": "expanded"
+    },
+    {
+      "text": "Leave the Accordion States mode unset: the component derives it from expanded, disabled, hover and contained.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/modes/0"
+      },
+      "target": "Accordion States"
+    },
+    {
+      "text": "To let a long title wrap instead of truncating, set disableTruncation.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/13"
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make the header a clear promise about the content inside.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Make the header a clear promise about the content inside."
+        },
+        "target": "title"
+      },
+      {
+        "text": "The header should tell people what they will find; the body answers the question the header raises.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use a meaningful header and let the body answer the question that header raises."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Keep the header short enough to stay scannable in a narrow host.",
+        "strength": "recommended",
+        "from": {
+          "section": "anatomy",
+          "quote": "Keep the header short enough to remain scannable in a narrow host."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Allow a long title to wrap when the group name needs more than one line.",
+        "strength": "recommended",
+        "from": {
+          "section": "sizing",
+          "quote": "Allow a long title to wrap when the group name needs more than one line."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Put rows or short explanatory text in the content slot when they answer the header's promise.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Rows or short explanatory text belong in the content slot when they answer the header’s promise."
+        },
+        "target": "children"
+      },
+      {
+        "text": "Do not mix unrelated information in one section: the heading stops helping.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The heading stops helping because the open content answers several different questions."
+        },
+        "target": "children"
+      }
+    ],
+    "good": [
+      "Payment methods",
+      "Bank accounts",
+      "Savings Account · HDFC Bank"
+    ],
+    "bad": [
+      "More",
+      "Support hours, marketing preferences, and unrelated profile reminders."
+    ]
+  },
+  "states": [
+    {
+      "state": "Collapsed",
+      "when": "The default (defaultExpanded false): the heading shows and the content stays out of the initial scan.",
+      "from": {
+        "section": "states",
+        "quote": "The heading is visible while supporting content stays out of the initial scan."
+      }
+    },
+    {
+      "state": "Open",
+      "when": "expanded (or defaultExpanded) is true, after the person asks for more detail.",
+      "from": {
+        "section": "states",
+        "quote": "The content slot is visible after the person asks for more detail."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled is true: the section is unavailable until the product condition changes.",
+      "from": {
+        "section": "states",
+        "quote": "The section is unavailable until the product condition changes."
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "Supplied by the component under a pointer; not configured.",
+      "from": {
+        "section": "states",
+        "quote": "Expanded, disabled, and hover feedback come from the public component as people interact."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Name what people will find",
+      "dont": "Use a heading with no meaning",
+      "why": "People must open the section before they know whether it contains the detail they need.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name what people will find"
+      }
+    },
+    {
+      "do": "Keep the content related",
+      "dont": "Mix unrelated information",
+      "why": "The heading stops helping because the open content answers several different questions.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the content related"
+      }
+    },
+    {
+      "do": "Keep primary work visible",
+      "dont": "Hide the primary action in the body",
+      "why": "The button is unavailable until someone expands the section, so the task is harder to complete.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep primary work visible"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A section whose body answers its header, with Text in the content slot.",
+      "jsx": "<Accordion title=\"Payment methods\" modes={{ 'Color Mode': 'Light' }}>\n  <Text text=\"Review the payment methods available for this account.\" modes={{ 'Color Mode': 'Light' }} />\n</Accordion>",
+      "from": {
+        "section": "content",
+        "quote": "Use a meaningful header and let the body answer the question that header raises."
+      }
+    },
+    {
+      "purpose": "A contained, controlled section holding related rows.",
+      "jsx": "<Accordion title=\"Bank accounts\" contained expanded onExpandedChange={(expanded) => {}} modes={{ 'Color Mode': 'Light' }}>\n  <ListItem layout=\"Horizontal\" title=\"Savings Account\" supportText=\"HDFC Bank\" modes={{ 'Color Mode': 'Light' }} />\n</Accordion>",
+      "from": {
+        "section": "configuration",
+        "quote": "Use contained when the filled header should keep related supporting content together."
+      }
+    },
+    {
+      "purpose": "Supporting details in an Accordion, with the primary action outside it in the page flow.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Accordion title=\"Payment details\" modes={{ 'Color Mode': 'Light' }}>\n    <Text text=\"Paid from your JioFinance account.\" modes={{ 'Color Mode': 'Light' }} />\n  </Accordion>\n  <Button label=\"Confirm payment\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'High', AppearanceBrand: 'Primary' }} />\n</VStack>",
+      "from": {
+        "section": "doDont",
+        "quote": "Use the Accordion for supporting details while the main payment action stays in the page flow."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Accordion title",
+        "description": "The accordion header title. Default \"Accordion title\", from the component source."
+      },
+      {
+        "name": "contained",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "When `true`, the header always uses the filled background treatment (Figma Hover / Open Hover visuals). Defaults to `false` (transparent at rest, filled only while hovered or pressed). Default false, from the component source."
+      },
+      {
+        "name": "defaultExpanded",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial expanded state. Defaults to false (collapsed) Default false, from the component source."
+      },
+      {
+        "name": "expanded",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Controlled expanded state. When provided, the component becomes controlled."
+      },
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded: boolean) => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback fired when the accordion's expanded state changes."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Whether the accordion is disabled. Default false, from the component source."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Content to display when the accordion is expanded (Figma Slot: 'content')"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object passed to getVariableByName for all design tokens."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional container style overrides."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for screen readers. If not provided, uses title."
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility hint for screen readers."
+      },
+      {
+        "name": "accessibilityState",
+        "type": "AccessibilityState",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility state information."
+      },
+      {
+        "name": "webAccessibilityProps",
+        "type": "WebAccessibilityProps",
+        "required": false,
+        "source": "types",
+        "description": "Web-specific accessibility props (only used on web platform)"
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      },
+      {
+        "name": "showHeader",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "Developer-only: part of a sticky-header split, not a designer setting. Declared: When `false`, the header Pressable is omitted. Pair with a header-only Accordion (`showContent={false}`) when the host lifts the title into a sticky slot (e.g. `ScrollView` `stickyHeaderIndices`). Default true, from the component source.",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "name": "showContent",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "Developer-only: part of a sticky-header split, not a designer setting. Declared: When `false`, the expandable content slot is omitted. Use to render a header-only Accordion for sticky layouts. Default true, from the component source.",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "name": "...React.ComponentProps<typeof View>",
+        "type": "React.ComponentProps<typeof View>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Accordion States",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Open",
+          "Open Hover",
+          "Disabled"
+        ],
+        "description": "A token collection Accordion reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: Interaction states (Idle, Hover, Open, Disabled) are resolved automatically from `expanded`, `disabled`, hover, and `contained` — consumers should not pass `'Accordion States'` in `modes`.",
+        "source": "types",
+        "default": "Idle"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Content to display when the accordion is expanded (Figma Slot: 'content')",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded: boolean) => void",
+        "description": "Callback fired when the accordion's expanded state changes",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Dark mode does not restyle the Accordion: its title, icon and header background resolve to the same values in Light and Dark, so the text stays black on a dark host.",
+        "source": "evidence",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "text": "On the web the header does not expose aria-expanded, although Enter and Space toggle it.",
+        "source": "evidence",
+        "checkedOn": "2026-09-21"
+      },
+      {
+        "text": "In the React Native Web preview, opening and closing is immediate, with no transition.",
+        "source": "evidence",
+        "checkedOn": "2026-09-21"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=accordion",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1291-4846",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-accordion--docs"
+  }
+}

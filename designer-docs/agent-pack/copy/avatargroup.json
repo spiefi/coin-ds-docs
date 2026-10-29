@@ -1,0 +1,252 @@
+{
+  "slug": "avatargroup",
+  "label": "Avatar Group",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/avatargroup.guide.tsx",
+    "src/AvatarGuides.tsx"
+  ],
+  "evidence": "docs/evidence/avatar-and-avatargroup.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T08:38:19.132Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "avatar stack",
+    "facepile",
+    "people",
+    "users"
+  ],
+  "title": "Avatar Group",
+  "summary": "Show several people or identities as one compact visual cue.",
+  "corePrinciple": "Share one size across the Avatar children.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1366-15672",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-avatargroup--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Each child keeps its own face in the overlap",
+      "description": "The group layers its child Avatars in order. The last child sits in front, while a cutout keeps the next face visible.",
+      "blocks": [
+        "Shown at 2.5×",
+        "1",
+        "2",
+        "3",
+        "First child",
+        "It starts at the back of the visual order and gives the group its first face.",
+        "Middle child",
+        "It overlaps the first child and sits behind the last.",
+        "Last child",
+        "The final child is drawn in front. Child order therefore changes which face leads."
+      ],
+      "specimen": [
+        "MS",
+        "AK",
+        "LS"
+      ],
+      "anatomy": [
+        {
+          "part": "First child",
+          "note": "It starts at the back of the visual order and gives the group its first face."
+        },
+        {
+          "part": "Middle child",
+          "note": "It overlaps the first child and sits behind the last."
+        },
+        {
+          "part": "Last child",
+          "note": "The final child is drawn in front. Child order therefore changes which face leads."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Change the shared size or the child content",
+      "description": "Avatar Size belongs to the group mode. The children supply the image or monogram; there is no separate count or gap control.",
+      "blocks": [
+        "Two large Avatars",
+        "The group places each child in order and keeps one shared owner size.",
+        "Four compact Avatars",
+        "The group mode supplies one size to every child; each Avatar supplies its own image or monogram."
+      ],
+      "specimen": [
+        "MS",
+        "AK",
+        "LS",
+        "DV"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Content and loading belong to each Avatar",
+      "description": "Avatar Group does not add a selected, disabled, or loading state. A child can be loading while the others remain visible.",
+      "blocks": [
+        "All Avatars ready",
+        "The group stays a compact composition of the children it receives.",
+        "One child is loading",
+        "The loading child shows a same-size skeleton while the other Avatar children remain visible."
+      ],
+      "specimen": [
+        "MS",
+        "AK",
+        "LS"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The host needs room for every child",
+      "description": "The row grows with its child count. A narrower host does not reduce Avatar Size automatically, so select a supported size that fits.",
+      "blocks": [
+        "Wider host · 196 px",
+        "M · four children",
+        "Narrow host · 112 px",
+        "S · four children"
+      ],
+      "specimen": [
+        "MS",
+        "AK",
+        "LS",
+        "DV"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Compose the group from Avatar children",
+      "description": "AvatarGroup contains an ordered row of Avatar children. Each child supplies its own image or monogram content.",
+      "blocks": [
+        "01",
+        "Use Avatar children",
+        "The group’s content is the Avatar instances supplied inside it.",
+        "02",
+        "Choose each child’s content",
+        "Each Avatar can show its own image or monogram.",
+        "03",
+        "Order the children intentionally",
+        "The last child sits in front in the overlapping group."
+      ],
+      "specimen": [
+        "MS",
+        "AK",
+        "LS"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Show who can access a shared account",
+      "description": "A public Coin Card can wrap its title, support text, and AvatarGroup in one composition. The group itself contains only its Avatar children.",
+      "blocks": [
+        "The Card adds optional context outside the AvatarGroup component."
+      ],
+      "specimen": [
+        "Shared savings",
+        "People who can view this account",
+        "MS",
+        "AK",
+        "LS"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Respect shared size and host width",
+      "description": "AvatarGroup derives its members from child Avatars. Its owner mode can size them together, and their count determines the row width.",
+      "blocks": [
+        "Do",
+        "Set one owner size",
+        "All three children inherit M from AvatarGroup.",
+        "Don’t",
+        "3 Child mode L",
+        "3",
+        "Override a child’s size",
+        "An explicit L child mode takes precedence over the group’s M mode.",
+        "112 px host",
+        "Fit three M children",
+        "All three circles stay inside the visible 112 px host.",
+        "Overfill a fixed host",
+        "This five-child row extends past both edges, so the host clips its outer Avatars."
+      ],
+      "specimen": [
+        "MS",
+        "AK",
+        "LS",
+        "DV",
+        "RN"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Set one owner size",
+            "caption": "All three children inherit M from AvatarGroup.",
+            "specimen": "MS · AK · LS"
+          },
+          "dont": {
+            "title": "Override a child’s size",
+            "caption": "An explicit L child mode takes precedence over the group’s M mode.",
+            "specimen": "MS · AK · LS · 3 Child mode L · 3"
+          }
+        },
+        {
+          "do": {
+            "title": "Fit three M children",
+            "caption": "All three circles stay inside the visible 112 px host.",
+            "specimen": "112 px host · MS · AK · LS"
+          },
+          "dont": {
+            "title": "Overfill a fixed host",
+            "caption": "This five-child row extends past both edges, so the host clips its outer Avatars.",
+            "specimen": "112 px host · MS · AK · LS · DV · RN"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Follow the public slot and mode contract",
+      "description": "The guide uses the Coin component master, the canonical Storybook examples, and the installed public implementation.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component master and exposed properties",
+        "02",
+        "Canonical Storybook",
+        "Docs page and public example behavior",
+        "Default group",
+        "Large size",
+        "Custom gap",
+        "Checked 23 September 2026",
+        "The declared and installed jfs-components version is 0.1.60; the earlier registry check on 23 September also returned 0.1.60. A fresh registry lookup could not be confirmed during recovery because registry DNS was unavailable. Figma’s Avatar Size mode sets L/M/S/XS to 42/36/29/14 px. The public group derives its count from children and uses token-owned overlap; it exposes no count or gap choice. Storybook’s custom-gap example has no gap control. Keep child sizes aligned with the group owner.",
+        "jfs-components",
+        "0.1.60"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

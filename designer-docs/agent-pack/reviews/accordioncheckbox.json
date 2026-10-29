@@ -1,0 +1,34 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The Accordion Checkbox guide and its evidence were checked on 18–19 September 2026 on jfs-components 0.1.60 (its Sources note still says so); the installed package is 0.1.78 (mirror v0.1.78-dbe0e02). Read against the installed AccordionCheckbox.tsx (the same blob from v0.1.78 to dbe0e02) and CheckboxItem.tsx, and run on the installed build, every sentence this entry quotes still holds, but one keyboard sentence is out of date. The Sources note's “child choices do not respond to Space. This is a known package limitation.” and the evidence's “Space on a nested child did not change its checked state” are contradicted: since dbe0e02 a CheckboxItem row toggles with Space on the web (CheckboxItem.tsx lines 230–244 and 317–323), and on 29 October, in headless Chrome on the guide's own playground, Space on the focused “Savings • 0245” row inside AccordionCheckbox ticked it. The note's first clause (“In this web build, checkbox keyboard activation can also toggle expansion”) still holds, and so does the evidence's header-checkbox sentence. The entry doesn't quote the out-of-date part. Re-check the guide on 0.1.78 and publish it, then re-extract. Added by Claude Code in the overnight run agentpack-batch14, for Marcin to confirm. Guide fix #539."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/states/4",
+      "reason": "lost-context: The guide's states are \"stable configured outcomes\", and pressed feedback is something \"the runtime supplies ... during interaction\". The evidence adds that the package has no hover or pressed handler and that React Native Web provides the opacity feedback. Listing \"Pressed\" as a component state presents runtime feedback as a configured state.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The pressed feedback is AccordionCheckbox’s own, not only the runtime’s: in 0.1.78-dbe0e02 the header Pressable’s style function returns opacity 0.9 while pressed and not disabled (AccordionCheckbox.tsx lines 283–286; the file is the same blob, 34f07b0, from v0.1.78 to dbe0e02). The item keeps the guide’s framing: it is transient feedback while the header is pressed, and checked and expanded still change independently, as the States description says; it is listed beside the four configured outcomes, not as one of them. The evidence’s “the React Native Web runtime provides pressed opacity feedback” was written on 0.1.60 and describes the same opacity."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The guide says only that \"the group checkbox selects every account\" and that consumer logic makes the header a select-all control. Nothing cited says the screen \"checks the header when every row is checked\"; that reverse wiring is added.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The purpose describes the guide’s own In context code, which the reviewer sees only as rendered copy: AccountSelectionExample in src/AccordionCheckboxGuide.tsx at 09a45da sets allSelected = selected.every(Boolean) (line 196), passes checked={allSelected} to the AccordionCheckbox (line 208), and sets every row from onCheckedChange (line 210). So the header shows checked when every row is checked, and the purpose says so as the screen’s wiring, not as AccordionCheckbox behaviour."
+    },
+    {
+      "field": "/facts/gaps/0",
+      "reason": "misreads-source: The evidence records Space and Enter \"expanded the header\" on 19 September 2026. It gives no commit \"dbe0e02\", no \"Component Bug #540\" or \"#535\", and no observation that the keys also close the group. These details go beyond the evidence.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The gap rests on the evidence’s keyboard sentence (19 September, 0.1.60), which the trace check already flags as checked on 0.1.60, and on a re-run on the installed build: on 29 October, in headless Chrome on dbe0e02 with the guide’s playground, Space on the focused “Select Axis Bank” checkbox opened the group without selecting it, and Enter selected it and opened it. The header Checkbox is a role-checkbox div inside the header’s native button (AccordionCheckbox.tsx 276–297); Checkbox.tsx 238–258 has no key handler and react-native-web 0.21.2 PressResponder.js 66–71 takes Space only on buttons, which is the standalone Checkbox’s filed Component Bug #535. The flow says to list Component Bugs in the entry’s gaps, as other entries do (Checkbox names #535), so the gap names them; it names #540, filed for it in this run. The keys reach the header’s own press, which toggles expanded (AccordionCheckbox.tsx line 277 onPress={handleToggleExpanded}; lines 122–125 set next = !isExpanded), so a key that opens a closed group closes an open one; that is why the gap says “opens or closes”."
+    },
+    {
+      "field": "/facts/gaps/1",
+      "reason": "misreads-source: The evidence says disabled reaches only the header press target and header Checkbox, and that children get only modes. It never says disabled \"dims the whole component, content slot included\" or that rows \"look unavailable yet still respond\". The \"Still so on dbe0e02 (Component Bug #540)\" reference is also absent from the evidence.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The gap rests on the installed package and a run, not only the 0.1.60 evidence sentence (which the trace check flags). In 0.1.78-dbe0e02, AccordionCheckbox.tsx line 219 sets opacity 0.6 on the outer container when disabled, and that container (line 275) holds the Divider and the content slot (318–327), so the rows are dimmed; line 323 passes the children only modes, so they stay pressable; and the package’s own JSDoc for disabled (line 42) says “Disables the entire component (header press + checkbox + content).” On 29 October, in headless Chrome on dbe0e02 with the guide’s playground open and Disabled on, the header and its checkbox had aria-disabled true and tabindex −1, and a click on “Savings • 0245” still ticked it. The flow says to list a proposed Component Bug in the gaps; it names #540, filed for it in this run."
+    }
+  ]
+}
