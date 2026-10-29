@@ -1,0 +1,646 @@
+{
+  "slug": "profilecard",
+  "guideCommit": "3542b1b255de6faac8e365d34c14d6f65a716707",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/profilecard.md at 3542b1b. The guide's Sources note was checked on 20 October 2026 on the 19 October build of Biscuit's main, the build the evidence names (mirror v0.1.78-c7d3348, Biscuit's main at c7d3348), so items citing the note or the evidence carry that build. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Installed ProfileCard.tsx, UpiHandle.tsx and the profileCard tokens still match most guide sentences used here, read from source, not run (token values through the package's own resolver): the panel is navy #00065a (Premium: gold #cea15a with darker gold pills #b78d49 and divider #ad8444, and dark #1e1a14 text), with 12 px corners, 20 px padding and a 12 px gap between the header, the divider and each body row (body children sit directly in the panel), 344 wide unless width says otherwise; the avatar is 42 px, a monogram unless avatarSource is set; the badge is badgeIcon in an Icon Capsule on a white disc, and null removes it; the name is a 14 px bold ListItem title on one line ending in …; the handles are UpiHandle pills in a wrapping row, a pill with onPress is a button that scales to 0.98 while pressed, one without is text, and [] removes the row; the divider shows only with a body and showDivider; header replaces the avatar, name and handles; the card root is a View, never pressable, with no selected, disabled or loading prop; under context 10 jioPlus ListItem titles, NavArrows and the avatar's initials are white, a Divider is #191f6e, a Button gold #cea15a with a dark label, and pills and the avatar #021891. Where the guide states #354's problems, the installed source contradicts it, apparently with #354's fix (the ticket is Component Fix, In progress, and no evidence verifies it on dbe0e02): (1) enhanceOnDark paints a plain Text and a ListItem's support text in the on-dark colour (context10/text/color: white, dark in Premium), so Configuration's “plain Text and support text don’t”, the Don't “They stay dark and almost disappear.” and the Sources sentence no longer hold; (2) context 10 jioPlus and List Item Style Default are forced on the header and on every body child (cloneChildrenWithModes with forced modes; the children JSDoc now says a child's own modes cannot unset the context), so “a child’s own modes override the card’s” holds only for other collections, and Boxed no longer reaches the rows (the Don't “White boxes cover the header and rows, and the name disappears.” and the Sources Boxed sentence); (3) the badge is forced to AppearanceBrand Neutral and Emphasis Low, which resolves the glyph to #24262b, Figma's grey, and is nudged to about Figma's (25, 24), so “the QR glyph is near-black, not grey” no longer holds; (4) each handle sits in a wrapper with flexShrink 1 and minWidth 0 and UpiHandle's label is one shrinking line ending in …, so a long handle should now end in … inside the card (not run), and the Don't “It never ends in …, so the pill runs past the panel.” and the Sources sentence look out of date; (5) the 48 px header still holds: the title token is 16 px, but safeTextLineHeight raises it to 17 (14 × 1.2, rounded up). The Storybook sentence was not checked. All eight problems are still recorded as gaps with their quotes and the 20 October build, as the guide and evidence state them, since nothing verifies the fixes, and the three Don'ts are extracted as the guide writes them. Examples follow the building rules: no Color Mode (the guide sets Light on every ProfileCard, Title and VStack), no Profile Card Appearance Premium (no guide sentence says which content needs it), and no Button / Size S on the Upgrade Button (a slot child takes its look from its parent); the In context VStack's Slot gap M is left out. Avatar has no entry in this pack, and ProfileCard takes the avatar through name, monogram and avatarSource, so none is needed; the body rows are ListItems (undocumented in this pack: facts only) and a Divider, as the guide composes them. The guide's photo is a docs asset (jio-gold-logo.png); the Photo example passes a { uri } that stands for the business's own logo. Copy is the guide's own (Profile, Your account and payments, Priya Sharma, PS, priya@jio, 98765 43210, JioFinance+, Upgrade, Linked bank accounts, Jio Gold, jiogold@jio). Left out of examples (the pack allows three): the playground and its Last press readout, With a body (shown inside In context), Premium and Premium with a body, Name only, Fills its host, Long name and handle, the readouts and the Don'ts. Not recorded: style (the building rules keep style off Coin components); the modes the evidence says also change the look (Avatar Size, Icon Capsule Size, Attached Border, Slot gap, AppearanceBrand, Emphasis, Semantic Intent) or do nothing (Page type, Context, Badge Size), which its Limits keep out of the guide; the header override's details; Biscuit's handwritten ProfileCard.mdx (a profile header on a dark surface, not a light product card or a settings form), since the guide doesn't say it and that page isn't deployed, so avoidWhen holds only the guide's missing states and whole-card press; the evidence's “a child's own modes win” as a children fact, which the installed source contradicts; the unnamed avatar and badge images and dark mode (the pack's rules). No Sources line renders with a missing value. Sorting (batch 6), after the cross-check: /accessibility/1 now says only that the card itself isn't pressable; the context 10 fact keeps “white” to the avatar's initials, as the evidence does; the gaps name Component Bug #354 as the evidence does, without a board status. Second cross-check (batch 6): the QR badge part no longer says where the badge sits (the guide does not; the evidence records its position as a discrepancy), the handle onPress item says only what its anatomy sentence says, and the long-handle gap no longer adds advice (that stays in the content rule from the Do). Third cross-check (batch 6): the Avatar and Name parts are not always present (header replaces the avatar, name and handles together), so their anatomy required is false.",
+  "useWhen": [
+    {
+      "text": "Show who the user is on a dark panel: initials or a photo, a name, UPI handles, and account rows below.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Profile Card to show who the user is on a dark panel: initials or a photo, a name, UPI handles, and account rows below."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A card that needs a selected, disabled, or loading state: the Profile Card has none.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "There’s no selected, disabled, or loading state."
+      }
+    },
+    {
+      "text": "A card that should press as a whole: the card itself isn't pressable; its handles and body rows press through their own onPress.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "The monogram, or a photo from avatarSource; 42 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "monogram, or a photo from avatarSource, 42 px."
+      }
+    },
+    {
+      "part": "QR badge",
+      "holds": "badgeIcon on a white disc; badgeIcon null removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "badgeIcon on a white disc; null removes it."
+      }
+    },
+    {
+      "part": "Name",
+      "holds": "name, 14 px bold, on one line.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "name, 14 px bold, on one line."
+      }
+    },
+    {
+      "part": "UPI handles",
+      "holds": "upiHandles: a pill each; onPress makes a pill a button.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "upiHandles: a pill each; onPress makes a pill a button."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "Drawn only when there's a body; showDivider hides it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Drawn only when there’s a body; showDivider hides it."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "children: your rows, given the card's on-dark modes.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "children: your rows, given the card’s on-dark modes."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A navy panel, 12 px corners, 20 px padding, 344 px wide.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A navy panel, 12 px corners, 20 px padding, 344 px wide."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card heads the Profile screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The card heads the Profile screen."
+      }
+    },
+    {
+      "text": "Let the screen do the work: copying a handle and opening a row go through each handle's and row's onPress, and the card only lays them out.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Copying a handle and opening a row are the screen’s own work, through each handle’s and row’s onPress; the card only lays them out."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" says what the card itself does in any use: it lays out the handles and rows, and the screen's onPress handlers act. It describes the card's role, so it is read as recommended, not as a constraint."
+      }
+    },
+    {
+      "text": "The card is 344 px wide by default, as Figma draws it.",
+      "strength": "recommended",
+      "target": "width",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 344 px wide, as Figma draws it"
+      }
+    },
+    {
+      "text": "Height follows the content: 20 px of padding, and 12 px between the header, the divider, and each body row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the content: 20 px of padding, and 12 px between the header, the divider, and each body row."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "name, monogram, and upiHandles make the header.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "name, monogram, and upiHandles make the header."
+      }
+    },
+    {
+      "text": "avatarSource shows a photo in place of the initials, such as a business's logo.",
+      "strength": "recommended",
+      "target": "avatarSource",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a photo in place of the initials"
+      }
+    },
+    {
+      "text": "badgeIcon={null} removes the QR badge.",
+      "strength": "recommended",
+      "target": "badgeIcon",
+      "from": {
+        "section": "configuration",
+        "quote": "badgeIcon={null} removes the QR badge"
+      }
+    },
+    {
+      "text": "upiHandles={[]} leaves just the name.",
+      "strength": "recommended",
+      "target": "upiHandles",
+      "from": {
+        "section": "configuration",
+        "quote": "upiHandles={[]} leaves just the name."
+      }
+    },
+    {
+      "text": "children is the body, under a divider; leave it out for a header-only card.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "children is the body, under a divider; leave it out for a header-only card."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" is part of \"header-only\", which names the card with no body; it sets no limit."
+      }
+    },
+    {
+      "text": "The divider is drawn only when there's a body; showDivider={false} hides it.",
+      "strength": "recommended",
+      "target": "showDivider",
+      "value": "false",
+      "from": {
+        "section": "anatomy",
+        "quote": "Drawn only when there’s a body; showDivider hides it."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" states when the card draws its divider, in any use: with a body, unless showDivider turns it off. It describes the component, so it is read as recommended."
+      }
+    },
+    {
+      "text": "header replaces the avatar, name, and handles together.",
+      "strength": "recommended",
+      "target": "header",
+      "from": {
+        "section": "configuration",
+        "quote": "header replaces the avatar, name, and handles together."
+      }
+    },
+    {
+      "text": "Profile Card Appearance Premium turns the panel gold.",
+      "strength": "recommended",
+      "target": "Profile Card Appearance",
+      "value": "Premium",
+      "from": {
+        "section": "configuration",
+        "quote": "Profile Card Appearance Premium turns the panel gold."
+      }
+    },
+    {
+      "text": "With Premium, the body rows' titles and Buttons follow the gold.",
+      "strength": "recommended",
+      "target": "Profile Card Appearance",
+      "value": "Premium",
+      "from": {
+        "section": "configuration",
+        "quote": "The rows’ titles and Buttons follow the gold."
+      }
+    },
+    {
+      "text": "The card passes its on-dark modes to everything inside, so ListItem titles, icons, chevrons, and Buttons turn white or gold on their own; plain Text and support text don't.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "The card passes its on-dark modes to everything inside, so ListItem titles, icons, chevrons, and Buttons turn white or gold on their own; plain Text and support text don’t."
+      }
+    },
+    {
+      "text": "Keep the card's own row style: rows sit on the navy panel.",
+      "strength": "recommended",
+      "target": "List Item Style",
+      "from": {
+        "section": "doDont",
+        "quote": "Rows sit on the navy panel."
+      }
+    },
+    {
+      "text": "Do not set List Item Style Boxed: white boxes cover the header and rows, and the name disappears.",
+      "strength": "discouraged",
+      "target": "List Item Style",
+      "value": "Boxed",
+      "from": {
+        "section": "doDont",
+        "quote": "White boxes cover the header and rows, and the name disappears."
+      }
+    },
+    {
+      "text": "width takes another number, or a percentage such as '100%' to fill its host.",
+      "strength": "recommended",
+      "target": "width",
+      "value": "100%",
+      "from": {
+        "section": "sizing",
+        "quote": "width takes another number, or a percentage such as '100%' to fill its host."
+      }
+    },
+    {
+      "text": "upiHandles: a pill each; onPress makes a pill a button.",
+      "strength": "recommended",
+      "target": "upiHandles",
+      "from": {
+        "section": "anatomy",
+        "quote": "upiHandles: a pill each; onPress makes a pill a button."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Give name as the person's display name.",
+        "strength": "recommended",
+        "target": "name",
+        "from": {
+          "section": "content",
+          "quote": "name is the person’s display name, and monogram their two initials."
+        }
+      },
+      {
+        "text": "Give monogram as the person's two initials.",
+        "strength": "recommended",
+        "target": "monogram",
+        "from": {
+          "section": "content",
+          "quote": "name is the person’s display name, and monogram their two initials."
+        }
+      },
+      {
+        "text": "Set name yourself: left out, the card shows “Name”.",
+        "strength": "required",
+        "target": "name",
+        "from": {
+          "fact": "props:name"
+        }
+      },
+      {
+        "text": "Set monogram yourself unless avatarSource gives a photo: left out, the avatar shows “MS”.",
+        "strength": "required",
+        "target": "monogram",
+        "from": {
+          "fact": "props:monogram"
+        }
+      },
+      {
+        "text": "A long name ends in …, and the handles wrap onto another line.",
+        "strength": "recommended",
+        "target": "name",
+        "from": {
+          "section": "sizing",
+          "quote": "A long name ends in …, and the handles wrap onto another line."
+        }
+      },
+      {
+        "text": "Write each handle's label as the UPI ID or the phone number exactly as people would type it, such as priya@jio or 98765 43210.",
+        "strength": "recommended",
+        "target": "upiHandles",
+        "from": {
+          "section": "content",
+          "quote": "A handle’s label is the UPI ID or the phone number exactly as people would type it"
+        }
+      },
+      {
+        "text": "Use ic_copy on a handle people copy and ic_confirm on a verified number.",
+        "strength": "recommended",
+        "target": "upiHandles",
+        "from": {
+          "section": "content",
+          "quote": "use ic_copy on a handle people copy and ic_confirm on a verified number."
+        }
+      },
+      {
+        "text": "Pass upiHandles: left out, the card shows two sample handles; [] removes the row.",
+        "strength": "recommended",
+        "target": "upiHandles",
+        "from": {
+          "section": "evidence",
+          "quote": "`upiHandles` (two sample handles; `[]` removes the row)"
+        },
+        "checkedOn": "2026-10-20",
+        "checkedVersion": "0.1.78-c7d3348"
+      },
+      {
+        "text": "Keep handles short, so each fits its pill.",
+        "strength": "recommended",
+        "target": "upiHandles",
+        "from": {
+          "section": "doDont",
+          "quote": "Each fits its pill."
+        }
+      },
+      {
+        "text": "Do not use a sentence as a handle: it never ends in …, so the pill runs past the panel.",
+        "strength": "discouraged",
+        "target": "upiHandles",
+        "from": {
+          "section": "doDont",
+          "quote": "It never ends in …, so the pill runs past the panel."
+        },
+        "absolute": {
+          "word": "never",
+          "scope": "contextual",
+          "reason": "\"never\" describes what a handle too long for its pill does (the Don't's sentence-long handle) on the build the guide checked; it is about that case, not a rule for every handle."
+        }
+      },
+      {
+        "text": "Keep body rows to short titles, with one Button or a chevron each.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "Keep body rows to short titles, with one Button or a chevron each."
+        }
+      },
+      {
+        "text": "Put titles and Buttons in the body: they turn white and gold on the navy panel.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "They turn white and gold on the navy panel."
+        }
+      },
+      {
+        "text": "Do not put support text or plain Text in the body: they stay dark and almost disappear.",
+        "strength": "discouraged",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "They stay dark and almost disappear."
+        }
+      }
+    ],
+    "good": [
+      "Priya Sharma",
+      "PS",
+      "priya@jio",
+      "98765 43210",
+      "JioFinance+",
+      "Upgrade",
+      "Linked bank accounts"
+    ],
+    "bad": [
+      "Tap to copy my UPI ID priya@jio and pay me back"
+    ]
+  },
+  "states": [
+    {
+      "state": "Card",
+      "when": "Always: the card itself isn't pressable.",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable."
+      }
+    },
+    {
+      "state": "Pressable handle",
+      "when": "A handle with onPress is a button that shrinks a little while pressed, usually to copy it.",
+      "from": {
+        "section": "states",
+        "quote": "A handle with onPress is a button that shrinks a little while pressed, usually to copy it"
+      }
+    },
+    {
+      "state": "Text handle",
+      "when": "Without onPress, a handle is plain text.",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress, a handle is plain text."
+      }
+    },
+    {
+      "state": "Body rows",
+      "when": "Body rows keep their own states, such as a ListItem with onPress.",
+      "from": {
+        "section": "states",
+        "quote": "Body rows keep their own states, such as a ListItem with onPress."
+      }
+    },
+    {
+      "state": "Selected, disabled, loading",
+      "when": "Not available: there's no selected, disabled, or loading state.",
+      "from": {
+        "section": "states",
+        "quote": "There’s no selected, disabled, or loading state."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "A handle with onPress is a button; one without is plain text.",
+      "strength": "recommended",
+      "target": "upiHandles",
+      "from": {
+        "section": "states",
+        "quote": "A handle with onPress is a button that shrinks a little while pressed, usually to copy it; one without is plain text."
+      }
+    },
+    {
+      "text": "The card itself isn't pressable.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable."
+      }
+    },
+    {
+      "text": "accessibilityLabel is the card's accessibility label.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Titles and Buttons in the body",
+      "dont": "Support text or plain Text in the body",
+      "why": "They stay dark and almost disappear.",
+      "from": {
+        "section": "doDont",
+        "quote": "They turn white and gold on the navy panel."
+      }
+    },
+    {
+      "do": "Short handles",
+      "dont": "A sentence as a handle",
+      "why": "It never ends in …, so the pill runs past the panel.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each fits its pill."
+      }
+    },
+    {
+      "do": "The card’s own row style",
+      "dont": "List Item Style Boxed",
+      "why": "White boxes cover the header and rows, and the name disappears.",
+      "from": {
+        "section": "doDont",
+        "quote": "Rows sit on the navy panel."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The Profile screen, the guide's In context: the card heads the screen under its Title, with a UPI ID to copy, a verified number, and two short account rows under a divider. Copying the handle and opening a row are the screen's own work, through their onPress.",
+      "jsx": "<VStack>\n  <Title title=\"Profile\" subtitle=\"Your account and payments\" />\n  <ProfileCard\n    name=\"Priya Sharma\"\n    monogram=\"PS\"\n    upiHandles={[\n      { label: 'priya@jio', iconName: 'ic_copy', onPress: () => {} },\n      { label: '98765 43210', iconName: 'ic_confirm' },\n    ]}\n  >\n    <ListItem\n      layout=\"Horizontal\"\n      title=\"JioFinance+\"\n      showSupportText={false}\n      navArrow={false}\n      trailing={<Button label=\"Upgrade\" onPress={() => {}} />}\n    />\n    <Divider />\n    <ListItem\n      layout=\"Horizontal\"\n      title=\"Linked bank accounts\"\n      showSupportText={false}\n      onPress={() => {}}\n    />\n  </ProfileCard>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The card heads the Profile screen."
+      }
+    },
+    {
+      "purpose": "Header only: no children, so no divider and no body.",
+      "jsx": "<ProfileCard\n  name=\"Priya Sharma\"\n  monogram=\"PS\"\n  upiHandles={[\n    { label: 'priya@jio', iconName: 'ic_copy', onPress: () => {} },\n    { label: '98765 43210', iconName: 'ic_confirm' },\n  ]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "No children: no divider and no body."
+      }
+    },
+    {
+      "purpose": "A business's profile with a photo: avatarSource shows its logo in place of initials. The URI stands for the business's own logo.",
+      "jsx": "<ProfileCard\n  name=\"Jio Gold\"\n  avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  upiHandles={[{ label: 'jiogold@jio', iconName: 'ic_copy', onPress: () => {} }]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource in place of initials, here a business’s logo."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "upiHandles",
+      "description": "Each handle is { label (required), iconName (UpiHandle's default ic_scan_qr_code), showIcon (default true), onPress }; onPress makes the pill a button that scales to 0.98 while pressed. A handle has no picture.",
+      "quote": "`ProfileCardUpiHandle`: `label` (required), `iconName` (UpiHandle's default `ic_scan_qr_code`), `showIcon` (true), `onPress` (makes the pill a `button`, scale 0.98 while pressed). No picture on a handle.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "name",
+      "description": "One line ending in … (the header's ListItem title).",
+      "quote": "Name: one line with … (ListItem title).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Profile Card Appearance",
+      "description": "Premium turns the panel gold (#cea15a), with a darker gold avatar, pills and divider, and dark text.",
+      "quote": "Profile Card Appearance Premium: gold panel `#cea15a`, darker gold avatar, pills and divider, dark text.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "context 10",
+      "description": "The card gives everything inside context 10 jioPlus. Under it ListItem titles, Icons and NavArrows are white, a Divider is #191f6e, a Button is gold (#cea15a) with a dark label, the UpiHandle pills are navy (#021891), and the avatar is navy (#021891) with white initials.",
+      "quote": "Under jioPlus: ListItem titles white, Icons and NavArrows white, Divider `#191f6e`, Button gold `#cea15a` with dark label, UpiHandle navy `#021891` pills, avatar `#021891` with white initials.",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Plain Text and ListItem support text in the body stay dark on the navy panel and almost disappear, as in Figma's own sample (Component Bug #354).",
+      "from": {
+        "section": "sources",
+        "quote": "plain Text and ListItem support text stay dark on the navy panel, as in Figma’s own sample"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "A body child's own modes override the card's on-dark modes (Component Bug #354).",
+      "from": {
+        "section": "sources",
+        "quote": "a child’s own modes override the card’s"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "List Item Style Boxed breaks the card: white boxes cover the header and rows, and the name disappears (Component Bug #354).",
+      "quote": "List Item Style Boxed breaks the card (white boxes, the name disappears).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "A long UPI handle never ends in …, so its pill runs past the card (Component Bug #354).",
+      "from": {
+        "section": "sources",
+        "quote": "a long handle never ends in …, so its pill runs past the card."
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The header is 48 px tall where Figma's is 47 (Component Bug #354).",
+      "from": {
+        "section": "sources",
+        "quote": "The header is 48 px tall where Figma’s is 47"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The QR badge's glyph is near-black (#0f0d0a) where Figma's is grey (#24262b), and the badge sits at the avatar's 45° point where Figma places it at (25, 24) (Component Bug #354).",
+      "quote": "Badge glyph `#0f0d0a` on a white disc vs Figma `#24262b`; badge anchored at the 45° point (26.85) vs Figma (25, 24).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The published Storybook is older than the installed package and still shows the older generated page (Component Bug #354).",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook is older than the installed package and still shows the older generated page (all reported)."
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Figma's Profile Card has one property, the body slot; the name, handles, badge, and photo are overrides there, and Premium is a variable mode. In code they are props (name, monogram, avatarSource, badgeIcon, upiHandles), and Premium is the Profile Card Appearance mode.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Profile Card has one property, the body slot; the name, handles, badge, and photo are overrides there, and Premium is a variable mode."
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ]
+}

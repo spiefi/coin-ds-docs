@@ -1,0 +1,352 @@
+{
+  "slug": "actiontile",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/actiontile.guide.tsx, which only registers it, and the Action Tile parts of the shared src/ActionGuides.tsx: actionTileModes, ActionTileExample, QuickActionsExample, ActionableTileStateExample, ActionTilePlayground and actionTileSections; the ActionFooter and Additem parts belong to other guides) and docs/evidence/actiontile.md at cba512f. The guide's Sources note says “Checked 19 September 2026” and that the public export is jfs-components 0.1.60. The evidence names no date or build; its items carry the Sources note's date and build (an assumption: it is the check the guide cites), so every item resting on the evidence is flagged as stale. That 0.1.60 sentence is out of date and not used. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October); the package CHANGELOG names no ActionTile change after 0.1.54. Installed ActionTile.tsx and IconCapsule.tsx still match every guide and evidence sentence used here, read from source, not run: the props are label (default “Cards”, Figma's default text), icon, modes, onPress and style; the tile is a View fixed at width 168 and height 90 with the actionTile tokens (white background, radius 16, 12 px horizontal and 16 px vertical padding, 8 px gap, a 14 px label); a React element in icon is cloned with the tile's merged modes (the provider's, then the tile's own), so it receives the owner's full mode object; with no icon the tile draws a default IconCapsule (iconName ic_card); with onPress the whole tile is one pressable, without it the plain View is returned; there is no disabled or loading prop. No guide sentence is contradicted on 0.1.78, but three things read wider than the guide, from the source, not run: the cloned modes replace any modes set on the IconCapsule itself; style is spread after the fixed size, so a style patch can resize the tile (the guide says not to); the label has no line limit and nothing clips the tile, so a sentence-long label wraps in the 144 px text width and runs past the 90 px bottom edge (which backs the Don't against a sentence label). Modes: the guide sets Primary appearance with Medium emphasis on every tile (with Color Mode Light, Context Default, Page type MainPage, Semantic Intent Brand and Icon Capsule Size M) to match a Storybook reference; that is a choice for the guide's pictures, not a rule that some content needs it, so under the building rules the examples set no modes and no Color Mode, and the tiles take the package defaults (Primary, High). With the package's resolver that is a gold #cea15a capsule with a dark icon, where the guide's Medium is a pale #fde8c9 capsule with a gold icon and Figma's live Neutral, High a dark #303338 capsule with a white icon; the tile itself is the same white in all three. That mismatch is recorded as a gap. “Two actions in one place” is not applied: the guide's quick actions are peer shortcuts with one look, none leading. The In context HStack's modes are dropped, and its alignVertical flex-start too (HStack's default); wrap is kept (layout). The icon slot holds an IconCapsule with the guide's iconName (ic_cards, ic_savings, ic_payments, all in the installed icon registry); IconCapsule has no entry in this pack, and the examples use it because the guide supplies the icon that way and the package's icon doc expects one (as the BrandChip entry does with Avatar); it carries no modes, since the tile passes its own. Copy is the guide's own (Cards, Savings, Payments); press handlers are stubs. Left out of examples: the In context and state readouts (“Choose a destination.”, “Ready to open Payments.”: documentation lines, not Coin), the playground and its Color mode control, the wide and narrow hosts (documentation frames) and the Don'ts. Not recorded: style beyond the guide's no-resize rule (the building rules keep style off Coin components); the pressed opacity and the screen-reader name and role, which the guide doesn't cover and the pack's rules keep out of gaps; the evidence's Storybook story ids. Accessibility is empty: the guide says nothing about it. The Sources note renders whole: no line has a missing value. Sorting (batch 6): the cross-check found that gap 1 said more than the evidence (the package defaults, Primary with High, are read from the package's token resolver, not the evidence), so the gap now says only what the evidence records; the package-default finding is kept here and reported on Component Fix #419 (IconCapsule's default is gold where Figma is Neutral).",
+  "useWhen": [
+    {
+      "text": "A compact shortcut to one destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "A compact shortcut to one destination."
+      }
+    },
+    {
+      "text": "Offer a small set of quick actions: a group of tiles, each a shortcut to one destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Offer a small set of quick actions"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Explaining a destination in a sentence: explanatory sentences turn a shortcut into a card. A tile holds one short label.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "explanatory sentences that turn a shortcut into a card"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Icon capsule",
+      "holds": "The icon slot, an IconCapsule by default: reinforces the destination and receives the tile's full mode object.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Reinforces the destination and receives the owner’s full mode object."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label: names one destination with a short, familiar term.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names one destination with a short, familiar term."
+      }
+    },
+    {
+      "part": "Tile boundary",
+      "holds": "The fixed 168 × 90 surface and its token-driven styling, owned by ActionTile.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "ActionTile owns the fixed 168 × 90 surface and token-driven styling."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Group tiles in an HStack: the HStack owns the responsive group while each fixed tile keeps one destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A public HStack owns the responsive group while each fixed tile keeps one destination."
+      }
+    },
+    {
+      "text": "Let the surrounding layout wrap or scroll around the tiles.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Let the surrounding public layout wrap or scroll"
+      }
+    },
+    {
+      "text": "In a wide host, the tile keeps its intrinsic footprint inside the available space.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The tile keeps its intrinsic footprint inside available space."
+      }
+    },
+    {
+      "text": "In a narrow host, the host adapts around the tile; the tile itself stays 168 × 90.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The host adapts around the tile; the tile itself stays 168 × 90."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Keep the label and the icon focused on the same destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep both focused on the same destination."
+      }
+    },
+    {
+      "text": "Use an icon that matches the destination, such as a card icon for a card destination.",
+      "strength": "recommended",
+      "target": "icon",
+      "from": {
+        "section": "configuration",
+        "quote": "Use a card icon for a card destination."
+      }
+    },
+    {
+      "text": "Change both the label and its icon together.",
+      "strength": "recommended",
+      "target": "icon",
+      "from": {
+        "section": "configuration",
+        "quote": "Change both the label and its icon together."
+      }
+    },
+    {
+      "text": "Do not pair a label with another destination's icon, such as a cards icon on Savings: it makes the shortcut ambiguous.",
+      "strength": "discouraged",
+      "target": "icon",
+      "from": {
+        "section": "doDont",
+        "quote": "A cards icon makes the Savings shortcut ambiguous."
+      }
+    },
+    {
+      "text": "Keep the destination distinct from neighboring shortcuts.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep the destination distinct from neighboring shortcuts."
+      }
+    },
+    {
+      "text": "icon expects an IconCapsule or a compatible component; when it is a React element, ActionTile passes its modes to it.",
+      "strength": "recommended",
+      "target": "icon",
+      "from": {
+        "fact": "props:icon"
+      }
+    },
+    {
+      "text": "The icon capsule inherits the modes supplied to ActionTile.",
+      "strength": "recommended",
+      "target": "icon",
+      "from": {
+        "section": "anatomy",
+        "quote": "The icon capsule inherits the owner modes supplied to ActionTile."
+      }
+    },
+    {
+      "text": "Supplying onPress makes the tile actionable.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "Supplying onPress makes the tile actionable."
+      }
+    },
+    {
+      "text": "Do not invent disabled or loading states: the public API does not expose them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The public API does not expose disabled or loading states, so do not invent them."
+      }
+    },
+    {
+      "text": "ActionTile owns a fixed width and height (168 × 90); do not resize the tile with style patches.",
+      "strength": "discouraged",
+      "target": "style",
+      "from": {
+        "section": "sizing",
+        "quote": "do not resize the tile with style patches."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One icon, one short label, one destination.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One icon. One short label. One destination."
+        }
+      },
+      {
+        "text": "Short nouns usually work best for the label.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Short nouns usually work best."
+        }
+      },
+      {
+        "text": "The icon and the short label should describe the same place.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The icon and short label should describe the same place."
+        }
+      },
+      {
+        "text": "Use compact labels: Cards, Savings and Payments are easy to scan in a group.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Cards, Savings, and Payments are easy to scan in a group."
+        }
+      },
+      {
+        "text": "Give each visible tile a destination name that distinguishes it from its siblings.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Each visible tile needs a destination name that distinguishes it from its siblings."
+        }
+      },
+      {
+        "text": "Do not repeat a vague label such as More on several tiles: duplicate More tiles do not reveal where either shortcut leads.",
+        "strength": "discouraged",
+        "target": "label",
+        "from": {
+          "section": "doDont",
+          "quote": "Duplicate More tiles do not reveal where either shortcut leads."
+        }
+      },
+      {
+        "text": "Do not turn the label into a sentence such as “Open the place where you manage all your cards”: long instructions overwhelm a compact shortcut.",
+        "strength": "discouraged",
+        "target": "label",
+        "from": {
+          "section": "doDont",
+          "quote": "Long instructions overwhelm a compact shortcut."
+        }
+      }
+    ],
+    "good": [
+      "Cards",
+      "Savings",
+      "Payments"
+    ],
+    "bad": [
+      "More",
+      "Open the place where you manage all your cards"
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Without onPress: display only; the tile presents the shortcut information without activation.",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the tile presents the shortcut information without activation."
+      }
+    },
+    {
+      "state": "Actionable",
+      "when": "With onPress the whole tile activates the named destination.",
+      "from": {
+        "section": "states",
+        "quote": "With onPress the whole tile activates the named destination."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Use distinct destination names",
+      "dont": "Repeat a vague label",
+      "why": "Duplicate More tiles do not reveal where either shortcut leads.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use distinct destination names"
+      }
+    },
+    {
+      "do": "Keep the label short",
+      "dont": "Turn the label into a sentence",
+      "why": "Long instructions overwhelm a compact shortcut.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the label short"
+      }
+    },
+    {
+      "do": "Match icon and destination",
+      "dont": "Pair the label with another destination",
+      "why": "A cards icon makes the Savings shortcut ambiguous.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match icon and destination"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Quick actions, the guide's In context: an HStack wraps three actionable tiles, each with its own label and matching IconCapsule icon, each opening one destination.",
+      "jsx": "<HStack wrap>\n  <ActionTile\n    label=\"Cards\"\n    icon={<IconCapsule iconName=\"ic_cards\" />}\n    onPress={() => {}}\n  />\n  <ActionTile\n    label=\"Savings\"\n    icon={<IconCapsule iconName=\"ic_savings\" />}\n    onPress={() => {}}\n  />\n  <ActionTile\n    label=\"Payments\"\n    icon={<IconCapsule iconName=\"ic_payments\" />}\n    onPress={() => {}}\n  />\n</HStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "A public HStack owns the responsive group while each fixed tile keeps one destination."
+      }
+    },
+    {
+      "purpose": "A static, display-only tile: without onPress it presents the shortcut information without activation.",
+      "jsx": "<ActionTile\n  label=\"Cards\"\n  icon={<IconCapsule iconName=\"ic_cards\" />}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the tile presents the shortcut information without activation."
+      }
+    },
+    {
+      "purpose": "A Savings tile: the label and its icon change together, so the savings icon reinforces the Savings label.",
+      "jsx": "<ActionTile\n  label=\"Savings\"\n  icon={<IconCapsule iconName=\"ic_savings\" />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Change both the label and its icon together."
+      }
+    }
+  ],
+  "evidenceFacts": [],
+  "gaps": [
+    {
+      "text": "ActionTile has no disabled or loading state: its public API offers only an optional action (onPress).",
+      "from": {
+        "section": "states",
+        "quote": "The public API does not expose disabled or loading states"
+      },
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "text": "Figma's live Action Tile icon capsule resolves AppearanceBrand Neutral with Emphasis High, while the supplied Storybook reference selects Primary appearance with Medium emphasis; the guide follows the Storybook reference.",
+      "quote": "The live Figma icon capsule was observed resolving `Icon Capsule Size=M`, `AppearanceBrand=Neutral`, `Emphasis=High`",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

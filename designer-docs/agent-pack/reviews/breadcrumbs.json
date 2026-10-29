@@ -1,0 +1,20 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The Breadcrumbs guide and its evidence were checked in September 2026 on jfs-components 0.1.60 and say the package has no Breadcrumbs (\"the resolved package does not include Breadcrumbs\"); its previews are drawn from NavArrow and Text. The installed 0.1.78 (mirror v0.1.78-dbe0e02) exports Breadcrumbs, and the entry's facts and examples come from it. Re-extract once the guide is re-checked on 0.1.78 and published (#521). Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm."
+    },
+    {
+      "field": "/configuration/4",
+      "reason": "\"Chevrons, link treatment, and current-page state are supplied by the published component.\" says more than the installed Breadcrumbs.tsx does (read, not rendered): it adds the chevrons, but every crumb gets the same text style, so ancestors have no link colour and the current crumb is not set apart visually (it only gets aria-current on the web, selected on native). Guide fix #521. Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/facts/gaps/1",
+      "reason": "misreads-source: The evidence file never says that Breadcrumbs' Figma node exposes no properties. That sentence comes from the guide's configuration section (\"Breadcrumbs has no exposed properties in the inspected Figma source\"), not the evidence. The date 2026-09-15 is also the guide's Storybook check date; the evidence file is dated 19 September 2026.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "The gap does not cite the evidence file: its from is the guide's Configuration section (\"Breadcrumbs has no exposed properties in the inspected Figma source.\"), a gap the guide itself states, so it is dated with the guide's own check (Sources: \"Checked 15 September 2026\"). The 0.1.60 stale flag on it stays."
+    }
+  ]
+}

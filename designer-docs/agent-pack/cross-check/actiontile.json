@@ -1,0 +1,21 @@
+{
+  "slug": "actiontile",
+  "entryHash": "8c7bbf8c6d564ed645c2ccfbe3f5fb933b9e5bb9f6e2b575ba344b27c71a0350",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "checkedAt": "2026-10-29T02:48:47Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/anatomy/0",
+      "reason": "misreads-source: The phrase \"an IconCapsule by default\" implies ActionTile renders a default IconCapsule. Neither the guide nor the cited fact says that. The fact only says the slot \"Expects an IconCapsule or compatible component\", and the icon prop is optional."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The example adds a `wrap` prop to HStack, which nothing cited supports. The guide only says \"A public HStack owns the responsive group\" and, separately, \"Let the surrounding public layout wrap or scroll\"; it does not say HStack has a wrap prop."
+    }
+  ],
+  "notes": "The examples use IconCapsule `iconName` values (ic_cards, ic_savings, ic_payments) that neither the guide nor the evidence shows; check them against the package. The guide's sources section says its examples use Primary appearance with Medium emphasis modes, but none of the entry's examples pass `modes`. /anatomy/0 marks the icon capsule alwaysPresent=true while the icon prop is optional (required:false); this follows the guide's \"One icon\" principle but is worth confirming."
+}

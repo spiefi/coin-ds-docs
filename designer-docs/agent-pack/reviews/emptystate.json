@@ -1,0 +1,34 @@
+{
+  "flags": [
+    {
+      "field": "/content/rules/3",
+      "reason": "\"shows a button only when you give it a label\" is narrower than the package: the guide's Sources and the installed EmptyState.tsx (0.1.78-dbe0e02, read from source) show a button with a label or an action, and onPress alone draws a Button with an empty label. Guide fix #524. Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/configuration/6",
+      "reason": "misreads-source: The quoted evidence is the 'Custom slots' Storybook measurement (Icon Capsule Size L + Emphasis Medium, 360 × 213), dated 10 October. Nothing says it is the guide's empty-payments composition. The guide only says 'A soft brand icon when there's simply nothing to show yet' and never names Emphasis Medium.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "The guide's own Nothing yet and No results capsules use Emphasis Medium: in src/guides/emptystate.guide.tsx at b4988c5, CAP = { 'Icon Capsule Size': 'L', Emphasis: 'Medium' } is the modes of EMPTY (ic_wallet, \"No payments yet\", \"Make a payment\") and NORESULT, which the playground, the In context card and the Do specimen render. The evidence line measures that same composition (Emphasis Medium capsule with the \"Make a payment\" button, #fde8c9). The guide's text calls it the soft brand icon but never names the mode, which #524 asks the guide to do."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: It claims the guide's own Nothing yet capsule is 'ic_wallet with Emphasis Medium'. Neither the guide nor the evidence names ic_wallet or says the guide's capsule uses Emphasis Medium; the only Emphasis Medium evidence is the Custom slots story.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "ic_wallet with Emphasis Medium is the guide's own Nothing yet capsule: EMPTY in src/guides/emptystate.guide.tsx at b4988c5 is { icon: 'ic_wallet', modes: CAP, title: 'No payments yet', … button: 'Make a payment' } with CAP = Icon Capsule Size L and Emphasis Medium, and the In context card renders <ES r={EMPTY} … />. The cross-check reads only the rendered copy."
+    },
+    {
+      "field": "/states/2",
+      "reason": "misreads-source: The guide only says 'Disable the button while a retry is already running.' Nothing cited says Empty State's own button takes no disabled or that the guide's Retrying example uses buttonSlot. The evidence says the guide's `ES` 'passes buttonLabel and onPress … instead of a button slot'.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "The guide's Retrying example does use buttonSlot: line 82 of src/guides/emptystate.guide.tsx at b4988c5 is <ExampleCard title=\"Retrying\" …><ES r={FAILED} buttonSlot={<Button label=\"Try again\" disabled modes={BTN} />} /></ExampleCard>. EmptyState's props (buttonLabel, onPress, buttonSlot) have no disabled, which is why. The evidence line the cross-check quotes describes ES's default path, not this example."
+    },
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: Same unsupported claim as /states/2: 'Empty State's own button takes no disabled, so a disabled Button goes in buttonSlot, as in the guide's Retrying example.' Neither the guide nor the evidence says how the Retrying example is built or that disabled is unavailable.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "Same as /states/2: the guide's Retrying example passes buttonSlot={<Button label=\"Try again\" disabled modes={BTN} />} (src/guides/emptystate.guide.tsx line 82 at b4988c5), and EmptyState has no disabled prop of its own (its facts list buttonLabel, onPress and buttonSlot only)."
+    }
+  ]
+}

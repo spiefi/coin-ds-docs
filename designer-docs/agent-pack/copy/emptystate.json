@@ -1,0 +1,299 @@
+{
+  "slug": "emptystate",
+  "label": "Empty State",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "files": [
+    "src/guides/emptystate.guide.tsx"
+  ],
+  "evidence": "docs/evidence/emptystate.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T01:42:13.711Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "no results",
+    "nothing here",
+    "zero state",
+    "blank state",
+    "error state"
+  ],
+  "title": "Empty State",
+  "summary": "Use an Empty State when a list or screen has nothing to show, to say why and offer one next step.",
+  "corePrinciple": "Say what’s missing, then what to do next.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1828-82",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-emptystate--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An icon, a message, and one button",
+      "description": "An icon sits above a bold title and a line of description, with one button below. You pass in the icon; the button comes from a label and an action.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Icon",
+        "An Icon Capsule you pass in; its own modes set size and colour.",
+        "Title",
+        "16 px bold; says what’s missing.",
+        "Description",
+        "12 px; why it’s empty or what to do.",
+        "Button",
+        "Set with buttonLabel and onPress; without them there’s no button."
+      ],
+      "specimen": [
+        "Couldn’t load payments",
+        "Check your connection and try again.",
+        "Try again"
+      ],
+      "anatomy": [
+        {
+          "part": "Icon",
+          "note": "An Icon Capsule you pass in; its own modes set size and colour."
+        },
+        {
+          "part": "Title",
+          "note": "16 px bold; says what’s missing."
+        },
+        {
+          "part": "Description",
+          "note": "12 px; why it’s empty or what to do."
+        },
+        {
+          "part": "Button",
+          "note": "Set with buttonLabel and onPress; without them there’s no button."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "An icon and a button for the reason",
+      "description": "Pick the icon and its colour for why the area is empty, and label the button with the next step. Turn the description off when the title says enough.",
+      "blocks": [
+        "Nothing yet",
+        "A soft brand icon when there’s simply nothing to show yet.",
+        "No results",
+        "After a search or filter, say so and offer a way back.",
+        "Couldn’t load",
+        "A red error icon when loading failed; the button retries.",
+        "Without a description",
+        "Drop the description when the title says it all."
+      ],
+      "specimen": [
+        "No payments yet",
+        "Payments you make will show up here.",
+        "Make a payment",
+        "No matching payments",
+        "Try a different name or amount.",
+        "Clear search",
+        "Couldn’t load payments",
+        "Check your connection and try again.",
+        "Try again"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Nothing yet",
+          "description": "A soft brand icon when there’s simply nothing to show yet."
+        },
+        {
+          "title": "No results",
+          "description": "After a search or filter, say so and offer a way back."
+        },
+        {
+          "title": "Couldn’t load",
+          "description": "A red error icon when loading failed; the button retries."
+        },
+        {
+          "title": "Without a description",
+          "description": "Drop the description when the title says it all."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "A static message with a live button",
+      "description": "Empty State has no states of its own: the screen shows it while there’s nothing to list and replaces it when there is. Its button has the usual Button states.",
+      "blocks": [
+        "Ready",
+        "The button waits for a press.",
+        "Retrying",
+        "Disable the button while a retry is already running."
+      ],
+      "specimen": [
+        "Couldn’t load payments",
+        "Check your connection and try again.",
+        "Try again"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Ready",
+          "description": "The button waits for a press."
+        },
+        {
+          "title": "Retrying",
+          "description": "Disable the button while a retry is already running."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "As wide as its container, as tall as its content",
+      "description": "Empty State takes its width from its container and centres its text. It has 4 px of padding, 16 px between the icon, title, and description, and 24 px above the button. Figma’s version is 236 px wide.",
+      "blocks": [
+        "236 × 211",
+        "24",
+        "16"
+      ],
+      "specimen": [
+        "Couldn’t load payments",
+        "Check your connection and try again.",
+        "Try again"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "What’s missing, why, and what next",
+      "description": "Write the title as what’s missing, in a few words. Use the description for why it’s empty or what will appear, and label the button with the next step. Empty State has no copy of its own and shows a button only when you give it a label, so set all three.",
+      "blocks": [
+        "What’s missing, why, what next"
+      ],
+      "specimen": [
+        "No payments yet",
+        "Payments you make will show up here.",
+        "Make a payment"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "What’s missing, why, what next",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "An empty payments card",
+      "description": "The Recent payments card shows the empty state until there’s a payment. Make a payment adds one, and the screen swaps the empty state for the list.",
+      "blocks": [
+        "No payments yet"
+      ],
+      "specimen": [
+        "Recent payments",
+        "No payments yet",
+        "Payments you make will show up here.",
+        "Make a payment"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A clear reason and a working next step",
+      "description": "Each pair shows an empty state people can act on versus one that misleads them or does nothing.",
+      "blocks": [
+        "Do",
+        "Offer the next step",
+        "“Make a payment” names the next step, and the screen handles the press.",
+        "Don’t",
+        "Leave out the button",
+        "Without a button label there’s no button, so people have no way forward.",
+        "Match the icon to the reason",
+        "A soft icon for an empty list; red only when something failed.",
+        "Use the error icon for an empty list",
+        "A red alert makes “No payments yet” look like a failure.",
+        "Write a title",
+        "“No payments yet” is the heading and names the area for screen readers.",
+        "Leave the title out",
+        "The area has no heading or name, so screen readers can’t say what’s empty."
+      ],
+      "specimen": [
+        "No payments yet",
+        "Payments you make will show up here.",
+        "Make a payment"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Offer the next step",
+            "caption": "“Make a payment” names the next step, and the screen handles the press.",
+            "specimen": "No payments yet · Payments you make will show up here. · Make a payment"
+          },
+          "dont": {
+            "title": "Leave out the button",
+            "caption": "Without a button label there’s no button, so people have no way forward.",
+            "specimen": "No payments yet · Payments you make will show up here."
+          }
+        },
+        {
+          "do": {
+            "title": "Match the icon to the reason",
+            "caption": "A soft icon for an empty list; red only when something failed.",
+            "specimen": "No payments yet · Payments you make will show up here. · Make a payment"
+          },
+          "dont": {
+            "title": "Use the error icon for an empty list",
+            "caption": "A red alert makes “No payments yet” look like a failure.",
+            "specimen": "No payments yet · Payments you make will show up here. · Make a payment"
+          }
+        },
+        {
+          "do": {
+            "title": "Write a title",
+            "caption": "“No payments yet” is the heading and names the area for screen readers.",
+            "specimen": "No payments yet · Payments you make will show up here. · Make a payment"
+          },
+          "dont": {
+            "title": "Leave the title out",
+            "caption": "The area has no heading or name, so screen readers can’t say what’s empty.",
+            "specimen": "Payments you make will show up here. · Make a payment"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Empty State contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Without description",
+        "Custom slots",
+        "Checked 23 October 2026",
+        "Installed jfs-components is 0.1.78 (23 October build) from the team’s private package repository. Figma’s Empty state is one 236 px component with a red 81 px icon and a 32 px button. The package has no copy of its own and shows a button only when given a label or an action; passing null removes the icon or the button. Its modes reach the icon and button you pass in, and their own modes win. It has no background, so this page shows Light only. On the web a titled Empty State is a region named by its title, which is a heading. Its default icon is hidden from screen readers, but an icon you pass in is read as an unnamed image. The published Storybook predates this build.",
+        "jfs-components",
+        "0.1.78",
+        "null"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

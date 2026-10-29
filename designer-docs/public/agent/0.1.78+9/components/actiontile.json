@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 1,
+  "id": "ActionTile",
+  "slug": "actiontile",
+  "category": "action",
+  "tags": [
+    "shortcut",
+    "quick action",
+    "tile",
+    "icon tile"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T02:54:29Z",
+    "flags": [
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The Action Tile guide and its evidence were checked on 19 September 2026 on jfs-components 0.1.60, not on the installed 0.1.78 (mirror v0.1.78-dbe0e02). The installed ActionTile.tsx still matches what the entry says (read, not rendered). Re-extract once the guide is re-checked on 0.1.78 and published (#522). Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "A compact shortcut to one destination.",
+  "useWhen": [
+    {
+      "text": "A compact shortcut to one destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "A compact shortcut to one destination."
+      }
+    },
+    {
+      "text": "Offer a small set of quick actions: a group of tiles, each a shortcut to one destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Offer a small set of quick actions"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Explaining a destination in a sentence: explanatory sentences turn a shortcut into a card. A tile holds one short label.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "explanatory sentences that turn a shortcut into a card"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Icon capsule",
+      "holds": "The icon slot, an IconCapsule by default: reinforces the destination and receives the tile's full mode object.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Reinforces the destination and receives the owner’s full mode object."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label: names one destination with a short, familiar term.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names one destination with a short, familiar term."
+      }
+    },
+    {
+      "part": "Tile boundary",
+      "holds": "The fixed 168 × 90 surface and its token-driven styling, owned by ActionTile.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "ActionTile owns the fixed 168 × 90 surface and token-driven styling."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "icon",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Group tiles in an HStack: the HStack owns the responsive group while each fixed tile keeps one destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A public HStack owns the responsive group while each fixed tile keeps one destination."
+      }
+    },
+    {
+      "text": "Let the surrounding layout wrap or scroll around the tiles.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Let the surrounding public layout wrap or scroll"
+      }
+    },
+    {
+      "text": "In a wide host, the tile keeps its intrinsic footprint inside the available space.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The tile keeps its intrinsic footprint inside available space."
+      }
+    },
+    {
+      "text": "In a narrow host, the host adapts around the tile; the tile itself stays 168 × 90.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The host adapts around the tile; the tile itself stays 168 × 90."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Keep the label and the icon focused on the same destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep both focused on the same destination."
+      }
+    },
+    {
+      "text": "Use an icon that matches the destination, such as a card icon for a card destination.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use a card icon for a card destination."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "Change both the label and its icon together.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Change both the label and its icon together."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "Do not pair a label with another destination's icon, such as a cards icon on Savings: it makes the shortcut ambiguous.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A cards icon makes the Savings shortcut ambiguous."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "Keep the destination distinct from neighboring shortcuts.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep the destination distinct from neighboring shortcuts."
+      }
+    },
+    {
+      "text": "icon expects an IconCapsule or a compatible component; when it is a React element, ActionTile passes its modes to it.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "icon"
+    },
+    {
+      "text": "The icon capsule inherits the modes supplied to ActionTile.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The icon capsule inherits the owner modes supplied to ActionTile."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "Supplying onPress makes the tile actionable.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Supplying onPress makes the tile actionable."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Do not invent disabled or loading states: the public API does not expose them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The public API does not expose disabled or loading states, so do not invent them."
+      }
+    },
+    {
+      "text": "ActionTile owns a fixed width and height (168 × 90); do not resize the tile with style patches.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sizing",
+        "quote": "do not resize the tile with style patches."
+      },
+      "target": "style"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One icon, one short label, one destination.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One icon. One short label. One destination."
+        }
+      },
+      {
+        "text": "Short nouns usually work best for the label.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short nouns usually work best."
+        },
+        "target": "label"
+      },
+      {
+        "text": "The icon and the short label should describe the same place.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The icon and short label should describe the same place."
+        }
+      },
+      {
+        "text": "Use compact labels: Cards, Savings and Payments are easy to scan in a group.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Cards, Savings, and Payments are easy to scan in a group."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Give each visible tile a destination name that distinguishes it from its siblings.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Each visible tile needs a destination name that distinguishes it from its siblings."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Do not repeat a vague label such as More on several tiles: duplicate More tiles do not reveal where either shortcut leads.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Duplicate More tiles do not reveal where either shortcut leads."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Do not turn the label into a sentence such as “Open the place where you manage all your cards”: long instructions overwhelm a compact shortcut.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Long instructions overwhelm a compact shortcut."
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "Cards",
+      "Savings",
+      "Payments"
+    ],
+    "bad": [
+      "More",
+      "Open the place where you manage all your cards"
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Without onPress: display only; the tile presents the shortcut information without activation.",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the tile presents the shortcut information without activation."
+      }
+    },
+    {
+      "state": "Actionable",
+      "when": "With onPress the whole tile activates the named destination.",
+      "from": {
+        "section": "states",
+        "quote": "With onPress the whole tile activates the named destination."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Use distinct destination names",
+      "dont": "Repeat a vague label",
+      "why": "Duplicate More tiles do not reveal where either shortcut leads.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use distinct destination names"
+      }
+    },
+    {
+      "do": "Keep the label short",
+      "dont": "Turn the label into a sentence",
+      "why": "Long instructions overwhelm a compact shortcut.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the label short"
+      }
+    },
+    {
+      "do": "Match icon and destination",
+      "dont": "Pair the label with another destination",
+      "why": "A cards icon makes the Savings shortcut ambiguous.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match icon and destination"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Quick actions, the guide's In context: an HStack wraps three actionable tiles, each with its own label and matching IconCapsule icon, each opening one destination.",
+      "jsx": "<HStack wrap>\n  <ActionTile\n    label=\"Cards\"\n    icon={<IconCapsule iconName=\"ic_cards\" />}\n    onPress={() => {}}\n  />\n  <ActionTile\n    label=\"Savings\"\n    icon={<IconCapsule iconName=\"ic_savings\" />}\n    onPress={() => {}}\n  />\n  <ActionTile\n    label=\"Payments\"\n    icon={<IconCapsule iconName=\"ic_payments\" />}\n    onPress={() => {}}\n  />\n</HStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "A public HStack owns the responsive group while each fixed tile keeps one destination."
+      }
+    },
+    {
+      "purpose": "A static, display-only tile: without onPress it presents the shortcut information without activation.",
+      "jsx": "<ActionTile\n  label=\"Cards\"\n  icon={<IconCapsule iconName=\"ic_cards\" />}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the tile presents the shortcut information without activation."
+      }
+    },
+    {
+      "purpose": "A Savings tile: the label and its icon change together, so the savings icon reinforces the Savings label.",
+      "jsx": "<ActionTile\n  label=\"Savings\"\n  icon={<IconCapsule iconName=\"ic_savings\" />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Change both the label and its icon together."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Cards",
+        "description": "Label text, e.g. \"Cards\". Default \"Cards\", from the component source."
+      },
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Icon component slot. Expects an IconCapsule or compatible component. Modes will be passed to this slot if it's a valid React element."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes for design token resolution."
+      },
+      {
+        "name": "style",
+        "type": "ViewStyle",
+        "required": false,
+        "source": "types",
+        "description": "Optional container style."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback when tile is pressed."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Capsule Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "L",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection ActionTile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "icon",
+        "type": "React.ReactNode",
+        "description": "Icon component slot. Expects an IconCapsule or compatible component. Modes will be passed to this slot if it's a valid React element.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Callback when tile is pressed",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "ActionTile has no disabled or loading state: its public API offers only an optional action (onPress).",
+        "source": "evidence",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "text": "Figma's live Action Tile icon capsule resolves AppearanceBrand Neutral with Emphasis High, while the supplied Storybook reference selects Primary appearance with Medium emphasis; the guide follows the Storybook reference.",
+        "source": "evidence",
+        "checkedOn": "2026-09-19"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=actiontile",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1500-13351",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-actiontile--docs"
+  }
+}
