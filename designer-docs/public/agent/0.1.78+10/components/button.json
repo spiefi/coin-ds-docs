@@ -1,0 +1,780 @@
+{
+  "schemaVersion": 1,
+  "id": "Button",
+  "slug": "button",
+  "category": "action",
+  "tags": [
+    "CTA",
+    "call to action",
+    "primary button",
+    "secondary button",
+    "submit"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T03:24:15Z",
+    "flags": [
+      {
+        "field": "/configuration/3",
+        "reason": "The source says \"only\", but the line is a short card caption under the Glass example; it is unclear whether it is a hard limit or advice, and the guide does not define a meaningful backdrop. Read as recommended, not hardened into a constraint.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use Button when one clear action moves someone forward, confirms a choice, or completes a task.",
+  "useWhen": [
+    {
+      "text": "One clear action moves someone forward, confirms a choice, or completes a task.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Button when one clear action moves someone forward, confirms a choice, or completes a task."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Avoid loading as a substitute for transaction progress; it is for while required content is being prepared.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Use loading while required content is being prepared, not as a substitute for transaction progress."
+      },
+      "target": "loading"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Container",
+      "holds": "Holds the action and resolves its visual treatment.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Holds the action and resolves its visual treatment."
+      }
+    },
+    {
+      "part": "Start slot",
+      "holds": "Optional leading node: an icon that clarifies the action.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional. Use for an icon that clarifies the action."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "The label: names the outcome in one to three words.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Required. Name the outcome in one to three words."
+      }
+    },
+    {
+      "part": "End icon",
+      "holds": "Optional icon after the label, for direction or continuation.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional. Use when direction or continuation matters."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "renderContent",
+      "accepts": [
+        "((styles: StyleProp<TextStyle>) => React.ReactNode)"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "leading",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "trailing",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the action where the decision happens, and let surrounding content explain the choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use surrounding content to explain the choice. Let the button stay concise."
+      }
+    },
+    {
+      "text": "In a wide container, keep the action close to the content it completes.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Keep the action close to the content it completes."
+      }
+    },
+    {
+      "text": "Make one action the strongest; competing actions should not share equal emphasis.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Two dominant actions make the choice harder to read."
+      }
+    },
+    {
+      "text": "Let container width resolve the layout: the same action can fill a narrow container's width. There is no separate desktop or mobile Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Container width resolves the layout. Designers choose the label, hierarchy, and size—not a separate “desktop” or “mobile” Button."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use type default for most actions; it hugs its label or fills its container when the layout asks it to.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The standard solid action. It hugs its label or fills its container when the layout asks it to."
+      },
+      "target": "type",
+      "value": "default"
+    },
+    {
+      "text": "Use type fixed for aligned, bounded actions: it keeps long content within the system width limit.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keeps long content within the system width limit. It remains responsive rather than using a hand-set pixel width."
+      },
+      "target": "type",
+      "value": "fixed"
+    },
+    {
+      "text": "Do not use type fixed for a full-width action: fixed is bounded by the system and will not fill. Use type default for a footer action that fills its container.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Fixed is bounded by the system and will not behave like Fill."
+      },
+      "target": "type",
+      "value": "fixed"
+    },
+    {
+      "text": "Use type glass only over a meaningful backdrop such as rich media or a coloured surface.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use only over a meaningful backdrop"
+      },
+      "target": "type",
+      "value": "glass"
+    },
+    {
+      "text": "Do not place type glass on a plain, low-contrast surface: it loses its purpose and can become hard to read.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The treatment loses its purpose and can become hard to read."
+      },
+      "target": "type",
+      "value": "glass"
+    },
+    {
+      "text": "Appearance identifies the family; Emphasis sets how loudly the action speaks within it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Appearance identifies the family. Emphasis decides how loudly the action speaks within that family."
+      },
+      "target": "Emphasis"
+    },
+    {
+      "text": "Reserve Semantic Intent System (AppearanceSystem positive, warning or negative) for an outcome with clear positive, warning or negative meaning.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Reserve these appearances for an outcome with clear positive, warning, or negative meaning."
+      },
+      "target": "Semantic Intent",
+      "value": "System"
+    },
+    {
+      "text": "Button / Size M: the action leads a screen, sheet or key step.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The action leads a screen, sheet, or key step."
+      },
+      "target": "Button / Size",
+      "value": "M"
+    },
+    {
+      "text": "Button / Size S: the action sits inside a card or compact group.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The action sits inside a card or compact group."
+      },
+      "target": "Button / Size",
+      "value": "S"
+    },
+    {
+      "text": "Button / Size XS: space is dense and the surrounding touch area stays usable.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Space is dense and the surrounding touch area stays usable."
+      },
+      "target": "Button / Size",
+      "value": "XS"
+    },
+    {
+      "text": "Most actions need at most one of the start slot and end icon, and many need neither.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Most actions need one at most, and many need neither."
+      }
+    },
+    {
+      "text": "Give disabled a clear condition; hover and pressed happen automatically and are not configured.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Hover and pressed happen automatically. Disabled should have a clear condition."
+      },
+      "target": "disabled"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make the action clear before choosing its appearance; the label should explain what happens next.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Make the action clear before choosing its appearance. The label should explain what happens next."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Lead with a verb, such as “Save details”, “Transfer money” or “View statement”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use clear actions such as “Save details”, “Transfer money”, or “View statement”."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Aim for one to three words. Put the explanation beside the button, not inside it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Aim for one to three words. Put explanation beside the button, not inside it."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Add an icon only when it improves recognition, direction, or the action's meaning.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Add one only when it improves recognition, direction, or the action’s meaning."
+        },
+        "target": "icon"
+      },
+      {
+        "text": "Be specific: prefer “Pay ₹500” or “Download report” over a vague “OK” when the outcome can be named.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Prefer “Pay ₹500” or “Download report” over a vague “OK” when the outcome can be named."
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "Save details",
+      "Transfer money",
+      "Pay ₹1,250",
+      "Confirm payment"
+    ],
+    "bad": [
+      "Click here to transfer your money now"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "Ready for action.",
+      "from": {
+        "section": "states",
+        "quote": "Ready for action."
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "Appears automatically under a pointer; not configured.",
+      "from": {
+        "section": "states",
+        "quote": "Appears automatically under a pointer."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "Appears while the action is held; not configured.",
+      "from": {
+        "section": "states",
+        "quote": "Appears while the action is held."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled is true; unavailable until a condition is met.",
+      "from": {
+        "section": "states",
+        "quote": "Unavailable until a condition is met."
+      }
+    },
+    {
+      "state": "Loading",
+      "when": "loading is true while required content is being prepared; a shape-preserving skeleton holds the action's place.",
+      "from": {
+        "section": "states",
+        "quote": "A shape-preserving skeleton holds the action’s place."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Write a short, verb-led label",
+      "dont": "Put the explanation inside the button",
+      "why": "Long labels are slower to scan and can truncate.",
+      "from": {
+        "section": "doDont",
+        "quote": "Write a short, verb-led label"
+      }
+    },
+    {
+      "do": "Make one action strongest",
+      "dont": "Give competing actions equal emphasis",
+      "why": "Two dominant actions make the choice harder to read.",
+      "from": {
+        "section": "doDont",
+        "quote": "Make one action strongest"
+      }
+    },
+    {
+      "do": "Use Default when a footer action fills the container",
+      "dont": "Use Fixed as a substitute for a full-width action",
+      "why": "Fixed is bounded by the system and will not behave like Fill.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Default when a footer action fills the container"
+      }
+    },
+    {
+      "do": "Use Glass over a visible backdrop",
+      "dont": "Place Glass on a plain, low-contrast surface",
+      "why": "The treatment loses its purpose and can become hard to read.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Glass over a visible backdrop"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A primary action that leads a step, filling its container's width.",
+      "jsx": "<Button\n  label=\"Pay ₹1,250\"\n  onPress={() => {}}\n  style={{ width: '100%' }}\n  modes={{ 'Color Mode': 'Light', 'Button / Size': 'M', Emphasis: 'High', 'Semantic Intent': 'Brand', AppearanceBrand: 'Primary' }}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Default · M · full available width"
+      }
+    },
+    {
+      "purpose": "One strongest action beside a quieter one.",
+      "jsx": "<HStack modes={{ 'Color Mode': 'Light' }}>\n  <Button label=\"Back\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'Low', AppearanceBrand: 'Neutral' }} />\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'High', AppearanceBrand: 'Primary' }} />\n</HStack>",
+      "from": {
+        "section": "doDont",
+        "quote": "Make one action strongest"
+      }
+    },
+    {
+      "purpose": "A positive system action with clear meaning, in a card.",
+      "jsx": "<Button label=\"Confirm\" onPress={() => {}} modes={{ 'Color Mode': 'Light', 'Button / Size': 'S', 'Semantic Intent': 'System', AppearanceSystem: 'positive' }} />",
+      "from": {
+        "section": "configuration",
+        "quote": "Reserve these appearances for an outcome with clear positive, warning, or negative meaning."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Button",
+        "description": "Label text to display when no children are provided. Default \"Button\", from the component source."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional custom content to render inside the button. When provided, this is treated as a full-content override and `label`/`labelStyle` are ignored."
+      },
+      {
+        "name": "renderContent",
+        "type": "(styles: StyleProp<TextStyle>) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional render prop for taking over the inner label/content while still reusing the token-driven text styles. When provided, this takes precedence over `children`. The `styles` argument is the merged text style (base token styles + `labelStyle`). Example: ```tsx <Button renderContent={(styles) => ( <CustomText style={styles}>Pay now</CustomText> )} /> ```."
+      },
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional leading accessory (e.g., icon)"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional trailing accessory (e.g., icon)"
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Name of the icon to display on the right side of the button. Takes precedence over `trailing` if both are provided."
+      },
+      {
+        "name": "type",
+        "type": "ButtonType",
+        "required": false,
+        "source": "types",
+        "values": [
+          "default",
+          "glass",
+          "fixed"
+        ],
+        "default": "default",
+        "description": "Visual/layout type matching the Figma `Type` property. Defaults to `'default'`. `'glass'` also activates when `modes['Button type'] === 'glass'`. Default \"default\", from the component source."
+      },
+      {
+        "name": "glassOverlayColor",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Glass-only override for the translucent overlay color painted over the live blur. Defaults to the resolved `button/background` token under `Button type=glass`. Ignored for non-glass types."
+      },
+      {
+        "name": "glassIntensity",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Glass-only override for blur intensity on the 0–100 scale. Defaults to the `blur/minimal` token. Ignored for non-glass types."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration passed to the token resolver (e.g., {\"Button / Size\": \"M\"})"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback triggered when the button is pressed."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "When true, the button cannot be pressed. Default false, from the component source."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the button container."
+      },
+      {
+        "name": "labelStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the label text."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for screen readers. If not provided, uses label or children text."
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility hint for screen readers."
+      },
+      {
+        "name": "accessibilityState",
+        "type": "AccessibilityState",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility state information Performance notes: - The pressed visual (background/border swap) is applied through the Pressable `style` callback, NOT a mirrored React state. This avoids the flicker that scrolling parents previously caused: when a ScrollView cancels a touch the host view simply reverts its style without React rendering. On iOS we additionally use `unstable_pressDelay` so the pressed visual is never even applied during a scroll-cancelled touch. - Hover state is only mirrored into React state on web (where hover events fire). On native the setter call is gated out so the component never re-renders due to hover. - All design-token reads are folded into a single `useMemo` keyed on `(modes, disabled)`. - The component is wrapped in `React.memo`. Callers that want to take advantage of this should pass stable `modes` (the default `EMPTY_MODES` is already stable) and stable callback props. /."
+      },
+      {
+        "name": "webAccessibilityProps",
+        "type": "WebAccessibilityProps",
+        "required": false,
+        "source": "types",
+        "description": "Web-specific accessibility props (only used on web platform)"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Explicit per-instance loading override. When `true`, the button renders as a pill-shaped skeleton of the same size; when `false`, the surrounding `<SkeletonGroup>` is ignored. Defaults to inheriting from the group."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      },
+      {
+        "name": "...SafePressableProps",
+        "type": "SafePressableProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection Button reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Optional custom content to render inside the button. When provided, this is treated as a full-content override and `label`/`labelStyle` are ignored.",
+        "source": "types"
+      },
+      {
+        "name": "renderContent",
+        "type": "(styles: StyleProp<TextStyle>) => React.ReactNode",
+        "description": "Optional render prop for taking over the inner label/content while still reusing the token-driven text styles. When provided, this takes precedence over `children`. The `styles` argument is the merged text style (base token styles + `labelStyle`). Example: ```tsx <Button renderContent={(styles) => ( <CustomText style={styles}>Pay now</CustomText> )} /> ```",
+        "source": "types"
+      },
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "description": "Optional leading accessory (e.g., icon)",
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "description": "Optional trailing accessory (e.g., icon)",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Callback triggered when the button is pressed",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=button",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3574-181",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-button--docs"
+  }
+}

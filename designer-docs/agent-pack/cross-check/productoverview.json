@@ -1,0 +1,21 @@
+{
+  "slug": "productoverview",
+  "entryHash": "61a9dbd55e939c5c9636f22ec33f3e9925c1f37a1f8cd93b07b4d23010716291",
+  "guideCommit": "6d52ca836c3834529cfc4ea2059d423846771061",
+  "checkedAt": "2026-10-29T03:19:07Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/11",
+      "reason": "misreads-source: The guide says \"disableTruncation affects only the stats\" and \"The name and description wrap\" by default. The evidence also says neither the name nor the description truncates and that the mdx's two-line claim is wrong. The item repeats the stale type comment, which says the name is one line and the description at most two, and claims disableTruncation wraps them. That contradicts /configuration/10 and the evidence's Limits."
+    },
+    {
+      "field": "/anatomy/3",
+      "reason": "lost-context: The anatomy row reads \"description, 14 px, centred; it renders white on white today.\" The item drops the white-on-white clause, so it implies a readable description. The evidence's Limits say not to imply \"that the description is readable today\"."
+    }
+  ],
+  "notes": "/facts/props/10, cited by /configuration/11, comes from the package type comments, which the evidence shows are wrong (Component Bug #355: disableTruncation scope and mdx claims). Consider overriding or annotating that fact rather than surfacing it. Nothing else in the entry mentions the white-on-white description, so a known-issue note may be worth adding."
+}

@@ -1,0 +1,895 @@
+{
+  "schemaVersion": 1,
+  "id": "ExpandableCheckbox",
+  "slug": "expandablecheckbox",
+  "category": "input",
+  "tags": [
+    "consent",
+    "terms checkbox",
+    "read more",
+    "agreement"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T03:24:15Z",
+    "flags": []
+  },
+  "summary": "Use an Expandable Checkbox for one consent whose text is too long for a line, such as agreeing to share KYC details.",
+  "useWhen": [
+    {
+      "text": "One consent whose text is too long for a line, such as agreeing to share KYC details.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Expandable Checkbox for one consent whose text is too long for a line, such as agreeing to share KYC details."
+      }
+    },
+    {
+      "text": "A long consent: one collapsed line keeps the screen calm, and Read more shows the rest.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "One line keeps the screen calm; Read more shows the rest."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A short option: Read more would open the same words. Use a Checkbox Item.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Read more opens the same words. Use a Checkbox Item."
+      },
+      "useInstead": "CheckboxItem"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Checkbox",
+      "holds": "The box: ticking it gives consent; pressing the label or the row ticks it too.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Ticking it gives consent; the label and row tick it too."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label, the consent phrase, cut to one line with an ellipsis when long.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The consent phrase, cut to one line with an ellipsis when long."
+      }
+    },
+    {
+      "part": "Terms link",
+      "holds": "Optional (linkLabel): opens the document; pressing it doesn't tick the box.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Opens the document; pressing it doesn’t tick the box."
+      }
+    },
+    {
+      "part": "Read more",
+      "holds": "The toggle at the end of the row: shows the full text and never ticks the box.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows the full text; it never ticks the box."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The row fills its container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The row fills its container."
+      }
+    },
+    {
+      "text": "Idle, the row is 24 px tall (the guide measures “I agree” with its Terms link), with Read more hugging the end 8 px after the checkbox item.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Idle it is 24 px tall, with Read more hugging the end 8 px after the checkbox item."
+      }
+    },
+    {
+      "text": "Open, Read less sits 8 px below the text, and text taller than 450 px scrolls inside the row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Open, Read less sits 8 px below the text, and text taller than 450 px scrolls inside the row."
+      }
+    },
+    {
+      "text": "Open, the sentence wraps inside the row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "an open sentence wraps inside the row"
+      }
+    },
+    {
+      "text": "In narrow rows, “I agree” with its Terms link stops fitting one line below about 295 px: the link wraps under “I agree” and the row grows to 38 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Below about 295 px, the link wraps under “I agree” and the row grows to 38 px."
+      }
+    },
+    {
+      "text": "One row per agreement.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "One row per agreement."
+      }
+    },
+    {
+      "text": "The screen keeps each row's checked state (checked with onValueChange); on the guide's account-opening screen, it enables Open account only after the required consent is ticked.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps each row’s checked state and enables Open account only after the required consent"
+      },
+      "target": "checked"
+    },
+    {
+      "text": "Each row opens and closes on its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "each row opens and closes on its own."
+      },
+      "target": "expanded"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Checked and Open are separate: ticking the box doesn't open the text, and Read more doesn't tick the box.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Ticking the box doesn’t open the text, and Read more doesn’t tick the box."
+      }
+    },
+    {
+      "text": "When Idle, the label shows one line by default; show two (collapsedLines 2) when the first line alone doesn't make sense.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "When Idle, the label shows one line by default; show two when the first line alone doesn’t make sense."
+      },
+      "target": "collapsedLines",
+      "value": "2"
+    },
+    {
+      "text": "A long consent shows one line and an ellipsis when Idle, and the link moves to its own line.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "One line and an ellipsis; the link moves to its own line."
+      },
+      "target": "label"
+    },
+    {
+      "text": "Pair linkLabel with onLinkPress: the row leaves opening the document to the screen.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/2"
+      },
+      "target": "onLinkPress"
+    },
+    {
+      "text": "Set disabled to dim the row and stop the box changing; Read more still opens the text, so people can read what they agreed to.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Disabled dims the row and stops the box changing, but Read more still opens the text so people can read what they agreed to."
+      },
+      "target": "disabled",
+      "value": "true"
+    },
+    {
+      "text": "children replaces the label and the link: when children is given, label and linkLabel are ignored, and the row's modes reach the children.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "children"
+    },
+    {
+      "text": "disableTruncation true turns off the Idle clamp: no ellipsis, and collapsedLines is ignored, so the label wraps in full.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/14"
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    },
+    {
+      "text": "The row forces its toggle Button to Button / Size XS, AppearanceBrand Secondary and Emphasis Low.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The toggle Button's size, appearance, and emphasis are forced (XS, Secondary, Low)."
+      }
+    },
+    {
+      "text": "Figma and the package both set the label in regular weight.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma and the package both set the label in regular weight."
+      },
+      "target": "Weight"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Ticking gives consent; Read more only shows the words.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Ticking gives consent; Read more only shows the words."
+        }
+      },
+      {
+        "text": "Write the consent as the label and name the document in the link.",
+        "strength": "recommended",
+        "from": {
+          "section": "configuration",
+          "quote": "Write the consent as the label and name the document in the link."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Start the label with the consent, in sentence case without a full stop.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Start the label with the consent, in sentence case without a full stop."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Name the document in the link.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name the document in the link."
+        },
+        "target": "linkLabel"
+      },
+      {
+        "text": "Rename the toggles only in pairs (readMoreLabel with readLessLabel), and keep them short, such as “Show terms” and “Hide terms”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Rename the toggles only in pairs, and keep them short, such as “Show terms” and “Hide terms”."
+        },
+        "target": "readMoreLabel"
+      },
+      {
+        "text": "Name the toggle Read more: people know it opens the text.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "People know it opens the text."
+        },
+        "target": "readMoreLabel"
+      },
+      {
+        "text": "Do not put the document on the toggle: “Terms & Conditions” on the button only opens the row, and squeezes the label.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Terms & Conditions” on the button only opens the row, and squeezes the label."
+        },
+        "target": "readMoreLabel"
+      },
+      {
+        "text": "Give each agreement its own row: people can accept one without the other.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "People can accept one without the other."
+        }
+      },
+      {
+        "text": "Do not merge agreements into one row: one tick accepts them all (all three, in the guide's example).",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "One tick accepts all three."
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.",
+      "Terms",
+      "I agree",
+      "Terms & Conditions",
+      "I agree to share my KYC details",
+      "KYC terms",
+      "Read more",
+      "Read less",
+      "Show terms",
+      "Hide terms"
+    ],
+    "bad": [
+      "Email me offers",
+      "I agree to share my KYC details, get offers on WhatsApp, and receive marketing calls"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "The default (checked and expanded false): unticked, one line, Read more.",
+      "from": {
+        "section": "states",
+        "quote": "The default: unticked, one line, Read more."
+      }
+    },
+    {
+      "state": "Checked",
+      "when": "checked (or defaultChecked) true: a purple box records consent; the text stays collapsed.",
+      "from": {
+        "section": "states",
+        "quote": "A purple box records consent; the text stays collapsed."
+      }
+    },
+    {
+      "state": "Open",
+      "when": "expanded (or defaultExpanded) true: the text opens above Read less, which moves to the right.",
+      "from": {
+        "section": "states",
+        "quote": "The text opens above Read less, which moves to the right."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled true: dimmed; it can't be ticked or unticked, but Read more still opens the text.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed; it can’t be ticked or unticked, but Read more still opens the text."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the row is one checkbox that announces whether it is ticked, Read more announces whether the text is open, and Enter or Space ticks or unticks the box once.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the row is one checkbox that announces whether it is ticked, Read more announces whether the text is open, and Enter or Space ticks or unticks the box once."
+      }
+    },
+    {
+      "text": "The Terms link opens with the keyboard.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The Terms link opens with the keyboard"
+      },
+      "target": "onLinkPress"
+    },
+    {
+      "text": "One checkbox Tab stop per row; Tab goes from the box to the link, then to Read more.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "One checkbox Tab stop per row; Tab goes box → link → Read more."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the checkbox; without it, the row is named from its label.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/18"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Collapse long consent",
+      "dont": "Use it for a short option",
+      "why": "Read more opens the same words. Use a Checkbox Item.",
+      "from": {
+        "section": "doDont",
+        "quote": "Collapse long consent"
+      }
+    },
+    {
+      "do": "Name the toggle Read more",
+      "dont": "Put the document on the toggle",
+      "why": "“Terms & Conditions” on the button only opens the row, and squeezes the label.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the toggle Read more"
+      }
+    },
+    {
+      "do": "Give each agreement its own row",
+      "dont": "Merge agreements",
+      "why": "One tick accepts all three.",
+      "from": {
+        "section": "doDont",
+        "quote": "Give each agreement its own row"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The required KYC consent before opening an account: the screen keeps the row's checked state and enables Open account only once the consent is ticked (shown unticked, so the Button is disabled).",
+      "jsx": "<VStack>\n  <ExpandableCheckbox\n    label=\"I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.\"\n    linkLabel=\"Terms\"\n    onLinkPress={() => {}}\n    checked={false}\n    onValueChange={() => {}}\n  />\n  <Button label=\"Open account\" disabled onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps each row’s checked state and enables Open account only after the required consent"
+      }
+    },
+    {
+      "purpose": "A long consent that shows two lines before Read more (collapsedLines 2), for when the first line alone doesn't make sense.",
+      "jsx": "<ExpandableCheckbox\n  label=\"I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.\"\n  linkLabel=\"Terms\"\n  onLinkPress={() => {}}\n  collapsedLines={2}\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "show two when the first line alone doesn’t make sense."
+      }
+    },
+    {
+      "purpose": "Toggles renamed as a short pair, “Show terms” and “Hide terms”, on the long KYC consent.",
+      "jsx": "<ExpandableCheckbox\n  label=\"I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.\"\n  linkLabel=\"Terms\"\n  onLinkPress={() => {}}\n  readMoreLabel=\"Show terms\"\n  readLessLabel=\"Hide terms\"\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Rename the toggles only in pairs, and keep them short, such as “Show terms” and “Hide terms”."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "",
+        "description": "Primary label rendered next to the checkbox (Figma `Text` instance). Ignored when {@link children} is provided. Default \"\", from the component source."
+      },
+      {
+        "name": "linkLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Optional underlined link rendered after {@link label} (Figma `Link` instance, e.g. \"Terms & Conditions\"). Ignored when {@link children} is provided."
+      },
+      {
+        "name": "onLinkPress",
+        "type": "(event: GestureResponderEvent) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Enter on the Terms link calls onLinkPress once and doesn't tick the box. Declared: Press handler for {@link linkLabel}. Navigation is left to the consumer.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Children wrap but are not clamped when Idle. Declared: Full label-slot override matching the Figma Checkbox Item `slot`. When provided, {@link label} / {@link linkLabel} are ignored and `modes` are cascaded into the slot children. Prefer this for fully custom label compositions.",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Whether the checkbox is checked (controlled)."
+      },
+      {
+        "name": "defaultChecked",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial checked state (uncontrolled). Default false, from the component source."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(checked: boolean) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Space and Enter each tick or untick the box with one onValueChange per press, controlled or not, open or closed; the Terms link and Read more / Read less never tick it. Declared: Callback fired when the checked state changes.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "expanded",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Whether the row is expanded to reveal the full label (controlled)."
+      },
+      {
+        "name": "defaultExpanded",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial expanded state (uncontrolled). Defaults to `false` (Idle). Default false, from the component source."
+      },
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded: boolean) => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback fired when the expanded state changes."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "The row is exposed as disabled and can't be ticked, but Read more stays enabled and opens the text. Declared: Dims the row and blocks the checkbox and terms link. The disclosure toggle still opens so the consent can be read. Default false, from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "readMoreLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Read more",
+        "description": "A long toggle label squeezes the checkbox item: a 236 px button leaves the item 84 px and stacks the label and link. Declared: Label for the toggle button shown when the row is collapsed. Default \"Read more\", from the component source.",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "readLessLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Read less",
+        "description": "Label for the toggle button shown when the row is expanded. Default \"Read less\", from the component source."
+      },
+      {
+        "name": "collapsedLines",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 1,
+        "description": "Clamps the label only: the link is outside the clamp, so a long label puts the link on a second line (the Idle row is then 38 px tall). Declared: Number of lines to show when collapsed. Defaults to `1`. Default 1, from the component source.",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Wraps the label in full when Idle. Declared: When `true`, disables truncation of the collapsed label: the trailing ellipsis (`…`) is never shown and the `collapsedLines` clamp is ignored, so the label wraps fully even when horizontal space is tight. Default false, from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override outer container styles."
+      },
+      {
+        "name": "labelStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override styles applied to the composed {@link label} `Text`. No-op when {@link children} is provided."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the checkbox. Falls back to `label`."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "The toggle Button is forced to Secondary; the row's modes don't change it. Declared: A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "The toggle Button is forced to XS; the row's modes don't change it. Declared: A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "M",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "contentInset/Left",
+        "type": "mode collection",
+        "values": [
+          "Mode 1",
+          "S",
+          "M",
+          "L"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Mode 1"
+      },
+      {
+        "name": "contentInset/Right",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "S",
+          "M",
+          "L"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "The toggle Button is forced to Low; the row's modes don't change it. Declared: A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "High",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "Reaches the label and link. Declared: A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Neutral",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "Reaches the label and link. Declared: A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Medium",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "Reaches the label and link; left unset, the label is regular weight (400), as in Figma. Declared: A token collection ExpandableCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Medium",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Full label-slot override matching the Figma Checkbox Item `slot`. When provided, {@link label} / {@link linkLabel} are ignored and `modes` are cascaded into the slot children. Prefer this for fully custom label compositions.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onLinkPress",
+        "type": "(event: GestureResponderEvent) => void",
+        "description": "Press handler for {@link linkLabel}. Navigation is left to the consumer.",
+        "source": "types"
+      },
+      {
+        "name": "onValueChange",
+        "type": "(checked: boolean) => void",
+        "description": "Callback fired when the checked state changes.",
+        "source": "types"
+      },
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded: boolean) => void",
+        "description": "Callback fired when the expanded state changes.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma's Expandable Checkbox has only two states, Idle and Open: checked, disabled, the number of collapsed lines and the toggle labels exist only in the package.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "Still different from Figma: the label's line height is 17 in code (16 in Figma), and Read more is 84.9 px wide (81 in Figma).",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=expandablecheckbox",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4514-5767",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-expandablecheckbox--docs"
+  }
+}

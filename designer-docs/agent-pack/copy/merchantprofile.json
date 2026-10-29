@@ -1,0 +1,295 @@
+{
+  "slug": "merchantprofile",
+  "label": "Merchant Profile",
+  "guideCommit": "4c690580b413720a7f723487ff3c84dabb4c14ec",
+  "files": [
+    "src/guides/merchantprofile.guide.tsx"
+  ],
+  "evidence": "docs/evidence/merchantprofile.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:08:50.185Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "merchant header",
+    "payee",
+    "business profile",
+    "UPI merchant",
+    "shop header"
+  ],
+  "title": "Merchant Profile",
+  "summary": "Use a Merchant Profile at the top of a payment to show who is being paid: the merchant’s logo, registered name, and UPI ID.",
+  "corePrinciple": "Who you’re paying, before how much.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1516-1103",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-merchantprofile--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A logo over two lines",
+      "description": "The avatar sits on top, then the merchant’s name and their UPI ID, each 12 px apart and centred.",
+      "blocks": [
+        "12",
+        "1",
+        "2",
+        "3",
+        "Avatar",
+        "avatarProps: the merchant’s logo, or initials with style Monogram.",
+        "Name",
+        "title: the registered name, 16 px Bold; it wraps.",
+        "UPI ID",
+        "subtitle, 12 px under the name; it wraps too.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Jio Gold",
+        "UPI ID: jiogold@jio"
+      ],
+      "anatomy": [
+        {
+          "part": "Avatar",
+          "note": "avatarProps: the merchant’s logo, or initials with style Monogram."
+        },
+        {
+          "part": "Name",
+          "note": "title: the registered name, 16 px Bold; it wraps."
+        },
+        {
+          "part": "UPI ID",
+          "note": "subtitle, 12 px under the name; it wraps too."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "The avatar and two lines",
+      "description": "avatarProps goes to the Avatar: an imageSource for the merchant’s logo, or style Monogram with their initials. Avatar Size sets the avatar, 42 px at L; no mode changes the text. Leave title or subtitle out and it shows sample text, so hide the subtitle with an empty one.",
+      "blocks": [
+        "Logo",
+        "imageSource: the merchant’s own logo.",
+        "Initials",
+        "style Monogram with two letters.",
+        "Avatar Size M",
+        "A 36 px avatar; S is 29 px.",
+        "No subtitle",
+        "An empty subtitle hides the line."
+      ],
+      "specimen": [
+        "Jio Gold",
+        "UPI ID: jiogold@jio",
+        "AP",
+        "Amazon Pay",
+        "UPI ID: amazonpay@apl"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Logo",
+          "description": "imageSource: the merchant’s own logo."
+        },
+        {
+          "title": "Initials",
+          "description": "style Monogram with two letters."
+        },
+        {
+          "title": "Avatar Size M",
+          "description": "A 36 px avatar; S is 29 px."
+        },
+        {
+          "title": "No subtitle",
+          "description": "An empty subtitle hides the line."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Wrapped, never cut",
+      "description": "The profile has no states: it doesn’t press. In a narrow column both lines wrap and stay centred, and neither ends in an ellipsis, though Figma cuts a long UPI ID. Both examples sit in a 240 px column.",
+      "blocks": [
+        "Long name",
+        "The name wraps onto three lines.",
+        "Long UPI ID",
+        "The UPI ID wraps too."
+      ],
+      "specimen": [
+        "HB",
+        "HDFC Bank Limited Corporate Banking Services India",
+        "UPI ID: hdfccorp@hdfcbank",
+        "SW",
+        "Swiggy",
+        "UPI ID: swiggy.instamart.payments@axisbank"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Long name",
+          "description": "The name wraps onto three lines."
+        },
+        {
+          "title": "Long UPI ID",
+          "description": "The UPI ID wraps too."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Centred in its column",
+      "description": "The profile has no width of its own: it fills its column, keeps 16 px clear at each side, and centres its lines; Figma draws it 360 px wide. With a one-line name it’s 102 px tall: a 42 px avatar, 12 px, a 20 px name, 12 px, and a 16 px UPI ID. Figma’s name lines are 18 px.",
+      "blocks": [
+        "328 × 102",
+        "12"
+      ],
+      "specimen": [
+        "Jio Gold",
+        "UPI ID: jiogold@jio"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The registered name, then the UPI ID",
+      "description": "Write title as the merchant’s registered name, the one their bank holds, so people know who they’re paying. Start subtitle with UPI ID: and give the ID they’re paying, so they can check it.",
+      "blocks": [
+        "Registered name",
+        "The company’s full name.",
+        "Labelled ID",
+        "“UPI ID:” before the ID people pay."
+      ],
+      "specimen": [
+        "UI",
+        "Uber India Systems Private Limited",
+        "UPI ID: uberindia@ybl",
+        "Jio Gold",
+        "UPI ID: jiogold@jio"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Registered name",
+          "description": "The company’s full name."
+        },
+        {
+          "title": "Labelled ID",
+          "description": "“UPI ID:” before the ID people pay."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Before people pay",
+      "description": "A payment screen opens with the merchant, so people know who they’re paying before they enter the amount. The screen lays out the rest and sends the payment.",
+      "blocks": [
+        "Paying Jio Gold, UPI ID jiogold@jio"
+      ],
+      "specimen": [
+        "Jio Gold",
+        "UPI ID: jiogold@jio",
+        "₹",
+        "1,200",
+        "Add note",
+        "Pay ₹1,200"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "The right merchant, nothing borrowed",
+      "description": "Each pair shows a profile people can trust next to one that shows someone else’s details.",
+      "blocks": [
+        "Do",
+        "A logo or initials",
+        "Pass the merchant’s logo, or their initials.",
+        "Don’t",
+        "No avatarProps",
+        "The Avatar falls back to a stranger’s photo.",
+        "An empty subtitle to hide it",
+        "subtitle=\"\" leaves just the name.",
+        "Leaving subtitle out",
+        "It shows the sample UPI ID, uberindia@ybl."
+      ],
+      "specimen": [
+        "AP",
+        "Amazon Pay",
+        "UPI ID: amazonpay@apl",
+        "Jio Gold",
+        "UPI ID: uberindia@ybl"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "A logo or initials",
+            "caption": "Pass the merchant’s logo, or their initials.",
+            "specimen": "AP · Amazon Pay · UPI ID: amazonpay@apl"
+          },
+          "dont": {
+            "title": "No avatarProps",
+            "caption": "The Avatar falls back to a stranger’s photo.",
+            "specimen": "Amazon Pay · UPI ID: amazonpay@apl"
+          }
+        },
+        {
+          "do": {
+            "title": "An empty subtitle to hide it",
+            "caption": "subtitle=\"\" leaves just the name.",
+            "specimen": "Jio Gold"
+          },
+          "dont": {
+            "title": "Leaving subtitle out",
+            "caption": "It shows the sample UPI ID, uberindia@ybl.",
+            "specimen": "Jio Gold · UPI ID: uberindia@ybl"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Merchant Profile contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Short name",
+        "Long name",
+        "Without subtitle",
+        "Multiple profiles",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Merchant Profile is one component, 360 × 118, with Title and Subtitle text properties and a nested Avatar showing the merchant’s logo. The package takes title, subtitle, and avatarProps: a left-out line shows sample text, and the Avatar shows a stock photo until you pass a logo or initials. The name’s lines are 20 px, not 18, and a long UPI ID wraps where Figma cuts it. accessibilityLabel does nothing, and the whole profile is a heading (reported).",
+        "jfs-components",
+        "0.1.78",
+        "Title",
+        "Subtitle",
+        "title",
+        "subtitle",
+        "avatarProps",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

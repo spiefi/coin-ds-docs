@@ -1,0 +1,471 @@
+{
+  "slug": "valuebackmetric",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch7, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from src/guides/valuebackmetric.guide.tsx and docs/evidence/valuebackmetric.md at cba512f (“publish the 5 October Coin build's component fixes”). The guide's Sources note was checked on 8 October 2026 on the 5 October build, which the evidence's 636f3f5 check names (mirror v0.1.78-636f3f5, Biscuit's main at 636f3f5, checked 8 October), so items citing the note or that check carry that build. The evidence's first check (1 October 2026, jfs-components 0.1.77) is out of date where its 636f3f5 section says #184 is fixed: Enter on Earn, Earn nested inside the pressable card, text that does not wrap. None of the 0.1.77 lines is used: the fixed bugs are superseded, the 1 October measurements (136 × 84, header 78 × 18) add nothing the guide's Sizing does not say, and its Storybook-docs lines are left out (below). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). ValueBackMetric.tsx is byte-identical at v0.1.78-636f3f5 and v0.1.78-dbe0e02 (fetched at both tags; GitHub's compare of the two tags is truncated at 300 files). Of its imports, Icon.tsx and react-utils.ts are unchanged; web-platform-utils.ts adds an optional activationKeys option to useKeyboardNavigation whose default is still Enter and Space, and ValueBackMetric calls it without options; Text.tsx adds only a visible flag on its loading skeleton. So #184's fix still holds on the installed build, read from source, not run: the call to action is a Pressable with the link role whose key handler calls onLinkPress on Enter and Space; with onPress and a call to action, the root View holds a Pressable button around the header, value and caption, and the call to action sits beside it; the root has maxWidth 100%, minWidth 0 and alignSelf stretch, and each text flexShrink 1. Installed ValueBackMetric.tsx and its tokens (resolved with the package's own resolver) match every guide sentence used here: minHeight 82; padding 0; value 16 px / 500, title 12 px / 500, caption 12 px / 400 grey #777777; value, caption and the call to action render only when given; the header row always renders (its icon unless icon is null, its title unless title is empty); title defaults to JioPoints and icon to ic_rupee_coin, which is in the icon registry, and the registry has no JioPoints mark; the call to action is the shared Text with Text Appearance Secondary and Text Sizes Small seeded (caller modes win), purple #5d00b5 at 12 px, not Link; AppearanceBrand changes only icon/color (gold #ad8444 Primary, purple #5d00b5 Secondary, grey #545961 Neutral, blue #026b9a Tertiary in Light), while the title, value, caption and call-to-action colours are the same under all four. One guide sentence reads wider than the source: Anatomy's “It has no surface or padding of its own.” The root paints valueBackMetric/background/color, which resolves to white #ffffff (ValueBackMetric.tsx lines 161–162 and 252); it has no radius or border. So only the padding part is used (from Sizing); the surface part is not encoded and is raised for a guide fix. Also read from source, not run: with onPress and a linkLabel but no onLinkPress, the label is plain Text beside the card's button, so pressing it does nothing; the guide always pairs linkLabel with onLinkPress (its Metric helper adds a stub), and the configuration item pairing them rests on In context. The evidence's one open item (without onPress the joined label sits on a role-less div) still holds: the static root is a View with accessible, accessibilityRole text and the joined label, and react-native-web 0.21.2 maps the text role to no role; it is a screen-reader-name issue, so per the pack's rules it is not a gap and not recorded. The guide states no other accessibility rule; accessibility holds only the Sources note's Enter and Space line. In context: on dbe0e02 Card adds AppearanceBrand Neutral by default (its Card.tsx at 636f3f5 has no default mode) and passes its modes down through VStack and HStack to the cards, so in the guide's In context composition, and in this entry's first example, the header icons resolve grey #545961, not gold #ad8444. No guide sentence covers this, so it is not a rule here; the example keeps the guide's composition, and the finding is raised for the guide fix. Examples follow the building rules: the guide sets Color Mode Light on every Value Back Metric (its Metric helper) and on the In context Card, VStack, HStack and Text; all are dropped, and no other modes are set (the Icon colour card's AppearanceBrand Secondary is a look, which no rule says the content needs). Kept: HStack's justifyHorizontal space-around and wrap (layout, the guide's own). Copy and data are the guide's own (Your rewards; JioPoints, 1,240, Earn 10 points with UPI, Earn; Cashback, ₹120, Credited monthly, View); press handlers are stubs; no example passes an icon or image (the guide never does). Left out of examples (three at most): the Full, Without caption, Icon colour, Static and Content cards (their copy is in content good), the status readout (“Nothing opened yet”, documentation chrome), the playground and the Don'ts. Not recorded: style, titleStyle, valueStyle and captionStyle (the building rules keep style off Coin components); accessibilityLabel and its joined default (the guide doesn't cover it); the link slot beyond one fact item (the guide never uses it). Left out from the evidence's 0.1.77 Storybook-docs lines: “use MetricData for a generic stat and MoneyValue for an amount” (MetricData is not a public export on dbe0e02: src/components/MetricData exists, index.ts does not export it, so it cannot be a useInstead; the guide's own Don't covers the account balance) and “Do not invent a warning variant with AppearanceSystem” (the building rules already keep modes at their defaults). The package's own JSDoc example still uses value “Value” and caption “Earn 10 point with UPI”, the placeholder copy the guide's Don't rejects. Read from source, not run, and not in the guide or evidence: the static root is accessible, which on native groups its children into one element, so the call to action inside a static card may not be reachable on its own by a native screen reader; not recorded. Dark mode is not recorded (the background and the title and value colours resolve the same in Dark), per the pack's rules. Gaps are empty: #184 is fixed and verified on 636f3f5, its code is unchanged on dbe0e02, and the evidence's remaining item is a screen-reader name. The Sources blocks that end “jfs-components”, “0.1.78”, “ic_rupee_coin” are the note's code elements; the paragraph itself renders whole, so no value is missing. Sorting (batch 7): the cross-check found that a placement item (in a row the card hugs its longest line; in a column it may fill the column) dropped the evidence’s caveat: it was read from source and “Not measured on the guide.” It is removed. The link-slot rule now says only what its fact says; onLinkPress is covered by the In context rule and its own event fact.",
+  "useWhen": [
+    {
+      "text": "Use a Value Back Metric to show a rewards balance, such as JioPoints or cashback, with how to earn more and one next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Value Back Metric to show a rewards balance, such as JioPoints or cashback, with how to earn more and one next step."
+      }
+    },
+    {
+      "text": "Rewards programmes: JioPoints and cashback are earn-and-redeem programmes.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "JioPoints and cashback are earn-and-redeem programmes."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "An account balance, such as a savings balance: a savings balance is not a rewards programme.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A savings balance is not a rewards programme."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Header",
+      "holds": "The programme's icon (icon, default ic_rupee_coin) and name (title, default JioPoints); always shown.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Programme icon and name; always shown."
+      }
+    },
+    {
+      "part": "Value",
+      "holds": "value: the amount, in the largest type. Hidden when left out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The amount, in the largest type."
+      }
+    },
+    {
+      "part": "Caption",
+      "holds": "caption: one short line on how to earn or when it's credited. Hidden when left out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One short line on how to earn or when it’s credited."
+      }
+    },
+    {
+      "part": "Call to action",
+      "holds": "linkLabel with onLinkPress: one purple verb, such as Earn. Hidden when left out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One purple verb, such as Earn."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place one programme per card, side by side, with a distinct verb on each.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Place one programme per card, side by side, with a distinct verb on each."
+      }
+    },
+    {
+      "text": "The card has no padding and is at least 82 px tall.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card has no padding and is at least 82 px tall."
+      }
+    },
+    {
+      "text": "The card is no wider than its column: in a narrow column its text wraps instead of overflowing.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It never grows wider than its column: in a narrow column the text wraps instead of overflowing"
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "contextual",
+        "reason": "\"never\" describes how the card sizes itself inside its column (installed source: the root's maxWidth is 100% and each text shrinks); it is behaviour to rely on, not an instruction to follow."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Full: the balance, how to earn, and the next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Balance, how to earn, and the next step."
+      }
+    },
+    {
+      "text": "Add the value, caption and call to action as the card needs them; each disappears when left out. The header shows either way.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Add the value, caption, and call to action as the card needs them; each disappears when left out."
+      }
+    },
+    {
+      "text": "Leave out the call to action (linkLabel) when the card is informational and the next step lives elsewhere on the screen.",
+      "strength": "recommended",
+      "target": "linkLabel",
+      "from": {
+        "section": "configuration",
+        "quote": "Informational; the next step lives elsewhere on the screen."
+      }
+    },
+    {
+      "text": "Leave out the caption when the amount speaks for itself.",
+      "strength": "recommended",
+      "target": "caption",
+      "from": {
+        "section": "configuration",
+        "quote": "When the amount speaks for itself."
+      }
+    },
+    {
+      "text": "AppearanceBrand (the icon colour) retints only the header icon; the amount and Earn keep their colours.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "Retints only the icon; the amount and Earn keep their colours."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" says what the icon colour reaches (the icon, not the amount or the call to action); it describes the mode's effect and sets no limit on when to use it."
+      }
+    },
+    {
+      "text": "The default icon is ic_rupee_coin, because the JioPoints mark is not in the icon set.",
+      "strength": "recommended",
+      "target": "icon",
+      "from": {
+        "section": "sources",
+        "quote": "The package uses ic_rupee_coin as the default icon because the JioPoints mark is not in the icon set."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "icon takes an icon name from the registry, drawn in the icon colour, or a node such as an Icon or Image, which gets the card's modes.",
+      "strength": "recommended",
+      "target": "icon",
+      "from": {
+        "fact": "props:icon"
+      }
+    },
+    {
+      "text": "title defaults to JioPoints: set it to the programme's name, or the card reads JioPoints.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "fact": "props:title"
+      }
+    },
+    {
+      "text": "The call to action is purple text, not a Link, so it has no underline.",
+      "strength": "recommended",
+      "target": "linkLabel",
+      "from": {
+        "section": "sources",
+        "quote": "The call to action is purple text, not a Link, so it has no underline."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Pair linkLabel with onLinkPress: the screen opens the programme when a call to action is pressed.",
+      "strength": "recommended",
+      "target": "onLinkPress",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the programme when a call to action is pressed."
+      }
+    },
+    {
+      "text": "Content in the link slot renders instead of linkLabel.",
+      "strength": "recommended",
+      "target": "link",
+      "from": {
+        "fact": "slots:link"
+      }
+    },
+    {
+      "text": "Add a press action to the card (onPress) when it should open the programme; Earn keeps its own action.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "Add a press action to the card when it should open the programme; Earn keeps its own action."
+      }
+    },
+    {
+      "text": "In a pressable card the call to action sits beside the card's button, not inside it, so each press runs only its own action.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "sources",
+        "quote": "in a pressable card the call to action sits beside the card’s button, not inside it, so each press runs only its own action."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" describes how the card's press and the call to action's press stay apart in a pressable card; it is the component's behaviour, not a constraint on the designer."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "disabled turns off the card's press when onPress is set.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "fact": "props:disabled"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name the programme, show the amount, offer one verb.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Name the programme, show the amount, offer one verb."
+        }
+      },
+      {
+        "text": "Use the programme name as the title.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Use the programme name as the title"
+        }
+      },
+      {
+        "text": "Put the countable amount in the value.",
+        "strength": "recommended",
+        "target": "value",
+        "from": {
+          "section": "content",
+          "quote": "put the countable amount in the value"
+        }
+      },
+      {
+        "text": "Keep the caption to one short sentence: how to earn or when it's credited.",
+        "strength": "recommended",
+        "target": "caption",
+        "from": {
+          "section": "content",
+          "quote": "keep the caption to one short sentence"
+        }
+      },
+      {
+        "text": "Make the call to action one verb in sentence case, such as Earn, View, or Claim.",
+        "strength": "recommended",
+        "target": "linkLabel",
+        "from": {
+          "section": "content",
+          "quote": "make the call to action one verb in sentence case, such as Earn, View, or Claim"
+        }
+      },
+      {
+        "text": "When cards sit side by side, give each a distinct verb.",
+        "strength": "recommended",
+        "target": "linkLabel",
+        "from": {
+          "section": "inContext",
+          "quote": "with a distinct verb on each"
+        }
+      },
+      {
+        "text": "Keep lines short: in a narrow column the text wraps, but short lines still read best.",
+        "strength": "recommended",
+        "from": {
+          "section": "sizing",
+          "quote": "but short lines still read best"
+        }
+      },
+      {
+        "text": "Name the programme and show an amount, so people can tell what the number is for.",
+        "strength": "recommended",
+        "target": "value",
+        "from": {
+          "section": "doDont",
+          "quote": "People can tell what the number is for."
+        }
+      },
+      {
+        "text": "Don't keep the Figma placeholder “Value” as the value: it is not product copy.",
+        "strength": "discouraged",
+        "target": "value",
+        "from": {
+          "section": "doDont",
+          "quote": "“Value” is the Figma placeholder, not product copy."
+        }
+      },
+      {
+        "text": "Use one verb: Earn says what happens next.",
+        "strength": "recommended",
+        "target": "linkLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "Earn says what happens next."
+        }
+      },
+      {
+        "text": "Don't write a vague call to action such as “Click here”: it says nothing about what happens.",
+        "strength": "discouraged",
+        "target": "linkLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "“Click here” says nothing about what happens."
+        }
+      }
+    ],
+    "good": [
+      "JioPoints",
+      "1,240",
+      "Earn 10 points with UPI",
+      "Earn",
+      "Cashback",
+      "₹120",
+      "Credited monthly",
+      "View",
+      "Claim"
+    ],
+    "bad": [
+      "Value",
+      "Click here"
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "By default (no onPress) only the call to action responds to a press: Earn, with onLinkPress.",
+      "from": {
+        "section": "states",
+        "quote": "By default only the call to action responds."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress, the card opens the programme; Earn still runs its own action (onLinkPress).",
+      "from": {
+        "section": "states",
+        "quote": "The whole card opens the programme; Earn still runs its own action."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web, Enter and Space activate the call to action.",
+      "strength": "recommended",
+      "target": "onLinkPress",
+      "from": {
+        "section": "sources",
+        "quote": "On the web, Enter and Space activate the call to action"
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Name the programme and show an amount",
+      "dont": "Keep the placeholder",
+      "why": "“Value” is the Figma placeholder, not product copy.",
+      "from": {
+        "section": "doDont",
+        "quote": "People can tell what the number is for."
+      }
+    },
+    {
+      "do": "Use one verb",
+      "dont": "Write a vague call to action",
+      "why": "“Click here” says nothing about what happens.",
+      "from": {
+        "section": "doDont",
+        "quote": "Earn says what happens next."
+      }
+    },
+    {
+      "do": "Use it for rewards",
+      "dont": "Use it for an account balance",
+      "why": "A savings balance is not a rewards programme.",
+      "from": {
+        "section": "doDont",
+        "quote": "JioPoints and cashback are earn-and-redeem programmes."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Rewards on the home screen, the guide's In context: one programme per card, side by side, with a distinct verb on each (Earn, View); the screen opens the programme when a call to action is pressed (onLinkPress).",
+      "jsx": "<Card>\n  <VStack>\n    <Text>Your rewards</Text>\n    <HStack justifyHorizontal=\"space-around\" wrap>\n      <ValueBackMetric\n        title=\"JioPoints\"\n        value=\"1,240\"\n        caption=\"Earn 10 points with UPI\"\n        linkLabel=\"Earn\"\n        onLinkPress={() => {}}\n      />\n      <ValueBackMetric\n        title=\"Cashback\"\n        value=\"₹120\"\n        caption=\"Credited monthly\"\n        linkLabel=\"View\"\n        onLinkPress={() => {}}\n      />\n    </HStack>\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "Place one programme per card, side by side, with a distinct verb on each. The screen opens the programme when a call to action is pressed."
+      }
+    },
+    {
+      "purpose": "Pressable: onPress makes the card open the programme, and Earn still runs its own action (onLinkPress).",
+      "jsx": "<ValueBackMetric\n  title=\"JioPoints\"\n  value=\"1,240\"\n  caption=\"Earn 10 points with UPI\"\n  linkLabel=\"Earn\"\n  onLinkPress={() => {}}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "The whole card opens the programme; Earn still runs its own action."
+      }
+    },
+    {
+      "purpose": "Without call to action: an informational card, when the next step lives elsewhere on the screen.",
+      "jsx": "<ValueBackMetric\n  title=\"JioPoints\"\n  value=\"1,240\"\n  caption=\"Earn 10 points with UPI\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Informational; the next step lives elsewhere on the screen."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "events",
+      "name": "onLinkPress",
+      "description": "On the web, Enter and Space on the call to action call onLinkPress, as a click does (#184, fixed on 636f3f5).",
+      "quote": "Enter (and Space) on Earn calls `onLinkPress`.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "events",
+      "name": "onPress",
+      "description": "With onPress the card is a button and the call to action is a sibling link beside it, not inside it; each click calls only its own handler.",
+      "quote": "With `onPress`, the card is a button and Earn is a sibling link, not inside it; each click calls only its own handler.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "caption",
+      "description": "In a 120 px column the caption wraps and nothing overflows.",
+      "quote": "In a 120 px column the caption wraps and nothing overflows.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": []
+}

@@ -1,0 +1,449 @@
+{
+  "schemaVersion": 1,
+  "id": "TransactionDetails",
+  "slug": "transactiondetails",
+  "category": "content",
+  "tags": [
+    "receipt",
+    "payment details",
+    "transaction info",
+    "label and value",
+    "key value list"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T03:24:15Z",
+    "flags": []
+  },
+  "summary": "Use Transaction Details to list the facts of one payment as label and value pairs: its ID, the accounts, and how it was paid.",
+  "useWhen": [
+    {
+      "text": "List the facts of one payment as label and value pairs: its ID, the accounts, and how it was paid.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Transaction Details to list the facts of one payment as label and value pairs: its ID, the accounts, and how it was paid."
+      }
+    },
+    {
+      "text": "The receipt behind a payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The receipt behind a payment"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Items people should press, select, copy, collapse or page through: the list has no states, and its items are static text.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The list has no states: its items don’t press, select, copy, collapse, or page."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "label, 14 px Medium in near-black; it names the fact.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "label, 14 px Medium in near-black; it names the fact."
+      }
+    },
+    {
+      "part": "Value",
+      "holds": "value, the same size in a softer grey, 4 px under its label.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "value, the same size in a softer grey, 4 px under its label."
+      }
+    },
+    {
+      "part": "Item",
+      "holds": "TransactionDetails.Item: one label and its value.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "TransactionDetails.Item: one label and its value."
+      }
+    },
+    {
+      "part": "List",
+      "holds": "TransactionDetails: stacks its items 16 px apart, with no padding.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "TransactionDetails: stacks its items 16 px apart, with no padding."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The details sit on the screen a payment opens, under its amount and outcome.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The details sit on the screen a payment opens, under its amount and outcome."
+      }
+    },
+    {
+      "text": "The screen adds the heading and the action; the list holds only the facts.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds the heading and the action; the list only holds the facts"
+      }
+    },
+    {
+      "text": "The list has no surface, divider or icon: the screen around it provides those.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "There’s no surface, divider, or icon: the screen around it provides those."
+      }
+    },
+    {
+      "text": "To let people copy an ID or share the receipt, put a button on the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "To let people copy an ID or share the receipt, put a button on the screen."
+      }
+    },
+    {
+      "text": "The list has no width of its own: it fills its column, and each item is as wide as its text.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The list has no width of its own: it fills its column, and each item is as wide as its text."
+      }
+    },
+    {
+      "text": "A long value wraps under its label; nothing is cut.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A long value wraps under its label; nothing is cut."
+      }
+    },
+    {
+      "text": "Items sit 16 px apart, and a label sits 4 px above its value, each on a 17 px line.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Items sit 16 px apart, and a label sits 4 px above its value, each on a 17 px line."
+      }
+    },
+    {
+      "text": "In a flex row the list keeps its natural width and doesn't shrink.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "In a flex row the list keeps its natural width (doesn't shrink)."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The list has nothing to set: no variants, and no mode changes it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The list has nothing to set: no variants, and no mode changes it."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "You choose the items and their order: one TransactionDetails.Item each, with a label and a value.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "You choose the items and their order, one TransactionDetails.Item each, with a label and a value."
+      },
+      "target": "children"
+    },
+    {
+      "text": "A single fact is still a list of one: one TransactionDetails.Item in a TransactionDetails.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "A single fact is still a list of one."
+      },
+      "target": "children"
+    },
+    {
+      "text": "An item's label defaults to the word Label and its value to the word Value.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`TransactionDetails.Item`: `label` (default 'Label'), `value` (default 'Value')"
+      },
+      "target": "TransactionDetails.Item"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name the fact, then give it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Name the fact, then give it."
+        }
+      },
+      {
+        "text": "Put the reference people quote first, then who paid whom, then how.",
+        "strength": "recommended",
+        "from": {
+          "section": "configuration",
+          "quote": "Put the reference people quote first, then who paid whom, then how."
+        }
+      },
+      {
+        "text": "Write each label as a field name, such as UPI transaction ID, From, To, or Payment method.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write each label as a field name, such as UPI transaction ID, From, To, or Payment method."
+        }
+      },
+      {
+        "text": "Keep labels to short names people scan for.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short names people scan for."
+        }
+      },
+      {
+        "text": "Write the value as the data itself, never a sentence.",
+        "strength": "required",
+        "from": {
+          "section": "content",
+          "quote": "Write the value as the data itself, never a sentence"
+        }
+      },
+      {
+        "text": "Mask account numbers to their last four digits.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "mask account numbers to their last four digits"
+        }
+      },
+      {
+        "text": "Do not repeat the value in the label.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "The label shouldn’t repeat the value."
+        }
+      },
+      {
+        "text": "Do not put the ID in both places: the label repeats the number.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The label repeats the number."
+        }
+      },
+      {
+        "text": "One fact per item.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "One fact per item."
+        }
+      },
+      {
+        "text": "Do not write a sentence as a value: people have to read it to find the fact.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "People have to read it to find the fact."
+        }
+      }
+    ],
+    "good": [
+      "UPI transaction ID",
+      "101674916166",
+      "From",
+      "JioFinance ··1234",
+      "To",
+      "Rahul Verma · rahul@okjio",
+      "Payment method",
+      "UPI",
+      "Payment details"
+    ],
+    "bad": [
+      "UPI transaction ID 101674916166",
+      "You paid with UPI from your JioFinance account ending 1234."
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Always: the list has no states, and its items don't press, select, copy, collapse, or page.",
+      "from": {
+        "section": "states",
+        "quote": "The list has no states: its items don’t press, select, copy, collapse, or page."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Name the list for screen readers with accessibilityLabel; the guide's receipt screen names it “Payment details”.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "its accessibilityLabel, Payment details, names it for screen readers."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web the list is named by its accessibilityLabel, and each item is read once as its label and value, unless the item's own accessibilityLabel replaces them; phone screen readers read the items too.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web it’s a list named by its accessibilityLabel, and each item is read once as its label and value, unless the item’s own accessibilityLabel replaces them; phone screen readers read the items too."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Name, then the fact",
+      "dont": "The ID in both places",
+      "why": "The label repeats the number.",
+      "from": {
+        "section": "doDont",
+        "quote": "UPI transaction ID is the label; the number is the value."
+      }
+    },
+    {
+      "do": "Data in the value",
+      "dont": "A sentence as a value",
+      "why": "People have to read it to find the fact.",
+      "from": {
+        "section": "doDont",
+        "quote": "One fact per item."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The receipt a payment opens: the screen puts the amount and outcome above in a Title and its action, Share receipt, below; the list holds the facts and is named “Payment details” for screen readers.",
+      "jsx": "<VStack justifyVertical=\"space-between\" style={{ flex: 1, padding: 16 }}>\n  <VStack>\n    <Title title=\"Paid ₹1,200\" subtitle=\"To Rahul Verma · 21 Oct 2026, 4:15 pm\" />\n    <TransactionDetails accessibilityLabel=\"Payment details\">\n      <TransactionDetails.Item label=\"UPI transaction ID\" value=\"101674916166\" />\n      <TransactionDetails.Item label=\"From\" value=\"JioFinance ··1234\" />\n      <TransactionDetails.Item label=\"To\" value=\"Rahul Verma · rahul@okjio\" />\n      <TransactionDetails.Item label=\"Payment method\" value=\"UPI\" />\n    </TransactionDetails>\n  </VStack>\n  <Button label=\"Share receipt\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The details sit on the screen a payment opens, under its amount and outcome."
+      }
+    },
+    {
+      "purpose": "A bank transfer: the reference first, then both accounts masked to their last four digits, then how and when.",
+      "jsx": "<TransactionDetails accessibilityLabel=\"Transfer details\">\n  <TransactionDetails.Item label=\"Transfer ID\" value=\"TXN202610210001\" />\n  <TransactionDetails.Item label=\"From account\" value=\"Savings ··1234\" />\n  <TransactionDetails.Item label=\"To account\" value=\"Current ··5678\" />\n  <TransactionDetails.Item label=\"Transfer type\" value=\"IMPS\" />\n  <TransactionDetails.Item label=\"Date and time\" value=\"21 Oct 2026, 10:30 am\" />\n</TransactionDetails>",
+      "from": {
+        "section": "configuration",
+        "quote": "Put the reference people quote first, then who paid whom, then how."
+      }
+    },
+    {
+      "purpose": "A single fact, still a list of one: the item stays inside a TransactionDetails.",
+      "jsx": "<TransactionDetails accessibilityLabel=\"Payment details\">\n  <TransactionDetails.Item label=\"UPI transaction ID\" value=\"101674916166\" />\n</TransactionDetails>",
+      "from": {
+        "section": "states",
+        "quote": "A single fact is still a list of one."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "TransactionDetails.Item children. Nothing truncates: long text wraps. Declared: Slot for TransactionDetails.Item children.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "No mode changes the list or its items: their tokens are one-mode collections of literals. The list passes its modes to its items, and an item's own modes win. Declared: Modes object passed to `getVariableByName` for design token resolution.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional container style overrides."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "On the web the list is a list (ul, role list) named by accessibilityLabel, with no name without it. On native the list is not accessible itself (accessible={false}), so iOS probably never says its name (not checked on a device). Declared: Accessibility label for screen readers.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "...React.ComponentProps<typeof View>",
+        "type": "React.ComponentProps<typeof View>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      },
+      {
+        "name": "TransactionDetails.Item",
+        "type": "component",
+        "description": "On the web each Item is a list item (li, role listitem) named “label: value” (its own accessibilityLabel wins), its text hidden so it is read once, and not a Tab stop. On native each Item is accessible with role text and the label “label: value”. Declared: A static sub-component of TransactionDetails. Its own props: label, value, modes, style, labelStyle, valueStyle, accessibilityLabel.",
+        "source": "evidence",
+        "checkedOn": "2026-10-27"
+      }
+    ],
+    "modes": [],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Slot for TransactionDetails.Item children",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "On the web, a TransactionDetails.Item on its own, outside a TransactionDetails, renders a list item (li) with no list (#413, Component Fix, To do). The guide never shows a standalone Item.",
+        "source": "evidence",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "text": "Figma draws each Detail Item at a fixed 315 px; the package sizes items to their text, and the list fills its column.",
+        "source": "evidence",
+        "checkedOn": "2026-10-25"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=transactiondetails",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1557-7798",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-transactiondetails--docs"
+  }
+}

@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 1,
+  "id": "Tabs",
+  "slug": "tabs",
+  "category": "navigation",
+  "tags": [
+    "tab bar",
+    "sub-navigation",
+    "views"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T03:24:15Z",
+    "flags": []
+  },
+  "summary": "Use Tabs to switch between a few peer views of the same content, such as an account’s overview, activity, and details.",
+  "useWhen": [
+    {
+      "text": "Switch between a few peer views of the same content, such as an account’s overview, activity and details.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Tabs to switch between a few peer views of the same content, such as an account’s overview, activity, and details."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The choices do something, such as “Pay” and “Cancel”: use Buttons, not tabs.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "“Pay” and “Cancel” do something; use Buttons."
+      },
+      "useInstead": "Button"
+    },
+    {
+      "text": "A tab needs a disabled or loading state: Tabs has neither.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Tabs has no disabled or loading state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Tab row",
+      "holds": "The tabs, in one row, 16 px apart.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Holds the tabs in one row, 16 px apart."
+      }
+    },
+    {
+      "part": "Selected tab",
+      "holds": "A black label: the view on screen now.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Black label: the view on screen now."
+      }
+    },
+    {
+      "part": "Underline",
+      "holds": "A 2 px gold bar under the selected tab only.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "2 px gold bar under the selected tab only."
+      }
+    },
+    {
+      "part": "Idle tab",
+      "holds": "A grey label: another view, one tap away.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey label: another view, one tap away."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Show the selected tab’s view below the row; the screen keeps the selected tab.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the selected tab and shows that view below the row."
+      }
+    },
+    {
+      "text": "When another tab is pressed, the screen swaps the panel; the tabs only report the press.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pressing another tab swaps the panel; the tabs only report the press."
+      }
+    },
+    {
+      "text": "Tabs stretches to the width of its container; each tab is as wide as its label, with 16 px between tabs.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Tabs stretches to the width of its container."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass the tabs as TabItem children: children is required, and each child should be a TabItem.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "children"
+    },
+    {
+      "text": "Put each TabItem directly inside Tabs: Tabs passes its modes to direct TabItem children, and does not recognise wrappers or fragments around them.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Wrappers and Fragments around TabItems are not recognised."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Set modes on Tabs: they reach its direct TabItem children (not through wrappers or Fragments), and a TabItem's own modes win.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "modes"
+    },
+    {
+      "text": "Turn on scrollable when the labels don’t fit, so the row scrolls sideways.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Turn on scrollable when the labels don’t fit, so the row scrolls sideways."
+      },
+      "target": "scrollable",
+      "value": "true"
+    },
+    {
+      "text": "Do not squeeze a long set, such as six filters, into a row that doesn’t scroll: every label shrinks and ends in an ellipsis, even “All”.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Every label shrinks and ends in an ellipsis, even “All”."
+      },
+      "target": "scrollable",
+      "value": "false"
+    },
+    {
+      "text": "Keep track of the selected tab on the screen: mark that TabItem active, and move the mark when another tab is pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The screen keeps track of the selected tab: it marks that tab active and moves the mark when another tab is pressed."
+      }
+    },
+    {
+      "text": "Select exactly one tab: one underline says which view is showing.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "One underline says which view is showing."
+      }
+    },
+    {
+      "text": "Do not mark two tabs active: only the first is underlined, which may not be the view that’s showing.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Only the first is underlined, which may not be the view that’s showing."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "A few peer views, exactly one selected, and the content below follows it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "A few peer views, exactly one selected, and the content below follows it."
+        }
+      },
+      {
+        "text": "Name each view in a word or two.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name each view in a word or two"
+        }
+      },
+      {
+        "text": "Write labels as short nouns in sentence case that name the view, such as “Overview” or “Activity”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Labels are short nouns in sentence case that name the view, such as “Overview” or “Activity”."
+        }
+      },
+      {
+        "text": "Don’t number tabs or write actions.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "Don’t number tabs or write actions."
+        }
+      }
+    ],
+    "good": [
+      "Overview",
+      "Activity",
+      "Details",
+      "All",
+      "Sent",
+      "Received",
+      "Pending",
+      "Failed",
+      "Refunded"
+    ],
+    "bad": [
+      "Pay",
+      "Cancel",
+      "Tab 1",
+      "Tab 2",
+      "Tab 3"
+    ]
+  },
+  "states": [
+    {
+      "state": "First tab selected",
+      "when": "The screen opens on the summary view, with the first tab marked active.",
+      "from": {
+        "section": "states",
+        "quote": "Open on the summary view."
+      }
+    },
+    {
+      "state": "Another tab selected",
+      "when": "After a press, the screen marks the pressed tab active: the black label and underline move to it.",
+      "from": {
+        "section": "states",
+        "quote": "The black label and underline move to the pressed tab."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the row is a tab list named by its accessibilityLabel, and each tab is announced by its label and whether it is selected.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the row is a tab list named by its accessibility label, and each tab is announced by its label and whether it is selected"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home and End select tabs.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Only the selected tab is in the Tab order, or the first tab when none is selected; Space, Enter, the arrow keys, Home, and End select tabs."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Switch between peer views",
+      "dont": "Use tabs as actions",
+      "why": "“Pay” and “Cancel” do something; use Buttons.",
+      "from": {
+        "section": "doDont",
+        "quote": "Switch between peer views"
+      }
+    },
+    {
+      "do": "Select exactly one tab",
+      "dont": "Select two tabs",
+      "why": "Only the first is underlined, which may not be the view that’s showing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Select exactly one tab"
+      }
+    },
+    {
+      "do": "Scroll a long set",
+      "dont": "Squeeze six tabs into one row",
+      "why": "Every label shrinks and ends in an ellipsis, even “All”.",
+      "from": {
+        "section": "doDont",
+        "quote": "Scroll a long set"
+      }
+    },
+    {
+      "do": "Name each view",
+      "dont": "Number the tabs",
+      "why": "“Tab 1”, “Tab 2”, and “Tab 3” say nothing about the view.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name each view"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Account views in one row, with the screen marking the selected tab active.",
+      "jsx": "<Tabs modes={{ 'Color Mode': 'Light' }}>\n  <TabItem label=\"Overview\" active onPress={() => {}} />\n  <TabItem label=\"Activity\" onPress={() => {}} />\n  <TabItem label=\"Details\" onPress={() => {}} />\n</Tabs>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the selected tab and shows that view below the row."
+      }
+    },
+    {
+      "purpose": "Six filters in a scrollable row: each tab hugs its label and the row scrolls sideways.",
+      "jsx": "<Tabs scrollable modes={{ 'Color Mode': 'Light' }}>\n  <TabItem label=\"All\" active onPress={() => {}} />\n  <TabItem label=\"Sent\" onPress={() => {}} />\n  <TabItem label=\"Received\" onPress={() => {}} />\n  <TabItem label=\"Pending\" onPress={() => {}} />\n  <TabItem label=\"Failed\" onPress={() => {}} />\n  <TabItem label=\"Refunded\" onPress={() => {}} />\n</Tabs>",
+      "from": {
+        "section": "doDont",
+        "quote": "Six filters hug their labels and scroll."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": true,
+        "source": "evidence",
+        "description": "Tabs recognises only direct TabItem children; wrappers and fragments around TabItems are not recognised, so they miss the row's modes. Declared: Tab item children. Each child should be a <TabItem> component. Modes are automatically forwarded to all TabItem children.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Merged under each direct TabItem child's own modes; the item's modes win. Declared: Design token modes for theming.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "scrollable",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Makes the row a horizontal scroll view: tabs hug their labels 16 px apart, and the row scrolls sideways with no scrollbar or edge hint. Declared: When true, the tabs row scrolls horizontally (useful for many items). Default false, from the component source.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "evidence",
+        "description": "With scrollable, style lands on the content container, not the viewport. Declared: Override container styles.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Names the tab list on the web. Declared: Accessible name for the tab row.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Works since the 636f3f5 build (the 5 October check found none). Declared: Test identifier.",
+        "checkedOn": "2026-10-08"
+      }
+    ],
+    "modes": [],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Tab item children. Each child should be a <TabItem> component. Modes are automatically forwarded to all TabItem children.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "The active label stays black in Dark mode (#197, To do); the guide shows Light only.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "text": "A scrollable row has no scrollbar or edge hint.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "text": "Tabs has no disabled or loading prop.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "text": "No hover style: pressing dims a tab to 70% opacity.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=tabs",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3063-136",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-tabs--docs"
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "slug": "balance",
+  "label": "Balance",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/balance.guide.tsx"
+  ],
+  "evidence": "docs/evidence/balance.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:08:48.604Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "account balance",
+    "amount",
+    "total",
+    "money value",
+    "amount owed"
+  ],
+  "title": "Balance",
+  "summary": "Use a Balance to show one money amount, such as what someone owes or holds, in large type under a short title.",
+  "corePrinciple": "One amount, named, at a glance.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1986-6203",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-balance--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A title and a Money Value",
+      "description": "A Balance stacks a short title over a Money Value: the currency symbol and your amount in heavy type, 6 px below.",
+      "blocks": [
+        "6",
+        "1",
+        "2",
+        "3",
+        "Title",
+        "Names the amount in 14 px medium text.",
+        "Currency",
+        "The symbol for your currency code, such as ₹ for INR.",
+        "Amount",
+        "Your amount exactly as you write it, in 36 px heavy type.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Total owed to people",
+        "₹",
+        "50,000.67"
+      ],
+      "anatomy": [
+        {
+          "part": "Title",
+          "note": "Names the amount in 14 px medium text."
+        },
+        {
+          "part": "Currency",
+          "note": "The symbol for your currency code, such as ₹ for INR."
+        },
+        {
+          "part": "Amount",
+          "note": "Your amount exactly as you write it, in 36 px heavy type."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Your currency, a minus, or your own Money Value",
+      "description": "Pass a currency code or symbol and the amount as text. To use a Money Value option, such as hiding the amount, pass your own Money Value inside the Balance.",
+      "blocks": [
+        "Currency code",
+        "USD shows as $; unknown codes print as typed.",
+        "Negative amount",
+        "A leading minus shows before the symbol.",
+        "Hidden amount",
+        "Your own Money Value, here with hidden on."
+      ],
+      "specimen": [
+        "Total owed to you",
+        "$",
+        "1,250.00",
+        "Net balance",
+        "-",
+        "₹",
+        "1,200.00",
+        "Available balance",
+        "•••"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Currency code",
+          "description": "USD shows as $; unknown codes print as typed."
+        },
+        {
+          "title": "Negative amount",
+          "description": "A leading minus shows before the symbol."
+        },
+        {
+          "title": "Hidden amount",
+          "description": "Your own Money Value, here with hidden on."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "No states of its own",
+      "description": "A Balance isn’t pressable and has no selected, disabled, or loading look. When the amount changes, pass the new amount.",
+      "blocks": [
+        "Nothing owed",
+        "Zero looks like any other amount."
+      ],
+      "specimen": [
+        "Total owed to people",
+        "₹",
+        "0.00"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Nothing owed",
+          "description": "Zero looks like any other amount."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The host sets the width, Context3 the amount",
+      "description": "A Balance is as wide as its host and as tall as its text: 68 px at the default size. It has no padding or surface, so place it in a screen or card that has them. Context3 sets the amount’s size; the title stays 14 px.",
+      "blocks": [
+        "300 × 68",
+        "6",
+        "Balance & Cards",
+        "The default: a 36 px amount.",
+        "Default",
+        "A 14 px amount, the title’s size.",
+        "Transaction Bubble",
+        "A 26 px amount with a 28 px symbol.",
+        "Amount Input",
+        "A 56 px amount with a 32 px symbol."
+      ],
+      "specimen": [
+        "Total owed to people",
+        "₹",
+        "50,000.67"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Balance & Cards",
+          "description": "The default: a 36 px amount."
+        },
+        {
+          "title": "Default",
+          "description": "A 14 px amount, the title’s size."
+        },
+        {
+          "title": "Transaction Bubble",
+          "description": "A 26 px amount with a 28 px symbol."
+        },
+        {
+          "title": "Amount Input",
+          "description": "A 56 px amount with a 32 px symbol."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Say what it is, write it as people read it",
+      "description": "Write the title as a short name for the amount, such as “Available balance” or “Total owed to people”. Pass the amount already formatted, with separators and decimals: the Balance shows it exactly as you write it.",
+      "blocks": [
+        "A complete balance"
+      ],
+      "specimen": [
+        "Available balance",
+        "₹",
+        "1,24,500.00"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "A complete balance",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "What you owe after a trip",
+      "description": "The trip screen adds up what you owe and passes it as formatted text; the Balance only shows it. Settle up is the screen’s own Button.",
+      "blocks": [
+        "Press Settle up"
+      ],
+      "specimen": [
+        "Goa trip",
+        "4 friends · 12 expenses",
+        "Total owed to people",
+        "₹",
+        "2,450.00",
+        "Settle up"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A named, readable amount",
+      "description": "Each pair shows a Balance people read at a glance next to one that misnames or garbles the amount.",
+      "blocks": [
+        "Do",
+        "Name the amount",
+        "“Available balance” says what the number is.",
+        "Don’t",
+        "Leave the default title",
+        "A savings balance still says “Total owed to people”.",
+        "Format the amount",
+        "Separators and decimals read at a glance.",
+        "Pass a raw number",
+        "The Balance doesn’t format, so 124500.5 shows as written.",
+        "Keep the title short",
+        "Two or three words name the amount.",
+        "Write a sentence",
+        "A long title wraps and buries the amount."
+      ],
+      "specimen": [
+        "Available balance",
+        "₹",
+        "24,500.00",
+        "Total owed to people",
+        "1,24,500.50",
+        "124500.5",
+        "2,450.00",
+        "Total amount you still owe to the friends on this trip after the last settlement"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Name the amount",
+            "caption": "“Available balance” says what the number is.",
+            "specimen": "Available balance · ₹ · 24,500.00"
+          },
+          "dont": {
+            "title": "Leave the default title",
+            "caption": "A savings balance still says “Total owed to people”.",
+            "specimen": "Total owed to people · ₹ · 24,500.00"
+          }
+        },
+        {
+          "do": {
+            "title": "Format the amount",
+            "caption": "Separators and decimals read at a glance.",
+            "specimen": "Available balance · ₹ · 1,24,500.50"
+          },
+          "dont": {
+            "title": "Pass a raw number",
+            "caption": "The Balance doesn’t format, so 124500.5 shows as written.",
+            "specimen": "Available balance · ₹ · 124500.5"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the title short",
+            "caption": "Two or three words name the amount.",
+            "specimen": "Available balance · ₹ · 2,450.00"
+          },
+          "dont": {
+            "title": "Write a sentence",
+            "caption": "A long title wraps and buries the amount.",
+            "specimen": "Total amount you still owe to the friends on this trip after the last settlement · ₹ · 2,450.00"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Balance contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Custom slot",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build) from the team’s private package repository. Figma’s Balance is one component with a Title property and a nested Money Value; the package adds amount and currency props and a slot for your own Money Value. Figma draws the amount on a 36 px line, the package on a 44 px one, so a Balance is 68 px tall instead of 60. The package’s default amount is “50,000.67”, as in Figma and Storybook. A Money Value in the slot always gets Context3 Balance & Cards. Page type JioPlus turns both the title and the amount white. On the web the amount is announced once, with its currency, such as “₹50,000.67”. The published Storybook docs page for Balance still doesn’t load: the fix is in Biscuit’s source but not yet deployed; its stories load.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
