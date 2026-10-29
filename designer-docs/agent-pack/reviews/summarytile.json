@@ -1,0 +1,28 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The guide and its evidence were checked on 20 October on 0.1.78-c7d3348 and not re-checked on the installed build, dbe0e02, which changed SummaryTile for #352: children left out shows no action (no placeholder Button), onActionPress with actionLabel adds the built-in small secondary Button, a Button or IconButton in children is AppearanceBrand Secondary and Button / Size S without modes on the tile, the description stays on one line and ends in … like the title (disableTruncation lets both wrap), and a tile without onPress is named by its title. This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts (listed in its notes): the placeholder Button (Configuration, States, the Your own Button pair, Sources), setting AppearanceBrand Secondary and Button / Size S on the tile (Configuration, the Modes on the tile pair, Sources), the description that wraps and never truncates (Anatomy, Sizing, Content), and disableTruncation affecting only the title and the static tile not announced by its title (Sources). Re-extract once #352 is closed and the guide is re-checked and published. Added by Claude Code in the overnight run agentpack-batch11, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The description says \"The tile carries no modes: on the installed package a Button in children starts at AppearanceBrand Secondary and Button / Size S.\" The guide says the opposite for the installed 0.1.78: \"a Button passed in children doesn't get its purple, size S look, so these examples set AppearanceBrand Secondary and Button / Size S on the tile.\" The Don't \"A bare Button\" adds that without those modes \"it's gold and size M, too loud for a header.\" The evidence agrees (gold Primary, size M). The example drops the TILE modes that the guide's In context sets.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The guide and the evidence describe the 20 October build (0.1.78-c7d3348); the installed package is 0.1.78-dbe0e02, which the reviewer can’t see. There, SummaryTile.tsx lines 26–29 set ACTION_SLOT_DEFAULTS { AppearanceBrand: ‘Secondary’, ‘Button / Size’: ‘S’ }, line 175 merges the tile’s modes over them, and line 179 clones children with that, so a Button in children with no modes on the tile is purple and size S, as the guide’s TILE modes made it on c7d3348; setting those modes on the tile now only repeats the default, which the building rules leave out. The guide’s sentences to the contrary are the stale ones the entry’s human flag lists (#352)."
+    },
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: \"the slotted Button needs no modes on the tile\" contradicts the guide's Do \"Modes on the tile\" and its Don't \"A bare Button … gold and size M\". On the installed package this snippet renders a gold, size M Button, not the Figma look.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "Same as /examples/0: on the installed 0.1.78-dbe0e02, SummaryTile.tsx lines 26–29, 175 and 179 give a Button in children AppearanceBrand Secondary and Button / Size S when the tile sets no modes, so this snippet renders the purple, size S Button Figma draws, not a gold size M one. The guide’s Do “Modes on the tile” and Don’t “A bare Button” describe c7d3348 and are among the stale items in the human flag (#352)."
+    },
+    {
+      "field": "/anatomy/2",
+      "reason": "lost-context: The quote is cut before \"; it wraps.\", which drops the point that the description wraps and never truncates. Without it, the entry is easier to read alongside /configuration/13's claim that the description is clamped to one line.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The cut is deliberate: on the installed 0.1.78-dbe0e02 the description takes the same one-line clamp as the title (SummaryTile.tsx lines 225–229, resolveTruncation(disableTruncation, 1)), so “it wraps” no longer holds and is left out with the guide’s other stale description sentences, which the human flag lists (#352). /configuration/13 states the installed behaviour from the package fact."
+    }
+  ]
+}

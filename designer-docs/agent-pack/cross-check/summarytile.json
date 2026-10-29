@@ -1,0 +1,25 @@
+{
+  "slug": "summarytile",
+  "entryHash": "208391d7bff3b1c1b5a81d216011066450f78e740a1a0c644043eae1edcbe0bf",
+  "guideCommit": "52bf96ec1d239d72ebf343cab56c7c3b3ff6a51f",
+  "checkedAt": "2026-10-29T05:31:36Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The description says \"The tile carries no modes: on the installed package a Button in children starts at AppearanceBrand Secondary and Button / Size S.\" The guide says the opposite for the installed 0.1.78: \"a Button passed in children doesn't get its purple, size S look, so these examples set AppearanceBrand Secondary and Button / Size S on the tile.\" The Don't \"A bare Button\" adds that without those modes \"it's gold and size M, too loud for a header.\" The evidence agrees (gold Primary, size M). The example drops the TILE modes that the guide's In context sets."
+    },
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: \"the slotted Button needs no modes on the tile\" contradicts the guide's Do \"Modes on the tile\" and its Don't \"A bare Button … gold and size M\". On the installed package this snippet renders a gold, size M Button, not the Figma look."
+    },
+    {
+      "field": "/anatomy/2",
+      "reason": "lost-context: The quote is cut before \"; it wraps.\", which drops the point that the description wraps and never truncates. Without it, the entry is easier to read alongside /configuration/13's claim that the description is clamped to one line."
+    }
+  ],
+  "notes": "The type-derived facts /facts/props/4, /5, /6 and /13 contradict both the guide and the evidence, which describe the installed jfs-components 0.1.78. The facts claim there is no default action, describe actionLabel and onActionPress props, say a slotted Button starts at Secondary / S, say disableTruncation wraps the description, and say accessibilityLabel defaults to the title. On 0.1.78, by contrast: the evidence's full prop list has no actionLabel or onActionPress; left out, children shows a placeholder Button with no onPress; a passed Button is gold, size M; \"disableTruncation affects only the title\"; and \"a tile without onPress isn't announced by its title.\" The types seem to come from a different, probably newer, build than the evidence. A human should confirm which version the pack targets. The items that faithfully restate those facts are not flagged as extraction errors under the rules, but they conflict directly with the guide: /configuration/1, /configuration/2, /configuration/3, /configuration/5, /configuration/13, /accessibility/0, /content/rules/3, and /content/bad (whose \"Button\" source is the guide's placeholder, which the facts say doesn't exist). The entry also drops the guide's Do/Don't pairs \"Modes on the tile\" vs \"A bare Button\" and \"Your own Button\" vs \"The placeholder\", and /useWhen omits the guide's TILE-modes guidance."
+}

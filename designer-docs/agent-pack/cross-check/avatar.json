@@ -1,0 +1,17 @@
+{
+  "slug": "avatar",
+  "entryHash": "abd612f207cb7805ada356e5330b4dad456e1180a14e674ee1ef22dbbf5ceca4",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "checkedAt": "2026-10-29T05:29:59Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/7",
+      "reason": "lost-context: The item says `loading` true shows a same-size placeholder on its own. The guide says \"Loading is a runtime state supplied through SkeletonGroup\", and the sources section says the Skeleton appears \"inside an active SkeletonGroup\". The evidence adds that a direct `loading={true}` outside an active SkeletonGroup renders no placeholder in the checked runtime, so the item drops the condition that limits the claim."
+    }
+  ],
+  "notes": "/configuration/7 restates the types-derived fact /facts/props/7, whose description (\"When `true`, renders a same-size circular skeleton\") is itself contradicted by the evidence file for the checked runtime. A human may want to qualify that fact too. /examples/0 says M (36 px) is the size the In context card uses \"in its code\"; the rendered guide copy shown here names no size, so this could not be verified from what was provided. /states/1 also leaves out that loading is supplied through SkeletonGroup, but it does not claim otherwise."
+}

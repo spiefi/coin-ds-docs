@@ -1,0 +1,230 @@
+{
+  "slug": "avatar",
+  "label": "Avatar",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/avatar.guide.tsx",
+    "src/AvatarGuides.tsx"
+  ],
+  "evidence": "docs/evidence/avatar-and-avatargroup.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:21:45.273Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "profile picture",
+    "profile photo",
+    "initials",
+    "monogram",
+    "user"
+  ],
+  "title": "Avatar",
+  "summary": "Represent one person or account with an image or initials.",
+  "corePrinciple": "Use a real image when available; use a short monogram otherwise.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1-37658",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-avatar--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A circular frame holds an image or initials",
+      "description": "Avatar keeps the outer size and shape while its content style changes. The markers point to the real component instance.",
+      "blocks": [
+        "Shown at 2×",
+        "Monogram",
+        "Image",
+        "1",
+        "2",
+        "3",
+        "Circle and border",
+        "Avatar Size sets the token-owned width and height; its default radius resolves to a circle.",
+        "Monogram content",
+        "The Monogram style centers the supplied text and uses Avatar label tokens.",
+        "Image content",
+        "The Image style crops a supplied image source into the same circular frame."
+      ],
+      "specimen": [
+        "MS"
+      ],
+      "anatomy": [
+        {
+          "part": "Circle and border",
+          "note": "Avatar Size sets the token-owned width and height; its default radius resolves to a circle."
+        },
+        {
+          "part": "Monogram content",
+          "note": "The Monogram style centers the supplied text and uses Avatar label tokens."
+        },
+        {
+          "part": "Image content",
+          "note": "The Image style crops a supplied image source into the same circular frame."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose Image or Monogram",
+      "description": "Style selects which content is rendered. Monogram uses its text property; Image uses imageSource and otherwise shows the package fallback.",
+      "blocks": [
+        "Image",
+        "Provide an image source that represents this person. The bundled fallback is only a preview when no source is supplied.",
+        "Monogram",
+        "Use a short, recognizable set of initials when a portrait is not available."
+      ],
+      "specimen": [
+        "AK"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Loading preserves the selected size",
+      "description": "Loading is a runtime state supplied through SkeletonGroup, not a style or size variant. It replaces the identity content with a same-size neutral placeholder.",
+      "blocks": [
+        "Ready",
+        "The image or monogram remains inside the chosen Avatar Size.",
+        "Loading · neutral placeholder",
+        "The token-backed Skeleton circle is expected while the image or monogram is unavailable."
+      ],
+      "specimen": [
+        "MS"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Pick one of the four Avatar Size modes",
+      "description": "The modes resolve to token-owned dimensions. A surrounding card or row can provide room, but it does not stretch Avatar automatically.",
+      "blocks": [
+        "L",
+        "42 px",
+        "M",
+        "36 px",
+        "S",
+        "29 px",
+        "XS · M",
+        "14 px · one letter"
+      ],
+      "specimen": [
+        "MS",
+        "M"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Avatar content is an image or monogram text",
+      "description": "Set Style to Image or Monogram, then supply the matching image source or monogram text.",
+      "blocks": [
+        "01",
+        "Use monogram text",
+        "Supply initials for a compact text based identity.",
+        "02",
+        "Supply image content",
+        "Set imageSource to the intended image.",
+        "imageSource",
+        "03",
+        "Use one letter at XS",
+        "The XS example shows a single monogram letter."
+      ],
+      "specimen": [
+        "MS",
+        "M"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Identify an account owner at a glance",
+      "description": "A surrounding Card may add a name or role when the layout calls for it; Avatar does not require nearby text.",
+      "blocks": [
+        "The Card adds optional context outside Avatar."
+      ],
+      "specimen": [
+        "MS",
+        "Account owner",
+        "Shared savings account"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Give every identity meaningful content",
+      "description": "The repeated fallback looks like one person even when it is used for several different accounts.",
+      "blocks": [
+        "Do",
+        "Use a portrait or clear initials",
+        "Each Avatar shows its own portrait or monogram content.",
+        "Don’t",
+        "Reuse the built-in fallback for different people",
+        "Both images resolve to the same bundled fallback and cannot distinguish separate identities."
+      ],
+      "specimen": [
+        "MS",
+        "AK"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Use a portrait or clear initials",
+            "caption": "Each Avatar shows its own portrait or monogram content.",
+            "specimen": "MS · AK"
+          },
+          "dont": {
+            "title": "Reuse the built-in fallback for different people",
+            "caption": "Both images resolve to the same bundled fallback and cannot distinguish separate identities.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public style, text, image, and size choices",
+      "description": "The guide compares the exposed Figma property with the installed package and the canonical published stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component master and exposed properties",
+        "02",
+        "Canonical Storybook",
+        "Docs page and public example behavior",
+        "Image style",
+        "Monogram style",
+        "Size modes",
+        "Remote image",
+        "Checked 23 September 2026",
+        "The declared and installed jfs-components version is 0.1.60; the earlier registry check on 23 September also returned 0.1.60. A fresh registry lookup could not be confirmed during recovery because registry DNS was unavailable. Figma exposes Image and Monogram plus monogram text; Storybook also demonstrates size and remote-image examples. Supply a person-specific imageSource; the package fallback is only a preview. Loading replaces Avatar content with a neutral, token-backed Skeleton inside an active SkeletonGroup. This version drops its typed accessibility label and keeps role image on the press wrapper, so examples remain non-interactive.",
+        "jfs-components",
+        "0.1.60",
+        "imageSource",
+        "SkeletonGroup",
+        "image"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

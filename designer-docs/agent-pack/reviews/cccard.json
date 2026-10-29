@@ -1,0 +1,34 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The guide and its evidence were checked on 21 October on 0.1.78-c7d3348 and not re-checked on the installed build, dbe0e02, which changed CcCard for #364: badges are Small and benefit icons purple by default, benefits sit 4 px apart, the upsell is a 12 px line, compact shows a 42 px Avatar (the image in a circle, or a “CC” monogram), the full card shows no picture box without imageSource, '' or null hides a footer line, showHeader and showNudge also hide a custom header or upsell, and the full card is 343 × 244. This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts: Sizing “and 12 px between benefits” and “It comes out taller than Figma’s, because its badges are bigger and its benefits further apart.”; Configuration “AppearanceBrand Secondary turns the benefit icons purple”, “Badge Size Small makes the badges smaller”, their example captions and “Without the badges, 31 px shorter.” (24 px now); the Don’t caption “An empty box still takes its space beside the title.”; Content “an empty headline, description, or footerSubtitle shows its placeholder word”; and the Sources note’s 264 px, Medium badges, 12 px benefits, gold icons, 14 px upsell, 88 × 54 compact picture and hard-coded badge label colour. The guide fix belongs to #364 (open; a work note there lists these sentences). Re-extract once #364 is closed and the guide is re-checked on dbe0e02 and published. Added by Claude Code in the overnight run agentpack-batch11, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/configuration/3",
+      "reason": "misreads-source: The guide says the opposite: \"Compact defaults to the 88 × 54 picture where Figma shows a 42 px Avatar\". The configuration section adds that media must replace the picture to get an Avatar. The cited JSDoc is wrong, and the evidence records that the JSDoc contradicts itself.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The reviewer reads the guide and evidence as checked on 21 October on 0.1.78-c7d3348; the installed package is 0.1.78-dbe0e02, which changed CcCard for #364. In dbe0e02 compact without media renders a 42 px Avatar (Avatar Size L): the imageSource cropped to a circle, or a “CC” monogram without one (CcCard.tsx lines 231, 261–271); the guide page rendered on dbe0e02 on 29 October shows the Compact card at 343 × 110 with a 42 × 42 Avatar, not the 88 × 54 picture. The item rests on the package fact props:compact, which matches the installed source. The guide’s contrary Sources sentence is stale and is in this entry’s human flag for the guide fix."
+    },
+    {
+      "field": "/content/rules/2",
+      "reason": "misreads-source: The guide says \"an empty headline, description, or footerSubtitle shows its placeholder word\". The evidence says footer text \"can't be partly hidden (placeholders come back)\", and its limits forbid implying that footer lines can be hidden one by one. The \"'' or null hides the line\" clause contradicts both.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "In the installed 0.1.78-dbe0e02 (changed for #364 after the guide and evidence were checked on c7d3348), only a left-out headline shows “Headline”: the sample is used only when headline is undefined, and an empty string or null renders no line (CcCard.tsx lines 238, 358). The rule rests on the package fact props:headline, which says exactly that. The guide’s “an empty headline … shows its placeholder word” and the evidence’s “can’t be partly hidden” describe c7d3348 and are in this entry’s human flag for the guide fix."
+    },
+    {
+      "field": "/content/rules/3",
+      "reason": "misreads-source: Same as headline: the guide and the evidence say an empty description shows its placeholder word, so \"'' or null hides the line\" is unsupported and contradicted.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "Same as headline, for description: in 0.1.78-dbe0e02 only a left-out description shows “Description”; an empty string or null renders no line (CcCard.tsx lines 239, 360). The rule rests on the package fact props:description, which says so. The guide and evidence sentences describe c7d3348 and are in the human flag."
+    },
+    {
+      "field": "/content/rules/4",
+      "reason": "misreads-source: Same as headline: the guide and the evidence say an empty footerSubtitle falls back to its placeholder word, so \"'' or null hides the line\" is contradicted.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "Same as headline, for footerSubtitle: in 0.1.78-dbe0e02 only a left-out footerSubtitle shows “Subtitle”; an empty string or null renders no line (CcCard.tsx lines 240, 361). The rule rests on the package fact props:footerSubtitle, which says so. The guide and evidence sentences describe c7d3348 and are in the human flag."
+    }
+  ]
+}

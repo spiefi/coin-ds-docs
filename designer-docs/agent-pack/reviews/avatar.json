@@ -1,0 +1,16 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The Avatar guide and its evidence were checked on 23 September 2026 on jfs-components 0.1.60 (its Sources note still says so); the installed package is 0.1.78 (mirror v0.1.78-dbe0e02). Read against the installed Avatar.tsx and Skeleton.tsx, every sentence this entry quotes still holds, but loading no longer needs a SkeletonGroup: Avatar draws its same-size placeholder when loading is true on its own (Avatar.tsx lines 167 and 224, visible={loading === true}; Skeleton.tsx lines 134 and 272–275). So the States description (“Loading is a runtime state supplied through SkeletonGroup, not a style or size variant.”), the Sources line (“Loading replaces Avatar content with a neutral, token-backed Skeleton inside an active SkeletonGroup.”) and the evidence (“a direct `loading={true}` outside an active `SkeletonGroup` renders no placeholder”) say less than the package; the entry follows the package’s loading fact and doesn’t quote them. Re-check the guide on 0.1.78 and publish it, then re-extract. Added by Claude Code in the overnight run agentpack-batch11, for Marcin to confirm. Guide fix #533."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/configuration/7",
+      "reason": "lost-context: The item says `loading` true shows a same-size placeholder on its own. The guide says \"Loading is a runtime state supplied through SkeletonGroup\", and the sources section says the Skeleton appears \"inside an active SkeletonGroup\". The evidence adds that a direct `loading={true}` outside an active SkeletonGroup renders no placeholder in the checked runtime, so the item drops the condition that limits the claim.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The item rests on the installed package, not on the 0.1.60 evidence the reviewer quotes. In 0.1.78-dbe0e02, Avatar.tsx line 167 reads loading ?? the SkeletonGroup’s active, and lines 216–226 return a Skeleton of the avatar’s size with visible={loading === true}; Skeleton.tsx line 134 shows it when the group is active or visible is true, and returns null only when neither is (lines 272–275). So loading={true} draws the placeholder without a group, as the package’s own loading JSDoc says, and a SkeletonGroup matters only when loading is left unset. The guide and evidence sentences the reviewer cites were checked on 0.1.60 and are out of date: that is the guide fix in this file’s flag, not a reason to narrow the item."
+    }
+  ]
+}
