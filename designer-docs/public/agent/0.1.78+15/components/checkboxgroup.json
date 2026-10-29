@@ -1,0 +1,479 @@
+{
+  "schemaVersion": 1,
+  "id": "CheckboxGroup",
+  "slug": "checkboxgroup",
+  "category": "input",
+  "tags": [
+    "multi-select",
+    "multiple choice",
+    "checkbox list",
+    "options"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T07:47:24Z",
+    "flags": []
+  },
+  "summary": "Use a Checkbox Group to let people pick any number of related options, such as accounts to link.",
+  "useWhen": [
+    {
+      "text": "People pick any number of related options, such as accounts to link.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Checkbox Group to let people pick any number of related options, such as accounts to link."
+      }
+    },
+    {
+      "text": "Independent choices: people can pick one, several, or none.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "People can pick one, several, or none."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A single choice, such as a billing period: checkboxes let people pick “Monthly” and “Yearly” at once.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Checkboxes let people pick “Monthly” and “Yearly” at once."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Group",
+      "holds": "Full-width column with no padding of its own; it only spaces and themes its items.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Full-width column with no padding of its own."
+      }
+    },
+    {
+      "part": "Checkbox Item",
+      "holds": "One independent choice: a public CheckboxItem with its own checkbox and label.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One independent choice."
+      }
+    },
+    {
+      "part": "Checkbox",
+      "holds": "Shows whether this option is selected.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows whether this option is selected."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "Names the option so it can be told apart.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the option so it can be told apart."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The group fills its container and adds no side padding, so the form around it sets the margins.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The group fills its container and adds no side padding, so the form around it sets the margins."
+      }
+    },
+    {
+      "text": "Rows are 12 px apart.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Full width, 12 px between rows"
+      }
+    },
+    {
+      "text": "Rows grow taller when an end action or a long label needs the space.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Rows grow taller when an end action or a long label needs the space."
+      }
+    },
+    {
+      "text": "The screen supplies the group's heading.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen supplies the heading, owns each item’s checked state, and enables the button once something is selected."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Put only Checkbox Items (CheckboxItem) in the group, one for each option.",
+      "strength": "required",
+      "from": {
+        "section": "configuration",
+        "quote": "The group accepts Checkbox Items only."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Each row can be a plain label, a label with a link, or a label with an action on its end.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Each row can be a plain label, a label with a link, or a label with an action on its end."
+      }
+    },
+    {
+      "text": "Plain labels are the default, for lists of accounts or options.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default for lists of accounts or options."
+      }
+    },
+    {
+      "text": "A label with a link (a Text and a Link in the row's children) is the Figma composition, for consent rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma composition, for consent rows."
+      }
+    },
+    {
+      "text": "An end action (the row's endSlot) is for a secondary action that does not toggle the row.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A secondary action that does not toggle the row."
+      }
+    },
+    {
+      "text": "Pass real items, not the empty group: with no children the group shows three identical placeholder rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "With no children it shows three identical placeholder rows."
+      },
+      "target": "children"
+    },
+    {
+      "text": "The screen owns each item’s checked state (checked and onValueChange on each CheckboxItem); on the guide's Choose accounts to link screen it also enables the button once something is selected.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen supplies the heading, owns each item’s checked state, and enables the button once something is selected."
+      }
+    },
+    {
+      "text": "The group itself only lays out the rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The group itself only lays out the rows."
+      }
+    },
+    {
+      "text": "Each row keeps its own state; the group does not limit or count selections.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Each row keeps its own state; the group does not limit or count selections."
+      }
+    },
+    {
+      "text": "Disable a row (disabled on its CheckboxItem) only while the option is temporarily unavailable.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Disable a row only while the option is temporarily unavailable."
+      }
+    },
+    {
+      "text": "The group forwards its modes to every item and end-slot child.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The group forwards modes to every item and end-slot child and uses a 12 px gap with no padding."
+      },
+      "target": "modes"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Related choices, each independent, stacked with even spacing.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Related choices, each independent, stacked with even spacing."
+        }
+      },
+      {
+        "text": "Make every option distinct: start each label with what it is, then what tells it apart, such as the last four digits.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Start each label with what it is, then what tells it apart, such as the last four digits."
+        }
+      },
+      {
+        "text": "Keep labels parallel and in sentence case.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep labels parallel and in sentence case."
+        }
+      },
+      {
+        "text": "Group related options: every row answers the same question.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Every row answers the same question."
+        }
+      },
+      {
+        "text": "Don't mix unrelated choices: a marketing opt-in among accounts reads like one of them.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A marketing opt-in among accounts reads like one of them."
+        }
+      }
+    ],
+    "good": [
+      "Fixed deposit • 0245",
+      "Recurring deposit • 1182",
+      "Mutual fund • Equity",
+      "Savings account • 4821",
+      "Email",
+      "SMS",
+      "Push notification"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Selected and unselected",
+      "when": "Each row keeps its own state; the group does not limit or count selections.",
+      "from": {
+        "section": "states",
+        "quote": "Each row keeps its own state; the group does not limit or count selections."
+      }
+    },
+    {
+      "state": "Mixed selection",
+      "when": "Any number can be selected.",
+      "from": {
+        "section": "states",
+        "quote": "Any number can be selected."
+      }
+    },
+    {
+      "state": "Disabled rows",
+      "when": "The checkbox dims but the label stays the same colour.",
+      "from": {
+        "section": "states",
+        "quote": "The checkbox dims but the label stays the same colour."
+      }
+    },
+    {
+      "state": "No children",
+      "when": "With no children it shows three identical placeholder rows.",
+      "from": {
+        "section": "doDont",
+        "quote": "With no children it shows three identical placeholder rows."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Name the group with accessibilityLabel: the group’s name comes only from accessibilityLabel.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "the group’s name comes only from accessibilityLabel"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web each row is one checkbox with one Tab stop that announces whether it is selected.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web each row is one checkbox with one Tab stop that announces whether it is selected"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Group related options",
+      "dont": "Mix unrelated choices",
+      "why": "A marketing opt-in among accounts reads like one of them.",
+      "from": {
+        "section": "doDont",
+        "quote": "Mix unrelated choices"
+      }
+    },
+    {
+      "do": "Pass real items",
+      "dont": "Ship the empty group",
+      "why": "With no children it shows three identical placeholder rows.",
+      "from": {
+        "section": "doDont",
+        "quote": "Ship the empty group"
+      }
+    },
+    {
+      "do": "Use checkboxes for independent choices",
+      "dont": "Use them for a single choice",
+      "why": "Checkboxes let people pick “Monthly” and “Yearly” at once.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use them for a single choice"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Choose accounts to link, the guide's In context, as the screen first shows it: a Card with the screen's heading in a Text, the group named by accessibilityLabel, and the Button. The screen owns each row's checked value: onValueChange stands for the screen's own wiring, which stores the new value and passes it back as checked. The screen enables the Button once something is selected; onPress stands for linking. It sets no modes.",
+      "jsx": "<Card>\n  <Text text=\"Choose accounts to link\" />\n  <CheckboxGroup accessibilityLabel=\"Accounts to link\">\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Fixed deposit • 0245</CheckboxItem>\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Recurring deposit • 1182</CheckboxItem>\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Mutual fund • Equity</CheckboxItem>\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Savings account • 4821</CheckboxItem>\n  </CheckboxGroup>\n  <Button label=\"Select an account\" disabled onPress={() => {}} />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen supplies the heading, owns each item’s checked state, and enables the button once something is selected."
+      }
+    },
+    {
+      "purpose": "A consent row, the guide's Label with a link (the Figma composition): a Text and a Link side by side in the row's children, the Link hugging its text, and accessibilityLabel naming the row, as the guide's source sets it. onPress stands for opening the terms; checked and onValueChange stand for the screen's own wiring, as in the In context example.",
+      "jsx": "<CheckboxGroup accessibilityLabel=\"Consent\">\n  <CheckboxItem checked={false} onValueChange={(checked) => {}} accessibilityLabel=\"I agree Terms & Conditions\">\n    <Text text=\"I agree\" />\n    <Link text=\"Terms & Conditions\" autolayout=\"Hug\" onPress={() => {}} />\n  </CheckboxItem>\n</CheckboxGroup>",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma composition, for consent rows."
+      }
+    },
+    {
+      "purpose": "Rows with an end action, the guide's With an end action: a Manage Button in each row's endSlot, a secondary action that does not toggle the row; the rows grow taller to fit it. Button / Size XS goes on the group, as the guide's own source sets it, and the group forwards it to every item and end-slot child so the Button fits the 80 px end slot (the Checkbox Item entry's rule); the Button itself takes no modes. onPress and onValueChange stand for the screen's own wiring.",
+      "jsx": "<CheckboxGroup accessibilityLabel=\"Accounts\" modes={{ 'Button / Size': 'XS' }}>\n  <CheckboxItem checked={false} onValueChange={(checked) => {}} endSlot={<Button label=\"Manage\" onPress={() => {}} />}>Fixed deposit • 0245</CheckboxItem>\n  <CheckboxItem checked={false} onValueChange={(checked) => {}} endSlot={<Button label=\"Manage\" onPress={() => {}} />}>Recurring deposit • 1182</CheckboxItem>\n</CheckboxGroup>",
+      "from": {
+        "section": "configuration",
+        "quote": "A secondary action that does not toggle the row."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Slot — a list of `CheckboxItem` (or compatible) elements to render inside the group. The `modes` prop is automatically forwarded to each child. When omitted, three default placeholder `CheckboxItem`s are rendered to mirror the Figma reference for the empty/initial state."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Forwarded to every item and end-slot child. Declared: Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`).",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override container styles."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "The group's name: on the web the group is a list named by accessibilityLabel and nothing else. Declared: Accessibility label for the surrounding group.",
+        "checkedOn": "2026-10-28"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection CheckboxGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection CheckboxGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection CheckboxGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Slot — a list of `CheckboxItem` (or compatible) elements to render inside the group. The `modes` prop is automatically forwarded to each child. When omitted, three default placeholder `CheckboxItem`s are rendered to mirror the Figma reference for the empty/initial state.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "On the web the rows sit directly in the group's list, without list items.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=checkboxgroup",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3999-527",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-checkboxgroup--docs"
+  }
+}

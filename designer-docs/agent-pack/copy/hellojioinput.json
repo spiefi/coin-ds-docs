@@ -1,0 +1,303 @@
+{
+  "slug": "hellojioinput",
+  "label": "HelloJio Input",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/hellojioinput.guide.tsx"
+  ],
+  "evidence": "docs/evidence/hellojioinput.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:56:28.445Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "chat",
+    "assistant",
+    "prompt",
+    "composer",
+    "send message",
+    "ask"
+  ],
+  "title": "HelloJio Input",
+  "summary": "Use a HelloJio Input for the HelloJio assistant’s prompt: people type a question and send it, with optional attachments above.",
+  "corePrinciple": "One short question, one tap to send.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7584-1796",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-hellojioinput--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A brand icon, the prompt, and a send button",
+      "description": "A grey pill holds the HelloJio mark, one line for the question, and a gold send button.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Brand icon",
+        "The HelloJio mark; it can be turned off.",
+        "Prompt",
+        "The placeholder, then the question people type; one line.",
+        "Send",
+        "Gold button that sends the text; Return sends too.",
+        "Pill",
+        "Grey rounded surface; white with a border while focused."
+      ],
+      "specimen": [
+        "Ask me anything"
+      ],
+      "anatomy": [
+        {
+          "part": "Brand icon",
+          "note": "The HelloJio mark; it can be turned off."
+        },
+        {
+          "part": "Prompt",
+          "note": "The placeholder, then the question people type; one line."
+        },
+        {
+          "part": "Send",
+          "note": "Gold button that sends the text; Return sends too."
+        },
+        {
+          "part": "Pill",
+          "note": "Grey rounded surface; white with a border while focused."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose what the pill shows",
+      "description": "The brand icon and send button are on by default and can each be turned off. Attachments people add sit inside the pill, above the prompt.",
+      "blocks": [
+        "Default",
+        "The brand icon, the prompt, and the send button.",
+        "Without the brand icon",
+        "For screens that already show the HelloJio mark.",
+        "Without send",
+        "The Return key still sends the text.",
+        "With an attachment",
+        "Files people added sit above the prompt, and the pill grows to fit."
+      ],
+      "specimen": [
+        "Statement_Sep",
+        "PDF file",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "The brand icon, the prompt, and the send button."
+        },
+        {
+          "title": "Without the brand icon",
+          "description": "For screens that already show the HelloJio mark."
+        },
+        {
+          "title": "Without send",
+          "description": "The Return key still sends the text."
+        },
+        {
+          "title": "With an attachment",
+          "description": "Files people added sit above the prompt, and the pill grows to fit."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Idle, focused, Jio Plus, and disabled",
+      "description": "The pill is grey while idle and turns white with a border while people type. Over imagery, Jio Plus makes the idle pill frosted glass.",
+      "blocks": [
+        "Idle",
+        "Grey pill. Select it to see the white focused pill.",
+        "Jio Plus",
+        "Frosted glass over imagery while not focused. The prompt and typed text stay readable.",
+        "Disabled",
+        "Half opacity; typing and sending are off."
+      ],
+      "specimen": [
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Idle",
+          "description": "Grey pill. Select it to see the white focused pill."
+        },
+        {
+          "title": "Jio Plus",
+          "description": "Frosted glass over imagery while not focused. The prompt and typed text stay readable."
+        },
+        {
+          "title": "Disabled",
+          "description": "Half opacity; typing and sending are off."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 38 px tall",
+      "description": "HelloJio Input fills its container’s width and is 38 px tall (36 px in Jio Plus, which has no border), with an 18 px brand icon and a 26 px send button. Attachments add height above the prompt.",
+      "blocks": [
+        "300 × 38",
+        "With two attachments",
+        "The pill grows, and the chips scroll sideways when they run out of room."
+      ],
+      "specimen": [
+        "Statement_Sep",
+        "PDF file",
+        "PAN_card",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "With two attachments",
+          "description": "The pill grows, and the chips scroll sideways when they run out of room."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Invite a question",
+      "description": "Write a short, open prompt in sentence case with no full stop, such as “Ask me anything”. The prompt is also the field’s accessible name, so keep it meaningful.",
+      "blocks": [
+        "Prompts"
+      ],
+      "specimen": [
+        "Ask me anything",
+        "Ask about your gold savings"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Prompts",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Ask HelloJio",
+      "description": "The screen adds the question to the conversation and clears the field. It also ignores an empty prompt, because Send works even when the field is empty.",
+      "blocks": [],
+      "specimen": [
+        "What is the gold rate today?",
+        "24K gold is ₹7,412 per gram today.",
+        "Ask me anything"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep the prompt clear",
+      "description": "Each pair shows a prompt people understand versus one that misleads them.",
+      "blocks": [
+        "Do",
+        "Keep the prompt short",
+        "The whole prompt fits in the pill.",
+        "Don’t",
+        "Write a long prompt",
+        "It is cut off in the pill.",
+        "Use it to ask HelloJio",
+        "The brand mark and send button promise an answer.",
+        "Use it for search",
+        "People expect an answer, not a list of results.",
+        "Let people remove attachments",
+        "The close button takes the file out.",
+        "Show a close icon that does nothing",
+        "It looks tappable but nothing happens."
+      ],
+      "specimen": [
+        "Statement_Sep",
+        "PDF file",
+        "Ask me anything",
+        "Ask me anything about your gold, savings, loans, or bills",
+        "Ask about your gold savings",
+        "Search transactions"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the prompt short",
+            "caption": "The whole prompt fits in the pill.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Write a long prompt",
+            "caption": "It is cut off in the pill.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Use it to ask HelloJio",
+            "caption": "The brand mark and send button promise an answer.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Use it for search",
+            "caption": "People expect an answer, not a list of results.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Let people remove attachments",
+            "caption": "The close button takes the file out.",
+            "specimen": "Statement_Sep · PDF file"
+          },
+          "dont": {
+            "title": "Show a close icon that does nothing",
+            "caption": "It looks tappable but nothing happens.",
+            "specimen": "Statement_Sep · PDF file"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public HelloJio Input contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Active",
+        "Jio Plus",
+        "Submit log",
+        "Without send",
+        "With attachments",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s HelloJio Input is a set with Idle, Active, and IdleJioPlus states, start and end slot options, and an attachment slot. The package sets the state from focus and the Jio Plus option. The pill is 38 px tall, or 36 px in Jio Plus, as in Figma; the send button is 26 px (28 px in Figma). Send works even when the field is empty, and the text stays after sending, so the screen ignores empty prompts and clears the field. On the web Tab goes from the input straight to Send. Dark mode is not shown.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

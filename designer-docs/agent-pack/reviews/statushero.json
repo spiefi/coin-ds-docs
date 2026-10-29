@@ -1,0 +1,22 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The guide and its evidence were re-checked on 28 October on the installed build, dbe0e02, only for #346 (the amount is announced once with its currency); the rest still describes the 25 October build, c8526ae. dbe0e02 changed StatusHero for #398: the mark's Neutral High at Icon Capsule Size L is a default the hero's modes override (dark grey with a white tick; AppearanceBrand Primary on the hero makes it gold; Semantic Intent System still colours it green, orange or red), the hero fills its parent instead of hugging its text, renderMedia gets the hero's modes as defaults and each element's own modes win, a hero with no title and no subtitle has no empty content wrap, and a new accessibilityLabel names the hero as a group. This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts (listed in its notes): Configuration “The mark is gold by default: the hero fixes its Icon Capsule to AppearanceBrand Primary, so no brand mode changes it.” and the Brand card's “The default gold mark.”; Sizing's “As wide as its words”, “The hero has no width of its own: it centres its content and wraps text only when its host is narrower.” and the 302 of “With the default copy it is 302 × 269” (269 still holds); the Don't caption “The gold tick says it worked.” (the pair is kept with the Do caption); Sources “Its mark is gold where Figma’s is dark grey with a white tick: the hero fixes the capsule’s brand mode, so only Semantic Intent System recolours it.” and “Storybook’s Without subtitle story still shows the default subtitle”; the playground's Gold readout; and the evidence's Contract, Web render, Discrepancies and Limits lines on the forced gold mark and modes, renderMedia replacing modes, the hugging width, the empty gap and no accessibility props. The guide fix belongs to #398 (Component Fix, In progress; only the 269 px against Figma's 259 is left, waiting for Marcin's call), whose publish re-checks the guide on dbe0e02. Re-extract once #398 is closed and the guide is published. Added by Claude Code in the overnight run agentpack-batch12, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/configuration/2",
+      "reason": "misreads-source: The cited guide text is only \"Orange: still waiting.\" Neither the guide nor that citation names the card's icon. The parenthetical \"the guide's card uses iconName ic_warning\" is unsupported. The evidence only says `ic_warning` renders in the capsule, not that the guide's card uses it.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, coordinator; for Astra and Marcin to confirm",
+      "why": "The reviewer sees only the rendered copy, not the guide’s code. The guide’s System warning card is H({ modes: SYS(warning), iconName: ic_warning, … }) (statushero.guide.tsx line 60, at e7ed622), and its Configuration description says “pick a matching iconName”; the parenthesis names that card’s iconName and adds no rule."
+    },
+    {
+      "field": "/configuration/3",
+      "reason": "misreads-source: The cited text is \"Red: it didn’t happen.\" The claim that \"the guide's card uses iconName ic_close\" is not in the guide or the citation. The evidence only says `ic_close` renders in the capsule.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, coordinator; for Astra and Marcin to confirm",
+      "why": "Same as /configuration/2: the guide’s System negative card is H({ ...FAILED, modes: SYS(negative), iconName: ic_close }) (statushero.guide.tsx line 61, at e7ed622; the Do “The mark matches” on line 118 uses the same ic_close), so the parenthesis states what the guide’s own card passes."
+    }
+  ]
+}

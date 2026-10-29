@@ -1,0 +1,469 @@
+{
+  "slug": "table",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/table.guide.tsx) and docs/evidence/table.md at 622cd82 (“docs: publish 11 Coin fixes on jfs-components v0.1.78-a116616”, 17 October), the same files on main and docs-next. The guide's Sources note was checked on 17 October 2026 on the build it calls the 16 October build (mirror v0.1.78-a116616, Biscuit's main at a116616, the #264 fix), so items citing it carry 2026-10-17 and 0.1.78-a116616. The evidence has two checks: 12 October on 636f3f5 (the first check: contract, Figma, Storybook, measurements) and the 17 October re-check on a116616 (#264: body colour, Weight, grid roles, pressable rows). Each item cites its section's own date and build: the re-check paragraph's onRowPress sentence carries 2026-10-17 and 0.1.78-a116616; contract lines unchanged since the first check (git 4fee471 → 622cd82), the empty-data sentence among them, carry 2026-10-12 and 0.1.78-636f3f5; the evidence's Coin gaps section (#264 still To do) is superseded by the re-check and not cited. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-a116616...v0.1.78-dbe0e02 (4 commits, 222 files, complete) changes no Table, Text, react-utils, typography, web-platform-utils or design-tokens file, and the installed Table.tsx is identical to a116616's (fetched with gh api and diffed). Read from source, not run, with token values through the package's own getVariableByName: header cells #f5f5f5 with 14/600 labels on a 20 px line, cells #ffffff with 12 px padding and 1 px #eeeeee lines on the right and below (Table.tsx 62–90, 204–245), one header cell per column and one line under the header (309–326); body text 14 px on a 17 px line at Medium, so a row is 12 + 17 + 12 + 1 = 42 px and the header 45; Context ListItem makes Medium 12 px; values are Regular 400 unless a Weight mode is set (bodyTextModes, 103–106), Bold 800; a cell's width is its column's width, then columnWidth, then flex 1 with minWidth 0 (235, 288); the root has overflow hidden and width 100% unless scrollable (624); scrollable wraps it in a horizontal ScrollView with no indicator (632); maxHeight puts the body in a ScrollView under the header (597–610); with children it is composition and only a direct Table.Header is pinned (splitStickyHeaderChildren, 467); data [] renders the header only (523, 540); rows are a View with role row, or with onRowPress a Pressable with role row, tabIndex 0 on the web, Space through useKeyboardNavigation and opacity 0.6 while pressed (342–366); cells never truncate (Text's default layout wraps). Every guide sentence quoted here holds on dbe0e02. One does not: the #264 fix gives every string or number body cell the colour of tableHeader/label/color after Text's token colour (Table.tsx 108–110, 143; Text.tsx 153 puts style after the token colour), and that token is rgb(0, 0, 0) in every mode (Neutral, Success, Error, Secondary and Page type JioPlus resolved), so Text Appearance on the table no longer tints the values; only Coin Text that a column renders itself takes a Text Appearance (cloneChildrenWithModes merges the table's modes under its own). The 17 October re-check measured Weight, JioPlus and the roles, not Text Appearance. Left out for that reason, and listed in the human flag in reviews/table.json: Configuration's Status appearances card (“Success, Warning, and Error tint every body cell green, amber, or red; to mark one value, render your own cells.”); the Configuration description's “text size and the brand appearances are in the playground above” (the quote stops at “reach its body text only”, which still holds: no mode changes the header, the lines or the fills); the third Do & Don't pair, Colour single values / Colour the whole table, whose Don't caption “Text appearance on the table tints every value, so nothing stands out.” is false on this build (its Do caption is kept as a content rule); and the evidence's 12 October Text Appearance colours. Not recorded: the Sources note's “The app’s theme doesn’t reach the table, so it takes its modes directly” (true on dbe0e02: Table reads modes only from its own prop) and Color Mode, which the pack leaves to the brand team; the evidence's Not supported list (striping, sorting, selection and the rest), which the guide doesn't use; getRowKey, headerAlign and style (developer settings; the building rules keep style off Coin components); the composition API, recorded only as the children fact (same look, developer choice, as the evidence says); the Storybook page, its stories and Code Connect (Storybook-side, not usage gaps); Figma's hex values. TableColumn's fields (key, header, align, headerAlign, width, flex, render) are not facts in this release (show-facts lists none), so column items cite the guide or the evidence. Strengths: recommended or discouraged; nothing is required. Two quotes carry only: “Only the rows remain…” (everywhere: with showHeader false the header row is not drawn, Table.tsx 523) and “Modes on the table reach its body text only” (everywhere: the table's own tokens resolve the same in every mode). avoidWhen is empty: the guide names no case for another component, and the summary's “a few values” and the Narrow host advice (fewer columns or sideways scroll) are not avoid rules; the trace-check flags it. Anatomy: no part is marked always present: the header goes with showHeader false, rows and cells with no data (the No rows state), and Number is only in right-aligned number columns. The No rows state keeps the guide's “Put an Empty State next to it”, in the guide's words, so no placement edge to EmptyState is made (the Table is not placed in one). Content good keeps the guide's Recent payments headers and two formatted values; the guide shows no bad copy. Examples follow the building rules: no Color Mode (the guide sets Light on every Table and Text), no modes on the Table, no style (the guide's Host and Surface are docs frames); columns and data are inlined, since an example is one JSX expression (assemble wraps it in a fragment), and the row type is inferred from data. In context is the guide's portfolio screen: a VStack (the guide's Host is a stack) with a default Coin Text heading “Your holdings” (the guide's Text Sizes Large is dropped: no entry rule says a heading needs it) over the Table with the guide's COLOURED columns, whose Change render returns Coin Text with Text Appearance Error for a leading minus and Success otherwise, as the guide does: the only mode in the examples, set per value by the content rule from the Do “Colour single values” and Configuration's “Your own cells”; the empty onRowPress stands for the screen's navigation. Default and Column widths are the guide's Configuration cards with its HOLDINGS data and its COLUMNS and WIDTHS (Units centred, as the guide sets it; Column widths has no Change column, as in the guide, so each row's change field is unused). Text and VStack have entries (Text's is undocumented: facts only). Left out of examples: Without a header, Trimmed outer borders, the mode cards, the States, Sizing and Content cards, the Do & Don'ts and the playground. Gaps: the Sources note's Figma and code difference (Figma's single full-width header, a line under the header in code, taller rows; widths, alignment and scrolling only in code) and the evidence's 38 against 42 and 45 px rows. Sorting (batch 12, rounds 1–3): three cross-check runs. Round 1 flagged /examples/2 (Units centred, not in the copy) and /configuration/12 (the Don't “Fix widths that don't fit” targeted columnWidth, but applies to any fixed widths): the target is removed. Round 2 flagged /configuration/1 (“By default … numbers sit right” read as built in, while align defaults to left): now “In the guide's Default … the number columns are set to align right”; and /examples/2 again. Its note that the empty-data sentence dates from the first check is right (unchanged since 4fee471): that fact now carries 2026-10-12 and 0.1.78-636f3f5, and the 38/42/45 gap now says only what the evidence's Discrepancies line says. Round 3, on the final entry, flagged /examples/2 only: dismissed in reviews/table.json (the guide's own WIDTHS, table.guide.tsx line 43, rendered at line 105; the reviewer sees only the copy). Its notes, not flags: the unused change field (the guide's data, kept) and the core principle filed as a use-when (kept, as toggle.json does). Remaining: the trace-check flag on the empty avoidWhen, and the human flag on the Text Appearance sentences. Ticket (coordinator, batch 12): the guide fix is #534 (Documentation, To do), filed in this run with the four sentences above and the question whether black values under every Text Appearance are intended; the human flag names it. The coordinator confirmed the token: tableHeader/label/color resolves to rgb(0, 0, 0) with no modes, Text Appearance Success, Error and Secondary, and Page type JioPlus, while text/foreground follows Text Appearance.",
+  "useWhen": [
+    {
+      "text": "Compare a few values across rows, such as holdings, with columns that line up and numbers aligned right.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Table to compare a few values across rows, such as holdings, with columns that line up and numbers aligned right."
+      }
+    },
+    {
+      "text": "Line values up so they can be compared at a glance.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Line values up so they can be compared at a glance."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Header row",
+      "holds": "Grey row of column names; it stays put when the rows scroll.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey row of column names; it stays put when the rows scroll."
+      }
+    },
+    {
+      "part": "Column name",
+      "holds": "14 px semibold, aligned like the values below it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "14 px semibold, aligned like the values below it."
+      }
+    },
+    {
+      "part": "Row",
+      "holds": "One record, such as one holding; it can be pressable.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One record, such as one holding; it can be pressable."
+      }
+    },
+    {
+      "part": "Cell",
+      "holds": "White, 12 px padding, with 1 px lines on its right and below.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "White, 12 px padding, with 1 px lines on its right and below."
+      }
+    },
+    {
+      "part": "Number",
+      "holds": "Right-aligned, so digits line up down the column.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Right-aligned, so digits line up down the column."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "A table fills its host's width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A table fills its host’s width."
+      }
+    },
+    {
+      "text": "In a 240 px host each column keeps about 30 px for text, so words and numbers break apart: use fewer columns or sideways scroll.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In a 240 px host each column keeps about 30 px for text, so words and numbers break apart. Use fewer columns or sideways scroll."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Columns share the width unless one gets a flex or a fixed width, and each sets its own alignment.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Columns share the width unless one gets a flex or a fixed width, and each sets its own alignment."
+      }
+    },
+    {
+      "text": "In the guide's Default, columns share the width equally, and the number columns are set to align right so their digits line up.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Columns share the width equally; numbers sit right so their digits line up."
+      }
+    },
+    {
+      "text": "A column's flex gives it more room and its width fixes it: a fixed width beats flex (in the guide, Asset takes twice the room and Units keeps a fixed 70 px).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Asset takes twice the room and Units keeps a fixed 70 px; a fixed width beats flex."
+      }
+    },
+    {
+      "text": "columnWidth gives every column, header and body, the same fixed width; a column's own width still takes precedence. Leave it out to let columns flex.",
+      "strength": "recommended",
+      "target": "columnWidth",
+      "from": {
+        "fact": "props:columnWidth"
+      }
+    },
+    {
+      "text": "Turn the header off (showHeader false) when a title above already explains the values: only the rows remain.",
+      "strength": "recommended",
+      "target": "showHeader",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the rows remain, for values that a title above already explains."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes every Table with showHeader false: the data-driven header row is drawn only when showHeader is true (Table.tsx line 523, 0.1.78-dbe0e02), so the body rows are all that remain."
+      }
+    },
+    {
+      "text": "For a table inside a card, trimOuterBorders drops the outer lines of the last column and the last row.",
+      "strength": "recommended",
+      "target": "trimOuterBorders",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "The last column and the last row drop their outer lines, for a table inside a card."
+      }
+    },
+    {
+      "text": "A column can render its own cells: the guide's Change column renders Coin Text, green for gains and red for losses.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Change column renders Coin Text, here green for gains and red for losses."
+      }
+    },
+    {
+      "text": "Modes on the table reach its body text only.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "Modes on the table reach its body text only"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes every Table: its own cell and header tokens (tableCell/*, tableHeader/*) resolve the same in every mode, so the modes passed to it reach only the Coin Text in body cells and the elements a column renders (Table.tsx lines 61–90 and 125–151, 0.1.78-dbe0e02). It does not mean every mode changes the values: since the #264 fix the values take their colour from the table, not from Text Appearance (see notes)."
+      }
+    },
+    {
+      "text": "Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular.",
+      "strength": "recommended",
+      "target": "Weight",
+      "value": "Bold",
+      "from": {
+        "section": "configuration",
+        "quote": "Weight reaches the text cells: Bold makes every value bold. With no Weight they stay Regular."
+      }
+    },
+    {
+      "text": "Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px.",
+      "strength": "recommended",
+      "target": "Context",
+      "value": "ListItem",
+      "from": {
+        "section": "configuration",
+        "quote": "Context retunes text sizes for where the table sits: under ListItem, Medium text is 12 px."
+      }
+    },
+    {
+      "text": "On a JioPlus page (Page type JioPlus) the values stay dark and readable on the white cells.",
+      "strength": "recommended",
+      "target": "Page type",
+      "value": "JioPlus",
+      "from": {
+        "section": "configuration",
+        "quote": "The values stay dark and readable on the white cells."
+      }
+    },
+    {
+      "text": "Fixed widths that add up to more than the host need sideways scroll (scrollable), or the last column is cut off.",
+      "strength": "recommended",
+      "target": "scrollable",
+      "from": {
+        "section": "sizing",
+        "quote": "Fixed widths that add up to more than the host need sideways scroll, or the last column is cut off."
+      }
+    },
+    {
+      "text": "Don't fix widths that don't fit: three 130 px columns need 390 px; without scroll the last one is cut off.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Three 130 px columns need 390 px; without scroll the last one is cut off."
+      }
+    },
+    {
+      "text": "A maximum height (maxHeight) scrolls the rows under a pinned header.",
+      "strength": "recommended",
+      "target": "maxHeight",
+      "from": {
+        "section": "sizing",
+        "quote": "A maximum height scrolls the rows under a pinned header."
+      }
+    },
+    {
+      "text": "With both sideways scroll and a maximum height, the header moves sideways with the rows but stays at the top.",
+      "strength": "recommended",
+      "target": "maxHeight",
+      "from": {
+        "section": "sizing",
+        "quote": "The header moves sideways with the rows but stays at the top."
+      }
+    },
+    {
+      "text": "On the guide's portfolio screen, pressing a row opens that holding; the screen handles the press through onRowPress.",
+      "strength": "recommended",
+      "target": "onRowPress",
+      "from": {
+        "section": "inContext",
+        "quote": "Pressing a row opens that holding; the screen handles the press."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name each column in a word or two and format values before they reach the table, with currency symbols, separators, and signs.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name each column in a word or two and format values before they reach the table, with currency symbols, separators, and signs."
+        }
+      },
+      {
+        "text": "Right-align numbers and keep text left.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Right-align numbers and keep text left."
+        }
+      },
+      {
+        "text": "Cells wrap instead of cutting text off, so keep values short.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Cells wrap instead of cutting text off, so keep values short."
+        }
+      },
+      {
+        "text": "Colour single values: Coin Text in the Change column marks gains and losses.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Coin Text in the Change column marks gains and losses."
+        }
+      }
+    ],
+    "good": [
+      "Date",
+      "Paid to",
+      "Amount",
+      "₹1,240",
+      "+2.4%"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Static rows",
+      "when": "Rows only show values; they can't be focused or pressed.",
+      "from": {
+        "section": "states",
+        "quote": "Rows only show values; they can't be focused or pressed."
+      }
+    },
+    {
+      "state": "Pressable rows",
+      "when": "Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is.",
+      "from": {
+        "section": "states",
+        "quote": "Each row takes focus and a press: it fades to 60% while pressed and tells the screen which holding it is."
+      }
+    },
+    {
+      "state": "No rows",
+      "when": "Only the header shows. Put an Empty State next to it to explain why.",
+      "from": {
+        "section": "states",
+        "quote": "Only the header shows. Put an Empty State next to it to explain why."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "When the screen handles a row press, every row takes focus and a press and fades while pressed; screen readers still hear it as a row.",
+      "strength": "recommended",
+      "target": "onRowPress",
+      "from": {
+        "section": "states",
+        "quote": "When the screen handles a row press, every row takes focus and a press and fades while pressed; screen readers still hear it as a row."
+      }
+    },
+    {
+      "text": "On the web screen readers hear the header cells, rows, and cells as a table, with pressable rows still rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "on the web screen readers hear the header cells, rows, and cells as a table, with pressable rows still rows."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "A pressable row activates with Enter or Space and fades to 60% while pressed.",
+      "strength": "recommended",
+      "target": "onRowPress",
+      "from": {
+        "section": "evidence",
+        "quote": "With `onRowPress` a row stays `role=\"row\"`, gets `tabIndex 0` on the web, activates with Enter or Space, and fades to 60% while pressed"
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "accessibilityLabel is the accessibility label for the table container.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Right-align numbers",
+      "dont": "Left-align numbers",
+      "why": "Ragged digits make values hard to compare down the column.",
+      "from": {
+        "section": "doDont",
+        "quote": "Right-align numbers"
+      }
+    },
+    {
+      "do": "Let columns share the width",
+      "dont": "Fix widths that don't fit",
+      "why": "Three 130 px columns need 390 px; without scroll the last one is cut off.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let columns share the width"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Holdings on a portfolio screen, the guide's In context: a heading over a Table whose Change column renders Coin Text, green for gains and red for losses (the Text Appearance comes from each value, as the guide's Do “Colour single values” shows); pressing a row opens that holding, and the screen handles the press. The empty press handler stands for the screen's own navigation.",
+      "jsx": "<VStack>\n  <Text>Your holdings</Text>\n  <Table\n    columns={[\n      { key: 'asset', header: 'Asset' },\n      { key: 'units', header: 'Units', align: 'right' },\n      { key: 'value', header: 'Value', align: 'right' },\n      {\n        key: 'change',\n        header: 'Change',\n        align: 'right',\n        render: (row) => (\n          <Text modes={{ 'Text Appearance': row.change.startsWith('-') ? 'Error' : 'Success' }}>{row.change}</Text>\n        ),\n      },\n    ]}\n    data={[\n      { asset: 'HDFC Bank', units: '120', value: '₹1,98,400', change: '+2.4%' },\n      { asset: 'Reliance', units: '64', value: '₹1,52,900', change: '-0.8%' },\n      { asset: 'Infosys', units: '210', value: '₹3,10,500', change: '+1.1%' },\n      { asset: 'TCS', units: '48', value: '₹1,84,200', change: '+0.3%' },\n    ]}\n    onRowPress={(row) => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The portfolio screen lists holdings with gains in green and losses in red. Pressing a row opens that holding; the screen handles the press."
+      }
+    },
+    {
+      "purpose": "Default, from the guide's Configuration: four columns share the width equally, and the three number columns are right-aligned so their digits line up.",
+      "jsx": "<Table\n  columns={[\n    { key: 'asset', header: 'Asset' },\n    { key: 'units', header: 'Units', align: 'right' },\n    { key: 'value', header: 'Value', align: 'right' },\n    { key: 'change', header: 'Change', align: 'right' },\n  ]}\n  data={[\n    { asset: 'HDFC Bank', units: '120', value: '₹1,98,400', change: '+2.4%' },\n    { asset: 'Reliance', units: '64', value: '₹1,52,900', change: '-0.8%' },\n    { asset: 'Infosys', units: '210', value: '₹3,10,500', change: '+1.1%' },\n    { asset: 'TCS', units: '48', value: '₹1,84,200', change: '+0.3%' },\n  ]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Columns share the width equally; numbers sit right so their digits line up."
+      }
+    },
+    {
+      "purpose": "Column widths, from the guide's Configuration: Asset takes twice the room (flex 2), Units keeps a fixed 70 px, centred, and Value flexes, right-aligned; a fixed width beats flex.",
+      "jsx": "<Table\n  columns={[\n    { key: 'asset', header: 'Asset', flex: 2 },\n    { key: 'units', header: 'Units', width: 70, align: 'center' },\n    { key: 'value', header: 'Value', align: 'right' },\n  ]}\n  data={[\n    { asset: 'HDFC Bank', units: '120', value: '₹1,98,400', change: '+2.4%' },\n    { asset: 'Reliance', units: '64', value: '₹1,52,900', change: '-0.8%' },\n    { asset: 'Infosys', units: '210', value: '₹3,10,500', change: '+1.1%' },\n    { asset: 'TCS', units: '48', value: '₹1,84,200', change: '+0.3%' },\n  ]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Asset takes twice the room and Units keeps a fixed 70 px; a fixed width beats flex."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "onRowPress",
+      "description": "With onRowPress each row stays a row (role row), is focusable on the web, activates with Enter or Space, and fades to 60% while pressed.",
+      "quote": "With `onRowPress` a row stays `role=\"row\"`, gets `tabIndex 0` on the web, activates with Enter or Space, and fades to 60% while pressed",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "data",
+      "description": "An empty data array renders the header only; there is no empty state.",
+      "quote": "`data={[]}` renders the header only; there is no empty state.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "columnWidth",
+      "description": "A column's width beats columnWidth, which beats flex.",
+      "quote": "Width: a column's `width` beats `columnWidth`, which beats `flex`.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "scrollable",
+      "description": "Wraps the table in a horizontal scroller with the scrollbar hidden.",
+      "quote": "`scrollable` wraps the table in a horizontal scroller with the scrollbar hidden.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "maxHeight",
+      "description": "Scrolls the body under the header, which stays pinned vertically; with scrollable as well, the header scrolls sideways with the body.",
+      "quote": "`maxHeight` scrolls the body under the header (pinned vertically); with both, the header scrolls sideways with the body.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "children",
+      "description": "Composition (Table.Header, Table.HeaderCell, Table.Body, Table.Row, Table.Cell): with children, columns, data and showHeader are ignored. Same look; a developer's choice, not a designer setting.",
+      "quote": "With `children`, `columns`, `data`, and `showHeader` are ignored.",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Table is one 720 × 190 component with one full-width header; in code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code.",
+      "from": {
+        "section": "sources",
+        "quote": "In code each column has its own header cell, a line runs under the header, and rows are a little taller; widths, alignment, and scrolling exist only in code."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Figma rows are 38 px; the code's are about 42 px (body) and 45 px (header).",
+      "quote": "Figma rows are 38 px; the code's are about 42 (body) and 45 (header).",
+      "checkedOn": "2026-10-12",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ]
+}

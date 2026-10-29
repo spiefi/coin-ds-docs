@@ -1,0 +1,16 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The guide's Sources note was checked on 17 October on 0.1.78-a116616, whose Table.tsx is identical to the installed dbe0e02, but the #264 fix in that build also stopped Text Appearance from reaching the table's own values: every string or number body cell is Coin Text given colour: bodyTextColor(modes), the tableHeader/label/color token, after Text's token colour (Table.tsx lines 108–110 and 143; Text.tsx line 153 puts style after the token colour), and that token is black in every mode, so Success, Warning, Error and the brand appearances set on the table leave the values black. Only Coin Text that a column renders itself still takes its own Text Appearance (or the table's, through the modes merged into it). The 17 October re-check measured Weight, JioPlus and the roles, not Text Appearance. This entry follows the installed package and leaves out the guide sentences it contradicts: Configuration's Status appearances card (“Success, Warning, and Error tint every body cell green, amber, or red; to mark one value, render your own cells.”), the Configuration description's “text size and the brand appearances are in the playground above”, the third Do & Don't pair (its Don't “Colour the whole table”: “Text appearance on the table tints every value, so nothing stands out.”), and the evidence's 12 October Text Appearance colours for body text. Guide fix #534 (Documentation, To do), filed by this run; it also asks Marcin whether black values under every Text Appearance are intended or a Component Bug. Re-extract once #534 is fixed and published. Added by Claude Code in the overnight run agentpack-batch12, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: The guide's Column widths card says only \"Asset takes twice the room and Units keeps a fixed 70 px; a fixed width beats flex.\" Nothing cited says Units is centred, yet the example sets align: 'center' on it and describes it as \"centred\".",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The example is the guide's own Column widths card, which the reviewer sees only as rendered copy: its columns are WIDTHS in src/guides/table.guide.tsx at 622cd82, line 43 { key: 'units', header: 'Units', width: 70, align: 'center' }, rendered at line 105 with data={HOLDINGS}. The example keeps the guide's columns and data as they are (only the Color Mode is dropped, per the building rules), so the centred Units column is the guide's, not an addition."
+    }
+  ]
+}

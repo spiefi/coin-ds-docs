@@ -1,0 +1,467 @@
+{
+  "slug": "testimonialscard",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch12, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/testimonialscard.guide.tsx) and docs/evidence/testimonialscard.md at e7ed622 (“docs: publish 19 Component Fix fixes on jfs-components dbe0e02”, 28 October), the same files on main and docs-next (the guide was added at ccb4c4c on 26 October; nothing changed them after e7ed622). The guide's Sources note was checked on 28 October 2026 on what it calls the 27 October build of Biscuit's main, mirror v0.1.78-dbe0e02, which is the installed build, so items citing it carry 2026-10-28 and 0.1.78-dbe0e02. The evidence's “dbe0e02 publish (28 October 2026, #406)” section replaces its older 26 October sections (on c8526ae) wherever they disagree, so the superseded points are not cited: the crossed text colours, the 17 px name line, the 4 px gap and 117 px card, monogram needing style Monogram, the sample photo without avatarProps, avatarProps.modes replacing the card's modes, and no pressed or disabled look. Evidence items cite the dbe0e02 section with its own date and build (2026-10-28, 0.1.78-dbe0e02); the only older line cited is the 26 October Sources section's summary of Biscuit's handwritten TestimonialsCard.mdx, for avoidWhen (2026-10-26, 0.1.78-c8526ae): the .mdx is not in the mirror (src/components/TestimonialsCard holds only TestimonialsCard.tsx at both v0.1.78-c8526ae and v0.1.78-dbe0e02), so it could not be re-read on dbe0e02; the dbe0e02 section doesn't contradict it, and the installed props have no rating, date or link either. Read against the installed TestimonialsCard.tsx (not rendered), with token values through the package's own getVariableByName (lib/commonjs): the card is a column 180 px wide, hard-coded (line 136), with alignItems flex-start (141), testimonialsCard/gap 12, padding 12 on every side, radius 8 and a white background; the 1 px rgb(232,232,232) border is an absolute overlay, so it adds no size (145–162). The name is 14 px, weight 700, on a 16 px line (testimonialsCard/title/lineHeight doesn't exist, so it falls back to testimonialsCard/subtitle/lineHeight, 16; lines 115–123), 2 px (title/gap in context7 Card, 103–104) above the quote, 12 px, weight 400, on a 16 px line (126–132), both rgb(13,13,15). So 12 + 42 + 12 + 16 + 2 + 16 + 12 = 112 for a one-line quote, and each further line adds 16; the body has no line clamp. The Avatar is always rendered, inside a view hidden from screen readers (215–227); its style is avatarProps.style, else Monogram when monogram is set or there is no imageSource, else Image (195–196); its monogram is avatarProps.monogram, else the first letters of the title's first two words (21–27, 197–199), so “Aarav S.” gives AS; its modes are the card's modes with avatarProps.modes on top (190–193). Avatar Size L, M, S and XS resolve avatar/size to 42, 36, 29 and 14 px, L is the default, and the card's own tokens don't change with it. An empty title or body hides its line (229, 239). Without onPress the card is a View carrying the label: on the web role group with aria-label, natively accessible with accessibilityRole text (282–293); the label is accessibilityLabel, else “Testimonial from {title}: {body}” (201–202), and the texts are hidden, so it reads once. With onPress it is a Pressable with role button and that label, dimmed to 0.7 while pressed unless disabled (258–279), with no hover style. disabled applies only with onPress: opacity 0.5, the Pressable disabled and aria-disabled on the web (143, 253–256, 270–274); without onPress it changes nothing (the dbe0e02 evidence: “Disabled without onPress leaves a static card alone”). Every guide sentence used here matches the installed build; none is contradicted, so no human flag. Two read with care: States' “Without onPress the card is text” is accessibilityRole text natively and a named group on the web; either way the card is read once, so it is quoted. States' “disabled dims it to half, stops presses, and takes it out of the Tab order.” holds only with onPress (the guide's own disabled card sets both): it is quoted, and the configuration rule from the disabled fact adds the condition. Open ticket #418 (Component Bug, Component Fix In progress, Mr. Biscuit): every render logs the console warning “Variable with name \"testimonialsCard/title/lineHeight\" not found” (it shows here too when the tokens are resolved); the layout is right (16 px name line, 112 px card). It is a developer console warning, not a usage gap, so it is in no rule and no gap. useWhen: the summary and the core principle. avoidWhen: the guide names no case, so the three items come from the evidence's summary of Biscuit's .mdx (not a review with stars or a profile; no rating, date, or link), as SummaryTile's and CardFeedback's do. ProfileCard has an entry, so that rule carries useInstead; Rating is not a jfs-components export (the package has CircularRating, which the .mdx doesn't name), so the stars rule has none. The Don'ts “The brand’s initials” and “A paragraph of marketing” are content guidance, so they are content rules, not avoidWhen. Anatomy: Avatar and Card are always present; Name and Quote are not marked always present: title and body are optional props, and although the package renders them by default (“Title” and its sample quote), an empty string hides each line (TestimonialsCard.tsx 229, 239). Modes: Avatar Size is the only collection the guide describes, and no guide sentence says when to pick M or S, so the configuration items say what it does and no rule asks for one; XS (14 px) is in the facts, but the guide names three sizes. The other collections in the facts (Badge Size, context 10, Context2, Context4, Page type, Profile Card Appearance) come from the package's FIGMA_COMPONENT_MODES and the guide says nothing about them. Content: good keeps the guide's names and quotes; bad keeps the two Don't specimens, the brand's initials “JF” and the marketing paragraph. Examples follow the building rules: no Color Mode (the guide sets Light on every component), no Slot gap modes, no style (paddingVertical 16, width 100% and paddingHorizontal 12 are the docs frame). The In context example is the guide's row: a VStack holding a Title and a horizontal ScrollArea › HStack of four cards, each with onPress (the empty handler stands for opening that customer's review) and an accessibilityLabel that says where it goes; ScrollArea has no entry in this pack and is used only as the guide does, as the horizontal scroller its In context needs (“the row scrolls instead of squeezing them”); Title, VStack and HStack have entries; alignVertical flex-start is kept as the guide writes it (it is HStack's default cross-axis alignment, stackAlignment.ts). The cards pass avatarProps={{ monogram }} alone, which the Sources note says shows initials on this build, instead of the guide's MONO helper (style Monogram plus monogram). The second example is a single quote with no onPress and no avatarProps, so its initials come from the title (Configuration). The third shows a photo through avatarProps.imageSource; the URI stands for the person's own photo. Not recorded: style (the building rules keep style overrides off Coin components); Color Mode and dark mode; Figma's hex values; the Storybook story list; the playground and its Readout (“onPress makes the whole card one button, which dims while pressed.” is playground copy, not a section); “Shown at 1.5×”. Gaps: the Sources note's Figma difference (Figma's Title, Body, Show Footer Text and Show Button properties change no layer). Sorting (batch 12, rounds 1 and 2): two cross-check runs. Round 1 raised four flags, all our extraction's wording, none about the installed build: /configuration/5 and /placementAdvice/0 generalised the guide's one In context row (each card opening a review through onPress; the row under a section title), so both now say they describe the guide's In context, and the onPress item says onPress is optional; /anatomy/1 and /anatomy/2 marked Name and Quote always present, but title and body are optional and an empty string hides each line (the older evidence's “Empty hides it.” still holds on dbe0e02, lines 229 and 239), so both are now not required. Round 2 ran on that final entry and raised no flags. Its notes, not flags: /examples/0's HStack alignVertical, Title's title and subtitle and ScrollArea direction horizontal are the guide's own code (testimonialscard.guide.tsx lines 88–90), which the reviewer doesn't see; the guide's ScreenFrame is the docs site's phone frame (guide-kit), not a jfs-components export, so the example leaves it out. Round 1 also noted that the evidence's Limits paragraph (“Don't imply … a pressed or disabled look … or that `monogram` alone shows initials”) is stale after the #406 fixes; nothing here cites it, and it is reported to the coordinator as an evidence fix. No dismissals, no human flag; no trace-check flags remain.",
+  "useWhen": [
+    {
+      "text": "One customer quote: their initials or photo, their name, and their words, usually in a sideways row.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Testimonials Card for one customer quote, their initials or photo, their name, and their words, usually in a sideways row."
+      }
+    },
+    {
+      "text": "A real person, in their own words.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "A real person, in their own words."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A profile: the upstream Storybook docs, as the evidence records them, say the card is not a profile; use a Profile Card.",
+      "strength": "discouraged",
+      "useInstead": "ProfileCard",
+      "from": {
+        "section": "evidence",
+        "quote": "Not a review with stars (Rating) or a profile (ProfileCard)."
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "A review with stars: the upstream Storybook docs, as the evidence records them, say the card is not one; it has no rating.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "Not a review with stars (Rating) or a profile (ProfileCard)."
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "A quote that needs a rating, a date, or a link on the card: the upstream Storybook docs, as the evidence records them, list none of these.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "Limits: no rating, date, or link; a row should scroll rather than shrink the card."
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "An Avatar, 42 px; avatarProps sets its initials or photo.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "An Avatar, 42 px; avatarProps sets its initials or photo."
+      }
+    },
+    {
+      "part": "Name",
+      "holds": "title, the person’s name, 14 px Bold.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "title, the person’s name, 14 px Bold."
+      }
+    },
+    {
+      "part": "Quote",
+      "holds": "body, 12 px; it wraps and never clips.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "body, 12 px; it wraps and never clips."
+      }
+    },
+    {
+      "part": "Card",
+      "holds": "180 px wide, white, a 1 px grey border, 8 px corners.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "180 px wide, white, a 1 px grey border, 8 px corners."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In the guide's In context, customer quotes sit in a row that scrolls sideways under a section title.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Customer quotes scroll sideways under a section title, and each card opens that customer’s full review."
+      }
+    },
+    {
+      "text": "The cards keep their 180 px, so the row scrolls instead of squeezing them.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The cards keep their 180 px, so the row scrolls instead of squeezing them."
+      }
+    },
+    {
+      "text": "The card is 180 px wide and doesn't stretch to its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is always 180 px wide and never stretches to its host."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "it describes every card: the width is a fixed 180 in the component (TestimonialsCard.tsx line 136, 0.1.78-dbe0e02), not a token or a prop; only a style override, which the building rules keep off Coin components, would change it."
+      }
+    },
+    {
+      "text": "Its height follows the quote: 12 px of padding, the 42 px avatar, 12 px, the name on a 16 px line, 2 px, then 16 px for each line of the quote.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Its height follows the quote: 12 px of padding, the 42 px avatar, 12 px, the name on a 16 px line, 2 px, then 16 px for each line of the quote."
+      }
+    },
+    {
+      "text": "With a one-line quote it is 112 px tall, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "With a one-line quote it is 112 px tall, as in Figma."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The card shows an Avatar in every configuration, and avatarProps sets it: monogram shows the person’s initials, and imageSource shows their photo.",
+      "strength": "recommended",
+      "target": "avatarProps",
+      "from": {
+        "section": "configuration",
+        "quote": "The card always shows an Avatar, and avatarProps sets it: monogram shows the person’s initials, and imageSource shows their photo."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "it describes every card: the Avatar is rendered unconditionally (TestimonialsCard.tsx lines 215–227, 0.1.78-dbe0e02), with no prop that removes it."
+      }
+    },
+    {
+      "text": "monogram alone in avatarProps shows initials; no Avatar style is needed.",
+      "strength": "recommended",
+      "target": "avatarProps",
+      "from": {
+        "section": "sources",
+        "quote": "monogram alone in avatarProps shows initials, and a pressable card dims while pressed."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Without avatarProps it shows the initials of the title.",
+      "strength": "recommended",
+      "target": "avatarProps",
+      "from": {
+        "section": "configuration",
+        "quote": "Without avatarProps it shows the initials of the title."
+      }
+    },
+    {
+      "text": "Avatar Size on the card’s modes sets the avatar to 42, 36, or 29 px; an Avatar Size in avatarProps’ own modes wins.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "from": {
+        "section": "configuration",
+        "quote": "Avatar Size on the card’s modes sets it to 42, 36, or 29 px; an Avatar Size in avatarProps’ own modes wins."
+      }
+    },
+    {
+      "text": "With no Avatar Size set, the avatar is L, 42 px, the default.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "value": "L",
+      "from": {
+        "section": "configuration",
+        "quote": "42 px, the default."
+      }
+    },
+    {
+      "text": "In the guide's row of quotes, each card opens that customer’s full review through onPress; onPress is optional, and without it the card is a quote to read.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "inContext",
+        "quote": "Customer quotes scroll sideways under a section title, and each card opens that customer’s full review."
+      }
+    },
+    {
+      "text": "disabled dims the card to half, stops presses, and takes it out of the Tab order.",
+      "strength": "recommended",
+      "target": "disabled",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "disabled dims it to half, stops presses, and takes it out of the Tab order."
+      }
+    },
+    {
+      "text": "disabled works only on a card with onPress; on a card without onPress it changes nothing.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "fact": "props:disabled"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write title as the person’s name the way they’d sign it, such as Aarav S., not the product.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Write title as the person’s name the way they’d sign it, such as Aarav S., not the product."
+        }
+      },
+      {
+        "text": "Write body as what they said, in a sentence or two.",
+        "strength": "recommended",
+        "target": "body",
+        "from": {
+          "section": "content",
+          "quote": "Write body as what they said, in a sentence or two."
+        }
+      },
+      {
+        "text": "Cards in a row look best with quotes of similar length.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "cards in a row look best with quotes of similar length"
+        }
+      },
+      {
+        "text": "Show a face or initials that belong to the name.",
+        "strength": "recommended",
+        "target": "avatarProps",
+        "from": {
+          "section": "doDont",
+          "quote": "A face or initials that belong to the name."
+        }
+      },
+      {
+        "text": "Don't show the brand’s initials: “JF” beside Aarav S. reads as the company, not the customer.",
+        "strength": "discouraged",
+        "target": "avatarProps",
+        "from": {
+          "section": "doDont",
+          "quote": "“JF” beside Aarav S. reads as the company, not the customer."
+        }
+      },
+      {
+        "text": "Don't write a paragraph of marketing: the card grows tall and stops sounding like a person.",
+        "strength": "discouraged",
+        "target": "body",
+        "from": {
+          "section": "doDont",
+          "quote": "The card grows tall and stops sounding like a person."
+        }
+      }
+    ],
+    "good": [
+      "Aarav S.",
+      "Priya M.",
+      "Rohan K.",
+      "Neha J.",
+      "Renewing my car insurance took a minute.",
+      "Simple, fast, reliable.",
+      "Setting up my first SIP took less than two minutes.",
+      "I see all my accounts and my gold in one place now."
+    ],
+    "bad": [
+      "JF",
+      "JioFinance brings your bank accounts, cards, insurance, loans, and digital gold together in one secure app, with instant payments, smart insights, and rewards on every transaction you make."
+    ]
+  },
+  "states": [
+    {
+      "state": "Quote",
+      "when": "Without onPress the card is text, and screen readers read it once: “Testimonial from Aarav S.: …”.",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the card is text, and screen readers read it once: “Testimonial from Aarav S.: …”."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "With onPress the whole card is one button; it dims while pressed and has no hover look.",
+      "from": {
+        "section": "states",
+        "quote": "it dims while pressed and has no hover look."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With onPress and disabled: dimmed to half; presses do nothing.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to half; presses do nothing."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "With onPress the whole card is one button, so give it an accessibilityLabel that says where it goes.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "states",
+        "quote": "With onPress the whole card is one button, so give it an accessibilityLabel that says where it goes; it dims while pressed and has no hover look."
+      }
+    },
+    {
+      "text": "Screen readers read the name and the whole quote together.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Screen readers read the name and the whole quote together"
+      }
+    },
+    {
+      "text": "accessibilityLabel is the card's label for screen readers; left out, it is made from the title and body.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    },
+    {
+      "text": "With onPress, Enter and Space press the card.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "evidence",
+        "quote": "Pressed dims to 0.7; disabled is 0.5 with `aria-disabled` and `tabindex -1`; Enter and Space press it; no hover look."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Their initials",
+      "dont": "The brand’s initials",
+      "why": "“JF” beside Aarav S. reads as the company, not the customer.",
+      "from": {
+        "section": "doDont",
+        "quote": "Their initials"
+      }
+    },
+    {
+      "do": "A sentence or two",
+      "dont": "A paragraph of marketing",
+      "why": "The card grows tall and stops sounding like a person.",
+      "from": {
+        "section": "doDont",
+        "quote": "A sentence or two"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A row of quotes, the guide's In context: a Title over a row that scrolls sideways, each card keeping its 180 px. Each card shows the customer's initials through avatarProps' monogram, opens that customer's full review through onPress (the empty handler stands for opening it), and has an accessibilityLabel that says where it goes. ScrollArea has no entry in this pack; it is the horizontal scroller the guide's In context uses.",
+      "jsx": "<VStack>\n  <Title title=\"What customers say\" subtitle=\"From people who switched this year\" />\n  <ScrollArea direction=\"horizontal\">\n    <HStack alignVertical=\"flex-start\">\n      <TestimonialsCard\n        title=\"Aarav S.\"\n        body=\"Renewing my car insurance took a minute.\"\n        avatarProps={{ monogram: 'AS' }}\n        onPress={() => {}}\n        accessibilityLabel=\"Read Aarav S.’s full review\"\n      />\n      <TestimonialsCard\n        title=\"Priya M.\"\n        body=\"Simple, fast, reliable.\"\n        avatarProps={{ monogram: 'PM' }}\n        onPress={() => {}}\n        accessibilityLabel=\"Read Priya M.’s full review\"\n      />\n      <TestimonialsCard\n        title=\"Rohan K.\"\n        body=\"Setting up my first SIP took less than two minutes.\"\n        avatarProps={{ monogram: 'RK' }}\n        onPress={() => {}}\n        accessibilityLabel=\"Read Rohan K.’s full review\"\n      />\n      <TestimonialsCard\n        title=\"Neha J.\"\n        body=\"I see all my accounts and my gold in one place now.\"\n        avatarProps={{ monogram: 'NJ' }}\n        onPress={() => {}}\n        accessibilityLabel=\"Read Neha J.’s full review\"\n      />\n    </HStack>\n  </ScrollArea>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Customer quotes scroll sideways under a section title, and each card opens that customer’s full review."
+      }
+    },
+    {
+      "purpose": "One quote with no onPress, from the guide's Content and Configuration: the title is the person's name as they'd sign it and the body is what they said; with no avatarProps the avatar shows the initials of the title (RK). Screen readers read the card once.",
+      "jsx": "<TestimonialsCard title=\"Rohan K.\" body=\"Setting up my first SIP took less than two minutes.\" />",
+      "from": {
+        "section": "configuration",
+        "quote": "Without avatarProps it shows the initials of the title."
+      }
+    },
+    {
+      "purpose": "The person's photo, from the guide's Configuration: imageSource in avatarProps shows it in the avatar. The URI stands for that person's own photo.",
+      "jsx": "<TestimonialsCard\n  title=\"Priya M.\"\n  body=\"Simple, fast, reliable.\"\n  avatarProps={{ imageSource: { uri: 'https://example.com/photos/priya-m.jpg' } }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The card always shows an Avatar, and avatarProps sets it: monogram shows the person’s initials, and imageSource shows their photo."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "title",
+      "description": "14 px on a 16 px line, 2 px above the quote.",
+      "quote": "A one-line card is 180 × 112 (the name 14 px on a 16 px line, 2 px above the quote; the 1 px `#e8e8e8` stroke is drawn inside the frame); two quote lines give 128.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "body",
+      "description": "Wraps: a one-line card is 180 × 112, and two quote lines give 128.",
+      "quote": "A one-line card is 180 × 112 (the name 14 px on a 16 px line, 2 px above the quote; the 1 px `#e8e8e8` stroke is drawn inside the frame); two quote lines give 128.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "avatarProps",
+      "description": "monogram alone shows the initials; without avatarProps the initials come from the title; imageSource shows a photo. avatarProps.modes merge with the card's modes, and the avatar's own Avatar Size wins.",
+      "quote": "`avatarProps={{ monogram: 'AS' }}` alone shows the initials; without avatarProps the initials come from the title; imageSource still shows a photo. avatarProps.modes merge with the card's modes, and the avatar's own Avatar Size wins.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "The card dims to 0.7 while pressed; Enter and Space press it; no hover look.",
+      "quote": "Pressed dims to 0.7; disabled is 0.5 with `aria-disabled` and `tabindex -1`; Enter and Space press it; no hover look.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "disabled",
+      "description": "With onPress: 0.5 opacity, aria-disabled and tabindex -1 on the web. Without onPress it leaves a static card alone.",
+      "quote": "Pressed dims to 0.7; disabled is 0.5 with `aria-disabled` and `tabindex -1`; Enter and Space press it; no hover look. Disabled without onPress leaves a static card alone.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Left out, the card reads once as “Testimonial from <title>: <body>”.",
+      "quote": "The card reads once as the group “Testimonial from Aarav S.: …”.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma’s card has Title and Body text properties and Show Footer Text and Show Button switches, but none of them changes a layer.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s card has Title and Body text properties and Show Footer Text and Show Button switches, but none of them changes a layer."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ]
+}
