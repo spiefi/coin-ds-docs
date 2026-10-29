@@ -1,0 +1,718 @@
+{
+  "slug": "cardfinancialcondition",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch9, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/cardfinancialcondition.guide.tsx) and docs/evidence/cardfinancialcondition.md at e7ed622 (“docs: publish 19 Component Fix fixes on jfs-components dbe0e02”, 28 October). The guide's Sources note was checked on 28 October 2026 on the installed build (jfs-components 0.1.78, mirror v0.1.78-dbe0e02, Biscuit's main at dbe0e02, 27 October), so items citing it carry 2026-10-28 and 0.1.78-dbe0e02. The evidence has a dbe0e02 publish section (verified 27 October on dbe0e02, #350), which replaces the older sections where they differ, and older sections checked on 19 October on c7d3348 (Contract, Modes and tokens, Web render); items citing those carry 2026-10-19 and 0.1.78-c7d3348. GitHub's compare of v0.1.78-c7d3348 and v0.1.78-dbe0e02 (195 files, complete) touches no token or resolver file; for this card it changes only CardFinancialCondition.tsx line 328 (the default spoken name now passes progressState) and financialConditionName.ts (Inactive leaves out the score), plus Nudge.tsx (closeAccessibilityLabel, a 28 px close, dev warnings, and a numeric title lineHeight), none of which reaches the card's nudge, which has no title and no close. Checked against the installed source, read, not run, with token values through the package's own getVariableByName (lib/commonjs/design-tokens/figma-variables-resolver.js): COMPONENT_DEFAULT_MODES is AppearanceBrand Neutral, Context Nudge&Alert, Nudge padding None (CardFinancialCondition.tsx 73–77), merged under the theme's and the card's own modes (278–286); the button always gets AppearanceBrand Secondary and Context CTACard over the card's modes (295–298), and buttonSlot children get those button modes (318–325) while progressSlot and nudgeSlot children get the card's (300–316); the root is a column with alignItems flex-start, no width, 16 px padding, radius 16, gap 8 (205–214); the header row has gap 16 and width 100% (215–220); title and body are plain Text with no numberOfLines, so they wrap (338–339); the default ring is CircularProgressBar with state, value and valueLabel (342–349), 60 px at the default circularProgressBar Size S (164 at M), Inactive by default, clamping value to 0–100 and showing valueLabel or the rounded value only when Active (CircularProgressBar.tsx 92, 119–120, 200, 240–258); showNudge gates the default Nudge (inline-compact, nudgeBody in a Text child, no title, no close because neither showClose nor onClose is passed; Nudge.tsx 316–320) and nudgeSlot (352–358); showDivider gates the Divider (360); showButton gates the Button and buttonSlot (362–372); the default spoken name is financialConditionName(title, body, value, valueLabel, progressState) (327–328), which leaves the score out while progressState is Inactive or false and otherwise reads “title, score. body” with no doubled period (financialConditionName.ts 1–22). Resolved token values (Light, the card's defaults): card background white for every AppearanceBrand, System status and Color Mode tried, radius 16, padding 16, gap 8, header gap 16, title 16/700 on an 18 line, body 14; ring arc Neutral rgb(48,51,56), Primary rgb(206,161,90), Secondary rgb(93,0,181), Tertiary rgb(2,107,154); nudge background Neutral white, Primary rgb(254,244,229), Secondary rgb(246,243,255), Tertiary rgb(236,247,255); button rgb(93,0,181) for every AppearanceBrand; Semantic Intent System positive gives a green ring rgb(0,119,61), nudge rgb(219,240,217) and button rgb(38,171,33), negative a red ring rgb(188,1,12), nudge rgb(255,224,222) and button rgb(245,0,48); AppearanceSystem without Semantic Intent System changes nothing; Emphasis Medium gives a pale ring rgb(214,214,217) and button rgb(228,219,255), Low rgb(245,245,245) and a transparent button, the nudge unchanged; the button's padding is 4 × 16 with 14/22 text (32 px) at Context Default, Nudge&Alert and ListItem and at Button / Size S and XS, so neither Context nor Button / Size changes it (the evidence names no Button / Size effect, so it is noted here and not recorded as a fact); Nudge padding Default gives 12 px; Border Boolean True gives the nudge a rgb(235,235,237) border; context 10 jioPlus turns the divider rgb(25,31,110). Every guide sentence used here holds on the installed build, so nothing is left out as contradicted and there are no human flags. Superseded and not used: the evidence Contract line “The default ignores `progressState`, so an Inactive card still reads the value” and the Hosting line on Inactive cards passing accessibilityLabel 'Protection. No score yet', both replaced by the dbe0e02 section; the 17 and 19 October measurements of the older 25 px button. Not recorded: style, headerStyle, titleStyle and bodyStyle (the building rules keep style overrides off Coin components) and the guide's style={{ width: '100%', maxWidth: 343 }} host frame, since the card fills its host; testID and the other View props; the evidence's Figma layer details and Code Connect; Biscuit's unpublished CardFinancialCondition.mdx (use, avoid and accessibilityLabel advice the guide doesn't give), so avoidWhen stays empty: the guide names no case or component to use instead; the exported financialConditionName helper; circularProgressBar Size, Border Boolean, Nudge padding, Button / State and context 10 beyond their facts, which the guide doesn't show; Page type, Context2, Slot gap and Profile Card Appearance, which the evidence says change nothing visible; dark mode (the card stays white in every Color Mode), which the pack's rules keep out of gaps. Anatomy: Title, Body and Score are always present (title and body have defaults; the ring is the default unless progressSlot replaces it); Nudge, Divider and Button are false, since showNudge, showDivider and showButton remove them. content.bad holds the Don't's paragraph nudge. Examples follow the building rules: no Color Mode, no AppearanceBrand Neutral (the card's default), no Slot gap on the VStack (the guide's In context sets M; the VStack stretches its children, stackAlignment.ts), and no style frame; the built-in button gets only buttonLabel and onPressButton; every card passes progressState Active, since the default Inactive hides the score; content is passed explicitly with the guide's own copy (Your money, October 2026, Protection, Check your coverage and gaps, the two-line nudge, View details, Your cover looks complete, You have gaps in your cover, 72, 90, 30); the second example is the In context card once cover is added, which the guide's source sets to value 90 and body “Your cover looks complete” with showNudge false (cardfinancialcondition.guide.tsx 126–128; the copy snapshot renders the screen before the press). The third example sets Semantic Intent System with AppearanceSystem negative, as the configuration says for a score to act on; it is set for the score's meaning, and it reaches the ring, the nudge and the button as the guide shows, not to restyle the button. Title has an undocumented entry. Left out of examples (three at most): Neutral and Primary alone, Positive, Without the nudge, Without the divider, Inactive, valueLabel, Long copy, the Don'ts and the playground. Gaps: the guide's Sources note that Figma's nudge is the retired Nudge with a purple sparkle, which no mode reproduces, and that the published Storybook still shows the older generated page (the evidence's Discrepancies: it lists collection defaults Primary / Default / Default, not the card's Neutral / Nudge&Alert / None); no open ticket was found for either. #285 and #350 (Component Bugs) are fixed on dbe0e02. Sorting (batch 9, first cross-check): our misreadings fixed: the Active spoken name now says it applies while the ring is Active; the circularProgressBar Size fact no longer names a 60 px S default the evidence doesn't state; the Figma sparkle gap no longer turns the page's choice to follow Neutral into card behaviour; the white-card rule no longer says which parts modes colour (context 10 also recolours the divider); “Your cover looks complete” left content.good, since the guide doesn't present it as sample copy. The In context example's copy is the guide's own and its flag is dismissed in reviews/cardfinancialcondition.json.",
+  "useWhen": [
+    {
+      "text": "Show one coverage score with a short reading, a hint on what's missing, and one button.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card Financial Condition to show one coverage score with a short reading, a hint on what's missing, and one button."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "title: the topic in 16 px bold; it wraps rather than cutting off.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The topic in 16 px bold; it wraps rather than cutting off."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "body: one short line on what the score covers.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One short line on what the score covers."
+      }
+    },
+    {
+      "part": "Score",
+      "holds": "A 60 px Circular Progress Bar: empty while Inactive, value out of 100 when Active; progressSlot replaces it.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 60 px Circular Progress Bar: empty while Inactive, value out of 100 when Active."
+      }
+    },
+    {
+      "part": "Nudge",
+      "holds": "An inline Nudge with nudgeBody; a line break starts its second line. showNudge removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An inline Nudge with nudgeBody; a line break starts its second line."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "A 1 px rule; showDivider removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 1 px rule; showDivider removes it."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "A purple Button with buttonLabel; onPressButton runs your action. showButton removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A purple Button with buttonLabel; onPressButton runs your action."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card has no width of its own: it fills its host, and Figma draws it at 343 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card has no width of its own: it fills its host, and Figma draws it at 343 px."
+      }
+    },
+    {
+      "text": "It's as tall as its content, with 16 px padding, 8 px between parts, and 16 px between the text and the 60 px ring.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It’s as tall as its content, with 16 px padding, 8 px between parts, and 16 px between the text and the 60 px ring."
+      }
+    },
+    {
+      "text": "The button is always Figma's 32 px, with 14 px text, whatever Context the card has.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The button is always Figma’s 32 px, with 14 px text, whatever Context the card has."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "it describes the card's built-in button, which the installed card always gives Context CTACard (CardFinancialCondition.tsx 295–298): its padding and text resolve the same at every Context and Button / Size. It names no restriction on how to use the card."
+      }
+    },
+    {
+      "text": "View details (the button) runs the screen's own action through onPressButton.",
+      "strength": "recommended",
+      "target": "onPressButton",
+      "from": {
+        "section": "inContext",
+        "quote": "View details runs the screen’s own action through onPressButton."
+      }
+    },
+    {
+      "text": "The card doesn't fetch or work out the score itself: once the person adds cover, the screen passes the new value and hides the nudge with showNudge.",
+      "strength": "recommended",
+      "target": "showNudge",
+      "value": "false",
+      "from": {
+        "section": "inContext",
+        "quote": "Once the person adds cover, the screen passes the new value and hides the nudge with showNudge; the card doesn’t fetch or work out the score itself."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "AppearanceBrand colours the ring and the nudge: the card defaults to Neutral, and the button stays purple.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand colours the ring and the nudge: the card defaults to Neutral, and the button stays purple."
+      }
+    },
+    {
+      "text": "Neutral, the card's default: a dark ring and a white nudge.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Neutral",
+      "from": {
+        "section": "configuration",
+        "quote": "The card’s default: a dark ring and a white nudge."
+      }
+    },
+    {
+      "text": "Primary: a gold ring and a cream nudge; the button stays purple.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Primary",
+      "from": {
+        "section": "configuration",
+        "quote": "A gold ring and a cream nudge; the button stays purple."
+      }
+    },
+    {
+      "text": "For a score that's good or bad, set Semantic Intent to System and pick AppearanceSystem: the ring, the nudge, and the button take the status colour.",
+      "strength": "recommended",
+      "target": "Semantic Intent",
+      "value": "System",
+      "from": {
+        "section": "configuration",
+        "quote": "For a score that’s good or bad, set Semantic Intent to System and pick AppearanceSystem: the ring, the nudge, and the button take the status colour."
+      }
+    },
+    {
+      "text": "System with positive: green for a good score.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "positive",
+      "from": {
+        "section": "configuration",
+        "quote": "System with positive: green for a good score."
+      }
+    },
+    {
+      "text": "System with negative: red for a score to act on.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "negative",
+      "from": {
+        "section": "configuration",
+        "quote": "System with negative: red for a score to act on."
+      }
+    },
+    {
+      "text": "Emphasis Medium or Low makes the ring and the button paler.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "from": {
+        "section": "configuration",
+        "quote": "Emphasis Medium or Low makes the ring and the button paler."
+      }
+    },
+    {
+      "text": "The card itself stays white in every mode.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The card stays white in every mode"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Set progressState to Active to show the score: Inactive, the default, draws an empty ring with a dash; Active fills value out of 100 and prints the number, or valueLabel in its place.",
+      "strength": "recommended",
+      "target": "progressState",
+      "value": "Active",
+      "from": {
+        "section": "states",
+        "quote": "Inactive, the default, draws an empty ring with a dash; Active fills value out of 100 and prints the number, or valueLabel in its place."
+      }
+    },
+    {
+      "text": "value is the score out of 100: the ring clamps it to 0–100.",
+      "strength": "required",
+      "target": "value",
+      "from": {
+        "fact": "props:value"
+      }
+    },
+    {
+      "text": "valueLabel replaces the number in the ring, such as “72%” with a percent sign.",
+      "strength": "recommended",
+      "target": "valueLabel",
+      "from": {
+        "section": "states",
+        "quote": "valueLabel replaces the number, here with a percent sign."
+      }
+    },
+    {
+      "text": "Set showNudge false to remove the nudge: the score, a rule, and the button remain.",
+      "strength": "recommended",
+      "target": "showNudge",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "showNudge, showDivider, and showButton remove their parts; progressSlot, nudgeSlot, and buttonSlot replace them with your own components."
+      }
+    },
+    {
+      "text": "Set showDivider false to remove the divider: the button sits right under the nudge.",
+      "strength": "recommended",
+      "target": "showDivider",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "The button sits right under the nudge."
+      }
+    },
+    {
+      "text": "Set showButton false to remove the button.",
+      "strength": "recommended",
+      "target": "showButton",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "showNudge, showDivider, and showButton remove their parts; progressSlot, nudgeSlot, and buttonSlot replace them with your own components."
+      }
+    },
+    {
+      "text": "progressSlot replaces the ring with your own component.",
+      "strength": "recommended",
+      "target": "progressSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "showNudge, showDivider, and showButton remove their parts; progressSlot, nudgeSlot, and buttonSlot replace them with your own components."
+      }
+    },
+    {
+      "text": "nudgeSlot replaces the nudge with your own component.",
+      "strength": "recommended",
+      "target": "nudgeSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "showNudge, showDivider, and showButton remove their parts; progressSlot, nudgeSlot, and buttonSlot replace them with your own components."
+      }
+    },
+    {
+      "text": "buttonSlot replaces the button with your own component.",
+      "strength": "recommended",
+      "target": "buttonSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "showNudge, showDivider, and showButton remove their parts; progressSlot, nudgeSlot, and buttonSlot replace them with your own components."
+      }
+    },
+    {
+      "text": "showNudge also gates nudgeSlot: with showNudge false, a nudgeSlot doesn't render either.",
+      "strength": "required",
+      "target": "showNudge",
+      "value": "false",
+      "from": {
+        "fact": "props:showNudge"
+      }
+    },
+    {
+      "text": "showButton also gates buttonSlot: with showButton false, a buttonSlot doesn't render either.",
+      "strength": "required",
+      "target": "showButton",
+      "value": "false",
+      "from": {
+        "fact": "props:showButton"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One score, one gap, one next step.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One score, one gap, one next step."
+        }
+      },
+      {
+        "text": "Use a one- or two-word title for the topic.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Use a one- or two-word title for the topic and one short line for the body."
+        }
+      },
+      {
+        "text": "Use one short line for the body.",
+        "strength": "recommended",
+        "target": "body",
+        "from": {
+          "section": "content",
+          "quote": "Use a one- or two-word title for the topic and one short line for the body."
+        }
+      },
+      {
+        "text": "Keep the nudge to two lines with a line break between them.",
+        "strength": "recommended",
+        "target": "nudgeBody",
+        "from": {
+          "section": "content",
+          "quote": "Keep the nudge to two lines with a line break between them"
+        }
+      },
+      {
+        "text": "Label the button with a verb, such as “View details”.",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "section": "content",
+          "quote": "label the button with a verb"
+        }
+      },
+      {
+        "text": "Keep the nudge to two lines: short lines, one line break.",
+        "strength": "recommended",
+        "target": "nudgeBody",
+        "from": {
+          "section": "doDont",
+          "quote": "Short lines, one line break."
+        }
+      },
+      {
+        "text": "Do not write a paragraph in the nudge: it wraps to four lines and pushes the button down.",
+        "strength": "discouraged",
+        "target": "nudgeBody",
+        "from": {
+          "section": "doDont",
+          "quote": "It wraps to four lines and pushes the button down."
+        }
+      },
+      {
+        "text": "Show the score when you have it: Active, with the ring at the score.",
+        "strength": "recommended",
+        "target": "progressState",
+        "value": "Active",
+        "from": {
+          "section": "doDont",
+          "quote": "Show the score when you have it"
+        }
+      },
+      {
+        "text": "Do not leave a known score Inactive: the ring stays empty and the score is lost.",
+        "strength": "discouraged",
+        "target": "progressState",
+        "value": "Inactive",
+        "from": {
+          "section": "doDont",
+          "quote": "The ring stays empty and the 72 is lost."
+        }
+      },
+      {
+        "text": "Pair the score with a next step: the nudge says what's missing and the button opens it.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The nudge says what’s missing and the button opens it."
+        }
+      },
+      {
+        "text": "Do not hide the nudge and the button: that leaves a number with no reading and nothing to do.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A number with no reading and nothing to do."
+        }
+      },
+      {
+        "text": "Long copy wraps: nothing is cut off; the title and body wrap and the card grows.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Nothing is cut off: the title and body wrap and the card grows."
+        }
+      }
+    ],
+    "good": [
+      "Protection",
+      "Check your coverage and gaps",
+      "View details"
+    ],
+    "bad": [
+      "There may be gaps in your health or life cover because one of your policies ended last month and your family has grown since you bought it"
+    ]
+  },
+  "states": [
+    {
+      "state": "Inactive",
+      "when": "progressState Inactive, the default: no score yet, an empty ring with a dash, as in Figma.",
+      "from": {
+        "section": "states",
+        "quote": "No score yet: an empty ring with a dash, as in Figma."
+      }
+    },
+    {
+      "state": "Active",
+      "when": "progressState Active: the ring fills value out of 100 and prints the number, or valueLabel in its place.",
+      "from": {
+        "section": "states",
+        "quote": "Inactive, the default, draws an empty ring with a dash; Active fills value out of 100 and prints the number, or valueLabel in its place."
+      }
+    },
+    {
+      "state": "Not pressable",
+      "when": "The card has no pressed or disabled state: only the button acts.",
+      "from": {
+        "section": "states",
+        "quote": "The card has no pressed or disabled state: only the button acts."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Without accessibilityLabel, while the ring is Active, the card's default spoken name reads the title, the score, and the body, such as “Protection, 72 out of 100. Check your coverage and gaps”.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "The default spoken name reads the title, the score, and the body, such as “Protection, 72 out of 100. Check your coverage and gaps”."
+      }
+    },
+    {
+      "text": "While the ring is Inactive, the default spoken name leaves out the score: “Protection. Check your coverage and gaps”.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "While the ring is Inactive, it leaves out the score: “Protection. Check your coverage and gaps”."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the nudge to two lines",
+      "dont": "Write a paragraph in the nudge",
+      "why": "It wraps to four lines and pushes the button down.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the nudge to two lines"
+      }
+    },
+    {
+      "do": "Show the score when you have it",
+      "dont": "Leave a known score Inactive",
+      "why": "The ring stays empty and the 72 is lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show the score when you have it"
+      }
+    },
+    {
+      "do": "Pair the score with a next step",
+      "dont": "Hide the nudge and the button",
+      "why": "A number with no reading and nothing to do.",
+      "from": {
+        "section": "doDont",
+        "quote": "Pair the score with a next step"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A protection score on the Money screen, the guide's In context: under the page's Title, the card shows the score Active at 72 with its reading and two-line nudge; View details runs the screen's own action through onPressButton.",
+      "jsx": "<VStack>\n  <Title title=\"Your money\" subtitle=\"October 2026\" />\n  <CardFinancialCondition\n    title=\"Protection\"\n    body=\"Check your coverage and gaps\"\n    progressState=\"Active\"\n    value={72}\n    nudgeBody={'There may be gaps in your health or life cover\\nAdd coverage to stay financially secure'}\n    buttonLabel=\"View details\"\n    onPressButton={() => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "View details runs the screen’s own action through onPressButton."
+      }
+    },
+    {
+      "purpose": "After the person adds cover, the guide's In context: the screen passes the new score and reading and hides the nudge with showNudge; the card doesn't work out the score itself.",
+      "jsx": "<CardFinancialCondition\n  title=\"Protection\"\n  body=\"Your cover looks complete\"\n  progressState=\"Active\"\n  value={90}\n  showNudge={false}\n  buttonLabel=\"View details\"\n  onPressButton={() => {}}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Once the person adds cover, the screen passes the new value and hides the nudge with showNudge; the card doesn’t fetch or work out the score itself."
+      }
+    },
+    {
+      "purpose": "A score to act on, in red, the guide's Configuration: Semantic Intent System with AppearanceSystem negative colours the ring, the nudge and the button.",
+      "jsx": "<CardFinancialCondition\n  title=\"Protection\"\n  body=\"You have gaps in your cover\"\n  progressState=\"Active\"\n  value={30}\n  nudgeBody={'There may be gaps in your health or life cover\\nAdd coverage to stay financially secure'}\n  buttonLabel=\"View details\"\n  onPressButton={() => {}}\n  modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "System with negative: red for a score to act on."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "default": "Neutral",
+      "description": "The card sets AppearanceBrand Neutral itself, over the collection's Primary default; the theme's modes and the card's own modes are merged on top of it.",
+      "quote": "Card defaults `AppearanceBrand: Neutral`, `Context: Nudge&Alert`, `Nudge padding: None` (`:72-76`), then the theme, then `modes`.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Context",
+      "default": "Nudge&Alert",
+      "description": "The card defaults to Nudge&Alert, which its nudge keeps; its button always gets Context CTACard (and AppearanceBrand Secondary), so the card's Context doesn't change the button.",
+      "quote": "The button always gets `AppearanceBrand: Secondary` and `Context: CTACard` (`:295-298`, since #285); the nudge keeps the card's Context.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Nudge padding",
+      "default": "None",
+      "description": "The card defaults to None, so its nudge has no padding; Default gives the nudge 12 px padding.",
+      "quote": "Nudge padding Default: 12 px nudge padding.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Semantic Intent",
+      "description": "System, with AppearanceSystem, gives the ring, the nudge and the button the status colour: positive green, warning orange, negative red.",
+      "quote": "Semantic Intent System + AppearanceSystem: ring, nudge and button take the status colour (positive green, warning orange, negative red).",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceSystem",
+      "description": "Only with Semantic Intent System: positive green, warning orange, negative red on the ring, the nudge and the button. AppearanceSystem alone does nothing.",
+      "quote": "AppearanceSystem alone does nothing.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Emphasis",
+      "description": "Medium and Low make the button and the ring's arc paler.",
+      "quote": "Emphasis Medium / Low: paler button and arc.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "circularProgressBar Size",
+      "description": "M makes the ring 164 px.",
+      "quote": "circularProgressBar Size M: 164 px ring.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Border Boolean",
+      "description": "Changes the nudge's border.",
+      "quote": "Border Boolean: nudge border.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "context 10",
+      "description": "jioPlus changes the divider's colour.",
+      "quote": "context 10 jioPlus: divider colour.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Button / State",
+      "description": "A static restyle of the button.",
+      "quote": "Button / State: a static button restyle.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Page type",
+      "description": "Listed for CardFinancialCondition, but changes nothing visible.",
+      "quote": "Page type, Context2, Slot gap, Profile Card Appearance: nothing visible.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Context2",
+      "description": "Listed for CardFinancialCondition, but changes nothing visible.",
+      "quote": "Page type, Context2, Slot gap, Profile Card Appearance: nothing visible.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Slot gap",
+      "description": "Listed for CardFinancialCondition, but changes nothing visible.",
+      "quote": "Page type, Context2, Slot gap, Profile Card Appearance: nothing visible.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Profile Card Appearance",
+      "description": "Listed for CardFinancialCondition, but changes nothing visible.",
+      "quote": "Page type, Context2, Slot gap, Profile Card Appearance: nothing visible.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "value",
+      "description": "The score out of 100; the ring clamps it to 0–100.",
+      "quote": "`value` (0; the ring clamps 0–100)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "valueLabel",
+      "description": "Replaces the number in the ring.",
+      "quote": "`valueLabel` (replaces the number in the ring)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "showNudge",
+      "description": "Also gates nudgeSlot: with showNudge false, a nudgeSlot doesn't render either.",
+      "quote": "`showNudge` (true; also gates `nudgeSlot`)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "showButton",
+      "description": "Also gates buttonSlot: with showButton false, a buttonSlot doesn't render either.",
+      "quote": "`showButton` (true; also gates `buttonSlot`)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "buttonSlot",
+      "description": "Its components get the button's modes (AppearanceBrand Secondary, Context CTACard over the card's); progressSlot and nudgeSlot get the card's modes.",
+      "quote": "slots get the card's modes; `buttonSlot` gets the button modes",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "onPressButton",
+      "description": "Runs when the button is pressed; the card itself is not pressable. The button has no disabled or loading state, and the card's nudge has no title, button or close.",
+      "quote": "No disabled or loading for the button; no nudge title, button or close.",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Without it, the card is named by title, score and body (“Protection, 72 out of 100. Check your coverage and gaps”, or valueLabel in place of the score) while the ring is Active; while it is Inactive (or progressState false) the name leaves out the score (“Protection. Check your coverage and gaps”), and the ring itself reads “Inactive progress”.",
+      "quote": "While Inactive the default spoken name leaves out the score: the defaults, Inactive with 72, `progressState={false}`, and Inactive with valueLabel all read “Protection. Check your coverage and gaps”; the ring reads “Inactive progress”.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Card/FinancialCondition uses the retired Nudge with a purple sparkle, which no mode reproduces.",
+      "from": {
+        "section": "sources",
+        "quote": "its nudge is the retired Nudge with a purple sparkle, which no mode reproduces"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The published Storybook still shows the older generated Card Financial Condition page.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook still shows the older generated page."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ]
+}

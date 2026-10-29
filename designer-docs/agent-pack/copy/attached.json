@@ -1,0 +1,252 @@
+{
+  "slug": "attached",
+  "label": "Attached",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "files": [
+    "src/guides/attached.guide.tsx",
+    "src/AttachedGuide.tsx"
+  ],
+  "evidence": "docs/evidence/attached.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:17:35.296Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "corner badge",
+    "overlay badge",
+    "indicator"
+  ],
+  "title": "Attached",
+  "summary": "Add a subordinate signal to a main item without altering its footprint.",
+  "corePrinciple": "Attachment supports the item, never obscures it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4477-471",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-attached--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A small signal stays attached to its main item",
+      "description": "Attached keeps a subordinate badge connected to the content it qualifies. The badge can straddle an edge or corner without changing the main item’s layout footprint.",
+      "blocks": [
+        "Shown at 3×",
+        "1",
+        "2",
+        "3",
+        "Main bounds",
+        "The child in the main slot establishes the size and the visual object people identify first.",
+        "Attachment",
+        "The badge slot is centered on the selected anchor and can straddle the main edge.",
+        "Anchor / ring",
+        "Position chooses one of nine anchors; the token ring separates a compact signal from the main mark."
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Main bounds",
+          "note": "The child in the main slot establishes the size and the visual object people identify first."
+        },
+        {
+          "part": "Attachment",
+          "note": "The badge slot is centered on the selected anchor and can straddle the main edge."
+        },
+        {
+          "part": "Anchor / ring",
+          "note": "Position chooses one of nine anchors; the token ring separates a compact signal from the main mark."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the anchor and corner relationship",
+      "description": "Use the exposed position choices for where the badge belongs. For diagonal anchors, choose the round child’s edge or its bounding-box corner.",
+      "blocks": [
+        "Nine positions",
+        "Place the signal where it belongs",
+        "top-left",
+        "top",
+        "top-right",
+        "left",
+        "center",
+        "right",
+        "bottom-left",
+        "bottom",
+        "bottom-right",
+        "Use edge or corner anchors when the badge describes the item. A center anchor is reserved for a deliberate overlay.",
+        "Corner geometry",
+        "Choose the corner anchor",
+        "Bounding box",
+        "Circle edge",
+        "The child stays a native circular capsule in both examples. Corner projection changes only the badge anchor: use Circle edge for round marks and Bounding box for a square corner relationship."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "The composition state belongs to its children",
+      "description": "Attached has no loading or disabled state of its own. Show whether a supporting signal is present through its children.",
+      "blocks": [
+        "Badge present",
+        "The secondary signal remains visible while the main item keeps its own identity.",
+        "Badge absent",
+        "Use the same composition when there is no subordinate status or action to show."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Make room for the part that overhangs",
+      "description": "The main child owns its intrinsic size. Attached does not grow the layout footprint for the badge, so its host needs enough whitespace for the overhang.",
+      "blocks": [
+        "Roomy host",
+        "Whitespace keeps the edge signal clear."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Keep the attachment subordinate",
+      "description": "Use a compact, meaningful signal that clarifies the main item. The badge should not carry the primary label or become a second focal point.",
+      "blocks": [
+        "01",
+        "Make the main item readable first",
+        "The badge adds a small qualification such as payment type or status while the central mark remains easy to recognize.",
+        "02",
+        "Use a short secondary meaning",
+        "Choose a familiar icon or small signal that people can understand at a glance.",
+        "03",
+        "Reserve the center",
+        "A centered badge covers the main mark, so use it only when the overlay itself is the intended message."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Attach a qualifier to a real list item",
+      "description": "A payment row keeps the qualifier next to the item it describes.",
+      "blocks": [
+        "A small secondary signal stays attached to the item it qualifies."
+      ],
+      "specimen": [
+        "Card payment",
+        "Today · Food",
+        "₹",
+        "500"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Let the signal support the item",
+      "description": "Each comparison shows a visible consequence of treating the attachment as supporting information.",
+      "blocks": [
+        "Do",
+        "Keep the center clear",
+        "Anchor a small badge to the edge when the main icon carries the identity.",
+        "Don’t",
+        "Cover the main mark",
+        "A centered badge obscures the item it is meant to qualify.",
+        "The main mark remains the first thing people can identify.",
+        "Allow the overhang",
+        "Leave slack around the composition so the badge can straddle the edge.",
+        "Clipped by host",
+        "Clip the host",
+        "Overflow hidden turns a positioning choice into a visibly cut-off signal.",
+        "The host needs space beyond the main bounds.",
+        "Keep the badge compact",
+        "Use a small, familiar symbol for supporting information.",
+        "Make the badge compete",
+        "An oversized attachment pulls focus away from the main item.",
+        "Secondary signals should stay visually lighter than the main item."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the center clear",
+            "caption": "Anchor a small badge to the edge when the main icon carries the identity.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Cover the main mark",
+            "caption": "A centered badge obscures the item it is meant to qualify.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Allow the overhang",
+            "caption": "Leave slack around the composition so the badge can straddle the edge.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Clip the host",
+            "caption": "Overflow hidden turns a positioning choice into a visibly cut-off signal.",
+            "specimen": "Clipped by host"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the badge compact",
+            "caption": "Use a small, familiar symbol for supporting information.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Make the badge compete",
+            "caption": "An oversized attachment pulls focus away from the main item.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the public attachment contract",
+      "description": "This guide uses the published Attached API, the Coin Components Library node, and the canonical Storybook fixtures.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Attached component set · node 4477:471",
+        "02",
+        "Canonical Storybook",
+        "Default, all positions, corner, and capsule badge stories",
+        "Open capsule badge story",
+        "Open all positions story",
+        "Checked 1 October 2026",
+        "Examples use public Attached and IconCapsule exports from jfs-components 0.1.78. The package defaults circular to true; the guide uses that default when omitted and exposes the supported choice. Badge placement waits for layout measurement, and the badge does not expand the parent layout footprint. The capsule story enlarges its children with style dimensions; this guide uses the native Icon Capsule Size modes M and XS so both child capsules keep their component-owned circular geometry.",
+        "Attached",
+        "IconCapsule",
+        "jfs-components",
+        "circular",
+        "true"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

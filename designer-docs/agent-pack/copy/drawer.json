@@ -1,0 +1,386 @@
+{
+  "slug": "drawer",
+  "label": "Drawer",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "files": [
+    "src/guides/drawer.guide.tsx"
+  ],
+  "evidence": "docs/evidence/drawer.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:17:32.115Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "bottom drawer",
+    "bottom sheet",
+    "draggable sheet",
+    "handle"
+  ],
+  "title": "Drawer",
+  "summary": "Use a Drawer for a panel that peeks from the bottom of a screen and drags up to show more, such as recent transactions.",
+  "corePrinciple": "Always there: a peek, or pulled up to read more.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2847-3454",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-drawer--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A handle, a title, and scrolling content",
+      "description": "The grey sheet carries a drag handle and an optional title that stay put while the content scrolls. Collapsed, only its top peeks above the screen’s bottom edge.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Handle",
+        "A button: press it, or drag it or the content, to resize.",
+        "Title",
+        "Optional; stays in place while the content scrolls.",
+        "Content",
+        "Scrolls inside the sheet; give each item its own modes.",
+        "Sheet",
+        "Grey, with 12 px top corners and a soft shadow."
+      ],
+      "specimen": [
+        "Home",
+        "Recent transactions",
+        "Netflix",
+        "25 March · 17:30",
+        "₹",
+        "500",
+        "Spotify",
+        "24 March · 09:12",
+        "119",
+        "Amazon",
+        "22 March · 21:04",
+        "1,299",
+        "Swiggy",
+        "21 March · 20:41",
+        "386"
+      ],
+      "anatomy": [
+        {
+          "part": "Handle",
+          "note": "A button: press it, or drag it or the content, to resize."
+        },
+        {
+          "part": "Title",
+          "note": "Optional; stays in place while the content scrolls."
+        },
+        {
+          "part": "Content",
+          "note": "Scrolls inside the sheet; give each item its own modes."
+        },
+        {
+          "part": "Sheet",
+          "note": "Grey, with 12 px top corners and a soft shadow."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Peek, title, and scrim",
+      "description": "Set how much of the drawer peeks when collapsed, so the title and the first item show. A scrim dims the screen while the drawer covers it.",
+      "blocks": [
+        "Peek 140",
+        "The title and the first transaction show.",
+        "Peek 200",
+        "A taller peek shows two transactions.",
+        "Without a title",
+        "The content starts under the handle; screen readers hear only “Drawer”.",
+        "With a scrim",
+        "The screen dims behind the drawer and taps on it don’t get through."
+      ],
+      "specimen": [
+        "Home",
+        "Recent transactions",
+        "Netflix",
+        "25 March · 17:30",
+        "₹",
+        "500",
+        "Spotify",
+        "24 March · 09:12",
+        "119",
+        "Amazon",
+        "22 March · 21:04",
+        "1,299",
+        "Swiggy",
+        "21 March · 20:41",
+        "386",
+        "Uber",
+        "20 March · 08:15",
+        "212",
+        "BigBasket",
+        "18 March · 11:02",
+        "1,054"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Peek 140",
+          "description": "The title and the first transaction show."
+        },
+        {
+          "title": "Peek 200",
+          "description": "A taller peek shows two transactions."
+        },
+        {
+          "title": "Without a title",
+          "description": "The content starts under the handle; screen readers hear only “Drawer”."
+        },
+        {
+          "title": "With a scrim",
+          "description": "The screen dims behind the drawer and taps on it don’t get through."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Collapsed or expanded",
+      "description": "A Drawer has two sizes and springs between them when dragged or when its handle is pressed; Escape collapses it. It never closes: collapsed is its smallest size.",
+      "blocks": [
+        "Collapsed",
+        "The peek shows what’s inside and invites a drag.",
+        "Expanded",
+        "The sheet rises to near the top; the list scrolls inside it."
+      ],
+      "specimen": [
+        "Home",
+        "Recent transactions",
+        "Netflix",
+        "25 March · 17:30",
+        "₹",
+        "500",
+        "Spotify",
+        "24 March · 09:12",
+        "119",
+        "Amazon",
+        "22 March · 21:04",
+        "1,299",
+        "Swiggy",
+        "21 March · 20:41",
+        "386",
+        "Uber",
+        "20 March · 08:15",
+        "212",
+        "BigBasket",
+        "18 March · 11:02",
+        "1,054"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Collapsed",
+          "description": "The peek shows what’s inside and invites a drag."
+        },
+        {
+          "title": "Expanded",
+          "description": "The sheet rises to near the top; the list scrolls inside it."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, sized by the screen",
+      "description": "The drawer spans the screen it sits in. Collapsed, it shows 200 px by default; expanded, it is 90% of that screen’s height, and never more than 95%. Its content starts 71 px below the top of the sheet, as in Figma.",
+      "blocks": [
+        "42 × 6",
+        "24"
+      ],
+      "specimen": [
+        "Home",
+        "Recent transactions",
+        "Netflix",
+        "25 March · 17:30",
+        "₹",
+        "500",
+        "Spotify",
+        "24 March · 09:12",
+        "119",
+        "Amazon",
+        "22 March · 21:04",
+        "1,299"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name it, and lead with what matters",
+      "description": "Title the drawer with what it holds. Collapsed, people see only the title and the first item or two, so put the most useful item first.",
+      "blocks": [
+        "The peek shows the first item"
+      ],
+      "specimen": [
+        "Home",
+        "Recent transactions",
+        "Netflix",
+        "25 March · 17:30",
+        "₹",
+        "500",
+        "Spotify",
+        "24 March · 09:12",
+        "119",
+        "Amazon",
+        "22 March · 21:04",
+        "1,299",
+        "Swiggy",
+        "21 March · 20:41",
+        "386",
+        "Uber",
+        "20 March · 08:15",
+        "212",
+        "BigBasket",
+        "18 March · 11:02",
+        "1,054"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "The peek shows the first item",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Recent transactions on a home screen",
+      "description": "The drawer peeks under the home screen. People drag it or press its handle to expand it, and the screen’s See all transactions button opens it too.",
+      "blocks": [
+        "Drawer collapsed"
+      ],
+      "specimen": [
+        "Home",
+        "See all transactions",
+        "Recent transactions",
+        "Netflix",
+        "25 March · 17:30",
+        "₹",
+        "500",
+        "Spotify",
+        "24 March · 09:12",
+        "119",
+        "Amazon",
+        "22 March · 21:04",
+        "1,299",
+        "Swiggy",
+        "21 March · 20:41",
+        "386",
+        "Uber",
+        "20 March · 08:15",
+        "212",
+        "BigBasket",
+        "18 March · 11:02",
+        "1,054"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Show enough, and say what it holds",
+      "description": "Each pair shows a drawer people understand versus one that hides what it holds.",
+      "blocks": [
+        "Do",
+        "Peek enough to read",
+        "The title and the first item say what’s inside.",
+        "Don’t",
+        "Peek only the handle",
+        "People can’t tell what the drawer holds.",
+        "Give it a title",
+        "The title says what’s inside and names the drawer for screen readers.",
+        "Leave the title out",
+        "The peek shows a bare list, and screen readers hear only “Drawer”."
+      ],
+      "specimen": [
+        "Home",
+        "Recent transactions",
+        "Netflix",
+        "25 March · 17:30",
+        "₹",
+        "500",
+        "Spotify",
+        "24 March · 09:12",
+        "119",
+        "Amazon",
+        "22 March · 21:04",
+        "1,299",
+        "Swiggy",
+        "21 March · 20:41",
+        "386",
+        "Uber",
+        "20 March · 08:15",
+        "212",
+        "BigBasket",
+        "18 March · 11:02",
+        "1,054"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Peek enough to read",
+            "caption": "The title and the first item say what’s inside.",
+            "specimen": "Home · Recent transactions · Netflix · 25 March · 17:30 · ₹ · 500 · Spotify · 24 March · 09:12 · ₹ · 119 · Amazon · 22 March · 21:04 · ₹ · 1,299 · Swiggy · 21 March · 20:41 · ₹ · 386 · Uber · 20 March · 08:15 · ₹ · 212 · BigBasket · 18 March · 11:02 · ₹ · 1,054"
+          },
+          "dont": {
+            "title": "Peek only the handle",
+            "caption": "People can’t tell what the drawer holds.",
+            "specimen": "Home · Recent transactions · Netflix · 25 March · 17:30 · ₹ · 500 · Spotify · 24 March · 09:12 · ₹ · 119 · Amazon · 22 March · 21:04 · ₹ · 1,299 · Swiggy · 21 March · 20:41 · ₹ · 386 · Uber · 20 March · 08:15 · ₹ · 212 · BigBasket · 18 March · 11:02 · ₹ · 1,054"
+          }
+        },
+        {
+          "do": {
+            "title": "Give it a title",
+            "caption": "The title says what’s inside and names the drawer for screen readers.",
+            "specimen": "Home · Recent transactions · Netflix · 25 March · 17:30 · ₹ · 500 · Spotify · 24 March · 09:12 · ₹ · 119 · Amazon · 22 March · 21:04 · ₹ · 1,299 · Swiggy · 21 March · 20:41 · ₹ · 386 · Uber · 20 March · 08:15 · ₹ · 212 · BigBasket · 18 March · 11:02 · ₹ · 1,054"
+          },
+          "dont": {
+            "title": "Leave the title out",
+            "caption": "The peek shows a bare list, and screen readers hear only “Drawer”.",
+            "specimen": "Home · Netflix · 25 March · 17:30 · ₹ · 500 · Spotify · 24 March · 09:12 · ₹ · 119 · Amazon · 22 March · 21:04 · ₹ · 1,299 · Swiggy · 21 March · 20:41 · ₹ · 386 · Uber · 20 March · 08:15 · ₹ · 212 · BigBasket · 18 March · 11:02 · ₹ · 1,054"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Drawer contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Interactive",
+        "With overlay",
+        "With carousel",
+        "Programmatic control",
+        "Checked 23 October 2026",
+        "Installed jfs-components is 0.1.78 (23 October build) from the team’s private package repository. Figma’s Drawer is one 360 × 722 component with a fixed header and a scrolling content slot. The package sizes the drawer from the screen it sits in, and its content starts 71 px from the top, as in Figma. It can be dragged with a mouse or a finger; its handle is a button that expands or collapses it, and Escape collapses it. On the web it’s a dialog named by its title. It has no way to close, and its scrim leaves keyboard focus alone. On this site drags spring slightly differently from Storybook because the site uses a simplified animation library.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "flags": [],
+  "dismissed": [
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: The guide's In context says only that \"the screen passes the new value and hides the nudge with showNudge\". The example's description says the screen passes \"the new score and reading\", and its code swaps the body to \"Your cover looks complete\". That body text comes from the Configuration section's Positive example, not In context, which shows only \"Score 72, with a nudge\".",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch9, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The copy is the guide’s own In context state after the press: cardfinancialcondition.guide.tsx (at e7ed622) lines 125–130 render the card with value: added ? 90 : 72, body: added ? 'Your cover looks complete' : 'Check your coverage and gaps', and showNudge: !added, with onPressButton setting added, and its readout reads “Cover added: score 90, and the nudge is hidden”. The copy snapshot renders the screen before the press (“Score 72, with a nudge”), so the cross-check cannot see that state. The example cites the In context sentence that describes it (the screen passes the new value and hides the nudge with showNudge); the new body is the reading the guide gives that value."
+    }
+  ]
+}

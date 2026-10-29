@@ -1,0 +1,357 @@
+{
+  "slug": "cardfinancialcondition",
+  "label": "Card Financial Condition",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/cardfinancialcondition.guide.tsx"
+  ],
+  "evidence": "docs/evidence/cardfinancialcondition.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:17:30.463Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "financial condition",
+    "protection score",
+    "coverage card",
+    "insurance score",
+    "financial health"
+  ],
+  "title": "Card Financial Condition",
+  "summary": "Use a Card Financial Condition to show one coverage score with a short reading, a hint on what's missing, and one button.",
+  "corePrinciple": "One score, one gap, one next step.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3600-3177",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cardfinancialcondition--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A score, a hint, and a button",
+      "description": "A white card puts a title and one line beside a 60 px score ring. Under them sit an inline nudge with up to two lines, a divider, and one button.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Title",
+        "The topic in 16 px bold; it wraps rather than cutting off.",
+        "Body",
+        "One short line on what the score covers.",
+        "Score",
+        "A 60 px Circular Progress Bar: empty while Inactive, value out of 100 when Active.",
+        "Nudge",
+        "An inline Nudge with nudgeBody; a line break starts its second line.",
+        "Divider",
+        "A 1 px rule; showDivider removes it.",
+        "Button",
+        "A purple Button with buttonLabel; onPressButton runs your action."
+      ],
+      "specimen": [
+        "Protection",
+        "Check your coverage and gaps",
+        "72",
+        "There may be gaps in your health or life cover Add coverage to stay financially secure",
+        "View details"
+      ],
+      "anatomy": [
+        {
+          "part": "Title",
+          "note": "The topic in 16 px bold; it wraps rather than cutting off."
+        },
+        {
+          "part": "Body",
+          "note": "One short line on what the score covers."
+        },
+        {
+          "part": "Score",
+          "note": "A 60 px Circular Progress Bar: empty while Inactive, value out of 100 when Active."
+        },
+        {
+          "part": "Nudge",
+          "note": "An inline Nudge with nudgeBody; a line break starts its second line."
+        },
+        {
+          "part": "Divider",
+          "note": "A 1 px rule; showDivider removes it."
+        },
+        {
+          "part": "Button",
+          "note": "A purple Button with buttonLabel; onPressButton runs your action."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Brand, status, and sections",
+      "description": "AppearanceBrand colours the ring and the nudge: the card defaults to Neutral, and the button stays purple. For a score that’s good or bad, set Semantic Intent to System and pick AppearanceSystem: the ring, the nudge, and the button take the status colour. Emphasis Medium or Low makes the ring and the button paler. showNudge, showDivider, and showButton remove their parts; progressSlot, nudgeSlot, and buttonSlot replace them with your own components.",
+      "blocks": [
+        "Neutral",
+        "The card’s default: a dark ring and a white nudge.",
+        "Primary",
+        "A gold ring and a cream nudge; the button stays purple.",
+        "Positive",
+        "System with positive: green for a good score.",
+        "Negative",
+        "System with negative: red for a score to act on.",
+        "Without the nudge",
+        "The score, a rule, and the button.",
+        "Without the divider",
+        "The button sits right under the nudge."
+      ],
+      "specimen": [
+        "Protection",
+        "Check your coverage and gaps",
+        "72",
+        "There may be gaps in your health or life cover Add coverage to stay financially secure",
+        "View details",
+        "Your cover looks complete",
+        "90",
+        "Health and life cover are in place Review them once a year",
+        "You have gaps in your cover",
+        "30"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Neutral",
+          "description": "The card’s default: a dark ring and a white nudge."
+        },
+        {
+          "title": "Primary",
+          "description": "A gold ring and a cream nudge; the button stays purple."
+        },
+        {
+          "title": "Positive",
+          "description": "System with positive: green for a good score."
+        },
+        {
+          "title": "Negative",
+          "description": "System with negative: red for a score to act on."
+        },
+        {
+          "title": "Without the nudge",
+          "description": "The score, a rule, and the button."
+        },
+        {
+          "title": "Without the divider",
+          "description": "The button sits right under the nudge."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Inactive or Active",
+      "description": "progressState decides whether the ring shows a score. Inactive, the default, draws an empty ring with a dash; Active fills value out of 100 and prints the number, or valueLabel in its place. The card has no pressed or disabled state: only the button acts.",
+      "blocks": [
+        "Inactive",
+        "No score yet: an empty ring with a dash, as in Figma.",
+        "Active",
+        "The ring fills to 72 and shows the number.",
+        "valueLabel",
+        "valueLabel replaces the number, here with a percent sign."
+      ],
+      "specimen": [
+        "Protection",
+        "Check your coverage and gaps",
+        "There may be gaps in your health or life cover Add coverage to stay financially secure",
+        "View details",
+        "72",
+        "72%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Inactive",
+          "description": "No score yet: an empty ring with a dash, as in Figma."
+        },
+        {
+          "title": "Active",
+          "description": "The ring fills to 72 and shows the number."
+        },
+        {
+          "title": "valueLabel",
+          "description": "valueLabel replaces the number, here with a percent sign."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Your screen sets the width",
+      "description": "The card has no width of its own: it fills its host, and Figma draws it at 343 px. It’s as tall as its content, with 16 px padding, 8 px between parts, and 16 px between the text and the 60 px ring. The button is always Figma’s 32 px, with 14 px text, whatever Context the card has.",
+      "blocks": [
+        "343 × 183",
+        "16"
+      ],
+      "specimen": [
+        "Protection",
+        "Check your coverage and gaps",
+        "72",
+        "There may be gaps in your health or life cover Add coverage to stay financially secure",
+        "View details"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name it, read it, act on it",
+      "description": "Use a one- or two-word title for the topic and one short line for the body. Keep the nudge to two lines with a line break between them, and label the button with a verb. The default spoken name reads the title, the score, and the body, such as “Protection, 72 out of 100. Check your coverage and gaps”. While the ring is Inactive, it leaves out the score: “Protection. Check your coverage and gaps”.",
+      "blocks": [
+        "Short copy",
+        "“Protection”, one line, two nudge lines, and “View details”.",
+        "Long copy wraps",
+        "Nothing is cut off: the title and body wrap and the card grows."
+      ],
+      "specimen": [
+        "Protection",
+        "Check your coverage and gaps",
+        "72",
+        "There may be gaps in your health or life cover Add coverage to stay financially secure",
+        "View details",
+        "Comprehensive financial protection plan",
+        "Review every active policy, find the gaps in your cover, and stay on top of renewals."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short copy",
+          "description": "“Protection”, one line, two nudge lines, and “View details”."
+        },
+        {
+          "title": "Long copy wraps",
+          "description": "Nothing is cut off: the title and body wrap and the card grows."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A protection score on the Money screen",
+      "description": "View details runs the screen’s own action through onPressButton. Once the person adds cover, the screen passes the new value and hides the nudge with showNudge; the card doesn’t fetch or work out the score itself.",
+      "blocks": [
+        "Score 72, with a nudge"
+      ],
+      "specimen": [
+        "Your money",
+        "October 2026",
+        "Protection",
+        "Check your coverage and gaps",
+        "72",
+        "There may be gaps in your health or life cover Add coverage to stay financially secure",
+        "View details"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A score people can act on",
+      "description": "Each pair shows a card that reads at a glance next to one that hides its score or its next step.",
+      "blocks": [
+        "Do",
+        "Keep the nudge to two lines",
+        "Short lines, one line break.",
+        "Don’t",
+        "Write a paragraph in the nudge",
+        "It wraps to four lines and pushes the button down.",
+        "Show the score when you have it",
+        "Active, with the ring at 72.",
+        "Leave a known score Inactive",
+        "The ring stays empty and the 72 is lost.",
+        "Pair the score with a next step",
+        "The nudge says what’s missing and the button opens it.",
+        "Hide the nudge and the button",
+        "A number with no reading and nothing to do."
+      ],
+      "specimen": [
+        "Protection",
+        "Check your coverage and gaps",
+        "72",
+        "There may be gaps in your health or life cover Add coverage to stay financially secure",
+        "View details",
+        "There may be gaps in your health or life cover because one of your policies ended last month and your family has grown since you bought it"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the nudge to two lines",
+            "caption": "Short lines, one line break.",
+            "specimen": "Protection · Check your coverage and gaps · 72 · There may be gaps in your health or life cover Add coverage to stay financially secure · View details"
+          },
+          "dont": {
+            "title": "Write a paragraph in the nudge",
+            "caption": "It wraps to four lines and pushes the button down.",
+            "specimen": "Protection · Check your coverage and gaps · 72 · There may be gaps in your health or life cover because one of your policies ended last month and your family has grown since you bought it · View details"
+          }
+        },
+        {
+          "do": {
+            "title": "Show the score when you have it",
+            "caption": "Active, with the ring at 72.",
+            "specimen": "Protection · Check your coverage and gaps · 72 · There may be gaps in your health or life cover Add coverage to stay financially secure · View details"
+          },
+          "dont": {
+            "title": "Leave a known score Inactive",
+            "caption": "The ring stays empty and the 72 is lost.",
+            "specimen": "Protection · Check your coverage and gaps · There may be gaps in your health or life cover Add coverage to stay financially secure · View details"
+          }
+        },
+        {
+          "do": {
+            "title": "Pair the score with a next step",
+            "caption": "The nudge says what’s missing and the button opens it.",
+            "specimen": "Protection · Check your coverage and gaps · 72 · There may be gaps in your health or life cover Add coverage to stay financially secure · View details"
+          },
+          "dont": {
+            "title": "Hide the nudge and the button",
+            "caption": "A number with no reading and nothing to do.",
+            "specimen": "Protection · Check your coverage and gaps · 72"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Card Financial Condition contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Active progress",
+        "Without nudge",
+        "Without divider",
+        "Custom progress slot",
+        "Long content",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78, built from Biscuit’s main at dbe0e02 (27 October) and taken from the team’s private package repository. Figma’s Card/FinancialCondition is one 343 × 181 component with no properties and an Inactive ring; its nudge is the retired Nudge with a purple sparkle, which no mode reproduces, so this page follows the package’s Neutral default. The button is Figma’s 32 px at any Context. The card stays white in every mode, and its default spoken name includes the score only while the ring is Active. The published Storybook still shows the older generated page.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "slug": "drawer",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch9, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/drawer.guide.tsx) and docs/evidence/drawer.md at b4988c5 (“docs: publish nine Component Fix fixes on jfs-components c8526ae”, 23 October). The guide's Sources note was checked on 23 October 2026 on the build it calls the 23 October build (mirror v0.1.78-c8526ae, Biscuit's main at c8526ae, the evidence's c8526ae publish section), so items citing it carry 2026-10-23 and 0.1.78-c8526ae. The evidence has sections from 6 October (Check, Behaviour, Classification; 3795b4c), 17 October (Overlay focus trap; a116616) and 23 October (c8526ae publish); the 23 October section says it replaces the others where they differ, and each item citing the evidence carries its section's date and build. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c8526ae and v0.1.78-dbe0e02 (163 files, complete) touches no Drawer, Overlay, resolver, token, shadow or typography file; src/utils/web-focus-trap.ts is listed with 0 additions and 0 deletions (a mode-only change). Installed Drawer.tsx matches every guide and evidence sentence used here, read from source, not run (tokens through the package's own getVariableByName with no modes): defaults collapsedHeight 200, expandedRatio 0.9, initialState 'collapsed', showOverlay false (lines 161–182); the host is an absolute, full-size, box-none View that measures its parent with onLayout (183–191, 526–531, 662–670), so the drawer sizes from the screen it sits in, not the window; expandedRatio is clamped to 0.2–0.95, the peek is at most the parent's height, and the expanded height is the parent × ratio, never less than the peek (198–204); a controlled state wins at mount (193–194, 242) and later state changes animate with the gesture spring (283–307); Escape on the web collapses an expanded sheet, and when it is already collapsed it calls onOverlayPress if one is given (309–327); the whole sheet is the drag target (346–456); the handle is a Pressable with accessibilityRole button named “Collapse drawer” / “Expand drawer” that toggles on press (580–597); the title sits outside the ScrollView, so it stays put while the content scrolls (602–653); the ScrollView scrolls only when expanded (642); the sheet is role dialog named accessibilityLabel || title || 'Drawer' (514, 551–554); children are rendered as they are, with no modes passed to them (652), while the drawer's modes reach its tokens and the Overlay (534); showOverlay renders the Overlay whatever the state (534), without trapFocus, so focus is left alone (Overlay.tsx 85–112, 128–142), and the Overlay fills its parent with overlay/background rgba(0, 0, 0, 0.7) and blocks taps even without onOverlayPress. Resolved tokens: drawer/background rgb(245, 245, 245) (grey), drawer/radius/top 12, handlebar 42 × 6 rgb(224, 224, 227), padding 8 / 8 / 10, gap 8, title 14/17 bold, title wrap padding 16 top and 8 bottom, shadow blurs 48 (primary) and 24 (secondary); the content's top is 8 + 6 + 16 + 17 + 8 + (8 + 8) = 71 px with a title and 38 px without, as the guide and the evidence say. Nothing in the guide is contradicted by the installed build, so there is no guide fix. Left out: the Configuration description “A scrim dims the screen while the drawer covers it.”, which can be read as the scrim showing only while expanded, while the installed Overlay renders in both states (the evidence's “shown in both states”); the entry uses the With a scrim card's caption instead. The Peek 140 and Peek 200 captions (“The title and the first transaction show.”, “A taller peek shows two transactions.”) describe the guide's transaction rows, so they are not configuration rules; the third example shows the 200 px default. The Sources sentence on Storybook's animation library, the Figma frame sizes and the story list are not guidance. Out of date and not used: the 6 October Check and Behaviour lines the 23 October section replaces (window geometry, state ignored at mount, accessibilityLabel never applied, no keyboard way to resize, content 63 px from the top, the shadow using one layer's values) and the 17 October focus-trap note (#281 fixed; the guide's Sources say its scrim leaves focus alone). Not recorded: header, style, sheetStyle, contentStyle, contentContainerStyle, showsVerticalScrollIndicator, bottomInset, accessibilityHint, the ref API (expand, collapse, toggle, getState) and Page type, which the guide doesn't cover (the evidence classes them as developer-only); Escape calling onOverlayPress when collapsed, which the guide doesn't say; dark mode, which the pack's rules keep out of gaps. Anatomy: the Handle and the Sheet are always rendered (required); the Title is optional and the Content is the optional children. Accessibility: the guide's own sentences only; the 6 October evidence line that the handle cannot be focused is replaced by the 23 October one. avoidWhen rests on the States sentence “It never closes: collapsed is its smallest size.”: the installed Drawer has no visible, close or dismiss prop (the facts list none), so “never” applies everywhere; the guide names no component to use instead, so useInstead is left out. Examples follow the building rules: no Color Mode, and no modes on Drawer, ListGroup, ListItem, MoneyValue, Button, VStack, Text or Screen (the guide sets Color Mode Light on all of them and List Item Style Boxed on the rows, a look the guide doesn't ask for). The rows are the guide's own composition (a ListGroup of Horizontal ListItems with a MoneyValue in trailing), as in ListGroup's entry; MoneyValue has no entry in this pack, and the examples use it because the guide's rows show each amount with it. Screen holds the first example because the drawer fills the screen it sits in; the guide's ScreenFrame is a docs-site frame. Copy is the guide's own (Recent transactions, Home, See all transactions, Netflix 25 March · 17:30 ₹500, Spotify, Amazon). The state in the first two examples is shown as a literal with an onStateChange stub: the screen keeps it in its own state. Left out of examples (three at most): Peek 140 alone, Without a title (a Don't), Collapsed and Expanded alone, the Don'ts and the playground. Sorting (batch 9, cross-check round 1): the expandedRatio fact said “a share of the parent's height”, which its 6 October quote doesn't say (that section measured from the window); it now says only the default and the clamp, and the collapsedHeight fact's 0.9 now says it is the default expandedRatio. The two state examples now say their literal state and empty handlers are placeholders, and the scrim example's onOverlayPress rests on the package's own description instead of the playground. Round 2: the configuration item “A button on the screen can open the drawer too” turned the In context example into a rule (the guide's earlier Do “Add a button that opens it” was removed on 23 October), so it is gone; the In context sentence stays as placement advice and in the first example, and opening it from the screen rests on the state fact. The States description's “springs between them when dragged or when its handle is pressed” is a transition, not a state, so it is no longer a state item (the Handle's anatomy note and the Sources accessibility sentence cover it). Gap: the published Storybook is still the 17 October build (index.json last modified 17 October 2026 10:39 UTC on 29 October), so its Drawer predates the c8526ae fixes in #202 (closed); no open ticket covers rebuilding it.",
+  "useWhen": [
+    {
+      "text": "A panel that peeks from the bottom of a screen and drags up to show more, such as recent transactions.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Drawer for a panel that peeks from the bottom of a screen and drags up to show more, such as recent transactions."
+      }
+    },
+    {
+      "text": "Content that stays on the screen: always there, as a peek or pulled up to read more.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Always there: a peek, or pulled up to read more."
+      },
+      "absolute": {
+        "word": "Always",
+        "scope": "everywhere",
+        "reason": "it describes every Drawer: the installed component has no visible, close or dismiss prop, so it is always on its screen, collapsed or expanded. It names no restriction on how to use it."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Something people close or dismiss: a Drawer never closes; collapsed is its smallest size.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "It never closes: collapsed is its smallest size."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "the installed Drawer has no visible, close or dismiss prop and no closed state: its two states are collapsed and expanded, and collapsed is the smallest."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Handle",
+      "holds": "A button: press it, or drag it or the content, to resize.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A button: press it, or drag it or the content, to resize."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "Optional; stays in place while the content scrolls.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional; stays in place while the content scrolls."
+      }
+    },
+    {
+      "part": "Content",
+      "holds": "Scrolls inside the sheet; give each item its own modes.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Scrolls inside the sheet; give each item its own modes."
+      }
+    },
+    {
+      "part": "Sheet",
+      "holds": "Grey, with 12 px top corners and a soft shadow.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey, with 12 px top corners and a soft shadow."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The drawer spans the screen it sits in.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The drawer spans the screen it sits in."
+      }
+    },
+    {
+      "text": "Its content starts 71 px below the top of the sheet, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Its content starts 71 px below the top of the sheet, as in Figma."
+      }
+    },
+    {
+      "text": "In the guide, the drawer peeks under the home screen; people drag it or press its handle to expand it, and the screen’s See all transactions button opens it too.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The drawer peeks under the home screen. People drag it or press its handle to expand it, and the screen’s See all transactions button opens it too."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set how much of the drawer peeks when collapsed (collapsedHeight), so the title and the first item show.",
+      "strength": "recommended",
+      "target": "collapsedHeight",
+      "from": {
+        "section": "configuration",
+        "quote": "Set how much of the drawer peeks when collapsed, so the title and the first item show."
+      }
+    },
+    {
+      "text": "Collapsed, it shows 200 px by default.",
+      "strength": "recommended",
+      "target": "collapsedHeight",
+      "from": {
+        "section": "sizing",
+        "quote": "Collapsed, it shows 200 px by default"
+      }
+    },
+    {
+      "text": "Expanded, it is 90% of its screen’s height (expandedRatio), and never more than 95%.",
+      "strength": "recommended",
+      "target": "expandedRatio",
+      "from": {
+        "section": "sizing",
+        "quote": "expanded, it is 90% of that screen’s height, and never more than 95%"
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "contextual",
+        "reason": "it describes the expanded height that expandedRatio sets, which the installed package clamps to 0.2–0.95; it says nothing about a peek taller than that, where the expanded sheet is as tall as the peek."
+      }
+    },
+    {
+      "text": "With a scrim (showOverlay), the screen dims behind the drawer and taps on it don’t get through.",
+      "strength": "recommended",
+      "target": "showOverlay",
+      "from": {
+        "section": "configuration",
+        "quote": "The screen dims behind the drawer and taps on it don’t get through."
+      }
+    },
+    {
+      "text": "With the scrim on, onOverlayPress is called when the scrim (the area outside the sheet) is pressed.",
+      "strength": "recommended",
+      "from": {
+        "fact": "props:onOverlayPress"
+      }
+    },
+    {
+      "text": "To open or collapse it from the screen, pass state: the drawer animates to it, and drags and handle presses are reported through onStateChange for the screen to apply back.",
+      "strength": "recommended",
+      "target": "state",
+      "from": {
+        "fact": "props:state"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Title the drawer with what it holds.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Title the drawer with what it holds."
+        }
+      },
+      {
+        "text": "Collapsed, people see only the title and the first item or two, so put the most useful item first.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Collapsed, people see only the title and the first item or two, so put the most useful item first."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "it describes the collapsed peek, whose height the screen sets with collapsedHeight; how many items show depends on that height and on the items."
+        }
+      },
+      {
+        "text": "Peek enough to read: the title and the first item say what’s inside.",
+        "strength": "recommended",
+        "target": "collapsedHeight",
+        "from": {
+          "section": "doDont",
+          "quote": "The title and the first item say what’s inside."
+        }
+      },
+      {
+        "text": "Do not peek only the handle: people can’t tell what the drawer holds.",
+        "strength": "discouraged",
+        "target": "collapsedHeight",
+        "from": {
+          "section": "doDont",
+          "quote": "People can’t tell what the drawer holds."
+        }
+      },
+      {
+        "text": "Do not leave the title out: the peek shows a bare list, and screen readers hear only “Drawer”.",
+        "strength": "discouraged",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "The peek shows a bare list, and screen readers hear only “Drawer”."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "it describes a drawer with no title and no accessibilityLabel: the installed sheet is named accessibilityLabel, then title, then “Drawer”."
+        }
+      }
+    ],
+    "good": [
+      "Recent transactions"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Collapsed",
+      "when": "The peek shows what’s inside and invites a drag.",
+      "from": {
+        "section": "states",
+        "quote": "The peek shows what’s inside and invites a drag."
+      }
+    },
+    {
+      "state": "Expanded",
+      "when": "The sheet rises to near the top; the list scrolls inside it.",
+      "from": {
+        "section": "states",
+        "quote": "The sheet rises to near the top; the list scrolls inside it."
+      }
+    },
+    {
+      "state": "No closed state",
+      "when": "It never closes: collapsed is its smallest size.",
+      "from": {
+        "section": "states",
+        "quote": "It never closes: collapsed is its smallest size."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Give it a title: the title says what’s inside and names the drawer for screen readers.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "doDont",
+        "quote": "The title says what’s inside and names the drawer for screen readers."
+      }
+    },
+    {
+      "text": "On the web it’s a dialog named by its title.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web it’s a dialog named by its title."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "Its handle is a button that expands or collapses it, and Escape collapses it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "its handle is a button that expands or collapses it, and Escape collapses it."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "It has no way to close, and its scrim leaves keyboard focus alone.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It has no way to close, and its scrim leaves keyboard focus alone."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Peek enough to read",
+      "dont": "Peek only the handle",
+      "why": "People can’t tell what the drawer holds.",
+      "from": {
+        "section": "doDont",
+        "quote": "Peek enough to read"
+      }
+    },
+    {
+      "do": "Give it a title",
+      "dont": "Leave the title out",
+      "why": "The peek shows a bare list, and screen readers hear only “Drawer”.",
+      "from": {
+        "section": "doDont",
+        "quote": "Give it a title"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Recent transactions on a home screen, the guide's In context: the drawer peeks under Home (140 px here) with its title and the first transaction. People drag it or press its handle to expand it, and the screen's See all transactions button opens it too. The screen keeps the drawer's state in its own state: the button sets it to expanded, and onStateChange reports drags and handle presses for the screen to apply back. The literal state and the empty handlers here are placeholders for that wiring. The drawer fills the Screen it sits in.",
+      "jsx": "<Screen>\n  <VStack alignHorizontal=\"center\">\n    <Text text=\"Home\" />\n    <Button label=\"See all transactions\" onPress={() => {}} />\n  </VStack>\n  <Drawer\n    title=\"Recent transactions\"\n    collapsedHeight={140}\n    state=\"collapsed\"\n    onStateChange={() => {}}\n  >\n    <ListGroup>\n      <ListItem layout=\"Horizontal\" title=\"Netflix\" supportText=\"25 March · 17:30\" trailing={<MoneyValue value=\"500\" currency=\"₹\" />} onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Spotify\" supportText=\"24 March · 09:12\" trailing={<MoneyValue value=\"119\" currency=\"₹\" />} onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Amazon\" supportText=\"22 March · 21:04\" trailing={<MoneyValue value=\"1,299\" currency=\"₹\" />} onPress={() => {}} />\n    </ListGroup>\n  </Drawer>\n</Screen>",
+      "from": {
+        "section": "inContext",
+        "quote": "The drawer peeks under the home screen. People drag it or press its handle to expand it, and the screen’s See all transactions button opens it too."
+      }
+    },
+    {
+      "purpose": "With a scrim, the guide's Configuration: the screen dims behind the expanded drawer and taps on it don't get through. A press on the scrim calls onOverlayPress, which the package says is typically used to collapse the drawer: here the screen would set its state back to collapsed. The literal state and the empty handlers are placeholders for the screen's own state.",
+      "jsx": "<Drawer\n  title=\"Recent transactions\"\n  state=\"expanded\"\n  onStateChange={() => {}}\n  showOverlay\n  onOverlayPress={() => {}}\n>\n  <ListGroup>\n    <ListItem layout=\"Horizontal\" title=\"Netflix\" supportText=\"25 March · 17:30\" trailing={<MoneyValue value=\"500\" currency=\"₹\" />} onPress={() => {}} />\n    <ListItem layout=\"Horizontal\" title=\"Spotify\" supportText=\"24 March · 09:12\" trailing={<MoneyValue value=\"119\" currency=\"₹\" />} onPress={() => {}} />\n  </ListGroup>\n</Drawer>",
+      "from": {
+        "section": "configuration",
+        "quote": "The screen dims behind the drawer and taps on it don’t get through."
+      }
+    },
+    {
+      "purpose": "The defaults, the guide's Sizing: with no collapsedHeight the drawer peeks 200 px, and expanded it is 90% of its screen's height. It starts collapsed and manages its own state.",
+      "jsx": "<Drawer title=\"Recent transactions\">\n  <ListGroup>\n    <ListItem layout=\"Horizontal\" title=\"Netflix\" supportText=\"25 March · 17:30\" trailing={<MoneyValue value=\"500\" currency=\"₹\" />} onPress={() => {}} />\n    <ListItem layout=\"Horizontal\" title=\"Spotify\" supportText=\"24 March · 09:12\" trailing={<MoneyValue value=\"119\" currency=\"₹\" />} onPress={() => {}} />\n    <ListItem layout=\"Horizontal\" title=\"Amazon\" supportText=\"22 March · 21:04\" trailing={<MoneyValue value=\"1,299\" currency=\"₹\" />} onPress={() => {}} />\n  </ListGroup>\n</Drawer>",
+      "from": {
+        "section": "sizing",
+        "quote": "Collapsed, it shows 200 px by default; expanded, it is 90% of that screen’s height, and never more than 95%."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "collapsedHeight",
+      "default": 200,
+      "description": "How much of the sheet shows when collapsed, in px (default 200). The drawer sizes from its parent (the host layer's onLayout), not the window: 140 shows 140 px and 200 shows 200; with the default expandedRatio, expanded is 0.9 of the parent's height.",
+      "quote": "Geometry from the parent (the host layer's `onLayout`), not the window: `collapsedHeight` 140 shows 140 px, 200 shows 200; expanded is 286 px (0.9 × 318), top 32.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "expandedRatio",
+      "default": 0.9,
+      "description": "How tall the drawer is when expanded, as a ratio: default 0.9, clamped to 0.2–0.95.",
+      "quote": "`expandedRatio` (0.9, clamped 0.2–0.95)",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "initialState",
+      "default": "collapsed",
+      "description": "The state at mount when state is not given (default collapsed).",
+      "quote": "`initialState` ('collapsed')",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "state",
+      "description": "A controlled state applies at mount: state=\"expanded\" renders expanded.",
+      "quote": "A controlled `state=\"expanded\"` applies at mount",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "The dialog's name. The sheet is a dialog named accessibilityLabel, then title, then “Drawer”.",
+      "quote": "The sheet is `role=\"dialog\"` named `accessibilityLabel || title || 'Drawer'`",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "showOverlay",
+      "description": "A static rgba(0,0,0,0.7) scrim behind the sheet, shown in both states; without onOverlayPress it still blocks taps on the screen.",
+      "quote": "`showOverlay`: a static rgba(0,0,0,0.7) scrim behind the sheet, shown in both states; without `onOverlayPress` it still blocks taps on the screen.",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "The drawer's modes are not passed to its children: every child needs its own modes.",
+      "quote": "Modes are not passed to children: every child needs its own `modes`.",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The published Storybook (built 17 October) predates the 23 October Drawer fixes: on the web there, its expanded content doesn't scroll.",
+      "quote": "The published Storybook (built 17 October) still predates this.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ]
+}

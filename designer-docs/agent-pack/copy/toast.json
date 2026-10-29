@@ -1,0 +1,277 @@
+{
+  "slug": "toast",
+  "label": "Toast",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/toast.guide.tsx"
+  ],
+  "evidence": "docs/evidence/toast.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:17:28.885Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "snackbar",
+    "notification",
+    "confirmation message",
+    "alert pill"
+  ],
+  "title": "Toast",
+  "summary": "Use a Toast to confirm something that just happened, such as a payment or a copy, in a short message that closes itself.",
+  "corePrinciple": "Confirm, briefly, then get out of the way.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2197-1510",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-toast--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A dark pill with a message",
+      "description": "A toast is a dark pill holding one message and, if you ask for it, a leading icon. It has no buttons; it closes itself.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "Pill",
+        "Dark grey with 14 px corners and a soft shadow; the same in every mode.",
+        "Leading icon",
+        "Optional 18 px icon; the card icon unless you swap it.",
+        "Message",
+        "White 14 px text, up to two lines."
+      ],
+      "specimen": [
+        "Mobile number is invalid"
+      ],
+      "anatomy": [
+        {
+          "part": "Pill",
+          "note": "Dark grey with 14 px corners and a soft shadow; the same in every mode."
+        },
+        {
+          "part": "Leading icon",
+          "note": "Optional 18 px icon; the card icon unless you swap it."
+        },
+        {
+          "part": "Message",
+          "note": "White 14 px text, up to two lines."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Message, icon, and brand",
+      "description": "A toast is one message with an optional leading icon. Only the icon follows AppearanceBrand; the pill is the same dark grey in every mode. Where toasts appear, top or bottom, is set once on the screen's provider: try it in the playground.",
+      "blocks": [
+        "Message only",
+        "The default: one line of white text in a dark pill.",
+        "With the card icon",
+        "startItem adds the card icon before the message, white by default, as in Figma.",
+        "Your own icon",
+        "Swap in another 18 px icon; it takes the Coin icon colour, a deeper gold.",
+        "Icon by brand",
+        "AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default."
+      ],
+      "specimen": [
+        "Mobile number is invalid",
+        "Payment successful",
+        "Primary",
+        "Secondary",
+        "Tertiary",
+        "Neutral"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Message only",
+          "description": "The default: one line of white text in a dark pill."
+        },
+        {
+          "title": "With the card icon",
+          "description": "startItem adds the card icon before the message, white by default, as in Figma."
+        },
+        {
+          "title": "Your own icon",
+          "description": "Swap in another 18 px icon; it takes the Coin icon colour, a deeper gold."
+        },
+        {
+          "title": "Icon by brand",
+          "description": "AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Shown, stacked, and gone",
+      "description": "A toast slides in from its edge and closes itself after 4 s, or after its own timeout; with no timeout it stays until the screen clears it. Up to three show at once, newest last. Older ones wait behind them on their own timers, so they appear only if they’re still due when a newer one closes. There's no close button and no swipe.",
+      "blocks": [
+        "Stacked and queued",
+        "Five at once: the newest three show; the first two time out behind them and never appear."
+      ],
+      "specimen": [
+        "Show five",
+        "Clear all"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Stacked and queued",
+          "description": "Five at once: the newest three show; the first two time out behind them and never appear."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Hugs its message, within 90% of the screen",
+      "description": "A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below. Long messages wrap to two lines, then end in an ellipsis, unless the toast is added with disableTruncation, which shows every line.",
+      "blocks": [
+        "270 × 48",
+        "Short message",
+        "Even one word gets a 200 px pill.",
+        "Long message",
+        "It wraps to two lines, then ends in an ellipsis; the rest is lost."
+      ],
+      "specimen": [
+        "Mobile number is invalid",
+        "Saved",
+        "We couldn't verify your mobile number. Check the number and try again, or sign in with your email address instead."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short message",
+          "description": "Even one word gets a 200 px pill."
+        },
+        {
+          "title": "Long message",
+          "description": "It wraps to two lines, then ends in an ellipsis; the rest is lost."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One short sentence about what happened",
+      "description": "Say what happened in a few words, such as Payment successful or UPI ID copied. A toast has no buttons and closes itself, so never ask for a decision or put anything in it that people must read twice.",
+      "blocks": [
+        "Confirmations",
+        "Short, specific, and about something that already happened."
+      ],
+      "specimen": [
+        "Payment successful",
+        "UPI ID copied",
+        "Mobile number is invalid"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Confirmations",
+          "description": "Short, specific, and about something that already happened."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Copying a UPI ID",
+      "description": "Pressing Copy confirms with a toast at the bottom of the screen. The screen adds it with addToast; it closes itself after 4 s.",
+      "blocks": [
+        "Nothing copied yet"
+      ],
+      "specimen": [
+        "Your UPI ID",
+        "yourname@jio",
+        "Copy"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Short, and about what already happened",
+      "description": "Each pair shows a toast people take in at a glance next to one they can't finish reading or act on.",
+      "blocks": [
+        "Do",
+        "Keep it to one line",
+        "“Payment successful” reads at a glance.",
+        "Don’t",
+        "Write a paragraph",
+        "Past two lines the message is cut off, and nothing shows the rest.",
+        "Confirm what happened",
+        "The action is done; the toast just says so.",
+        "Ask for a decision",
+        "A toast has no buttons and disappears in 4 s, so people can't answer."
+      ],
+      "specimen": [
+        "Payment successful",
+        "We couldn't verify your mobile number. Check the number and try again, or sign in with your email address instead.",
+        "UPI ID copied",
+        "Retry the payment?"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep it to one line",
+            "caption": "“Payment successful” reads at a glance.",
+            "specimen": "Payment successful"
+          },
+          "dont": {
+            "title": "Write a paragraph",
+            "caption": "Past two lines the message is cut off, and nothing shows the rest.",
+            "specimen": "We couldn't verify your mobile number. Check the number and try again, or sign in with your email address instead."
+          }
+        },
+        {
+          "do": {
+            "title": "Confirm what happened",
+            "caption": "The action is done; the toast just says so.",
+            "specimen": "UPI ID copied"
+          },
+          "dont": {
+            "title": "Ask for a decision",
+            "caption": "A toast has no buttons and disappears in 4 s, so people can't answer.",
+            "specimen": "Retry the payment?"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Toast contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Top placement",
+        "Multiple toasts",
+        "Persistent toast",
+        "Custom timeout",
+        "With start item",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma’s Toast is one 291 × 46 component with a text, an optional start icon, and an icon swap; its icon resolves to white. Since the #267 fix the default icon is white too; an AppearanceBrand mode recolours it, while the pill stays the same dark grey in every mode. Screens add toasts with addToast and show them through one ToastProvider: every provider shows the same queue, so this page mounts one at a time. Toasts slide in from their edge and fade out, as in the package, and messages stop at two lines unless addToast sets disableTruncation. Each toast is announced as an alert. The published Storybook page is still the old generated one.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
