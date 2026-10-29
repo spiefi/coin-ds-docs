@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "id": "Disclaimer",
+  "slug": "disclaimer",
+  "category": "content",
+  "tags": [
+    "fine print",
+    "legal line",
+    "terms",
+    "small print"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T05:38:55Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide (checked 23 October on 0.1.78-c8526ae, unchanged for Disclaimer on the installed 0.1.78-dbe0e02) says three times that copy that “doesn’t name the bank” gets “Jio Payments Bank Pvt. Ltd.” on a second line (Anatomy, Configuration, Sources). The package adds it unless the copy contains that exact string (Disclaimer.tsx line 121), so copy that names the bank another way still gets it, and longer copy gets it after its last line, not on a second one. The entry keeps the guide's words and adds the exact string from the evidence (“unless the copy already contains it”). Guide fix #531. Added by Claude Code in the overnight run agentpack-batch10, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Disclaimer for one short legal line under an action, such as who provides a payment service.",
+  "useWhen": [
+    {
+      "text": "One short legal line under an action, such as who provides a payment service.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Disclaimer for one short legal line under an action, such as who provides a payment service."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A problem people need to fix, such as “UPI limit reached. Try a smaller amount.”: grey 10 px text hides an error. Use Support Text, whose red message tells people what to fix.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Grey 10 px text hides an error."
+      },
+      "useInstead": "SupportText"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Copy",
+      "holds": "One string of 10 px grey text, centred line by line; a line break is the only formatting it takes.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One string; a line break is the only formatting it takes."
+      }
+    },
+    {
+      "part": "Column",
+      "holds": "At most 281 px wide; the text wraps there and centres.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "At most 281 px wide; the text wraps there and centres."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Under a payment action: a payment footer (an ActionFooter) holds the Pay button and, below it, the provider line.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment footer holds the Pay button and, below it, the provider line."
+      }
+    },
+    {
+      "text": "The footer passes its modes to both; the screen handles the payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The footer passes its modes to both; the screen handles the payment."
+      }
+    },
+    {
+      "text": "The column is 281 px wide, or as wide as a narrower host, and the text centres inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The column is 281 px wide, or as wide as a narrower host, and the text centres inside it."
+      }
+    },
+    {
+      "text": "Each line adds 12 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each line adds 12 px."
+      }
+    },
+    {
+      "text": "It centres in any vertical stack, including one that stretches its children (a Stack with fillWidth).",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It centres in any vertical stack, including one that stretches its children."
+      }
+    },
+    {
+      "text": "Its root is always 100% wide, which matters in row parents.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The root is now always 100% wide, which matters in row parents."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Disclaimer has no variants, icon, or size: the copy is the only choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Disclaimer has no variants, icon, or size."
+      },
+      "target": "disclaimer"
+    },
+    {
+      "text": "Write the copy for the screen; without it, the package shows a generic Jio Payments Bank line.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Write the copy for the screen; without it, the package shows a generic Jio Payments Bank line."
+      },
+      "target": "disclaimer"
+    },
+    {
+      "text": "Copy that doesn’t name the bank (that doesn’t contain “Jio Payments Bank Pvt. Ltd.”) gets “Jio Payments Bank Pvt. Ltd.” on a line below.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Copy that doesn’t name the bank gets “Jio Payments Bank Pvt. Ltd.” on a line below."
+      },
+      "target": "disclaimer"
+    },
+    {
+      "text": "To name the bank in the copy, put a line break before the bank’s name: it keeps the name on one line, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A line break before the bank’s name keeps it on one line, as in Figma."
+      },
+      "target": "disclaimer"
+    },
+    {
+      "text": "Leaving the copy out shows “All financial services…”, which differs from Figma, and that default copy breaks the bank’s name across two lines.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The default copy breaks the bank’s name across two lines."
+      },
+      "target": "disclaimer"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Small print that says who stands behind the action, in one or two lines.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Small print that says who stands behind the action, in one or two lines."
+        }
+      },
+      {
+        "text": "Name the provider or the condition in one or two short sentences.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name the provider or the condition in one or two short sentences."
+        }
+      },
+      {
+        "text": "For terms, say what continuing means; the package adds the bank’s name below.",
+        "strength": "recommended",
+        "from": {
+          "section": "configuration",
+          "quote": "Say what continuing means; the package adds the bank’s name below."
+        }
+      },
+      {
+        "text": "Put the full terms on their own page and add a Link below the disclaimer; the copy can’t hold links or bold text.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put the full terms on their own page and add a Link below; the copy can’t hold links or bold text."
+        }
+      },
+      {
+        "text": "Keep it to a sentence or two: two lines are read at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Two lines are read at a glance."
+        }
+      },
+      {
+        "text": "Do not paste the full terms: five or more lines of 10 px text go unread.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Five or more lines of 10 px text go unread."
+        }
+      }
+    ],
+    "good": [
+      "Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd.",
+      "By continuing you agree to the terms for this payment."
+    ],
+    "bad": [
+      "Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing. Past performance does not guarantee future returns. Payment and UPI services are provided by Jio Payments Bank Pvt. Ltd.",
+      "UPI limit reached. Try a smaller amount."
+    ]
+  },
+  "states": [
+    {
+      "state": "Read-only",
+      "when": "Disclaimer isn’t interactive: it has no hover, pressed, focus, or disabled style, and Tab skips it. Only the copy changes.",
+      "from": {
+        "section": "states",
+        "quote": "Disclaimer isn’t interactive: it has no hover, pressed, focus, or disabled style, and Tab skips it."
+      }
+    },
+    {
+      "state": "In a full-screen modal footer",
+      "when": "Inside a full-screen modal footer, the modal turns it light grey to suit its dark surface.",
+      "from": {
+        "section": "states",
+        "quote": "Inside a full-screen modal footer, the modal turns it light grey to suit its dark surface."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Screen readers read the copy and the added bank line as one label, or accessibilityLabel when it’s set.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Screen readers read the copy and that line as one label, or accessibilityLabel when it’s set."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Break before the bank’s name",
+      "dont": "Let the name split",
+      "why": "The default copy breaks the bank’s name across two lines.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let the name split"
+      }
+    },
+    {
+      "do": "Keep it to a sentence or two",
+      "dont": "Paste the full terms",
+      "why": "Five or more lines of 10 px text go unread.",
+      "from": {
+        "section": "doDont",
+        "quote": "Paste the full terms"
+      }
+    },
+    {
+      "do": "Use Support Text for problems",
+      "dont": "Put problems in small print",
+      "why": "Grey 10 px text hides an error.",
+      "from": {
+        "section": "doDont",
+        "quote": "Put problems in small print"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The provider line under a payment action, the guide's In context: an ActionFooter titled Confirm payment holds one vertical Stack with the Pay button and, below it, the Disclaimer. The copy breaks before the bank's name, so the name stays on one line and the package adds nothing. The footer passes its modes to both, so neither sets any. The empty onPress stands for the screen's own payment handling.",
+      "jsx": "<ActionFooter title=\"Confirm payment\">\n  <Stack layoutDirection=\"vertical\">\n    <Button label=\"Pay ₹500\" onPress={() => {}} />\n    <Disclaimer disclaimer={'Payment and UPI services are provided by\\nJio Payments Bank Pvt. Ltd.'} />\n  </Stack>\n</ActionFooter>",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment footer holds the Pay button and, below it, the provider line."
+      }
+    },
+    {
+      "purpose": "Terms for this screen with the full terms a link away, the guide's Content: the copy says what continuing means and the package adds “Jio Payments Bank Pvt. Ltd.” on a line below it; the full terms are on their own page, reached through a Link below the copy, because the copy can't hold links. The empty onPress stands for the screen's own navigation to that page.",
+      "jsx": "<VStack>\n  <Disclaimer disclaimer=\"By continuing you agree to the terms for this payment.\" />\n  <Link text=\"View terms\" textAlign=\"Center\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "content",
+        "quote": "Put the full terms on their own page and add a Link below; the copy can’t hold links or bold text."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "disclaimer",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "All financial services are provided by Jio Payments Bank Pvt. Ltd.",
+        "description": "The copy, one string; a line break is its only formatting. The package renders it, a line break, then the children if passed, else “Jio Payments Bank Pvt. Ltd.” unless the copy already contains it: “Terms apply.” renders two lines, 24 px. Declared: First line of the disclaimer text. Default \"All financial services are provided by Jio Payments Bank Pvt. Ltd.\", from the component source.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object passed directly to `getVariableByName`."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the container."
+      },
+      {
+        "name": "textStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the text element."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the spoken name. Without it the name is the copy plus the second line (“Terms apply. Jio Payments Bank Pvt. Ltd.”). On the web the root is a group with that name and the text itself is aria-hidden; on native the root is accessible with role text, so VoiceOver gets the same name (not device-tested). Declared: Accessibility label for screen readers. If not provided, uses disclaimer text.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility hint for screen readers /."
+      },
+      {
+        "name": "...React.ComponentProps<typeof View>",
+        "type": "React.ComponentProps<typeof View>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Disclaimer reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context5",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Fullscreen Modal",
+          "Mode 1"
+        ],
+        "description": "FullscreenModal sets Fullscreen Modal on its footer Disclaimer, which makes the text #EBEBED, light grey for its dark surface, in both colour modes. Declared: A token collection Disclaimer reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-06"
+      }
+    ],
+    "slots": [],
+    "events": [],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=disclaimer",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=208-2399",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-disclaimer--docs"
+  }
+}

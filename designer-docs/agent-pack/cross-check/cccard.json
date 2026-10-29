@@ -1,0 +1,29 @@
+{
+  "slug": "cccard",
+  "entryHash": "da52e1cb1d5c63dcf03fc0dfc4dfb3175984af32b8a21d2b1f7297f0ddce3d7e",
+  "guideCommit": "5170833ef03e04a22f99f4203d1fe13a508185f8",
+  "checkedAt": "2026-10-29T05:34:00Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/3",
+      "reason": "misreads-source: The guide says the opposite: \"Compact defaults to the 88 × 54 picture where Figma shows a 42 px Avatar\". The configuration section adds that media must replace the picture to get an Avatar. The cited JSDoc is wrong, and the evidence records that the JSDoc contradicts itself."
+    },
+    {
+      "field": "/content/rules/2",
+      "reason": "misreads-source: The guide says \"an empty headline, description, or footerSubtitle shows its placeholder word\". The evidence says footer text \"can't be partly hidden (placeholders come back)\", and its limits forbid implying that footer lines can be hidden one by one. The \"'' or null hides the line\" clause contradicts both."
+    },
+    {
+      "field": "/content/rules/3",
+      "reason": "misreads-source: Same as headline: the guide and the evidence say an empty description shows its placeholder word, so \"'' or null hides the line\" is unsupported and contradicted."
+    },
+    {
+      "field": "/content/rules/4",
+      "reason": "misreads-source: Same as headline: the guide and the evidence say an empty footerSubtitle falls back to its placeholder word, so \"'' or null hides the line\" is contradicted."
+    }
+  ],
+  "notes": "These four flags come from type descriptions (/facts/props/0, /16, /17, /18) that disagree with the guide and the evidence. The compact JSDoc claims a 42 px Avatar, and the headline/description/footerSubtitle docs claim '' or null hides the line. A human should check whether those fact descriptions should be corrected or marked as discrepancies (ticket #364 covers both), so later extractions don't repeat the error. Two smaller points: /configuration/5 targets only showHeader although it also covers showNudge. In /examples/0, the second card's footerSubtitle \"Lifetime free\" is invented content, but it is plausible."
+}

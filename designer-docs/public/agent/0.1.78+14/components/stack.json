@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "id": "Stack",
+  "slug": "stack",
+  "category": "layout",
+  "tags": [
+    "layout",
+    "spacing",
+    "gap",
+    "slot",
+    "auto layout"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T05:38:55Z",
+    "flags": [
+      {
+        "field": "/facts/props/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/6",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/5",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/content/rules",
+        "reason": "The guide gives no content rules; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use Stack when a public component slot needs one token-driven gap and an intentional vertical or horizontal direction.",
+  "useWhen": [
+    {
+      "text": "A public component's slot needs one token-driven gap and an intentional vertical or horizontal direction.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Stack when a public component slot needs one token-driven gap and an intentional vertical or horizontal direction."
+      }
+    },
+    {
+      "text": "A clear group, such as actions, metadata or supporting copy.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Use Stack for a clear group such as actions, metadata, or supporting copy."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A catch-all page canvas for unrelated sections: Stack has no wrap, padding or overlap.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Stack has no wrap, padding, or overlap semantics for unrelated sections."
+      }
+    },
+    {
+      "text": "The layout needs overlap, z-order, wrapping, padding or automatic viewport switching: use the public component that owns the slot.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Stack does not add overlap, z-order, wrapping, padding, or automatic viewport switching. Use the public component that owns the slot."
+      }
+    },
+    {
+      "text": "Expecting the direction to follow the viewport: the viewport does not switch layoutDirection; choose a different public composition when the content role changes.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sizing",
+        "quote": "Choose a different public composition when the content role changes; the viewport does not switch layoutDirection for you."
+      },
+      "target": "layoutDirection"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Direction",
+      "holds": "layoutDirection, vertical or horizontal; vertical by default.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Set layoutDirection to vertical or horizontal. The default is vertical."
+      }
+    },
+    {
+      "part": "Token gap",
+      "holds": "The Slot gap between children; Stack has no padding, wrap or reverse control.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Slot gap provides repeated separation. Stack has no padding, wrap, or reverse control."
+      }
+    },
+    {
+      "part": "Cross-axis fit",
+      "holds": "Optional fillWidth (vertical) or equalHeight (horizontal); fixed child dimensions still win.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "fillWidth makes these vertical children share the host edge. Fixed child dimensions still win."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Use Stack in the slot owned by a public component, where direction and gap carry product meaning.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use Stack in the slot owned by a public component, where direction and gap carry product meaning."
+      }
+    },
+    {
+      "text": "Let the owning public component, such as ActionFooter, give the Stack its product meaning.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A public ActionFooter or related component gives this primitive its product meaning."
+      }
+    },
+    {
+      "text": "Designers consume public components and patterns that own the slot; Stack's Figma source is a Subcomponents anatomy reference, not something to place on its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma source is a Coin Subcomponents anatomy reference, so designers should consume public components and patterns that own the slot."
+      }
+    },
+    {
+      "text": "Stack keeps its chosen direction at every width; responsive intent belongs to the owning public composition.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Stack keeps its chosen direction at every width. Responsive intent belongs to the owning public composition."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use layoutDirection vertical (the default) for a column of actions or supporting content inside a public slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the default direction for a column of actions or supporting content inside a public slot."
+      },
+      "target": "layoutDirection",
+      "value": "vertical"
+    },
+    {
+      "text": "Use layoutDirection horizontal when sibling actions or content belong on one line; set the direction explicitly.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use a row when sibling actions or content belong on one line. Direction is explicit."
+      },
+      "target": "layoutDirection",
+      "value": "horizontal"
+    },
+    {
+      "text": "Choose the direction from the content role; it stays fixed through viewport changes.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Choose direction from the content role. Stack stays direction-locked; it does not switch because the viewport changed."
+      },
+      "target": "layoutDirection"
+    },
+    {
+      "text": "Set the gap with the Slot gap mode; Stack has no padding, wrap or reverse control.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Slot gap provides repeated separation. Stack has no padding, wrap, or reverse control."
+      },
+      "target": "Slot gap"
+    },
+    {
+      "text": "Use equalHeight only for a horizontal row, the direction it applies to.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use only for the active direction"
+      },
+      "target": "equalHeight",
+      "value": "true"
+    },
+    {
+      "text": "Use fillWidth for a vertical column when its children benefit from a shared edge.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Use equalHeight for a row or fillWidth for a column when the content benefits from shared edges."
+      },
+      "target": "fillWidth",
+      "value": "true"
+    },
+    {
+      "text": "Do not give children a fixed width when a fillWidth column should fill: fixed child dimensions still win.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Fixed child dimensions still win, so the column edge no longer aligns."
+      },
+      "target": "fillWidth"
+    }
+  ],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Vertical",
+      "when": "layoutDirection vertical (default): a column for grouped slot content.",
+      "from": {
+        "section": "states",
+        "quote": "Default column direction for grouped slot content."
+      }
+    },
+    {
+      "state": "Horizontal",
+      "when": "layoutDirection horizontal: an explicit row for sibling content.",
+      "from": {
+        "section": "states",
+        "quote": "Explicit row direction for sibling content."
+      }
+    },
+    {
+      "state": "Equal height",
+      "when": "equalHeight in a row: children share the tallest height when they can stretch.",
+      "from": {
+        "section": "states",
+        "quote": "Horizontal children share the tallest height when they can stretch."
+      }
+    },
+    {
+      "state": "Fill width",
+      "when": "fillWidth in a column: children stretch across the stack when they can.",
+      "from": {
+        "section": "states",
+        "quote": "Vertical children stretch across the stack when they can."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Let a vertical slot fill its width",
+      "dont": "Fix child widths when the column should fill",
+      "why": "Fixed child dimensions still win, so the column edge no longer aligns.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let a vertical slot fill its width"
+      }
+    },
+    {
+      "do": "Use fill width when column edges should align",
+      "dont": "Use Stack as a catch-all page canvas",
+      "why": "Stack has no wrap, padding, or overlap semantics for unrelated sections.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Stack as a catch-all page canvas"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A vertical Stack in ActionFooter's slot: the action under its supporting copy.",
+      "jsx": "<ActionFooter modes={{ 'Color Mode': 'Light' }}>\n  <Stack layoutDirection=\"vertical\" fillWidth modes={{ 'Color Mode': 'Light', 'Slot gap': 'S' }}>\n    <Text text=\"You can change your plan at any time.\" modes={{ 'Color Mode': 'Light' }} />\n    <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n  </Stack>\n</ActionFooter>",
+      "from": {
+        "section": "inContext",
+        "quote": "Use a vertical Stack when actions belong under supporting copy."
+      }
+    },
+    {
+      "purpose": "A deliberate row of actions that share an edge.",
+      "jsx": "<Stack layoutDirection=\"horizontal\" equalHeight modes={{ 'Color Mode': 'Light', 'Slot gap': 'M' }}>\n  <Button label=\"Back\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'Low', AppearanceBrand: 'Neutral' }} />\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light', Emphasis: 'High' }} />\n</Stack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Use horizontal direction when actions are a deliberate row."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Content laid out inside the stack. `modes` are cascaded to every child via {@link cloneChildrenWithModes}."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "layoutDirection",
+        "type": "StackLayoutDirection",
+        "required": false,
+        "source": "evidence",
+        "values": [
+          "vertical",
+          "horizontal"
+        ],
+        "default": "vertical",
+        "description": "vertical or horizontal, default vertical; the direction never switches on its own. Declared: Main-axis direction for stack children. Matches the Figma Slot variant: - `vertical` (default): stacks children in a column - `horizontal`: arranges children in a row. Default \"vertical\", from the component source.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "alignCrossAxis",
+        "type": "ViewStyle['alignItems']",
+        "required": false,
+        "source": "types",
+        "values": [
+          "center",
+          "flex-start",
+          "flex-end",
+          "stretch",
+          "baseline"
+        ],
+        "description": "Alignment along the cross axis. Defaults to `stretch` for vertical and `flex-start` for horizontal (Figma Alignment=Top Left). Pass `center` for Figma Alignment=Left. This is a layout prop, not a Figma variant."
+      },
+      {
+        "name": "justifyMainAxis",
+        "type": "ViewStyle['justifyContent']",
+        "required": false,
+        "source": "types",
+        "values": [
+          "center",
+          "flex-start",
+          "flex-end",
+          "space-between",
+          "space-around",
+          "space-evenly"
+        ],
+        "description": "Distribution along the main axis (maps to `justifyContent`). Defaults to `flex-start`."
+      },
+      {
+        "name": "equalHeight",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Stretches a row's children to the tallest; a fixed child dimension still wins over the stretch. Declared: Only meaningful when `layoutDirection` is `horizontal`. When true, forces every child to share the height of the tallest child. The height is enforced by the stack itself (`alignItems: 'stretch'` plus an injected `alignSelf: 'stretch'` on each child), so children can no longer opt out via their own `alignSelf`. Children with an explicit `height` keep that height, since a fixed cross-axis dimension defeats stretch in Yoga. Overrides `alignCrossAxis` when it applies. Default false, from the component source.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "fillWidth",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Stretches a column's children; a fixed child dimension still wins over the stretch. Declared: Only meaningful when `layoutDirection` is `vertical`. When true, forces every child to fill the full width of the stack. The width is enforced by the stack itself (`alignItems: 'stretch'` plus an injected `alignSelf: 'stretch'` on each child), so children can no longer opt out via their own `alignSelf`. Children with an explicit `width` keep that width, since a fixed cross-axis dimension defeats stretch in Yoga. Overrides `alignCrossAxis` when it applies. Default false, from the component source.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration passed to the token resolver and cascaded to children."
+      },
+      {
+        "name": "...ViewProps",
+        "type": "ViewProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection Stack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection Stack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Content laid out inside the stack. `modes` are cascaded to every child via {@link cloneChildrenWithModes}.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "Stack has no wrap, reverse, padding, overlap or automatic viewport direction.",
+        "source": "evidence",
+        "checkedOn": "2026-09-19"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=stack",
+    "figma": "https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents?node-id=279-3",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-stack--docs"
+  }
+}

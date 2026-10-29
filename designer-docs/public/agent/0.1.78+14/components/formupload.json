@@ -1,0 +1,760 @@
+{
+  "schemaVersion": 1,
+  "id": "FormUpload",
+  "slug": "formupload",
+  "category": "input",
+  "tags": [
+    "upload",
+    "attachment",
+    "file upload",
+    "photo upload",
+    "image picker",
+    "receipt"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T05:38:55Z",
+    "flags": []
+  },
+  "summary": "Use a Form Upload to collect photos, such as receipts or ID proof, with a label, previews, and a hint about what to add.",
+  "useWhen": [
+    {
+      "text": "Collect photos, such as receipts or ID proof, with a label, previews, and a hint about what to add.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Form Upload to collect photos, such as receipts or ID proof, with a label, previews, and a hint about what to add."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Files that are not images: previews show images only, and the field does not check file type or size.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "Previews show images only, and file type and size are not checked."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "label: names what to add; plain text above the row.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names what to add; plain text above the row."
+      }
+    },
+    {
+      "part": "Preview",
+      "holds": "One per attachment: a 44 px thumbnail of each added image.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 44 px thumbnail of each added image."
+      }
+    },
+    {
+      "part": "Remove",
+      "holds": "On each preview: a button named after the file that takes it out of the row.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A button named after the file that takes it out of the row."
+      }
+    },
+    {
+      "part": "Add cell",
+      "holds": "After the previews: opens the app's picker; hidden once the limit (maxCount) is reached.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Opens the app’s picker; hidden once the limit is reached."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "supportText below the row: the file rules; an error message replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "File rules; an error message replaces it."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The app opens its own picker and keeps the list of files: the screen holds attachments and passes picker.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The app opens its own picker and keeps the list of files."
+      },
+      "target": "attachments"
+    },
+    {
+      "text": "In the guide's expense claim, when people tap Submit without a receipt, the screen sets the error; the button stays enabled.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "When people tap Submit without a receipt, the screen sets the error; the button stays enabled."
+      },
+      "target": "isInvalid"
+    },
+    {
+      "text": "The row fills its container and wraps to a new line when it runs out of room.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The row fills its container and wraps to a new line when it runs out of room."
+      }
+    },
+    {
+      "text": "Each cell is 44 × 44 px with 8 px between cells.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each cell is 44 × 44 px with 8 px between cells."
+      }
+    },
+    {
+      "text": "The label, the row and the support text sit 8 px apart.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "8 px between label, row, and support text."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Show what was added and how much more fits.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Show what was added and how much more fits."
+      }
+    },
+    {
+      "text": "Each added file becomes a preview, and the add cell stays at the end until the limit (maxCount) is reached.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Each added file becomes a preview, and the add cell stays at the end until the limit is reached."
+      },
+      "target": "maxCount"
+    },
+    {
+      "text": "Set a limit with maxCount: the add cell disappears when the row is full.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The add cell disappears when the row is full."
+      },
+      "target": "maxCount"
+    },
+    {
+      "text": "Do not leave the limit open: without maxCount the add cell never goes away, so people can't tell when they're done.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The add cell never goes away, so people can’t tell when they’re done."
+      },
+      "target": "maxCount"
+    },
+    {
+      "text": "Without a limit (no maxCount), the add cell never goes away.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Without a limit, the add cell never goes away."
+      },
+      "target": "maxCount"
+    },
+    {
+      "text": "The package always puts the add cell last, after the previews, and wraps the row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "the package wraps the row and always puts the add cell last"
+      }
+    },
+    {
+      "text": "Files picked beyond maxCount are dropped.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Picked assets beyond `maxCount` are dropped."
+      },
+      "target": "maxCount"
+    },
+    {
+      "text": "Keep attachments in the screen and update them from onAttachmentsChange: the field calls it to add or remove a file, and the parent updates the attachments array.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "onAttachmentsChange"
+    },
+    {
+      "text": "Pass the app's picker as picker: it keeps the component free of native picker libraries, and the add cell opens it, so uploads work on phones.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "picker"
+    },
+    {
+      "text": "With isInvalid set, errorMessage replaces supportText; it shows only while the field is invalid (or has a Form error).",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`errorMessage` replaces `supportText` only while `isInvalid` (or a Form error) is set."
+      },
+      "target": "errorMessage"
+    },
+    {
+      "text": "File type and size are not checked by the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "file type and size are not checked"
+      }
+    },
+    {
+      "text": "Set isDisabled to fade the cells and stop adding and removing; the label stays at full contrast.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Disabled fades the cells and stops adding and removing; the label stays at full contrast."
+      },
+      "target": "isDisabled",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name what to add in the label, such as “Receipts” or “PAN card”, without “Upload” or “Your”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name what to add in the label, such as “Receipts” or “PAN card”, without “Upload” or “Your”."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Name the document: a short label says what belongs here.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "A short label says what belongs here."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Do not put instructions in the label: the rules crowd out the name. Put them in the support text.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The rules crowd out the name."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Use the support text for file types and size.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the support text for file types and size"
+        },
+        "target": "supportText"
+      },
+      {
+        "text": "Write an error that says how to fix it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "an error that says how to fix it."
+        },
+        "target": "errorMessage"
+      },
+      {
+        "text": "Say what to fix: the message names what is missing, such as “Add at least one receipt”.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The message names what is missing."
+        },
+        "target": "errorMessage"
+      },
+      {
+        "text": "Do not mark an error without a message: with isInvalid, set an errorMessage that says what to fix.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Mark an error without a message"
+        },
+        "target": "isInvalid"
+      }
+    ],
+    "good": [
+      "Receipts",
+      "PAN card",
+      "PAN card, front and back",
+      "JPG or PNG, up to 5 MB each",
+      "Up to 6 photos, JPG or PNG",
+      "Up to 3 photos, JPG or PNG",
+      "Front and back, JPG or PNG",
+      "Add at least one receipt"
+    ],
+    "bad": [
+      "Upload your receipts here in JPG or PNG format, up to 5 MB each"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty",
+      "when": "No attachments: one add cell until people pick a file.",
+      "from": {
+        "section": "configuration",
+        "quote": "One add cell until people pick a file."
+      }
+    },
+    {
+      "state": "Default",
+      "when": "The default, with files below the limit: ready to add more files.",
+      "from": {
+        "section": "states",
+        "quote": "Ready to add more files."
+      }
+    },
+    {
+      "state": "At the limit",
+      "when": "attachments reach maxCount: reaching the limit hides the add cell.",
+      "from": {
+        "section": "configuration",
+        "quote": "Reaching the limit hides the add cell."
+      }
+    },
+    {
+      "state": "Error",
+      "when": "isInvalid with an errorMessage: the message shows in place of the support text and turns red; the cells do not change colour.",
+      "from": {
+        "section": "states",
+        "quote": "An error shows its message in place of the support text; the cells do not change colour."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: faded cells, with adding and removing turned off; the label stays at full contrast.",
+      "from": {
+        "section": "states",
+        "quote": "Disabled fades the cells and stops adding and removing; the label stays at full contrast."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the field is a group named by its label, and the add cell says which field it adds to.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the field is a group named by its label, and the add cell says which field it adds to."
+      },
+      "target": "label"
+    },
+    {
+      "text": "Each file's remove button is named after it, such as “Remove Receipt 1”, and works with a click, a tap, or Enter.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Each file’s remove button is named after it, such as “Remove Receipt 1”, and works with a click, a tap, or Enter."
+      },
+      "target": "attachments"
+    },
+    {
+      "text": "Each preview button is named after the attachment's name, so give each attachment one.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Each preview button is named after the file's `name`."
+      },
+      "target": "attachments"
+    },
+    {
+      "text": "When disabled, the cells are marked disabled and leave the tab order.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "cells get `aria-disabled` and leave the tab order."
+      },
+      "target": "isDisabled",
+      "value": "true"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Set a limit",
+      "dont": "Leave the limit open",
+      "why": "The add cell never goes away, so people can’t tell when they’re done.",
+      "from": {
+        "section": "doDont",
+        "quote": "Set a limit"
+      }
+    },
+    {
+      "do": "Say what to fix",
+      "dont": "Mark an error without a message",
+      "why": "Nothing on screen changes.",
+      "from": {
+        "section": "doDont",
+        "quote": "Say what to fix"
+      }
+    },
+    {
+      "do": "Name the document",
+      "dont": "Put instructions in the label",
+      "why": "The rules crowd out the name.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the document"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Claim an expense, the guide's In context: the field sits in a Card above Submit claim. Shown after people tapped Submit claim with no receipt, so the screen has set isInvalid and the message, and the button stays enabled. The empty attachments list, the onAttachmentsChange stub and the picker stub stand in for the app's own list of files and its own picker.",
+      "jsx": "<Card>\n  <VStack>\n    <FormUpload\n      label=\"Receipts\"\n      maxCount={3}\n      supportText=\"Up to 3 photos, JPG or PNG\"\n      attachments={[]}\n      onAttachmentsChange={() => {}}\n      picker={async () => ({ assets: [] })}\n      isInvalid\n      errorMessage=\"Add at least one receipt\"\n    />\n    <Button label=\"Submit claim\" onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "When people tap Submit without a receipt, the screen sets the error; the button stays enabled."
+      }
+    },
+    {
+      "purpose": "Two receipts with a limit of three: each file shows as a preview with a remove button named after it (Remove Receipt 1), the add cell follows, and the support text gives the file rules. The uris are placeholders for the app's files, and the picker stub stands in for the app's picker.",
+      "jsx": "<FormUpload\n  label=\"Receipts\"\n  maxCount={3}\n  supportText=\"JPG or PNG, up to 5 MB each\"\n  attachments={[\n    { uri: 'https://example.com/receipt-1.jpg', name: 'Receipt 1' },\n    { uri: 'https://example.com/receipt-2.jpg', name: 'Receipt 2' },\n  ]}\n  onAttachmentsChange={() => {}}\n  picker={async () => ({ assets: [] })}\n/>",
+      "from": {
+        "section": "anatomy",
+        "quote": "Each file shows as a preview with a remove button, an add cell follows, and support text sits below."
+      }
+    },
+    {
+      "purpose": "At the limit: three receipts with maxCount 3, so the add cell is hidden and people can tell they're done; removing one brings it back. The uris are placeholders for the app's files, and the picker stub stands in for the app's picker.",
+      "jsx": "<FormUpload\n  label=\"Receipts\"\n  maxCount={3}\n  supportText=\"Up to 3 photos, JPG or PNG\"\n  attachments={[\n    { uri: 'https://example.com/receipt-1.jpg', name: 'Receipt 1' },\n    { uri: 'https://example.com/receipt-2.jpg', name: 'Receipt 2' },\n    { uri: 'https://example.com/receipt-3.jpg', name: 'Receipt 3' },\n  ]}\n  onAttachmentsChange={() => {}}\n  picker={async () => ({ assets: [] })}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Reaching the limit hides the add cell."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "On the web it names the field, a group, and the add button, such as “Receipts, add attachment”. Declared: Label rendered above the upload row.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "supportText",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Helper text rendered below the upload row. When `errorMessage` is provided, it replaces the support text and renders in the error status."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Field name. When used inside `<Form>`, this is the key used to look up server-side `validationErrors`."
+      },
+      {
+        "name": "attachments",
+        "type": "FormUploadAttachment[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Each attachment renders a preview cell (testID-item-N) that shows its uri as an image (cover), with a remove control; there is no file icon or name, so a non-image file has no thumbnail. File type and size are not checked. Declared: Controlled list of attachments. Each item maps to an `Additem` cell: render attachments as `'preview'` cells and leave the last slot as the `'empty'` upload trigger.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "maxCount",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "description": "One empty add cell (testID-add) follows the previews while attachments.length < maxCount, or always when maxCount is unset. Picked assets beyond maxCount are dropped. Declared: Maximum number of attachments allowed. When omitted, the component renders a single empty upload trigger. Once `attachments.length` reaches `maxCount`, the empty trigger is hidden.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "onAttachmentsChange",
+        "type": "(attachments: FormUploadAttachment[]) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called when the attachment list should change (add or remove). The parent is responsible for updating the `attachments` array."
+      },
+      {
+        "name": "picker",
+        "type": "AdditemProps['picker']",
+        "required": false,
+        "source": "types",
+        "description": "Optional picker injected by the parent. This keeps the component free of native-library dependencies while still providing real upload behaviour on iOS/Android. The picker should wrap `react-native-image-picker`, `expo-image-picker`, `react-native-document-picker`, etc."
+      },
+      {
+        "name": "errorMessage",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces supportText only while isInvalid (or a Form error) is set. Invalid changes nothing else: the cells keep their colours. Declared: Error message shown below the row. When provided inside `<Form>`, the form context error is used automatically unless this prop is set explicitly.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "isInvalid",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "The support text turns red (rgb(245, 0, 48)) with a warning icon; the cells are unchanged. Declared: Marks the field as invalid. Also set automatically by `<Form>` errors. Default false, from the component source.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Each cell renders at 0.5 opacity once, with the label at full opacity; adding and removing are blocked, and the cells leave the tab order. Declared: Disables all upload interaction. Default false, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom children/slot rendered in place of the generated `Additem` cells. Useful when the consumer wants full control over the upload row. `modes` cascade into slot children automatically."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes for design-token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the outermost wrapper."
+      },
+      {
+        "name": "rowStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the upload row container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label. Defaults to `label`."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Each preview gets testID-item-N, a wrapper holding the preview button and its remove button as siblings, and the add cell gets testID-add. Declared: Test identifier.",
+        "checkedOn": "2026-10-08"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "FormField States",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active",
+          "Read Only",
+          "Error",
+          "Disabled"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Icon Capsule Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "L",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Status",
+        "type": "mode collection",
+        "values": [
+          "Auto",
+          "Warning",
+          "Error",
+          "Success",
+          "Loading",
+          "Neutral"
+        ],
+        "description": "A token collection FormUpload reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Auto"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Custom children/slot rendered in place of the generated `Additem` cells. Useful when the consumer wants full control over the upload row. `modes` cascade into slot children automatically.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onAttachmentsChange",
+        "type": "(attachments: FormUploadAttachment[]) => void",
+        "description": "Called when the attachment list should change (add or remove). The parent is responsible for updating the `attachments` array.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Previews show images only: there is no file icon or name, so a non-image file, such as a PDF, has no thumbnail.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "text": "Figma has no error or disabled design: in the package an error only changes the support text, and disabled fades the cells to half opacity.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Figma's FormUpload puts its Add Item cells in one clipped row; the package wraps the row and always puts the add cell last.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Cells are 44 × 44 px in the package and 45 × 44 in Figma.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=formupload",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7217-11616",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-formupload--docs"
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "slug": "summarytile",
+  "label": "Summary Tile",
+  "guideCommit": "52bf96ec1d239d72ebf343cab56c7c3b3ff6a51f",
+  "files": [
+    "src/guides/summarytile.guide.tsx"
+  ],
+  "evidence": "docs/evidence/summarytile.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:21:38.869Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "section header",
+    "summary row",
+    "dashboard header",
+    "confidence meter",
+    "strength indicator"
+  ],
+  "title": "Summary Tile",
+  "summary": "Use a Summary Tile to head a dashboard block: a title with a confidence meter, one line about the block, and one action or a chevron.",
+  "corePrinciple": "Name the block, then offer one way in.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4116-6354",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-summarytile--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A title, a meter, a line, and an action",
+      "description": "The tile is one row with no panel of its own: the title and its meter sit over a line of description, and the action sits at the end. The chevron, when chevron is on, follows the action.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Title",
+        "title: the block’s name, 16 px bold, on one line.",
+        "Meter",
+        "A StrengthIndicator from confidence; null removes it.",
+        "Description",
+        "description: what the block holds, 12 px; it wraps.",
+        "Action",
+        "children: your Button, given the tile’s modes."
+      ],
+      "specimen": [
+        "Spending",
+        "Know your spending and savings",
+        "Set budget"
+      ],
+      "anatomy": [
+        {
+          "part": "Title",
+          "note": "title: the block’s name, 16 px bold, on one line."
+        },
+        {
+          "part": "Meter",
+          "note": "A StrengthIndicator from confidence; null removes it."
+        },
+        {
+          "part": "Description",
+          "note": "description: what the block holds, 12 px; it wraps."
+        },
+        {
+          "part": "Action",
+          "note": "children: your Button, given the tile’s modes."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "An action, a chevron, or neither",
+      "description": "children holds the action. Left out, the tile shows a placeholder Button with no onPress, so pass your own Button or IconButton, or null for none. The tile passes its modes to whatever you put there, and your Button’s own modes win. Give the tile AppearanceBrand Secondary and Button / Size S, as every example here does, and your Button is purple and small, as Figma draws it. chevron adds a forward arrow at the end. AppearanceBrand, Emphasis, and Semantic Intent change only the action: the title, description, and meter keep their look.",
+      "blocks": [
+        "Your Button",
+        "A purple, size S Button from the tile’s modes.",
+        "IconButton",
+        "A round icon action instead of a label.",
+        "Chevron",
+        "A forward arrow, with onPress on the whole row.",
+        "No action",
+        "children and confidence set to null: only text.",
+        "Emphasis Medium",
+        "A light purple action.",
+        "Emphasis Low",
+        "A text action.",
+        "AppearanceBrand Neutral",
+        "A dark grey action.",
+        "Semantic Intent System",
+        "AppearanceSystem negative turns the action red."
+      ],
+      "specimen": [
+        "Spending",
+        "Know your spending and savings",
+        "Set budget",
+        "Bills",
+        "3 bills due this week",
+        "Insights",
+        "This month’s breakdown",
+        "Manage scheduled payments",
+        "2 bills are overdue",
+        "Pay now"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Your Button",
+          "description": "A purple, size S Button from the tile’s modes."
+        },
+        {
+          "title": "IconButton",
+          "description": "A round icon action instead of a label."
+        },
+        {
+          "title": "Chevron",
+          "description": "A forward arrow, with onPress on the whole row."
+        },
+        {
+          "title": "No action",
+          "description": "children and confidence set to null: only text."
+        },
+        {
+          "title": "Emphasis Medium",
+          "description": "A light purple action."
+        },
+        {
+          "title": "Emphasis Low",
+          "description": "A text action."
+        },
+        {
+          "title": "AppearanceBrand Neutral",
+          "description": "A dark grey action."
+        },
+        {
+          "title": "Semantic Intent System",
+          "description": "AppearanceSystem negative turns the action red."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Confidence, and a pressable row",
+      "description": "confidence shows how much data stands behind the block: High lights three green bars, Medium two orange, Low one red, and None, the default, three grey. A number from 0 to 1 picks the nearest level. onPress makes the whole row one button that dims while pressed; it removes the placeholder Button, not one you pass. The tile has no disabled, selected, or loading state.",
+      "blocks": [
+        "High",
+        "Three green bars: enough data.",
+        "Medium",
+        "Two orange bars.",
+        "Low",
+        "One red bar.",
+        "None",
+        "Three grey bars: no data yet."
+      ],
+      "specimen": [
+        "Spending",
+        "Know your spending and savings",
+        "Set budget"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "High",
+          "description": "Three green bars: enough data."
+        },
+        {
+          "title": "Medium",
+          "description": "Two orange bars."
+        },
+        {
+          "title": "Low",
+          "description": "One red bar."
+        },
+        {
+          "title": "None",
+          "description": "Three grey bars: no data yet."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The host sets the width",
+      "description": "The tile fills its host’s width and adds no padding, background, or border: the card or screen around it supplies them. Figma draws it at 280 px. The text takes the room the action leaves, so the description wraps onto more lines, and the title ends in … unless disableTruncation is set. The parts are 8 px apart, and the meter sits 4 px after the title.",
+      "blocks": [
+        "320 × 44",
+        "8",
+        "Narrow host",
+        "At 240 px the description wraps and the title is cut short.",
+        "Wide host",
+        "At 360 px it fits on one line.",
+        "Long title",
+        "The title ends in … on one line.",
+        "disableTruncation",
+        "The title wraps, and the meter stays beside it."
+      ],
+      "specimen": [
+        "Spending",
+        "Know your spending and savings",
+        "Set budget",
+        "Spending across all your accounts"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Narrow host",
+          "description": "At 240 px the description wraps and the title is cut short."
+        },
+        {
+          "title": "Wide host",
+          "description": "At 360 px it fits on one line."
+        },
+        {
+          "title": "Long title",
+          "description": "The title ends in … on one line."
+        },
+        {
+          "title": "disableTruncation",
+          "description": "The title wraps, and the meter stays beside it."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the block, say what’s in it, use a verb",
+      "description": "Make the title the block’s name in a word or two, such as Spending, Bills, or Goals. The description says what the block holds in one short line; it never truncates, so a paragraph makes the row tall. Label the action with a verb for the block, such as Set budget, Pay bills, or Add goal.",
+      "blocks": [
+        "Goals",
+        "“Goals”, what it tracks, and “Add goal”.",
+        "Bills",
+        "“Bills”, what’s due, and “Pay bills”."
+      ],
+      "specimen": [
+        "Goals",
+        "Save for a trip to Goa",
+        "Add goal",
+        "Bills",
+        "3 bills due this week",
+        "Pay bills"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Goals",
+          "description": "“Goals”, what it tracks, and “Add goal”."
+        },
+        {
+          "title": "Bills",
+          "description": "“Bills”, what’s due, and “Pay bills”."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Spending on the Money screen",
+      "description": "The tile heads a card, and the list under it is the block it introduces. See all opens the screen’s own spending view through the Button’s onPress; the tile only lays out the row.",
+      "blocks": [
+        "Spending view not opened"
+      ],
+      "specimen": [
+        "Spending",
+        "Your top categories this month",
+        "See all",
+        "Food",
+        "12 orders",
+        "₹",
+        "6,240",
+        "Shopping",
+        "5 orders",
+        "4,180",
+        "Travel",
+        "3 trips",
+        "2,950"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A quiet action, one press target, a real verb",
+      "description": "Each pair shows a tile that reads as a header next to one that shouts, presses twice, or does nothing.",
+      "blocks": [
+        "Do",
+        "Modes on the tile",
+        "AppearanceBrand Secondary and Button / Size S make your Button match Figma.",
+        "Don’t",
+        "A bare Button",
+        "Without those modes it’s gold and size M, too loud for a header.",
+        "A chevron on a row that opens",
+        "onPress makes the whole row the one target.",
+        "A Button in a pressable row",
+        "Both press, and the Button sits inside the row’s button.",
+        "Your own Button",
+        "A verb that does something.",
+        "The placeholder",
+        "Left out, children shows “Button”, which does nothing."
+      ],
+      "specimen": [
+        "Spending",
+        "Know your spending and savings",
+        "Set budget",
+        "Insights",
+        "This month’s breakdown"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Modes on the tile",
+            "caption": "AppearanceBrand Secondary and Button / Size S make your Button match Figma.",
+            "specimen": "Spending · Know your spending and savings · Set budget"
+          },
+          "dont": {
+            "title": "A bare Button",
+            "caption": "Without those modes it’s gold and size M, too loud for a header.",
+            "specimen": "Spending · Know your spending and savings · Set budget"
+          }
+        },
+        {
+          "do": {
+            "title": "A chevron on a row that opens",
+            "caption": "onPress makes the whole row the one target.",
+            "specimen": "Insights · This month’s breakdown"
+          },
+          "dont": {
+            "title": "A Button in a pressable row",
+            "caption": "Both press, and the Button sits inside the row’s button.",
+            "specimen": "Insights · This month’s breakdown · Set budget"
+          }
+        },
+        {
+          "do": {
+            "title": "Your own Button",
+            "caption": "A verb that does something.",
+            "specimen": "Spending · Know your spending and savings · Set budget"
+          },
+          "dont": {
+            "title": "The placeholder",
+            "caption": "Left out, children shows “Button”, which does nothing.",
+            "specimen": "Spending · Know your spending and savings"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Summary Tile contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With chevron",
+        "Pressable with chevron",
+        "High confidence",
+        "No indicator",
+        "Custom action",
+        "Icon button action",
+        "Checked 20 October 2026",
+        "Installed jfs-components is 0.1.78 (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Summary Tile exposes only chevron and the action slot; the title, description, and confidence are overrides there. The package’s default action is a placeholder Button with no onPress, and a Button passed in children doesn’t get its purple, size S look, so these examples set AppearanceBrand Secondary and Button / Size S on the tile. The title’s line is 20 px (Figma 18), so a one-line tile is 44 px tall, not 42. disableTruncation affects only the title, and a tile without onPress isn’t announced by its title. The published Storybook still shows the older generated page (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "chevron",
+        "onPress",
+        "children",
+        "disableTruncation"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

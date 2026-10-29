@@ -1,0 +1,567 @@
+{
+  "slug": "cccard",
+  "guideCommit": "5170833ef03e04a22f99f4203d1fe13a508185f8",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/cccard.guide.tsx) and docs/evidence/cccard.md at 5170833 (“docs: add CC Card guide”, 21 October), the same files on main and docs-next. The guide's Sources note and the evidence were checked on 21 October 2026 on 0.1.78-c7d3348 (the Sources note calls it the “19 October build of Biscuit’s main”), so items citing them carry 2026-10-21 and 0.1.78-c7d3348. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c7d3348 and v0.1.78-dbe0e02 (3 commits, 195 files, complete) changes CcCard.tsx (599 → 666 lines; the #364 Component Bug fixes) and PdpCcCard, and no Badge, Avatar, Image, Icon, Title, ListItem, TextSegment, Button, design-tokens or resolver file. The entry follows the installed source, read line by line, and the guide page rendered on it in headless Chrome at 1280 px (29 October, this run): the full card is 343 × 244 (badges 16, media row 54, benefits 62, upsell 20, fee row 34, 8 px apart, 12 px padding inside a 1 px border); no header 220; no upsell 216; no button 244; shortest full card 192; compact 110 with a 42 px Avatar; width 300 keeps the height; the pressable card is a button named “JioFinance Gold Credit Card”; the border is white except with Page type SubPage (grey). What dbe0e02 changed against the guide: badges are Small by default (badgeModes, line 227); benefit icons are purple by default (iconModes sets AppearanceBrand Secondary, caller modes win, lines 223–226); benefits sit 4 px apart (listGroup/gap read with List Item Style Minimal, line 498); the upsell text is Text Sizes Small (12 px, line 230) in a row at least 20 px tall; compact's default media is a 42 px Avatar (Avatar Size L), the imageSource cropped to a circle or a “CC” monogram without one (lines 261–271); the full card shows no picture box when imageSource is left out (line 272); '' or null hides a footer line and only a left-out one shows its sample word (lines 238–240); showHeader and showNudge also hide a custom header or nudge (244, 328); the nudge avatar without nudgeAvatarSource is a “JF” monogram (337); CcCardBadge has an icon field; the sample badges no longer hard-code a white label (604–607). Left out because dbe0e02 contradicts them (in the human flag, for the guide fix): Sizing “and 12 px between benefits” and “It comes out taller than Figma’s, because its badges are bigger and its benefits further apart.”; Configuration “AppearanceBrand Secondary turns the benefit icons purple” and “Badge Size Small makes the badges smaller” (with their example cards “Purple benefit icons, as in Figma.” and “Smaller badges, as in Figma.”), and “Without the badges, 31 px shorter.” (24 px now); the Do & Don't caption “An empty box still takes its space beside the title.” (the pair itself is kept, with the Do caption as its reason); Content “an empty headline, description, or footerSubtitle shows its placeholder word” (a left-out line shows it; '' or null hides it); and the Sources note's 264 px, Medium badges, 12 px benefits, gold icons, 14 px upsell, compact's 88 × 54 picture and hard-coded label colour. Kept, because the installed source agrees: every Anatomy part (the 88 × 54 box is still the full card's picture when imageSource is set, the Button is still Secondary size S, lines 233–236); the configuration sentences on compact (quoted from “it drops…” on, since compact's picture is now a round 42 px Avatar of the same image; the compact fact, props:compact, says so), media in both variants, showHeader and showNudge, showButton (the height is unchanged, measured), badges taking modes and Page type SubPage; the 343 px width; the States, Content (except the placeholder clause) and In context sentences; the Sources' border and Storybook sentences. Package facts: title, subtitle, the footer trio, items, nudgeSegments and buttonLabel show sample words or rows when left out (types facts, read in source); badges does too (two Tertiary sample badges, evidence fact, lines 604–607 at dbe0e02), so the content rules make setting them (or hiding the header or upsell) required, as PdpCcCard's entry does for its sample words. The evidence facts (onPress, showButton, items, badges, Page type) were checked on c7d3348 and re-read against dbe0e02: onPress still gives a Pressable named accessibilityLabel ?? title with opacity 0.92 (lines 394–404, 661–663), showButton still leaves the height (measured 244 both), items={[]} still removes the list (302), Page type SubPage still turns the border grey (489, measured rgb(235, 235, 237)). avoidWhen rests on the evidence's record of Biscuit's handwritten CcCard.mdx (e60f8bd8; the mirror ships no mdx), as CardFeedback's entry does in release +13; the guide's own copy names no other component. DebitCard, PdpCcCard and PlanComparisonCard have entries, so each rule carries useInstead. Placement: Page type SubPage is the one mode the guide ties to a place (a white page), so it is placement advice with its value; the other mode cards (AppearanceBrand Secondary, Badge Size Small) are left out, because dbe0e02 makes their look the default. Strength: the In context “only lays out the offer” is everywhere (onButtonPress is a plain handler; the card holds no application state, lines 348–352). Anatomy required: only the Fee is always drawn (the footer text block renders in both variants); badges, picture, benefits, upsell and the Button can each be hidden or dropped, and compact drops the title. Examples follow the building rules: no Color Mode (the guide sets Light on every card), no Slot gap or Padding on the In context VStack and no width style (the guide's 343 px VStack style is a docs frame), the built-in Button gets only buttonLabel and onButtonPress. The badges keep the guide's per-badge AppearanceBrand (leading Tertiary, trailing Secondary), as its rule “Badges take modes, not colours.” sets them; the upsell's “JioFinance+” run keeps Text Appearance Primary, as the package's own sample run does (DEFAULT_NUDGE_SEGMENTS, line 617). Avatar: the compact example uses <Avatar imageSource={require('./jiofinance-logo.png')} /> in media, as the guide's “Compact with an Avatar” does (Avatar's default style is Image; Avatar Size is left unset, which gives 42 px, the size Figma's compact card shows). require() paths stand for the app's pictures, as in PdpCcCard's entry. The guide's FitWidth and Surface are docs frames, not Coin components, and are left out. All components used have an entry in this pack (Avatar gets one in this batch). Left out of examples: the No header, No upsell, No button, AppearanceBrand Secondary, Badge Size Small, Page type SubPage, width 300, Shortest full card and Long title cards, the Do & Don't specimens and the playground. Not recorded: style, imageWidth and imageHeight (the guide never sets them), the header, nudge, footer and button overrides (the building rules keep built-in parts as they are), CcCardListItem.iconColor and badge color and labelColor (the guide says badges take modes, not colours), the badge icon field (new in dbe0e02, not in the guide), Figma's hex values, the Storybook host and the evidence's measurements from c7d3348. Gaps: the published Storybook (index.json last modified 17 October 2026, checked 29 October) still lists the seven stories the Sources note names, so its pressable-story and old-page sentence still holds; and Figma's square picture corners against the package's 8 px (image/radius 8 at dbe0e02). Sorting (batch 11, three cross-check runs). Round 1 flagged /configuration/8 (“the Button stays small and purple” lost the condition of the card modes listed before it; card modes such as AppearanceBrand reach the Button, CcCard.tsx 233–236): our misreading, removed, since Anatomy already names the small purple Button. It flagged the footer rule for extending one fact (props:headline) to description and footerSubtitle: our misreading, split into one rule per prop, each on its own fact. Round 2 noted that title and subtitle don’t render in compact: the two rules now say “on the full card”. The final run, on this entry, flags /configuration/3 (compact’s 42 px Avatar) and /content/rules/2–4 ('' or null hides a footer line) as contradicting the guide and evidence; all four rest on package facts that match the installed dbe0e02 source and the page rendered on it, so they are dismissed in reviews/cccard.json for Astra and Marcin, and the stale guide sentences are in the human flag. Its other notes, not flags: /configuration/5 names only showHeader as target although the sentence also covers showNudge; and the second In context card’s footerSubtitle “Lifetime free” is the guide’s own (cccard.guide.tsx line 126). No trace-check flags remain. Ticket (coordinator, batch 11): the guide fix belongs to #364 (Component Fix, open), whose publish re-checks the guide; a work note on #364 lists the sentences above, and the human flag points there.",
+  "useWhen": [
+    {
+      "text": "Sell one credit card: who it's for, its key benefits, an upsell, and the joining fee, with one action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a CC Card to sell one credit card: who it’s for, its key benefits, an upsell, and the joining fee, with one action."
+      }
+    },
+    {
+      "text": "One card, its benefits, its fee.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One card, its benefits, its fee."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A card face (the card itself, as someone holds it): the upstream Storybook docs, as the evidence records them, point to Debit Card.",
+      "strength": "discouraged",
+      "useInstead": "DebitCard",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a card face (DebitCard), a product page with metric columns (PdpCcCard), or a plan matrix (PlanComparisonCard)."
+      },
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "A product page with metric columns: the upstream Storybook docs, as the evidence records them, point to PDP CC Card.",
+      "strength": "discouraged",
+      "useInstead": "PdpCcCard",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a card face (DebitCard), a product page with metric columns (PdpCcCard), or a plan matrix (PlanComparisonCard)."
+      },
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "A plan matrix: the upstream Storybook docs, as the evidence records them, point to Plan Comparison Card.",
+      "strength": "discouraged",
+      "useInstead": "PlanComparisonCard",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a card face (DebitCard), a product page with metric columns (PdpCcCard), or a plan matrix (PlanComparisonCard)."
+      },
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Badges",
+      "holds": "badges on the left, trailingBadges on the right.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "badges on the left, trailingBadges on the right."
+      }
+    },
+    {
+      "part": "Picture",
+      "holds": "imageSource in an 88 × 54 box; media replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource in an 88 × 54 box; media replaces it."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title in 14 px bold on one line, subtitle under it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "title in 14 px bold on one line, subtitle under it."
+      }
+    },
+    {
+      "part": "Benefits",
+      "holds": "items: one Coin ListItem per benefit, with its icon.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "items: one Coin ListItem per benefit, with its icon."
+      }
+    },
+    {
+      "part": "Upsell",
+      "holds": "nudgeSegments after a small avatar.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "nudgeSegments after a small avatar."
+      }
+    },
+    {
+      "part": "Fee",
+      "holds": "headline, description, and footerSubtitle.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "headline, description, and footerSubtitle."
+      }
+    },
+    {
+      "part": "Action",
+      "holds": "A small purple Button from buttonLabel.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A small purple Button from buttonLabel."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "On a screen of card offers, list the cards one under another.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists the cards on offer, one under another."
+      }
+    },
+    {
+      "text": "On a white page, set Page type SubPage: it gives the card a grey border.",
+      "strength": "recommended",
+      "target": "Page type",
+      "value": "SubPage",
+      "from": {
+        "section": "configuration",
+        "quote": "Page type SubPage shows a grey border for white pages"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The full card, the default, shows every part.",
+      "strength": "recommended",
+      "target": "compact",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "The full card shows every part."
+      }
+    },
+    {
+      "text": "Use compact for dense lists: just the picture and the fee.",
+      "strength": "recommended",
+      "target": "compact",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "Just the picture and the fee, for dense lists."
+      }
+    },
+    {
+      "text": "compact drops the badges, title, benefits, upsell, and button, so put the card's name in headline.",
+      "strength": "recommended",
+      "target": "compact",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "it drops the badges, title, benefits, upsell, and button, so put the card’s name in headline."
+      }
+    },
+    {
+      "text": "In compact, the media slot shows a 42 px Avatar, and the footer has no button.",
+      "strength": "recommended",
+      "target": "compact",
+      "value": "true",
+      "from": {
+        "fact": "props:compact"
+      }
+    },
+    {
+      "text": "media replaces the picture in both the full and the compact card, for example with an Avatar.",
+      "strength": "recommended",
+      "target": "media",
+      "from": {
+        "section": "configuration",
+        "quote": "media replaces the picture in both, for example with an Avatar as Figma’s compact card does."
+      }
+    },
+    {
+      "text": "showHeader and showNudge hide the badges and the upsell.",
+      "strength": "recommended",
+      "target": "showHeader",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "showHeader and showNudge hide the badges and the upsell"
+      }
+    },
+    {
+      "text": "showButton hides the button but not its space: the fee stays where it was, and the card is no shorter.",
+      "strength": "recommended",
+      "target": "showButton",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "showButton hides the button but not its space."
+      }
+    },
+    {
+      "text": "Colour badges with their modes, not with colours.",
+      "strength": "recommended",
+      "target": "badges",
+      "from": {
+        "section": "configuration",
+        "quote": "Badges take modes, not colours."
+      }
+    },
+    {
+      "text": "The card is 343 px wide, as in Figma; width sets another number or a percentage of its host.",
+      "strength": "recommended",
+      "target": "width",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 343 px wide, as in Figma; width sets another number or a percentage of its host."
+      }
+    },
+    {
+      "text": "The height follows the parts you show.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The height follows the parts you show"
+      }
+    },
+    {
+      "text": "A benefit row presses when you give it onPress.",
+      "strength": "recommended",
+      "target": "CcCardListItem.onPress",
+      "from": {
+        "section": "states",
+        "quote": "a benefit row presses when you give it onPress."
+      }
+    },
+    {
+      "text": "Let the Button act or the whole card, not both: a pressable card (onPress) that keeps its button puts a button inside a button.",
+      "strength": "discouraged",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "Use one or the other: a pressable card that keeps its button puts a button inside a button."
+      }
+    },
+    {
+      "text": "Each Apply starts the screen's own application through onButtonPress; the card only lays out the offer.",
+      "strength": "recommended",
+      "target": "onButtonPress",
+      "from": {
+        "section": "inContext",
+        "quote": "Each Apply starts the screen’s own application through onButtonPress; the card only lays out the offer."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes every CC Card: onButtonPress is a plain () => void handler passed to its Button, and the card holds no application state (CcCard.tsx lines 348–352, 0.1.78-dbe0e02)."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Set title yourself on the full card: left out, it shows the sample word “Title” (compact drops the title).",
+        "strength": "required",
+        "target": "title",
+        "from": {
+          "fact": "props:title"
+        }
+      },
+      {
+        "text": "Set subtitle yourself on the full card: left out, it shows the sample word “Subtitle” (compact drops it).",
+        "strength": "required",
+        "target": "subtitle",
+        "from": {
+          "fact": "props:subtitle"
+        }
+      },
+      {
+        "text": "Set headline yourself: left out, it shows the sample word “Headline”; '' or null hides the line.",
+        "strength": "required",
+        "target": "headline",
+        "from": {
+          "fact": "props:headline"
+        }
+      },
+      {
+        "text": "Set description yourself: left out, it shows the sample word “Description”; '' or null hides the line.",
+        "strength": "required",
+        "target": "description",
+        "from": {
+          "fact": "props:description"
+        }
+      },
+      {
+        "text": "Set footerSubtitle yourself: left out, it shows the sample word “Subtitle”; '' or null hides the line.",
+        "strength": "required",
+        "target": "footerSubtitle",
+        "from": {
+          "fact": "props:footerSubtitle"
+        }
+      },
+      {
+        "text": "Set buttonLabel whenever the card shows its button: it defaults to “Button”.",
+        "strength": "required",
+        "target": "buttonLabel",
+        "from": {
+          "fact": "props:buttonLabel"
+        }
+      },
+      {
+        "text": "Set items yourself: left out, the card shows three sample benefit rows.",
+        "strength": "required",
+        "target": "items",
+        "from": {
+          "fact": "props:items"
+        }
+      },
+      {
+        "text": "Set badges, or hide the header with showHeader false: left out, the header shows two sample badges.",
+        "strength": "required",
+        "target": "badges",
+        "from": {
+          "fact": "props:badges"
+        }
+      },
+      {
+        "text": "Set nudgeSegments, or hide the upsell with showNudge false: left out, it shows the sample “Upsell message JioFinance+”.",
+        "strength": "required",
+        "target": "nudgeSegments",
+        "from": {
+          "fact": "props:nudgeSegments"
+        }
+      },
+      {
+        "text": "Make the title the card's name, short enough for one line, and the subtitle the kind of card.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the card’s name, short enough for one line, and the subtitle the kind of card."
+        }
+      },
+      {
+        "text": "Give each benefit one fact.",
+        "strength": "recommended",
+        "target": "items",
+        "from": {
+          "section": "content",
+          "quote": "Give each benefit one fact."
+        }
+      },
+      {
+        "text": "Put the fee label in headline, the amount in description, and the billing note in footerSubtitle.",
+        "strength": "recommended",
+        "target": "headline",
+        "from": {
+          "section": "content",
+          "quote": "Put the fee label in headline, the amount in description, and the billing note in footerSubtitle."
+        }
+      },
+      {
+        "text": "Label the button with a verb, such as Apply.",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "section": "content",
+          "quote": "Label the button with a verb, such as Apply."
+        }
+      },
+      {
+        "text": "Replace every sample: each line should say something about this card.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Each line says something about this card."
+        }
+      },
+      {
+        "text": "In compact, headline carries the card's name, which the title can't show.",
+        "strength": "recommended",
+        "target": "headline",
+        "from": {
+          "section": "doDont",
+          "quote": "headline carries the name the title can’t show."
+        }
+      }
+    ],
+    "good": [
+      "JioFinance Gold Credit Card",
+      "Rewards on gold and every spend",
+      "5% back as JioPoints on gold",
+      "Joining fee",
+      "₹499",
+      "+ GST",
+      "Apply"
+    ],
+    "bad": [
+      "Headline",
+      "Description",
+      "Subtitle"
+    ]
+  },
+  "states": [
+    {
+      "state": "Button acts",
+      "when": "The default: the card isn't pressable; its Apply button is, and a benefit row presses when you give it onPress.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t pressable: its Apply button is, and a benefit row presses when you give it onPress."
+      }
+    },
+    {
+      "state": "Whole card",
+      "when": "onPress set: the whole card is one button, named by its title. Use it without the card's own button (showButton false).",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      }
+    },
+    {
+      "state": "Disabled, selected, loading",
+      "when": "Not available: the card has no disabled, selected, or loading state.",
+      "from": {
+        "section": "states",
+        "quote": "The card has no disabled, selected, or loading state."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "With onPress, the whole card is one button, named by its title.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Replace every sample",
+      "dont": "Leave the footer empty",
+      "why": "Headline, Description, and Subtitle show as written.",
+      "from": {
+        "section": "doDont",
+        "quote": "Replace every sample"
+      }
+    },
+    {
+      "do": "Show the card",
+      "dont": "Leave out the picture",
+      "why": "The picture says what’s on offer.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show the card"
+      }
+    },
+    {
+      "do": "Name the card in compact",
+      "dont": "Compact with the full card’s text",
+      "why": "The title disappears, so only the fee is left.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the card in compact"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Card offers on the Cards screen, the guide's In context: a title, then two full cards one under another, each with its picture, name, benefits and fee; the first adds a trailing badge and an upsell, the second hides the upsell. Each Apply starts the screen's own application through onButtonPress (the empty handlers stand for that wiring). Badges take their colours as modes, as the guide sets them; the upsell's last run is brand-coloured as in the package's own sample. The require() paths stand for the app's own pictures.",
+      "jsx": "<VStack>\n  <Title title=\"Cards for you\" subtitle=\"Pre-approved offers\" />\n  <CcCard\n    imageSource={require('./credit-card.png')}\n    title=\"JioFinance Gold Credit Card\"\n    subtitle=\"Rewards on gold and every spend\"\n    badges={[{ label: 'Pre-approved', modes: { AppearanceBrand: 'Tertiary' } }]}\n    trailingBadges={[{ label: 'Lifetime free', modes: { AppearanceBrand: 'Secondary' } }]}\n    items={[\n      { icon: 'ic_rupee_coin', title: '5% back as JioPoints on gold' },\n      { icon: 'ic_flight_mode', title: '4 airport lounge visits a year' },\n      { icon: 'ic_gift', title: 'No annual fee in the first year' },\n    ]}\n    nudgeSegments={[{ text: 'Get 2x JioPoints with ' }, { text: 'JioFinance+', modes: { 'Text Appearance': 'Primary' } }]}\n    nudgeAvatarSource={require('./jiofinance-logo.png')}\n    headline=\"Joining fee\"\n    description=\"₹499\"\n    footerSubtitle=\"+ GST\"\n    buttonLabel=\"Apply\"\n    onButtonPress={() => {}}\n  />\n  <CcCard\n    imageSource={require('./credit-card.png')}\n    title=\"JioFinance Everyday Credit Card\"\n    subtitle=\"Cashback on bills and groceries\"\n    badges={[{ label: 'Pre-approved', modes: { AppearanceBrand: 'Tertiary' } }]}\n    items={[\n      { icon: 'ic_voucher_cashback', title: '2% cashback on bills' },\n      { icon: 'ic_wallet', title: '1% cashback on everything else' },\n    ]}\n    showNudge={false}\n    headline=\"Joining fee\"\n    description=\"₹0\"\n    footerSubtitle=\"Lifetime free\"\n    buttonLabel=\"Apply\"\n    onButtonPress={() => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists the cards on offer, one under another."
+      }
+    },
+    {
+      "purpose": "Compact with an Avatar, as in Figma, for a dense list: a round mark over the fee, with the card's name in headline because compact drops the title. The require() path stands for the app's own logo.",
+      "jsx": "<CcCard\n  compact\n  media={<Avatar imageSource={require('./jiofinance-logo.png')} />}\n  headline=\"JioFinance Gold Credit Card\"\n  description=\"₹499\"\n  footerSubtitle=\"Joining fee\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "media replaces the picture in both, for example with an Avatar as Figma’s compact card does."
+      }
+    },
+    {
+      "purpose": "The whole card as one button, named by its title, the guide's Whole card state: onPress is set and the card's own button is hidden, so there is no button inside a button. The empty handler stands for the screen's own navigation.",
+      "jsx": "<CcCard\n  imageSource={require('./credit-card.png')}\n  title=\"JioFinance Gold Credit Card\"\n  subtitle=\"Rewards on gold and every spend\"\n  badges={[{ label: 'Pre-approved', modes: { AppearanceBrand: 'Tertiary' } }]}\n  items={[\n    { icon: 'ic_rupee_coin', title: '5% back as JioPoints on gold' },\n    { icon: 'ic_flight_mode', title: '4 airport lounge visits a year' },\n  ]}\n  showNudge={false}\n  headline=\"Joining fee\"\n  description=\"₹499\"\n  footerSubtitle=\"+ GST\"\n  showButton={false}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "Makes the card a Pressable named by accessibilityLabel or, without one, its title, slightly dimmed while pressed; with the Apply button kept, that nests a button in a button. There is no disabled.",
+      "quote": "`onPress` makes the card a `Pressable` (name `accessibilityLabel ?? title`, opacity 0.92); with Apply that nests a button in a button. No `disabled`.",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "showButton",
+      "description": "Hiding the button doesn't change the card's height.",
+      "quote": "`showButton` (removing it doesn't change the height)",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "items",
+      "description": "A row's icon: null hides its glyph; a row's onPress makes it a button; items={[]} removes the list.",
+      "quote": "`icon: null` hides the glyph; `onPress` makes the row a button. `items={[]}` removes the list.",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "badges",
+      "description": "Left out, the header shows two sample Tertiary badges.",
+      "quote": "sample two Tertiary badges",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Page type",
+      "description": "On the card, only the border colour changes: white by default, so it doesn't show, and grey with Page type SubPage.",
+      "quote": "Only the border colour varies: white by default (invisible), `#ebebed` with Page type SubPage (or context 8 Section).",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Every published Storybook story renders the card as a pressable button with Apply inside it, and the published page is the older generated one.",
+      "from": {
+        "section": "sources",
+        "quote": "Every published Storybook story renders the card as a pressable button with Apply inside it, and the published page is the older generated one (all reported)."
+      },
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The picture's corners are 8 px round, where Figma's are square.",
+      "quote": "Figma image radius 0 vs 8.",
+      "checkedOn": "2026-10-21",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ]
+}

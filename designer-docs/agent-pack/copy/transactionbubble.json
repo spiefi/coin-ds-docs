@@ -1,0 +1,309 @@
+{
+  "slug": "transactionbubble",
+  "label": "Transaction Bubble",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/transactionbubble.guide.tsx"
+  ],
+  "evidence": "docs/evidence/transactionbubble.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T05:21:40.460Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "payment bubble",
+    "chat payment",
+    "payment in thread",
+    "transaction row",
+    "payment card"
+  ],
+  "title": "Transaction Bubble",
+  "summary": "Use a Transaction Bubble for one payment in a chat thread: who it was with, the amount, and its status, opening its details.",
+  "corePrinciple": "One payment per bubble; its details are one tap away.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1517-1155",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-transactionbubble--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Who, how much, and how it went",
+      "description": "The description and the amount sit at the top, anything you pass as children comes next, and the status line and a chevron close the bubble.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Description",
+        "description, 14 px on one line; it ellipsizes unless disableTruncation.",
+        "Amount",
+        "A Money Value from value and currency, at the bubble’s size.",
+        "Status",
+        "A Transaction Status from status and date; the mode sets its mark.",
+        "Chevron",
+        "A Nav Arrow that says the bubble opens; statusSlot removes it.",
+        "Bubble",
+        "White, with a 1 px grey border, 23 px corners and 16 px padding."
+      ],
+      "specimen": [
+        "Paid to Priya Sharma",
+        "₹",
+        "1,200",
+        "Paid · 21 Oct 2026"
+      ],
+      "anatomy": [
+        {
+          "part": "Description",
+          "note": "description, 14 px on one line; it ellipsizes unless disableTruncation."
+        },
+        {
+          "part": "Amount",
+          "note": "A Money Value from value and currency, at the bubble’s size."
+        },
+        {
+          "part": "Status",
+          "note": "A Transaction Status from status and date; the mode sets its mark."
+        },
+        {
+          "part": "Chevron",
+          "note": "A Nav Arrow that says the bubble opens; statusSlot removes it."
+        },
+        {
+          "part": "Bubble",
+          "note": "White, with a 1 px grey border, 23 px corners and 16 px padding."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Status, a note, your own status line",
+      "description": "Set the Transaction Status mode on the bubble to set its status mark: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”; status and date give the words. children add a row between the amount and the status, such as the note sent with the payment. statusSlot replaces the status line and the chevron with your own content. No other mode changes the bubble.",
+      "blocks": [
+        "Paid",
+        "A green tick beside Paid.",
+        "Declined",
+        "A red cross; the words come from status.",
+        "With a note",
+        "children sit between the amount and the status.",
+        "Without the chevron",
+        "statusSlot replaces the line and the chevron."
+      ],
+      "specimen": [
+        "Paid to Priya Sharma",
+        "₹",
+        "1,200",
+        "Paid · 21 Oct 2026",
+        "Payment to Uber India",
+        "56",
+        "Declined · 20 Mar 2025",
+        "For Saturday’s dinner"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Paid",
+          "description": "A green tick beside Paid."
+        },
+        {
+          "title": "Declined",
+          "description": "A red cross; the words come from status."
+        },
+        {
+          "title": "With a note",
+          "description": "children sit between the amount and the status."
+        },
+        {
+          "title": "Without the chevron",
+          "description": "statusSlot replaces the line and the chevron."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "A picture, or a button",
+      "description": "Without onPress the bubble is a picture of the payment, but its chevron still shows; if it doesn’t open, drop the chevron with statusSlot. With onPress the whole bubble is one button, and it fades a little while pressed. Its default name is the description and the status word, with no amount or date, so set accessibilityLabel.",
+      "blocks": [
+        "Picture",
+        "No onPress: nothing to press, yet the chevron shows.",
+        "Button",
+        "Looks the same; the whole bubble presses."
+      ],
+      "specimen": [
+        "Paid to Priya Sharma",
+        "₹",
+        "1,200",
+        "Paid · 21 Oct 2026"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Picture",
+          "description": "No onPress: nothing to press, yet the chevron shows."
+        },
+        {
+          "title": "Button",
+          "description": "Looks the same; the whole bubble presses."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The thread sets the width",
+      "description": "The bubble has no width of its own: it fills its host. In Figma’s thread it is 231 px of a 328 px column, on the right for payments you send. With one line of description it is 119 px tall, 10 px taller than Figma’s 109, because the amount sits on a 34 px line. It has 16 px of padding, and its parts are 8 px apart.",
+      "blocks": [
+        "231 × 119",
+        "8"
+      ],
+      "specimen": [
+        "Paid to Priya Sharma",
+        "₹",
+        "1,200",
+        "Paid · 21 Oct 2026"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The other person, the amount, one word",
+      "description": "Write description as what happened and with whom, such as Paid to Priya Sharma; it gets one line, so keep it short or set disableTruncation. Give value without a currency sign: currency adds the ₹. Write status as one word that matches the mode, and date short. When the bubble presses, set accessibilityLabel to the person, the amount, the status, and the date.",
+      "blocks": [
+        "One line",
+        "A long description ends in an ellipsis.",
+        "Wrapped",
+        "disableTruncation lets the description wrap."
+      ],
+      "specimen": [
+        "Paid to Bharat Sanchar Nigam Limited",
+        "₹",
+        "799",
+        "Paid · 21 Oct 2026"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "One line",
+          "description": "A long description ends in an ellipsis."
+        },
+        {
+          "title": "Wrapped",
+          "description": "disableTruncation lets the description wrap."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Payments in a thread",
+      "description": "A thread lists the payments between two people: the ones you send sit on the right, the ones you receive on the left. The thread places and sizes the bubbles, 231 px wide here as in Figma, and each bubble’s onPress opens that payment’s details.",
+      "blocks": [
+        "No payment opened"
+      ],
+      "specimen": [
+        "Paid to Priya Sharma",
+        "₹",
+        "1,200",
+        "Paid · 21 Oct 2026",
+        "Request from Priya Sharma",
+        "450",
+        "Requested · Today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One payment, said once",
+      "description": "Each pair shows a bubble people read at a glance next to one that contradicts or buries the payment.",
+      "blocks": [
+        "Do",
+        "The mode with the word",
+        "Paid with the Paid mode: a green mark.",
+        "Don’t",
+        "Only the word",
+        "Paid gets the default Expired mode’s grey “!”.",
+        "Who and how much",
+        "The receipt opens from the bubble.",
+        "Receipt fields inside",
+        "The bubble becomes a receipt; put these in Transaction Details."
+      ],
+      "specimen": [
+        "Paid to Priya Sharma",
+        "₹",
+        "1,200",
+        "Paid · 21 Oct 2026",
+        "UPI ID 101674916166 · HDFC Bank ··4821"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "The mode with the word",
+            "caption": "Paid with the Paid mode: a green mark.",
+            "specimen": "Paid to Priya Sharma · ₹ · 1,200 · Paid · 21 Oct 2026"
+          },
+          "dont": {
+            "title": "Only the word",
+            "caption": "Paid gets the default Expired mode’s grey “!”.",
+            "specimen": "Paid to Priya Sharma · ₹ · 1,200 · Paid · 21 Oct 2026"
+          }
+        },
+        {
+          "do": {
+            "title": "Who and how much",
+            "caption": "The receipt opens from the bubble.",
+            "specimen": "Paid to Priya Sharma · ₹ · 1,200 · Paid · 21 Oct 2026"
+          },
+          "dont": {
+            "title": "Receipt fields inside",
+            "caption": "The bubble becomes a receipt; put these in Transaction Details.",
+            "specimen": "Paid to Priya Sharma · ₹ · 1,200 · UPI ID 101674916166 · HDFC Bank ··4821 · Paid · 21 Oct 2026"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Transaction Bubble contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Successful transaction",
+        "With press and slot",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Transaction Bubble exposes one property, Description; its amount and status line are nested instances, and its status comes from the Transaction Status variable mode. The package takes description, value, currency, status, and date as props, and the mode sets the status mark’s icon and colour, as in Figma. The bubble is 119 px tall where Figma’s is 109, its description is Regular where Figma’s is Medium, and its default accessible name leaves out the amount and date. In Storybook, the Successful story keeps the orange mark and the slot story shows two amounts (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "Description",
+        "description",
+        "value",
+        "currency",
+        "status",
+        "date"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
