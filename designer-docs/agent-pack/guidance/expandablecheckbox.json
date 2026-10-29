@@ -1,0 +1,601 @@
+{
+  "slug": "expandablecheckbox",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch2, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and its evidence at e7ed622. The guide's Sources note was checked on 28 October on the 27 October build, which is the installed one: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02), so items citing it carry that build. The evidence's older sections were checked on 0.1.78-3795b4c (6 October) and 0.1.78-c1fa197 (13 October). Where they disagree with the c1fa197 fixes (#200, Done: open text wraps, one checkbox, the Terms link works from the keyboard, a disabled row still opens, regular-weight label) or the dbe0e02 section (#409, #357), the newer ones were used. The installed ExpandableCheckbox source was read to confirm that the 6 October facts recorded here still hold: the toggle's forced XS / Secondary / Low modes, the clamp on the label only, and children not clamped. The 6 October difference 'the Figma link fills the row, the package link hugs its text' is not recorded: the installed source gives the Idle link Fill. The guide names a Checkbox Item as the alternative for a short option, so that avoidWhen rule uses CheckboxItem. The upstream mdx's CheckboxGroup and Accordion alternatives are in the evidence only, not the guide, so they are not recorded. Examples follow the building rules: no Color Mode (the guide sets Light on every example) and no other modes. They use the guide's own KYC consent copy. The In context example keeps the KYC row and the Open account Button but leaves out the guide's short WhatsApp row, which the guide's own Do & Don't would send to a Checkbox Item. For the same reason, the renamed-toggle example uses the long KYC consent rather than the guide's 'I agree' row. Not recorded as gaps, per the pack's rules: the label and link in Color Mode Dark, and the #200 accessibility faults, all fixed by c1fa197 or dbe0e02. Not recorded: style and labelStyle, which the building rules keep off Coin components, and the mode collections the evidence does not describe.",
+  "useWhen": [
+    {
+      "text": "One consent whose text is too long for a line, such as agreeing to share KYC details.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Expandable Checkbox for one consent whose text is too long for a line, such as agreeing to share KYC details."
+      }
+    },
+    {
+      "text": "A long consent: one collapsed line keeps the screen calm, and Read more shows the rest.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "One line keeps the screen calm; Read more shows the rest."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A short option: Read more would open the same words. Use a Checkbox Item.",
+      "strength": "discouraged",
+      "useInstead": "CheckboxItem",
+      "from": {
+        "section": "doDont",
+        "quote": "Read more opens the same words. Use a Checkbox Item."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Checkbox",
+      "holds": "The box: ticking it gives consent; pressing the label or the row ticks it too.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Ticking it gives consent; the label and row tick it too."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label, the consent phrase, cut to one line with an ellipsis when long.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The consent phrase, cut to one line with an ellipsis when long."
+      }
+    },
+    {
+      "part": "Terms link",
+      "holds": "Optional (linkLabel): opens the document; pressing it doesn't tick the box.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Opens the document; pressing it doesn’t tick the box."
+      }
+    },
+    {
+      "part": "Read more",
+      "holds": "The toggle at the end of the row: shows the full text and never ticks the box.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows the full text; it never ticks the box."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The row fills its container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The row fills its container."
+      }
+    },
+    {
+      "text": "Idle, the row is 24 px tall (the guide measures “I agree” with its Terms link), with Read more hugging the end 8 px after the checkbox item.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Idle it is 24 px tall, with Read more hugging the end 8 px after the checkbox item."
+      }
+    },
+    {
+      "text": "Open, Read less sits 8 px below the text, and text taller than 450 px scrolls inside the row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Open, Read less sits 8 px below the text, and text taller than 450 px scrolls inside the row."
+      }
+    },
+    {
+      "text": "Open, the sentence wraps inside the row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "an open sentence wraps inside the row"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "In narrow rows, “I agree” with its Terms link stops fitting one line below about 295 px: the link wraps under “I agree” and the row grows to 38 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Below about 295 px, the link wraps under “I agree” and the row grows to 38 px."
+      }
+    },
+    {
+      "text": "One row per agreement.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "One row per agreement."
+      }
+    },
+    {
+      "text": "The screen keeps each row's checked state (checked with onValueChange); on the guide's account-opening screen, it enables Open account only after the required consent is ticked.",
+      "strength": "recommended",
+      "target": "checked",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps each row’s checked state and enables Open account only after the required consent"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" (and \"required\") describe when that screen's Open account button turns on, tied to the consent that screen needs; they set no limit on the component."
+      }
+    },
+    {
+      "text": "Each row opens and closes on its own.",
+      "strength": "recommended",
+      "target": "expanded",
+      "from": {
+        "section": "inContext",
+        "quote": "each row opens and closes on its own."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Checked and Open are separate: ticking the box doesn't open the text, and Read more doesn't tick the box.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Ticking the box doesn’t open the text, and Read more doesn’t tick the box."
+      }
+    },
+    {
+      "text": "When Idle, the label shows one line by default; show two (collapsedLines 2) when the first line alone doesn't make sense.",
+      "strength": "recommended",
+      "target": "collapsedLines",
+      "value": "2",
+      "from": {
+        "section": "configuration",
+        "quote": "When Idle, the label shows one line by default; show two when the first line alone doesn’t make sense."
+      }
+    },
+    {
+      "text": "A long consent shows one line and an ellipsis when Idle, and the link moves to its own line.",
+      "strength": "recommended",
+      "target": "label",
+      "from": {
+        "section": "configuration",
+        "quote": "One line and an ellipsis; the link moves to its own line."
+      }
+    },
+    {
+      "text": "Pair linkLabel with onLinkPress: the row leaves opening the document to the screen.",
+      "strength": "recommended",
+      "target": "onLinkPress",
+      "from": {
+        "fact": "props:onLinkPress"
+      }
+    },
+    {
+      "text": "Set disabled to dim the row and stop the box changing; Read more still opens the text, so people can read what they agreed to.",
+      "strength": "recommended",
+      "target": "disabled",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "Disabled dims the row and stops the box changing, but Read more still opens the text so people can read what they agreed to."
+      }
+    },
+    {
+      "text": "children replaces the label and the link: when children is given, label and linkLabel are ignored, and the row's modes reach the children.",
+      "strength": "required",
+      "target": "children",
+      "from": {
+        "fact": "props:children"
+      }
+    },
+    {
+      "text": "disableTruncation true turns off the Idle clamp: no ellipsis, and collapsedLines is ignored, so the label wraps in full.",
+      "strength": "required",
+      "target": "disableTruncation",
+      "value": "true",
+      "from": {
+        "fact": "props:disableTruncation"
+      }
+    },
+    {
+      "text": "The row forces its toggle Button to Button / Size XS, AppearanceBrand Secondary and Emphasis Low.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The toggle Button's size, appearance, and emphasis are forced (XS, Secondary, Low)."
+      },
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "Figma and the package both set the label in regular weight.",
+      "strength": "recommended",
+      "target": "Weight",
+      "from": {
+        "section": "sources",
+        "quote": "Figma and the package both set the label in regular weight."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Ticking gives consent; Read more only shows the words.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Ticking gives consent; Read more only shows the words."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "\"only\" describes what the Read more toggle does (it shows the words and gives no consent), not a limit on the designer."
+        }
+      },
+      {
+        "text": "Write the consent as the label and name the document in the link.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "configuration",
+          "quote": "Write the consent as the label and name the document in the link."
+        }
+      },
+      {
+        "text": "Start the label with the consent, in sentence case without a full stop.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Start the label with the consent, in sentence case without a full stop."
+        }
+      },
+      {
+        "text": "Name the document in the link.",
+        "strength": "recommended",
+        "target": "linkLabel",
+        "from": {
+          "section": "content",
+          "quote": "Name the document in the link."
+        }
+      },
+      {
+        "text": "Rename the toggles only in pairs (readMoreLabel with readLessLabel), and keep them short, such as “Show terms” and “Hide terms”.",
+        "strength": "recommended",
+        "target": "readMoreLabel",
+        "from": {
+          "section": "content",
+          "quote": "Rename the toggles only in pairs, and keep them short, such as “Show terms” and “Hide terms”."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "\"only in pairs\" applies when the toggles are renamed (rename both, not one); the defaults need no renaming."
+        }
+      },
+      {
+        "text": "Name the toggle Read more: people know it opens the text.",
+        "strength": "recommended",
+        "target": "readMoreLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "People know it opens the text."
+        }
+      },
+      {
+        "text": "Do not put the document on the toggle: “Terms & Conditions” on the button only opens the row, and squeezes the label.",
+        "strength": "discouraged",
+        "target": "readMoreLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "“Terms & Conditions” on the button only opens the row, and squeezes the label."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "\"only\" says what a toggle named after the document actually does (it opens the row, not the document); it is the reason against the Don't, not a constraint."
+        }
+      },
+      {
+        "text": "Give each agreement its own row: people can accept one without the other.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "People can accept one without the other."
+        }
+      },
+      {
+        "text": "Do not merge agreements into one row: one tick accepts them all (all three, in the guide's example).",
+        "strength": "discouraged",
+        "target": "label",
+        "from": {
+          "section": "doDont",
+          "quote": "One tick accepts all three."
+        }
+      }
+    ],
+    "good": [
+      "I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.",
+      "Terms",
+      "I agree",
+      "Terms & Conditions",
+      "I agree to share my KYC details",
+      "KYC terms",
+      "Read more",
+      "Read less",
+      "Show terms",
+      "Hide terms"
+    ],
+    "bad": [
+      "Email me offers",
+      "I agree to share my KYC details, get offers on WhatsApp, and receive marketing calls"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "The default (checked and expanded false): unticked, one line, Read more.",
+      "from": {
+        "section": "states",
+        "quote": "The default: unticked, one line, Read more."
+      }
+    },
+    {
+      "state": "Checked",
+      "when": "checked (or defaultChecked) true: a purple box records consent; the text stays collapsed.",
+      "from": {
+        "section": "states",
+        "quote": "A purple box records consent; the text stays collapsed."
+      }
+    },
+    {
+      "state": "Open",
+      "when": "expanded (or defaultExpanded) true: the text opens above Read less, which moves to the right.",
+      "from": {
+        "section": "states",
+        "quote": "The text opens above Read less, which moves to the right."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled true: dimmed; it can't be ticked or unticked, but Read more still opens the text.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed; it can’t be ticked or unticked, but Read more still opens the text."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the row is one checkbox that announces whether it is ticked, Read more announces whether the text is open, and Enter or Space ticks or unticks the box once.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the row is one checkbox that announces whether it is ticked, Read more announces whether the text is open, and Enter or Space ticks or unticks the box once."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The Terms link opens with the keyboard.",
+      "strength": "recommended",
+      "target": "onLinkPress",
+      "from": {
+        "section": "sources",
+        "quote": "The Terms link opens with the keyboard"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "One checkbox Tab stop per row; Tab goes from the box to the link, then to Read more.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "One checkbox Tab stop per row; Tab goes box → link → Read more."
+      },
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "accessibilityLabel names the checkbox; without it, the row is named from its label.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Collapse long consent",
+      "dont": "Use it for a short option",
+      "why": "Read more opens the same words. Use a Checkbox Item.",
+      "from": {
+        "section": "doDont",
+        "quote": "Collapse long consent"
+      }
+    },
+    {
+      "do": "Name the toggle Read more",
+      "dont": "Put the document on the toggle",
+      "why": "“Terms & Conditions” on the button only opens the row, and squeezes the label.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the toggle Read more"
+      }
+    },
+    {
+      "do": "Give each agreement its own row",
+      "dont": "Merge agreements",
+      "why": "One tick accepts all three.",
+      "from": {
+        "section": "doDont",
+        "quote": "Give each agreement its own row"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The required KYC consent before opening an account: the screen keeps the row's checked state and enables Open account only once the consent is ticked (shown unticked, so the Button is disabled).",
+      "jsx": "<VStack>\n  <ExpandableCheckbox\n    label=\"I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.\"\n    linkLabel=\"Terms\"\n    onLinkPress={() => {}}\n    checked={false}\n    onValueChange={() => {}}\n  />\n  <Button label=\"Open account\" disabled onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps each row’s checked state and enables Open account only after the required consent"
+      }
+    },
+    {
+      "purpose": "A long consent that shows two lines before Read more (collapsedLines 2), for when the first line alone doesn't make sense.",
+      "jsx": "<ExpandableCheckbox\n  label=\"I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.\"\n  linkLabel=\"Terms\"\n  onLinkPress={() => {}}\n  collapsedLines={2}\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "show two when the first line alone doesn’t make sense."
+      }
+    },
+    {
+      "purpose": "Toggles renamed as a short pair, “Show terms” and “Hide terms”, on the long KYC consent.",
+      "jsx": "<ExpandableCheckbox\n  label=\"I agree to share my KYC details with Jio Payments Bank to verify my identity and open this account.\"\n  linkLabel=\"Terms\"\n  onLinkPress={() => {}}\n  readMoreLabel=\"Show terms\"\n  readLessLabel=\"Hide terms\"\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Rename the toggles only in pairs, and keep them short, such as “Show terms” and “Hide terms”."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "onValueChange",
+      "description": "Space and Enter each tick or untick the box with one onValueChange per press, controlled or not, open or closed; the Terms link and Read more / Read less never tick it.",
+      "quote": "Space ticks and unticks the box with one onValueChange per press, controlled or not, open or closed; Enter does the same and Space doesn't scroll the page.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "onLinkPress",
+      "description": "Enter on the Terms link calls onLinkPress once and doesn't tick the box.",
+      "quote": "Enter on the Terms link calls `onLinkPress` once, with no TypeError, and doesn't tick the box.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "disabled",
+      "description": "The row is exposed as disabled and can't be ticked, but Read more stays enabled and opens the text.",
+      "quote": "Disabled: the row has `aria-disabled` and `tabindex=\"-1\"` and can't be ticked, but Read more stays enabled and opens the text.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "collapsedLines",
+      "description": "Clamps the label only: the link is outside the clamp, so a long label puts the link on a second line (the Idle row is then 38 px tall).",
+      "quote": "The label clamps to `collapsedLines` with an ellipsis; the link is outside the clamp, so a long label puts the link on a second line (38 px tall).",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "children",
+      "description": "Children wrap but are not clamped when Idle.",
+      "quote": "The `children` path wraps but is not clamped when Idle.",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "disableTruncation",
+      "description": "Wraps the label in full when Idle.",
+      "quote": "`disableTruncation` wraps when Idle.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "readMoreLabel",
+      "description": "A long toggle label squeezes the checkbox item: a 236 px button leaves the item 84 px and stacks the label and link.",
+      "quote": "Toggle labels: a long `readMoreLabel` squeezes the checkbox item (a 236 px button leaves the item 84 px and stacks label and link).",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "modes",
+      "name": "Button / Size",
+      "description": "The toggle Button is forced to XS; the row's modes don't change it.",
+      "quote": "The toggle Button's size, appearance, and emphasis are forced (XS, Secondary, Low).",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "The toggle Button is forced to Secondary; the row's modes don't change it.",
+      "quote": "The toggle Button's size, appearance, and emphasis are forced (XS, Secondary, Low).",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "modes",
+      "name": "Emphasis",
+      "description": "The toggle Button is forced to Low; the row's modes don't change it.",
+      "quote": "The toggle Button's size, appearance, and emphasis are forced (XS, Secondary, Low).",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "modes",
+      "name": "Weight",
+      "description": "Reaches the label and link; left unset, the label is regular weight (400), as in Figma.",
+      "quote": "Label weight is 400, as in Figma.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "Text Appearance",
+      "description": "Reaches the label and link.",
+      "quote": "Modes: Color Mode, Text Appearance, Text Sizes, and Weight reach the label and link.",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "modes",
+      "name": "Text Sizes",
+      "description": "Reaches the label and link.",
+      "quote": "Modes: Color Mode, Text Appearance, Text Sizes, and Weight reach the label and link.",
+      "checkedOn": "2026-10-06",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Expandable Checkbox has only two states, Idle and Open: checked, disabled, the number of collapsed lines and the toggle labels exist only in the package.",
+      "from": {
+        "section": "sources",
+        "quote": "checked, disabled, the number of collapsed lines, and the toggle labels exist only in the package."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Still different from Figma: the label's line height is 17 in code (16 in Figma), and Read more is 84.9 px wide (81 in Figma).",
+      "quote": "Still different from Figma: line height 17 (16) and Read more 84.9 px (81).",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ]
+}

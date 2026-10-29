@@ -1,0 +1,304 @@
+{
+  "slug": "overlay",
+  "label": "Overlay",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "files": [
+    "src/guides/overlay.guide.tsx"
+  ],
+  "evidence": "docs/evidence/overlay.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:46:09.992Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "scrim",
+    "backdrop",
+    "dim layer",
+    "modal background"
+  ],
+  "title": "Overlay",
+  "summary": "Use an Overlay to dim the screen behind a dialog, sheet, or drawer, so attention goes to what sits above it.",
+  "corePrinciple": "Dim the page so one thing stands out.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2976-55",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-overlay--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A scrim with your content above it",
+      "description": "The overlay is a 70% black layer over its screen. With onPress a tap anywhere on the scrim dismisses it; whatever you place inside it sits above the scrim.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "Scrim",
+        "70% black over the whole screen; it doesn’t change with mode.",
+        "Dismiss area",
+        "With onPress, a tap anywhere on the scrim calls it.",
+        "Content",
+        "Yours, placed above the scrim; presses on it don’t dismiss."
+      ],
+      "specimen": [
+        "Home",
+        "Your balance and recent payments.",
+        "Pay ₹250",
+        "Confirm payment",
+        "₹250 to Ravi Stores",
+        "Pay",
+        "Cancel"
+      ],
+      "anatomy": [
+        {
+          "part": "Scrim",
+          "note": "70% black over the whole screen; it doesn’t change with mode."
+        },
+        {
+          "part": "Dismiss area",
+          "note": "With onPress, a tap anywhere on the scrim calls it."
+        },
+        {
+          "part": "Content",
+          "note": "Yours, placed above the scrim; presses on it don’t dismiss."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Placement, content, and fill",
+      "description": "Content sits in the middle by default, or docks to the top or bottom. Leave the overlay empty when a sheet or drawer draws its own surface. With fill off it stays in the page’s flow instead of covering its screen.",
+      "blocks": [
+        "Centred",
+        "The default: content sits in the middle at its own width.",
+        "At the top",
+        "Content docks to the top and stretches across the screen.",
+        "At the bottom",
+        "Content docks to the bottom and stretches across, like a sheet.",
+        "Stretched",
+        "Content stays in the middle but spans the screen’s width.",
+        "Bare scrim",
+        "Only the dim layer, for a sheet or drawer that draws its own surface.",
+        "Fill off",
+        "The scrim stays in the page’s flow and covers only its own content."
+      ],
+      "specimen": [
+        "Home",
+        "Your balance and recent payments.",
+        "Pay ₹250",
+        "Confirm payment",
+        "₹250 to Ravi Stores",
+        "Pay",
+        "Cancel"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Centred",
+          "description": "The default: content sits in the middle at its own width."
+        },
+        {
+          "title": "At the top",
+          "description": "Content docks to the top and stretches across the screen."
+        },
+        {
+          "title": "At the bottom",
+          "description": "Content docks to the bottom and stretches across, like a sheet."
+        },
+        {
+          "title": "Stretched",
+          "description": "Content stays in the middle but spans the screen’s width."
+        },
+        {
+          "title": "Bare scrim",
+          "description": "Only the dim layer, for a sheet or drawer that draws its own surface."
+        },
+        {
+          "title": "Fill off",
+          "description": "The scrim stays in the page’s flow and covers only its own content."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Shown, dismissible, or blocking",
+      "description": "The screen shows an overlay by rendering it and hides it by removing it; it appears and goes at once, with no fade. With onPress, a tap on the scrim calls it; without, the scrim still blocks the page but does nothing. With trapFocus it’s a dialog: on the web focus moves inside, Tab stays there, and Escape calls onPress.",
+      "blocks": [
+        "Tap to dismiss",
+        "A tap on the dimmed page hides it; Pay ₹250 brings it back.",
+        "Blocking",
+        "Taps on the dimmed page do nothing, and the page underneath can’t be pressed.",
+        "Hidden",
+        "Nothing is drawn: the page is bright and can be pressed."
+      ],
+      "specimen": [
+        "Home",
+        "Your balance and recent payments.",
+        "Pay ₹250",
+        "Confirm payment",
+        "₹250 to Ravi Stores",
+        "Pay",
+        "Cancel"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Tap to dismiss",
+          "description": "A tap on the dimmed page hides it; Pay ₹250 brings it back."
+        },
+        {
+          "title": "Blocking",
+          "description": "Taps on the dimmed page do nothing, and the page underneath can’t be pressed."
+        },
+        {
+          "title": "Hidden",
+          "description": "Nothing is drawn: the page is bright and can be pressed."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Fills its nearest positioned parent",
+      "description": "With fill on, the overlay covers the nearest parent that sets a position, here the screen, and nothing outside it; it has no size of its own. With fill off it is as big as its content.",
+      "blocks": [
+        "358 × 318"
+      ],
+      "specimen": [
+        "Home",
+        "Your balance and recent payments.",
+        "Pay ₹250"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One focused task above the scrim",
+      "description": "Put one small surface on the scrim, such as a confirmation with two buttons, and give people a way back: a Cancel button and onPress on the scrim. When it’s a dialog (trapFocus), name it for screen readers with dismissAccessibilityLabel, such as “Cancel payment”; the default is “Dismiss overlay”.",
+      "blocks": [
+        "Confirm or cancel",
+        "One question, one main action, and Cancel."
+      ],
+      "specimen": [
+        "Home",
+        "Your balance and recent payments.",
+        "Pay ₹250",
+        "Confirm payment",
+        "₹250 to Ravi Stores",
+        "Pay",
+        "Cancel"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Confirm or cancel",
+          "description": "One question, one main action, and Cancel."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Confirming a payment",
+      "description": "Pay ₹250 dims Home and asks for confirmation in a dialog that holds keyboard focus (trapFocus). Pay completes it; Cancel, Escape, or a tap on the dimmed screen backs out. The screen removes the overlay either way.",
+      "blocks": [
+        "On Home"
+      ],
+      "specimen": [
+        "Home",
+        "Your balance and recent payments.",
+        "Pay ₹250"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Dim the page, and always offer a way back",
+      "description": "Each pair shows an overlay people can leave and read past next to one that traps or blacks out the screen.",
+      "blocks": [
+        "Do",
+        "Offer a way back",
+        "onPress on the scrim and a Cancel button give two ways out.",
+        "Don’t",
+        "Leave no way back",
+        "Without onPress or Cancel, only finishing the task closes it.",
+        "Use one scrim",
+        "One 70% layer keeps the page faintly visible behind.",
+        "Stack scrims",
+        "Two overlays add up to 91% black and hide the page."
+      ],
+      "specimen": [
+        "Home",
+        "Your balance and recent payments.",
+        "Pay ₹250",
+        "Confirm payment",
+        "₹250 to Ravi Stores",
+        "Pay",
+        "Cancel"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Offer a way back",
+            "caption": "onPress on the scrim and a Cancel button give two ways out.",
+            "specimen": "Home · Your balance and recent payments. · Pay ₹250 · Confirm payment · ₹250 to Ravi Stores · Pay · Cancel"
+          },
+          "dont": {
+            "title": "Leave no way back",
+            "caption": "Without onPress or Cancel, only finishing the task closes it.",
+            "specimen": "Home · Your balance and recent payments. · Pay ₹250 · Confirm payment · ₹250 to Ravi Stores · Pay"
+          }
+        },
+        {
+          "do": {
+            "title": "Use one scrim",
+            "caption": "One 70% layer keeps the page faintly visible behind.",
+            "specimen": "Home · Your balance and recent payments. · Pay ₹250 · Confirm payment · ₹250 to Ravi Stores · Pay · Cancel"
+          },
+          "dont": {
+            "title": "Stack scrims",
+            "caption": "Two overlays add up to 91% black and hide the page.",
+            "specimen": "Home · Your balance and recent payments. · Pay ₹250 · Confirm payment · ₹250 to Ravi Stores · Pay · Cancel"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Overlay contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Bare backdrop",
+        "Bottom sheet",
+        "Checked 23 October 2026",
+        "Installed jfs-components is 0.1.78 (23 October build) from the team’s private package repository. Figma’s Overlay is a fill of 70% black with no properties; placement, content, fill, and tap to dismiss exist only in code. In code it fills its nearest positioned parent, not the device screen, and its colour is the same in every mode. It has no animation. On the web the scrim is never a Tab stop. With trapFocus the overlay is a modal dialog named by dismissAccessibilityLabel: focus moves inside, Tab stays inside, and Escape calls onPress, and only the newest such overlay holds focus. Without it, as for a dimmed region or Drawer’s scrim, it leaves focus alone; on this page only the In context dialog uses it. Drawer uses Overlay for its scrim. The examples host it as the Storybook stories do, over a small white screen; the dialog is a Coin Card instead of the stories’ hand-made box. The published Storybook predates this build.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

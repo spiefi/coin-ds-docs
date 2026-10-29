@@ -1,0 +1,410 @@
+{
+  "slug": "cardbankaccount",
+  "label": "Card Bank Account",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/cardbankaccount.guide.tsx"
+  ],
+  "evidence": "docs/evidence/cardbankaccount.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:46:08.405Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "bank account card",
+    "linked account",
+    "account summary",
+    "account details"
+  ],
+  "title": "Card Bank Account",
+  "summary": "Use a Card Bank Account to summarise one linked bank account: the bank, a few facts such as the masked number, and one action.",
+  "corePrinciple": "One account, a few facts, one action.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3762-2459",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cardbankaccount--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "The bank, its facts, and one action",
+      "description": "A white panel stacks a header with the bank’s logo, its name, and an optional badge; a list of label and value rows; and one footer button. You set them through props: institutionName, institutionAvatar, badge, items, and buttonLabel.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Institution",
+        "institutionName and institutionAvatar: the bank’s logo and name.",
+        "Badge",
+        "badge: one word about the account, such as its status.",
+        "Label",
+        "A field name in 14 px bold; it wraps when space runs out.",
+        "Value",
+        "The fact in 14 px, on one line.",
+        "Button",
+        "A small Button from buttonLabel and onButtonPress, full width.",
+        "Panel",
+        "A white panel with 16 px corners and 16 by 12 px padding."
+      ],
+      "specimen": [
+        "Jio Payments Bank",
+        "Active",
+        "Account type",
+        "Savings",
+        "Account number",
+        "•••• 4521",
+        "Last updated",
+        "Today, 9:14 AM",
+        "View statement"
+      ],
+      "anatomy": [
+        {
+          "part": "Institution",
+          "note": "institutionName and institutionAvatar: the bank’s logo and name."
+        },
+        {
+          "part": "Badge",
+          "note": "badge: one word about the account, such as its status."
+        },
+        {
+          "part": "Label",
+          "note": "A field name in 14 px bold; it wraps when space runs out."
+        },
+        {
+          "part": "Value",
+          "note": "The fact in 14 px, on one line."
+        },
+        {
+          "part": "Button",
+          "note": "A small Button from buttonLabel and onButtonPress, full width."
+        },
+        {
+          "part": "Panel",
+          "note": "A white panel with 16 px corners and 16 by 12 px padding."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "A badge, and the button’s colours",
+      "description": "badge takes a word, which becomes a Badge in the button’s colours, or a Badge you set up yourself, such as a green status; leave it out for none. AppearanceBrand and Emphasis colour the footer button and a word badge; the defaults, Secondary at Medium emphasis, are light purple. The panel and the rows don’t change. headerSlot replaces the whole header, children replace the rows, and footer replaces the button.",
+      "blocks": [
+        "Word badge",
+        "A word becomes a Badge in the button’s colours.",
+        "Status badge",
+        "A Badge with Semantic Intent System and AppearanceSystem positive turns green.",
+        "No badge",
+        "Leave badge out; the bank’s name has the row.",
+        "Secondary (default)",
+        "A light purple button and badge.",
+        "Primary",
+        "Light gold.",
+        "Neutral",
+        "A dark grey button and a light grey badge.",
+        "Tertiary",
+        "A blue button and a light blue badge.",
+        "Emphasis High",
+        "Solid purple, the strongest call.",
+        "Emphasis Medium (default)",
+        "Light purple.",
+        "Emphasis Low",
+        "A text button and a pale badge."
+      ],
+      "specimen": [
+        "Jio Payments Bank",
+        "Active",
+        "Account type",
+        "Savings",
+        "Account number",
+        "•••• 4521",
+        "Last updated",
+        "Today, 9:14 AM",
+        "View statement"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Word badge",
+          "description": "A word becomes a Badge in the button’s colours."
+        },
+        {
+          "title": "Status badge",
+          "description": "A Badge with Semantic Intent System and AppearanceSystem positive turns green."
+        },
+        {
+          "title": "No badge",
+          "description": "Leave badge out; the bank’s name has the row."
+        },
+        {
+          "title": "Secondary (default)",
+          "description": "A light purple button and badge."
+        },
+        {
+          "title": "Primary",
+          "description": "Light gold."
+        },
+        {
+          "title": "Neutral",
+          "description": "A dark grey button and a light grey badge."
+        },
+        {
+          "title": "Tertiary",
+          "description": "A blue button and a light blue badge."
+        },
+        {
+          "title": "Emphasis High",
+          "description": "Solid purple, the strongest call."
+        },
+        {
+          "title": "Emphasis Medium (default)",
+          "description": "Light purple."
+        },
+        {
+          "title": "Emphasis Low",
+          "description": "A text button and a pale badge."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Only the button responds",
+      "description": "The card itself isn’t pressable: the footer button is its one action, with the Button’s own hover and pressed colours. footer={false} removes it for a summary to read. The card can’t disable its button.",
+      "blocks": [
+        "With an action",
+        "View statement is the card’s one action.",
+        "Read only",
+        "No button: a summary to read."
+      ],
+      "specimen": [
+        "Jio Payments Bank",
+        "Active",
+        "Account type",
+        "Savings",
+        "Account number",
+        "•••• 4521",
+        "Last updated",
+        "Today, 9:14 AM",
+        "View statement"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "With an action",
+          "description": "View statement is the card’s one action."
+        },
+        {
+          "title": "Read only",
+          "description": "No button: a summary to read."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Your screen sets the width",
+      "description": "The card fills its host’s width; Figma draws it at 292 px. Height follows the rows: each is 17 px, 12 px apart. The panel is padded 16 px top and bottom and 12 px at the sides, with 16 px between the header, the rows, and the button. Button / Size S, the default, is 32 px tall; M is 42 and XS 24. Avatar Size L makes the logo 42 px. List Item Style Minimal tightens the rows to 4 px apart with 12 px regular labels.",
+      "blocks": [
+        "292 × 207",
+        "16",
+        "Button / Size M",
+        "A 42 px button.",
+        "Button / Size XS",
+        "A 24 px button.",
+        "List Item Style Minimal",
+        "Rows 4 px apart, labels 12 px regular."
+      ],
+      "specimen": [
+        "Jio Payments Bank",
+        "Active",
+        "Account type",
+        "Savings",
+        "Account number",
+        "•••• 4521",
+        "Last updated",
+        "Today, 9:14 AM",
+        "View statement"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Button / Size M",
+          "description": "A 42 px button."
+        },
+        {
+          "title": "Button / Size XS",
+          "description": "A 24 px button."
+        },
+        {
+          "title": "List Item Style Minimal",
+          "description": "Rows 4 px apart, labels 12 px regular."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Field names and short facts",
+      "description": "Label each row with a field name, such as Account type, and give the fact as its value. Show only the last four digits of the account number. Keep values short: a value never shrinks, so a long one squeezes its label. Label the button with a verb, such as View statement, and pass the bank’s own logo.",
+      "blocks": [
+        "Four facts",
+        "Field names on the left, short facts on the right, the number masked."
+      ],
+      "specimen": [
+        "Jio Payments Bank",
+        "Active",
+        "Account type",
+        "Savings",
+        "Account number",
+        "•••• 4521",
+        "IFSC",
+        "JIOP0000001",
+        "Last updated",
+        "Today, 9:14 AM",
+        "View statement"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Four facts",
+          "description": "Field names on the left, short facts on the right, the number masked."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Linked accounts in Settings",
+      "description": "The Bank accounts screen shows the linked account. View statement opens the screen’s own statement view through onButtonPress; the card doesn’t fetch the account or change it.",
+      "blocks": [
+        "Statement not opened"
+      ],
+      "specimen": [
+        "Bank accounts",
+        "Used for UPI payments and transfers",
+        "Jio Payments Bank",
+        "Active",
+        "Account type",
+        "Savings",
+        "Account number",
+        "•••• 4521",
+        "Last updated",
+        "Today, 9:14 AM",
+        "View statement"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Safe, recognisable, readable",
+      "description": "Each pair shows a card people trust at a glance next to one that exposes the number, shows a stranger, or squeezes its labels.",
+      "blocks": [
+        "Do",
+        "Mask the account number",
+        "Only the last four digits show.",
+        "Don’t",
+        "The full account number",
+        "Anyone near the screen can read it.",
+        "Pass the bank’s logo",
+        "institutionAvatar shows the bank’s own mark.",
+        "Leave out the logo",
+        "The card falls back to a stranger’s photo.",
+        "Short values",
+        "Each label and value fits on one line.",
+        "A sentence as a value",
+        "The value never shrinks, so its label is squeezed into a narrow column."
+      ],
+      "specimen": [
+        "Jio Payments Bank",
+        "Account type",
+        "Savings",
+        "Account number",
+        "•••• 4521",
+        "Last updated",
+        "Today, 9:14 AM",
+        "View statement",
+        "123456784521",
+        "JP",
+        "Savings account with auto-sweep"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Mask the account number",
+            "caption": "Only the last four digits show.",
+            "specimen": "Jio Payments Bank · Account type · Savings · Account number · •••• 4521 · Last updated · Today, 9:14 AM · View statement"
+          },
+          "dont": {
+            "title": "The full account number",
+            "caption": "Anyone near the screen can read it.",
+            "specimen": "Jio Payments Bank · Account type · Savings · Account number · 123456784521 · Last updated · Today, 9:14 AM · View statement"
+          }
+        },
+        {
+          "do": {
+            "title": "Pass the bank’s logo",
+            "caption": "institutionAvatar shows the bank’s own mark.",
+            "specimen": "Jio Payments Bank · Account type · Savings · Account number · •••• 4521 · Last updated · Today, 9:14 AM · View statement"
+          },
+          "dont": {
+            "title": "Leave out the logo",
+            "caption": "The card falls back to a stranger’s photo.",
+            "specimen": "JP · Jio Payments Bank · Account type · Savings · Account number · •••• 4521 · Last updated · Today, 9:14 AM · View statement"
+          }
+        },
+        {
+          "do": {
+            "title": "Short values",
+            "caption": "Each label and value fits on one line.",
+            "specimen": "Jio Payments Bank · Account type · Savings · Account number · •••• 4521 · Last updated · Today, 9:14 AM · View statement"
+          },
+          "dont": {
+            "title": "A sentence as a value",
+            "caption": "The value never shrinks, so its label is squeezed into a narrow column.",
+            "specimen": "Jio Payments Bank · Account type · Savings account with auto-sweep · Account number · •••• 4521 · Last updated · Today, 9:14 AM · View statement"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Card Bank Account contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Savings",
+        "Without badge",
+        "Custom badge",
+        "Without footer",
+        "Checked 19 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma’s Card / BankAccount is one 292 px component with no properties; in code it fills its host and you set it through props. Figma’s badge is amber, while the package’s takes the button’s colours (Secondary at Medium emphasis by default), and its row values are 14 px where Figma’s are 12 px. Without institutionAvatar the card shows a stock photo of a person, without other props it shows placeholder copy, and a long value squeezes its label (all reported). The published Storybook still shows the older generated page, and its Default story is gold (AppearanceBrand Primary) while the others are purple.",
+        "jfs-components",
+        "0.1.78",
+        "institutionAvatar"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

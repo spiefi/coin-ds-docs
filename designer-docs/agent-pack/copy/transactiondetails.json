@@ -1,0 +1,323 @@
+{
+  "slug": "transactiondetails",
+  "label": "Transaction Details",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/transactiondetails.guide.tsx"
+  ],
+  "evidence": "docs/evidence/transactiondetails.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:46:11.561Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "receipt",
+    "payment details",
+    "transaction info",
+    "label and value",
+    "key value list"
+  ],
+  "title": "Transaction Details",
+  "summary": "Use Transaction Details to list the facts of one payment as label and value pairs: its ID, the accounts, and how it was paid.",
+  "corePrinciple": "Name the fact, then give it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1557-7798",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-transactiondetails--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Labels over values",
+      "description": "Each item puts a label over its value, and the list stacks the items 16 px apart. There’s no surface, divider, or icon: the screen around it provides those.",
+      "blocks": [
+        "16",
+        "4",
+        "1",
+        "2",
+        "3",
+        "Label",
+        "label, 14 px Medium in near-black; it names the fact.",
+        "Value",
+        "value, the same size in a softer grey, 4 px under its label.",
+        "Item",
+        "TransactionDetails.Item: one label and its value.",
+        "List",
+        "TransactionDetails: stacks its items 16 px apart, with no padding.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "UPI transaction ID",
+        "101674916166",
+        "From",
+        "JioFinance ··1234"
+      ],
+      "anatomy": [
+        {
+          "part": "Label",
+          "note": "label, 14 px Medium in near-black; it names the fact."
+        },
+        {
+          "part": "Value",
+          "note": "value, the same size in a softer grey, 4 px under its label."
+        },
+        {
+          "part": "Item",
+          "note": "TransactionDetails.Item: one label and its value."
+        },
+        {
+          "part": "List",
+          "note": "TransactionDetails: stacks its items 16 px apart, with no padding."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Only the items",
+      "description": "The list has nothing to set: no variants, and no mode changes it. You choose the items and their order, one TransactionDetails.Item each, with a label and a value. Put the reference people quote first, then who paid whom, then how.",
+      "blocks": [
+        "UPI payment",
+        "The ID, both ends, then the method.",
+        "Bank transfer",
+        "Five facts, in the order people check them."
+      ],
+      "specimen": [
+        "UPI transaction ID",
+        "101674916166",
+        "From",
+        "JioFinance ··1234",
+        "To",
+        "Rahul Verma · rahul@okjio",
+        "Payment method",
+        "UPI",
+        "Transfer ID",
+        "TXN202610210001",
+        "From account",
+        "Savings ··1234",
+        "To account",
+        "Current ··5678",
+        "Transfer type",
+        "IMPS",
+        "Date and time",
+        "21 Oct 2026, 10:30 am"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "UPI payment",
+          "description": "The ID, both ends, then the method."
+        },
+        {
+          "title": "Bank transfer",
+          "description": "Five facts, in the order people check them."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Static text",
+      "description": "The list has no states: its items don’t press, select, copy, collapse, or page. To let people copy an ID or share the receipt, put a button on the screen.",
+      "blocks": [
+        "One item",
+        "A single fact is still a list of one.",
+        "Bill payment",
+        "A longer list keeps the same 16 px rhythm."
+      ],
+      "specimen": [
+        "UPI transaction ID",
+        "101674916166",
+        "Transaction ID",
+        "BILL2026102100042",
+        "Biller",
+        "Jio Postpaid",
+        "Consumer number",
+        "98765 43210",
+        "Bill period",
+        "September 2026",
+        "Payment method",
+        "JioFinance Wallet"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "One item",
+          "description": "A single fact is still a list of one."
+        },
+        {
+          "title": "Bill payment",
+          "description": "A longer list keeps the same 16 px rhythm."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "As wide as its column",
+      "description": "The list has no width of its own: it fills its column, and each item is as wide as its text. A long value wraps under its label; nothing is cut. Figma draws the items at a fixed 315 px. Items sit 16 px apart, and a label sits 4 px above its value, each on a 17 px line.",
+      "blocks": [
+        "315 × 92",
+        "16",
+        "4"
+      ],
+      "specimen": [
+        "UPI transaction ID",
+        "101674916166",
+        "From",
+        "JioFinance ··1234"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Field names and data",
+      "description": "Write each label as a field name, such as UPI transaction ID, From, To, or Payment method. Write the value as the data itself, never a sentence, and mask account numbers to their last four digits. The label shouldn’t repeat the value.",
+      "blocks": [
+        "Field names",
+        "Short names people scan for.",
+        "A long value",
+        "It wraps under its label; nothing is cut."
+      ],
+      "specimen": [
+        "UPI transaction ID",
+        "101674916166",
+        "From",
+        "JioFinance ··1234",
+        "To",
+        "Rahul Verma · rahul@okjio",
+        "Payment method",
+        "UPI",
+        "Bharat Sanchar Nigam Limited · bsnl.broadband@okaxis"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Field names",
+          "description": "Short names people scan for."
+        },
+        {
+          "title": "A long value",
+          "description": "It wraps under its label; nothing is cut."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "The receipt behind a payment",
+      "description": "The details sit on the screen a payment opens, under its amount and outcome. The screen adds the heading and the action; the list only holds the facts, and its accessibilityLabel, Payment details, names it for screen readers.",
+      "blocks": [
+        "Receipt not shared yet"
+      ],
+      "specimen": [
+        "Paid ₹1,200",
+        "To Rahul Verma · 21 Oct 2026, 4:15 pm",
+        "UPI transaction ID",
+        "101674916166",
+        "From",
+        "JioFinance ··1234",
+        "To",
+        "Rahul Verma · rahul@okjio",
+        "Payment method",
+        "UPI",
+        "Share receipt"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Name it, then give it",
+      "description": "Each pair shows a receipt people scan in seconds next to one that makes them read twice.",
+      "blocks": [
+        "Do",
+        "Name, then the fact",
+        "UPI transaction ID is the label; the number is the value.",
+        "Don’t",
+        "The ID in both places",
+        "The label repeats the number.",
+        "Data in the value",
+        "One fact per item.",
+        "A sentence as a value",
+        "People have to read it to find the fact."
+      ],
+      "specimen": [
+        "UPI transaction ID",
+        "101674916166",
+        "UPI transaction ID 101674916166",
+        "Payment method",
+        "UPI",
+        "From",
+        "JioFinance ··1234",
+        "You paid with UPI from your JioFinance account ending 1234."
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Name, then the fact",
+            "caption": "UPI transaction ID is the label; the number is the value.",
+            "specimen": "UPI transaction ID · 101674916166"
+          },
+          "dont": {
+            "title": "The ID in both places",
+            "caption": "The label repeats the number.",
+            "specimen": "UPI transaction ID 101674916166 · 101674916166"
+          }
+        },
+        {
+          "do": {
+            "title": "Data in the value",
+            "caption": "One fact per item.",
+            "specimen": "Payment method · UPI · From · JioFinance ··1234"
+          },
+          "dont": {
+            "title": "A sentence as a value",
+            "caption": "People have to read it to find the fact.",
+            "specimen": "Payment method · You paid with UPI from your JioFinance account ending 1234."
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Transaction Details contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Single item",
+        "Account transfer",
+        "Bill payment",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Transaction Details is one component with no properties: a slot of Detail Items, each with a Label and a Value, drawn 315 px wide. The package takes TransactionDetails.Item children with label and value and sizes them to their text. No mode changes it. On the web it’s a list named by its accessibilityLabel, and each item is read once as its label and value, unless the item’s own accessibilityLabel replaces them; phone screen readers read the items too.",
+        "jfs-components",
+        "0.1.78",
+        "TransactionDetails.Item",
+        "label",
+        "value",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,498 @@
+{
+  "slug": "holdingscard",
+  "label": "Holdings Card",
+  "guideCommit": "dd348618b44309d7f0f1eec37043594508c86470",
+  "files": [
+    "src/guides/holdingscard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/holdingscard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-28T23:46:06.801Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "loan offer",
+    "offer card",
+    "holding",
+    "investment card",
+    "selectable card",
+    "loan card"
+  ],
+  "title": "Holdings Card",
+  "summary": "Use a Holdings Card for one loan offer or holding: its headline amount, its key terms, and a radio to choose it from a list.",
+  "corePrinciple": "One offer, its terms at a glance.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1028-1533",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-holdingscard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An amount over its terms",
+      "description": "A rounded panel puts a logo and the radio at the top, the headline amount under them, and the terms in rows of three. The footer adds links and an action below a divider.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Logo",
+        "headerImage, fitted into a 100 × 24 box; the box stays when left out.",
+        "Radio",
+        "Shows selected; badgeLabel or trailing can replace it.",
+        "Hero",
+        "heroLabel over heroValue, the amount in 20 px bold.",
+        "Terms",
+        "details, three to a row; a long value ends in an ellipsis.",
+        "Footer",
+        "footer: a divider, two labelled links, and a small blue button.",
+        "Panel",
+        "A rounded panel with a 1 px border; AppearanceBrand sets its colours."
+      ],
+      "specimen": [
+        "Loan amount up to",
+        "₹1,89,000",
+        "Interest",
+        "12% p.a.",
+        "Tenure",
+        "36 months",
+        "Processing fee",
+        "₹499",
+        "APR",
+        "15.47%",
+        "EMI",
+        "₹6,277/m",
+        "Repayment",
+        "Schedule",
+        "Charges",
+        "Details",
+        "Apply"
+      ],
+      "anatomy": [
+        {
+          "part": "Logo",
+          "note": "headerImage, fitted into a 100 × 24 box; the box stays when left out."
+        },
+        {
+          "part": "Radio",
+          "note": "Shows selected; badgeLabel or trailing can replace it."
+        },
+        {
+          "part": "Hero",
+          "note": "heroLabel over heroValue, the amount in 20 px bold."
+        },
+        {
+          "part": "Terms",
+          "note": "details, three to a row; a long value ends in an ellipsis."
+        },
+        {
+          "part": "Footer",
+          "note": "footer: a divider, two labelled links, and a small blue button."
+        },
+        {
+          "part": "Panel",
+          "note": "A rounded panel with a 1 px border; AppearanceBrand sets its colours."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Trailing, footer, and colours",
+      "description": "The top right shows a Radio by default, for choosing this offer. badgeLabel swaps it for a status Badge, green by default; AppearanceSystem warning makes it orange. trailing swaps in your own component, and radio false leaves the top right empty. footer adds a divider, footerItems as labelled links, and a small Apply button that is always blue. children replaces the terms with your own content. AppearanceBrand colours the panel: Primary (pale gold) by default, Secondary (lilac), Neutral (white, as in Figma), or Tertiary (light grey).",
+      "blocks": [
+        "Radio",
+        "For choosing one offer from a list.",
+        "Badge",
+        "A status in place of the Radio.",
+        "Badge, AppearanceSystem warning",
+        "An orange badge for a warning.",
+        "No trailing",
+        "Nothing at the top right, for a holding you don’t choose.",
+        "Footer",
+        "Links to more detail and a blue Apply button.",
+        "Custom body",
+        "Your content in place of the terms; the amount and Radio stay.",
+        "AppearanceBrand Neutral",
+        "A white panel with a grey border, as in Figma.",
+        "AppearanceBrand Secondary",
+        "A lilac panel.",
+        "AppearanceBrand Tertiary",
+        "A light grey panel.",
+        "Without a logo",
+        "The empty logo box still holds the top row’s height."
+      ],
+      "specimen": [
+        "Loan amount up to",
+        "₹1,89,000",
+        "Interest",
+        "12% p.a.",
+        "Tenure",
+        "36 months",
+        "Processing fee",
+        "₹499",
+        "APR",
+        "15.47%",
+        "EMI",
+        "₹6,277/m",
+        "Pre-approved",
+        "Expires soon",
+        "Repayment",
+        "Schedule",
+        "Charges",
+        "Details",
+        "Apply",
+        "Pre-approved on your salary account. No documents needed."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Radio",
+          "description": "For choosing one offer from a list."
+        },
+        {
+          "title": "Badge",
+          "description": "A status in place of the Radio."
+        },
+        {
+          "title": "Badge, AppearanceSystem warning",
+          "description": "An orange badge for a warning."
+        },
+        {
+          "title": "No trailing",
+          "description": "Nothing at the top right, for a holding you don’t choose."
+        },
+        {
+          "title": "Footer",
+          "description": "Links to more detail and a blue Apply button."
+        },
+        {
+          "title": "Custom body",
+          "description": "Your content in place of the terms; the amount and Radio stay."
+        },
+        {
+          "title": "AppearanceBrand Neutral",
+          "description": "A white panel with a grey border, as in Figma."
+        },
+        {
+          "title": "AppearanceBrand Secondary",
+          "description": "A lilac panel."
+        },
+        {
+          "title": "AppearanceBrand Tertiary",
+          "description": "A light grey panel."
+        },
+        {
+          "title": "Without a logo",
+          "description": "The empty logo box still holds the top row’s height."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Selected comes from your screen",
+      "description": "The whole card is one button. When it’s pressed, your onPress sets selected, and the Radio fills; the card doesn’t select itself. disabled greys the Radio and stops presses. A card without onPress is disabled too, and then its footer links and button don’t respond to clicks either. While pressed, the card fades a little.",
+      "blocks": [
+        "Shown at 71%",
+        "Not selected",
+        "An empty Radio.",
+        "Selected",
+        "A filled purple Radio.",
+        "Disabled",
+        "A grey Radio; the card doesn’t press."
+      ],
+      "specimen": [
+        "Loan amount up to",
+        "₹1,89,000",
+        "Interest",
+        "12% p.a.",
+        "Tenure",
+        "36 months",
+        "Processing fee",
+        "₹499",
+        "APR",
+        "15.47%",
+        "EMI",
+        "₹6,277/m"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Not selected",
+          "description": "An empty Radio."
+        },
+        {
+          "title": "Selected",
+          "description": "A filled purple Radio."
+        },
+        {
+          "title": "Disabled",
+          "description": "A grey Radio; the card doesn’t press."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Give it a width",
+      "description": "The card has no width of its own: it fills a host that stretches it, and shrinks to its content anywhere else. Set it with style, as Figma does at 328 px. The terms share the width in three equal columns, and the height follows the content: 20 px of padding at the top and bottom, 16 px at the sides, and 10 px between the parts. Each extra row of terms adds about 47 px.",
+      "blocks": [
+        "328 × 207.5",
+        "10",
+        "Wider, 360 px",
+        "The three columns widen; the amount stays at the left.",
+        "Seven terms",
+        "A third row, and the card grows."
+      ],
+      "specimen": [
+        "Loan amount up to",
+        "₹1,89,000",
+        "Interest",
+        "12% p.a.",
+        "Tenure",
+        "36 months",
+        "Processing fee",
+        "₹499",
+        "APR",
+        "15.47%",
+        "EMI",
+        "₹6,277/m",
+        "Prepayment",
+        "Free",
+        "Payout",
+        "24 hours"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Wider, 360 px",
+          "description": "The three columns widen; the amount stays at the left."
+        },
+        {
+          "title": "Seven terms",
+          "description": "A third row, and the card grows."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Say what the number is",
+      "description": "Make heroLabel say what the amount is, such as Loan amount up to, and give heroValue already formatted, with its ₹. Keep term labels to a word or two and put the unit in the value: 36 months, 12% p.a. Name footer links for the next step, and keep the action to one word, such as Apply. headerImage is made for a wide logo: a square mark sits centred in its 100 × 24 box. Holdings work the same way: the current value as the hero, with quantity and returns as terms.",
+      "blocks": [
+        "Loan offer",
+        "The amount you can borrow, with its rate and tenure.",
+        "Gold holding",
+        "What you own today, with no Radio."
+      ],
+      "specimen": [
+        "Loan amount up to",
+        "₹1,89,000",
+        "Interest",
+        "12% p.a.",
+        "Tenure",
+        "36 months",
+        "Processing fee",
+        "₹499",
+        "APR",
+        "15.47%",
+        "EMI",
+        "₹6,277/m",
+        "Current value",
+        "₹52,340",
+        "Quantity",
+        "8.2 g",
+        "Bought at",
+        "₹5,920/g",
+        "Returns",
+        "+7.8%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Loan offer",
+          "description": "The amount you can borrow, with its rate and tenure."
+        },
+        {
+          "title": "Gold holding",
+          "description": "What you own today, with no Radio."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Choosing a loan offer",
+      "description": "The screen lists its offers and keeps one selected: each card’s onPress picks that offer, and its selected follows the screen’s choice.",
+      "blocks": [
+        "No offer picked"
+      ],
+      "specimen": [
+        "Pick an offer",
+        "Pre-approved for you",
+        "Loan amount up to",
+        "₹1,89,000",
+        "Interest",
+        "12% p.a.",
+        "Tenure",
+        "36 months",
+        "Processing fee",
+        "₹499",
+        "APR",
+        "15.47%",
+        "EMI",
+        "₹6,277/m",
+        "₹2,50,000",
+        "13.5% p.a.",
+        "48 months",
+        "₹999",
+        "16.2%",
+        "₹6,768/m"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A set width, short values, short labels",
+      "description": "Each pair shows a card that reads cleanly next to one that squeezes its terms, cuts a value or badge, or wraps its button.",
+      "blocks": [
+        "Do",
+        "Give it a width",
+        "style width 328 keeps three even columns.",
+        "Don’t",
+        "Leave the width to its host",
+        "In a host that doesn’t stretch it, the card shrinks and labels wrap.",
+        "Values with their unit",
+        "36 months fits its column.",
+        "Long values",
+        "The column stays the same, so the value is cut short.",
+        "One word on the button",
+        "Apply fits the 80 px button.",
+        "Two words",
+        "Apply now wraps onto two lines.",
+        "A short badge",
+        "Pre-approved fits beside the logo.",
+        "A long badge",
+        "It isn’t shortened, so the card’s edge cuts it off."
+      ],
+      "specimen": [
+        "Loan amount up to",
+        "₹1,89,000",
+        "Interest",
+        "12% p.a.",
+        "Tenure",
+        "36 months",
+        "Processing fee",
+        "₹499",
+        "APR",
+        "15.47%",
+        "EMI",
+        "₹6,277/m",
+        "36 months or 60 months",
+        "Repayment",
+        "Schedule",
+        "Charges",
+        "Details",
+        "Apply",
+        "Apply now",
+        "Pre-approved",
+        "Recommended for you this month"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Give it a width",
+            "caption": "style width 328 keeps three even columns.",
+            "specimen": "Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m"
+          },
+          "dont": {
+            "title": "Leave the width to its host",
+            "caption": "In a host that doesn’t stretch it, the card shrinks and labels wrap.",
+            "specimen": "Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m"
+          }
+        },
+        {
+          "do": {
+            "title": "Values with their unit",
+            "caption": "36 months fits its column.",
+            "specimen": "Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m"
+          },
+          "dont": {
+            "title": "Long values",
+            "caption": "The column stays the same, so the value is cut short.",
+            "specimen": "Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months or 60 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m"
+          }
+        },
+        {
+          "do": {
+            "title": "One word on the button",
+            "caption": "Apply fits the 80 px button.",
+            "specimen": "Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m · Repayment · Schedule · Charges · Details · Apply"
+          },
+          "dont": {
+            "title": "Two words",
+            "caption": "Apply now wraps onto two lines.",
+            "specimen": "Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m · Repayment · Schedule · Charges · Details · Apply now"
+          }
+        },
+        {
+          "do": {
+            "title": "A short badge",
+            "caption": "Pre-approved fits beside the logo.",
+            "specimen": "Pre-approved · Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m"
+          },
+          "dont": {
+            "title": "A long badge",
+            "caption": "It isn’t shortened, so the card’s edge cuts it off.",
+            "specimen": "Recommended for you this month · Loan amount up to · ₹1,89,000 · Interest · 12% p.a. · Tenure · 36 months · Processing fee · ₹499 · APR · 15.47% · EMI · ₹6,277/m"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Holdings Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Selected",
+        "Disabled",
+        "With badge",
+        "With footer",
+        "Without trailing",
+        "With image",
+        "Checked 21 October 2026",
+        "Installed jfs-components is 0.1.78 (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Holdings Card exposes children, footer, radio, and trailing; it is a white card (AppearanceBrand Neutral) with a dark badge and a gold Apply button. In the package, the default card is pale gold, the badge green, the footer links black, and the Apply button is always blue, whatever AppearanceBrand you set. The card has no width of its own, a card without onPress is disabled along with its footer, and it is about 7 px taller than Figma’s because its text lines are taller. A long badge is cut off by the card’s edge, and a two-word action wraps in the 80 px button. The published Storybook is older than the installed package and still shows the older generated page; its With image story can’t load its logo (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "children",
+        "footer",
+        "radio",
+        "trailing",
+        "onPress"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
