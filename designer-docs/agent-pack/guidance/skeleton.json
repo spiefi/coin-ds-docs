@@ -1,9 +1,9 @@
 {
   "slug": "skeleton",
-  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
   "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch5, extraction worker",
   "extractedOn": "2026-10-29",
-  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/skeleton.md at 622cd82. The guide's Sources note was checked on 17 October 2026 on the 16 October build (mirror v0.1.78-a116616, Biscuit's main at a116616, the #266 fix), so items citing it carry that build. The evidence's Checked, Contract and Modes and tokens sections are from 12 October on 0.1.78-636f3f5; its 17 October re-check on a116616 replaces them where they differ: a component's loading now draws its placeholder without a group, so the Contract's “`loading` on its own, without a group, renders nothing (#266)” is out of date and not used, and a loading group now adds one hidden “Loading” announcement, so its “renders no element” is not used either. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-a116616 and v0.1.78-dbe0e02 changes no skeleton file and none of Text, Avatar, Button, Image, IconButton or Icon; Badge changes only its System + High label colour, and FullscreenModal.tsx shows no line changes. Installed Skeleton.tsx, SkeletonGroup.tsx and shimmer-tokens.ts still match every guide sentence used here, read from source, not run: kind defaults to other and sets only the radius token (text and other 9999, image 10, badge 4); width and height are set only when given; the block colour is bg/defaultSkeleton, which resolves through context5 to #e7e7e7 by default and to rgb(44, 37, 27) for Fullscreen Modal in Light, and FullscreenModal forces context5 Fullscreen Modal on its content; the band is a 1500 ms linear loop with a 75 ms stagger that wraps at 600 ms, and reduced motion is a 3000 ms white pulse with no stagger; the group's reducedMotion overrides the device setting when set; a Skeleton draws only while a loading group is around it or visible is set, and returns null otherwise; Text, Avatar, Badge, Button, Image, IconButton, Icon and FavoriteToggle read the group, and their own loading wins in both directions; inside a loading group the blocks are hidden from screen readers (aria-hidden and role presentation on the web) and the group adds one hidden progressbar named Loading in a polite live region; a placeholder drawn by a component's own loading is a progressbar named Loading. No guide sentence is contradicted, but two read wider than the code: Text draws one block as tall as all its lines (line height × lines), not one pill per line, so “one per line” holds for bars placed by hand; and the public visible prop lets a hand-placed Skeleton draw with no group, which “A Skeleton placed by hand still needs a group” leaves out (the package docs say a hand-placed Skeleton leaves visible unset). From the source, not tested: Image and Icon take no modes and pass none to their placeholder, so inside a FullscreenModal their placeholders would stay light grey while Text, Avatar, Badge and Button turn deep brown; no guide or evidence sentence covers this, so it is not a gap here. SkeletonGroup has no facts of its own, so its two props, loading and reducedMotion, are evidence facts from the evidence's Contract; context5 is not in Skeleton's mode list, so it is an evidence fact from Modes and tokens. Examples follow the building rules: no Color Mode (the guide sets Light on every component) and no other modes; the guide's Text Sizes Large title and Small detail lines are left out, since no guide sentence says the content needs them. The guide's rows start with an Avatar monogram; Avatar has no entry in this pack, so the example rows keep the name, the detail line and the Badge. Copy and data are the guide's own (Your holdings, Reliance Industries, HDFC Bank, their units and the Equity badge). The rows' VStack keeps the guide's flex 1 (layout only). Left out of examples: the playground and its Readout, the In context status line (page copy), the fullscreen-modal card (it sets context5 by hand, which FullscreenModal does itself), the Outside a group card (covered by the state and accessibility items) and the Don'ts. Not recorded: style (the building rules keep style off Coin components); the hooks and constants (useSkeleton, useStaggerIndex, useReducedMotion, SHIMMER, SKELETON_TOKEN, SKELETON_FALLBACK), which the guide leaves out; nested groups (an inner group replaces the outer one), which the guide doesn't cover; the evidence's Storybook story and control problems under #266, since it doesn't say whether they remain after the fix; the fallback grey rgb(245, 245, 246), used only when the token resolver fails. Not recorded as gaps, per the pack's rules: dark mode (Color Mode alone doesn't change the grey). Content good and bad are empty: the guide shows sample holdings data, not copy to write or avoid.",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/skeleton.md at 622cd82. The guide's Sources note was checked on 17 October 2026 on the 16 October build (mirror v0.1.78-a116616, Biscuit's main at a116616, the #266 fix), so items citing it carry that build. The evidence's Checked, Contract and Modes and tokens sections are from 12 October on 0.1.78-636f3f5; its 17 October re-check on a116616 replaces them where they differ: a component's loading now draws its placeholder without a group, so the Contract's “`loading` on its own, without a group, renders nothing (#266)” is out of date and not used, and a loading group now adds one hidden “Loading” announcement, so its “renders no element” is not used either. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-a116616 and v0.1.78-dbe0e02 changes no skeleton file and none of Text, Avatar, Button, Image, IconButton or Icon; Badge changes only its System + High label colour, and FullscreenModal.tsx shows no line changes. Installed Skeleton.tsx, SkeletonGroup.tsx and shimmer-tokens.ts still match every guide sentence used here, read from source, not run: kind defaults to other and sets only the radius token (text and other 9999, image 10, badge 4); width and height are set only when given; the block colour is bg/defaultSkeleton, which resolves through context5 to #e7e7e7 by default and to rgb(44, 37, 27) for Fullscreen Modal in Light, and FullscreenModal forces context5 Fullscreen Modal on its content; the band is a 1500 ms linear loop with a 75 ms stagger that wraps at 600 ms, and reduced motion is a 3000 ms white pulse with no stagger; the group's reducedMotion overrides the device setting when set; a Skeleton draws only while a loading group is around it or visible is set, and returns null otherwise; Text, Avatar, Badge, Button, Image, IconButton, Icon and FavoriteToggle read the group, and their own loading wins in both directions; inside a loading group the blocks are hidden from screen readers (aria-hidden and role presentation on the web) and the group adds one hidden progressbar named Loading in a polite live region; a placeholder drawn by a component's own loading is a progressbar named Loading. No guide sentence is contradicted, but two read wider than the code: Text draws one block as tall as all its lines (line height × lines), not one bar per line, so “one per line” holds for bars placed by hand; and the public visible prop lets a hand-placed Skeleton draw with no group, which “A Skeleton placed by hand still needs a group” leaves out (the package docs say a hand-placed Skeleton leaves visible unset). From the source, not tested: Image and Icon take no modes and pass none to their placeholder, so inside a FullscreenModal their placeholders would stay light grey while Text, Avatar, Badge and Button turn deep brown; no guide or evidence sentence covers this, so it is not a gap here. SkeletonGroup has no facts of its own, so its two props, loading and reducedMotion, are evidence facts from the evidence's Contract; context5 is not in Skeleton's mode list, so it is an evidence fact from Modes and tokens. Examples follow the building rules: no Color Mode (the guide sets Light on every component) and no other modes; the guide's Text Sizes Large title and Small detail lines are left out, since no guide sentence says the content needs them. The guide's rows start with an Avatar monogram; Avatar has no entry in this pack, so the example rows keep the name, the detail line and the Badge. Copy and data are the guide's own (Your holdings, Reliance Industries, HDFC Bank, their units and the Equity badge). The rows' VStack keeps the guide's flex 1 (layout only). Left out of examples: the playground and its Readout, the In context status line (page copy), the fullscreen-modal card (it sets context5 by hand, which FullscreenModal does itself), the Outside a group card (covered by the state and accessibility items) and the Don'ts. Not recorded: style (the building rules keep style off Coin components); the hooks and constants (useSkeleton, useStaggerIndex, useReducedMotion, SHIMMER, SKELETON_TOKEN, SKELETON_FALLBACK), which the guide leaves out; nested groups (an inner group replaces the outer one), which the guide doesn't cover; the evidence's Storybook story and control problems under #266, since it doesn't say whether they remain after the fix; the fallback grey rgb(245, 245, 246), used only when the token resolver fails. Not recorded as gaps, per the pack's rules: dark mode (Color Mode alone doesn't change the grey). Content good and bad are empty: the guide shows sample holdings data, not copy to write or avoid. Refreshed 29 October 2026 for guide fix #543 (3f56271): the Anatomy notes, the Text and Circle or rounded bar cards and the evidence reword the made-up shape name (a bar with fully rounded ends, a rounded bar); /anatomy/0 and /anatomy/4 (now part “Circle or rounded bar”) and /configuration/1 and /configuration/4 quote the new sentences.",
   "useWhen": [
     {
       "text": "Show the shape of content while it loads, with a SkeletonGroup, so the screen doesn't jump when it arrives.",
@@ -43,11 +43,11 @@
   "anatomy": [
     {
       "part": "Text bar",
-      "holds": "A Skeleton with kind text: a full pill, one per line of text.",
+      "holds": "A Skeleton with kind text: a bar with fully rounded ends, one per line of text.",
       "required": false,
       "from": {
         "section": "anatomy",
-        "quote": "kind text: a full pill, one per line of text."
+        "quote": "kind text: a bar with fully rounded ends, one per line of text."
       }
     },
     {
@@ -78,12 +78,12 @@
       }
     },
     {
-      "part": "Circle or pill",
-      "holds": "A Skeleton with kind other, the default: a circle when square, else a pill.",
+      "part": "Circle or rounded bar",
+      "holds": "A Skeleton with kind other, the default: a circle when square, else a rounded bar.",
       "required": false,
       "from": {
         "section": "anatomy",
-        "quote": "kind other, the default: a circle when square, else a pill."
+        "quote": "kind other, the default: a circle when square, else a rounded bar."
       }
     }
   ],
@@ -131,13 +131,13 @@
       }
     },
     {
-      "text": "kind text: full pills, one per line; match each line's height.",
+      "text": "kind text: rounded bars, one per line; match each line's height.",
       "strength": "recommended",
       "target": "kind",
       "value": "text",
       "from": {
         "section": "configuration",
-        "quote": "Full pills, one per line; match each line's height."
+        "quote": "Rounded bars, one per line; match each line's height."
       }
     },
     {
@@ -161,13 +161,13 @@
       }
     },
     {
-      "text": "kind other is the default: square sizes make a circle, wide ones a pill, for avatars and buttons.",
+      "text": "kind other is the default: square sizes make a circle, wide ones a rounded bar, for avatars and buttons.",
       "strength": "recommended",
       "target": "kind",
       "value": "other",
       "from": {
         "section": "configuration",
-        "quote": "The default kind: square sizes make a circle, wide ones a pill, for avatars and buttons."
+        "quote": "The default kind: square sizes make a circle, wide ones a rounded bar, for avatars and buttons."
       }
     },
     {
@@ -425,7 +425,7 @@
     {
       "list": "props",
       "name": "kind",
-      "description": "kind sets only the corner radius: text and other 9999 (a full pill, or a circle when square), image 10, badge 4.",
+      "description": "kind sets only the corner radius: text and other 9999 (fully rounded ends, or a circle when square), image 10, badge 4.",
       "quote": "kind sets only the corners (text and other 9999, image 10, badge 4). No size unless given.",
       "checkedOn": "2026-10-12",
       "checkedVersion": "0.1.78-636f3f5"

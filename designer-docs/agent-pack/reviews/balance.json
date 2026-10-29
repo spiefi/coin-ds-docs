@@ -1,0 +1,11 @@
+{
+  "flags": [],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The guide's In context only gives the text \"Goa trip | 4 friends · 12 expenses\" and says \"Settle up is the screen’s own Button.\" Nothing cited says this header is a Coin `Title` component with `title`/`subtitle` props, or that the screen is built from nested VStacks. The description's \"under the screen's Title\" and the code add that structure without support.",
+      "by": "Claude Code (claude-opus-5-5), #543 refresh run (agentpack-refresh-543), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The structure is the guide’s own In context code, which the reviewer doesn’t see (it reads only the rendered copy, with no component names): src/guides/balance.guide.tsx at 3f56271, lines 89–95, is a VStack holding a Title (title=\"Goa trip\", subtitle=\"4 friends · 12 expenses\") and a nested VStack with the Balance and the Settle up Button. Title and its title and subtitle props are jfs-components exports and facts, and the example type-checks. The example drops only the guide’s modes and the Button’s alignSelf style, as its notes say."
+    }
+  ]
+}

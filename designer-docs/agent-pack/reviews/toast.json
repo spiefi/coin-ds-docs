@@ -4,5 +4,13 @@
       "field": "",
       "reason": "The guide (checked 17 October on 0.1.78-a116616, unchanged for Toast on the installed 0.1.78-dbe0e02) has two unclear lines. States says a toast “closes itself after 4 s, or after its own timeout; with no timeout it stays until the screen clears it.”: leaving timeout out gives the 4 s default, so “no timeout” has to mean a timeout of 0 (the playground's Stays); the entry says “a timeout of 0 or less” from the evidence. The Content example “Confirmations” includes “Mobile number is invalid”, an error, beside the guide's rule that a toast confirms something that already happened, and the guide doesn't say whether errors belong in a toast; the entry leaves it out of good copy. Guide fix #530. Added by Claude Code in the overnight run agentpack-batch9, for Marcin to confirm."
     }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The guide's In context only says \"Pressing Copy confirms with a toast at the bottom of the screen. The screen adds it with addToast\". The example adds components and props that nothing cited supports: VStack, Text with a `text` prop, and Button with `label` and `onPress`. Nothing cited establishes those APIs, so the scaffolding may be wrong.",
+      "by": "Claude Code (claude-opus-5-5), #543 refresh run (agentpack-refresh-543), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The scaffolding is the guide’s own In context code, which the reviewer doesn’t see: src/guides/toast.guide.tsx at 3f56271 puts the screen in a VStack inside the ToastProvider (its live() helper, lines 39–42) with two Texts and a Button label=\"Copy\" whose onPress calls addToast({ title: 'UPI ID copied' }) (lines 108–112). Text’s text prop, Button’s label and onPress, and VStack are package facts and exports (not shown to the reviewer), and the example type-checks against jfs-components; the guide passes the Text copy as children, the example through text."
+    }
   ]
 }

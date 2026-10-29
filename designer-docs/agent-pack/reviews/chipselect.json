@@ -6,6 +6,18 @@
       "reason": "misreads-source: The cited sentence \"For other attribute filters.\" names no icon. The value ic_filter appears nowhere in the rendered guide or the evidence file. The evidence lists only ic_calendar_week (default) and ic_home (Custom icon story). The item says \"ic_filter in the guide's code\", but nothing shown here supports that.",
       "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, on the extraction’s behalf; for Astra and Marcin to confirm",
       "why": "The icon name is the guide's own, from its code, which the reviewer doesn't see: src/guides/chipselect.guide.tsx at 4e470cf, line 10 (const FILTER = 'ic_filter'), and the Configuration card “Filter icon” renders <Chip label=\"Category\" icon={FILTER} /> (line 49); the Content, In context and Do & Don't chips use the same constant (lines 76–77, 86, 97). ic_filter is in the installed icon registry (jfs-components 0.1.78-dbe0e02, src/icons/registry.ts line 1937, IconFilter.tsx), and ChipSelect draws any registry name it is given as the leading icon (ChipSelect.tsx lines 159–161). The item says where the name comes from; the copy calls it “Filter icon”."
+    },
+    {
+      "field": "/content/good",
+      "reason": "lost-context: The list mixes the guide's \"Idle labels\" (Date, Category, Account) with its \"Applied labels\" without saying which state each belongs to. The guide says to use generic words only \"While Idle\" and to replace them \"Once applied\", and the do/don't warns that \"An Active “Date” chip does not say which dates.\" Listed unconditionally, \"Date\" reads as a good label for an Active chip too.",
+      "by": "Claude Code (claude-opus-5-5), #543 refresh run (agentpack-refresh-543), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The state condition is carried by the entry’s content rules, which sit beside the list: /content/rules/0 (“While Idle, use one or two words for the filter.”), /content/rules/1 (“Once applied, replace them with the chosen value …”) and /content/rules/3 (an Active “Date” chip does not say which dates). content.good is a plain list of the guide’s own good labels with no field for a state (entry schema), and Date, Category and Account are the guide’s Idle labels, which are good copy for an Idle chip; the extraction notes record why bad stays empty."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: Nothing cited supports wrapping the row in ChipGroup, calling it \"the pack's component for a row of Chip Select filters\", or giving it an accessibilityLabel. The guide's In context shows only filters above a transaction list, and the entry admits the guide's own code uses a plain wrapping row. The claim comes from another entry, not from this guide or its evidence.",
+      "by": "Claude Code (claude-opus-5-5), #543 refresh run (agentpack-refresh-543), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The ChipGroup comes from the pack’s building rules, which the reviewer doesn’t see: rules.md “Plan with the largest block that fits” asks for the largest existing block for each part, and the Chip Group guide’s own summary says “Use a Chip Group to lay out a row of Chip Select filters that wraps onto new lines with even gaps.” (src/guides/chipgroup.guide.tsx line 160), with the “Transaction filters” name from its In context. The example says plainly that this guide’s own code uses a plain wrapping row."
     }
   ]
 }

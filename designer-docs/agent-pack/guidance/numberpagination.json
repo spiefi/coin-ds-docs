@@ -1,9 +1,9 @@
 {
   "slug": "numberpagination",
-  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
   "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch3, extraction worker",
   "extractedOn": "2026-10-29",
-  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/numberpagination.md at cba512f. The guide's Sources note was checked on 8 October 2026 on the 5 October build (mirror v0.1.78-636f3f5, the #180 fix), so items citing it carry that build; the evidence's 0.1.78 checks were run on v0.1.78 (5b6894b, 1 October), 3795b4c (2 October) and 636f3f5 (8 October). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Its NumberPagination.tsx, GlassFill.web.tsx, web-platform-utils.ts and token values still match every guide sentence used here, read from source, not run: activePage and totalPages default to 1 and the component keeps no page of its own (a press calls onPageChange with that page, and the screen passes it back); the active page is a white circle with a black number and has aria-current=\"page\" on the web; each number is a 32 × 32 button named “Page n” that drops to 70% opacity while pressed; the pill is 39 px tall with a 1 px border and 4 px padding (138 px for four pages), its horizontal scroll area 32 px tall (the #176 clamp); the container is a navigation landmark on the web and a toolbar on native, named by accessibilityLabel (default “Pagination”); the frost (9 px blur) has the pill's 19.5 px radius with overflow hidden (the #180 fix); there are no arrows, no disabled prop and no truncation; children replaces the page buttons. No guide sentence is contradicted. Two evidence sentences the guide does not use are out of date on dbe0e02 and were not recorded: the 29 September Contract's “No testID or label” (the installed build has accessibilityLabel, used here from the package fact), and “Carousel uses its own pagination, not this component” (Carousel's Numbered type now overlays a NumberPagination at the bottom centre, beside an autoplay control; Carousel has no entry in this pack, so it is not named as an alternative). The 29 September rendered checks on 0.1.77 (pages named “Page n”, and Figma's 136 px against the package's 138 px) are cited with that version and flagged; the installed source still matches both. Examples follow the building rules: no Color Mode (the guide sets Light on every pagination) and no other modes. They use the guide's own page counts: the In context carousel (four photos, the first in view), three pages for three offers, and five pages with the last in view. Left out of examples: the guide's Backdrop (a docs-only stand-in for a photo, not a Coin export), its playground (Pages control and “Slide n of m” readout) and the In context status line “Photo n of 4”, both plain page copy rather than Coin; the two Don'ts (a pagination in a light Card, and twelve pages). No example places the pill over an Image: the guide says it goes over imagery but not where on the image, so a position would be invented. Not recorded: style, which the building rules keep off Coin components, and the native accessibilityState selected on the active page, which the guide and evidence don't describe. Content good and bad are empty: the component writes only numbers.",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/numberpagination.md at cba512f. The guide's Sources note was checked on 8 October 2026 on the 5 October build (mirror v0.1.78-636f3f5, the #180 fix), so items citing it carry that build; the evidence's 0.1.78 checks were run on v0.1.78 (5b6894b, 1 October), 3795b4c (2 October) and 636f3f5 (8 October). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Its NumberPagination.tsx, GlassFill.web.tsx, web-platform-utils.ts and token values still match every guide sentence used here, read from source, not run: activePage and totalPages default to 1 and the component keeps no page of its own (a press calls onPageChange with that page, and the screen passes it back); the active page is a white circle with a black number and has aria-current=\"page\" on the web; each number is a 32 × 32 button named “Page n” that drops to 70% opacity while pressed; Number Pagination is 39 px tall with a 1 px border and 4 px padding (138 px for four pages), its horizontal scroll area 32 px tall (the #176 clamp); the container is a navigation landmark on the web and a toolbar on native, named by accessibilityLabel (default “Pagination”); the frost (9 px blur) has the glass background's 19.5 px radius with overflow hidden (the #180 fix); there are no arrows, no disabled prop and no truncation; children replaces the page buttons. No guide sentence is contradicted. Two evidence sentences the guide does not use are out of date on dbe0e02 and were not recorded: the 29 September Contract's “No testID or label” (the installed build has accessibilityLabel, used here from the package fact), and “Carousel uses its own pagination, not this component” (Carousel's Numbered type now overlays a NumberPagination at the bottom centre, beside an autoplay control; Carousel has no entry in this pack, so it is not named as an alternative). The 29 September rendered checks on 0.1.77 (pages named “Page n”, and Figma's 136 px against the package's 138 px) are cited with that version and flagged; the installed source still matches both. Examples follow the building rules: no Color Mode (the guide sets Light on every pagination) and no other modes. They use the guide's own page counts: the In context carousel (four photos, the first in view), three pages for three offers, and five pages with the last in view. Left out of examples: the guide's Backdrop (a docs-only stand-in for a photo, not a Coin export), its playground (Pages control and “Slide n of m” readout) and the In context status line “Photo n of 4”, both plain page copy rather than Coin; the two Don'ts (a pagination in a light Card, and twelve pages). No example places Number Pagination over an Image: the guide says it goes over imagery but not where on the image, so a position would be invented. Not recorded: style, which the building rules keep off Coin components, and the native accessibilityState selected on the active page, which the guide and evidence don't describe. Content good and bad are empty: the component writes only numbers. Refreshed 29 October 2026 for guide fix #543 (3f56271): the guide and evidence now name the frosted part the glass background (Anatomy part “Glass background”) and otherwise say Number Pagination or the numbers; /avoidWhen/1, /placementAdvice/2–3, /configuration/1, /doDont/1, both gaps and the totalPages fact quote or follow the new sentences.",
   "useWhen": [
     {
       "text": "Show which slide of a short media carousel is in view, and let people jump to another.",
@@ -32,22 +32,22 @@
       }
     },
     {
-      "text": "Showing every page of a long set: twelve pages don't fit, so people have to scroll the pill to find the rest.",
+      "text": "Showing every page of a long set: twelve pages don't fit, so people have to scroll the numbers to find the rest.",
       "strength": "discouraged",
       "from": {
         "section": "doDont",
-        "quote": "Twelve pages don’t fit, so people must scroll the pill to find the rest."
+        "quote": "Twelve pages don’t fit, so people must scroll the numbers to find the rest."
       },
       "absolute": {
         "word": "must",
         "scope": "contextual",
-        "reason": "\"must\" describes what people are left to do when twelve pages overflow the pill, not a rule for the designer."
+        "reason": "\"must\" describes what people are left to do when twelve pages overflow Number Pagination, not a rule for the designer."
       }
     }
   ],
   "anatomy": [
     {
-      "part": "Glass pill",
+      "part": "Glass background",
       "holds": "Frosted, translucent surface with a thin light border; it holds one circular number per page.",
       "required": true,
       "from": {
@@ -92,19 +92,19 @@
       }
     },
     {
-      "text": "The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide.",
+      "text": "Number Pagination is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide.",
       "strength": "recommended",
       "from": {
         "section": "sizing",
-        "quote": "The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide."
+        "quote": "Number Pagination is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide."
       }
     },
     {
-      "text": "It does not wrap: pages that do not fit scroll sideways inside the pill.",
+      "text": "It does not wrap: pages that do not fit scroll sideways inside the glass background.",
       "strength": "recommended",
       "from": {
         "section": "sizing",
-        "quote": "It does not wrap: pages that do not fit scroll sideways inside the pill."
+        "quote": "It does not wrap: pages that do not fit scroll sideways inside the glass background."
       }
     }
   ],
@@ -119,12 +119,12 @@
       }
     },
     {
-      "text": "Keep the count small so the pill stays compact over the image.",
+      "text": "Keep the count small so Number Pagination stays compact over the image.",
       "strength": "recommended",
       "target": "totalPages",
       "from": {
         "section": "configuration",
-        "quote": "Keep the count small so the pill stays compact over the image."
+        "quote": "Keep the count small so Number Pagination stays compact over the image."
       }
     },
     {
@@ -316,7 +316,7 @@
     {
       "do": "Keep to a few pages",
       "dont": "Show every page of a long set",
-      "why": "Twelve pages don’t fit, so people must scroll the pill to find the rest.",
+      "why": "Twelve pages don’t fit, so people must scroll the numbers to find the rest.",
       "from": {
         "section": "doDont",
         "quote": "Five numbers fit comfortably."
@@ -325,7 +325,7 @@
   ],
   "examples": [
     {
-      "purpose": "A photo carousel on a product card, the guide's In context: four photos with the first in view. The screen draws the photo and puts the pill over it (the component draws only the numbers); it passes activePage and, when a number is pressed, onPageChange gives that page; the screen shows that photo and passes the page back.",
+      "purpose": "A photo carousel on a product card, the guide's In context: four photos with the first in view. The screen draws the photo and puts Number Pagination over it (the component draws only the numbers); it passes activePage and, when a number is pressed, onPageChange gives that page; the screen shows that photo and passes the page back.",
       "jsx": "<NumberPagination totalPages={4} activePage={1} onPageChange={() => {}} />",
       "from": {
         "section": "inContext",
@@ -369,7 +369,7 @@
     {
       "list": "props",
       "name": "totalPages",
-      "description": "Pages that don't fit scroll sideways inside the pill: twelve pages in a 360 px host scroll horizontally, and the last page can be scrolled into view.",
+      "description": "Pages that don't fit scroll sideways inside the glass background: twelve pages in a 360 px host scroll horizontally, and the last page can be scrolled into view.",
       "quote": "Twelve pages in a 360 px host scroll horizontally, and the last page can be scrolled into view",
       "checkedOn": "2026-10-01",
       "checkedVersion": "0.1.78-5b6894b"
@@ -377,17 +377,17 @@
   ],
   "gaps": [
     {
-      "text": "Number Pagination has no arrows and no disabled state; pages that do not fit scroll inside the pill.",
+      "text": "Number Pagination has no arrows and no disabled state; pages that do not fit scroll inside the glass background.",
       "from": {
         "section": "sources",
-        "quote": "It has no arrows or disabled state; pages that do not fit scroll inside the pill."
+        "quote": "It has no arrows or disabled state; pages that do not fit scroll inside the glass background."
       },
       "checkedOn": "2026-10-08",
       "checkedVersion": "0.1.78-636f3f5"
     },
     {
-      "text": "Figma's four-page pill is 136 px wide; the package's is 138 px, because its 1 px border is added.",
-      "quote": "The four-page pill is 138 × 39 again.",
+      "text": "Figma's four-page Number Pagination is 136 px wide; the package's is 138 px, because its 1 px border is added.",
+      "quote": "The four-page Number Pagination is 138 × 39 again.",
       "checkedOn": "2026-10-02",
       "checkedVersion": "0.1.78-3795b4c"
     }
