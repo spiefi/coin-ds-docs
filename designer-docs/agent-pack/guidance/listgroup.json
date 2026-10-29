@@ -1,15 +1,476 @@
 {
   "slug": "listgroup",
-  "undocumented": true,
-  "extractedBy": "Claude Code (claude-opus-5-5), flow-kit session",
-  "extractedOn": "2026-10-17",
-  "notes": "No designer guide. Facts come from the package types; the summary, when present, is the component's own JSDoc; the example only shows the public API and is not design guidance.",
-  "summary": "ListGroup component that mirrors the Figma \"List Group\" component.",
+  "guideCommit": "267077a65984c994d9cc3f2e3590e28f9038241d",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/listgroup.guide.tsx) and docs/evidence/listgroup.md at 267077a (“docs: add List Group guide”). This replaces the undocumented entry from 0.1.78+2 (a JSDoc summary and one example that set Color Mode): ListGroup now has a designer guide. The guide’s Sources note and the evidence were checked on 28 October 2026 on the installed build itself (jfs-components 0.1.78, mirror v0.1.78-dbe0e02, Biscuit’s main at dbe0e02, 27 October; the evidence says installed and upstream ListGroup.tsx are byte-identical), so items citing them carry 2026-10-28 and 0.1.78-dbe0e02. Installed ListGroup.tsx still matches every guide and evidence sentence used here, read from source, not run (token values through the package’s own getVariableByName): the root is a View, column, alignItems stretch, width 100%, background and border transparent (listGroup/background rgba(255,255,255,0), border colour hard-coded transparent, borderWidth 0), no padding (lines 408-429); the label defaults to empty and renders only when set, on one line (resolveTruncation(disableTruncation, 1)), with listGroup/gap below it only when there are rows (lines 401, 502-511); Title Level Default resolves to 14 px, weight 500, #24262b, Bold to 18 px, weight 900, #0d0d0f (line height 20, raised to 22 by safeTextLineHeight); listGroup/gap is 12 in List Item Style Default and Boxed and 4 in Minimal; in static mode listGroupSlot then children are flattened (only valid elements survive, so strings vanish) and cloned with the group’s modes, the row’s own modes merged last (react-utils cloneChildrenWithModes: { ...modes, ...existingModes }), so a row’s own modes win (lines 462-474); reorder mode starts only when data is an array and renderItem, onDragEnd and keyExtractor are functions (isReorderMode, lines 75-82), otherwise the static branch renders no rows, so only the label shows; in reorder mode renderItem’s rows are wrapped in an Animated.View and never given the group’s modes (ReorderBody, lines 221-377), the pan only activates after drag() is called from the row’s drag handle (lines 294-318), and onDragEnd gets { data, from, to } on release when the row moved (lines 276-288); accessibilityLabel is destructured out and the root gets accessibilityLabel undefined, role list, and the label Text is accessibilityElementsHidden and importantForAccessibility no (lines 488-509). ListItem’s List Item Style tokens (resolved with Context ListItem, which ListItem forces) give Default a transparent row with no padding, Boxed a white row with a #ebebed border, radius 12 and 12 px padding, Minimal titles at weight 400 (Default and Boxed 700), matching the guide’s “white card” and “lighter titles”. One guide sentence reads wider than the installed source and is not used: States “Give the group data, renderItem, keyExtractor, and onDragEnd, and every row gets a drag handle.” The group adds no handle (ReorderRow, lines 163-210, is a plain Animated.View); the handle is ListItem’s isDraggable with onDragHandleGrant={drag}, which renderItem has to set, as the evidence says and the guide’s own code does. The rule on all four props rests on the next sentence (“All four are needed”), the reorder example on the drag sentence, and the handle rule on the evidence. Not recorded as gaps, per the pack’s rules: the missing screen-reader name and the rows that aren’t list items (#420; kept as an accessibility item from the Sources note), and the MDX’s claims that accessibilityLabel names the group and rows expose listitem (evidence Discrepancies). Gaps hold what the evidence and Sources state Coin does differently: Figma’s “March 2025” title against no label by default, Code Connect not mapping the Title to label, the hard-coded transparent border against listGroup/border/color, and, from #420 (Component Bug, Component Fix › To do, Mr. Biscuit), reorder mode’s silent fall-through to the label and its missing mode cascade. Generated facts type data, keyExtractor, renderItem and onDragEnd as “undefined” (the static branch of the props union); their evidence facts say how reorder mode uses them, and the reorder example shows the real types. Examples follow the building rules: no Color Mode (the guide sets Light on every group, row, Icon Capsule and the VStack); no List Item Style or Title Level (modes that only change the look, and no guide sentence says which content needs them; the Do “Set the style on the group” is kept as a rule); the In context VStack drops the guide’s Slot gap XL and alignHorizontal stretch (a VStack stretches by default and the group is width 100% anyway); the reorder rows carry no modes, which keeps “give every row the same modes” (none on each), and the Icon Capsule drops the guide’s AppearanceBrand Neutral (slot children carry no appearance modes; ListItem passes its modes with Context ListItem into leading), so it takes the package default look. Components without an entry: MoneyValue is kept in trailing for each payment’s amount, the row’s content in the guide’s payment rows (ListItem’s own doc names MoneyValue for trailing; as the Balance entry uses it); the guide’s Monogram Avatar in leading is left out, since Avatar has no entry and leading is optional (the rows are then shorter than the guide’s 42 px). ListItem has an undocumented entry; IconCapsule gets its entry in this same batch. Copy and data are the guide’s own (March 2025, February 2025, Netflix 12 Mar 499, Swiggy 10 Mar 320, Adani Electricity 8 Mar 1,840, Jio Fiber 28 Feb 999, Zomato 14 Feb 650; Pinned on home with Savings, Bills, Mobile recharge and Wallet and their icons, all in the installed icon registry; the long label); press and drag-end handlers are stubs, so the reorder example’s screen state is left to the caller. Left out of examples (three at most): the Configuration cards (Boxed, Minimal, Title Level Bold, No label), A month and A sentence, the order readout (“Order: …”, a docs line), the playground, and the Don’ts. Not recorded: style, testID, accessibilityHint and the other View props (the guide doesn’t cover them; the building rules keep style off Coin components), listGroupSlot beyond the children fact (the evidence’s Limits keep it and children apart), onDragUpdate, the evidence’s 328 × 126 web measurement and Storybook story ids. Content bad is empty: the guide’s long label is shown to demonstrate truncation and wrapping, not marked as a Don’t. The Sources note renders whole: its code elements (jfs-components, 0.1.78, label, accessibilityLabel) appear in the rendered paragraph.",
+  "useWhen": [
+    {
+      "text": "Put related list rows under one label, such as a month of payments, with one style for every row.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a List Group to put related list rows under one label, such as a month of payments, with one style for every row."
+      }
+    },
+    {
+      "text": "Rows people can reorder: people drag a row by its handle, and onDragEnd hands your screen the new order to save.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "People drag a row by its handle, and onDragEnd hands your screen the new order to save."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A label with no rows under it: show a group only when it has rows. An empty group shows only the label, with nothing under it.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Show a group only when it has rows."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it applies to every List Group: with no rows the installed group renders just its label, so no empty group should be shown."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "label: what the rows share, on one line.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "label: what the rows share, on one line."
+      }
+    },
+    {
+      "part": "Row",
+      "holds": "A List Item; the group passes its modes to it (not in reorder mode: see States).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A List Item; the group passes its modes to it."
+      }
+    },
+    {
+      "part": "Group",
+      "holds": "A column that fills its width, with no fill or padding.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A column that fills its width, with no fill or padding."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The group fills its container and adds no padding: the label, 12 px, then rows 12 px apart, or 4 px with Minimal.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The group fills its container and adds no padding: the label, 12 px, then rows 12 px apart, or 4 px with Minimal."
+      }
+    },
+    {
+      "text": "The group draws nothing but the label and the rows: no fill, border, or padding.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The group draws nothing else: no fill, border, or padding."
+      }
+    },
+    {
+      "text": "Each row keeps its own height: 42 px for a Default List Item with an avatar, 68 px Boxed.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each row keeps its own height: 42 px for a Default List Item with an avatar, 68 px Boxed."
+      }
+    },
+    {
+      "text": "Like the guide’s history screen, stack one group per month, newest first.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A history screen stacks one group per month, newest first."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass the rows as children. The package takes label, with none by default.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "sources",
+        "quote": "The package takes label, with none by default, and the rows as children."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Pass rows as elements, such as List Items: only elements survive, and strings vanish.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "evidence",
+        "quote": "Only elements survive: strings vanish."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it states what the package does with any row passed to any group: the installed ListGroup flattens its rows to valid elements and drops strings."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Without a label the rows start at the top.",
+      "strength": "recommended",
+      "target": "label",
+      "from": {
+        "section": "configuration",
+        "quote": "Without a label the rows start at the top."
+      }
+    },
+    {
+      "text": "List Item Style changes every row: Default rows sit 12 px apart with no fill, Boxed puts each row on a white card, and Minimal packs them 4 px apart with lighter titles.",
+      "strength": "recommended",
+      "target": "List Item Style",
+      "from": {
+        "section": "configuration",
+        "quote": "List Item Style changes every row: Default rows sit 12 px apart with no fill, Boxed puts each row on a white card, and Minimal packs them 4 px apart with lighter titles."
+      }
+    },
+    {
+      "text": "Set the style on the group: every row takes it from the group (the guide’s Do shows Boxed).",
+      "strength": "recommended",
+      "target": "List Item Style",
+      "from": {
+        "section": "doDont",
+        "quote": "Every row takes Boxed from the group."
+      }
+    },
+    {
+      "text": "Do not change the style on one row: a row’s own modes win, so with Boxed on the group that row loses its card.",
+      "strength": "discouraged",
+      "target": "List Item Style",
+      "from": {
+        "section": "doDont",
+        "quote": "A row’s own modes win, so that row loses its card."
+      }
+    },
+    {
+      "text": "Title Level makes the label bigger and bolder.",
+      "strength": "recommended",
+      "target": "Title Level",
+      "from": {
+        "section": "configuration",
+        "quote": "Title Level makes the label bigger and bolder."
+      }
+    },
+    {
+      "text": "Title Level Default: a 14 px grey label.",
+      "strength": "recommended",
+      "target": "Title Level",
+      "value": "Default",
+      "from": {
+        "section": "configuration",
+        "quote": "A 14 px grey label."
+      }
+    },
+    {
+      "text": "Title Level Bold: an 18 px black label.",
+      "strength": "recommended",
+      "target": "Title Level",
+      "value": "Bold",
+      "from": {
+        "section": "configuration",
+        "quote": "An 18 px black label."
+      }
+    },
+    {
+      "text": "The label stays on one line and ends in an ellipsis; disableTruncation lets a longer label wrap.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "from": {
+        "section": "content",
+        "quote": "It stays on one line and ends in an ellipsis; disableTruncation lets a longer label wrap."
+      }
+    },
+    {
+      "text": "To let people reorder the rows, give the group all four of data, renderItem, keyExtractor and onDragEnd: leave one out and only the label shows.",
+      "strength": "required",
+      "target": "data",
+      "from": {
+        "section": "states",
+        "quote": "All four are needed: leave one out and only the label shows."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it states the package’s behaviour for any group: the installed ListGroup enters reorder mode only when all four are present (isReorderMode) and otherwise renders no rows, so only the label shows."
+      }
+    },
+    {
+      "text": "In reorder mode each row shows a drag handle: renderItem returns a ListItem with isDraggable and onDragHandleGrant={drag}.",
+      "strength": "recommended",
+      "target": "renderItem",
+      "from": {
+        "section": "evidence",
+        "quote": "Each row shows a drag handle (List Item `isDraggable`, `onDragHandleGrant={drag}`)"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Your screen keeps the order: onDragEnd hands it the new order to save.",
+      "strength": "recommended",
+      "target": "onDragEnd",
+      "from": {
+        "section": "states",
+        "quote": "Your screen keeps the order; this one shows it below."
+      }
+    },
+    {
+      "text": "In reorder mode the group doesn’t pass its modes on, so give every row the same modes.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "states",
+        "quote": "In this mode the group doesn’t pass its modes on, so give every row the same modes."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One label, one look for every row under it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One label, one look for every row under it."
+        }
+      },
+      {
+        "text": "Write label as the one thing the rows share, such as a month or a kind of account, in a few words.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Write label as the one thing the rows share, such as a month or a kind of account, in a few words."
+        }
+      },
+      {
+        "text": "In the guide’s payment history, each label names the month, and each row opens that payment.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "inContext",
+          "quote": "Each label names the month, and each row opens that payment."
+        }
+      }
+    ],
+    "good": [
+      "March 2025",
+      "February 2025"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Reorderable",
+      "when": "With data, renderItem, keyExtractor and onDragEnd, people drag a row by its handle, and onDragEnd hands your screen the new order to save.",
+      "from": {
+        "section": "states",
+        "quote": "People drag a row by its handle, and onDragEnd hands your screen the new order to save."
+      }
+    },
+    {
+      "state": "Reorder props incomplete",
+      "when": "Leave out any of data, renderItem, keyExtractor or onDragEnd and only the label shows.",
+      "from": {
+        "section": "states",
+        "quote": "All four are needed: leave one out and only the label shows."
+      }
+    },
+    {
+      "state": "Empty",
+      "when": "With no rows, only the label shows, with nothing under it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Only the label shows, with nothing under it."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Do not count on accessibilityLabel or the label to name the list: the group drops accessibilityLabel and hides the label from screen readers, so nothing names the list, and its rows aren’t list items (reported, #420).",
+      "strength": "discouraged",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "sources",
+        "quote": "It drops accessibilityLabel and hides the label from screen readers, so nothing names the list, and its rows aren’t list items (reported)."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Set the style on the group",
+      "dont": "Change it on one row",
+      "why": "A row’s own modes win, so that row loses its card.",
+      "from": {
+        "section": "doDont",
+        "quote": "Set the style on the group"
+      }
+    },
+    {
+      "do": "Rows under every label",
+      "dont": "An empty group",
+      "why": "Only the label shows, with nothing under it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Rows under every label"
+      }
+    }
+  ],
   "examples": [
     {
-      "purpose": "A labelled group of list rows.",
-      "jsx": "<ListGroup label=\"Linked accounts\" modes={{ 'Color Mode': 'Light' }}>\n  <ListItem layout=\"Horizontal\" title=\"Savings Account\" supportText=\"HDFC Bank\" modes={{ 'Color Mode': 'Light' }} />\n</ListGroup>",
-      "from": null
+      "purpose": "Payments, a month at a time, the guide’s In context: a history screen stacks one group per month, newest first; each label names the month, and each row opens that payment (onPress). Each row’s amount is a MoneyValue in trailing; the rows carry no modes, so they take the group’s.",
+      "jsx": "<VStack>\n  <ListGroup label=\"March 2025\">\n    <ListItem layout=\"Horizontal\" title=\"Netflix\" supportText=\"12 Mar\" trailing={<MoneyValue value=\"499\" currency=\"₹\" />} onPress={() => {}} />\n    <ListItem layout=\"Horizontal\" title=\"Swiggy\" supportText=\"10 Mar\" trailing={<MoneyValue value=\"320\" currency=\"₹\" />} onPress={() => {}} />\n    <ListItem layout=\"Horizontal\" title=\"Adani Electricity\" supportText=\"8 Mar\" trailing={<MoneyValue value=\"1,840\" currency=\"₹\" />} onPress={() => {}} />\n  </ListGroup>\n  <ListGroup label=\"February 2025\">\n    <ListItem layout=\"Horizontal\" title=\"Jio Fiber\" supportText=\"28 Feb\" trailing={<MoneyValue value=\"999\" currency=\"₹\" />} onPress={() => {}} />\n    <ListItem layout=\"Horizontal\" title=\"Zomato\" supportText=\"14 Feb\" trailing={<MoneyValue value=\"650\" currency=\"₹\" />} onPress={() => {}} />\n  </ListGroup>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "A history screen stacks one group per month, newest first. Each label names the month, and each row opens that payment."
+      }
+    },
+    {
+      "purpose": "Rows people can reorder, the guide’s States: data, renderItem, keyExtractor and onDragEnd are all given; each row is a ListItem with a drag handle (isDraggable, onDragHandleGrant from drag, isDragging while it is the dragged row). onDragEnd (a stub here) hands your screen the new order to save, and data is that order. The group passes no modes in this mode, and no row sets any, so every row has the same.",
+      "jsx": "<ListGroup\n  label=\"Pinned on home\"\n  data={[\n    { id: 'Savings', title: 'Savings', support: 'Balance and statements', icon: 'ic_savings' },\n    { id: 'Bills', title: 'Bills', support: 'Electricity, water, gas', icon: 'ic_bill' },\n    { id: 'Mobile recharge', title: 'Mobile recharge', support: 'Jio prepaid', icon: 'ic_mobile' },\n    { id: 'Wallet', title: 'Wallet', support: 'JioPay wallet', icon: 'ic_wallet' },\n  ]}\n  keyExtractor={(item) => item.id}\n  onDragEnd={() => {}}\n  renderItem={({ item, isActive, drag }) => (\n    <ListItem\n      layout=\"Horizontal\"\n      title={item.title}\n      supportText={item.support}\n      navArrow={false}\n      isDraggable\n      isDragging={isActive}\n      onDragHandleGrant={drag}\n      leading={<IconCapsule iconName={item.icon} />}\n    />\n  )}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "People drag a row by its handle, and onDragEnd hands your screen the new order to save."
+      }
+    },
+    {
+      "purpose": "Wrapped, the guide’s Content example: a label stays on one line and ends in an ellipsis; disableTruncation lets a longer label wrap.",
+      "jsx": "<ListGroup label=\"Payments to merchants this month across all linked accounts\" disableTruncation>\n  <ListItem layout=\"Horizontal\" title=\"Netflix\" supportText=\"12 Mar\" trailing={<MoneyValue value=\"499\" currency=\"₹\" />} onPress={() => {}} />\n  <ListItem layout=\"Horizontal\" title=\"Swiggy\" supportText=\"10 Mar\" trailing={<MoneyValue value=\"320\" currency=\"₹\" />} onPress={() => {}} />\n</ListGroup>",
+      "from": {
+        "section": "content",
+        "quote": "disableTruncation shows all of it."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "label",
+      "default": "",
+      "description": "None by default. Shown above the rows on one line with an ellipsis; disableTruncation lets it wrap. 12 px (listGroup/gap) below it when there are rows.",
+      "quote": "`label` (`''`): heading above the rows, one line with an ellipsis; `disableTruncation` lets it wrap.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "slots",
+      "name": "children",
+      "description": "The rows, stacked full width, 12 px apart. children or listGroupSlot (listGroupSlot’s rows first when both). Only elements survive: strings vanish.",
+      "quote": "Only elements survive: strings vanish.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "The group passes them to every row ({ ...group, ...row }, so a row’s own modes win), and List Items pass them on to their slots. Not in reorder mode: rows aren’t given the group’s modes there.",
+      "quote": "the group passes them to every row (`{ ...group, ...row }`, so a row's own modes win)",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "List Item Style",
+      "description": "Default: rows 42 px tall, no fill, 12 px gap. Boxed: rows get 12 px padding, a white fill, a 1 px #ebebed border and radius 12 (68 px tall), gap 12. Minimal: gap 4 and regular-weight titles. The look comes from List Item; the group only changes its gap.",
+      "quote": "The look comes from List Item; the group only changes its gap.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "Title Level",
+      "description": "Default: the label is 14/18 medium #24262b. Bold: 18/22 black #0d0d0f.",
+      "quote": "`Title Level` Default: label 14/18 Medium `#24262b`. Bold: 18/22 Black `#0d0d0f`.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "data",
+      "description": "Reorder mode: the rows’ items, with keyExtractor, renderItem and onDragEnd. All four, or the group silently renders only the label. Rows aren’t given the group’s modes in this mode.",
+      "quote": "`data`, `keyExtractor`, `renderItem`, and `onDragEnd` (all four, or it silently renders only the label)",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "renderItem",
+      "description": "Reorder mode: returns each row. Each row shows a drag handle (List Item isDraggable, onDragHandleGrant={drag}).",
+      "quote": "Each row shows a drag handle (List Item `isDraggable`, `onDragHandleGrant={drag}`)",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "onDragEnd",
+      "description": "Reorder mode: gets the new order on release; the screen saves it.",
+      "quote": "`onDragEnd` gets the new order and the screen saves it.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Dropped: the root is a list with no name, and the label text is hidden from screen readers (#420).",
+      "quote": "`accessibilityLabel` is dropped; the root is `ul[role=list]` with no name, and the label text is hidden from screen readers.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma shows a “March 2025” title; the package (and Storybook’s Default) has no label until you pass one.",
+      "quote": "Figma shows a \"March 2025\" title; the package and Storybook's Default have no label until you pass one.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Code Connect maps Figma’s List Group, but not its Title to label.",
+      "quote": "Code Connect maps it, but not the Title to `label`.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The listGroup/border/color token exists, but the code hard-codes a transparent border.",
+      "quote": "`listGroup/border/color` exists but the code hard-codes a transparent border.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Static mode passes the group’s modes to its rows; reorder mode doesn’t (Component Bug #420).",
+      "quote": "Static mode passes modes to rows; reorder mode doesn't.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Reorder mode needs all four of data, keyExtractor, renderItem and onDragEnd; leave one out and the group silently renders only the label (Component Bug #420).",
+      "quote": "`data`, `keyExtractor`, `renderItem`, and `onDragEnd` (all four, or it silently renders only the label)",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
     }
   ]
 }

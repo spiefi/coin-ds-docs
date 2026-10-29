@@ -1,0 +1,29 @@
+{
+  "slug": "iconcapsule",
+  "entryHash": "ce9eb77e4ef92c6f42b7da542109a8162c88d539afb1739c38e6bd929301398a",
+  "guideCommit": "021681db7a25644db22d4a03ff3ec052c41545b3",
+  "checkedAt": "2026-10-29T04:02:30Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/5",
+      "reason": "misreads-source: The guide only says Emphasis High is \"A solid circle.\" Nothing in the rendered copy says which AppearanceBrand the example uses, so \"(the guide shows it on AppearanceBrand Secondary)\" is unsupported."
+    },
+    {
+      "field": "/configuration/6",
+      "reason": "misreads-source: The guide says only \"A pale circle with a coloured icon.\" The claim that it is shown on AppearanceBrand Secondary is not in the cited text. The parenthetical also implies one swatch stands for every appearance, yet the evidence says Tertiary Medium keeps a #036b99 fill with a pale glyph."
+    },
+    {
+      "field": "/configuration/7",
+      "reason": "misreads-source: The guide says only \"No circle, just the coloured icon.\" Nothing cited says the example uses AppearanceBrand Secondary."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: The guide's Do pair (\"Negative is red, the colour people expect for an error.\") names no glyph. The guide never mentions ic_error, so calling it \"the ic_error glyph from the Coin icon set\" is unsupported. If the name isn't in the set, the example would draw an empty circle, which is exactly what the guide's Don't warns against."
+    }
+  ],
+  "notes": "/configuration/16 is marked [recommended] with target=Context, but the guide says parent components set Context, and the evidence Limits say not to present Context values as options. A human may want it moved to a non-configurable note so agents don't set Context themselves. /facts/props/3 says the root has \"no name\", which matches the evidence, but it leaves out the evidence's note that an aria-label in rest props does reach the root. /facts/modes has no item 2 (the numbering jumps from 1 to 3), which may mean a dropped fact. The evidence also lists the MDX accessibilityLabel discrepancy (filed under #419), and no /facts/gaps item records it."
+}

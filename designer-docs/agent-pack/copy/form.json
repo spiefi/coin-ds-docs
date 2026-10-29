@@ -1,0 +1,295 @@
+{
+  "slug": "form",
+  "label": "Form",
+  "guideCommit": "8572e95e0efc0ee2a52ae3a5b945d3b49dec3226",
+  "files": [
+    "src/guides/form.guide.tsx"
+  ],
+  "evidence": "docs/evidence/form.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:41:50.027Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "form layout",
+    "validation",
+    "field group",
+    "server errors"
+  ],
+  "title": "Form",
+  "summary": "Use a Form to stack related fields and show the errors your screen sends for each one, such as a bank account’s details.",
+  "corePrinciple": "Group the fields; let each one show its own problem.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1949-7250",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-form--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A column of named fields",
+      "description": "Form stacks its fields 12 px apart and hands each named field its error. It draws nothing of its own: no background, border, or title.",
+      "blocks": [
+        "12",
+        "1",
+        "2",
+        "3",
+        "Form",
+        "An invisible column: 12 px between fields, no padding.",
+        "Named field",
+        "A Form Field with a name gets the error for that name.",
+        "Error message",
+        "Shown by the field while the Form has an error for it.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Account holder name",
+        "IFSC code",
+        "IFSC codes have 11 characters"
+      ],
+      "anatomy": [
+        {
+          "part": "Form",
+          "note": "An invisible column: 12 px between fields, no padding."
+        },
+        {
+          "part": "Named field",
+          "note": "A Form Field with a name gets the error for that name."
+        },
+        {
+          "part": "Error message",
+          "note": "Shown by the field while the Form has an error for it."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Errors by field name",
+      "description": "Give each field a name, and pass the errors keyed by those names. Form has no other options that change what people see.",
+      "blocks": [
+        "No errors",
+        "The fields, 12 px apart, with nothing added.",
+        "An error for one field",
+        "Only the field whose name matches shows the message.",
+        "Two messages for one field",
+        "Given a list, the field shows only the first message.",
+        "Other fields too",
+        "Form Upload and Message Field show their errors the same way."
+      ],
+      "specimen": [
+        "Account holder name",
+        "Account number",
+        "IFSC code",
+        "IFSC codes have 11 characters",
+        "PAN",
+        "Enter all 10 characters of your PAN",
+        "PAN card",
+        "Upload a PDF or JPG under 5 MB",
+        "Describe your issue",
+        "Charged twice",
+        "Add a few more details, at least 20 characters"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "No errors",
+          "description": "The fields, 12 px apart, with nothing added."
+        },
+        {
+          "title": "An error for one field",
+          "description": "Only the field whose name matches shows the message."
+        },
+        {
+          "title": "Two messages for one field",
+          "description": "Given a list, the field shows only the first message."
+        },
+        {
+          "title": "Other fields too",
+          "description": "Form Upload and Message Field show their errors the same way."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Showing, then clearing an error",
+      "description": "A field shows its error until people change its value, then the message clears. When the screen sends a new set of errors, they all show again.",
+      "blocks": [
+        "Edit to clear",
+        "Type in either field: its message clears and the other stays."
+      ],
+      "specimen": [
+        "Account number",
+        "Account numbers have 9 to 18 digits",
+        "IFSC code",
+        "IFSC codes have 11 characters"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Edit to clear",
+          "description": "Type in either field: its message clears and the other stays."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 12 px between fields",
+      "description": "Form fills its container and adds 12 px between its fields, with no padding. Each Form Field keeps its own height: 72 px with a label, 96 px with a message.",
+      "blocks": [
+        "328 × 240",
+        "12"
+      ],
+      "specimen": [
+        "Account holder name",
+        "Account number",
+        "IFSC code"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One sentence that names the fix",
+      "description": "Key each message to the field it’s about, and write it as one sentence that says how to fix the value. Show problems with the whole form, such as a failed payment, outside it.",
+      "blocks": [
+        "Say how to fix it"
+      ],
+      "specimen": [
+        "Account number",
+        "Account numbers have 9 to 18 digits",
+        "IFSC code",
+        "IFSC codes have 11 characters"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Say how to fix it",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Checking bank details",
+      "description": "When people tap Verify, the screen checks the details and passes the errors to the Form. Editing a field clears its message. The button sits outside the Form and stays enabled.",
+      "blocks": [
+        "Press Verify to check the details"
+      ],
+      "specimen": [
+        "Account holder name",
+        "Account number",
+        "IFSC code",
+        "Verify account"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make every error reach its field",
+      "description": "Each pair shows a form that tells people what to fix versus one where the problem never appears.",
+      "blocks": [
+        "Do",
+        "Name every field",
+        "The message appears under the field it’s about.",
+        "Don’t",
+        "Leave a field unnamed",
+        "The Form has an error for it, but the field never shows it.",
+        "Use Form Field for each value",
+        "Form Field shows the message under the field.",
+        "Put a Text Input in a Form",
+        "Text Input ignores the Form, so the error never appears.",
+        "Keep the button enabled",
+        "People tap it and see which field to fix.",
+        "Disable the button instead",
+        "A greyed-out button doesn’t say what’s missing."
+      ],
+      "specimen": [
+        "Email",
+        "Enter an email address like name@example.com",
+        "Account number",
+        "Account numbers have 9 to 18 digits",
+        "IFSC code",
+        "IFSC codes have 11 characters",
+        "Verify account"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Name every field",
+            "caption": "The message appears under the field it’s about.",
+            "specimen": "Email · Enter an email address like name@example.com"
+          },
+          "dont": {
+            "title": "Leave a field unnamed",
+            "caption": "The Form has an error for it, but the field never shows it.",
+            "specimen": "Email"
+          }
+        },
+        {
+          "do": {
+            "title": "Use Form Field for each value",
+            "caption": "Form Field shows the message under the field.",
+            "specimen": "Email · Enter an email address like name@example.com"
+          },
+          "dont": {
+            "title": "Put a Text Input in a Form",
+            "caption": "Text Input ignores the Form, so the error never appears.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the button enabled",
+            "caption": "People tap it and see which field to fix.",
+            "specimen": "Account number · Account numbers have 9 to 18 digits · IFSC code · IFSC codes have 11 characters · Verify account"
+          },
+          "dont": {
+            "title": "Disable the button instead",
+            "caption": "A greyed-out button doesn’t say what’s missing.",
+            "specimen": "Account number · IFSC code · Verify account"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Form contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With validation errors",
+        "Server validation",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s Form is one 328 × 306 component: a slot of three Form Fields, 12 px apart, and the package matches it. In the package Form only spaces the fields and passes errors by name to Form Field, Form Upload, and Message Field; it does not submit or check anything, and its onSubmit property does nothing. On the web the form has no accessible name, and nothing announces errors when they arrive. Form Field and Message Field mark themselves invalid and link their message, so a screen reader reads it with the field. The published Storybook predates the current stories.",
+        "jfs-components",
+        "0.1.78",
+        "onSubmit"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

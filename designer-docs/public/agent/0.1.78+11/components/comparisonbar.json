@@ -1,0 +1,825 @@
+{
+  "schemaVersion": 1,
+  "id": "ComparisonBar",
+  "slug": "comparisonbar",
+  "category": "action",
+  "tags": [
+    "compare tray",
+    "compare drawer",
+    "add to compare",
+    "product comparison"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "ea46f6883c97d1016d0abd671590f7b078ee7955",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T04:05:26Z",
+    "flags": []
+  },
+  "summary": "Use a Comparison Bar to collect the items people pick to compare, as pictures in slots, and let them start the comparison.",
+  "useWhen": [
+    {
+      "text": "Collect the items people pick to compare, as pictures in slots, and let them start the comparison.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Comparison Bar to collect the items people pick to compare, as pictures in slots, and let them start the comparison."
+      }
+    },
+    {
+      "text": "Show what's picked; compare when there's something to show.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Show what’s picked; compare when there’s something to show."
+      }
+    },
+    {
+      "text": "People pick items from a list to compare, such as gold coins.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Comparing gold coins"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Comparing values side by side: the Comparison Bar is not a value chart. It is a card of image slots and a Compare button, for collecting the items to compare; value comparisons are other components, such as Allocation Comparison Chart and Plan Comparison Card.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "ComparisonBar is not a value chart: it is a floating card of image slots and a Compare button, for collecting items to compare. Value comparisons are Allocation Comparison Chart, Plan Comparison Card, and others."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Card",
+      "holds": "A white card as wide as its slots and button.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white card as wide as its slots and button."
+      }
+    },
+    {
+      "part": "Filled slot",
+      "holds": "An item with an imageSource: a picture; pressing anywhere on the slot removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A picture; pressing anywhere on the slot removes it."
+      }
+    },
+    {
+      "part": "Remove mark",
+      "holds": "On a filled slot: shows the slot removes; it isn't a separate button.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows the slot removes; it isn’t a separate button."
+      }
+    },
+    {
+      "part": "Empty slot",
+      "holds": "An item without an imageSource: a + that asks your screen to add an item.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A + that asks your screen to add an item."
+      }
+    },
+    {
+      "part": "Compare",
+      "holds": "A Coin Button, named by compareLabel, that stays off until a slot has a picture.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Coin Button that stays off until a slot has a picture."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "items",
+      "accepts": [
+        "ComparisonBarItem"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The bar hugs its content: 10 and 12 px of padding, 45 × 44 px slots 12 px apart, then the button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The bar hugs its content: 10 and 12 px of padding, 45 × 44 px slots 12 px apart, then the button."
+      }
+    },
+    {
+      "text": "Four slots and the default button make the bar 369 × 66 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Four slots and the default button make it 369 × 66 px"
+      }
+    },
+    {
+      "text": "Each slot adds 57 px, and the bar never wraps or scrolls.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each slot adds 57 px, and the bar never wraps or scrolls."
+      },
+      "target": "items"
+    },
+    {
+      "text": "As people add items from a list, such as gold coins, the bar fills from the left.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "People add coins from the list, and the bar fills from the left."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass items: one row per slot, in order. items is required.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "items"
+    },
+    {
+      "text": "Pass one item per slot: an item with an imageSource is filled, and one without is empty.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Pass one item per slot: an item with an imageSource is filled, and one without is empty."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Fewer slots make a shorter bar.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Fewer slots make a shorter bar."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Use four slots or fewer: the bar fits a phone screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The bar fits a phone screen."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Do not use five or more slots: the bar doesn't wrap or scroll, so it's wider than a 390 px phone.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The bar doesn’t wrap or scroll, so it’s wider than a 390 px phone."
+      },
+      "target": "items"
+    },
+    {
+      "text": "The bar keeps no list of its own, so your screen changes items.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The bar keeps no list of its own, so your screen changes items."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Tapping a picture in the bar takes that item out (onItemRemove).",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Tapping a picture in the bar takes that coin out."
+      },
+      "target": "onItemRemove"
+    },
+    {
+      "text": "Compare turns on with the first item; your screen opens the comparison (onCompare).",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Compare turns on with the first coin; your screen opens the comparison."
+      },
+      "target": "onCompare"
+    },
+    {
+      "text": "compareLabel names the button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "compareLabel names the button"
+      },
+      "target": "compareLabel"
+    },
+    {
+      "text": "The button widens with its label.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The button widens with its label."
+      },
+      "target": "compareLabel"
+    },
+    {
+      "text": "The Compare button is Coin's Button at size M by default; Button / Size S gives the smaller, 32 px button Figma draws.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Button / Size S gives the smaller button Figma draws."
+      },
+      "target": "Button / Size",
+      "value": "S"
+    },
+    {
+      "text": "Radius rounds the pictures' corners, which shows on square photos.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Radius rounds the pictures’ corners, which shows on square photos."
+      },
+      "target": "Radius"
+    },
+    {
+      "text": "Radius None: square corners.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Square corners."
+      },
+      "target": "Radius",
+      "value": "None"
+    },
+    {
+      "text": "Radius L: fully rounded corners.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Fully rounded corners."
+      },
+      "target": "Radius",
+      "value": "L"
+    },
+    {
+      "text": "Leave the colour modes alone: the + stays dark on the grey slots.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The + stays dark on the grey slots."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "Do not set a brand colour on the bar: AppearanceBrand Secondary turns the + white, so the empty slots look blank.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "AppearanceBrand Secondary turns the + white, so the empty slots look blank."
+      },
+      "target": "AppearanceBrand",
+      "value": "Secondary"
+    },
+    {
+      "text": "compareDisabled keeps Compare off, say until two are added.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "compareDisabled keeps it off, say until two are added."
+      },
+      "target": "compareDisabled",
+      "value": "true"
+    },
+    {
+      "text": "disableCompareWhenEmpty (default true) keeps Compare off while no slot has a picture; false keeps it pressable when empty. compareDisabled, when set, wins over it.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "disableCompareWhenEmpty"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Use each item's own picture, so people can tell at a glance what they picked.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use each item’s own picture, so people can tell at a glance what they picked."
+        },
+        "target": "ComparisonBarItem.imageSource"
+      },
+      {
+        "text": "Keep compareLabel to a short verb such as Compare: a long label makes the bar wider than a phone.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep compareLabel to a short verb such as Compare: a long label makes the bar wider than a phone."
+        },
+        "target": "compareLabel"
+      },
+      {
+        "text": "Do not write a sentence as compareLabel, such as “Compare these 4 coins”: the bar grows past a 390 px phone.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "The bar grows past a 390 px phone."
+        },
+        "target": "compareLabel"
+      },
+      {
+        "text": "Left out, compareLabel is “Compare”.",
+        "strength": "recommended",
+        "from": {
+          "fact": "/facts/props/4"
+        },
+        "target": "compareLabel"
+      }
+    ],
+    "good": [
+      "Compare"
+    ],
+    "bad": [
+      "Compare these 4 coins"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty slot",
+      "when": "An item without an imageSource: pressing it asks your screen to add an item (onItemPress).",
+      "from": {
+        "section": "states",
+        "quote": "Pressing an empty one asks your screen to add an item (onItemPress)"
+      }
+    },
+    {
+      "state": "Filled slot",
+      "when": "An item with an imageSource: pressing it asks your screen to remove that item (onItemRemove).",
+      "from": {
+        "section": "states",
+        "quote": "pressing a filled one asks it to remove that item (onItemRemove)"
+      }
+    },
+    {
+      "state": "Nothing added",
+      "when": "No slot has a picture: Compare is dimmed and can't be pressed.",
+      "from": {
+        "section": "states",
+        "quote": "Compare is dimmed and can’t be pressed."
+      }
+    },
+    {
+      "state": "One added",
+      "when": "One picture turns Compare on; one is enough.",
+      "from": {
+        "section": "states",
+        "quote": "Compare stays dimmed and can’t be pressed until a slot has a picture; one is enough."
+      }
+    },
+    {
+      "state": "All added",
+      "when": "Every slot shows a picture and a remove mark.",
+      "from": {
+        "section": "states",
+        "quote": "Every slot shows a picture and a remove mark."
+      }
+    },
+    {
+      "state": "Kept off",
+      "when": "compareDisabled keeps Compare off, say until two are added.",
+      "from": {
+        "section": "states",
+        "quote": "compareDisabled keeps it off, say until two are added."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Each slot is a button.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Each slot is a button."
+      }
+    },
+    {
+      "text": "The remove mark isn't a separate button: pressing anywhere on a filled slot removes it.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows the slot removes; it isn’t a separate button."
+      }
+    },
+    {
+      "text": "Give each item an accessibilityLabel with its name, or every slot is read out the same.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Give each item an accessibilityLabel with its name, or every slot is read out the same."
+      },
+      "target": "ComparisonBarItem.accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Leave the colour modes alone",
+      "dont": "Set a brand colour on the bar",
+      "why": "AppearanceBrand Secondary turns the + white, so the empty slots look blank.",
+      "from": {
+        "section": "doDont",
+        "quote": "The + stays dark on the grey slots."
+      }
+    },
+    {
+      "do": "Four slots or fewer",
+      "dont": "Five or more slots",
+      "why": "The bar doesn’t wrap or scroll, so it’s wider than a 390 px phone.",
+      "from": {
+        "section": "doDont",
+        "quote": "The bar fits a phone screen."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Comparing gold coins, the guide's In context: people add coins from the Gold coins list, and the bar fills from the left. Here the 1 g coin is added, so its picture fills the first slot (named for screen readers) and Compare is on. Tapping its picture takes the coin out (onItemRemove), an empty slot asks the screen to add the next coin (onItemPress), and the screen opens the comparison (onCompare). The rows leave out the guide's leading pictures, and their Buttons carry no modes.",
+      "jsx": "<VStack alignHorizontal=\"stretch\">\n  <ListGroup label=\"Gold coins\">\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"1 g gold coin\"\n      supportText=\"₹7,850 · 24K\"\n      trailing={<Button label=\"Added\" onPress={() => {}} />}\n    />\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"2 g gold coin\"\n      supportText=\"₹15,640 · 24K\"\n      trailing={<Button label=\"Add\" onPress={() => {}} />}\n    />\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"5 g gold coin\"\n      supportText=\"₹38,900 · 24K\"\n      trailing={<Button label=\"Add\" onPress={() => {}} />}\n    />\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"10 g gold coin\"\n      supportText=\"₹77,500 · 24K\"\n      trailing={<Button label=\"Add\" onPress={() => {}} />}\n    />\n  </ListGroup>\n  <ComparisonBar\n    items={[\n      { id: '1g', imageSource: { uri: 'https://example.com/gold-coin.png' }, accessibilityLabel: 'Remove 1 g gold coin' },\n      { id: 'empty-0' },\n      { id: 'empty-1' },\n      { id: 'empty-2' },\n    ]}\n    onItemPress={() => {}}\n    onItemRemove={() => {}}\n    onCompare={() => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "People add coins from the list, and the bar fills from the left."
+      }
+    },
+    {
+      "purpose": "Four slots, Figma's layout: one picture and three to add. The filled item carries an accessibilityLabel with its name; the empty ones keep the default add label.",
+      "jsx": "<ComparisonBar\n  items={[\n    { id: 'a', imageSource: { uri: 'https://example.com/gold-coin.png' }, accessibilityLabel: 'Remove 1 g gold coin' },\n    { id: 'b' },\n    { id: 'c' },\n    { id: 'd' },\n  ]}\n  onItemPress={() => {}}\n  onItemRemove={() => {}}\n  onCompare={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Figma’s layout: one picture and three to add."
+      }
+    },
+    {
+      "purpose": "Two needed: one coin is added, but the screen sets compareDisabled to keep Compare off until two are added.",
+      "jsx": "<ComparisonBar\n  items={[\n    { id: 'a', imageSource: { uri: 'https://example.com/gold-coin.png' }, accessibilityLabel: 'Remove 1 g gold coin' },\n    { id: 'b' },\n    { id: 'c' },\n    { id: 'd' },\n  ]}\n  compareDisabled\n  onItemPress={() => {}}\n  onItemRemove={() => {}}\n  onCompare={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "compareDisabled keeps it off, say until two are added."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "items",
+        "type": "ComparisonBarItem[]",
+        "required": true,
+        "source": "evidence",
+        "description": "The bar keeps no state: your screen updates items. Declared: The slots rendered before the Compare button. Each entry controls its own add/image state via {@link ComparisonBarItem.imageSource}.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "onItemPress",
+        "type": "(id: ComparisonBarItem['id'], index: number) => void",
+        "required": false,
+        "source": "types",
+        "description": "Fired when an empty (Add) slot is tapped. The consumer is expected to react by opening whatever picker is appropriate and then updating that item's `imageSource` to flip it into the \"Image Added\" state — the component does not know how images are sourced. Receives the item's `id` (or index when no id was supplied) and the slot index."
+      },
+      {
+        "name": "onItemRemove",
+        "type": "(id: ComparisonBarItem['id'], index: number) => void",
+        "required": false,
+        "source": "types",
+        "description": "Fired when a filled slot is tapped. For better mobile ergonomics the *entire* filled slot is the remove target (the dismiss capsule is just a visual affordance), so a fingertip anywhere on the item triggers this. The consumer is expected to clear that item's `imageSource` to return it to the \"Add\" state. Receives the item's `id` (or index) and the slot index."
+      },
+      {
+        "name": "onCompare",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Fired when the Compare button is pressed."
+      },
+      {
+        "name": "compareLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Compare",
+        "description": "Label for the trailing action button. Defaults to `\"Compare\"`. Default \"Compare\", from the component source."
+      },
+      {
+        "name": "compareDisabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "Set to true or false, it overrides the automatic behaviour both ways. Declared: Explicitly controls the Compare button's *functional* disabled state — a truly disabled button is non-interactive (its `onPress` never fires), not just dimmed. Note that `modes` only affects appearance, so dimming the button via tokens does NOT stop taps; that is what this prop is for. When provided (a boolean), it always wins over {@link ComparisonBarProps.disableCompareWhenEmpty}. Leave it `undefined` to fall back to the auto behavior.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "disableCompareWhenEmpty",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "While no slot has an image, Compare is off: 50 % opacity and not pressable. One image turns it on. Declared: When `true` (default) the Compare button is automatically (and truly) disabled while no slot has an image — there is nothing to compare yet. Set to `false` to keep it tappable even when empty. Ignored when {@link ComparisonBarProps.compareDisabled} is set explicitly. Default true, from the component source.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration passed to the token resolver."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the outer floating card."
+      },
+      {
+        "name": "ComparisonBarItem.id",
+        "type": "string | number",
+        "required": false,
+        "description": "Stable identifier for this slot. Returned to callbacks so the consumer can target the exact item that was interacted with. Falls back to the array index when omitted. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "ComparisonBarItem.imageSource",
+        "type": "ImageSourcePropType | string | null",
+        "required": false,
+        "description": "Set, the slot is filled: its picture and a close mark. null, undefined or an empty string leave it empty, with a +. Declared: Image to render in the slot. When provided the slot renders in the \"Image Added\" state; when omitted/`null` it renders the empty \"Add\" state. Accepts the same shapes as the library `Image` component (remote URL string, `{ uri }`, or a `require()`d asset). A field of each items row.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "ComparisonBarItem.accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "description": "Names the slot. Left out, an empty slot is “Add item to comparison” and a filled one “Remove item from comparison”. Declared: Accessibility label for the slot. Defaults to a generic add/remove label. A field of each items row.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Brand modes on the bar also reach the empty slots' +: on Secondary, Neutral or Tertiary (or Semantic Intent System) it turns white, about 1.19:1 on the slot, and on Emphasis Medium faint gold. Declared: A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "Sizes the Compare button. With the default M the button is 115 × 42 (16/24 type) and four slots make the bar 369 × 66; with S the button is 98 × 32 (14/22) and the bar 352 × 66. Declared: A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "M",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Capsule Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "L",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Radius",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "None"
+        ],
+        "description": "Rounds the pictures' corners: S 8 px, M 16, L 32, None 0. Declared: A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection ComparisonBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "items",
+        "type": "ComparisonBarItem[]",
+        "description": "A structured slot: an array of ComparisonBarItem rows. The slots rendered before the Compare button. Each entry controls its own add/image state via {@link ComparisonBarItem.imageSource}.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onItemPress",
+        "type": "(id: ComparisonBarItem['id'], index: number) => void",
+        "description": "Fired when an empty (Add) slot is tapped. The consumer is expected to react by opening whatever picker is appropriate and then updating that item's `imageSource` to flip it into the \"Image Added\" state — the component does not know how images are sourced. Receives the item's `id` (or index when no id was supplied) and the slot index.",
+        "source": "types"
+      },
+      {
+        "name": "onItemRemove",
+        "type": "(id: ComparisonBarItem['id'], index: number) => void",
+        "description": "Fired when a filled slot is tapped. For better mobile ergonomics the *entire* filled slot is the remove target (the dismiss capsule is just a visual affordance), so a fingertip anywhere on the item triggers this. The consumer is expected to clear that item's `imageSource` to return it to the \"Add\" state. Receives the item's `id` (or index) and the slot index.",
+        "source": "types"
+      },
+      {
+        "name": "onCompare",
+        "type": "() => void",
+        "description": "Fired when the Compare button is pressed.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Brand modes on the bar turn the empty slots' + white (Component Bug #421).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "Figma's Compare button is 96 × 32 and pale purple (the values of Button Size S, Secondary, Disabled); the package draws a size M gold Button, dimmed by opacity when off (Component Bug #421).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The empty slot's + is 18 px (XS) where Figma's is 29 px with an 18 px glyph (S), though the package's own comment says S (Component Bug #421).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "A filled slot's picture is 33 × 28 where Figma's is 33 × 20, and the bar's right padding is 12 px where Figma's is 8 (Component Bug #421).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The slots give no press feedback (Component Bug #421).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The bar has no overflow handling (Component Bug #421).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "Figma's Code Connect passes a Button child; the package takes items and compareLabel.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "Biscuit's ComparisonBar.mdx mentions “the disabled-style props”; the props are compareDisabled and disableCompareWhenEmpty.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=comparisonbar",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5350-360",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-comparisonbar--docs"
+  }
+}

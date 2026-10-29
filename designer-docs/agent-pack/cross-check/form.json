@@ -1,0 +1,17 @@
+{
+  "slug": "form",
+  "entryHash": "272a5a9591a51526cf0a4603e32e6e958dee5c167f6c762607ed7a479172e2ef",
+  "guideCommit": "8572e95e0efc0ee2a52ae3a5b945d3b49dec3226",
+  "checkedAt": "2026-10-29T03:55:55Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The description says \"a Card holds the Form and the Verify account Button\", but the In context section only says \"The button sits outside the Form and stays enabled\". Nothing cited mentions a Card or a VStack, so that part of the composition is unsupported."
+    }
+  ],
+  "notes": "/avoidWhen/0 and /avoidWhen/1 credit \"the Storybook docs\", but the evidence takes these rules from the upstream source mdx. The published docs page is the old generated one and does not say this. Better wording would be \"the Form source docs (mdx)\". /states/2 and /examples/2 describe clear-on-edit without the evidence's developer caveat: with an inline validationErrors literal, every parent re-render brings the errors back, so the screen must keep the errors object in state. /examples/0 states that its inline errors stand in for state, but /examples/2 does not, and it would help to add the same line there. /facts/gaps/0 adds \"each error shows only under its field\". That is a fair reading, but errors keyed to unnamed or missing fields show nowhere, which the evidence also implies."
+}

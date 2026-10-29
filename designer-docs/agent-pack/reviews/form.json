@@ -1,0 +1,16 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The live Form guide on main (51f6153) is older than the guide on docs-next (8572e95, where this entry’s copy was read): the 8 October publish of the #186/#187 fixes never reached main’s Form guide, so the live Sources note still says “In this version Message Field turns red but shows no message”, which the installed 0.1.78-dbe0e02 contradicts (MessageField shows the Form error). Both versions also say “its onSubmit property does nothing” and that the form has no accessible name; the installed Form.tsx calls onSubmit on Enter and when a Form Field submits, and names the form with accessibilityLabel (Component Bug #207’s points, In progress). The entry quotes only sentences the same on main and docs-next and leaves the Sources note out. Guide fix #528. Added by Claude Code in the overnight run agentpack-batch8, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The description says \"a Card holds the Form and the Verify account Button\", but the In context section only says \"The button sits outside the Form and stays enabled\". Nothing cited mentions a Card or a VStack, so that part of the composition is unsupported.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The guide’s In context puts the Form and the Verify account Button in a Card and a VStack (form.guide.tsx lines 61–69, the same at 8572e95 and on main at 51f6153); the rendered copy names neither, which the cross-check cannot see. The example keeps that composition with the building rules applied (no modes), and the Button stays outside the Form as the cited sentence says."
+    }
+  ]
+}
