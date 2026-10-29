@@ -1,0 +1,302 @@
+{
+  "slug": "attached",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch9, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/AttachedGuide.tsx, registered in src/guides/attached.guide.tsx) and docs/evidence/attached.md at 4e470cf (“docs: adopt Biscuit's main at 3795b4c”, 2 October), which only moved the Sources date to 1 October. The Sources note was checked on 1 October 2026 against jfs-components 0.1.78 (the evidence's “0.1.78 check”: mirror tag v0.1.78, built from Biscuit's fix/component-bugs-v0.1.78 at 5b6894b), so items citing it carry 2026-10-01 and 0.1.78-5b6894b. The evidence's other section (22 September, 0.1.60) is not cited: its facts are either in the package types (children, badge, nine positions, circular, badgeSize, badgeRadius, modes) or restated by the 1 October Sources note. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Unchanged since the check, read on GitHub (spiefi/coin-components): src/components/Attached/Attached.tsx has the same blob (3e0dad2) at v0.1.78, v0.1.78-3795b4c and v0.1.78-dbe0e02, and its last commit is the 0.1.77 build (1f05631, 28 September); IconCapsule.tsx (f4496d2) and utils/react-utils.ts (bd10632) are the same at v0.1.78 and v0.1.78-dbe0e02; the attached/* variables in Coin Variables-variables-full.json are identical at both tags. Installed Attached.tsx matches every guide sentence used here, read from source, not run: the root is a View with position relative and alignSelf flex-start, so it hugs the main child (242, 261–265); the main child is measured (onMainLayout, 153–156, 243) and sets the size; the badge is absolutely positioned with its centre on the anchor, so it straddles the edge and adds nothing to the layout footprint (210–239, 244–256); it stays at opacity 0 until both are measured (236–237); position has nine values, default bottom-right (18–27, 135); circular (default true, 136) projects only diagonal anchors onto the inscribed circle, and edge and centre anchors are the same either way (216–230); the ring is an outside border on the badge from attached/slot/border and attached/slot/borderWidth (191–208, 253), which the package resolver gives as rgb(255,255,255), 2 px, with no modes (Attached Border True, the default) and transparent with Attached Border False; both slots get Attached's merged modes through cloneChildrenWithModes, the child's own modes winning (142–148, 163–170; react-utils.ts 59–65). There is no loading, disabled or pressed state and no event prop. IconCapsule reads its circle from iconCapsule/size and iconCapsule/radius (9999 means size/2) before a style override is merged (IconCapsule.tsx 33–42, 103–106): Icon Capsule Size M is 42 px (the default) and XS is 18 px, both radius 9999, so a style width or height would break the circle, as the Sources note says. ic_cart and ic_rupee are in the installed icon set (src/icons/registry.ts lines 940 and 3964). The published Storybook (index.json, last modified 17 October 2026) still has every Attached story the Sources note names (default, all-positions, square-vs-circular, enforced-image-badge, capsule-badge), so no stale-Storybook gap. No guide sentence is contradicted by the installed build, so no guide fix is proposed. Not recorded: badgeSize and badgeRadius (the fixed badge box), style and the inherited View props, the Attached Border mode, and the guide's Configuration labels as mode names, which the guide doesn't cover; the 22 September evidence's Figma node detail (42 px main slot, 16 px attachment reference) and its note on the capsule story's 56 px and 22 px style sizes, which the Sources note already summarises; the Sources line “The package defaults circular to true”, which the circular fact already gives. Anatomy: none of the three parts is always present: children and badge are optional props, and the ring is drawn only around a badge. The guide gives no accessibility guidance (the examples' accessibilityLabel on IconCapsule is not rendered: IconCapsule.tsx 85–88 drops it), so accessibility stays empty and is flagged. content.good and content.bad are empty: the guide's copy is about the badge's meaning, and its specimens are icons and a list row's title, not badge copy. Examples follow the building rules: no Color Mode (the guide sets Light on every Attached, IconCapsule, ListItem and MoneyValue), no modes on Attached, and no modes on the main IconCapsule (Icon Capsule Size M is its default). The badge IconCapsule sets Icon Capsule Size XS, the one mode in the examples, because the Sources note says the guide uses the native M and XS sizes rather than style dimensions and the Do “Keep the badge compact” needs the smaller capsule. The In context row drops the guide's trailing MoneyValue (no entry in this pack) and its accessibilityLabel, which named the amount; ListItem has an undocumented entry and takes its props. Copy and glyphs are the guide's own (Card payment, Today · Food, ic_cart main, ic_rupee badge). Left out of examples (three at most): the nine-position grid, the Bounding box corner, the centred and clipped Don'ts and the playground.",
+  "useWhen": [
+    {
+      "text": "Add a subordinate signal to a main item without altering its footprint.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Add a subordinate signal to a main item without altering its footprint."
+      }
+    },
+    {
+      "text": "Keep a small qualifier, such as a payment type or status, attached to the item it describes.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The badge adds a small qualification such as payment type or status while the central mark remains easy to recognize."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The extra signal is the item's primary label or would become a second focal point: the badge stays subordinate to the main item.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "The badge should not carry the primary label or become a second focal point."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Main bounds",
+      "holds": "The child in the main slot (children): it establishes the size and is the visual object people identify first.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The child in the main slot establishes the size and the visual object people identify first."
+      }
+    },
+    {
+      "part": "Attachment",
+      "holds": "The badge slot: centred on the selected anchor, so it can straddle the main edge.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The badge slot is centered on the selected anchor and can straddle the main edge."
+      }
+    },
+    {
+      "part": "Anchor / ring",
+      "holds": "Position chooses one of nine anchors; the token ring around the badge separates the compact signal from the main mark.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Position chooses one of nine anchors; the token ring separates a compact signal from the main mark."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The main child owns its size and Attached does not grow the layout footprint for the badge, so give its host enough whitespace for the overhang.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Attached does not grow the layout footprint for the badge, so its host needs enough whitespace for the overhang."
+      }
+    },
+    {
+      "text": "Leave slack around the composition so the badge can straddle the edge.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Leave slack around the composition so the badge can straddle the edge."
+      }
+    },
+    {
+      "text": "Do not clip the host with overflow hidden: the badge overhangs the main bounds and is visibly cut off.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Overflow hidden turns a positioning choice into a visibly cut-off signal."
+      }
+    },
+    {
+      "text": "Keep the qualifier next to the item it describes, as in a payment row.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment row keeps the qualifier next to the item it describes."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use the position choices for where the badge belongs.",
+      "strength": "recommended",
+      "target": "position",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the exposed position choices for where the badge belongs."
+      }
+    },
+    {
+      "text": "Use an edge or corner anchor when the badge describes the item, such as the default bottom-right.",
+      "strength": "recommended",
+      "target": "position",
+      "from": {
+        "section": "configuration",
+        "quote": "Use edge or corner anchors when the badge describes the item."
+      }
+    },
+    {
+      "text": "Avoid the center anchor unless the overlay is deliberate: a centred badge covers the main mark.",
+      "strength": "discouraged",
+      "target": "position",
+      "value": "center",
+      "from": {
+        "section": "configuration",
+        "quote": "A center anchor is reserved for a deliberate overlay."
+      }
+    },
+    {
+      "text": "For a diagonal (corner) anchor, choose whether it sits on the round child’s edge or on its bounding-box corner.",
+      "strength": "recommended",
+      "target": "circular",
+      "from": {
+        "section": "configuration",
+        "quote": "For diagonal anchors, choose the round child’s edge or its bounding-box corner."
+      }
+    },
+    {
+      "text": "Circle edge, circular true (the default), for round marks such as a circular IconCapsule: corner anchors sit on the circle.",
+      "strength": "recommended",
+      "target": "circular",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "use Circle edge for round marks and Bounding box for a square corner relationship."
+      }
+    },
+    {
+      "text": "Bounding box, circular false, for a square corner relationship: corner anchors sit on the bounding-box corners.",
+      "strength": "recommended",
+      "target": "circular",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "use Circle edge for round marks and Bounding box for a square corner relationship."
+      }
+    },
+    {
+      "text": "Size IconCapsule children with their Icon Capsule Size modes, not style dimensions, so they keep their circular geometry: the guide uses M for the main item and XS for the badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "this guide uses the native Icon Capsule Size modes M and XS so both child capsules keep their component-owned circular geometry."
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Let the attachment support the item, not obscure it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Attachment supports the item, never obscures it."
+        },
+        "absolute": {
+          "word": "never",
+          "scope": "contextual",
+          "reason": "it is the guide's core principle, and the guide itself keeps a center anchor for a deliberate overlay that covers the main mark, so it doesn't forbid every covering badge."
+        }
+      },
+      {
+        "text": "Use a compact, meaningful signal that clarifies the main item.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use a compact, meaningful signal that clarifies the main item."
+        }
+      },
+      {
+        "text": "Make the main item readable first: the badge adds a small qualification, such as payment type or status, while the central mark stays easy to recognise.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The badge adds a small qualification such as payment type or status while the central mark remains easy to recognize."
+        }
+      },
+      {
+        "text": "Choose a familiar icon or small signal that people can understand at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Choose a familiar icon or small signal that people can understand at a glance."
+        }
+      },
+      {
+        "text": "Do not make the badge compete with the main item: an oversized attachment pulls focus away from it.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "An oversized attachment pulls focus away from the main item."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "No state of its own",
+      "when": "Attached has no loading or disabled state of its own; show whether a supporting signal is present through its children.",
+      "from": {
+        "section": "states",
+        "quote": "Attached has no loading or disabled state of its own."
+      }
+    },
+    {
+      "state": "Badge present",
+      "when": "The secondary signal remains visible while the main item keeps its own identity.",
+      "from": {
+        "section": "states",
+        "quote": "The secondary signal remains visible while the main item keeps its own identity."
+      }
+    },
+    {
+      "state": "Badge absent",
+      "when": "Use the same composition, with no badge, when there is no subordinate status or action to show.",
+      "from": {
+        "section": "states",
+        "quote": "Use the same composition when there is no subordinate status or action to show."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Keep the center clear",
+      "dont": "Cover the main mark",
+      "why": "A centered badge obscures the item it is meant to qualify.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the center clear"
+      }
+    },
+    {
+      "do": "Allow the overhang",
+      "dont": "Clip the host",
+      "why": "Overflow hidden turns a positioning choice into a visibly cut-off signal.",
+      "from": {
+        "section": "doDont",
+        "quote": "Allow the overhang"
+      }
+    },
+    {
+      "do": "Keep the badge compact",
+      "dont": "Make the badge compete",
+      "why": "An oversized attachment pulls focus away from the main item.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the badge compact"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's composition: a main IconCapsule at its default size with a compact IconCapsule badge (Icon Capsule Size XS) on the default bottom-right anchor, projected onto the circle's edge.",
+      "jsx": "<Attached badge={<IconCapsule iconName=\"ic_rupee\" modes={{ 'Icon Capsule Size': 'XS' }} />}>\n  <IconCapsule iconName=\"ic_cart\" />\n</Attached>",
+      "from": {
+        "section": "sources",
+        "quote": "this guide uses the native Icon Capsule Size modes M and XS so both child capsules keep their component-owned circular geometry."
+      }
+    },
+    {
+      "purpose": "The guide's In context: a payment row keeps the qualifier next to the item it describes, with Attached as the row's leading item.",
+      "jsx": "<ListItem\n  layout=\"Horizontal\"\n  title=\"Card payment\"\n  supportText=\"Today · Food\"\n  navArrow={false}\n  leading={\n    <Attached badge={<IconCapsule iconName=\"ic_rupee\" modes={{ 'Icon Capsule Size': 'XS' }} />}>\n      <IconCapsule iconName=\"ic_cart\" />\n    </Attached>\n  }\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment row keeps the qualifier next to the item it describes."
+      }
+    },
+    {
+      "purpose": "Badge absent, the guide's States: the same composition with no badge when there is no subordinate status to show.",
+      "jsx": "<Attached>\n  <IconCapsule iconName=\"ic_cart\" />\n</Attached>",
+      "from": {
+        "section": "states",
+        "quote": "Use the same composition when there is no subordinate status or action to show."
+      }
+    }
+  ],
+  "evidenceFacts": [],
+  "gaps": []
+}

@@ -1,0 +1,10 @@
+{
+  "dismissed": [
+    {
+      "field": "/anatomy/0",
+      "reason": "misreads-source: Marks the main bounds part as alwaysPresent=false, but nothing in the guide supports an absent main child. The guide says \"The child in the main slot establishes the size and the visual object people identify first\", and both the \"Badge present\" and \"Badge absent\" states keep the main item. Only the badge-related parts are optional.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch9, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "In this pack an anatomy part's required means the package always renders it (agent-pack/README.md, Decisions: false for an optional prop or slot). Attached's children is optional (children?: React.ReactNode, Attached.tsx line 35, 0.1.78-dbe0e02), and without it the main slot renders nothing (mainChildren is null, line 164), so the part is not always present. Every composition in the guide has a main item, and the entry keeps that as the part's role (“establishes the size and is the visual object people identify first”) and in all three examples; DropdownInput's and FormField's labels are recorded the same way."
+    }
+  ]
+}

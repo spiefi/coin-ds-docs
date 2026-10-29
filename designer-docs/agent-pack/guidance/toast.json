@@ -1,0 +1,407 @@
+{
+  "slug": "toast",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch9, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/toast.guide.tsx) and docs/evidence/toast.md at 622cd82 (“docs: publish 11 Coin fixes on jfs-components v0.1.78-a116616”, 17 October). The guide's Sources note was checked on 17 October 2026 on the build it calls the 16 October build (mirror v0.1.78-a116616, Biscuit's main at a116616, the #267 fix), so items citing it carry 2026-10-17 and 0.1.78-a116616. The evidence was first checked on 12 October (636f3f5) and re-checked on 17 October on a116616 for the #267 publish, which rewrote its Contract, Modes and tokens and Discrepancies; items citing it carry the 17 October re-check. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-a116616 and v0.1.78-dbe0e02 (222 files, complete) touches no Toast, ToastProvider or useToast file, no token file, no resolver, no Icon and no react-utils. Installed Toast.tsx, ToastProvider.tsx and useToast.ts match every guide and evidence sentence used here, read from source, not run, with token values through the package's own getVariableByName: every pill token (toast/background rgb(48,51,56), foreground white, border 1 px rgba(255,255,255,0.1), radius 14, padding 16 / 14, gap 8, 14 / 500 / 18 type, both shadows) resolves the same in Light and Dark and under every AppearanceBrand; the card icon is ic_card at 18 px (Toast.tsx 45–46, 136–145) and uses AppearanceBrand Neutral, white, unless the toast's modes set AppearanceBrand (73–80); a custom slotItem gets the toast's modes (138), so an Icon with no colour resolves icon/color, rgb(173,132,68) in Light with no brand; the title clamps at two lines unless disableTruncation (159, resolveTruncation); minWidth 200, maxWidth 90%, centred (166–174); the pill is role alert with an assertive live region (153–154); enter SlideInUp or SlideInDown and exit FadeOut, 250 ms (102–104, 150–151). ToastProvider shows the newest maxVisibleToasts (3 by default; 0 shows none) in a centred region 8 px plus the safe-area inset from its edge, 8 px gap, oldest first, and passes each entry's modes or its own (ToastProvider.tsx 15–60). addToast defaults timeout to 4000 and starts each toast's timer when it is added, also behind the cap; 0 or less keeps it until closeToast or closeAll; all providers read one module-level queue (useToast.ts 40–97). No guide sentence used here is contradicted. The guide's States sentence “with no timeout it stays until the screen clears it” means a timeout of 0 (the playground's Stays): leaving timeout out gives the 4 s default, which the same sentence states first. The entry says “0 or less” from the evidence (`timeout <= 0` keeps it until closed). Out of date and not used: the Sources “Installed jfs-components is 0.1.78 (16 October build)” (the Toast code is the same on the installed 27 October build); the evidence's Coin gaps line, which lists #267 as To do (it is Done and live since 17 October, and the evidence's Discrepancies say fixed); the 12 October Review lines on queued toasts appearing after 4 s (replaced by the a116616 timers). Not recorded: the Toast view on its own (id, style, autoClose, onClose, which the provider sets or ignores; the docs draw static views with timeout={0} only as specimens, and each is still role alert), maxVisibleToasts, closeToast(id) beyond clearing, useToast, which the guide doesn't cover (the evidence's Limits say they are not shown); the 250 ms animation and the docs site's Reanimated stub; the Figma 193 px example against the 200 px minimum; dark mode (Toast never reads JFSThemeProvider, and in Dark only the icon colours change), which the pack's rules keep out of gaps. Anatomy: the Pill and the Message are always present (title is required); the Leading icon only with startItem. Content good keeps the guide's two confirmations; “Mobile number is invalid” (Figma's default text, also in the Content “Confirmations” example) is left out of good, since it reports an error rather than confirming a done action, and the guide doesn't say whether errors belong in a toast. bad keeps the Don'ts' specimens. Example: the guide's In context, a UPI ID with a Copy button inside one ToastProvider. The example uses ToastProvider, which has no entry in this pack, because the guide says screens show toasts only through one provider (Configuration, Sources) and Toast has no other public way onto a screen; it keeps the provider's default bottom placement and no modes. addToast is a function, not a component, so the example type-checker can't import it: the Copy handler shows the guide's call, addToast({ title: 'UPI ID copied' }), as a comment. The building rules drop the guide's Color Mode Light on every component and its Text Sizes Large on the label (no guide sentence says the content needs it); Text has an undocumented entry and takes text. Left out of examples: the static specimens (a Toast view drawn inline would be a role-alert element on the page, not a toast), the playground, Stacked and queued, and the Don'ts. Gap: the Sources note's stale Storybook. On 29 October the published Storybook (index.json last modified 17 October 2026) still lists the six stories the guide names, and its bundled Toast code predates a116616: it has no autoClose and resolves the icon with the toast's own modes, so its default icon is gold. The gap's text keeps the guide's words; this 29 October check is recorded here only. Sorting (batch 9): the cross-check found that a placement item turned the In context example (a Copy confirmation at the bottom) into advice that confirmations show at the bottom; the guide gives no preferred edge, so the item is gone and placement keeps the provider's default as a fact. It also found the gap adding “it predates the installed build” to the guide's words; the gap now says only what the Sources note does.",
+  "useWhen": [
+    {
+      "text": "Confirm something that just happened, such as a payment or a copy, in a short message that closes itself.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Toast to confirm something that just happened, such as a payment or a copy, in a short message that closes itself."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Asking for a decision, such as “Retry the payment?”: a toast has no buttons and disappears in 4 s, so people can’t answer.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A toast has no buttons and disappears in 4 s, so people can't answer."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Pill",
+      "holds": "Dark grey with 14 px corners and a soft shadow; the same in every mode.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Dark grey with 14 px corners and a soft shadow; the same in every mode."
+      }
+    },
+    {
+      "part": "Leading icon",
+      "holds": "Optional 18 px icon, shown with startItem; the card icon unless you swap it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional 18 px icon; the card icon unless you swap it."
+      }
+    },
+    {
+      "part": "Message",
+      "holds": "The title: white 14 px text, up to two lines.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White 14 px text, up to two lines."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Screens add toasts with addToast and show them through one ToastProvider around the screen: every provider shows the same queue.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Screens add toasts with addToast and show them through one ToastProvider: every provider shows the same queue"
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Mount one ToastProvider: two mounted providers show every toast twice.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Every provider renders the whole queue, so two mounted providers show every toast twice; the docs mount one at a time."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Where toasts appear, top or bottom, is set once on the screen’s ToastProvider, not on each toast.",
+      "strength": "recommended",
+      "target": "placement",
+      "from": {
+        "section": "configuration",
+        "quote": "Where toasts appear, top or bottom, is set once on the screen's provider"
+      }
+    },
+    {
+      "text": "A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "A toast is one message with an optional leading icon.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "A toast is one message with an optional leading icon."
+      }
+    },
+    {
+      "text": "Message only is the default: one line of white text in a dark pill.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: one line of white text in a dark pill."
+      }
+    },
+    {
+      "text": "startItem adds the card icon before the message, white by default, as in Figma.",
+      "strength": "recommended",
+      "target": "startItem",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "startItem adds the card icon before the message, white by default, as in Figma."
+      }
+    },
+    {
+      "text": "Your own icon: with startItem on, swap in another 18 px icon in slotItem; it takes the Coin icon colour, a deeper gold.",
+      "strength": "recommended",
+      "target": "slotItem",
+      "from": {
+        "section": "configuration",
+        "quote": "Swap in another 18 px icon; it takes the Coin icon colour, a deeper gold."
+      }
+    },
+    {
+      "text": "AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes what the mode does on every toast: on the installed build AppearanceBrand changes the icon colour and none of the pill tokens."
+      }
+    },
+    {
+      "text": "Only the icon follows AppearanceBrand; the pill is the same dark grey in every mode.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the icon follows AppearanceBrand; the pill is the same dark grey in every mode."
+      },
+      "absolute": {
+        "word": "Only",
+        "scope": "everywhere",
+        "reason": "it describes every toast: on the installed build every pill token resolves the same under every AppearanceBrand and Color Mode, and only the icon colour changes."
+      }
+    },
+    {
+      "text": "The screen adds a toast with addToast; it closes itself after 4 s.",
+      "strength": "recommended",
+      "target": "timeout",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds it with addToast; it closes itself after 4 s."
+      }
+    },
+    {
+      "text": "A toast closes itself after 4 s, or after its own timeout; with no timeout (a timeout of 0 or less) it stays until the screen clears it.",
+      "strength": "recommended",
+      "target": "timeout",
+      "from": {
+        "section": "states",
+        "quote": "closes itself after 4 s, or after its own timeout; with no timeout it stays until the screen clears it."
+      }
+    },
+    {
+      "text": "Long messages wrap to two lines, then end in an ellipsis, unless the toast is added with disableTruncation, which shows every line.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "from": {
+        "section": "sizing",
+        "quote": "Long messages wrap to two lines, then end in an ellipsis, unless the toast is added with disableTruncation, which shows every line."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Confirm, briefly, then get out of the way.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Confirm, briefly, then get out of the way."
+        }
+      },
+      {
+        "text": "Say what happened in a few words, such as Payment successful or UPI ID copied.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Say what happened in a few words, such as Payment successful or UPI ID copied."
+        }
+      },
+      {
+        "text": "Never ask for a decision or put anything in a toast that people must read twice: it has no buttons and closes itself.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "A toast has no buttons and closes itself, so never ask for a decision or put anything in it that people must read twice."
+        },
+        "absolute": {
+          "word": "never",
+          "scope": "everywhere",
+          "reason": "it follows from what every toast is: none has buttons, so no toast can take an answer, and the guide gives no exception. Read as discouraged, the strength of the guide's Don'ts."
+        }
+      },
+      {
+        "text": "Short, specific, and about something that already happened.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short, specific, and about something that already happened."
+        }
+      },
+      {
+        "text": "Keep it to one line: “Payment successful” reads at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Payment successful” reads at a glance."
+        }
+      },
+      {
+        "text": "Do not write a paragraph: past two lines the message is cut off, and nothing shows the rest.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Past two lines the message is cut off, and nothing shows the rest."
+        }
+      },
+      {
+        "text": "Confirm what happened: the action is done; the toast just says so.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The action is done; the toast just says so."
+        }
+      }
+    ],
+    "good": [
+      "Payment successful",
+      "UPI ID copied"
+    ],
+    "bad": [
+      "Retry the payment?",
+      "We couldn't verify your mobile number. Check the number and try again, or sign in with your email address instead."
+    ]
+  },
+  "states": [
+    {
+      "state": "Shown",
+      "when": "A toast slides in from its edge and closes itself after 4 s, or after its own timeout.",
+      "from": {
+        "section": "states",
+        "quote": "A toast slides in from its edge and closes itself after 4 s, or after its own timeout"
+      }
+    },
+    {
+      "state": "Stays",
+      "when": "With no timeout (a timeout of 0 or less) it stays until the screen clears it.",
+      "from": {
+        "section": "states",
+        "quote": "with no timeout it stays until the screen clears it."
+      }
+    },
+    {
+      "state": "Stacked",
+      "when": "Up to three show at once, newest last.",
+      "from": {
+        "section": "states",
+        "quote": "Up to three show at once, newest last."
+      }
+    },
+    {
+      "state": "Queued",
+      "when": "Older ones wait behind them on their own timers, so they appear only if they’re still due when a newer one closes.",
+      "from": {
+        "section": "states",
+        "quote": "Older ones wait behind them on their own timers, so they appear only if they’re still due when a newer one closes."
+      }
+    },
+    {
+      "state": "No dismiss",
+      "when": "There’s no close button and no swipe.",
+      "from": {
+        "section": "states",
+        "quote": "There's no close button and no swipe."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Each toast is announced as an alert.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Each toast is announced as an alert."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep it to one line",
+      "dont": "Write a paragraph",
+      "why": "Past two lines the message is cut off, and nothing shows the rest.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep it to one line"
+      }
+    },
+    {
+      "do": "Confirm what happened",
+      "dont": "Ask for a decision",
+      "why": "A toast has no buttons and disappears in 4 s, so people can't answer.",
+      "from": {
+        "section": "doDont",
+        "quote": "Confirm what happened"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Copying a UPI ID, the guide's In context: the screen sits in one ToastProvider, which shows toasts at the bottom by default. Copy's onPress calls addToast({ title: 'UPI ID copied' }) (shown as a comment, since addToast is a function, not a component); the toast closes itself after 4 s.",
+      "jsx": "<ToastProvider>\n  <VStack>\n    <Text text=\"Your UPI ID\" />\n    <Text text=\"yourname@jio\" />\n    <Button\n      label=\"Copy\"\n      onPress={() => {\n        /* addToast({ title: 'UPI ID copied' }) */\n      }}\n    />\n  </VStack>\n</ToastProvider>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds it with addToast; it closes itself after 4 s."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "timeout",
+      "description": "Through addToast({ timeout }): how long the toast stays, in ms, from when it is added (default 4000), also for toasts waiting behind the cap. 0 or less keeps it until closeToast or closeAll removes it.",
+      "quote": "`timeout <= 0` keeps it until closed.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "disableTruncation",
+      "description": "Reachable through addToast({ disableTruncation: true }) since a116616: the title wraps to every line instead of clamping at two.",
+      "quote": "`disableTruncation` is reachable through `addToast` since a116616 (#267, fixed).",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "placement",
+      "description": "Set on the ToastProvider (bottom by default, or top), which passes it to every toast it shows; the toast slides in from that edge.",
+      "quote": "`ToastProvider` (`children`, `maxVisibleToasts` 3, `placement` `bottom` (default) | `top`, `modes` as a fallback for entries without their own).",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "Per toast through addToast({ modes }), or for every toast through the ToastProvider's modes, used for entries without their own. Toast never reads JFSThemeProvider.",
+      "quote": "Toast never reads `JFSThemeProvider`; modes reach it through the entry or the provider.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "Recolours only the leading icon (Light): Primary gold rgb(206,161,90), Secondary rgb(93,0,181), Tertiary rgb(3,107,153). With AppearanceBrand unset, the card icon is Neutral white (#ffffff), as in Figma, not the collection's default Primary gold.",
+      "quote": "`toast/icon/color` follows AppearanceBrand (Light): Primary `rgb(206,161,90)` gold, Secondary `rgb(93,0,181)`, Tertiary `rgb(3,107,153)`, Neutral `#ffffff` (Figma's value; the default since a116616, #267).",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Color Mode",
+      "description": "The pill (dark grey background, white text, faint white border) is the same in every mode.",
+      "quote": "The pill is the same in every mode.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The published Storybook page is still the old generated one.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook page is still the old generated one."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ]
+}

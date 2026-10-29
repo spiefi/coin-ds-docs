@@ -1,0 +1,271 @@
+{
+  "slug": "noteinput",
+  "label": "Note Input",
+  "guideCommit": "8f8313d23d006d725301a0690ff2ef863f963d77",
+  "files": [
+    "src/guides/noteinput.guide.tsx"
+  ],
+  "evidence": "docs/evidence/noteinput.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:17:33.707Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "memo",
+    "payment note",
+    "add note",
+    "remark"
+  ],
+  "title": "Note Input",
+  "summary": "Use a Note Input for a short, optional memo under an amount, such as “Rent for April”, that grows as people type.",
+  "corePrinciple": "An optional memo that stays out of the way until tapped.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2244-6063",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-noteinput--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A grey pill around the note",
+      "description": "The pill hugs its text: the placeholder until people type, then the note itself. Tapping anywhere on it starts typing, and a long note wraps inside it.",
+      "blocks": [
+        "Shown at 2×",
+        "1",
+        "2",
+        "Pill",
+        "Light grey with round ends; tap anywhere on it to type.",
+        "Note text",
+        "14 px bold; the placeholder looks the same.",
+        "Padding"
+      ],
+      "specimen": [
+        "Rent for April",
+        "Add note"
+      ],
+      "anatomy": [
+        {
+          "part": "Pill",
+          "note": "Light grey with round ends; tap anywhere on it to type."
+        },
+        {
+          "part": "Note text",
+          "note": "14 px bold; the placeholder looks the same."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "A placeholder, then the note",
+      "description": "Note Input has no variants. Set the placeholder to say what the note is for. The note keeps what people type, and the screen reads it to send with the payment.",
+      "blocks": [
+        "Default placeholder",
+        "“Add note” suits most payments.",
+        "Specific placeholder",
+        "Say who or what the note is for when it helps.",
+        "Filled",
+        "The note replaces the placeholder in the same style."
+      ],
+      "specimen": [
+        "Add note",
+        "Add a note for Asha",
+        "Rent for April"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default placeholder",
+          "description": "“Add note” suits most payments."
+        },
+        {
+          "title": "Specific placeholder",
+          "description": "Say who or what the note is for when it helps."
+        },
+        {
+          "title": "Filled",
+          "description": "The note replaces the placeholder in the same style."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Empty, typing, filled, and read only",
+      "description": "Focus doesn’t change the pill’s colour: the placeholder disappears and a caret shows. A read-only note is faded and can’t be focused or changed.",
+      "blocks": [
+        "Empty",
+        "Tap it: the placeholder clears and the pill shrinks to the caret.",
+        "Filled",
+        "Same colour and weight as the placeholder.",
+        "Read only",
+        "Faded to 60%; it can’t be focused or changed."
+      ],
+      "specimen": [
+        "Add note",
+        "Rent for April",
+        "Gift"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Empty",
+          "description": "Tap it: the placeholder clears and the pill shrinks to the caret."
+        },
+        {
+          "title": "Filled",
+          "description": "Same colour and weight as the placeholder."
+        },
+        {
+          "title": "Read only",
+          "description": "Faded to 60%; it can’t be focused or changed."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "35 px tall, as wide as its text",
+      "description": "The pill is 35 px tall for one line, with 8 px above and below the text and 16 px at each end. Its width follows the text up to the width of its container; a longer note wraps onto more lines.",
+      "blocks": [
+        "Shown at 2.5×",
+        "99 × 35",
+        "It grows as people type",
+        "Type in the note: the pill widens with each character."
+      ],
+      "specimen": [
+        "Add note",
+        "Dinner"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "It grows as people type",
+          "description": "Type in the note: the pill widens with each character."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "A few words people will recognise later",
+      "description": "The note travels with the payment, so keep it to a few words about what the money is for. Use the placeholder for a hint, not an instruction.",
+      "blocks": [
+        "Short and specific"
+      ],
+      "specimen": [
+        "Rent for April",
+        "Dinner at Toit",
+        "Gift for Asha",
+        "Add note"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short and specific",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A memo under the transfer amount",
+      "description": "Amount Input places the note under the amount. The screen keeps both values and sends the note with the payment.",
+      "blocks": [
+        "Add an optional note"
+      ],
+      "specimen": [
+        "Send to Asha Rao",
+        "₹",
+        "500",
+        "Add note",
+        "Send ₹500"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep notes short and optional",
+      "description": "Each pair shows a note people can use versus one that crowds the screen or hides what they need.",
+      "blocks": [
+        "Do",
+        "Keep it to a few words",
+        "The pill hugs the note on one line.",
+        "Don’t",
+        "Write a sentence",
+        "A long note wraps onto a second line and takes more room under the amount.",
+        "Ask for required details in a Form Field",
+        "A label and a required mark say it must be filled in.",
+        "Hide a required detail in a note",
+        "The pill has no label, required mark, or error, so people skip it."
+      ],
+      "specimen": [
+        "Rent for April",
+        "Rent for April and the maintenance",
+        "Reason for transfer",
+        "*",
+        "Reason (required)",
+        "Add note",
+        "For example, rent"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep it to a few words",
+            "caption": "The pill hugs the note on one line.",
+            "specimen": "Rent for April · Rent for April"
+          },
+          "dont": {
+            "title": "Write a sentence",
+            "caption": "A long note wraps onto a second line and takes more room under the amount.",
+            "specimen": "Rent for April and the maintenance · Rent for April and the maintenance"
+          }
+        },
+        {
+          "do": {
+            "title": "Ask for required details in a Form Field",
+            "caption": "A label and a required mark say it must be filled in.",
+            "specimen": "Reason for transfer · *"
+          },
+          "dont": {
+            "title": "Hide a required detail in a note",
+            "caption": "The pill has no label, required mark, or error, so people skip it.",
+            "specimen": "Reason (required)"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Note Input contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Checked 13 October 2026",
+        "Installed jfs-components is 0.1.78 (12 October build) from the team’s private package repository. Figma’s Note Input has Idle and Editing variants, 95 × 34; the package has none: it follows focus, grows with the text, wraps a long note inside the pill, and is 35 px tall for one line. Its colours are the same in Dark mode, so this page shows Light only. It keeps what people type on its own, or takes its value from the screen. On the web each note is one Tab stop, its text is read once, and it keeps its name, the placeholder or yours, while focused. A read-only note is faded and can’t be focused. Enter starts a new line in the note. The published Storybook has one story; newer stories are not deployed yet.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

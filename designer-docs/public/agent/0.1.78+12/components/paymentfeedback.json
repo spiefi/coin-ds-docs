@@ -1,0 +1,667 @@
+{
+  "schemaVersion": 1,
+  "id": "PaymentFeedback",
+  "slug": "paymentfeedback",
+  "category": "feedback",
+  "tags": [
+    "payment status",
+    "payment result",
+    "transaction result",
+    "success screen",
+    "payment confirmation",
+    "receipt"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "2bae394cec05b83d6daa0c71d168ae3fb58f61df",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T04:33:30Z",
+    "flags": []
+  },
+  "summary": "Use a Payment Feedback on the screen after a payment to show the amount, whether it went through, and its reference.",
+  "useWhen": [
+    {
+      "text": "On the screen after a payment, to show the amount, whether it went through, and its reference.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Payment Feedback on the screen after a payment to show the amount, whether it went through, and its reference."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Before the payment has a result: Payment Feedback has no pressed, disabled or loading state, and the screen shows it once the payment has a result.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Payment Feedback has no pressed, disabled, or loading state: the screen shows it once the payment has a result."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Icon",
+      "holds": "An 81 px Icon Capsule coloured by AppearanceSystem; renderMedia replaces it.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "An 81 px Icon Capsule coloured by AppearanceSystem; renderMedia replaces it."
+      }
+    },
+    {
+      "part": "Amount",
+      "holds": "The title: 36 px heavy text. The component adds no currency sign.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The title: 36 px heavy text. The component adds no currency sign."
+      }
+    },
+    {
+      "part": "Status",
+      "holds": "The subtitle: the outcome in words, at 16 px.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The subtitle: the outcome in words, at 16 px."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "Optional: one sentence under the status, at 14 px (body).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional: one sentence under the status, at 14 px."
+      }
+    },
+    {
+      "part": "Details",
+      "holds": "One line per line break in details; showDetails hides them.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One line per line break in details; showDetails hides them."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "renderMedia",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "It has no width of its own: it fills its container, or shrinks to its longest line when centred.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It has no width of its own: it fills its container, or shrinks to its longest line when centred"
+      }
+    },
+    {
+      "text": "Payment Feedback has no button of its own, so the screen adds one.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Payment Feedback has no button of its own, so the screen adds one."
+      }
+    },
+    {
+      "text": "On the guide's result screen, Pay swaps the payment screen for the result (the amount, the outcome and the reference), with Done below to leave.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pay swaps the payment screen for the result: the amount, the outcome, and the reference, with Done below to leave."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set the outcome with AppearanceSystem in modes: positive is green, warning orange, and negative red.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Set the outcome with AppearanceSystem in modes: positive is green, warning orange, and negative red."
+      },
+      "target": "AppearanceSystem"
+    },
+    {
+      "text": "The icon and the words don't follow AppearanceSystem: set iconName and the status line (subtitle) to match it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The icon and the words don't follow it, so set iconName and the status line to match."
+      },
+      "target": "iconName"
+    },
+    {
+      "text": "Paid: positive with ic_confirm, the default: a check on green.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "positive with ic_confirm, the default: a check on green."
+      },
+      "target": "AppearanceSystem",
+      "value": "positive"
+    },
+    {
+      "text": "Pending: warning with ic_info, while the bank hasn't confirmed it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "warning with ic_info, while the bank hasn't confirmed it."
+      },
+      "target": "AppearanceSystem",
+      "value": "warning"
+    },
+    {
+      "text": "Failed: negative with ic_close: a white cross on red.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "negative with ic_close: a white cross on red."
+      },
+      "target": "AppearanceSystem",
+      "value": "negative"
+    },
+    {
+      "text": "Do not keep the default check on a failed payment: a check mark on red says success and failure at once.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A check mark on red says success and failure at once."
+      },
+      "target": "iconName",
+      "value": "ic_confirm"
+    },
+    {
+      "text": "iconName defaults to ic_confirm whatever the outcome: set it for a pending or failed payment.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "iconName"
+    },
+    {
+      "text": "subtitle defaults to “Payment successful” whatever the outcome: set it for a pending or failed payment.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "subtitle"
+    },
+    {
+      "text": "title defaults to “₹50,000”: pass the amount that was paid.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "title"
+    },
+    {
+      "text": "details defaults to a sample date and transaction ID (18 March 2025, TXN121466784): pass the payment's own, or set showDetails false.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "details"
+    },
+    {
+      "text": "Set showDetails false to hide the date and reference.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "showDetails off hides the date and reference."
+      },
+      "target": "showDetails",
+      "value": "false"
+    },
+    {
+      "text": "renderMedia replaces the icon with your own.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "renderMedia replaces the icon with your own."
+      },
+      "target": "renderMedia"
+    },
+    {
+      "text": "Of Payment Feedback's modes, set only AppearanceSystem.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Of the modes, set only AppearanceSystem"
+      },
+      "target": "AppearanceSystem"
+    },
+    {
+      "text": "Do not set AppearanceBrand on it: it changes nothing.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "AppearanceBrand and Page type change nothing"
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "Do not set Page type on it: it changes nothing.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "AppearanceBrand and Page type change nothing"
+      },
+      "target": "Page type"
+    },
+    {
+      "text": "Do not set Icon Capsule Size, Emphasis or Semantic Intent for the default icon: it keeps its own size, emphasis and intent.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "the default icon keeps its own size, emphasis and intent."
+      },
+      "target": "Icon Capsule Size"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Lead with the amount, then say the outcome in words.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Lead with the amount, then say the outcome in words."
+        }
+      },
+      {
+        "text": "Write the amount as it was paid, with its currency sign: the component adds none.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the amount as it was paid, with its currency sign: the component adds none."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Do not write a sentence in the title: 36 px heavy text wraps into a block nobody reads first.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "36 px heavy text wraps into a block nobody reads first."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Put the outcome in the status line, in sentence case.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put the outcome in the status line in sentence case"
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Do not rely on the colour to give the outcome: say it in the status line.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Rely on the colour"
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Keep the body to one sentence.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "keep the body to one sentence"
+        },
+        "target": "body"
+      },
+      {
+        "text": "Give the details one fact per line, split with a line break.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "give the details one fact per line, split with a line break."
+        },
+        "target": "details"
+      }
+    ],
+    "good": [
+      "₹1,250",
+      "Payment successful",
+      "Sent to Rahul Sharma.",
+      "13 October 2026, 4:15 pm",
+      "Transaction ID: TXN121466784",
+      "Payment pending",
+      "Your bank is still processing it.",
+      "Payment failed",
+      "Something went wrong. Please try again."
+    ],
+    "bad": [
+      "Your payment of ₹1,250 was successful"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "It has no pressed, disabled or loading state: the screen shows it once the payment has a result.",
+      "from": {
+        "section": "states",
+        "quote": "Payment Feedback has no pressed, disabled, or loading state: the screen shows it once the payment has a result."
+      }
+    },
+    {
+      "state": "Everything",
+      "when": "Amount, status, body, and details.",
+      "from": {
+        "section": "states",
+        "quote": "Amount, status, body, and details."
+      }
+    },
+    {
+      "state": "No details",
+      "when": "showDetails off hides the date and reference.",
+      "from": {
+        "section": "states",
+        "quote": "showDetails off hides the date and reference."
+      }
+    },
+    {
+      "state": "Amount and status",
+      "when": "The shortest version: the amount and the outcome, with no body and showDetails off.",
+      "from": {
+        "section": "states",
+        "quote": "The shortest version: the amount and the outcome."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Say the outcome in words in the status line: “Payment failed” tells everyone what happened, not only people who see the red.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "“Payment failed” tells everyone what happened, not only people who see the red."
+      },
+      "target": "subtitle"
+    },
+    {
+      "text": "It has no label of its own and doesn’t announce the result: its text is read in order, and the icon is an image with no name.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It has no label of its own and doesn’t announce the result: its text is read in order, and the icon is an image with no name."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Say the outcome in words",
+      "dont": "Rely on the colour",
+      "why": "Only the red icon says this payment failed.",
+      "from": {
+        "section": "doDont",
+        "quote": "Say the outcome in words"
+      }
+    },
+    {
+      "do": "Match the icon to the outcome",
+      "dont": "Keep the default check",
+      "why": "A check mark on red says success and failure at once.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match the icon to the outcome"
+      }
+    },
+    {
+      "do": "Keep the title to the amount",
+      "dont": "Write a sentence in the title",
+      "why": "36 px heavy text wraps into a block nobody reads first.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the title to the amount"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A successful payment: the amount, the outcome, who it went to, then the date and transaction ID.",
+      "jsx": "<PaymentFeedback\n  title=\"₹1,250\"\n  subtitle=\"Payment successful\"\n  body=\"Sent to Rahul Sharma.\"\n  details={'13 October 2026, 4:15 pm\\nTransaction ID: TXN121466784'}\n  iconName=\"ic_confirm\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "₹1,250, “Payment successful”, who it went to, then the date and transaction ID."
+      }
+    },
+    {
+      "purpose": "A failed payment: negative with ic_close, and the outcome in words.",
+      "jsx": "<PaymentFeedback\n  title=\"₹1,250\"\n  subtitle=\"Payment failed\"\n  body=\"Something went wrong. Please try again.\"\n  details={'13 October 2026, 4:15 pm\\nTransaction ID: TXN121466784'}\n  iconName=\"ic_close\"\n  modes={{ AppearanceSystem: 'negative' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "negative with ic_close: a white cross on red."
+      }
+    },
+    {
+      "purpose": "A payment result screen: the result centred, with Done below to leave, since Payment Feedback has no button of its own.",
+      "jsx": "<VStack justifyVertical=\"space-between\" style={{ flex: 1, padding: 16 }}>\n  <VStack justifyVertical=\"center\" style={{ flex: 1 }}>\n    <PaymentFeedback\n      title=\"₹1,250\"\n      subtitle=\"Payment successful\"\n      body=\"Sent to Rahul Sharma.\"\n      details={'13 October 2026, 4:15 pm\\nTransaction ID: TXN121466784'}\n      iconName=\"ic_confirm\"\n    />\n  </VStack>\n  <Button label=\"Done\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Pay swaps the payment screen for the result: the amount, the outcome, and the reference, with Done below to leave."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "₹50,000",
+        "description": "An empty string renders no title line. Declared: Large heading text, typically a monetary value (e.g. \"₹50,000\") Default \"₹50,000\", from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Payment successful",
+        "description": "An empty string renders no status line. Declared: Status line below the title (e.g. \"Payment successful\") Default \"Payment successful\", from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Descriptive body text below the subtitle."
+      },
+      {
+        "name": "details",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "18 March 2025, 4:15 pm\nTransaction ID: TXN121466784",
+        "description": "showDetails false or an empty details string removes the details block. Declared: Transaction metadata shown at the bottom (e.g. date, transaction ID). Supports newlines. Default \"18 March 2025, 4:15 pm\\nTransaction ID: TXN121466784\", from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "showDetails",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to render the details section. Default true, from the component source."
+      },
+      {
+        "name": "iconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_confirm",
+        "description": "Icon name used in the default IconCapsule media slot. Default \"ic_confirm\", from the component source."
+      },
+      {
+        "name": "renderMedia",
+        "type": "ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the default capsule; the node gets the Payment Feedback's modes under its own. Declared: Optional custom media slot that replaces the default IconCapsule.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "On the default capsule the caller's AppearanceSystem wins, and its size, emphasis and intent are forced (Icon Capsule Size L, Emphasis High, Semantic Intent System). Declared: Mode configuration for design tokens. Also drives the default IconCapsule's color — pass `AppearanceSystem: 'positive' | 'warning' | 'negative'` to render a green/orange/red capsule (defaults to `positive`).",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "style",
+        "type": "ViewStyle",
+        "required": false,
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Listed for PaymentFeedback, but changes nothing. Declared: A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "There is no status prop: the outcome is AppearanceSystem (positive green, warning orange, negative red) plus iconName and the words. Declared: A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "positive",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "Nudge&Alert shrinks the default capsule to 14 px and CTACard to 58 px. Declared: A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "Listed for PaymentFeedback, but changes nothing: the default capsule keeps High. Declared: A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "High",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Icon Capsule Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "L",
+          "S",
+          "XS"
+        ],
+        "description": "Listed for PaymentFeedback, but changes nothing: the default capsule keeps L. Declared: A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "M",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "Listed for PaymentFeedback, but changes nothing. Declared: A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "Listed for PaymentFeedback, but changes nothing: the default capsule keeps System. Declared: A token collection PaymentFeedback reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Brand",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "slots": [
+      {
+        "name": "renderMedia",
+        "type": "ReactNode",
+        "description": "Optional custom media slot that replaces the default IconCapsule",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "Figma's Payment Feedback shows only a successful payment; pending and failed exist only in code, through AppearanceSystem.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "text": "It doesn't announce the result: it has no live region or alert role.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=paymentfeedback",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1056-3084",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-paymentfeedback--docs"
+  }
+}
