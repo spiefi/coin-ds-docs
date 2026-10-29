@@ -1,0 +1,29 @@
+{
+  "slug": "accordioncheckbox",
+  "entryHash": "d197ab2a35d100bc71ff55baad18781a460d00fee2cbe72a6c30d4a94bfe9c83",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "checkedAt": "2026-10-29T09:04:50Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/states/4",
+      "reason": "lost-context: The guide's states are \"stable configured outcomes\", and pressed feedback is something \"the runtime supplies ... during interaction\". The evidence adds that the package has no hover or pressed handler and that React Native Web provides the opacity feedback. Listing \"Pressed\" as a component state presents runtime feedback as a configured state."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The guide says only that \"the group checkbox selects every account\" and that consumer logic makes the header a select-all control. Nothing cited says the screen \"checks the header when every row is checked\"; that reverse wiring is added."
+    },
+    {
+      "field": "/facts/gaps/0",
+      "reason": "misreads-source: The evidence records Space and Enter \"expanded the header\" on 19 September 2026. It gives no commit \"dbe0e02\", no \"Component Bug #540\" or \"#535\", and no observation that the keys also close the group. These details go beyond the evidence."
+    },
+    {
+      "field": "/facts/gaps/1",
+      "reason": "misreads-source: The evidence says disabled reaches only the header press target and header Checkbox, and that children get only modes. It never says disabled \"dims the whole component, content slot included\" or that rows \"look unavailable yet still respond\". The \"Still so on dbe0e02 (Component Bug #540)\" reference is also absent from the evidence."
+    }
+  ],
+  "notes": "/configuration/8 cites /facts/props/3, which supports only the controlled behaviour. \"defaultExpanded (false by default)\" and the uncontrolled open/close behaviour must come from other package facts; check those. Likewise, /configuration/10's ellipsis behaviour without disableTruncation and /anatomy/1's \"subtitle, shown only when set\" are not in the guide, so confirm both against the package types. /content/bad leaves out the repeated generic row label \"Account\" from the doDont live example. /facts/props/8's \"Default false, from the component source\" is not in the evidence file. The guide sources say \"Checked 18 September 2026\" while the evidence says 19 September; the facts use the evidence date."
+}

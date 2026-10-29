@@ -1,0 +1,1072 @@
+{
+  "schemaVersion": 1,
+  "id": "HoldingsCard",
+  "slug": "holdingscard",
+  "category": "card",
+  "tags": [
+    "loan offer",
+    "offer card",
+    "holding",
+    "investment card",
+    "selectable card",
+    "loan card"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "dd348618b44309d7f0f1eec37043594508c86470",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T09:06:00Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/examples/1",
+        "reason": "misreads-source: The gold-holding example has no onPress. The guide says \"A card without onPress is disabled too\". The evidence's Limits say not to imply \"that a card without onPress works\", and its Hosting gives every card onPress. So this example renders as a disabled button, which the guide's Gold holding example is not.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/states/2",
+        "reason": "lost-context: The Disabled state says it comes only from `disabled`. The guide also says \"A card without onPress is disabled too, and then its footer links and button don't respond to clicks either\", which is the condition most likely to catch an agent out.",
+        "by": "cross-check"
+      },
+      {
+        "field": "",
+        "reason": "The guide and its evidence were checked on 21 October on 0.1.78-c7d3348 and not re-checked on the installed build, dbe0e02, which changed HoldingsCard for #362 (a white card and a dark badge by default, a gold Apply that takes the card's modes, purple links, a working footer without onPress, a width that fills a stretching host up to 328). This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts (listed in its notes). Re-extract once #362 is fixed and the guide is re-checked and published. Added by Claude Code in the overnight run agentpack-batch2, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Holdings Card for one loan offer or holding: its headline amount, its key terms, and a radio to choose it from a list.",
+  "useWhen": [
+    {
+      "text": "One loan offer or holding: its headline amount, its key terms, and a radio to choose it from a list.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Holdings Card for one loan offer or holding: its headline amount, its key terms, and a radio to choose it from a list."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Logo",
+      "holds": "headerImage, fitted into a 100 × 24 box; the box stays when it's left out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "headerImage, fitted into a 100 × 24 box; the box stays when left out."
+      }
+    },
+    {
+      "part": "Radio",
+      "holds": "At the top right, showing selected; badgeLabel or trailing can replace it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows selected; badgeLabel or trailing can replace it."
+      }
+    },
+    {
+      "part": "Hero",
+      "holds": "heroLabel over heroValue, the amount in 20 px bold.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "heroLabel over heroValue, the amount in 20 px bold."
+      }
+    },
+    {
+      "part": "Terms",
+      "holds": "details, three to a row; a long value ends in an ellipsis.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "details, three to a row; a long value ends in an ellipsis."
+      }
+    },
+    {
+      "part": "Footer",
+      "holds": "With footer: links and an action below a divider.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The footer adds links and an action below a divider."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A rounded panel with a 1 px border; AppearanceBrand sets its colours.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A rounded panel with a 1 px border; AppearanceBrand sets its colours."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "details",
+      "accepts": [
+        "HoldingsCardDetailItem"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "trailing",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "footerSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "footerItems",
+      "accepts": [
+        "HoldingsCardFooterItem"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "When a screen lists offers to choose from, it keeps one selected: each card's onPress picks that offer, and its selected follows the screen's choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists its offers and keeps one selected: each card’s onPress picks that offer, and its selected follows the screen’s choice."
+      },
+      "target": "selected"
+    },
+    {
+      "text": "Set the card's width with style, as Figma does at 328 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Set it with style, as Figma does at 328 px."
+      },
+      "target": "style"
+    },
+    {
+      "text": "The terms share the width in three equal columns, and the height follows the content: 20 px of padding at the top and bottom, 16 px at the sides, and 10 px between the parts.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The terms share the width in three equal columns, and the height follows the content: 20 px of padding at the top and bottom, 16 px at the sides, and 10 px between the parts."
+      }
+    },
+    {
+      "text": "A wider card, such as 360 px, widens the three columns; the amount stays at the left.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The three columns widen; the amount stays at the left."
+      },
+      "target": "style"
+    },
+    {
+      "text": "Each extra row of terms adds about 47 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each extra row of terms adds about 47 px."
+      },
+      "target": "details"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The top right shows a Radio by default, for choosing this offer.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The top right shows a Radio by default, for choosing this offer."
+      },
+      "target": "radio",
+      "value": "true"
+    },
+    {
+      "text": "badgeLabel swaps the Radio for a status Badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "badgeLabel swaps it for a status Badge"
+      },
+      "target": "badgeLabel"
+    },
+    {
+      "text": "trailing swaps in your own component at the top right.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "trailing swaps in your own component"
+      },
+      "target": "trailing"
+    },
+    {
+      "text": "radio false leaves the top right empty.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "radio false leaves the top right empty."
+      },
+      "target": "radio",
+      "value": "false"
+    },
+    {
+      "text": "Use radio false for a holding you don't choose: nothing shows at the top right.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Nothing at the top right, for a holding you don’t choose."
+      },
+      "target": "radio",
+      "value": "false"
+    },
+    {
+      "text": "radio false hides the whole top right: a badgeLabel Badge or a trailing component as well as the Radio.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "radio",
+      "value": "false"
+    },
+    {
+      "text": "footer adds a divider, footerItems as labelled links, and a small Apply button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "footer adds a divider, footerItems as labelled links, and a small Apply button"
+      },
+      "target": "footer",
+      "value": "true"
+    },
+    {
+      "text": "footerSlot replaces the footer body below the divider; it shows only when footer is true.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/9"
+      },
+      "target": "footerSlot"
+    },
+    {
+      "text": "children puts your own content in place of the terms; the amount and the Radio stay.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Your content in place of the terms; the amount and Radio stay."
+      },
+      "target": "children"
+    },
+    {
+      "text": "AppearanceBrand colours the panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand colours the panel"
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "AppearanceBrand Primary: a pale gold panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Primary (pale gold)"
+      },
+      "target": "AppearanceBrand",
+      "value": "Primary"
+    },
+    {
+      "text": "AppearanceBrand Neutral: a white panel with a grey border, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A white panel with a grey border, as in Figma."
+      },
+      "target": "AppearanceBrand",
+      "value": "Neutral"
+    },
+    {
+      "text": "AppearanceBrand Secondary: a lilac panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A lilac panel."
+      },
+      "target": "AppearanceBrand",
+      "value": "Secondary"
+    },
+    {
+      "text": "AppearanceBrand Tertiary: a light grey panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A light grey panel."
+      },
+      "target": "AppearanceBrand",
+      "value": "Tertiary"
+    },
+    {
+      "text": "Without headerImage, the empty logo box still holds the top row's height.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The empty logo box still holds the top row’s height."
+      },
+      "target": "headerImage"
+    },
+    {
+      "text": "Update selected yourself when onPress fires: the card does not toggle selected itself.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/15"
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "disabled greys the Radio and stops presses.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "disabled greys the Radio and stops presses."
+      },
+      "target": "disabled",
+      "value": "true"
+    },
+    {
+      "text": "disableTruncation lets the term values wrap instead of ending in an ellipsis.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/20"
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One offer, its terms at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One offer, its terms at a glance."
+        }
+      },
+      {
+        "text": "Set heroLabel yourself: left out, the card shows the sample “Loan amount up-to”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "heroLabel"
+      },
+      {
+        "text": "Set heroValue yourself: left out, the card shows the sample “₹1,89,000”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/2"
+        },
+        "target": "heroValue"
+      },
+      {
+        "text": "Pass your own details (or children): left out, the card shows five sample terms.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/3"
+        },
+        "target": "details"
+      },
+      {
+        "text": "With footer, pass your own footerItems (or footerSlot): left out, the footer shows two placeholder links labelled “Link”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/10"
+        },
+        "target": "footerItems"
+      },
+      {
+        "text": "Make heroLabel say what the amount is, such as “Loan amount up to”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make heroLabel say what the amount is, such as Loan amount up to"
+        },
+        "target": "heroLabel"
+      },
+      {
+        "text": "Give heroValue already formatted, with its ₹.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "give heroValue already formatted, with its ₹."
+        },
+        "target": "heroValue"
+      },
+      {
+        "text": "Keep term labels to a word or two.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep term labels to a word or two"
+        },
+        "target": "details"
+      },
+      {
+        "text": "Put the unit in the value, such as “36 months” or “12% p.a.”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "put the unit in the value: 36 months, 12% p.a."
+        },
+        "target": "details"
+      },
+      {
+        "text": "Do not give a term a long value: the column stays the same, so the value is cut short.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The column stays the same, so the value is cut short."
+        },
+        "target": "details"
+      },
+      {
+        "text": "Name footer links for the next step.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name footer links for the next step"
+        },
+        "target": "footerItems"
+      },
+      {
+        "text": "Keep the footer action to one word, such as “Apply”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "keep the action to one word, such as Apply."
+        },
+        "target": "footerActionLabel"
+      },
+      {
+        "text": "Keep the badge short: “Pre-approved” fits beside the logo.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Pre-approved fits beside the logo."
+        },
+        "target": "badgeLabel"
+      },
+      {
+        "text": "headerImage is made for a wide logo: a square mark sits centred in its 100 × 24 box.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "headerImage is made for a wide logo: a square mark sits centred in its 100 × 24 box."
+        },
+        "target": "headerImage"
+      },
+      {
+        "text": "For a holding, make the current value the hero, with quantity and returns as terms.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Holdings work the same way: the current value as the hero, with quantity and returns as terms."
+        }
+      }
+    ],
+    "good": [
+      "Loan amount up to",
+      "₹1,89,000",
+      "Interest",
+      "12% p.a.",
+      "Tenure",
+      "36 months",
+      "Processing fee",
+      "₹499",
+      "APR",
+      "15.47%",
+      "EMI",
+      "₹6,277/m",
+      "Repayment",
+      "Schedule",
+      "Charges",
+      "Details",
+      "Apply",
+      "Pre-approved",
+      "Current value",
+      "₹52,340",
+      "Quantity",
+      "8.2 g",
+      "Bought at",
+      "₹5,920/g",
+      "Returns",
+      "+7.8%"
+    ],
+    "bad": [
+      "36 months or 60 months",
+      "Apply now",
+      "Recommended for you this month"
+    ]
+  },
+  "states": [
+    {
+      "state": "Not selected",
+      "when": "selected false, the default: an empty Radio.",
+      "from": {
+        "section": "states",
+        "quote": "An empty Radio."
+      }
+    },
+    {
+      "state": "Selected",
+      "when": "When the card is pressed, your onPress sets selected and the Radio fills (purple); the card doesn't select itself.",
+      "from": {
+        "section": "states",
+        "quote": "When it’s pressed, your onPress sets selected, and the Radio fills; the card doesn’t select itself."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled: a grey Radio, and the card doesn't press.",
+      "from": {
+        "section": "states",
+        "quote": "A grey Radio; the card doesn’t press."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "While pressed, the card fades a little.",
+      "from": {
+        "section": "states",
+        "quote": "While pressed, the card fades a little."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Values with their unit",
+      "dont": "Long values",
+      "why": "The column stays the same, so the value is cut short.",
+      "from": {
+        "section": "doDont",
+        "quote": "Values with their unit"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Choosing a loan offer: a Title over two offer cards, each 328 px wide. The screen holds the choice: selected is true only on the offer it holds, and each card's onPress should pick that offer (the handlers here are stubs).",
+      "jsx": "<VStack style={{ width: 328 }}>\n  <Title title=\"Pick an offer\" subtitle=\"Pre-approved for you\" />\n  <HoldingsCard\n    headerImage={require('../assets/jio-gold-logo.png')}\n    heroLabel=\"Loan amount up to\"\n    heroValue=\"₹1,89,000\"\n    details={[\n      { label: 'Interest', value: '12% p.a.' },\n      { label: 'Tenure', value: '36 months' },\n      { label: 'Processing fee', value: '₹499' },\n      { label: 'APR', value: '15.47%' },\n      { label: 'EMI', value: '₹6,277/m' },\n    ]}\n    selected\n    onPress={() => {}}\n    style={{ width: 328 }}\n  />\n  <HoldingsCard\n    headerImage={require('../assets/jio-gold-logo.png')}\n    heroLabel=\"Loan amount up to\"\n    heroValue=\"₹2,50,000\"\n    details={[\n      { label: 'Interest', value: '13.5% p.a.' },\n      { label: 'Tenure', value: '48 months' },\n      { label: 'Processing fee', value: '₹999' },\n      { label: 'APR', value: '16.2%' },\n      { label: 'EMI', value: '₹6,768/m' },\n    ]}\n    selected={false}\n    onPress={() => {}}\n    style={{ width: 328 }}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists its offers and keeps one selected: each card’s onPress picks that offer, and its selected follows the screen’s choice."
+      }
+    },
+    {
+      "purpose": "A gold holding: what you own today, with the current value as the hero, quantity and returns as terms, and no Radio (radio false).",
+      "jsx": "<HoldingsCard\n  headerImage={require('../assets/jio-gold-logo.png')}\n  heroLabel=\"Current value\"\n  heroValue=\"₹52,340\"\n  details={[\n    { label: 'Quantity', value: '8.2 g' },\n    { label: 'Bought at', value: '₹5,920/g' },\n    { label: 'Returns', value: '+7.8%' },\n  ]}\n  radio={false}\n  style={{ width: 328 }}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Holdings work the same way: the current value as the hero, with quantity and returns as terms."
+      }
+    },
+    {
+      "purpose": "A loan offer with its footer: two links named for the next step and a one-word Apply action.",
+      "jsx": "<HoldingsCard\n  headerImage={require('../assets/jio-gold-logo.png')}\n  heroLabel=\"Loan amount up to\"\n  heroValue=\"₹1,89,000\"\n  details={[\n    { label: 'Interest', value: '12% p.a.' },\n    { label: 'Tenure', value: '36 months' },\n    { label: 'Processing fee', value: '₹499' },\n    { label: 'APR', value: '15.47%' },\n    { label: 'EMI', value: '₹6,277/m' },\n  ]}\n  footer\n  footerItems={[\n    { label: 'Repayment', linkLabel: 'Schedule', onLinkPress: () => {} },\n    { label: 'Charges', linkLabel: 'Details', onLinkPress: () => {} },\n  ]}\n  footerActionLabel=\"Apply\"\n  onFooterActionPress={() => {}}\n  onPress={() => {}}\n  style={{ width: 328 }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "footer adds a divider, footerItems as labelled links, and a small Apply button"
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "headerImage",
+        "type": "ImageSourcePropType",
+        "required": false,
+        "source": "evidence",
+        "description": "None ships. Shown with contain, at the left, in a 100 × 23.69 box; an empty box of that size stays when it's left out. Declared: Source for the header image (e.g. bank logo).",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "heroLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Loan amount up-to",
+        "description": "12 px on a 16 px line, over heroValue; it wraps. Declared: Label text above the hero value (e.g. \"Loan amount up-to\"). Default \"Loan amount up-to\", from the component source.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "heroValue",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "₹1,89,000",
+        "description": "20 px bold on a 24 px line, under heroLabel; it wraps. Declared: Main hero value string (e.g. \"₹1,89,000\"). Default \"₹1,89,000\", from the component source.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "details",
+        "type": "HoldingsCardDetailItem[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Left out, the card shows five sample terms. Three to a row in equal columns, 12 px apart, with rows 16 px apart; a short row is padded. Declared: Array of detail items displayed in a 3-column grid below the hero.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the terms grid and gets the card's modes; the hero and the top right stay. Declared: Figma Slot — replaces the default details grid when provided. Additive; existing `details` callers are unchanged.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "radio",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "false hides the whole top right: the Radio, a badgeLabel Badge, and a trailing component. Declared: Figma \"Radio\" boolean — shows/hides the header trailing. Defaults to `true` (same as the historical always-visible Radio). Default true, from the component source.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Figma Trailing instance-swap. When omitted, the legacy default `Radio` is rendered (wired to `selected` / `disabled`). Pass any node to override, or set `badgeLabel` to opt into the Figma Badge trailing."
+      },
+      {
+        "name": "badgeLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Opt into the Figma Badge trailing instead of the legacy Radio. Ignored when `trailing` is set. Omit to keep Radio (back-compat)."
+      },
+      {
+        "name": "footer",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Figma Footer boolean. When `true`, renders the footer (divider + default action row, or `footerSlot` when provided). Defaults to `false` so existing layouts are unchanged. Default false, from the component source."
+      },
+      {
+        "name": "footerSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the footer body below the divider. Declared: Full override for the footer body below the divider. Only rendered when `footer` is `true`.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "footerItems",
+        "type": "HoldingsCardFooterItem[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Each item is a label over a Coin Link. Left out, the footer shows two placeholder links labelled “Link”. Declared: Default footer link columns (label + link). Ignored when `footerSlot` is set.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "footerActionLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Apply",
+        "description": "Label for the default footer action Button. Default \"Apply\", from the component source."
+      },
+      {
+        "name": "onFooterActionPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Press handler for the default footer action Button."
+      },
+      {
+        "name": "selected",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "The card never changes selected itself: the screen sets it in onPress. Declared: Whether the radio button is selected (legacy default trailing). Default false, from the component source.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Whether the card / radio is disabled. Default false, from the component source."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "The card fades to 0.75 opacity while pressed. Declared: Called when the card is pressed. The card does not toggle `selected` itself — the caller updates `selected`.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Optional accessible name for the card root."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "The Radio and the footer's Divider take the card's modes. Declared: Modes object for design-token resolution.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "evidence",
+        "description": "Applied last, after the card's own styles. Declared: Custom style for the outer container.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test ID for testing."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "Term labels (10 px) wrap; term values (12 px) end in an ellipsis unless disableTruncation lets them wrap. Declared: When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "HoldingsCardDetailItem.label",
+        "type": "string",
+        "required": true,
+        "description": "A field of each details row.",
+        "source": "types"
+      },
+      {
+        "name": "HoldingsCardDetailItem.value",
+        "type": "string",
+        "required": true,
+        "description": "A field of each details row.",
+        "source": "types"
+      },
+      {
+        "name": "HoldingsCardFooterItem.label",
+        "type": "string",
+        "required": true,
+        "description": "A field of each footerItems row.",
+        "source": "types"
+      },
+      {
+        "name": "HoldingsCardFooterItem.linkLabel",
+        "type": "string",
+        "required": false,
+        "description": "A field of each footerItems row.",
+        "source": "types"
+      },
+      {
+        "name": "HoldingsCardFooterItem.onLinkPress",
+        "type": "() => void",
+        "required": false,
+        "description": "A field of each footerItems row.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Sets the panel's fill and stroke and the term labels' colour: Primary pale gold (#fef4e5), Secondary lilac (#f6f3ff), Neutral white with an #ebebed stroke (Figma's look), Tertiary light grey (#f5f5f5). The card's radius (16), 1 px stroke, padding (20 / 16) and gap (10) don't change with any mode. Declared: A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection HoldingsCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      }
+    ],
+    "slots": [
+      {
+        "name": "details",
+        "type": "HoldingsCardDetailItem[]",
+        "description": "A structured slot: an array of HoldingsCardDetailItem rows. Array of detail items displayed in a 3-column grid below the hero.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Figma Slot — replaces the default details grid when provided. Additive; existing `details` callers are unchanged.",
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "description": "Figma Trailing instance-swap. When omitted, the legacy default `Radio` is rendered (wired to `selected` / `disabled`). Pass any node to override, or set `badgeLabel` to opt into the Figma Badge trailing.",
+        "source": "types"
+      },
+      {
+        "name": "footerSlot",
+        "type": "React.ReactNode",
+        "description": "Full override for the footer body below the divider. Only rendered when `footer` is `true`.",
+        "source": "types"
+      },
+      {
+        "name": "footerItems",
+        "type": "HoldingsCardFooterItem[]",
+        "description": "A structured slot: an array of HoldingsCardFooterItem rows. Default footer link columns (label + link). Ignored when `footerSlot` is set.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onFooterActionPress",
+        "type": "() => void",
+        "description": "Press handler for the default footer action Button.",
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Called when the card is pressed. The card does not toggle `selected` itself — the caller updates `selected`.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "At 328 px wide the card is about 7 px taller than Figma's (207.69 against 201): its hero line is 44 px against 42, its term rows 31 against 30, plus the border.",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "text": "The package's default top right is a Radio, where Figma's Holdings Card defaults to a Badge (reported in #362).",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=holdingscard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1028-1533",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-holdingscard--docs"
+  }
+}

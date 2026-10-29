@@ -1,0 +1,16 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The Favorite Toggle guide's Sources note and its evidence's 0.1.78 check were made on 1 October 2026 on mirror v0.1.78 (5b6894b); the rest of the evidence on 28 September on 0.1.60. The installed package is 0.1.78, mirror v0.1.78-dbe0e02, where FavoriteToggle.tsx has changed once since (17 October): loading now draws its placeholder on its own (FavoriteToggle.tsx line 231, visible={loading === true}; Skeleton.tsx lines 134 and 272–275). Read against the installed source, every sentence this entry quotes still holds, but two are out of date and not quoted: the Anatomy note “Filled heart; its colour is meant to change when saved.” (the colour does change since #168: white while not saved, gold once saved, FavoriteToggle.tsx lines 114–123), and the evidence's Contract line “`loading` renders a same-size circular skeleton only inside `<SkeletonGroup loading>`; on its own it renders nothing.” The evidence's 0.1.60 Rendered and Limits sections (Active colours never resolve, no aria-checked, no hit slop, package default S) are superseded by its 0.1.78 check but still read as current. Re-check the guide and evidence on 0.1.78 and publish them, then re-extract. Added by Claude Code in the overnight run agentpack-batch14, for Marcin to confirm. Guide fix #538."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/facts/gaps/0",
+      "reason": "misreads-source: The evidence's 0.1.78 check names mirror tag `v0.1.78` built from `5b6894b`. It never mentions a build '0.1.78-dbe0e02' or 'Component Bug #541'. It also says only that 'A 44 px `hitSlop` is set in code'. It does not say phones were tested or that they honour the slop. The gap adds a build id, a bug number and a phone-behaviour claim that the evidence does not support.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The gap rests on the evidence’s 0.1.78 check (1 October, mirror v0.1.78 at 5b6894b) and on a re-check of the installed build, as the flow asks: a gap names the installed build it still holds on and the Component Bug proposed for it (Checkbox’s gap names #535 the same way). On 29 October, on 0.1.78-dbe0e02, FavoriteToggle.tsx still sets a hit slop of (44 − size) / 2 on each side (lines 86–89, 197 and 245), react-native-web 0.21.2’s View forwards no hitSlop prop (exports/View/index.js 26–33 picks only listed props; only the legacy Touchable mixin reads it), and in headless Chrome on the guide’s In context toggle (29 × 29) a click 5 px outside its right edge left aria-checked false, while a click inside set it true. That phones honour the hit slop is the guide’s own copy, not the evidence’s: Sizing says “On phones its tap area reaches 44 px around the circle” and the Sources note “On iOS and Android a hit slop extends the tap area to 44 px” (the Sizing sentence is quoted in this entry’s /accessibility/3); React Native’s Pressable takes hitSlop on iOS and Android. The gap names Component Bug #541, filed for it in this run."
+    }
+  ]
+}

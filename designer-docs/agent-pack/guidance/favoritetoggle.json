@@ -1,0 +1,431 @@
+{
+  "slug": "favoritetoggle",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch14, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/favoritetoggle.guide.tsx, self-contained) and docs/evidence/favoritetoggle.md at 4e470cf (“docs: adopt Biscuit's main at 3795b4c (v0.1.78-3795b4c)”, 2 October), the commit the copy snapshot records; both files are the same blobs on main and docs-next and unchanged since. The evidence has two dated parts: Checked, Sources, Contract, Rendered, Limits and Verification from 28 September 2026 on jfs-components 0.1.60, and a “0.1.78 check” from 1 October 2026 on mirror tag v0.1.78 (Biscuit's fix/component-bugs-v0.1.78 at 5b6894b); the guide's Sources note (“Checked 1 October 2026”, 0.1.78) belongs to the second. Every evidence and Sources item here cites the 1 October check, so it carries 2026-10-01 and 0.1.78-5b6894b; the trace check compares the version (0.1.78), so none of them is flagged. Nothing is taken from the 0.1.60 sections: the 0.1.78 check supersedes their Rendered and Limits lines (Active colours fixed as #168, size default M, aria-checked emitted, hit slop set), and their Contract loading line is out of date (below). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). FavoriteToggle.tsx is blob d1bbbfd at v0.1.78, v0.1.78-636f3f5 and -c1fa197 and blob b3f5873 at -a116616 and -dbe0e02 (the installed file); its one change since the 1 October check is line 231, visible={loading === true} on the loading Skeleton (commit 8e2a35e, 17 October). The favoriteToggle/*, color/favoriteToggle/* and blur/minimal variables and the Favorite Toggle Size and Favorite Toggle Color collections are identical in the v0.1.78 and dbe0e02 token files. Every guide sentence quoted here was read against the installed FavoriteToggle.tsx (read, not rendered), with token values through the package's own getVariableByName (lib/commonjs): Favorite Toggle Size S, M and L resolve favoriteToggle/width and height to 14, 29 and 41 px and the icon to 10, 20 and 28 px; the collection's default is S, but the component puts Favorite Toggle Size M ahead of the caller's modes (DEFAULT_SIZE_MODE, lines 70–71 and 97–100), so with no size it is 29 × 29, as the Sources note and the 0.1.78 check say; favoriteToggle/icon/radius is 9999, a circle (103–107); width and height come only from that token (199–201), so it never stretches. Colour: the component sets Favorite Toggle Color from isActive after the caller's modes (114–117), so a value passed in modes is replaced; Active resolves background rgb(255, 255, 255) and icon rgb(206, 161, 90) (gold) in Light, and Default rgba(255, 255, 255, 0.2) and white, as the 0.1.78 check records; not saved draws a light GlassFill blur with that 20 % white overlay behind a transparent container (206, 253–260), saved paints the white background with no glass. So the States copy (frosted circle and white heart; white circle and gold heart, as in Figma) holds. Disabled: opacity 0.5 (210), presses ignored (191, 242), and on the web tabIndex −1 (web-platform-utils.ts 283–291; react-native-web 0.21.2 Pressable also gives a disabled Pressable tabIndex −1, exports/Pressable 118–122), so “Dimmed to half opacity and skipped by keyboard focus.” holds. A pressed toggle drops to opacity 0.7 (68, 218); no guide sentence covers it, so it is not recorded. Loading: isLoading is loading ?? the SkeletonGroup's active (174–175), and it returns a Skeleton kind other of the toggle's size and radius (223–233), so “A same-size circle holds the place while the item loads.” holds. Since 17 October the Skeleton gets visible={loading === true}, and Skeleton.tsx draws when the group is active or visible is set (134, 272–275), so loading true now draws the placeholder with no group. That contradicts the evidence's 0.1.60 Contract line “`loading` renders a same-size circular skeleton only inside `<SkeletonGroup loading>`; on its own it renders nothing.” (true on 5b6894b too, which did not pass visible); the line is not quoted, the loading rule rests on the package's own loading fact (its JSDoc), and the evidence fix is in reviews/favoritetoggle.json. The guide's own Loading specimen wraps loading in a SkeletonGroup, which still works. Accessibility on the web: role switch (238), aria-label from accessibilityLabel or “Favorite” (187, 193; web-platform-utils.ts 198–201), aria-checked from isActive set after the web props (248–250), Enter and Space press it (useKeyboardNavigation, web-platform-utils.ts 115–141); the heart icon is hidden from assistive tech (265–266). Tap area: touchHitSlop gives (44 − size) / 2 on each side (86–89, 197, 245), so on phones the tap area is 44 px for S, M and L; react-native-web 0.21.2 never reads hitSlop (its View forwards only listed props and none is hitSlop; only the legacy Touchable mixin mentions it), so in a browser the tap area is the visible circle, as the Sizing description, the Sources note and the 0.1.78 check say. That is recorded as a gap and filed as Component Bug #541 (coordinator, batch 14). Not counted as a Coin gap, per the pack's rules (screen-reader names): on iOS and Android the Pressable gets accessibilityLabel undefined (239) and the label reaches only the web's aria-label (getWebAccessibilityProps returns nothing off the web), so by the source a native screen reader gets no name from accessibilityLabel; the Content rule to give it a label that names the item is still quoted, since it holds on the web and is the guide's intent. Out of date in the guide, so not quoted: the Anatomy note “Filled heart; its colour is meant to change when saved.” was written while Active colours did not resolve (0.1.60); since #168 the colour does change, white to gold (114–123). The Heart part rests on the package's icon fact instead (“only its color changes with state (white when inactive, gold when active)”). Both guide fixes are in reviews/favoritetoggle.json (human flag on the whole entry). Facts: the Favorite Toggle Size mode fact's generated default is the collection's, S, which is not what FavoriteToggle draws; the 0.1.78 check's line sets it to M as an evidence fact. Favorite Toggle Color and isActive get the 0.1.78 check's Active colours and aria-checked lines. Not recorded: defaultActive and the uncontrolled use (the guide controls every toggle from the screen), onPress (raw press handler), accessibilityHint, accessibilityState, webAccessibilityProps, testID and the inherited SafePressableProps, style (the building rules keep style off Coin components), Color Mode (building rules; in Dark the Active heart resolves to rgb(143, 99, 23)), the pressed opacity, the Storybook story list (Default, States, Disabled), the Figma node ids, the measured-size labels and the playground. The Sources note's “Declared and installed jfs-components is 0.1.78 from the team’s private package repository.” is not quoted (it says where the package came from, not how to use the toggle). Anatomy: Glass surface is the circle, always present (frosted while not saved, white once saved, per States); Heart is always present. Configuration keeps Size as the only look (contextual: saved, disabled and loading are states, and the icon prop is for future reuse), M as the default and the size for most cards, Small only on dense thumbnails (everywhere, recommended: a design rule the package doesn't check), Large on hero images, and the Don't against Small on a large card. avoidWhen keeps the two placement Don'ts (plain white surface, two hearts on one card); the guide names no component to use instead. Content good is the guide's three labels; there is no bad copy. Examples follow the building rules: no Color Mode (the guide sets Light on every toggle) and no Favorite Toggle Size M (the guide sets M everywhere, which only repeats the component's default); Size L only for the hero-image example, as the guide's Configuration gives it. isActive and onChange stand for the screen's wiring. The guide's In context places the toggle on a photo (a guide-kit Backdrop, CSS) above two Text lines; the example keeps only the toggle, since placing it over an image would need absolute-position style and the guide's backdrop is not a Coin component. FavoriteToggle is the only component used. Left out of examples: the anatomy and sizing specimens, the Small card, the Disabled and Loading specimens (SkeletonGroup has no entry in this pack) and the Don'ts. Consistency: only guidance/skeleton.json mentions FavoriteToggle (its notes: it reads the group, its own loading wins both ways, and a placeholder drawn by its own loading is a progressbar named Loading); that agrees with FavoriteToggle.tsx 174–175 and 223–233 and with this entry's loading rule. No other entry uses or names the toggle. Run on the installed build, 29 October, in headless Chrome (playwright-core, the guide's own page built with vite, react-native-web 0.21.2; script ft/run/tap.mjs in the batch scratch folder): the In context toggle is 29 × 29 with role switch and aria-checked false, a transparent container and a white heart; a click 5 px outside its right edge left it unsaved, a click inside saved it (aria-checked true, background rgb(255, 255, 255), heart rgb(206, 161, 90)); the Sizing specimens, shown at 1.5×, measure 21, 43.5 and 61.5 px (14, 29 and 41); the Disabled specimen has tabindex −1 and opacity 0.5. Sorting (batch 14, two cross-check runs). Round 1 flagged /placementAdvice/1 (generalises the In context card's top-right corner into a rule): our over-reading, so the item now says where the guide's In context card puts it. It flagged /facts/modes/2 and /configuration/1 for saying the size collection's own default is S, which the 0.1.78 evidence doesn't say (it is true in the package: the token file's default mode is S on dbe0e02, and FavoriteToggle.tsx says so at lines 70 and 95): our addition, so the evidence fact's description keeps to the evidence's words and the rule drops the clause. Its note called /configuration/9 (leave Favorite Toggle Color out of modes) an inference; it now says only what the fact says, that the collection follows isActive (FavoriteToggle.tsx 114–117 replaces a value passed in modes, and the building rules leave modes unset anyway). Rounds 1 and 2 flagged /facts/gaps/0 for naming dbe0e02 and the bug placeholder, which the evidence doesn't, and round 2 for “which phones honour”, which is the guide's Sizing and Sources copy rather than the evidence; dismissed in reviews/favoritetoggle.json with the source lines and the run above. Round 2's note asks a human to confirm loading on its own (the 0.1.60 evidence says it renders nothing): the installed source draws it (above), and the out-of-date evidence line is in the human flag. Left: the human flag (guide fix #538). Component Bug #541 (web tap area) for the coordinator to file or drop; the gap names it.",
+  "useWhen": [
+    {
+      "text": "On an image card, so people can save the item for later with one tap.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Favorite Toggle on an image card so people can save the item for later with one tap."
+      }
+    },
+    {
+      "text": "Saving an item, such as a plan, from its card.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Save a plan from its card"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "On a plain white surface: white glass on white almost disappears. Place it on imagery instead.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "White glass on white almost disappears."
+      }
+    },
+    {
+      "text": "A second heart on the same card: two hearts make people wonder which one saves.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Two hearts make people wonder which one saves."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Glass surface",
+      "holds": "The circle: frosted, so the heart stays readable over photos, while not saved; a white circle once saved.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Frosted circle that keeps the heart readable over photos."
+      }
+    },
+    {
+      "part": "Heart",
+      "holds": "The filled heart glyph (icon, ic_favorite by default): white while not saved, gold once saved.",
+      "required": true,
+      "from": {
+        "fact": "props:icon"
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "One heart per item, on imagery, saying exactly what gets saved.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One heart per item, on imagery, saying exactly what gets saved."
+      }
+    },
+    {
+      "text": "In the guide's In context card, the toggle sits in the top-right corner of the card image.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The toggle sits in the top-right corner of the card image."
+      }
+    },
+    {
+      "text": "Place it on imagery: the frosted circle reads clearly over a photo.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The frosted circle reads clearly over a photo."
+      }
+    },
+    {
+      "text": "Use one heart per item: one save action per card.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "One save action per card."
+      }
+    },
+    {
+      "text": "It is a fixed square set by Favorite Toggle Size: the toggle never stretches.",
+      "strength": "recommended",
+      "target": "Favorite Toggle Size",
+      "from": {
+        "section": "sizing",
+        "quote": "The toggle never stretches."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it describes every Favorite Toggle: its width and height are the Favorite Toggle Size token (FavoriteToggle.tsx lines 101–107 and 199–201, 0.1.78-dbe0e02), so a card or row around it does not resize it. It describes the component rather than asking anything of the designer, so it stays recommended."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Size is the only visual choice: Favorite Toggle Size sets it (S 14 px, M 29 px, L 41 px).",
+      "strength": "recommended",
+      "target": "Favorite Toggle Size",
+      "from": {
+        "section": "configuration",
+        "quote": "Size is the only visual choice."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "it means the one look a designer picks: saved, disabled and loading are states the screen sets, not looks, and the package keeps the icon prop for future reuse (Figma hardcodes the heart)."
+      }
+    },
+    {
+      "text": "With no Favorite Toggle Size the toggle is M (29 px), the Figma size.",
+      "strength": "recommended",
+      "target": "Favorite Toggle Size",
+      "value": "M",
+      "from": {
+        "section": "sources",
+        "quote": "Size comes from the Favorite Toggle Size mode (S 14, M 29, L 41 px) and defaults to M, the Figma size."
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "text": "Use Medium (29 px) on most cards: it is the Figma size.",
+      "strength": "recommended",
+      "target": "Favorite Toggle Size",
+      "value": "M",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma size, right for most cards."
+      }
+    },
+    {
+      "text": "Use Small (14 px) only on dense thumbnails: it fits tiny thumbnails but is hard to tap.",
+      "strength": "recommended",
+      "target": "Favorite Toggle Size",
+      "value": "S",
+      "from": {
+        "section": "configuration",
+        "quote": "use Small only on dense thumbnails"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it bounds where Small belongs for every Favorite Toggle: Small is 14 px and hard to tap (the guide's Configuration card and Do & Don't). It is a design rule the package does not check, so it stays recommended."
+      }
+    },
+    {
+      "text": "Use Large (41 px) on full-width hero images.",
+      "strength": "recommended",
+      "target": "Favorite Toggle Size",
+      "value": "L",
+      "from": {
+        "section": "configuration",
+        "quote": "For full-width hero images."
+      }
+    },
+    {
+      "text": "Don't shrink it on a large card: a 14 px heart is hard to see and to hit.",
+      "strength": "discouraged",
+      "target": "Favorite Toggle Size",
+      "value": "S",
+      "from": {
+        "section": "doDont",
+        "quote": "A 14 px heart is hard to see and to hit."
+      }
+    },
+    {
+      "text": "Let the screen own the saved state: it keeps the list of saved items and passes each card's toggle its saved state (isActive) and change handler (onChange).",
+      "strength": "recommended",
+      "target": "isActive",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the list of saved items and passes each card its saved state and change handler."
+      }
+    },
+    {
+      "text": "isActive makes the toggle controlled: it shows that value, and onChange reports the next one for the screen to keep.",
+      "strength": "recommended",
+      "target": "isActive",
+      "from": {
+        "fact": "props:isActive"
+      }
+    },
+    {
+      "text": "Saved uses Favorite Toggle Color Active: a white circle with a gold heart.",
+      "strength": "recommended",
+      "target": "Favorite Toggle Color",
+      "value": "Active",
+      "from": {
+        "section": "sources",
+        "quote": "Saved uses the Favorite Toggle Color Active mode: a white circle with a gold heart."
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "text": "Favorite Toggle Color follows isActive: Default while not saved, Active once saved.",
+      "strength": "recommended",
+      "target": "Favorite Toggle Color",
+      "from": {
+        "fact": "modes:Favorite Toggle Color"
+      }
+    },
+    {
+      "text": "Leave icon at its default heart (ic_favorite): Figma hardcodes the heart, and the prop is there purely for future reuse.",
+      "strength": "recommended",
+      "target": "icon",
+      "from": {
+        "fact": "props:icon"
+      }
+    },
+    {
+      "text": "loading true draws a same-size circular placeholder instead of the toggle; left unset, loading follows a surrounding SkeletonGroup.",
+      "strength": "recommended",
+      "target": "loading",
+      "from": {
+        "fact": "props:loading"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name what gets saved: the label names the item, as in “Save Gold savings plan to favorites”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name what gets saved"
+        }
+      },
+      {
+        "text": "The toggle has no visible text: its accessibility label carries what it saves.",
+        "strength": "recommended",
+        "target": "accessibilityLabel",
+        "from": {
+          "section": "content",
+          "quote": "The toggle has no visible text."
+        }
+      }
+    ],
+    "good": [
+      "Save Gold savings plan to favorites",
+      "Save Nifty 50 Index Fund to favorites",
+      "Save Digital Gold to favorites"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Not saved",
+      "when": "isActive false: a frosted circle with a white heart.",
+      "from": {
+        "section": "states",
+        "quote": "Not saved is a frosted circle with a white heart."
+      }
+    },
+    {
+      "state": "Saved",
+      "when": "isActive true: a white circle with a gold heart, as in Figma.",
+      "from": {
+        "section": "states",
+        "quote": "Saved is a white circle with a gold heart, as in Figma."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled true: dimmed to half opacity and skipped by keyboard focus.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to half opacity and skipped by keyboard focus."
+      }
+    },
+    {
+      "state": "Loading",
+      "when": "While the item loads: a same-size circle holds the place.",
+      "from": {
+        "section": "states",
+        "quote": "A same-size circle holds the place while the item loads."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Give it an accessibility label that names the item, so screen reader users hear what they are saving.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "Give it an accessibility label that names the item, so screen reader users hear what they are saving."
+      }
+    },
+    {
+      "text": "Without accessibilityLabel the toggle's name is the default “Favorite”, which doesn't name the item.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    },
+    {
+      "text": "On the web the saved state is announced (aria-checked).",
+      "strength": "recommended",
+      "target": "isActive",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the saved state is announced (aria-checked)."
+      },
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "text": "Tap area: on phones it reaches 44 px around the circle; in a web browser only the visible circle responds (14 px at Small, 29 px at Medium).",
+      "strength": "recommended",
+      "target": "Favorite Toggle Size",
+      "from": {
+        "section": "sizing",
+        "quote": "On phones its tap area reaches 44 px around the circle; in a web browser only the visible circle responds, 14 px for Small and 29 px for Medium."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "it is limited to web browsers, where react-native-web ignores the 44 px hit slop the toggle sets; on phones the tap area reaches 44 px."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Place it on imagery",
+      "dont": "Put it on a plain white surface",
+      "why": "White glass on white almost disappears.",
+      "from": {
+        "section": "doDont",
+        "quote": "Place it on imagery"
+      }
+    },
+    {
+      "do": "Use Medium on cards",
+      "dont": "Shrink it on a large card",
+      "why": "A 14 px heart is hard to see and to hit.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Medium on cards"
+      }
+    },
+    {
+      "do": "Use one heart per item",
+      "dont": "Repeat it on one card",
+      "why": "Two hearts make people wonder which one saves.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use one heart per item"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Save a plan from its card, the guide's In context: the toggle sits in the top-right corner of the card image, and its accessibility label names the plan. The screen keeps the list of saved items; isActive and onChange stand for that wiring, which passes this card its saved state and change handler. Size is left at its default, M (29 px).",
+      "jsx": "<FavoriteToggle isActive={false} onChange={(next) => {}} accessibilityLabel=\"Save Gold savings plan to favorites\" />",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the list of saved items and passes each card its saved state and change handler."
+      }
+    },
+    {
+      "purpose": "A saved item, the guide's States: isActive true draws a white circle with a gold heart. The label still names the item.",
+      "jsx": "<FavoriteToggle isActive onChange={(next) => {}} accessibilityLabel=\"Save Nifty 50 Index Fund to favorites\" />",
+      "from": {
+        "section": "states",
+        "quote": "Saved is a white circle with a gold heart, as in Figma."
+      }
+    },
+    {
+      "purpose": "On a full-width hero image: Favorite Toggle Size L (41 px), the size the guide's Configuration gives hero images.",
+      "jsx": "<FavoriteToggle isActive={false} onChange={(next) => {}} modes={{ 'Favorite Toggle Size': 'L' }} accessibilityLabel=\"Save Digital Gold to favorites\" />",
+      "from": {
+        "section": "configuration",
+        "quote": "For full-width hero images."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Favorite Toggle Size",
+      "default": "M",
+      "description": "With no Favorite Toggle Size mode the toggle is 29 × 29 (M); 0.1.77 defaulted to 14 × 14 (S).",
+      "quote": "With no `Favorite Toggle Size` mode the toggle is 29 × 29 (M); 0.1.77 defaulted to 14 × 14 (S).",
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "list": "modes",
+      "name": "Favorite Toggle Color",
+      "description": "Saved (isActive true) resolves Active: a white background, rgb(255, 255, 255), and a gold heart, rgb(206, 161, 90).",
+      "quote": "Saved resolves `Favorite Toggle Color` Active: background `rgb(255,255,255)` and a gold heart (`rgb(206,161,90)`)",
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    },
+    {
+      "list": "props",
+      "name": "isActive",
+      "description": "On the web the toggle carries aria-checked true or false.",
+      "quote": "The web element carries `aria-checked` true or false.",
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "In a web browser the tap area is only the visible circle (14 px at Small, 29 px at Medium): react-native-web ignores the 44 px hit slop the toggle sets, which phones honour. Still so on 0.1.78-dbe0e02 (Component Bug #541).",
+      "quote": "react-native-web's Pressable ignores `hitSlop`, so in a browser the tap area is still the visible circle.",
+      "checkedOn": "2026-10-01",
+      "checkedVersion": "0.1.78-5b6894b"
+    }
+  ]
+}

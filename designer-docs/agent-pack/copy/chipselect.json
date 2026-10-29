@@ -1,0 +1,305 @@
+{
+  "slug": "chipselect",
+  "label": "Chip Select",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "files": [
+    "src/guides/chipselect.guide.tsx"
+  ],
+  "evidence": "docs/evidence/chipselect.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T08:38:17.537Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "filter chip",
+    "chip",
+    "pill",
+    "date range",
+    "filter"
+  ],
+  "title": "Chip Select",
+  "summary": "Use a Chip Select to show one filter, such as a date range, and whether it is applied.",
+  "corePrinciple": "Idle names the filter; Active shows the chosen value and how to clear it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1901-4727",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-chipselect--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Icon, label, and a way out",
+      "description": "One pill holds a leading icon, the label, and, when Active, a close icon. The whole chip is a single press target.",
+      "blocks": [
+        "Shown at 2.5×",
+        "4",
+        "1",
+        "2",
+        "3",
+        "Leading icon",
+        "Hints at the kind of filter, such as a date.",
+        "Label",
+        "Names the filter, or the value once applied.",
+        "Close icon",
+        "Shows that pressing again clears the filter.",
+        "Container",
+        "Pill that turns lavender when Active.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Date"
+      ],
+      "anatomy": [
+        {
+          "part": "Leading icon",
+          "note": "Hints at the kind of filter, such as a date."
+        },
+        {
+          "part": "Label",
+          "note": "Names the filter, or the value once applied."
+        },
+        {
+          "part": "Close icon",
+          "note": "Shows that pressing again clears the filter."
+        },
+        {
+          "part": "Container",
+          "note": "Pill that turns lavender when Active."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Label, icon, and close icon",
+      "description": "Choose an icon that matches the filter, and keep the close icon whenever a press clears the filter.",
+      "blocks": [
+        "Calendar icon",
+        "The default, for date and period filters.",
+        "Filter icon",
+        "For other attribute filters.",
+        "Active with close icon",
+        "The × tells people a press removes the filter.",
+        "Active without close icon",
+        "Only when a press reopens the picker instead of clearing."
+      ],
+      "specimen": [
+        "Date",
+        "Category",
+        "Last 30 days"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Calendar icon",
+          "description": "The default, for date and period filters."
+        },
+        {
+          "title": "Filter icon",
+          "description": "For other attribute filters."
+        },
+        {
+          "title": "Active with close icon",
+          "description": "The × tells people a press removes the filter."
+        },
+        {
+          "title": "Active without close icon",
+          "description": "Only when a press reopens the picker instead of clearing."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Idle and Active",
+      "description": "One property switches the chip between Idle and Active. There is no disabled state; hide a filter that does not apply instead.",
+      "blocks": [
+        "Idle",
+        "Grey pill, dark text.",
+        "Active",
+        "Lavender pill, purple icon, text, and close icon."
+      ],
+      "specimen": [
+        "Date"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Idle",
+          "description": "Grey pill, dark text."
+        },
+        {
+          "title": "Active",
+          "description": "Lavender pill, purple icon, text, and close icon."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The label sets the width",
+      "description": "Height is fixed at 32 px. Width grows with the label and the icons, so short labels keep a row of chips on one line.",
+      "blocks": [
+        "Shown at 3×",
+        "86 × 32",
+        "Short and long"
+      ],
+      "specimen": [
+        "Date",
+        "Last 30 days"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short and long",
+          "description": ""
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the filter, then the choice",
+      "description": "While Idle, use one or two words for the filter. Once applied, replace them with the chosen value so the row reads as a summary.",
+      "blocks": [
+        "Idle labels",
+        "Applied labels"
+      ],
+      "specimen": [
+        "Date",
+        "Category",
+        "Account",
+        "Last 30 days",
+        "Groceries",
+        "Savings •• 4821"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Idle labels",
+          "description": ""
+        },
+        {
+          "title": "Applied labels",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Filters above a transaction list",
+      "description": "The screen owns each filter. Pressing an Idle chip opens a picker (not part of Chip Select); pressing an Active chip clears it. The screen updates the chip’s state and label after each choice.",
+      "blocks": [
+        "Showing all transactions"
+      ],
+      "specimen": [
+        "Date",
+        "Category"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make applied filters obvious",
+      "description": "Each pair shows what people read in the chip row.",
+      "blocks": [
+        "Do",
+        "Show the chosen value",
+        "“Last 30 days” tells people what the list is showing.",
+        "Don’t",
+        "Keep the generic label",
+        "An Active “Date” chip does not say which dates.",
+        "Match the icon to the filter",
+        "A calendar signals a date filter.",
+        "Use an unrelated icon",
+        "A home icon on a date filter confuses the meaning.",
+        "Keep the close icon when a press clears",
+        "The × shows how to remove the filter.",
+        "Hide it when a press clears",
+        "Without the ×, people cannot tell how to undo the filter."
+      ],
+      "specimen": [
+        "Last 30 days",
+        "Date",
+        "Groceries"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Show the chosen value",
+            "caption": "“Last 30 days” tells people what the list is showing.",
+            "specimen": "Last 30 days"
+          },
+          "dont": {
+            "title": "Keep the generic label",
+            "caption": "An Active “Date” chip does not say which dates.",
+            "specimen": "Date"
+          }
+        },
+        {
+          "do": {
+            "title": "Match the icon to the filter",
+            "caption": "A calendar signals a date filter.",
+            "specimen": "Date"
+          },
+          "dont": {
+            "title": "Use an unrelated icon",
+            "caption": "A home icon on a date filter confuses the meaning.",
+            "specimen": "Date"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the close icon when a press clears",
+            "caption": "The × shows how to remove the filter.",
+            "specimen": "Groceries"
+          },
+          "dont": {
+            "title": "Hide it when a press clears",
+            "caption": "Without the ×, people cannot tell how to undo the filter.",
+            "specimen": "Groceries"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Chip Select contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Active",
+        "Custom icon",
+        "Active without close icon",
+        "Checked 1 October 2026",
+        "Declared and installed jfs-components is 0.1.78 from the team’s private package repository. Figma’s State variant maps to the active property, which sets the ChipSelect State mode. The leading icon shows in both states, as in Figma. The close icon is part of the single press target, not a separate button. On the web the chip is a button named by its label and announced as pressed when Active; Enter and click activate it. Developers can replace the name with accessibilityLabel.",
+        "jfs-components",
+        "0.1.78",
+        "active",
+        "ChipSelect State",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
