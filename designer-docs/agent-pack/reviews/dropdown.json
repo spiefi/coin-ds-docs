@@ -1,0 +1,22 @@
+{
+  "flags": [
+    {
+      "field": "/placementAdvice/4",
+      "reason": "\"Items are 43 px tall\" is Figma's number: the guide's own size marks read 240 × 44 for one item, and in the installed Dropdown.tsx (0.1.78-dbe0e02, read from source) safeTextLineHeight raises the label line to 20 px, so an item is 44 px. Guide fix #523. Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The guide's In context section shows the menu closed. Its only caption is \"Menu closed\" and its only live text is \"September statement\". Nothing in that section shows it open with Download/Share/Report items, so \"The guide's In context, shown open\" misstates it. Those labels come from the Content section's \"Actions\" example.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "The guide's In context does show it open: in src/guides/dropdown.guide.tsx at 889444e, pressing More sets open, and {open && <List labels={ACTIONS} label=\"Statement actions\" width={220} … />} renders a Dropdown with Download statement, Share statement and Report a problem inside the same Card. The copy snapshot was taken with the menu closed, and the cross-check reads only that copy, so it could not see the open menu."
+    },
+    {
+      "field": "/placementAdvice/3",
+      "reason": "misreads-source: The cited sizing text is only the heading \"The screen sets the width\", and the section shows 240 px panels (\"240 × 132\", \"240 × 44\"). Nothing in the guide or the evidence gives 220 px for the menu, so \"or 220 for the menu\" is unsupported.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "220 is the guide's own width for the menu: the same In context line in src/guides/dropdown.guide.tsx at 889444e passes width={220} to the List, which sets style={{ width }} on the Dropdown. The rendered copy shows only the 240 px size marks because the menu is closed when the snapshot is taken."
+    }
+  ]
+}

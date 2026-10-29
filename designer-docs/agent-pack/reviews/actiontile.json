@@ -1,0 +1,22 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The Action Tile guide and its evidence were checked on 19 September 2026 on jfs-components 0.1.60, not on the installed 0.1.78 (mirror v0.1.78-dbe0e02). The installed ActionTile.tsx still matches what the entry says (read, not rendered). Re-extract once the guide is re-checked on 0.1.78 and published (#522). Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/anatomy/0",
+      "reason": "misreads-source: The phrase \"an IconCapsule by default\" implies ActionTile renders a default IconCapsule. Neither the guide nor the cited fact says that. The fact only says the slot \"Expects an IconCapsule or compatible component\", and the icon prop is optional.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "ActionTile does draw an IconCapsule when no icon is given: the installed ActionTile.tsx (0.1.78-dbe0e02) returns <IconCapsule modes={modes} /> when the icon prop is empty (\"Default fallback if no icon prop is provided, matching design default\"), and its JSDoc says it \"Displays an icon (defaulting to IconCapsule)\". So the icon capsule is always present, and \"an IconCapsule by default\" is the package's own behaviour."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The example adds a `wrap` prop to HStack, which nothing cited supports. The guide only says \"A public HStack owns the responsive group\" and, separately, \"Let the surrounding public layout wrap or scroll\"; it does not say HStack has a wrap prop.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, on the extraction's behalf; for Astra and Marcin to confirm",
+      "why": "HStack has a wrap prop: the installed HStack.d.ts declares wrap?: boolean | 'wrap' | 'nowrap' | 'wrap-reverse', and the example type-checks against jfs-components. The guide's own Quick actions In context is built the same way: QuickActionsExample in src/ActionGuides.tsx at cba512f renders <HStack wrap alignVertical=\"flex-start\"> around the three tiles. The cross-check reads only the rendered copy."
+    }
+  ]
+}

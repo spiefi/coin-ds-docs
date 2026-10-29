@@ -1,0 +1,306 @@
+{
+  "slug": "breadcrumbs",
+  "label": "Breadcrumbs",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "files": [
+    "src/guides/breadcrumbs.guide.tsx",
+    "src/LayoutGuides.tsx"
+  ],
+  "evidence": "docs/evidence/button-and-layout.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T01:42:12.153Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "path",
+    "trail",
+    "hierarchy",
+    "back navigation"
+  ],
+  "title": "Breadcrumbs",
+  "summary": "Use Breadcrumbs when people need a compact path back through a hierarchy. The trail moves from the broadest ancestor to the current page.",
+  "corePrinciple": "Preserve route order and keep the current page visible. Chevrons, link treatment, and current-page state are supplied by the published component.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9788-1945",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-breadcrumbs--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A path with a clear endpoint",
+      "description": "Read the route from ancestor to current and keep the component secondary to the page heading.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Breadcrumb trail",
+        "The published component communicates hierarchy without replacing the page title or primary navigation.",
+        "Ancestor links",
+        "Items are ordered from the broadest ancestor toward the current page. Each ancestor can take people back one level.",
+        "Automatic chevrons",
+        "Separators express the path between items. Do not add manual punctuation or duplicate chevrons.",
+        "Current page",
+        "The last item is current unless an explicit current item is supplied. The published story identifies the current page."
+      ],
+      "specimen": [
+        "Cloud",
+        "ITR",
+        "2024-25",
+        "Original"
+      ],
+      "anatomy": [
+        {
+          "part": "Breadcrumb trail",
+          "note": "The published component communicates hierarchy without replacing the page title or primary navigation."
+        },
+        {
+          "part": "Ancestor links",
+          "note": "Items are ordered from the broadest ancestor toward the current page. Each ancestor can take people back one level."
+        },
+        {
+          "part": "Automatic chevrons",
+          "note": "Separators express the path between items. Do not add manual punctuation or duplicate chevrons."
+        },
+        {
+          "part": "Current page",
+          "note": "The last item is current unless an explicit current item is supplied. The published story identifies the current page."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Configuration follows the route",
+      "description": "Breadcrumbs has no exposed properties in the inspected Figma source. Configure content hierarchy and let the published component render the path.",
+      "blocks": [
+        "Default trail",
+        "Ancestor to current",
+        "Order each item from the broadest ancestor to the current page.",
+        "Preserve route order",
+        "Wrapping trail",
+        "Wrap inside the host",
+        "A constrained parent lets a long trail wrap. The component does not auto-collapse the route.",
+        "System output of available width",
+        "Interactive trail",
+        "Select an ancestor to preview navigation.",
+        "Current page stays current",
+        "The final item reads as current unless the published component receives an explicit current item.",
+        "Do not duplicate primary navigation"
+      ],
+      "specimen": [
+        "Cloud",
+        "ITR",
+        "2024-25",
+        "Original",
+        "Returns",
+        "Summary"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "States follow hierarchy and width",
+      "description": "The published stories show a default trail, a long trail, and interactive ancestors. Width and route data drive the outcome.",
+      "blocks": [
+        "Default trail",
+        "Cloud → ITR → 2024-25 → Original.",
+        "Wrapping trail",
+        "Long trail",
+        "Items wrap within the constrained parent.",
+        "Interactive trail",
+        "Select an ancestor to preview navigation.",
+        "Interactive item",
+        "Ancestor items can navigate; current remains current.",
+        "State comes from the route.",
+        "The trail reflects hierarchy and available width. Do not represent a responsive collapse or item count as a designer-selected control."
+      ],
+      "specimen": [
+        "Cloud",
+        "ITR",
+        "2024-25",
+        "Original",
+        "Returns",
+        "Summary"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The parent supplies the constraint",
+      "description": "A Breadcrumbs trail stays in the available parent and wraps when the route is longer than the line.",
+      "blocks": [
+        "Wide parent",
+        "Default trail",
+        "Narrow parent",
+        "Wrapping trail",
+        "Width comes from the parent. A long trail wraps inside the available space; it does not auto-collapse into a menu."
+      ],
+      "specimen": [
+        "Cloud",
+        "ITR",
+        "2024-25",
+        "Original",
+        "Returns",
+        "Summary"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Make the relationship visible",
+      "description": "Breadcrumbs works when the route has meaningful ancestors and the current page needs orientation.",
+      "blocks": [
+        "01",
+        "Start broad",
+        "Order items from the broadest ancestor toward the current page.",
+        "Default trail",
+        "02",
+        "Name the current page",
+        "Keep the final item concise and aligned with the page title.",
+        "03",
+        "Wrap, do not collapse",
+        "A constrained parent can wrap a long path; it does not invent a different navigation pattern.",
+        "04",
+        "Keep it secondary",
+        "Breadcrumbs supports orientation. It should not compete with primary navigation or the page heading."
+      ],
+      "specimen": [
+        "Cloud",
+        "ITR",
+        "2024-25",
+        "Original"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Place the primitive where the relationship happens",
+      "description": "Use Breadcrumbs above page content when the route supports backtracking.",
+      "blocks": [
+        "Report hierarchy",
+        "Cloud / ITR / Original",
+        "Orient people above a report page when the route has meaningful ancestors.",
+        "Default trail",
+        "Breadcrumbs supports orientation.",
+        "Long route",
+        "Keep the path readable",
+        "Keep a long route in its constrained parent so people can still parse each level.",
+        "Wrapping trail",
+        "Wrapping is resolved by width.",
+        "Current location",
+        "Make the final item unmistakable",
+        "The current page should agree with the visible heading and carry current-page semantics.",
+        "Interactive trail",
+        "Select an ancestor to preview navigation."
+      ],
+      "specimen": [
+        "Cloud",
+        "ITR",
+        "2024-25",
+        "Original",
+        "Returns",
+        "Summary"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Protect structure and clarity",
+      "description": "These pairs keep hierarchy readable and leave route behavior to the published component.",
+      "blocks": [
+        "Do",
+        "Default trail",
+        "Order the trail from ancestor to current",
+        "The route becomes easier to scan and the current page has a clear endpoint.",
+        "Don’t",
+        "Illustration of incorrect route",
+        "Original",
+        "›",
+        "Cloud",
+        "ITR",
+        "Reverse the route to match a visual shortcut",
+        "The reading order stops matching the hierarchy and current location becomes ambiguous.",
+        "Wrapping trail",
+        "Let a long trail wrap inside its parent",
+        "Available width stays visible and the route remains available for orientation.",
+        "…",
+        "Invent an unapproved auto-collapse",
+        "The component does not decide to replace route levels with an ellipsis menu."
+      ],
+      "specimen": [
+        "Cloud",
+        "ITR",
+        "2024-25",
+        "Original",
+        "Returns",
+        "Summary"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Order the trail from ancestor to current",
+            "caption": "The route becomes easier to scan and the current page has a clear endpoint.",
+            "specimen": "Default trail · Cloud · ITR · 2024-25 · Original"
+          },
+          "dont": {
+            "title": "Reverse the route to match a visual shortcut",
+            "caption": "The reading order stops matching the hierarchy and current location becomes ambiguous.",
+            "specimen": "Illustration of incorrect route · Original · › · Cloud · › · ITR"
+          }
+        },
+        {
+          "do": {
+            "title": "Let a long trail wrap inside its parent",
+            "caption": "Available width stays visible and the route remains available for orientation.",
+            "specimen": "Wrapping trail · Cloud · ITR · 2024-25 · Original · Returns · Summary"
+          },
+          "dont": {
+            "title": "Invent an unapproved auto-collapse",
+            "caption": "The component does not decide to replace route levels with an ellipsis menu.",
+            "specimen": "Illustration of incorrect route · Cloud · › · ITR · › · …"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the published component",
+      "description": "The guide separates designer choices from behavior supplied by the public library at runtime.",
+      "blocks": [
+        "01",
+        "Figma source",
+        "Coin Components Library · node 9788:1945",
+        "02",
+        "Published Storybook",
+        "Breadcrumbs stories and interaction",
+        "Checked 15 September 2026",
+        "Live layout examples use public exports from jfs-components 0.1.60. Breadcrumbs previews are code-rendered documentation references built from public leaf primitives because the resolved package does not include Breadcrumbs; use the Storybook link for the shipped runtime.",
+        "Package check · 0.1.60",
+        "These previews are code-rendered documentation references built from public NavArrow and Text primitives with native anchors for keyboard semantics. Breadcrumbs is not yet included in the released component package; use the published stories for the shipped runtime."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,574 @@
+{
+  "slug": "emptystate",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide and docs/evidence/emptystate.md at b4988c5 (“publish nine Component Fix fixes on jfs-components c8526ae”). The guide's Sources note was checked on 23 October 2026 on the 23 October build, which the evidence's c8526ae section names (mirror v0.1.78-c8526ae, Biscuit's main at c8526ae, the #231 fix, verified 23 October), so items citing it carry that build. The evidence's 10 October sections (0.1.78-636f3f5: Contract, Browser measurements, Accessibility, Limits) describe the package before #231 and are out of date where its c8526ae section says so: placeholder copy and a default “Button” that does nothing, null slots that still render the defaults, custom slots that get no modes, no role, heading or name. None of those sentences is used; from the 10 October sections only Figma and token facts still true on the installed build are used (the red capsule's modes, the Emphasis Medium capsule colour, the 81 px L capsule), each resolved again from the installed tokens. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c8526ae and v0.1.78-dbe0e02 changes no file of EmptyState, IconCapsule, Button, react-utils or the design tokens (Card.tsx does change, #343). Installed EmptyState.tsx matches every guide sentence used here, read from source, not run: title and description default to empty and render only when set (the description also needs showDescription); the icon sits above the title and description, the button below; title 16 px bold (line height 18), description 12 px (16), centred; padding 4, 16 px between icon, title and description, 24 px above the button, no background; width comes from the parent; iconSlot left out gives a default IconCapsule wrapped aria-hidden, a passed node is cloned with Empty State's modes (its own modes win), and null or false removes it; buttonSlot null or false removes the button, a passed node is cloned the same way, and without one a Button with Empty State's modes appears when buttonLabel or onPress is set; the root's accessibility label is accessibilityLabel or the title and its role summary, which react-native-web 0.21.2 renders as a section with role region; the title is a header, rendered as h1 (heading); IconCapsule renders role image and drops any accessibilityLabel, so a passed icon is an unnamed image. Two guide sentences read wider than the code: Content's “shows a button only when you give it a label” and the Don't caption “Without a button label there’s no button”: onPress alone also draws a Button, with an empty label (label={buttonLabel ?? ''}); the Sources sentence (“a label or an action”) is exact. States' “Its button has the usual Button states”: the built-in button takes no disabled, so the Retrying state needs a Button in buttonSlot, as the guide's own Retrying card does. From the source, not run: Card clones its modes into its children and adds AppearanceBrand Neutral (the guide's In context sets it on the Card; on dbe0e02 it is also Card's default), so in the In context card Neutral reaches Empty State, its Icon Capsule and its button: the capsule resolves to grey #545961 (Neutral, Emphasis Medium) and the button to dark grey #303338, not the soft brand icon and gold button the other sections show. No guide sentence covers this, so it is not a rule here; the In context example keeps the guide's composition and says so. Examples follow the building rules: no Color Mode (the guide sets Light on every component and Host). Modes are kept only where an entry rule says the content needs them: the icon's colour follows the reason (Configuration “Pick the icon and its colour for why the area is empty”, the Do “A soft icon for an empty list; red only when something failed”), so the failed case's Icon Capsule keeps Semantic Intent System with AppearanceSystem negative (the evidence names them for Figma's red capsule; set on the capsule, not on Empty State, whose modes would also reach its button), and the empty-list capsules keep Emphasis Medium, the pale capsule (#fde8c9) the evidence measures for the guide's “Make a payment” composition, against the default gold #cea15a. The soft-icon reading of Emphasis Medium rests on the guide's code and that measurement, not on a sentence that names the mode: an assumption for review. Left out: Icon Capsule Size L on every capsule and Button / Size S on Empty State (no guide rule says this content needs them; Sources describes Figma's 81 px icon and 32 px button, kept as evidence facts; the button is a built-in part, which the building rules keep to its props), and AppearanceBrand Neutral on the Card (Card's default on dbe0e02). IconCapsule has no entry in this pack; the examples use it in iconSlot because the anatomy names the icon as “An Icon Capsule you pass in” and the guide never shows the default icon (as BrandChip's entry uses Avatar in avatarSlot). Copy and data are the guide's own (Recent payments, No payments yet, Couldn’t load payments, ic_wallet, ic_error). Left out of examples (three at most): the No results and Without a description cards (their copy is in content good), the list the In context card swaps in after a payment (ListGroup, ListItem and a MoneyValue, which has no entry) and its Clear payments button (screen state), the readout, the playground, the Host wrapper, testID and the Don'ts. Not recorded: style and testID (the building rules keep style off Coin components), accessibilityRole (the guide doesn't cover overriding it), the evidence's 236 × 211 and 236 × 227 measurements and Figma's unused slot/gap, the Color Mode text colours, and the 10 October line that nothing announces the empty state (pre-#231, not re-checked). Not recorded as gaps, per the pack's rules: dark mode (no background, so the page shows Light only) and the unnamed passed-in icon. #231's problems are fixed and verified on c8526ae, so gaps hold only the Storybook that predates this build. The Sources blocks that end “jfs-components”, “0.1.78”, “null” are the note's code elements; the paragraph itself reads “passing null removes the icon or the button”, so no value is missing. Content bad is empty: the Don'ts show configurations (no button, the error icon on an empty list, no title), not bad wording. Sorting (batch 6), after the cross-check: “red only when something failed” is a Do caption, so it stays recommended, not required; the iconSlot and buttonSlot behaviour items, which rest on facts, are recommended too; the In context example's purpose no longer says the Card's AppearanceBrand Neutral reaches the Empty State (true in the installed Card.tsx, which adds Neutral and passes its modes to its children, but nothing cited says it; it is raised on the guide fix instead); the four mode facts say only what the evidence measures. Second cross-check (batch 6): the Title part no longer says it is not shown when empty (nothing cited says so), and the Button / Size fact no longer gives the 97 × 42 size, which the evidence measured on the old placeholder button.",
+  "useWhen": [
+    {
+      "text": "Use an Empty State when a list or screen has nothing to show, to say why and offer one next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Empty State when a list or screen has nothing to show, to say why and offer one next step."
+      }
+    },
+    {
+      "text": "Say what's missing, then what to do next.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Say what’s missing, then what to do next."
+      }
+    },
+    {
+      "text": "Nothing to show yet, such as no payments yet: say so, with a soft brand icon.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A soft brand icon when there’s simply nothing to show yet."
+      }
+    },
+    {
+      "text": "A search or filter found nothing: say so and offer a way back, such as Clear search.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "After a search or filter, say so and offer a way back."
+      }
+    },
+    {
+      "text": "Loading failed: a red error icon, and the button retries, such as Try again.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A red error icon when loading failed; the button retries."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Keeping it once there is something to list: the screen shows the Empty State while there's nothing to list and replaces it with the list when there is.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "the screen shows it while there’s nothing to list and replaces it when there is."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Icon",
+      "holds": "An Icon Capsule you pass in iconSlot; its own modes set its size and colour. Left out, Empty State shows its own icon; null removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An Icon Capsule you pass in; its own modes set size and colour."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title: 16 px bold; says what's missing.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "16 px bold; says what’s missing."
+      }
+    },
+    {
+      "part": "Description",
+      "holds": "description: 12 px; why it's empty or what to do. Hidden when showDescription is false.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px; why it’s empty or what to do."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "Set with buttonLabel and onPress; without them there's no button. buttonSlot replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Set with buttonLabel and onPress; without them there’s no button."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Empty State takes its width from its container and centres its text.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Empty State takes its width from its container and centres its text."
+      }
+    },
+    {
+      "text": "Show it where the list would be, such as inside the Recent payments card, until there's a payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The Recent payments card shows the empty state until there’s a payment."
+      }
+    },
+    {
+      "text": "When the action adds something (Make a payment adds a payment), the screen swaps the Empty State for the list.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Make a payment adds one, and the screen swaps the empty state for the list."
+      }
+    },
+    {
+      "text": "Empty State has no background of its own: it shows on the surface that holds it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It has no background, so this page shows Light only."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "\"only\" is about the guide page, which shows Light alone because Empty State has no background; it sets no limit on Empty State in use. The rule takes only the part about the background."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "Figma's version is 236 px wide; in code the width comes from the container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Figma’s version is 236 px wide."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pick the icon and its colour for why the area is empty, and label the button with the next step.",
+      "strength": "recommended",
+      "target": "iconSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "Pick the icon and its colour for why the area is empty, and label the button with the next step."
+      }
+    },
+    {
+      "text": "Nothing yet: a soft brand icon when there's simply nothing to show yet.",
+      "strength": "recommended",
+      "target": "iconSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "A soft brand icon when there’s simply nothing to show yet."
+      }
+    },
+    {
+      "text": "Couldn't load: a red error icon when loading failed; the button retries.",
+      "strength": "recommended",
+      "target": "iconSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "A red error icon when loading failed; the button retries."
+      }
+    },
+    {
+      "text": "Match the icon to the reason: a soft icon for an empty list, and red only when something failed.",
+      "strength": "recommended",
+      "target": "iconSlot",
+      "from": {
+        "section": "doDont",
+        "quote": "A soft icon for an empty list; red only when something failed."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "\"only\" keeps the red icon for failures in every Empty State: an empty list gets a soft icon. The paired Don't (the error icon on an empty list) gives the reason."
+      }
+    },
+    {
+      "text": "Don't use the error icon for an empty list: a red alert makes “No payments yet” look like a failure.",
+      "strength": "discouraged",
+      "target": "iconSlot",
+      "from": {
+        "section": "doDont",
+        "quote": "A red alert makes “No payments yet” look like a failure."
+      }
+    },
+    {
+      "text": "For the red error icon, the Icon Capsule takes Semantic Intent System with AppearanceSystem negative: Figma's red capsule (Icon Capsule Size L makes it Figma's 81 px).",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "negative",
+      "from": {
+        "section": "evidence",
+        "quote": "The red capsule plus gold button equals Icon Capsule Size L + System negative on the capsule and Button / Size S + Brand Primary on the button."
+      },
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "For the soft icon, the guide's empty-payments composition (Make a payment) gives the Icon Capsule Emphasis Medium: a pale capsule (#fde8c9) instead of the default gold (#cea15a).",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Medium",
+      "from": {
+        "section": "evidence",
+        "quote": "`Emphasis: Medium` capsule; Button size S “Make a payment”): 360 × 213; capsule `#fde8c9`"
+      },
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Modes set on Empty State reach the icon and button you pass in, and their own modes win.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "sources",
+        "quote": "Its modes reach the icon and button you pass in, and their own modes win."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "Leave iconSlot out for Empty State's own icon, or pass null to remove the icon. A node you pass gets Empty State's modes.",
+      "strength": "recommended",
+      "target": "iconSlot",
+      "from": {
+        "fact": "props:iconSlot"
+      }
+    },
+    {
+      "text": "The button comes from a label and an action: buttonLabel and onPress.",
+      "strength": "recommended",
+      "target": "buttonLabel",
+      "from": {
+        "section": "anatomy",
+        "quote": "You pass in the icon; the button comes from a label and an action."
+      }
+    },
+    {
+      "text": "buttonSlot replaces the button, and null removes it. Left out, Empty State draws its own button when buttonLabel or onPress is set, and no button otherwise.",
+      "strength": "recommended",
+      "target": "buttonSlot",
+      "from": {
+        "fact": "props:buttonSlot"
+      }
+    },
+    {
+      "text": "Turn the description off (showDescription false) when the title says enough.",
+      "strength": "recommended",
+      "target": "showDescription",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "Turn the description off when the title says enough."
+      }
+    },
+    {
+      "text": "The spacing is built in: 4 px of padding, 16 px between the icon, title and description, and 24 px above the button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It has 4 px of padding, 16 px between the icon, title, and description, and 24 px above the button."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write the title as what's missing, in a few words.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Write the title as what’s missing, in a few words."
+        }
+      },
+      {
+        "text": "Use the description for why it's empty or what will appear.",
+        "strength": "recommended",
+        "target": "description",
+        "from": {
+          "section": "content",
+          "quote": "Use the description for why it’s empty or what will appear"
+        }
+      },
+      {
+        "text": "Label the button with the next step.",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "section": "content",
+          "quote": "label the button with the next step"
+        }
+      },
+      {
+        "text": "Empty State has no copy of its own and shows a button only when you give it a label, so set all three: title, description and buttonLabel.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Empty State has no copy of its own and shows a button only when you give it a label, so set all three."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "\"only\" describes when Empty State draws its own button, without a buttonSlot; it is the guide's reason to set a label, not a constraint (a press handler alone also draws a button, with no label)."
+        }
+      },
+      {
+        "text": "Name the next step on the button, such as “Make a payment”, and let the screen handle the press (onPress).",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "“Make a payment” names the next step, and the screen handles the press."
+        }
+      },
+      {
+        "text": "Don't leave out the button label: without it there's no button, so people have no way forward.",
+        "strength": "discouraged",
+        "target": "buttonLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "Without a button label there’s no button, so people have no way forward."
+        }
+      }
+    ],
+    "good": [
+      "No payments yet",
+      "Payments you make will show up here.",
+      "Make a payment",
+      "No matching payments",
+      "Try a different name or amount.",
+      "Clear search",
+      "Couldn’t load payments",
+      "Check your connection and try again.",
+      "Try again"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Shown while empty",
+      "when": "Empty State has no states of its own: the screen shows it while there's nothing to list and replaces it when there is.",
+      "from": {
+        "section": "states",
+        "quote": "Empty State has no states of its own: the screen shows it while there’s nothing to list and replaces it when there is."
+      }
+    },
+    {
+      "state": "Ready",
+      "when": "The button waits for a press.",
+      "from": {
+        "section": "states",
+        "quote": "The button waits for a press."
+      }
+    },
+    {
+      "state": "Retrying",
+      "when": "While a retry is already running, the button is disabled. Empty State's own button takes no disabled, so the guide's Retrying example puts a disabled Button in buttonSlot.",
+      "from": {
+        "section": "states",
+        "quote": "Disable the button while a retry is already running."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web a titled Empty State is a region named by its title, which is a heading.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "sources",
+        "quote": "On the web a titled Empty State is a region named by its title, which is a heading."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "Write a title: it is the heading and names the area for screen readers.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "doDont",
+        "quote": "“No payments yet” is the heading and names the area for screen readers."
+      }
+    },
+    {
+      "text": "Don't leave the title out: the area then has no heading or name, so screen readers can't say what's empty.",
+      "strength": "discouraged",
+      "target": "title",
+      "from": {
+        "section": "doDont",
+        "quote": "The area has no heading or name, so screen readers can’t say what’s empty."
+      }
+    },
+    {
+      "text": "Empty State's own icon is hidden from screen readers, but an icon you pass in is read as an unnamed image.",
+      "strength": "recommended",
+      "target": "iconSlot",
+      "from": {
+        "section": "sources",
+        "quote": "Its default icon is hidden from screen readers, but an icon you pass in is read as an unnamed image."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "accessibilityLabel names the area in place of the title; with neither, Empty State has no role or name.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Offer the next step",
+      "dont": "Leave out the button",
+      "why": "Without a button label there’s no button, so people have no way forward.",
+      "from": {
+        "section": "doDont",
+        "quote": "“Make a payment” names the next step, and the screen handles the press."
+      }
+    },
+    {
+      "do": "Match the icon to the reason",
+      "dont": "Use the error icon for an empty list",
+      "why": "A red alert makes “No payments yet” look like a failure.",
+      "from": {
+        "section": "doDont",
+        "quote": "A soft icon for an empty list; red only when something failed."
+      }
+    },
+    {
+      "do": "Write a title",
+      "dont": "Leave the title out",
+      "why": "The area has no heading or name, so screen readers can’t say what’s empty.",
+      "from": {
+        "section": "doDont",
+        "quote": "“No payments yet” is the heading and names the area for screen readers."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "An empty payments card, the guide's In context: the Recent payments card shows the Empty State until there's a payment; Make a payment (onPress) adds one, and the screen swaps the Empty State for the list. The icon is the guide's own Nothing yet capsule (ic_wallet with Emphasis Medium, the soft icon for an empty list).",
+      "jsx": "<Card>\n  <Card.Title>Recent payments</Card.Title>\n  <EmptyState\n    iconSlot={<IconCapsule iconName=\"ic_wallet\" modes={{ Emphasis: 'Medium' }} />}\n    title=\"No payments yet\"\n    description=\"Payments you make will show up here.\"\n    buttonLabel=\"Make a payment\"\n    onPress={() => {}}\n  />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The Recent payments card shows the empty state until there’s a payment. Make a payment adds one, and the screen swaps the empty state for the list."
+      }
+    },
+    {
+      "purpose": "Couldn't load: a red error icon when loading failed (Semantic Intent System with AppearanceSystem negative, set on the Icon Capsule so the button keeps its own look), and the button retries.",
+      "jsx": "<EmptyState\n  iconSlot={<IconCapsule iconName=\"ic_error\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }} />}\n  title=\"Couldn’t load payments\"\n  description=\"Check your connection and try again.\"\n  buttonLabel=\"Try again\"\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "A red error icon when loading failed; the button retries."
+      }
+    },
+    {
+      "purpose": "Retrying: while a retry is already running, the button is disabled. Empty State's own button takes no disabled, so a disabled Button goes in buttonSlot, as in the guide's Retrying example; it gets Empty State's modes.",
+      "jsx": "<EmptyState\n  iconSlot={<IconCapsule iconName=\"ic_error\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }} />}\n  title=\"Couldn’t load payments\"\n  description=\"Check your connection and try again.\"\n  buttonSlot={<Button label=\"Try again\" disabled />}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Disable the button while a retry is already running."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "title",
+      "description": "On the web, a titled Empty State is a section with role region named by its title (accessibilityRole summary), and the title is a heading (h1).",
+      "quote": "a titled Empty State is `section role=\"region\"` named by its title (`accessibilityRole: 'summary'`); the title is an `h1`.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Names the Empty State in place of its title. Without a title and without accessibilityLabel, the Empty State has no role or name.",
+      "quote": "Without a title (and no `accessibilityLabel`) there is no role or name.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "iconSlot",
+      "description": "Left out, the default icon is hidden from screen readers (aria-hidden on the web); an IconCapsule you pass stays an unnamed image (role img).",
+      "quote": "The default icon is wrapped `aria-hidden`; an IconCapsule passed in `iconSlot` stays an unnamed `role=\"img\"`.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "buttonLabel",
+      "description": "With buttonLabel or onPress, and no buttonSlot, Empty State draws a Button that gets its modes; with neither, there is no button.",
+      "quote": "new `buttonLabel` and `onPress` give a default Button (modes from Empty State) only when one of them is set",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "slots",
+      "name": "iconSlot",
+      "description": "null or false removes the icon; a node you pass gets Empty State's modes, and its own modes win.",
+      "quote": "`iconSlot={null}` / `buttonSlot={null}` (or `false`) remove the slot; custom slots get Empty State's modes through `cloneChildrenWithModes`, and the slot's own `modes` win.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "slots",
+      "name": "buttonSlot",
+      "description": "null or false removes the button; a node you pass gets Empty State's modes, and its own modes win.",
+      "quote": "`iconSlot={null}` / `buttonSlot={null}` (or `false`) remove the slot; custom slots get Empty State's modes through `cloneChildrenWithModes`, and the slot's own `modes` win.",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceSystem",
+      "description": "On the Icon Capsule in iconSlot, Semantic Intent System with AppearanceSystem negative gives Figma's red error capsule (#f50030). Set on Empty State instead, it would also reach the button.",
+      "quote": "The red capsule plus gold button equals Icon Capsule Size L + System negative on the capsule and Button / Size S + Brand Primary on the button.",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Emphasis",
+      "description": "On the Icon Capsule in iconSlot, Emphasis Medium gives a pale capsule (#fde8c9); the default capsule is gold (#cea15a).",
+      "quote": "`Emphasis: Medium` capsule; Button size S “Make a payment”): 360 × 213; capsule `#fde8c9`",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Icon Capsule Size",
+      "description": "On the Icon Capsule, L is Figma's 81 px capsule with a 36 px icon; the default capsule is 42 px.",
+      "quote": "capsule 81 × 81 red `#f50030` with a 36 px icon",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "modes",
+      "name": "Button / Size",
+      "description": "The guide sets S on Empty State, whose modes reach its button, for Figma's 32 px button.",
+      "quote": "`ES` passes `buttonLabel` and `onPress` with `Button / Size: S` on Empty State instead of a button slot",
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The published Storybook predates this build (the #231 fix on c8526ae), so its Empty State pages are older than the package.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook predates this build."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ]
+}

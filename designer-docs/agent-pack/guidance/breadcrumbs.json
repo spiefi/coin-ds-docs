@@ -1,0 +1,331 @@
+{
+  "slug": "breadcrumbs",
+  "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch6, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from src/guides/breadcrumbs.guide.tsx and the shared src/LayoutGuides.tsx at 09a45da, using only the Breadcrumbs parts (META.breadcrumbs, the BREADCRUMB_* constants, BreadcrumbTrail, BreadcrumbsAnatomy, BreadcrumbsGapNote and the breadcrumbs branches of the shared page), and from the Breadcrumbs lines of the shared docs/evidence/button-and-layout.md (checked 19 September 2026 on 0.1.60). The guide's Sources note was checked on 15 September 2026 on jfs-components 0.1.60, when the package had no Breadcrumbs export, so its previews are drawn from NavArrow and Text, not the component. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October), which does export Breadcrumbs (src/components/index.ts exports Breadcrumbs, BreadcrumbsProps and BreadcrumbItem). That contradicts three sentences, none of them used here: the Sources note's “because the resolved package does not include Breadcrumbs” and “Breadcrumbs is not yet included in the released component package”, and the evidence's “It does not contain a Breadcrumbs component or export.” (with its Known limitations line saying the same for 0.1.60). Read from the installed Breadcrumbs.tsx source, not run, the component matches the guide's route and current-page sentences: items is the trail from ancestor to current; it adds an ic_chevron_right chevron before every item after the first (grouped with that item, so a wrapped line starts with a chevron); the item with current: true is current, otherwise the last item; it wraps (an HStack with wrap) and never collapses the route; onItemPress is not called for the current crumb unless that crumb has its own onPress. Three guide sentences read wider than the code. (1) “Chevrons, link treatment, and current-page state are supplied by the published component.”: every crumb uses the same Text with the same modes, so the current crumb looks like its ancestors and ancestors get no link colour or underline; the component supplies only the link role, a pointer cursor on the web, 70% opacity while pressed, and aria-current page (web) or the selected state (native) on the current crumb. The guide's own previews draw the current item at weight 600, so “Make the final item unmistakable” rests on the heading and the semantics, not on a visual difference. (2) “Each ancestor can take people back one level.”: ancestors are pressable only when onItemPress or the item's own onPress is given; without one they are plain text. (3) “A long trail wraps inside the available space”: the trail wraps between crumbs only; each label is a single line with no shrink, and Text's singleLine overflows on the web rather than wrapping or truncating, so one very long label can run past its parent. The evidence's accessibility finding still matches the source: Breadcrumbs passes as=\"nav\" to HStack, which spreads it onto a React Native View, and react-native-web 0.21.2's View does not forward as, so the root is a div with aria-label Breadcrumb and no navigation role (recorded as a gap; read, not run). The configuration rules rest on the package facts where the guide's sentence says the same thing (items, BreadcrumbItem.current, onItemPress). The guide's sentence “Breadcrumbs has no exposed properties in the inspected Figma source.” describes Figma, not the package; it is kept as a Figma and code gap and dated to the guide's 15 September check. Examples follow the building rules (no Color Mode, no modes) and use the real Breadcrumbs export with the guide's own BREADCRUMB_ROUTES labels (Cloud, ITR, 2024-25, Original; and Returns, Summary for the long route), keeping current: true on the last item as the guide's data does; press handlers are stubs. Assumption: the In context report page has no heading under the trail in the guide; the first example adds a Title reading Original because the guide says the current page should agree with the visible heading. Left out of examples: the guide's interactive status line (“Selected ancestor: …”, documentation chrome), the playground, the scenario titles (“Cloud / ITR / Original” is a card heading, not a trail) and the Don't illustrations. Not recorded: modes, style and testID (the building rules keep modes and style off), key, BreadcrumbItem.onPress and BreadcrumbItem.accessibilityLabel, the 32 px hit area, and the evidence's line on ordering, separators and no auto-collapse (the guide's own sentences and the declared facts already say it, and the source matches). Content good and bad are empty: the guide shows route data, not copy to write or avoid. The Sources note renders no line with a missing value. Sorting (batch 6), after the cross-check: BreadcrumbItem.current and onItemPress are recommended, not required (both are optional in the types, and the guide only says ancestors can take people back); the separator rule keeps its context (no manual punctuation or duplicate chevrons between items: labels such as 2024-25 keep their own punctuation); Ancestor links and Automatic chevrons are not always present (a one-item trail has neither), so their anatomy required is false; the first example no longer adds a Title, which nothing cited supports; gap 0 keeps the evidence's Storybook-iframe wording and its follow-up caveat; gap 1 says only what the guide's Configuration says.",
+  "useWhen": [
+    {
+      "text": "People need a compact path back through a hierarchy.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Breadcrumbs when people need a compact path back through a hierarchy."
+      }
+    },
+    {
+      "text": "The route has meaningful ancestors and the current page needs orientation.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Breadcrumbs works when the route has meaningful ancestors and the current page needs orientation."
+      }
+    },
+    {
+      "text": "Orient people above a report page when the route has meaningful ancestors.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Orient people above a report page when the route has meaningful ancestors."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "In place of the page title or primary navigation: Breadcrumbs shows the hierarchy beside them, without replacing them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "anatomy",
+        "quote": "The published component communicates hierarchy without replacing the page title or primary navigation."
+      }
+    },
+    {
+      "text": "To duplicate primary navigation.",
+      "strength": "discouraged",
+      "from": {
+        "section": "configuration",
+        "quote": "Do not duplicate primary navigation"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Breadcrumb trail",
+      "holds": "The whole trail, built from items: it shows the hierarchy without replacing the page title or primary navigation.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The published component communicates hierarchy without replacing the page title or primary navigation."
+      }
+    },
+    {
+      "part": "Ancestor links",
+      "holds": "The items before the current page, from the broadest ancestor toward it. Each can take people back one level when onItemPress (or the item's own onPress) is given.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Items are ordered from the broadest ancestor toward the current page. Each ancestor can take people back one level."
+      }
+    },
+    {
+      "part": "Automatic chevrons",
+      "holds": "The separators between items, which express the path; the component adds them, so add no manual punctuation or duplicate chevrons.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Separators express the path between items. Do not add manual punctuation or duplicate chevrons."
+      }
+    },
+    {
+      "part": "Current page",
+      "holds": "The item marked current (BreadcrumbItem.current), or the last item when none is marked.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The last item is current unless an explicit current item is supplied."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place Breadcrumbs above page content, when the route supports backtracking.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use Breadcrumbs above page content when the route supports backtracking."
+      }
+    },
+    {
+      "text": "Keep it secondary: it supports orientation and should not compete with primary navigation or the page heading.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Breadcrumbs supports orientation. It should not compete with primary navigation or the page heading."
+      }
+    },
+    {
+      "text": "The trail's width comes from its parent.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Width comes from the parent."
+      }
+    },
+    {
+      "text": "Keep a long route in its constrained parent so people can still parse each level.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Keep a long route in its constrained parent so people can still parse each level."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "items is the trail in route order, from the broadest ancestor to the current page; each item has a label.",
+      "strength": "required",
+      "target": "items",
+      "from": {
+        "fact": "props:items"
+      }
+    },
+    {
+      "text": "The current page is the item with current: true; when no item has it, the last item is current. The current crumb is not pressable unless it has its own onPress.",
+      "strength": "recommended",
+      "target": "BreadcrumbItem.current",
+      "from": {
+        "fact": "props:BreadcrumbItem.current"
+      }
+    },
+    {
+      "text": "Give onItemPress so ancestors can take people back: it is called with the pressed item and its index, and not for the current crumb unless that crumb has its own onPress.",
+      "strength": "recommended",
+      "target": "onItemPress",
+      "from": {
+        "fact": "props:onItemPress"
+      }
+    },
+    {
+      "text": "Configure the content hierarchy (the items) and let the component render the path.",
+      "strength": "recommended",
+      "target": "items",
+      "from": {
+        "section": "configuration",
+        "quote": "Configure content hierarchy and let the published component render the path."
+      }
+    },
+    {
+      "text": "Do not draw chevrons, link styling or a current-page treatment yourself: the component supplies them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Chevrons, link treatment, and current-page state are supplied by the published component."
+      }
+    },
+    {
+      "text": "A constrained parent lets a long trail wrap; the component does not auto-collapse the route.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A constrained parent lets a long trail wrap. The component does not auto-collapse the route."
+      }
+    },
+    {
+      "text": "Do not present a responsive collapse or an item count as a designer-selected control: the trail reflects the hierarchy and the available width.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Do not represent a responsive collapse or item count as a designer-selected control."
+      }
+    },
+    {
+      "text": "Do not reverse the route to match a visual shortcut: the reading order stops matching the hierarchy and the current location becomes ambiguous.",
+      "strength": "discouraged",
+      "target": "items",
+      "from": {
+        "section": "doDont",
+        "quote": "The reading order stops matching the hierarchy and current location becomes ambiguous."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Start broad: order items from the broadest ancestor toward the current page.",
+        "strength": "recommended",
+        "target": "items",
+        "from": {
+          "section": "content",
+          "quote": "Order items from the broadest ancestor toward the current page."
+        }
+      },
+      {
+        "text": "Preserve route order and keep the current page visible in the trail.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Preserve route order and keep the current page visible."
+        }
+      },
+      {
+        "text": "Name the current page: keep the final item concise and aligned with the page title.",
+        "strength": "recommended",
+        "target": "BreadcrumbItem.label",
+        "from": {
+          "section": "content",
+          "quote": "Keep the final item concise and aligned with the page title."
+        }
+      },
+      {
+        "text": "Do not add manual punctuation or duplicate chevrons between items: the separators express the path, and the component supplies them.",
+        "strength": "discouraged",
+        "from": {
+          "section": "anatomy",
+          "quote": "Do not add manual punctuation or duplicate chevrons."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Default trail",
+      "when": "The ancestors in route order, ending at the current page, such as Cloud, ITR, 2024-25, Original.",
+      "from": {
+        "section": "states",
+        "quote": "Cloud → ITR → 2024-25 → Original."
+      }
+    },
+    {
+      "state": "Long trail",
+      "when": "A route longer than the line: the items wrap within the constrained parent.",
+      "from": {
+        "section": "states",
+        "quote": "Items wrap within the constrained parent."
+      }
+    },
+    {
+      "state": "Interactive item",
+      "when": "With onItemPress, ancestor items navigate; the current item stays current.",
+      "from": {
+        "section": "states",
+        "quote": "Ancestor items can navigate; current remains current."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The current page should agree with the visible heading and carry current-page semantics; the component marks the current crumb.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The current page should agree with the visible heading and carry current-page semantics."
+      }
+    },
+    {
+      "text": "The trail is announced as “Breadcrumb” unless accessibilityLabel names it.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Order the trail from ancestor to current",
+      "dont": "Reverse the route to match a visual shortcut",
+      "why": "The reading order stops matching the hierarchy and current location becomes ambiguous.",
+      "from": {
+        "section": "doDont",
+        "quote": "Order the trail from ancestor to current"
+      }
+    },
+    {
+      "do": "Let a long trail wrap inside its parent",
+      "dont": "Invent an unapproved auto-collapse",
+      "why": "The component does not decide to replace route levels with an ellipsis menu.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let a long trail wrap inside its parent"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A report page, the guide's In context: the trail sits above the page content, from the broadest ancestor to the current page (the guide's default trail: Cloud, ITR, 2024-25, Original); ancestors take people back through onItemPress.",
+      "jsx": "<Breadcrumbs\n  items={[\n    { label: 'Cloud' },\n    { label: 'ITR' },\n    { label: '2024-25' },\n    { label: 'Original', current: true },\n  ]}\n  onItemPress={() => {}}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Orient people above a report page when the route has meaningful ancestors."
+      }
+    },
+    {
+      "purpose": "A long route: the trail wraps inside its parent instead of collapsing, so every level stays readable.",
+      "jsx": "<Breadcrumbs\n  items={[\n    { label: 'Cloud' },\n    { label: 'ITR' },\n    { label: '2024-25' },\n    { label: 'Original' },\n    { label: 'Returns' },\n    { label: 'Summary', current: true },\n  ]}\n  onItemPress={() => {}}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Keep a long route in its constrained parent so people can still parse each level."
+      }
+    }
+  ],
+  "evidenceFacts": [],
+  "gaps": [
+    {
+      "text": "In the inspected Storybook iframe the trail's root is a div with an accessible label but no navigation role; the evidence asks for a source accessibility follow-up.",
+      "quote": "the runtime root is a `div` with an accessible label but no `navigation` role",
+      "checkedOn": "2026-09-19",
+      "checkedVersion": "0.1.60"
+    },
+    {
+      "text": "Figma's Breadcrumbs exposes no properties in the inspected Figma source.",
+      "from": {
+        "section": "configuration",
+        "quote": "Breadcrumbs has no exposed properties in the inspected Figma source."
+      },
+      "checkedOn": "2026-09-15",
+      "checkedVersion": "0.1.60"
+    }
+  ]
+}

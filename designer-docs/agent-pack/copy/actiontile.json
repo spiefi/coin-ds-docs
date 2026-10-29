@@ -1,0 +1,258 @@
+{
+  "slug": "actiontile",
+  "label": "Action Tile",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/actiontile.guide.tsx",
+    "src/ActionGuides.tsx"
+  ],
+  "evidence": "docs/evidence/actiontile.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T01:42:08.989Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "shortcut",
+    "quick action",
+    "tile",
+    "icon tile"
+  ],
+  "title": "Action Tile",
+  "summary": "A compact shortcut to one destination.",
+  "corePrinciple": "One icon. One short label. One destination.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1500-13351",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-actiontile--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "One icon, one label, one boundary",
+      "description": "The fixed tile keeps its destination compact. The icon capsule inherits the owner modes supplied to ActionTile.",
+      "blocks": [
+        "Shown at 1.5×",
+        "1",
+        "2",
+        "3",
+        "Icon capsule",
+        "Reinforces the destination and receives the owner’s full mode object.",
+        "Label",
+        "Names one destination with a short, familiar term.",
+        "Tile boundary",
+        "ActionTile owns the fixed 168 × 90 surface and token-driven styling."
+      ],
+      "specimen": [
+        "Cards"
+      ],
+      "anatomy": [
+        {
+          "part": "Icon capsule",
+          "note": "Reinforces the destination and receives the owner’s full mode object."
+        },
+        {
+          "part": "Label",
+          "note": "Names one destination with a short, familiar term."
+        },
+        {
+          "part": "Tile boundary",
+          "note": "ActionTile owns the fixed 168 × 90 surface and token-driven styling."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Pair the label with the right icon",
+      "description": "ActionTile exposes the label and icon slot. Keep both focused on the same destination.",
+      "blocks": [
+        "Cards",
+        "Card services",
+        "Use a card icon for a card destination.",
+        "Savings",
+        "Savings space",
+        "Change both the label and its icon together.",
+        "Payments",
+        "Payment tasks",
+        "Keep the destination distinct from neighboring shortcuts."
+      ],
+      "specimen": [
+        "Cards",
+        "Savings",
+        "Payments"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Static and actionable are the supported forms",
+      "description": "Supplying onPress makes the tile actionable. The public API does not expose disabled or loading states, so do not invent them.",
+      "blocks": [
+        "Static",
+        "Display only",
+        "Without onPress the tile presents the shortcut information without activation.",
+        "Actionable",
+        "Ready to open Payments.",
+        "One destination",
+        "With onPress the whole tile activates the named destination."
+      ],
+      "specimen": [
+        "Cards",
+        "Payments"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Keep the public 168 × 90 footprint",
+      "description": "ActionTile owns a fixed width and height. Let the surrounding public layout wrap or scroll; do not resize the tile with style patches.",
+      "blocks": [
+        "Wide host",
+        "The tile keeps its intrinsic footprint inside available space.",
+        "Narrow host",
+        "The host adapts around the tile; the tile itself stays 168 × 90."
+      ],
+      "specimen": [
+        "Cards",
+        "Savings"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Make every shortcut distinct",
+      "description": "Short nouns usually work best. Avoid duplicate labels or explanatory sentences that turn a shortcut into a card.",
+      "blocks": [
+        "01",
+        "One clear destination",
+        "The icon and short label should describe the same place.",
+        "02",
+        "Use compact labels",
+        "Cards, Savings, and Payments are easy to scan in a group.",
+        "03",
+        "Avoid duplicates",
+        "Each visible tile needs a destination name that distinguishes it from its siblings."
+      ],
+      "specimen": [
+        "Savings"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Offer a small set of quick actions",
+      "description": "A public HStack owns the responsive group while each fixed tile keeps one destination.",
+      "blocks": [
+        "Choose a destination."
+      ],
+      "specimen": [
+        "Cards",
+        "Savings",
+        "Payments"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep shortcuts concise and unique",
+      "description": "The value of a quick-action group comes from immediate recognition.",
+      "blocks": [
+        "Do",
+        "Use distinct destination names",
+        "Each tile can be understood before it is activated.",
+        "Don’t",
+        "Repeat a vague label",
+        "Duplicate More tiles do not reveal where either shortcut leads.",
+        "Keep the label short",
+        "Cards is familiar and easy to scan.",
+        "Turn the label into a sentence",
+        "Long instructions overwhelm a compact shortcut.",
+        "Match icon and destination",
+        "The savings icon reinforces the Savings label.",
+        "Pair the label with another destination",
+        "A cards icon makes the Savings shortcut ambiguous."
+      ],
+      "specimen": [
+        "Savings",
+        "Payments",
+        "More",
+        "Cards",
+        "Open the place where you manage all your cards"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Use distinct destination names",
+            "caption": "Each tile can be understood before it is activated.",
+            "specimen": "Savings · Payments"
+          },
+          "dont": {
+            "title": "Repeat a vague label",
+            "caption": "Duplicate More tiles do not reveal where either shortcut leads.",
+            "specimen": "More · More"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the label short",
+            "caption": "Cards is familiar and easy to scan.",
+            "specimen": "Cards"
+          },
+          "dont": {
+            "title": "Turn the label into a sentence",
+            "caption": "Long instructions overwhelm a compact shortcut.",
+            "specimen": "Open the place where you manage all your cards"
+          }
+        },
+        {
+          "do": {
+            "title": "Match icon and destination",
+            "caption": "The savings icon reinforces the Savings label.",
+            "specimen": "Savings"
+          },
+          "dont": {
+            "title": "Pair the label with another destination",
+            "caption": "A cards icon makes the Savings shortcut ambiguous.",
+            "specimen": "Savings"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Public component, fixed contract",
+      "description": "The guide follows the live Figma instance and the package’s public label, icon, modes, and onPress API.",
+      "blocks": [
+        "01",
+        "Action Tile in Figma",
+        "Public node 1500:13351 · 168 × 90 fixed instance",
+        "02",
+        "ActionTile Storybook",
+        "Default, custom-icon, and mode stories",
+        "Checked 19 September 2026",
+        "The public export is jfs-components 0.1.60. Examples use Primary appearance with Medium emphasis, matching the supplied Storybook reference. ActionTile passes those owner modes to its icon capsule."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
