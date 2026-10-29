@@ -1,0 +1,323 @@
+{
+  "slug": "cardfeedback",
+  "label": "Card Feedback",
+  "guideCommit": "4a044e7567d826f9487e2a51a4f655630d5902a0",
+  "files": [
+    "src/guides/cardfeedback.guide.tsx"
+  ],
+  "evidence": "docs/evidence/cardfeedback.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:46:16.982Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "feedback card",
+    "status card",
+    "result card",
+    "success message",
+    "error message",
+    "inline alert"
+  ],
+  "title": "Card Feedback",
+  "summary": "Use a Card Feedback to show the result of an action in the page, such as a payment that went through or failed, with one next step.",
+  "corePrinciple": "Say what happened, then what to do next.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1280-4481",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cardfeedback--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An icon, the outcome, and a next step",
+      "description": "A tinted panel stacks a status icon, a title, one line of detail, and an optional row of buttons. You build it from the card’s parts: Icon, Content, Title, Body, and Action.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Icon",
+        "CardFeedback.Icon: a 20 px registry icon in the status colour.",
+        "Title",
+        "CardFeedback.Title: the outcome in a few words, 14 px.",
+        "Body",
+        "CardFeedback.Body: one sentence of detail, 12 px; it wraps.",
+        "Action",
+        "CardFeedback.Action: a row of small buttons in the status colour.",
+        "Panel",
+        "A tinted panel with 12 px padding and corners; AppearanceSystem sets the tint."
+      ],
+      "specimen": [
+        "Payment successful",
+        "₹1,250 was sent to Rahul Sharma.",
+        "View receipt"
+      ],
+      "anatomy": [
+        {
+          "part": "Icon",
+          "note": "CardFeedback.Icon: a 20 px registry icon in the status colour."
+        },
+        {
+          "part": "Title",
+          "note": "CardFeedback.Title: the outcome in a few words, 14 px."
+        },
+        {
+          "part": "Body",
+          "note": "CardFeedback.Body: one sentence of detail, 12 px; it wraps."
+        },
+        {
+          "part": "Action",
+          "note": "CardFeedback.Action: a row of small buttons in the status colour."
+        },
+        {
+          "part": "Panel",
+          "note": "A tinted panel with 12 px padding and corners; AppearanceSystem sets the tint."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Three statuses",
+      "description": "AppearanceSystem sets the status: positive, the default, is green; warning is orange; negative is red. It colours the panel, the icon, and the buttons in Action. Pick an icon that matches: the card colours it but doesn’t choose it. AppearanceBrand only shifts the title and body colour slightly.",
+      "blocks": [
+        "Positive",
+        "Green for a result that went through.",
+        "Warning",
+        "Orange for something to finish soon.",
+        "Negative",
+        "Red for something that failed."
+      ],
+      "specimen": [
+        "Payment successful",
+        "₹1,250 was sent to Rahul Sharma.",
+        "View receipt",
+        "KYC pending",
+        "Finish KYC by 31 October to keep investing.",
+        "Complete KYC",
+        "Payment failed",
+        "Your bank declined the payment. No money was taken.",
+        "Try again"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Positive",
+          "description": "Green for a result that went through."
+        },
+        {
+          "title": "Warning",
+          "description": "Orange for something to finish soon."
+        },
+        {
+          "title": "Negative",
+          "description": "Red for something that failed."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "With or without actions",
+      "description": "The card itself is static: only the buttons you put in Action respond. onPress makes the whole card one button instead; use it only when the card has no buttons inside, and name it with accessibilityLabel. A pressable card fades slightly on hover and more while pressed, and shows a ring on keyboard focus. disabled fades it to half and ignores presses.",
+      "blocks": [
+        "Message only",
+        "Icon, title, and body: nothing to press.",
+        "Two actions",
+        "Buttons take the status colour; a Button’s own modes make the second one quieter.",
+        "Pressable card",
+        "onPress with no buttons inside: press it to see it fade.",
+        "Disabled",
+        "Half opacity, and presses are ignored."
+      ],
+      "specimen": [
+        "Payment successful",
+        "₹1,250 was sent to Rahul Sharma.",
+        "Payment failed",
+        "Your bank declined the payment. No money was taken.",
+        "Try again",
+        "Change bank"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Message only",
+          "description": "Icon, title, and body: nothing to press."
+        },
+        {
+          "title": "Two actions",
+          "description": "Buttons take the status colour; a Button’s own modes make the second one quieter."
+        },
+        {
+          "title": "Pressable card",
+          "description": "onPress with no buttons inside: press it to see it fade."
+        },
+        {
+          "title": "Disabled",
+          "description": "Half opacity, and presses are ignored."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Your screen sets the width",
+      "description": "The card fills its host’s width; Figma draws it at 328 px. It’s as tall as its content and at least 59 px, with 12 px padding and 8 px between the icon, the text, and the actions. Title and body wrap, and buttons wrap onto a new row when they run out of room.",
+      "blocks": [
+        "328 × 126",
+        "8"
+      ],
+      "specimen": [
+        "Payment successful",
+        "₹1,250 was sent to Rahul Sharma.",
+        "View receipt"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The outcome, then the next step",
+      "description": "Make the title the outcome, such as “Payment failed”, and the body one sentence on what it means for the person. Label each button with a verb, and keep to one or two. The colour alone doesn’t carry the status for everyone, so the title has to say it.",
+      "blocks": [
+        "Outcome, detail, next step",
+        "“Payment failed”, what happened to the money, and “Try again”."
+      ],
+      "specimen": [
+        "Payment failed",
+        "Your bank declined the payment. No money was taken.",
+        "Try again"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Outcome, detail, next step",
+          "description": "“Payment failed”, what happened to the money, and “Try again”."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A failed payment on the Pay screen",
+      "description": "Try again runs the screen’s own retry through the button’s onPress. When the retry goes through, the screen swaps the card for a positive one; the card doesn’t change itself or time out.",
+      "blocks": [
+        "Payment failed"
+      ],
+      "specimen": [
+        "Pay Rahul Sharma",
+        "₹1,250 from HDFC Bank",
+        "Payment failed",
+        "Your bank declined the payment. No money was taken.",
+        "Try again"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A clear result and one next step",
+      "description": "Each pair shows a card people read at once next to one that sends mixed signals or crowds its actions.",
+      "blocks": [
+        "Do",
+        "Match the icon to the status",
+        "An error icon on the red card.",
+        "Don’t",
+        "Reuse the success icon",
+        "A tick on a red card contradicts the title.",
+        "Make the title the outcome",
+        "“Payment failed” says it in two words.",
+        "Put the detail in the title",
+        "The title wraps and the outcome gets lost.",
+        "One or two actions",
+        "They fit on one row.",
+        "Three or more actions",
+        "They wrap onto a second row and look the same."
+      ],
+      "specimen": [
+        "Payment failed",
+        "Your bank declined the payment. No money was taken.",
+        "Your bank declined your payment of ₹1,250 to Rahul Sharma",
+        "No money was taken.",
+        "KYC pending",
+        "Finish KYC by 31 October to keep investing.",
+        "Complete KYC",
+        "Remind me later",
+        "Contact support"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Match the icon to the status",
+            "caption": "An error icon on the red card.",
+            "specimen": "Payment failed · Your bank declined the payment. No money was taken."
+          },
+          "dont": {
+            "title": "Reuse the success icon",
+            "caption": "A tick on a red card contradicts the title.",
+            "specimen": "Payment failed · Your bank declined the payment. No money was taken."
+          }
+        },
+        {
+          "do": {
+            "title": "Make the title the outcome",
+            "caption": "“Payment failed” says it in two words.",
+            "specimen": "Payment failed · Your bank declined the payment. No money was taken."
+          },
+          "dont": {
+            "title": "Put the detail in the title",
+            "caption": "The title wraps and the outcome gets lost.",
+            "specimen": "Your bank declined your payment of ₹1,250 to Rahul Sharma · No money was taken."
+          }
+        },
+        {
+          "do": {
+            "title": "One or two actions",
+            "caption": "They fit on one row.",
+            "specimen": "KYC pending · Finish KYC by 31 October to keep investing. · Complete KYC"
+          },
+          "dont": {
+            "title": "Three or more actions",
+            "caption": "They wrap onto a second row and look the same.",
+            "specimen": "KYC pending · Finish KYC by 31 October to keep investing. · Complete KYC · Remind me later · Contact support"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Card Feedback contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Custom content",
+        "Multiple actions",
+        "Icon prop",
+        "Checked 19 October 2026",
+        "Installed jfs-components is 0.1.78, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Card/Feedback is one 328 × 123 component with no properties; its status comes from modes, and its icon is a solid circle, while the package draws whichever registry icon you pass. The card doesn’t read the app’s theme, so Color Mode has to come through its modes. Inside a VStack or another Coin container that passes modes down, its parts keep the card’s status colours. Emphasis alone doesn’t quieten a button in the status colour, so the quieter action here switches to Brand Neutral at Emphasis Low. The published Storybook hasn’t been rebuilt: it still renders every story as a pressable card with buttons inside it, and shows the older generated page.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "dismissed": [
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: Nothing cited says the guide's source puts 'Button / Size': 'XS' on the group. The evidence lists only the `--with-end-slot` story (Button \"Manage\"), and the rendered evidence describes \"a default Button end slot\" (Button 80 × 42), not XS. The claims that the Button must fit an 80 px slot and \"takes no modes\" also come from outside this guide.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The guide's source sets it, in code the copy snapshot doesn't carry: src/guides/checkboxgroup.guide.tsx at e7ed622 line 8 (GROUP_MODES = { 'Color Mode': 'Light', 'Button / Size': 'XS' }), line 17 (every Group passes GROUP_MODES to CheckboxGroup), line 18 (a Manage Button in each endSlot), and lines 58 and 78 (both With an end action examples render that Group). The 80 px slot is CheckboxItem's endSlotWidth default (CheckboxItem.tsx line 144, 0.1.78-dbe0e02), and the slot stretches its child to that width (lines 294–306); a Size M Button has 20 px side padding and a 16 px label that neither wraps nor shrinks (Button.tsx lines 124–131 and 433–439; button/padding/horizontal 20 and button/fontSize 16 through the package's getVariableByName), so the evidence's 0.1.60 “80 × 42” is the slot's width, and the Checkbox Item entry records XS so the Button fits (agent-pack/guidance/checkboxitem.json /configuration/6). The group forwards the mode to the end-slot Button (the guide's Sources: “The group forwards modes to every item and end-slot child”); no modes on the Button itself follows building.md (slot children carry no appearance, emphasis or size modes)."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: \"accessibilityLabel naming the row, as the guide's source sets it\" and the Link's autolayout=\"Hug\" have no support in this guide or its evidence. The evidence only records a label slot holding Text \"I agree\" and Link \"Terms & Conditions\".",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "Both come from the guide's own Label with a link example, in code the copy snapshot doesn't carry: src/guides/checkboxgroup.guide.tsx at e7ed622 line 56, <CheckboxItem accessibilityLabel=\"I agree Terms & Conditions\"><Text text=\"I agree\" /><Link text=\"Terms & Conditions\" autolayout=\"Hug\" onPress={() => {}} /></CheckboxItem>. Installed Link (0.1.78-dbe0e02) defaults autolayout to Fill, which stretches it across its parent (Link.tsx lines 94 and 123), so Hug is what keeps it beside “I agree”; CheckboxItem takes its name from a string label only (CheckboxItem.tsx lines 227–228), so a Text + Link row is named by accessibilityLabel."
+    }
+  ]
+}

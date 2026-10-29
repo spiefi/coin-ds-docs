@@ -1,0 +1,831 @@
+{
+  "schemaVersion": 1,
+  "id": "DropdownInput",
+  "slug": "dropdowninput",
+  "category": "input",
+  "tags": [
+    "select",
+    "picker",
+    "combobox",
+    "select field",
+    "form field"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T05:05:58Z",
+    "flags": []
+  },
+  "summary": "Use a Dropdown Input in a form when people choose one option from a list of four or more.",
+  "useWhen": [
+    {
+      "text": "In a form, when people choose one option from a list of four or more.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Dropdown Input in a form when people choose one option from a list of four or more."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Two options, such as Yes or No: in a list they need an extra tap to see both answers.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Yes or No needs an extra tap to see both answers."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "Names the question the field answers (label).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the question the field answers."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "Pressable surface that opens the list; it shows the current choice and a chevron.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Pressable surface that opens the list."
+      }
+    },
+    {
+      "part": "Placeholder",
+      "holds": "Tells people what to choose until they have chosen (placeholder); the choice replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Tells people what to choose until they have chosen."
+      }
+    },
+    {
+      "part": "Chevron",
+      "holds": "Shows that the field opens a list.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows that the field opens a list."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "Explains the choice (supportText), or the error when invalid (errorMessage).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Explains the choice, or the error when invalid."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "renderValue",
+      "accepts": [
+        "((option: DropdownInputOption | undefined, hasValue: boolean) => React.ReactNode)"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place it in a form, such as the In context transfer form, where From and To fields sit above a Continue button.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Dropdown Input in a form"
+      }
+    },
+    {
+      "text": "The field fills its container and is 48 px tall.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field fills its container and is 48 px tall."
+      }
+    },
+    {
+      "text": "The field narrows with its column; the chevron stays at the end.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field narrows with its column; the chevron stays at the end."
+      }
+    },
+    {
+      "text": "Pressing the field opens a Dropdown of the options just below it, as a layer over the page.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Pressing it opens a Dropdown of the options just below."
+      }
+    },
+    {
+      "text": "The open list matches the field’s width and scrolls after about five options.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The open list matches the field’s width and scrolls after about five options."
+      }
+    },
+    {
+      "text": "In the package the list opens below the field by default (placement bottom) and moves to the other side when there isn't room.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "placement"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Give every field a label.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Every field has a label."
+      },
+      "target": "label"
+    },
+    {
+      "text": "A label and a placeholder are the minimum for a clear field.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The minimum for a clear field."
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "Add support text when people need help choosing; it sits under the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "support text when people need help choosing."
+      },
+      "target": "supportText"
+    },
+    {
+      "text": "Pass the options as items; the chosen option's label replaces the placeholder in the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The choice replaces the placeholder."
+      },
+      "target": "items"
+    },
+    {
+      "text": "The screen owns each value: pass value and update it in onValueChange, and check the form when people continue.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns each value and checks the form when people continue."
+      },
+      "target": "value"
+    },
+    {
+      "text": "Leave the list closed until people press the field (open and defaultOpen are left unset).",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Label the question, show the choice, and open the list only when asked."
+      },
+      "target": "defaultOpen"
+    },
+    {
+      "text": "Mark a field the form needs with isRequired: an asterisk follows the label.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "An asterisk follows the label."
+      },
+      "target": "isRequired"
+    },
+    {
+      "text": "When a field is invalid (isInvalid), errorMessage replaces the support text.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Invalid replaces the support text with the error"
+      },
+      "target": "errorMessage"
+    },
+    {
+      "text": "Mark an empty field invalid when people continue, and show how to fix it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "It marks an empty field invalid and shows how to fix it."
+      },
+      "target": "isInvalid"
+    },
+    {
+      "text": "Use isReadOnly to show a value that cannot change right now.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "shows a value that cannot change right now."
+      },
+      "target": "isReadOnly"
+    },
+    {
+      "text": "It works with or without a safe-area provider at the app root.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It works with or without a SafeAreaProvider."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write the label as a noun for the thing being chosen, such as “Account” or “Transfer from”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the label as a noun for the thing being chosen"
+        },
+        "target": "label"
+      },
+      {
+        "text": "Write the placeholder as an instruction that starts with a verb, such as “Select an account”.",
+        "strength": "recommended",
+        "from": {
+          "section": "configuration",
+          "quote": "Add a placeholder that starts with a verb"
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Write error messages as a way to fix the problem, such as “Choose an account to transfer from”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "error messages as a way to fix the problem."
+        },
+        "target": "errorMessage"
+      },
+      {
+        "text": "Do not write a vague error: “Invalid” does not say what went wrong.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Invalid” does not say what went wrong."
+        },
+        "target": "errorMessage"
+      },
+      {
+        "text": "Keep a visible label: “Account” still explains the value after a choice, while a placeholder disappears once people choose.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Account” still explains the value after a choice."
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "Account",
+      "Transfer from",
+      "Select an account",
+      "Choose where to transfer funds",
+      "Choose an account to transfer from"
+    ],
+    "bad": [
+      "Invalid"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "The field shows the placeholder and a chevron; pressing it opens a Dropdown of the options just below.",
+      "from": {
+        "section": "anatomy",
+        "quote": "The field shows the current choice and a chevron. Pressing it opens a Dropdown of the options just below."
+      }
+    },
+    {
+      "state": "Chosen",
+      "when": "After a choice, the chosen option replaces the placeholder.",
+      "from": {
+        "section": "configuration",
+        "quote": "The choice replaces the placeholder."
+      }
+    },
+    {
+      "state": "Required",
+      "when": "isRequired: an asterisk follows the label.",
+      "from": {
+        "section": "states",
+        "quote": "An asterisk follows the label."
+      }
+    },
+    {
+      "state": "Invalid",
+      "when": "isInvalid: red border, tinted field, and the error (errorMessage) in place of support text.",
+      "from": {
+        "section": "states",
+        "quote": "Red border, tinted field, and the error in place of support text."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: the whole field is dimmed and does not open.",
+      "from": {
+        "section": "states",
+        "quote": "The whole field is dimmed and does not open."
+      }
+    },
+    {
+      "state": "Read-only",
+      "when": "isReadOnly: a grey field that shows the value but does not open.",
+      "from": {
+        "section": "states",
+        "quote": "A grey field that shows the value but does not open."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the field is a combobox that opens a listbox; arrow keys move through the open list and Enter chooses.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the field is a combobox that opens a listbox; arrow keys move through the open list and Enter chooses."
+      }
+    },
+    {
+      "text": "The chosen option is announced as selected; invalid, required and disabled are announced; a disabled field leaves the tab order; and focus shows a ring.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The chosen option is announced as selected, invalid, required, and disabled are announced, a disabled field leaves the tab order, and focus shows a ring."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the field; without it the field is named by its label, then its placeholder.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/26"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep a visible label",
+      "dont": "Rely on the placeholder",
+      "why": "Once chosen, “Savings account” sits in the field with no question.",
+      "from": {
+        "section": "doDont",
+        "quote": "“Account” still explains the value after a choice."
+      }
+    },
+    {
+      "do": "Say how to fix an error",
+      "dont": "Write a vague error",
+      "why": "“Invalid” does not say what went wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "The message tells people what to do next."
+      }
+    },
+    {
+      "do": "Use it for longer lists",
+      "dont": "Hide two options in a list",
+      "why": "Yes or No needs an extra tap to see both answers.",
+      "from": {
+        "section": "doDont",
+        "quote": "Four or more options fit well in a list."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context: choose accounts for a transfer. A Card holds a title, a From and a To field with the same four accounts, and a Continue button. The screen owns each value (value and onValueChange); when people continue it marks an empty field invalid (isInvalid) and its errorMessage says how to fix it.",
+      "jsx": "<Card>\n  <VStack>\n    <Text text=\"Transfer money\" />\n    <DropdownInput\n      label=\"From\"\n      placeholder=\"Select an account\"\n      items={[\n        { value: 'savings', label: 'Savings account' },\n        { value: 'checking', label: 'Checking account' },\n        { value: 'brokerage', label: 'Brokerage account' },\n        { value: 'recurring', label: 'Recurring deposit' },\n      ]}\n      value={null}\n      onValueChange={() => {}}\n      errorMessage=\"Choose an account to transfer from\"\n    />\n    <DropdownInput\n      label=\"To\"\n      placeholder=\"Select an account\"\n      items={[\n        { value: 'savings', label: 'Savings account' },\n        { value: 'checking', label: 'Checking account' },\n        { value: 'brokerage', label: 'Brokerage account' },\n        { value: 'recurring', label: 'Recurring deposit' },\n      ]}\n      value={null}\n      onValueChange={() => {}}\n      errorMessage=\"Choose an account to transfer to\"\n    />\n    <Button label=\"Continue\" onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns each value and checks the form when people continue."
+      }
+    },
+    {
+      "purpose": "A label, a placeholder that starts with a verb, and support text for people who need help choosing; nothing is chosen yet.",
+      "jsx": "<DropdownInput\n  label=\"Account\"\n  placeholder=\"Select an account\"\n  supportText=\"Choose where to transfer funds\"\n  items={[\n    { value: 'savings', label: 'Savings account' },\n    { value: 'checking', label: 'Checking account' },\n    { value: 'brokerage', label: 'Brokerage account' },\n    { value: 'recurring', label: 'Recurring deposit' },\n  ]}\n  value={null}\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Extra guidance sits under the field."
+      }
+    },
+    {
+      "purpose": "Invalid: the field has no choice when people continue, so the error replaces the support text and says how to fix it.",
+      "jsx": "<DropdownInput\n  label=\"Account\"\n  placeholder=\"Select an account\"\n  items={[\n    { value: 'savings', label: 'Savings account' },\n    { value: 'checking', label: 'Checking account' },\n    { value: 'brokerage', label: 'Brokerage account' },\n    { value: 'recurring', label: 'Recurring deposit' },\n  ]}\n  value={null}\n  onValueChange={() => {}}\n  isInvalid\n  errorMessage=\"Choose an account to transfer from\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Red border, tinted field, and the error in place of support text."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Label rendered above the input."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Select an option",
+        "description": "Placeholder text shown when no value is selected. Default \"Select an option\", from the component source."
+      },
+      {
+        "name": "items",
+        "type": "DropdownInputOption[]",
+        "required": false,
+        "source": "types",
+        "description": "Data-driven list of options. Mutually compatible with `children`; if both are provided the `items` are rendered first."
+      },
+      {
+        "name": "value",
+        "type": "DropdownInputOptionValue | null",
+        "required": false,
+        "source": "types",
+        "description": "Currently selected value (controlled). When `value` is `undefined` the component operates in uncontrolled mode and keeps its own state."
+      },
+      {
+        "name": "defaultValue",
+        "type": "DropdownInputOptionValue | null",
+        "required": false,
+        "source": "types",
+        "default": null,
+        "description": "Initial selected value for uncontrolled mode. Default null, from the component source."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: DropdownInputOptionValue | null, option?: DropdownInputOption) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called when the selected value changes."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom slot of `<DropdownItem />` children. Used when finer-grained control is needed (icons, custom layouts, etc.). When provided alongside `items`, both are rendered (items first)."
+      },
+      {
+        "name": "renderValue",
+        "type": "(option: DropdownInputOption | undefined, hasValue: boolean) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom renderer for the trigger label. Receives the currently-selected option (if any) and a boolean indicating whether the field has a value."
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Controlled open state."
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial open state for uncontrolled mode. Default false, from the component source."
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called whenever the open state changes."
+      },
+      {
+        "name": "placement",
+        "type": "'bottom' | 'top' | 'auto'",
+        "required": false,
+        "source": "types",
+        "values": [
+          "top",
+          "bottom",
+          "auto"
+        ],
+        "default": "bottom",
+        "description": "Preferred placement for the popup. The component falls back to the opposite side automatically when there isn't enough room. Default \"bottom\", from the component source."
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Renders a required asterisk next to the label. Default false, from the component source."
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "On the web a disabled field has aria-disabled=true and tabindex=-1, so it is announced as disabled and leaves the tab order. Declared: Disables interaction and dims the field. Default false, from the component source.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "isInvalid",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Marks the field as invalid and shows `errorMessage`. Default false, from the component source."
+      },
+      {
+        "name": "isReadOnly",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Renders the field in read-only mode (non-interactive but not disabled). Default false, from the component source."
+      },
+      {
+        "name": "supportText",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Helper text displayed below the input."
+      },
+      {
+        "name": "errorMessage",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Replaces `supportText` when `isInvalid` is true."
+      },
+      {
+        "name": "menuMaxHeight",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 240,
+        "description": "Maximum height of the popup before it becomes scrollable. Helpful for long lists. Defaults to 240 (roughly 5 items). Default 240, from the component source."
+      },
+      {
+        "name": "menuOffset",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Pixel gap between the trigger and the popup. When omitted, it defaults to the `formField/gap` design token so the menu sits the same distance below the input as the rest of the field's internal spacing."
+      },
+      {
+        "name": "matchTriggerWidth",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "When true, the popup width matches the trigger width. When false, the popup uses its intrinsic content width but never exceeds the trigger. Default true, from the component source."
+      },
+      {
+        "name": "closeOnBackdropPress",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether tapping the backdrop closes the menu. Default true, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes for design token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the outermost wrapper."
+      },
+      {
+        "name": "inputStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the input row."
+      },
+      {
+        "name": "menuStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the popup container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label. Defaults to the visible label / placeholder."
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility hint."
+      },
+      {
+        "name": "onFocus",
+        "type": "(e: any) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called when the trigger receives focus (web only)."
+      },
+      {
+        "name": "onBlur",
+        "type": "(e: any) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called when the trigger loses focus (web only)."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Dropdown Item State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Selected"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "FormField States",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active",
+          "Read Only",
+          "Error",
+          "Disabled"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Status",
+        "type": "mode collection",
+        "values": [
+          "Auto",
+          "Warning",
+          "Error",
+          "Success",
+          "Loading",
+          "Neutral"
+        ],
+        "description": "A token collection DropdownInput reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Auto"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Custom slot of `<DropdownItem />` children. Used when finer-grained control is needed (icons, custom layouts, etc.). When provided alongside `items`, both are rendered (items first).",
+        "source": "types"
+      },
+      {
+        "name": "renderValue",
+        "type": "(option: DropdownInputOption | undefined, hasValue: boolean) => React.ReactNode",
+        "description": "Custom renderer for the trigger label. Receives the currently-selected option (if any) and a boolean indicating whether the field has a value.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onValueChange",
+        "type": "(value: DropdownInputOptionValue | null, option?: DropdownInputOption) => void",
+        "description": "Called when the selected value changes.",
+        "source": "types"
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "description": "Called whenever the open state changes.",
+        "source": "types"
+      },
+      {
+        "name": "onFocus",
+        "type": "(e: any) => void",
+        "description": "Called when the trigger receives focus (web only).",
+        "source": "types"
+      },
+      {
+        "name": "onBlur",
+        "type": "(e: any) => void",
+        "description": "Called when the trigger loses focus (web only).",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=dropdowninput",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3055-880",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-dropdowninput--docs"
+  }
+}

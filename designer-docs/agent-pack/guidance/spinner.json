@@ -1,0 +1,408 @@
+{
+  "slug": "spinner",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch10, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/spinner.guide.tsx) and docs/evidence/spinner.md at 622cd82 (“docs: publish 11 Coin fixes on jfs-components v0.1.78-a116616”, 17 October), the same files on main and docs-next. The guide's Sources note was checked on 17 October 2026 on the build it calls the 16 October build (mirror v0.1.78-a116616, Biscuit's main at a116616, the #276 fix), so items citing it carry 2026-10-17 and 0.1.78-a116616. The evidence was first checked on 12 and 13 October (c1fa197) and re-checked on 17 October on a116616 for the #276 publish, which changed only the stroke (12.8 / 72 × size) and the durationMs JSDoc (1500) in Spinner.tsx; items citing the evidence carry the 17 October re-check. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-a116616 and v0.1.78-dbe0e02 (222 files, complete) touches no Spinner file, no skeleton file (useReducedMotion lives there), no design-tokens or resolver file and no react-utils. Installed Spinner.tsx matches every guide and evidence sentence used here, read from source, not run, with token values through the package's own getVariableByName: size 72, durationMs 1500, gravity 0.45 (clamped 0–0.9), animating true and accessibilityLabel “Loading” by default (lines 178–188, 63–66, 196); stroke max(1, size × 12.8 / 72), so 12.8 at 72 and 5.69 at 32 (70, 197); three 100° arcs with round caps, no fill and no track (72, 117–128, 259–266); the lead angle is tau + gravity × sin(tau), fastest at the top and slowest at the bottom (152–155); the gap between heads breathes from 10° to 84° (75, 79, 163–170); the leading arc (primary) is drawn last, on top (253); resting is a fixed fan at 0°, −120° and −240°, not a frame of the spin (237, 254–256), shown when animating is false or the device asks for reduced motion (192–193; useReducedMotion reads prefers-reduced-motion on the web and AccessibilityInfo on native); the root is a size × size View with role progressbar and the label, and no pressable, focus or disabled handling (239–250); the three colours are spiner/primary, secondary and tertiary/bg, literals in the one-mode collection Spinner / Output, which resolve to rgb(208,162,89), rgb(91,0,181) and rgb(6,107,153) with no modes, with Color Mode Dark, with AppearanceBrand Secondary and with Semantic Intent System; colors replaces any of them (202–206). No guide sentence used here is contradicted. Gravity: Marcin's 12 October comment on #73 (“what is weight? Whatever it is do not work on the documentation page”) was about the playground's old Weight segment; the evidence's 13 October review found it a docs mistake, and 10b3720 removed the control and made Configuration name gravity and its value on each card. The entry records gravity as the package fact (its JSDoc, with the evidence's clamp) and the guide's own Configuration sentence on what it does, plus the Default card's values. The Heavy (0.85, 2.8 s) and Weightless (0, 1.6 s) cards are left out of configuration: they show values side by side, and no guide sentence says when to choose one, so they don't become advice; the playground (Size, Turn, Animating) is not part of the copy. Not recorded: style (the building rules keep style overrides off Coin components), testID and other inherited View props; Figma's variable names and hex values, the Storybook story list and args, the Reanimated stand-in on the docs site, and the measured speed ratios from the 13 October review; Button's loading drawing a Skeleton, not a Spinner (no guide sentence covers it). Skeleton: the summary keeps the Spinner for when the shape of what's loading can't be shown, but the guide never names Skeleton, so avoidWhen names no component (useInstead) for that case; the Skeleton entry's own guide doesn't mention Spinner either. Anatomy: all three arcs are always drawn. Content good keeps the guide's line “Fetching your statements…”; there is no bad copy (the Don't shows a spinner with no line). Examples follow the building rules: no Color Mode (the guide sets Light on every component), and no Slot gap on the VStacks (the guide's S repeats VStack's default, and its M in In context changes only the look, which no guide sentence says the content needs). Text takes text, as its undocumented entry does. The In context example draws the loading state of the guide's screen with Title, the Spinner and its line in place of the list, and the Refresh Button, which the guide's own example turns off while loading (disabled={loading}); the literal disabled and the empty onPress stand for the screen's state and its wiring. The guide's ScreenFrame is a docs frame, not a Coin component, and is left out. All components used have an entry in this pack. Left out of examples (three at most): the sizing trio, the Default, Heavy and Weightless cards, the resting specimen, the Spin every row Don't and the playground. Gaps: the Sources note's stale Storybook; on 29 October the published Storybook (index.json last modified 17 October 2026) still lists the six stories, its docs page still has the old generated headings (Example, Available Collections and Modes, Usage, Sizes, Weight, Custom colours, Resting state, Props, Design Tokens), and its bundled Spinner still draws 0.11 × size and documents durationMs as 2400, so it predates a116616; the gap keeps the guide's words and this check is recorded here only. And the evidence's Figma discrepancy: Figma's one static pose is not the code's resting fan. Sorting (batch 10, rounds 1 and 2): two cross-check runs. Round 1 flagged /useWhen/2, which turned the In context refresh of statements into a recommendation for refreshing any list (generalises-example): our misreading, removed; the In context stays as the first example, and a general rule would also clash with Skeleton's entry, whose guide uses its own refresh pattern. Round 1 also flagged /examples/0 (the 40 px size and the disabled Refresh are not in the copy). Round 2, on the final entry, flagged /examples/0 again; it is dismissed in reviews/spinner.json, because both come from the guide's own In context code (spinner.guide.tsx lines 102 and 107 at 622cd82), which the reviewer can't see. Its notes, not flags: the core principle sits in useWhen (kept, as in Skeleton's entry); examples/1 puts the line under the spinner where the Content copy says next to it (the guide's own Waiting composition stacks it under, centred); and durationMs looked missing from the facts (types facts aren't shown to the reviewer; it is /facts/props/2). No trace-check flags remain.",
+  "useWhen": [
+    {
+      "text": "Show that something is loading when you can't show its shape or say how long it will take.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Spinner to show that something is loading when you can't show its shape or say how long it will take."
+      }
+    },
+    {
+      "text": "Show that something is happening, then get out of the way.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Show that something is happening, then get out of the way."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "When you can show the shape of what's loading, or say how long it will take: the guide keeps the spinner for when you can't.",
+      "strength": "discouraged",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Spinner to show that something is loading when you can't show its shape or say how long it will take."
+      }
+    },
+    {
+      "text": "Spinning every row of a list: several spinners compete for attention and make the wait feel longer.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Several spinners compete for attention and make the wait feel longer."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Leading arc",
+      "holds": "Gold and drawn on top. It leads the turn: fastest over the top, slowest at the bottom.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Gold and drawn on top. It leads the turn: fastest over the top, slowest at the bottom."
+      }
+    },
+    {
+      "part": "Middle arc",
+      "holds": "Purple. It follows the gold arc; the gap between them opens and closes as it turns.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Purple. It follows the gold arc; the gap between them opens and closes as it turns."
+      }
+    },
+    {
+      "part": "Trailing arc",
+      "holds": "Teal and last in the chain, closing up behind the others at the top of each turn.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Teal and last in the chain, closing up behind the others at the top of each turn."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Show one spinner per wait: one spinner covers the whole list while it loads.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "One spinner covers the whole list while it loads."
+      }
+    },
+    {
+      "text": "32 px is small enough to sit beside a line of text.",
+      "strength": "recommended",
+      "target": "size",
+      "value": "32",
+      "from": {
+        "section": "sizing",
+        "quote": "Small enough to sit beside a line of text."
+      }
+    },
+    {
+      "text": "56 px for a card or one section that's loading.",
+      "strength": "recommended",
+      "target": "size",
+      "value": "56",
+      "from": {
+        "section": "sizing",
+        "quote": "10 px arcs, for a card or one section that's loading."
+      }
+    },
+    {
+      "text": "88 px for a whole screen waiting on one thing.",
+      "strength": "recommended",
+      "target": "size",
+      "value": "88",
+      "from": {
+        "section": "sizing",
+        "quote": "15.6 px arcs, for a whole screen waiting on one thing."
+      }
+    },
+    {
+      "text": "It keeps its size and doesn't stretch to fill its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It keeps its size and doesn't stretch to fill its host."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The screen owns the loading state; the spinner only shows it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns the loading state; the spinner only shows it."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes every Spinner: it has no loading, progress or completion prop (Spinner.tsx lines 34–61, 0.1.78-dbe0e02), so the screen decides when it shows and removes it."
+      }
+    },
+    {
+      "text": "size sets the diameter in px: 72 by default, with no minimum or maximum.",
+      "strength": "recommended",
+      "target": "size",
+      "from": {
+        "section": "sizing",
+        "quote": "Size is the diameter in px: 72 by default, with no minimum or maximum."
+      }
+    },
+    {
+      "text": "The arcs stay about 18% of the size thick, so a 32 px spinner draws 5.7 px arcs.",
+      "strength": "recommended",
+      "target": "size",
+      "from": {
+        "section": "sizing",
+        "quote": "The arcs stay about 18% of it thick, so a 32 px spinner draws 5.7 px arcs."
+      }
+    },
+    {
+      "text": "durationMs sets the time for one turn.",
+      "strength": "recommended",
+      "target": "durationMs",
+      "from": {
+        "section": "configuration",
+        "quote": "durationMs the time for one turn"
+      }
+    },
+    {
+      "text": "gravity sets how much it speeds up over the top and slows at the bottom.",
+      "strength": "recommended",
+      "target": "gravity",
+      "from": {
+        "section": "configuration",
+        "quote": "gravity how much it speeds up over the top and slows at the bottom"
+      }
+    },
+    {
+      "text": "The default is gravity 0.45 and a 1.5 s turn: a little faster over the top.",
+      "strength": "recommended",
+      "target": "gravity",
+      "from": {
+        "section": "configuration",
+        "quote": "Gravity 0.45 and a 1.5 s turn: a little faster over the top."
+      }
+    },
+    {
+      "text": "It spins while animating is on, the default.",
+      "strength": "recommended",
+      "target": "animating",
+      "value": "true",
+      "from": {
+        "section": "states",
+        "quote": "It spins while animating is on, the default."
+      }
+    },
+    {
+      "text": "No mode changes it.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "No mode changes it."
+      }
+    },
+    {
+      "text": "colors can replace its three colours in code; keep Coin's gold, purple, and teal.",
+      "strength": "discouraged",
+      "target": "colors",
+      "from": {
+        "section": "configuration",
+        "quote": "A colors setting can replace its three colours in code; keep Coin's gold, purple, and teal."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "The spinner shows no words: name what's loading, and add a short line of text next to it when the wait is more than a moment.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "name what's loading, and add a short line of text next to it when the wait is more than a moment."
+        }
+      },
+      {
+        "text": "For example, a spinner named “Loading your statements” and one line that says the same: “Fetching your statements…”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "A 56 px spinner named “Loading your statements” and one line that says the same."
+        }
+      },
+      {
+        "text": "Say what's loading: a short line next to it tells people what they're waiting for.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "A short line next to it tells people what they're waiting for."
+        }
+      },
+      {
+        "text": "Don't leave it unexplained: a spinner on its own says something is happening, not what.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A spinner on its own says something is happening, not what."
+        }
+      }
+    ],
+    "good": [
+      "Fetching your statements…"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Spinning",
+      "when": "While animating is on, the default: shown while something loads; the screen removes it when the content arrives.",
+      "from": {
+        "section": "states",
+        "quote": "Shown while something loads; the screen removes it when the content arrives."
+      }
+    },
+    {
+      "state": "Resting",
+      "when": "With animating off, or when the device asks for reduced motion: an evenly spaced fan of three arcs, which isn't a frame of the spin.",
+      "from": {
+        "section": "states",
+        "quote": "With animating off, or when the device asks for reduced motion, it rests as an evenly spaced fan of three arcs; the rest isn't a frame of the spin."
+      }
+    },
+    {
+      "state": "No interaction states",
+      "when": "It has no pressed, focus, or disabled state.",
+      "from": {
+        "section": "states",
+        "quote": "It has no pressed, focus, or disabled state."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Its spoken name is “Loading” unless you set accessibilityLabel; name what's loading.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "Its spoken name is “Loading” unless you set accessibilityLabel; name what's loading"
+      }
+    },
+    {
+      "text": "It is announced as a progress bar named “Loading” unless you name it, with no value.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It is announced as a progress bar named “Loading” unless you name it, with no value."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "The resting fan is also what people who turn on reduced motion see.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Also what people who turn on reduced motion see."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Say what's loading",
+      "dont": "Leave it unexplained",
+      "why": "A spinner on its own says something is happening, not what.",
+      "from": {
+        "section": "doDont",
+        "quote": "Say what's loading"
+      }
+    },
+    {
+      "do": "Show one spinner per wait",
+      "dont": "Spin every row",
+      "why": "Several spinners compete for attention and make the wait feel longer.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show one spinner per wait"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Refreshing statements, the guide's In context, while they load: the list under the title is swapped for a 40 px spinner named “Loading your statements” and one line of text, and the list comes back when the statements arrive. The screen owns the loading state; Refresh is off while it loads, as in the guide's own example. The literal disabled and the empty onPress stand for the screen's own state and wiring.",
+      "jsx": "<VStack>\n  <Title title=\"Statements\" subtitle=\"Savings account ··4821\" />\n  <VStack alignHorizontal=\"center\">\n    <Spinner size={40} accessibilityLabel=\"Loading your statements\" />\n    <Text text=\"Fetching your statements…\" />\n  </VStack>\n  <Button label=\"Refresh\" disabled onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Refresh swaps the list for a spinner and a line of text while the statements load, then brings the list back."
+      }
+    },
+    {
+      "purpose": "Say what's loading, the guide's Content: a 56 px spinner, the size for a card or one section, named “Loading your statements”, with one line under it that says the same.",
+      "jsx": "<VStack alignHorizontal=\"center\">\n  <Spinner size={56} accessibilityLabel=\"Loading your statements\" />\n  <Text text=\"Fetching your statements…\" />\n</VStack>",
+      "from": {
+        "section": "content",
+        "quote": "A 56 px spinner named “Loading your statements” and one line that says the same."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "gravity",
+      "description": "Default 0.45, clamped to 0–0.9; 0 gives an even speed.",
+      "quote": "`gravity` (0.45, clamped 0–0.9; 0 = even speed)",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "size",
+      "description": "The diameter, with no clamp; the arc stroke is 12.8 / 72 of it (12.8 px at 72).",
+      "quote": "stroke = 12.8/72 × size since a116616",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "colors",
+      "description": "{ primary, secondary, tertiary }: the leading gold arc (primary, drawn on top), then the purple and the teal.",
+      "quote": "Leading arc gold (primary) is drawn on top, then purple, then teal.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "Has no effect on the output: no mode collection changes the spinner; only colors does.",
+      "quote": "No mode collection (Color Mode, AppearanceBrand, Semantic Intent, sizes) changes the output; only `colors` does.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "animating",
+      "description": "false, or reduced motion on the device, shows the resting fan. Reduced motion comes from prefers-reduced-motion on the web, and no prop overrides it.",
+      "quote": "Reduced motion comes from `prefers-reduced-motion` on the web; no prop overrides it.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "The name of the root, a progressbar (“Loading” by default). There is no value, aria-busy or live region.",
+      "quote": "No value, `aria-busy`, or live region.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The published Storybook page is still the old generated one.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook page is still the old generated one."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Figma's Spinner is one static pose (contiguous arcs, a ~69° gap); the code's resting pose is three separate arcs 120° apart.",
+      "quote": "Figma is one static pose (contiguous arcs, a ~69° gap); code's resting pose is three separate arcs 120° apart, and the live spin starts bunched at the top.",
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ]
+}

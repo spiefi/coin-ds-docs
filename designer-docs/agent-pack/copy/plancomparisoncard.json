@@ -1,0 +1,421 @@
+{
+  "slug": "plancomparisoncard",
+  "label": "Plan Comparison Card",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/plancomparisoncard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/plancomparisoncard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:46:10.686Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "plan comparison",
+    "compare plans",
+    "feature matrix",
+    "upgrade table",
+    "membership plans"
+  ],
+  "title": "Plan Comparison Card",
+  "summary": "Use a Plan Comparison Card to compare two or three plans feature by feature, with the plan you recommend in gold.",
+  "corePrinciple": "Same features, side by side.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4498-2968",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-plancomparisoncard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Plan names over a table of features",
+      "description": "Plan names sit in a row above a dark table. Each row of the table is one feature: its label on the left, then one cell per plan, in the same order as the names.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "Plan names",
+        "columns: one name per plan, 14 px, centred over its column.",
+        "Recommended plan",
+        "brand: true turns that plan’s name gold.",
+        "Feature",
+        "A row’s label, 12 px, always on one line.",
+        "Value",
+        "A string or number from values, 12 px medium, centred.",
+        "Info icon",
+        "showInfo adds it after the label; onInfoPress makes it a button.",
+        "Not included",
+        "false in values: a grey cross.",
+        "Table",
+        "A dark panel with 16 px corners and a 1 px line between rows."
+      ],
+      "specimen": [
+        "Your plan",
+        "JioFinance+",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "₹5,000",
+        "Bonus JioGold",
+        "1%"
+      ],
+      "anatomy": [
+        {
+          "part": "Plan names",
+          "note": "columns: one name per plan, 14 px, centred over its column."
+        },
+        {
+          "part": "Recommended plan",
+          "note": "brand: true turns that plan’s name gold."
+        },
+        {
+          "part": "Feature",
+          "note": "A row’s label, 12 px, always on one line."
+        },
+        {
+          "part": "Value",
+          "note": "A string or number from values, 12 px medium, centred."
+        },
+        {
+          "part": "Info icon",
+          "note": "showInfo adds it after the label; onInfoPress makes it a button."
+        },
+        {
+          "part": "Not included",
+          "note": "false in values: a grey cross."
+        },
+        {
+          "part": "Table",
+          "note": "A dark panel with 16 px corners and a 1 px line between rows."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Plans, features, and cells",
+      "description": "columns names the plans, left to right. Mark the one you recommend with brand: its name turns gold. rows lists the features: each row’s values fill the plan columns in the same order. A string or number shows as text, false shows a grey cross, and any Coin component, such as a Badge, shows as it is. showInfo adds an info icon after a feature’s label. children replaces the table with your own content, under the same plan names. No mode restyles the card: the modes you give it pass to the components in its cells and slot.",
+      "blocks": [
+        "Two plans",
+        "Your plan against the one you recommend, in gold.",
+        "Three plans",
+        "Each plan column gets narrower, so names and values stay short.",
+        "No recommendation",
+        "Without brand, every plan name is white.",
+        "A Badge in a cell",
+        "A Coin component fills the cell and gets the card’s modes.",
+        "Without info icons",
+        "Leave out showInfo when a feature needs no explaining.",
+        "Custom body",
+        "Your content replaces the table; the plan names stay, and the card adds no panel."
+      ],
+      "specimen": [
+        "Your plan",
+        "JioFinance+",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "₹5,000",
+        "Bonus JioGold",
+        "1%",
+        "Free",
+        "Plus",
+        "Premium",
+        "JioPoints",
+        "1.1x",
+        "₹2,000",
+        "Gold bonus",
+        "Gold locker",
+        "New",
+        "JioFinance+ benefits change on 1 November."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Two plans",
+          "description": "Your plan against the one you recommend, in gold."
+        },
+        {
+          "title": "Three plans",
+          "description": "Each plan column gets narrower, so names and values stay short."
+        },
+        {
+          "title": "No recommendation",
+          "description": "Without brand, every plan name is white."
+        },
+        {
+          "title": "A Badge in a cell",
+          "description": "A Coin component fills the cell and gets the card’s modes."
+        },
+        {
+          "title": "Without info icons",
+          "description": "Leave out showInfo when a feature needs no explaining."
+        },
+        {
+          "title": "Custom body",
+          "description": "Your content replaces the table; the plan names stay, and the card adds no panel."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "An info icon that explains or only hints",
+      "description": "showInfo draws the icon as a hint: it doesn’t press, and screen readers skip it. onInfoPress makes the same icon a button named “More information about” and the feature, with a bigger tap area than it looks. Use it to open the explanation, for example in a sheet. The card and its rows have no pressed, selected, or disabled state.",
+      "blocks": [
+        "Hint",
+        "The icon only marks that more detail exists.",
+        "Button",
+        "Looks the same, but each icon is a button you can tab to."
+      ],
+      "specimen": [
+        "Your plan",
+        "JioFinance+",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "₹5,000",
+        "Bonus JioGold",
+        "1%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Hint",
+          "description": "The icon only marks that more detail exists."
+        },
+        {
+          "title": "Button",
+          "description": "Looks the same, but each icon is a button you can tab to."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Fills its host, nothing wraps",
+      "description": "The card fills the width of its host; Figma draws it at 328 px. The feature column takes 1.8 shares of the width and each plan column one share, so at 328 px two plans leave about 67 px for each value and three plans about 48 px. Text never wraps or shortens: a name, label, or value too long for its column runs into the next one. Height follows the rows: each row is 46 px, and the plan names sit 16 px above the table.",
+      "blocks": [
+        "328 × 172",
+        "16",
+        "86.5 × 46"
+      ],
+      "specimen": [
+        "Your plan",
+        "JioFinance+",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "₹5,000",
+        "Bonus JioGold",
+        "1%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Short names, short values",
+      "description": "Call the user’s current plan Your plan and the others by their product names, in a word or two. Write features as nouns, such as Cashback or Bonus JioGold, not sentences. Keep values to a number or a few characters: 1.25x, ₹5,000, 1%. Use false for a feature a plan doesn’t include, not the word No, so every missing feature looks the same. With three plans, keep names under about 8 characters.",
+      "blocks": [
+        "Upgrade from your plan",
+        "The current plan first, the upgrade by its product name.",
+        "Three tiers",
+        "Short names and values that fit the narrower columns."
+      ],
+      "specimen": [
+        "Your plan",
+        "JioFinance+",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "₹5,000",
+        "Bonus JioGold",
+        "1%",
+        "Free",
+        "Plus",
+        "Premium",
+        "JioPoints",
+        "1.1x",
+        "₹2,000",
+        "Gold bonus"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Upgrade from your plan",
+          "description": "The current plan first, the upgrade by its product name."
+        },
+        {
+          "title": "Three tiers",
+          "description": "Short names and values that fit the narrower columns."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "The JioFinance+ upgrade screen",
+      "description": "The comparison sits between the screen’s heading and its upgrade button. Each info icon opens that feature’s explanation through onInfoPress; the button starts the upgrade through its own onPress.",
+      "blocks": [
+        "Nothing opened yet"
+      ],
+      "specimen": [
+        "Get more with JioFinance+",
+        "Compare what you get today with the upgrade.",
+        "Your plan",
+        "JioFinance+",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "₹5,000",
+        "Bonus JioGold",
+        "1%",
+        "Upgrade to JioFinance+"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Crosses, one gold plan, values that fit",
+      "description": "Each pair shows a comparison that reads at a glance next to one that hides a missing feature, loses the recommendation, or spills out of its columns.",
+      "blocks": [
+        "Do",
+        "Cross for not included",
+        "false shows the same grey cross in every cell.",
+        "Don’t",
+        "The word No",
+        "Text reads like a value and looks different from the crosses.",
+        "One recommended plan",
+        "Only JioFinance+ is gold.",
+        "Every plan gold",
+        "Nothing stands out as the one to pick.",
+        "Short names for three plans",
+        "Every name and value fits its column.",
+        "Long names in three columns",
+        "Text doesn’t wrap, so it runs into the next column and off the card.",
+        "One value per plan",
+        "Each value sits under its own plan.",
+        "A value missing",
+        "Values fill columns in order, so ₹5,000 lands under Your plan."
+      ],
+      "specimen": [
+        "Your plan",
+        "JioFinance+",
+        "JioPoints multiplier",
+        "1x",
+        "1.25x",
+        "Cashback",
+        "₹5,000",
+        "Bonus JioGold",
+        "1%",
+        "No",
+        "Free",
+        "Plus",
+        "Premium",
+        "JioPoints",
+        "1.1x",
+        "₹2,000",
+        "Gold bonus",
+        "Up to ₹2,000",
+        "Up to ₹5,000"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Cross for not included",
+            "caption": "false shows the same grey cross in every cell.",
+            "specimen": "Your plan · JioFinance+ · JioPoints multiplier · 1x · 1.25x · Cashback · ₹5,000 · Bonus JioGold · 1%"
+          },
+          "dont": {
+            "title": "The word No",
+            "caption": "Text reads like a value and looks different from the crosses.",
+            "specimen": "Your plan · JioFinance+ · JioPoints multiplier · 1x · 1.25x · Cashback · No · ₹5,000 · Bonus JioGold · No · 1%"
+          }
+        },
+        {
+          "do": {
+            "title": "One recommended plan",
+            "caption": "Only JioFinance+ is gold.",
+            "specimen": "Your plan · JioFinance+ · JioPoints multiplier · 1x · 1.25x · Cashback · ₹5,000 · Bonus JioGold · 1%"
+          },
+          "dont": {
+            "title": "Every plan gold",
+            "caption": "Nothing stands out as the one to pick.",
+            "specimen": "Your plan · JioFinance+ · JioPoints multiplier · 1x · 1.25x · Cashback · ₹5,000 · Bonus JioGold · 1%"
+          }
+        },
+        {
+          "do": {
+            "title": "Short names for three plans",
+            "caption": "Every name and value fits its column.",
+            "specimen": "Free · Plus · Premium · JioPoints · 1x · 1.1x · 1.25x · Cashback · ₹2,000 · ₹5,000 · Gold bonus · 1%"
+          },
+          "dont": {
+            "title": "Long names in three columns",
+            "caption": "Text doesn’t wrap, so it runs into the next column and off the card.",
+            "specimen": "Free · Plus · JioFinance+ · JioPoints multiplier · 1x · 1.1x · 1.25x · Cashback · Up to ₹2,000 · Up to ₹5,000 · Bonus JioGold · 1%"
+          }
+        },
+        {
+          "do": {
+            "title": "One value per plan",
+            "caption": "Each value sits under its own plan.",
+            "specimen": "Your plan · JioFinance+ · JioPoints multiplier · 1x · 1.25x · Cashback · ₹5,000 · Bonus JioGold · 1%"
+          },
+          "dont": {
+            "title": "A value missing",
+            "caption": "Values fill columns in order, so ₹5,000 lands under Your plan.",
+            "specimen": "Your plan · JioFinance+ · JioPoints multiplier · 1x · 1.25x · Cashback · ₹5,000 · Bonus JioGold · 1%"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Plan Comparison Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Three plans",
+        "Interactive info",
+        "Custom slot",
+        "Checked 21 October 2026",
+        "Installed jfs-components is 0.1.78 (19 October build of Biscuit’s main) from the team’s private package repository. Figma’s Plan Comparison Card exposes only its Slot as a property; the plan names, rows, and cells are layers there. In the package, the plan names split their row exactly 1.8 to 1 but the table’s cells don’t, because each cell’s padding counts first, so a name sits 3 to 8 px right of its column. Text never wraps or shortens and overflows narrow columns. The table is 5 px taller than Figma’s because its row lines sit outside the 46 px cells, and Figma draws no line under its third row. The info icon from showInfo and the grey cross have no accessible name. The published Storybook still shows the older generated page, with every story on a black host (all reported).",
+        "jfs-components",
+        "0.1.78",
+        "showInfo"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "checkboxgroup",
+  "entryHash": "b11b5e23b191ebe719c2aca675579e8c6f5aba1ea6f0f7cb4bd80a486b87ac59",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "checkedAt": "2026-10-29T04:58:49Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: Nothing cited says the guide's source puts 'Button / Size': 'XS' on the group. The evidence lists only the `--with-end-slot` story (Button \"Manage\"), and the rendered evidence describes \"a default Button end slot\" (Button 80 × 42), not XS. The claims that the Button must fit an 80 px slot and \"takes no modes\" also come from outside this guide."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: \"accessibilityLabel naming the row, as the guide's source sets it\" and the Link's autolayout=\"Hug\" have no support in this guide or its evidence. The evidence only records a label slot holding Text \"I agree\" and Link \"Terms & Conditions\"."
+    }
+  ],
+  "notes": "The evidence file's older Rendered and Limits sections say no aria-checked and nested duplicate checkbox roles. The dbe0e02 section at the top explicitly replaces them, so /accessibility/1 and /facts/props/3 correctly follow the newer text. /content/good includes \"Email\", \"SMS\" and \"Push notification\" from the doDont Do example. They illustrate independent choices but do not follow the content rule of 'what it is, then what tells it apart', so a reviewer may want to limit /content/good to the account labels."
+}

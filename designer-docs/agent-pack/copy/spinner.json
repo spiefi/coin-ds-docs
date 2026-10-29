@@ -1,0 +1,269 @@
+{
+  "slug": "spinner",
+  "label": "Spinner",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/spinner.guide.tsx"
+  ],
+  "evidence": "docs/evidence/spinner.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T04:46:15.410Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "loader",
+    "loading indicator",
+    "activity indicator",
+    "progress spinner"
+  ],
+  "title": "Spinner",
+  "summary": "Use a Spinner to show that something is loading when you can't show its shape or say how long it will take.",
+  "corePrinciple": "Show that something is happening, then get out of the way.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2729-1039",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-spinner--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Three arcs chasing each other",
+      "description": "Three 100° arcs with round ends turn clockwise around an empty centre, with no track behind them. Each is about 18% of the size thick: 12.8 px at the default 72 px, as in Figma. The diagram shows the resting pose so the pins stay put.",
+      "blocks": [
+        "Shown at 3×",
+        "72 × 72",
+        "1",
+        "2",
+        "3",
+        "Leading arc",
+        "Gold and drawn on top. It leads the turn: fastest over the top, slowest at the bottom.",
+        "Middle arc",
+        "Purple. It follows the gold arc; the gap between them opens and closes as it turns.",
+        "Trailing arc",
+        "Teal and last in the chain, closing up behind the others at the top of each turn.",
+        "Measured size (px)"
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Leading arc",
+          "note": "Gold and drawn on top. It leads the turn: fastest over the top, slowest at the bottom."
+        },
+        {
+          "part": "Middle arc",
+          "note": "Purple. It follows the gold arc; the gap between them opens and closes as it turns."
+        },
+        {
+          "part": "Trailing arc",
+          "note": "Teal and last in the chain, closing up behind the others at the top of each turn."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Size, speed, and gravity",
+      "description": "Three settings shape it: size sets the diameter, durationMs the time for one turn, and gravity how much it speeds up over the top and slows at the bottom. No mode changes it. A colors setting can replace its three colours in code; keep Coin's gold, purple, and teal.",
+      "blocks": [
+        "Default",
+        "Gravity 0.45 and a 1.5 s turn: a little faster over the top.",
+        "Heavy",
+        "Gravity 0.85 and a 2.8 s turn: fast over the top, slow at the bottom.",
+        "Weightless",
+        "Gravity 0 and a 1.6 s turn: the same speed all the way round."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "Gravity 0.45 and a 1.5 s turn: a little faster over the top."
+        },
+        {
+          "title": "Heavy",
+          "description": "Gravity 0.85 and a 2.8 s turn: fast over the top, slow at the bottom."
+        },
+        {
+          "title": "Weightless",
+          "description": "Gravity 0 and a 1.6 s turn: the same speed all the way round."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Spinning or resting",
+      "description": "It spins while animating is on, the default. With animating off, or when the device asks for reduced motion, it rests as an evenly spaced fan of three arcs; the rest isn't a frame of the spin. It has no pressed, focus, or disabled state.",
+      "blocks": [
+        "Spinning",
+        "Shown while something loads; the screen removes it when the content arrives.",
+        "Resting",
+        "Also what people who turn on reduced motion see."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Spinning",
+          "description": "Shown while something loads; the screen removes it when the content arrives."
+        },
+        {
+          "title": "Resting",
+          "description": "Also what people who turn on reduced motion see."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "You set the diameter",
+      "description": "Size is the diameter in px: 72 by default, with no minimum or maximum. The arcs stay about 18% of it thick, so a 32 px spinner draws 5.7 px arcs. It keeps its size and doesn't stretch to fill its host.",
+      "blocks": [
+        "32 px",
+        "5.7 px arcs. Small enough to sit beside a line of text.",
+        "56 px",
+        "10 px arcs, for a card or one section that's loading.",
+        "88 px",
+        "15.6 px arcs, for a whole screen waiting on one thing."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "32 px",
+          "description": "5.7 px arcs. Small enough to sit beside a line of text."
+        },
+        {
+          "title": "56 px",
+          "description": "10 px arcs, for a card or one section that's loading."
+        },
+        {
+          "title": "88 px",
+          "description": "15.6 px arcs, for a whole screen waiting on one thing."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "No text of its own",
+      "description": "The spinner shows no words. Its spoken name is “Loading” unless you set accessibilityLabel; name what's loading, and add a short line of text next to it when the wait is more than a moment.",
+      "blocks": [
+        "Say what's loading",
+        "A 56 px spinner named “Loading your statements” and one line that says the same."
+      ],
+      "specimen": [
+        "Fetching your statements…"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Say what's loading",
+          "description": "A 56 px spinner named “Loading your statements” and one line that says the same."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Refreshing statements",
+      "description": "Refresh swaps the list for a spinner and a line of text while the statements load, then brings the list back. The screen owns the loading state; the spinner only shows it.",
+      "blocks": [
+        "Statements up to date"
+      ],
+      "specimen": [
+        "Statements",
+        "Savings account ··4821",
+        "September 2026 statement",
+        "August 2026 statement",
+        "July 2026 statement",
+        "Refresh"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One clear wait",
+      "description": "Each pair shows a wait people understand next to one that leaves them guessing or watching several spinners at once.",
+      "blocks": [
+        "Do",
+        "Say what's loading",
+        "A short line next to it tells people what they're waiting for.",
+        "Don’t",
+        "Leave it unexplained",
+        "A spinner on its own says something is happening, not what.",
+        "Show one spinner per wait",
+        "One spinner covers the whole list while it loads.",
+        "Spin every row",
+        "Several spinners compete for attention and make the wait feel longer."
+      ],
+      "specimen": [
+        "Fetching your statements…",
+        "September 2026 statement",
+        "August 2026 statement",
+        "July 2026 statement"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Say what's loading",
+            "caption": "A short line next to it tells people what they're waiting for.",
+            "specimen": "Fetching your statements…"
+          },
+          "dont": {
+            "title": "Leave it unexplained",
+            "caption": "A spinner on its own says something is happening, not what.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Show one spinner per wait",
+            "caption": "One spinner covers the whole list while it loads.",
+            "specimen": "Fetching your statements…"
+          },
+          "dont": {
+            "title": "Spin every row",
+            "caption": "Several spinners compete for attention and make the wait feel longer.",
+            "specimen": "September 2026 statement · August 2026 statement · July 2026 statement"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Spinner contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Sizes",
+        "Heavy",
+        "Weightless",
+        "Resting",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma’s Spinner is one 72 × 72 frame of three arcs in gold, purple, and teal, with no variants; the motion, speed, gravity, and resting pose exist only in code. Since the #276 fix the arcs match Figma’s ring: 12.8 px thick at 72, and in proportion at other sizes. No mode changes it, and a colors setting replaces its three colours. It is announced as a progress bar named “Loading” unless you name it, with no value. The published Storybook page is still the old generated one.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
