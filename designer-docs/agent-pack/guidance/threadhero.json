@@ -1,0 +1,457 @@
+{
+  "slug": "threadhero",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/threadhero.guide.tsx) and docs/evidence/threadhero.md at e7ed622 (“docs: publish 19 Component Fix fixes on jfs-components dbe0e02”). The guide's Sources note was checked on 28 October 2026 on the installed build itself (jfs-components 0.1.78, the 27 October build: mirror v0.1.78-dbe0e02, Biscuit's main at dbe0e02), so items citing it carry 2026-10-28 and 0.1.78-dbe0e02. The evidence's dbe0e02 section (#397 verified 27 October on dbe0e02, closed by Marcin, published 28 October) replaces its 25 October sections (0.1.78-c8526ae) where they differ; items from that section carry 2026-10-27 and 0.1.78-dbe0e02, and lines from the 25 October sections carry 2026-10-25 and 0.1.78-c8526ae and are used only where the installed source still agrees. Installed ThreadHero.tsx (137 lines), react-utils' cloneChildrenWithModes and resolveTruncation, typography's safeTextLineHeight and the threadHero/* and avatar size tokens (through the package's own resolver) match every guide sentence used here, read from source, not run: the props are title (default “Subhash Rajan”), subtitle (default “Banking name: SHIVASHANKAR RAJAN”), caption (no default), renderAvatar (no default; undefined, null, false and '' show nothing), modes, style (spread last on the root) and disableTruncation, with no onPress, testID, accessibility props or children; the root is a View, a centred column with an 8 px gap (threadHero/gap) and no width, holding a centred, full-width column with a 2 px gap (threadHero/details/gap) for the avatar, name and banking name, then the caption; the name is 16 px weight 600 on a 20 px line (#191b1e), centred, with no line limit, so it wraps; the banking name and caption are 12 px weight 500 on an 18 px line (#5d5d61), one line with a tail ellipsis unless disableTruncation; title, subtitle and caption render only when non-empty (ThreadHero.tsx:123-134); every threadHero/* token is a one-mode literal (Thread Hero / Output), so no mode changes the hero's text; renderAvatar is cloned with { ...heroModes, ...avatarModes } (react-utils.ts:59-66), so the avatar's own modes win and fragments are unwrapped; Avatar Size defaults to L, 42 px (M 36, S 29) through context/avatar/size; an Avatar with no props is style Image with the bundled photo, and it is pressable only with onPress. Heights add up as 42 + 2 + 20 + 2 + 18 + 8 + 18 = 110, 84 without a caption and 40 without avatar and caption. No guide sentence is contradicted by the installed source; the Sizing sentence names the 2 px once, though the same 2 px also separates the name from the banking name, which is how its parts make 110 (the entry keeps the guide's wording). Not used, because the dbe0e02 section replaces them: the 25 October Contract lines that renderAvatar's own modes are replaced (“on the Avatar itself it's overwritten”), the published stories' nonexistent Avatar props, the MDX's “all three lines ellipsize”, and the MDX Anatomy specimen and Code Connect points (#397, closed). Not recorded: style (the building rules keep style off Coin components); the evidence's colours; Biscuit's handwritten MDX lines the evidence quotes (not the signed-in user, ProfileCard; not a payment result, StatusHero; its content lines), since the guide does not say them; the Storybook story list, Hosting and Limits. Accessibility stays empty: the guide gives none, and the evidence only says the hero has no accessibility props and its avatar is an image on the web; screen-reader names are not gaps in this pack. Avatar Size is created as an evidence mode fact (create: true): ThreadHero's own mode metadata lists no collections, but the hero passes its modes to the avatar (the dbe0e02 section), and its values are the package's Avatar Size collection. The two required content rules rest on the title and subtitle defaults (props facts), as in the MerchantProfile entry. Examples follow the building rules: no Color Mode (the guide sets Light on every hero and column) and no Avatar Size (L, 42 px, is the default and Figma's; no guide sentence says some content needs another), and the slotted Avatar carries no modes. Avatar has no entry in this pack; the examples use it because renderAvatar is the hero's only way to show an avatar and the guide fills it with a Monogram Avatar and asks for initials without a photo (its Don't shows the default Avatar's stranger photo), as the BrandChip entry does. The In context example drops the guide's two Transaction Bubbles (no entry in this pack), their widths and the VStack with Slot gap XL around them, so it shows the hero alone; the Wrapped example drops the 240 px column (a style width). Copy is the guide's own (RV, Rahul Verma, Banking name: RAHUL KUMAR VERMA, +91 98765 43210; VR, Venkatasubramanian Ramakrishnan, Banking name: VENKATASUBRAMANIAN RAMAKRISHNAN, venkatasubramanian.r@okjio). Left out of examples (the pack allows three): Without a caption, Without an avatar, Cut, Phone number and UPI ID (their copy is in content good), the playground and the Don'ts. Gaps are the two Figma differences still open: Figma's nested Avatar against renderAvatar with no default (the Sources note), and Figma's caption on by default and 360 px width against a caption only when passed and no width of its own (the 25 October Discrepancies line, no ticket; still true in the installed source). Sorting (batch 8): the cross-check found that the default-avatar Don't also read as ruling out the Monogram avatar the Do recommends; it now says an Avatar left with no photo and not set to Monogram. It also found the Avatar Size fact calling L the default and Figma's size, which the evidence does not say; the description now gives only the evidence's S 29 and M 36 and Figma's 42 px (the default L is the package collection's own default mode). A second cross-check found that the phone-number format, the caption under the guide's Phone number example, was stated as a rule for every number; it now keeps the example's context.",
+  "useWhen": [
+    {
+      "text": "At the top of a payment or chat thread, to show who the other person is: their name, banking name, and number.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Thread Hero at the top of a payment or chat thread to show who the other person is: their name, banking name, and number."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A person header people press, or one with a button in it: the hero has no states, doesn't press, and no part of it is a button.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The hero has no states: it doesn’t press, and no part of it is a button."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "renderAvatar: an Avatar, 42 px, on top; there's none by default.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "renderAvatar: an Avatar, 42 px; there’s none by default."
+      }
+    },
+    {
+      "part": "Name",
+      "holds": "title, 16 px Semibold, close under the avatar; a long name wraps.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "title, 16 px Semibold; a long name wraps."
+      }
+    },
+    {
+      "part": "Banking name",
+      "holds": "subtitle, 12 px grey on one line, close under the name; it ellipsizes.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "subtitle, 12 px grey on one line; it ellipsizes."
+      }
+    },
+    {
+      "part": "Caption",
+      "holds": "caption: a phone number or UPI ID, 8 px below the banking name; left out, it doesn't show.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "caption: a phone number or UPI ID; left out, it doesn’t show."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The hero opens the thread, so people know who they're paying before they see the payments below it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero opens the thread, so people know who they’re paying before they see the payments below it."
+      }
+    },
+    {
+      "text": "The thread lays the hero out with the payments; the hero only names the person.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The thread lays it out; the hero only names the person."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it says what a Thread Hero does in any thread: it shows the person's avatar, name, banking name and caption, and lays out nothing around it."
+      }
+    },
+    {
+      "text": "The hero has no width of its own: its lines centre in the width they get. Figma draws it 360 px wide.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The hero has no width of its own: its lines centre in the width they get, and Figma draws it 360 px wide."
+      }
+    },
+    {
+      "text": "With an avatar and a caption it is 110 px tall: a 42 px avatar, 2 px, a 20 px name, an 18 px banking name, then 8 px and an 18 px caption.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "With an avatar and a caption it is 110 px tall: a 42 px avatar, 2 px, a 20 px name, an 18 px banking name, then 8 px and an 18 px caption."
+      }
+    },
+    {
+      "text": "Without a caption it is 84 px tall; without an avatar and a caption, 40 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "84 tall without a caption; 40 without avatar and caption."
+      },
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "renderAvatar takes an Avatar: the person's photo, or their initials with style Monogram.",
+      "strength": "recommended",
+      "target": "renderAvatar",
+      "from": {
+        "section": "configuration",
+        "quote": "renderAvatar takes an Avatar: the person’s photo, or their initials with style Monogram."
+      }
+    },
+    {
+      "text": "renderAvatar has no default, so without one there is no avatar and the name moves to the top.",
+      "strength": "recommended",
+      "target": "renderAvatar",
+      "from": {
+        "section": "configuration",
+        "quote": "There’s no default, so without one the name moves to the top."
+      }
+    },
+    {
+      "text": "Without a photo, pass a Monogram Avatar with the person's initials.",
+      "strength": "recommended",
+      "target": "renderAvatar",
+      "from": {
+        "section": "doDont",
+        "quote": "A Monogram avatar with their initials."
+      }
+    },
+    {
+      "text": "Don't leave the Avatar at its default: an Avatar given no photo, and not set to style Monogram, shows a stranger's portrait.",
+      "strength": "discouraged",
+      "target": "renderAvatar",
+      "from": {
+        "section": "doDont",
+        "quote": "An Avatar with no photo shows a stranger’s portrait."
+      }
+    },
+    {
+      "text": "caption shows only when you pass it.",
+      "strength": "recommended",
+      "target": "caption",
+      "from": {
+        "section": "configuration",
+        "quote": "caption shows only when you pass it"
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it states what the package does with every Thread Hero: caption has no default and the line renders only when a caption is passed (ThreadHero.tsx:130)."
+      }
+    },
+    {
+      "text": "An empty subtitle hides the banking line.",
+      "strength": "recommended",
+      "target": "subtitle",
+      "from": {
+        "section": "configuration",
+        "quote": "an empty subtitle hides the banking line."
+      }
+    },
+    {
+      "text": "No mode changes the hero's text.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "No mode changes the hero’s text."
+      }
+    },
+    {
+      "text": "The hero passes its modes to the avatar, and the avatar's own modes win, so Avatar Size can be set on the hero or on the avatar; Figma uses L, 42 px.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "from": {
+        "section": "configuration",
+        "quote": "The hero passes its modes to the avatar, and the avatar’s own modes win, so set Avatar Size on the hero or on the avatar; Figma uses L, 42 px."
+      }
+    },
+    {
+      "text": "In a narrow column the banking name and the caption stay on one line and end in an ellipsis; disableTruncation lets them wrap too.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "from": {
+        "section": "states",
+        "quote": "In a narrow column the name wraps, while the banking name and the caption stay on one line and end in an ellipsis; disableTruncation lets them wrap too."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "The person first, then the name their bank knows.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "The person first, then the name their bank knows."
+        }
+      },
+      {
+        "text": "Write title as the name the user knows the person by.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Write title as the name the user knows the person by."
+        }
+      },
+      {
+        "text": "Start subtitle with “Banking name:” and give the name their bank holds, so people can check they're paying the right person.",
+        "strength": "recommended",
+        "target": "subtitle",
+        "from": {
+          "section": "content",
+          "quote": "Start subtitle with Banking name: and give the name their bank holds, so people can check they’re paying the right person."
+        }
+      },
+      {
+        "text": "Use caption for a phone number or UPI ID, not a sentence.",
+        "strength": "recommended",
+        "target": "caption",
+        "from": {
+          "section": "content",
+          "quote": "Use caption for a phone number or UPI ID, not a sentence."
+        }
+      },
+      {
+        "text": "Like the guide's Phone number example, write a phone number in caption as +91 and ten digits, spaced.",
+        "strength": "recommended",
+        "target": "caption",
+        "from": {
+          "section": "content",
+          "quote": "+91 and ten digits, spaced."
+        }
+      },
+      {
+        "text": "Or give the UPI ID they're paid at.",
+        "strength": "recommended",
+        "target": "caption",
+        "from": {
+          "section": "content",
+          "quote": "Or the ID they’re paid at."
+        }
+      },
+      {
+        "text": "After the name people know, give the banking name, labelled.",
+        "strength": "recommended",
+        "target": "subtitle",
+        "from": {
+          "section": "doDont",
+          "quote": "Then the banking name, labelled."
+        }
+      },
+      {
+        "text": "Don't put the phone number in title: the title is the person; the number goes in caption.",
+        "strength": "discouraged",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "The title is the person; the number goes in caption."
+        }
+      },
+      {
+        "text": "Set title yourself: left out, the hero shows “Subhash Rajan”.",
+        "strength": "required",
+        "target": "title",
+        "from": {
+          "fact": "props:title"
+        }
+      },
+      {
+        "text": "Set subtitle yourself, or pass an empty one to hide the line: left out, it shows “Banking name: SHIVASHANKAR RAJAN”.",
+        "strength": "required",
+        "target": "subtitle",
+        "from": {
+          "fact": "props:subtitle"
+        }
+      }
+    ],
+    "good": [
+      "Rahul Verma",
+      "Banking name: RAHUL KUMAR VERMA",
+      "+91 98765 43210",
+      "rahul@okjio"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Always: the hero has no states; it doesn't press, and no part of it is a button.",
+      "from": {
+        "section": "states",
+        "quote": "The hero has no states: it doesn’t press, and no part of it is a button."
+      }
+    },
+    {
+      "state": "Cut",
+      "when": "In a narrow column the name wraps; the banking name and the caption stay on one line and end in an ellipsis.",
+      "from": {
+        "section": "states",
+        "quote": "The name wraps; the other two lines end in an ellipsis."
+      }
+    },
+    {
+      "state": "Wrapped",
+      "when": "With disableTruncation every line wraps.",
+      "from": {
+        "section": "states",
+        "quote": "Every line wraps."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "The name people know",
+      "dont": "The phone as the title",
+      "why": "The title is the person; the number goes in caption.",
+      "from": {
+        "section": "doDont",
+        "quote": "The name people know"
+      }
+    },
+    {
+      "do": "Initials without a photo",
+      "dont": "The default avatar",
+      "why": "An Avatar with no photo shows a stranger’s portrait.",
+      "from": {
+        "section": "doDont",
+        "quote": "Initials without a photo"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The top of a payment thread, the guide's In context: the hero names the person (their initials in a Monogram Avatar, the name people know, the labelled banking name and their number) before the payments below it. The thread lays it out and shows the payments.",
+      "jsx": "<ThreadHero\n  renderAvatar={<Avatar style=\"Monogram\" monogram=\"RV\" />}\n  title=\"Rahul Verma\"\n  subtitle=\"Banking name: RAHUL KUMAR VERMA\"\n  caption=\"+91 98765 43210\"\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero opens the thread, so people know who they’re paying before they see the payments below it."
+      }
+    },
+    {
+      "purpose": "Without a banking name: an empty subtitle hides the line (left out, the hero would show its default banking name).",
+      "jsx": "<ThreadHero\n  renderAvatar={<Avatar style=\"Monogram\" monogram=\"RV\" />}\n  title=\"Rahul Verma\"\n  subtitle=\"\"\n  caption=\"+91 98765 43210\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "An empty subtitle hides the line."
+      }
+    },
+    {
+      "purpose": "A long name, the guide's Wrapped state: the name wraps anyway, and disableTruncation lets the banking name and the UPI ID wrap too instead of ending in an ellipsis.",
+      "jsx": "<ThreadHero\n  renderAvatar={<Avatar style=\"Monogram\" monogram=\"VR\" />}\n  title=\"Venkatasubramanian Ramakrishnan\"\n  subtitle=\"Banking name: VENKATASUBRAMANIAN RAMAKRISHNAN\"\n  caption=\"venkatasubramanian.r@okjio\"\n  disableTruncation\n/>",
+      "from": {
+        "section": "states",
+        "quote": "disableTruncation lets them wrap too."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "title",
+      "description": "The name: 16 px Semibold (600) on a 20 px line, centred; it wraps, with no line limit.",
+      "quote": "`title` (default 'Subhash Rajan'): 16/20 Semibold 600 `#191b1e`, centred, wraps (no clamp).",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "subtitle",
+      "description": "The banking name: 12 px Medium on an 18 px line, grey, centred, one line with an ellipsis. An empty string hides it; left out, it shows the default.",
+      "quote": "`''` hides it; `undefined` shows the default.",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "caption",
+      "description": "No default: 12 px Medium on an 18 px line, grey, one line with an ellipsis, 8 px below the banking name; hidden when not passed.",
+      "quote": "`caption` (no default): 12/18 Medium `#5d5d61`, one line with ellipsis, 8 px below; hidden when not passed.",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "renderAvatar",
+      "description": "No default avatar. The avatar gets the hero's modes and its own modes win; fragments and arrays get the hero's modes too; false shows no avatar.",
+      "quote": "Fragments and arrays get the hero's modes; `renderAvatar={false}` shows no avatar.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "No mode changes the hero's own text: its tokens have one mode. The hero passes its modes to the avatar.",
+      "quote": "no mode changes the hero's own text (one-mode literals)",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "disableTruncation",
+      "description": "The banking name and the caption wrap instead of ending in an ellipsis; the name wraps either way.",
+      "quote": "`disableTruncation`: subtitle and caption wrap.",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "modes",
+      "name": "Avatar Size",
+      "create": true,
+      "type": "string",
+      "values": [
+        "L",
+        "M",
+        "S",
+        "XS"
+      ],
+      "default": "L",
+      "description": "Not read by the hero's own text: the hero passes its modes to the avatar, so Avatar Size on the hero sizes it (a hero at S gives a 29 px avatar), and an Avatar Size set on the avatar itself wins (an avatar at M gives 36 px whatever the hero's size). Figma's nested Avatar is 42 px.",
+      "quote": "an avatar set to Size S stays 29 px, and a hero at S with an avatar at M gives 36.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Thread Hero has Title, Subtitle and Caption text properties, a caption switch and a nested Avatar; the package has no avatar unless you pass one in renderAvatar.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Thread Hero has Title, Subtitle, and Caption text properties, a caption switch, and a nested Avatar, drawn 360 px wide. The package takes title, subtitle, caption, and renderAvatar: with no renderAvatar there’s no avatar"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Figma's caption shows by default and its Thread Hero is 360 px wide; the package hides the caption until you pass one and has no width of its own (it hugs its text).",
+      "quote": "Figma's caption shows by default and the hero is 360 px wide; the package hides the caption until passed and hugs its text.",
+      "checkedOn": "2026-10-25",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ]
+}

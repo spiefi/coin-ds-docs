@@ -1,0 +1,855 @@
+{
+  "schemaVersion": 1,
+  "id": "SuggestiveSearch",
+  "slug": "suggestivesearch",
+  "category": "input",
+  "tags": [
+    "autocomplete",
+    "typeahead",
+    "combobox",
+    "search with suggestions",
+    "bank search"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-29T04:05:26Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Suggestive Search to let people type and pick one item from a known list, such as their bank, with matches shown as they type.",
+  "useWhen": [
+    {
+      "text": "Let people type and pick one item from a known list, such as their bank, with matches shown as they type.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Suggestive Search to let people type and pick one item from a known list, such as their bank, with matches shown as they type."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "label: names the value, such as “Bank name”.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the value, such as “Bank name”."
+      }
+    },
+    {
+      "part": "Required mark",
+      "holds": "isRequired: a red asterisk shown on screen; screen readers hear “required” from the field.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown on screen; screen readers hear “required” from the field."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "Where people type; its border shows the state.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Where people type; its border shows the state."
+      }
+    },
+    {
+      "part": "Suggestions",
+      "holds": "A floating list of the matches from your items, in your order.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Matches from your list, in your order."
+      }
+    },
+    {
+      "part": "Match",
+      "holds": "The typed text, in bold (highlightMatch).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The typed text, in bold."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "supportText: a short hint under the field.",
+      "required": false,
+      "from": {
+        "section": "configuration",
+        "quote": "A short hint under the field."
+      }
+    },
+    {
+      "part": "Error message",
+      "holds": "errorMessage, shown when isInvalid: a message that says how to fix it, under the red field.",
+      "required": false,
+      "from": {
+        "section": "states",
+        "quote": "A red field and a message that says how to fix it."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "items",
+      "accepts": [
+        "SuggestiveSearchItem"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "renderItem",
+      "accepts": [
+        "((option: SuggestiveSearchOption, meta: { query: string; isSelected: boolean; }) => React.ReactNode)"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Suggestive Search fills its container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Suggestive Search fills its container."
+      }
+    },
+    {
+      "text": "The label is 17 px tall with 8 px to a 47 px field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The label is 17 px tall with 8 px to a 47 px field."
+      }
+    },
+    {
+      "text": "The list opens 6 px below the field with 44 px rows, floats over what follows, and scrolls after 240 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The list opens 6 px below the field with 44 px rows, floats over what follows, and scrolls after 240 px."
+      }
+    },
+    {
+      "text": "On the guide's add-a-bank-account screen, Continue checks that a bank was picked from the list and, if not, shows the field's error (isInvalid with errorMessage); the open list floats over the button.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Continue checks that a bank was picked from the list and shows an error if not; the list floats over the button while it’s open."
+      },
+      "target": "isInvalid",
+      "value": "true"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Add supportText for a short hint under the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A short hint under the field."
+      },
+      "target": "supportText"
+    },
+    {
+      "text": "Set isRequired to mark the field required: a red asterisk after the label, and screen readers hear “required”.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A red asterisk after the label; screen readers hear “required”."
+      },
+      "target": "isRequired",
+      "value": "true"
+    },
+    {
+      "text": "Set emptyMessage to say so when nothing matches; without it the list just disappears.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Says so when nothing matches; without it the list just disappears."
+      },
+      "target": "emptyMessage"
+    },
+    {
+      "text": "Do not leave emptyMessage out and let the list vanish: people can’t tell whether anything matched.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "People can’t tell whether anything matched."
+      },
+      "target": "emptyMessage"
+    },
+    {
+      "text": "Set maxResults to cap the list; otherwise it scrolls after about five rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Caps the list; otherwise it scrolls after about five rows."
+      },
+      "target": "maxResults"
+    },
+    {
+      "text": "Set highlightMatch to false to show matches in plain text.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Matches show in plain text."
+      },
+      "target": "highlightMatch",
+      "value": "false"
+    },
+    {
+      "text": "Pass an option as { value, label, disabled: true } to keep it listed but not choosable, such as a payee still being verified.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Ananya Iyer is listed but disabled, such as a payee still being verified."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Do not set isInvalid without an errorMessage: a red field doesn’t say what’s wrong.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A red field doesn’t say what’s wrong."
+      },
+      "target": "isInvalid",
+      "value": "true"
+    },
+    {
+      "text": "Show states with isInvalid, isReadOnly and isDisabled: the component sets FormField States itself (invalid gives Error, read only or disabled give Read Only with disabled at 50 % opacity, focus gives Active, otherwise Idle).",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`FormField States` is forced: invalid → Error, read-only or disabled → Read Only (disabled adds 50 % opacity), focused → Active, else Idle."
+      },
+      "target": "FormField States"
+    },
+    {
+      "text": "To show the list open in a static example, pass the controlled open prop: on the web an uncontrolled list (defaultOpen) closes on the first mousedown outside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "on the web the component closes an uncontrolled list on any mousedown outside it"
+      },
+      "target": "open",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Type a little, then pick the right one.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Type a little, then pick the right one."
+        }
+      },
+      {
+        "text": "Label the field with what it holds, such as “Bank name”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Label the field with what it holds, such as “Bank name”"
+        },
+        "target": "label"
+      },
+      {
+        "text": "Use the placeholder for a search hint.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "use the placeholder for a search hint."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Do not use the placeholder as the label: it disappears as soon as people type.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It disappears as soon as people type."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Keep options short and unique.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep options short and unique"
+        },
+        "target": "items"
+      },
+      {
+        "text": "Write the no-match message as what happened.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "write the no-match message as what happened"
+        },
+        "target": "emptyMessage"
+      },
+      {
+        "text": "Make error messages say how to fix the pick.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "make errors say how to fix the pick."
+        },
+        "target": "errorMessage"
+      }
+    ],
+    "good": [
+      "Bank name",
+      "Search bank name",
+      "Pick the bank your account is with.",
+      "No matching banks",
+      "Choose your bank from the list.",
+      "HDFC Bank",
+      "State Bank of India",
+      "Beneficiary",
+      "Search beneficiary"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "At rest: a grey border; it turns purple when focused.",
+      "from": {
+        "section": "states",
+        "quote": "Grey border; it turns purple when focused."
+      }
+    },
+    {
+      "state": "Open",
+      "when": "As people type, matches from the items appear in a floating list under the field, with the typed text in bold.",
+      "from": {
+        "section": "anatomy",
+        "quote": "As people type, matches from your list appear in a floating list under it, with the typed text in bold."
+      }
+    },
+    {
+      "state": "No matches",
+      "when": "With emptyMessage the list says so when nothing matches; without it the list just disappears.",
+      "from": {
+        "section": "configuration",
+        "quote": "Says so when nothing matches; without it the list just disappears."
+      }
+    },
+    {
+      "state": "Option chosen",
+      "when": "The list marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check).",
+      "from": {
+        "section": "sources",
+        "quote": "marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check)."
+      }
+    },
+    {
+      "state": "Error",
+      "when": "isInvalid with errorMessage: a red field and a message that says how to fix it.",
+      "from": {
+        "section": "states",
+        "quote": "A red field and a message that says how to fix it."
+      }
+    },
+    {
+      "state": "Read only",
+      "when": "isReadOnly: grey, shows the chosen bank, and can’t be changed.",
+      "from": {
+        "section": "states",
+        "quote": "Grey, shows the chosen bank, and can’t be changed."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: faded and unavailable; like read only, it can’t be typed in or opened.",
+      "from": {
+        "section": "states",
+        "quote": "Read only and disabled can’t be typed in or opened; disabled is also faded."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the field is a combobox: the arrow keys move through the suggestions, Enter picks one, Escape closes the list, and focus stays in the field after a pick.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the field is a combobox: the arrow keys move through the suggestions, Enter picks one, Escape closes the list, and focus stays in the field after a pick."
+      }
+    },
+    {
+      "text": "Each suggestion is announced by its label; isRequired and isInvalid are announced, with the errorMessage tied to the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Each suggestion is announced by its label, and required and error are announced, with the message tied to the field."
+      }
+    },
+    {
+      "text": "The field's accessible name defaults to the visible label, then the placeholder; accessibilityLabel overrides it.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/31"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Label the field",
+      "dont": "Use the placeholder as the label",
+      "why": "It disappears as soon as people type.",
+      "from": {
+        "section": "doDont",
+        "quote": "Label the field"
+      }
+    },
+    {
+      "do": "Say when nothing matches",
+      "dont": "Let the list vanish",
+      "why": "People can’t tell whether anything matched.",
+      "from": {
+        "section": "doDont",
+        "quote": "Say when nothing matches"
+      }
+    },
+    {
+      "do": "Explain the error",
+      "dont": "Rely on red alone",
+      "why": "A red field doesn’t say what’s wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "Explain the error"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Adding a bank account: people type part of their bank’s name and pick it, then press Continue. The screen checks that a bank was picked; errorMessage shows only once it sets isInvalid, as in the error state.",
+      "jsx": "<Card>\n  <Card.Title>Add a bank account</Card.Title>\n  <SuggestiveSearch\n    label=\"Bank name\"\n    placeholder=\"Search bank name\"\n    items={['HDFC Bank', 'Himachal Pradesh Gramin Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra Bank', 'Punjab National Bank', 'Bank of Baroda', 'Canara Bank', 'Union Bank of India', 'IndusInd Bank', 'Yes Bank']}\n    emptyMessage=\"No matching banks\"\n    errorMessage=\"Choose your bank from the list.\"\n    onValueChange={() => {}}\n  />\n  <Button label=\"Continue\" onPress={() => {}} />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "Continue checks that a bank was picked from the list and shows an error if not"
+      }
+    },
+    {
+      "purpose": "The error state: the typed bank is not in the list, so the field is red and the message says how to fix the pick.",
+      "jsx": "<SuggestiveSearch\n  label=\"Bank name\"\n  placeholder=\"Search bank name\"\n  items={['HDFC Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Bank of Baroda']}\n  defaultInputValue=\"Paytm Bank\"\n  isInvalid\n  errorMessage=\"Choose your bank from the list.\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "A red field and a message that says how to fix it."
+      }
+    },
+    {
+      "purpose": "Object items with an option that can’t be chosen: Ananya Iyer stays listed but disabled, such as a payee still being verified.",
+      "jsx": "<SuggestiveSearch\n  label=\"Beneficiary\"\n  placeholder=\"Search beneficiary\"\n  items={[\n    { value: 'u1', label: 'Aarav Sharma' },\n    { value: 'u2', label: 'Aditi Verma' },\n    { value: 'u3', label: 'Rohan Mehta' },\n    { value: 'u4', label: 'Ananya Iyer', disabled: true },\n  ]}\n  onValueChange={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Ananya Iyer is listed but disabled, such as a payee still being verified."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Label rendered above the input."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Search",
+        "description": "Placeholder text shown when the query is empty. Default \"Search\", from the component source."
+      },
+      {
+        "name": "items",
+        "type": "SuggestiveSearchItem[]",
+        "required": false,
+        "source": "evidence",
+        "description": "The screen owns the items and any loading; the component filters, caps, highlights the first match in bold, and shows a check on the selected row. An option object may set disabled: it stays listed and can't be chosen. Declared: Suggestions to filter against the current query. May be bare strings or `{ value, label }` objects.",
+        "checkedOn": "2026-10-10"
+      },
+      {
+        "name": "inputValue",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Current query text (controlled). When `undefined` the component manages its own query state internally."
+      },
+      {
+        "name": "defaultInputValue",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "",
+        "description": "Initial query text for uncontrolled mode. Default \"\", from the component source."
+      },
+      {
+        "name": "onInputChange",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called whenever the query text changes (typing or selection)."
+      },
+      {
+        "name": "value",
+        "type": "SuggestiveSearchOptionValue | null",
+        "required": false,
+        "source": "types",
+        "description": "Currently selected suggestion value (controlled). When `undefined` the component tracks the selection internally."
+      },
+      {
+        "name": "defaultValue",
+        "type": "SuggestiveSearchOptionValue | null",
+        "required": false,
+        "source": "types",
+        "default": null,
+        "description": "Initial selected value for uncontrolled mode. Default null, from the component source."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: SuggestiveSearchOptionValue | null, option?: SuggestiveSearchOption) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Choosing an option sets the query to its label and closes the list; typing anything else clears the selection. Declared: Called when a suggestion is chosen.",
+        "checkedOn": "2026-10-10"
+      },
+      {
+        "name": "filter",
+        "type": "(query: string, option: SuggestiveSearchOption) => boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "Since c8526ae the default and custom filters get the trimmed query (“HDF ” lists HDFC Bank). Declared: Custom predicate deciding whether an option matches the current query. Defaults to a case-insensitive substring match on the label.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "minChars",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 1,
+        "description": "Minimum number of characters required before suggestions are shown. Default 1, from the component source."
+      },
+      {
+        "name": "maxResults",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Caps the number of suggestions rendered. Defaults to no limit."
+      },
+      {
+        "name": "highlightMatch",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Highlights the matched substring of each suggestion in bold. Default true, from the component source."
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Message shown when the query has matched no suggestions. When omitted, the dropdown simply stays hidden on an empty result set."
+      },
+      {
+        "name": "renderItem",
+        "type": "(option: SuggestiveSearchOption, meta: {\n        query: string;\n        isSelected: boolean;\n    }) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom renderer for a suggestion row (overrides the default label)."
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Controlled open state of the suggestion dropdown."
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "On the web an uncontrolled list closes on any mousedown outside it, as designed; the guide's static examples pass the controlled open prop to keep their lists open. Declared: Initial open state for uncontrolled mode. Default false, from the component source.",
+        "checkedOn": "2026-10-11"
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called whenever the open state changes."
+      },
+      {
+        "name": "menuMaxHeight",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 240,
+        "description": "Maximum height of the suggestion list before it becomes scrollable. Default 240, from the component source."
+      },
+      {
+        "name": "menuOffset",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 6,
+        "description": "Vertical gap between the input and the suggestion dropdown. Default 6, from the component source."
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "The red asterisk is visible text; screen readers get the requirement from the field (aria-required on the web). Declared: Renders a required asterisk next to the label. Default false, from the component source.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Disables interaction and dims the field. Default false, from the component source."
+      },
+      {
+        "name": "isInvalid",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Marks the field as invalid and shows `errorMessage`. Default false, from the component source."
+      },
+      {
+        "name": "isReadOnly",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Renders the field as read-only (non-interactive, not dimmed). Default false, from the component source."
+      },
+      {
+        "name": "supportText",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Helper text displayed below the input."
+      },
+      {
+        "name": "errorMessage",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Replaces `supportText` when `isInvalid` is true."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes for design token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the outermost wrapper."
+      },
+      {
+        "name": "inputStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the input row."
+      },
+      {
+        "name": "inputTextStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the input text."
+      },
+      {
+        "name": "menuStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the suggestion dropdown container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label. Defaults to the visible label / placeholder."
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility hint."
+      },
+      {
+        "name": "onFocus",
+        "type": "RNTextInputProps['onFocus']",
+        "required": false,
+        "source": "types",
+        "description": "Called when the input receives focus."
+      },
+      {
+        "name": "onBlur",
+        "type": "RNTextInputProps['onBlur']",
+        "required": false,
+        "source": "types",
+        "description": "Called when the input loses focus."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test identifier."
+      },
+      {
+        "name": "SuggestiveSearchItem.toString",
+        "type": "(() => string) | (() => string)",
+        "required": true,
+        "description": "Returns a string representation of a string. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "SuggestiveSearchItem.valueOf",
+        "type": "(() => string) | (() => Object)",
+        "required": true,
+        "description": "Returns the primitive value of the specified object. A field of each items row.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection SuggestiveSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Dropdown Item State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Selected"
+        ],
+        "description": "A token collection SuggestiveSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "FormField States",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active",
+          "Read Only",
+          "Error",
+          "Disabled"
+        ],
+        "description": "Forced by the component from its props and focus: invalid gives Error, read only or disabled give Read Only (disabled adds 50 % opacity), focused gives Active, otherwise Idle. Declared: A token collection SuggestiveSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Idle",
+        "checkedOn": "2026-10-10"
+      },
+      {
+        "name": "Status",
+        "type": "mode collection",
+        "values": [
+          "Auto",
+          "Warning",
+          "Error",
+          "Success",
+          "Loading",
+          "Neutral"
+        ],
+        "description": "A token collection SuggestiveSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Auto"
+      }
+    ],
+    "slots": [
+      {
+        "name": "items",
+        "type": "SuggestiveSearchItem[]",
+        "description": "A structured slot: an array of SuggestiveSearchItem rows. Suggestions to filter against the current query. May be bare strings or `{ value, label }` objects.",
+        "source": "types"
+      },
+      {
+        "name": "renderItem",
+        "type": "(option: SuggestiveSearchOption, meta: {\n        query: string;\n        isSelected: boolean;\n    }) => React.ReactNode",
+        "description": "Custom renderer for a suggestion row (overrides the default label).",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onInputChange",
+        "type": "(text: string) => void",
+        "description": "Called whenever the query text changes (typing or selection).",
+        "source": "types"
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: SuggestiveSearchOptionValue | null, option?: SuggestiveSearchOption) => void",
+        "description": "Called when a suggestion is chosen.",
+        "source": "types"
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "description": "Called whenever the open state changes.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Suggestive Search still differs from Figma (raised in #233, not claimed by its fix): it bolds the typed text where Figma greys it, its placeholder colour (#888a8d) differs, it marks the chosen row with a grey fill and a 16 px check (Figma: white with a 20 px check), and its rows are 44 px (Figma: 43 px).",
+        "source": "evidence",
+        "checkedOn": "2026-10-23"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=suggestivesearch",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4579-8094",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-suggestivesearch--docs"
+  }
+}

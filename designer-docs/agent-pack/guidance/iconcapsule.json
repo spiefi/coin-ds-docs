@@ -1,0 +1,500 @@
+{
+  "slug": "iconcapsule",
+  "guideCommit": "021681db7a25644db22d4a03ff3ec052c41545b3",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, extraction worker",
+  "extractedOn": "2026-10-29",
+  "notes": "Extracted 29 October 2026 from the guide (src/guides/iconcapsule.guide.tsx) and docs/evidence/iconcapsule.md at 021681d (“docs: add Icon Capsule guide”); both are unchanged since. The guide's Sources note and the evidence were checked on 28 October 2026 on the installed build itself (jfs-components 0.1.78, mirror v0.1.78-dbe0e02, Biscuit's main at dbe0e02, 27 October), so items citing them carry 2026-10-28 and 0.1.78-dbe0e02. Installed IconCapsule.tsx and Icon.tsx match every guide and evidence sentence used here, read from source, not run: iconName defaults to ic_card and accessibilityRole to image (IconCapsule.tsx:81-92); the capsule merges a JFSThemeProvider's modes under its own (93-103); it reads seven iconCapsule tokens and no glass token, and the radius sentinel 9999 makes it a circle (32-58); the root View renders accessibilityLabel undefined and the Icon inside is hidden from accessibility (112-127); Icon draws the registry glyph first and the source only when the name is missing or unknown, and an unknown name with no source warns and draws nothing, so the circle is empty (Icon.tsx:86-138); the registry has 1,323 names, including every name the guide uses (ic_wallet, ic_bulb, ic_water, ic_mobile, ic_savings, ic_card, ic_confirm, ic_warning, ic_error), and not “wallet”. Token values looked up with the package's own getVariableByName: Icon Capsule Size XS 18/12, S 29/18, M 42/18, L 81/36; Context Nudge&Alert 14/14 and CTACard 58/29 at every size, Default and ListItem follow the size; Emphasis High Primary #cea15a with a #0f0d0a glyph, Secondary #5d00b5, Neutral #303338 and Tertiary #036b99 with white; Medium Primary #fde8c9 and Secondary #e4dbff with a coloured glyph, Neutral #545961 with a white glyph, Tertiary still #036b99 with a pale #b3d3e0 glyph; Low a transparent fill with the coloured glyph; System positive #26ab21, warning #f06e0f, negative #f50030 with a white glyph, unchanged by Emphasis and AppearanceBrand; Page type JioPlus changes only Neutral Low's glyph (to white); iconCapsule/glass/background exists (#ffffff33) but is never read. ListItem passes its modes plus Context ListItem to its leading slot and adds no AppearanceBrand (ListItem.tsx:117-120, 219-230, 509-522); cloneChildrenWithModes lets the child's own modes win over the parent's, forced Context last (react-utils.ts:59-65); ListGroup passes its own modes to its rows (ListGroup.tsx:469). No guide sentence is contradicted by the installed build. One reads wider than the code if taken beyond its example: Emphasis Medium's “A pale circle with a coloured icon.” is shown on Secondary (and holds for Primary), but Neutral Medium is a lighter grey with a white glyph and Tertiary Medium keeps the blue circle with a pale glyph, so the Emphasis rules keep the guide's Secondary context and the evidence fact gives the other values. The In context sentence “so set its colour on the capsule” is recorded as where a colour goes when the capsule takes one: under the building rules a slot child carries no appearance modes unless an entry's rule says the content needs it (here, a status), so it is not read as a call to colour every capsule. Not recorded: the playground readout (“Low draws no circle”: not a citable section); the evidence's “Figma draws only M; the other sizes and contexts exist as variable modes only” and the Sources note's Figma icon swap against iconName (a property mapping, not something Coin lacks: the package has all four sizes and a glyph by name); the dropped accessibilityLabel and the MDX's claim that it is supported (screen-reader matters, which the pack keeps out of gaps; kept in an accessibility rule and an evidence fact); Storybook's coverage (no story shows XS, S, L, Medium, Low, System or a Context); style, testID, aria-label pass-through, accessibilityRole and the 1 px transparent border; Color Mode, and Context values as options (the evidence's Limits; parent components set Context). Avatar, named by the guide for letters or a logo, has no entry in this pack. Anatomy: both parts are marked required: the circle always renders, and iconName defaults to ic_card, so a glyph is drawn unless the name isn't in the icon set (the Not in the icon set state, which the guide shows as a Don't). Examples follow the building rules: no Color Mode (the guide's helper adds Color Mode Light to every capsule); in the In context list the ListGroup's modes and each capsule's AppearanceBrand Neutral are dropped, since slot children carry no appearance modes and a List Item doesn't set the capsule's colour, so the capsules show the package default, Primary gold, where the guide and Figma show Neutral (the default-appearance gap, #419); the failure capsule keeps Semantic Intent System with AppearanceSystem negative, because the guide's Do pair and its configuration say a failure needs it (the building rules' status case). ListGroup and ListItem have entries (ListItem's is undocumented). This matches the ActionTile entry, which puts a mode-free IconCapsule with an iconName from the icon set in the tile's icon slot. Copy is the guide's own (Pay bills; Electricity, Adani Electricity; Water, BWSSB; Mobile recharge, Jio prepaid; ic_bulb, ic_water, ic_mobile, ic_error, ic_wallet); press handlers are stubs. Left out of examples (the pack allows three): the size, appearance and emphasis specimens, positive and warning, the unknown-name state, the Don'ts and the playground. Gaps: Glass, the default appearance and the unreachable source, all on Component Bug #419 (Component Fix › To do, Mr. Biscuit). Sorting (batch 8): the cross-check found that the Emphasis High, Medium and Low items presented “on AppearanceBrand Secondary” as the guide’s own condition; they now give the guide’s captions and say that the guide shows them on Secondary (the evidence fact gives Medium on Neutral and Tertiary, where the caption does not hold; a guide fix covers it). It also found Circle and Icon marked always present, where Emphasis Low draws no circle and an iconName outside the set leaves the circle empty; both are now not required.",
+  "useWhen": [
+    {
+      "text": "Show one icon in a coloured circle, such as the mark at the start of a list row or a status on a result screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Icon Capsule to show one icon in a coloured circle, such as the mark at the start of a list row or a status on a result screen."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Letters or a logo: a capsule holds one glyph, never letters or a logo. Use an Avatar for those.",
+      "strength": "discouraged",
+      "useInstead": "Avatar",
+      "from": {
+        "section": "content",
+        "quote": "A capsule holds one glyph, never letters or a logo; use an Avatar for those."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it says what any Icon Capsule holds: one glyph from the icon set, never letters or a logo."
+      }
+    },
+    {
+      "text": "Something people press, select or disable: an Icon Capsule doesn't press, select or disable; the row or tile around it does.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "An Icon Capsule doesn’t press, select, or disable: the row or tile around it does."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Circle",
+      "holds": "Icon Capsule Size sets it, 42 px at M; AppearanceBrand and Emphasis fill it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Icon Capsule Size sets it, 42 px at M; AppearanceBrand and Emphasis fill it."
+      }
+    },
+    {
+      "part": "Icon",
+      "holds": "iconName: one glyph from the Coin icon set, 18 px at M.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "iconName: one glyph from the Coin icon set, 18 px at M."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put the capsule in a List Item's leading slot, where it says what each row is about.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "In a List Item’s leading slot the capsule says what each row is about."
+      }
+    },
+    {
+      "text": "In a List Item's leading slot the row passes its modes to the capsule, and the capsule's own modes win: when the capsule takes a colour, set it on the capsule.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "inContext",
+        "quote": "The row passes its modes to the capsule, and the capsule’s own modes win, so set its colour on the capsule."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "With Semantic Intent Brand, the default, AppearanceBrand picks the colour and Emphasis how strong it is.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "With Semantic Intent Brand, the default, AppearanceBrand picks the colour and Emphasis how strong it is."
+      }
+    },
+    {
+      "text": "AppearanceBrand Primary, the default: gold with a black icon.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Primary",
+      "from": {
+        "section": "configuration",
+        "quote": "Gold with a black icon: the default."
+      }
+    },
+    {
+      "text": "AppearanceBrand Secondary: purple with a white icon.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Secondary",
+      "from": {
+        "section": "configuration",
+        "quote": "Purple with a white icon."
+      }
+    },
+    {
+      "text": "AppearanceBrand Neutral: dark grey with a white icon, as Figma draws it.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Neutral",
+      "from": {
+        "section": "configuration",
+        "quote": "Dark grey with a white icon, as Figma draws it."
+      }
+    },
+    {
+      "text": "AppearanceBrand Tertiary: blue with a white icon.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Tertiary",
+      "from": {
+        "section": "configuration",
+        "quote": "Blue with a white icon."
+      }
+    },
+    {
+      "text": "Emphasis High: a solid circle (the guide shows it on AppearanceBrand Secondary).",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "High",
+      "from": {
+        "section": "configuration",
+        "quote": "A solid circle."
+      }
+    },
+    {
+      "text": "Emphasis Medium: a pale circle with a coloured icon (the guide shows it on AppearanceBrand Secondary).",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Medium",
+      "from": {
+        "section": "configuration",
+        "quote": "A pale circle with a coloured icon."
+      }
+    },
+    {
+      "text": "Emphasis Low: no circle, just the coloured icon (the guide shows it on AppearanceBrand Secondary).",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Low",
+      "from": {
+        "section": "configuration",
+        "quote": "No circle, just the coloured icon."
+      }
+    },
+    {
+      "text": "Semantic Intent System colours the capsule with AppearanceSystem instead, for success, warning and errors, and ignores Emphasis.",
+      "strength": "recommended",
+      "target": "Semantic Intent",
+      "value": "System",
+      "from": {
+        "section": "configuration",
+        "quote": "Semantic Intent System colours it with AppearanceSystem instead, for success, warning, and errors, and ignores Emphasis."
+      }
+    },
+    {
+      "text": "With Semantic Intent System, AppearanceSystem positive is green, for something that worked.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "positive",
+      "from": {
+        "section": "configuration",
+        "quote": "Green, for something that worked."
+      }
+    },
+    {
+      "text": "With Semantic Intent System, AppearanceSystem warning is orange, for something to check.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "warning",
+      "from": {
+        "section": "configuration",
+        "quote": "Orange, for something to check."
+      }
+    },
+    {
+      "text": "With Semantic Intent System, AppearanceSystem negative is red, for something that failed.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "negative",
+      "from": {
+        "section": "configuration",
+        "quote": "Red, for something that failed."
+      }
+    },
+    {
+      "text": "For a failure, use Semantic Intent System with AppearanceSystem negative: red is the colour people expect for an error.",
+      "strength": "recommended",
+      "target": "AppearanceSystem",
+      "value": "negative",
+      "from": {
+        "section": "doDont",
+        "quote": "Negative is red, the colour people expect for an error."
+      }
+    },
+    {
+      "text": "Do not use a brand colour for a failure, such as purple: it doesn't say that anything went wrong.",
+      "strength": "discouraged",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "doDont",
+        "quote": "Purple doesn’t say that anything went wrong."
+      }
+    },
+    {
+      "text": "Icon Capsule Size sets the circle and the icon together: XS is 18 px with a 12 px icon, S 29 with 18, M 42 with 18, and L 81 with 36.",
+      "strength": "recommended",
+      "target": "Icon Capsule Size",
+      "from": {
+        "section": "sizing",
+        "quote": "Icon Capsule Size sets the circle and the icon together: XS is 18 px with a 12 px icon, S 29 with 18, M 42 with 18, and L 81 with 36."
+      }
+    },
+    {
+      "text": "Figma draws Icon Capsule Size M.",
+      "strength": "recommended",
+      "target": "Icon Capsule Size",
+      "value": "M",
+      "from": {
+        "section": "sizing",
+        "quote": "Figma draws M."
+      }
+    },
+    {
+      "text": "Some parent components set the Context mode instead of Icon Capsule Size, which fixes the capsule at 14 or 58 px whatever its size.",
+      "strength": "recommended",
+      "target": "Context",
+      "from": {
+        "section": "sizing",
+        "quote": "Some parent components set the Context mode instead, which fixes the capsule at 14 or 58 px whatever its size."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One glyph in one circle; modes pick its size and colour.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One glyph in one circle; modes pick its size and colour."
+        }
+      },
+      {
+        "text": "Pick the glyph from the Coin icon set by its iconName, so it says the same as the row's title: a bulb for electricity, a drop for water.",
+        "strength": "recommended",
+        "target": "iconName",
+        "from": {
+          "section": "content",
+          "quote": "Pick the glyph from the Coin icon set by its iconName, so it says the same as the row’s title: a bulb for electricity, a drop for water."
+        }
+      },
+      {
+        "text": "Put the words in the row or tile around the capsule: it has no text.",
+        "strength": "recommended",
+        "from": {
+          "section": "anatomy",
+          "quote": "There’s no text: the words belong to the row or tile around it."
+        }
+      },
+      {
+        "text": "Use a name from the icon set: ic_wallet draws the wallet.",
+        "strength": "recommended",
+        "target": "iconName",
+        "from": {
+          "section": "doDont",
+          "quote": "ic_wallet draws the wallet."
+        }
+      },
+      {
+        "text": "Do not pass a name Coin doesn't have, such as “wallet”: it isn't in the set, so the circle is empty.",
+        "strength": "discouraged",
+        "target": "iconName",
+        "from": {
+          "section": "doDont",
+          "quote": "“wallet” isn’t in the set, so the circle is empty."
+        }
+      }
+    ],
+    "good": [
+      "ic_bulb",
+      "ic_water",
+      "ic_mobile",
+      "ic_savings",
+      "ic_wallet"
+    ],
+    "bad": [
+      "wallet"
+    ]
+  },
+  "states": [
+    {
+      "state": "No states of its own",
+      "when": "An Icon Capsule doesn't press, select or disable: the row or tile around it does.",
+      "from": {
+        "section": "states",
+        "quote": "An Icon Capsule doesn’t press, select, or disable: the row or tile around it does."
+      }
+    },
+    {
+      "state": "In the icon set",
+      "when": "iconName is in the Coin icon set: ic_wallet draws the wallet glyph.",
+      "from": {
+        "section": "states",
+        "quote": "ic_wallet draws the wallet glyph."
+      }
+    },
+    {
+      "state": "Not in the icon set",
+      "when": "iconName isn't in the Coin icon set: the circle shows with nothing in it.",
+      "from": {
+        "section": "states",
+        "quote": "If iconName isn’t in the Coin icon set, the circle shows with nothing in it."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Name what the capsule shows in the row or tile around it: the capsule drops accessibilityLabel and hides the icon from screen readers.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "sources",
+        "quote": "It drops accessibilityLabel and hides the icon from screen readers, so name it in the row or tile around it."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "A name from the icon set",
+      "dont": "A name Coin doesn’t have",
+      "why": "“wallet” isn’t in the set, so the circle is empty.",
+      "from": {
+        "section": "doDont",
+        "quote": "A name from the icon set"
+      }
+    },
+    {
+      "do": "System for a failure",
+      "dont": "A brand colour for a failure",
+      "why": "Purple doesn’t say that anything went wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "System for a failure"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Pay bills, the guide's In context: in each List Item's leading slot an IconCapsule says what the row is about (ic_bulb for Electricity, ic_water for Water, ic_mobile for Mobile recharge), and the row's title and support text carry the words.",
+      "jsx": "<ListGroup label=\"Pay bills\">\n  <ListItem\n    layout=\"Horizontal\"\n    title=\"Electricity\"\n    supportText=\"Adani Electricity\"\n    leading={<IconCapsule iconName=\"ic_bulb\" />}\n    onPress={() => {}}\n  />\n  <ListItem\n    layout=\"Horizontal\"\n    title=\"Water\"\n    supportText=\"BWSSB\"\n    leading={<IconCapsule iconName=\"ic_water\" />}\n    onPress={() => {}}\n  />\n  <ListItem\n    layout=\"Horizontal\"\n    title=\"Mobile recharge\"\n    supportText=\"Jio prepaid\"\n    leading={<IconCapsule iconName=\"ic_mobile\" />}\n    onPress={() => {}}\n  />\n</ListGroup>",
+      "from": {
+        "section": "inContext",
+        "quote": "In a List Item’s leading slot the capsule says what each row is about."
+      }
+    },
+    {
+      "purpose": "A failure, the guide's Do: Semantic Intent System with AppearanceSystem negative makes the capsule red, the colour people expect for an error (here around the ic_error glyph from the Coin icon set).",
+      "jsx": "<IconCapsule\n  iconName=\"ic_error\"\n  modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }}\n/>",
+      "from": {
+        "section": "doDont",
+        "quote": "Negative is red, the colour people expect for an error."
+      }
+    },
+    {
+      "purpose": "A name from the icon set with no modes: ic_wallet draws the wallet glyph in the default capsule.",
+      "jsx": "<IconCapsule iconName=\"ic_wallet\" />",
+      "from": {
+        "section": "states",
+        "quote": "ic_wallet draws the wallet glyph."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "iconName",
+      "description": "Any name in the Coin icon set (about 1,300). An unknown name draws the circle with no glyph and logs a warning.",
+      "quote": "any name in the Coin icon set (about 1,300). An unknown name draws the circle with no glyph and logs a warning.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "source",
+      "description": "A fallback glyph (SVG, raster or element), used only when iconName isn't in the icon set. Because iconName defaults to ic_card, source alone never shows: with no iconName the capsule draws ic_card; with an empty or unknown iconName it draws the source.",
+      "quote": "Because `iconName` defaults to `ic_card`, `source` alone never shows",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Accepted and discarded: the capsule is an image with no name, and its glyph is hidden from screen readers.",
+      "quote": "`accessibilityLabel`: accepted and discarded",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "props",
+      "name": "modes",
+      "description": "Merged over a JFSThemeProvider's modes; the capsule's own modes win.",
+      "quote": "`modes`, merged over a `JFSThemeProvider`'s modes:",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "Icon Capsule Size",
+      "description": "Circle and glyph: XS 18 / 12 px, S 29 / 18, M 42 / 18 (the default), L 81 / 36.",
+      "quote": "`Icon Capsule Size`: XS 18 / 12, S 29 / 18, M 42 / 18 (default), L 81 / 36 (circle / glyph, rendered).",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "Context",
+      "description": "Default and ListItem use Icon Capsule Size; Nudge&Alert fixes the capsule at 14 px with a 14 px glyph, CTACard at 58 px with a 29 px glyph. Parent components set it.",
+      "quote": "`Context`: Default and ListItem use the size; Nudge&Alert fixes 14 / 14; CTACard 58 / 29 (rendered). Parent components set it.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "At Emphasis High: Primary #cea15a with a black glyph (the default), Secondary #5d00b5, Neutral #303338 and Tertiary #036b99, each with a white glyph.",
+      "quote": "High: Primary `#cea15a` / black glyph, Secondary `#5d00b5` / white, Neutral `#303338` / white, Tertiary `#036b99` / white.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "Emphasis",
+      "description": "Medium: Primary #fde8c9, Secondary #e4dbff, Neutral #545961, and Tertiary stays #036b99 with a pale #b3d3e0 glyph. Low: no fill, so only the coloured glyph shows.",
+      "quote": "Medium: Primary `#fde8c9`, Secondary `#e4dbff`, Neutral `#545961`, Tertiary `#036b99` with a pale `#b3d3e0` glyph.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceSystem",
+      "description": "With Semantic Intent System: positive #26ab21, warning #f06e0f, negative #f50030, each with a white glyph.",
+      "quote": "`AppearanceSystem` positive `#26ab21`, warning `#f06e0f`, negative `#f50030`, white glyph",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "Semantic Intent",
+      "description": "System colours the capsule with AppearanceSystem; Emphasis and AppearanceBrand then change nothing, so System with Emphasis Low is still filled.",
+      "quote": "`Emphasis` and `AppearanceBrand` change nothing (System + Low is still filled, rendered).",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "list": "modes",
+      "name": "Page type",
+      "description": "JioPlus changes only Neutral Low: its glyph turns white.",
+      "quote": "`Page type` JioPlus: only Neutral Low's glyph turns white.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's Icon Capsule has a Type property, Default or Glass; the package has no type prop and never reads the iconCapsule/glass/background token, so there is no Glass capsule in code (Component Bug #419).",
+      "quote": "Figma has `Type=Glass`; the package has no type prop and never reads `iconCapsule/glass/background`.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Figma's default Icon Capsule is Neutral High (dark grey, white glyph); the package with no modes, and Storybook's Default, are Primary High (gold, black glyph) (Component Bug #419).",
+      "quote": "Figma's Default is Neutral High (dark grey, white glyph); the package with no modes, and Storybook's Default, are Primary High (gold, black glyph).",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The JSDoc and Biscuit's IconCapsule.mdx say source is used when iconName is missing, but iconName defaults to ic_card, so source never shows on its own: only with an empty or unknown iconName (Component Bug #419).",
+      "quote": "JSDoc and MDX say `source` is used when `iconName` is missing; the default `iconName` means it never is.",
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ]
+}

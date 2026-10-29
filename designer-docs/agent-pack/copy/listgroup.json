@@ -1,0 +1,354 @@
+{
+  "slug": "listgroup",
+  "label": "List Group",
+  "guideCommit": "267077a65984c994d9cc3f2e3590e28f9038241d",
+  "files": [
+    "src/guides/listgroup.guide.tsx"
+  ],
+  "evidence": "docs/evidence/listgroup.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:41:46.811Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "list section",
+    "grouped list",
+    "section header",
+    "transaction list",
+    "reorder list"
+  ],
+  "title": "List Group",
+  "summary": "Use a List Group to put related list rows under one label, such as a month of payments, with one style for every row.",
+  "corePrinciple": "One label, one look for every row under it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2849-3171",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-listgroup--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A label over rows",
+      "description": "The label sits 12 px above the rows, and the rows sit 12 px apart. The group draws nothing else: no fill, border, or padding.",
+      "blocks": [
+        "12",
+        "1",
+        "2",
+        "3",
+        "Label",
+        "label: what the rows share, on one line.",
+        "Row",
+        "A List Item; the group passes its modes to it.",
+        "Group",
+        "A column that fills its width, with no fill or padding.",
+        "Component bounds",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "March 2025",
+        "NE",
+        "Netflix",
+        "12 Mar",
+        "₹",
+        "499",
+        "SW",
+        "Swiggy",
+        "10 Mar",
+        "320"
+      ],
+      "anatomy": [
+        {
+          "part": "Label",
+          "note": "label: what the rows share, on one line."
+        },
+        {
+          "part": "Row",
+          "note": "A List Item; the group passes its modes to it."
+        },
+        {
+          "part": "Group",
+          "note": "A column that fills its width, with no fill or padding."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Row style and label weight",
+      "description": "List Item Style changes every row: Default rows sit 12 px apart with no fill, Boxed puts each row on a white card, and Minimal packs them 4 px apart with lighter titles. Title Level makes the label bigger and bolder. Without a label the rows start at the top.",
+      "blocks": [
+        "Default",
+        "Rows 12 px apart, no fill.",
+        "Boxed",
+        "Each row on a white card.",
+        "Minimal",
+        "Rows 4 px apart, regular titles.",
+        "Title Level Default",
+        "A 14 px grey label.",
+        "Title Level Bold",
+        "An 18 px black label.",
+        "No label",
+        "The rows start at the top."
+      ],
+      "specimen": [
+        "March 2025",
+        "NE",
+        "Netflix",
+        "12 Mar",
+        "₹",
+        "499",
+        "SW",
+        "Swiggy",
+        "10 Mar",
+        "320"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default",
+          "description": "Rows 12 px apart, no fill."
+        },
+        {
+          "title": "Boxed",
+          "description": "Each row on a white card."
+        },
+        {
+          "title": "Minimal",
+          "description": "Rows 4 px apart, regular titles."
+        },
+        {
+          "title": "Title Level Default",
+          "description": "A 14 px grey label."
+        },
+        {
+          "title": "Title Level Bold",
+          "description": "An 18 px black label."
+        },
+        {
+          "title": "No label",
+          "description": "The rows start at the top."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Rows people can reorder",
+      "description": "Give the group data, renderItem, keyExtractor, and onDragEnd, and every row gets a drag handle. People drag a row by its handle, and onDragEnd hands your screen the new order to save. All four are needed: leave one out and only the label shows. In this mode the group doesn’t pass its modes on, so give every row the same modes.",
+      "blocks": [
+        "Order: Savings, Bills, Mobile recharge, Wallet",
+        "Drag a handle",
+        "Your screen keeps the order; this one shows it below."
+      ],
+      "specimen": [
+        "Pinned on home",
+        "Savings",
+        "Balance and statements",
+        "Bills",
+        "Electricity, water, gas",
+        "Mobile recharge",
+        "Jio prepaid",
+        "Wallet",
+        "JioPay wallet"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Drag a handle",
+          "description": "Your screen keeps the order; this one shows it below."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 12 px apart",
+      "description": "The group fills its container and adds no padding: the label, 12 px, then rows 12 px apart, or 4 px with Minimal. Each row keeps its own height: 42 px for a Default List Item with an avatar, 68 px Boxed.",
+      "blocks": [
+        "328 × 126",
+        "12"
+      ],
+      "specimen": [
+        "March 2025",
+        "NE",
+        "Netflix",
+        "12 Mar",
+        "₹",
+        "499",
+        "SW",
+        "Swiggy",
+        "10 Mar",
+        "320"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "A label that names the rows",
+      "description": "Write label as the one thing the rows share, such as a month or a kind of account, in a few words. It stays on one line and ends in an ellipsis; disableTruncation lets a longer label wrap.",
+      "blocks": [
+        "A month",
+        "Fits on one line.",
+        "A sentence",
+        "It ends in an ellipsis.",
+        "Wrapped",
+        "disableTruncation shows all of it."
+      ],
+      "specimen": [
+        "March 2025",
+        "NE",
+        "Netflix",
+        "12 Mar",
+        "₹",
+        "499",
+        "SW",
+        "Swiggy",
+        "10 Mar",
+        "320",
+        "Payments to merchants this month across all linked accounts"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "A month",
+          "description": "Fits on one line."
+        },
+        {
+          "title": "A sentence",
+          "description": "It ends in an ellipsis."
+        },
+        {
+          "title": "Wrapped",
+          "description": "disableTruncation shows all of it."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Payments, a month at a time",
+      "description": "A history screen stacks one group per month, newest first. Each label names the month, and each row opens that payment.",
+      "blocks": [],
+      "specimen": [
+        "March 2025",
+        "NE",
+        "Netflix",
+        "12 Mar",
+        "₹",
+        "499",
+        "SW",
+        "Swiggy",
+        "10 Mar",
+        "320",
+        "AE",
+        "Adani Electricity",
+        "8 Mar",
+        "1,840",
+        "February 2025",
+        "JF",
+        "Jio Fiber",
+        "28 Feb",
+        "999",
+        "ZO",
+        "Zomato",
+        "14 Feb",
+        "650"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One group, one list",
+      "description": "Each pair shows a group that reads as one list next to one that falls apart.",
+      "blocks": [
+        "Do",
+        "Set the style on the group",
+        "Every row takes Boxed from the group.",
+        "Don’t",
+        "Change it on one row",
+        "A row’s own modes win, so that row loses its card.",
+        "Rows under every label",
+        "Show a group only when it has rows.",
+        "An empty group",
+        "Only the label shows, with nothing under it."
+      ],
+      "specimen": [
+        "March 2025",
+        "NE",
+        "Netflix",
+        "12 Mar",
+        "₹",
+        "499",
+        "SW",
+        "Swiggy",
+        "10 Mar",
+        "320"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Set the style on the group",
+            "caption": "Every row takes Boxed from the group.",
+            "specimen": "March 2025 · NE · Netflix · 12 Mar · ₹ · 499 · SW · Swiggy · 10 Mar · ₹ · 320"
+          },
+          "dont": {
+            "title": "Change it on one row",
+            "caption": "A row’s own modes win, so that row loses its card.",
+            "specimen": "March 2025 · NE · Netflix · 12 Mar · ₹ · 499 · SW · Swiggy · 10 Mar · ₹ · 320"
+          }
+        },
+        {
+          "do": {
+            "title": "Rows under every label",
+            "caption": "Show a group only when it has rows.",
+            "specimen": "March 2025 · NE · Netflix · 12 Mar · ₹ · 499 · SW · Swiggy · 10 Mar · ₹ · 320"
+          },
+          "dont": {
+            "title": "An empty group",
+            "caption": "Only the label shows, with nothing under it.",
+            "specimen": "March 2025"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public List Group contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With custom items",
+        "Without label",
+        "Reorderable",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s listGroup is one component: a Title over a slot of List Items, 12 px apart, drawn 352 px wide with “March 2025”. The package takes label, with none by default, and the rows as children. List Item Style and Title Level are modes, and the group passes its modes to its rows except when they can be reordered. It drops accessibilityLabel and hides the label from screen readers, so nothing names the list, and its rows aren’t list items (reported).",
+        "jfs-components",
+        "0.1.78",
+        "label",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

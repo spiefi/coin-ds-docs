@@ -1,0 +1,312 @@
+{
+  "slug": "segmentedtrack",
+  "label": "Segmented Track",
+  "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
+  "files": [
+    "src/guides/segmentedtrack.guide.tsx"
+  ],
+  "evidence": "docs/evidence/segmentedtrack.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:41:53.194Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "stacked bar",
+    "allocation bar",
+    "share chart",
+    "portfolio mix"
+  ],
+  "title": "Segmented Track",
+  "summary": "Use a Segmented Track to show how one whole splits into a few parts, such as a portfolio’s equity, debt, and cash.",
+  "corePrinciple": "Parts of one whole, sized by their share and named in a legend.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4176-39960",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-segmentedtrack--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A pill split by share",
+      "description": "The track is a 24 px pill. Each slice’s width is its share of the total, and the colours step from strong to light.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Track",
+        "Rounds the ends and holds the slices with no gaps.",
+        "First slice",
+        "Strongest colour; its width is its share.",
+        "Second slice",
+        "A lighter step of the same colour.",
+        "Third slice",
+        "Lightest; the steps repeat after three slices."
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Track",
+          "note": "Rounds the ends and holds the slices with no gaps."
+        },
+        {
+          "part": "First slice",
+          "note": "Strongest colour; its width is its share."
+        },
+        {
+          "part": "Second slice",
+          "note": "A lighter step of the same colour."
+        },
+        {
+          "part": "Third slice",
+          "note": "Lightest; the steps repeat after three slices."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Shares and appearance",
+      "description": "Pass each part’s share; the track works out the widths. An appearance recolours every slice. Figma and code both default to Senary gold.",
+      "blocks": [
+        "Equal slices",
+        "Without shares every slice is the same width, as in Figma.",
+        "Weighted slices",
+        "Widths follow the shares: 60, 25, and 15.",
+        "Five parts",
+        "After three slices the colours repeat, so the legend tells them apart.",
+        "Primary appearance",
+        "Purple steps instead of gold."
+      ],
+      "specimen": [
+        "Large cap",
+        "35%",
+        "Mid cap",
+        "25%",
+        "Small cap",
+        "15%",
+        "Debt",
+        "Cash",
+        "10%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Equal slices",
+          "description": "Without shares every slice is the same width, as in Figma."
+        },
+        {
+          "title": "Weighted slices",
+          "description": "Widths follow the shares: 60, 25, and 15."
+        },
+        {
+          "title": "Five parts",
+          "description": "After three slices the colours repeat, so the legend tells them apart."
+        },
+        {
+          "title": "Primary appearance",
+          "description": "Purple steps instead of gold."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Display only",
+      "description": "Segmented Track has no hover, pressed, selected, or disabled state and can’t take focus. Only the data changes it, so pass real shares and hide the track when there are none.",
+      "blocks": [
+        "A zero share",
+        "A part worth 0 still draws a 1 px sliver; leave it out instead.",
+        "No data",
+        "An empty list draws an empty 24 px track; hide the track instead."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "A zero share",
+          "description": "A part worth 0 still draws a 1 px sliver; leave it out instead."
+        },
+        {
+          "title": "No data",
+          "description": "An empty list draws an empty 24 px track; hide the track instead."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "24 px tall, full width",
+      "description": "The track is 24 px tall with fully rounded ends and stretches to the width of its container. Slices share that width by their shares, with no gaps.",
+      "blocks": [
+        "300 × 24",
+        "180 × 24"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the mix and every part",
+      "description": "The track has no text, so give it a spoken name that lists the shares, such as “Portfolio mix: equity 60%, debt 25%, cash 15%”, and put a legend with the same names next to it. Use short names in sentence case and plain percentages.",
+      "blocks": [
+        "Track with a legend"
+      ],
+      "specimen": [
+        "Equity",
+        "60%",
+        "Debt",
+        "25%",
+        "Cash",
+        "15%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Track with a legend",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A portfolio card",
+      "description": "The screen works out each part’s share and passes the same list, in the same order, to the track and the legend, so their colours match. Nothing on the track is pressable; to switch between mixes, use Range Track, which adds tabs.",
+      "blocks": [],
+      "specimen": [
+        "Portfolio mix",
+        "₹4,20,000 invested",
+        "Equity",
+        "60%",
+        "Debt",
+        "25%",
+        "Cash",
+        "15%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Show one whole, clearly named",
+      "description": "Each pair shows a track people can read versus one that misleads them.",
+      "blocks": [
+        "Do",
+        "Show parts of one whole",
+        "Equity, debt, and cash add up to the portfolio.",
+        "Don’t",
+        "Use it as a progress bar",
+        "One value filling a track is a progress bar, not a split.",
+        "Pair it with a legend",
+        "Each name and share sits next to its colour.",
+        "Rely on colour alone",
+        "Without a legend nobody knows which slice is which.",
+        "Use a data appearance",
+        "Senary gives three distinct golds.",
+        "Pick Neutral",
+        "All three slices turn the same grey and the split disappears.",
+        "Hide it when there’s no data",
+        "Say so in words instead.",
+        "Pass an empty list",
+        "It leaves a blank gap that says nothing about why."
+      ],
+      "specimen": [
+        "Equity",
+        "60%",
+        "Debt",
+        "25%",
+        "Cash",
+        "15%",
+        "KYC 70% complete",
+        "No investments yet"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Show parts of one whole",
+            "caption": "Equity, debt, and cash add up to the portfolio.",
+            "specimen": "Equity · 60% · Debt · 25% · Cash · 15%"
+          },
+          "dont": {
+            "title": "Use it as a progress bar",
+            "caption": "One value filling a track is a progress bar, not a split.",
+            "specimen": "KYC 70% complete"
+          }
+        },
+        {
+          "do": {
+            "title": "Pair it with a legend",
+            "caption": "Each name and share sits next to its colour.",
+            "specimen": "Equity · 60% · Debt · 25% · Cash · 15%"
+          },
+          "dont": {
+            "title": "Rely on colour alone",
+            "caption": "Without a legend nobody knows which slice is which.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Use a data appearance",
+            "caption": "Senary gives three distinct golds.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Pick Neutral",
+            "caption": "All three slices turn the same grey and the split disappears.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Hide it when there’s no data",
+            "caption": "Say so in words instead.",
+            "specimen": "No investments yet"
+          },
+          "dont": {
+            "title": "Pass an empty list",
+            "caption": "It leaves a blank gap that says nothing about why.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Segmented Track contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Proportional segments",
+        "Senary",
+        "Many segments",
+        "In Range Track",
+        "Checked 13 October 2026",
+        "Installed jfs-components is 0.1.78 (12 October build) from the team’s private package repository. Figma’s Segmented Track is one 268 × 24 component with three equal gold slices, the Senary appearance, which code now uses by default too. It is display-only: on the web it is a group named by its spoken name, and a slice given its own name is read as an image inside that group. Range Track builds on it, adding tabs and a legend. The published Storybook predates 0.1.78.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

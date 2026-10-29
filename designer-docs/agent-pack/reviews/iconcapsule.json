@@ -1,0 +1,34 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The guide’s Configuration captions for Emphasis (“A solid circle.”, “A pale circle with a coloured icon.”, “No circle, just the coloured icon.”) are drawn on AppearanceBrand Secondary but read as true for every appearance. On the installed 0.1.78-dbe0e02, read through the package’s resolver, Emphasis Medium on Neutral is a lighter grey #545961 with a white glyph and on Tertiary the circle stays #036b99 with only the glyph pale (#b3d3e0). The entry keeps the captions with “the guide shows it on AppearanceBrand Secondary”. Guide fix #527. Added by Claude Code in the overnight run agentpack-batch8, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/configuration/5",
+      "reason": "misreads-source: The guide only says Emphasis High is \"A solid circle.\" Nothing in the rendered copy says which AppearanceBrand the example uses, so \"(the guide shows it on AppearanceBrand Secondary)\" is unsupported.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "iconcapsule.guide.tsx draws all three Emphasis examples with IC({ AppearanceBrand: 'Secondary', … }) (lines 46–48, at 021681d), so the guide does show them on AppearanceBrand Secondary; the rendered copy only lacks the words, which the cross-check cannot see. The parenthesis keeps the example’s context instead of reading the caption as true for every appearance, which the installed tokens contradict for Medium on Neutral and Tertiary (an evidence fact gives those values). The caption itself goes to guide fix #527."
+    },
+    {
+      "field": "/configuration/6",
+      "reason": "misreads-source: The guide says only \"A pale circle with a coloured icon.\" The claim that it is shown on AppearanceBrand Secondary is not in the cited text. The parenthetical also implies one swatch stands for every appearance, yet the evidence says Tertiary Medium keeps a #036b99 fill with a pale glyph.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "iconcapsule.guide.tsx draws all three Emphasis examples with IC({ AppearanceBrand: 'Secondary', … }) (lines 46–48, at 021681d), so the guide does show them on AppearanceBrand Secondary; the rendered copy only lacks the words, which the cross-check cannot see. The parenthesis keeps the example’s context instead of reading the caption as true for every appearance, which the installed tokens contradict for Medium on Neutral and Tertiary (an evidence fact gives those values). The caption itself goes to guide fix #527."
+    },
+    {
+      "field": "/configuration/7",
+      "reason": "misreads-source: The guide says only \"No circle, just the coloured icon.\" Nothing cited says the example uses AppearanceBrand Secondary.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "iconcapsule.guide.tsx draws all three Emphasis examples with IC({ AppearanceBrand: 'Secondary', … }) (lines 46–48, at 021681d), so the guide does show them on AppearanceBrand Secondary; the rendered copy only lacks the words, which the cross-check cannot see. The parenthesis keeps the example’s context instead of reading the caption as true for every appearance, which the installed tokens contradict for Medium on Neutral and Tertiary (an evidence fact gives those values). The caption itself goes to guide fix #527."
+    },
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: The guide's Do pair (\"Negative is red, the colour people expect for an error.\") names no glyph. The guide never mentions ic_error, so calling it \"the ic_error glyph from the Coin icon set\" is unsupported. If the name isn't in the set, the example would draw an empty circle, which is exactly what the guide's Don't warns against.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch8, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The guide’s Do and its negative Configuration example both draw IC(SYS('negative'), 'ic_error') (iconcapsule.guide.tsx lines 53 and 100, at 021681d), so the glyph is the guide’s own; the rendered copy names no glyph, which the cross-check cannot see. ic_error is in the installed icon set (node_modules/jfs-components/src/icons/registry.ts, 0.1.78-dbe0e02), so the example draws the error glyph, not an empty circle."
+    }
+  ]
+}

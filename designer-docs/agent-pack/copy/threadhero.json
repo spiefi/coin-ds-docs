@@ -1,0 +1,303 @@
+{
+  "slug": "threadhero",
+  "label": "Thread Hero",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/threadhero.guide.tsx"
+  ],
+  "evidence": "docs/evidence/threadhero.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-29T03:41:51.598Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "contact header",
+    "payee",
+    "person header",
+    "chat header",
+    "thread header"
+  ],
+  "title": "Thread Hero",
+  "summary": "Use a Thread Hero at the top of a payment or chat thread to show who the other person is: their name, banking name, and number.",
+  "corePrinciple": "The person first, then the name their bank knows.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1699-6500",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-threadhero--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A portrait over three lines",
+      "description": "The avatar sits on top, the name and the banking name close under it, and the caption 8 px below.",
+      "blocks": [
+        "8",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Avatar",
+        "renderAvatar: an Avatar, 42 px; there’s none by default.",
+        "Name",
+        "title, 16 px Semibold; a long name wraps.",
+        "Banking name",
+        "subtitle, 12 px grey on one line; it ellipsizes.",
+        "Caption",
+        "caption: a phone number or UPI ID; left out, it doesn’t show.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "RV",
+        "Rahul Verma",
+        "Banking name: RAHUL KUMAR VERMA",
+        "+91 98765 43210"
+      ],
+      "anatomy": [
+        {
+          "part": "Avatar",
+          "note": "renderAvatar: an Avatar, 42 px; there’s none by default."
+        },
+        {
+          "part": "Name",
+          "note": "title, 16 px Semibold; a long name wraps."
+        },
+        {
+          "part": "Banking name",
+          "note": "subtitle, 12 px grey on one line; it ellipsizes."
+        },
+        {
+          "part": "Caption",
+          "note": "caption: a phone number or UPI ID; left out, it doesn’t show."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Avatar and caption",
+      "description": "renderAvatar takes an Avatar: the person’s photo, or their initials with style Monogram. There’s no default, so without one the name moves to the top. caption shows only when you pass it, and an empty subtitle hides the banking line. No mode changes the hero’s text. The hero passes its modes to the avatar, and the avatar’s own modes win, so set Avatar Size on the hero or on the avatar; Figma uses L, 42 px.",
+      "blocks": [
+        "Full",
+        "Initials, name, banking name, and number.",
+        "Without a caption",
+        "It ends at the banking name.",
+        "Without an avatar",
+        "The name moves to the top.",
+        "Without a banking name",
+        "An empty subtitle hides the line."
+      ],
+      "specimen": [
+        "RV",
+        "Rahul Verma",
+        "Banking name: RAHUL KUMAR VERMA",
+        "+91 98765 43210"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Full",
+          "description": "Initials, name, banking name, and number."
+        },
+        {
+          "title": "Without a caption",
+          "description": "It ends at the banking name."
+        },
+        {
+          "title": "Without an avatar",
+          "description": "The name moves to the top."
+        },
+        {
+          "title": "Without a banking name",
+          "description": "An empty subtitle hides the line."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Cut or wrapped",
+      "description": "The hero has no states: it doesn’t press, and no part of it is a button. In a narrow column the name wraps, while the banking name and the caption stay on one line and end in an ellipsis; disableTruncation lets them wrap too. Both examples sit in a 240 px column.",
+      "blocks": [
+        "Cut",
+        "The name wraps; the other two lines end in an ellipsis.",
+        "Wrapped",
+        "Every line wraps."
+      ],
+      "specimen": [
+        "VR",
+        "Venkatasubramanian Ramakrishnan",
+        "Banking name: VENKATASUBRAMANIAN RAMAKRISHNAN",
+        "venkatasubramanian.r@okjio"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Cut",
+          "description": "The name wraps; the other two lines end in an ellipsis."
+        },
+        {
+          "title": "Wrapped",
+          "description": "Every line wraps."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Centred in its column",
+      "description": "The hero has no width of its own: its lines centre in the width they get, and Figma draws it 360 px wide. With an avatar and a caption it is 110 px tall: a 42 px avatar, 2 px, a 20 px name, an 18 px banking name, then 8 px and an 18 px caption.",
+      "blocks": [
+        "328 × 110",
+        "8"
+      ],
+      "specimen": [
+        "RV",
+        "Rahul Verma",
+        "Banking name: RAHUL KUMAR VERMA",
+        "+91 98765 43210"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The name people know, then the bank’s",
+      "description": "Write title as the name the user knows the person by. Start subtitle with Banking name: and give the name their bank holds, so people can check they’re paying the right person. Use caption for a phone number or UPI ID, not a sentence.",
+      "blocks": [
+        "Phone number",
+        "+91 and ten digits, spaced.",
+        "UPI ID",
+        "Or the ID they’re paid at."
+      ],
+      "specimen": [
+        "RV",
+        "Rahul Verma",
+        "Banking name: RAHUL KUMAR VERMA",
+        "+91 98765 43210",
+        "rahul@okjio"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Phone number",
+          "description": "+91 and ten digits, spaced."
+        },
+        {
+          "title": "UPI ID",
+          "description": "Or the ID they’re paid at."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "The top of a payment thread",
+      "description": "The hero opens the thread, so people know who they’re paying before they see the payments below it. The thread lays it out; the hero only names the person.",
+      "blocks": [],
+      "specimen": [
+        "RV",
+        "Rahul Verma",
+        "Banking name: RAHUL KUMAR VERMA",
+        "+91 98765 43210",
+        "Paid to Rahul Verma",
+        "₹",
+        "1,200",
+        "Paid · 21 Oct 2026",
+        "Request from Rahul Verma",
+        "450",
+        "Requested · Today"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "The person, not their number",
+      "description": "Each pair shows a hero people recognise at once next to one that makes them work out who it is.",
+      "blocks": [
+        "Do",
+        "The name people know",
+        "Then the banking name, labelled.",
+        "Don’t",
+        "The phone as the title",
+        "The title is the person; the number goes in caption.",
+        "Initials without a photo",
+        "A Monogram avatar with their initials.",
+        "The default avatar",
+        "An Avatar with no photo shows a stranger’s portrait."
+      ],
+      "specimen": [
+        "RV",
+        "Rahul Verma",
+        "Banking name: RAHUL KUMAR VERMA",
+        "+91 98765 43210"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "The name people know",
+            "caption": "Then the banking name, labelled.",
+            "specimen": "RV · Rahul Verma · Banking name: RAHUL KUMAR VERMA · +91 98765 43210"
+          },
+          "dont": {
+            "title": "The phone as the title",
+            "caption": "The title is the person; the number goes in caption.",
+            "specimen": "RV · +91 98765 43210 · Banking name: RAHUL KUMAR VERMA"
+          }
+        },
+        {
+          "do": {
+            "title": "Initials without a photo",
+            "caption": "A Monogram avatar with their initials.",
+            "specimen": "RV · Rahul Verma · Banking name: RAHUL KUMAR VERMA · +91 98765 43210"
+          },
+          "dont": {
+            "title": "The default avatar",
+            "caption": "An Avatar with no photo shows a stranger’s portrait.",
+            "specimen": "Rahul Verma · Banking name: RAHUL KUMAR VERMA · +91 98765 43210"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Thread Hero contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Without caption",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Thread Hero has Title, Subtitle, and Caption text properties, a caption switch, and a nested Avatar, drawn 360 px wide. The package takes title, subtitle, caption, and renderAvatar: with no renderAvatar there’s no avatar, and the caption shows only when you pass one. The title wraps, as in Figma, and the avatar’s own modes win over the hero’s. In Biscuit’s source, Storybook’s page now says the title wraps and its stories show a Monogram avatar.",
+        "jfs-components",
+        "0.1.78",
+        "Title",
+        "Subtitle",
+        "Caption",
+        "caption",
+        "title",
+        "subtitle",
+        "renderAvatar"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
