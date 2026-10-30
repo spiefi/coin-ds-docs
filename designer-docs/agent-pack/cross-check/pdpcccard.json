@@ -1,8 +1,8 @@
 {
   "slug": "pdpcccard",
-  "entryHash": "fe9c11955348a9c903990f8a4c40dcbc81bf01f7d09ad1232ad13862604baa82",
+  "entryHash": "f670ede6c8ca1dc71de741e7293c0c5d92272712c8e21fd5d1ada1cfdea274a7",
   "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
-  "checkedAt": "2026-10-28T23:20:07Z",
+  "checkedAt": "2026-10-30T12:26:23Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
@@ -10,16 +10,16 @@
   "flags": [
     {
       "field": "/anatomy/1",
-      "reason": "misreads-source: alwaysPresent=false implies the title can be left off, but the guide says \"title and subtitle fall back to the words Title and Subtitle\". The evidence says \"there is no way to hide either\", and its Limits say not to imply the title can be hidden."
+      "reason": "misreads-source: alwaysPresent=false implies the title can be absent, but the guide says that without a value \"title and subtitle fall back to the words Title and Subtitle\". The evidence also says there is \"no way to hide either\", and its Limits say not to imply the title can be hidden."
     },
     {
       "field": "/anatomy/2",
-      "reason": "misreads-source: alwaysPresent=false implies the subtitle can be absent, but per the guide it falls back to the word \"Subtitle\" when left out. The evidence says it cannot be hidden, and its Limits forbid implying it can."
+      "reason": "misreads-source: alwaysPresent=false implies the subtitle can be left out, but the guide says it falls back to the word \"Subtitle\". The evidence says it can't be hidden."
     },
     {
       "field": "/doDont/2",
-      "reason": "misreads-source: The why gives the Do caption (\"disableTruncation shows all of it, and the card grows\") rather than the reason against the Don't. The guide's reason is \"The title runs past both edges of the card.\" The other doDont items use the Don't caption as the why."
+      "reason": "misreads-source: The why is the Do's caption (\"disableTruncation shows all of it, and the card grows.\"), not the reason to avoid singleLine. The guide's reason for the Don't is \"The title runs past both edges of the card.\""
     }
   ],
-  "notes": "The type-derived facts /facts/props/4 and /facts/props/5 say \"Pass '' or null to hide the line\". This contradicts the evidence (\"undefined brings the placeholder back; there is no way to hide either\") and its Limits. The content rules citing them don't repeat the hiding claim, but a human should reconcile the type docs with the measured behaviour (#361). Picture alwaysPresent=false is arguable: without imageSource an empty box still keeps its space, and only media replaces it."
+  "notes": "The type facts /facts/props/4 and /facts/props/5 say \"Pass '' or null to hide the line\", but the evidence says \"undefined brings the placeholder back; there is no way to hide either\", and its Limits forbid implying the title or subtitle can be hidden. The content rules themselves don't claim this, but whoever owns the facts layer should reconcile the type descriptions with the evidence."
 }

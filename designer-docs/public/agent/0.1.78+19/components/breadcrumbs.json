@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "id": "Breadcrumbs",
+  "slug": "breadcrumbs",
+  "category": "navigation",
+  "tags": [
+    "path",
+    "trail",
+    "hierarchy",
+    "back navigation"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-30T12:30:13Z",
+    "flags": [
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-15); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The Breadcrumbs guide and its evidence were checked in September 2026 on jfs-components 0.1.60 and say the package has no Breadcrumbs (\"the resolved package does not include Breadcrumbs\"); its previews are drawn from NavArrow and Text. The installed 0.1.78 (mirror v0.1.78-dbe0e02) exports Breadcrumbs, and the entry's facts and examples come from it. Re-extract once the guide is re-checked on 0.1.78 and published (#521). Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm.",
+        "by": "human"
+      },
+      {
+        "field": "/configuration/4",
+        "reason": "\"Chevrons, link treatment, and current-page state are supplied by the published component.\" says more than the installed Breadcrumbs.tsx does (read, not rendered): it adds the chevrons, but every crumb gets the same text style, so ancestors have no link colour and the current crumb is not set apart visually (it only gets aria-current on the web, selected on native). Guide fix #521. Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use Breadcrumbs when people need a compact path back through a hierarchy. The trail moves from the broadest ancestor to the current page.",
+  "useWhen": [
+    {
+      "text": "People need a compact path back through a hierarchy.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Breadcrumbs when people need a compact path back through a hierarchy."
+      }
+    },
+    {
+      "text": "The route has meaningful ancestors and the current page needs orientation.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Breadcrumbs works when the route has meaningful ancestors and the current page needs orientation."
+      }
+    },
+    {
+      "text": "Orient people above a report page when the route has meaningful ancestors.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Orient people above a report page when the route has meaningful ancestors."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "In place of the page title or primary navigation: Breadcrumbs shows the hierarchy beside them, without replacing them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "anatomy",
+        "quote": "The published component communicates hierarchy without replacing the page title or primary navigation."
+      }
+    },
+    {
+      "text": "To duplicate primary navigation.",
+      "strength": "discouraged",
+      "from": {
+        "section": "configuration",
+        "quote": "Do not duplicate primary navigation"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Breadcrumb trail",
+      "holds": "The whole trail, built from items: it shows the hierarchy without replacing the page title or primary navigation.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The published component communicates hierarchy without replacing the page title or primary navigation."
+      }
+    },
+    {
+      "part": "Ancestor links",
+      "holds": "The items before the current page, from the broadest ancestor toward it. Each can take people back one level when onItemPress (or the item's own onPress) is given.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Items are ordered from the broadest ancestor toward the current page. Each ancestor can take people back one level."
+      }
+    },
+    {
+      "part": "Automatic chevrons",
+      "holds": "The separators between items, which express the path; the component adds them, so add no manual punctuation or duplicate chevrons.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Separators express the path between items. Do not add manual punctuation or duplicate chevrons."
+      }
+    },
+    {
+      "part": "Current page",
+      "holds": "The item marked current (BreadcrumbItem.current), or the last item when none is marked.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The last item is current unless an explicit current item is supplied."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "items",
+      "accepts": [
+        "BreadcrumbItem"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place Breadcrumbs above page content, when the route supports backtracking.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use Breadcrumbs above page content when the route supports backtracking."
+      }
+    },
+    {
+      "text": "Keep it secondary: it supports orientation and should not compete with primary navigation or the page heading.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Breadcrumbs supports orientation. It should not compete with primary navigation or the page heading."
+      }
+    },
+    {
+      "text": "The trail's width comes from its parent.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Width comes from the parent."
+      }
+    },
+    {
+      "text": "Keep a long route in its constrained parent so people can still parse each level.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Keep a long route in its constrained parent so people can still parse each level."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "items is the trail in route order, from the broadest ancestor to the current page; each item has a label.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "items"
+    },
+    {
+      "text": "The current page is the item with current: true; when no item has it, the last item is current. The current crumb is not pressable unless it has its own onPress.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/9"
+      },
+      "target": "BreadcrumbItem.current"
+    },
+    {
+      "text": "Give onItemPress so ancestors can take people back: it is called with the pressed item and its index, and not for the current crumb unless that crumb has its own onPress.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "onItemPress"
+    },
+    {
+      "text": "Configure the content hierarchy (the items) and let the component render the path.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Configure content hierarchy and let the published component render the path."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Do not draw chevrons, link styling or a current-page treatment yourself: the component supplies them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Chevrons, link treatment, and current-page state are supplied by the published component."
+      }
+    },
+    {
+      "text": "A constrained parent lets a long trail wrap; the component does not auto-collapse the route.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A constrained parent lets a long trail wrap. The component does not auto-collapse the route."
+      }
+    },
+    {
+      "text": "Do not present a responsive collapse or an item count as a designer-selected control: the trail reflects the hierarchy and the available width.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Do not represent a responsive collapse or item count as a designer-selected control."
+      }
+    },
+    {
+      "text": "Do not reverse the route to match a visual shortcut: the reading order stops matching the hierarchy and the current location becomes ambiguous.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The reading order stops matching the hierarchy and current location becomes ambiguous."
+      },
+      "target": "items"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Start broad: order items from the broadest ancestor toward the current page.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Order items from the broadest ancestor toward the current page."
+        },
+        "target": "items"
+      },
+      {
+        "text": "Preserve route order and keep the current page visible in the trail.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Preserve route order and keep the current page visible."
+        }
+      },
+      {
+        "text": "Name the current page: keep the final item concise and aligned with the page title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the final item concise and aligned with the page title."
+        },
+        "target": "BreadcrumbItem.label"
+      },
+      {
+        "text": "Do not add manual punctuation or duplicate chevrons between items: the separators express the path, and the component supplies them.",
+        "strength": "discouraged",
+        "from": {
+          "section": "anatomy",
+          "quote": "Do not add manual punctuation or duplicate chevrons."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Default trail",
+      "when": "The ancestors in route order, ending at the current page, such as Cloud, ITR, 2024-25, Original.",
+      "from": {
+        "section": "states",
+        "quote": "Cloud → ITR → 2024-25 → Original."
+      }
+    },
+    {
+      "state": "Long trail",
+      "when": "A route longer than the line: the items wrap within the constrained parent.",
+      "from": {
+        "section": "states",
+        "quote": "Items wrap within the constrained parent."
+      }
+    },
+    {
+      "state": "Interactive item",
+      "when": "With onItemPress, ancestor items navigate; the current item stays current.",
+      "from": {
+        "section": "states",
+        "quote": "Ancestor items can navigate; current remains current."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The current page should agree with the visible heading and carry current-page semantics; the component marks the current crumb.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The current page should agree with the visible heading and carry current-page semantics."
+      }
+    },
+    {
+      "text": "The trail is announced as “Breadcrumb” unless accessibilityLabel names it.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Order the trail from ancestor to current",
+      "dont": "Reverse the route to match a visual shortcut",
+      "why": "The reading order stops matching the hierarchy and current location becomes ambiguous.",
+      "from": {
+        "section": "doDont",
+        "quote": "Order the trail from ancestor to current"
+      }
+    },
+    {
+      "do": "Let a long trail wrap inside its parent",
+      "dont": "Invent an unapproved auto-collapse",
+      "why": "The component does not decide to replace route levels with an ellipsis menu.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let a long trail wrap inside its parent"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A report page, the guide's In context: the trail sits above the page content, from the broadest ancestor to the current page (the guide's default trail: Cloud, ITR, 2024-25, Original); ancestors take people back through onItemPress.",
+      "jsx": "<Breadcrumbs\n  items={[\n    { label: 'Cloud' },\n    { label: 'ITR' },\n    { label: '2024-25' },\n    { label: 'Original', current: true },\n  ]}\n  onItemPress={() => {}}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Orient people above a report page when the route has meaningful ancestors."
+      }
+    },
+    {
+      "purpose": "A long route: the trail wraps inside its parent instead of collapsing, so every level stays readable.",
+      "jsx": "<Breadcrumbs\n  items={[\n    { label: 'Cloud' },\n    { label: 'ITR' },\n    { label: '2024-25' },\n    { label: 'Original' },\n    { label: 'Returns' },\n    { label: 'Summary', current: true },\n  ]}\n  onItemPress={() => {}}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Keep a long route in its constrained parent so people can still parse each level."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "items",
+        "type": "BreadcrumbItem[]",
+        "required": true,
+        "source": "types",
+        "description": "Ordered trail from ancestor to the current page."
+      },
+      {
+        "name": "onItemPress",
+        "type": "(item: BreadcrumbItem, index: number) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called with the pressed item and its index. Not invoked for the current crumb unless that crumb supplies its own `onPress`."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes forwarded to `HStack`, `Text`, and `Icon`."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override the wrapping trail container."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test ID for the trail container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Breadcrumb",
+        "description": "Accessibility label for the trail. Defaults to `\"Breadcrumb\"`. Default \"Breadcrumb\", from the component source."
+      },
+      {
+        "name": "BreadcrumbItem.key",
+        "type": "string",
+        "required": false,
+        "description": "Optional stable key. Falls back to `label` + index. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "BreadcrumbItem.label",
+        "type": "string",
+        "required": true,
+        "description": "Visible crumb label. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "BreadcrumbItem.onPress",
+        "type": "() => void",
+        "required": false,
+        "description": "Called when this crumb is pressed. Takes precedence over the list-level `onItemPress` handler. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "BreadcrumbItem.current",
+        "type": "boolean",
+        "required": false,
+        "description": "Marks this crumb as the current page. When omitted, the last item is treated as current and is not pressable unless it has its own `onPress`. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "BreadcrumbItem.accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "description": "Override announced to assistive tech. Defaults to `label`. A field of each items row.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Background",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "False"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Padding",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "None"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Stack Context",
+        "type": "mode collection",
+        "values": [
+          "Root",
+          "Nested"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Root"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection Breadcrumbs reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      }
+    ],
+    "slots": [
+      {
+        "name": "items",
+        "type": "BreadcrumbItem[]",
+        "description": "A structured slot: an array of BreadcrumbItem rows. Ordered trail from ancestor to the current page.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onItemPress",
+        "type": "(item: BreadcrumbItem, index: number) => void",
+        "description": "Called with the pressed item and its index. Not invoked for the current crumb unless that crumb supplies its own `onPress`.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "In the inspected Storybook iframe the trail's root is a div with an accessible label but no navigation role; the evidence asks for a source accessibility follow-up.",
+        "source": "evidence",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "text": "Figma's Breadcrumbs exposes no properties in the inspected Figma source.",
+        "source": "evidence",
+        "checkedOn": "2026-09-15"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=breadcrumbs",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9788-1945",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-breadcrumbs--docs"
+  }
+}

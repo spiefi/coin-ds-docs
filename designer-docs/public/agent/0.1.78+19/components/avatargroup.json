@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "id": "AvatarGroup",
+  "slug": "avatargroup",
+  "category": "content",
+  "tags": [
+    "avatar stack",
+    "facepile",
+    "people",
+    "users"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-30T12:30:13Z",
+    "flags": [
+      {
+        "field": "/configuration/4",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/content/rules/4",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The Avatar Group guide and its evidence were checked on 23 September 2026 on jfs-components 0.1.60 (its Sources note still says so); the installed package is 0.1.78 (mirror v0.1.78-dbe0e02). Read against the installed AvatarGroup.tsx and Avatar.tsx, with their tokens through the package's resolver, every sentence this entry quotes still holds, and no Avatar Group copy is wrong except the Sources note's version line (“The declared and installed jfs-components version is 0.1.60; the earlier registry check on 23 September also returned 0.1.60. A fresh registry lookup could not be confirmed during recovery because registry DNS was unavailable.”). The shared evidence's loading line (“a direct `loading={true}` outside an active `SkeletonGroup` renders no placeholder”, and the group example's SkeletonGroup wrapper) says less than the package: one Avatar child with loading true draws its same-size skeleton on its own (Avatar.tsx lines 167 and 216–226; Skeleton.tsx lines 134 and 272–275); the entry doesn't quote it. Re-check the guide on 0.1.78 and publish it, then re-extract. Added by Claude Code in the overnight run agentpack-batch14, for Marcin to confirm. Guide fix #533.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Show several people or identities as one compact visual cue.",
+  "useWhen": [
+    {
+      "text": "Show several people or identities as one compact visual cue.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Show several people or identities as one compact visual cue."
+      }
+    },
+    {
+      "text": "Show who can access a shared account.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Show who can access a shared account"
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "First child",
+      "holds": "It starts at the back of the visual order and gives the group its first face.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "It starts at the back of the visual order and gives the group its first face."
+      }
+    },
+    {
+      "part": "Middle child",
+      "holds": "It overlaps the first child and sits behind the last.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "It overlaps the first child and sits behind the last."
+      }
+    },
+    {
+      "part": "Last child",
+      "holds": "The final child is drawn in front. Child order therefore changes which face leads.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The final child is drawn in front. Child order therefore changes which face leads."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Give the host room for every child: the row grows with its child count.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The row grows with its child count."
+      }
+    },
+    {
+      "text": "A narrower host doesn't shrink the Avatars: select a supported Avatar Size that fits (the guide fits four children at M in a 196 px host and at S in a 112 px host).",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A narrower host does not reduce Avatar Size automatically, so select a supported size that fits."
+      },
+      "target": "Avatar Size"
+    },
+    {
+      "text": "Don't overfill a fixed-width host: a row with more children than fit extends past it, and the guide's host clips the outer Avatars.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "This five-child row extends past both edges, so the host clips its outer Avatars."
+      }
+    },
+    {
+      "text": "A Coin Card can wrap a title, support text and the AvatarGroup in one composition; the Card adds that optional context outside the group.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A public Coin Card can wrap its title, support text, and AvatarGroup in one composition."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Avatar Size belongs to the group: set it once on the AvatarGroup, and the group gives that one size to every child.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Avatar Size belongs to the group mode."
+      },
+      "target": "Avatar Size"
+    },
+    {
+      "text": "Share one size across the Avatar children.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Share one size across the Avatar children."
+      },
+      "target": "Avatar Size"
+    },
+    {
+      "text": "Don't set Avatar Size on a child: a child's own mode takes precedence over the group's, so that child comes out a different size from the others.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "An explicit L child mode takes precedence over the group’s M mode."
+      },
+      "target": "Avatar Size"
+    },
+    {
+      "text": "With no Avatar Size set, the group and its children are L (42 px).",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/modes/0"
+      },
+      "target": "Avatar Size",
+      "value": "L"
+    },
+    {
+      "text": "Avatar Size L, M, S and XS make every child 42, 36, 29 or 14 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Avatar Size mode sets L/M/S/XS to 42/36/29/14 px."
+      },
+      "target": "Avatar Size"
+    },
+    {
+      "text": "There is no separate count or gap control: the children supply the members and their image or monogram.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The children supply the image or monogram; there is no separate count or gap control."
+      }
+    },
+    {
+      "text": "AvatarGroup adds no selected, disabled or loading state of its own: loading belongs to each Avatar child.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Avatar Group does not add a selected, disabled, or loading state."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Use Avatar children: the group's content is the Avatar instances supplied inside it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The group’s content is the Avatar instances supplied inside it."
+        }
+      },
+      {
+        "text": "The group itself contains only its Avatar children; a title or support text stays outside it, for example in a surrounding Card.",
+        "strength": "recommended",
+        "from": {
+          "section": "inContext",
+          "quote": "The group itself contains only its Avatar children."
+        }
+      },
+      {
+        "text": "Each child supplies its own image or monogram content.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Each child supplies its own image or monogram content."
+        }
+      },
+      {
+        "text": "Order the children intentionally: the last child sits in front, so child order changes which face leads.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The last child sits in front in the overlapping group."
+        }
+      },
+      {
+        "text": "For an Image child, supply that person's own imageSource: with none, the Avatar shows a bundled fallback image, which is not a person record.",
+        "strength": "recommended",
+        "from": {
+          "section": "evidence",
+          "quote": "With no `imageSource`, the implementation displays a bundled fallback image; use a supplied person-specific source for identity rather than treating the fallback as a person record."
+        }
+      }
+    ],
+    "good": [
+      "MS",
+      "AK",
+      "LS",
+      "DV"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "All Avatars ready",
+      "when": "The group stays a compact composition of the children it receives.",
+      "from": {
+        "section": "states",
+        "quote": "The group stays a compact composition of the children it receives."
+      }
+    },
+    {
+      "state": "One child is loading",
+      "when": "One Avatar child is loading: it shows a same-size skeleton while the other Avatar children remain visible.",
+      "from": {
+        "section": "states",
+        "quote": "The loading child shows a same-size skeleton while the other Avatar children remain visible."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Don't rely on the Avatar children to announce who is in the group: Avatar discards its accessibility label and hides its image and initials from accessibility.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "The guides do not present it as an accessible action or rely on Avatar to announce its content."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Set one owner size",
+      "dont": "Override a child’s size",
+      "why": "An explicit L child mode takes precedence over the group’s M mode.",
+      "from": {
+        "section": "doDont",
+        "quote": "All three children inherit M from AvatarGroup."
+      }
+    },
+    {
+      "do": "Fit three M children",
+      "dont": "Overfill a fixed host",
+      "why": "This five-child row extends past both edges, so the host clips its outer Avatars.",
+      "from": {
+        "section": "doDont",
+        "quote": "All three circles stay inside the visible 112 px host."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Who can view a shared account, the guide's In context: a Card wraps the title, the support text and the AvatarGroup, and the group holds only its three Monogram Avatars. The size, M (36 px), is set once on the group: it is what the guide's In context card draws in its code (its copy names no size), and what its Do & Don't's three children inherit. The Avatars set no size of their own.",
+      "jsx": "<Card variant=\"slim\">\n  <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\">\n    <VStack>\n      <Card.Title>Shared savings</Card.Title>\n      <Card.SupportText>People who can view this account</Card.SupportText>\n    </VStack>\n    <AvatarGroup modes={{ 'Avatar Size': 'M' }}>\n      <Avatar style=\"Monogram\" monogram=\"MS\" />\n      <Avatar style=\"Monogram\" monogram=\"AK\" />\n      <Avatar style=\"Monogram\" monogram=\"LS\" />\n    </AvatarGroup>\n  </HStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "A public Coin Card can wrap its title, support text, and AvatarGroup in one composition."
+      }
+    },
+    {
+      "purpose": "Two people at the default size, L (42 px), with no modes set: the group gives both one size, and each Avatar brings its own content, a person's own photo (the Image style, the default; the URI stands for that person's image) or initials.",
+      "jsx": "<AvatarGroup>\n  <Avatar imageSource={{ uri: 'https://example.com/photos/meera-shah.jpg' }} />\n  <Avatar style=\"Monogram\" monogram=\"AK\" />\n</AvatarGroup>",
+      "from": {
+        "section": "configuration",
+        "quote": "The group mode supplies one size to every child; each Avatar supplies its own image or monogram."
+      }
+    },
+    {
+      "purpose": "Four people in a narrow place, like the guide's 112 px host: the group doesn't shrink its Avatars, so select a supported size that fits, here S (29 px), set once on the group.",
+      "jsx": "<AvatarGroup modes={{ 'Avatar Size': 'S' }}>\n  <Avatar style=\"Monogram\" monogram=\"MS\" />\n  <Avatar style=\"Monogram\" monogram=\"AK\" />\n  <Avatar style=\"Monogram\" monogram=\"LS\" />\n  <Avatar style=\"Monogram\" monogram=\"DV\" />\n</AvatarGroup>",
+      "from": {
+        "section": "sizing",
+        "quote": "A narrower host does not reduce Avatar Size automatically, so select a supported size that fits."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "style",
+        "type": "ViewStyle",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...React.ComponentProps<typeof View>",
+        "type": "React.ComponentProps<typeof View>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection AvatarGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "L"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection AvatarGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection AvatarGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection AvatarGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection AvatarGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection AvatarGroup reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=avatargroup",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1366-15672",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-avatargroup--docs"
+  }
+}

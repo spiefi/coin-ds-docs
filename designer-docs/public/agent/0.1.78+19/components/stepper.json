@@ -1,0 +1,505 @@
+{
+  "schemaVersion": 1,
+  "id": "Stepper",
+  "slug": "stepper",
+  "category": "navigation",
+  "tags": [
+    "progress steps",
+    "timeline",
+    "onboarding steps",
+    "order tracking"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-30T12:30:13Z",
+    "flags": []
+  },
+  "summary": "Use a Stepper to show where someone is in a process with several stages, such as KYC, and how each stage went.",
+  "useWhen": [
+    {
+      "text": "Show where someone is in a process with several stages, such as KYC, and how each stage went.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Stepper to show where someone is in a process with several stages, such as KYC, and how each stage went."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The stages need to run horizontally or be pressed: Stepper is vertical only and not interactive.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "Stepper is vertical only and not interactive"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Indicator",
+      "holds": "A 36 px circle whose colour and icon show the stage's state.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Circle whose colour and icon show the stage’s state."
+      }
+    },
+    {
+      "part": "Connector",
+      "holds": "A 2 px line that links a stage to the next one; the last stage has none.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 2 px connector links it to the next stage; the last stage has none."
+      }
+    },
+    {
+      "part": "Upcoming stage",
+      "holds": "A stage whose pale circle shows it has not started yet.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Pale circle: not started yet."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "Names the stage; every stage has one.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the stage."
+      }
+    },
+    {
+      "part": "Date",
+      "holds": "When the stage finished, started, or is due.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "When the stage finished, started, or is due."
+      }
+    },
+    {
+      "part": "Supporting text",
+      "holds": "What the stage involves, or how it went.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "What the stage involves, or how it went."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Stepper fills its container, with 8 px on each side.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Stepper fills its container with 8 px on each side."
+      }
+    },
+    {
+      "text": "Allow at least 52 px per stage: a stage grows when its text wraps, and the connector grows with it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each stage is at least 52 px tall and grows when its text wraps; the connector grows with it."
+      }
+    },
+    {
+      "text": "Put the next action in a separate button: Stepper isn't pressable.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Stepper isn’t pressable, so the next action is a separate button."
+      }
+    },
+    {
+      "text": "Let the screen work out each stage's state and update the Stepper as the person moves on.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen works out each stage’s state and updates the Stepper as the person moves on"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Give every stage a title.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Every stage has a title."
+      }
+    },
+    {
+      "text": "Add supporting text (supportingText) to say what the stage involves or how it went.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Add supporting text to say what the stage involves or how it went"
+      }
+    },
+    {
+      "text": "Add a date (metaText) when timing matters, as on an order tracker.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "a date when timing matters, as on an order tracker."
+      }
+    },
+    {
+      "text": "Use titles alone for short processes whose titles say enough; it is compact.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Compact, for short processes whose titles say enough."
+      }
+    },
+    {
+      "text": "Set each stage's status: in code it sets both the stage's icon and its colour.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "in code the stage’s status sets both its icon and its colour."
+      }
+    },
+    {
+      "text": "Set Step Status to inactive on an upcoming stage, and keep any explicit Step Status matched to the status: an explicit Step Status always wins.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "An upcoming stage needs Step Status set to inactive, and an explicit Step Status always wins, so keep it matched to the status."
+      },
+      "target": "Step Status",
+      "value": "inactive"
+    },
+    {
+      "text": "Set the Step Status mode to inactive on each upcoming stage: upcoming steps render solid purple unless set to inactive.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "upcoming steps render solid purple unless set to `inactive`."
+      }
+    },
+    {
+      "text": "Set Step Status on each Step, not in the Stepper's modes: a Stepper-level Step Status colours every step the same.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "A Stepper-level `Step Status` colours every step the same."
+      },
+      "target": "Step Status"
+    },
+    {
+      "text": "Do not put a check on purple, the current colour: a check in the current colour reads as both done and in progress.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A check in the current colour reads as both done and in progress."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name every stage, and show its state in colour, icon, and words.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Every stage named, its state shown in colour, icon, and words."
+        }
+      },
+      {
+        "text": "Name the stage in a few words in its title, such as “Verify PAN”, not an action like “Click to verify”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Titles name the stage in a few words, such as “Verify PAN”, not an action like “Click to verify”."
+        }
+      },
+      {
+        "text": "Use the supporting text to say what happens or what went wrong: the indicator only says that a stage failed or needs attention, not why.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Supporting text says what happens or what went wrong: the indicator only says that a stage failed or needs attention, not why."
+        }
+      },
+      {
+        "text": "Write the outcome in the text: what failed and what to fix.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The text says what failed and what to fix."
+        }
+      },
+      {
+        "text": "Do not leave the default title, “Stepper Item”: it tells people nothing.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Stepper Item” tells people nothing."
+        }
+      }
+    ],
+    "good": [
+      "Verify PAN",
+      "Add bank account",
+      "Add nominee",
+      "eSign",
+      "Match your PAN with your name",
+      "Link the account you’ll invest from",
+      "Choose who receives your investments",
+      "Sign the form with an Aadhaar OTP",
+      "PAN details match your name",
+      "Nominee’s date of birth is missing",
+      "Account name doesn’t match your PAN",
+      "Done 2 Oct 2026",
+      "Started 5 Oct 2026",
+      "Due by 12 Oct 2026"
+    ],
+    "bad": [
+      "Stepper Item",
+      "Click to verify"
+    ]
+  },
+  "states": [
+    {
+      "state": "Done",
+      "when": "status complete: a green circle with a check.",
+      "from": {
+        "section": "states",
+        "quote": "Green circle with a check."
+      }
+    },
+    {
+      "state": "Current",
+      "when": "The stage in progress (status number): a purple circle with the stage number.",
+      "from": {
+        "section": "states",
+        "quote": "Purple circle with the stage number."
+      }
+    },
+    {
+      "state": "Upcoming",
+      "when": "Not started (status number with the Step Status mode inactive): a pale lavender circle.",
+      "from": {
+        "section": "states",
+        "quote": "Pale lavender circle: not started."
+      }
+    },
+    {
+      "state": "Needs attention",
+      "when": "status warning: an orange alert; the person must act to continue.",
+      "from": {
+        "section": "states",
+        "quote": "Orange alert: the person must act to continue."
+      }
+    },
+    {
+      "state": "Failed",
+      "when": "status error: a red cross; the text says what went wrong.",
+      "from": {
+        "section": "states",
+        "quote": "Red cross: say what went wrong."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Give the Stepper a spoken name with accessibilityLabel, such as “KYC progress”.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "gives it a spoken name such as “KYC progress”"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Give each stage a title that names it: on the web each stage is read with its title, supporting text of up to 80 characters, and date, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "each stage is read with its title, supporting text of up to 80 characters, and date, plus “Completed”, “Failed”, or “Needs attention”, and the first unfinished stage is marked as current."
+      }
+    },
+    {
+      "text": "Say in the text what happened: the icons themselves have no names.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The icons themselves have no names, so the text must say what happened."
+      }
+    },
+    {
+      "text": "Do not rely on the icon: a red cross, or “Failed” read aloud, doesn't say what went wrong or how to fix it.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A red cross, or “Failed” read aloud, doesn’t say what went wrong or how to fix it."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Match the icon and colour",
+      "dont": "Put a check on purple",
+      "why": "A check in the current colour reads as both done and in progress.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match the icon and colour"
+      }
+    },
+    {
+      "do": "Name each stage",
+      "dont": "Leave the default titles",
+      "why": "“Stepper Item” tells people nothing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name each stage"
+      }
+    },
+    {
+      "do": "Write the outcome",
+      "dont": "Rely on the icon",
+      "why": "A red cross, or “Failed” read aloud, doesn’t say what went wrong or how to fix it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Write the outcome"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "KYC progress with a spoken name, upcoming stages set to inactive, and the next action as a separate Button.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <Stepper accessibilityLabel=\"KYC progress\" modes={{ 'Color Mode': 'Light' }}>\n    <Step title=\"Verify PAN\" supportingText=\"Match your PAN with your name\" metaText=\"Done 2 Oct 2026\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Add bank account\" supportingText=\"Link the account you’ll invest from\" metaText=\"Started 5 Oct 2026\" modes={{ 'Color Mode': 'Light' }} />\n    <Step title=\"Add nominee\" supportingText=\"Choose who receives your investments\" metaText=\"Due by 12 Oct 2026\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n    <Step title=\"eSign\" supportingText=\"Sign the form with an Aadhaar OTP\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n  </Stepper>\n  <Button label=\"Continue\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Stepper isn’t pressable, so the next action is a separate button."
+      }
+    },
+    {
+      "purpose": "A short process with titles only.",
+      "jsx": "<Stepper accessibilityLabel=\"KYC progress\" modes={{ 'Color Mode': 'Light' }}>\n  <Step title=\"Verify PAN\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n  <Step title=\"Add bank account\" modes={{ 'Color Mode': 'Light' }} />\n  <Step title=\"Add nominee\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n</Stepper>",
+      "from": {
+        "section": "configuration",
+        "quote": "Compact, for short processes whose titles say enough."
+      }
+    },
+    {
+      "purpose": "A failed stage whose supporting text says what went wrong.",
+      "jsx": "<Stepper accessibilityLabel=\"KYC progress\" modes={{ 'Color Mode': 'Light' }}>\n  <Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" status=\"complete\" modes={{ 'Color Mode': 'Light' }} />\n  <Step title=\"Add bank account\" supportingText=\"Account name doesn’t match your PAN\" status=\"error\" modes={{ 'Color Mode': 'Light' }} />\n  <Step title=\"Add nominee\" supportingText=\"Choose who receives your investments\" modes={{ 'Color Mode': 'Light', 'Step Status': 'inactive' }} />\n</Stepper>",
+      "from": {
+        "section": "doDont",
+        "quote": "The text says what failed and what to fix."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Stepper clones every element child with index, its own modes merged into the child's (the child's win), and showLine (false on the last child). It is vertical only, not interactive, and owns no current step.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Merged into every Step child, whose own modes win; a Step Status set here colours every step the same.",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "name": "style",
+        "type": "ViewStyle",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Works on Stepper, Step and StepLabel.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Names the list: on the web Stepper renders a ul named by accessibilityLabel, and each Step an li.",
+        "checkedOn": "2026-10-08"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Step Status",
+        "source": "evidence",
+        "type": "mode collection",
+        "values": [
+          "active",
+          "inactive",
+          "complete",
+          "error",
+          "warning"
+        ],
+        "description": "A Step's status alone sets its colour (complete green, error red, warning orange); an explicit Step Status mode still overrides it. Set on the Stepper, Step Status colours every step the same.",
+        "checkedOn": "2026-10-08"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "The check, cross and alert glyphs are unnamed images.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "Stepper is vertical only and not interactive.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "text": "In Dark mode, complete and warning stages turn red, and supporting text and dates stay near-black (#197); the guide shows Light only.",
+        "source": "evidence",
+        "checkedOn": "2026-10-05"
+      },
+      {
+        "text": "The published Storybook predates 0.1.78: its done, error and warning examples show the icon on purple.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=stepper",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3228-457",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-stepper--docs"
+  }
+}
