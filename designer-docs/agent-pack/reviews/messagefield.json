@@ -3,6 +3,14 @@
     {
       "field": "/configuration/1",
       "reason": "\"Without a limit there is no counter.\" is true only by default: with showCounter set and no maxLength the installed MessageField shows a plain count (MessageField.tsx, 0.1.78-dbe0e02, read from source). An agent reading this rule would think showCounter does nothing without a limit. Guide fix #518. Added by Claude Code in the overnight run agentpack-batch5, for Marcin to confirm."
+    },
+    {
+      "field": "/facts/gaps/0",
+      "reason": "\"a counter that shows only with a limit\" (the guide's Sources note) is true only by default: with showCounter set and no maxLength the installed MessageField shows a plain count (the entry's showCounter fact; MessageField.tsx, 0.1.78-dbe0e02, read from source). Same problem as /configuration/1: guide fix #518. Added by Claude Code in the overnight run agentpack-r20 (release 0.1.78+20), for Marcin to confirm."
+    },
+    {
+      "field": "/placementAdvice/1",
+      "reason": "\"The counter sits 8 px below.\" holds only with no message under the field: with support text or an error message, the message sits between the text area and the counter (the entry's errorMessage fact; MessageField.tsx, 0.1.78-dbe0e02, read from source). Guide fix #518. Added by Claude Code in the overnight run agentpack-r20 (release 0.1.78+20), for Marcin to confirm."
     }
   ],
   "dismissed": [

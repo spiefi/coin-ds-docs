@@ -1,0 +1,796 @@
+{
+  "schemaVersion": 1,
+  "id": "FormField",
+  "slug": "formfield",
+  "category": "input",
+  "tags": [
+    "input",
+    "text field",
+    "form input",
+    "label",
+    "error message"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:24:09Z",
+    "flags": []
+  },
+  "summary": "Use a Form Field to collect one labelled value, such as an account number, with a hint or an error message below it.",
+  "useWhen": [
+    {
+      "text": "Collect one labelled value, such as an account number, with a hint or an error message below it.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Form Field to collect one labelled value, such as an account number, with a hint or an error message below it."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The input is unlabelled chrome, a code, or a file: the Storybook docs (as the evidence records them) point to TextInput or InputSearch for unlabelled chrome, OTP for codes, and FormUpload for files.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "TextInput or InputSearch for unlabelled chrome, OTP for codes, FormUpload for files."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Label",
+      "holds": "The label text above the field; names the value and gives the field its accessible name.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the value and gives the field its accessible name."
+      }
+    },
+    {
+      "part": "Required mark",
+      "holds": "A red asterisk beside the label, for fields people must fill in (isRequired).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A red asterisk for fields people must fill in."
+      }
+    },
+    {
+      "part": "Start icon",
+      "holds": "An optional 18 px icon before the text, such as the rupee sign.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional 18 px icon, such as the rupee sign."
+      }
+    },
+    {
+      "part": "Input",
+      "holds": "The placeholder, which shows the format, then what people type.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The placeholder shows the format; then what people type."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "The white box; its border turns purple on focus and red on error.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White box; purple border on focus, red on error."
+      }
+    },
+    {
+      "part": "Support text",
+      "holds": "A hint below the field; an error message replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A hint below the field; an error message replaces it."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "leading",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "trailing",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Form Field fills its container's width; the screen sets the width. The field is 47 px tall, and the label and support text sit 8 px above and below it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Form Field fills its container’s width. The field is 47 px tall with 12 px of padding at each end, and the label and support text sit 8 px above and below it. The screen sets the width."
+      }
+    },
+    {
+      "text": "In a narrow column the field narrows with its column, and the hint wraps.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field narrows with its column, and the hint wraps."
+      }
+    },
+    {
+      "text": "Let the screen check the values (for example when people tap Verify) and set the error on the field; Form Field only shows it, and the button stays enabled.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen checks the values when people tap Verify and sets the error on the field. Form Field only shows it, and the button stays enabled."
+      },
+      "target": "isInvalid"
+    },
+    {
+      "text": "Keep the primary action enabled and show the error on the field; the Storybook docs say disabled is not a validation strategy.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Keep the primary action enabled and show the error on the field"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Every option is off unless you set it. Add an icon, an action, or the required mark when it tells people something they need.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Every option is off unless you set it. Add an icon, an action, or the required mark when it tells people something they need."
+      }
+    },
+    {
+      "text": "The default configuration is a label, a format example, and a hint below (label, placeholder and supportText).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: a label, a format example, and a hint below."
+      }
+    },
+    {
+      "text": "Turn on startIcon to show the rupee icon, which marks an amount before people type.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The rupee icon marks an amount before people type."
+      },
+      "target": "startIcon",
+      "value": "true"
+    },
+    {
+      "text": "Put a small text button in trailing to act on the value without leaving the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A small text button acts on the value without leaving the field."
+      },
+      "target": "trailing"
+    },
+    {
+      "text": "For the end action, a Coin Button with AppearanceBrand Secondary, Emphasis Low and Button / Size S renders 74 × 32, transparent with purple text, matching Figma's end slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "A Coin `Button` with `AppearanceBrand: Secondary`, `Emphasis: Low`, `Button / Size: S` in `trailing` renders 74 × 32, transparent with purple `rgb(93,0,181)` text, matching Figma's end slot."
+      },
+      "target": "trailing"
+    },
+    {
+      "text": "Set isRequired to show a red asterisk on a field people must fill in.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A red asterisk marks a field people must fill in."
+      },
+      "target": "isRequired",
+      "value": "true"
+    },
+    {
+      "text": "Set type password to hide the characters.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The type hides the characters."
+      },
+      "target": "type",
+      "value": "password"
+    },
+    {
+      "text": "Set type to email, phone or number to pick the keyboard for those fields.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "It also picks the keyboard for email, phone, and number fields."
+      },
+      "target": "type"
+    },
+    {
+      "text": "Do not show red without a message: colour alone does not say what is wrong.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Colour alone does not say what is wrong."
+      },
+      "target": "isInvalid"
+    },
+    {
+      "text": "Show fixed values as read only (isReadOnly): full contrast keeps the value easy to read.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Full contrast keeps the value easy to read."
+      },
+      "target": "isReadOnly",
+      "value": "true"
+    },
+    {
+      "text": "Use isDisabled for a field that does not apply yet.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Use it for a field that does not apply yet."
+      },
+      "target": "isDisabled",
+      "value": "true"
+    },
+    {
+      "text": "Do not disable a value people need to read: half opacity makes it hard to read.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Half opacity makes it hard to read."
+      },
+      "target": "isDisabled",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "A clear label, a format example, and help when it goes wrong.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "A clear label, a format example, and help when it goes wrong."
+        }
+      },
+      {
+        "text": "Write the label as the name of the value in sentence case, such as “Account number”, not “Enter your account number”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the label as the name of the value in sentence case, such as “Account number”, not “Enter your account number”."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Do not start a label with “Enter” or “Your”.",
+        "strength": "discouraged",
+        "from": {
+          "section": "evidence",
+          "quote": "Labels name the value in sentence case and do not start with \"Enter\" or \"Your\""
+        },
+        "target": "label"
+      },
+      {
+        "text": "Do not use the placeholder as the label: the name disappears as soon as people type.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The name disappears as soon as people type."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Use the placeholder for a format example.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the placeholder for a format example"
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Use support text for a rule.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "support text for a rule"
+        },
+        "target": "supportText"
+      },
+      {
+        "text": "Write an error that says how to fix the value.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "an error that says how to fix the value"
+        },
+        "target": "errorMessage"
+      },
+      {
+        "text": "Say how to fix it: the error message names the fix.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The message names the fix."
+        },
+        "target": "errorMessage"
+      },
+      {
+        "text": "Write the error so it says how to fix the value in one sentence.",
+        "strength": "recommended",
+        "from": {
+          "section": "evidence",
+          "quote": "error text says how to fix the value in one sentence"
+        },
+        "target": "errorMessage"
+      }
+    ],
+    "good": [
+      "Account number",
+      "IFSC code",
+      "Mobile number",
+      "PAN",
+      "XXXX XXXX XXXX",
+      "SBIN0001234",
+      "98765 43210",
+      "11 characters, on your cheque book",
+      "We’ll send a code to this number",
+      "Enter all 10 characters of your PAN",
+      "IFSC codes have 11 characters",
+      "Up to ₹50,000 a day"
+    ],
+    "bad": [
+      "Enter your account number"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "No state prop set: a grey border.",
+      "from": {
+        "section": "states",
+        "quote": "A grey border. Select the field to see the purple focus border."
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "While the field has focus: a purple border.",
+      "from": {
+        "section": "states",
+        "quote": "Focus draws a purple border"
+      }
+    },
+    {
+      "state": "Error",
+      "when": "isInvalid: red border and fill; errorMessage replaces the hint.",
+      "from": {
+        "section": "states",
+        "quote": "Red border and fill; the message replaces the hint."
+      }
+    },
+    {
+      "state": "Read only",
+      "when": "isReadOnly: grey at full contrast; people can read the value but not change it.",
+      "from": {
+        "section": "states",
+        "quote": "Grey and full contrast: people can read the value but not change it."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "isDisabled: the read-only look at half opacity, and Tab skips it; for a field that does not apply yet.",
+      "from": {
+        "section": "states",
+        "quote": "The read-only look at half opacity, and Tab skips it. Use it for a field that does not apply yet."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Use label to name the value: it also gives the field its accessible name.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the value and gives the field its accessible name."
+      },
+      "target": "label"
+    },
+    {
+      "text": "On the web the label names the input, and screen readers announce required and invalid fields and read the support text or error with them.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the label names the input; screen readers also announce required and invalid fields and read the support text or error with them."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Label every field",
+      "dont": "Use the placeholder as the label",
+      "why": "The label stays visible while people type.",
+      "from": {
+        "section": "doDont",
+        "quote": "Label every field"
+      }
+    },
+    {
+      "do": "Say how to fix it",
+      "dont": "Show red without a message",
+      "why": "Colour alone does not say what is wrong.",
+      "from": {
+        "section": "doDont",
+        "quote": "Say how to fix it"
+      }
+    },
+    {
+      "do": "Show fixed values as read only",
+      "dont": "Disable a value people need to read",
+      "why": "Half opacity makes it hard to read.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show fixed values as read only"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A field the screen marks invalid after people tap Verify; the button stays enabled.",
+      "jsx": "<VStack modes={{ 'Color Mode': 'Light' }}>\n  <FormField\n    label=\"IFSC code\"\n    placeholder=\"SBIN0001234\"\n    supportText=\"11 characters, on your cheque book\"\n    isInvalid\n    errorMessage=\"IFSC codes have 11 characters\"\n    onChangeText={(text) => {}}\n    modes={{ 'Color Mode': 'Light' }}\n  />\n  <Button label=\"Verify account\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen checks the values when people tap Verify and sets the error on the field."
+      }
+    },
+    {
+      "purpose": "A required amount field with the rupee start icon and a hint.",
+      "jsx": "<FormField\n  label=\"Amount\"\n  placeholder=\"0\"\n  startIcon\n  isRequired\n  supportText=\"Up to ₹50,000 a day\"\n  onChangeText={(text) => {}}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The rupee icon marks an amount before people type."
+      }
+    },
+    {
+      "purpose": "A promo code field with an Apply text button in the end slot; the Button gets the field's modes plus the end-slot styling.",
+      "jsx": "<FormField\n  label=\"Promo code\"\n  placeholder=\"JIO200\"\n  onChangeText={(text) => {}}\n  modes={{ 'Color Mode': 'Light' }}\n  trailing={<Button label=\"Apply\" onPress={() => {}} modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Secondary', Emphasis: 'Low', 'Button / Size': 'S' }} />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "A small text button acts on the value without leaving the field."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Label rendered above the input."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Placeholder text shown when the input is empty."
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Current value of the input (controlled)."
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "types",
+        "description": "Called when the input text changes."
+      },
+      {
+        "name": "type",
+        "type": "FormFieldType",
+        "required": false,
+        "source": "evidence",
+        "values": [
+          "number",
+          "search",
+          "text",
+          "password",
+          "email",
+          "phone",
+          "url"
+        ],
+        "default": "text",
+        "description": "password masks the value; email sets type=email; number sets inputmode=numeric. Declared: Logical input type. Mapped to keyboard, secure entry and capitalization. Default \"text\", from the component source.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Field name. When used inside `<Form>`, this is the key used to look up server-side `validationErrors` and to notify the form when the value changes so the error can clear."
+      },
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional element rendered before the input text (Figma start icon area). No leading element is rendered by default — the Figma FormField design hides the start icon unless toggled on."
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Not hidden from assistive tech on the web: a Button there stays in the tab order after the input and keeps its name. Declared: Optional element rendered after the input text (Figma slot \"end\"). Typically used for an inline button (e.g. \"Apply\", \"Show\") or a status icon.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "startIcon",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "When `true`, shows the leading icon area (Figma `startIcon`). Defaults to `false`. Uses `ic_rupee` at 18px unless `leading` or `leadingIconName` overrides it. Default false, from the component source."
+      },
+      {
+        "name": "leadingIconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Convenience prop to render a built-in icon as the leading element. Ignored when `leading` is provided. When set, implies a visible start icon even if `startIcon` is omitted."
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Sets aria-required on the input; the asterisk uses the Negative token. Declared: Shows a required asterisk next to the label. Default false, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Uses the Read Only colours at 50 % opacity rather than Figma's Disabled mode; sets aria-disabled and tabindex -1, so Tab skips the field. Declared: Disables interaction and dims the field. Resolves to \"Read Only\" state. Default false, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "isInvalid",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Sets aria-invalid on the input, and aria-describedby points at the error message. Declared: Marks the field as invalid and shows `errorMessage`. Default false, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "isReadOnly",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Renders the field in read-only mode (non-interactive but not dimmed). Resolves to the \"Read Only\" state. Default false, from the component source."
+      },
+      {
+        "name": "supportText",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Linked to the input (aria-describedby) while the field is valid. Declared: Helper text displayed below the input.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "errorMessage",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces supportText only while isInvalid (or a Form error) is set; with isInvalid and no errorMessage, the support text turns red. Declared: Replaces `supportText` when `isInvalid` is true.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "maxLength",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Maximum number of characters accepted."
+      },
+      {
+        "name": "autoFocus",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "When true, focuses the input on mount. Default false, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes for design token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the outermost wrapper."
+      },
+      {
+        "name": "inputStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the input row container."
+      },
+      {
+        "name": "inputTextStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the input text."
+      },
+      {
+        "name": "onFocus",
+        "type": "RNTextInputProps['onFocus']",
+        "required": false,
+        "source": "types",
+        "description": "Called when the input receives focus."
+      },
+      {
+        "name": "onBlur",
+        "type": "RNTextInputProps['onBlur']",
+        "required": false,
+        "source": "types",
+        "description": "Called when the input loses focus."
+      },
+      {
+        "name": "onSubmitEditing",
+        "type": "RNTextInputProps['onSubmitEditing']",
+        "required": false,
+        "source": "types",
+        "description": "Called when the user submits the input (e.g. presses return)."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "The input's accessible name is accessibilityLabel, then label, then the placeholder. Declared: Accessibility label. Defaults to `label` or `placeholder`.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility hint."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test identifier."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "Dark renders identically to Light: Form Field has no dark values. Declared: A token collection FormField reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Light",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "FormField States",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active",
+          "Read Only",
+          "Error",
+          "Disabled"
+        ],
+        "description": "Set by the component from its props: invalid → Error; read only or disabled → Read Only; focused → Active; otherwise Idle. An explicit modes['FormField States'] overrides it. Declared: A token collection FormField reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Idle",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "Status",
+        "type": "mode collection",
+        "values": [
+          "Auto",
+          "Warning",
+          "Error",
+          "Success",
+          "Loading",
+          "Neutral"
+        ],
+        "description": "A token collection FormField reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Auto"
+      }
+    ],
+    "slots": [
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "description": "Optional element rendered before the input text (Figma start icon area). No leading element is rendered by default — the Figma FormField design hides the start icon unless toggled on.",
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "description": "Optional element rendered after the input text (Figma slot \"end\"). Typically used for an inline button (e.g. \"Apply\", \"Show\") or a status icon.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "description": "Called when the input text changes.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Dark mode is not supported: Color Mode Dark renders like Light.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "text": "Disabled uses the read-only colours at half opacity instead of Figma's Disabled colours; the FormField States Disabled mode is never used.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "No live region: an error is read when people reach the field, not when it appears.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "The package field is 47 px tall; Figma's is 45 px.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=formfield",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1922-5647",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-formfield--docs"
+  }
+}

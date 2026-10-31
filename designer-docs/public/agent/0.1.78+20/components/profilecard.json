@@ -1,0 +1,1002 @@
+{
+  "schemaVersion": 1,
+  "id": "ProfileCard",
+  "slug": "profilecard",
+  "category": "card",
+  "tags": [
+    "profile header",
+    "identity card",
+    "UPI ID",
+    "account card",
+    "jioPlus card"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:24:09Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide was checked on 0.1.78-c7d3348; the installed dbe0e02 ProfileCard.tsx (read, not rendered) already forces context 10 jioPlus and List Item Style Default on every child, paints plain Text and ListItem support text on-dark, and gives a long handle an ellipsis, so most of the gaps quoted from the guide (Component Bug #354) describe the pre-fix card. Only the 48 px header still holds. Re-extract once #354's fix is published to the guide. Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Profile Card to show who the user is on a dark panel: initials or a photo, a name, UPI handles, and account rows below.",
+  "useWhen": [
+    {
+      "text": "Show who the user is on a dark panel: initials or a photo, a name, UPI handles, and account rows below.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Profile Card to show who the user is on a dark panel: initials or a photo, a name, UPI handles, and account rows below."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A card that needs a selected, disabled, or loading state: the Profile Card has none.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "There’s no selected, disabled, or loading state."
+      }
+    },
+    {
+      "text": "A card that should press as a whole: the card itself isn't pressable; its handles and body rows press through their own onPress.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "The monogram, or a photo from avatarSource; 42 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "monogram, or a photo from avatarSource, 42 px."
+      }
+    },
+    {
+      "part": "QR badge",
+      "holds": "badgeIcon on a white disc; badgeIcon null removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "badgeIcon on a white disc; null removes it."
+      }
+    },
+    {
+      "part": "Name",
+      "holds": "name, 14 px bold, on one line.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "name, 14 px bold, on one line."
+      }
+    },
+    {
+      "part": "UPI handles",
+      "holds": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "Drawn only when there's a body; showDivider hides it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Drawn only when there’s a body; showDivider hides it."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "children: your rows, given the card's on-dark modes.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "children: your rows, given the card’s on-dark modes."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A navy panel, 12 px corners, 20 px padding, 344 px wide.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A navy panel, 12 px corners, 20 px padding, 344 px wide."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "header",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card heads the Profile screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The card heads the Profile screen."
+      }
+    },
+    {
+      "text": "Let the screen do the work: copying a handle and opening a row go through each handle's and row's onPress, and the card only lays them out.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Copying a handle and opening a row are the screen’s own work, through each handle’s and row’s onPress; the card only lays them out."
+      }
+    },
+    {
+      "text": "The card is 344 px wide by default, as Figma draws it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 344 px wide, as Figma draws it"
+      },
+      "target": "width"
+    },
+    {
+      "text": "Height follows the content: 20 px of padding, and 12 px between the header, the divider, and each body row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the content: 20 px of padding, and 12 px between the header, the divider, and each body row."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "name, monogram, and upiHandles make the header.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "name, monogram, and upiHandles make the header."
+      }
+    },
+    {
+      "text": "avatarSource shows a photo in place of the initials, such as a business's logo.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a photo in place of the initials"
+      },
+      "target": "avatarSource"
+    },
+    {
+      "text": "badgeIcon={null} removes the QR badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "badgeIcon={null} removes the QR badge"
+      },
+      "target": "badgeIcon"
+    },
+    {
+      "text": "upiHandles={[]} leaves just the name.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "upiHandles={[]} leaves just the name."
+      },
+      "target": "upiHandles"
+    },
+    {
+      "text": "children is the body, under a divider; leave it out for a header-only card.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "children is the body, under a divider; leave it out for a header-only card."
+      },
+      "target": "children"
+    },
+    {
+      "text": "The divider is drawn only when there's a body; showDivider={false} hides it.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Drawn only when there’s a body; showDivider hides it."
+      },
+      "target": "showDivider",
+      "value": "false"
+    },
+    {
+      "text": "header replaces the avatar, name, and handles together.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "header replaces the avatar, name, and handles together."
+      },
+      "target": "header"
+    },
+    {
+      "text": "Profile Card Appearance Premium turns the panel gold.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Profile Card Appearance Premium turns the panel gold."
+      },
+      "target": "Profile Card Appearance",
+      "value": "Premium"
+    },
+    {
+      "text": "With Premium, the body rows' titles and Buttons follow the gold.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The rows’ titles and Buttons follow the gold."
+      },
+      "target": "Profile Card Appearance",
+      "value": "Premium"
+    },
+    {
+      "text": "The card passes its on-dark modes to everything inside, so ListItem titles, icons, chevrons, and Buttons turn white or gold on their own; plain Text and support text don't.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The card passes its on-dark modes to everything inside, so ListItem titles, icons, chevrons, and Buttons turn white or gold on their own; plain Text and support text don’t."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "Keep the card's own row style: rows sit on the navy panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Rows sit on the navy panel."
+      },
+      "target": "List Item Style"
+    },
+    {
+      "text": "Do not set List Item Style Boxed: white boxes cover the header and rows, and the name disappears.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "White boxes cover the header and rows, and the name disappears."
+      },
+      "target": "List Item Style",
+      "value": "Boxed"
+    },
+    {
+      "text": "width takes another number, or a percentage such as '100%' to fill its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "width takes another number, or a percentage such as '100%' to fill its host."
+      },
+      "target": "width",
+      "value": "100%"
+    },
+    {
+      "text": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "upiHandles: a UPI Handle each; onPress makes a UPI Handle a button."
+      },
+      "target": "upiHandles"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Give name as the person's display name.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "name is the person’s display name, and monogram their two initials."
+        },
+        "target": "name"
+      },
+      {
+        "text": "Give monogram as the person's two initials.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "name is the person’s display name, and monogram their two initials."
+        },
+        "target": "monogram"
+      },
+      {
+        "text": "Set name yourself: left out, the card shows “Name”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/0"
+        },
+        "target": "name"
+      },
+      {
+        "text": "Set monogram yourself unless avatarSource gives a photo: left out, the avatar shows “MS”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "monogram"
+      },
+      {
+        "text": "A long name ends in …, and the handles wrap onto another line.",
+        "strength": "recommended",
+        "from": {
+          "section": "sizing",
+          "quote": "A long name ends in …, and the handles wrap onto another line."
+        },
+        "target": "name"
+      },
+      {
+        "text": "Write each handle's label as the UPI ID or the phone number exactly as people would type it, such as priya@jio or 98765 43210.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "A handle’s label is the UPI ID or the phone number exactly as people would type it"
+        },
+        "target": "upiHandles"
+      },
+      {
+        "text": "Use ic_copy on a handle people copy and ic_confirm on a verified number.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "use ic_copy on a handle people copy and ic_confirm on a verified number."
+        },
+        "target": "upiHandles"
+      },
+      {
+        "text": "Pass upiHandles: left out, the card shows two sample handles; [] removes the row.",
+        "strength": "recommended",
+        "from": {
+          "section": "evidence",
+          "quote": "`upiHandles` (two sample handles; `[]` removes the row)"
+        },
+        "target": "upiHandles"
+      },
+      {
+        "text": "Keep handles short, so each fits its UPI Handle.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Each fits its UPI Handle."
+        },
+        "target": "upiHandles"
+      },
+      {
+        "text": "Do not use a sentence as a handle: it never ends in …, so the UPI Handle runs past the panel.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It never ends in …, so the UPI Handle runs past the panel."
+        },
+        "target": "upiHandles"
+      },
+      {
+        "text": "Keep body rows to short titles, with one Button or a chevron each.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep body rows to short titles, with one Button or a chevron each."
+        },
+        "target": "children"
+      },
+      {
+        "text": "Put titles and Buttons in the body: they turn white and gold on the navy panel.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "They turn white and gold on the navy panel."
+        },
+        "target": "children"
+      },
+      {
+        "text": "Do not put support text or plain Text in the body: they stay dark and almost disappear.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "They stay dark and almost disappear."
+        },
+        "target": "children"
+      }
+    ],
+    "good": [
+      "Priya Sharma",
+      "PS",
+      "priya@jio",
+      "98765 43210",
+      "JioFinance+",
+      "Upgrade",
+      "Linked bank accounts"
+    ],
+    "bad": [
+      "Tap to copy my UPI ID priya@jio and pay me back"
+    ]
+  },
+  "states": [
+    {
+      "state": "Card",
+      "when": "Always: the card itself isn't pressable.",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable."
+      }
+    },
+    {
+      "state": "Pressable handle",
+      "when": "A handle with onPress is a button that shrinks a little while pressed, usually to copy it.",
+      "from": {
+        "section": "states",
+        "quote": "A handle with onPress is a button that shrinks a little while pressed, usually to copy it"
+      }
+    },
+    {
+      "state": "Text handle",
+      "when": "Without onPress, a handle is plain text.",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress, a handle is plain text."
+      }
+    },
+    {
+      "state": "Body rows",
+      "when": "Body rows keep their own states, such as a ListItem with onPress.",
+      "from": {
+        "section": "states",
+        "quote": "Body rows keep their own states, such as a ListItem with onPress."
+      }
+    },
+    {
+      "state": "Selected, disabled, loading",
+      "when": "Not available: there's no selected, disabled, or loading state.",
+      "from": {
+        "section": "states",
+        "quote": "There’s no selected, disabled, or loading state."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "A handle with onPress is a button; one without is plain text.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "A handle with onPress is a button that shrinks a little while pressed, usually to copy it; one without is plain text."
+      },
+      "target": "upiHandles"
+    },
+    {
+      "text": "The card itself isn't pressable.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable."
+      }
+    },
+    {
+      "text": "accessibilityLabel is the card's accessibility label.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Titles and Buttons in the body",
+      "dont": "Support text or plain Text in the body",
+      "why": "They stay dark and almost disappear.",
+      "from": {
+        "section": "doDont",
+        "quote": "They turn white and gold on the navy panel."
+      }
+    },
+    {
+      "do": "Short handles",
+      "dont": "A sentence as a handle",
+      "why": "It never ends in …, so the UPI Handle runs past the panel.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each fits its UPI Handle."
+      }
+    },
+    {
+      "do": "The card’s own row style",
+      "dont": "List Item Style Boxed",
+      "why": "White boxes cover the header and rows, and the name disappears.",
+      "from": {
+        "section": "doDont",
+        "quote": "Rows sit on the navy panel."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The Profile screen, the guide's In context: the card heads the screen under its Title, with a UPI ID to copy, a verified number, and two short account rows under a divider. Copying the handle and opening a row are the screen's own work, through their onPress.",
+      "jsx": "<VStack>\n  <Title title=\"Profile\" subtitle=\"Your account and payments\" />\n  <ProfileCard\n    name=\"Priya Sharma\"\n    monogram=\"PS\"\n    upiHandles={[\n      { label: 'priya@jio', iconName: 'ic_copy', onPress: () => {} },\n      { label: '98765 43210', iconName: 'ic_confirm' },\n    ]}\n  >\n    <ListItem\n      layout=\"Horizontal\"\n      title=\"JioFinance+\"\n      showSupportText={false}\n      navArrow={false}\n      trailing={<Button label=\"Upgrade\" onPress={() => {}} />}\n    />\n    <Divider />\n    <ListItem\n      layout=\"Horizontal\"\n      title=\"Linked bank accounts\"\n      showSupportText={false}\n      onPress={() => {}}\n    />\n  </ProfileCard>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The card heads the Profile screen."
+      }
+    },
+    {
+      "purpose": "Header only: no children, so no divider and no body.",
+      "jsx": "<ProfileCard\n  name=\"Priya Sharma\"\n  monogram=\"PS\"\n  upiHandles={[\n    { label: 'priya@jio', iconName: 'ic_copy', onPress: () => {} },\n    { label: '98765 43210', iconName: 'ic_confirm' },\n  ]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "No children: no divider and no body."
+      }
+    },
+    {
+      "purpose": "A business's profile with a photo: avatarSource shows its logo in place of initials. The URI stands for the business's own logo.",
+      "jsx": "<ProfileCard\n  name=\"Jio Gold\"\n  avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  upiHandles={[{ label: 'jiogold@jio', iconName: 'ic_copy', onPress: () => {} }]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource in place of initials, here a business’s logo."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Name",
+        "description": "One line ending in … (the header's ListItem title). Declared: User's display name shown in the header. Default \"Name\", from the component source.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "monogram",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "MS",
+        "description": "Monogram initials for the avatar (used when `avatarSource` is not set). Default \"MS\", from the component source."
+      },
+      {
+        "name": "avatarSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Avatar image source. When set, the avatar renders the image instead of the monogram."
+      },
+      {
+        "name": "badgeIcon",
+        "type": "string | null",
+        "required": false,
+        "source": "types",
+        "default": "ic_qr_code",
+        "description": "Registry icon for the small badge attached to the avatar's bottom-right corner. Pass `null` to hide the badge. Defaults to `'ic_qr_code'`. Default \"ic_qr_code\", from the component source."
+      },
+      {
+        "name": "upiHandles",
+        "type": "ProfileCardUpiHandle[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Each handle is { label (required), iconName (UpiHandle's default ic_scan_qr_code), showIcon (default true), onPress }; onPress makes the UPI Handle a button that scales to 0.98 while pressed. A handle has no picture. Declared: UPI handle pills rendered under the name. Pass `[]` to render none.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the header row (avatar + name + handles). Takes precedence over the declarative header props. `modes` cascade into it."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Card body (the Figma \"slot\"). Rendered below the header divider. The card forces `context 10: jioPlus` onto every child so nested `ListItem`s and `Text`s stay on-dark. A child's own modes cannot unset that context."
+      },
+      {
+        "name": "showDivider",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggles the divider between the header and the body. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "width",
+        "type": "number | `${number}%`",
+        "required": false,
+        "source": "types",
+        "default": 344,
+        "description": "Card width. Defaults to the Figma spec (`344`). Pass `'100%'` to fill the parent. Default 344, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object for design-token resolution, cascaded to all children."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the card container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the card."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Attached Border",
+        "type": "mode collection",
+        "values": [
+          "True",
+          "False"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "True"
+      },
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "L"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "The card gives everything inside context 10 jioPlus. Under it ListItem titles, Icons and NavArrows are white, a Divider is #191f6e, a Button is gold (#cea15a) with a dark label, the UPI Handles are navy (#021891), and the avatar is navy (#021891) with white initials. Declared: A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context5",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Fullscreen Modal",
+          "Mode 1"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Draggable List",
+        "type": "mode collection",
+        "values": [
+          "default",
+          "onDrag"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Capsule Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "L",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Icon Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "List Item Style",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Boxed",
+          "Minimal"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "ListItem State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "NavArrow Direction",
+        "type": "mode collection",
+        "values": [
+          "Left&Right",
+          "Top&Bottom"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Left&Right"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "Premium turns the panel gold (#cea15a), with a darker gold avatar, UPI Handles and divider, and dark text. Declared: A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: The card supports the `Profile Card Appearance` collection (`Default` | `Premium`) via the `modes` prop, which recolors the container, avatar, pills and divider in one go.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "Selectable",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "False"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "UPI Handle Image",
+        "type": "mode collection",
+        "values": [
+          "True",
+          "False"
+        ],
+        "description": "A token collection ProfileCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "True"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "description": "Full override for the header row (avatar + name + handles). Takes precedence over the declarative header props. `modes` cascade into it.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Card body (the Figma \"slot\"). Rendered below the header divider. The card forces `context 10: jioPlus` onto every child so nested `ListItem`s and `Text`s stay on-dark. A child's own modes cannot unset that context.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "Plain Text and ListItem support text in the body stay dark on the navy panel and almost disappear, as in Figma's own sample (Component Bug #354).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "A body child's own modes override the card's on-dark modes (Component Bug #354).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "List Item Style Boxed breaks the card: white boxes cover the header and rows, and the name disappears (Component Bug #354).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "A long UPI handle never ends in …, so its UPI Handle runs past the card (Component Bug #354).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "The header is 48 px tall where Figma's is 47 (Component Bug #354).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "The QR badge's glyph is near-black (#0f0d0a) where Figma's is grey (#24262b), and the badge sits at the avatar's 45° point where Figma places it at (25, 24) (Component Bug #354).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "The published Storybook is older than the installed package and still shows the older generated page (Component Bug #354).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "Figma's Profile Card has one property, the body slot; the name, handles, badge, and photo are overrides there, and Premium is a variable mode. In code they are props (name, monogram, avatarSource, badgeIcon, upiHandles), and Premium is the Profile Card Appearance mode.",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=profilecard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=6914-38498",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-profilecard--docs"
+  }
+}

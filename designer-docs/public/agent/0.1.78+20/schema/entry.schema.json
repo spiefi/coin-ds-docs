@@ -1,0 +1,535 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coin agent pack entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "slug",
+    "category",
+    "tags",
+    "status",
+    "summary",
+    "useWhen",
+    "avoidWhen",
+    "anatomy",
+    "allowedChildren",
+    "placementAdvice",
+    "configuration",
+    "content",
+    "states",
+    "accessibility",
+    "doDont",
+    "examples",
+    "facts",
+    "sources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "description": "Public export name, e.g. Badge"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Guide slug, e.g. badge"
+    },
+    "category": {
+      "enum": [
+        "action",
+        "input",
+        "content",
+        "card",
+        "navigation",
+        "feedback",
+        "layout",
+        "data"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "guideCommit",
+        "packageVersion",
+        "builtAt",
+        "flags"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "documented",
+            "flagged",
+            "undocumented",
+            "unsupported"
+          ]
+        },
+        "guideCommit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "packageVersion": {
+          "type": "string"
+        },
+        "builtAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/flag"
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "useWhen": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "avoidWhen": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "anatomy": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "part",
+          "holds",
+          "required",
+          "from"
+        ],
+        "properties": {
+          "part": {
+            "type": "string"
+          },
+          "holds": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "from": {
+            "$ref": "#/$defs/origin"
+          }
+        }
+      }
+    },
+    "allowedChildren": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "slot",
+          "accepts",
+          "source"
+        ],
+        "properties": {
+          "slot": {
+            "type": "string"
+          },
+          "accepts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source": {
+            "$ref": "#/$defs/factSource"
+          }
+        }
+      }
+    },
+    "placementAdvice": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "configuration": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rules",
+        "good",
+        "bad"
+      ],
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "good": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bad": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "when",
+          "from"
+        ],
+        "properties": {
+          "state": {
+            "type": "string"
+          },
+          "when": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/$defs/origin"
+          }
+        }
+      }
+    },
+    "accessibility": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "doDont": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "do",
+          "dont",
+          "why",
+          "from"
+        ],
+        "properties": {
+          "do": {
+            "type": "string"
+          },
+          "dont": {
+            "type": "string"
+          },
+          "why": {
+            "type": "string"
+          },
+          "from": {
+            "$ref": "#/$defs/origin"
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "purpose",
+          "jsx",
+          "from"
+        ],
+        "properties": {
+          "purpose": {
+            "type": "string"
+          },
+          "jsx": {
+            "type": "string",
+            "description": "Public-API JSX, jfs-components exports only"
+          },
+          "from": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/origin"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "facts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "props",
+        "modes",
+        "slots",
+        "events",
+        "gaps"
+      ],
+      "properties": {
+        "props": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "modes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gap"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "guide",
+        "figma",
+        "storybook"
+      ],
+      "properties": {
+        "guide": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "figma": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "storybook": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "origin": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "quote"
+          ],
+          "properties": {
+            "section": {
+              "type": "string",
+              "description": "summary, corePrinciple, anatomy, configuration, states, sizing, content, inContext, doDont or evidence"
+            },
+            "quote": {
+              "type": "string",
+              "description": "Exact text from the guide at status.guideCommit"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fact"
+          ],
+          "properties": {
+            "fact": {
+              "type": "string",
+              "description": "JSON pointer into facts, e.g. /facts/props/0"
+            }
+          }
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "strength",
+        "from"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "strength": {
+          "enum": [
+            "required",
+            "recommended",
+            "discouraged"
+          ]
+        },
+        "from": {
+          "$ref": "#/$defs/origin"
+        },
+        "target": {
+          "type": "string",
+          "description": "Prop or mode a configuration rule is about"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value the rule is about, when one"
+        },
+        "useInstead": {
+          "type": "string",
+          "description": "Component id to use instead (avoidWhen rules)"
+        }
+      }
+    },
+    "factSource": {
+      "enum": [
+        "types",
+        "runtime",
+        "evidence",
+        "unknown"
+      ]
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "source"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "default": {},
+        "required": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/factSource"
+        },
+        "checkedOn": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "source",
+        "checkedOn"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "runtime",
+            "evidence"
+          ]
+        },
+        "checkedOn": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "flag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "reason",
+        "by"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "JSON pointer to the flagged item"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "by": {
+          "enum": [
+            "trace-check",
+            "cross-check",
+            "human"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "schemaVersion": 1,
+  "id": "ChipGroup",
+  "slug": "chipgroup",
+  "category": "input",
+  "tags": [
+    "filter chips",
+    "chip row",
+    "filters"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:24:09Z",
+    "flags": []
+  },
+  "summary": "Use a Chip Group to lay out a row of Chip Select filters that wraps onto new lines with even gaps.",
+  "useWhen": [
+    {
+      "text": "Lay out a row of Chip Select filters that wraps onto new lines with even gaps.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Chip Group to lay out a row of Chip Select filters that wraps onto new lines with even gaps."
+      }
+    },
+    {
+      "text": "The group spaces the chips; each chip keeps its own state.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "The group spaces the chips; each chip keeps its own state."
+      }
+    },
+    {
+      "text": "Filters that combine, such as Date and Payment methods applying together.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Date and Payment methods apply together."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "One choice among options, such as Daily, Weekly or Monthly: people expect several chips to apply, and each is announced as its own toggle.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "People expect several to apply, and each is announced as its own toggle."
+      }
+    },
+    {
+      "text": "A mutually exclusive choice: the upstream ChipGroup mdx (unpublished), as the evidence records it, points to a SegmentedControl.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "a mutually exclusive choice → SegmentedControl"
+      },
+      "useInstead": "SegmentedControl"
+    },
+    {
+      "text": "A single filter: the upstream ChipGroup mdx (unpublished), as the evidence records it, points to a ChipSelect alone.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "one filter → a ChipSelect alone"
+      },
+      "useInstead": "ChipSelect"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Chip Select",
+      "holds": "Each chip keeps its own label, icon, and Active state.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Each chip keeps its own label, icon, and Active state."
+      }
+    },
+    {
+      "part": "Gap",
+      "holds": "8 px between chips, set by the group.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "8 px between chips, set by the group."
+      }
+    },
+    {
+      "part": "Wrapped chip",
+      "holds": "A chip that doesn't fit starts the next row, on the left.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A chip that doesn’t fit starts the next row, on the left."
+      }
+    },
+    {
+      "part": "Group",
+      "holds": "Lays chips out; it has no state, only an optional spoken name.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Lays chips out; it has no state, only an optional spoken name."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In the guide's In context, the filters sit above the list they filter, a transaction list.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Filters above a transaction list"
+      }
+    },
+    {
+      "text": "The group fills its container and adds a 32 px row for each line of chips.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The group fills its container and adds a 32 px row for each line of chips."
+      }
+    },
+    {
+      "text": "On the web chips are a little wider than in Figma, so Figma's three filters need 382 px for one row.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "On the web chips are a little wider than in Figma, so Figma’s three filters need 382 px for one row."
+      }
+    },
+    {
+      "text": "More filters wrap onto new rows with the same 8 px gaps.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "More filters wrap onto new rows with the same 8 px gaps."
+      }
+    },
+    {
+      "text": "A chip wider than the row wraps its label to stay inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "a chip wider than the row wraps its label to stay inside it."
+      }
+    },
+    {
+      "text": "A row parent or a horizontal ScrollView: there the group takes its content width and never wraps.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "In a row parent or a horizontal ScrollView the group takes its content width and never wraps (743 px for six chips)."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Chip Group has no variants or size.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Chip Group has no variants or size."
+      }
+    },
+    {
+      "text": "Choose the filters, their order, and each chip's icon; each chip turns Active on its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Choose the filters, their order, and each chip’s icon; each chip turns Active on its own."
+      }
+    },
+    {
+      "text": "Chip Group has no idle, active, or disabled state.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Chip Group has no idle, active, or disabled state."
+      }
+    },
+    {
+      "text": "Each ChipSelect owns its active and onPress; the group tracks nothing.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Each ChipSelect owns `active` and `onPress`; the group tracks nothing."
+      }
+    },
+    {
+      "text": "The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it."
+      }
+    },
+    {
+      "text": "The group only keeps the chips spaced as they change width.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The group only keeps the chips spaced as they change width."
+      }
+    },
+    {
+      "text": "Match each icon to its filter: a calendar, a status, and a payment icon tell the filters apart.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "A calendar, a status, and a payment icon tell the filters apart."
+      }
+    },
+    {
+      "text": "Don't leave the default icon: every chip shows a calendar, so the filters look alike.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Every chip shows a calendar, so the filters look alike."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name each filter in one or two words, in sentence case.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name each filter in one or two words, in sentence case."
+        }
+      },
+      {
+        "text": "Once a filter applies, its chip shows the chosen value, so the row reads as a summary of the list.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Once a filter applies, its chip shows the chosen value, so the row reads as a summary of the list."
+        }
+      },
+      {
+        "text": "Keep labels short: short names fit several filters to a row.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Short names fit several filters to a row."
+        }
+      },
+      {
+        "text": "Don't write long labels: each long name takes a row to itself.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Each long name takes a row to itself."
+        }
+      }
+    ],
+    "good": [
+      "Date",
+      "Status",
+      "Payment methods",
+      "Last 30 days",
+      "Pending",
+      "UPI"
+    ],
+    "bad": [
+      "Date of transaction",
+      "Transaction status",
+      "Payment method used"
+    ]
+  },
+  "states": [
+    {
+      "state": "Nothing applied",
+      "when": "Grey chips name the filters.",
+      "from": {
+        "section": "states",
+        "quote": "Grey chips name the filters."
+      }
+    },
+    {
+      "state": "Filters applied",
+      "when": "Each Active chip shows its value; the others stay as they are.",
+      "from": {
+        "section": "states",
+        "quote": "Each Active chip shows its value; the others stay as they are."
+      }
+    },
+    {
+      "state": "A chip applies",
+      "when": "It shows its value and a close icon, grows 20 px, and the row may re-wrap.",
+      "from": {
+        "section": "states",
+        "quote": "When a chip applies, it shows its value and a close icon, grows 20 px, and the row may re-wrap."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Name the row with accessibilityLabel, as the screen names it “Transaction filters”, so it is announced as a group.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen names the row “Transaction filters”, so it is announced as a group."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "accessibilityLabel is the chip row's accessible name; when it is set, the row's role defaults to group.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/4"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Given an accessibility label, the row is announced as a named group; each chip is still announced as its own toggle button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Given an accessibility label, the row is announced as a named group; each chip is still announced as its own toggle button."
+      }
+    },
+    {
+      "text": "Tab visits every chip in order; arrows do nothing; Enter, Space, and click press a chip.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Tab visits every chip in order; arrows do nothing; Enter, Space, and click press a chip."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Match each icon to its filter",
+      "dont": "Leave the default icon",
+      "why": "Every chip shows a calendar, so the filters look alike.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match each icon to its filter"
+      }
+    },
+    {
+      "do": "Keep labels short",
+      "dont": "Write long labels",
+      "why": "Each long name takes a row to itself.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep labels short"
+      }
+    },
+    {
+      "do": "Let filters combine",
+      "dont": "Use chips for one choice",
+      "why": "People expect several to apply, and each is announced as its own toggle.",
+      "from": {
+        "section": "doDont",
+        "quote": "Let filters combine"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Figma's three filters, from the guide's Configuration: Date, Status and Payment methods, each ChipSelect with its own icon, in one wrapping row. The screen adds each chip's active and onPress, as the next example shows.",
+      "jsx": "<ChipGroup>\n  <ChipSelect label=\"Date\" icon=\"ic_calendar_week\" />\n  <ChipSelect label=\"Status\" icon=\"ic_status_loading\" />\n  <ChipSelect label=\"Payment methods\" icon=\"ic_payments\" />\n</ChipGroup>",
+      "from": {
+        "section": "configuration",
+        "quote": "Date, Status, and Payment methods, each with its own icon."
+      }
+    },
+    {
+      "purpose": "Filters above a transaction list, the guide's In context, once the screen has applied Date and Payment methods: the screen names the row “Transaction filters” and owns each chip's active and onPress; an applied chip shows its value as its label, and pressing it again clears it. The literal values and empty onPress stand for the screen's own state and picker.",
+      "jsx": "<ChipGroup accessibilityLabel=\"Transaction filters\">\n  <ChipSelect label=\"Last 30 days\" icon=\"ic_calendar_week\" active onPress={() => {}} />\n  <ChipSelect label=\"Status\" icon=\"ic_status_loading\" active={false} onPress={() => {}} />\n  <ChipSelect label=\"UPI\" icon=\"ic_payments\" active onPress={() => {}} />\n</ChipGroup>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns each filter: pressing an Idle chip applies it (a picker would open here), and pressing an Active chip clears it."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Each chip gets maxWidth 100%, flexShrink 1, minWidth 0 and overflow hidden from the group, so a chip wider than the row shrinks to the row and wraps its label. Declared: Child elements to be rendered inside the chip group. Expects ChipSelect components. Strings and numbers are rendered as single-line text so a ReactNode child does not get dropped.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Every element child gets the group's modes with its own on top (the child wins, per key). ChipSelect State can't be set from the group. Declared: Mode configuration for design tokens. These modes are passed down to all child components.",
+        "checkedOn": "2026-10-06"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Additional styles for the container."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test ID for testing."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "On the web the named row gets role=\"group\" and aria-label. Declared: Accessible name for the chip row. When set, the row's role defaults to `group`.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "accessibilityRole",
+        "type": "AccessibilityRole",
+        "required": false,
+        "source": "types",
+        "values": [
+          "button",
+          "header",
+          "link",
+          "menu",
+          "menuitem",
+          "search",
+          "summary",
+          "image",
+          "switch",
+          "text",
+          "none",
+          "togglebutton",
+          "keyboardkey",
+          "adjustable",
+          "imagebutton",
+          "alert",
+          "checkbox",
+          "combobox",
+          "menubar",
+          "progressbar",
+          "radio",
+          "radiogroup",
+          "scrollbar",
+          "spinbutton",
+          "tab",
+          "tabbar",
+          "tablist",
+          "timer",
+          "list",
+          "toolbar"
+        ],
+        "description": "Accessibility role. Defaults to `group` when `accessibilityLabel` is set."
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility hint for screen readers."
+      },
+      {
+        "name": "accessibilityState",
+        "type": "AccessibilityState",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility state forwarded to the row."
+      }
+    ],
+    "modes": [],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Child elements to be rendered inside the chip group. Expects ChipSelect components. Strings and numbers are rendered as single-line text so a ReactNode child does not get dropped.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "On the web the chips are slightly wider than in Figma.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "text": "The published Storybook predates the current stories, so two of its chips show no icon.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=chipgroup",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1905-5123",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-chipgroup--docs"
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coin agent pack pilot results",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packVersion",
+    "runAt",
+    "model",
+    "variants",
+    "questions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "packVersion": {
+      "type": "string"
+    },
+    "runAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "model": {
+      "type": "string"
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "none",
+          "full",
+          "brief",
+          "graph"
+        ]
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "question",
+          "expected",
+          "runs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "choose",
+              "configure",
+              "compose",
+              "gap"
+            ]
+          },
+          "question": {
+            "type": "string"
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "validAnswers",
+              "required",
+              "recommended",
+              "settledBy"
+            ],
+            "properties": {
+              "validAnswers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "required": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "recommended": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "settledBy": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/run"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "variant",
+        "answer",
+        "read",
+        "pass",
+        "failed",
+        "notes",
+        "tokens",
+        "calls",
+        "durationMs"
+      ],
+      "properties": {
+        "variant": {
+          "enum": [
+            "none",
+            "full",
+            "brief",
+            "graph"
+          ]
+        },
+        "answer": {
+          "type": "string"
+        },
+        "read": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "file",
+              "tokens"
+            ],
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "tokens": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "pass": {
+          "type": "boolean"
+        },
+        "failed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "input",
+            "cacheRead",
+            "cacheWrite",
+            "output",
+            "peakContext",
+            "coin",
+            "coinEstimated"
+          ],
+          "properties": {
+            "input": {
+              "type": "integer"
+            },
+            "cacheRead": {
+              "type": "integer"
+            },
+            "cacheWrite": {
+              "type": "integer"
+            },
+            "output": {
+              "type": "integer"
+            },
+            "peakContext": {
+              "type": "integer",
+              "description": "Largest single model call: input + cacheRead + cacheWrite"
+            },
+            "coin": {
+              "type": "integer",
+              "description": "Tokens of the pack files the agent read, each file counted once"
+            },
+            "coinEstimated": {
+              "type": "boolean"
+            }
+          }
+        },
+        "calls": {
+          "type": "integer",
+          "description": "Model calls in the run"
+        },
+        "durationMs": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

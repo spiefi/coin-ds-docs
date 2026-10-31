@@ -1,0 +1,497 @@
+{
+  "schemaVersion": 1,
+  "id": "Toast",
+  "slug": "toast",
+  "category": "feedback",
+  "tags": [
+    "snackbar",
+    "notification",
+    "confirmation message",
+    "alert"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:24:09Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide (checked 17 October on 0.1.78-a116616, unchanged for Toast on the installed 0.1.78-dbe0e02) has two unclear lines. States says a toast “closes itself after 4 s, or after its own timeout; with no timeout it stays until the screen clears it.”: leaving timeout out gives the 4 s default, so “no timeout” has to mean a timeout of 0 (the playground's Stays); the entry says “a timeout of 0 or less” from the evidence. The Content example “Confirmations” includes “Mobile number is invalid”, an error, beside the guide's rule that a toast confirms something that already happened, and the guide doesn't say whether errors belong in a toast; the entry leaves it out of good copy. Guide fix #530. Added by Claude Code in the overnight run agentpack-batch9, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Toast to confirm something that just happened, such as a payment or a copy, in a short message that closes itself.",
+  "useWhen": [
+    {
+      "text": "Confirm something that just happened, such as a payment or a copy, in a short message that closes itself.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Toast to confirm something that just happened, such as a payment or a copy, in a short message that closes itself."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Asking for a decision, such as “Retry the payment?”: a toast has no buttons and disappears in 4 s, so people can’t answer.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A toast has no buttons and disappears in 4 s, so people can't answer."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Surface",
+      "holds": "Dark grey with 14 px corners and a soft shadow; the same in every mode.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Dark grey with 14 px corners and a soft shadow; the same in every mode."
+      }
+    },
+    {
+      "part": "Leading icon",
+      "holds": "Optional 18 px icon, shown with startItem; the card icon unless you swap it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional 18 px icon; the card icon unless you swap it."
+      }
+    },
+    {
+      "part": "Message",
+      "holds": "The title: white 14 px text, up to two lines.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White 14 px text, up to two lines."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "slotItem",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Screens add toasts with addToast and show them through one ToastProvider around the screen: every provider shows the same queue.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Screens add toasts with addToast and show them through one ToastProvider: every provider shows the same queue"
+      }
+    },
+    {
+      "text": "Mount one ToastProvider: two mounted providers show every toast twice.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Every provider renders the whole queue, so two mounted providers show every toast twice; the docs mount one at a time."
+      }
+    },
+    {
+      "text": "Where toasts appear, top or bottom, is set once on the screen’s ToastProvider, not on each toast.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Where toasts appear, top or bottom, is set once on the screen's provider"
+      },
+      "target": "placement"
+    },
+    {
+      "text": "A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A toast is as wide as its message, at least 200 px and at most 90% of its screen, with 16 px of padding at the sides and 14 px above and below."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "A toast is one message with an optional leading icon.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A toast is one message with an optional leading icon."
+      },
+      "target": "title"
+    },
+    {
+      "text": "Message only is the default: one line of white text on a dark surface.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: one line of white text on a dark surface."
+      },
+      "target": "title"
+    },
+    {
+      "text": "startItem adds the card icon before the message, white by default, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "startItem adds the card icon before the message, white by default, as in Figma."
+      },
+      "target": "startItem",
+      "value": "true"
+    },
+    {
+      "text": "Your own icon: with startItem on, swap in another 18 px icon in slotItem; it takes the Coin icon colour, a deeper gold.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Swap in another 18 px icon; it takes the Coin icon colour, a deeper gold."
+      },
+      "target": "slotItem"
+    },
+    {
+      "text": "AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand recolours only the icon: gold, purple, blue, or white, the default."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "Only the icon follows AppearanceBrand; the surface is the same dark grey in every mode.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the icon follows AppearanceBrand; the surface is the same dark grey in every mode."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "The screen adds a toast with addToast; it closes itself after 4 s.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds it with addToast; it closes itself after 4 s."
+      },
+      "target": "timeout"
+    },
+    {
+      "text": "A toast closes itself after 4 s, or after its own timeout; with no timeout (a timeout of 0 or less) it stays until the screen clears it.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "closes itself after 4 s, or after its own timeout; with no timeout it stays until the screen clears it."
+      },
+      "target": "timeout"
+    },
+    {
+      "text": "Long messages wrap to two lines, then end in an ellipsis, unless the toast is added with disableTruncation, which shows every line.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Long messages wrap to two lines, then end in an ellipsis, unless the toast is added with disableTruncation, which shows every line."
+      },
+      "target": "disableTruncation"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Confirm, briefly, then get out of the way.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Confirm, briefly, then get out of the way."
+        }
+      },
+      {
+        "text": "Say what happened in a few words, such as Payment successful or UPI ID copied.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Say what happened in a few words, such as Payment successful or UPI ID copied."
+        }
+      },
+      {
+        "text": "Never ask for a decision or put anything in a toast that people must read twice: it has no buttons and closes itself.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "A toast has no buttons and closes itself, so never ask for a decision or put anything in it that people must read twice."
+        }
+      },
+      {
+        "text": "Short, specific, and about something that already happened.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short, specific, and about something that already happened."
+        }
+      },
+      {
+        "text": "Keep it to one line: “Payment successful” reads at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Payment successful” reads at a glance."
+        }
+      },
+      {
+        "text": "Do not write a paragraph: past two lines the message is cut off, and nothing shows the rest.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Past two lines the message is cut off, and nothing shows the rest."
+        }
+      },
+      {
+        "text": "Confirm what happened: the action is done; the toast just says so.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The action is done; the toast just says so."
+        }
+      }
+    ],
+    "good": [
+      "Payment successful",
+      "UPI ID copied"
+    ],
+    "bad": [
+      "Retry the payment?",
+      "We couldn't verify your mobile number. Check the number and try again, or sign in with your email address instead."
+    ]
+  },
+  "states": [
+    {
+      "state": "Shown",
+      "when": "A toast slides in from its edge and closes itself after 4 s, or after its own timeout.",
+      "from": {
+        "section": "states",
+        "quote": "A toast slides in from its edge and closes itself after 4 s, or after its own timeout"
+      }
+    },
+    {
+      "state": "Stays",
+      "when": "With no timeout (a timeout of 0 or less) it stays until the screen clears it.",
+      "from": {
+        "section": "states",
+        "quote": "with no timeout it stays until the screen clears it."
+      }
+    },
+    {
+      "state": "Stacked",
+      "when": "Up to three show at once, newest last.",
+      "from": {
+        "section": "states",
+        "quote": "Up to three show at once, newest last."
+      }
+    },
+    {
+      "state": "Queued",
+      "when": "Older ones wait behind them on their own timers, so they appear only if they’re still due when a newer one closes.",
+      "from": {
+        "section": "states",
+        "quote": "Older ones wait behind them on their own timers, so they appear only if they’re still due when a newer one closes."
+      }
+    },
+    {
+      "state": "No dismiss",
+      "when": "There’s no close button and no swipe.",
+      "from": {
+        "section": "states",
+        "quote": "There's no close button and no swipe."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Each toast is announced as an alert.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Each toast is announced as an alert."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep it to one line",
+      "dont": "Write a paragraph",
+      "why": "Past two lines the message is cut off, and nothing shows the rest.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep it to one line"
+      }
+    },
+    {
+      "do": "Confirm what happened",
+      "dont": "Ask for a decision",
+      "why": "A toast has no buttons and disappears in 4 s, so people can't answer.",
+      "from": {
+        "section": "doDont",
+        "quote": "Confirm what happened"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Copying a UPI ID, the guide's In context: the screen sits in one ToastProvider, which shows toasts at the bottom by default. Copy's onPress calls addToast({ title: 'UPI ID copied' }) (shown as a comment, since addToast is a function, not a component); the toast closes itself after 4 s.",
+      "jsx": "<ToastProvider>\n  <VStack>\n    <Text text=\"Your UPI ID\" />\n    <Text text=\"yourname@jio\" />\n    <Button\n      label=\"Copy\"\n      onPress={() => {\n        /* addToast({ title: 'UPI ID copied' }) */\n      }}\n    />\n  </VStack>\n</ToastProvider>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen adds it with addToast; it closes itself after 4 s."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": true,
+        "source": "types"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "source": "types"
+      },
+      {
+        "name": "timeout",
+        "type": "number | undefined",
+        "required": false,
+        "source": "evidence",
+        "default": 4000,
+        "description": "Through addToast({ timeout }): how long the toast stays, in ms, from when it is added (default 4000), also for toasts waiting behind the cap. 0 or less keeps it until closeToast or closeAll removes it. Declared: Default 4000, from the component source.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "onClose",
+        "type": "(() => void) | undefined",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "modes",
+        "type": "Modes | undefined",
+        "required": false,
+        "source": "evidence",
+        "description": "Per toast through addToast({ modes }), or for every toast through the ToastProvider's modes, used for entries without their own. Toast never reads JFSThemeProvider.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "placement",
+        "type": "ToastPlacement | undefined",
+        "required": false,
+        "source": "evidence",
+        "values": [
+          "top",
+          "bottom"
+        ],
+        "default": "bottom",
+        "description": "Set on the ToastProvider (bottom by default, or top), which passes it to every toast it shows; the toast slides in from that edge. Declared: Default \"bottom\", from the component source.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle> | undefined",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "startItem",
+        "type": "boolean | undefined",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "When `true`, shows the leading icon area (Figma `startItem`). Defaults to `false` so existing call sites stay text-only. Default false, from the component source."
+      },
+      {
+        "name": "slotItem",
+        "type": "React.ReactNode | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Optional custom leading content (Figma Slot `slotItem`). Used only when `startItem` is `true`. When omitted, the default `ic_card` icon is shown."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "Reachable through addToast({ disableTruncation: true }) since a116616: the title wraps to every line instead of clamping at two. Declared: When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "autoClose",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "When false, the view does not start its own timer. ToastProvider sets this because `addToast` already schedules the close, including for queued toasts. Default true, from the component source."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Recolours only the leading icon (Light): Primary gold rgb(206,161,90), Secondary rgb(93,0,181), Tertiary rgb(3,107,153). With AppearanceBrand unset, the card icon is Neutral white (#ffffff), as in Figma, not the collection's default Primary gold. Declared: A token collection Toast reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "The surface (dark grey background, white text, faint white border) is the same in every mode. Declared: A token collection Toast reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Light",
+        "checkedOn": "2026-10-17"
+      }
+    ],
+    "slots": [
+      {
+        "name": "slotItem",
+        "type": "React.ReactNode | undefined",
+        "description": "Optional custom leading content (Figma Slot `slotItem`). Used only when `startItem` is `true`. When omitted, the default `ic_card` icon is shown.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onClose",
+        "type": "(() => void) | undefined",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The published Storybook page is still the old generated one.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=toast",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2197-1510",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-toast--docs"
+  }
+}
