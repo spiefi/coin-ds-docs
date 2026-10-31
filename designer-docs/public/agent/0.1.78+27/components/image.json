@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "id": "Image",
+  "slug": "image",
+  "category": "content",
+  "tags": [],
+  "status": {
+    "state": "undocumented",
+    "guideCommit": null,
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T05:18:28Z",
+    "flags": []
+  },
+  "summary": "Coin has no designer guide for Image; use its facts from the package types.",
+  "useWhen": [],
+  "avoidWhen": [],
+  "anatomy": [],
+  "allowedChildren": [],
+  "placementAdvice": [],
+  "configuration": [],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [],
+  "accessibility": [],
+  "doDont": [],
+  "examples": [
+    {
+      "purpose": "A 16 : 9 image with an accessible label.",
+      "jsx": "<Image imageSource=\"https://example.com/offer.png\" ratio={16 / 9} accessibilityLabel=\"Personal loan offer\" />",
+      "from": null
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Image source. Accepts the same shapes as React Native's `<Image>` plus a raw URL string. Naming is intentionally aligned with `Avatar`, `ProductLabel`, `CardProviderInfo`, etc. so the library has a single, predictable image-source prop name."
+      },
+      {
+        "name": "ratio",
+        "type": "number | undefined",
+        "required": false,
+        "source": "types",
+        "default": 1.7778,
+        "description": "Width-to-height aspect ratio as a number, e.g. `16 / 9`, `1`, `4 / 3`. Defaults to `16 / 9` so the image always has a sensible rendered height even when the parent has no fixed height (e.g. inside `MediaCard`, which hugs whatever the image renders at). Pass `ratio={null as any}` is not supported — explicitly set a number, or override with `width` + `height` if you need a non-aspect layout. Equivalent CSS: `aspect-ratio: <ratio>`. Default 1.7778 (16 / 9), from the component source."
+      },
+      {
+        "name": "resizeMode",
+        "type": "ImageResizeMode | undefined",
+        "required": false,
+        "source": "types",
+        "values": [
+          "center",
+          "none",
+          "stretch",
+          "repeat",
+          "cover",
+          "contain"
+        ],
+        "default": "cover",
+        "description": "How the image is fit inside its box. Defaults to `'cover'`. Default \"cover\", from the component source."
+      },
+      {
+        "name": "resizeMethod",
+        "type": "ImageResizeMethod | undefined",
+        "required": false,
+        "source": "types",
+        "values": [
+          "none",
+          "auto",
+          "resize",
+          "scale"
+        ],
+        "description": "(Android only) How the bitmap is resampled when the source resolution differs from the rendered box. RN's own default is `'auto'`, which for large source images silently picks `'resize'`: a pre-decode software downsample that DESTROYS detail and makes big hero/background images look soft/pixelated even when the asset is high-res. To avoid that, this component defaults to: - `'none'` when an explicit `width` + `height` box is set (full-bleed hero/background usage — full resolution, maximum sharpness), and - `'scale'` otherwise (GPU scaling — high quality and memory-safe for ordinary aspect-ratio images). Pass an explicit value to override. No-op on iOS/web."
+      },
+      {
+        "name": "width",
+        "type": "ViewStyle['width'] | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Optional explicit width. If omitted and a `ratio` is set, the image defaults to `width: '100%'` so it fills its parent."
+      },
+      {
+        "name": "height",
+        "type": "ViewStyle['height'] | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Optional explicit height. Usually you only need `ratio` instead."
+      },
+      {
+        "name": "borderRadius",
+        "type": "number | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Border radius applied to the image (clips the underlying raster)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ImageStyle> | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Style merged onto the underlying RN `<Image>`."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label forwarded to RN `<Image>`."
+      },
+      {
+        "name": "accessibilityElementsHidden",
+        "type": "boolean | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Hide from the a11y tree (e.g. when image is purely decorative)."
+      },
+      {
+        "name": "importantForAccessibility",
+        "type": "'auto' | 'yes' | 'no' | 'no-hide-descendants' | undefined",
+        "required": false,
+        "source": "types",
+        "values": [
+          "auto",
+          "yes",
+          "no",
+          "no-hide-descendants"
+        ]
+      },
+      {
+        "name": "loading",
+        "type": "boolean | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Explicit per-instance loading override. When `true`, the image renders as a skeleton placeholder at the same box size; when `false`, the surrounding `<SkeletonGroup>` is ignored. Defaults to inheriting from the group."
+      },
+      {
+        "name": "cache",
+        "type": "ImageCacheControl | undefined",
+        "required": false,
+        "source": "types",
+        "values": [
+          "default",
+          "reload",
+          "force-cache",
+          "only-if-cached"
+        ],
+        "description": "iOS URL cache strategy applied to remote (`{ uri }`) sources. Injected into the RN `source.cache` field so callers don't have to re-shape the source object themselves. No-op for local/required assets and on Android/web."
+      },
+      {
+        "name": "onLoad",
+        "type": "((event: NativeSyntheticEvent<ImageLoadEventData>) => void) | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Called when the image finishes loading successfully. Forwarded straight to RN's `<Image onLoad>`."
+      },
+      {
+        "name": "onError",
+        "type": "((event: NativeSyntheticEvent<ImageErrorEventData>) => void) | undefined",
+        "required": false,
+        "source": "types",
+        "description": "Called when the image fails to load. Forwarded straight to RN's `<Image onError>`."
+      }
+    ],
+    "modes": [],
+    "slots": [],
+    "events": [
+      {
+        "name": "onLoad",
+        "type": "((event: NativeSyntheticEvent<ImageLoadEventData>) => void) | undefined",
+        "description": "Called when the image finishes loading successfully. Forwarded straight to RN's `<Image onLoad>`.",
+        "source": "types"
+      },
+      {
+        "name": "onError",
+        "type": "((event: NativeSyntheticEvent<ImageErrorEventData>) => void) | undefined",
+        "description": "Called when the image fails to load. Forwarded straight to RN's `<Image onError>`.",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": null,
+    "figma": null,
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/story/components-image--sixteen-by-nine"
+  }
+}

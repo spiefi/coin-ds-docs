@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 1,
+  "id": "FilterBar",
+  "slug": "filterbar",
+  "category": "input",
+  "tags": [
+    "search",
+    "search bar",
+    "search field",
+    "text field",
+    "filter"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T05:18:28Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The Filter Bar guide (Sources: checked 2 October 2026 on the 3795b4c build) and its evidence (last check 8 October, on 636f3f5) were read against the installed v0.1.78-dbe0e02. FilterBar.tsx is the same file on every build since 0.1.78 (155f6f5 at 5b6894b, 3795b4c, 636f3f5 and dbe0e02); TextInput.tsx changed after the guide's check (17c8f68 at 3795b4c, 2004ac9 from 636f3f5 through dbe0e02), and the filterBar and textInput tokens resolve to the same values on both. One guide sentence does not hold on dbe0e02, and the entry leaves its second half out: the Anatomy Placeholder note “Names what is being searched until they type.” The Text Input inside clears its placeholder as soon as the field is focused, before anything is typed (TextInput.tsx: displayPlaceholder is empty while focused; it was so at 3795b4c too), and the Text Input guide says so itself (“Focused, a darker grey border appears and the placeholder clears.”). The entry quotes only “Names what is being searched”. Also for the same guide fix: the States Empty caption “The placeholder carries the name.” is not quoted, since it can be read as the input's accessible name, which is “Search filter” unless accessibilityLabel is set (evidence, 8 October); and the Focused card describes only the bar's ring, while since 636f3f5 the field also shows Text Input's grey Active border (evidence, 8 October). Guide fix #558. Added by Claude Code in the overnight run agentpack-r27, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Filter Bar at the top of a list so people can narrow what they see by typing.",
+  "useWhen": [
+    {
+      "text": "At the top of a list, so people can narrow what they see by typing.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Filter Bar at the top of a list so people can narrow what they see by typing."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The field needs a disabled or an error state: Filter Bar has neither.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Filter Bar has no disabled or error state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Bar",
+      "holds": "Full-width container that insets the field from the screen edges.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Full-width container that insets the field from the screen edges."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "One public Text Input, set up for search.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The bar holds one public Text Input set up for search"
+      }
+    },
+    {
+      "part": "Search icon",
+      "holds": "Tells people the field searches.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Tells people the field searches."
+      }
+    },
+    {
+      "part": "Placeholder",
+      "holds": "Names what is being searched. The query replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names what is being searched"
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "renderInput",
+      "accepts": [
+        "((args: RenderInputArgs) => React.ReactNode)"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put it at the top of the list it filters.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "at the top of a list"
+      }
+    },
+    {
+      "text": "Filter Bar takes the full width of its container and keeps a fixed height.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Filter Bar takes the full width of its container and keeps a fixed height."
+      }
+    },
+    {
+      "text": "Place it in a full-width row; the screen owns the width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Place it in a full-width row; the screen owns the width."
+      }
+    },
+    {
+      "text": "In a narrower host, the field shrinks while the bar keeps its padding.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field shrinks with its host while the bar keeps its padding."
+      }
+    },
+    {
+      "text": "Keep one search per list: one field, one set of results.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep one search per list"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Only the words change: the bar, field and icon come from tokens.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The bar, field, and icon come from tokens."
+      }
+    },
+    {
+      "text": "Designers choose the placeholder and whether the bar opens with a query already in place (value).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Designers choose the placeholder and whether the bar opens with a query already in place."
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "Name the list in placeholder, such as “Search transactions”: naming the list tells people what they can find.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Naming the list tells people what they can find."
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "Left out, placeholder reads “Search”, its default: the generic word says nothing about what can be found.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The generic word says nothing about what can be found."
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "Prefill value with the query when people return to a list that is already filtered.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use it when returning to a list that is already filtered."
+      },
+      "target": "value"
+    },
+    {
+      "text": "Name what is being searched, then let the list below respond to every keystroke.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Name what is being searched, then let the list below respond to every keystroke."
+      },
+      "target": "onChangeText"
+    },
+    {
+      "text": "Filter the list in the screen, from the text onChangeText reports: Filter Bar reports the text; it does not filter anything itself.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Filter Bar reports the text; it does not filter anything itself."
+      },
+      "target": "onChangeText"
+    },
+    {
+      "text": "renderInput and children are developer overrides, and the guide does not show them.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "renderInput and children are developer overrides and are not shown."
+      },
+      "target": "renderInput"
+    },
+    {
+      "text": "Passing children without renderInput replaces the default Text Input, and FilterBar then wires up neither value nor onChangeText.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "children"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Start the placeholder with “Search” and name the list.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Start with “Search” and name the list."
+        }
+      },
+      {
+        "text": "Keep it to three words or fewer so it fits a narrow field.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep it to three words or fewer so it fits a narrow field."
+        }
+      },
+      {
+        "text": "Name the list: “Search transactions” tells people what they will find.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Search transactions” tells people what they will find."
+        }
+      },
+      {
+        "text": "Don't leave a vague prompt: “Type here” hides what the field searches.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Type here” hides what the field searches."
+        }
+      },
+      {
+        "text": "Don't write a long placeholder: a long prompt is cut off, so people lose what it searches.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A long prompt is cut off, so people lose what it searches."
+        }
+      }
+    ],
+    "good": [
+      "Search transactions",
+      "Search funds",
+      "Search by merchant"
+    ],
+    "bad": [
+      "Type here",
+      "Search transactions, merchants, and categories"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty",
+      "when": "No query yet: the field shows its placeholder.",
+      "from": {
+        "section": "states",
+        "quote": "It shows its placeholder when empty"
+      }
+    },
+    {
+      "state": "Filled",
+      "when": "With a query: the query replaces the placeholder.",
+      "from": {
+        "section": "states",
+        "quote": "The query replaces the placeholder."
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "While the field is selected: a 1 px ring outlines its padded area without changing the bar’s height.",
+      "from": {
+        "section": "states",
+        "quote": "Select the field: a 1 px ring outlines its padded area without changing the bar’s height."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web, accessibilityLabel names the input.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web, accessibilityLabel names the input."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Without accessibilityLabel, FilterBar names the input “Search filter”, so the placeholder never names it.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "defaulting to \"Search filter\", so the placeholder never names the FilterBar input."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Name the list",
+      "dont": "Leave a vague prompt",
+      "why": "“Type here” hides what the field searches.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the list"
+      }
+    },
+    {
+      "do": "Keep the placeholder short",
+      "dont": "Write a long placeholder",
+      "why": "A long prompt is cut off, so people lose what it searches.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the placeholder short"
+      }
+    },
+    {
+      "do": "Keep one search per list",
+      "dont": "Stack several search bars",
+      "why": "Two bars make people guess which one filters the list.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep one search per list"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Filtering a transaction list, the guide's In context: a Screen holds a Filter Bar named for the list above a VStack of the transaction rows (List Items with the guide's titles and dates). value=\"\" stands for the screen's query, still empty, so every row shows; onChangeText stands for the screen storing the query and showing only the matching rows.",
+      "jsx": "<Screen>\n  <FilterBar placeholder=\"Search transactions\" value=\"\" onChangeText={(query) => {}} />\n  <VStack>\n    <ListItem layout=\"Horizontal\" title=\"Digital Gold\" supportText=\"12 Sep · ₹2,000\" />\n    <ListItem layout=\"Horizontal\" title=\"Nifty 50 Index Fund\" supportText=\"10 Sep · ₹5,000\" />\n    <ListItem layout=\"Horizontal\" title=\"Electricity bill\" supportText=\"8 Sep · ₹1,240\" />\n    <ListItem layout=\"Horizontal\" title=\"Gold savings plan\" supportText=\"1 Sep · ₹1,000\" />\n  </VStack>\n</Screen>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen passes the query to its list"
+      }
+    },
+    {
+      "purpose": "Returning to a list that is already filtered, the guide's Prefilled query card: the bar opens with the query “Gold” in place.",
+      "jsx": "<FilterBar placeholder=\"Search transactions\" value=\"Gold\" onChangeText={(query) => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "Use it when returning to a list that is already filtered."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Search",
+        "description": "Placeholder text for the search input. Default \"Search\", from the component source."
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "",
+        "description": "Current value of the search input. Default \"\", from the component source."
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback function called when text changes."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional custom content to replace the default TextInput. When provided (and `renderInput` is not set), this is treated as a full override and FilterBar will not wire up value or onChangeText."
+      },
+      {
+        "name": "renderInput",
+        "type": "(args: RenderInputArgs) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Narrow override hook for the inner input. When provided, this takes precedence over `children` and receives the same props that the default TextInput would use (placeholder, value, onChangeText, modes, and accessibility labelling). Use this when you want to customize the input implementation but still respect the higher-level FilterBar API."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object passed to `getVariableByName` for all design tokens."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional container style overrides."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Without it, FilterBar gives its Text Input the name “Search filter”, so the placeholder never names the input. Declared: Accessibility label for the filter bar.",
+        "default": "Search filter",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility hint for screen readers /."
+      },
+      {
+        "name": "...React.ComponentProps<typeof View>",
+        "type": "React.ComponentProps<typeof View>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection FilterBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "InputState",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "While the field is focused, the Text Input inside draws its grey InputState Active border, beside the bar's own focus ring. Declared: A token collection FilterBar reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Idle",
+        "checkedOn": "2026-10-08"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Optional custom content to replace the default TextInput. When provided (and `renderInput` is not set), this is treated as a full override and FilterBar will not wire up value or onChangeText.",
+        "source": "types"
+      },
+      {
+        "name": "renderInput",
+        "type": "(args: RenderInputArgs) => React.ReactNode",
+        "description": "Narrow override hook for the inner input. When provided, this takes precedence over `children` and receives the same props that the default TextInput would use (placeholder, value, onChangeText, modes, and accessibility labelling). Use this when you want to customize the input implementation but still respect the higher-level FilterBar API.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "description": "Callback function called when text changes",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The bar renders 62 px tall with a 42 px field; Figma draws a 64 px bar with a 44 px field.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "The focus ring is a hard-coded 1 px #222 box-shadow, not a token.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "No disabled or error state.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=filterbar",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=541-4823",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-filterbar--docs"
+  }
+}

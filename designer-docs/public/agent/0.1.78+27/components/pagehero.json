@@ -1,0 +1,859 @@
+{
+  "schemaVersion": 1,
+  "id": "PageHero",
+  "slug": "pagehero",
+  "category": "content",
+  "tags": [
+    "offer header",
+    "feature header",
+    "upsell",
+    "promo hero",
+    "landing hero"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T05:18:28Z",
+    "flags": [
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The Page Hero guide (e7ed622) and its evidence were checked on 26 October 2026 on the c8526ae build; the installed v0.1.78-dbe0e02 has a different PageHero.tsx (5c1d049 at c8526ae, cfcb2e6 at ace46ca and dbe0e02), changed by Biscuit's ace46ca for Component Bug #405, and the evidence's 28 October note says the guide's copy waits for #405's own publish. Read against the installed source, the token values and the guide page rendered on it (31 October), these sentences no longer hold, and the entry leaves them out: (1) Sizing's “The hero fills its host’s width and keeps 16 px clear on each side, but adds nothing above or below, so the screen gives it room.” and its title “Full width, 16 px inside”: the root no longer applies PageHero/padding/horizontal (the token is still 16), so the text and the button are as wide as the host; the entry quotes only “The hero fills its host’s width” and “adds nothing above or below, so the screen gives it room”. Sizing's “Figma’s hero has no side padding, and its eyebrow and headline lines are 20 and 29 px.” is left out too: the padding no longer differs from Figma (the line heights still do, the entry's gap from the evidence). (2) Configuration's “set Button / Size S with it, as Figma does”, the PageHero Size S card that sets both modes, and the playground note “PageHero Size S also sets Button / Size S here, as Figma does: the button doesn’t follow PageHero Size on its own.”: PageHero Size S now sets the default button, and the buttons in buttonSlot, to Button / Size S itself, and a Button / Size in modes still wins (buttonModes). (3) States' “Pass media only when you have some: media={false} still leaves an empty box.”: false, '' and null now draw no box (isRenderedSlot). (4) The first Don't caption's “as Storybook’s Default story does”: the stories' meta args set body to '' since ace46ca, so Default shows the price once; the entry quotes only “supportingText and body repeat the price”. (5) Sources: “The package adds 16 px of side padding, its eyebrow and headline lines are taller than Figma’s, PageHero Size S leaves the button at M, and Storybook’s Default story shows the price twice (all reported).”: only the line heights still hold. The evidence's Contract, Web render and Discrepancies lines for the 16 px padding (text 296 wide), “the Button stays M”, “media={false} still draws the empty box.”, “No heading role on the headline; no button disabled or label props.” and the Default story's repeated price are out of date the same way. Not in the guide or the evidence: ace46ca also made the headline a heading (accessibilityRole header, role heading on the web) and added buttonDisabled and buttonAccessibilityLabel for the default button; the entry carries the two props from the package's facts. The guide is updated when Component Bug #405 publishes (the Component Fix flow updates the guide copy a fix changed); #405 stays open only for the eyebrow and headline line heights, which wait for Marcin's call. Added by Claude Code in the overnight run agentpack-r27, for Marcin to confirm. Component Bug #405.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Page Hero at the top of a feature or offer page: media, a short eyebrow, the offer as a headline, its price, and one action.",
+  "useWhen": [
+    {
+      "text": "At the top of a feature or offer page: media, a short eyebrow, the offer as a headline, its price, and one action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Page Hero at the top of a feature or offer page: media, a short eyebrow, the offer as a headline, its price, and one action."
+      }
+    },
+    {
+      "text": "Open an offer page with the offer: in the guide, the Digital Gold page shows the coin, what it is, and two actions, Start saving and Learn more.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The Digital Gold page opens with the offer: the coin, what it is, and two actions, Start saving and Learn more."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A page title with search: Biscuit's Storybook page, as the evidence records it, points to HeroSection instead.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not a title with search (HeroSection)"
+      },
+      "useInstead": "HeroSection"
+    },
+    {
+      "text": "A portfolio total: Biscuit's Storybook page, as the evidence records it, points to PortfolioHero instead.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "or a portfolio total (PortfolioHero)"
+      },
+      "useInstead": "PortfolioHero"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Media",
+      "holds": "media, in a 117 px box at Video / Output L.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "media, in a 117 px box at Video / Output L."
+      }
+    },
+    {
+      "part": "Eyebrow",
+      "holds": "eyebrow, a short category, 18 px Bold.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "eyebrow, a short category, 18 px Bold."
+      }
+    },
+    {
+      "part": "Headline",
+      "holds": "headline, 29 px Black; it wraps, centred.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "headline, 29 px Black; it wraps, centred."
+      }
+    },
+    {
+      "part": "Supporting text",
+      "holds": "supportingText, the price or term, 12 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "supportingText, the price or term, 12 px."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "body, a second fact; hidden until you pass it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "body, a second fact; hidden until you pass it."
+      }
+    },
+    {
+      "part": "Action",
+      "holds": "A full-width Button, or your buttonSlot.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A full-width Button, or your buttonSlot."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "buttonSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "media",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Everything is centred in one column: the media on top, the eyebrow and the headline, the supporting line and the body, then the button across the full width.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Everything is centred in one column: the media on top, the eyebrow and the headline, the supporting line and the body, then the button across the full width."
+      }
+    },
+    {
+      "text": "The hero fills its host's width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The hero fills its host’s width"
+      }
+    },
+    {
+      "text": "The hero adds nothing above or below, so the screen gives it room.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "adds nothing above or below, so the screen gives it room"
+      }
+    },
+    {
+      "text": "Its parts are 16 px apart and the eyebrow sits 8 px above the headline.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Its parts are 16 px apart and the eyebrow sits 8 px above the headline."
+      }
+    },
+    {
+      "text": "With the default copy in a 328 px host the hero is 328 × 225, and the headline wraps to three 35 px lines.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "With the default copy in a 328 px host it is 328 × 225, and the headline wraps to three 35 px lines."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "media takes any Coin element, such as an Image or an Icon Capsule, in a box Video / Output sizes to 117, 70 or 20 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "media takes any Coin element, such as an Image or an Icon Capsule, in a box Video / Output sizes to 117, 70, or 20 px"
+      },
+      "target": "media"
+    },
+    {
+      "text": "Give media something the size of its box, because the box clips the rest.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "give it something that size, because the box clips the rest."
+      },
+      "target": "media"
+    },
+    {
+      "text": "Smaller media, such as an Icon Capsule, sits centred in the box.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Smaller media sits centred in the box."
+      },
+      "target": "media"
+    },
+    {
+      "text": "Video / Output M makes the media box 70 px: give it media to match.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A 70 px box, with media to match."
+      },
+      "target": "Video / Output",
+      "value": "M"
+    },
+    {
+      "text": "PageHero Size M: a 29 px headline, with the parts 16 px apart.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A 29 px headline, 16 px apart."
+      },
+      "target": "PageHero Size",
+      "value": "M"
+    },
+    {
+      "text": "PageHero Size S makes the text smaller, with an 18 px headline and 12 px gaps.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "PageHero Size S makes the text smaller, with an 18 px headline and 12 px gaps"
+      },
+      "target": "PageHero Size",
+      "value": "S"
+    },
+    {
+      "text": "The hero passes its modes to the button, so AppearanceBrand recolours it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The hero passes its modes to the button, so AppearanceBrand recolours it"
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "AppearanceBrand Primary, the default, gives the gold button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The gold button, the default."
+      },
+      "target": "AppearanceBrand",
+      "value": "Primary"
+    },
+    {
+      "text": "AppearanceBrand Secondary turns the button purple; the text doesn't change.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The button turns purple; the text doesn’t change."
+      },
+      "target": "AppearanceBrand",
+      "value": "Secondary"
+    },
+    {
+      "text": "buttonSlot replaces the default button, for example with two stacked buttons.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "buttonSlot replaces it, for example with two stacked buttons."
+      },
+      "target": "buttonSlot"
+    },
+    {
+      "text": "For two actions, as in Figma, stack two buttons in buttonSlot: High, then Medium.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Two stacked buttons, High then Medium, as in Figma."
+      },
+      "target": "buttonSlot"
+    },
+    {
+      "text": "Page type JioPlus turns the text white for the JioFinance+ page's dark backdrop.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Page type JioPlus turns the text white for the JioFinance+ page’s dark backdrop."
+      },
+      "target": "Page type",
+      "value": "JioPlus"
+    },
+    {
+      "text": "showEyebrow, showSupportingText, showBody and showButton hide their parts, and an empty headline hides the headline.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "showEyebrow, showSupportingText, showBody, and showButton hide their parts, and an empty headline hides the headline."
+      }
+    },
+    {
+      "text": "body shows only once you pass one.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "body shows only once you pass one."
+      },
+      "target": "body"
+    },
+    {
+      "text": "The hero doesn't press or load: its button is its only action (onButtonPress, or the buttons you put in buttonSlot).",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The hero doesn’t press or load; its button is its only action."
+      },
+      "target": "onButtonPress"
+    },
+    {
+      "text": "With two actions in buttonSlot, the hero only lays them out; each button does its own thing.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero only lays them out; each button does its own thing."
+      },
+      "target": "buttonSlot"
+    },
+    {
+      "text": "Figma's Page Hero shows media, the body and two stacked buttons by default; the package shows one button until you pass media, a body or a buttonSlot.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "it shows media, the body, and two stacked buttons by default, where the package shows one button until you pass media, a body, or a buttonSlot."
+      }
+    },
+    {
+      "text": "Left out, eyebrow reads “Upgrade to JioFinance+”, its default: pass your own category, or set showEyebrow={false}.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "eyebrow"
+    },
+    {
+      "text": "Left out, headline reads “Resume earning cashback, extra points, and 1% gold”, its default: pass your own offer.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/2"
+      },
+      "target": "headline"
+    },
+    {
+      "text": "Left out, supportingText reads “₹999/year · ₹0 until 2027”, its default: pass your own price or term, or set showSupportingText={false}.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "supportingText"
+    },
+    {
+      "text": "Left out, buttonLabel reads “Renew for free”, its default: pass your own verb, or set showButton={false}.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/7"
+      },
+      "target": "buttonLabel"
+    },
+    {
+      "text": "buttonDisabled disables the default action button; it is ignored when buttonSlot is provided.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/9"
+      },
+      "target": "buttonDisabled"
+    },
+    {
+      "text": "buttonAccessibilityLabel is the accessibility label of the default action button; it is ignored when buttonSlot is provided.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/10"
+      },
+      "target": "buttonAccessibilityLabel"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One offer, said once, with one next step.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One offer, said once, with one next step."
+        }
+      },
+      {
+        "text": "Write eyebrow as a short category, such as Upgrade to JioFinance+, and headline as the offer in one sentence.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write eyebrow as a short category, such as Upgrade to JioFinance+, and headline as the offer in one sentence."
+        }
+      },
+      {
+        "text": "Put the price or term in supportingText and a second, different fact in body.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put the price or term in supportingText and a second, different fact in body."
+        }
+      },
+      {
+        "text": "Don't repeat the price: supportingText and body that say the same sentence twice.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "supportingText and body repeat the price"
+        }
+      },
+      {
+        "text": "Make buttonLabel a short verb: it stays on one line and is cut off if it's too long.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make buttonLabel a short verb: it stays on one line and is cut off if it’s too long."
+        },
+        "target": "buttonLabel"
+      },
+      {
+        "text": "A long headline wraps, centred; nothing is cut off.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "It wraps, centred; nothing is cut off."
+        }
+      }
+    ],
+    "good": [
+      "Upgrade to JioFinance+",
+      "Resume earning cashback, extra points, and 1% gold",
+      "₹999/year",
+      "Auto-renews · Cancel anytime",
+      "Renew for free",
+      "Start saving",
+      "Learn more"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Offer",
+      "when": "Eyebrow, headline, price, and button.",
+      "from": {
+        "section": "states",
+        "quote": "Eyebrow, headline, price, and button."
+      }
+    },
+    {
+      "state": "Without a button",
+      "when": "showButton={false}: text only.",
+      "from": {
+        "section": "states",
+        "quote": "showButton={false}: text only."
+      }
+    },
+    {
+      "state": "Headline only",
+      "when": "Every switch off but the headline.",
+      "from": {
+        "section": "states",
+        "quote": "Every switch off but the headline."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Two different lines",
+      "dont": "The same sentence twice",
+      "why": "supportingText and body repeat the price",
+      "from": {
+        "section": "doDont",
+        "quote": "The price, then what follows from it."
+      }
+    },
+    {
+      "do": "Media sized to its box",
+      "dont": "Media bigger than its box",
+      "why": "Video / Output M is a 70 px box, so the coin is cut off.",
+      "from": {
+        "section": "doDont",
+        "quote": "A 117 px coin in the 117 px box."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "An offer, the guide's anatomy specimen: a 117 px Image in the media box at Video / Output L, a short category as eyebrow, the offer as headline, the price in supportingText, a second, different fact in body, and one short verb on the default button. The image URL and the empty press handler stand for the app's own.",
+      "jsx": "<PageHero\n  media={<Image imageSource={{ uri: 'https://example.com/gold-coin.png' }} width={117} height={117} />}\n  eyebrow=\"Upgrade to JioFinance+\"\n  headline=\"Resume earning cashback, extra points, and 1% gold\"\n  supportingText=\"₹999/year\"\n  body=\"Auto-renews · Cancel anytime\"\n  buttonLabel=\"Renew for free\"\n  onButtonPress={() => {}}\n/>",
+      "from": {
+        "section": "anatomy",
+        "quote": "Everything is centred in one column: the media on top, the eyebrow and the headline, the supporting line and the body, then the button across the full width."
+      }
+    },
+    {
+      "purpose": "The top of an offer page, the guide's In context: the Digital Gold hero with the coin, what it is, its purity and where it is stored, and two actions in buttonSlot, stacked full width in a VStack: Start saving at the defaults, then Learn more at Emphasis Medium. The hero only lays them out; each button has its own press handler. The image URL and the empty handlers stand for the app's own.",
+      "jsx": "<PageHero\n  media={<Image imageSource={{ uri: 'https://example.com/gold-coin.png' }} width={117} height={117} />}\n  eyebrow=\"Digital Gold\"\n  headline=\"Save in gold from ₹10 a day\"\n  supportingText=\"24K · 99.9% pure\"\n  body=\"Stored for free in insured vaults\"\n  buttonSlot={\n    <VStack style={{ width: '100%' }}>\n      <Button label=\"Start saving\" onPress={() => {}} />\n      <Button label=\"Learn more\" onPress={() => {}} modes={{ Emphasis: 'Medium' }} />\n    </VStack>\n  }\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "The Digital Gold page opens with the offer: the coin, what it is, and two actions, Start saving and Learn more."
+      }
+    },
+    {
+      "purpose": "A headline alone, the guide's States card “Headline only”: every switch off but the headline, so the default eyebrow, price and button don't show.",
+      "jsx": "<PageHero\n  headline=\"You are all set\"\n  showEyebrow={false}\n  showSupportingText={false}\n  showButton={false}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Every switch off but the headline."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "eyebrow",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Upgrade to JioFinance+",
+        "description": "Small eyebrow text shown above the headline. Default \"Upgrade to JioFinance+\", from the component source."
+      },
+      {
+        "name": "showEyebrow",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to render the eyebrow line. Default true, from the component source."
+      },
+      {
+        "name": "headline",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Resume earning cashback, extra points, and 1% gold",
+        "description": "Main headline text. Centered and bold. Default \"Resume earning cashback, extra points, and 1% gold\", from the component source."
+      },
+      {
+        "name": "supportingText",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "₹999/year · ₹0 until 2027",
+        "description": "Supporting text shown directly below the headline (e.g. price). Default \"₹999/year · ₹0 until 2027\", from the component source."
+      },
+      {
+        "name": "showSupportingText",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to render the supporting text. Default true, from the component source."
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Optional second supporting line shown below `supportingText`."
+      },
+      {
+        "name": "showBody",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to render the body line. Default true, from the component source."
+      },
+      {
+        "name": "buttonLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Renew for free",
+        "description": "Label for the default action button. Ignored when `buttonSlot` is provided. Default \"Renew for free\", from the component source."
+      },
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Press handler for the default action button. Ignored when `buttonSlot` is provided."
+      },
+      {
+        "name": "buttonDisabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Disable the default action button. Ignored when `buttonSlot` is provided."
+      },
+      {
+        "name": "buttonAccessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the default action button. Ignored when `buttonSlot` is provided."
+      },
+      {
+        "name": "showButton",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to render the default action button. Ignored when `buttonSlot` is provided. Default true, from the component source."
+      },
+      {
+        "name": "buttonSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional slot to fully override the action button area (e.g. a `ButtonGroup` with several buttons). When provided, `showButton`, `buttonLabel`, `onButtonPress`, `buttonDisabled`, and `buttonAccessibilityLabel` are ignored. `modes` are automatically cascaded into this slot."
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional media element shown above the text block (eyebrow + headline). Intentionally typed as `React.ReactNode` so the consumer can bring any renderer they like — `<Image />`, `<IconCapsule />`, a Lottie player (`LottiePlayer` / `lottie-react-native`), an `<SvgXml />` from `react-native-svg`, a `<Video />` from `react-native-video`, a gradient view, or a custom illustration. The library deliberately does NOT wrap Lottie / video runtimes (they require native modules + pod autolinking on every consumer's app), so PageHero just allocates a token-sized container and lets the slot render whatever it wants. The slot is rendered inside a `width × height` box driven by the `video/width` and `video/height` tokens from the `Video / Output` collection (`L | M | S` → 117 / 70 / 20; default `L` = 117×117). `modes` are automatically cascaded into the slot via `cloneChildrenWithModes`."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration for design-token theming."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides applied to the outer container."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: Text colors react to the `Page type` (`MainPage | SubPage | JioPlus`) and `Color Mode` (`Light | Dark`) collections; type scale reacts to `PageHero Size` (`M | S`); the media box reacts to `Video / Output` (`L | M | S`).",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: Text colors react to the `Page type` (`MainPage | SubPage | JioPlus`) and `Color Mode` (`Light | Dark`) collections; type scale reacts to `PageHero Size` (`M | S`); the media box reacts to `Video / Output` (`L | M | S`).",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "PageHero Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: Text colors react to the `Page type` (`MainPage | SubPage | JioPlus`) and `Color Mode` (`Light | Dark`) collections; type scale reacts to `PageHero Size` (`M | S`); the media box reacts to `Video / Output` (`L | M | S`).",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Video / Output",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S"
+        ],
+        "description": "A token collection PageHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: Text colors react to the `Page type` (`MainPage | SubPage | JioPlus`) and `Color Mode` (`Light | Dark`) collections; type scale reacts to `PageHero Size` (`M | S`); the media box reacts to `Video / Output` (`L | M | S`).",
+        "source": "types",
+        "default": "L"
+      }
+    ],
+    "slots": [
+      {
+        "name": "buttonSlot",
+        "type": "React.ReactNode",
+        "description": "Optional slot to fully override the action button area (e.g. a `ButtonGroup` with several buttons). When provided, `showButton`, `buttonLabel`, `onButtonPress`, `buttonDisabled`, and `buttonAccessibilityLabel` are ignored. `modes` are automatically cascaded into this slot.",
+        "source": "types"
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "description": "The media element keeps its own size in the centred box and is clipped to it. Declared: Optional media element shown above the text block (eyebrow + headline). Intentionally typed as `React.ReactNode` so the consumer can bring any renderer they like — `<Image />`, `<IconCapsule />`, a Lottie player (`LottiePlayer` / `lottie-react-native`), an `<SvgXml />` from `react-native-svg`, a `<Video />` from `react-native-video`, a gradient view, or a custom illustration. The library deliberately does NOT wrap Lottie / video runtimes (they require native modules + pod autolinking on every consumer's app), so PageHero just allocates a token-sized container and lets the slot render whatever it wants. The slot is rendered inside a `width × height` box driven by the `video/width` and `video/height` tokens from the `Video / Output` collection (`L | M | S` → 117 / 70 / 20; default `L` = 117×117). `modes` are automatically cascaded into the slot via `cloneChildrenWithModes`.",
+        "source": "evidence",
+        "checkedOn": "2026-10-26"
+      }
+    ],
+    "events": [
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "description": "Press handler for the default action button. Ignored when `buttonSlot` is provided.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The eyebrow and headline lines are taller than Figma's: the eyebrow's line is 22 px where Figma's is 20, and each headline line is 35 px where Figma's is 29. Still so on the installed dbe0e02 build (Component Bug #405).",
+        "source": "evidence",
+        "checkedOn": "2026-10-26"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=pagehero",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4453-2348",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-pagehero--docs"
+  }
+}

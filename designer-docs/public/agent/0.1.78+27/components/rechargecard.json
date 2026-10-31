@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "id": "RechargeCard",
+  "slug": "rechargecard",
+  "category": "card",
+  "tags": [
+    "plan card",
+    "prepaid plan",
+    "recharge plan",
+    "mobile plan",
+    "data pack"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "0615fbf45d463766fe3247400cb76d1bb465f640",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T05:18:28Z",
+    "flags": [
+      {
+        "field": "/doDont",
+        "reason": "The guide gives no doDont guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/9",
+        "reason": "misreads-source: The evidence says the opposite: subscriptionContent adds the third column when React.Children.count > 0, and \"`false`, `''` or an empty fragment still add an empty column\". The fact says they hide the column like `null`.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/configuration/2",
+        "reason": "misreads-source: This rests on the wrong /facts/props/9. The evidence (and its Discrepancies: \"`subscriptionContent={false}` shows an empty column\") says false, '' or an empty fragment still render an empty Subscriptions column. Limits also say not to show `subscriptionContent={false}`.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/facts/props/10",
+        "reason": "misreads-source: The evidence says \"Without actions the empty group still takes a 20 px gap\", with a no-actions height of 227 because \"the empty group's 20 px gap remains\". The fact claims omitted or empty actions \"leave no group and no extra gap\".",
+        "by": "cross-check"
+      },
+      {
+        "field": "/configuration/5",
+        "reason": "misreads-source: This contradicts the guide: \"Without actions, the empty row still adds 20 px at the bottom\". doDont also lists \"Leave out actions\" as a Don't, because \"An empty row still leaves space under the fine print.\" The item recommends leaving actions out and claims no extra gap.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/configuration/4",
+        "reason": "lost-context: It recommends a second action without the guide's caveat that \"with two, the longer label is cut short\". doDont lists \"Two actions\" as a Don't (\"The row splits equally, so View details is cut short\").",
+        "by": "cross-check"
+      },
+      {
+        "field": "/configuration/9",
+        "reason": "misreads-source: The guide says \"the card adds the ₹\" and that the ₹ is fixed, and doDont says a ₹ in the price \"shows ₹₹349\". The evidence says there are no currency props. A currency prop that avoids double prefixing contradicts the guide for the installed 0.1.78.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/configuration/10",
+        "reason": "misreads-source: The guide says \"the labels Validity, Data, and Subscriptions are fixed\", and the evidence says there are no label props. Limits: \"Don't imply the currency or labels can change\".",
+        "by": "cross-check"
+      },
+      {
+        "field": "/configuration/11",
+        "reason": "misreads-source: The guide says the Data label is fixed, and the evidence says there are no label props.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/configuration/12",
+        "reason": "misreads-source: The guide says the Subscriptions label is fixed, and the evidence says there are no label props.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/accessibility/1",
+        "reason": "misreads-source: The guide's sources section says \"a card without onPress isn't announced by its title\". The evidence says \"Static: `accessibilityLabel` only (title not used)\". \"pressable or not; without it, the card is named by its title\" contradicts both.",
+        "by": "cross-check"
+      },
+      {
+        "field": "/states/2",
+        "reason": "misreads-source: The guide says disabled \"stops it firing without changing its look\" and \"disabled has no look of its own\". Limits: \"Don't show `disabled` as a visual state\". The item says the card is dimmed, even when static.",
+        "by": "cross-check"
+      },
+      {
+        "field": "",
+        "reason": "The guide and its evidence were checked on 20 October on 0.1.78-c7d3348. The installed build, dbe0e02, carries most of #353's fixes: the buttons hug their labels, no actions means no row and no gap, a ₹ already in the price is not doubled, currency and label props exist, an empty subscriptionContent hides the column, disabled dims the card, and a static card is named by its title. This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts, including all three Do and Don't pairs. dbe0e02 also brought #416: actions that don't fit the row run past the card's edge. Re-extract once #353 and #416 are fixed and the guide is re-checked and published. Added by Claude Code in the overnight run agentpack-batch3, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Recharge Card to show one prepaid plan: its price, validity, data, the apps it includes, and the action to buy it.",
+  "useWhen": [
+    {
+      "text": "Show one prepaid plan: its price, validity, data, the apps it includes, and the action to buy it.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Recharge Card to show one prepaid plan: its price, validity, data, the apps it includes, and the action to buy it."
+      }
+    },
+    {
+      "text": "A small top-up, such as a data pack, with its limit in the fine print.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "A small top-up, with its limit in the fine print."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A plan people select, or one that shows loading: the card has no selected or loading state.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The card has no selected or loading state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "title: the plan's name, 12 px bold.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "title: the plan’s name, 12 px bold."
+      }
+    },
+    {
+      "part": "Price",
+      "holds": "A MoneyValue from price, 36 px; the card adds the ₹.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A MoneyValue from price, 36 px; the card adds the ₹."
+      }
+    },
+    {
+      "part": "Plan facts",
+      "holds": "validity and data, each under its label, sharing the width in equal columns.",
+      "required": true,
+      "from": {
+        "section": "sizing",
+        "quote": "The facts share the width in equal columns"
+      }
+    },
+    {
+      "part": "Apps",
+      "holds": "subscriptionContent: your Avatars, overlapped at size S, in a third column.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "subscriptionContent: your Avatars, overlapped at size S."
+      }
+    },
+    {
+      "part": "Fine print",
+      "holds": "disclaimer, 10 px; a line break in the text starts a new line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "disclaimer, 10 px; a line break in the text starts a new line."
+      }
+    },
+    {
+      "part": "Actions",
+      "holds": "actions: your Buttons, purple and size S.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "actions: your Buttons, purple and size S."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A white panel, 20 px corners, 1 px border, at least 312 px wide.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white panel, 20 px corners, 1 px border, at least 312 px wide."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "subscriptionContent",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "actions",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "On a Recharge screen, list the plans one under another.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists plans one under another."
+      }
+    },
+    {
+      "text": "Each Recharge starts the screen's own payment through the Button's onPress; the card only lays out the plan.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Each Recharge starts the screen’s own payment through the Button’s onPress; the card only lays out the plan."
+      },
+      "target": "actions"
+    },
+    {
+      "text": "The card is never narrower than 312 px, as Figma draws it, and fills a wider host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is never narrower than 312 px, as Figma draws it, and fills a wider host."
+      }
+    },
+    {
+      "text": "The facts share the width in equal columns, and the price stays at the left.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The facts share the width in equal columns, and the price stays at the left."
+      }
+    },
+    {
+      "text": "In a wider host the fact columns get wider; the price stays at the left.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The fact columns get wider; the price stays at the left."
+      }
+    },
+    {
+      "text": "Height follows the content: 20 px between the rows, 20 px of padding at the top and bottom, and 16 px at the sides.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the content: 20 px between the rows and 20 px of padding at the top and bottom, 16 px at the sides."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "subscriptionContent adds a third column, Subscriptions, for the apps the plan includes: pass Avatars, and the card overlaps them at size S.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "subscriptionContent adds a third column, Subscriptions, for the apps the plan includes: pass Avatars, and the card overlaps them at size S."
+      },
+      "target": "subscriptionContent"
+    },
+    {
+      "text": "Leave subscriptionContent out for two columns, for a plan without apps.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave it out for two columns."
+      },
+      "target": "subscriptionContent"
+    },
+    {
+      "text": "subscriptionContent false, '' or an empty fragment hides the Subscriptions column, the same as leaving it out.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/9"
+      },
+      "target": "subscriptionContent"
+    },
+    {
+      "text": "actions takes your Buttons, and the card makes them purple, size S, and Emphasis High.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "actions takes your Buttons, and the card makes them purple, size S, and Emphasis High"
+      },
+      "target": "actions"
+    },
+    {
+      "text": "With a second action, give that Button Emphasis Low, as Figma does.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "give a second one Emphasis Low, as Figma does."
+      },
+      "target": "actions"
+    },
+    {
+      "text": "Leave actions out (or pass false, '' or an empty fragment) for no buttons: the card then adds no button row and no extra gap.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/10"
+      },
+      "target": "actions"
+    },
+    {
+      "text": "Don't give a card both onPress and actions: a pressable card with actions puts buttons inside a button.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Use one or the other: a pressable card with actions puts buttons inside a button."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "On the card, Button / Size M makes its buttons bigger, and AppearanceBrand and Emphasis change all of them.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "On the card, Button / Size M makes them bigger, and AppearanceBrand and Emphasis change all of them."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "The card's own text and panel don't change with modes.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The card’s own text and panel don’t change with modes."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "currency sets the symbol before price (₹ by default); a string price that already starts with it is not prefixed again.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/2"
+      },
+      "target": "currency"
+    },
+    {
+      "text": "validityLabel sets the label above the validity value (Validity by default).",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "validityLabel"
+    },
+    {
+      "text": "dataLabel sets the label above the data value (Data by default).",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "dataLabel"
+    },
+    {
+      "text": "subscriptionsLabel sets the label above the apps (Subscriptions by default).",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/7"
+      },
+      "target": "subscriptionsLabel"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One plan, priced up front.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One plan, priced up front."
+        }
+      },
+      {
+        "text": "Make the title the plan's name.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the plan’s name"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Give price as a number: the card adds the ₹.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "the price a number: the card adds the ₹."
+        },
+        "target": "price"
+      },
+      {
+        "text": "Keep validity and data to one value each, such as “28 days” and “2 GB/day”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep validity and data to one value each, such as 28 days and 2 GB/day"
+        },
+        "target": "validity"
+      },
+      {
+        "text": "Put the plan's limits in the disclaimer, in a line or two of fine print.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put the plan’s limits in the disclaimer, in a line or two of fine print."
+        },
+        "target": "disclaimer"
+      },
+      {
+        "text": "A line break in disclaimer starts a new line of fine print.",
+        "strength": "recommended",
+        "from": {
+          "section": "anatomy",
+          "quote": "a line break in the text starts a new line."
+        },
+        "target": "disclaimer"
+      },
+      {
+        "text": "Label the main action Recharge.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Label the main action Recharge."
+        },
+        "target": "actions"
+      },
+      {
+        "text": "Set title yourself: left out, the card shows the sample “Unlimited 5G”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/0"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Set price yourself: left out, the card shows the sample ₹500.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "price"
+      },
+      {
+        "text": "Set validity yourself: left out, the card shows the sample “365 days”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/3"
+        },
+        "target": "validity"
+      },
+      {
+        "text": "Set data yourself: left out, the card shows the sample “2 GB/Day”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/4"
+        },
+        "target": "data"
+      },
+      {
+        "text": "Set disclaimer yourself: left out, the card shows sample fine print for a data-only pack.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/8"
+        },
+        "target": "disclaimer"
+      }
+    ],
+    "good": [
+      "Unlimited 5G",
+      "349",
+      "28 days",
+      "2 GB/day",
+      "Unlimited voice and 100 SMS a day. Speed drops to 64 kbps after 2 GB.",
+      "Recharge",
+      "Data pack",
+      "19",
+      "1 day",
+      "1.5 GB",
+      "Data only. No voice or SMS."
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "The default: the card isn't pressable; its action Buttons are.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t pressable: its buttons are."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress: the whole card is one button, announced by its title.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, announced by its title"
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled: the card is dimmed, a static card too; with onPress set, it doesn't fire.",
+      "from": {
+        "fact": "/facts/props/14"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "With onPress, the whole card is one button, announced by its title.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, announced by its title"
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "accessibilityLabel names the card for screen readers, pressable or not; without it, the card is named by its title.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/15"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [],
+  "examples": [
+    {
+      "purpose": "Plans on the Recharge screen, one under another under a Title: the Unlimited 5G plan with the apps it includes (monogram Avatars stand in for app logos, as in the guide) and a Data pack without apps. Each Recharge starts the screen's own payment through the Button's onPress (stubs here); the card only lays out the plan.",
+      "jsx": "<VStack>\n  <Title title=\"Popular plans\" subtitle=\"For 98765 43210\" />\n  <RechargeCard\n    title=\"Unlimited 5G\"\n    price={349}\n    validity=\"28 days\"\n    data=\"2 GB/day\"\n    disclaimer={'Unlimited voice and 100 SMS a day.\\nSpeed drops to 64 kbps after 2 GB.'}\n    subscriptionContent={\n      <>\n        <Avatar style=\"Monogram\" monogram=\"JH\" />\n        <Avatar style=\"Monogram\" monogram=\"JS\" />\n        <Avatar style=\"Monogram\" monogram=\"+2\" />\n      </>\n    }\n    actions={<Button label=\"Recharge\" onPress={() => {}} />}\n  />\n  <RechargeCard\n    title=\"Data pack\"\n    price={19}\n    validity=\"1 day\"\n    data=\"1.5 GB\"\n    disclaimer=\"Data only. No voice or SMS.\"\n    actions={<Button label=\"Recharge\" onPress={() => {}} />}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Each Recharge starts the screen’s own payment through the Button’s onPress; the card only lays out the plan."
+      }
+    },
+    {
+      "purpose": "The whole card as one button: onPress, announced by its title, and no actions, since a pressable card with actions would put buttons inside a button.",
+      "jsx": "<RechargeCard\n  title=\"Data pack\"\n  price={19}\n  validity=\"1 day\"\n  data=\"1.5 GB\"\n  disclaimer=\"Data only. No voice or SMS.\"\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, announced by its title"
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Unlimited 5G",
+        "description": "Title of the card. Default: \"Unlimited 5G\". Default \"Unlimited 5G\", from the component source."
+      },
+      {
+        "name": "price",
+        "type": "number | string",
+        "required": false,
+        "source": "types",
+        "default": 500,
+        "description": "Value for the MoneyValue component. Default: 500. Default 500, from the component source."
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "₹",
+        "description": "Currency symbol or ISO code prefixed to `price`. Default: \"₹\". A string `price` that already starts with this symbol (or `₹` when the currency is INR) is not prefixed again. Default \"₹\", from the component source."
+      },
+      {
+        "name": "validity",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "365 days",
+        "description": "Validity duration string. Default: \"365 days\". Default \"365 days\", from the component source."
+      },
+      {
+        "name": "data",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "2 GB/Day",
+        "description": "Data allowance string. Default: \"2 GB/Day\". Default \"2 GB/Day\", from the component source."
+      },
+      {
+        "name": "validityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Validity",
+        "description": "Label above the validity value. Default: \"Validity\". Default \"Validity\", from the component source."
+      },
+      {
+        "name": "dataLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Data",
+        "description": "Label above the data value. Default: \"Data\". Default \"Data\", from the component source."
+      },
+      {
+        "name": "subscriptionsLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Subscriptions",
+        "description": "Label above the subscription avatars. Default: \"Subscriptions\". Default \"Subscriptions\", from the component source."
+      },
+      {
+        "name": "disclaimer",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Data only pack (No Voice & No SMS)\nVoice: NA | SMS: NA...",
+        "description": "Disclaimer text under the specs. Default: \"Data only pack (No Voice & No SMS)\\\\nVoice: NA | SMS: NA...\". Default \"Data only pack (No Voice & No SMS)\\nVoice: NA | SMS: NA...\", from the component source."
+      },
+      {
+        "name": "subscriptionContent",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Wrapped in an AvatarGroup at Avatar Size S whatever the card's modes: 29 px Avatars, overlapping by 6 px. Declared: Avatar elements to be displayed in the subscription slot. Content will be wrapped in an AvatarGroup. `false`, `''` and an empty fragment hide the column the same way as `null`.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "The Buttons get AppearanceBrand Secondary (purple), Button / Size S and Emphasis High, with the card's modes on top; a Button's own modes win. Declared: Actions to be displayed in the button group (e.g. Button components). Buttons should be passed as children to this prop. Omitted, `false`, `''` or an empty fragment leave no group and no extra gap.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration for design tokens."
+      },
+      {
+        "name": "style",
+        "type": "ViewStyle",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "The root becomes a Pressable with the button role, named by accessibilityLabel or else title. Declared: Press handler for the whole card. When set, the card becomes pressable (rendered through a `Pressable` with `accessibilityRole=\"button\"`).",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Dims the card and blocks the pressable wrapper when `onPress` is set. The dimmed look applies even on a static card."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label forwarded to the root (defaults to `title`)."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "Has no effect on the card's Avatars: the card forces them to S. Declared: A token collection RechargeCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "L",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection RechargeCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection RechargeCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection RechargeCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context3",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Transaction Bubble",
+          "Balance & Cards",
+          "Amount Input"
+        ],
+        "description": "The card gives its price Context3 Balance & Cards by default: 36 px, weight 900. Context3 Default on the card shrinks the price to 14 px. Declared: A token collection RechargeCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection RechargeCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection RechargeCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      }
+    ],
+    "slots": [
+      {
+        "name": "subscriptionContent",
+        "type": "React.ReactNode",
+        "description": "Avatar elements to be displayed in the subscription slot. Content will be wrapped in an AvatarGroup. `false`, `''` and an empty fragment hide the column the same way as `null`.",
+        "source": "types"
+      },
+      {
+        "name": "actions",
+        "type": "React.ReactNode",
+        "description": "Actions to be displayed in the button group (e.g. Button components). Buttons should be passed as children to this prop. Omitted, `false`, `''` or an empty fragment leave no group and no extra gap.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the whole card. When set, the card becomes pressable (rendered through a `Pressable` with `accessibilityRole=\"button\"`).",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The card is 271 px tall where Figma's is 261 (three columns, one action, 312 px wide), because its text lines are taller: line heights are raised to 1.2 × the font size.",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "Figma's Recharge Card exposes only title and disclaimer as properties; the price, facts, apps and buttons are layers there.",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=rechargecard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2235-937",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-rechargecard--docs"
+  }
+}

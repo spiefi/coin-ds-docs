@@ -1,0 +1,455 @@
+{
+  "slug": "steplabel",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r27, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/steplabel.guide.tsx) and docs/evidence/steplabel.md (with steplabel.brief.md) at e7ed622 (“docs: publish 19 Component Fix fixes on jfs-components dbe0e02”, 28 October); the guide was written at eee9a2b (10 October, #162, Done and live). e7ed622 is on origin/main, and the three files read the same on origin/main and origin/docs-next. The guide was checked on the installed build: its Sources note says “Checked 28 October 2026” on the 27 October build of 0.1.78, which is the docs' mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02). The evidence has two parts: the 10 October check on v0.1.78-636f3f5 and a “dbe0e02 publish (28 October 2026, #235)” section that replaces it where they differ. Blobs compared: StepLabel.tsx is 9d56558 at 636f3f5 (no useTokens) and 31602bb from c1fa197 (12 October) through ace46ca and dbe0e02 and in node_modules; Step.tsx is bd055a3 at 636f3f5, 4f38bf6 at c1fa197 and 8b6cea0 at ace46ca and dbe0e02 and in node_modules; Stepper.tsx is 47dbbab at 636f3f5 and 52d2aec from c1fa197 and in node_modules. Token values were read on the installed build only, through the package's own getVariableByName (lib/commonjs): title 14/18 700 rgb(13, 13, 15), JioType Var; supporting text 12/16 400 rgb(26, 28, 31) with AppearanceBrand Neutral or Tertiary or none, rgb(206, 161, 90) (gold) with Primary and rgb(93, 0, 181) with Secondary; date 10/12 700 rgb(48, 51, 56) for every AppearanceBrand; gap 2. The package facts give Primary as the AppearanceBrand collection's default, but the supporting and date lines resolve with Neutral unless the caller sets one (evidenceFacts/0). The title and date ignore AppearanceBrand, and Emphasis, Semantic Intent, AppearanceSystem and Step Status (complete, error) change nothing. Every sentence quoted here was read against the installed source: StepLabel merges JFSThemeProvider's modes and then its own (StepLabel.tsx 30–34); the supporting and date lines resolve with AppearanceBrand Neutral unless the caller's modes set one (50–51); it renders a View with the gap and flex 1, then style, holding the title always and the supporting line or date only when its switch is on and its text is not empty (104–115), with no numberOfLines, so long text wraps; title defaults to “Stepper Item” and subtitle and meta to true (21–25); the View has no role, label or accessible flag. In Step.tsx, children replace the default StepLabel and are placed in a flex 1 View right of the indicator with the Step's merged modes (cloneChildrenWithModes: the parent's first, the child's own win), and Stepper merges its modes into each Step the same way, so AppearanceBrand Primary on the Stepper reaches a Step Label that sets none (“even on the Stepper” holds). The Step's spoken name, with a StepLabel child, is that child's title (“Stepper Item” when unset), its supporting text when subtitle is on and the trimmed text is 80 characters or fewer with no line break, its date when meta is on, then the Step's status word (Completed, Failed, Needs attention), joined by commas; the Step's own title, supporting text and date are then ignored (Step.tsx 42–51, 70–112, 262–289, 316–331). So the Do “Add nominee, Someone who can claim this account” and the Don't's 88-character detail line, read as only “Add nominee”, hold on a current stage with no date. Every guide sentence holds on dbe0e02; none is stale, so there is no human flag for staleness. Strength: four quotes hold an absolute word: /configuration/0 “The title is always shown.” (everywhere: StepLabel always renders the title), /configuration/5 and /6 “… shows only when it has text and its switch is on …” (everywhere: the render condition), and /configuration/10 “Only Color Mode, and AppearanceBrand for the supporting line, change the label …” (everywhere: verified token by token above); all describe the component and stay recommended. /accessibility/2 “… only “Add nominee” is heard.” is contextual: it describes the guide's example, which has no date. Nothing is required: no prop is required and no everywhere-absolute instructs. The default-title rule rests on the Do & Don't caption, which matches the title fact's default. Left out, and why: the 10 October evidence sentences the 28 October section replaces (“StepLabel, Step, and Stepper never read `JFSThemeProvider` (no `useTokens`)”, the Step “announced by the Step's own `title` prop … read “Step N””, and “A Step with a StepLabel child and no `title` is named “Step 1””), and the upstream StepLabel.mdx errors it lists, which c8526ae fixed; the evidence's line numbers (StepLabel.tsx:44-45, Step.tsx:223-232) are 636f3f5's. The Figma frame's sizes and variable names, the contrast ratios other than the guide's 2.4:1, Dark token values, and the Limits list are not recorded. Not recorded: style (an override the building rules keep off Coin components), testID, Color Mode, and the playground's Height readout. States: the guide's “No states of its own” and its three cards, each kept to its own words: the colours are the label's, the outcome is the Step's indicator. avoidWhen is empty: the guide never says when not to use a Step Label (its own States, Content and Do & Don't previews put one in Steps with no other content), so it is flagged rather than guessed. Gaps: none filed from the guide; #162's comments record “New issues: none filed” and a note added to #235. #235 (Component Fix, Done and live 27 October) fixed the spoken name with a StepLabel child, the theme provider and StepLabel.mdx; its 12 October check says Figma's green date and #1c1c1c supporting text are unchanged, and no open ticket covers them. The two gaps come from the Sources note, as in Step's entry: Figma's green date, and the published Storybook, re-checked on 31 October: its StepLabel stories still pass “Step Title” and a Default with AppearanceBrand Primary (removed upstream in 5b6894b, “Release v0.1.78”), and its StepLabel bundle has no useTokens. Examples follow the building rules: no Color Mode (the guide sets Light on every component), no Button / Size S on the Add nominee button (a look-only mode on a child), no AppearanceBrand Neutral on the Card (Card's entry: Neutral white is its default), no width style on the VStack, and none of the guide's stage() Step Status modes except inactive on the upcoming stage (Step's entry: a current stage has no Step Status mode, status complete sets the done colour, and an upcoming stage needs inactive). The guide also passes each Step the label's title; with a StepLabel child it is ignored on dbe0e02, and Step's entry asks for a title unless children replace it, so it is left out. Example 1 is the guide's In context before the nominee is added (the Start again button and the after state are left out); example 2 is its Content example. Card, VStack, HStack, Button, Stepper and Step have entries. Consistency with related entries: Step's entry agrees: children replace the text block and the title prop; with custom children screen readers hear the StepLabel child's text; a StepLabel child's title, supporting text and date make the name and the Step's own title and date are ignored (evidenceFacts/5, 28 October); its example puts a StepLabel and a Button in the current Step's children, although it sets Color Mode and Button / Size S, which this entry leaves out. Its “Stepper Item … read as “Step 1”” is a Step with no title and no children, which holds; a Step Label with no title is read as “Stepper Item”. Its accessibility/0 “its title (or a StepLabel child's title), supporting text of up to 80 characters, the date” is right, but with a StepLabel child the supporting text and date are the child's too. Stepper's entry agrees (each stage read with its title, supporting text of up to 80 characters and date; testID works on StepLabel); its notes' guide problem (3) still calls c1fa197 “installed” and names only the child's title, superseded by its 17 and 29 October updates. Neither says StepLabel has no entry; rules.md in 0.1.78+26 lists StepLabel among the exports this pack does not cover, which this entry ends. Nothing hand-written here, in the guide at e7ed622, in the evidence, or in the installed StepLabel, Step and Stepper sources uses the shape word Coin doesn't have. Cross-check: round 1 raised one flag, on evidenceFacts/0: its description added “the collection's own default is Primary”, which comes from the package facts, not the evidence quote; the description now keeps to the quote, and the default is said here instead (our misreading, fixed). Its notes also said the examples' Step Status inactive rests on Step's entry, which it could not see (it is Step's configuration/8, “an upcoming stage needs the Step Status mode set to inactive”). Round 2 raised no flags. Its notes: the evidence's 10 October Contract lines on the theme provider and the Step's own title are superseded by the 28 October section, which configuration/10 and accessibility/0 follow (as above); and the examples' done, current and upcoming stages are the guide source's own (the Content example's labelled('done' | 'current' | 'upcoming', …) and In context's stage('done' | 'current' | 'upcoming')), not only what its rendered indicators show, while the inactive mode for the upcoming stage is Step's entry's rule (above).",
+  "useWhen": [
+    {
+      "text": "Keep a Step's title, detail and date when you put your own content, such as a button, inside the Step.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Step Label to keep a Step’s title, detail and date when you put your own content, such as a button, inside the Step."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Column",
+      "holds": "Fills its host’s width; the lines sit 2 px apart.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Fills its host’s width; the lines sit 2 px apart."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "14 px bold; names the stage and is always shown.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "14 px bold; names the stage and is always shown."
+      }
+    },
+    {
+      "part": "Supporting text",
+      "holds": "12 px; what the stage involves or how it went.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px; what the stage involves or how it went."
+      }
+    },
+    {
+      "part": "Date",
+      "holds": "10 px bold; when it finished, started, or is due.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "10 px bold; when it finished, started, or is due."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put a Step Label in a Step's children, beside your own content: the guide's current stage holds a Step Label and an Add nominee button.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The current stage holds a Step Label and an Add nominee button."
+      }
+    },
+    {
+      "text": "In the guide's nominee example, once the nominee is added, the screen gives the Step back its own text and moves the current stage on.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Once the nominee is added, the screen gives the Step back its own text and moves the current stage on."
+      }
+    },
+    {
+      "text": "A Step Label has no fixed size: it takes the width it's given, which in a Step is everything right of the indicator.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It takes the width it’s given (in a Step, everything right of the indicator)"
+      }
+    },
+    {
+      "text": "Its lines set the height: 18 px tall with a title alone, 50 px with all three lines.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "18 px tall with a title alone, 50 px with all three lines."
+      }
+    },
+    {
+      "text": "Long text wraps: nothing is cut off; each line wraps and the label grows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Nothing is cut off: each line wraps and the label grows."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The title is always shown: set title to name the stage.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "The title is always shown."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "everywhere",
+        "reason": "it holds for every Step Label: the installed StepLabel always renders the title line, whatever the other props, and only the supporting text and date can be hidden. It describes the component, so it stays recommended."
+      }
+    },
+    {
+      "text": "Don't leave the default title: without a title, a Step Label shows “Stepper Item”.",
+      "strength": "discouraged",
+      "target": "title",
+      "from": {
+        "section": "doDont",
+        "quote": "Without a title, it shows “Stepper Item”."
+      }
+    },
+    {
+      "text": "Use the title alone when the stage name says enough: it is compact.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "Compact, when the stage name says enough."
+      }
+    },
+    {
+      "text": "Add supportingText for one line on what the stage involves.",
+      "strength": "recommended",
+      "target": "supportingText",
+      "from": {
+        "section": "configuration",
+        "quote": "One line on what the stage involves."
+      }
+    },
+    {
+      "text": "Add a date (metaText) for when the stage finished, started, or is due.",
+      "strength": "recommended",
+      "target": "metaText",
+      "from": {
+        "section": "configuration",
+        "quote": "When the stage finished, started, or is due."
+      }
+    },
+    {
+      "text": "The supporting text shows only when supportingText has text and its switch, subtitle, is on.",
+      "strength": "recommended",
+      "target": "subtitle",
+      "from": {
+        "section": "configuration",
+        "quote": "A line of supporting text or a date shows only when it has text and its switch is on: subtitle and meta, as in Figma."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it holds for every Step Label: the supporting line renders only when subtitle is on and supportingText is not empty. It describes the component, so it stays recommended."
+      }
+    },
+    {
+      "text": "The date shows only when metaText has text and its switch, meta, is on.",
+      "strength": "recommended",
+      "target": "meta",
+      "from": {
+        "section": "configuration",
+        "quote": "A line of supporting text or a date shows only when it has text and its switch is on: subtitle and meta, as in Figma."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it holds for every Step Label: the date line renders only when meta is on and metaText is not empty. It describes the component, so it stays recommended."
+      }
+    },
+    {
+      "text": "With meta off, the date stays hidden even though it has text.",
+      "strength": "recommended",
+      "target": "meta",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "With meta off, the date stays hidden even though it has text."
+      }
+    },
+    {
+      "text": "With subtitle off, the supporting text stays hidden even though it has text.",
+      "strength": "recommended",
+      "target": "subtitle",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "Subtitle does the same for supporting text."
+      }
+    },
+    {
+      "text": "In Figma there is no Step Label component: it is the text frame inside Step in Coin Subcomponents, whose title, supporting text and Meta text, and subtitle and meta switches, match the props.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma has no Step Label component: it is the text frame inside Step in Coin Subcomponents, whose title, supporting text, and Meta text and subtitle and meta switches match the props."
+      }
+    },
+    {
+      "text": "Only Color Mode, and AppearanceBrand for the supporting line, change the label; it takes modes from its own modes prop, its Step, or JFSThemeProvider.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "sources",
+        "quote": "Only Color Mode, and AppearanceBrand for the supporting line, change the label, and it takes modes from its own prop, its Step, or JFSThemeProvider."
+      },
+      "absolute": {
+        "word": "Only",
+        "scope": "everywhere",
+        "reason": "it holds for every Step Label on the installed build: Emphasis, Semantic Intent, AppearanceSystem and Step Status resolve the same title, supporting text, date and gap, and AppearanceBrand changes only the supporting line. It describes the component, so it stays recommended."
+      }
+    },
+    {
+      "text": "Leave AppearanceBrand unset: the supporting text stays dark grey.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "doDont",
+        "quote": "Leave the brand mode unset"
+      }
+    },
+    {
+      "text": "Don't pass AppearanceBrand Primary, on the Step Label or even on the Stepper: it turns the detail gold, 2.4:1 on white.",
+      "strength": "discouraged",
+      "target": "AppearanceBrand",
+      "value": "Primary",
+      "from": {
+        "section": "doDont",
+        "quote": "AppearanceBrand Primary, even on the Stepper, turns the detail gold: 2.4:1 on white."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "The stage in words: its name, one line of detail, and when.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "The stage in words: its name, one line of detail, and when."
+        }
+      },
+      {
+        "text": "Write the title as the stage in one to four words, in sentence case, such as “Verify PAN”.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Write the title as the stage in one to four words, in sentence case, such as “Verify PAN”."
+        }
+      },
+      {
+        "text": "Name the stage: “Verify PAN” says what happens here.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "“Verify PAN” says what happens here."
+        }
+      },
+      {
+        "text": "Keep the supporting text to one line on what happens or what went wrong.",
+        "strength": "recommended",
+        "target": "supportingText",
+        "from": {
+          "section": "content",
+          "quote": "Keep the supporting text to one line on what happens or what went wrong"
+        }
+      },
+      {
+        "text": "Say what happened in the supporting text: the label looks the same in every stage, and the Step's indicator shows whether the stage is current, done, or failed.",
+        "strength": "recommended",
+        "target": "supportingText",
+        "from": {
+          "section": "states",
+          "quote": "The Step’s indicator shows whether the stage is current, done, or failed, so say what happened in the supporting text."
+        }
+      },
+      {
+        "text": "Start the date with what it marks: Done, Started, or Due by.",
+        "strength": "recommended",
+        "target": "metaText",
+        "from": {
+          "section": "content",
+          "quote": "start the date with what it marks: Done, Started, or Due by."
+        }
+      }
+    ],
+    "good": [
+      "Verify PAN",
+      "PAN details match your name",
+      "Done 2 Oct 2026",
+      "Add nominee",
+      "Someone who can claim this account",
+      "Started 5 Oct 2026",
+      "eSign",
+      "Sign the form with an Aadhaar OTP",
+      "Due by 12 Oct 2026"
+    ],
+    "bad": [
+      "Stepper Item",
+      "Choose someone who can claim this account and its investments if anything happens to you"
+    ]
+  },
+  "states": [
+    {
+      "state": "No states of its own",
+      "when": "A Step Label looks the same in every stage; the Step's indicator shows whether the stage is current, done, or failed.",
+      "from": {
+        "section": "states",
+        "quote": "A Step Label looks the same in every stage."
+      }
+    },
+    {
+      "state": "In a current stage",
+      "when": "Black title, grey detail.",
+      "from": {
+        "section": "states",
+        "quote": "Black title, grey detail."
+      }
+    },
+    {
+      "state": "In a done stage",
+      "when": "Same colours; the Step's green check says it's done.",
+      "from": {
+        "section": "states",
+        "quote": "Same colours; the green check says it’s done."
+      }
+    },
+    {
+      "state": "In a failed stage",
+      "when": "Same colours; the supporting text says what went wrong.",
+      "from": {
+        "section": "states",
+        "quote": "Same colours; the text says what went wrong."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "A Step Label has no role or name of its own: the Step around it is announced by the label's title, supporting text of up to 80 characters, and date, and the Step's own title is ignored.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It has no role or name of its own: the Step around it is announced by the label’s title, supporting text of up to 80 characters, and date, and the Step’s own title is ignored."
+      }
+    },
+    {
+      "text": "Keep the detail short so it is heard with the title: the guide's stage is read as “Add nominee, Someone who can claim this account”.",
+      "strength": "recommended",
+      "target": "supportingText",
+      "from": {
+        "section": "doDont",
+        "quote": "The stage is read as “Add nominee, Someone who can claim this account”."
+      }
+    },
+    {
+      "text": "Don't write a detail line over 80 characters: it is shown but not read (in the guide's example, only “Add nominee” is heard).",
+      "strength": "discouraged",
+      "target": "supportingText",
+      "from": {
+        "section": "doDont",
+        "quote": "Over 80 characters, the detail is shown but not read: only “Add nominee” is heard."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "“only” describes the guide's example, a current stage with a title and a long detail line and no date: there only the title is heard. A stage with a date is still announced with it, so the rule is that the long detail is not read, not that everything but the title is dropped."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the detail short",
+      "dont": "Write a long detail line",
+      "why": "Over 80 characters, the detail is shown but not read: only “Add nominee” is heard.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the detail short"
+      }
+    },
+    {
+      "do": "Leave the brand mode unset",
+      "dont": "Pass a Primary brand mode",
+      "why": "AppearanceBrand Primary, even on the Stepper, turns the detail gold: 2.4:1 on white.",
+      "from": {
+        "section": "doDont",
+        "quote": "Leave the brand mode unset"
+      }
+    },
+    {
+      "do": "Name the stage",
+      "dont": "Leave the default title",
+      "why": "Without a title, it shows “Stepper Item”.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the stage"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context, adding a nominee while opening a demat account: a Card titled “Open your demat account” holds a Stepper. The done stage and the upcoming stage use the Step's own text; the current stage holds a Step Label and an Add nominee button in an HStack, and the Step Label keeps the stage's title and detail beside the button. The upcoming stage sets the Step Status mode inactive, as the Step entry says; the empty onPress stands for the app's own action.",
+      "jsx": "<Card>\n  <Card.Title>Open your demat account</Card.Title>\n  <VStack>\n    <Stepper accessibilityLabel=\"Account opening progress\">\n      <Step title=\"Verify PAN\" supportingText=\"PAN details match your name\" metaText=\"Done 2 Oct 2026\" status=\"complete\" />\n      <Step>\n        <StepLabel title=\"Add nominee\" supportingText=\"Someone who can claim this account\" />\n        <HStack>\n          <Button label=\"Add nominee\" onPress={() => {}} />\n        </HStack>\n      </Step>\n      <Step title=\"eSign\" supportingText=\"Sign the form with an Aadhaar OTP\" modes={{ 'Step Status': 'inactive' }} />\n    </Stepper>\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The current stage holds a Step Label and an Add nominee button."
+      }
+    },
+    {
+      "purpose": "The guide's Content example: in each Step, a Step Label names the stage in a few words, gives one line of detail, and starts the date with what it marks (Done, Started, Due by). The first stage is done, the second current, and the third upcoming, with the Step Status mode inactive, as the Step entry says.",
+      "jsx": "<Stepper>\n  <Step status=\"complete\">\n    <StepLabel title=\"Verify PAN\" supportingText=\"PAN details match your name\" metaText=\"Done 2 Oct 2026\" />\n  </Step>\n  <Step>\n    <StepLabel title=\"Add nominee\" supportingText=\"Someone who can claim this account\" metaText=\"Started 5 Oct 2026\" />\n  </Step>\n  <Step modes={{ 'Step Status': 'inactive' }}>\n    <StepLabel title=\"eSign\" supportingText=\"Sign the form with an Aadhaar OTP\" metaText=\"Due by 12 Oct 2026\" />\n  </Step>\n</Stepper>",
+      "from": {
+        "section": "content",
+        "quote": "start the date with what it marks: Done, Started, or Due by."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "The supporting and date lines resolve with AppearanceBrand Neutral unless the caller sets one.",
+      "quote": "The supporting and date lines resolve with `AppearanceBrand: Neutral` unless the caller sets one",
+      "checkedOn": "2026-10-10",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma's done example shows a green date; the package keeps it grey.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s done example shows a green date; the package keeps it grey."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "The published Storybook StepLabel page predates 0.1.78.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook predates 0.1.78."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ]
+}
