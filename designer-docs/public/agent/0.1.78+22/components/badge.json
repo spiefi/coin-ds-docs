@@ -1,0 +1,591 @@
+{
+  "schemaVersion": 1,
+  "id": "Badge",
+  "slug": "badge",
+  "category": "content",
+  "tags": [
+    "tag",
+    "label",
+    "status",
+    "lozenge",
+    "count"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:10:13Z",
+    "flags": [
+      {
+        "field": "/facts/props/7",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/4",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/modes/6",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/6",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/examples/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Badge to make a short status, category, or count easy to scan beside the content it describes.",
+  "useWhen": [
+    {
+      "text": "Show a short status, category or count beside the content it describes, so people can scan it.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Badge to make a short status, category, or count easy to scan beside the content it describes."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The message needs a sentence or an explanation: keep the explanation out of the Badge.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Avoid putting the whole explanation inside the Badge."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Leading visual",
+      "holds": "Optional leading node, such as an icon, that adds a recognizable cue without replacing the words.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Adds a recognizable cue without replacing the words."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "The label text; names the status or category.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the status or category."
+      }
+    },
+    {
+      "part": "Surface",
+      "holds": "The token-owned surface that groups the message into one compact shape.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Groups the message into one compact shape."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "leading",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the Badge next to the item it describes.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Place the compact status next to the item it describes."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use the solid treatment (type default) beside ordinary content.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use a solid Badge beside ordinary content."
+      },
+      "target": "type",
+      "value": "default"
+    },
+    {
+      "text": "Use type glass where the underlying image or surface stays part of the composition.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use glass where the underlying image or surface remains part of the composition."
+      },
+      "target": "type",
+      "value": "glass"
+    },
+    {
+      "text": "Choose Badge Size for the density of the surrounding content.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Choose the size for the surrounding density."
+      },
+      "target": "Badge Size"
+    },
+    {
+      "text": "Choose a Semantic Intent and appearance whose meaning agrees with the status.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Use semantic treatment that agrees with the status."
+      },
+      "target": "Semantic Intent"
+    },
+    {
+      "text": "Give the status that needs attention the strongest Emphasis, rather than equal emphasis on every badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Give the status needing attention the strongest emphasis."
+      },
+      "target": "Emphasis"
+    },
+    {
+      "text": "Add onPress only when opening related detail is useful; most badges only inform.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Add an action only when opening related detail is useful."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Pass the Badge's own modes object to the Icon in leading, with the Context4 that matches the treatment (solid or glass): Badge renders the leading node as given.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "It renders a supplied leading node verbatim, so the guide passes the same owner mode object to the public Icon and selects the matching `Context4` for Solid or Glass."
+      },
+      "target": "leading"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Say one thing in a few words.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Say one thing, in a few words."
+        }
+      },
+      {
+        "text": "Write the status, not a sentence.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the status, not a sentence"
+        },
+        "target": "label"
+      },
+      {
+        "text": "Use familiar words.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use familiar words."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Keep tense and capitalization consistent across a set of badges.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep tense and capitalization consistent across the same set."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Keep comparable statuses similar in length and capitalization.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Keep comparable statuses similar in length and capitalization."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Keep the label short so the Badge stays a compact companion; its width follows the label.",
+        "strength": "recommended",
+        "from": {
+          "section": "sizing",
+          "quote": "Keep the label short so the Badge remains a compact companion."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Let the label carry the meaning, and use emphasis to set priority.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Let the label carry the meaning and use emphasis to establish priority."
+        }
+      }
+    ],
+    "good": [
+      "Paid",
+      "Due today",
+      "3 new",
+      "Pending",
+      "Failed"
+    ],
+    "bad": [
+      "Payment successfully completed",
+      "Awaiting payment processing",
+      "FAILURE"
+    ]
+  },
+  "states": [
+    {
+      "state": "Informational",
+      "when": "Without onPress; most badges only communicate information.",
+      "from": {
+        "section": "states",
+        "quote": "Most badges communicate information."
+      }
+    },
+    {
+      "state": "Action",
+      "when": "With onPress, when opening related detail is useful.",
+      "from": {
+        "section": "states",
+        "quote": "Add an action only when opening related detail is useful."
+      }
+    },
+    {
+      "state": "Loading",
+      "when": "loading is true while the value is still arriving.",
+      "from": {
+        "section": "states",
+        "quote": "Loading shows that the value is still arriving."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Rely on the visible label for an interactive Badge's accessible name, and verify that name: Badge ignores accessibilityLabel.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The package currently ignores the supplied accessibilityLabel on Badge; rely on visible text and verify the resulting accessible name for an action."
+      },
+      "target": "label"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use a short status",
+      "dont": "Avoid a sentence inside the Badge",
+      "why": "Avoid putting the whole explanation inside the Badge.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a short status"
+      }
+    },
+    {
+      "do": "Match meaning and tone",
+      "dont": "Avoid contradictory signals",
+      "why": "Conflicting words and tone make the status harder to trust.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match meaning and tone"
+      }
+    },
+    {
+      "do": "Reserve strong emphasis",
+      "dont": "Avoid equal emphasis everywhere",
+      "why": "If every status competes, the urgent one is harder to find.",
+      "from": {
+        "section": "doDont",
+        "quote": "Reserve strong emphasis"
+      }
+    },
+    {
+      "do": "Use a consistent vocabulary",
+      "dont": "Avoid mixed label styles",
+      "why": "Mixed wording and capitalization slow scanning.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a consistent vocabulary"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A system status beside the item it describes, in a slim Card row.",
+      "jsx": "<Card variant=\"slim\" modes={{ 'Color Mode': 'Light' }}>\n  <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\" modes={{ 'Color Mode': 'Light' }}>\n    <Text>September payment</Text>\n    <Badge label=\"Paid\" modes={{ 'Color Mode': 'Light', 'Semantic Intent': 'System', AppearanceSystem: 'positive' }} />\n  </HStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "Place the compact status next to the item it describes."
+      }
+    },
+    {
+      "purpose": "A solid badge with a leading icon; the Icon gets the Badge's modes, with Context4 Badge.",
+      "jsx": "<Badge\n  label=\"Paid\"\n  modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', Context4: 'Badge' }}\n  leading={<Icon iconName=\"ic_card\" modes={{ 'Color Mode': 'Light', 'Badge Size': 'Medium', Context4: 'Badge' }} />}\n/>",
+      "from": {
+        "section": "evidence",
+        "quote": "It renders a supplied leading node verbatim, so the guide passes the same owner mode object to the public Icon and selects the matching `Context4` for Solid or Glass."
+      }
+    },
+    {
+      "purpose": "A badge that opens related detail.",
+      "jsx": "<Badge label=\"View details\" onPress={() => {}} modes={{ 'Color Mode': 'Light' }} />",
+      "from": {
+        "section": "states",
+        "quote": "Add an action only when opening related detail is useful."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Label",
+        "description": "Visible label text shown inside the badge. Default \"Label\", from the component source."
+      },
+      {
+        "name": "type",
+        "type": "BadgeType",
+        "required": false,
+        "source": "types",
+        "values": [
+          "default",
+          "glass"
+        ],
+        "default": "default",
+        "description": "Visual style (matches the Figma `type` property). `'default'` is a solid token-colored pill; `'glass'` is a frosted, translucent pill backed by a real background blur (`GlassFill`) — the same glass surface used at the bottom of media/merchandising cards. Default \"default\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes used to resolve design tokens (e.g. Appearance, Size)"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Optional press handler to make the badge interactive."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Ignored: the rendered wrapper does not get it.",
+        "checkedOn": "2026-09-23"
+      },
+      {
+        "name": "style",
+        "type": "ViewStyle",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "labelStyle",
+        "type": "TextStyle",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Rendered verbatim: Badge does not pass its modes to the leading node. Declared: Optional leading node (icon/image) rendered before the label, inside the badge surface. When present, the badge lays its contents out in a row.",
+        "checkedOn": "2026-09-23"
+      },
+      {
+        "name": "glassOverlayColor",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Glass-only override for the translucent overlay color painted over the live blur. Defaults to the `badge/glass/color/background` token. Ignored for the `'default'` type."
+      },
+      {
+        "name": "glassIntensity",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Glass-only override for the blur intensity on the 0–100 scale. Defaults to the `blur/minimal` token. Ignored for the `'default'` type."
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Explicit per-instance loading override. When `true`, renders a badge-shaped skeleton placeholder instead of the badge. Defaults to inheriting from the surrounding `<SkeletonGroup>`."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      },
+      {
+        "name": "...Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityLabel' | 'accessibilityRole'>",
+        "type": "Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityLabel' | 'accessibilityRole'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection Badge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection Badge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection Badge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Badge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection Badge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection Badge reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Context4",
+        "source": "evidence",
+        "type": "mode collection",
+        "values": [
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "The solid Figma master owns Context4=Badge. The package lists Badge/glass for the glass treatment, but the glass master's mode could not be resolved, so full mode parity is unverified.",
+        "checkedOn": "2026-09-23"
+      }
+    ],
+    "slots": [
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "description": "Optional leading node (icon/image) rendered before the label, inside the badge surface. When present, the badge lays its contents out in a row.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Optional press handler to make the badge interactive",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Badge ignores accessibilityLabel on its rendered wrapper.",
+        "source": "evidence",
+        "checkedOn": "2026-09-23"
+      },
+      {
+        "text": "Badge has no selected or disabled variant.",
+        "source": "evidence",
+        "checkedOn": "2026-09-23"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=badge",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5607-5484",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-badge--docs"
+  }
+}

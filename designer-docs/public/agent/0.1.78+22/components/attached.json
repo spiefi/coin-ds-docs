@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 1,
+  "id": "Attached",
+  "slug": "attached",
+  "category": "content",
+  "tags": [
+    "corner badge",
+    "overlay badge",
+    "indicator"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:10:13Z",
+    "flags": [
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Add a subordinate signal to a main item without altering its footprint.",
+  "useWhen": [
+    {
+      "text": "Add a subordinate signal to a main item without altering its footprint.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Add a subordinate signal to a main item without altering its footprint."
+      }
+    },
+    {
+      "text": "Keep a small qualifier, such as a payment type or status, attached to the item it describes.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The badge adds a small qualification such as payment type or status while the central mark remains easy to recognize."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "The extra signal is the item's primary label or would become a second focal point: the badge stays subordinate to the main item.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "The badge should not carry the primary label or become a second focal point."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Main bounds",
+      "holds": "The child in the main slot (children): it establishes the size and is the visual object people identify first.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The child in the main slot establishes the size and the visual object people identify first."
+      }
+    },
+    {
+      "part": "Attachment",
+      "holds": "The badge slot: centred on the selected anchor, so it can straddle the main edge.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The badge slot is centered on the selected anchor and can straddle the main edge."
+      }
+    },
+    {
+      "part": "Anchor / ring",
+      "holds": "Position chooses one of nine anchors; the token ring around the badge separates the compact signal from the main mark.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Position chooses one of nine anchors; the token ring separates a compact signal from the main mark."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "badge",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The main child owns its size and Attached does not grow the layout footprint for the badge, so give its host enough whitespace for the overhang.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Attached does not grow the layout footprint for the badge, so its host needs enough whitespace for the overhang."
+      }
+    },
+    {
+      "text": "Leave slack around the composition so the badge can straddle the edge.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Leave slack around the composition so the badge can straddle the edge."
+      }
+    },
+    {
+      "text": "Do not clip the host with overflow hidden: the badge overhangs the main bounds and is visibly cut off.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Overflow hidden turns a positioning choice into a visibly cut-off signal."
+      }
+    },
+    {
+      "text": "Keep the qualifier next to the item it describes, as in a payment row.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment row keeps the qualifier next to the item it describes."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Use the position choices for where the badge belongs.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the exposed position choices for where the badge belongs."
+      },
+      "target": "position"
+    },
+    {
+      "text": "Use an edge or corner anchor when the badge describes the item.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use edge or corner anchors when the badge describes the item."
+      },
+      "target": "position"
+    },
+    {
+      "text": "Avoid the center anchor unless the overlay is deliberate: a centred badge covers the main mark.",
+      "strength": "discouraged",
+      "from": {
+        "section": "configuration",
+        "quote": "A center anchor is reserved for a deliberate overlay."
+      },
+      "target": "position",
+      "value": "center"
+    },
+    {
+      "text": "For a diagonal (corner) anchor, choose whether it sits on the round child’s edge or on its bounding-box corner.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For diagonal anchors, choose the round child’s edge or its bounding-box corner."
+      },
+      "target": "circular"
+    },
+    {
+      "text": "Circle edge, circular true (the default), for round marks such as a circular IconCapsule: corner anchors sit on the circle.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "use Circle edge for round marks and Bounding box for a square corner relationship."
+      },
+      "target": "circular",
+      "value": "true"
+    },
+    {
+      "text": "Bounding box, circular false, for a square corner relationship: corner anchors sit on the bounding-box corners.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "use Circle edge for round marks and Bounding box for a square corner relationship."
+      },
+      "target": "circular",
+      "value": "false"
+    },
+    {
+      "text": "Size IconCapsule children with their Icon Capsule Size modes, not style dimensions, so they keep their circular geometry: the guide uses M for the main item and XS for the badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "this guide uses the native Icon Capsule Size modes M and XS so both child capsules keep their component-owned circular geometry."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Let the attachment support the item, not obscure it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Attachment supports the item, never obscures it."
+        }
+      },
+      {
+        "text": "Use a compact, meaningful signal that clarifies the main item.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use a compact, meaningful signal that clarifies the main item."
+        }
+      },
+      {
+        "text": "Make the main item readable first: the badge adds a small qualification, such as payment type or status, while the central mark stays easy to recognise.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The badge adds a small qualification such as payment type or status while the central mark remains easy to recognize."
+        }
+      },
+      {
+        "text": "Choose a familiar icon or small signal that people can understand at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Choose a familiar icon or small signal that people can understand at a glance."
+        }
+      },
+      {
+        "text": "Do not make the badge compete with the main item: an oversized attachment pulls focus away from it.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "An oversized attachment pulls focus away from the main item."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "No state of its own",
+      "when": "Attached has no loading or disabled state of its own; show whether a supporting signal is present through its children.",
+      "from": {
+        "section": "states",
+        "quote": "Attached has no loading or disabled state of its own."
+      }
+    },
+    {
+      "state": "Badge present",
+      "when": "The secondary signal remains visible while the main item keeps its own identity.",
+      "from": {
+        "section": "states",
+        "quote": "The secondary signal remains visible while the main item keeps its own identity."
+      }
+    },
+    {
+      "state": "Badge absent",
+      "when": "Use the same composition, with no badge, when there is no subordinate status or action to show.",
+      "from": {
+        "section": "states",
+        "quote": "Use the same composition when there is no subordinate status or action to show."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Keep the center clear",
+      "dont": "Cover the main mark",
+      "why": "A centered badge obscures the item it is meant to qualify.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the center clear"
+      }
+    },
+    {
+      "do": "Allow the overhang",
+      "dont": "Clip the host",
+      "why": "Overflow hidden turns a positioning choice into a visibly cut-off signal.",
+      "from": {
+        "section": "doDont",
+        "quote": "Allow the overhang"
+      }
+    },
+    {
+      "do": "Keep the badge compact",
+      "dont": "Make the badge compete",
+      "why": "An oversized attachment pulls focus away from the main item.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the badge compact"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's composition: a main IconCapsule at its default size with a compact IconCapsule badge (Icon Capsule Size XS) on the default bottom-right anchor, projected onto the circle's edge.",
+      "jsx": "<Attached badge={<IconCapsule iconName=\"ic_rupee\" modes={{ 'Icon Capsule Size': 'XS' }} />}>\n  <IconCapsule iconName=\"ic_cart\" />\n</Attached>",
+      "from": {
+        "section": "sources",
+        "quote": "this guide uses the native Icon Capsule Size modes M and XS so both child capsules keep their component-owned circular geometry."
+      }
+    },
+    {
+      "purpose": "The guide's In context: a payment row keeps the qualifier next to the item it describes, with Attached as the row's leading item.",
+      "jsx": "<ListItem\n  layout=\"Horizontal\"\n  title=\"Card payment\"\n  supportText=\"Today · Food\"\n  navArrow={false}\n  leading={\n    <Attached badge={<IconCapsule iconName=\"ic_rupee\" modes={{ 'Icon Capsule Size': 'XS' }} />}>\n      <IconCapsule iconName=\"ic_cart\" />\n    </Attached>\n  }\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment row keeps the qualifier next to the item it describes."
+      }
+    },
+    {
+      "purpose": "Badge absent, the guide's States: the same composition with no badge when there is no subordinate status to show.",
+      "jsx": "<Attached>\n  <IconCapsule iconName=\"ic_cart\" />\n</Attached>",
+      "from": {
+        "section": "states",
+        "quote": "Use the same composition when there is no subordinate status or action to show."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Main content the badge attaches to (the Figma \"main slot\"). Any node — typically an `IconCapsule`, `Avatar`, image, etc. `modes` are cascaded to every child via {@link cloneChildrenWithModes}."
+      },
+      {
+        "name": "badge",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "The element attached on top of `children` (the Figma \"slot\"). Centered on the anchor point given by `position` so it straddles the edge/corner. `modes` are cascaded into it as well."
+      },
+      {
+        "name": "badgeSize",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Enforces a fixed square size (in px) on the `badge` slot, regardless of what node is passed. The badge is wrapped in a box of `badgeSize × badgeSize` with `overflow: 'hidden'`, and the badge content is stretched to fill it. Use this to guarantee the design-token size even when a consumer drops in an arbitrary node (e.g. an `Image`) whose intrinsic size/aspect-ratio would otherwise win. When omitted, the badge keeps its own intrinsic size (legacy behavior)."
+      },
+      {
+        "name": "badgeRadius",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Corner radius used to clip the `badge` box. Only applies when `badgeSize` is set. Anything that overflows the rounded box (e.g. a non-square image) is clipped."
+      },
+      {
+        "name": "position",
+        "type": "AttachedPosition",
+        "required": false,
+        "source": "types",
+        "values": [
+          "center",
+          "left",
+          "right",
+          "top",
+          "bottom",
+          "top-left",
+          "top-right",
+          "bottom-left",
+          "bottom-right"
+        ],
+        "default": "bottom-right",
+        "description": "Anchor point for the `badge` relative to the main content. Default \"bottom-right\", from the component source."
+      },
+      {
+        "name": "circular",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "How the anchor point is computed for diagonal (corner) positions: - `true` (default): treat the main content as a **circle** inscribed in its bounding box — corner anchors sit on the circle's circumference (the 45° point), so badges hug round content like a circular `IconCapsule` or `Avatar`. - `false`: treat the main content as a **square** — corner anchors sit on the bounding-box corners. Edge (`top`/`bottom`/`left`/`right`) and `center` anchors are unaffected, since the circle meets the bounding box at those points. Default true, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration cascaded to the token resolver and all children."
+      },
+      {
+        "name": "...Omit<ViewProps, 'children'>",
+        "type": "Omit<ViewProps, 'children'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Attached Border",
+        "type": "mode collection",
+        "values": [
+          "True",
+          "False"
+        ],
+        "description": "A token collection Attached reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "True"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Attached reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Main content the badge attaches to (the Figma \"main slot\"). Any node — typically an `IconCapsule`, `Avatar`, image, etc. `modes` are cascaded to every child via {@link cloneChildrenWithModes}.",
+        "source": "types"
+      },
+      {
+        "name": "badge",
+        "type": "React.ReactNode",
+        "description": "The element attached on top of `children` (the Figma \"slot\"). Centered on the anchor point given by `position` so it straddles the edge/corner. `modes` are cascaded into it as well.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=attached",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4477-471",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-attached--docs"
+  }
+}

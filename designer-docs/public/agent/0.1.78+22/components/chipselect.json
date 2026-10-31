@@ -1,0 +1,579 @@
+{
+  "schemaVersion": 1,
+  "id": "ChipSelect",
+  "slug": "chipselect",
+  "category": "input",
+  "tags": [
+    "filter chip",
+    "chip",
+    "date range",
+    "filter"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:10:13Z",
+    "flags": [
+      {
+        "field": "/facts/modes/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Chip Select to show one filter, such as a date range, and whether it is applied.",
+  "useWhen": [
+    {
+      "text": "Show one filter, such as a date range, and whether it is applied.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Chip Select to show one filter, such as a date range, and whether it is applied."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A filter that does not apply: hide it instead. Chip Select has no disabled state.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "There is no disabled state; hide a filter that does not apply instead."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Leading icon",
+      "holds": "Hints at the kind of filter, such as a date.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Hints at the kind of filter, such as a date."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "Names the filter, or the value once applied.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the filter, or the value once applied."
+      }
+    },
+    {
+      "part": "Close icon",
+      "holds": "Shown when Active; shows that pressing again clears the filter.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows that pressing again clears the filter."
+      }
+    },
+    {
+      "part": "Container",
+      "holds": "Fully rounded shape that turns lavender when Active.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Fully rounded shape that turns lavender when Active."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "labelSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In the guide's In context, the filters sit above the list they filter, a transaction list.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Filters above a transaction list"
+      }
+    },
+    {
+      "text": "Height is fixed at 32 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height is fixed at 32 px."
+      }
+    },
+    {
+      "text": "Width grows with the label and the icons, so short labels keep a row of chips on one line.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Width grows with the label and the icons, so short labels keep a row of chips on one line."
+      },
+      "target": "label"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Idle names the filter; Active shows the chosen value and how to clear it.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Idle names the filter; Active shows the chosen value and how to clear it."
+      },
+      "target": "active"
+    },
+    {
+      "text": "One property, active, switches the chip between Idle and Active.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "One property switches the chip between Idle and Active."
+      },
+      "target": "active"
+    },
+    {
+      "text": "Figma's State variant maps to the active property, which sets the ChipSelect State mode.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s State variant maps to the active property, which sets the ChipSelect State mode."
+      },
+      "target": "active"
+    },
+    {
+      "text": "With active unset (false), the chip is Idle.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "active",
+      "value": "false"
+    },
+    {
+      "text": "The screen owns each filter.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen owns each filter."
+      }
+    },
+    {
+      "text": "In the guide's In context, pressing an Idle chip opens a picker (not part of Chip Select) and pressing an Active chip clears it; the screen owns what a press does.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pressing an Idle chip opens a picker (not part of Chip Select); pressing an Active chip clears it."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "The screen updates the chip's state (active) and label after each choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen updates the chip’s state and label after each choice."
+      }
+    },
+    {
+      "text": "The whole chip is one press target: the close icon is part of it, not a separate button.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The close icon is part of the single press target, not a separate button."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Choose an icon that matches the filter.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Choose an icon that matches the filter"
+      },
+      "target": "icon"
+    },
+    {
+      "text": "Calendar icon, the default: for date and period filters.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default, for date and period filters."
+      },
+      "target": "icon",
+      "value": "ic_calendar_week"
+    },
+    {
+      "text": "icon is ic_calendar_week, the calendar icon, by default.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/2"
+      },
+      "target": "icon",
+      "value": "ic_calendar_week"
+    },
+    {
+      "text": "Filter icon (ic_filter in the guide's code): for other attribute filters.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For other attribute filters."
+      },
+      "target": "icon",
+      "value": "ic_filter"
+    },
+    {
+      "text": "Match the icon to the filter: a calendar signals a date filter.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "A calendar signals a date filter."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "Don't use an unrelated icon: a home icon on a date filter confuses the meaning.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A home icon on a date filter confuses the meaning."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "The leading icon shows in both states, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The leading icon shows in both states, as in Figma."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "Keep the close icon whenever a press clears the filter: the × tells people a press removes the filter.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "keep the close icon whenever a press clears the filter"
+      },
+      "target": "showCloseIcon",
+      "value": "true"
+    },
+    {
+      "text": "Hide the close icon (showCloseIcon false) only when a press reopens the picker instead of clearing.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Only when a press reopens the picker instead of clearing."
+      },
+      "target": "showCloseIcon",
+      "value": "false"
+    },
+    {
+      "text": "Don't hide the close icon when a press clears: without the ×, people cannot tell how to undo the filter.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Without the ×, people cannot tell how to undo the filter."
+      },
+      "target": "showCloseIcon",
+      "value": "false"
+    },
+    {
+      "text": "showCloseIcon is true by default, and the close icon shows only when the chip is Active.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "showCloseIcon"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "While Idle, use one or two words for the filter.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "While Idle, use one or two words for the filter."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Once applied, replace them with the chosen value so the row reads as a summary.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Once applied, replace them with the chosen value so the row reads as a summary."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Show the chosen value: “Last 30 days” tells people what the list is showing.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Last 30 days” tells people what the list is showing."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Don't keep the generic label once the filter applies: an Active “Date” chip does not say which dates.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "An Active “Date” chip does not say which dates."
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "Date",
+      "Category",
+      "Account",
+      "Last 30 days",
+      "Groceries",
+      "Savings •• 4821"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "active false (the default): grey background, dark text; the label names the filter.",
+      "from": {
+        "section": "states",
+        "quote": "Grey background, dark text."
+      }
+    },
+    {
+      "state": "Active",
+      "when": "active true: lavender background, purple icon, text, and close icon; the label shows the chosen value.",
+      "from": {
+        "section": "states",
+        "quote": "Lavender background, purple icon, text, and close icon."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the chip is a button named by its label and announced as pressed when Active; Enter and click activate it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the chip is a button named by its label and announced as pressed when Active; Enter and click activate it."
+      }
+    },
+    {
+      "text": "Developers can replace the name with accessibilityLabel.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Developers can replace the name with accessibilityLabel."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "accessibilityLabel is the chip's accessible name; without it, the name is the visible label.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/8"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Show the chosen value",
+      "dont": "Keep the generic label",
+      "why": "An Active “Date” chip does not say which dates.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show the chosen value"
+      }
+    },
+    {
+      "do": "Match the icon to the filter",
+      "dont": "Use an unrelated icon",
+      "why": "A home icon on a date filter confuses the meaning.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match the icon to the filter"
+      }
+    },
+    {
+      "do": "Keep the close icon when a press clears",
+      "dont": "Hide it when a press clears",
+      "why": "Without the ×, people cannot tell how to undo the filter.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the close icon when a press clears"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Filters above a transaction list, the guide's In context, once the screen has applied the date filter: the date chip is Active and shows its value, “Last 30 days”, with the close icon (a press clears it); Category is Idle (a press opens the screen's picker, which is not part of Chip Select). The row is a ChipGroup, the pack's component for a row of Chip Select filters (the guide's own code lays the two chips out in a plain wrapping row), named “Transaction filters” as the ChipGroup entry advises. The literal values and empty onPress stand for the screen's own state and picker.",
+      "jsx": "<ChipGroup accessibilityLabel=\"Transaction filters\">\n  <ChipSelect label=\"Last 30 days\" icon=\"ic_calendar_week\" active onPress={() => {}} />\n  <ChipSelect label=\"Category\" icon=\"ic_filter\" active={false} onPress={() => {}} />\n</ChipGroup>",
+      "from": {
+        "section": "inContext",
+        "quote": "Pressing an Idle chip opens a picker (not part of Chip Select); pressing an Active chip clears it."
+      }
+    },
+    {
+      "purpose": "An applied date filter whose press reopens the picker instead of clearing it, the guide's Active without close icon: the only case for hiding the close icon. onPress stands for the screen reopening its picker.",
+      "jsx": "<ChipSelect label=\"Last 30 days\" active showCloseIcon={false} onPress={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "Only when a press reopens the picker instead of clearing."
+      }
+    },
+    {
+      "purpose": "One filter on its own, Idle: “Category” names an attribute filter, with the filter icon, as the guide's Configuration and Content show it. A press opens the screen's picker; once a value is chosen, the screen sets active and replaces the label with the value (Content's applied labels, such as “Groceries”).",
+      "jsx": "<ChipSelect label=\"Category\" icon=\"ic_filter\" onPress={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "For other attribute filters."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Date",
+        "description": "Label text to display. Default \"Date\", from the component source."
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "On the web, aria-pressed follows active. Declared: Whether the chip is in active state. Default false, from the component source.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "ic_calendar_week",
+        "description": "The leading icon shows in both states, as in Figma. Declared: Icon name to display in Idle state (when active is false). Default \"ic_calendar_week\", from the component source.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "showCloseIcon",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to show the close icon when active. Default true, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes for design token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides."
+      },
+      {
+        "name": "labelSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional slot to override the label text."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Button press handler."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "On the web the chip's aria-label comes from label; accessibilityLabel replaces that name. Declared: Accessible name. Defaults to the visible `label`.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility hint for screen readers."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test identifier for E2E / unit tests."
+      }
+    ],
+    "modes": [
+      {
+        "name": "ChipSelect State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "active forces this mode (Idle or Active); a ChipSelect State passed in modes is overridden. Declared: A token collection ChipSelect reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Idle",
+        "checkedOn": "2026-09-28"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ChipSelect reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      }
+    ],
+    "slots": [
+      {
+        "name": "labelSlot",
+        "type": "React.ReactNode",
+        "description": "Optional slot to override the label text.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Button press handler.",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=chipselect",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1901-4727",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-chipselect--docs"
+  }
+}

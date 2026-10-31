@@ -23,6 +23,18 @@
       "reason": "lost-context: The quote is cut before \"; it wraps.\", which drops the point that the description wraps and never truncates. Without it, the entry is easier to read alongside /configuration/13's claim that the description is clamped to one line.",
       "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
       "why": "The cut is deliberate: on the installed 0.1.78-dbe0e02 the description takes the same one-line clamp as the title (SummaryTile.tsx lines 225–229, resolveTruncation(disableTruncation, 1)), so “it wraps” no longer holds and is left out with the guide’s other stale description sentences, which the human flag lists (#352). /configuration/13 states the installed behaviour from the package fact."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The example leaves modes off the tile and says 'on the installed package a Button in children starts at AppearanceBrand Secondary and Button / Size S'. The guide says the opposite for installed 0.1.78: 'a Button passed in children doesn't get its purple, size S look, so these examples set AppearanceBrand Secondary and Button / Size S on the tile'. The doDont Don't also says 'Without those modes it's gold and size M'. Without TILE modes this example renders the gold, size M Button the guide warns against.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r22 (release 0.1.78+22), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /examples/0 dismissal above, which Astra confirmed on 30 October (“ACTION_SLOT_DEFAULTS supplies Secondary/S before tile and child overrides”), raised again in new words. The reviewer reads the guide and evidence as checked on c7d3348; on the installed 0.1.78-dbe0e02 a Button in children is AppearanceBrand Secondary and Button / Size S with no modes on the tile (SummaryTile.tsx 26–29, 175, 179), as the children fact says. The guide’s contrary sentences are stale and in this entry’s human flag for #352."
+    },
+    {
+      "field": "/examples/2",
+      "reason": "misreads-source: It says 'the slotted Button needs no modes on the tile', but the guide says a bare Button in children is 'gold and size M, too loud for a header' unless the tile sets AppearanceBrand Secondary and Button / Size S. The guide says 'every example here does' set those modes.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r22 (release 0.1.78+22), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /examples/2 dismissal above, which Astra confirmed on 30 October, raised again in new words. On the installed 0.1.78-dbe0e02 the slotted Button starts at AppearanceBrand Secondary and Button / Size S without modes on the tile (SummaryTile.tsx 26–29, 175, 179); the building rules keep modes at their defaults. The guide’s “Give the tile AppearanceBrand Secondary and Button / Size S” and the “A bare Button” Don’t describe c7d3348 and are in this entry’s human flag for #352."
     }
   ]
 }

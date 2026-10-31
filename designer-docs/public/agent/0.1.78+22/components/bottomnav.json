@@ -1,0 +1,503 @@
+{
+  "schemaVersion": 1,
+  "id": "BottomNav",
+  "slug": "bottomnav",
+  "category": "navigation",
+  "tags": [
+    "tab bar",
+    "bottom navigation",
+    "navigation bar",
+    "tabs"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:10:13Z",
+    "flags": [
+      {
+        "field": "/facts/props/5",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/8",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/placementAdvice/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/4",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Bottom Nav to move between the top-level sections of an app from any screen.",
+  "useWhen": [
+    {
+      "text": "Move between the top-level sections of an app from any screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Bottom Nav to move between the top-level sections of an app from any screen."
+      }
+    },
+    {
+      "text": "Switch sections of the app.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Switch sections of the app"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "More than five top-level destinations: with a sixth, items shrink to about 55 px and labels crowd each other.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Items shrink to about 55 px and labels crowd each other."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Bar",
+      "holds": "White surface with a hairline top border (the guide shows it in Light).",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White surface with a hairline top border."
+      }
+    },
+    {
+      "part": "Active item",
+      "holds": "The destination people are on, in the accent colour.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The destination people are on, in the accent colour."
+      }
+    },
+    {
+      "part": "Idle item",
+      "holds": "Another destination, one tap away.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Another destination, one tap away."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "Names the destination in one or two words.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the destination in one or two words."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Always at the bottom.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "always at the bottom"
+      }
+    },
+    {
+      "text": "Bottom Nav spans its screen and anchors to the bottom edge.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Bottom Nav spans its screen and anchors to the bottom edge."
+      }
+    },
+    {
+      "text": "It anchors itself to the bottom of its nearest positioned container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "anchors itself to the bottom of its nearest positioned container"
+      }
+    },
+    {
+      "text": "Its height comes from the items and the padding, 78 px in the installed package.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Its height comes from the items and the padding, 78 px in the installed package."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Three to five destinations, exactly one Active.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Three to five destinations, exactly one Active"
+      }
+    },
+    {
+      "text": "Every destination gets an equal share of the bar.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Every destination gets an equal share of the bar."
+      }
+    },
+    {
+      "text": "Fewer destinations mean wider tap targets; five is the most that stays comfortable.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Fewer destinations mean wider tap targets; five is the most that stays comfortable."
+      }
+    },
+    {
+      "text": "The screen tells Bottom Nav which destination is Active through its value.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The screen tells Bottom Nav which destination is Active through its value."
+      },
+      "target": "value"
+    },
+    {
+      "text": "Bottom Nav sets each item's BottomNavItem / State mode from value: the item whose value matches is Active, the rest Idle.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Bottom Nav sets each item’s BottomNavItem / State mode from value"
+      },
+      "target": "value"
+    },
+    {
+      "text": "The app keeps the Active value and swaps the screen above when it changes.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The app keeps the Active value and swaps the screen above when it changes."
+      },
+      "target": "value"
+    },
+    {
+      "text": "Bottom Nav only reports which destination was pressed: onChange receives that destination's value.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Bottom Nav only reports which destination was pressed."
+      },
+      "target": "onChange"
+    },
+    {
+      "text": "A destination can be disabled while it is temporarily unavailable: set disabled on its BottomNav.Item.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "A destination can be disabled while it is temporarily unavailable."
+      }
+    },
+    {
+      "text": "Don't leave nothing Active: with no match for the value, every item looks Idle.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "With no match for the value, every item looks Idle."
+      },
+      "target": "value"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One or two words per destination.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "One or two words per destination"
+        }
+      },
+      {
+        "text": "Use short nouns people already know, each with an icon that matches it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use short nouns people already know, each with an icon that matches it."
+        }
+      },
+      {
+        "text": "Don't use a long label: it wraps and makes that item taller than the rest.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "A long label wraps and makes that item taller than the rest."
+        }
+      },
+      {
+        "text": "Give each destination its own icon: icons help people find a section at a glance.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Icons help people find a section at a glance."
+        }
+      },
+      {
+        "text": "Don't reuse one icon everywhere: identical icons force people to read every label.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Identical icons force people to read every label."
+        }
+      }
+    ],
+    "good": [
+      "Home",
+      "Finances",
+      "Pay",
+      "Invest",
+      "Explore"
+    ],
+    "bad": [
+      "Investments & savings"
+    ]
+  },
+  "states": [
+    {
+      "state": "Active",
+      "when": "The destination whose value matches Bottom Nav's value: only the matching item switches to Active.",
+      "from": {
+        "section": "states",
+        "quote": "Only the matching item switches to Active."
+      }
+    },
+    {
+      "state": "Idle",
+      "when": "Every other destination: one Active, the rest Idle.",
+      "from": {
+        "section": "states",
+        "quote": "One Active, the rest Idle"
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "A destination that is temporarily unavailable: dimmed and skipped by keyboard focus.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed and skipped by keyboard focus."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Each destination is a tab named by its label.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "each item `role=tab`, `aria-label` = label"
+      }
+    },
+    {
+      "text": "Don't rely on accessibilityLabel or on the Active state being announced on the web: the tab list has no accessible name, even with accessibilityLabel, and the Active tab is not exposed as selected.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the tab list has no accessible name, even with accessibilityLabel, and the Active tab is not exposed as selected."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep three to five destinations",
+      "dont": "Crowd in a sixth",
+      "why": "Items shrink to about 55 px and labels crowd each other.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep three to five destinations"
+      }
+    },
+    {
+      "do": "Keep one destination Active",
+      "dont": "Leave nothing Active",
+      "why": "With no match for the value, every item looks Idle.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep one destination Active"
+      }
+    },
+    {
+      "do": "Give each destination its own icon",
+      "dont": "Reuse one icon everywhere",
+      "why": "Identical icons force people to read every label.",
+      "from": {
+        "section": "doDont",
+        "quote": "Give each destination its own icon"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Switching sections of the app, the guide's In context: a Screen holds the Active section's content and the Bottom Nav, which anchors to its bottom edge. Five destinations, each a short noun with its own icon; Home is Active. The app keeps the Active value and swaps the content above when onChange reports a pressed destination: the literal value and the empty onChange stand for the app's own state.",
+      "jsx": "<Screen>\n  <VStack>\n    <Text text=\"Home\" />\n    <Text text=\"Your balances and recent activity\" />\n  </VStack>\n  <BottomNav value=\"home\" onChange={(value) => {}}>\n    <BottomNav.Item value=\"home\" label=\"Home\" iconName=\"ic_home\" />\n    <BottomNav.Item value=\"finances\" label=\"Finances\" iconName=\"ic_rupee\" />\n    <BottomNav.Item value=\"pay\" label=\"Pay\" iconName=\"ic_scan_qr_code\" />\n    <BottomNav.Item value=\"invest\" label=\"Invest\" iconName=\"ic_rupee_coin\" />\n    <BottomNav.Item value=\"explore\" label=\"Explore\" iconName=\"ic_search\" />\n  </BottomNav>\n</Screen>",
+      "from": {
+        "section": "inContext",
+        "quote": "The app keeps the Active value and swaps the screen above when it changes."
+      }
+    },
+    {
+      "purpose": "Three destinations, the guide's Configuration: each gets an equal share of the bar, so the tap targets are wider than with five (about 109 px each on the guide's 360 px frame, against about 66 px for five).",
+      "jsx": "<BottomNav value=\"home\" onChange={(value) => {}}>\n  <BottomNav.Item value=\"home\" label=\"Home\" iconName=\"ic_home\" />\n  <BottomNav.Item value=\"pay\" label=\"Pay\" iconName=\"ic_scan_qr_code\" />\n  <BottomNav.Item value=\"explore\" label=\"Explore\" iconName=\"ic_search\" />\n</BottomNav>",
+      "from": {
+        "section": "configuration",
+        "quote": "Each item is about 109 px wide."
+      }
+    },
+    {
+      "purpose": "A destination that is temporarily unavailable, the guide's States: Pay is disabled, so it is dimmed and skipped by keyboard focus; Home is Active.",
+      "jsx": "<BottomNav value=\"home\" onChange={(value) => {}}>\n  <BottomNav.Item value=\"home\" label=\"Home\" iconName=\"ic_home\" />\n  <BottomNav.Item value=\"finances\" label=\"Finances\" iconName=\"ic_rupee\" />\n  <BottomNav.Item value=\"pay\" label=\"Pay\" iconName=\"ic_scan_qr_code\" disabled />\n  <BottomNav.Item value=\"invest\" label=\"Invest\" iconName=\"ic_rupee_coin\" />\n  <BottomNav.Item value=\"explore\" label=\"Explore\" iconName=\"ic_search\" />\n</BottomNav>",
+      "from": {
+        "section": "states",
+        "quote": "A destination can be disabled while it is temporarily unavailable."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "value",
+        "type": "string | number",
+        "required": false,
+        "source": "types",
+        "description": "Value of the currently selected item."
+      },
+      {
+        "name": "onChange",
+        "type": "(value: string | number) => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback fired when an item is pressed."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "The content of the component (BottomNav.Item components)."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Accepted by the type but discarded: the tab list gets no name from it.",
+        "checkedOn": "2026-09-28"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityRole' | 'accessibilityLabel' | 'accessibilityHint'>",
+        "type": "Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityRole' | 'accessibilityLabel' | 'accessibilityHint'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      },
+      {
+        "name": "BottomNav.Item",
+        "type": "component",
+        "description": "Each destination is a BottomNav.Item with value, label, iconName, disabled and onPress. Declared: A static sub-component of BottomNav. Its own props: value.",
+        "source": "evidence",
+        "checkedOn": "2026-09-28"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection BottomNav reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "The content of the component (BottomNav.Item components).",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onChange",
+        "type": "(value: string | number) => void",
+        "description": "Callback fired when an item is pressed.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma draws the bar at 77 px; the package renders 78 px, with its 1 px top border inside the bar.",
+        "source": "evidence",
+        "checkedOn": "2026-09-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=bottomnav",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=302-79",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-bottomnav--docs"
+  }
+}

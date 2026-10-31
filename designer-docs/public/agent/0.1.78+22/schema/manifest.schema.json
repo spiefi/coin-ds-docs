@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coin agent pack manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packVersion",
+    "packageVersion",
+    "packageSource",
+    "guideCommit",
+    "builtAt",
+    "components",
+    "counts"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "packVersion": {
+      "type": "string"
+    },
+    "packageVersion": {
+      "type": "string"
+    },
+    "packageSource": {
+      "type": "string"
+    },
+    "guideCommit": {
+      "type": "string"
+    },
+    "builtAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "components": {
+      "type": "integer"
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documented",
+        "flagged",
+        "undocumented",
+        "unsupported"
+      ],
+      "properties": {
+        "documented": {
+          "type": "integer"
+        },
+        "flagged": {
+          "type": "integer"
+        },
+        "undocumented": {
+          "type": "integer"
+        },
+        "unsupported": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

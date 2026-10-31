@@ -29,6 +29,30 @@
       "reason": "misreads-source: Same as headline: the guide and the evidence say an empty footerSubtitle falls back to its placeholder word, so \"'' or null hides the line\" is contradicted.",
       "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch11, on the extraction’s behalf; for Astra and Marcin to confirm",
       "why": "Same as headline, for footerSubtitle: in 0.1.78-dbe0e02 only a left-out footerSubtitle shows “Subtitle”; an empty string or null renders no line (CcCard.tsx lines 240, 361). The rule rests on the package fact props:footerSubtitle, which says so. The guide and evidence sentences describe c7d3348 and are in the human flag."
+    },
+    {
+      "field": "/configuration/3",
+      "reason": "misreads-source: The guide says the opposite: \"Compact defaults to the 88 × 54 picture where Figma shows a 42 px Avatar\". The evidence agrees (\"Compact defaults to the 88 × 54 image\"). The item repeats the package JSDoc's claim that a 42 px Avatar renders by default, which the guide reports as a discrepancy.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r22 (release 0.1.78+22), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /configuration/3 dismissal above, which Astra confirmed on 30 October, raised again in new words against the reworded item (“without media … by default”, as Astra asked). On the installed 0.1.78-dbe0e02, compact without media renders a 42 px Avatar (Avatar Size L: imageSource in a circle, or a “CC” monogram; CcCard.tsx 231, 261–271), as the compact fact says. The guide’s and evidence’s 88 × 54 sentences describe c7d3348 and are in this entry’s human flag for #364."
+    },
+    {
+      "field": "/content/rules/2",
+      "reason": "misreads-source: The guide says \"an empty headline, description, or footerSubtitle shows its placeholder word\", and the evidence's Limits say \"Don't imply ... that footer lines can be hidden one by one\". The added \"'' or null hides the line\" contradicts this.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r22 (release 0.1.78+22), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /content/rules/2 dismissal above, which Astra confirmed on 30 October (“undefined supplies samples; '' or null hides each default footer line”), raised again in new words. On the installed 0.1.78-dbe0e02 only a left-out headline shows “Headline”; '' or null renders no line (CcCard.tsx 238, 358), as the headline fact says. The guide and evidence sentences describe c7d3348 and are in the human flag for #364."
+    },
+    {
+      "field": "/content/rules/3",
+      "reason": "misreads-source: Same as headline: the guide says an empty description \"shows its placeholder word\", so \"'' or null hides the line\" contradicts it and the evidence's Limits.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r22 (release 0.1.78+22), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /content/rules/3 dismissal above, which Astra confirmed on 30 October, raised again in new words. On the installed 0.1.78-dbe0e02 only a left-out description shows “Description”; '' or null renders no line (CcCard.tsx 239, 360), as the description fact says. The guide and evidence sentences describe c7d3348 and are in the human flag for #364."
+    },
+    {
+      "field": "/content/rules/4",
+      "reason": "misreads-source: Same as headline: the guide says an empty footerSubtitle \"shows its placeholder word\", so \"'' or null hides the line\" contradicts it and the evidence's Limits.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r22 (release 0.1.78+22), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /content/rules/4 dismissal above, which Astra confirmed on 30 October, raised again in new words. On the installed 0.1.78-dbe0e02 only a left-out footerSubtitle shows “Subtitle”; '' or null renders no line (CcCard.tsx 240, 361), as the footerSubtitle fact says. The guide and evidence sentences describe c7d3348 and are in the human flag for #364."
     }
   ]
 }
