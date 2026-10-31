@@ -1,0 +1,277 @@
+{
+  "slug": "bottomnavitem",
+  "label": "Bottom Nav Item",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/bottomnavitem.guide.tsx",
+    "src/BottomNavItemGuide.tsx"
+  ],
+  "evidence": "docs/evidence/bottomnavitem.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T03:32:46.068Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "tab bar item",
+    "navigation item"
+  ],
+  "title": "Bottom Nav Item",
+  "summary": "Show one top-level destination in the bottom navigation bar with an icon and a short label.",
+  "corePrinciple": "One destination, one short label. Let BottomNav mark the Active item.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=306-92",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-bottomnavitem--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "An icon above a short label",
+      "description": "The item stacks a registry icon over its label. The State mode colors both parts; the label also names the tab.",
+      "blocks": [
+        "Shown at 3×",
+        "32 × 44",
+        "24",
+        "6",
+        "14",
+        "1",
+        "2",
+        "3",
+        "Icon",
+        "A 24 px registry icon. State colors it grey when Idle and gold when Active.",
+        "Label",
+        "11 px medium text, 6 px below the icon. On the web it also becomes the tab’s spoken name.",
+        "Item",
+        "Hugs its content on its own. Inside BottomNav, every item stretches to an equal share of the bar.",
+        "Component bounds",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Home"
+      ],
+      "anatomy": [
+        {
+          "part": "Icon",
+          "note": "A 24 px registry icon. State colors it grey when Idle and gold when Active."
+        },
+        {
+          "part": "Label",
+          "note": "11 px medium text, 6 px below the icon. On the web it also becomes the tab’s spoken name."
+        },
+        {
+          "part": "Item",
+          "note": "Hugs its content on its own. Inside BottomNav, every item stretches to an equal share of the bar."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Choose the icon and label; State comes from the bar",
+      "description": "Figma exposes State, the icon, and the label. In code, the icon and label are properties and State is the BottomNavItem / State mode, which BottomNav sets from its value.",
+      "blocks": [
+        "Icon + label",
+        "One destination per item",
+        "Pair a familiar registry icon with the destination’s name.",
+        "BottomNavItem / State",
+        "Idle",
+        "Active",
+        "Idle or Active",
+        "Active turns the icon gold and darkens the label. Only the current destination should be Active."
+      ],
+      "specimen": [
+        "Home",
+        "Pay",
+        "Explore",
+        "Finances"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Idle, Active, and unavailable",
+      "description": "Idle and Active come from the State mode. Disabled is a property: the item fades and stops responding, but keeps its place in the bar.",
+      "blocks": [
+        "State mode",
+        "Idle",
+        "Any destination other than the current one.",
+        "Active",
+        "The destination people are on now.",
+        "disabled",
+        "Unavailable",
+        "Half opacity. The item cannot be pressed or reached with Tab.",
+        "Press, hover, and keyboard focus",
+        "On the web, hover fades an item to 85% opacity and a touch press fades it to 70%. Keyboard focus adds a dark 2 px line under the item alongside the browser’s focus ring. Try them in the live example above."
+      ],
+      "specimen": [
+        "Pay"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The item hugs its label; the bar shares its width",
+      "description": "On its own, an item is as wide as its label. BottomNav gives every item the same share of the bar, so fewer items mean wider tap targets.",
+      "blocks": [
+        "Standalone",
+        "32 × 44 px",
+        "50 × 44 px",
+        "Width follows the label",
+        "Both items are 44 px high. The longer label makes Finances wider.",
+        "Inside BottomNav",
+        "3 items",
+        "each 94.7 × 44 px",
+        "94.7",
+        "5 items",
+        "each 56.8 × 44 px",
+        "56.8",
+        "Equal shares of the bar",
+        "The same bar width divided by three or five items."
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Pay",
+        "Explore",
+        "Invest"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name each destination plainly",
+      "description": "The label is both the visible name and, on the web, the spoken name of the tab. Keep it short and specific.",
+      "blocks": [
+        "01",
+        "Use one or two words",
+        "Home, Finances, Pay, and Explore fit on one line and scan quickly.",
+        "02",
+        "The label is the spoken name",
+        "The icon is hidden from assistive technology. Add an accessibility label only when the visible label is abbreviated.",
+        "03",
+        "Keep three to five destinations",
+        "Canonical BottomNav guidance keeps 3–5 items so every tap target stays wide."
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Pay",
+        "Explore"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Move between top-level destinations",
+      "description": "A public BottomNav holds five BottomNavItems at the bottom of an app screen and keeps exactly one Active.",
+      "blocks": [
+        "Choose a destination. BottomNav marks it Active and the screen above changes."
+      ],
+      "specimen": [
+        "Home",
+        "Your accounts at a glance",
+        "Balances, recent payments, and reminders.",
+        "Finances",
+        "Pay",
+        "Invest",
+        "Explore"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Protect the label",
+      "description": "The label carries the destination’s name for sight and speech, so shortening or removing it has a visible cost.",
+      "blocks": [
+        "Do",
+        "Use a short label",
+        "Invest sits on one line and matches the other items.",
+        "Don’t",
+        "Write a long label",
+        "“Investments and savings” wraps onto extra lines and pushes that item out of line with the others.",
+        "Keep every label",
+        "Each destination has a visible name, which is also its spoken name.",
+        "Remove the labels",
+        "Icons alone must be guessed, and each tab loses its spoken name."
+      ],
+      "specimen": [
+        "Home",
+        "Finances",
+        "Invest",
+        "Explore",
+        "Investments and savings"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Use a short label",
+            "caption": "Invest sits on one line and matches the other items.",
+            "specimen": "Home · Finances · Invest · Explore"
+          },
+          "dont": {
+            "title": "Write a long label",
+            "caption": "“Investments and savings” wraps onto extra lines and pushes that item out of line with the others.",
+            "specimen": "Home · Finances · Investments and savings · Explore"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep every label",
+            "caption": "Each destination has a visible name, which is also its spoken name.",
+            "specimen": "Home · Finances · Invest · Explore"
+          },
+          "dont": {
+            "title": "Remove the labels",
+            "caption": "Icons alone must be guessed, and each tab loses its spoken name.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Public BottomNavItem, shown in its BottomNav composition",
+      "description": "The guide renders the public jfs-components BottomNavItem on its own and inside the public BottomNav.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "BottomNavItem set, node 306:92 · State, icon, and label",
+        "02",
+        "Canonical Storybook",
+        "BottomNavItem docs and stories; BottomNav composition",
+        "Default story",
+        "With custom icons",
+        "Disabled state",
+        "BottomNav composition",
+        "Checked 24 September 2026",
+        "Declared, installed, and npm latest are all jfs-components@0.1.60. Figma’s State variant maps to the BottomNavItem / State mode in code; BottomNav sets it from value. The guide stays in Light mode, matching the Figma context, because the installed Dark tokens resolve the Idle label to orange. On the web, BottomNav ignores its accessibility label, and the Active tab is not exposed as selected.",
+        "latest",
+        "jfs-components@0.1.60",
+        "BottomNavItem / State",
+        "value"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

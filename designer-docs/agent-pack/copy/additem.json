@@ -1,0 +1,253 @@
+{
+  "slug": "additem",
+  "label": "Add Item",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "files": [
+    "src/guides/additem.guide.tsx",
+    "src/ActionGuides.tsx"
+  ],
+  "evidence": "docs/evidence/additem.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T03:32:47.631Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "upload",
+    "attachment",
+    "attach file"
+  ],
+  "title": "Add Item",
+  "summary": "Add an attachment and show what was chosen.",
+  "corePrinciple": "Keep empty, preview, and unavailable states distinct.",
+  "figma": "https://www.figma.com/design/dSlK8ueQ7wlbyUSZd4f8QO/Coin-Subcomponents",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-additem--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Empty and preview reveal different parts",
+      "description": "The 44 × 44 cell keeps the add icon, thumbnail, and optional remove affordance within one fixed boundary.",
+      "blocks": [
+        "Shown at 2×",
+        "Empty",
+        "Preview",
+        "1",
+        "2",
+        "3",
+        "4",
+        "44 × 44 cell",
+        "The fixed boundary is the target and visual container.",
+        "Add icon",
+        "Identifies the empty state as an attachment trigger.",
+        "Thumbnail",
+        "Confirms which visual asset was selected.",
+        "Remove affordance",
+        "Appears only when onRemove is supplied for a preview."
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "44 × 44 cell",
+          "note": "The fixed boundary is the target and visual container."
+        },
+        {
+          "part": "Add icon",
+          "note": "Identifies the empty state as an attachment trigger."
+        },
+        {
+          "part": "Thumbnail",
+          "note": "Confirms which visual asset was selected."
+        },
+        {
+          "part": "Remove affordance",
+          "note": "Appears only when onRemove is supplied for a preview."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Supply state, image, and picker behavior explicitly",
+      "description": "Empty can call onPress or an injected picker. Preview needs an image source; onRemove is optional.",
+      "blocks": [
+        "Empty",
+        "Add trigger",
+        "Use picker with onAssetsPicked, or wire a platform-specific onPress.",
+        "Preview",
+        "Selected asset",
+        "Supply preview plus imageSource to show what was chosen.",
+        "No remove action",
+        "Omit onRemove when the selected attachment cannot be cleared here."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Keep empty, preview, and unavailable distinct",
+      "description": "These are visibly different outcomes. Unavailable uses the public isDisabled behavior rather than a new visual variant.",
+      "blocks": [
+        "Empty",
+        "Ready to add",
+        "The add icon tells people the cell can accept an attachment.",
+        "Preview",
+        "Asset selected",
+        "A thumbnail confirms the chosen asset and can expose removal.",
+        "Unavailable",
+        "Action disabled",
+        "The cell is dimmed and its press behavior is disabled."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The cell stays 44 × 44",
+      "description": "Additem owns its fixed cell. A FormUpload or another public layout owns row gaps, wrapping, and the surrounding label.",
+      "blocks": [
+        "Attachment row",
+        "Cells keep the same footprint while the row controls spacing.",
+        "Constrained host",
+        "The host can wrap around the fixed cell without resizing it."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the attachment beside the thumbnail",
+      "description": "A 44px image cannot explain itself. Keep a meaningful filename or field label nearby so the selected asset remains understandable.",
+      "blocks": [
+        "01",
+        "Give the preview context",
+        "Pair the cell with the field purpose and a readable filename.",
+        "receipt-september.svg",
+        "02",
+        "Use a useful field label",
+        "“Identity documents” says more than a generic “Upload.”",
+        "03",
+        "Keep state visible",
+        "Do not use the empty add icon after an asset has been chosen."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Use Additem inside FormUpload",
+      "description": "The public composite supplies the field label, support text, attachment row, picker handoff, and controlled attachment list.",
+      "blocks": [
+        "1 of 2 attachments selected"
+      ],
+      "specimen": [
+        "Identity documents",
+        "Add a clear image and keep the filename nearby."
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Explain what the thumbnail represents",
+      "description": "A small preview is evidence of a choice, not a complete label.",
+      "blocks": [
+        "Do",
+        "Keep a meaningful label nearby",
+        "The attachment remains identifiable even when the image is small.",
+        "Don’t",
+        "Show an unexplained thumbnail",
+        "People cannot confirm what file they selected or why it belongs here.",
+        "Keep selected state visible",
+        "The preview agrees with the nearby status text.",
+        "Pair selected copy with an empty cell",
+        "The add icon contradicts the nearby selected state.",
+        "Explain why adding is unavailable",
+        "A nearby reason tells people what to do next.",
+        "Disable the cell without a reason",
+        "An unexplained unavailable state leaves people stuck."
+      ],
+      "specimen": [
+        "Receipt · September",
+        "Receipt selected",
+        "Complete the required details to add a receipt"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep a meaningful label nearby",
+            "caption": "The attachment remains identifiable even when the image is small.",
+            "specimen": "Receipt · September"
+          },
+          "dont": {
+            "title": "Show an unexplained thumbnail",
+            "caption": "People cannot confirm what file they selected or why it belongs here.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Keep selected state visible",
+            "caption": "The preview agrees with the nearby status text.",
+            "specimen": "Receipt selected"
+          },
+          "dont": {
+            "title": "Pair selected copy with an empty cell",
+            "caption": "The add icon contradicts the nearby selected state.",
+            "specimen": "Receipt selected"
+          }
+        },
+        {
+          "do": {
+            "title": "Explain why adding is unavailable",
+            "caption": "A nearby reason tells people what to do next.",
+            "specimen": "Complete the required details to add a receipt"
+          },
+          "dont": {
+            "title": "Disable the cell without a reason",
+            "caption": "An unexplained unavailable state leaves people stuck.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Public export with a source limitation",
+      "description": "The package and stories define the usable contract. The matching lower-case Figma subcomponent key was found, but an exact live node was not exposed in the available page context.",
+      "blocks": [
+        "01",
+        "Coin Subcomponents file",
+        "Read-only source file · exact Additem node unresolved",
+        "02",
+        "Additem Storybook",
+        "Empty, preview, picker, disabled, and all-state stories",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Additem defaults its inner IconCapsule to Neutral, Low, and S. The exact Figma node remains unverified. The remove control is its own button beside the preview, named “Remove” plus the preview’s label, and a click, a tap, or Enter removes the item without opening the preview.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

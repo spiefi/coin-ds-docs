@@ -1,0 +1,467 @@
+{
+  "slug": "contentsheet",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r26, extraction worker",
+  "extractedOn": "2026-10-31",
+  "useWhen": [
+    {
+      "text": "Show a short panel from the bottom of the screen, such as a month’s transactions or a payment choice.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Content Sheet to show a short panel from the bottom of the screen, such as a month’s transactions or a payment choice."
+      }
+    },
+    {
+      "text": "Choosing how to pay, as in the guide's In context: the sheet holds the payment options over the payment screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Choosing how to pay"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Content too long to read without scrolling: longer content deserves its own screen.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "Keep the content short enough to read without scrolling; longer content deserves its own screen."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "Optional and centred; it stays put while the content scrolls.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional and centred; it stays put while the content scrolls."
+      }
+    },
+    {
+      "part": "Slot",
+      "holds": "Any content; the sheet grows to fit it.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Any content; the sheet grows to fit it."
+      }
+    },
+    {
+      "part": "Sheet",
+      "holds": "White, with 20 px top corners and no handle.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White, with 20 px top corners and no handle."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In a screen the sheet docks to the bottom and spans the full width.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "In a screen it docks to the bottom and spans the full width."
+      }
+    },
+    {
+      "text": "Place the sheet in the screen it covers: it is not a portal or modal, and it docks to the bottom of its nearest positioned parent at full width.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Not a portal or modal: `position: absolute; left/right/bottom: 0` inside the nearest positioned parent (full width, flush bottom)"
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "The sheet spans its screen and adds 12 px above and 41 px below the content, with 8 px between the title and the content.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The sheet spans its screen and adds 12 px above and 41 px below the content, with 8 px between the title and the content."
+      }
+    },
+    {
+      "text": "The sheet never sets a height: it grows with the content up to 70% of its screen, then the content scrolls under the title.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It never sets a height: it grows with the content up to 70% of its screen, then the content scrolls under the title."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it describes the component in every use: the sheet itself sets no height and follows its content up to the cap (the children fact: “The sheet has no fixed height”). It states behaviour, not an instruction, so it stays recommended; a height set through style is the guide's Don't, below."
+      }
+    },
+    {
+      "text": "The 70% height limit is measured against the sheet's screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Its 70% height limit is measured against its screen."
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "The title stays fixed 8 px above the content, and the items in the slot are 8 px apart, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "In the package, as in Figma, the title stays fixed 8 px above the content, and the items in the slot are 8 px apart."
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "In the guide, the payment screen opens the sheet from a Change payment method button.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The payment screen opens the sheet from Change payment method."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The sheet grows to fit its content; the screen decides when it shows.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "It grows to fit its content; the screen decides when it shows."
+      }
+    },
+    {
+      "text": "Add a title when the content needs a name.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a title when the content needs a name."
+      }
+    },
+    {
+      "text": "Without a title, the slot starts right under the top padding.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "configuration",
+        "quote": "The slot starts right under the top padding."
+      }
+    },
+    {
+      "text": "The slot takes any content, and the sheet’s height follows it.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "The slot takes any content, and the sheet’s height follows it."
+      }
+    },
+    {
+      "text": "Let the sheet fit its content: one row makes a short sheet.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "doDont",
+        "quote": "One row makes a short sheet."
+      }
+    },
+    {
+      "text": "Don't set a fixed height (a height in style): empty space fills the sheet under one row.",
+      "strength": "discouraged",
+      "target": "style",
+      "from": {
+        "section": "doDont",
+        "quote": "Empty space fills the sheet under one row."
+      }
+    },
+    {
+      "text": "The screen shows and hides the sheet (visible): it springs up from the bottom and back down.",
+      "strength": "recommended",
+      "target": "visible",
+      "from": {
+        "section": "states",
+        "quote": "The screen shows and hides the sheet: it springs up from the bottom and back down."
+      }
+    },
+    {
+      "text": "visible is on by default, so the sheet springs up from the bottom edge when it mounts; set to false, it springs back down below the bottom edge.",
+      "strength": "recommended",
+      "target": "visible",
+      "from": {
+        "fact": "props:visible"
+      }
+    },
+    {
+      "text": "The sheet has no role, scrim, or close control of its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The sheet has no role, scrim, or close control of its own"
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "Dim the screen behind the sheet: the white sheet then stands out from the page. The guide's examples dim their screens with an Overlay.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The white sheet stands out from the page."
+      }
+    },
+    {
+      "text": "Don't leave the sheet on a white screen: without a scrim, the sheet’s edge disappears.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Without a scrim, the sheet’s edge disappears."
+      }
+    },
+    {
+      "text": "Choosing an option, or tapping the dimmed screen, closes the sheet; the screen keeps the choice.",
+      "strength": "recommended",
+      "target": "visible",
+      "value": "false",
+      "from": {
+        "section": "inContext",
+        "quote": "Choosing an option, or tapping the dimmed screen, closes it; the screen keeps the choice."
+      }
+    },
+    {
+      "text": "pinToBottom is on by default: the sheet is pinned to the bottom of its parent, absolute and full width. Set it to false to render the sheet in normal flow, inside your own layout container.",
+      "strength": "recommended",
+      "target": "pinToBottom",
+      "from": {
+        "fact": "props:pinToBottom"
+      }
+    },
+    {
+      "text": "safeAreaBottom is on by default: it adds the device's bottom safe-area inset (home indicator) on top of the sheet's bottom padding, so content stays clear of the indicator when the sheet rests at the bottom of the screen.",
+      "strength": "recommended",
+      "target": "safeAreaBottom",
+      "from": {
+        "fact": "props:safeAreaBottom"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Title the sheet with what it holds, such as a month or a choice, in a few words.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Title the sheet with what it holds, such as a month or a choice, in a few words."
+        }
+      },
+      {
+        "text": "Keep the sheet to one task, and name it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name it, and keep it to one task"
+        }
+      },
+      {
+        "text": "Keep the content short enough to read without scrolling.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the content short enough to read without scrolling; longer content deserves its own screen."
+        }
+      },
+      {
+        "text": "Name the choice: a title such as “Pay with” says what the options are for.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "“Pay with” says what the options are for."
+        }
+      },
+      {
+        "text": "Don't leave options untitled: people can’t tell what they’re choosing.",
+        "strength": "discouraged",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "People can’t tell what they’re choosing."
+        }
+      }
+    ],
+    "good": [
+      "March 2025",
+      "Pay with"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Shown",
+      "when": "Over a dimmed screen, docked to the bottom.",
+      "from": {
+        "section": "states",
+        "quote": "Over a dimmed screen, docked to the bottom."
+      }
+    },
+    {
+      "state": "Hidden",
+      "when": "The sheet waits below the screen, out of the Tab order and hidden from screen readers.",
+      "from": {
+        "section": "states",
+        "quote": "A hidden sheet waits below the screen, out of the Tab order and hidden from screen readers."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "A hidden sheet (visible false) is out of the Tab order and hidden from screen readers.",
+      "strength": "recommended",
+      "target": "visible",
+      "value": "false",
+      "from": {
+        "section": "states",
+        "quote": "A hidden sheet waits below the screen, out of the Tab order and hidden from screen readers."
+      }
+    },
+    {
+      "text": "The title is a page heading.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "section": "sources",
+        "quote": "The title is a page heading."
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "The sheet has no role, label, focus handling or Escape of its own; the content keeps its own roles, such as a ListGroup's list and its List Items' buttons.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "No role, label, focus handling, or Escape. Children keep their roles (ListGroup `ul[role=list]`, ListItem `button`); the title is an `h1`."
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "The guide's examples dim their screens with an Overlay that leaves keyboard focus on the page.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The examples dim their screens with Coin Overlay, which leaves keyboard focus on the page."
+      },
+      "checkedOn": "2026-10-23",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Dim the screen behind it",
+      "dont": "Leave it on a white screen",
+      "why": "Without a scrim, the sheet’s edge disappears.",
+      "from": {
+        "section": "doDont",
+        "quote": "The white sheet stands out from the page."
+      }
+    },
+    {
+      "do": "Let it fit the content",
+      "dont": "Set a fixed height",
+      "why": "Empty space fills the sheet under one row.",
+      "from": {
+        "section": "doDont",
+        "quote": "One row makes a short sheet."
+      }
+    },
+    {
+      "do": "Name the choice",
+      "dont": "Leave options untitled",
+      "why": "People can’t tell what they’re choosing.",
+      "from": {
+        "section": "doDont",
+        "quote": "“Pay with” says what the options are for."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Choosing how to pay, the guide's In context, with the sheet shown: the payment screen (a line of Text and its Change payment method Button) is dimmed by a bare Overlay, and the sheet titled “Pay with” docks to the bottom over it, holding the three payment options as List Items in a ListGroup. visible stands for the screen's shown state, which the Button's onPress sets; a row's onPress stands for keeping that choice and hiding the sheet, and the Overlay's onPress for hiding it on a tap on the dimmed screen. The screen renders the Overlay only while the sheet shows.",
+      "jsx": "<Screen>\n  <Text>Pay ₹500 to Asha Stores</Text>\n  <Button label=\"Change payment method\" onPress={() => {}} />\n  <Overlay onPress={() => {}} />\n  <ContentSheet visible title=\"Pay with\">\n    <ListGroup>\n      <ListItem layout=\"Horizontal\" title=\"UPI\" supportText=\"Jio Payments Bank •• 4821\" onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Debit card\" supportText=\"•• 9012\" onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Net banking\" supportText=\"Any bank\" onPress={() => {}} />\n    </ListGroup>\n  </ContentSheet>\n</Screen>",
+      "from": {
+        "section": "inContext",
+        "quote": "Choosing an option, or tapping the dimmed screen, closes it; the screen keeps the choice."
+      }
+    },
+    {
+      "purpose": "The same payment screen with the sheet hidden, as after a choice: visible={false} and no Overlay, so only the screen shows; the sheet waits below the screen, out of the Tab order and hidden from screen readers. The Button's onPress stands for the screen showing the sheet (and its Overlay) again.",
+      "jsx": "<Screen>\n  <Text>Pay ₹500 to Asha Stores</Text>\n  <Button label=\"Change payment method\" onPress={() => {}} />\n  <ContentSheet visible={false} title=\"Pay with\">\n    <ListGroup>\n      <ListItem layout=\"Horizontal\" title=\"UPI\" supportText=\"Jio Payments Bank •• 4821\" onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Debit card\" supportText=\"•• 9012\" onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Net banking\" supportText=\"Any bank\" onPress={() => {}} />\n    </ListGroup>\n  </ContentSheet>\n</Screen>",
+      "from": {
+        "section": "states",
+        "quote": "A hidden sheet waits below the screen, out of the Tab order and hidden from screen readers."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "visible",
+      "description": "A hidden sheet stays mounted; on the web it is inert and aria-hidden, with its controls at tabindex -1, so Tab skips it and screen readers don't read it.",
+      "quote": "A hidden sheet stays mounted but is `inert` and `aria-hidden`, with its controls at `tabindex=\"-1\"`: Tab skips it and screen readers don't read it",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "title",
+      "description": "On the web the title is a centred h1 (role heading) in a fixed header outside the scroller, so it stays put while the content scrolls; each titled sheet adds a page heading.",
+      "quote": "The title is a centred `h1` (`role=\"heading\"`) in a fixed header outside the scroller, so it stays put while the content scrolls",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "maxHeightPercent",
+      "description": "The maximum height is maxHeightPercent of the parent's height (448 px in a 640 px parent at the default 0.7); past it the content scrolls, with the scrollbar hidden.",
+      "quote": "Maximum height is `maxHeightPercent` × the parent's height (c1fa197: 448 px in a 640 px parent, 280 px in a 400 px parent); past it the content scrolls (scrollbar hidden).",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "pinToBottom",
+      "description": "Not a portal or modal: pinned, the sheet is absolute at left, right and bottom 0 inside its nearest positioned parent (full width, flush bottom); pinToBottom={false} puts it in normal flow.",
+      "quote": "Not a portal or modal: `position: absolute; left/right/bottom: 0` inside the nearest positioned parent (full width, flush bottom); `pinToBottom={false}` puts it in normal flow.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "modes",
+      "name": "Page type",
+      "description": "MainPage and SubPage give a white sheet (#ffffff), JioPlus a light grey one (#f5f5f5).",
+      "quote": "`Page type` mode: MainPage/SubPage #ffffff, JioPlus #f5f5f5.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Open since #203 (question 6): on a phone with a home indicator the package adds the bottom safe-area inset on top of Figma's 41 px bottom padding (safeAreaBottom, on by default); whether Figma means the inset to be added is not decided.",
+      "quote": "Still open from it: whether the safe-area inset is meant to be added to the 41 px bottom padding (question 6).",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ],
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/contentsheet.guide.tsx, self-contained) and docs/evidence/contentsheet.md at b4988c5 (23 October, the c8526ae publish of #281). b4988c5 is on origin/main, and both files read the same on main and docs-next. The evidence was first checked on 6 October 2026 on 0.1.78-3795b4c and re-checked on 13 October on 0.1.78-c1fa197 for the #203 publish (“The behaviour below is updated to that build”), with later notes for a116616 (17 October: the Overlay focus trap, #281) and c8526ae (23 October: #281 fixed; “ContentSheet.tsx itself wasn't re-checked against this build”). The guide's Sources note says “Checked 13 October 2026” on the 12 October build (c1fa197), so items citing it and the evidence's Behaviour lines carry 2026-10-13 and 0.1.78-c1fa197; /accessibility/3 cites the Sources sentence about Overlay, which the 23 October publish rewrote (the evidence's c8526ae note), so it carries 2026-10-23 and 0.1.78-c8526ae. All are the installed package version, so the trace check flags none. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Blobs compared on GitHub (spiefi/coin-components) and with git hash-object in node_modules: ContentSheet.tsx is 4fdb2ff at c1fa197, a116616, 5990169, ace46ca, c7d3348, c8526ae and dbe0e02 and in node_modules (3795b4c and 636f3f5 had a3f3a08; its only change since is the #203 fix in the c1fa197 build, edc36d0, 12 October; upstream MrBiscuit has the same 4fdb2ff at c1fa197, c8526ae and dbe0e02); Overlay.tsx is ed191d9 at c8526ae and dbe0e02; web-focus-trap.ts changed between c8526ae (73b4021) and dbe0e02 (a64d121) only inside the trap (an isTabStop filter that skips tabIndex −1, disabled and inert nodes), which runs only with trapFocus; Coin Variables-variables-full.json (4545aec), figma-modes.generated.ts (f6aa2f7), figma-variables-resolver.ts (d03e77c), typography.ts (cbabe67) and react-utils.ts (bd10632) are the same from c1fa197 to dbe0e02; react-native-web is 0.21.2, as in the evidence. So nothing the 13 October check read has changed. Every guide and evidence sentence quoted here was read against the installed source (read, not rendered; token values through the package's own getVariableByName in lib/commonjs, Light): the defaults visible, pinToBottom and safeAreaBottom true, maxHeightPercent 0.7 (ContentSheet.tsx 228–240); the sheet is contentSheet/bg rgb(255, 255, 255) under MainPage and SubPage and rgb(245, 245, 245) under JioPlus, 8 px side padding, 12 px top, 41 px bottom plus the safe-area inset when safeAreaBottom is on (0 with no SafeAreaProvider, 244–254), top radius 20 and bottom radius 0, no handle (144–205); pinned, a host fills the parent (absolute, 0 on every side, 320–329, 417–424) and the sheet sits in it absolute at left, right and bottom 0 (207–212), so it docks to the bottom of its nearest positioned parent at full width (react-native-web Views are position relative); the title is a Text with accessibilityRole header (an h1 on the web, react-native-web's role mapping) in a header View outside the ScrollView, centred, 14/17 weight 700 rgb(13, 13, 15), with drawer/titleWrap padding 16 above and 8 below, so the header is 41 px and the slot starts 12 + 41 + 8 = 61 px from the top (291–295, 401–411); contentSheet/gap 8 separates the header from the scroller and the slot's children (401, 405); the maximum height is the measured parent height × maxHeightPercent, and the scroller's own maximum takes off the padding, the header and the gap, so past it only the slot scrolls, with the scrollbar hidden (270–300, 403–409); visible springs translateY between 0 and the window's height with the Drawer's spring (damping 32, stiffness 300; 60–67, 286–289), starting off-screen on mount; hidden, the sheet keeps its children mounted with accessibilityElementsHidden, importantForAccessibility no-hide-descendants and pointerEvents none, on the web aria-hidden, inert and tabIndex −1, and every focusable descendant at tabindex −1 (restored when shown; 357–397); there is no role, label, Escape or focus move on the sheet, and no close callback (the props). Overlay.tsx (dbe0e02): without trapFocus the focus trap does nothing (useWebFocusTrap returns at once when inactive, web-focus-trap.ts 109), the root is a plain View with no dialog role, and the scrim Pressable is tabIndex −1 and aria-hidden on the web (Overlay.tsx 102–160), so “leaves keyboard focus on the page” holds. No sentence quoted here is contradicted. Sizing's “8 px between the title and the content” is the gap between the 41 px header (Figma's 344 × 41 title wrap) and the slot, as the evidence measures it; the title's text sits 16 px above the content (the wrap's 8 px plus the gap). Tickets, read on the board (read only): #203 (Component Fix, Done, live 13 October with c1fa197): all of its defects (gap token unused, title scrolling away, hidden sheet focusable and readable, Dark title white on white, a window-relative cap) are fixed and the installed source confirms each, so none is a gap; its question 6 (whether the safe-area inset is meant to be added to Figma's 41 px bottom padding) is still unanswered in its comments and in the evidence, so /gaps/0 records it, naming #203. Its item 7 (the generated Storybook docs page) is not a Coin defect. #281 (Component Fix, Done, live 23 October, c8526ae) is fixed, and Overlay.tsx is the same on dbe0e02. Dark mode is not recorded (Dark set through modes gives a white title on an rgb(13, 13, 15) sheet, readableSheetBackground, 44–55; ContentSheet reads only its modes prop, not JFSThemeProvider, so Dark set only on the provider leaves the sheet and title light, as the evidence says). Not quoted: the evidence's Upstream mdx line (the 6 October generated page): upstream ContentSheet.mdx at dbe0e02 (76592ce, the same since c1fa197) is the handwritten rewrite and no longer has “Keep `safeAreaBottom` enabled”, “When used as a modal surface, manage focus and provide a dismiss affordance in the content” or “Do not set a fixed height” in those words; it names Drawer, ModalSheet and ActionFooter as the alternatives, but no guide or evidence sentence does, so avoidWhen has no useInstead. That mdx also says “The title is a Text node, not a header role”, which the source contradicts (accessibilityRole header); reported to the coordinator as a package docs note. Also left out: the Sources' Figma sentence (one 360 × 350 component; the package grows with its content, which the entry says), the evidence's Package line (6 October) and Storybook line (the published Storybook's age; its index on 31 October lists the four stories the Sources note names, and the docs page is an attached MDX whose version was not determined), the site's Reanimated stand-in and the docs-only #281 measurements. Strength: one quote holds an absolute word, /placementAdvice/3 “It never sets a height” (everywhere: the component itself sets no height in any use; behaviour, so recommended). Nothing is required: ContentSheet has no required prop and the guide no everywhere-absolute instruction. Anatomy required: Sheet and Slot are always drawn; Title only with a non-empty title. Cross-check round 1 flagged /useWhen/1 (the core principle, which describes behaviour, not a situation); it moved to /configuration/0. Round 2 raised none. Configuration from facts: visible, pinToBottom and safeAreaBottom say only what their type docs say. Not recorded as rules: maxHeightPercent (its fact and the evidence fact carry it; the guide's 70% is the default), avoidKeyboard and keyboardSpacing (deprecated, no effect), style (only the guide's fixed-height Don't; the building rules forbid colour, border, radius and font overrides), testID and the inherited View props; the modes Color Mode (building rules) and Page type (the guide shows none; kept as an evidence fact), and List Item Style Boxed, which the guide sets on every sheet's rows and ListGroup (its SHEET modes), a look no guide sentence asks for, so the examples' rows are default List Items. Examples follow the building rules: no Color Mode and no other modes (the guide sets Color Mode Light on everything); the guide's ScreenFrame is written as Screen, which has an undocumented entry; the In context screen is a Text, its Change payment method Button, a bare Overlay with onPress (rendered only while the sheet shows, as the guide does) and the sheet titled “Pay with” with the guide's three payment rows as Horizontal List Items in a ListGroup; the second example is that screen with the sheet hidden and no Overlay, as the In context screen is after a choice, matching the States' Hidden card (which uses the transaction rows). The transaction sheets (Configuration, States, Sizing, Do & Don'ts) are left out of examples: their rows show each amount with MoneyValue, which has no entry in this pack. Also left out: the anatomy and sizing specimens (pinToBottom false), the Do & Don'ts previews and the playground. Consistency with related entries: Overlay's entry agrees: its bare-scrim rule (“Leave the overlay empty (no children) when a sheet or drawer draws its own surface”), its required “Leave trapFocus off … for a scrim drawn under another surface”, its bare-scrim example and “Without trapFocus … the overlay leaves focus alone” are how this guide and its examples use Overlay. ModalSheet's entry agrees (“A new flow: it deserves its own screen; keep a sheet to one task” matches this guide's Content); unlike Content Sheet it has its own scrim, close and focus handling, which this entry's “no role, scrim, or close control of its own” keeps apart. Drawer's entry agrees (a Drawer has a handle and never closes; this sheet has no handle and the screen shows and hides it; both use the drawer/title tokens and the same spring). Popup's entry (its own scrim, Escape and focus trap) and ListGroup's (rows take the group's List Item Style; none set here) don't conflict. Neither this guide nor ModalSheet's, Drawer's or Popup's names the others, so an agent choosing between these bottom surfaces has only each entry's own use-when (reported). No other guidance file names ContentSheet or Content Sheet; Button's “The action leads a screen, sheet, or key step” is about Button size. Nothing hand-written here, in the guide or evidence at b4988c5, in the installed ContentSheet.tsx or in its upstream mdx uses that shape word."
+}
