@@ -6,11 +6,14 @@
 //   /mcp                    the current release
 //   /mcp?coin=0.1.78        the newest release for that jfs-components version
 //   /mcp?release=0.1.78+2   exactly that release
-// Tool inputs never reach a file path: component names resolve through the
-// release's index.json, and release ids must be listed in public/agent/index.json.
+// It reads each release from its pack, agent-pack/packs/<release>.json.gz (see
+// agent-pack/scripts/packs.mjs), so the Vercel function carries one file per
+// release. Tool inputs never reach a file path: component names resolve through
+// the release's index.json, and release ids must be listed in public/agent/index.json.
 import { readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
+import { gunzipSync } from 'node:zlib'
 import { Server } from '@modelcontextprotocol/sdk/server/index.js'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
 import { CallToolRequestSchema, ErrorCode, ListToolsRequestSchema, McpError } from '@modelcontextprotocol/sdk/types.js'
@@ -18,15 +21,41 @@ import { CallToolRequestSchema, ErrorCode, ListToolsRequestSchema, McpError } fr
 export const SERVER_NAME = 'coin-docs'
 const SERVER_VERSION = '1.0.0'
 const MAX_COMPONENTS_PER_CALL = 30
-const AGENT_ROOT = fileURLToPath(new URL('../../public/agent/', import.meta.url))
+const PACKS_ROOT = fileURLToPath(new URL('../packs/', import.meta.url))
+const PACKS_KEPT = 3
 
 export class NotFound extends Error {}
+
+// A pack unpacks to a whole release (about 5 MB), so only the few most recently used stay unpacked.
+const packCache = new Map()
+function packFiles(release) {
+  let pending = packCache.get(release)
+  if (pending) {
+    packCache.delete(release)
+  } else {
+    pending = readFile(join(PACKS_ROOT, `${release}.json.gz`)).then((data) => JSON.parse(gunzipSync(data).toString('utf8')).files)
+    pending.catch(() => packCache.delete(release))
+  }
+  packCache.set(release, pending)
+  while (packCache.size > PACKS_KEPT) packCache.delete(packCache.keys().next().value)
+  return pending
+}
+
+/** `index.json` is the releases index; any other path is `<release>/<file in that release>`. */
+async function readPacked(path) {
+  if (path === 'index.json') return readFile(join(PACKS_ROOT, 'index.json'), 'utf8')
+  const slash = path.indexOf('/')
+  const files = await packFiles(path.slice(0, slash))
+  const text = files[path.slice(slash + 1)]
+  if (typeof text !== 'string') throw Object.assign(new Error(`${path} is not in the release`), { code: 'ENOENT' })
+  return text
+}
 
 // Releases never change once committed, so files can stay cached for the life of the process.
 const fileCache = new Map()
 function readText(path) {
   if (!fileCache.has(path)) {
-    const pending = readFile(join(AGENT_ROOT, path), 'utf8')
+    const pending = readPacked(path)
     pending.catch(() => fileCache.delete(path))
     fileCache.set(path, pending)
   }
