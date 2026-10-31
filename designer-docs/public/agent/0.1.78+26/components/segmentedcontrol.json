@@ -1,0 +1,618 @@
+{
+  "schemaVersion": 1,
+  "id": "SegmentedControl",
+  "slug": "segmentedcontrol",
+  "category": "input",
+  "tags": [
+    "segmented button",
+    "toggle group",
+    "period switcher",
+    "button group"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": [
+      {
+        "field": "/avoidWhen/2",
+        "reason": "The Segmented Control guide (3f56271) never says when to use Tabs instead, and the Tabs guide doesn't name Segmented Control. This rule's pointer to Tabs rests on the unpublished upstream SegmentedControl.mdx as the evidence records it (“prefer Tabs for peer views”); at dbe0e02f the mdx still says the control “filters or switches a value in place” while Tabs “switch peer views or pages” (lines 24 and 84). But the guide's own Three options card calls “a period or a view with three choices” the usual case, and the Tabs guide offers Tabs “to switch between a few peer views of the same content”, so from the published guides alone a designer or agent can't tell whether switching views belongs to this control or to Tabs. The guide should say when to use Tabs instead (and, as the mdx does, Segmented Track for a share-of chart and Chip Select for optional filters, which /avoidWhen/3 and /avoidWhen/4 also take from the mdx); then re-extract. Added by Claude Code in the overnight run agentpack-r26, for Marcin to confirm. Guide fix #557.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Segmented Control to switch between two to five short, exclusive options, such as Daily, Weekly and Monthly.",
+  "useWhen": [
+    {
+      "text": "Switch between two to five short, exclusive options, such as Daily, Weekly and Monthly.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Segmented Control to switch between two to five short, exclusive options, such as Daily, Weekly and Monthly."
+      }
+    },
+    {
+      "text": "One choice from a short set, always in view.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One choice from a short set, always in view."
+      }
+    },
+    {
+      "text": "Switch the period of the numbers below it, such as a portfolio's value, as in the guide's In context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Switching a portfolio’s period"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "More than five options, such as the seven days of a week: segments of about 40 px show at most a sliver of each day, so nobody can tell them apart.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Segments of about 40 px show at most a sliver of each day, so nobody can tell them apart."
+      }
+    },
+    {
+      "text": "An option needs a disabled or loading state: Segmented Control has neither.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "There is no disabled or loading state."
+      }
+    },
+    {
+      "text": "Switching between peer views: the upstream Segmented Control mdx (unpublished), as the evidence records it, prefers Tabs.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "prefer Tabs for peer views"
+      },
+      "useInstead": "Tabs"
+    },
+    {
+      "text": "A share-of chart: the upstream Segmented Control mdx (unpublished), as the evidence records it, points to a Segmented Track.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "SegmentedTrack for a share-of chart"
+      },
+      "useInstead": "SegmentedTrack"
+    },
+    {
+      "text": "Optional filters: the upstream Segmented Control mdx (unpublished), as the evidence records it, points to a Chip Select (or a FilterBar, which this pack does not cover).",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "ChipSelect or FilterBar for optional filters"
+      },
+      "useInstead": "ChipSelect"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Track",
+      "holds": "The lavender track holds the options side by side.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A lavender track holds the options side by side."
+      }
+    },
+    {
+      "part": "Segment",
+      "holds": "An option people can tap; its label sits on the track.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "An option people can tap; its label sits on the track."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "One or two short words, centred.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One or two short words, centred."
+      }
+    },
+    {
+      "part": "Selected segment",
+      "holds": "Purple fill and a white label mark the current choice.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Purple fill and a white label mark the current choice."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "items",
+      "accepts": [
+        "SegmentedControlItem"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In a column, the track fills its container and splits it equally, with 8 px between segments and no padding of its own (in a row it is as wide as its labels need, below).",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The track fills its container and splits it equally, with 8 px between segments and no padding of its own."
+      }
+    },
+    {
+      "text": "Each segment is 43 px tall: 12 px above and below a 19 px label, with 16 px at each side.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each segment is 43 px tall: 12 px above and below a 19 px label, with 16 px at each side."
+      }
+    },
+    {
+      "text": "A label that doesn't fit ends in an ellipsis, and the track never runs past its column.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A label that doesn’t fit ends in an ellipsis, and the track never runs past its column."
+      }
+    },
+    {
+      "text": "In a row, the track is as wide as its labels need, 304 px for Daily, Weekly and Monthly, and a narrower row ends them in an ellipsis.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In a row, the track is as wide as its labels need, 304 px for Daily, Weekly, and Monthly, and a narrower row ends them in an ellipsis."
+      }
+    },
+    {
+      "text": "In a narrow column the labels end in an ellipsis: in a 216 px column each segment is about 66 px, too narrow for any of Daily, Weekly and Monthly; showing all three in full needs a track of about 300 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In a 216 px column each segment is about 66 px, too narrow for any of these labels, so each ends in an ellipsis. Daily, Weekly, and Monthly need about 300 px."
+      }
+    },
+    {
+      "text": "Place the control above the numbers it changes.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The control sits above the numbers it changes."
+      }
+    },
+    {
+      "text": "In a row, a width set through style wins over the width the labels need.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "An explicit style width wins."
+      },
+      "target": "style"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set the options (items) and the one that starts selected.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Set the options and the one that starts selected."
+      },
+      "target": "items"
+    },
+    {
+      "text": "items is required: each option is a row with a key and a label.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "items"
+    },
+    {
+      "text": "Every segment gets the same width, so the number of options decides how much room each label has.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Every segment gets the same width, so the number of options decides how much room each label has."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Two options: opposites, such as Buy and Sell, each take half the track.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Opposites, such as Buy and Sell, each take half the track."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Three options are the usual case: a period or a view with three choices.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The usual case: a period or a view with three choices."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Offer five options at most: five is the most that fits, and on a 360 px phone each segment is then about 59 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Five is the most that fits: on a 360 px phone each segment is about 59 px."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Select the likeliest option first (defaultSelectedKey, or the screen's selectedKey).",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "select the likeliest option first"
+      },
+      "target": "defaultSelectedKey"
+    },
+    {
+      "text": "Left out, defaultSelectedKey falls back to the first item's key, so the first option starts selected.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/2"
+      },
+      "target": "defaultSelectedKey"
+    },
+    {
+      "text": "One segment is always selected, as long as the key names one of the options.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "One segment is always selected."
+      },
+      "target": "selectedKey"
+    },
+    {
+      "text": "Don't pass a key that isn't one of the options (as selectedKey or defaultSelectedKey): nothing is selected, and people can't tell what they're looking at.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Nothing is selected, and people can’t tell what they’re looking at."
+      },
+      "target": "selectedKey"
+    },
+    {
+      "text": "Keys match by strict equality: a key that matches no item leaves every segment unselected.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Selection is strict equality; a key that matches no item leaves every segment unselected."
+      },
+      "target": "selectedKey"
+    },
+    {
+      "text": "defaultSelectedKey is read only when the control mounts: changing it later doesn't move the selection.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`defaultSelectedKey` is read only at mount"
+      },
+      "target": "defaultSelectedKey"
+    },
+    {
+      "text": "In the guide's In context the screen keeps the selected period (selectedKey) and updates the value below; the control only reports the tap (onSelectionChange).",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the selected period and updates the value below; the control only reports the tap."
+      },
+      "target": "onSelectionChange"
+    },
+    {
+      "text": "onSelectionChange is called with the new key; pressing the selected segment again doesn't call it.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Pressing the selected segment again doesn't call `onSelectionChange`."
+      },
+      "target": "onSelectionChange"
+    },
+    {
+      "text": "The control sets SegmentedControl/Segment on each segment itself (Idle, or Active for the selected one), over the modes it is given.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The component sets `SegmentedControl/Segment` Idle/Active per segment, overriding caller modes."
+      },
+      "target": "SegmentedControl/Segment"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One or two words per option.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "One or two words per option"
+        },
+        "target": "SegmentedControlItem.label"
+      },
+      {
+        "text": "Keep labels short and parallel, such as Daily, Weekly, Monthly: labels share the width equally and end in an ellipsis when they don't fit.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Labels share the width equally and end in an ellipsis when they don’t fit, so keep them short and parallel: Daily, Weekly, Monthly."
+        },
+        "target": "SegmentedControlItem.label"
+      },
+      {
+        "text": "Use the words people see in the content below the control.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the words people see in the content below"
+        },
+        "target": "SegmentedControlItem.label"
+      },
+      {
+        "text": "Don't write long labels such as “One-time payment”: every label is cut short, and “One-ti…” doesn't say which plan it is.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Every label is cut short, and “One-ti…” doesn’t say which plan it is."
+        },
+        "target": "SegmentedControlItem.label"
+      }
+    ],
+    "good": [
+      "Daily",
+      "Weekly",
+      "Monthly",
+      "Buy",
+      "Sell",
+      "1M",
+      "3M",
+      "6M",
+      "1Y",
+      "All"
+    ],
+    "bad": [
+      "One-time payment",
+      "Monthly SIP",
+      "Step-up SIP"
+    ]
+  },
+  "states": [
+    {
+      "state": "Selected",
+      "when": "The current choice: a purple fill and a white label.",
+      "from": {
+        "section": "anatomy",
+        "quote": "Purple fill and a white label mark the current choice."
+      }
+    },
+    {
+      "state": "Unselected",
+      "when": "The other options: labels on the track.",
+      "from": {
+        "section": "anatomy",
+        "quote": "the others are labels on the track."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "A pressed segment dims until release, then becomes the selection.",
+      "from": {
+        "section": "states",
+        "quote": "A pressed segment dims until release, then becomes the selection."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the control is a tab list: the selected segment is announced as selected and is the only one in the Tab order, and Enter, Space and the arrow keys select.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the control is a tab list: the selected segment is announced as selected and is the only one in the Tab order, and Enter, Space, and the arrow keys select."
+      }
+    },
+    {
+      "text": "On the web the arrow keys, Home and End move focus and select (the arrows wrap); Space and Enter select the focused segment once.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Arrow keys, Home, and End move focus and select (arrows wrap); Space and Enter select the focused segment once."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the tab list, and testID identifies it.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The tab list is named by `accessibilityLabel` and takes `testID`."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep labels short",
+      "dont": "Write long labels",
+      "why": "Every label is cut short, and “One-ti…” doesn’t say which plan it is.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each label fits its segment, so every option reads in full."
+      }
+    },
+    {
+      "do": "Offer five options at most",
+      "dont": "Squeeze in seven",
+      "why": "Segments of about 40 px show at most a sliver of each day, so nobody can tell them apart.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each label has room to breathe."
+      }
+    },
+    {
+      "do": "Select one of the options",
+      "dont": "Pass a key that isn’t an option",
+      "why": "Nothing is selected, and people can’t tell what they’re looking at.",
+      "from": {
+        "section": "doDont",
+        "quote": "One segment is always filled, so people see the current view."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Three options, the guide's Three options card: a period with Daily, Weekly and Monthly. Weekly starts selected (defaultSelectedKey), as in the guide's code for that card. The keys stand for the screen's period values; left uncontrolled, the control moves its own selection when people tap.",
+      "jsx": "<SegmentedControl\n  items={[\n    { key: 'daily', label: 'Daily' },\n    { key: 'weekly', label: 'Weekly' },\n    { key: 'monthly', label: 'Monthly' },\n  ]}\n  defaultSelectedKey=\"weekly\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The usual case: a period or a view with three choices."
+      }
+    },
+    {
+      "purpose": "Five options, the most that fits, the guide's Five options card: the ranges 1M, 3M, 6M, 1Y and All, each key the same as its label. 1Y starts selected (defaultSelectedKey), as in the guide's code for that card. On a 360 px phone each segment is about 59 px.",
+      "jsx": "<SegmentedControl\n  items={[\n    { key: '1M', label: '1M' },\n    { key: '3M', label: '3M' },\n    { key: '6M', label: '6M' },\n    { key: '1Y', label: '1Y' },\n    { key: 'All', label: 'All' },\n  ]}\n  defaultSelectedKey=\"1Y\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Five is the most that fits: on a 360 px phone each segment is about 59 px."
+      }
+    },
+    {
+      "purpose": "Switching a portfolio's period, the guide's In context, showing the weekly change: a Card titled “Portfolio value” with the control above the change it controls, “+₹3,020 (2.4%) this week”. selectedKey=\"weekly\" stands for the period the screen keeps, and onSelectionChange for the screen storing the new period and updating the change below. Between the control and the change the guide also shows the value, ₹ 1,24,560; in the guide's code it is a MoneyValue, which has no entry in this pack, so it is left out: report that the value needs MoneyValue.",
+      "jsx": "<Card>\n  <Card.Title>Portfolio value</Card.Title>\n  <SegmentedControl\n    items={[\n      { key: 'daily', label: 'Daily' },\n      { key: 'weekly', label: 'Weekly' },\n      { key: 'monthly', label: 'Monthly' },\n    ]}\n    selectedKey=\"weekly\"\n    onSelectionChange={() => {}}\n  />\n  <Text text=\"+₹3,020 (2.4%) this week\" />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the selected period and updates the value below; the control only reports the tap."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "items",
+        "type": "SegmentedControlItem[]",
+        "required": true,
+        "source": "types",
+        "description": "The items to display as segments."
+      },
+      {
+        "name": "selectedKey",
+        "type": "React.Key",
+        "required": false,
+        "source": "evidence",
+        "description": "Keys match by strict equality; a key that matches no item leaves every segment unselected. Declared: The currently selected key (controlled)",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "defaultSelectedKey",
+        "type": "React.Key",
+        "required": false,
+        "source": "evidence",
+        "description": "Read only at mount: a later change doesn't move the selection. Declared: The initially selected key (uncontrolled). Defaults to the first item's key.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(key: React.Key) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Not called when the selected segment is pressed again. Declared: Callback fired when the selected segment changes.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "evidence",
+        "description": "In a row, an explicit style width wins over the width the labels need. Declared: Override container styles.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Names the tab list. Declared: Accessible name for the segment group.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test identifier."
+      },
+      {
+        "name": "SegmentedControlItem.key",
+        "type": "React.Key",
+        "required": true,
+        "description": "A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "SegmentedControlItem.label",
+        "type": "string",
+        "required": true,
+        "description": "A field of each items row.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "SegmentedControl/Segment",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "Set by the control on each segment (Idle, or Active for the selected one), over the modes it is given. Declared: A token collection SegmentedControl reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Idle",
+        "checkedOn": "2026-10-07"
+      }
+    ],
+    "slots": [
+      {
+        "name": "items",
+        "type": "SegmentedControlItem[]",
+        "description": "A structured slot: an array of SegmentedControlItem rows. The items to display as segments",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onSelectionChange",
+        "type": "(key: React.Key) => void",
+        "description": "Callback fired when the selected segment changes",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=segmentedcontrol",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2994-2578",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-segmentedcontrol--docs"
+  }
+}

@@ -17,7 +17,7 @@ header: Anatomy · title: A padded search field · description: The bar holds on
 specimen: `<FilterBar testID="fb-anatomy" placeholder="Search transactions" value="" onChangeText={() => {}} />`; specimenWidth 360
 parts:
 1. Bar — Full-width container that insets the field from the screen edges. — target: byTestId('fb-anatomy') — side: left
-2. Field — Pill-shaped input surface from the public Text Input. — target: `${byTestId('fb-anatomy')} > div` — side: top
+2. Field — Fully rounded input surface from the public Text Input. — target: `${byTestId('fb-anatomy')} > div` — side: top
 3. Search icon — Tells people the field searches. — target: `${byTestId('fb-anatomy')} svg` — side: bottom
 4. Placeholder — Names what is being searched until they type. — target: `${byTestId('fb-anatomy')} input` — side: right
 marks: padding byTestId('fb-anatomy')

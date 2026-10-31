@@ -1,12 +1,21 @@
 {
   "slug": "cardbankaccount",
-  "entryHash": "ca3ae80897d2853cb37b44ae43ab930a7a56f06f73ecac57014703d1d22cffba",
+  "entryHash": "18fc41eefcf294c865b151f3bdb2268bcfa53524099a808abd4cc5d8e732c2e1",
   "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
-  "checkedAt": "2026-10-29T10:47:29Z",
+  "checkedAt": "2026-10-30T12:28:31Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [],
-  "notes": "Every guide-cited item and every /facts line checked out against its source, so there are no flags. Several items rest on type-derived facts that contradict the guide and the 19 October evidence. Per the instructions these are not flagged, but a human should reconcile them. (1) /configuration/20 and /states/2 rest on /facts/props/9, which says buttonDisabled disables the default footer button. The guide's states section says \"The card can’t disable its button\", and the evidence contract says there is \"no way to disable the footer Button\". (2) /configuration/17, /configuration/18 and /configuration/19 rest on /facts/props/7, /facts/props/1 and /facts/props/5, which say there is no placeholder bank name, row copy or button. The guide's sources section says \"without other props it shows placeholder copy\". The evidence lists the defaults 'State Bank of India', three 'Korem ipsum' rows and 'Button'. (3) /configuration/21 rests on /facts/props/13, which says disableTruncation reaches the header name, badge, row values and footer button. The evidence says it covers \"value text only\" and \"doesn't reach the header name, badge or button\". These type facts probably come from a newer build than the guide checked (Biscuit's ace46ca/dbe0e02 changes for #344). The evidence says this guide's copy wasn't re-checked against those changes and waits for #344's own publish. Either the guide needs re-checking or the entry is mixing builds. (4) /accessibility/0 says accessibilityLabel 'labels the card region', which follows the declared type text. The evidence notes the label sits on a role-less root div, so it may not be exposed as a region. (5) Minor: /content/rules/8 gives the Do caption ('institutionAvatar shows the bank’s own mark') as its reason. The guide's actual reason against leaving out the logo is the Don't caption: 'The card falls back to a stranger’s photo.'"
+  "flags": [
+    {
+      "field": "/content/rules/2",
+      "reason": "stronger-than-source: The guide's \"Show only the last four digits of the account number\" is an ordinary content directive, like \"Keep values short\" (marked recommended). Here \"only\" says which digits to show; it is not an absolute that applies everywhere. No package fact enforces masking, so [required] overstates it."
+    },
+    {
+      "field": "/content/rules/8",
+      "reason": "misreads-source: The reason given for not leaving out the logo is the Do caption (\"institutionAvatar shows the bank’s own mark\"). The guide's actual reason is the Don't caption: \"The card falls back to a stranger’s photo.\" /doDont/1's why repeats the same Do caption instead of that consequence."
+    }
+  ],
+  "notes": "Several type-sourced facts contradict the guide and evidence (checked 19 October on a116616). This may be because the types come from the newer dbe0e02 install, whose #344 changes the guide copy 'wasn't re-checked' against. (1) buttonDisabled (/configuration/20, /states/2) contradicts the guide's \"The card can’t disable its button\" and the evidence's \"no way to disable the footer Button\". (2) The disableTruncation fact says it reaches the header name, badge and button (/configuration/21). Evidence says it affects value text only. (3) institutionName default \"\", items with no placeholder, and buttonLabel hiding the button when omitted (/configuration/17–19) contradict the guide's sources section and evidence, which report placeholder copy ('State Bank of India', 'Korem ipsum', 'Button'). The guide and the package types disagree, so a human should confirm which build the entry targets before publishing."
 }

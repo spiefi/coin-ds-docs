@@ -1,0 +1,326 @@
+{
+  "slug": "navarrow",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r24, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/navarrow.guide.tsx, self-contained) and docs/evidence/navarrow.md at 31f1c5e (29 September; on origin/main, and docs-next has the same guide and evidence). The guide's Sources note (“Checked 29 September 2026”, “Installed jfs-components is 0.1.77”) and the evidence were checked only on jfs-components 0.1.77 (tag v0.1.77), with no later check, so this entry cites neither: every item rests on a guide-body sentence or a package fact, and none carries the stale flag. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.77 and v0.1.78-dbe0e02 (10 commits, truncated at 300 files) was checked with blob hashes: NavArrow.tsx is the same blob (61504eb) at v0.1.77, at dbe0e02 and in node_modules, and so are figma-variables-resolver.ts (d03e77c), figma-modes.generated.ts (f6aa2f7, the same eight mode collections), JFSThemeProvider.tsx (fa8a86a), react-utils.ts (bd10632), AppBar.tsx (5ab17df), ListItem.tsx (58d50f3), Section.tsx (5e4baa0) and Breadcrumbs.tsx (e24c1bc). Changed: the packaged Coin Variables (0582bb0 to 4545aec), web-platform-utils.ts (c3fdb83 to e33b52b: the keyboard handler gains an activationKeys option whose default, Enter and Space, is what NavArrow still gets, plus focus-ring helpers NavArrow doesn't use), and SummaryTile, TransactionBubble and ProfileCard. The navArrow tokens, resolved with the package's own getVariableByName (lib/commonjs) against both token files, are the same at v0.1.77 and dbe0e02 except one: Color Mode Dark navArrow/icon/color was rgb(255, 153, 0), orange, and is now rgb(241, 241, 241), from #177's fix (Biscuit, 636f3f5; #177 is in Review on the Components board). Unchanged: icon colour rgb(36, 38, 43), box 6 × 10 (navArrow/width and height), radius 0, transparent background, and a 4 × 8 chevron with a 2 px stroke, so the drawing is 6 × 10, and 10 × 6 for Down, which swaps them (NavArrow.tsx 112–131); Context2 AppBar makes the box 32 × 32, NavArrow Direction Top&Bottom 10 × 6, and Page type JioPlus, context 10 jioPlus and context5 Fullscreen Modal or Mode 1 turn the chevron white. Every guide sentence quoted here was read against the installed NavArrow.tsx (read, not rendered): direction defaults to Back and disabled to false (101–109); without onPress the arrow is a View with role image, named by accessibilityLabel or else “Go back”, “Go forward” or “Go down” (150–156, 203–212); with onPress it is a Pressable with role button and that name, at least 44 × 44 with the chevron centred (22–31, 182–199), at 0.7 opacity while pressed unless disabled (194); disabled blocks presses and, on the web, keyboard activation and Tab focus, with no change of look (161, 186, 189; web-platform-utils.ts 283–291, 318–341); round caps and joins (175–176). No guide-body sentence is contradicted.\n\nLeft out, because only the 0.1.77 Sources note or evidence carries them (left out rather than kept flagged): the Sources sentence “List Item, App Bar, Section, and Summary Tile already draw their own arrows.” (still true on dbe0e02: ListItem.tsx 721, AppBar.tsx 203–219 on a sub page with no leadingSlot, Section.tsx 521 with onPress, SummaryTile.tsx 246 with chevron; ListItem's case is carried by the body's Forward card, Section isn't part of Coin, and AppBar's and SummaryTile's entries describe their own arrows); “A decorative arrow is still announced as an image” (still true: role image with a name, 203–208; reported to the coordinator as a possible Component Bug, no ticket in the evidence); “a disabled arrow looks the same as an enabled one” (the States sentence “It has no disabled look.” carries it); “In Dark colour mode the chevron currently turns orange because of a token value, so use it on light surfaces.” (contradicted on dbe0e02, see above; the human flag in reviews/navarrow.json reports it, as a candidate guide fix with the Sources version line); the evidence's Contract, token and Rendered lines (the default names “Go forward” and “Go down”, the AppBar 32 × 32 box, JioPlus white, and “Profile Card Appearance Premium gold”, which the installed tokens don't show: Premium alone leaves rgb(36, 38, 43), and with context 10 jioPlus it is rgb(30, 26, 20)); and its Limits #177 line (fixed; dark mode isn't a gap here anyway). So evidenceFacts and gaps are empty. Ticket #242, named in the run's brief, is the Duet board's “Project knowledge page” (To do) and has nothing to do with NavArrow; the evidence names only #137 and #177.\n\nThe core principle's first sentence, “A cue, not a button.”, is not a use-when on its own (round 1 of the cross-check: alone it loses “give the arrow onPress only when it stands alone”); the whole principle is /configuration/4. The In context example's Card and the label “Back to Home” are in the guide's code (navarrow.guide.tsx lines 21–26 and 79–85), not its rendered text, so its purpose says so and credits the label to the Content section. Content rules are the section's title and its first sentence; its accessibilityLabel sentence is the accessibility rule. Cross-check: round 1 raised 2 flags (/useWhen/1, /examples/0), both fixed; round 2 raised none, noting only that the entry leaves out the Sources limitations and the AppBar preference, which is deliberate (above). Strength: one quote holds an absolute word, the core principle's “give the arrow onPress only when it stands alone” (everywhere; recommended, since it is design guidance, not a package constraint). No rule is required: no prop is needed for a correct arrow. The Back and Down example captions are placement advice (target direction with its value); the Forward caption is the avoidWhen and /configuration/2, with useInstead ListItem (ListItem has an undocumented entry; its navArrow fact defaults to true and draws the arrow on the far right of a Horizontal row). Content good is “Back to Home”; “Go back” is not listed as bad, because the guide calls it the default to replace, and AppBar's entry uses “Go back” as a good label for its IconButton. Examples follow the building rules: no Color Mode (the guide sets Light on every component) and no other modes; the guide's BackTitle and Statements helpers are written out, with Text's text prop for the title; In context's status readout (“On Accounts”, a docs-only status line) is left out. Left out of examples (three at most): the anatomy and sizing specimens, the Down card (its HStack has nothing pressable, so an agent would copy a label that opens nothing; the guide shows only the look), the Decorative card, the Do & Don'ts and the playground. Not recorded: style (building rules), the inherited SafePressableProps, the eight mode collections (the guide sets none; building rules), Figma frame and token names, the Storybook stories and the evidence's Verification section.\n\nConsistency with related entries: ListItem (undocumented; navArrow shows the NavArrow on the far right, Horizontal layout only, default true; layout defaults to Vertical, so the examples set Horizontal) agrees with the avoidWhen and the examples. AppBar's entry (checked on 0.1.60, flagged) recommends an IconButton named “Go back” in leadingSlot because the default back arrow “has no accessible name”; this entry says nothing about AppBar's default arrow, so they don't conflict, but the installed AppBar wraps a NavArrow with role image named “Go back” in a Pressable with no label (AppBar.tsx 205–217), so the button may take that name from its content: not rendered here, reported to the coordinator. AppBar passes its modes, with Context2 AppBar, to that NavArrow (170, 217), which makes the box 32 × 32; the chevron stays 6 × 10, so this entry's sizes hold there too. SummaryTile's entry (the chevron is NavArrow Forward after the action; its colour doesn't change with AppearanceBrand, Emphasis or Semantic Intent) agrees with the tokens. TransactionBubble's entry and review (a Nav Arrow that says the bubble opens; Page type JioPlus, context 10 jioPlus and context5 turn the chevron white, Context2 AppBar and NavArrow Direction resize or turn it) agree with the tokens resolved here. ProfileCard's entry (under context 10 jioPlus, NavArrows are white) agrees. Breadcrumbs' entry says its old guide drew previews from NavArrow and Text; the installed Breadcrumbs draws an Icon (ic_chevron_right), not a NavArrow (Breadcrumbs.tsx 118–120), and this entry says nothing about Breadcrumbs. Card, HStack, VStack and Text are used only as the guide uses them. The guide, the evidence, the NavArrow source and this entry use no shape word for the arrow that Coin doesn't use.",
+  "useWhen": [
+    {
+      "text": "Show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Nav Arrow to show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "At the end of a list row: ListItem draws the forward arrow for you, so don't add a Nav Arrow there.",
+      "strength": "discouraged",
+      "useInstead": "ListItem",
+      "from": {
+        "section": "configuration",
+        "quote": "At the end of a row. ListItem draws it for you."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Chevron",
+      "holds": "A 6 × 10 px chevron with a 2 px rounded grey stroke.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 6 × 10 px chevron with a 2 px rounded grey stroke."
+      }
+    },
+    {
+      "part": "Touch target",
+      "holds": "With onPress, a 44 × 44 area surrounds the chevron.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "With onPress, a 44 × 44 area surrounds the chevron."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put a back arrow beside a screen title, as its own button.",
+      "strength": "recommended",
+      "target": "direction",
+      "value": "Back",
+      "from": {
+        "section": "configuration",
+        "quote": "Beside a screen title, as its own button."
+      }
+    },
+    {
+      "text": "Put a down arrow next to a label that opens more content below.",
+      "strength": "recommended",
+      "target": "direction",
+      "value": "Down",
+      "from": {
+        "section": "configuration",
+        "quote": "Next to a label that opens more content below."
+      }
+    },
+    {
+      "text": "Point forward in a row: the row leads on to another screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The row leads on to another screen."
+      }
+    },
+    {
+      "text": "One chevron per row: use the row's own arrow, and don't add a second one, since two chevrons look like a mistake.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Two chevrons look like a mistake."
+      }
+    },
+    {
+      "text": "In a header over a list, the back arrow is its own button; each row is pressable as a whole and ListItem draws its forward arrow. The screen handles the navigation.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The back arrow is its own button; each row is pressable as a whole and ListItem draws its forward arrow. The screen handles the navigation."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set direction to where it leads: Forward leads to another screen, Back returns to the previous one, and Down opens content below.",
+      "strength": "recommended",
+      "target": "direction",
+      "from": {
+        "section": "configuration",
+        "quote": "Forward leads to another screen, Back returns to the previous one, and Down opens content below."
+      }
+    },
+    {
+      "text": "Left out, direction is Back, a left chevron, so set Forward or Down when the arrow points elsewhere.",
+      "strength": "recommended",
+      "target": "direction",
+      "from": {
+        "fact": "props:direction"
+      }
+    },
+    {
+      "text": "Forward: at the end of a row; ListItem draws it for you.",
+      "strength": "recommended",
+      "target": "direction",
+      "value": "Forward",
+      "from": {
+        "section": "configuration",
+        "quote": "At the end of a row. ListItem draws it for you."
+      }
+    },
+    {
+      "text": "Don't point back in a row: a back arrow reads as leaving, not opening.",
+      "strength": "discouraged",
+      "target": "direction",
+      "value": "Back",
+      "from": {
+        "section": "doDont",
+        "quote": "A back arrow reads as leaving, not opening."
+      }
+    },
+    {
+      "text": "Make the whole row pressable, and give the arrow onPress only when it stands alone.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Make the whole row pressable, and give the arrow onPress only when it stands alone."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it applies to every Nav Arrow: the arrow takes onPress when nothing around it is pressable, such as the guide's back arrow beside a screen title, and never inside a row that presses, where the row handles the press (the guide's States and Do & Don'ts say the same). It is design guidance, not a package constraint, so it stays recommended."
+      }
+    },
+    {
+      "text": "Give it onPress and it gains a 44 × 44 pressable area; without it, it is a small image.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "anatomy",
+        "quote": "Give it onPress and it gains a 44 × 44 pressable area; without it, it is a small image."
+      }
+    },
+    {
+      "text": "Don't make only the arrow pressable in a row: people tap the label and nothing happens.",
+      "strength": "discouraged",
+      "target": "onPress",
+      "from": {
+        "section": "doDont",
+        "quote": "People tap the label and nothing happens."
+      }
+    },
+    {
+      "text": "The chevron is 6 × 10 px (10 × 6 pointing down). A pressable arrow reserves 44 × 44 px so it is easy to tap.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The chevron is 6 × 10 px (10 × 6 pointing down). A pressable arrow reserves 44 × 44 px so it is easy to tap."
+      }
+    },
+    {
+      "text": "disabled stops presses when onPress is set; it defaults to false.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "fact": "props:disabled"
+      }
+    },
+    {
+      "text": "The arrow has no disabled look.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled look."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name the destination.",
+        "strength": "recommended",
+        "target": "accessibilityLabel",
+        "from": {
+          "section": "content",
+          "quote": "Name the destination"
+        }
+      },
+      {
+        "text": "The arrow has no visible text.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The arrow has no visible text."
+        }
+      }
+    ],
+    "good": [
+      "Back to Home"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Decorative",
+      "when": "Without onPress: a 6 × 10 image; the row around it handles presses.",
+      "from": {
+        "section": "states",
+        "quote": "A 6 × 10 image; the row around it handles presses."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress: a 44 × 44 button.",
+      "from": {
+        "section": "states",
+        "quote": "A 44 × 44 button; press it to see it dim."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "A pressable arrow dims to 70% while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "With onPress it is a button that dims to 70% while pressed."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With disabled set there is no disabled look: the arrow looks as it does enabled.",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled look."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Without onPress the arrow is an image inside something pressable; with onPress it is a button.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the arrow is an image inside something pressable. With onPress it is a button"
+      }
+    },
+    {
+      "text": "When it is a button, set accessibilityLabel to where it goes, such as “Back to Home”, instead of the default “Go back”.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "When it is a button, set accessibilityLabel to where it goes, such as “Back to Home”, instead of the default “Go back”."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Make the whole row pressable",
+      "dont": "Make only the arrow pressable",
+      "why": "People tap the label and nothing happens.",
+      "from": {
+        "section": "doDont",
+        "quote": "Make the whole row pressable"
+      }
+    },
+    {
+      "do": "Point forward in a row",
+      "dont": "Point back in a row",
+      "why": "A back arrow reads as leaving, not opening.",
+      "from": {
+        "section": "doDont",
+        "quote": "Point forward in a row"
+      }
+    },
+    {
+      "do": "Use the row’s own arrow",
+      "dont": "Add a second arrow",
+      "why": "Two chevrons look like a mistake.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use the row’s own arrow"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A header and a list of accounts, the guide's In context as its example code draws it: a back arrow beside the screen title “Accounts”, as its own button, over two account rows in a Card. The arrow's accessibilityLabel names where it goes (“Back to Home”), as the guide's Content section says. Each ListItem is pressable as a whole and draws its own forward arrow; the empty onPress handlers stand for the screen's navigation (back to Home, or opening that account).",
+      "jsx": "<VStack>\n  <HStack alignVertical=\"center\">\n    <NavArrow direction=\"Back\" accessibilityLabel=\"Back to Home\" onPress={() => {}} />\n    <Text text=\"Accounts\" />\n  </HStack>\n  <Card>\n    <VStack>\n      <ListItem layout=\"Horizontal\" title=\"Savings •• 0245\" supportText=\"₹1,24,500\" onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Salary •• 1180\" supportText=\"₹48,200\" onPress={() => {}} />\n    </VStack>\n  </Card>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The back arrow is its own button; each row is pressable as a whole and ListItem draws its forward arrow. The screen handles the navigation."
+      }
+    },
+    {
+      "purpose": "The guide's labelled back arrow: beside the screen title “Accounts”, a pressable Back arrow that screen readers hear as “Back to Home”. The empty onPress stands for the screen going back to Home.",
+      "jsx": "<HStack alignVertical=\"center\">\n  <NavArrow direction=\"Back\" accessibilityLabel=\"Back to Home\" onPress={() => {}} />\n  <Text text=\"Accounts\" />\n</HStack>",
+      "from": {
+        "section": "content",
+        "quote": "Screen readers hear “Back to Home”."
+      }
+    },
+    {
+      "purpose": "A forward arrow at the end of a row, the guide's Forward card: ListItem draws it for you, and the whole row (“Statements”, “Monthly and yearly”) is pressable. The empty onPress stands for the screen opening Statements.",
+      "jsx": "<ListItem layout=\"Horizontal\" title=\"Statements\" supportText=\"Monthly and yearly\" onPress={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "At the end of a row. ListItem draws it for you."
+      }
+    }
+  ],
+  "evidenceFacts": [],
+  "gaps": []
+}

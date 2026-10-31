@@ -1,0 +1,525 @@
+{
+  "schemaVersion": 1,
+  "id": "UpiHandle",
+  "slug": "upihandle",
+  "category": "content",
+  "tags": [
+    "UPI ID",
+    "VPA",
+    "payment address",
+    "handle"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T05:18:28Z",
+    "flags": []
+  },
+  "summary": "Use a UPI Handle to show a UPI ID or number that people can recognise, copy, or scan, with an optional avatar.",
+  "useWhen": [
+    {
+      "text": "Show a UPI ID or number that people can recognise, copy, or scan, with an optional avatar.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a UPI Handle to show a UPI ID or number that people can recognise, copy, or scan, with an optional avatar."
+      }
+    },
+    {
+      "text": "Confirm the payee on a payment screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Confirm the payee"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Several IDs in one UPI Handle: people can't tell which ID they copied. Give each ID its own UPI Handle.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "People can’t tell which ID they copied."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "Optional photo or logo; it shows only when a source is set.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional photo or logo; it shows only when a source is set."
+      }
+    },
+    {
+      "part": "Handle",
+      "holds": "The UPI ID or number, on one line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The UPI ID or number, on one line."
+      }
+    },
+    {
+      "part": "Action icon",
+      "holds": "Optional cue for what pressing does: copy or scan.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional cue for what pressing does: copy or scan."
+      }
+    },
+    {
+      "part": "Background",
+      "holds": "Grey rounded surface that hugs its content.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey rounded surface that hugs its content."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Let the screen do the work: it copies the handle or opens the payment when the UPI Handle is pressed; the UPI Handle only reports the press, through onPress.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen copies the handle or opens the payment when pressed; the UPI Handle only reports the press."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Leave room for the whole ID: when space runs out, a long handle ends in an ellipsis.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "When space runs out, a long handle ends in an ellipsis, so leave room for the whole ID."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Show the real handle and put its action on the UPI Handle itself, through onPress.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Show the real handle and put its action on the UPI Handle."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Add an avatar (source) when a photo or logo helps people recognise the account.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Add an avatar when a photo or logo helps people recognise the account."
+      },
+      "target": "source"
+    },
+    {
+      "text": "Leave source out where a name is already shown: without an avatar the UPI Handle pads evenly.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The UPI Handle pads evenly; use it where a name is already shown."
+      },
+      "target": "source"
+    },
+    {
+      "text": "Show or hide the avatar with source alone: a source shows it and sets UPI Handle Image to True; no source hides it and sets False, overriding any UPI Handle Image value in modes. The avatar is not tinted; the source renders as-is.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/4"
+      },
+      "target": "UPI Handle Image"
+    },
+    {
+      "text": "Choose the icon for the action the UPI Handle performs, or none when it only shows the handle.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Choose the icon for the action the UPI Handle performs, or none when it only shows the handle."
+      },
+      "target": "iconName"
+    },
+    {
+      "text": "iconName defaults to ic_scan_qr_code, a scan icon: set iconName=\"ic_copy\" wherever the UPI Handle copies.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The package defaults to a scan icon, so this guide sets the copy icon wherever the UPI Handle copies."
+      },
+      "target": "iconName",
+      "value": "ic_copy"
+    },
+    {
+      "text": "Scan icon (ic_scan_qr_code): for a handle people scan to pay.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For a handle people scan to pay."
+      },
+      "target": "iconName",
+      "value": "ic_scan_qr_code"
+    },
+    {
+      "text": "No icon (showIcon false): display only, nothing to press.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Display only: nothing to press."
+      },
+      "target": "showIcon",
+      "value": "false"
+    },
+    {
+      "text": "style constrains the UPI Handle: a long handle truncates inside that box (the guide's Sizing example limits it to 140 px).",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "style"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Don't add “UPI:” or translate the handle; the UPI Handle already says what it is.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "Don’t add “UPI:” or translate it; the UPI Handle already says what it is."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Set label to the real handle: the default, “Label”, is the Figma placeholder, not a handle.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "“Label” is the Figma placeholder, not a handle."
+        },
+        "target": "label"
+      },
+      {
+        "text": "One ID per UPI Handle: each UPI Handle copies one ID.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Each UPI Handle copies one ID."
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "priya@jio",
+      "merchant-1234@jio",
+      "9184844184"
+    ],
+    "bad": [
+      "Label",
+      "priya@jio, priya@okaxis"
+    ]
+  },
+  "states": [
+    {
+      "state": "Display only",
+      "when": "Without an action (no onPress), the UPI Handle only shows the handle: static text on a grey rounded background.",
+      "from": {
+        "section": "states",
+        "quote": "Without an action the UPI Handle only shows the handle."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress (or onClick), the whole UPI Handle is a button and shrinks slightly while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "With one, the whole UPI Handle is a button and shrinks slightly while pressed."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With disabled set, the UPI Handle is dimmed to half opacity, ignores presses and is skipped by keyboard focus.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to half opacity and skipped by keyboard focus."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On a pressable UPI Handle, set accessibilityLabel to say the action, such as “Copy priya@jio”.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "On a pressable UPI Handle, set an accessibility label that says the action, such as “Copy priya@jio”."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web a pressable UPI Handle is a button named by its accessibility label, or by the handle when none is set.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web a pressable UPI Handle is a button named by its accessibility label, or by the handle when none is set."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Keyboard focus draws a thin ring without moving anything, and a mouse click leaves no ring.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Keyboard focus draws a thin ring without moving anything, and a mouse click leaves no ring."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use the real handle",
+      "dont": "Leave the placeholder",
+      "why": "“Label” is the Figma placeholder, not a handle.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use the real handle"
+      }
+    },
+    {
+      "do": "Put the action on the UPI Handle",
+      "dont": "Show an icon with no action",
+      "why": "A scan icon on a static UPI Handle looks tappable but does nothing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Put the action on the UPI Handle"
+      }
+    },
+    {
+      "do": "One ID per UPI Handle",
+      "dont": "Combine handles in one label",
+      "why": "People can’t tell which ID they copied.",
+      "from": {
+        "section": "doDont",
+        "quote": "One ID per UPI Handle"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Confirm the payee, the guide's In context: a Card with the payee's name in a Text, the payee's UPI Handle with an avatar and the copy icon, and the Pay Button, stacked in a VStack as the guide's code stacks them. The UPI Handle's onPress stands for the screen copying the handle, and the Button's for the screen starting the payment. The URI stands for the payee's own photo.",
+      "jsx": "<Card>\n  <VStack>\n    <Text>Paying Priya Sharma</Text>\n    <UpiHandle\n      label=\"priya@jio\"\n      source={{ uri: 'https://example.com/photos/priya-sharma.jpg' }}\n      iconName=\"ic_copy\"\n      accessibilityLabel=\"Copy priya@jio\"\n      onPress={() => {}}\n    />\n    <Button label=\"Pay ₹500\" onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen copies the handle or opens the payment when pressed; the UPI Handle only reports the press."
+      }
+    },
+    {
+      "purpose": "A copy UPI Handle without an avatar, for a place where a name is already shown, the guide's Without avatar: the copy icon, an accessibility label that says the action, and onPress for the screen's copy.",
+      "jsx": "<UpiHandle\n  label=\"shrutirai-1@jio\"\n  iconName=\"ic_copy\"\n  accessibilityLabel=\"Copy shrutirai-1@jio\"\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The UPI Handle pads evenly; use it where a name is already shown."
+      }
+    },
+    {
+      "purpose": "Display only, the guide's No icon: no icon and no onPress, so there is nothing to press.",
+      "jsx": "<UpiHandle label=\"merchant@jio\" showIcon={false} />",
+      "from": {
+        "section": "configuration",
+        "quote": "Display only: nothing to press."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Label",
+        "description": "UPI handle text to display. Default \"Label\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object passed directly to `getVariableByName`."
+      },
+      {
+        "name": "showIcon",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggles the trailing icon visibility. Default true, from the component source."
+      },
+      {
+        "name": "iconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_scan_qr_code",
+        "description": "Icon name from the actions set. Default \"ic_scan_qr_code\", from the component source."
+      },
+      {
+        "name": "source",
+        "type": "UnifiedSource",
+        "required": false,
+        "source": "types",
+        "description": "Unified avatar source. Accepts a remote URI (raster or `.svg`), an inline SVG XML string, a `require()` asset, an SVG React component, or an already-rendered element. See {@link UnifiedSource}. Avatars are intentionally **not** tinted — the source renders as-is. The leading avatar is driven entirely by this prop: providing a `source` (or the deprecated `avatarSource`) force-sets the Figma \"UPI Handle Image\" collection to `True` and renders the avatar; omitting it force-sets the mode to `False` and hides it. This override wins over any `UPI Handle Image` value passed via `modes`."
+      },
+      {
+        "name": "avatarSource",
+        "type": "ImageSourcePropType | UnifiedSource",
+        "required": false,
+        "source": "types",
+        "description": "Deprecated: Use `source` instead. Kept as an alias for back-compat. Accepts the same shapes as `source` plus the legacy `ImageSourcePropType` from the previous API. Deprecated alias for `source`; kept for back-compat."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Names a pressable UPI Handle: it is a button named by accessibilityLabel (“Copy priya@jio”), and Enter works. Declared: Accessibility label for screen readers.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Additional accessibility hint for screen readers Performance notes: - Token reads collapsed into a single `useMemo([modes])`. - Press visual goes through Pressable's `({ pressed })` style callback so a scroll-cancelled touch never schedules a React render. iOS gets `unstable_pressDelay={130}` for additional safety inside scrollables. - Focus state is mirrored on web only (gated setter). - Wrapped in `React.memo`. /."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onClick",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Click/tap handler. Works as an alias for `onPress`."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "A disabled UPI Handle renders at 0.5 opacity; on the web it has aria-disabled and tabindex -1.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Constrains the pill. Long handles truncate inside this box."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      },
+      {
+        "name": "...Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityRole' | 'accessibilityLabel' | 'accessibilityHint' | 'disabled'>",
+        "type": "Omit<React.ComponentProps<typeof View>, 'style' | 'accessibilityRole' | 'accessibilityLabel' | 'accessibilityHint' | 'disabled'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection UpiHandle reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection UpiHandle reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection UpiHandle reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "UPI Handle Image",
+        "type": "mode collection",
+        "values": [
+          "True",
+          "False"
+        ],
+        "description": "A token collection UpiHandle reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "True"
+      }
+    ],
+    "slots": [],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "source": "types"
+      },
+      {
+        "name": "onClick",
+        "type": "() => void",
+        "description": "Click/tap handler. Works as an alias for `onPress`.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The package's default icon is still ic_scan_qr_code (scan), while Figma's UPI Handle uses ic_copy.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=upihandle",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=262-893",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-upihandle--docs"
+  }
+}

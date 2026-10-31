@@ -1,0 +1,730 @@
+{
+  "slug": "cardcta",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r26, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/cardcta.guide.tsx, self-contained) and docs/evidence/cardcta.md at e7ed622 (28 October, on origin/main; the guide and evidence are the same on origin/main and origin/docs-next). The guide's Sources note (\"Checked 19 October 2026\", \"16 October build\") and the evidence were checked on 19 October 2026 on 0.1.78-a116616, so items citing the evidence carry 2026-10-19 and 0.1.78-a116616 (same package version, so the trace check flags none); no item cites the Sources note. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-a116616 and v0.1.78-dbe0e02 (4 commits, 222 files) changes CardCTA.tsx and Badge.tsx among the files the card renders: CardCTA.tsx is 12f3f2b at a116616, c7d3348 and c8526ae, 4b9d8f4 at ace46ca and 037ab56 at dbe0e02, the same blob as node_modules; Badge.tsx (1e060c6 → b091d4d) changed only the label token for Semantic Intent System with Emphasis High (white instead of black on the status fill); Button.tsx (e266c65), IconCapsule.tsx (f4496d2), IconButton.tsx (dd6c456), ButtonGroup.tsx (0a18651), Avatar.tsx (26f5b52), Icon.tsx (cddaa05), Image.tsx (049a31f), react-utils.ts (bd10632), typography.ts (cbabe67), figma-variables-resolver.ts (d03e77c) and JFSThemeProvider.tsx (fa8a86a) are the same blobs, and the compare touches no token or modes file. So the card changed after the guide's check (Biscuit's ace46ca and dbe0e02 for Component Bug #345), as the evidence's 28 October note says (\"this guide's copy wasn't re-checked and waits for #345's own publish\"). Read in the installed source (CardCTA.tsx) and on the guide page rendered on it (31 October, react-native-web 0.21.2 in headless Chrome, 1280 and 390 px, a private build in the scratch folder): the root is overflow hidden (305); the title clamps to one line and the body to three unless disableTruncation (519–527; the Long copy card's body is cut at three lines, 51 of 102 px, and at 260 px the title ends in …); the default Button gets disableTruncation, so its label stays on one line and ends in … (Button.tsx 431–438), and the 9,999 px measuring copy is gone (the page's scrollWidth equals its width); the Button and its wrapper stretch (386–399), so every default Button fills its column (159.6 px “Set up” on a 320 px cta card, 222 px Save on rating, 298 px on sip; Component Bug #414, In progress, Biscuit) and a long label ends in … inside it; the rating badge defaults to AppearanceBrand Secondary under the caller's modes (285), purple with a white label, and ratingMediaAlign moves it (641–647: centred by default); sip without avatarSource shows a Monogram of the title's initials, or the headline's (568–594: “SA” in the guide's Don't), not a stock photo; with MediaBlock Image the right column has no padding and 12 px right corners and clips (286–297, 362–374), so a picture in iconSlot is clipped to the card's corners; new props badge and caption on cta (45–56, 528–531), disableTruncation, likeAccessibilityLabel, dislikeAccessibilityLabel, iconAccessibilityLabel and avatarAccessibilityLabel (the default IconCapsule and Avatar are decorative unless named, 68–72, 552–603), and ...rest with accessibilityLabel (a labelled root is a group on the web, 532–540). So these guide sentences no longer hold and are left out (human flag in reviews/cardcta.json, pointing at #345): Anatomy's Title note “nothing cuts it short” (the part quotes only “title: the offer, 16 px bold”; the Body part quotes only “body: what the step gives, 14 px”, leaving “it wraps”, true only up to three lines); Configuration's “AppearanceBrand changes only the rating badge.” (the new cta badge gets the card's modes, 528, 52) and the AppearanceBrand Secondary caption “The rating badge turns purple, as Figma draws it.” (it is purple without it); Sizing's “Height follows the text: nothing cuts the title or body short, so longer copy or a narrower host makes the card taller.” and “The button grows with its label and never wraps.”, and the Long copy caption; Content's “the card doesn’t cut either short” (the rule quotes only “Keep the title to one line and the body to three”); the Do & Don'ts description and the Don't captions of all three pairs (“runs out of the card”, “A stranger’s photo appears in its place.”, “Its corners poke out past the card’s rounded corners.”); and the Sources sentences on Figma's picture CTA, the unclipped picture, the gold badge, nothing cutting the text short, the long label, ratingMediaAlign, the stock photo and the 9,999 px copy. The Narrow host caption still holds (the body takes three lines at 260 px instead of two) but is left out: at that width the title now ends in …. Token values through the package's own getVariableByName (lib/commonjs): panel white, radius 12, border 1 px, white by default and rgb(235, 235, 237) with Page type SubPage or context 8 Section; left padding 12/8, 22 top and bottom, gap 16; text gap 6; title 16 px, line 18 (rendered 20 through safeTextLineHeight), 700, rgb(12, 13, 16); body 14/17, 400, rgb(19, 0, 45); Button AppearanceBrand Secondary, Button / Size S (rgb(93, 0, 181), white label, 32 px), Emphasis Medium rgb(228, 219, 255) with a purple label, Emphasis Low transparent, Semantic Intent System positive rgb(38, 171, 33) and warning rgb(240, 110, 15); IconCapsule Size M 42 px, Emphasis Medium, AppearanceBrand Secondary (rgb(228, 219, 255), purple icon), 58 px with Context CTACard, warning rgb(240, 110, 15) with a white icon; rating badge Secondary rgb(93, 0, 181), Primary rgb(206, 161, 90), Neutral rgb(48, 51, 56), Tertiary rgb(2, 107, 154); sip Avatar Size L, 42 px. Ticket #345 (Component Fix, In progress, Biscuit), read on the board (read only): its 27 October re-test on dbe0e02 found items 1, 2, 4, 5, 6 and 7 fixed and item 3's picture CTA buildable with badge and caption, and left open: a long badge isn't truncated or held to its column (it runs under the picture, cut mid-word), the chip-to-title gap is 6 px where Figma's is 16, and the caption is 12/16 regular in the body colour where Figma's Text is 14/16 medium black; it filed #414 for the Button filling its column. None of these is in the evidence or the guide, so none can be a gap here: they are in the human flag. Gaps: the two evidence discrepancies that still hold on dbe0e02 (rendered title line 20 px, like and dislike 26 px); the evidence's rating and sip heights were measured with Figma's copy and are not carried. Strength: no rule is required: no prop is required in the facts and no quoted absolute applies everywhere; the defaults back recommended “Set …” rules. The quoted absolutes are Configuration's “always purple at size S” and States' “only respond”, both scoped contextual. useWhen/2–3 and the avoidWhen rules rest on the evidence's record of Biscuit's handwritten mdx; read through gh api, the mdx at upstream dbe0e02f still says “a prompt with one next step. It does not complete the action. The button does.”, sends a status message to CardFeedback and a bank or product summary to CardBankAccount or CardProviderInfo, and warns against a second primary button. Facts: FIGMA_COMPONENT_MODES give Button / Size its collection default M, which the card overrides for its own Button (273), so an evidence fact sets S; evidence facts also say the card keeps its Button and IconCapsule at AppearanceBrand Secondary and the capsule at Emphasis Medium (273, 357); buttonLabel's default “Button” (“Save” on rating, 283) is the evidence's, as the type facts carry no default for it. Fact-based items for the installed props the guide doesn't cover: badge, caption, disableTruncation, ratingMediaAlign, type's Figma names, and the four accessibility labels. Do & Don'ts: only the first pair is kept, with its Do caption as the why; the second pair's Do caption backs a configuration rule. Examples follow the building rules: no Color Mode (the guide sets Light on every card, the VStack and the Title), no Slot gap M on the VStack, no style width 320 (the guide's frame), no modes. Copy is the guide's own (COPY, guide lines 14–18, and the In context Title, 118); the sip logo is a docs asset (jio-gold-logo.png), so the example passes a { uri }. VStack has an entry; Title has an undocumented entry. Left out of examples (three at most): the anatomy and sizing specimens, Slots, the mode cards (building rules keep modes at their defaults; their captions are kept as rules), the States cards, Long copy, Narrow host (it sets a style width), the Do & Don'ts and the playground. Not recorded: style (hosting; the building rules forbid colour, border, radius and font overrides); MediaBlock (only the Don't uses it, and its caption no longer holds), Context Nudge&Alert and ListItem, Button / State, Badge Size, Avatar Size, Icon Capsule Size, Color Mode, context 9, context 10, Context2, Context4 and Profile Card Appearance; ratingBadgeSlot, ratingActionsSlot and avatarSlot beyond the slots rule (the evidence's Limits); accessibilityLabel and testID (inherited View props, not part of the design contract); the evidence's hex values, web render tree and Hosting; the Sources' Storybook sentence. Consistency with related entries: Button's entry (Button / Size S for an action inside a card) agrees with the card's small Button. IconCapsule's entry (Emphasis Medium a pale circle with a coloured icon; Semantic Intent System colours it with AppearanceSystem and ignores Emphasis; Context CTACard 58 px; the capsule hides its icon from screen readers) agrees: the card's capsule is Emphasis Medium, warning turns it orange, CTACard gives 58 px, and the card names it only through iconAccessibilityLabel. Card's entry (Page type SubPage and context 8 Section give a grey border) agrees. Title and VStack are used as their entries allow. No other guidance file names Card CTA: the cardfinancialcondition and iconcapsule entries mention only the Context CTACard mode. Shape words: nothing hand-written here uses one Coin doesn't have, and neither the guide, the evidence, CardCTA.tsx nor the upstream mdx at dbe0e02f does; Button.tsx's own comments do (lines 25–27 and 127), which #544 already lists. Cross-check: two rounds. Round 1 flagged placementAdvice/0 as generalising the Home screen example (now worded as the guide's Home screen) and noted that avoidWhen/3's “the card has one button” overlooks like and dislike (now “don’t add one”). Round 2 flagged configuration/10 (disableTruncation) and configuration/21 (ratingMediaAlign), items that rest on the installed package's facts, read against the a116616 guide and evidence: dismissed in reviews/cardcta.json, as for ProductMerchandisingCard's #356 items. Both rounds noted that the badge, caption and accessibility-label items rest on dbe0e02 facts the a116616 guide contradicts; that is the human flag. Round 2 also noted that content.good carries the rating example's copy (Your credit score rose, Save), which the guide shows outside Content.",
+  "useWhen": [
+    {
+      "text": "Offer one next step, such as setting up UPI or rating an insight, with a title, a short line and a button.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card CTA to offer one next step, such as setting up UPI or rating an insight, with a title, a short line, and a button."
+      }
+    },
+    {
+      "text": "One prompt, one button.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One prompt, one button."
+      }
+    },
+    {
+      "text": "A prompt with one next step: the card doesn’t complete the action; its button does, as the card’s handwritten Storybook docs say in the evidence’s record.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "a prompt with one next step. It does not complete the action. The button does."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Pick the type by the step: cta for an offer or setup step, rating for a score and a reaction, sip for a person or plan, as the evidence records the handwritten Storybook docs.",
+      "strength": "recommended",
+      "target": "type",
+      "from": {
+        "section": "evidence",
+        "quote": "Types: cta for an offer or setup step, rating for a score and a reaction, sip for a person or plan."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A status message: the card’s handwritten Storybook docs, as the evidence records them, use Card Feedback.",
+      "strength": "discouraged",
+      "useInstead": "CardFeedback",
+      "from": {
+        "section": "evidence",
+        "quote": "Don't use for a status message (CardFeedback)"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "A bank summary: the handwritten Storybook docs, as the evidence records them, use Card Bank Account or Card Provider Info for a bank or product summary.",
+      "strength": "discouraged",
+      "useInstead": "CardBankAccount",
+      "from": {
+        "section": "evidence",
+        "quote": "a bank or product summary (CardBankAccount, CardProviderInfo)"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "A product summary: the handwritten Storybook docs, as the evidence records them, use Card Provider Info or Card Bank Account for a bank or product summary.",
+      "strength": "discouraged",
+      "useInstead": "CardProviderInfo",
+      "from": {
+        "section": "evidence",
+        "quote": "a bank or product summary (CardBankAccount, CardProviderInfo)"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "A second primary button: don’t add one, as the evidence records the handwritten Storybook docs.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "don't add a second primary button"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "title: the offer, 16 px bold.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "title: the offer, 16 px bold"
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "body: what the step gives, 14 px.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "body: what the step gives, 14 px"
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "A small purple Button from buttonLabel and onPressButton.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A small purple Button from buttonLabel and onPressButton."
+      }
+    },
+    {
+      "part": "Icon",
+      "holds": "On cta, an IconCapsule from iconName; iconSlot replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An IconCapsule from iconName; iconSlot replaces it."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A white panel with 12 px corners and a 1 px border.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white panel with 12 px corners and a 1 px border."
+      }
+    },
+    {
+      "part": "Badge",
+      "holds": "badge: an optional chip on the cta layout; hidden unless you pass one.",
+      "required": false,
+      "from": {
+        "fact": "props:badge"
+      }
+    },
+    {
+      "part": "Caption",
+      "holds": "caption: an optional line under the body on the cta layout; hidden unless you pass one.",
+      "required": false,
+      "from": {
+        "fact": "props:caption"
+      }
+    },
+    {
+      "part": "Rating badge",
+      "holds": "ratingLabel: the badge on the rating type.",
+      "required": false,
+      "from": {
+        "fact": "props:ratingLabel"
+      }
+    },
+    {
+      "part": "Like and dislike",
+      "holds": "Like and dislike actions in the rating footer, shown unless showRatingActions is false.",
+      "required": false,
+      "from": {
+        "fact": "props:showRatingActions"
+      }
+    },
+    {
+      "part": "Avatar",
+      "holds": "avatarSource: the picture in the sip type’s Avatar.",
+      "required": false,
+      "from": {
+        "fact": "props:avatarSource"
+      }
+    },
+    {
+      "part": "Headline",
+      "holds": "headline: on sip, the text above the description row.",
+      "required": false,
+      "from": {
+        "fact": "props:headline"
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "On the guide’s Home screen, the prompt sits under the screen’s greeting.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Home shows the prompt under the greeting."
+      }
+    },
+    {
+      "text": "The screen owns the step: on the guide’s Home screen, Set up opens the screen’s own setup flow through onPressButton, and the card doesn’t do the setup or remove itself.",
+      "strength": "recommended",
+      "target": "onPressButton",
+      "from": {
+        "section": "inContext",
+        "quote": "Set up opens the screen’s own setup flow through onPressButton; the card doesn’t do the setup or remove itself."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "type sets the layout: cta, the default, puts the title, body and button beside an icon.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "cta",
+      "from": {
+        "section": "configuration",
+        "quote": "type sets the layout: cta, the default, puts the title, body, and button beside an icon"
+      }
+    },
+    {
+      "text": "rating adds a badge above and like and dislike beside the button.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "rating",
+      "from": {
+        "section": "configuration",
+        "quote": "rating adds a badge above and like and dislike beside the button"
+      }
+    },
+    {
+      "text": "sip adds an avatar and a line of facts above the button.",
+      "strength": "recommended",
+      "target": "type",
+      "value": "sip",
+      "from": {
+        "section": "configuration",
+        "quote": "sip adds an avatar and a line of facts above the button."
+      }
+    },
+    {
+      "text": "type also accepts the Figma names CTA, Rating and Sip.",
+      "strength": "recommended",
+      "target": "type",
+      "from": {
+        "fact": "props:type"
+      }
+    },
+    {
+      "text": "Props for one type do nothing on the others.",
+      "strength": "recommended",
+      "target": "type",
+      "from": {
+        "section": "configuration",
+        "quote": "Props for one type do nothing on the others."
+      }
+    },
+    {
+      "text": "Set iconName to the step’s icon: left out, the cta capsule shows ic_upi_number.",
+      "strength": "recommended",
+      "target": "iconName",
+      "from": {
+        "fact": "props:iconName"
+      }
+    },
+    {
+      "text": "iconSlot, buttonSlot, ratingBadgeSlot, ratingActionsSlot and avatarSlot replace a type’s parts and get the card’s modes.",
+      "strength": "recommended",
+      "target": "iconSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "iconSlot, buttonSlot, ratingBadgeSlot, ratingActionsSlot, and avatarSlot replace a type’s parts and get the card’s modes."
+      }
+    },
+    {
+      "text": "iconSlot and buttonSlot take your own IconCapsule and Button.",
+      "strength": "recommended",
+      "target": "buttonSlot",
+      "from": {
+        "section": "configuration",
+        "quote": "Your own IconCapsule and Button in iconSlot and buttonSlot."
+      }
+    },
+    {
+      "text": "badge adds a chip on the cta layout: a string renders a Badge, a node replaces it, and false, null or an empty string hide it.",
+      "strength": "recommended",
+      "target": "badge",
+      "from": {
+        "fact": "props:badge"
+      }
+    },
+    {
+      "text": "caption adds a line under the body on the cta layout; false, null or an empty string hide it.",
+      "strength": "recommended",
+      "target": "caption",
+      "from": {
+        "fact": "props:caption"
+      }
+    },
+    {
+      "text": "The title clamps to one line and the body to three; disableTruncation lets both wrap freely.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "from": {
+        "fact": "props:disableTruncation"
+      }
+    },
+    {
+      "text": "The card’s Button is purple at size S: Emphasis makes it lighter, and Semantic Intent System gives it and the icon AppearanceSystem’s status colour.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "The button is always purple at size S: Emphasis makes it lighter, and Semantic Intent System gives it and the icon AppearanceSystem’s status colour."
+      },
+      "absolute": {
+        "word": "always",
+        "scope": "contextual",
+        "reason": "it is about the card’s own Button, and the same sentence names Emphasis and Semantic Intent System as what changes it; it is not a rule for every Button."
+      }
+    },
+    {
+      "text": "Emphasis Medium: a light purple button.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Medium",
+      "from": {
+        "section": "configuration",
+        "quote": "A light purple button."
+      }
+    },
+    {
+      "text": "Emphasis Low: a text button.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Low",
+      "from": {
+        "section": "configuration",
+        "quote": "A text button."
+      }
+    },
+    {
+      "text": "Semantic Intent System with AppearanceSystem warning turns the icon and the button orange.",
+      "strength": "recommended",
+      "target": "Semantic Intent",
+      "value": "System",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceSystem warning turns the icon and button orange."
+      }
+    },
+    {
+      "text": "Context CTACard: a larger, 58 px icon.",
+      "strength": "recommended",
+      "target": "Context",
+      "value": "CTACard",
+      "from": {
+        "section": "configuration",
+        "quote": "A larger, 58 px icon."
+      }
+    },
+    {
+      "text": "Page type SubPage: a light grey border.",
+      "strength": "recommended",
+      "target": "Page type",
+      "value": "SubPage",
+      "from": {
+        "section": "configuration",
+        "quote": "A light grey border."
+      }
+    },
+    {
+      "text": "context 8 Section adds a grey border.",
+      "strength": "recommended",
+      "target": "context 8",
+      "value": "Section",
+      "from": {
+        "section": "configuration",
+        "quote": "Context CTACard enlarges the icon, and Page type SubPage and context 8 Section add a grey border."
+      }
+    },
+    {
+      "text": "On rating, showButton={false} removes Save and moves like and dislike to the start.",
+      "strength": "recommended",
+      "target": "showButton",
+      "value": "false",
+      "from": {
+        "section": "states",
+        "quote": "On rating, showButton={false} removes Save and moves like and dislike to the start"
+      }
+    },
+    {
+      "text": "showRatingActions={false} removes like and dislike.",
+      "strength": "recommended",
+      "target": "showRatingActions",
+      "value": "false",
+      "from": {
+        "section": "states",
+        "quote": "showRatingActions={false} removes like and dislike"
+      }
+    },
+    {
+      "text": "Pass onPressLike and onPressDislike: like and dislike respond only when you do.",
+      "strength": "recommended",
+      "target": "onPressLike",
+      "from": {
+        "section": "states",
+        "quote": "Like and dislike only respond when you pass onPressLike and onPressDislike."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "it says when the rating card’s like and dislike respond: with their press handlers; it is not a limit on anything else."
+      }
+    },
+    {
+      "text": "On rating, ratingMediaAlign aligns the badge slot above the title: center, the default, or start.",
+      "strength": "recommended",
+      "target": "ratingMediaAlign",
+      "from": {
+        "fact": "props:ratingMediaAlign"
+      }
+    },
+    {
+      "text": "The card’s button can’t be disabled.",
+      "strength": "recommended",
+      "target": "onPressButton",
+      "from": {
+        "section": "states",
+        "quote": "The card’s button can’t be disabled."
+      }
+    },
+    {
+      "text": "The card fills its host’s width; Figma and Storybook draw it at 320 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills its host’s width; Figma and Storybook draw it at 320 px."
+      }
+    },
+    {
+      "text": "On cta the text takes 3/5 of the width and the icon 2/5, padded 22 px top and bottom.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "On cta the text takes 3/5 of the width and the icon 2/5, padded 22 px top and bottom."
+      }
+    },
+    {
+      "text": "Pass the plan’s picture in avatarSource: it shows the plan’s own mark.",
+      "strength": "recommended",
+      "target": "avatarSource",
+      "from": {
+        "section": "doDont",
+        "quote": "avatarSource shows the plan’s own mark."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make the title the offer.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the offer"
+        }
+      },
+      {
+        "text": "Make the body what the person gets.",
+        "strength": "recommended",
+        "target": "body",
+        "from": {
+          "section": "content",
+          "quote": "the body what the person gets"
+        }
+      },
+      {
+        "text": "Make the button label a verb, such as Set up, Save or Start SIP.",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "section": "content",
+          "quote": "the button label a verb, such as Set up, Save, or Start SIP"
+        }
+      },
+      {
+        "text": "Keep the title to one line and the body to three.",
+        "strength": "recommended",
+        "target": "body",
+        "from": {
+          "section": "content",
+          "quote": "Keep the title to one line and the body to three"
+        }
+      },
+      {
+        "text": "On sip, the headline names the plan, the description is its main fact, and the subtitle qualifies it.",
+        "strength": "recommended",
+        "target": "headline",
+        "from": {
+          "section": "content",
+          "quote": "On sip, the headline names the plan, the description is its main fact, and the subtitle qualifies it."
+        }
+      },
+      {
+        "text": "Don’t put a long label on the button.",
+        "strength": "discouraged",
+        "target": "buttonLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "A long button label"
+        }
+      },
+      {
+        "text": "Set title: left out, it reads “If you have 1 line”.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "fact": "props:title"
+        }
+      },
+      {
+        "text": "Set body: left out, it reads “Then you can have up to 3 lines in the subtext as well. This is for demonstration.”",
+        "strength": "recommended",
+        "target": "body",
+        "from": {
+          "fact": "props:body"
+        }
+      },
+      {
+        "text": "Set buttonLabel: left out, the Button reads “Button”, or “Save” on rating.",
+        "strength": "recommended",
+        "target": "buttonLabel",
+        "from": {
+          "fact": "props:buttonLabel"
+        }
+      },
+      {
+        "text": "Set ratingLabel on rating: left out, the badge reads “+28 Rating”.",
+        "strength": "recommended",
+        "target": "ratingLabel",
+        "from": {
+          "fact": "props:ratingLabel"
+        }
+      },
+      {
+        "text": "Set headline on sip: left out, it reads “Headline”.",
+        "strength": "recommended",
+        "target": "headline",
+        "from": {
+          "fact": "props:headline"
+        }
+      },
+      {
+        "text": "Set description on sip: left out, it reads “Description”.",
+        "strength": "recommended",
+        "target": "description",
+        "from": {
+          "fact": "props:description"
+        }
+      },
+      {
+        "text": "Set subtitle on sip: left out, it reads “Subtitle”.",
+        "strength": "recommended",
+        "target": "subtitle",
+        "from": {
+          "fact": "props:subtitle"
+        }
+      }
+    ],
+    "good": [
+      "Set up UPI Number",
+      "Receive money on your mobile number.",
+      "Set up",
+      "Your credit score rose",
+      "Save",
+      "Start a gold SIP",
+      "Jio Gold SIP",
+      "₹500",
+      "every month",
+      "Start SIP"
+    ],
+    "bad": [
+      "Set up your UPI Number to receive money"
+    ]
+  },
+  "states": [
+    {
+      "state": "Not pressable",
+      "when": "Always: the card itself isn’t pressable; its buttons are.",
+      "from": {
+        "section": "states",
+        "quote": "The card itself isn’t pressable; its buttons are."
+      }
+    },
+    {
+      "state": "Reactions only",
+      "when": "On rating with showButton={false}: like and dislike, without Save, at the start.",
+      "from": {
+        "section": "states",
+        "quote": "On rating, showButton={false} removes Save and moves like and dislike to the start"
+      }
+    },
+    {
+      "state": "Save only",
+      "when": "On rating with showRatingActions={false}: Save, without reactions.",
+      "from": {
+        "section": "states",
+        "quote": "showRatingActions={false} removes like and dislike"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "iconAccessibilityLabel names the default IconCapsule; without it the icon is decorative and hidden from screen readers.",
+      "strength": "recommended",
+      "target": "iconAccessibilityLabel",
+      "from": {
+        "fact": "props:iconAccessibilityLabel"
+      }
+    },
+    {
+      "text": "avatarAccessibilityLabel names the default sip Avatar; without it the avatar is decorative and hidden from screen readers.",
+      "strength": "recommended",
+      "target": "avatarAccessibilityLabel",
+      "from": {
+        "fact": "props:avatarAccessibilityLabel"
+      }
+    },
+    {
+      "text": "likeAccessibilityLabel names the like control; left out, it is “Like”.",
+      "strength": "recommended",
+      "target": "likeAccessibilityLabel",
+      "from": {
+        "fact": "props:likeAccessibilityLabel"
+      }
+    },
+    {
+      "text": "dislikeAccessibilityLabel names the dislike control; left out, it is “Dislike”.",
+      "strength": "recommended",
+      "target": "dislikeAccessibilityLabel",
+      "from": {
+        "fact": "props:dislikeAccessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "One verb on the button",
+      "dont": "A long button label",
+      "why": "“Set up” names the action.",
+      "from": {
+        "section": "doDont",
+        "quote": "One verb on the button"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The setup prompt on the Home screen, the guide’s In context: a Title greeting over a cta card with the UPI Number icon and the Set up Button. The greeting and balance are the guide’s; onPressButton stands for the screen opening its own setup flow (the card doesn’t do the setup or remove itself).",
+      "jsx": "<VStack>\n  <Title title=\"Good morning, Priya\" subtitle=\"Your balance is ₹12,450\" />\n  <CardCTA\n    type=\"cta\"\n    title=\"Set up UPI Number\"\n    body=\"Receive money on your mobile number.\"\n    iconName=\"ic_upi_number\"\n    buttonLabel=\"Set up\"\n    onPressButton={() => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Set up opens the screen’s own setup flow through onPressButton; the card doesn’t do the setup or remove itself."
+      }
+    },
+    {
+      "purpose": "A rating card, the guide’s rating example: the +28 points badge over a credit-score insight, with Save beside like and dislike. onPressButton stands for the screen’s Save action, and onPressLike and onPressDislike for the person’s reaction.",
+      "jsx": "<CardCTA\n  type=\"rating\"\n  ratingLabel=\"+28 points\"\n  title=\"Your credit score rose\"\n  body=\"Paying your bills on time helped. Was this useful?\"\n  buttonLabel=\"Save\"\n  onPressButton={() => {}}\n  onPressLike={() => {}}\n  onPressDislike={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "A badge, Save, and like or dislike, to react to an insight."
+      }
+    },
+    {
+      "purpose": "A plan card, the guide’s sip and Plan facts examples: the plan’s own mark as the avatar, the offer and what it gives, Jio Gold SIP as the headline, ₹500 as its main fact, every month as the qualifier, and Start SIP as the verb. The URI stands for the plan’s mark, and onPressButton for the screen starting the plan.",
+      "jsx": "<CardCTA\n  type=\"sip\"\n  title=\"Start a gold SIP\"\n  body=\"Buy 24K gold every month, automatically.\"\n  headline=\"Jio Gold SIP\"\n  description=\"₹500\"\n  subtitle=\"every month\"\n  buttonLabel=\"Start SIP\"\n  avatarSource={{ uri: 'https://example.com/jio-gold-sip-mark.png' }}\n  onPressButton={() => {}}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "“Jio Gold SIP”, “₹500”, and “every month”."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Button / Size",
+      "default": "S",
+      "description": "The card’s own Button is Button / Size S: the card sets it over its modes, so Button / Size on the card doesn’t change it.",
+      "quote": "Forced on children: Button `{ AppearanceBrand: 'Secondary', 'Button / Size': 'S' }`",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "description": "The card sets AppearanceBrand Secondary on its own Button and IconCapsule over its modes, so AppearanceBrand on the card doesn’t change either.",
+      "quote": "Forced on children: Button `{ AppearanceBrand: 'Secondary', 'Button / Size': 'S' }`; IconCapsule `{ 'Icon Capsule Size': 'M', Emphasis: 'Medium', AppearanceBrand: 'Secondary' }`",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "modes",
+      "name": "Emphasis",
+      "description": "The card keeps its own IconCapsule at Emphasis Medium, so Emphasis on the card changes its Button, not the icon.",
+      "quote": "IconCapsule `{ 'Icon Capsule Size': 'M', Emphasis: 'Medium', AppearanceBrand: 'Secondary' }`",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "list": "props",
+      "name": "buttonLabel",
+      "default": "Button",
+      "description": "Left out, the default Button reads “Button”, or “Save” on rating.",
+      "quote": "`buttonLabel` (default \"Button\"; \"Save\" on rating)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The title’s line is 20 px where Figma’s is 18.",
+      "quote": "Title 20 px line (Figma 18)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Like and dislike are 26 px where Figma’s are 28.",
+      "quote": "Like / dislike 26 px (Figma 28)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ]
+}

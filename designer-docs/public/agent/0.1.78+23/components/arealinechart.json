@@ -1,0 +1,732 @@
+{
+  "schemaVersion": 1,
+  "id": "AreaLineChart",
+  "slug": "arealinechart",
+  "category": "data",
+  "tags": [
+    "line chart",
+    "area chart",
+    "graph",
+    "trend",
+    "time series"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:50:12Z",
+    "flags": []
+  },
+  "summary": "Show a continuous trend and make series comparison legible.",
+  "useWhen": [
+    {
+      "text": "Show a continuous trend, such as an account balance over a few months, and make a comparison between series legible.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Show a continuous trend and make series comparison legible."
+      }
+    },
+    {
+      "text": "Put a trend beside the decision it informs, for example inside a card or an account summary.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Put a trend beside the decision it informs"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Comparing series in unrelated units, such as income in rupees and a conversion rate in percent: they don't belong on one comparison scale.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Income in rupees and conversion rate in percent do not belong on one comparison scale."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Y axis",
+      "holds": "Tick labels for one unit on a readable scale, so the direction is honest; on by default (showYAxis), formatted by formatY.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use one unit and a readable scale so the direction is honest."
+      }
+    },
+    {
+      "part": "Plot",
+      "holds": "Area and line show the trend; projected points use the dashed treatment. The plot owns pointer and x-axis selection.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Area and line show the trend; projected points use the dashed treatment. The plot owns pointer and x-axis selection."
+      }
+    },
+    {
+      "part": "Goal pin",
+      "holds": "A value bubble anchored to one data point (goalPin), to call out a meaningful point, not a decorative maximum.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use a goal pin to call out a meaningful point, not a decorative maximum."
+      }
+    },
+    {
+      "part": "X axis",
+      "holds": "Labels from xLabels, short enough to select and read at the host width; on by default (showXAxis).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep labels short enough to select and read at the host width."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "formatX",
+      "accepts": [
+        "((label: string | number, index: number) => React.ReactNode)"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "formatY",
+      "accepts": [
+        "((value: number) => React.ReactNode)"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "formatValue",
+      "accepts": [
+        "((value: number, series: ChartSeries) => React.ReactNode)"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Use a card or account summary to give the chart a clear unit and decision context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use a card or account summary to give the chart a clear unit and decision context."
+      }
+    },
+    {
+      "text": "A Card can provide the account label and unit context while the chart stays responsible for the plotted data.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the account label and unit context while the chart stays responsible for the plotted data."
+      }
+    },
+    {
+      "text": "The chart owns plot height while the host supplies width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The chart owns plot height while the host supplies width."
+      }
+    },
+    {
+      "text": "Use the full available width when comparing two series.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Use full available width when comparing two series."
+      }
+    },
+    {
+      "text": "On a narrow host, use shorter labels and fewer points in the same order.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "On a narrow host, use shorter labels and fewer points in the same order."
+      }
+    },
+    {
+      "text": "Reduce labels and point count before shrinking the readable chart.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Reduce labels and point count before shrinking the readable chart."
+      }
+    },
+    {
+      "text": "The Y-axis column reserves the width of its widest tick label, and the goal pin stays inside the plot.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The Y-axis column reserves the width of its widest tick label, and the goal pin stays inside the plot."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "series is required: one entry per series, each with its data; a series' label names it in the legend and when a point is selected.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "series"
+    },
+    {
+      "text": "Use the series, area/line, grid, dots, curve, and x-label choices to make a trend or comparison legible.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use the series, area/line, grid, dots, curve, and x-label choices to make a trend or comparison legible."
+      }
+    },
+    {
+      "text": "A single series keeps the direction prominent.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A single series keeps the direction prominent."
+      },
+      "target": "series"
+    },
+    {
+      "text": "A second labelled series adds comparison without hiding the units.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A second labelled series adds comparison without hiding the units."
+      },
+      "target": "series"
+    },
+    {
+      "text": "Mark projected points in the data (projected on a ChartPoint) so the chart can distinguish expectation from observed values; they are drawn dashed.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Mark projected points in the data so the chart can distinguish expectation from observed values."
+      },
+      "target": "series"
+    },
+    {
+      "text": "With more than one series the chart shows a legend of the series names (showLegend, on by default); a single series has none.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "showLegend"
+    },
+    {
+      "text": "Use a goal pin (goalPin, anchored to a data point) to call out a meaningful point, not a decorative maximum.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Use a goal pin to call out a meaningful point, not a decorative maximum."
+      },
+      "target": "goalPin"
+    },
+    {
+      "text": "Keep the x labels (xLabels) short enough to select and read at the host width.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep labels short enough to select and read at the host width."
+      },
+      "target": "xLabels"
+    },
+    {
+      "text": "height sets the plot's height (218 px by default); the x-axis row is added below it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "its plot height excludes the x-axis row"
+      },
+      "target": "height"
+    },
+    {
+      "text": "The chart derives a nice tick domain from its data unless y bounds (yMin, yMax) are supplied.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The chart derives a nice tick domain from its data unless y bounds are supplied"
+      },
+      "target": "yMax"
+    },
+    {
+      "text": "formatY formats the y-axis tick labels, and formatValue the values a selected point shows (it defaults to formatY), so the unit can be written on the axis.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/15"
+      },
+      "target": "formatY"
+    },
+    {
+      "text": "interactive (on by default) turns on hover and press-drag selection with a tooltip.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/20"
+      },
+      "target": "interactive"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Short x labels, one shared unit, and a visible legend help the chart communicate before a person inspects a point.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short x labels, one shared unit, and a visible legend help the chart communicate before a person inspects a point."
+        }
+      },
+      {
+        "text": "Use the same unit and scale for series that people need to compare.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the same unit and scale for series that people need to compare."
+        },
+        "target": "series"
+      },
+      {
+        "text": "Name every series (its label): a legend removes ambiguity when lines overlap or cross.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "A legend removes ambiguity when lines overlap or cross."
+        },
+        "target": "series"
+      },
+      {
+        "text": "Keep the visible values available in text when SVG interaction is not enough for the task.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the visible values available in text when SVG interaction is not enough for the task."
+        }
+      }
+    ],
+    "good": [
+      "Apr",
+      "May",
+      "Jun",
+      "Income",
+      "Spending",
+      "Balance"
+    ],
+    "bad": [
+      "January month-end account balance",
+      "February month-end account balance"
+    ]
+  },
+  "states": [
+    {
+      "state": "Unselected",
+      "when": "No point is active, which is how the chart starts unless activeIndex or defaultActiveIndex names one: keep the plot quiet when no point needs focus.",
+      "from": {
+        "section": "states",
+        "quote": "Keep the plot quiet when no point needs focus."
+      }
+    },
+    {
+      "state": "Selected",
+      "when": "A point is active, set by activeIndex or by pointer and x-axis selection, which update onActiveIndexChange: the chart exposes the selected point and its readable series values.",
+      "from": {
+        "section": "states",
+        "quote": "Expose a selected point and its readable series values."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the x-axis labels are pressable and keyboard reachable, so a point can be selected without a pointer; the rendered accessibility tree does not expose the full series labels, so keep the values available in text when SVG interaction is not enough for the task.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "SVG interaction is keyboard reachable through the public x-axis Pressable in RN Web, but the rendered accessibility tree does not expose full series labels"
+      }
+    },
+    {
+      "text": "accessibilityLabel names the whole chart.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/24"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use one shared unit",
+      "dont": "Mix unrelated units",
+      "why": "Income in rupees and conversion rate in percent do not belong on one comparison scale.",
+      "from": {
+        "section": "doDont",
+        "quote": "Income and spending share the same scale, so their directions can be compared."
+      }
+    },
+    {
+      "do": "Label the series",
+      "dont": "Hide the legend",
+      "why": "Two lines without labels force people to guess which series they are seeing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Visible names keep overlapping lines understandable."
+      }
+    },
+    {
+      "do": "Use short readable labels",
+      "dont": "Overpack the x axis",
+      "why": "Long repeated labels crowd the axis and hide the trend.",
+      "from": {
+        "section": "doDont",
+        "quote": "A few short labels leave room for the plotted direction and selected values."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "An account balance trend, the guide's In context: a Card gives the account label and the unit context, and the chart plots three months of balance with a goal pin on the last point. The guide also keeps the plotted values in a text table beside it; that table is page HTML, not Coin.",
+      "jsx": "<Card>\n  <Card.Title>Account balance</Card.Title>\n  <Card.SupportText>Direction over the last three months</Card.SupportText>\n  <AreaLineChart\n    series={[{ key: 'balance', label: 'Balance', data: [620, 590, 725] }]}\n    xLabels={['Apr', 'May', 'Jun']}\n    height={168}\n    goalPin={{ value: '725k', atIndex: 2 }}\n    formatY={(value) => `${value}k`}\n    accessibilityLabel=\"Account balance\"\n  />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the account label and unit context while the chart stays responsible for the plotted data."
+      }
+    },
+    {
+      "purpose": "Series comparison with a point selected, the guide's States: income and spending in the same unit over six months, so two series get the legend automatically. The screen keeps the active index, and the chart shows that point's series values (here February, Income 14k and Spending 8k); pressing an x-axis label or the plot reports the new index through onActiveIndexChange. With no activeIndex the plot stays quiet.",
+      "jsx": "<AreaLineChart\n  series={[\n    { key: 'income', label: 'Income', data: [1, 14, 12, 22, 33, 45] },\n    { key: 'spending', label: 'Spending', data: [1, 8, 9, 14, 22, 30] },\n  ]}\n  xLabels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']}\n  showDots\n  activeIndex={1}\n  onActiveIndexChange={() => {}}\n  formatY={(value) => `${value}k`}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Expose a selected point and its readable series values."
+      }
+    },
+    {
+      "purpose": "A projected tail: three observed months and two projected ones, marked projected in the data so their segments are dashed; the guide turns the area off and shows dots for this one.",
+      "jsx": "<AreaLineChart\n  series={[\n    {\n      key: 'balance',\n      label: 'Balance',\n      showArea: false,\n      data: [22, 28, 31, { y: 36, projected: true }, { y: 41, projected: true }],\n    },\n  ]}\n  xLabels={['Apr', 'May', 'Jun', 'Jul', 'Aug']}\n  showDots\n  goalPin={{ value: '31k', atIndex: 2 }}\n  formatY={(value) => `${value}k`}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Mark projected points in the data so the chart can distinguish expectation from observed values."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "series",
+        "type": "ChartSeries[]",
+        "required": true,
+        "source": "types",
+        "description": "The series to plot. A single entry renders the \"Area Line Chart\" preset; multiple entries render the overlapping multi-series preset with an automatic legend."
+      },
+      {
+        "name": "xLabels",
+        "type": "Array<string | number>",
+        "required": false,
+        "source": "types",
+        "description": "Labels rendered along the x axis (left-to-right)."
+      },
+      {
+        "name": "yMin",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Force the lower bound of the y domain."
+      },
+      {
+        "name": "yMax",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Force the upper bound of the y domain."
+      },
+      {
+        "name": "numberOfTicks",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 4,
+        "description": "Approximate number of y-axis ticks / grid lines. Defaults to `4`. Default 4, from the component source."
+      },
+      {
+        "name": "curve",
+        "type": "Curve",
+        "required": false,
+        "source": "types",
+        "values": [
+          "linear",
+          "monotone"
+        ],
+        "default": "linear",
+        "description": "Interpolation between points. Defaults to `linear` (straight segments). Default \"linear\", from the component source."
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 218,
+        "description": "Plot drawing height in px (excludes the x-axis row). Defaults to `218`. Default 218, from the component source."
+      },
+      {
+        "name": "contentInset",
+        "type": "ChartInset",
+        "required": false,
+        "source": "types",
+        "description": "Fake margin inside the SVG so strokes/dots/pins are not clipped."
+      },
+      {
+        "name": "showGrid",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggle the background grid. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "showXAxis",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggle the x-axis labels. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "showYAxis",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggle the y-axis labels. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "showLegend",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggle the legend (multi-series only). Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "showDots",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Render a dot on every data point. Defaults to `false`. Default false, from the component source."
+      },
+      {
+        "name": "formatX",
+        "type": "(label: string | number, index: number) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Format an x label. Receives the raw label and index."
+      },
+      {
+        "name": "formatY",
+        "type": "(value: number) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Format a y-axis tick label."
+      },
+      {
+        "name": "formatValue",
+        "type": "(value: number, series: ChartSeries) => React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Format a value shown in the tooltip. Defaults to `formatY`."
+      },
+      {
+        "name": "goalPin",
+        "type": "GoalPinConfig",
+        "required": false,
+        "source": "types",
+        "description": "Render a goal pin anchored to a data point."
+      },
+      {
+        "name": "activeIndex",
+        "type": "number | null",
+        "required": false,
+        "source": "types",
+        "description": "Controlled active index (the highlighted point)."
+      },
+      {
+        "name": "defaultActiveIndex",
+        "type": "number | null",
+        "required": false,
+        "source": "types",
+        "default": null,
+        "description": "Initial active index for the uncontrolled case. Default null, from the component source."
+      },
+      {
+        "name": "onActiveIndexChange",
+        "type": "(index: number | null) => void",
+        "required": false,
+        "source": "types",
+        "description": "Notified whenever the active index changes."
+      },
+      {
+        "name": "interactive",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Enable hover/press-drag interaction + tooltip. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Extra SVG-decorator children rendered on top of the default layers."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the whole chart."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      },
+      {
+        "name": "AreaLineChart.Grid",
+        "type": "component",
+        "description": "A static sub-component of AreaLineChart. Its own props: direction, stroke, strokeWidth, strokeDasharray.",
+        "source": "types"
+      },
+      {
+        "name": "AreaLineChart.XAxis",
+        "type": "component",
+        "description": "A static sub-component of AreaLineChart. Its own props: showLabels, showTicks, tickLength, selectable, formatLabel.",
+        "source": "types"
+      },
+      {
+        "name": "AreaLineChart.YAxis",
+        "type": "component",
+        "description": "A static sub-component of AreaLineChart. Its own props: showLabels, showTicks, tickLength, showAxisLine, formatLabel.",
+        "source": "types"
+      },
+      {
+        "name": "AreaLineChart.GoalPin",
+        "type": "component",
+        "description": "A static sub-component of AreaLineChart. Its own props: value, atIndex, seriesIndex, color, textColor.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Appearance / DataViz",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Quaternary",
+          "Quinary",
+          "Senary",
+          "Neutral"
+        ],
+        "description": "A token collection AreaLineChart reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection AreaLineChart reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Emphasis / DataViz",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection AreaLineChart reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      }
+    ],
+    "slots": [
+      {
+        "name": "formatX",
+        "type": "(label: string | number, index: number) => React.ReactNode",
+        "description": "Format an x label. Receives the raw label and index.",
+        "source": "types"
+      },
+      {
+        "name": "formatY",
+        "type": "(value: number) => React.ReactNode",
+        "description": "Format a y-axis tick label.",
+        "source": "types"
+      },
+      {
+        "name": "formatValue",
+        "type": "(value: number, series: ChartSeries) => React.ReactNode",
+        "description": "Format a value shown in the tooltip. Defaults to `formatY`.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Extra SVG-decorator children rendered on top of the default layers.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onActiveIndexChange",
+        "type": "(index: number | null) => void",
+        "description": "Notified whenever the active index changes.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "In a 320 px host the last x-axis label extends about 3 px past the chart's right edge.",
+        "source": "evidence",
+        "checkedOn": "2026-10-01"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=arealinechart",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4225-1049",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-arealinechart--docs"
+  }
+}

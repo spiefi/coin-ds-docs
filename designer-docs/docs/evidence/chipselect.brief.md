@@ -3,7 +3,7 @@
 slug: chipselect · label: Chip Select · public API: ChipSelect
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1901-4727 · storybook: docsUrl('chipselect') · stories: Default=components-chipselect--default, Active=components-chipselect--active, Custom icon=components-chipselect--custom-icon, Active without close icon=components-chipselect--active-without-close-icon
 checked: 28 September 2026 · jfs-components 0.1.60 (registry latest 0.1.60)
-icon: a rounded pill outline (x 2–16, y 5–13, fully rounded) with a small × on its right third; 1.5 stroke.
+icon: a rounded outline (x 2–16, y 5–13, fully rounded) with a small × on its right third; 1.5 stroke.
 
 All instances use `modes={{ 'Color Mode': 'Light' }}`. ChipSelect has no `testID`; wrap every Anatomy specimen chip in nothing else and target it structurally (see Anatomy). Chips are content-sized: put them in `.coin-new-content-list` or an ExampleCard, never a full-width host.
 
@@ -13,13 +13,13 @@ principle: Idle names the filter; Active shows the chosen value and how to clear
 playground: stage = one ChipSelect. Controls: text control "Label" → `label` (maxLength 24, default "Date"); Segment "State" ['Idle', 'Active'] → `active` (pressing the chip also toggles it); Segment "Icon" ['Calendar', 'Filter'] → `icon` 'ic_calendar_week' | 'ic_filter'; when State is Active, OnOff "Close icon" → `showCloseIcon` (default On). Readout title "Last press", value "None yet" or "Applied" / "Cleared" after the chip toggles. Stage label: "Live Coin Chip Select".
 
 ## Anatomy
-header: Anatomy · title: Icon, label, and a way out · description: One pill holds a leading icon, the label, and, when Active, a close icon. The whole chip is a single press target.
+header: Anatomy · title: Icon, label, and a way out · description: One rounded container holds a leading icon, the label, and, when Active, a close icon. The whole chip is a single press target.
 specimen: `<ChipSelect active label="Date" icon="ic_calendar_week" />` as the only child of `<Anatomy>`
 parts (selectors are relative to the specimen; the chip root is `[tabindex="0"]`):
 1. Leading icon — Hints at the kind of filter, such as a date. — target: `[tabindex="0"] > div:first-child` — side: left
 2. Label — Names the filter, or the value once applied. — target: `[tabindex="0"] [dir="auto"]` — side: top
 3. Close icon — Shows that pressing again clears the filter. — target: `[tabindex="0"] > div:last-child` — side: right
-4. Container — Pill that turns lavender when Active. — target: `[tabindex="0"]` — side: bottom
+4. Container — Fully rounded shape that turns lavender when Active. — target: `[tabindex="0"]` — side: bottom
 marks: gap `[tabindex="0"] > div:first-child` → `[tabindex="0"] [dir="auto"]`
 
 ## Configuration
@@ -32,8 +32,8 @@ Grid: `coin-new-example-grid` (2 × 2).
 
 ## States
 header: States · title: Idle and Active · description: One property switches the chip between Idle and Active. There is no disabled state; hide a filter that does not apply instead.
-- Idle — `label="Date"` — lesson: grey pill, dark text.
-- Active — `active`, `label="Date"` — lesson: lavender pill, purple icon, text, and close icon.
+- Idle — `label="Date"` — lesson: grey background, dark text.
+- Active — `active`, `label="Date"` — lesson: lavender background, purple icon, text, and close icon.
 Grid: `coin-new-example-grid`.
 
 ## Sizing

@@ -1,0 +1,352 @@
+{
+  "slug": "circularrating",
+  "label": "Circular Rating",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "files": [
+    "src/guides/circularrating.guide.tsx"
+  ],
+  "evidence": "docs/evidence/circularrating.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:46:33.607Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "score ring",
+    "credit score",
+    "dotted ring",
+    "rating ring",
+    "health score"
+  ],
+  "title": "Circular Rating",
+  "summary": "Use a Circular Rating to show a score out of 100, such as credit health, as a dotted ring with your verdict and one next step.",
+  "corePrinciple": "A score, what it means, and what to do next.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3741-1711",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-circularrating--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A dotted ring, the score, a footer, and a nudge",
+      "description": "Twenty-four dots fill clockwise from 12 o’clock in step with the score. Inside sit a label, the score, and your tier; below come a dated footer and an inline nudge.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "Lit dots",
+        "18 px dots in the ring’s colour; the share lit matches the score.",
+        "Track dots",
+        "Grey dots for the rest of the 100.",
+        "Label",
+        "12 px; names the score.",
+        "Score",
+        "56 px heavy; the score rounded, out of 100.",
+        "Tier",
+        "16 px bold; your verdict on the score, with a chevron when it opens details.",
+        "Footer",
+        "12 px with an info icon; when the score was updated.",
+        "Nudge",
+        "An inline nudge with one button for the next step."
+      ],
+      "specimen": [
+        "Credit health",
+        "72",
+        "Doing great",
+        "Updated on 8 Oct 2026",
+        "Pay your card bill in full to raise your score",
+        "Pay now"
+      ],
+      "anatomy": [
+        {
+          "part": "Lit dots",
+          "note": "18 px dots in the ring’s colour; the share lit matches the score."
+        },
+        {
+          "part": "Track dots",
+          "note": "Grey dots for the rest of the 100."
+        },
+        {
+          "part": "Label",
+          "note": "12 px; names the score."
+        },
+        {
+          "part": "Score",
+          "note": "56 px heavy; the score rounded, out of 100."
+        },
+        {
+          "part": "Tier",
+          "note": "16 px bold; your verdict on the score, with a chevron when it opens details."
+        },
+        {
+          "part": "Footer",
+          "note": "12 px with an info icon; when the score was updated."
+        },
+        {
+          "part": "Nudge",
+          "note": "An inline nudge with one button for the next step."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Your words, the dots, and the nudge",
+      "description": "You write the label, tier, footer, and nudge; the score comes from the value. Choose how many dots make the ring, and whether the footer icon and the nudge show.",
+      "blocks": [
+        "Without the nudge",
+        "The score and its footer, when there’s no next step.",
+        "Without the footer icon",
+        "Just the update line.",
+        "Fewer dots",
+        "Twelve dots: each stands for more of the score. Past about 50 dots they overlap.",
+        "Tier opens details",
+        "With onTierPress the tier row becomes a button with a chevron, such as to open the score’s breakdown.",
+        "Colour",
+        "Modes colour the dots and the nudge together: Secondary is purple."
+      ],
+      "specimen": [
+        "Credit health",
+        "72",
+        "Doing great",
+        "Updated on 8 Oct 2026",
+        "Pay your card bill in full to raise your score",
+        "Pay now"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Without the nudge",
+          "description": "The score and its footer, when there’s no next step."
+        },
+        {
+          "title": "Without the footer icon",
+          "description": "Just the update line."
+        },
+        {
+          "title": "Fewer dots",
+          "description": "Twelve dots: each stands for more of the score. Past about 50 dots they overlap."
+        },
+        {
+          "title": "Tier opens details",
+          "description": "With onTierPress the tier row becomes a button with a chevron, such as to open the score’s breakdown."
+        },
+        {
+          "title": "Colour",
+          "description": "Modes colour the dots and the nudge together: Secondary is purple."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "No states of its own",
+      "description": "The ring has no states, and neither its colour nor its tier follows the score. Pick the tier from the score yourself, and the colour with modes.",
+      "blocks": [
+        "Shown at 69%",
+        "Low score",
+        "36 lights 9 dots. The tier is yours: “Needs attention”.",
+        "High score",
+        "72 lights 18 dots, in the same colour.",
+        "Empty",
+        "At 0, only grey dots."
+      ],
+      "specimen": [
+        "Credit health",
+        "36",
+        "Needs attention",
+        "Updated on 8 Oct 2026",
+        "72",
+        "Doing great",
+        "0",
+        "Not rated yet"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Low score",
+          "description": "36 lights 9 dots. The tier is yours: “Needs attention”."
+        },
+        {
+          "title": "High score",
+          "description": "72 lights 18 dots, in the same colour."
+        },
+        {
+          "title": "Empty",
+          "description": "At 0, only grey dots."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "A fixed 340 px wide",
+      "description": "A Circular Rating doesn’t resize. The ring is 320 px with 18 px dots, inside 10 px of padding, and the nudge is 312 px; give it a column at least 340 px wide.",
+      "blocks": [
+        "340 × 478",
+        "320 × 320"
+      ],
+      "specimen": [
+        "Credit health",
+        "72",
+        "Doing great",
+        "Updated on 8 Oct 2026",
+        "Pay your card bill in full to raise your score",
+        "Pay now"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the score, give a verdict, date it",
+      "description": "Name the score in two or three words, such as “Credit health”. Write the tier as a short verdict that fits one line, start the footer with when it was updated, and give the nudge one action with a verb label, such as “Pay now”.",
+      "blocks": [
+        "A complete rating"
+      ],
+      "specimen": [
+        "Credit health",
+        "64",
+        "Fair",
+        "Updated on 8 Oct 2026",
+        "Pay your card bill in full to raise your score",
+        "Pay now"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "A complete rating",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Credit health with a next step",
+      "description": "The screen passes the score and its tier, and wires both actions: the tier opens the score’s breakdown and Pay now opens the card bill.",
+      "blocks": [
+        "Press the tier or Pay now"
+      ],
+      "specimen": [
+        "Credit health",
+        "64",
+        "Fair",
+        "Updated on 8 Oct 2026",
+        "Pay your card bill in full to raise your score",
+        "Pay now"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make the score mean something",
+      "description": "Each pair shows a rating people can trust and act on versus one that misleads them.",
+      "blocks": [
+        "Do",
+        "Write the tier for the score",
+        "A low score says “Needs attention”.",
+        "Don’t",
+        "Leave the default tier",
+        "The tier doesn’t follow the score, so 36 still says “Doing great”.",
+        "Name the nudge’s action",
+        "“Pay now” says what happens.",
+        "Leave the default button",
+        "It shows and is read as “Button”.",
+        "Keep emphasis High",
+        "The lit dots stand out from the track.",
+        "Lower the emphasis",
+        "At Medium the lit dots have no contrast with the track (1.0:1)."
+      ],
+      "specimen": [
+        "Credit health",
+        "36",
+        "Needs attention",
+        "Updated on 8 Oct 2026",
+        "Doing great",
+        "64",
+        "Fair",
+        "Pay your card bill in full to raise your score",
+        "Pay now",
+        "Button",
+        "72"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Write the tier for the score",
+            "caption": "A low score says “Needs attention”.",
+            "specimen": "Credit health · 36 · Needs attention · Updated on 8 Oct 2026"
+          },
+          "dont": {
+            "title": "Leave the default tier",
+            "caption": "The tier doesn’t follow the score, so 36 still says “Doing great”.",
+            "specimen": "Credit health · 36 · Doing great · Updated on 8 Oct 2026"
+          }
+        },
+        {
+          "do": {
+            "title": "Name the nudge’s action",
+            "caption": "“Pay now” says what happens.",
+            "specimen": "Credit health · 64 · Fair · Updated on 8 Oct 2026 · Pay your card bill in full to raise your score · Pay now"
+          },
+          "dont": {
+            "title": "Leave the default button",
+            "caption": "It shows and is read as “Button”.",
+            "specimen": "Credit health · 64 · Fair · Updated on 8 Oct 2026 · Pay your card bill in full to raise your score · Button"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep emphasis High",
+            "caption": "The lit dots stand out from the track.",
+            "specimen": "Credit health · 72 · Doing great · Updated on 8 Oct 2026"
+          },
+          "dont": {
+            "title": "Lower the emphasis",
+            "caption": "At Medium the lit dots have no contrast with the track (1.0:1).",
+            "specimen": "Credit health · 72 · Doing great · Updated on 8 Oct 2026"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Circular Rating contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Without nudge",
+        "Low rating",
+        "Checked 17 October 2026",
+        "Installed jfs-components is 0.1.78 (16 October build) from the team’s private package repository. Figma has one Circular Rating component with no variants; the package builds it from Circular Progress Bar / Doted and an inline Nudge, and gives both one set of colour modes. Figma shows 26 dots, all lit, on a slightly smaller ring, with a white nudge; the package draws 24 dots lit by the score and colours the nudge with the ring. The nudge button is Figma’s small size by default. Screen readers hear the ring as a progress bar with its value out of 100, named by the label, score, and tier, then the footer as text. The chevron shows only when the tier opens details. Since the #271 fix the default nudge has no close button. With Color Mode Dark the text and grey dots keep their Light colours, so the guide shows Light only.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

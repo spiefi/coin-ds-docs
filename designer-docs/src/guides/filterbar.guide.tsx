@@ -48,7 +48,7 @@ function FilterBarGuide() {
       header: 'Anatomy', title: 'A padded search field', description: 'The bar holds one public Text Input set up for search, inset from the screen edges.',
       body: <Anatomy specimenWidth={360} marks={[{ kind: 'padding', target: byTestId('fb-anatomy') }]} parts={[
         { name: 'Bar', note: 'Full-width container that insets the field from the screen edges.', target: byTestId('fb-anatomy'), side: 'left' },
-        { name: 'Field', note: 'Pill-shaped input surface from the public Text Input.', target: `${byTestId('fb-anatomy')} > div`, side: 'top' },
+        { name: 'Field', note: 'Fully rounded input surface from the public Text Input.', target: `${byTestId('fb-anatomy')} > div`, side: 'top' },
         { name: 'Search icon', note: 'Tells people the field searches.', target: `${byTestId('fb-anatomy')} svg`, side: 'bottom' },
         { name: 'Placeholder', note: 'Names what is being searched until they type.', target: `${byTestId('fb-anatomy')} input`, side: 'right' },
       ]}><FilterBar testID="fb-anatomy" modes={MODES} placeholder="Search transactions" value="" onChangeText={() => {}} /></Anatomy>,

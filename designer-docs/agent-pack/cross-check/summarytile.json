@@ -1,8 +1,8 @@
 {
   "slug": "summarytile",
-  "entryHash": "208391d7bff3b1c1b5a81d216011066450f78e740a1a0c644043eae1edcbe0bf",
+  "entryHash": "b103bb966de47ea429dd8e3550895edd594cbc4e1fc0d9542eed4eb3b95827db",
   "guideCommit": "52bf96ec1d239d72ebf343cab56c7c3b3ff6a51f",
-  "checkedAt": "2026-10-29T05:31:36Z",
+  "checkedAt": "2026-10-31T01:08:37Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
@@ -10,16 +10,12 @@
   "flags": [
     {
       "field": "/examples/0",
-      "reason": "misreads-source: The description says \"The tile carries no modes: on the installed package a Button in children starts at AppearanceBrand Secondary and Button / Size S.\" The guide says the opposite for the installed 0.1.78: \"a Button passed in children doesn't get its purple, size S look, so these examples set AppearanceBrand Secondary and Button / Size S on the tile.\" The Don't \"A bare Button\" adds that without those modes \"it's gold and size M, too loud for a header.\" The evidence agrees (gold Primary, size M). The example drops the TILE modes that the guide's In context sets."
+      "reason": "misreads-source: The example leaves modes off the tile and says 'on the installed package a Button in children starts at AppearanceBrand Secondary and Button / Size S'. The guide says the opposite for installed 0.1.78: 'a Button passed in children doesn't get its purple, size S look, so these examples set AppearanceBrand Secondary and Button / Size S on the tile'. The doDont Don't also says 'Without those modes it's gold and size M'. Without TILE modes this example renders the gold, size M Button the guide warns against."
     },
     {
       "field": "/examples/2",
-      "reason": "misreads-source: \"the slotted Button needs no modes on the tile\" contradicts the guide's Do \"Modes on the tile\" and its Don't \"A bare Button … gold and size M\". On the installed package this snippet renders a gold, size M Button, not the Figma look."
-    },
-    {
-      "field": "/anatomy/2",
-      "reason": "lost-context: The quote is cut before \"; it wraps.\", which drops the point that the description wraps and never truncates. Without it, the entry is easier to read alongside /configuration/13's claim that the description is clamped to one line."
+      "reason": "misreads-source: It says 'the slotted Button needs no modes on the tile', but the guide says a bare Button in children is 'gold and size M, too loud for a header' unless the tile sets AppearanceBrand Secondary and Button / Size S. The guide says 'every example here does' set those modes."
     }
   ],
-  "notes": "The type-derived facts /facts/props/4, /5, /6 and /13 contradict both the guide and the evidence, which describe the installed jfs-components 0.1.78. The facts claim there is no default action, describe actionLabel and onActionPress props, say a slotted Button starts at Secondary / S, say disableTruncation wraps the description, and say accessibilityLabel defaults to the title. On 0.1.78, by contrast: the evidence's full prop list has no actionLabel or onActionPress; left out, children shows a placeholder Button with no onPress; a passed Button is gold, size M; \"disableTruncation affects only the title\"; and \"a tile without onPress isn't announced by its title.\" The types seem to come from a different, probably newer, build than the evidence. A human should confirm which version the pack targets. The items that faithfully restate those facts are not flagged as extraction errors under the rules, but they conflict directly with the guide: /configuration/1, /configuration/2, /configuration/3, /configuration/5, /configuration/13, /accessibility/0, /content/rules/3, and /content/bad (whose \"Button\" source is the guide's placeholder, which the facts say doesn't exist). The entry also drops the guide's Do/Don't pairs \"Modes on the tile\" vs \"A bare Button\" and \"Your own Button\" vs \"The placeholder\", and /useWhen omits the guide's TILE-modes guidance."
+  "notes": "The package-type facts /facts/props/4, /5, /6, /12 and /13 contradict both the guide and the evidence for installed jfs-components 0.1.78. They look like they come from a different (later or unpublished) version. The evidence's contract lists every prop and has no actionLabel or onActionPress. It says children left out gives a placeholder Button with no onPress, and a passed Button gets only the tile's modes (gold, size M). It says disableTruncation affects only the title and the description never truncates. It says a static tile has no accessible name and is not announced by its title. The evidence's Limits forbid implying that the description truncates or wraps through disableTruncation, or that a static tile is announced by its title. I have not flagged the items that cite these facts, because they restate the cited facts faithfully. But each one misstates the guide: /configuration/1 ('There is no default action'), /configuration/2, /configuration/3, /configuration/5, /configuration/13, /accessibility/0 and /content/rules/3. A human should check which package version the types were read from before publishing. If the types are for 0.1.78, the evidence and guide are wrong. Otherwise these items and both examples need rewriting."
 }

@@ -1,0 +1,1226 @@
+{
+  "schemaVersion": 1,
+  "id": "CcCard",
+  "slug": "cccard",
+  "category": "card",
+  "tags": [
+    "CcCard",
+    "credit card offer",
+    "credit card",
+    "card offer",
+    "card product",
+    "joining fee",
+    "benefits card"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "5170833ef03e04a22f99f4203d1fe13a508185f8",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:10:13Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide and its evidence were checked on 21 October on 0.1.78-c7d3348 and not re-checked on the installed build, dbe0e02, which changed CcCard for #364: badges are Small and benefit icons purple by default, benefits sit 4 px apart, the upsell is a 12 px line, compact shows a 42 px Avatar (the image in a circle, or a “CC” monogram), the full card shows no picture box without imageSource, '' or null hides a footer line, showHeader and showNudge also hide a custom header or upsell, and the full card is 343 × 244. This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts: Sizing “and 12 px between benefits” and “It comes out taller than Figma’s, because its badges are bigger and its benefits further apart.”; Configuration “AppearanceBrand Secondary turns the benefit icons purple”, “Badge Size Small makes the badges smaller”, their example captions and “Without the badges, 31 px shorter.” (24 px now); the Don’t caption “An empty box still takes its space beside the title.”; Content “an empty headline, description, or footerSubtitle shows its placeholder word”; and the Sources note’s 264 px, Medium badges, 12 px benefits, gold icons, 14 px upsell, 88 × 54 compact picture and hard-coded badge label colour. The guide fix belongs to #364 (open; a work note there lists these sentences). Re-extract once #364 is closed and the guide is re-checked on dbe0e02 and published. Added by Claude Code in the overnight run agentpack-batch11, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a CC Card to sell one credit card: who it’s for, its key benefits, an upsell, and the joining fee, with one action.",
+  "useWhen": [
+    {
+      "text": "Sell one credit card: who it's for, its key benefits, an upsell, and the joining fee, with one action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a CC Card to sell one credit card: who it’s for, its key benefits, an upsell, and the joining fee, with one action."
+      }
+    },
+    {
+      "text": "One card, its benefits, its fee.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One card, its benefits, its fee."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A card face (the card itself, as someone holds it): the upstream Storybook docs, as the evidence records them, point to Debit Card.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a card face (DebitCard), a product page with metric columns (PdpCcCard), or a plan matrix (PlanComparisonCard)."
+      },
+      "useInstead": "DebitCard"
+    },
+    {
+      "text": "A product page with metric columns: the upstream Storybook docs, as the evidence records them, point to PDP CC Card.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a card face (DebitCard), a product page with metric columns (PdpCcCard), or a plan matrix (PlanComparisonCard)."
+      },
+      "useInstead": "PdpCcCard"
+    },
+    {
+      "text": "A plan matrix: the upstream Storybook docs, as the evidence records them, point to Plan Comparison Card.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a card face (DebitCard), a product page with metric columns (PdpCcCard), or a plan matrix (PlanComparisonCard)."
+      },
+      "useInstead": "PlanComparisonCard"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Badges",
+      "holds": "badges on the left, trailingBadges on the right.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "badges on the left, trailingBadges on the right."
+      }
+    },
+    {
+      "part": "Picture",
+      "holds": "imageSource in an 88 × 54 box; media replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource in an 88 × 54 box; media replaces it."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title in 14 px bold on one line, subtitle under it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "title in 14 px bold on one line, subtitle under it."
+      }
+    },
+    {
+      "part": "Benefits",
+      "holds": "items: one Coin ListItem per benefit, with its icon.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "items: one Coin ListItem per benefit, with its icon."
+      }
+    },
+    {
+      "part": "Upsell",
+      "holds": "nudgeSegments after a small avatar.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "nudgeSegments after a small avatar."
+      }
+    },
+    {
+      "part": "Fee",
+      "holds": "headline, description, and footerSubtitle.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "headline, description, and footerSubtitle."
+      }
+    },
+    {
+      "part": "Action",
+      "holds": "A small purple Button from buttonLabel.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A small purple Button from buttonLabel."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "header",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "media",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "items",
+      "accepts": [
+        "CcCardListItem"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "nudge",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "footer",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "button",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "On a screen of card offers, list the cards one under another.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists the cards on offer, one under another."
+      }
+    },
+    {
+      "text": "On a white page, set Page type SubPage: it gives the card a grey border.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Page type SubPage shows a grey border for white pages"
+      },
+      "target": "Page type",
+      "value": "SubPage"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The full card, the default, shows every part.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The full card shows every part."
+      },
+      "target": "compact",
+      "value": "false"
+    },
+    {
+      "text": "Use compact for dense lists: just the picture and the fee.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Just the picture and the fee, for dense lists."
+      },
+      "target": "compact",
+      "value": "true"
+    },
+    {
+      "text": "compact drops the badges, title, benefits, upsell, and button, so put the card's name in headline.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "it drops the badges, title, benefits, upsell, and button, so put the card’s name in headline."
+      },
+      "target": "compact",
+      "value": "true"
+    },
+    {
+      "text": "In compact, without media, the media slot shows a 42 px Avatar by default, and the footer has no button.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "compact",
+      "value": "true"
+    },
+    {
+      "text": "media replaces the picture in both the full and the compact card, for example with an Avatar.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "media replaces the picture in both, for example with an Avatar as Figma’s compact card does."
+      },
+      "target": "media"
+    },
+    {
+      "text": "showHeader and showNudge hide the badges and the upsell.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "showHeader and showNudge hide the badges and the upsell"
+      },
+      "target": "showHeader",
+      "value": "false"
+    },
+    {
+      "text": "showButton hides the button but not its space: the fee stays where it was, and the card is no shorter.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "showButton hides the button but not its space."
+      },
+      "target": "showButton",
+      "value": "false"
+    },
+    {
+      "text": "Colour badges with their modes, not with colours.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Badges take modes, not colours."
+      },
+      "target": "badges"
+    },
+    {
+      "text": "The card is 343 px wide, as in Figma; width sets another number or a percentage of its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 343 px wide, as in Figma; width sets another number or a percentage of its host."
+      },
+      "target": "width"
+    },
+    {
+      "text": "The height follows the parts you show.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The height follows the parts you show"
+      }
+    },
+    {
+      "text": "A benefit row presses when you give it onPress.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "a benefit row presses when you give it onPress."
+      },
+      "target": "CcCardListItem.onPress"
+    },
+    {
+      "text": "Let the Button act or the whole card, not both: a pressable card (onPress) that keeps its button puts a button inside a button.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Use one or the other: a pressable card that keeps its button puts a button inside a button."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Each Apply starts the screen's own application through onButtonPress; the card only lays out the offer.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Each Apply starts the screen’s own application through onButtonPress; the card only lays out the offer."
+      },
+      "target": "onButtonPress"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Set title yourself on the full card: left out, it shows the sample word “Title” (compact drops the title).",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/8"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Set subtitle yourself on the full card: left out, it shows the sample word “Subtitle” (compact drops it).",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/9"
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Unless footer replaces the footer text, set headline yourself: left out, it shows the sample word “Headline”; '' or null hides the line.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/16"
+        },
+        "target": "headline"
+      },
+      {
+        "text": "Unless footer replaces the footer text, set description yourself: left out, it shows the sample word “Description”; '' or null hides the line.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/17"
+        },
+        "target": "description"
+      },
+      {
+        "text": "Unless footer replaces the footer text, set footerSubtitle yourself: left out, it shows the sample word “Subtitle”; '' or null hides the line.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/18"
+        },
+        "target": "footerSubtitle"
+      },
+      {
+        "text": "Set buttonLabel whenever the card shows its button: it defaults to “Button”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/20"
+        },
+        "target": "buttonLabel"
+      },
+      {
+        "text": "Set items yourself on the full card: left out, it shows three sample benefit rows (compact drops the benefits).",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/11"
+        },
+        "target": "items"
+      },
+      {
+        "text": "On the full card, unless header replaces the header, set badges, or hide the header with showHeader false: left out, it shows two sample badges (compact drops the header).",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/2"
+        },
+        "target": "badges"
+      },
+      {
+        "text": "On the full card, unless nudge replaces the upsell, set nudgeSegments, or hide the upsell with showNudge false: left out, it shows the sample “Upsell message JioFinance+” (compact drops the upsell).",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/13"
+        },
+        "target": "nudgeSegments"
+      },
+      {
+        "text": "Make the title the card's name, short enough for one line, and the subtitle the kind of card.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the card’s name, short enough for one line, and the subtitle the kind of card."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Give each benefit one fact.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Give each benefit one fact."
+        },
+        "target": "items"
+      },
+      {
+        "text": "Put the fee label in headline, the amount in description, and the billing note in footerSubtitle.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put the fee label in headline, the amount in description, and the billing note in footerSubtitle."
+        },
+        "target": "headline"
+      },
+      {
+        "text": "Label the button with a verb, such as Apply.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Label the button with a verb, such as Apply."
+        },
+        "target": "buttonLabel"
+      },
+      {
+        "text": "Replace every sample: each line should say something about this card.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Each line says something about this card."
+        }
+      },
+      {
+        "text": "In compact, headline carries the card's name, which the title can't show.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "headline carries the name the title can’t show."
+        },
+        "target": "headline"
+      }
+    ],
+    "good": [
+      "JioFinance Gold Credit Card",
+      "Rewards on gold and every spend",
+      "5% back as JioPoints on gold",
+      "Joining fee",
+      "₹499",
+      "+ GST",
+      "Apply"
+    ],
+    "bad": [
+      "Headline",
+      "Description",
+      "Subtitle"
+    ]
+  },
+  "states": [
+    {
+      "state": "Button acts",
+      "when": "The default: the card isn't pressable; its Apply button is, and a benefit row presses when you give it onPress.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t pressable: its Apply button is, and a benefit row presses when you give it onPress."
+      }
+    },
+    {
+      "state": "Whole card",
+      "when": "onPress set: the whole card is one button, named by its title. Use it without the card's own button (showButton false).",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      }
+    },
+    {
+      "state": "Disabled, selected, loading",
+      "when": "Not available: the card has no disabled, selected, or loading state.",
+      "from": {
+        "section": "states",
+        "quote": "The card has no disabled, selected, or loading state."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "With onPress, the whole card is one button, named by its title.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      },
+      "target": "onPress"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Replace every sample",
+      "dont": "Leave the footer empty",
+      "why": "Headline, Description, and Subtitle show as written.",
+      "from": {
+        "section": "doDont",
+        "quote": "Replace every sample"
+      }
+    },
+    {
+      "do": "Show the card",
+      "dont": "Leave out the picture",
+      "why": "The picture says what’s on offer.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show the card"
+      }
+    },
+    {
+      "do": "Name the card in compact",
+      "dont": "Compact with the full card’s text",
+      "why": "The title disappears, so only the fee is left.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the card in compact"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Card offers on the Cards screen, the guide's In context: a title, then two full cards one under another, each with its picture, name, benefits and fee; the first adds a trailing badge and an upsell, the second hides the upsell. Each Apply starts the screen's own application through onButtonPress (the empty handlers stand for that wiring). Badges take their colours as modes, as the guide sets them; the upsell's last run is brand-coloured as in the package's own sample. The require() paths stand for the app's own pictures.",
+      "jsx": "<VStack>\n  <Title title=\"Cards for you\" subtitle=\"Pre-approved offers\" />\n  <CcCard\n    imageSource={require('./credit-card.png')}\n    title=\"JioFinance Gold Credit Card\"\n    subtitle=\"Rewards on gold and every spend\"\n    badges={[{ label: 'Pre-approved', modes: { AppearanceBrand: 'Tertiary' } }]}\n    trailingBadges={[{ label: 'Lifetime free', modes: { AppearanceBrand: 'Secondary' } }]}\n    items={[\n      { icon: 'ic_rupee_coin', title: '5% back as JioPoints on gold' },\n      { icon: 'ic_flight_mode', title: '4 airport lounge visits a year' },\n      { icon: 'ic_gift', title: 'No annual fee in the first year' },\n    ]}\n    nudgeSegments={[{ text: 'Get 2x JioPoints with ' }, { text: 'JioFinance+', modes: { 'Text Appearance': 'Primary' } }]}\n    nudgeAvatarSource={require('./jiofinance-logo.png')}\n    headline=\"Joining fee\"\n    description=\"₹499\"\n    footerSubtitle=\"+ GST\"\n    buttonLabel=\"Apply\"\n    onButtonPress={() => {}}\n  />\n  <CcCard\n    imageSource={require('./credit-card.png')}\n    title=\"JioFinance Everyday Credit Card\"\n    subtitle=\"Cashback on bills and groceries\"\n    badges={[{ label: 'Pre-approved', modes: { AppearanceBrand: 'Tertiary' } }]}\n    items={[\n      { icon: 'ic_voucher_cashback', title: '2% cashback on bills' },\n      { icon: 'ic_wallet', title: '1% cashback on everything else' },\n    ]}\n    showNudge={false}\n    headline=\"Joining fee\"\n    description=\"₹0\"\n    footerSubtitle=\"Lifetime free\"\n    buttonLabel=\"Apply\"\n    onButtonPress={() => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lists the cards on offer, one under another."
+      }
+    },
+    {
+      "purpose": "Compact with an Avatar, as in Figma, for a dense list: a round mark over the fee, with the card's name in headline because compact drops the title. The require() path stands for the app's own logo.",
+      "jsx": "<CcCard\n  compact\n  media={<Avatar imageSource={require('./jiofinance-logo.png')} />}\n  headline=\"JioFinance Gold Credit Card\"\n  description=\"₹499\"\n  footerSubtitle=\"Joining fee\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "media replaces the picture in both, for example with an Avatar as Figma’s compact card does."
+      }
+    },
+    {
+      "purpose": "The whole card as one button, named by its title, the guide's Whole card state: onPress is set and the card's own button is hidden, so there is no button inside a button. The empty handler stands for the screen's own navigation.",
+      "jsx": "<CcCard\n  imageSource={require('./credit-card.png')}\n  title=\"JioFinance Gold Credit Card\"\n  subtitle=\"Rewards on gold and every spend\"\n  badges={[{ label: 'Pre-approved', modes: { AppearanceBrand: 'Tertiary' } }]}\n  items={[\n    { icon: 'ic_rupee_coin', title: '5% back as JioPoints on gold' },\n    { icon: 'ic_flight_mode', title: '4 airport lounge visits a year' },\n  ]}\n  showNudge={false}\n  headline=\"Joining fee\"\n  description=\"₹499\"\n  footerSubtitle=\"+ GST\"\n  showButton={false}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by its title."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "compact",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Compact variant. Renders a 42 px Avatar (Figma) in the media slot and the footer **without** its CTA button. Drops the product title/subtitle, header, list, and nudge — see the MDX. Mirrors the Figma `compact` property. Default false, from the component source."
+      },
+      {
+        "name": "showHeader",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggles the header badge row. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "badges",
+        "type": "CcCardBadge[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Left out, the header shows two sample Tertiary badges. Declared: Leading (left) badge group.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "trailingBadges",
+        "type": "CcCardBadge[]",
+        "required": false,
+        "source": "types",
+        "description": "Trailing (right-aligned) badge group."
+      },
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the header. Takes precedence over `badges`/`trailingBadges`."
+      },
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Image source for the default media slot. Accepts a URL string or any RN `ImageSourcePropType`. Ignored when `media` is provided."
+      },
+      {
+        "name": "imageWidth",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 88,
+        "description": "Default media image width. Defaults to the Figma spec (`88`). Default 88, from the component source."
+      },
+      {
+        "name": "imageHeight",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 54,
+        "description": "Default media image height. Defaults to the Figma spec (`54`). Default 54, from the component source."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Title",
+        "description": "Product title rendered next to the media slot (non-compact only). Default \"Title\", from the component source."
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Subtitle",
+        "description": "Product subtitle rendered below the title (non-compact only). Default \"Subtitle\", from the component source."
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the media slot's visual. Whatever you pass here is rendered **in both the compact and non-compact variants** — e.g. pass an `Avatar` and it stays an avatar in both, pass an `Image` and it stays an image in both. `modes` cascade into it automatically. Defaults to an `Image` driven by `imageSource`."
+      },
+      {
+        "name": "items",
+        "type": "CcCardListItem[]",
+        "required": false,
+        "source": "evidence",
+        "description": "A row's icon: null hides its glyph; a row's onPress makes it a button; items={[]} removes the list. Declared: Benefit rows rendered in the list. Defaults to three sample rows.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "showNudge",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggles the upsell nudge row. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "nudgeSegments",
+        "type": "TextSegmentRun[]",
+        "required": false,
+        "source": "types",
+        "description": "Declarative content for the nudge's inline text. Defaults to a sample \"Upsell message JioFinance+\" string with the last run brand-coloured."
+      },
+      {
+        "name": "nudgeAvatarSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Avatar image source shown at the start of the nudge row."
+      },
+      {
+        "name": "nudge",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the nudge row. Takes precedence over the declarative props."
+      },
+      {
+        "name": "headline",
+        "type": "string | null",
+        "required": false,
+        "source": "types",
+        "description": "Small muted label above the footer title (`ccCard/headline/*`). Omit for the sample \"Headline\". Pass `''` or `null` to hide the line."
+      },
+      {
+        "name": "description",
+        "type": "string | null",
+        "required": false,
+        "source": "types",
+        "description": "Bold footer value (`ccCard/title/*`). Omit for the sample \"Description\". Pass `''` or `null` to hide the line."
+      },
+      {
+        "name": "footerSubtitle",
+        "type": "string | null",
+        "required": false,
+        "source": "types",
+        "description": "Muted caption rendered inline after the description (`ccCard/subtitle/*`). Omit for the sample \"Subtitle\". Pass `''` or `null` to hide the line."
+      },
+      {
+        "name": "footer",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the footer text block."
+      },
+      {
+        "name": "buttonLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Button",
+        "description": "CTA button label. Defaults to `\"Button\"`. Default \"Button\", from the component source."
+      },
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "CTA press handler."
+      },
+      {
+        "name": "button",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the CTA. Takes precedence over `buttonLabel`."
+      },
+      {
+        "name": "showButton",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "Hiding the button doesn't change the card's height. Declared: Toggles the CTA button (non-compact). Defaults to `true`. Default true, from the component source.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Makes the card a Pressable named by accessibilityLabel or, without one, its title, slightly dimmed while pressed; with the Apply button kept, that nests a button in a button. There is no disabled. Declared: Press handler for the whole card. When set, the card becomes pressable.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "width",
+        "type": "number | `${number}%`",
+        "required": false,
+        "source": "types",
+        "default": 343,
+        "description": "Card width. Defaults to the Figma spec (`343`). Pass `'100%'` to fill the parent. Default 343, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object for design-token resolution. Cascaded to all children."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the card container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the card."
+      },
+      {
+        "name": "CcCardListItem.icon",
+        "type": "string | null",
+        "required": false,
+        "description": "Registry icon name for the leading glyph. Defaults to `'ic_card'`. Pass `null` to omit the leading icon. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "CcCardListItem.iconColor",
+        "type": "string",
+        "required": false,
+        "description": "Per-row override for the leading icon color. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "CcCardListItem.leading",
+        "type": "React.ReactNode",
+        "required": false,
+        "description": "Full override for the leading node. Takes precedence over `icon`. A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "CcCardListItem.title",
+        "type": "string",
+        "required": true,
+        "description": "Row title (e.g. `\"4 domestic + 2 intl. lounge access yearly\"`). A field of each items row.",
+        "source": "types"
+      },
+      {
+        "name": "CcCardListItem.onPress",
+        "type": "() => void",
+        "required": false,
+        "description": "Makes the row pressable. A field of each items row.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "L"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 8",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Section"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context5",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Fullscreen Modal",
+          "Mode 1"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context7",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Card",
+          "Page Hero"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Draggable List",
+        "type": "mode collection",
+        "values": [
+          "default",
+          "onDrag"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "List Item Style",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Boxed",
+          "Minimal"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "ListItem State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "NavArrow Direction",
+        "type": "mode collection",
+        "values": [
+          "Left&Right",
+          "Top&Bottom"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Left&Right"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "On the card, only the border colour changes: white by default, so it doesn't show, and grey with Page type SubPage. Declared: A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Radius",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "None"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Selectable",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "False"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection CcCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "description": "Full override for the header. Takes precedence over `badges`/`trailingBadges`.",
+        "source": "types"
+      },
+      {
+        "name": "media",
+        "type": "React.ReactNode",
+        "description": "Full override for the media slot's visual. Whatever you pass here is rendered **in both the compact and non-compact variants** — e.g. pass an `Avatar` and it stays an avatar in both, pass an `Image` and it stays an image in both. `modes` cascade into it automatically. Defaults to an `Image` driven by `imageSource`.",
+        "source": "types"
+      },
+      {
+        "name": "items",
+        "type": "CcCardListItem[]",
+        "description": "A structured slot: an array of CcCardListItem rows. Benefit rows rendered in the list. Defaults to three sample rows.",
+        "source": "types"
+      },
+      {
+        "name": "nudge",
+        "type": "React.ReactNode",
+        "description": "Full override for the nudge row. Takes precedence over the declarative props.",
+        "source": "types"
+      },
+      {
+        "name": "footer",
+        "type": "React.ReactNode",
+        "description": "Full override for the footer text block.",
+        "source": "types"
+      },
+      {
+        "name": "button",
+        "type": "React.ReactNode",
+        "description": "Full override for the CTA. Takes precedence over `buttonLabel`.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "description": "CTA press handler.",
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the whole card. When set, the card becomes pressable.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Every published Storybook story renders the card as a pressable button with Apply inside it, and the published page is the older generated one.",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "text": "The picture's corners are 8 px round, where Figma's are square.",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=cccard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5434-1992",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cccard--docs"
+  }
+}

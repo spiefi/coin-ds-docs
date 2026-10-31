@@ -1,0 +1,302 @@
+{
+  "slug": "inputsearch",
+  "label": "Input Search",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "files": [
+    "src/guides/inputsearch.guide.tsx"
+  ],
+  "evidence": "docs/evidence/inputsearch.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:06:44.103Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "search",
+    "search bar",
+    "search field",
+    "find",
+    "clear button"
+  ],
+  "title": "Input Search",
+  "summary": "Use an Input Search to search a list, with a clear button that appears as people type and an optional hint below.",
+  "corePrinciple": "Say what people can find, and let them start over.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1796-188",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-inputsearch--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A search field, a clear button, and a hint",
+      "description": "A grey, fully rounded field holds the search icon and the query. A clear button appears once people type, and an optional hint sits below.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Search icon",
+        "Marks the field as search; always shown.",
+        "Query",
+        "The placeholder, then what people type; one line.",
+        "Clear",
+        "Appears with text and empties the field.",
+        "Field",
+        "Grey rounded surface; a grey border shows focus.",
+        "Hint",
+        "Optional support text about what people can search for."
+      ],
+      "specimen": [
+        "Try a name or mobile number",
+        "Search payees"
+      ],
+      "anatomy": [
+        {
+          "part": "Search icon",
+          "note": "Marks the field as search; always shown."
+        },
+        {
+          "part": "Query",
+          "note": "The placeholder, then what people type; one line."
+        },
+        {
+          "part": "Clear",
+          "note": "Appears with text and empties the field."
+        },
+        {
+          "part": "Field",
+          "note": "Grey rounded surface; a grey border shows focus."
+        },
+        {
+          "part": "Hint",
+          "note": "Optional support text about what people can search for."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Add a hint when the prompt is not enough",
+      "description": "The hint is off by default. Turn it on only with a short hint you write; on its own it reads “Support Text”.",
+      "blocks": [
+        "With a hint",
+        "The hint says what kinds of search work.",
+        "Without a hint",
+        "Leave it off when the prompt says enough."
+      ],
+      "specimen": [
+        "Try a name or mobile number",
+        "Search payees",
+        "Search help articles"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "With a hint",
+          "description": "The hint says what kinds of search work."
+        },
+        {
+          "title": "Without a hint",
+          "description": "Leave it off when the prompt says enough."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Empty, focused, and filled",
+      "description": "Empty, the field shows its prompt. Focused, a grey border appears and the prompt clears. Filled, a clear button appears at the end. It has no disabled or error state.",
+      "blocks": [
+        "Empty",
+        "The prompt shows until people type. Select the field to see the focus border.",
+        "Filled",
+        "The clear button empties the field in one tap."
+      ],
+      "specimen": [
+        "Search payees"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Empty",
+          "description": "The prompt shows until people type. Select the field to see the focus border."
+        },
+        {
+          "title": "Filled",
+          "description": "The clear button empties the field in one tap."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 42 px tall",
+      "description": "Input Search fills its container’s width. The field is 42 px tall with 14 px of padding at each end and 18 px icons, and the hint sits 8 px below. The screen sets the width.",
+      "blocks": [
+        "300 × 42",
+        "8",
+        "In a narrow column",
+        "The field narrows with its column, and the hint wraps."
+      ],
+      "specimen": [
+        "Try a name or mobile number",
+        "Search payees",
+        "Search"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "In a narrow column",
+          "description": "The field narrows with its column, and the hint wraps."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Say what people can find",
+      "description": "Write a short prompt that names what people search, such as “Search payees”, in sentence case with no full stop. Use the hint for an example of what works. The field has no visible label, so give it an accessibility label with the same words.",
+      "blocks": [
+        "Prompts and hints"
+      ],
+      "specimen": [
+        "Try a name or mobile number",
+        "Try a fund name or fund house",
+        "Search payees",
+        "Search funds",
+        "Search help articles"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Prompts and hints",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Find a payee",
+      "description": "The screen filters the list as people type and restores it when they clear the field; Input Search only reports the text.",
+      "blocks": [],
+      "specimen": [
+        "Try a name or mobile number",
+        "Asha Rao",
+        "98765 43210",
+        "Ravi Kumar",
+        "91234 56780",
+        "Meera Shah",
+        "99887 76655",
+        "Search payees"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep the search clear",
+      "description": "Each pair shows a search people understand versus one that confuses them.",
+      "blocks": [
+        "Do",
+        "Write your own hint",
+        "The hint gives an example that works.",
+        "Don’t",
+        "Leave the default hint",
+        "The placeholder words “Support Text” reach people.",
+        "Keep one fixed prompt",
+        "The field always says what it searches.",
+        "Rotate the prompt",
+        "Changing text distracts, and screen readers hear only the first prompt.",
+        "Use a Form Field for a labelled value",
+        "The label stays while people type.",
+        "Collect a value with a search field",
+        "The prompt disappears as people type, and there is no label or error."
+      ],
+      "specimen": [
+        "Try a name or mobile number",
+        "Support Text",
+        "Search gold",
+        "Search funds",
+        "Search bills",
+        "Account number",
+        "Search payees",
+        "Search investments",
+        "XXXX XXXX XXXX"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Write your own hint",
+            "caption": "The hint gives an example that works.",
+            "specimen": "Try a name or mobile number"
+          },
+          "dont": {
+            "title": "Leave the default hint",
+            "caption": "The placeholder words “Support Text” reach people.",
+            "specimen": "Support Text"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep one fixed prompt",
+            "caption": "The field always says what it searches.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Rotate the prompt",
+            "caption": "Changing text distracts, and screen readers hear only the first prompt.",
+            "specimen": "Search gold · Search funds · Search bills · Search gold"
+          }
+        },
+        {
+          "do": {
+            "title": "Use a Form Field for a labelled value",
+            "caption": "The label stays while people type.",
+            "specimen": "Account number"
+          },
+          "dont": {
+            "title": "Collect a value with a search field",
+            "caption": "The prompt disappears as people type, and there is no label or error.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Input Search contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "With value",
+        "No support text",
+        "Custom support icon",
+        "Animated placeholders",
+        "Checked 8 October 2026",
+        "Installed jfs-components is 0.1.78 (5 October build) from the team’s private package repository. Figma’s Input Search is a 251 × 68 set with idle and active variants and a support text option. The package is a Text Input with a fixed search icon, a clear button that appears with text, and support text that is off by default and reads “Support Text” until you set it. The field is 42 px tall (44 px in Figma) and shows focus with a 1 px grey border, as in Figma’s active variant. It has no label, error, or disabled design. On the web the clear button is a button named “Clear search”, the field has one tab stop, and without an accessibility label the placeholder names the field, also while focused; a rotating placeholder is named by its first prompt.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "id": "Numpad",
+  "slug": "numpad",
+  "category": "input",
+  "tags": [
+    "keypad",
+    "number pad",
+    "keyboard",
+    "PIN",
+    "OTP",
+    "passcode"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:15:31Z",
+    "flags": [
+      {
+        "field": "/facts/props/1",
+        "reason": "Checked on jfs-components 0.1.77 (2026-09-29); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.77 (2026-09-29); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.77 (2026-09-29); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility/0",
+        "reason": "Checked on jfs-components 0.1.77 (2026-09-29); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use the Numpad to enter a PIN, a one-time code, or an amount on screen, without the system keyboard.",
+  "useWhen": [
+    {
+      "text": "Enter a PIN, a one-time code or an amount on screen, without the system keyboard.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use the Numpad to enter a PIN, a one-time code, or an amount on screen, without the system keyboard."
+      }
+    },
+    {
+      "text": "Secure by default: keep the digits shuffled whenever the number is sensitive.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Secure by default. Keep the digits shuffled whenever the number is sensitive."
+      }
+    },
+    {
+      "text": "Enter an amount to add to a wallet, as in the guide's In context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Adding money to a wallet"
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Digit key",
+      "holds": "A large digit; each key takes an equal share of the row.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A large digit; each key takes an equal share of the row."
+      }
+    },
+    {
+      "part": "Decimal point",
+      "holds": "Optional; hide it for whole numbers such as a PIN.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional; hide it for whole numbers such as a PIN."
+      }
+    },
+    {
+      "part": "Backspace",
+      "holds": "The backspace key, always at the bottom right.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "always at the bottom right."
+      }
+    },
+    {
+      "part": "Key gap",
+      "holds": "12 px between keys, across and down.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px between keys, across and down."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Give the Numpad the full width of the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Give it the full width of the screen."
+      }
+    },
+    {
+      "text": "The parent sets the width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The parent sets the width"
+      }
+    },
+    {
+      "text": "Keys share the width equally and are at least 46 px tall, with 12 px gaps.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Keys share the width equally and are at least 46 px tall, with 12 px gaps."
+      }
+    },
+    {
+      "text": "At 318 px wide each key is 98 × 46 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "At 318 px wide each key is 98 × 46 px."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The keys have no fill; they dim while pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The keys have no fill; they dim while pressed."
+      }
+    },
+    {
+      "text": "Shuffle is on by default and protects sensitive numbers.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Shuffle is on by default and protects sensitive numbers."
+      },
+      "target": "shuffle"
+    },
+    {
+      "text": "Turn shuffle off only for numbers that are not secret.",
+      "strength": "required",
+      "from": {
+        "section": "configuration",
+        "quote": "Turn it off only for numbers that are not secret."
+      },
+      "target": "shuffle",
+      "value": "false"
+    },
+    {
+      "text": "Shuffled, the default, is for PINs, codes and amounts: the digits move, against shoulder-surfing.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default. Digits move each time, against shoulder-surfing; for PINs, codes, and amounts."
+      },
+      "target": "shuffle",
+      "value": "true"
+    },
+    {
+      "text": "With shuffle on, the digits take a new order each time the Numpad mounts; the decimal and backspace keys keep their places.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "shuffle"
+    },
+    {
+      "text": "In order (shuffle={false}): the familiar 1–9 layout, for numbers that are not secret, such as a quantity.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The familiar 1–9 layout, for numbers that are not secret, such as a quantity."
+      },
+      "target": "shuffle",
+      "value": "false"
+    },
+    {
+      "text": "Don't use a fixed layout for a PIN: a fixed 1–9 layout lets onlookers read the PIN from finger positions.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A fixed 1–9 layout lets onlookers read the PIN from finger positions."
+      },
+      "target": "shuffle",
+      "value": "false"
+    },
+    {
+      "text": "The decimal key shows by default (showDecimal).",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/2"
+      },
+      "target": "showDecimal"
+    },
+    {
+      "text": "Hide the decimal point (showDecimal={false}) when only whole numbers are valid.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Hide the decimal point when only whole numbers are valid."
+      },
+      "target": "showDecimal",
+      "value": "false"
+    },
+    {
+      "text": "Without the decimal, for whole numbers such as a PIN, the bottom-left key is left empty.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For whole numbers such as a PIN; the bottom-left key is left empty."
+      },
+      "target": "showDecimal",
+      "value": "false"
+    },
+    {
+      "text": "Don't offer a decimal for a PIN: a decimal key invites an entry that can never be valid.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A decimal key invites an entry that can never be valid."
+      },
+      "target": "showDecimal",
+      "value": "true"
+    },
+    {
+      "text": "The Numpad only reports keys (onKeyPress): the screen keeps the value.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The Numpad only reports keys."
+      },
+      "target": "onKeyPress"
+    },
+    {
+      "text": "There are no disabled or selected keys; the screen decides what a key press does.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "There are no disabled or selected keys; the screen decides what a key press does."
+      }
+    },
+    {
+      "text": "onKeyPress is called with the key pressed: “0” to “9”, “.” or “backspace”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "onKeyPress"
+    },
+    {
+      "text": "On the guide's Add money card, the screen keeps the amount, updates the value above the pad on each key press, and enables its button once there is an amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the amount, updates the value above the pad on each key press, and enables the button once there is an amount."
+      },
+      "target": "onKeyPress"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "The Numpad has no display: put the value above it, such as the formatted amount for money.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The Numpad has no display. Put the value above it: the formatted amount for money"
+        }
+      },
+      {
+        "text": "For a PIN, show masked dots above the pad, never the PIN itself.",
+        "strength": "required",
+        "from": {
+          "section": "content",
+          "quote": "or masked dots for a PIN, never the PIN itself."
+        }
+      }
+    ],
+    "good": [
+      "● ● ○ ○"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Pressed",
+      "when": "A key dims to 40% while it is pressed; this is the Numpad's one interactive state.",
+      "from": {
+        "section": "states",
+        "quote": "Numpad has one interactive state: a key dims to 40% while it is pressed."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Each key is a button named by its digit, “.” or “Backspace”.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Keys: `button` named by the digit, \".\" or \"Backspace\""
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Shuffle for a PIN",
+      "dont": "Use a fixed layout for a PIN",
+      "why": "A fixed 1–9 layout lets onlookers read the PIN from finger positions.",
+      "from": {
+        "section": "doDont",
+        "quote": "Changing positions stop onlookers learning the PIN from finger movements."
+      }
+    },
+    {
+      "do": "Hide the decimal for a PIN",
+      "dont": "Offer a decimal for a PIN",
+      "why": "A decimal key invites an entry that can never be valid.",
+      "from": {
+        "section": "doDont",
+        "quote": "Only digits can be typed."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A PIN pad, the guide's Content PIN and its Do “Shuffle for a PIN”: masked dots above a Numpad with shuffle left on (the default) and no decimal key. “● ● ○ ○” stands for a four-digit PIN with two digits typed; onKeyPress stands for the screen updating the PIN and its dots on each key press.",
+      "jsx": "<VStack>\n  <Text text=\"● ● ○ ○\" />\n  <Numpad showDecimal={false} onKeyPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "content",
+        "quote": "or masked dots for a PIN, never the PIN itself."
+      }
+    },
+    {
+      "purpose": "Adding money to a wallet, the guide's In context, before any amount is typed: a Card holding a VStack with the text “Add money”, a shuffled Numpad with its decimal key, and the screen's Button, disabled and reading “Enter an amount” until there is an amount. onKeyPress stands for the screen updating the amount on each key press, and onPress for adding the money. The guide shows the amount (₹0) between the text and the pad in a MoneyValue, which has no entry in this pack, so it is left out: report that the amount needs MoneyValue.",
+      "jsx": "<Card>\n  <VStack>\n    <Text text=\"Add money\" />\n    <Numpad onKeyPress={() => {}} />\n    <Button label=\"Enter an amount\" disabled onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the amount, updates the value above the pad on each key press, and enables the button once there is an amount."
+      }
+    },
+    {
+      "purpose": "Digits in order, the guide's In order: the familiar 1–9 layout (shuffle={false}) for a number that is not secret, such as a quantity; the decimal key shows, as in the guide's example. onKeyPress stands for the screen updating the number.",
+      "jsx": "<Numpad shuffle={false} onKeyPress={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "The familiar 1–9 layout, for numbers that are not secret, such as a quantity."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g., {\"Color Mode\": \"Light\"})"
+      },
+      {
+        "name": "onKeyPress",
+        "type": "(key: NumpadKeyValue) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Called with the key pressed: “0” to “9”, “.” or “backspace”. Declared: Callback fired when any key is pressed.",
+        "checkedOn": "2026-09-29"
+      },
+      {
+        "name": "showDecimal",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to show the decimal point key (default: true) Default true, from the component source."
+      },
+      {
+        "name": "shuffle",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "When true, digit positions (0-9) are randomised on each mount for anti-keylogging / shoulder-surfing protection. The decimal and backspace keys keep their fixed positions. Default true, from the component source."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override container styles."
+      },
+      {
+        "name": "keyStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override individual key styles."
+      },
+      {
+        "name": "keyTextStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override text styles on digit / decimal keys."
+      }
+    ],
+    "modes": [],
+    "slots": [],
+    "events": [
+      {
+        "name": "onKeyPress",
+        "type": "(key: NumpadKeyValue) => void",
+        "description": "Callback fired when any key is pressed",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma shows the keys in 1–9 order with a “←” glyph; the package shuffles the digits by default and draws a backspace icon.",
+        "source": "evidence",
+        "checkedOn": "2026-09-29"
+      },
+      {
+        "text": "Figma's Numpad is 318 × 245, with 98 × 52.25 keys; the package's keys are at least 46 px tall, and at 318 px wide it measures 318 × 220, with 98 × 46 keys.",
+        "source": "evidence",
+        "checkedOn": "2026-09-29"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=numpad",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2054-964",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-numpad--docs"
+  }
+}

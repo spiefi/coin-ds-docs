@@ -1,14 +1,14 @@
 # Form brief
 
-slug: form · label: Form · public API: Form (+ FormField, FormUpload, TextInput, Button, Card, VStack for fields and composition)
+slug: form · label: Form · public API: Form (+ FormField, FormUpload, MessageField, TextInput, Button, Card, VStack for fields and composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1949-7250 · storybook: docsUrl('form') · stories: Default=components-form--default, With validation errors=components-form--with-validation-errors, Server validation=components-form--server-validation
-checked: 7 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-3795b4c; Biscuit's main 636f3f5 does not change Form)
+checked: 8 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-636f3f5, 5 October build; Form itself unchanged)
 icon: two stacked fields — `<><rect x="2" y="2.5" width="14" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5" /><rect x="2" y="10.5" width="14" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5" /></>`
 keywords: form layout, validation, field group, server errors
 
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`. Every Coin instance gets `modes={LIGHT}`.
-Errors must be stable objects: every `validationErrors` is a module-level constant or React state, never an inline object literal (an inline object is new on every render, so cleared errors come straight back). Constants: `NONE = {}`; `ERR_IFSC = { ifsc: 'IFSC codes have 11 characters' }`; `ERR_TWO = { account: 'Account numbers have 9 to 18 digits', ifsc: 'IFSC codes have 11 characters' }`; `ERR_PAN = { pan: ['Enter all 10 characters of your PAN', 'Use capital letters only'] }`; `ERR_DOC = { doc: 'Upload a PDF or JPG under 5 MB' }`; `ERR_EMAIL = { email: 'Enter an email address like name@example.com' }`.
-Fields: "Holder" = `<FormField name="holder" label="Account holder name" value=… />`, "Account" = `<FormField name="account" type="number" label="Account number" value=… />`, "IFSC" = `<FormField name="ifsc" label="IFSC code" value=… />`. Any field people can type in keeps its own value state (`value` + `onChangeText`). Defaults when stated as filled: Holder "Asha Rao", Account "12345", IFSC "SBIN000123".
+Errors must be stable objects: every `validationErrors` is a module-level constant or React state, never an inline object literal (an inline object is new on every render, so cleared errors come straight back). Constants: `NONE = {}`; `ERR_IFSC = { ifsc: 'IFSC codes have 11 characters' }`; `ERR_TWO = { account: 'Account numbers have 9 to 18 digits', ifsc: 'IFSC codes have 11 characters' }`; `ERR_PAN = { pan: ['Enter all 10 characters of your PAN', 'Use capital letters only'] }`; `ERR_OTHER = { doc: 'Upload a PDF or JPG under 5 MB', note: 'Add a few more details, at least 20 characters' }`; `ERR_EMAIL = { email: 'Enter an email address like name@example.com' }`.
+Fields: "Holder" = `<FormField name="holder" label="Account holder name" value=… />`, "Account" = `<FormField name="account" type="number" label="Account number" value=… />`, "IFSC" = `<FormField name="ifsc" label="IFSC code" value=… />`. Any field people can type in keeps its own value state (`value` + `onChangeText`). Defaults when stated as filled: Holder "Asha Rao", Account "12345", IFSC "SBIN000123". "Note" = `<MessageField name="note" label="Describe your issue" value=… />` with its own state, starting "Charged twice".
 Forms sit on white screens: "Host" = `<Surface width="wide"><VStack modes={LIGHT} style={{ width: '100%', padding: 0 }}>{children}</VStack></Surface>`; Anatomy and Sizing use `surface="white"`. `testID` lands on the Form root; its children are the fields in order.
 
 ## Overview
@@ -31,7 +31,7 @@ Grid `coin-new-example-grid`, each a Host:
 - No errors — `<Form>` Holder, Account (filled) — lesson: The fields, 12 px apart, with nothing added.
 - An error for one field — `<Form validationErrors={ERR_IFSC}>` Holder, IFSC (filled) — lesson: Only the field whose name matches shows the message.
 - Two messages for one field — `<Form validationErrors={ERR_PAN}>` `<FormField name="pan" label="PAN" value="ABCDE12" />` (with state) — lesson: Given a list, the field shows only the first message.
-- Form Upload too — `<Form validationErrors={ERR_DOC}>` `<FormUpload name="doc" label="PAN card" />` — lesson: Form Upload shows its error the same way.
+- Other fields too — `<Form validationErrors={ERR_OTHER}>` `<FormUpload name="doc" label="PAN card" />` and Note — lesson: Form Upload and Message Field show their errors the same way.
 
 ## States
 header: States · title: Showing, then clearing an error · description: A field shows its error until people change its value, then the message clears. When the screen sends a new set of errors, they all show again.
@@ -58,7 +58,7 @@ Every preview is a Host.
 
 ## Sources
 header: Sources · title: Use the public Form contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> from the team’s private package repository. Figma’s Form is one 328 × 306 component: a slot of three Form Fields, 12 px apart, and the package matches it. In the package Form only spaces the fields and passes errors by name to Form Field, Form Upload, and Message Field; it does not submit or check anything, and its <code>onSubmit</code> property does nothing. In this version Message Field turns red but shows no message. On the web the form has no accessible name and errors are not announced. The published Storybook predates the current stories.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma’s Form is one 328 × 306 component: a slot of three Form Fields, 12 px apart, and the package matches it. In the package Form only spaces the fields and passes errors by name to Form Field, Form Upload, and Message Field; it does not submit or check anything, and its <code>onSubmit</code> property does nothing. On the web the form has no accessible name, and nothing announces errors when they arrive. Form Field and Message Field mark themselves invalid and link their message, so a screen reader reads it with the field. The published Storybook predates the current stories.
 
 ## Limits
-Do not show `onSubmit`, `accessibilityLabel`, `modes` other than Light, `useFormContext`, `style`, Message Field inside a Form, Dark mode, or inline `validationErrors` objects. Do not imply that Form validates, submits on Enter, names its region, or announces errors.
+Do not show `onSubmit`, `accessibilityLabel`, `modes` other than Light, `useFormContext`, `style`, Dark mode, or inline `validationErrors` objects. Do not imply that Form validates, submits on Enter, names its region, or announces errors when they arrive.

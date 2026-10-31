@@ -3,23 +3,23 @@
 slug: noteinput · label: Note Input · public API: NoteInput (+ AmountInput, MoneyValue, Card, Button, FormField, VStack for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2244-6063 · storybook: docsUrl('noteinput') · stories: Default=components-noteinput--default
 checked: 13 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c1fa197, Biscuit's main c1fa197)
-icon: a pill with a line of text — `<><rect x="1.5" y="5.5" width="15" height="7" rx="3.5" stroke="currentColor" strokeWidth="1.5" /><path d="M5.5 9h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>`
+icon: a rounded field with a line of text — `<><rect x="1.5" y="5.5" width="15" height="7" rx="3.5" stroke="currentColor" strokeWidth="1.5" /><path d="M5.5 9h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>`
 keywords: memo, payment note, add note, remark
 
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; `const CARD = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes`; `const AMOUNT = { 'Color Mode': 'Light', Context3: 'Amount Input' } as Modes`. Every Coin instance gets `modes={LIGHT}` unless stated.
 NoteInput only works with state: "Note" = a small helper that keeps its own value, `function Note({ initial = '', ...props })` › `<NoteInput value={value} onChangeText={setValue} accessibilityLabel="Add note" modes={LIGHT} {...props} />`. Every example uses Note unless stated.
-The pill is light grey, so every example sits on white: "Host" = `<Surface width="wide">` (or `"narrow"` where stated); Anatomy and Sizing use `surface="white"`. `testID` lands on the `<input>`; the pill is `div:has(> div > ${byTestId(id)})`.
+The background is light grey, so every example sits on white: "Host" = `<Surface width="wide">` (or `"narrow"` where stated); Anatomy and Sizing use `surface="white"`. `testID` lands on the `<input>`; the background is `div:has(> div > ${byTestId(id)})`.
 
 ## Overview
 summary: Use a Note Input for a short, optional memo under an amount, such as “Rent for April”, that grows as people type.
 principle: An optional memo that stays out of the way until tapped.
-playground: `.preview-stage` › Host › `<NoteInput value={note} onChangeText={setNote} placeholder={placeholder} editable={!readOnly} accessibilityLabel="Add note" />`. Controls: `text-control` "Placeholder" (default "Add note", maxLength 24); OnOff "Read only" (off). Readout title "Note", value = the typed text or "Empty"; note: "Tap the pill to type. It grows with the text and wraps at the width of its column." Stage label: "Live Coin Note Input".
+playground: `.preview-stage` › Host › `<NoteInput value={note} onChangeText={setNote} placeholder={placeholder} editable={!readOnly} accessibilityLabel="Add note" />`. Controls: `text-control` "Placeholder" (default "Add note", maxLength 24); OnOff "Read only" (off). Readout title "Note", value = the typed text or "Empty"; note: "Tap the grey background to type. It grows with the text and wraps at the width of its column." Stage label: "Live Coin Note Input".
 
 ## Anatomy
-header: Anatomy · title: A grey pill around the note · description: The pill hugs its text: the placeholder until people type, then the note itself. Tapping anywhere on it starts typing, and a long note wraps inside it.
+header: Anatomy · title: A grey background around the note · description: The background hugs its text: the placeholder until people type, then the note itself. Tapping anywhere on it starts typing, and a long note wraps inside it.
 specimen: `<Anatomy surface="white" …><NoteInput testID="note-anatomy" value="Rent for April" onChangeText={() => {}} accessibilityLabel="Add note" modes={LIGHT} /></Anatomy>` (let `P = div:has(> div > ${byTestId('note-anatomy')})`)
 parts:
-1. Pill — Light grey with round ends; tap anywhere on it to type. — target: `P` — side: bottom
+1. Background — Light grey with round ends; tap anywhere on it to type. — target: `P` — side: bottom
 2. Note text — 14 px bold; the placeholder looks the same. — target: `byTestId('note-anatomy')` — side: top
 marks: padding `P`
 
@@ -31,16 +31,16 @@ Grid `coin-new-example-grid three`, each a Host:
 - Filled — `<Note initial="Rent for April" />` — lesson: The note replaces the placeholder in the same style.
 
 ## States
-header: States · title: Empty, typing, filled, and read only · description: Focus doesn’t change the pill’s colour: the placeholder disappears and a caret shows. A read-only note is faded and can’t be focused or changed.
+header: States · title: Empty, typing, filled, and read only · description: Focus doesn’t change the background’s colour: the placeholder disappears and a caret shows. A read-only note is faded and can’t be focused or changed.
 Grid `coin-new-example-grid three`, each a Host:
-- Empty — `<Note />` — lesson: Tap it: the placeholder clears and the pill shrinks to the caret.
+- Empty — `<Note />` — lesson: Tap it: the placeholder clears and the background shrinks to the caret.
 - Filled — `<Note initial="Rent for April" />` — lesson: Same colour and weight as the placeholder.
 - Read only — `<NoteInput value="Gift" editable={false} accessibilityLabel="Note" modes={LIGHT} />` — lesson: Faded to 60%; it can’t be focused or changed.
 
 ## Sizing
-header: Sizing · title: 35 px tall, as wide as its text · description: The pill is 35 px tall for one line, with 8 px above and below the text and 16 px at each end. Its width follows the text up to the width of its container; a longer note wraps onto more lines.
+header: Sizing · title: 35 px tall, as wide as its text · description: Note Input is 35 px tall for one line, with 8 px above and below the text and 16 px at each end. Its width follows the text up to the width of its container; a longer note wraps onto more lines.
 Measured diagram: `<Anatomy legend={false} surface="white" marks={[{ kind: 'size', target: S, side: 'bottom', label: 'both' }, { kind: 'padding', target: S }]}>` › `<NoteInput testID="note-size" value="" onChangeText={() => {}} accessibilityLabel="Add note" modes={LIGHT} />` where `S = div:has(> div > ${byTestId('note-size')})`. Expected about 99 × 35.
-Then ExampleCard "It grows as people type" (description: "Type in the note: the pill widens with each character.") › Host › `<Note initial="Dinner" />`.
+Then ExampleCard "It grows as people type" (description: "Type in the note: the background widens with each character.") › Host › `<Note initial="Dinner" />`.
 
 ## Content
 header: Content · title: A few words people will recognise later · description: The note travels with the payment, so keep it to a few words about what the money is for. Use the placeholder for a hint, not an instruction.
@@ -54,12 +54,12 @@ Composition in `.coin-new-context`: `<Card modes={CARD}>` › `<Card.Title>Send 
 header: Do & Don’ts · title: Keep notes short and optional · description: Each pair shows a note people can use versus one that crowds the screen or hides what they need.
 Every preview is a Host.
 - Do Keep the note in state: Typing updates the note, ready to send. — `<Note />` | Don't Leave it without state: Without a value from the screen, typing does nothing. — `<NoteInput accessibilityLabel="Add note" modes={LIGHT} />` (no `value`, no `onChangeText`)
-- Do Keep it to a few words: The pill hugs the note on one line. — narrow Host, `<Note initial="Rent for April" />` | Don't Write a sentence: A long note wraps onto a second line and takes more room under the amount. — narrow Host, `<Note initial="Rent for April and the maintenance" />`
-- Do Ask for required details in a Form Field: A label and a required mark say it must be filled in. — Host › `<VStack modes={LIGHT} style={{ width: '100%', padding: 0 }}><FormField label="Reason for transfer" isRequired placeholder="For example, rent" modes={LIGHT} /></VStack>` | Don't Hide a required detail in a note: The pill has no label, required mark, or error, so people skip it. — `<Note placeholder="Reason (required)" />`
+- Do Keep it to a few words: The background hugs the note on one line. — narrow Host, `<Note initial="Rent for April" />` | Don't Write a sentence: A long note wraps onto a second line and takes more room under the amount. — narrow Host, `<Note initial="Rent for April and the maintenance" />`
+- Do Ask for required details in a Form Field: A label and a required mark say it must be filled in. — Host › `<VStack modes={LIGHT} style={{ width: '100%', padding: 0 }}><FormField label="Reason for transfer" isRequired placeholder="For example, rent" modes={LIGHT} /></VStack>` | Don't Hide a required detail in a note: Note Input has no label, required mark, or error, so people skip it. — `<Note placeholder="Reason (required)" />`
 
 ## Sources
 header: Sources · title: Use the public Note Input contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Note Input has Idle and Editing variants, 95 × 34; the package has none: it follows focus, grows with the text, wraps a long note inside the pill, and is 35 px tall for one line. Its colours are the same in Dark mode, so this page shows Light only. It keeps what people type on its own, or takes its value from the screen. On the web each note is one Tab stop, its text is read once, and it keeps its name, the placeholder or yours, while focused. A read-only note is faded and can’t be focused. Enter starts a new line in the note. The published Storybook has one story; newer stories are not deployed yet.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (12 October build) from the team’s private package repository. Figma’s Note Input has Idle and Editing variants, 95 × 34; the package has none: it follows focus, grows with the text, wraps a long note inside its background, and is 35 px tall for one line. Its colours are the same in Dark mode, so this page shows Light only. It keeps what people type on its own, or takes its value from the screen. On the web each note is one Tab stop, its text is read once, and it keeps its name, the placeholder or yours, while focused. A read-only note is faded and can’t be focused. Enter starts a new line in the note. The published Storybook has one story; newer stories are not deployed yet.
 
 ## Limits
 Do not show Dark mode, the `state` prop, `multiline`, `maxLength`, `style`, or `textStyle`. Do not imply a focus colour, a character counter, required or error states, or that an uncontrolled note can be typed into. Do not show the long-note overflow outside the Don’t.

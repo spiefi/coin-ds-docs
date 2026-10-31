@@ -1,12 +1,17 @@
 {
   "slug": "plancomparisoncard",
-  "entryHash": "e7a7bdf9b920aef9351fb8f36f1116f7becfeb65cfdd5adb45824d61b9fe97ad",
+  "entryHash": "0a269d73f10587cdc8431606e790e9a4f183567c179f99d2685446855c039e26",
   "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
-  "checkedAt": "2026-10-29T04:59:12Z",
+  "checkedAt": "2026-10-31T00:46:06Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [],
-  "notes": "No item misstates the guide. Two things for a human reviewer. (1) /accessibility/1, /accessibility/2 and /accessibility/3 describe the dbe0e02 build: infoLabel, notIncludedLabel and role=\"table\". The guide was checked on c7d3348, and its sources section says \"The info icon from showInfo and the grey cross have no accessible name\". The evidence's Web render section also says \"no table semantics\". The evidence notes that #360 changed the component on dbe0e02 and that this guide's copy \"wasn't re-checked\". So the entry and the guide disagree until #360 is published and the guide is re-checked. The guide may need updating rather than the entry. (2) /examples/1 makes Premium the branded plan and assigns values per tier (for example, Gold bonus only on Premium). The guide's Three tiers example shows the texts but doesn't say which plan is gold or how the values map. This looks plausible but can't be confirmed from the rendered copy."
+  "flags": [
+    {
+      "field": "/accessibility/3",
+      "reason": "lost-context: The quote comes from the evidence file's 'dbe0e02 install (28 October 2026, not this guide's tickets)' note, which covers a later build whose copy 'wasn't re-checked and waits for #360's own publish'. For the build this guide checked (21 October), the evidence says 'No data-testid, no table roles' and lists 'no table semantics' as a discrepancy, so the item states another build's behaviour as fact for this card."
+    }
+  ],
+  "notes": "/accessibility/1 (infoLabel) and /accessibility/2 (notIncludedLabel) correctly restate type facts /facts/props/3 and /facts/props/4. But those props conflict with the guide and the 21 October evidence. The guide says 'The info icon from showInfo and the grey cross have no accessible name', and the evidence contract lists 'Five props, all optional' with 'No ... accessibilityLabel'. The type facts probably come from the newer dbe0e02/#360 build, which this guide was not re-checked against. A human should decide whether those props and /accessibility/3 belong in this entry before #360 is published and the guide is re-checked."
 }

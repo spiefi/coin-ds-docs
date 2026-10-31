@@ -3,7 +3,7 @@
 slug: segmentedcontrol · label: Segmented Control · public API: SegmentedControl (+ VStack, Card, MoneyValue, Text for hosting and composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2994-2578 · storybook: docsUrl('segmentedcontrol') · stories: Default=components-segmentedcontrol--default, Two segments=components-segmentedcontrol--two-segments, Interactive=components-segmentedcontrol--interactive
 checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
-icon: a pill with its right segment filled — `<><rect x="1.5" y="5" width="15" height="8" rx="4" stroke="currentColor" strokeWidth="1.5" /><rect x="10" y="7" width="4.5" height="4" rx="2" fill="currentColor" /></>`
+icon: a rounded track with its right segment filled — `<><rect x="1.5" y="5" width="15" height="8" rx="4" stroke="currentColor" strokeWidth="1.5" /><rect x="10" y="7" width="4.5" height="4" rx="2" fill="currentColor" /></>`
 keywords: segmented button, toggle group, period switcher, button group
 
 Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; `const NEUTRAL = { 'Color Mode': 'Light', AppearanceBrand: 'Neutral' } as Modes`. Every Coin instance gets `modes={LIGHT}` unless stated.
@@ -19,7 +19,7 @@ playground: `.preview-stage` › Host (`wide` or `narrow` from the Width control
 header: Anatomy · title: A track of equal segments · description: A lavender track holds the options side by side. The selected one fills purple with a white label; the others are labels on the track.
 specimen: `<Anatomy surface="white" specimenWidth={328} …><SegmentedControl items={PERIOD} defaultSelectedKey="monthly" modes={LIGHT} /></Anatomy>`
 parts:
-1. Track — Lavender pill that holds the segments and fills its container. — target: `[role="tablist"]` — side: bottom — at: 0.15
+1. Track — Rounded lavender background that holds the segments and fills its container. — target: `[role="tablist"]` — side: bottom — at: 0.15
 2. Segment — An option people can tap; its label sits on the track. — target: `[role="tab"]:nth-child(1)` — side: left
 3. Label — One or two short words, centred. — target: `[role="tab"]:nth-child(2) [dir="auto"]` — side: top
 4. Selected segment — Purple fill and a white label mark the current choice. — target: `[role="tab"]:nth-child(3)` — side: right

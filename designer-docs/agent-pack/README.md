@@ -34,6 +34,7 @@ unchanged.
 | `../public/agent/<packVersion>/` | A release: `manifest.json`, `index.json`, `rules.md`, `llms.txt`, `graph.json`, `sizes.json`, `components/<slug>.json`, `.md`, `.brief.md` and `.links.md`, `schema/`. Never edited once committed. |
 | `../public/agent/index.json` | The list of releases and the current one. |
 | `../public/agent/pilot/results.json` | The last test run. |
+| `packs/` | Not committed: one gzipped pack per release, which the MCP server reads (`scripts/packs.mjs`; made on `npm install`, by `build:agent-pack` and by `test:mcp`). |
 
 ## Commands (from `designer-docs/`)
 
@@ -57,6 +58,12 @@ Agents read the pack through one read-only MCP server, served by the docs
 site itself: `https://coin-designer-docs.vercel.app/mcp` (Streamable HTTP, no
 sign-in). It reads the committed releases in `public/agent/`, so it serves
 exactly what the site publishes, and there is nothing to copy into an app.
+
+It reads them from `packs/`, one file per release, and the deployed site
+itself keeps only the current release under `/agent/`
+(`scripts/trim-site.mjs`): copying every release file twice took a
+deployment past Vercel's 15,000-file limit. Older releases are served by the
+MCP server only.
 
 The URL picks the release, so an app pins it in its configuration rather than
 leaving it to the model:

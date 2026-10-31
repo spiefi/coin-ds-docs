@@ -112,7 +112,7 @@ function StackedPage({ progress, children }: { progress: SharedValue<number>; ch
 }
 
 /**
- * A white panel for light grey components (such as a #f5f5f5 pill or field)
+ * A white panel for light grey components (such as a #f5f5f5 UPI Handle or field)
  * that disappear on the grey example stages. Lays children out in a row like
  * a host; `width` matches the host widths. `elevated` leaves room below for a
  * component's own drop shadow (Toast), so it fades out inside the panel

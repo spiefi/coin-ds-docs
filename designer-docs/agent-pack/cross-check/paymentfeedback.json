@@ -1,17 +1,12 @@
 {
   "slug": "paymentfeedback",
-  "entryHash": "73061c7906ae83e80bd71a0ae9a4c4be0ebf5145f14290c2d71a3dfaba85bb73",
+  "entryHash": "476e343d4fd7e0ca8f9d98a080ab784022d7314bcbc2d1a83d1350e2b319e5b9",
   "guideCommit": "2bae394cec05b83d6daa0c71d168ae3fb58f61df",
-  "checkedAt": "2026-10-28T23:23:16Z",
+  "checkedAt": "2026-10-30T12:26:23Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
   },
-  "flags": [
-    {
-      "field": "/examples/2",
-      "reason": "misreads-source: The guide says only that the screen adds a Done button below the result (\"with Done below to leave\"). The example adds VStack with `justifyVertical`, padding, and a Button with `label`/`onPress`, and nothing cited supports those components or props. The evidence describes the in-context screen as a ScreenFrame with a full-width Done button, not this layout."
-    }
-  ],
-  "notes": "Minor, not flagged: /configuration/3 gives ic_info for pending as the guide does, but the guide's Sources says Biscuit's unpublished newer page suggests ic_warning/ic_error instead. That caveat could be carried along. /anatomy/0 marks Icon alwaysPresent=true. That fits the guide, but the evidence says renderMedia={false} renders no media (read from code, not run). /states/3 adds \"with no body and showDetails off\". This fits the states description but goes past the variant's own text."
+  "flags": [],
+  "notes": "No misreadings found. Three points for a human reviewer. (1) /configuration/3 recommends ic_info for pending, and /configuration/4 and /examples/1 use ic_close for failed. These follow the published stories. The guide's Sources section and the evidence both say Biscuit's newer, unpublished page suggests ic_warning and ic_error instead, and the entry does not carry that caveat. (2) /states/3 adds 'with no body and showDetails off'. The cited sentence does not say this, but the states description supports it ('The body appears only when you set it, and showDetails turns the details off'). An empty details string would also work. (3) /examples/2 uses VStack and Button props that the guide does not show. The evidence says the in-context screen is a ScreenFrame with a full-width Done button. Check this against the package rather than the guide."
 }

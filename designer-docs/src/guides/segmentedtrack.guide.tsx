@@ -37,8 +37,8 @@ function SegmentedTrackGuide() {
 
   const sections: GuideSectionSlots = {
     anatomy: {
-      header: 'Anatomy', title: 'A pill split by share',
-      description: 'The track is a 24 px pill. Each slice’s width is its share of the total, and the colours step from strong to light.',
+      header: 'Anatomy', title: 'A rounded track split by share',
+      description: 'The track is a 24 px bar with fully rounded ends. Each slice’s width is its share of the total, and the colours step from strong to light.',
       body: <Anatomy specimenWidth={300} parts={[
         { name: 'Track', note: 'Rounds the ends and holds the slices with no gaps.', target: '[role="group"]', side: 'left' },
         { name: 'First slice', note: 'Strongest colour; its width is its share.', target: '[role="group"] > div:nth-child(1)', side: 'top' },

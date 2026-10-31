@@ -6,7 +6,7 @@
 
 ## Sources
 
-- Figma: [Coin Components Library · Chip/Select](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1901-4727), frame `1901:4727` with variants `State=Idle` (`1901:4726`, 84 × 32) and `State=Active` (`1901:4728`, 104 × 32). Screenshot: Idle is a grey pill with a calendar icon and bold "Date"; Active is a lavender pill with purple icon, "Date", and a close ×. Bound variables: `chipSelect/gap` 4, `chipSelect/padding/horizontal` 16, `chipSelect/padding/vertical` 0, `chipSelect/radius` 999, `chipSelect/icon/size` 16, 14/32 JioType Var 700, Idle background #f5f5f5 and foreground #0d0d0f. Read through the Figma MCP (jiofinance.in account).
+- Figma: [Coin Components Library · Chip/Select](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1901-4727), frame `1901:4727` with variants `State=Idle` (`1901:4726`, 84 × 32) and `State=Active` (`1901:4728`, 104 × 32). Screenshot: Idle is a grey rounded container with a calendar icon and bold "Date"; Active is a lavender rounded container with purple icon, "Date", and a close ×. Bound variables: `chipSelect/gap` 4, `chipSelect/padding/horizontal` 16, `chipSelect/padding/vertical` 0, `chipSelect/radius` 999, `chipSelect/icon/size` 16, 14/32 JioType Var 700, Idle background #f5f5f5 and foreground #0d0d0f. Read through the Figma MCP (jiofinance.in account).
 - Storybook: `components-chipselect--docs`; stories `--default` (Date, Idle), `--active`, `--custom-icon` (Home, `ic_home`), `--active-without-close-icon`. MDX: "used for making selections, such as dates or filters"; Idle shows icon and label, Active adds a close icon unless `showCloseIcon={false}`.
 
 ## Contract

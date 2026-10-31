@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "id": "NoteInput",
+  "slug": "noteinput",
+  "category": "input",
+  "tags": [
+    "memo",
+    "payment note",
+    "add note",
+    "remark"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": []
+  },
+  "summary": "Use a Note Input for a short, optional memo under an amount, such as “Rent for April”, that grows as people type.",
+  "useWhen": [
+    {
+      "text": "A short, optional memo under an amount, such as “Rent for April”, that grows as people type.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Note Input for a short, optional memo under an amount, such as “Rent for April”, that grows as people type."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A detail people must give, such as a reason for the transfer: Note Input has no label, required mark, or error, so people skip it. Ask for it in a Form Field, whose label and required mark say it must be filled in.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Note Input has no label, required mark, or error, so people skip it."
+      },
+      "useInstead": "FormField"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Background",
+      "holds": "Light grey with round ends; tap anywhere on it to type. It hugs its text and a long note wraps inside it.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Light grey with round ends; tap anywhere on it to type."
+      }
+    },
+    {
+      "part": "Note text",
+      "holds": "The placeholder until people type, then the note itself: 14 px bold, and the placeholder looks the same.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "14 px bold; the placeholder looks the same."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Under the transfer amount: Amount Input places the note under the amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Amount Input places the note under the amount."
+      }
+    },
+    {
+      "text": "The screen keeps both values, the amount and the note, and sends the note with the payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps both values and sends the note with the payment."
+      }
+    },
+    {
+      "text": "The container sets the most it can take: the note's width follows the text up to the width of its container, and a longer note wraps onto more lines.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Its width follows the text up to the width of its container; a longer note wraps onto more lines."
+      }
+    },
+    {
+      "text": "Note Input is 35 px tall for one line, with 8 px above and below the text and 16 px at each end.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Note Input is 35 px tall for one line, with 8 px above and below the text and 16 px at each end."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Note Input has no variants. Set the placeholder to say what the note is for.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Note Input has no variants. Set the placeholder to say what the note is for."
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "The default placeholder, “Add note”, suits most payments.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "“Add note” suits most payments."
+      },
+      "target": "placeholder",
+      "value": "Add note"
+    },
+    {
+      "text": "A specific placeholder, such as “Add a note for Asha”: say who or what the note is for when it helps.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Say who or what the note is for when it helps."
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "The note keeps what people type, and the screen reads it to send with the payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The note keeps what people type, and the screen reads it to send with the payment."
+      },
+      "target": "value"
+    },
+    {
+      "text": "It keeps what people type on its own, or takes its value from the screen (value with onChangeText).",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It keeps what people type on its own, or takes its value from the screen."
+      },
+      "target": "value"
+    },
+    {
+      "text": "Read only, for a note people can't change: set editable to false; the note fades to 60% and can't be focused or changed.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Faded to 60%; it can’t be focused or changed."
+      },
+      "target": "editable",
+      "value": "false"
+    },
+    {
+      "text": "Enter starts a new line in the note.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Enter starts a new line in the note."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "An optional memo that stays out of the way until tapped.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "An optional memo that stays out of the way until tapped."
+        }
+      },
+      {
+        "text": "The note travels with the payment, so keep it to a few words about what the money is for.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The note travels with the payment, so keep it to a few words about what the money is for."
+        }
+      },
+      {
+        "text": "Use the placeholder for a hint, not an instruction.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the placeholder for a hint, not an instruction."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Keep it to a few words: the background hugs the note on one line.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The background hugs the note on one line."
+        }
+      },
+      {
+        "text": "Do not write a sentence: a long note wraps onto a second line and takes more room under the amount.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A long note wraps onto a second line and takes more room under the amount."
+        }
+      },
+      {
+        "text": "Ask for required details in a Form Field, not in a note.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Ask for required details in a Form Field"
+        }
+      }
+    ],
+    "good": [
+      "Rent for April",
+      "Dinner at Toit",
+      "Gift for Asha",
+      "Add note",
+      "Add a note for Asha"
+    ],
+    "bad": [
+      "Rent for April and the maintenance",
+      "Reason (required)"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty",
+      "when": "Tap it: the placeholder clears and the background shrinks to the caret.",
+      "from": {
+        "section": "states",
+        "quote": "Tap it: the placeholder clears and the background shrinks to the caret."
+      }
+    },
+    {
+      "state": "Typing",
+      "when": "Focus doesn’t change the background’s colour: the placeholder disappears and a caret shows. The background widens with each character.",
+      "from": {
+        "section": "states",
+        "quote": "Focus doesn’t change the background’s colour: the placeholder disappears and a caret shows."
+      }
+    },
+    {
+      "state": "Filled",
+      "when": "The note replaces the placeholder, in the same colour and weight as the placeholder.",
+      "from": {
+        "section": "states",
+        "quote": "Same colour and weight as the placeholder."
+      }
+    },
+    {
+      "state": "Read only",
+      "when": "Faded to 60%; it can’t be focused or changed.",
+      "from": {
+        "section": "states",
+        "quote": "Faded to 60%; it can’t be focused or changed."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web each note is one Tab stop, its text is read once, and it keeps its name, the placeholder or yours, while focused.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web each note is one Tab stop, its text is read once, and it keeps its name, the placeholder or yours, while focused."
+      }
+    },
+    {
+      "text": "The note's spoken name is accessibilityLabel, else the placeholder, and it stays while the placeholder is hidden on focus.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The field's `aria-label` is `accessibilityLabel`, else the placeholder, and it stays while the placeholder is hidden on focus."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "A read-only note is faded and can’t be focused.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "A read-only note is faded and can’t be focused."
+      },
+      "target": "editable",
+      "value": "false"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep it to a few words",
+      "dont": "Write a sentence",
+      "why": "A long note wraps onto a second line and takes more room under the amount.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep it to a few words"
+      }
+    },
+    {
+      "do": "Ask for required details in a Form Field",
+      "dont": "Hide a required detail in a note",
+      "why": "Note Input has no label, required mark, or error, so people skip it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Hide a required detail in a note"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A memo under the transfer amount, the guide's In context: a Card titled for the person, an AmountInput with the amount first and the NoteInput under it, and the payment Button. The note keeps what people type on its own, and onChangeText gives the screen each change, so the screen keeps both values and sends the note with the payment. AmountInput carries Context3 Amount Input, which the guide's own source sets on it, because it doesn't set its own context and passes its modes to both of its children; nothing else sets modes.",
+      "jsx": "<Card>\n  <Card.Title>Send to Asha Rao</Card.Title>\n  <AmountInput\n    modes={{ Context3: 'Amount Input' }}\n    moneyValueSlot={<MoneyValue value=\"500\" currency=\"₹\" />}\n    noteInputSlot={<NoteInput onChangeText={(note) => {}} />}\n  />\n  <Button label=\"Send ₹500\" onPress={() => {}} />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps both values and sends the note with the payment."
+      }
+    },
+    {
+      "purpose": "A specific placeholder, the guide's Configuration: say who or what the note is for. The note keeps what people type on its own; with no accessibilityLabel, the placeholder is its name.",
+      "jsx": "<NoteInput placeholder=\"Add a note for Asha\" />",
+      "from": {
+        "section": "configuration",
+        "quote": "Say who or what the note is for when it helps."
+      }
+    },
+    {
+      "purpose": "Read only, the guide's States: a note people can't change, faded to 60%; it can't be focused or changed.",
+      "jsx": "<NoteInput value=\"Gift\" editable={false} accessibilityLabel=\"Note\" />",
+      "from": {
+        "section": "states",
+        "quote": "Faded to 60%; it can’t be focused or changed."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Optional. Without it the note keeps its own state and takes typing; with it the screen owns the note (value and onChangeText). Declared: The value of the text input.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Add note",
+        "description": "The placeholder when empty (\"Add note\" by default) Default \"Add note\", from the component source."
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback when text changes."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes (e.g., {'InputState': 'Idle', 'Color Mode': 'Light'})"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Custom container style."
+      },
+      {
+        "name": "textStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Custom text input style."
+      },
+      {
+        "name": "state",
+        "type": "\"Editing\" | \"Idle\"",
+        "required": false,
+        "source": "evidence",
+        "values": [
+          "Editing",
+          "Idle"
+        ],
+        "description": "Not a designer variant: state Editing only hides the placeholder. Focus clears the placeholder on its own. Declared: State of the component.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "...Omit<TextInputProps, 'style' | 'value' | 'onChangeText' | 'placeholder'>",
+        "type": "Omit<TextInputProps, 'style' | 'value' | 'onChangeText' | 'placeholder'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "source": "evidence",
+        "type": "string",
+        "description": "The note's spoken name (on the web, the field's aria-label). Without it the placeholder names the note, and the name stays while the placeholder is hidden on focus.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "editable",
+        "source": "evidence",
+        "type": "boolean",
+        "description": "false makes the note read only: the background is at 60% opacity, the field is read-only and out of the tab order, a click doesn't focus it, and it keeps its placeholder.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "maxLength",
+        "source": "evidence",
+        "type": "number",
+        "description": "Limits how many characters people can type; there is no counter.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "defaultValue",
+        "source": "evidence",
+        "type": "string",
+        "description": "Ignored: the note doesn't start from it. To start with a note, pass value and update it from onChangeText.",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "modes": [],
+    "slots": [],
+    "events": [
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "description": "Callback when text changes",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The published Storybook has one Note Input story; newer stories are not deployed yet.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "text": "The package's JSDoc is out of date: it still mentions an InputState mode and a blinking cursor.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=noteinput",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2244-6063",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-noteinput--docs"
+  }
+}

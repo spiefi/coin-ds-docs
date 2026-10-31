@@ -1,0 +1,636 @@
+{
+  "schemaVersion": 1,
+  "id": "ModalSheet",
+  "slug": "modalsheet",
+  "category": "layout",
+  "tags": [
+    "page sheet",
+    "modal",
+    "sheet",
+    "overlay page",
+    "HelloJio sheet"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": [
+      {
+        "field": "/examples/0",
+        "reason": "misreads-source: The guide's In context sheet has an App Bar titled “Ask HelloJio” (the live-example text), and Sources says the dialog is “named by its App Bar title”. The example's AppBar has no title, so the dialog would be unnamed. That contradicts the guide and /accessibility/4 (“Give the App Bar a title”).",
+        "by": "cross-check"
+      }
+    ]
+  },
+  "summary": "Use a Modal Sheet for a task that slides up over the page, such as asking HelloJio, and goes away when it’s done.",
+  "useWhen": [
+    {
+      "text": "A task that slides up over the page and goes away when it's done.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Modal Sheet for a task that slides up over the page, such as asking HelloJio, and goes away when it’s done."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A new flow: it deserves its own screen; keep a sheet to one task.",
+      "strength": "discouraged",
+      "from": {
+        "section": "content",
+        "quote": "Keep it to one task; a new flow deserves its own screen."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Sheet",
+      "holds": "The surface: white, with 20 px corners and no handle.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White, with 20 px corners and no handle."
+      }
+    },
+    {
+      "part": "Slot",
+      "holds": "One column of your content (children); it gets the sheet's modes, without Page type.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One column of your content; it gets the sheet’s modes, without Page type."
+      }
+    },
+    {
+      "part": "App bar",
+      "holds": "Yours: an AppBar at the top of the slot, holding the close button.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours: the top of the slot, holding the close button."
+      }
+    },
+    {
+      "part": "Close button",
+      "holds": "Yours: a named IconButton that hides the sheet.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours: a named IconButton that hides the sheet."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "Yours: the main input or action, at the bottom (a HelloJioInput in the guide).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Yours: the main input or action, at the bottom."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The sheet spans its screen, with 12 px of padding at the top, 8 px at the sides and 32 px at the bottom, and puts 12 px between the items in its slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The sheet spans its screen with 12 px of padding at the top, 8 px at the sides, and 32 px at the bottom, and puts 12 px between the items in its slot."
+      }
+    },
+    {
+      "text": "Place the sheet in the screen it covers: with visible set, it fills its nearest positioned parent as an overlay; it is not a Modal or portal.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "With `visible` set it fills its nearest positioned parent as an overlay"
+      },
+      "target": "visible"
+    },
+    {
+      "text": "In the guide, a button on Home opens the sheet over Home, and Home steps back behind it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Ask HelloJio opens the sheet over Home, and Home steps back behind it."
+      }
+    },
+    {
+      "text": "Stepping the page back with the sheet is the screen's job, not the sheet's: the guide does it through the package's page-stack hook (useModalSheetPageStackStyle) with the sheet's presentationProgress.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "on a black screen whose page steps back with the sheet, through the package’s page-stack hook (the screen’s job, not the sheet’s)."
+      },
+      "target": "presentationProgress"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set visible to present the sheet over the page; the screen shows and hides it. Without visible, the sheet renders in place as a plain surface.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "visible"
+    },
+    {
+      "text": "Wire onRequestClose to set visible to false: it reports that people asked to close the sheet (a drag down), and the screen hides it.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/8"
+      },
+      "target": "onRequestClose"
+    },
+    {
+      "text": "By default (fillHeight true) the sheet covers the screen and the field sits at its foot.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: the sheet covers the screen and the field sits at its foot."
+      },
+      "target": "fillHeight",
+      "value": "true"
+    },
+    {
+      "text": "Fit the sheet to short content with fillHeight false; it fills the screen by default.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A sheet fills the screen by default; fit it to short content instead."
+      },
+      "target": "fillHeight",
+      "value": "false"
+    },
+    {
+      "text": "A fitted sheet hugs its content and docks to the bottom.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The sheet hugs its content and docks to the bottom."
+      },
+      "target": "fillHeight",
+      "value": "false"
+    },
+    {
+      "text": "Do not fill the screen for one line: the sheet covers the page and leaves it empty.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The sheet covers the page and leaves it empty."
+      },
+      "target": "fillHeight",
+      "value": "true"
+    },
+    {
+      "text": "A scrim (showOverlay) dims the page around a fitted sheet.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A scrim dims the page around a fitted sheet"
+      },
+      "target": "showOverlay",
+      "value": "true"
+    },
+    {
+      "text": "Without a scrim, the page stays bright behind the sheet, as in the Storybook story.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The page stays bright behind the sheet, as in the Storybook story."
+      },
+      "target": "showOverlay",
+      "value": "false"
+    },
+    {
+      "text": "With showOverlay, set onOverlayPress to hide the sheet when the scrim is pressed; when it's omitted, the scrim calls onRequestClose if that is set.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "onOverlayPress"
+    },
+    {
+      "text": "On a full-height sheet (fillHeight true, the default), a top inset (topInset) lets the page peek above the sheet; the sheet shortens to keep its bottom on the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The page peeks 40 px above, and the sheet shortens to keep its bottom on the screen."
+      },
+      "target": "topInset"
+    },
+    {
+      "text": "A fitted sheet (fillHeight false) docks to the bottom and ignores topInset.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "With `fillHeight={false}` it docks to the bottom and ignores the inset."
+      },
+      "target": "topInset"
+    },
+    {
+      "text": "Page type MainPage (the default) and SubPage both give a white sheet.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "MainPage, the default used everywhere else here, and SubPage both give a white sheet."
+      },
+      "target": "Page type"
+    },
+    {
+      "text": "Page type JioPlus gives a light grey sheet; its text stays dark, and the HelloJioInput turns white to stand out.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A light grey sheet. Its text stays dark, and the HelloJio field turns white to stand out."
+      },
+      "target": "Page type",
+      "value": "JioPlus"
+    },
+    {
+      "text": "Put the AppBar and the HelloJioInput straight in the slot (or in a fragment), not inside a component of your own: the sheet adjusts only the children it can see, so under Page type JioPlus a nested AppBar shows white on the grey sheet and a nested HelloJioInput's field matches the sheet.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The sheet does this only for children it can see: its direct slot children, fragments, and their `children` props."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Turning drag to close off (enableDismissGesture false) means a drag down does nothing, so a stray drag can't lose a half-typed question; the X and the scrim still close the sheet.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "A drag down does nothing; the X and the scrim still close it, so a stray drag can’t lose a half-typed question."
+      },
+      "target": "enableDismissGesture",
+      "value": "false"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "A page over the page, with a clear way to close it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "A page over the page, with a clear way to close it."
+        }
+      },
+      {
+        "text": "The sheet has no title or close button of its own: put an AppBar with a close button at the top of the slot and the main field at the bottom.",
+        "strength": "recommended",
+        "from": {
+          "section": "anatomy",
+          "quote": "It has no title or close button of its own: put an App Bar with a close button at the top and the main field at the bottom."
+        }
+      },
+      {
+        "text": "Start the slot with an AppBar that holds a named close button, keep one task in the middle, and put the main field or action at the bottom.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Start the slot with an App Bar that holds a named close button, keep one task in the middle, and put the main field or action at the bottom."
+        }
+      }
+    ],
+    "good": [
+      "Ask about your spends, bills, or investments."
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "In place",
+      "when": "visible omitted: the sheet renders in place, as a plain surface with its slot; once it's given visible, it slides over its screen.",
+      "from": {
+        "section": "sources",
+        "quote": "In the package it renders in place until it’s given visible; then it slides over its screen with an optional scrim and can be dragged down."
+      }
+    },
+    {
+      "state": "Shown",
+      "when": "The screen shows the sheet (visible true): it slides up from the bottom and settles without a bounce.",
+      "from": {
+        "section": "states",
+        "quote": "The screen shows and hides the sheet: it slides up from the bottom and settles without a bounce, then slides back down."
+      }
+    },
+    {
+      "state": "Hidden",
+      "when": "The screen hides the sheet (visible false): it slides back down and waits below the screen, out of the Tab order and hidden from screen readers.",
+      "from": {
+        "section": "states",
+        "quote": "A hidden sheet waits below the screen, out of the Tab order and hidden from screen readers."
+      }
+    },
+    {
+      "state": "Dragged down",
+      "when": "A drag down asks the screen to close the sheet (onRequestClose), unless drag to close is turned off.",
+      "from": {
+        "section": "states",
+        "quote": "A drag down asks to close it, unless drag to close is turned off."
+      }
+    },
+    {
+      "state": "Drag to close off",
+      "when": "enableDismissGesture false: a drag down does nothing; the X and the scrim still close the sheet.",
+      "from": {
+        "section": "states",
+        "quote": "A drag down does nothing; the X and the scrim still close it, so a stray drag can’t lose a half-typed question."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Add a named close IconButton: the X closes the sheet for everyone, including keyboard users.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The X closes the sheet for everyone, including keyboard users."
+      }
+    },
+    {
+      "text": "Do not rely on dragging to close the sheet: without an X, people must drag, tap the scrim, or know to press Escape.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Without an X, people must drag, tap the scrim, or know to press Escape."
+      }
+    },
+    {
+      "text": "When the screen shows the sheet, focus moves to its first control and Tab stays inside; Escape (even from the text field), the X or the scrim closes it and returns focus to what opened it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "When the screen shows it, focus moves to its first control (the X here) and Tab stays inside; Escape, even from the text field, the X, or the scrim closes it and returns focus to what opened it."
+      }
+    },
+    {
+      "text": "trapFocus false turns that focus handling off, for a sheet shown inside a page such as a preview; a sheet the screen opens keeps it (the default).",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "turns that off for a sheet shown inside a page, as these examples are until you open them again; In context keeps it."
+      },
+      "target": "trapFocus",
+      "value": "false"
+    },
+    {
+      "text": "Give the App Bar a title: on the web the sheet is a dialog named by its App Bar title, and a hidden sheet leaves the Tab order.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web it’s a dialog named by its App Bar title, and a hidden sheet leaves the Tab order."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Add a named close button",
+      "dont": "Rely on dragging",
+      "why": "Without an X, people must drag, tap the scrim, or know to press Escape.",
+      "from": {
+        "section": "doDont",
+        "quote": "Add a named close button"
+      }
+    },
+    {
+      "do": "Fit short content",
+      "dont": "Fill the screen for one line",
+      "why": "The sheet covers the page and leaves it empty.",
+      "from": {
+        "section": "doDont",
+        "quote": "Fit short content"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Asking a question from Home: the sheet fills the screen over a dimmed page, with an AppBar holding a named close IconButton, one line of Text and a HelloJioInput at its foot. The screen sets visible, and hides the sheet when a question is sent, the X or the scrim is pressed, or a drag asks to close it.",
+      "jsx": "<ModalSheet\n  visible\n  showOverlay\n  onOverlayPress={() => {}}\n  onRequestClose={() => {}}\n>\n  <AppBar\n    type=\"SubPage\"\n    leadingSlot={<JioDot />}\n    actionsSlot={<IconButton iconName=\"ic_close\" accessibilityLabel=\"Close\" onPress={() => {}} />}\n  />\n  <Text>Ask about your spends, bills, or investments.</Text>\n  <VStack style={{ flex: 1 }} />\n  <HelloJioInput onSubmit={() => {}} />\n</ModalSheet>",
+      "from": {
+        "section": "inContext",
+        "quote": "Sending a question or pressing the X closes it; the screen keeps what was asked."
+      }
+    },
+    {
+      "purpose": "A sheet fitted to short content (fillHeight false), docked to the bottom over a dimmed page, with drag to close off (enableDismissGesture false): the X and the scrim still close it.",
+      "jsx": "<ModalSheet\n  visible\n  fillHeight={false}\n  showOverlay\n  enableDismissGesture={false}\n  onOverlayPress={() => {}}\n  onRequestClose={() => {}}\n>\n  <AppBar\n    type=\"SubPage\"\n    leadingSlot={<JioDot />}\n    actionsSlot={<IconButton iconName=\"ic_close\" accessibilityLabel=\"Close\" onPress={() => {}} />}\n  />\n  <Text>Ask about your spends, bills, or investments.</Text>\n  <HelloJioInput onSubmit={() => {}} />\n</ModalSheet>",
+      "from": {
+        "section": "states",
+        "quote": "A drag down does nothing; the X and the scrim still close it, so a stray drag can’t lose a half-typed question."
+      }
+    },
+    {
+      "purpose": "Page type JioPlus, fitted to its content: a light grey sheet whose text stays dark and whose HelloJioInput turns white to stand out.",
+      "jsx": "<ModalSheet\n  visible\n  fillHeight={false}\n  showOverlay\n  onOverlayPress={() => {}}\n  onRequestClose={() => {}}\n  modes={{ 'Page type': 'JioPlus' }}\n>\n  <AppBar\n    type=\"SubPage\"\n    leadingSlot={<JioDot />}\n    actionsSlot={<IconButton iconName=\"ic_close\" accessibilityLabel=\"Close\" onPress={() => {}} />}\n  />\n  <Text>Ask about your spends, bills, or investments.</Text>\n  <HelloJioInput onSubmit={() => {}} />\n</ModalSheet>",
+      "from": {
+        "section": "configuration",
+        "quote": "A light grey sheet. Its text stays dark, and the HelloJio field turns white to stand out."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "The sheet adjusts only the slot children it can see: its direct children, fragments, and their children props. An AppBar or HelloJioInput rendered inside a consumer's own component isn't recognised. Declared: Sheet content. Figma exposes one slot — children fill it inside the token-driven padding.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "The sheet passes its modes to its slot children without Page type (an AppBar keeps it) and without Color Mode Dark; a child's own modes are merged over them. Declared: Design-token modes. Cascaded to every slot child via {@link cloneChildrenWithModes}. `Page type` drives `modalSheet/bg` (`JioPlus` → grey surface).",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "fillHeight",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Fill the parent's available height (`flex: 1`). Default `true`. Set `false` to size to slot content. Default true, from the component source."
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "With visible set, the sheet fills its nearest positioned parent as an overlay, and visible false keeps it mounted below the screen. It is not a Modal or portal: the screen sets visible to false on every close. Declared: When set, presents as an animated modal over the page (slide up / down). Omit for a plain in-flow Figma surface (container + slot only).",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "showOverlay",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Optional dimming scrim behind the sheet (`overlay/background` token). Presentation mode only. Defaults to `false` (page-sheet peek stays clear). Set `true` for a classic dimmed backdrop; pair with `onOverlayPress` to dismiss. Default false, from the component source."
+      },
+      {
+        "name": "onOverlayPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Scrim press — typically set `visible` to `false`. Only used when `showOverlay`. When omitted, the scrim calls `onRequestClose` if that is set, so a dimmed sheet can dismiss from the backdrop without a second handler."
+      },
+      {
+        "name": "dismissAccessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Dismiss overlay",
+        "description": "Accessible name for the scrim. Defaults to \"Dismiss overlay\". On the web the scrim is not a tab stop (pointer dismiss still works). Default \"Dismiss overlay\", from the component source."
+      },
+      {
+        "name": "trapFocus",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "With trapFocus false, Escape doesn't close the sheet, and a sheet shown from the first render leaves focus on the page; with the default, a sheet shown at load still takes focus. Declared: When `true` (default), opening moves focus to a control inside the dialog and keeps Tab there. Set `false` to render the sheet in a frame or preview without a page-wide trap. Default true, from the component source.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "onRequestClose",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "User requested close via swipe-down. Wire to set `visible={false}` (same role as RN `Modal`'s `onRequestClose`)."
+      },
+      {
+        "name": "enableDismissGesture",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "Gates only the drag and its “Drag down to dismiss” hint; the scrim and a close button in the slot still work. Declared: Drag down to dismiss (iOS & Android via `PanResponder`). Presentation mode only. Defaults to `true`. No grabber chrome — Figma has none. Default true, from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "onDismissed",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Fired after the dismiss slide-down animation completes."
+      },
+      {
+        "name": "topInset",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "description": "With fillHeight false the sheet docks to the bottom and ignores the inset; with fillHeight it shortens by the inset so its bottom stays on the screen. Declared: Top gap (px) so the layer under the modal peeks above the sheet (iOS page-sheet / card stack). Presentation mode only. Defaults to `40` on iOS and `0` elsewhere.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "presentationProgress",
+        "type": "SharedValue<number>",
+        "required": false,
+        "source": "types",
+        "description": "Optional shared progress `0 → 1` (closed → open), updated during present, dismiss, and swipe. Drive a page-recede (scale / radius / dim) from this so the under-layer stays in sync while dragging."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style override on the Figma container."
+      },
+      {
+        "name": "...Omit<ViewProps, 'style' | 'children'>",
+        "type": "Omit<ViewProps, 'style' | 'children'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "source": "evidence",
+        "type": "string",
+        "description": "Names the dialog; without it, a slot child's title names it.",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "MainPage and SubPage give a white sheet (#ffffff), JioPlus a light grey one (#f5f5f5). Declared: A token collection ModalSheet reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Sheet content. Figma exposes one slot — children fill it inside the token-driven padding.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onOverlayPress",
+        "type": "() => void",
+        "description": "Scrim press — typically set `visible` to `false`. Only used when `showOverlay`. When omitted, the scrim calls `onRequestClose` if that is set, so a dimmed sheet can dismiss from the backdrop without a second handler.",
+        "source": "types"
+      },
+      {
+        "name": "onRequestClose",
+        "type": "() => void",
+        "description": "User requested close via swipe-down. Wire to set `visible={false}` (same role as RN `Modal`'s `onRequestClose`).",
+        "source": "types"
+      },
+      {
+        "name": "onDismissed",
+        "type": "() => void",
+        "description": "Fired after the dismiss slide-down animation completes.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Under Page type JioPlus, an AppBar or HelloJioInput rendered inside a consumer's own component in the slot isn't recognised: the AppBar loses Page type (white on the grey sheet) and the HelloJioInput's field isn't repainted, so it still matches the sheet. The #255 fix doesn't reach them; the evidence leaves this limit for Marcin to judge.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "text": "A hidden sheet sets inert as the string \"true\", so React 19 logs a development warning; the sheet still works (#417, Component Bug, To do).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The “Drag down to dismiss” hint has no web mapping, so it isn't exposed on the web.",
+        "source": "evidence",
+        "checkedOn": "2026-10-27"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=modalsheet",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9559-28121",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-modalsheet--docs"
+  }
+}

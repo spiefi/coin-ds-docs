@@ -1,0 +1,537 @@
+{
+  "schemaVersion": 1,
+  "id": "MerchantProfile",
+  "slug": "merchantprofile",
+  "category": "content",
+  "tags": [
+    "merchant header",
+    "payee",
+    "business profile",
+    "UPI merchant",
+    "shop header"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "4c690580b413720a7f723487ff3c84dabb4c14ec",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:15:31Z",
+    "flags": []
+  },
+  "summary": "Use a Merchant Profile at the top of a payment to show who is being paid: the merchant’s logo, registered name, and UPI ID.",
+  "useWhen": [
+    {
+      "text": "At the top of a payment, to show who is being paid: the merchant's logo, registered name, and UPI ID.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Merchant Profile at the top of a payment to show who is being paid: the merchant’s logo, registered name, and UPI ID."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A merchant header that people press: the profile has no states and doesn't press.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The profile has no states: it doesn’t press."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "avatarProps: the merchant's logo, or initials with style Monogram.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "avatarProps: the merchant’s logo, or initials with style Monogram."
+      }
+    },
+    {
+      "part": "Name",
+      "holds": "title: the registered name, 16 px Bold; it wraps.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "title: the registered name, 16 px Bold; it wraps."
+      }
+    },
+    {
+      "part": "UPI ID",
+      "holds": "subtitle, 12 px under the name; it wraps too.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "subtitle, 12 px under the name; it wraps too."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "A payment screen opens with the merchant, so people know who they're paying before they enter the amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment screen opens with the merchant, so people know who they’re paying before they enter the amount."
+      }
+    },
+    {
+      "text": "Who you're paying, before how much.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Who you’re paying, before how much."
+      }
+    },
+    {
+      "text": "The screen lays out the rest and sends the payment; the profile shows who is being paid.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen lays out the rest and sends the payment."
+      }
+    },
+    {
+      "text": "The profile has no width of its own: it fills its column, keeps 16 px clear at each side, and centres its lines. Figma draws it 360 px wide.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The profile has no width of its own: it fills its column, keeps 16 px clear at each side, and centres its lines; Figma draws it 360 px wide."
+      }
+    },
+    {
+      "text": "In a stretching column it fills the width; in a centring one it hugs its content.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "In a stretching column it fills the width; in a centring one it hugs its content."
+      }
+    },
+    {
+      "text": "With a one-line name it's 102 px tall: a 42 px avatar, 12 px, a 20 px name, 12 px, and a 16 px UPI ID.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "With a one-line name it’s 102 px tall: a 42 px avatar, 12 px, a 20 px name, 12 px, and a 16 px UPI ID."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "avatarProps goes to the Avatar: an imageSource for the merchant's logo, or style Monogram with their initials.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarProps goes to the Avatar: an imageSource for the merchant’s logo, or style Monogram with their initials."
+      },
+      "target": "avatarProps"
+    },
+    {
+      "text": "Pass the merchant's logo, or their initials.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Pass the merchant’s logo, or their initials."
+      },
+      "target": "avatarProps"
+    },
+    {
+      "text": "For initials, use style Monogram with the merchant’s initials.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "or style Monogram with their initials."
+      },
+      "target": "avatarProps"
+    },
+    {
+      "text": "Don't leave avatarProps out: the Avatar falls back to a stranger's photo.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The Avatar falls back to a stranger’s photo."
+      },
+      "target": "avatarProps"
+    },
+    {
+      "text": "Avatar Size sets the avatar, 42 px at L; no mode changes the text.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Avatar Size sets the avatar, 42 px at L; no mode changes the text."
+      },
+      "target": "Avatar Size"
+    },
+    {
+      "text": "Avatar Size M gives a 36 px avatar; S gives 29 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A 36 px avatar; S is 29 px."
+      },
+      "target": "Avatar Size",
+      "value": "M"
+    },
+    {
+      "text": "Leave title or subtitle out and it shows sample text, so hide the subtitle with an empty one.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave title or subtitle out and it shows sample text, so hide the subtitle with an empty one."
+      },
+      "target": "subtitle"
+    },
+    {
+      "text": "To show just the name, pass an empty subtitle: it hides the line.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "An empty subtitle to hide it"
+      },
+      "target": "subtitle"
+    },
+    {
+      "text": "Don't leave subtitle out to hide it: it shows the sample UPI ID, uberindia@ybl.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "It shows the sample UPI ID, uberindia@ybl."
+      },
+      "target": "subtitle"
+    },
+    {
+      "text": "Figma's Title and Subtitle text properties and its nested Avatar are title, subtitle, and avatarProps in the package.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The package takes title, subtitle, and avatarProps"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write title as the merchant's registered name, the one their bank holds, so people know who they're paying.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write title as the merchant’s registered name, the one their bank holds, so people know who they’re paying."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Use the company's full name, such as Uber India Systems Private Limited.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The company’s full name."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Start subtitle with “UPI ID:” and give the ID they're paying, so they can check it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Start subtitle with UPI ID: and give the ID they’re paying, so they can check it."
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Set title yourself: left out, the profile shows “Uber India Systems Private Limited”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/0"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Set subtitle yourself, or pass an empty one to hide the line: left out, it shows “UPI ID: uberindia@ybl”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "subtitle"
+      }
+    ],
+    "good": [
+      "Jio Gold",
+      "UPI ID: jiogold@jio",
+      "Uber India Systems Private Limited",
+      "Amazon Pay",
+      "UPI ID: amazonpay@apl"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Always: the profile has no states; it doesn't press.",
+      "from": {
+        "section": "states",
+        "quote": "The profile has no states: it doesn’t press."
+      }
+    },
+    {
+      "state": "Long name or UPI ID",
+      "when": "In a narrow column both lines wrap and stay centred, and neither ends in an ellipsis, though Figma cuts a long UPI ID.",
+      "from": {
+        "section": "states",
+        "quote": "In a narrow column both lines wrap and stay centred, and neither ends in an ellipsis, though Figma cuts a long UPI ID."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Don't rely on accessibilityLabel: it does nothing (reported).",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "accessibilityLabel does nothing"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "A logo or initials",
+      "dont": "No avatarProps",
+      "why": "The Avatar falls back to a stranger’s photo.",
+      "from": {
+        "section": "doDont",
+        "quote": "Pass the merchant’s logo, or their initials."
+      }
+    },
+    {
+      "do": "An empty subtitle to hide it",
+      "dont": "Leaving subtitle out",
+      "why": "It shows the sample UPI ID, uberindia@ybl.",
+      "from": {
+        "section": "doDont",
+        "quote": "An empty subtitle to hide it"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A payment screen opens with the merchant, the guide’s In context: Jio Gold’s logo, registered name, and UPI ID, so people know who they’re paying before they enter the amount. The screen lays out the rest (in the guide, the amount, a note and a Pay ₹1,200 button) and sends the payment. The URI stands for the merchant’s own logo.",
+      "jsx": "<MerchantProfile\n  title=\"Jio Gold\"\n  subtitle=\"UPI ID: jiogold@jio\"\n  avatarProps={{ imageSource: { uri: 'https://example.com/jio-gold-logo.png' } }}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "A payment screen opens with the merchant, so people know who they’re paying before they enter the amount."
+      }
+    },
+    {
+      "purpose": "A merchant shown by initials: style Monogram with two letters.",
+      "jsx": "<MerchantProfile\n  title=\"Amazon Pay\"\n  subtitle=\"UPI ID: amazonpay@apl\"\n  avatarProps={{ style: 'Monogram', monogram: 'AP' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "style Monogram with two letters."
+      }
+    },
+    {
+      "purpose": "Just the name: an empty subtitle hides the line (left out, it would show the sample UPI ID).",
+      "jsx": "<MerchantProfile\n  title=\"Jio Gold\"\n  subtitle=\"\"\n  avatarProps={{ imageSource: { uri: 'https://example.com/jio-gold-logo.png' } }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "An empty subtitle hides the line."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Uber India Systems Private Limited",
+        "description": "The name: 16 px Bold on a 20 px line (the package raises the token's 18), centred; it wraps. Declared: The merchant's display name or title. Default \"Uber India Systems Private Limited\", from the component source.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "UPI ID: uberindia@ybl",
+        "description": "The UPI ID line: 12 px Medium on a 16 px line, centred; it wraps, with no ellipsis. Declared: Subtitle text, typically the UPI ID or additional merchant info. Default \"UPI ID: uberindia@ybl\", from the component source.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "The profile's own 12 tokens have one mode, so no mode changes the text, gap, or padding. Declared: Mode configuration passed to the token resolver. Also passed to the Avatar child component for consistent theming.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the container."
+      },
+      {
+        "name": "avatarProps",
+        "type": "Partial<AvatarProps>",
+        "required": false,
+        "source": "evidence",
+        "description": "Spread onto the Avatar: imageSource (a logo), or style 'Monogram' with monogram. With neither, the Avatar's bundled stock photo of a person shows. Declared: Props to pass to the Avatar component.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Does nothing: the root renders no label. Declared: Accessibility label for the merchant profile region.",
+        "checkedOn": "2026-10-28"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "Modes reach the Avatar: L 42 px (the default), M 36, S 29, XS 14. XS is too small for two initials. Declared: A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "L",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection MerchantProfile reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      }
+    ],
+    "slots": [],
+    "events": [],
+    "gaps": [
+      {
+        "text": "A left-out title or subtitle shows sample text (Uber India Systems Private Limited, UPI ID: uberindia@ybl) (Component Bug #423).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The Avatar shows a stock photo until you pass a logo or initials in avatarProps (Component Bug #423).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "An empty title or subtitle hides the text but keeps its 12 px gap: 86 px tall without a subtitle, 82 without a title (Component Bug #423).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "avatarProps.modes replaces the profile's modes on the avatar instead of merging with them (Component Bug #423).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The name's lines are 20 px where Figma's are 18, so a two-line name is 122 px tall where Figma's is 118 (Component Bug #423).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "A long UPI ID wraps where Figma cuts it with an ellipsis (Component Bug #423).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "The whole profile is a heading: on the web its root is an h1 around the avatar and both lines (Component Bug #423).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=merchantprofile",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1516-1103",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-merchantprofile--docs"
+  }
+}

@@ -28,3 +28,12 @@ Checked 7 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 
 - #207 (Component Fix, To do, Component Bug; Mr. Biscuit, Anagha Ghotkar): `onSubmit` typed but never called; `accessibilityLabel` lands on a presentational element, so the region is never named (the NamedRegion story claims otherwise); no Enter-to-submit or error summary; clear-on-edit resets on every new errors object, so inline objects re-show errors (needs a note or a deep compare); published Storybook stale and its mdx claims mode theming.
 - Existing: #187 (MessageField shows no error message; fixed on `main` 636f3f5, not yet in the mirror); #186 (FormField error and required not announced).
+
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #187 fixed. MessageField shows a Form validation error under the field (as well as its own `errorMessage`), linked with `aria-describedby`, with `aria-invalid` set.
+- #186 fixed. FormField sets `aria-invalid` and points `aria-describedby` at its error ("IFSC codes have 11 characters"), so a Form error is read with the field.
+- Still open: #207 (Form itself is unchanged: `onSubmit` unused, the region is not named, no Enter-to-submit or error summary). From the installed source, nothing announces errors when they arrive (no live region), and FormUpload gains a named group but no `aria-invalid` or `aria-describedby`.
+- Guide: the Configuration card "Form Upload too" is now "Other fields too" and adds a Message Field (`name="note"`) that shows its Form error. The Sources note drops "Message Field turns red but shows no message" and "errors are not announced", and says Form Field and Message Field link their message so a screen reader reads it with the field.

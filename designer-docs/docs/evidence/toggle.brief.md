@@ -14,10 +14,10 @@ principle: One setting, one switch, and the change happens at once.
 playground: `.preview-stage` holding a Row titled "Payment alerts" with `<CoinToggle value={on} onValueChange={setOn} disabled={disabled} accessibilityLabel="Payment alerts" />`. Controls: Segment "State" Off | On → `value`; OnOff "Disabled" → `disabled`. Readout title "Payment alerts", value "On" or "Off"; note: when disabled "Disabled toggles ignore presses."; otherwise "Press the toggle or choose a state." Stage label: "Live Coin Toggle".
 
 ## Anatomy
-header: Anatomy · title: A track and a thumb · description: Toggle is a 52 × 31 px pill. Off, the track is grey with the thumb on the left; on, it turns purple and the thumb slides right.
+header: Anatomy · title: A track and a thumb · description: Toggle is 52 × 31 px with fully rounded ends. Off, the track is grey with the thumb on the left; on, it turns purple and the thumb slides right.
 specimen: `<Anatomy parts={…}><SpecimenRow><Specimen caption="Off"><CoinToggle accessibilityLabel="Off example" /></Specimen><Specimen caption="On"><CoinToggle defaultValue accessibilityLabel="On example" /></Specimen></SpecimenRow></Anatomy>`
 parts:
-1. Track — Pill that is grey when off and purple when on. — target: `.gk-specimen:last-child [role="switch"]` — side: top
+1. Track — Fully rounded; grey when off and purple when on. — target: `.gk-specimen:last-child [role="switch"]` — side: top
 2. Thumb — White circle; its side shows the state. — target: `.gk-specimen:last-child [role="switch"] > div` — side: right
 3. Off position — Thumb on the left of a grey track. — target: `.gk-specimen:first-child [role="switch"] > div` — side: left
 

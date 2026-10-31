@@ -22,7 +22,7 @@ parts:
 1. Icon — A 20 px sparkle by default; it can be swapped or removed. — target: `${R} > div:first-child` — side: left
 2. Title — 14 px bold; says what’s on offer in a line. — target: `${R} > div:nth-child(2) > div:first-child > div:first-child` — side: top
 3. Body — 12 px; one sentence of detail. — target: `${R} > div:nth-child(2) > div:first-child > div:nth-child(2)` — side: right
-4. Button — The one next step, as a small pill. — target: `${R} [role="button"]` — side: bottom
+4. Button — The one next step, as a small Button. — target: `${R} [role="button"]` — side: bottom
 5. Card — Tinted by its appearance mode, with 12 px padding. — target: `R` — side: top — at: 0.9
 
 ## Configuration
@@ -57,7 +57,7 @@ Composition in `.coin-new-context`: `<Card modes={CARD}>` › `<Card.Title>Pay C
 ## Do & Don'ts
 header: Do & Don’ts · title: One clear suggestion at the right size · description: Each pair shows a nudge people can read and act on versus one that shouts, says nothing, or hides its action.
 Every preview is a Host.
-- Do Keep Nudge’s own context: The button is Figma’s small pill and stays below the message. — `<Nudge modes={NEUTRAL} {...SPLIT} />` | Don't Pass another Context: A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message. — `<Nudge modes={{ ...NEUTRAL, Context: 'Default' }} {...SPLIT} />`
+- Do Keep Nudge’s own context: The button is Figma’s small Button and stays below the message. — `<Nudge modes={NEUTRAL} {...SPLIT} />` | Don't Pass another Context: A Default Context, set here or passed down by a container, makes the button 42 px; it outweighs the message. — `<Nudge modes={{ ...NEUTRAL, Context: 'Default' }} {...SPLIT} />`
 - Do Write your own copy: The title, body, and button say what’s on offer. — `<Nudge modes={NEUTRAL} title="Turn on autopay" body="Pay your electricity bill on time, every month." buttonLabel="Turn on" />` | Don't Leave the copy out: Nudge has no placeholder: without copy it’s an empty card with a sparkle and no button. — `<Nudge modes={NEUTRAL} />` (no copy props, no `onPressButton`)
 - Do Use stacked detailed for a list: A title over list items explains the offer. — `<Nudge type="stacked-detailed" modes={NEUTRAL} title="Why split this payment?">{Reasons}</Nudge>` | Don't Expect an action on stacked detailed: It ignores the button and close, so people have nothing to tap. — `<Nudge type="stacked-detailed" modes={NEUTRAL} title="Split payment" buttonLabel="See plans" showClose />` (no children)
 

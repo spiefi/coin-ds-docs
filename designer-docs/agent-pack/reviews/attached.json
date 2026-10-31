@@ -5,6 +5,18 @@
       "reason": "misreads-source: Marks the main bounds part as alwaysPresent=false, but nothing in the guide supports an absent main child. The guide says \"The child in the main slot establishes the size and the visual object people identify first\", and both the \"Badge present\" and \"Badge absent\" states keep the main item. Only the badge-related parts are optional.",
       "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch9, on the extraction’s behalf; for Astra and Marcin to confirm",
       "why": "In this pack an anatomy part's required means the package always renders it (agent-pack/README.md, Decisions: false for an optional prop or slot). Attached's children is optional (children?: React.ReactNode, Attached.tsx line 35, 0.1.78-dbe0e02), and without it the main slot renders nothing (mainChildren is null, line 164), so the part is not always present. Every composition in the guide has a main item, and the entry keeps that as the part's role (“establishes the size and is the visual object people identify first”) and in all three examples; DropdownInput's and FormField's labels are recorded the same way."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The cited source says the guide uses \"Icon Capsule Size modes M and XS\", so the main child is explicitly size M. The description calls it \"at its default size\" and the code omits the M mode, which assumes M is the default. It also asserts a \"default bottom-right anchor\". The cited text supports neither claim.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r21 (release 0.1.78+21), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "Both defaults are package facts, which the cross-check does not see: the entry’s position fact gives default \"bottom-right\" (Attached.tsx line 135), and IconCapsule’s Icon Capsule Size collection defaults to M (the package’s FIGMA_COMPONENT_MODES; IconCapsule’s entry lists it). The guide sets M on the main capsule; the example leaves it out because the building rules say to leave modes at their defaults, and the purpose says so. The badge keeps XS, which the Sources sentence names."
+    },
+    {
+      "field": "/anatomy/0",
+      "reason": "misreads-source: The main child is marked alwaysPresent=false, but the guide says it \"establishes the size and the visual object people identify first\". It is present in both the \"Badge present\" and \"Badge absent\" states. Only the badge is optional.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r21 (release 0.1.78+21), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /anatomy/0 dismissal above, which Astra confirmed on 30 October (“optional children do not automatically render a main item”), raised again in new words. In this pack an anatomy part’s required means the package always renders it (agent-pack/README.md, Decisions). Attached’s children is optional, and without it the main slot renders nothing (Attached.tsx, 0.1.78-dbe0e02). The guide’s examples all have a main child, but that is how the guide uses it, not something the package always draws."
     }
   ]
 }

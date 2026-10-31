@@ -3,63 +3,63 @@
 slug: upihandle · label: UPI Handle · public API: UpiHandle (+ Card, VStack, Text, Button for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=262-893 · storybook: docsUrl('upihandle') · stories: Default=components-upihandle--default, Without image=components-upihandle--without-image, Without icon=components-upihandle--without-icon, Pressable=components-upihandle--pressable-handle, Disabled=components-upihandle--disabled, Several handles=components-upihandle--multiple-handles
 checked: 8 October 2026 · jfs-components 0.1.78 (mirror tag v0.1.78-636f3f5, Biscuit's main 636f3f5)
-icon: a handle pill — `<rect x="1.5" y="5" width="15" height="8" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" /><circle cx="5.5" cy="9" r="1.6" fill="currentColor" /><path d="M9 9h4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />`
+icon: a rounded handle shape — `<rect x="1.5" y="5" width="15" height="8" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" /><circle cx="5.5" cy="9" r="1.6" fill="currentColor" /><path d="M9 9h4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />`
 keywords: UPI ID, VPA, payment address, handle
 
-Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; every UpiHandle gets `modes={LIGHT}`. Sample avatar (an inline SVG monogram; UpiHandle never tints it): `const AVATAR = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46"><rect width="46" height="46" fill="#E9DDF7"/><text x="23" y="30" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="600" fill="#5D00B5">P</text></svg>'`, passed as `source={AVATAR}`. UpiHandle accepts `testID`. "Copy" means `iconName="ic_copy"` plus an `onPress` and `accessibilityLabel={`Copy ${label}`}`; "Scan" means `iconName="ic_scan_qr_code"`. The pill is light grey (#f5f5f5) and vanishes on the grey stages, so every pill sits on the kit’s white `Surface` (`<Surface width="wide">`, in place of a host; the playground puts a `<Surface>` inside `.preview-stage`), and the Anatomy and Sizing diagrams use `surface="white"`. Several pills go in one Surface (it lays them out in a row).
+Setup: `const LIGHT = { 'Color Mode': 'Light' } as Modes`; every UpiHandle gets `modes={LIGHT}`. Sample avatar (an inline SVG monogram; UpiHandle never tints it): `const AVATAR = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46"><rect width="46" height="46" fill="#E9DDF7"/><text x="23" y="30" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="600" fill="#5D00B5">P</text></svg>'`, passed as `source={AVATAR}`. UpiHandle accepts `testID`. "Copy" means `iconName="ic_copy"` plus an `onPress` and `accessibilityLabel={`Copy ${label}`}`; "Scan" means `iconName="ic_scan_qr_code"`. The UPI Handle is light grey (#f5f5f5) and vanishes on the grey stages, so every UPI Handle sits on the kit’s white `Surface` (`<Surface width="wide">`, in place of a host; the playground puts a `<Surface>` inside `.preview-stage`), and the Anatomy and Sizing diagrams use `surface="white"`. Several UPI Handles go in one Surface (it lays them out in a row).
 
 ## Overview
 summary: Use a UPI Handle to show a UPI ID or number that people can recognise, copy, or scan, with an optional avatar.
-principle: Show the real handle and put its action on the pill.
-playground: `.preview-stage` holding `<UpiHandle label={label} source={avatar ? AVATAR : undefined} showIcon={icon !== 'None'} iconName={icon === 'Scan' ? 'ic_scan_qr_code' : 'ic_copy'} onPress={icon === 'None' ? undefined : press} />`, starting with label "priya@jio", avatar on, icon Copy. Controls: `text-control` "Label" (maxLength 32) → `label`; OnOff "Avatar" → `source`; Segment "Icon" Copy | Scan | None. Readout title "Presses", value = count (starts 0); note: Copy "Pressing the pill copies the handle."; Scan "Pressing the pill opens the scanner."; None "Without an icon the pill only shows the handle." Stage label: "Live Coin UPI Handle".
+principle: Show the real handle and put its action on the UPI Handle.
+playground: `.preview-stage` holding `<UpiHandle label={label} source={avatar ? AVATAR : undefined} showIcon={icon !== 'None'} iconName={icon === 'Scan' ? 'ic_scan_qr_code' : 'ic_copy'} onPress={icon === 'None' ? undefined : press} />`, starting with label "priya@jio", avatar on, icon Copy. Controls: `text-control` "Label" (maxLength 32) → `label`; OnOff "Avatar" → `source`; Segment "Icon" Copy | Scan | None. Readout title "Presses", value = count (starts 0); note: Copy "Pressing the UPI Handle copies the handle."; Scan "Pressing the UPI Handle opens the scanner."; None "Without an icon the UPI Handle only shows the handle." Stage label: "Live Coin UPI Handle".
 
 ## Anatomy
-header: Anatomy · title: Avatar, handle, and an action icon · description: A grey, fully rounded pill holds an optional avatar, the handle on one line, and an optional icon for the pill’s action.
+header: Anatomy · title: Avatar, handle, and an action icon · description: A grey, fully rounded background holds an optional avatar, the handle on one line, and an optional icon for the UPI Handle’s action.
 specimen: `<UpiHandle testID="upi-anatomy" label="priya@jio" source={AVATAR} iconName="ic_copy" onPress={noop} />`
 parts:
 1. Avatar — Optional photo or logo; it shows only when a source is set. — target: `${byTestId('upi-anatomy')} > div:first-child` — side: left
 2. Handle — The UPI ID or number, on one line. — target: `${byTestId('upi-anatomy')} [dir="auto"]` — side: top
 3. Action icon — Optional cue for what pressing does: copy or scan. — target: `${byTestId('upi-anatomy')} > div:last-child` — side: right
-4. Pill — Grey rounded surface that hugs its content. — target: `byTestId('upi-anatomy')` — side: bottom
+4. Background — Grey rounded surface that hugs its content. — target: `byTestId('upi-anatomy')` — side: bottom
 
 ## Configuration
-header: Configuration · title: Avatar and icon are optional · description: Add an avatar when a photo or logo helps people recognise the account. Choose the icon for the action the pill performs, or none when it only shows the handle.
+header: Configuration · title: Avatar and icon are optional · description: Add an avatar when a photo or logo helps people recognise the account. Choose the icon for the action the UPI Handle performs, or none when it only shows the handle.
 Grid `coin-new-example-grid` (2 × 2):
 - With avatar — "priya@jio", AVATAR, Copy — lesson: A photo helps people confirm whose handle it is.
-- Without avatar — "shrutirai-1@jio", Copy — lesson: The pill pads evenly; use it where a name is already shown.
+- Without avatar — "shrutirai-1@jio", Copy — lesson: The UPI Handle pads evenly; use it where a name is already shown.
 - Scan icon — "merchant@jio", Scan with onPress — lesson: For a handle people scan to pay.
 - No icon — "merchant@jio", `showIcon={false}` — lesson: Display only: nothing to press.
 
 ## States
-header: States · title: Display only or pressable · description: Without an action the pill only shows the handle. With one, the whole pill is a button and shrinks slightly while pressed. A disabled pill is dimmed and ignores presses.
+header: States · title: Display only or pressable · description: Without an action the UPI Handle only shows the handle. With one, the whole UPI Handle is a button and shrinks slightly while pressed. A disabled UPI Handle is dimmed and ignores presses.
 Grid `coin-new-example-grid three`:
-- Display only — `showIcon={false}` — lesson: Static text in a pill.
-- Pressable — Copy — lesson: The whole pill responds to a press.
+- Display only — `showIcon={false}` — lesson: Static text on a grey rounded background.
+- Pressable — Copy — lesson: The whole UPI Handle responds to a press.
 - Disabled — Copy with `disabled` — lesson: Dimmed to half opacity and skipped by keyboard focus.
 
 ## Sizing
-header: Sizing · title: 29 px tall, as wide as its content · description: The pill is 29 px tall and grows with its handle: 14 px of padding at each end (4 px before an avatar), a 23 px avatar, and a 12 px icon. When space runs out, a long handle ends in an ellipsis, so leave room for the whole ID.
+header: Sizing · title: 29 px tall, as wide as its content · description: The UPI Handle is 29 px tall and grows with its handle: 14 px of padding at each end (4 px before an avatar), a 23 px avatar, and a 12 px icon. When space runs out, a long handle ends in an ellipsis, so leave room for the whole ID.
 In a `coin-new-stack`: measured diagram: `<Anatomy legend={false} marks={[{ kind: 'size', target: byTestId('upi-size'), side: 'bottom', label: 'both' }, { kind: 'padding', target: byTestId('upi-size') }]}><UpiHandle testID="upi-size" label="shrutirai-1@jio" iconName="ic_copy" onPress={noop} /></Anatomy>`. Expected label about 130 × 29.
-Then ExampleCard "Long handles truncate" (description: "Limited to 140 px, the handle ends in an ellipsis and the pill stays inside its space.") › host › `<UpiHandle label="very-long-upi-handle-id@jio" iconName="ic_copy" accessibilityLabel="Copy very-long-upi-handle-id@jio" onPress={noop} style={{ maxWidth: 140 }} />`.
+Then ExampleCard "Long handles truncate" (description: "Limited to 140 px, the handle ends in an ellipsis and the UPI Handle stays inside its space.") › host › `<UpiHandle label="very-long-upi-handle-id@jio" iconName="ic_copy" accessibilityLabel="Copy very-long-upi-handle-id@jio" onPress={noop} style={{ maxWidth: 140 }} />`.
 
 ## Content
-header: Content · title: Show the real handle · description: Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio. Don’t add “UPI:” or translate it; the pill already says what it is. On a pressable pill, set an accessibility label that says the action, such as “Copy priya@jio”.
-One ExampleCard "Handles" with `.coin-new-content-list` of Copy pills: "priya@jio", "merchant-1234@jio", "9184844184".
+header: Content · title: Show the real handle · description: Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio. Don’t add “UPI:” or translate it; the UPI Handle already says what it is. On a pressable UPI Handle, set an accessibility label that says the action, such as “Copy priya@jio”.
+One ExampleCard "Handles" with `.coin-new-content-list` of Copy UPI Handles: "priya@jio", "merchant-1234@jio", "9184844184".
 
 ## In context
-header: In context · title: Confirm the payee · description: The screen copies the handle or opens the payment when pressed; the pill only reports the press.
-Composition in `.coin-new-context`: `<Card modes={LIGHT}>` › `<VStack modes={LIGHT}>` › `<Text modes={LIGHT}>Paying Priya Sharma</Text>`, `<UpiHandle label="priya@jio" source={AVATAR} iconName="ic_copy" accessibilityLabel="Copy priya@jio" onPress={copy} />`, `<Button label="Pay ₹500" onPress={pay} />`. Below the card, `<p className="coin-new-readout" role="status">`: "Nothing yet" at first; the pill → "UPI ID copied"; Pay → "Payment started".
+header: In context · title: Confirm the payee · description: The screen copies the handle or opens the payment when pressed; the UPI Handle only reports the press.
+Composition in `.coin-new-context`: `<Card modes={LIGHT}>` › `<VStack modes={LIGHT}>` › `<Text modes={LIGHT}>Paying Priya Sharma</Text>`, `<UpiHandle label="priya@jio" source={AVATAR} iconName="ic_copy" accessibilityLabel="Copy priya@jio" onPress={copy} />`, `<Button label="Pay ₹500" onPress={pay} />`. Below the card, `<p className="coin-new-readout" role="status">`: "Nothing yet" at first; the UPI Handle → "UPI ID copied"; Pay → "Payment started".
 
 ## Do & Don'ts
 header: Do & Don’ts · title: Make the handle recognisable and honest · description: Each pair shows a handle people can trust and act on versus one that confuses them.
 Every preview is a host.
 - Do Use the real handle: People recognise the ID they will pay or copy. — "priya@jio", Copy | Don't Leave the placeholder: “Label” is the Figma placeholder, not a handle. — `label="Label"`, Copy
-- Do Put the action on the pill: The copy icon says what pressing does. — "priya@jio", Copy | Don't Show an icon with no action: A scan icon on a static pill looks tappable but does nothing. — "merchant@jio", `iconName="ic_scan_qr_code"`, no onPress
-- Do One handle per pill: Each pill copies one ID. — `.coin-new-content-list` with "priya@jio" and "priya@okaxis" pills, both Copy | Don't Combine handles in one label: People can’t tell which ID they copied. — `label="priya@jio, priya@okaxis"`, Copy
+- Do Put the action on the UPI Handle: The copy icon says what pressing does. — "priya@jio", Copy | Don't Show an icon with no action: A scan icon on a static UPI Handle looks tappable but does nothing. — "merchant@jio", `iconName="ic_scan_qr_code"`, no onPress
+- Do One ID per UPI Handle: Each UPI Handle copies one ID. — `.coin-new-content-list` with "priya@jio" and "priya@okaxis" UPI Handles, both Copy | Don't Combine handles in one label: People can’t tell which ID they copied. — `label="priya@jio, priya@okaxis"`, Copy
 
 ## Sources
 header: Sources · title: Use the public UPI Handle contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma shows an avatar, the handle, and a copy icon in a 144 × 29 pill. The package defaults to a scan icon, so this guide sets the copy icon wherever the pill copies. The avatar shows only when a source is set and is never tinted. On the web a pressable pill is a button named by its accessibility label, or by the handle when none is set. Keyboard focus draws a thin ring without moving anything, and a mouse click leaves no ring.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma shows an avatar, the handle, and a copy icon on a 144 × 29 grey rounded background. The package defaults to a scan icon, so this guide sets the copy icon wherever the UPI Handle copies. The avatar shows only when a source is set and is never tinted. On the web a pressable UPI Handle is a button named by its accessibility label, or by the handle when none is set. Keyboard focus draws a thin ring without moving anything, and a mouse click leaves no ring.
 
 ## Limits
 Do not show Dark mode, `disableTruncation`, `avatarSource`, the `UPI Handle Image` mode, or `accessibilityHint`. Use `style` only for the 140 px truncation example. Do not imply the default icon matches Figma (it is still `ic_scan_qr_code`; Figma uses `ic_copy`).

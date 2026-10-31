@@ -1,0 +1,670 @@
+{
+  "schemaVersion": 1,
+  "id": "StatusHero",
+  "slug": "statushero",
+  "category": "feedback",
+  "tags": [
+    "success screen",
+    "result screen",
+    "payment result",
+    "confirmation",
+    "done screen"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:15:31Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide and its evidence were re-checked on 28 October on the installed build, dbe0e02, only for #346 (the amount is announced once with its currency); the rest still describes the 25 October build, c8526ae. dbe0e02 changed StatusHero for #398: the mark's Neutral High at Icon Capsule Size L is a default the hero's modes override (dark grey with a white tick; AppearanceBrand Primary on the hero makes it gold; Semantic Intent System still colours it green, orange or red), the hero fills its parent instead of hugging its text, renderMedia gets the hero's modes as defaults and each element's own modes win, a hero with no title and no subtitle has no empty content wrap, and a new accessibilityLabel names the hero as a group. This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts (listed in its notes): Configuration “The mark is gold by default: the hero fixes its Icon Capsule to AppearanceBrand Primary, so no brand mode changes it.” and the Brand card's “The default gold mark.”; Sizing's “As wide as its words”, “The hero has no width of its own: it centres its content and wraps text only when its host is narrower.” and the 302 of “With the default copy it is 302 × 269” (269 still holds); the Don't caption “The gold tick says it worked.” (the pair is kept with the Do caption); Sources “Its mark is gold where Figma’s is dark grey with a white tick: the hero fixes the capsule’s brand mode, so only Semantic Intent System recolours it.” and “Storybook’s Without subtitle story still shows the default subtitle”; the playground's Gold readout; and the evidence's Contract, Web render, Discrepancies and Limits lines on the forced gold mark and modes, renderMedia replacing modes, the hugging width, the empty gap and no accessibility props. The guide fix belongs to #398 (Component Fix, In progress; only the 269 px against Figma's 259 is left, waiting for Marcin's call), whose publish re-checks the guide on dbe0e02. Re-extract once #398 is closed and the guide is published. Added by Claude Code in the overnight run agentpack-batch12, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Status Hero at the top of a result screen to confirm what just happened: a mark, the amount, a title, and one line.",
+  "useWhen": [
+    {
+      "text": "At the top of a result screen, to confirm what just happened: a mark, the amount, a title, and one line.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Status Hero at the top of a result screen to confirm what just happened: a mark, the amount, a title, and one line."
+      }
+    },
+    {
+      "text": "Say what happened, then the one thing that follows.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Say what happened, then the one thing that follows."
+      }
+    },
+    {
+      "text": "The screen after a payment, mandate, or setup succeeds (Biscuit's Storybook page).",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Use for the screen after a payment, mandate, or setup succeeds"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A history of payments: this hero is one result; put the history in Transaction Details.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "This hero is one result; put the history in Transaction Details."
+      },
+      "useInstead": "TransactionDetails"
+    },
+    {
+      "text": "A payment in a list: use a TransactionBubble.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not a payment in a list (TransactionBubble)"
+      },
+      "useInstead": "TransactionBubble"
+    },
+    {
+      "text": "A portfolio total: Biscuit's Storybook page names PortfolioHero, which has no entry in this pack.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "or a portfolio total (PortfolioHero)"
+      },
+      "useInstead": "PortfolioHero"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Media",
+      "holds": "The mark over the amount by default; renderMedia replaces the mark and the amount together.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "renderMedia replaces the mark and the amount together."
+      }
+    },
+    {
+      "part": "Mark",
+      "holds": "An 81 px Icon Capsule showing iconName.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An 81 px Icon Capsule showing iconName."
+      }
+    },
+    {
+      "part": "Amount",
+      "holds": "A Money Value from value and currency, 36 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Money Value from value and currency, 36 px."
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title, 20 px Bold; showTitle hides it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "title, 20 px Bold; showTitle hides it."
+      }
+    },
+    {
+      "part": "Subtitle",
+      "holds": "subtitle; a line break in it stays.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "subtitle; a line break in it stays."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "renderMedia",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put it at the top of a result screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Status Hero at the top of a result screen"
+      }
+    },
+    {
+      "text": "The guide's example, the screen after a setup: Start saving swaps the setup screen for the result; the hero confirms it, and Done below leaves.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Start saving swaps the setup screen for the result: the hero confirms it, and Done below leaves."
+      }
+    },
+    {
+      "text": "The hero has no button of its own, so the screen adds one.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero has no button of its own, so the screen adds one."
+      }
+    },
+    {
+      "text": "The media sits on top; the title and the subtitle follow. Everything is centred.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The media, a mark over the amount, sits on top; the title and the subtitle follow. Everything is centred."
+      }
+    },
+    {
+      "text": "With the default copy: 8 px of padding, an 81 px mark, 46 px to a 44 px amount, then 12 px to a 24 px title and 12 px to the subtitle.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "8 px of padding, an 81 px mark, 46 px to a 44 px amount, then 12 px to a 24 px title and 12 px to the subtitle."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set Semantic Intent to System and AppearanceSystem colours the mark green, orange, or red; pick a matching iconName.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Set Semantic Intent to System and AppearanceSystem colours it green, orange, or red; pick a matching iconName."
+      },
+      "target": "Semantic Intent",
+      "value": "System"
+    },
+    {
+      "text": "AppearanceSystem positive, with Semantic Intent System: green, it went through.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Green: it went through."
+      },
+      "target": "AppearanceSystem",
+      "value": "positive"
+    },
+    {
+      "text": "AppearanceSystem warning, with Semantic Intent System: orange, still waiting (the guide's card uses iconName ic_warning).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Orange: still waiting."
+      },
+      "target": "AppearanceSystem",
+      "value": "warning"
+    },
+    {
+      "text": "AppearanceSystem negative, with Semantic Intent System: red, it didn't happen (the guide's card uses iconName ic_close).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Red: it didn’t happen."
+      },
+      "target": "AppearanceSystem",
+      "value": "negative"
+    },
+    {
+      "text": "Make the mark match the result: a red cross for a failed payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "A red cross for a failed payment."
+      },
+      "target": "iconName"
+    },
+    {
+      "text": "Don't show a success mark on a failure.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A success mark on a failure"
+      }
+    },
+    {
+      "text": "renderMedia replaces the mark and the amount with your own content, such as a picture.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "renderMedia replaces the mark and the amount with your own content, such as a picture."
+      },
+      "target": "renderMedia"
+    },
+    {
+      "text": "Content in renderMedia gets the hero's modes as defaults; each element's own modes win, and fragments and arrays get them on every element child.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "renderMedia"
+    },
+    {
+      "text": "The hero has no states: it doesn't press, load, or animate, and it has no button, so the screen adds the next action.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The hero has no states: it doesn’t press, load, or animate, and it has no button, so the screen adds the next action."
+      }
+    },
+    {
+      "text": "showTitle={false} hides the title.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "showTitle={false} hides the title."
+      },
+      "target": "showTitle",
+      "value": "false"
+    },
+    {
+      "text": "An empty subtitle ('') hides the subtitle; leaving subtitle out shows the package's default sentence instead.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "an empty subtitle hides the subtitle; leaving subtitle out shows the package’s default sentence instead."
+      },
+      "target": "subtitle"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write title as the outcome in a few words, such as Payment successful.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write title as the outcome in a few words, such as Payment successful."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Write subtitle as the one fact that follows; a line break in it stays.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write subtitle as the one fact that follows; a line break in it stays."
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Give value as the number alone: currency adds the sign, and INR or ₹ both show ₹.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Give value as the number alone: currency adds the sign, and INR or ₹ both show ₹."
+        },
+        "target": "value"
+      },
+      {
+        "text": "For a payment that went through (the guide's Outcome and amount card): the title gives the outcome; the subtitle says where the money went.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The title gives the outcome; the subtitle says where the money went."
+        }
+      },
+      {
+        "text": "A long subtitle wraps, centred, in its column.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "It wraps, centred, in its column."
+        }
+      },
+      {
+        "text": "One next fact: what happened, then what follows.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "What happened, then what follows."
+        }
+      },
+      {
+        "text": "Don't put a history in the subtitle: this hero is one result; put the history in Transaction Details.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "This hero is one result; put the history in Transaction Details."
+        }
+      }
+    ],
+    "good": [
+      "Payment successful",
+      "₹1,200 sent to Rahul Verma.",
+      "Payment failed",
+      "No money left your account.",
+      "Daily savings started"
+    ],
+    "bad": [
+      "₹50 on 19 Oct, ₹50 on 20 Oct, ₹50 on 21 Oct, ₹50 on 22 Oct, ₹50 on 23 Oct"
+    ]
+  },
+  "states": [
+    {
+      "state": "Full",
+      "when": "Mark, amount, title, and subtitle.",
+      "from": {
+        "section": "states",
+        "quote": "Mark, amount, title, and subtitle."
+      }
+    },
+    {
+      "state": "Without a title",
+      "when": "showTitle={false} hides the title.",
+      "from": {
+        "section": "states",
+        "quote": "showTitle={false} hides the title."
+      }
+    },
+    {
+      "state": "Without a subtitle",
+      "when": "An empty subtitle hides it.",
+      "from": {
+        "section": "states",
+        "quote": "An empty subtitle hides it."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Screen readers read the amount once, with its currency.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Screen readers read the amount once, with its currency."
+      }
+    },
+    {
+      "text": "accessibilityLabel is an optional accessible name for the hero region.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/9"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Without an accessibilityLabel the hero doesn’t group its children, so the amount stays reachable on phones too; the hero groups them only when it has an accessibilityLabel.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "StatusHero only groups its children when it has an `accessibilityLabel`, so the amount is reachable on phones too."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "The mark matches",
+      "dont": "A success mark on a failure",
+      "why": "A red cross for a failed payment.",
+      "from": {
+        "section": "doDont",
+        "quote": "The mark matches"
+      }
+    },
+    {
+      "do": "One next fact",
+      "dont": "A history in the subtitle",
+      "why": "This hero is one result; put the history in Transaction Details.",
+      "from": {
+        "section": "doDont",
+        "quote": "One next fact"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The screen after a setup, the guide's In context: Start saving swaps the setup screen for this one; the hero confirms it and Done below leaves, because the hero has no button of its own. The copy is the guide's Daily savings started hero; the mark keeps its default.",
+      "jsx": "<VStack justifyVertical=\"space-between\">\n  <StatusHero\n    title=\"Daily savings started\"\n    subtitle=\"₹50 will move from HDFC Bank ··4821 to your gold locker every morning.\"\n    value=\"50\"\n  />\n  <Button label=\"Done\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Start saving swaps the setup screen for the result: the hero confirms it, and Done below leaves."
+      }
+    },
+    {
+      "purpose": "A failed payment: Semantic Intent System with AppearanceSystem negative and a matching ic_close, so the mark is a red cross.",
+      "jsx": "<StatusHero\n  title=\"Payment failed\"\n  subtitle=\"No money left your account.\"\n  value=\"1,200\"\n  iconName=\"ic_close\"\n  modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Set Semantic Intent to System and AppearanceSystem colours it green, orange, or red; pick a matching iconName."
+      }
+    },
+    {
+      "purpose": "A picture instead of the mark and the amount: renderMedia holds an 81 px Image (a placeholder URL stands for the screen's own picture).",
+      "jsx": "<StatusHero\n  title=\"Gold bought\"\n  subtitle=\"It’s in your gold locker now.\"\n  renderMedia={<Image imageSource=\"https://example.com/gold-coin.png\" width={81} height={81} />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "renderMedia replaces the mark and the amount with your own content, such as a picture."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "renderMedia",
+        "type": "ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom media slot content. Defaults to an IconCapsule above a MoneyValue. Hero modes are defaults; each element's own modes win. Fragments and arrays receive modes on every element child."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "You're set to make payments",
+        "description": "Hidden by showTitle={false} or an empty string. Declared: Title text displayed below the media slot. Default \"You're set to make payments\", from the component source.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "showTitle",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Whether to render the title. Default true, from the component source."
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "₹50 will be auto-invested daily,\nstay consistent & stay golden.",
+        "description": "A line break (\\n) stays a line break; '' hides the subtitle, undefined shows the default sentence. Declared: Body/subtitle text displayed below the title. Default \"₹50 will be auto-invested daily,\\nstay consistent & stay golden.\", from the component source.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "iconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_confirm",
+        "description": "Icon name used in the default media slot. Default \"ic_confirm\", from the component source."
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "50",
+        "description": "The amount is announced once with its currency (on the web a role img named with both, such as “₹1,200”). Declared: Monetary value shown in the default MoneyValue inside the media slot. Default \"50\", from the component source.",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "INR",
+        "description": "Currency symbol or ISO code for the default MoneyValue. Default \"INR\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Mode configuration for design tokens."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Optional accessible name for the hero region."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "With Semantic Intent System it colours the mark: positive #26ab21, warning #f06e0f, negative #f50030, with a white icon. Declared: A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "positive",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context3",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Transaction Bubble",
+          "Balance & Cards",
+          "Amount Input"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Capsule Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "L",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection StatusHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "renderMedia",
+        "type": "ReactNode",
+        "description": "Custom media slot content. Defaults to an IconCapsule above a MoneyValue. Hero modes are defaults; each element's own modes win. Fragments and arrays receive modes on every element child.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "With the default copy the hero is 269 px tall where Figma's is 259: its amount and title sit on 44 and 24 px lines, Figma's on 36 and 22 (reported in #398).",
+        "source": "evidence",
+        "checkedOn": "2026-10-25"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=statushero",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2594-13",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-statushero--docs"
+  }
+}

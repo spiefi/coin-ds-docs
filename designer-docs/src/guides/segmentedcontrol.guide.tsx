@@ -39,7 +39,7 @@ function SegmentedControlGuide() {
       header: 'Anatomy', title: 'A track of equal segments',
       description: 'A lavender track holds the options side by side. The selected one fills purple with a white label; the others are labels on the track.',
       body: <Anatomy surface="white" specimenWidth={328} parts={[
-        { name: 'Track', note: 'Lavender pill that holds the segments and fills its container.', target: '[role="tablist"]', side: 'bottom', at: 0.15 },
+        { name: 'Track', note: 'Rounded lavender background that holds the segments and fills its container.', target: '[role="tablist"]', side: 'bottom', at: 0.15 },
         { name: 'Segment', note: 'An option people can tap; its label sits on the track.', target: '[role="tab"]:nth-child(1)', side: 'left' },
         { name: 'Label', note: 'One or two short words, centred.', target: '[role="tab"]:nth-child(2) [dir="auto"]', side: 'top' },
         { name: 'Selected segment', note: 'Purple fill and a white label mark the current choice.', target: '[role="tab"]:nth-child(3)', side: 'right' },

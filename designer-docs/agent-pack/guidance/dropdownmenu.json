@@ -1,0 +1,468 @@
+{
+  "slug": "dropdownmenu",
+  "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r25, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/dropdownmenu.guide.tsx, self-contained) and docs/evidence/dropdownmenu.md at cba512f (8 October, “publish the 5 October Coin build's component fixes”, the #145 and #171 publish), which is on origin/main; the guide and the evidence read the same on origin/main and origin/docs-next. The evidence's 28 September sections (Checked, Sources, Contract, Rendered, Limits, Verification) describe 0.1.77; its “636f3f5 check” was made on 8 October on 0.1.78-636f3f5 (Biscuit's main at 636f3f5, the 5 October build), and the guide's Sources note was checked the same day on that build, so items citing the Sources note or the 8 October check carry 2026-10-08 and 0.1.78-636f3f5. One 0.1.77 sentence is used: the Contract's showTrailing default, as the evidence fact /facts/props/7. No 0.1.78 sentence says the chevron shows by default, and an agent that leaves showTrailing out gets a chevron on every row, so it is kept and stays flagged as stale (not dismissable); it still holds on dbe0e02 (DropdownMenu.tsx lines 192–193 and 293–299). No other 0.1.77 sentence is quoted. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-636f3f5 and v0.1.78-dbe0e02 (7 commits) is cut off at 300 files, so blobs were compared: DropdownMenu.tsx (17734ec) is the same blob at v0.1.77, 636f3f5, c1fa197, c7d3348 and dbe0e02 and in node_modules; Icon.tsx (cddaa05), react-utils.ts (bd10632), typography.ts (cbabe67), shadow.ts (1905a41), figma-variables-resolver.ts (d03e77c) and components/index.ts (cc1b283) are the same at all five; Avatar.tsx changed once (8e2a35e, 17 October, 2bf2dd4 to 26f5b52: the loading Skeleton's visible prop only); the history of src/design-tokens on dbe0e02 ends at 692e681 (the 636f3f5 mirror commit, 8 October). So nothing the 8 October check read has changed, and DropdownMenu.tsx itself is unchanged since 0.1.77. Every guide and evidence sentence quoted here was read against the installed source (read, not rendered; token values through the package's own getVariableByName in lib/commonjs, Light): the panel has dropdown/radius 8, a white background and a 0 4 16 rgba(0, 0, 0, 0.08) shadow on the outer view, with the rounding clipped on an inner view (112–136, 369–386); rows stack with dropdown/gap 0; maxHeight wraps them in a capped View and a ScrollView (395–407); a row is a Pressable 45 px tall (menuItems/height, fixed), padding 8/10, gap 8, 100% wide (229–239); the label is 14 px, weight 400, rgb(16, 15, 15) on a 17 px line (safeTextLineHeight raises the 16 px token to 1.2 × 14), one line with an ellipsis unless disableTruncation (256–265, 326), and reads “Default” when no label is given (327); the fill is white, rgb(246, 243, 255) lilac when selected or hovered (web, not disabled), and a darker rgb(228, 219, 255) while pressed (71–92, 219–228); disabled is 0.4 opacity and ignores presses (207–210, 237); leading: a passed node wins (null hides it), else, with showLeading (default true), an Avatar of style Image at Avatar Size S (29 px) showing the package's built-in sample photo (267–280; Avatar.tsx 22, 289); trailing: a passed node wins, else, with showTrailing (default true), an 18 px ic_chevron_right Icon at AppearanceBrand Neutral, rgb(84, 89, 97) (282–300); a row has role menuitem, is named accessibilityLabel, else its label, else “Menu item”, and passes selected and disabled only in accessibilityState (302–311); the menu has role menu, named accessibilityLabel or “Dropdown menu” (388–393); there is no open, trigger, position or key-handling prop. On the web (react-native-web 0.21.2) a disabled Pressable gets tabIndex -1 and aria-disabled (Pressable 127–130), so Tab skips it; createDOMProps reads aria-selected or accessibilitySelected, not accessibilityState, so no aria-selected reaches a row (673–679). No sentence quoted here is contradicted. Tickets, read on the board (read only): #171 (Component Fix, Done, live 8 October) is fixed (components/index.ts 68–73, lib/typescript index line 36), so it is not a gap. #209 (Done, live 13 October) lists DropdownMenuItem as not affected by the double Enter; DropdownMenuItem has no key handler of its own (Enter reaches it through react-native-web's Pressable), so nothing about keys is recorded beyond the guide's arrow-key sentence. #173 (Components, Done) covers Dropdown and DropdownInput only; the evidence's “tracked for Dropdown in #173” is about Dropdown. The two gaps (on the web the selected row is shown only visually; arrow keys do not move between rows) are the guide's own 0.1.78 Sources sentences and still hold on dbe0e02; no ticket read covers them for Dropdown Menu, so none is named (reported to the coordinator as a candidate Component Bug). #523 (Documentation, To do, Marcin) asks whether an action menu uses Dropdown or Dropdown Menu; this entry doesn't decide it, and reviews/dropdownmenu.json flags /useWhen/0 for it. DropdownMenuItem has no entry in this pack; the facts carry DropdownMenu.Item, the static sub-component, whose description lists its props. The examples use DropdownMenu.Item as the menu's children, as the guide does, and the type-check accepts it. Two item props the entry relies on are evidence facts: selected (the 8 October line, which the check read from the installed source, not in a browser) and showTrailing (0.1.77, flagged). The other item props are targeted as DropdownMenu.Item and named in plain words or in the examples (label, leading, showLeading, disabled, onPress). Strength: three quotes hold an absolute word. /placementAdvice/1 “Dropdown Menu only draws the panel.” (everywhere: behaviour, so recommended); /configuration/6 “Add a chevron only when a row opens another screen or menu.” (everywhere: every row; the guide's advice, so recommended); /accessibility/1 “shown only visually” (contextual: on the web; native screen readers were not checked). Nothing is required: no prop is required in the facts, and the defaults (the sample Avatar, the chevron) are recommended rules, not requirements. Anatomy required: the Panel and the Label are always drawn (“Default” with no label; children would replace the label, which the guide doesn't use); the Leading visual, the Chevron and the Selected row are optional. Examples follow the building rules: no Color Mode (the guide sets Light on every Dropdown Menu, row, Icon, Card, HStack and IconButton) and no other modes, so the In context More button's Emphasis Low is left out, since no rule in this entry says it needs it (as the Dropdown entry does). The 256 px width is layout-only style from the guide's Menu helper, per Sizing's “The screen sets the menu’s width”. The helper is written out: an Icon in leading for action rows, showLeading false for labels-only rows, showTrailing false unless the guide shows chevrons, and its menu names (Statement actions, Account menu, Actions). maxHeight 180 and the icon names (ic_download, ic_share, ic_edit, ic_info, ic_more_vertical, all in the registry) are the guide's own (lines 10, 63, 96, 112). The In context example shows the menu open, inside the Card under the row, as the guide renders it after More is pressed (line 99); the copy snapshot was taken closed (“Menu closed”). Press handlers are stubs; Places and the scrolling rows get them although the guide's static menus have none. Card, HStack and IconButton have entries; Text and Icon have undocumented entries. Left out of examples (three at most): the Anatomy specimen and People and accounts (both show the sample Avatar), Labels only, the Selected and Disabled menus, the Sizing measure, Content's Actions (the In context rows), the Do & Don't previews, and the playground and its Last action readout. Not recorded: style and labelStyle beyond the layout width (the building rules forbid colour, border, radius and font overrides); trailing as a custom node, children as custom row content, accessibilityHint and disableTruncation (no guide sentence); the modes (Menu State is set by the row itself from press, hover and selected; Avatar Size S is forced on leading and AppearanceBrand Neutral on the default chevron; the other collections come from the package's metadata and change nothing the guide shows; Color Mode by the building rules: in Dark the selected and hover fill resolves to rgb(15, 13, 10) on the still-white panel with dark text, a dark-mode problem, not recorded); the pressed lilac (no guide sentence); Figma's 256 × 180 frame and layer names; the Sources note's Figma Menu Item master sentence (Figma, not the package; not re-checked, the Figma connection needs sign-in); the Storybook story list (not re-read). Content: good is the guide's Actions and Places labels; bad is empty, since the Don't's account names are a misuse of the menu, not badly written labels. Cross-check: round 1 raised no flags (its notes: maxHeight 180, the icon names and the Account menu name are not in the rendered copy; all are the guide's code); /facts/props/6's description then gained that the 8 October line was read from source; round 2 raised no flags (its notes: the In context rows and the Places rows' configuration are not in the rendered copy; both are the guide's code, lines 86 and 99). Consistency with related entries: Dropdown's entry (889444e, checked on c1fa197) agrees on the shared shape: a rounded panel with a soft shadow, rows filling a width the screen sets, one-line labels with an ellipsis, maxHeight to scroll a long list, the screen opening, placing and closing the panel, and a disabled row dimmed and out of focus. It differs where the components differ: Dropdown's selected item is grey with a check and announced as selected; Dropdown Menu's is lilac and visual only; Dropdown's items are 43 px in its guide (44 rendered, #523), Dropdown Menu's rows 45. Both guides offer the same overflow action menu (the human flag on /useWhen/0, #523). Dropdown's notes say the package's DropdownMenu “isn't recorded”, which stays true of its guide but is out of date for the pack once this entry ships (reported). DropdownInput's useWhen (in a form, one option of four or more) agrees with this entry's avoidWhen/0 (Dropdown Input for a form value). No other guidance file names Dropdown Menu; AppBar's examples put a More options IconButton in actionsSlot with no menu, and IconButton's entry has no rule about a More button, so nothing disagrees. Category: pack.json says navigation; the guide reads as action (“Actions, not answers”, “Use it for actions”), with Places as the only navigation use (reported, pack.json not changed). Nothing hand-written here, in the guide or evidence at cba512f, or in the installed DropdownMenu source and types uses that shape word Coin doesn't have. Sorted by the coordinator: pack.json’s category is action (the guide: “Use it for actions”). Guide fix #554 was filed (which component an action menu uses, with #523, and a 0.1.78 re-check of the 28 September contract); the human flag names both, and a note on #523 points at #554. No Component Bug was filed for the two gaps: they are the guide’s own 0.1.78 Sources limitations, and the unannounced selected row is screen-reader support, which this flow does not count as a Coin gap. The cross-check ran again after the category change (round 3: 0 flags).",
+  "useWhen": [
+    {
+      "text": "A short list of actions that opens from a button, such as an overflow or account menu.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Dropdown Menu for a short list of actions that opens from a button, such as an overflow or account menu."
+      }
+    },
+    {
+      "text": "Actions, not answers.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Actions, not answers."
+      }
+    },
+    {
+      "text": "An overflow menu on a card, as in the guide's In context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "An overflow menu on a card"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Choosing a form value: use Dropdown Input.",
+      "strength": "discouraged",
+      "useInstead": "DropdownInput",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "For choosing a form value, use Dropdown Input."
+      }
+    },
+    {
+      "text": "Picking a form value, such as an account: account names in a menu have no label, value or error to go with them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Account names in a menu have no label, value, or error to go with them."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Panel",
+      "holds": "Rounded surface with a soft shadow; it holds the rows, each a DropdownMenu.Item (children).",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Rounded surface with a soft shadow."
+      }
+    },
+    {
+      "part": "Leading visual",
+      "holds": "Avatar or icon that identifies the row (leading); optional.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Avatar or icon that identifies the row."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "Names the action in a few words.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the action in a few words."
+      }
+    },
+    {
+      "part": "Chevron",
+      "holds": "Shows the row leads somewhere further; optional (showTrailing).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows the row leads somewhere further."
+      }
+    },
+    {
+      "part": "Selected row",
+      "holds": "Lilac fill marks the current row (selected).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Lilac fill marks the current row."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In the guide's overflow menu, the screen opens the menu from the More button, places it under the button, and closes it after an action.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the menu from the More button, places it under the button, and closes it after an action."
+      }
+    },
+    {
+      "text": "Dropdown Menu only draws the panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Dropdown Menu only draws the panel."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "“only” says what every Dropdown Menu does: it draws the panel and its rows, and the screen opens, places and closes it (the component has no open, trigger or position prop in the facts). It states behaviour, not an instruction, so it stays recommended."
+      }
+    },
+    {
+      "text": "Dropdown Menu draws the panel and rows; opening, placing and closing it, and which row is selected, belong to the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Dropdown Menu draws the panel and rows; opening, placing, and closing it, and which row is selected, belong to the screen."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "The screen sets the menu’s width (the guide's menus are 256 px wide); rows fill it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The screen sets the menu’s width; rows fill it"
+      }
+    },
+    {
+      "text": "Rows are 45 px tall.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Rows are 45 px tall"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Each row is a DropdownMenu.Item in the menu's children.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "fact": "props:DropdownMenu.Item"
+      }
+    },
+    {
+      "text": "Choose what each row shows: avatars suit people and accounts, icons suit actions, and plain labels suit short lists.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "section": "configuration",
+        "quote": "Avatars suit people and accounts, icons suit actions, and plain labels suit short lists."
+      }
+    },
+    {
+      "text": "Actions with icons: an Icon in each row's leading helps people spot an action quickly.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "section": "configuration",
+        "quote": "Icons help people spot an action quickly."
+      }
+    },
+    {
+      "text": "Labels only, with no leading visual: the lightest menu, for two or three actions.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "section": "configuration",
+        "quote": "The lightest menu, for two or three actions."
+      }
+    },
+    {
+      "text": "People and accounts: avatar rows, the Figma default, for switching between people or accounts.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma default, for switching between people or accounts."
+      }
+    },
+    {
+      "text": "The default leading Avatar is a sample photo: replace it with a real avatar or an icon.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "section": "sources",
+        "quote": "The default leading Avatar is a sample photo, so replace it with a real avatar or an icon."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "Add a chevron only when a row opens another screen or menu.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item.showTrailing",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a chevron only when a row opens another screen or menu."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it applies to every row of every Dropdown Menu: the chevron “Shows the row leads somewhere further” (Anatomy), so a row that acts in place has none. It is the guide's advice, so it stays recommended."
+      }
+    },
+    {
+      "text": "A long menu scrolls inside the panel: set maxHeight.",
+      "strength": "recommended",
+      "target": "maxHeight",
+      "from": {
+        "section": "configuration",
+        "quote": "A long menu scrolls inside the panel."
+      }
+    },
+    {
+      "text": "Don't let a long menu grow without a max height: ten rows push the panel far down the screen.",
+      "strength": "discouraged",
+      "target": "maxHeight",
+      "from": {
+        "section": "doDont",
+        "quote": "Ten rows push the panel far down the screen."
+      }
+    },
+    {
+      "text": "The screen marks the current row as selected (selected on its DropdownMenu.Item).",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item.selected",
+      "from": {
+        "section": "states",
+        "quote": "The screen marks the current row as selected."
+      }
+    },
+    {
+      "text": "Don't mark every row selected: when every row is lilac, the highlight means nothing.",
+      "strength": "discouraged",
+      "target": "DropdownMenu.Item.selected",
+      "from": {
+        "section": "doDont",
+        "quote": "When every row is lilac, the highlight means nothing."
+      }
+    },
+    {
+      "text": "Disable an action that is temporarily unavailable (disabled on its row) rather than removing it.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "section": "states",
+        "quote": "Disable an action that is temporarily unavailable rather than removing it."
+      }
+    },
+    {
+      "text": "Labels stay on one line, ending in an ellipsis when they run out of room.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item",
+      "from": {
+        "section": "sizing",
+        "quote": "labels stay on one line, ending in an ellipsis when they run out of room."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write actions in sentence case, starting with a verb such as “Download” or a clear noun such as “Settings”.",
+        "strength": "recommended",
+        "target": "DropdownMenu.Item",
+        "from": {
+          "section": "content",
+          "quote": "Write actions in sentence case, starting with a verb such as “Download” or a clear noun such as “Settings”."
+        }
+      },
+      {
+        "text": "Keep labels short and skip end punctuation.",
+        "strength": "recommended",
+        "target": "DropdownMenu.Item",
+        "from": {
+          "section": "content",
+          "quote": "Keep them short and skip end punctuation."
+        }
+      }
+    ],
+    "good": [
+      "Download statement",
+      "Share statement",
+      "Edit details",
+      "Report a problem",
+      "Profile",
+      "Settings",
+      "Help"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Selected",
+      "when": "The current row, which the screen marks selected: a lilac fill.",
+      "from": {
+        "section": "states",
+        "quote": "A lilac fill marks the current row."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "An action that is temporarily unavailable (disabled): dimmed, skipped by keyboard focus, and not pressable.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed, skipped by keyboard focus, and not pressable."
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "Hover uses the same lilac as selected.",
+      "from": {
+        "section": "states",
+        "quote": "Hover uses the same lilac as selected."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the menu renders as a named menu with menu items; accessibilityLabel names it.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "evidence",
+        "quote": "They render as a named menu with menu items"
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "On the web the selected row is shown only visually: it is not announced as selected.",
+      "strength": "recommended",
+      "target": "DropdownMenu.Item.selected",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the selected row is shown only visually"
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5",
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "“only” holds on the web, where selected reaches only accessibilityState, which react-native-web 0.21 does not turn into aria-selected (the evidence's 8 October check); native screen readers were not checked."
+      }
+    },
+    {
+      "text": "On the web arrow keys do not move between rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "arrow keys do not move between rows."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Highlight only the current row",
+      "dont": "Mark every row selected",
+      "why": "When every row is lilac, the highlight means nothing.",
+      "from": {
+        "section": "doDont",
+        "quote": "One lilac row shows where people are."
+      }
+    },
+    {
+      "do": "Use it for actions",
+      "dont": "Use it to pick a form value",
+      "why": "Account names in a menu have no label, value, or error to go with them.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each row does something."
+      }
+    },
+    {
+      "do": "Scroll a long menu",
+      "dont": "Let a long menu grow",
+      "why": "Ten rows push the panel far down the screen.",
+      "from": {
+        "section": "doDont",
+        "quote": "A max height keeps the panel within the screen."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context, an overflow menu on a statement card, with the menu open under the card's More button. The rows are the guide's Actions with icons menu: each has an Icon and no chevron (showTrailing false), since each row acts in place. The More button's onPress stands for the screen opening the menu, and each row's onPress for running that action and closing the menu; Dropdown Menu only draws the panel.",
+      "jsx": "<Card>\n  <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\">\n    <Text>September statement</Text>\n    <IconButton iconName=\"ic_more_vertical\" accessibilityLabel=\"More actions\" onPress={() => {}} />\n  </HStack>\n  <DropdownMenu accessibilityLabel=\"Statement actions\" style={{ width: 256 }}>\n    <DropdownMenu.Item label=\"Download statement\" leading={<Icon iconName=\"ic_download\" />} showTrailing={false} onPress={() => {}} />\n    <DropdownMenu.Item label=\"Share statement\" leading={<Icon iconName=\"ic_share\" />} showTrailing={false} onPress={() => {}} />\n    <DropdownMenu.Item label=\"Edit details\" leading={<Icon iconName=\"ic_edit\" />} showTrailing={false} onPress={() => {}} />\n    <DropdownMenu.Item label=\"Report a problem\" leading={<Icon iconName=\"ic_info\" />} showTrailing={false} onPress={() => {}} />\n  </DropdownMenu>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the menu from the More button, places it under the button, and closes it after an action."
+      }
+    },
+    {
+      "purpose": "Places, from the guide's Content: an account menu whose rows are clear nouns and open other screens, so each keeps its chevron (showTrailing is true by default) and shows no leading visual. Each onPress stands for the screen opening that place.",
+      "jsx": "<DropdownMenu accessibilityLabel=\"Account menu\" style={{ width: 256 }}>\n  <DropdownMenu.Item label=\"Profile\" showLeading={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Settings\" showLeading={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Help\" showLeading={false} onPress={() => {}} />\n</DropdownMenu>",
+      "from": {
+        "section": "content",
+        "quote": "Write actions in sentence case, starting with a verb such as “Download” or a clear noun such as “Settings”."
+      }
+    },
+    {
+      "purpose": "A scrolling menu, from the guide's Configuration: ten labels-only rows (“Action 1” to “Action 10” stand for real actions) with no chevrons, and maxHeight 180, so the menu scrolls inside the panel instead of growing.",
+      "jsx": "<DropdownMenu accessibilityLabel=\"Actions\" maxHeight={180} style={{ width: 256 }}>\n  <DropdownMenu.Item label=\"Action 1\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 2\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 3\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 4\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 5\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 6\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 7\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 8\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 9\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 10\" showLeading={false} showTrailing={false} onPress={() => {}} />\n</DropdownMenu>",
+      "from": {
+        "section": "configuration",
+        "quote": "A long menu scrolls inside the panel."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "DropdownMenu.Item.selected",
+      "create": true,
+      "type": "boolean",
+      "description": "On DropdownMenu.Item: marks the current row. On the web it reaches only accessibilityState, which react-native-web 0.21 does not turn into aria-selected (the 8 October check read this from the installed source; not browser-checked).",
+      "quote": "an item passes `selected` only through `accessibilityState`, which react-native-web 0.21 does not turn into `aria-selected`",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "DropdownMenu.Item.showTrailing",
+      "create": true,
+      "type": "boolean",
+      "default": true,
+      "description": "On DropdownMenu.Item: shows the default trailing chevron (ic_chevron_right) when trailing is not given; true by default.",
+      "quote": "`showTrailing` (default true: `ic_chevron_right`, Neutral)",
+      "checkedOn": "2026-09-28",
+      "checkedVersion": "0.1.77"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "On the web the selected row is shown only visually.",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the selected row is shown only visually"
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "On the web arrow keys do not move between rows.",
+      "from": {
+        "section": "sources",
+        "quote": "arrow keys do not move between rows."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ]
+}

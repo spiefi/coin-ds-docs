@@ -1,0 +1,334 @@
+{
+  "slug": "allocationcomparisonchart",
+  "label": "Allocation Comparison Chart",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/allocationcomparisonchart.guide.tsx",
+    "src/AllocationComparisonChartGuide.tsx"
+  ],
+  "evidence": "docs/evidence/allocationcomparisonchart.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:49:46.339Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "bar chart",
+    "graph",
+    "portfolio"
+  ],
+  "title": "Allocation Comparison Chart",
+  "summary": "Compare category amounts with a supplied reference.",
+  "corePrinciple": "Use one shared scale so comparison stays honest.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4976-1080",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-allocationcomparisonchart--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "Current values and references share one visual scale",
+      "description": "The chart combines a current pillar, optional baseline overlay, legend, marker, and category label. The shared scale lets people compare categories directly.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Legend",
+        "Current and Recommended explain the two readings when a baseline exists.",
+        "Current pillar",
+        "The main bar height encodes each supplied value.",
+        "Baseline overlay",
+        "A supplied recommendation overlays the same category from the bottom.",
+        "Marker",
+        "Keep the dashed callout focused on the first reference unless another marker is needed.",
+        "Category label",
+        "Use short distinct names that stay readable below the bars."
+      ],
+      "specimen": [
+        "Current",
+        "Recommended",
+        "65%",
+        "35%",
+        "Small & Mid",
+        "25%",
+        "Large",
+        "10%",
+        "Others"
+      ],
+      "anatomy": [
+        {
+          "part": "Legend",
+          "note": "Current and Recommended explain the two readings when a baseline exists."
+        },
+        {
+          "part": "Current pillar",
+          "note": "The main bar height encodes each supplied value."
+        },
+        {
+          "part": "Baseline overlay",
+          "note": "A supplied recommendation overlays the same category from the bottom."
+        },
+        {
+          "part": "Marker",
+          "note": "Keep the dashed callout focused on the first reference unless another marker is needed."
+        },
+        {
+          "part": "Category label",
+          "note": "Use short distinct names that stay readable below the bars."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Show the reference only when it answers a question",
+      "description": "Use the data, reference, marker, shared max, and any nonnegative bar-area height to establish a comparison that people can read.",
+      "blocks": [
+        "With reference",
+        "Compare current and recommended",
+        "Shared 0–100 scale",
+        "A recommended value appears only when the data includes a baseline.",
+        "Current only",
+        "Keep a simple distribution",
+        "Omit the reference when the page only needs current category amounts.",
+        "Plot height",
+        "Give the comparison enough room",
+        "The default bar area is 154px; choose any nonnegative numeric height when the host needs more or less room. Labels and legend add to the total chart height."
+      ],
+      "specimen": [
+        "Current",
+        "Recommended",
+        "65%",
+        "35%",
+        "Small & Mid",
+        "25%",
+        "Large",
+        "10%",
+        "Others"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Let the data decide whether comparison appears",
+      "description": "The chart has no selected or pressed state. Its meaningful visual difference is whether the supplied segments include a baseline and whether the marker is shown.",
+      "blocks": [
+        "Without reference",
+        "Shared 0–100 scale",
+        "Current bars stand on their own when there is no recommendation.",
+        "With reference",
+        "The legend and first marker explain the additional reading."
+      ],
+      "specimen": [
+        "Current",
+        "65%",
+        "Small & Mid",
+        "25%",
+        "Large",
+        "10%",
+        "Others",
+        "Recommended",
+        "35%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Keep bars and labels inside the same host",
+      "description": "The host supplies width, the chart owns the bar width token, and height sets the bar area. 154px is the default; narrow hosts need short category names and a shared scale.",
+      "blocks": [
+        "Shared 0–100 scale",
+        "Wide host",
+        "Use a consistent max when categories are compared across a summary.",
+        "Narrow host",
+        "Keep labels short enough to sit below their own bars."
+      ],
+      "specimen": [
+        "Current",
+        "Recommended",
+        "65%",
+        "35%",
+        "Small & Mid",
+        "25%",
+        "Large",
+        "10%",
+        "Others"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name categories and use one shared scale",
+      "description": "Category labels carry meaning below the bar. The legend and values should use the same unit and comparison frame.",
+      "blocks": [
+        "01",
+        "Use meaningful categories",
+        "Short, distinct labels help people map each value to the right category.",
+        "Shared 0–100 scale",
+        "02",
+        "Explain the reference",
+        "Keep the recommended legend when a baseline changes the decision.",
+        "03",
+        "Keep units consistent",
+        "Percentages, amounts, or another unit should share one max and format."
+      ],
+      "specimen": [
+        "Current",
+        "Recommended",
+        "65%",
+        "35%",
+        "Small & Mid",
+        "25%",
+        "Large",
+        "10%",
+        "Others"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Place the comparison beside its summary",
+      "description": "A Card can provide the portfolio label and explanation while the chart owns the category comparison.",
+      "blocks": [
+        "Use the chart beside a summary that explains what the categories mean."
+      ],
+      "specimen": [
+        "Portfolio allocation",
+        "Current mix compared with the recommended reference",
+        "Current",
+        "Recommended",
+        "65%",
+        "35%",
+        "Small & Mid",
+        "25%",
+        "Large",
+        "10%",
+        "Others",
+        "Shared 0–100 scale"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make the reference and scale easy to trust",
+      "description": "The visual pairs use real chart data and show the consequence of changing the comparison frame.",
+      "blocks": [
+        "Do",
+        "Shared 0–100 scale",
+        "Use one shared 100 scale",
+        "A fixed percentage frame makes category heights comparable.",
+        "Don’t",
+        "Automatic scale from supplied values",
+        "Autoscale each chart",
+        "Separate automatic scales make the same visual height represent different amounts.",
+        "Keep the reference legend",
+        "Current and Recommended tell people what the overlay means.",
+        "Hide the explanation",
+        "Without the legend, the second reading becomes ambiguous.",
+        "Use short distinct labels",
+        "Names such as Small & Mid, Large, and Others stay readable.",
+        "Crowd the categories",
+        "Long repeated labels compete with the values and crowd a narrow host."
+      ],
+      "specimen": [
+        "Current",
+        "Recommended",
+        "65%",
+        "35%",
+        "Small & Mid",
+        "25%",
+        "Large",
+        "10%",
+        "Others",
+        "90%",
+        "7%",
+        "3%",
+        "Small and mid-capital holdings",
+        "Large-capital holdings",
+        "Other diversified holdings"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Use one shared 100 scale",
+            "caption": "A fixed percentage frame makes category heights comparable.",
+            "specimen": "Current · Recommended · 65% · 35% · Small & Mid · 25% · Large · 10% · Others · Shared 0–100 scale"
+          },
+          "dont": {
+            "title": "Autoscale each chart",
+            "caption": "Separate automatic scales make the same visual height represent different amounts.",
+            "specimen": "Current · Recommended · 65% · 35% · Small & Mid · 25% · Large · 10% · Others · Automatic scale from supplied values · Current · Recommended · 90% · 35% · Small & Mid · 7% · Large · 3% · Others · Automatic scale from supplied values"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the reference legend",
+            "caption": "Current and Recommended tell people what the overlay means.",
+            "specimen": "Current · Recommended · 65% · 35% · Small & Mid · 25% · Large · 10% · Others · Shared 0–100 scale"
+          },
+          "dont": {
+            "title": "Hide the explanation",
+            "caption": "Without the legend, the second reading becomes ambiguous.",
+            "specimen": "65% · 35% · Small & Mid · 25% · Large · 10% · Others · Shared 0–100 scale"
+          }
+        },
+        {
+          "do": {
+            "title": "Use short distinct labels",
+            "caption": "Names such as Small & Mid, Large, and Others stay readable.",
+            "specimen": "Current · Recommended · 65% · 35% · Small & Mid · 25% · Large · 10% · Others · Shared 0–100 scale"
+          },
+          "dont": {
+            "title": "Crowd the categories",
+            "caption": "Long repeated labels compete with the values and crowd a narrow host.",
+            "specimen": "Current · Recommended · 65% · 35% · Small and mid-capital holdings · 25% · Large-capital holdings · 10% · Other diversified holdings · Shared 0–100 scale"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Grounded in the public comparison contract",
+      "description": "This guide uses the published AllocationComparisonChart API, the inspected Figma master, and canonical Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Allocation Comparison Chart · node 4976:1080",
+        "02",
+        "Canonical Storybook",
+        "Allocation, current-only, markers, and sizing examples",
+        "Open default story",
+        "Open no-baseline story",
+        "Checked 22 September 2026",
+        "Examples use public AllocationComparisonChart and AllocationSegment exports from jfs-components 0.1.60. Bars and supplied baselines share one max; when max is omitted it is derived from the supplied values. The package source caps each baseline overlay with min(baselineHeight, barHeight), so a recommendation above the current value is visibly clipped at the current pillar; the guide records that runtime behavior and does not teach it as an independently scaled bar. No custom segment colors are used.",
+        "AllocationComparisonChart",
+        "AllocationSegment",
+        "jfs-components",
+        "min(baselineHeight, barHeight)"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

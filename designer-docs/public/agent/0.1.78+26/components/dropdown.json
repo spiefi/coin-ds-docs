@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 1,
+  "id": "Dropdown",
+  "slug": "dropdown",
+  "category": "input",
+  "tags": [
+    "popover",
+    "menu",
+    "flyout",
+    "options list",
+    "panel"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "889444ed7986f76abf2b14ab41500e4443c326ce",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": [
+      {
+        "field": "/facts/props/8",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/9",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/10",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/placementAdvice/4",
+        "reason": "\"Items are 43 px tall\" is Figma's number: the guide's own size marks read 240 × 44 for one item, and in the installed Dropdown.tsx (0.1.78-dbe0e02, read from source) safeTextLineHeight raises the label line to 20 px, so an item is 44 px. Guide fix #523. Added by Claude Code in the overnight run agentpack-batch6, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Dropdown as the floating panel for a short list of choices or actions that opens from a button or field.",
+  "useWhen": [
+    {
+      "text": "As the floating panel for a short list of choices or actions that opens from a button or field.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Dropdown as the floating panel for a short list of choices or actions that opens from a button or field."
+      }
+    },
+    {
+      "text": "For example, a menu from an overflow (More) button, with actions such as Download statement, Share statement and Report a problem.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A menu from an overflow button"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A form field that opens a list of options: for form fields, DropdownInput opens, closes and places the Dropdown.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sources",
+        "quote": "opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields."
+      },
+      "useInstead": "DropdownInput"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Panel",
+      "holds": "Rounded surface with a soft shadow that floats over content; it holds the items, each a DropdownItem (children).",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Rounded surface with a soft shadow that floats over content."
+      }
+    },
+    {
+      "part": "Item",
+      "holds": "One choice or action in one line: a DropdownItem with a label and an optional leading icon.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One choice or action in one line."
+      }
+    },
+    {
+      "part": "Selected item",
+      "holds": "Grey fill and a check mark the current choice (selected on its DropdownItem).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey fill and a check mark the current choice."
+      }
+    },
+    {
+      "part": "Check",
+      "holds": "Appears on the selected item unless it has its own trailing content (trailing on its DropdownItem).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Appears on the selected item unless it has its own trailing content."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Keep it a short, scannable list; the screen decides when it opens and where it sits.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "A short, scannable list; the screen decides when it opens and where it sits."
+      }
+    },
+    {
+      "text": "Dropdown draws the panel and its items; opening, closing and placing it are handled by the screen, or by DropdownInput for form fields.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Dropdown draws the panel and its items; opening, closing, and placing it are handled by the screen, or by Dropdown Input for form fields."
+      }
+    },
+    {
+      "text": "For a menu from an overflow button, the screen opens the Dropdown when the More button is pressed, places it under the button, and closes it after a choice; Dropdown itself only draws the panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the Dropdown when the More button is pressed, places it under the button, and closes it after a choice. Dropdown only draws the panel."
+      }
+    },
+    {
+      "text": "The screen sets the panel's width (in the guide, a width on the Dropdown's style: 240, or 220 for the menu); the items fill it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The screen sets the width"
+      }
+    },
+    {
+      "text": "Items are 43 px tall and fill the panel’s width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Items are 43 px tall and fill the panel’s width."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Each item is a DropdownItem: it takes a label and an optional leading icon.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Items take a label and an optional leading icon."
+      },
+      "target": "DropdownItem.label"
+    },
+    {
+      "text": "A list of labels alone is the simplest list, for choices people know by name.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The simplest list, for choices people know by name."
+      },
+      "target": "DropdownItem.label"
+    },
+    {
+      "text": "Add a leading icon (an Icon in leading) when it helps people scan similar items.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Icons help people scan similar items."
+      },
+      "target": "DropdownItem.leading"
+    },
+    {
+      "text": "Labels stay on one line and end in an ellipsis when they run out of room.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Labels stay on one line and end in an ellipsis when they run out of room."
+      },
+      "target": "DropdownItem.label"
+    },
+    {
+      "text": "Set a maximum height (maxHeight) when the list is long so the panel scrolls instead of growing.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Set a maximum height when the list is long so the panel scrolls instead of growing."
+      },
+      "target": "maxHeight"
+    },
+    {
+      "text": "With maxHeight, the panel stays the same height and the list scrolls inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The panel stays the same height and the list scrolls."
+      },
+      "target": "maxHeight"
+    },
+    {
+      "text": "Don't let a long list grow without a max height: in the guide, twelve items push the panel far past the screen.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Twelve items push the panel far past the screen."
+      },
+      "target": "maxHeight"
+    },
+    {
+      "text": "Mark the current choice as selected (selected on its DropdownItem): it gets a grey fill and a check.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Mark the current choice as selected"
+      },
+      "target": "DropdownItem.selected"
+    },
+    {
+      "text": "In a single-choice list, mark one current choice: two checks make the current choice unclear.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Two checks make the current choice unclear."
+      },
+      "target": "DropdownItem.selected"
+    },
+    {
+      "text": "Dim options that are temporarily unavailable (disabled on their DropdownItem): they cannot be pressed or focused.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "dim options that are temporarily unavailable."
+      },
+      "target": "DropdownItem.disabled"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Start each label with the key word: put the word that tells items apart first.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Put the word that tells items apart first"
+        },
+        "target": "DropdownItem.label"
+      },
+      {
+        "text": "Keep labels to a few words, so every label reads in full.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "keep labels to a few words"
+        },
+        "target": "DropdownItem.label"
+      },
+      {
+        "text": "Use the same form for every item, such as all actions (Download statement, Share statement) or all choices (Savings account, Checking account).",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "use the same form for every item."
+        },
+        "target": "DropdownItem.label"
+      },
+      {
+        "text": "Don't write long labels: they are cut off, hiding what tells them apart.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Long labels are cut off, hiding what tells them apart."
+        },
+        "target": "DropdownItem.label"
+      }
+    ],
+    "good": [
+      "Download statement",
+      "Share statement",
+      "Report a problem",
+      "Savings account",
+      "Checking account",
+      "Brokerage account",
+      "Recurring deposit"
+    ],
+    "bad": [
+      "Savings account for household expenses",
+      "Savings account for holiday travel",
+      "Savings account for emergencies"
+    ]
+  },
+  "states": [
+    {
+      "state": "Selected",
+      "when": "The current choice (selected): grey fill plus a check.",
+      "from": {
+        "section": "states",
+        "quote": "Grey fill plus a check."
+      }
+    },
+    {
+      "state": "Disabled item",
+      "when": "An option that is temporarily unavailable (disabled): the item is dimmed and cannot be pressed or focused.",
+      "from": {
+        "section": "states",
+        "quote": "The unavailable item is dimmed and cannot be pressed or focused."
+      }
+    },
+    {
+      "state": "Hover and pressed",
+      "when": "Hover and press use the same grey as selected.",
+      "from": {
+        "section": "states",
+        "quote": "Hover and press use the same grey as selected."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the panel is a listbox of options, and the selected item is announced as selected.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the panel is a listbox of options and the selected item is announced as selected."
+      }
+    },
+    {
+      "text": "On its own, Tab moves from option to option, skipping disabled ones, and Enter or Space picks one; arrow keys don’t move between options.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On its own, Tab moves from option to option, skipping disabled ones, and Enter or Space picks one; arrow keys don’t move between options."
+      }
+    },
+    {
+      "text": "Inside DropdownInput, the field handles the keyboard.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Inside Dropdown Input, the field handles the keyboard."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the panel (the listbox); the guide names each list, such as “Accounts” or “Statement actions”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/4"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Mark the one current choice",
+      "dont": "Mark several choices in a single-choice list",
+      "why": "Two checks make the current choice unclear.",
+      "from": {
+        "section": "doDont",
+        "quote": "One check shows what is chosen."
+      }
+    },
+    {
+      "do": "Keep labels short",
+      "dont": "Write long labels",
+      "why": "Long labels are cut off, hiding what tells them apart.",
+      "from": {
+        "section": "doDont",
+        "quote": "Every label reads in full."
+      }
+    },
+    {
+      "do": "Scroll a long list",
+      "dont": "Let a long list grow",
+      "why": "Twelve items push the panel far past the screen.",
+      "from": {
+        "section": "doDont",
+        "quote": "A max height keeps the panel compact."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context, shown open: a menu from an overflow button on a statement row. The screen opens the Dropdown when the More button is pressed, places it under the button, and closes it after a choice; Dropdown only draws the panel. Each item's onPress runs its action.",
+      "jsx": "<Card>\n  <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\">\n    <Text>September statement</Text>\n    <IconButton iconName=\"ic_more_vertical\" accessibilityLabel=\"More actions\" onPress={() => {}} />\n  </HStack>\n  <Dropdown accessibilityLabel=\"Statement actions\" style={{ width: 220 }}>\n    <DropdownItem label=\"Download statement\" onPress={() => {}} />\n    <DropdownItem label=\"Share statement\" onPress={() => {}} />\n    <DropdownItem label=\"Report a problem\" onPress={() => {}} />\n  </Dropdown>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the Dropdown when the More button is pressed, places it under the button, and closes it after a choice."
+      }
+    },
+    {
+      "purpose": "Choices: four accounts whose labels start with the word that tells them apart, with the one current choice marked selected (grey fill and a check). Pressing an item lets the screen change the choice.",
+      "jsx": "<Dropdown accessibilityLabel=\"Accounts\" style={{ width: 240 }}>\n  <DropdownItem label=\"Savings account\" selected onPress={() => {}} />\n  <DropdownItem label=\"Checking account\" onPress={() => {}} />\n  <DropdownItem label=\"Brokerage account\" onPress={() => {}} />\n  <DropdownItem label=\"Recurring deposit\" onPress={() => {}} />\n</Dropdown>",
+      "from": {
+        "section": "doDont",
+        "quote": "One check shows what is chosen."
+      }
+    },
+    {
+      "purpose": "A scrolling list: twelve options with a maximum height (maxHeight 180), so the panel stays the same height and the list scrolls instead of growing.",
+      "jsx": "<Dropdown accessibilityLabel=\"Options\" maxHeight={180} style={{ width: 240 }}>\n  <DropdownItem label=\"Option 1\" onPress={() => {}} />\n  <DropdownItem label=\"Option 2\" onPress={() => {}} />\n  <DropdownItem label=\"Option 3\" onPress={() => {}} />\n  <DropdownItem label=\"Option 4\" onPress={() => {}} />\n  <DropdownItem label=\"Option 5\" onPress={() => {}} />\n  <DropdownItem label=\"Option 6\" onPress={() => {}} />\n  <DropdownItem label=\"Option 7\" onPress={() => {}} />\n  <DropdownItem label=\"Option 8\" onPress={() => {}} />\n  <DropdownItem label=\"Option 9\" onPress={() => {}} />\n  <DropdownItem label=\"Option 10\" onPress={() => {}} />\n  <DropdownItem label=\"Option 11\" onPress={() => {}} />\n  <DropdownItem label=\"Option 12\" onPress={() => {}} />\n</Dropdown>",
+      "from": {
+        "section": "configuration",
+        "quote": "The panel stays the same height and the list scrolls."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Dropdown items, typically `<DropdownItem />` children."
+      },
+      {
+        "name": "maxHeight",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Maximum height of the popup before its content becomes scrollable. Defaults to no limit."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes for design token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the popup container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the menu surface."
+      },
+      {
+        "name": "nativeID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "DOM id so the open menu can be focused and referenced."
+      },
+      {
+        "name": "focusable",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "When true on web, the listbox is a tab stop (tabIndex 0) so a modal focus trap lands on the menu instead of a backdrop. Default false, from the component source."
+      },
+      {
+        "name": "activeDescendantId",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Id of the keyboard-highlighted option (`aria-activedescendant`)."
+      },
+      {
+        "name": "DropdownItem.label",
+        "source": "evidence",
+        "type": "string",
+        "description": "On DropdownItem: the item's text, on one line; a long label is cut with an ellipsis.",
+        "checkedOn": "2026-09-28"
+      },
+      {
+        "name": "DropdownItem.leading",
+        "source": "evidence",
+        "type": "React.ReactNode",
+        "description": "On DropdownItem: content before the label, such as an Icon; a registry icon shows at 18 px in the brand gold when no colour is given.",
+        "checkedOn": "2026-09-28"
+      },
+      {
+        "name": "DropdownItem.trailing",
+        "source": "evidence",
+        "type": "React.ReactNode",
+        "description": "On DropdownItem: content after the label; when set, it replaces the selected item's check.",
+        "checkedOn": "2026-09-28"
+      },
+      {
+        "name": "DropdownItem.selected",
+        "source": "evidence",
+        "type": "boolean",
+        "description": "On DropdownItem: marks the current choice; on the web the option has aria-selected=true, so it is announced as selected.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "DropdownItem.disabled",
+        "source": "evidence",
+        "type": "boolean",
+        "description": "On DropdownItem: in a standalone Dropdown on the web, enabled options are tab stops (tabindex 0) and a disabled option leaves the tab order (tabindex -1).",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "DropdownItem.onPress",
+        "source": "evidence",
+        "type": "(value) => void",
+        "description": "On DropdownItem: the press handler. In a standalone Dropdown, Enter and Space each call it once (#209 fixed), so an action item runs once.",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Dropdown Item State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Selected"
+        ],
+        "description": "A token collection Dropdown reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Dropdown items, typically `<DropdownItem />` children.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "A standalone Dropdown has no arrow-key navigation: arrow keys don’t move between options (Tab, Enter and Space do). Inside DropdownInput the field handles the keyboard.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "text": "Hover and press use the same grey as selected, so a hovered item looks selected: there is no separate hover or pressed colour.",
+        "source": "evidence",
+        "checkedOn": "2026-10-01"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=dropdown",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3087-4266",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-dropdown--docs"
+  }
+}

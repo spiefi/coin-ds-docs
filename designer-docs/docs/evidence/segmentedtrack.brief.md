@@ -3,7 +3,7 @@
 slug: segmentedtrack · label: Segmented Track · public API: SegmentedTrack, MetricLegendItem (+ Card, VStack, Text for composition)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4176-39960 · storybook: docsUrl('segmentedtrack') · stories: Default=components-segmentedtrack--default, Proportional segments=components-segmentedtrack--proportional-segments, Senary=components-segmentedtrack--themed-senary, Many segments=components-segmentedtrack--many-segments, In Range Track=components-rangetrack--default
 checked: 13 October 2026 · jfs-components 0.1.78 (12 October build, mirror tag v0.1.78-c1fa197, Biscuit's main c1fa197)
-icon: a pill split into three parts — `<rect x="1.5" y="6" width="15" height="6" rx="3" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M9 6v6M13 6v6" stroke="currentColor" strokeWidth="1.5" />`
+icon: a rounded bar split into three parts — `<rect x="1.5" y="6" width="15" height="6" rx="3" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M9 6v6M13 6v6" stroke="currentColor" strokeWidth="1.5" />`
 keywords: stacked bar, allocation bar, share chart, portfolio mix
 
 Setup: `const SENARY = { 'Color Mode': 'Light', 'Appearance / DataViz': 'Senary' } as Modes` (the Figma look); `const PRIMARY = { 'Color Mode': 'Light' } as Modes` (the code default). Tracks use SENARY unless an example says otherwise.
@@ -17,7 +17,7 @@ principle: Parts of one whole, sized by their share and named in a legend.
 playground: `.preview-stage` with a Panel holding Track(mix, modes) and Legend(mix, modes). Controls: Segment "Parts" ['3 parts', '5 parts'] → MIX3 or MIX5; Segment "Appearance" ['Senary', 'Primary', 'Quaternary'] → `'Appearance / DataViz'` (Primary = PRIMARY; Quaternary = `{ 'Color Mode': 'Light', 'Appearance / DataViz': 'Quaternary' }`), applied to the track and the legend. Readout title "Spoken name", value = the track’s `accessibilityLabel`; note: "Figma and code both default to Senary gold." Stage label: "Live Coin Segmented Track".
 
 ## Anatomy
-header: Anatomy · title: A pill split by share · description: The track is a 24 px pill. Each slice’s width is its share of the total, and the colours step from strong to light.
+header: Anatomy · title: A rounded track split by share · description: The track is a 24 px bar with fully rounded ends. Each slice’s width is its share of the total, and the colours step from strong to light.
 specimen: Track(MIX3, SENARY); specimenWidth 300
 parts:
 1. Track — Rounds the ends and holds the slices with no gaps. — target: `[role="group"]` — side: left

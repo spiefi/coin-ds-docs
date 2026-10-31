@@ -1,0 +1,335 @@
+{
+  "slug": "numpad",
+  "label": "Numpad",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/numpad.guide.tsx"
+  ],
+  "evidence": "docs/evidence/numpad.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:46:35.191Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "keypad",
+    "number pad",
+    "keyboard",
+    "PIN",
+    "OTP",
+    "passcode"
+  ],
+  "title": "Numpad",
+  "summary": "Use the Numpad to enter a PIN, a one-time code, or an amount on screen, without the system keyboard.",
+  "corePrinciple": "Secure by default. Keep the digits shuffled whenever the number is sensitive.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2054-964",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-numpad--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A grid of twelve keys",
+      "description": "Four rows of three keys: digits, an optional decimal point, and backspace. The keys have no fill; they dim while pressed.",
+      "blocks": [
+        "12",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Digit key",
+        "A large digit; each key takes an equal share of the row.",
+        "Decimal point",
+        "Optional; hide it for whole numbers such as a PIN.",
+        "Backspace",
+        "Deletes the last character; always at the bottom right.",
+        "Key gap",
+        "12 px between keys, across and down.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        ".",
+        "0"
+      ],
+      "anatomy": [
+        {
+          "part": "Digit key",
+          "note": "A large digit; each key takes an equal share of the row."
+        },
+        {
+          "part": "Decimal point",
+          "note": "Optional; hide it for whole numbers such as a PIN."
+        },
+        {
+          "part": "Backspace",
+          "note": "Deletes the last character; always at the bottom right."
+        },
+        {
+          "part": "Key gap",
+          "note": "12 px between keys, across and down."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Shuffle and the decimal point",
+      "description": "Shuffle is on by default and protects sensitive numbers. Turn it off only for numbers that are not secret. Hide the decimal point when only whole numbers are valid.",
+      "blocks": [
+        "Shuffled",
+        "The default. Digits move each time, against shoulder-surfing; for PINs, codes, and amounts.",
+        "In order",
+        "The familiar 1–9 layout, for numbers that are not secret, such as a quantity.",
+        "Without decimal",
+        "For whole numbers such as a PIN; the bottom-left key is left empty."
+      ],
+      "specimen": [
+        "1",
+        "9",
+        "2",
+        "7",
+        "0",
+        "8",
+        "4",
+        "5",
+        "3",
+        ".",
+        "6"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Shuffled",
+          "description": "The default. Digits move each time, against shoulder-surfing; for PINs, codes, and amounts."
+        },
+        {
+          "title": "In order",
+          "description": "The familiar 1–9 layout, for numbers that are not secret, such as a quantity."
+        },
+        {
+          "title": "Without decimal",
+          "description": "For whole numbers such as a PIN; the bottom-left key is left empty."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Keys only dim when pressed",
+      "description": "Numpad has one interactive state: a key dims to 40% while it is pressed. There are no disabled or selected keys; the screen decides what a key press does.",
+      "blocks": [
+        "Pressed",
+        "Press any key to see it dim."
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        ".",
+        "0"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Pressed",
+          "description": "Press any key to see it dim."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "The parent sets the width",
+      "description": "Keys share the width equally and are at least 46 px tall, with 12 px gaps. At 318 px wide each key is 98 × 46 px. Give it the full width of the screen.",
+      "blocks": [
+        "318 × 220",
+        "98 × 46"
+      ],
+      "specimen": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        ".",
+        "0"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Show what’s been typed",
+      "description": "The Numpad has no display. Put the value above it: the formatted amount for money, or masked dots for a PIN, never the PIN itself.",
+      "blocks": [
+        "Amount",
+        "PIN"
+      ],
+      "specimen": [
+        "₹",
+        "1250",
+        "0",
+        "4",
+        "1",
+        "8",
+        "3",
+        "9",
+        "2",
+        "7",
+        "6",
+        ".",
+        "5",
+        "● ● ○ ○"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Amount",
+          "description": ""
+        },
+        {
+          "title": "PIN",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Adding money to a wallet",
+      "description": "The screen keeps the amount, updates the value above the pad on each key press, and enables the button once there is an amount. The Numpad only reports keys.",
+      "blocks": [
+        "No amount yet"
+      ],
+      "specimen": [
+        "Add money",
+        "₹",
+        "0",
+        "1",
+        "6",
+        "2",
+        "4",
+        "9",
+        "5",
+        "7",
+        "8",
+        ".",
+        "3",
+        "Enter an amount"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep sensitive entry safe",
+      "description": "Each pair shows a pad that protects people versus one that exposes them.",
+      "blocks": [
+        "Do",
+        "Shuffle for a PIN",
+        "Changing positions stop onlookers learning the PIN from finger movements.",
+        "Don’t",
+        "Use a fixed layout for a PIN",
+        "A fixed 1–9 layout lets onlookers read the PIN from finger positions.",
+        "Hide the decimal for a PIN",
+        "Only digits can be typed.",
+        "Offer a decimal for a PIN",
+        "A decimal key invites an entry that can never be valid."
+      ],
+      "specimen": [
+        "● ● ○ ○",
+        "2",
+        "6",
+        "3",
+        "5",
+        "7",
+        "8",
+        "1",
+        "4",
+        "9",
+        "0",
+        "."
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Shuffle for a PIN",
+            "caption": "Changing positions stop onlookers learning the PIN from finger movements.",
+            "specimen": "● ● ○ ○ · 2 · 6 · 3 · 5 · 7 · 8 · 1 · 4 · 9 · 0"
+          },
+          "dont": {
+            "title": "Use a fixed layout for a PIN",
+            "caption": "A fixed 1–9 layout lets onlookers read the PIN from finger positions.",
+            "specimen": "● ● ○ ○ · 1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · 9 · 0"
+          }
+        },
+        {
+          "do": {
+            "title": "Hide the decimal for a PIN",
+            "caption": "Only digits can be typed.",
+            "specimen": "4 · 5 · 8 · 1 · 3 · 9 · 0 · 6 · 7 · 2"
+          },
+          "dont": {
+            "title": "Offer a decimal for a PIN",
+            "caption": "A decimal key invites an entry that can never be valid.",
+            "specimen": "7 · 6 · 2 · 1 · 5 · 9 · 3 · 0 · 8 · . · 4"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Numpad contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Unshuffled",
+        "Without decimal",
+        "Bottom fixed",
+        "Checked 29 September 2026",
+        "Installed jfs-components is 0.1.77 from the team’s private package repository. Figma shows the keys in 1–9 order with a “←” glyph; the package shuffles the digits by default and draws a backspace icon. The screen keeps the value, shows it above the pad, and places the pad; the Numpad has no display, masking, or length limit.",
+        "jfs-components",
+        "0.1.77"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

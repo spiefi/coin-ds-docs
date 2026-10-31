@@ -21,19 +21,19 @@ playground: `.preview-stage` › Panel(`loading={loading}` `reducedMotion={…}`
 header: Anatomy · title: Grey blocks with a moving highlight · description: Each placeholder is a light grey block whose kind sets its corners. While the group loads, a white band sweeps across every block, one after another.
 specimen: `<Anatomy surface="white">` › `<SkeletonGroup loading><VStack testID="sk-anatomy" modes={LIGHT}>` Skeletons: `kind="text"` 220 × 20, `kind="image"` 220 × 120, `kind="badge"` 70 × 20, `kind="other"` 48 × 48 `</VStack></SkeletonGroup>`
 parts:
-1. Text bar — kind text: a full pill, one per line of text. — target: child 1 — side: top
+1. Text bar — kind text: a bar with fully rounded ends, one per line of text. — target: child 1 — side: top
 2. Image block — kind image: 10 px corners, as big as the image it replaces. — target: child 2 — side: left
 3. Shimmer — A white band sweeps across every block each 1.5 s. — target: child 2 — side: right (`at: 0.3`, so its leader doesn't cross the text bar)
 4. Badge block — kind badge: 4 px corners, like a badge. — target: child 3 — side: right
-5. Circle or pill — kind other, the default: a circle when square, else a pill. — target: child 4 — side: left
+5. Circle or rounded bar — kind other, the default: a circle when square, else a rounded bar. — target: child 4 — side: left
 
 ## Configuration
 header: Configuration · title: Four kinds, or components that draw their own · description: A Skeleton's kind sets only its corners; its width and height are yours. Inside a group, Coin components such as Text, Avatar, Badge, and Button draw their own placeholder at their own size, so you rarely place a Skeleton by hand.
 Grid `coin-new-example-grid`, each an ExampleCard › Panel(`loading`, …):
-- Text — Skeletons `kind="text"` `width="80%"` `height={16}` and `width="60%"` `height={14}` — lesson: Full pills, one per line; match each line's height.
+- Text — Skeletons `kind="text"` `width="80%"` `height={16}` and `width="60%"` `height={14}` — lesson: Rounded bars, one per line; match each line's height.
 - Image — `kind="image"` `width="100%"` `height={120}` — lesson: 10 px corners, as big as the image it stands in for.
 - Badge — `kind="badge"` 56 × 20 — lesson: 4 px corners, the size of a badge.
-- Circle or pill — in `<div className="coin-new-row">`: `kind="other"` 48 × 48 and 120 × 40 — lesson: The default kind: square sizes make a circle, wide ones a pill, for avatars and buttons.
+- Circle or rounded bar — in `<div className="coin-new-row">`: `kind="other"` 48 × 48 and 120 × 40 — lesson: The default kind: square sizes make a circle, wide ones a rounded bar, for avatars and buttons.
 - Coin components — Row(Reliance Industries …) — lesson: Avatar, Text, and Badge draw their own placeholders, sized from their own tokens.
 - On a fullscreen modal — not a Panel: `<ScreenFrame surface="dark">` › `<SkeletonGroup loading><div className="coin-new-row">` `kind="other"` 48 × 48 and `kind="text"` 160 × 16, each with `modes={{ ...LIGHT, context5: 'Fullscreen Modal' } as Modes}` — lesson: Fullscreen Modal gives its content this context, which turns the blocks deep brown for dark media.
 

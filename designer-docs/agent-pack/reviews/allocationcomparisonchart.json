@@ -1,0 +1,10 @@
+{
+  "dismissed": [
+    {
+      "field": "/facts/gaps/0",
+      "reason": "misreads-source: The evidence file records the clipping (\"caps overlayHeight at min(baselineHeight, barHeight)\") as a runtime limitation, but it never mentions a bug number. \"Component Bug #550\" is unsupported.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r25, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The gap’s claim rests on its cited evidence sentence, which says the chart caps the overlay at min(baselineHeight, barHeight) so a baseline above the current pillar is clipped (checked on 0.1.60, which the trace check already flags), and AllocationComparisonChart.tsx is the same blob (7b9c364) from 0.1.60 to the installed dbe0e02 (lines 196–198 still take the minimum). The ticket number is not a reading of the evidence: the flow says a Component Bug the run files is listed in the entry’s gaps, and the run filed this one as #550, as other entries name theirs (Checkbox’s gap names #535)."
+    }
+  ]
+}

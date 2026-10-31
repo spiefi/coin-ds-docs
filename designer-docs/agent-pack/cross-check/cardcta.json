@@ -1,0 +1,21 @@
+{
+  "slug": "cardcta",
+  "entryHash": "40b34afae11f0123ab73ec8fbd158638e2c5e88d5354506be64009cb994d35a2",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "checkedAt": "2026-10-31T03:48:16Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/10",
+      "reason": "misreads-source: The guide says the opposite: \"nothing cuts the title or body short\" (anatomy, sizing), \"the card doesn’t cut either short\" (content), and the evidence says \"Nothing clamps the title or body\" and \"No card-level ... clamping\" on the checked 0.1.78 build. Stating that the title clamps to one line and the body to three, with disableTruncation as the way out, contradicts the guide."
+    },
+    {
+      "field": "/configuration/21",
+      "reason": "misreads-source: The guide's sources section says \"ratingMediaAlign doesn’t move the default badge\", and the evidence says it \"doesn't move the default Badge (Badge has its own alignSelf: flex-start)\" and was \"described only\". Saying it aligns the badge slot to center or start presents it as working."
+    }
+  ],
+  "notes": "Several type-derived items conflict with what the guide and evidence record for the checked build (0.1.78 at a116616, 19 October). /configuration/8, /configuration/9, /anatomy/5 and /anatomy/6 add badge and caption on cta, but the guide says \"the package’s cta shows an icon and no badge or caption\". /accessibility/0 and /accessibility/1 describe naming props, but the evidence says \"Capsule and Avatar are role=img with no name\". These types probably come from the newer dbe0e02 install, which changed CardCTA for #345. The evidence says that build's \"copy wasn't re-checked\" and \"waits for #345's own publish\". A human should decide which build the entry describes, then either re-check the guide against dbe0e02 or drop or qualify these items, including the two flagged above. Minor point: /content/good includes \"Your credit score rose\" and \"Save\" from configuration examples, not from the content section."
+}

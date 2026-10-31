@@ -1,0 +1,617 @@
+{
+  "slug": "circularrating",
+  "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r25, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/circularrating.guide.tsx, self-contained) and docs/evidence/circularrating.md at 622cd82 (the 17 October publish of #271 on a116616). 622cd82 is on origin/main, and both files read the same on main and docs-next. The guide's Sources note was checked on 17 October 2026 on 0.1.78-a116616 (Biscuit's main at a116616, which fixes #271), so items citing it carry 2026-10-17 and 0.1.78-a116616; the evidence's facts were updated on 13 October to 0.1.78-c1fa197 (the #252 fix) and re-checked on 17 October on a116616 for the nudge only, so items citing the evidence's Contract and Browser measurements carry 2026-10-13 and 0.1.78-c1fa197. All are the installed package version, so the trace check does not flag them. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). Blobs compared on GitHub (spiefi/coin-components) and with git hash-object in node_modules: CircularRating.tsx (b811bff) and CircularProgressBarDoted.tsx (b9b6584) are the same blobs at c1fa197, a116616, c7d3348 and dbe0e02 and in node_modules (636f3f5 had 4c3b415 and 325108a; their only change since is the #252 fix, edc36d0, 12 October); react-utils.ts (bd10632), figma-variables-resolver.ts (d03e77c), Coin Variables-variables-full.json (4545aec) and figma-modes.generated.ts (f6aa2f7) are the same from 636f3f5 to dbe0e02; Icon.tsx (50a809d) is unchanged since a116616. Nudge.tsx changed once since a116616 (9f8a3d2 to bfa6689, 02503ec, 23 October, the c8526ae build): closeAccessibilityLabel, development warnings, the title's line height and a 28 px close button; CircularRating's default nudge passes no title and shows no close, so nothing it renders changed. So nothing the 13 and 17 October checks read has changed. Every guide and evidence sentence quoted here was read against the installed source (token values through the package's own getVariableByName in lib/commonjs, Light): the defaults value 72, dotCount 24, label “Rating”, tierLabel “Doing great”, footerText “Updated on 1 March”, showFooterIcon and showNudge true, nudgeBody “Split this transaction into installments”, nudgeButtonLabel “Button” (CircularRating.tsx lines 152–175); the root is a View with alignItems flex-start, padding 10 and gap 32 (circularRating/padding, circularRating/gap; 121–126), carrying accessibilityLabel ?? “<label>. <score> out of 100. <tier>. <footer>” with no role (207–215); the ring wrapper is a literal 320 × 320 (127–130); the ring gets the modes without Context, and the nudge gets Context Nudge&Alert unless modes set one (184–192), as does a nudgeSlot (200–204); value is clamped to 0–100, NaN as 0 (206); showChevron is onTierPress != null (222); the footer row is 16 px tall, full width and centred, 12/16 text rgb(13, 13, 15) with a 16 px ic_info icon hidden from screen readers, and disableTruncation reaches only that text (131–148, 229–246); the default nudge is a Nudge type inline-compact, 312 px wide, with onPressButton only when onPressNudgeButton is set (248–261). In CircularProgressBarDoted.tsx: a dot is 6 + 2 × 6 = 18 px (143–145), on a radius of (320 − 18) / 2 = 151 (148), starting at −90°, so clockwise from 12 o'clock (72, 187); lit dots are none at 0 and ceil(value / 100 × dotCount) otherwise (139–141), so 36 lights 9, 72 lights 18 and 12 dots at 72 light 9; dots overlap past 2π × 151 / 18 ≈ 53; lit dots read progressDot/bg from the modes (154–157): Primary rgb(206, 161, 90), Secondary rgb(93, 0, 181), Neutral rgb(48, 51, 56), Tertiary rgb(2, 107, 154); the track is rgb(235, 235, 237) in every mode read; label 12/15.6 weight 400, score 56 weight 900 (its 56 px line raised to 68 by safeTextLineHeight), tier 16/20.8 weight 700, all rgb(8, 13, 26) (165–181, 251–276); the score is String(Math.round(value)) (278); the progress bar is an empty overlay with role progressbar, the name accessibilityLabel ?? “<label>. <score> out of 100. <tier>”, and aria-valuenow, -valuemin 0 and -valuemax 100 on the web, never disabled (279–293, 355–367); with onTierPress the tier row is a Pressable with role button beside the progress bar, with a 24 px chevron (183, 303–344); the label, score and tier Texts are not hidden from screen readers (322–330), so they are read again as text. Nudge.tsx: the Nudge itself also sets Context Nudge&Alert when none is set (232–241); Close shows only with closeSlot, showClose or onClose (318–320), so the default nudge has none; the default button renders with buttonLabel or onPressButton (301–313), so “Button” shows by default. Under the default modes the nudge is cream rgb(254, 244, 229) with a gold rgb(206, 161, 90) button, 12 px weight 700 label and 4 px vertical padding, 25 px tall, Figma's small one (a Default Context gives a 16 px label and 8 px padding); Secondary gives a lilac rgb(246, 243, 255) nudge with a purple sparkle and button, rgb(93, 0, 181). Contrast of the lit dots with the track: Primary High 1.99:1, Medium 1.00:1, Low 1.09:1, as the evidence says; Secondary, Neutral and Tertiary are 8.27, 10.65 and 4.94:1 at High but 1.09–1.22:1 at Medium and Low, and System Low resolves to alpha 0, so the guide's Medium Don't (whose 1.0:1 is the default gold's) holds for every appearance. Rendered check (31 October): CircularRating from lib/commonjs, server-rendered with react-native-web 0.21.2 and measured in the cached headless Chromium: the progress bar had aria-valuenow 64 and no aria-disabled, the tier was a button, there was no Close, and the rating was 478 px tall; a 58-character tier stayed on one 21 px line, 440 px wide with white-space nowrap, overflowing the 320 px ring, because the tier Text gets numberOfLines 1 (CircularProgressBarDoted.tsx 305) and nothing constrains its width. That contradicts the evidence's “tier 16 px 700, wrapping with no line clamp” and “the tier no longer truncates.” (and #252's 12 October re-test), which are not quoted; the guide's “a short verdict that fits one line” holds and is kept. In a 400 px column the root and its full-width footer row stretch (the footer centres 30 px right of the ring's centre) while the ring and nudge stay at the left; in a 300 px column the ring and nudge overflow. So “A Circular Rating doesn't resize.” holds for the ring and the nudge; the placement rules quote it and the 340 px column sentence as the guide has them. Both points are in reviews/circularrating.json and reported as a candidate guide fix (the overflowing tier also as a candidate Component Bug). Tickets, read on the board (read only): #252 (Component Fix, Done, live 13 October) and #271 (Component Fix, Done, live 17 October) are fixed and the installed source confirms both (no aria-disabled, aria-valuenow, the name from accessibilityLabel and the clamped score, the chevron only with onTierPress, the small nudge button; no close on the default nudge), so neither is a gap. #252's verification left five points “for Marcin to judge”: the double reading of the label, score and tier is still true and is /gaps/2 (no ticket); the shared colour modes and Figma's 26 lit dots are /gaps/0, from the Sources note; 0.4 showing “0” is in the dotCount evidence fact; the story's dot count and the default nudge copy are not recorded (the content rules cover the copy). #251 (Components, To do, Marcin, token problem) is open: /gaps/1 names it for the Medium and Low contrast, because the entry's Emphasis rules exist only because of it and an agent asked for a lighter ring needs to know it is a known token problem; its Dark values, the “Defult” mode name and the broken nudge/radius alias (every Nudge logs “Variable VariableID:2892:386 not found”, and Nudge.tsx line 96 falls back to 12) are not recorded (dark mode is not a gap here; the alias is the Nudge's). #250 is CircularProgressBar's, not this component's. Strength: one quoted absolute word, the Sources' “The chevron shows only when the tier opens details.” (everywhere: behaviour, so recommended). Nothing is required: CircularRating has no required prop, and the label, footer and nudge body defaults back recommended “Set …” rules (the default tier and button are the guide's own Don'ts). Anatomy required: Label, Score, Tier and Footer are always drawn (footerSlot replaces only the footer's contents); Lit dots are absent at 0 and Track dots at 100; the Nudge only with showNudge. avoidWhen: the guide names no other component, so neither rule has useInstead; the narrow-column rule rests on Sizing, the other-scale rule on the evidence's Contract (no max, size, format or centre-slot prop). Circular Progress Bar is not named (no entry; its guide is being redone, #120). Examples follow the building rules: the guide's R helper sets Color Mode Light and Context Nudge&Alert on every rating; Color Mode is left out, and Nudge&Alert only repeats what CircularRating gives its nudge by itself, so no modes are set. The three examples are the guide's In context (64, “Fair”, both actions wired), Without the nudge (72, “Doing great”) and the States' Low score (36, “Needs attention”), with its label and footer copy; the helper's nudge copy is left out where showNudge is false. Left out of examples: the anatomy and sizing specimens, Without the footer icon, Fewer dots, Tier opens details and Colour (AppearanceBrand Secondary; building rules keep modes at their defaults, its caption is kept as a rule), High score and Empty, the Do & Don'ts, and the playground (its Score, Colour and Nudge controls and the “Read as” readout are not in the rendered copy). Not recorded: style and the ratingStyle, footerStyle, footerTextStyle and nudgeStyle overrides (the building rules forbid colour, border, radius and font overrides); the slots beyond their evidence facts (the evidence's Limits: not shown); Color Mode and the Sources' Dark sentence (dark mode is not a gap here); Semantic Intent System and AppearanceSystem colours, Border Boolean, Nudge padding, Button / Size and Button / State (the guide shows none); Slot gap, context 10, Context2, Page type and Profile Card Appearance (the evidence: they do nothing); the root's spoken label on an element with no role; Figma's layer names and hex values; the docs-only “Shown at 69%” scale label. Cross-check: three rounds, no flags; round 1 noted that #251 names only Medium and Low (the gap was reworded) and that “the default” on the Emphasis rule wasn't in the evidence (dropped); round 2 noted that the measured ratios are the default gold's (the gap now says so); round 3 noted the guide's Medium Don't may generalise from the gold (it holds for every appearance, above) and that the close sentence drops “Since the #271 fix” (true on the installed build). Consistency with related entries: Nudge's entry agrees: the Nudge sets Context Nudge&Alert itself (its small button), inline-compact is one line with the button beside it and no title, Close shows only with onClose or showClose (since #271), and the default button renders with buttonLabel or onPressButton. TestimonialsCard's notes say the package has CircularRating, which its .mdx doesn't name, and its review-with-stars rule has no useInstead: that agrees (a Circular Rating is a score ring, not a star rating). CardInsight's entry does not name Circular Rating; CardAdvisory's and CardFinancialCondition's name Circular Progress Bar, a different component with no entry. No other guidance file names Circular Rating. Nothing hand-written here, in the guide or evidence at 622cd82, or in the installed CircularRating and CircularProgressBarDoted source uses that shape word Coin doesn't have; Nudge.tsx's code comment at line 236 does (for #544). Sorted by the coordinator: guide fix #551 (the two evidence lines on the tier and the Sizing sentence) and Component Bug #549 (the overflowing tier that disableTruncation can’t reach, and the off-centre footer in a wider column) were filed; the human flag names both. No guide or evidence sentence describes the overflow, so it is not a gap here.",
+  "useWhen": [
+    {
+      "text": "Show a score out of 100, such as credit health, as a dotted ring with your verdict and one next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Circular Rating to show a score out of 100, such as credit health, as a dotted ring with your verdict and one next step."
+      }
+    },
+    {
+      "text": "A score, what it means, and what to do next.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "A score, what it means, and what to do next."
+      }
+    },
+    {
+      "text": "Credit health with a next step, as in the guide's In context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Credit health with a next step"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A column narrower than 340 px: Circular Rating doesn't resize.",
+      "strength": "discouraged",
+      "from": {
+        "section": "sizing",
+        "quote": "give it a column at least 340 px wide."
+      }
+    },
+    {
+      "text": "A score on a scale other than 0 to 100: Circular Rating has no max or format prop, and always shows the score out of 100.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "No max, size, format, or centre-slot props"
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Lit dots",
+      "holds": "18 px dots in the ring's colour; the share lit matches the score (none at 0).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "18 px dots in the ring’s colour; the share lit matches the score."
+      }
+    },
+    {
+      "part": "Track dots",
+      "holds": "Grey dots for the rest of the 100.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey dots for the rest of the 100."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label, 12 px; names the score.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px; names the score."
+      }
+    },
+    {
+      "part": "Score",
+      "holds": "56 px heavy; the score rounded, out of 100.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "56 px heavy; the score rounded, out of 100."
+      }
+    },
+    {
+      "part": "Tier",
+      "holds": "tierLabel, 16 px bold; your verdict on the score, with a chevron when it opens details.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "16 px bold; your verdict on the score, with a chevron when it opens details."
+      }
+    },
+    {
+      "part": "Footer",
+      "holds": "footerText, 12 px with an info icon; when the score was updated.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px with an info icon; when the score was updated."
+      }
+    },
+    {
+      "part": "Nudge",
+      "holds": "An inline nudge with one button for the next step (showNudge).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An inline nudge with one button for the next step."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "A Circular Rating doesn't resize.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A Circular Rating doesn’t resize."
+      }
+    },
+    {
+      "text": "The ring is 320 px with 18 px dots, inside 10 px of padding, and the nudge is 312 px: give it a column at least 340 px wide.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The ring is 320 px with 18 px dots, inside 10 px of padding, and the nudge is 312 px; give it a column at least 340 px wide."
+      }
+    },
+    {
+      "text": "With the nudge it measures 340 × 478 px: the ring 320 × 320, the footer row 320 × 16 and the nudge 312 × 58.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "340 × 478 (ring 320 × 320, footer row 320 × 16, nudge 312 × 58)"
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "The screen passes the score and its tier, and wires both actions: on the guide's credit health screen the tier opens the score's breakdown and Pay now opens the card bill.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen passes the score and its tier, and wires both actions: the tier opens the score’s breakdown and Pay now opens the card bill."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "You write the label, tier, footer and nudge; the score comes from value.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "You write the label, tier, footer, and nudge; the score comes from the value."
+      }
+    },
+    {
+      "text": "Choose how many dots make the ring (dotCount), and whether the footer icon (showFooterIcon) and the nudge (showNudge) show.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Choose how many dots make the ring, and whether the footer icon and the nudge show."
+      }
+    },
+    {
+      "text": "Set value to the score: left out, the ring shows 72.",
+      "strength": "recommended",
+      "target": "value",
+      "from": {
+        "fact": "props:value"
+      }
+    },
+    {
+      "text": "The score shows value rounded, out of a fixed 100, with no “%”.",
+      "strength": "recommended",
+      "target": "value",
+      "from": {
+        "section": "evidence",
+        "quote": "Score text is `Math.round(value)`, out of a fixed 100, no “%”."
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "showNudge={false}: the score and its footer, when there's no next step.",
+      "strength": "recommended",
+      "target": "showNudge",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "The score and its footer, when there’s no next step."
+      }
+    },
+    {
+      "text": "showFooterIcon={false}: just the update line.",
+      "strength": "recommended",
+      "target": "showFooterIcon",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "Just the update line."
+      }
+    },
+    {
+      "text": "dotCount 12: twelve dots, each standing for more of the score.",
+      "strength": "recommended",
+      "target": "dotCount",
+      "value": "12",
+      "from": {
+        "section": "configuration",
+        "quote": "Twelve dots: each stands for more of the score."
+      }
+    },
+    {
+      "text": "Don't go past about 50 dots: they overlap.",
+      "strength": "discouraged",
+      "target": "dotCount",
+      "from": {
+        "section": "configuration",
+        "quote": "Past about 50 dots they overlap."
+      }
+    },
+    {
+      "text": "With onTierPress the tier row becomes a button with a chevron, such as to open the score's breakdown.",
+      "strength": "recommended",
+      "target": "onTierPress",
+      "from": {
+        "section": "configuration",
+        "quote": "With onTierPress the tier row becomes a button with a chevron, such as to open the score’s breakdown."
+      }
+    },
+    {
+      "text": "The chevron shows only when the tier opens details (onTierPress is set).",
+      "strength": "recommended",
+      "target": "onTierPress",
+      "from": {
+        "section": "sources",
+        "quote": "The chevron shows only when the tier opens details."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it holds for every Circular Rating: the chevron is drawn when onTierPress is set and never otherwise. It describes behaviour rather than an instruction, so it stays recommended."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "Pick the tier from the score yourself, and the colour with modes: neither follows the score.",
+      "strength": "recommended",
+      "target": "tierLabel",
+      "from": {
+        "section": "states",
+        "quote": "Pick the tier from the score yourself, and the colour with modes."
+      }
+    },
+    {
+      "text": "Modes colour the dots and the nudge together: AppearanceBrand Secondary is purple.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Secondary",
+      "from": {
+        "section": "configuration",
+        "quote": "Modes colour the dots and the nudge together: Secondary is purple."
+      }
+    },
+    {
+      "text": "Keep Emphasis High: the lit dots stand out from the track.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "High",
+      "from": {
+        "section": "doDont",
+        "quote": "The lit dots stand out from the track."
+      }
+    },
+    {
+      "text": "Don't lower Emphasis: at Medium the lit dots have no contrast with the track (1.0:1).",
+      "strength": "discouraged",
+      "target": "Emphasis",
+      "value": "Medium",
+      "from": {
+        "section": "doDont",
+        "quote": "At Medium the lit dots have no contrast with the track (1.0:1)."
+      }
+    },
+    {
+      "text": "The nudge's button is Figma's small size by default.",
+      "strength": "recommended",
+      "target": "Context",
+      "from": {
+        "section": "sources",
+        "quote": "The nudge button is Figma’s small size by default."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "The default nudge has no close button.",
+      "strength": "recommended",
+      "target": "showNudge",
+      "from": {
+        "section": "sources",
+        "quote": "Since the #271 fix the default nudge has no close button."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name the score in two or three words, such as “Credit health”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Name the score in two or three words, such as “Credit health”."
+        }
+      },
+      {
+        "text": "Set label: left out, it reads “Rating”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "fact": "props:label"
+        }
+      },
+      {
+        "text": "Write the tier as a short verdict that fits one line.",
+        "strength": "recommended",
+        "target": "tierLabel",
+        "from": {
+          "section": "content",
+          "quote": "Write the tier as a short verdict that fits one line"
+        }
+      },
+      {
+        "text": "Write the tier for the score: a low score says “Needs attention”.",
+        "strength": "recommended",
+        "target": "tierLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "A low score says “Needs attention”."
+        }
+      },
+      {
+        "text": "Don't leave the default tier: it doesn't follow the score, so 36 still says “Doing great”.",
+        "strength": "discouraged",
+        "target": "tierLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "The tier doesn’t follow the score, so 36 still says “Doing great”."
+        }
+      },
+      {
+        "text": "Start the footer with when it was updated.",
+        "strength": "recommended",
+        "target": "footerText",
+        "from": {
+          "section": "content",
+          "quote": "start the footer with when it was updated"
+        }
+      },
+      {
+        "text": "Set footerText: left out, it reads “Updated on 1 March”.",
+        "strength": "recommended",
+        "target": "footerText",
+        "from": {
+          "fact": "props:footerText"
+        }
+      },
+      {
+        "text": "Give the nudge one action with a verb label, such as “Pay now”.",
+        "strength": "recommended",
+        "target": "nudgeButtonLabel",
+        "from": {
+          "section": "content",
+          "quote": "give the nudge one action with a verb label, such as “Pay now”."
+        }
+      },
+      {
+        "text": "Don't leave the default button: it shows and is read as “Button”.",
+        "strength": "discouraged",
+        "target": "nudgeButtonLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "It shows and is read as “Button”."
+        }
+      },
+      {
+        "text": "With the nudge on, set nudgeBody: left out, it reads “Split this transaction into installments”.",
+        "strength": "recommended",
+        "target": "nudgeBody",
+        "from": {
+          "fact": "props:nudgeBody"
+        }
+      }
+    ],
+    "good": [
+      "Credit health",
+      "Doing great",
+      "Needs attention",
+      "Fair",
+      "Not rated yet",
+      "Updated on 8 Oct 2026",
+      "Pay your card bill in full to raise your score",
+      "Pay now"
+    ],
+    "bad": [
+      "Button"
+    ]
+  },
+  "states": [
+    {
+      "state": "No states of its own",
+      "when": "The ring has no states; neither its colour nor its tier follows the score.",
+      "from": {
+        "section": "states",
+        "quote": "The ring has no states, and neither its colour nor its tier follows the score."
+      }
+    },
+    {
+      "state": "Low score",
+      "when": "36 lights 9 of 24 dots; the tier is yours to write, such as “Needs attention”.",
+      "from": {
+        "section": "states",
+        "quote": "36 lights 9 dots. The tier is yours: “Needs attention”."
+      }
+    },
+    {
+      "state": "High score",
+      "when": "72 lights 18 of 24 dots, in the same colour.",
+      "from": {
+        "section": "states",
+        "quote": "72 lights 18 dots, in the same colour."
+      }
+    },
+    {
+      "state": "Empty",
+      "when": "At 0, only grey dots.",
+      "from": {
+        "section": "states",
+        "quote": "At 0, only grey dots."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Screen readers hear the ring as a progress bar with its value out of 100, named by the label, score and tier, then the footer as text.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Screen readers hear the ring as a progress bar with its value out of 100, named by the label, score, and tier, then the footer as text."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "accessibilityLabel replaces the ring's name; without it the name is “<label>. <score> out of 100. <tier>”, with the score clamped to 0–100.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "evidence",
+        "quote": "Its name is `accessibilityLabel`, else “<label>. <score> out of 100. <tier>” with the clamped score"
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "With onTierPress the tier row is a button outside the progress bar; Enter and a click each call it once.",
+      "strength": "recommended",
+      "target": "onTierPress",
+      "from": {
+        "section": "evidence",
+        "quote": "With `onTierPress` the tier row is a `<button>` outside the progressbar; Enter and a click each call it once."
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Write the tier for the score",
+      "dont": "Leave the default tier",
+      "why": "The tier doesn’t follow the score, so 36 still says “Doing great”.",
+      "from": {
+        "section": "doDont",
+        "quote": "Write the tier for the score"
+      }
+    },
+    {
+      "do": "Name the nudge’s action",
+      "dont": "Leave the default button",
+      "why": "It shows and is read as “Button”.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the nudge’s action"
+      }
+    },
+    {
+      "do": "Keep emphasis High",
+      "dont": "Lower the emphasis",
+      "why": "At Medium the lit dots have no contrast with the track (1.0:1).",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep emphasis High"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Credit health with a next step, the guide's In context: a score of 64 with the tier “Fair”, which the screen picks for that score, a dated footer, and a nudge whose Pay now button is the next step. onTierPress stands for opening the score's breakdown (it makes the tier a button with a chevron), and onPressNudgeButton for opening the card bill.",
+      "jsx": "<CircularRating\n  value={64}\n  label=\"Credit health\"\n  tierLabel=\"Fair\"\n  footerText=\"Updated on 8 Oct 2026\"\n  nudgeBody=\"Pay your card bill in full to raise your score\"\n  nudgeButtonLabel=\"Pay now\"\n  onTierPress={() => {}}\n  onPressNudgeButton={() => {}}\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen passes the score and its tier, and wires both actions: the tier opens the score’s breakdown and Pay now opens the card bill."
+      }
+    },
+    {
+      "purpose": "A rating without the nudge, the guide's Without the nudge: a score of 72 with the tier “Doing great” and its dated footer, for when there's no next step. The tier is plain text with no chevron, since no onTierPress is set.",
+      "jsx": "<CircularRating\n  value={72}\n  label=\"Credit health\"\n  tierLabel=\"Doing great\"\n  footerText=\"Updated on 8 Oct 2026\"\n  showNudge={false}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The score and its footer, when there’s no next step."
+      }
+    },
+    {
+      "purpose": "A low score, the guide's States: 36 lights 9 of the 24 dots in the same colour as a high score, and the tier “Needs attention” is the one the screen writes for that score. No nudge.",
+      "jsx": "<CircularRating\n  value={36}\n  label=\"Credit health\"\n  tierLabel=\"Needs attention\"\n  footerText=\"Updated on 8 Oct 2026\"\n  showNudge={false}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "36 lights 9 dots. The tier is yours: “Needs attention”."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Context",
+      "default": "Nudge&Alert",
+      "description": "The default nudge gets Context Nudge&Alert unless modes set one, so its button is Figma's small one (12 px label, 25 px tall) with no modes set.",
+      "quote": "The nudge defaults to `Context: 'Nudge&Alert'` (c1fa197), so its button is Figma's small one (12 px label, 25 px tall) without any modes",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "dotCount",
+      "description": "Lit dots are ceil(value / 100 × dotCount), filling clockwise from 12 o'clock: 0 lights none, and any value above 0 lights at least one.",
+      "quote": "Lit dots = `ceil(value / 100 × dotCount)` (0 lights none; any value above 0 lights at least one, so 0.4 shows “0” with one lit dot), filling clockwise from 12 o'clock.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "value",
+      "description": "NaN is treated as 0.",
+      "quote": "`NaN` is treated as 0 (c1fa197; it showed “NaN” before).",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "footerSlot",
+      "description": "Replaces the footer text and icon; it receives the rating's modes.",
+      "quote": "`footerSlot` replaces the footer text and icon",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "nudgeSlot",
+      "description": "Replaces the nudge, and shows only with showNudge; it receives the rating's modes.",
+      "quote": "`nudgeSlot` replaces the nudge and shows only with `showNudge`.",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "list": "props",
+      "name": "disableTruncation",
+      "description": "Reaches only the footer text, not the tier.",
+      "quote": "`disableTruncation` reaches only the footer text",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma draws 26 dots, all lit, on a slightly smaller ring, with a white nudge; the package draws 24 dots lit by the score and colours the nudge with the ring.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma shows 26 dots, all lit, on a slightly smaller ring, with a white nudge; the package draws 24 dots lit by the score and colours the nudge with the ring."
+      },
+      "checkedOn": "2026-10-17",
+      "checkedVersion": "0.1.78-a116616"
+    },
+    {
+      "text": "At Emphasis Medium and Low the default gold lit dots vanish against the grey track, at 1.00:1 and 1.09:1 (token problem #251, open); at Emphasis High the gold is 1.99:1.",
+      "quote": "Contrast with the track: Primary High 1.99:1, Medium 1.00:1, Low 1.09:1",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    },
+    {
+      "text": "Screen readers hear the label, score and tier twice: in the progress bar's name and again as text.",
+      "quote": "The label, score and tier are also exposed as text, so they are read twice",
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
+    }
+  ]
+}

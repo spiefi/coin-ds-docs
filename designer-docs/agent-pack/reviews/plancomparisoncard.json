@@ -5,5 +5,18 @@
       "reason": "The guide and most of its evidence were checked on 21 October on 0.1.78-c7d3348 and not re-checked on the installed build, dbe0e02, which changed PlanComparisonCard for #360 (plan names centred over their columns, names that end in … on one line, labels and values that wrap, rows of at least 46 px, a table with rows, column headers and cells, a cross named “Not included”, infoLabel and notIncludedLabel). This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts (listed in its notes). The guide also doesn't say which surface hosts the card: its plan names are white with no panel behind them, every example sits on the docs' dark frame, and on a light Coin Screen the names don't show, so the entry's examples carry no host. Re-extract once #360 is fixed and the guide is re-checked and published. Added by Claude Code in the overnight run agentpack-batch10, for Marcin to confirm."
     }
   ],
-  "dismissed": []
+  "dismissed": [
+    {
+      "field": "/accessibility/3",
+      "reason": "lost-context: The evidence says the `role=\"table\"` structure comes from the dbe0e02 install, a build this guide's copy \"wasn't re-checked\" against and that \"waits for #360's own publish\". The 21 October check this guide is based on records \"No `data-testid`, no table roles\" and lists \"no table semantics\" as a discrepancy. The item states it as a general fact about the card and drops that build condition.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r21 (release 0.1.78+21), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "A pack release describes the installed package, 0.1.78-dbe0e02, and the item carries that build: it quotes the evidence’s 28 October section, which observed the installed card as a role=\"table\" with rows, column headers and cells, and carries checkedOn 2026-10-28 and checkedVersion 0.1.78-dbe0e02. The installed PlanComparisonCard.tsx sets those roles (gridRole, lines 113-118). The 21 October “no table roles” describes the older c7d3348 build. The whole-entry human flag already says the guide predates dbe0e02 and waits for #360."
+    },
+    {
+      "field": "/accessibility/3",
+      "reason": "lost-context: The quote comes from the evidence file's 'dbe0e02 install (28 October 2026, not this guide's tickets)' note, which covers a later build whose copy 'wasn't re-checked and waits for #360's own publish'. For the build this guide checked (21 October), the evidence says 'No data-testid, no table roles' and lists 'no table semantics' as a discrepancy, so the item states another build's behaviour as fact for this card.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r21 (release 0.1.78+21), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /accessibility/3 dismissal above, raised again by the second cross-check run in new words. A pack release describes the installed package, 0.1.78-dbe0e02, and the item says so: it carries checkedOn 2026-10-28 and checkedVersion 0.1.78-dbe0e02 from the evidence’s 28 October section, and the installed PlanComparisonCard.tsx sets the table roles (gridRole, lines 113-118). The 21 October “no table roles” describes the older c7d3348 build. The whole-entry human flag says the guide predates dbe0e02 and waits for #360."
+    }
+  ]
 }

@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "id": "BottomNavItem",
+  "slug": "bottomnavitem",
+  "category": "navigation",
+  "tags": [
+    "tab bar item",
+    "navigation item"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The Bottom Nav Item guide (31f1c5e) and its evidence were checked on 24 September 2026 on jfs-components 0.1.60 (its Sources note says “Declared, installed, and npm latest are all jfs-components@0.1.60.”); the installed package is 0.1.78 (mirror v0.1.78-dbe0e02). BottomNav.tsx is the same blob at the 0.1.60 release and on dbe0e02, and BottomNavItem.tsx changed once since 0.1.60 (the label's line height now goes through safeTextLineHeight, still 14 px), so every sentence this entry quotes still holds, but these do not, and the entry leaves them out: (1) the Sources note's “The guide stays in Light mode, matching the Figma context, because the installed Dark tokens resolve the Idle label to orange.”: with Color Mode Dark the Idle label now resolves to rgb(241, 241, 241), a light grey (mode/Grey/400 Dark, fixed for #177 in 636f3f5). (2) The Anatomy Item note's “Hugs its content on its own.” and the Sizing description's “On its own, an item is as wide as its label.” (and its card “Width follows the label”) hold only in the guide's inline-flex frame: the item's root has alignItems center and no width (BottomNavItem.tsx lines 79–82), so a parent that stretches its children widens it (Storybook's Default story draws a standalone Home item 992 px wide). Also unclear: In context's “… and keeps exactly one Active.” and its caption “Choose a destination. BottomNav marks it Active and the screen above changes.”: BottomNav keeps no state; it calls onChange with the pressed item's value and draws Active from the value the screen passes back, so a value that matches no item leaves every item Idle (BottomNav.tsx lines 99–119), as the Bottom Nav guide says (“Bottom Nav only reports which destination was pressed.”). And the guide doesn't say when not to use a Bottom Nav Item, so avoidWhen is empty. On the web, the item's dark 2 px focus line (States: “Keyboard focus adds a dark 2 px line under the item …”) also appears after a mouse press and stays until focus moves on, though the browser doesn't treat that focus as keyboard focus (not :focus-visible): the item sets its focus style on every focus event (BottomNavItem.tsx lines 46, 203–206 and 226) and doesn't use Coin's own keyboard-only check (isKeyboardInputModality, web-platform-utils.ts lines 233–271). Published Storybook draws the same after a click on a Bottom Nav tab. Re-check the guide on 0.1.78 and publish it, then re-extract. Added by Claude Code in the overnight run agentpack-r26, for Marcin to confirm. Guide fix #556; the focus line after a mouse press is Component Bug #555.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Show one top-level destination in the bottom navigation bar with an icon and a short label.",
+  "useWhen": [
+    {
+      "text": "Show one top-level destination in the bottom navigation bar, with an icon and a short label.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Show one top-level destination in the bottom navigation bar with an icon and a short label."
+      }
+    },
+    {
+      "text": "Move between top-level destinations: each destination of a BottomNav is one item.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Move between top-level destinations"
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Icon",
+      "holds": "A 24 px registry icon. State colors it grey when Idle and gold when Active.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 24 px registry icon. State colors it grey when Idle and gold when Active."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "11 px medium text, 6 px below the icon. On the web it also becomes the tab’s spoken name.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "11 px medium text, 6 px below the icon. On the web it also becomes the tab’s spoken name."
+      }
+    },
+    {
+      "part": "Item",
+      "holds": "Inside BottomNav, every item stretches to an equal share of the bar.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Inside BottomNav, every item stretches to an equal share of the bar."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Put the items in a BottomNav, which holds them at the bottom of an app screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A public BottomNav holds five BottomNavItems at the bottom of an app screen"
+      }
+    },
+    {
+      "text": "BottomNav gives every item the same share of the bar, so fewer items mean wider tap targets.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "BottomNav gives every item the same share of the bar, so fewer items mean wider tap targets."
+      }
+    },
+    {
+      "text": "Keep three to five destinations in the bar, so every tap target stays wide.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Canonical BottomNav guidance keeps 3–5 items so every tap target stays wide."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "One destination per item: pair a familiar registry icon (iconName) with the destination’s name (label).",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Pair a familiar registry icon with the destination’s name."
+      }
+    },
+    {
+      "text": "In code, the icon and label are properties (iconName and label), and State is the BottomNavItem / State mode, which BottomNav sets from its value.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "In code, the icon and label are properties and State is the BottomNavItem / State mode, which BottomNav sets from its value."
+      },
+      "target": "BottomNavItem / State"
+    },
+    {
+      "text": "Let BottomNav mark the Active item: give the bar the current destination's value instead of setting State on an item.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Let BottomNav mark the Active item."
+      },
+      "target": "BottomNavItem / State"
+    },
+    {
+      "text": "Active turns the icon gold and darkens the label.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Active turns the icon gold and darkens the label."
+      },
+      "target": "BottomNavItem / State",
+      "value": "Active"
+    },
+    {
+      "text": "Only the current destination should be Active.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the current destination should be Active."
+      },
+      "target": "BottomNavItem / State",
+      "value": "Active"
+    },
+    {
+      "text": "Left out, label reads “Home”, its default: give every item its own destination's name.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "label"
+    },
+    {
+      "text": "Left out, iconName shows ic_home, its default: give every item its own destination's icon.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "iconName"
+    },
+    {
+      "text": "disabled is a property: the item fades and stops responding, but keeps its place in the bar.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Disabled is a property: the item fades and stops responding, but keeps its place in the bar."
+      },
+      "target": "disabled",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Keep each label short and specific: it names the destination.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep it short and specific."
+        }
+      },
+      {
+        "text": "Use one or two words: Home, Finances, Pay and Explore fit on one line and scan quickly.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Home, Finances, Pay, and Explore fit on one line and scan quickly."
+        }
+      },
+      {
+        "text": "Don't write a long label: “Investments and savings” wraps onto extra lines and pushes that item out of line with the others.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Investments and savings” wraps onto extra lines and pushes that item out of line with the others."
+        }
+      },
+      {
+        "text": "Don't remove the labels: icons alone must be guessed, and each tab loses its spoken name.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Icons alone must be guessed, and each tab loses its spoken name."
+        }
+      }
+    ],
+    "good": [
+      "Home",
+      "Finances",
+      "Pay",
+      "Invest",
+      "Explore"
+    ],
+    "bad": [
+      "Investments and savings"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "Any destination other than the current one.",
+      "from": {
+        "section": "states",
+        "quote": "Any destination other than the current one."
+      }
+    },
+    {
+      "state": "Active",
+      "when": "The destination people are on now.",
+      "from": {
+        "section": "states",
+        "quote": "The destination people are on now."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "Unavailable: half opacity; the item cannot be pressed or reached with Tab.",
+      "from": {
+        "section": "states",
+        "quote": "Half opacity. The item cannot be pressed or reached with Tab."
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "On the web, hover fades an item to 85% opacity.",
+      "from": {
+        "section": "states",
+        "quote": "On the web, hover fades an item to 85% opacity"
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "On the web, a touch press fades the item to 70% opacity.",
+      "from": {
+        "section": "states",
+        "quote": "a touch press fades it to 70%"
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "Keyboard focus adds a dark 2 px line under the item alongside the browser’s focus ring.",
+      "from": {
+        "section": "states",
+        "quote": "Keyboard focus adds a dark 2 px line under the item alongside the browser’s focus ring."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The label is both the visible name and, on the web, the spoken name of the tab.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The label is both the visible name and, on the web, the spoken name of the tab."
+      },
+      "target": "label"
+    },
+    {
+      "text": "The icon is hidden from assistive technology.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The icon is hidden from assistive technology."
+      }
+    },
+    {
+      "text": "Add an accessibilityLabel only when the visible label is abbreviated.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Add an accessibility label only when the visible label is abbreviated."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use a short label",
+      "dont": "Write a long label",
+      "why": "“Investments and savings” wraps onto extra lines and pushes that item out of line with the others.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a short label"
+      }
+    },
+    {
+      "do": "Keep every label",
+      "dont": "Remove the labels",
+      "why": "Icons alone must be guessed, and each tab loses its spoken name.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep every label"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Moving between top-level destinations, the guide's In context: a Screen holds the current destination's content (Home's Title and a slim Card, the guide's literals) and a BottomNav at its bottom with five items, each a BottomNav.Item with its value, label and icon. The bar's value “home” makes Home Active and the other four Idle; the literal value and the empty onChange stand for the app's own state of the current destination.",
+      "jsx": "<Screen>\n  <VStack>\n    <Title title=\"Home\" />\n    <Card variant=\"slim\">\n      <Card.Title>Your accounts at a glance</Card.Title>\n      <Card.SupportText>Balances, recent payments, and reminders.</Card.SupportText>\n    </Card>\n  </VStack>\n  <BottomNav value=\"home\" onChange={(value) => {}}>\n    <BottomNav.Item value=\"home\" label=\"Home\" iconName=\"ic_home\" />\n    <BottomNav.Item value=\"finances\" label=\"Finances\" iconName=\"ic_rupee\" />\n    <BottomNav.Item value=\"pay\" label=\"Pay\" iconName=\"ic_scan_qr_code\" />\n    <BottomNav.Item value=\"invest\" label=\"Invest\" iconName=\"ic_rupee_coin\" />\n    <BottomNav.Item value=\"explore\" label=\"Explore\" iconName=\"ic_search\" />\n  </BottomNav>\n</Screen>",
+      "from": {
+        "section": "inContext",
+        "quote": "A public BottomNav holds five BottomNavItems at the bottom of an app screen"
+      }
+    },
+    {
+      "purpose": "One or two words per label, the guide's Content example: Home, Finances, Pay and Explore, each with its own registry icon, fit on one line. The bar's value “home” makes Home Active; the literal value and the empty onChange stand for the app's own state.",
+      "jsx": "<BottomNav value=\"home\" onChange={(value) => {}}>\n  <BottomNav.Item value=\"home\" label=\"Home\" iconName=\"ic_home\" />\n  <BottomNav.Item value=\"finances\" label=\"Finances\" iconName=\"ic_rupee\" />\n  <BottomNav.Item value=\"pay\" label=\"Pay\" iconName=\"ic_scan_qr_code\" />\n  <BottomNav.Item value=\"explore\" label=\"Explore\" iconName=\"ic_search\" />\n</BottomNav>",
+      "from": {
+        "section": "content",
+        "quote": "Home, Finances, Pay, and Explore fit on one line and scan quickly."
+      }
+    },
+    {
+      "purpose": "An unavailable destination, the guide's States card “Unavailable” (Pay, disabled) in a four-destination bar, as the guide's playground shows it with “Pay unavailable” switched on: Pay fades to half opacity and can't be pressed or reached with Tab, but keeps its place in the bar; Home is Active. The literal value and the empty onChange stand for the app's own state.",
+      "jsx": "<BottomNav value=\"home\" onChange={(value) => {}}>\n  <BottomNav.Item value=\"home\" label=\"Home\" iconName=\"ic_home\" />\n  <BottomNav.Item value=\"finances\" label=\"Finances\" iconName=\"ic_rupee\" />\n  <BottomNav.Item value=\"pay\" label=\"Pay\" iconName=\"ic_scan_qr_code\" disabled />\n  <BottomNav.Item value=\"explore\" label=\"Explore\" iconName=\"ic_search\" />\n</BottomNav>",
+      "from": {
+        "section": "states",
+        "quote": "Disabled is a property: the item fades and stops responding, but keeps its place in the bar."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "iconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_home",
+        "description": "Default \"ic_home\", from the component source."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Home",
+        "description": "Default \"Home\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Default false, from the component source."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "labelStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "iconColor",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "iconSize",
+        "type": "number",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityState",
+        "type": "AccessibilityState",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "webAccessibilityProps",
+        "type": "WebAccessibilityProps",
+        "required": false,
+        "source": "types",
+        "description": "Web-specific accessibility props (only used on web platform)"
+      },
+      {
+        "name": "...SafePressableProps",
+        "type": "SafePressableProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "BottomNavItem / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "A token collection BottomNavItem reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection BottomNavItem reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      }
+    ],
+    "slots": [],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=bottomnavitem",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=306-92",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-bottomnavitem--docs"
+  }
+}

@@ -1,0 +1,715 @@
+{
+  "schemaVersion": 1,
+  "id": "ProductOverview",
+  "slug": "productoverview",
+  "category": "content",
+  "tags": [
+    "product summary",
+    "product header",
+    "PDP",
+    "product detail",
+    "gold coin"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "6d52ca836c3834529cfc4ea2059d423846771061",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide (checked 20 October on 0.1.78-c7d3348) still describes Component Bug #355 problems that the installed 0.1.78-dbe0e02 fixes, read from source: the description is readable (card/supportive-text/color, #1a1c1f in every Text Appearance mode, not the white text/appearance/medium/color), the picture sits in a 288 px centred frame instead of filling the card’s width, and the name (1 line) and description (2 lines) end in … unless disableTruncation is set. The entry follows the package, so it does not say “white on white” or “disableTruncation affects only the stats”. The guide changes when #355 is closed and published. Added by Claude Code in the overnight run agentpack-batch7, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Product Overview to introduce one product: its picture, a chip, its name, a line of trust, and two or three key facts.",
+  "useWhen": [
+    {
+      "text": "Introduce one product: its picture, a chip, its name, a line of trust, and two or three key facts.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Product Overview to introduce one product: its picture, a chip, its name, a line of trust, and two or three key facts."
+      }
+    },
+    {
+      "text": "One product, and the facts that matter.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One product, and the facts that matter."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A card that should respond to a press: Product Overview isn't pressable.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Product Overview has no states: it isn’t pressable"
+      }
+    },
+    {
+      "text": "A card that needs a selected, disabled, or loading look: Product Overview has none.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "has no selected, disabled, or loading look."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Picture",
+      "holds": "imageSource, fitted inside the card's width at 288:170.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource, fitted inside the full width at 288:170."
+      }
+    },
+    {
+      "part": "Chip",
+      "holds": "A ProductLabel from label, with labelImageSource as its picture.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A ProductLabel from label, with labelImageSource as its picture."
+      }
+    },
+    {
+      "part": "Name",
+      "holds": "productName, 26 px, centred: the page's heading.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "productName, 26 px, centred: the page’s heading."
+      }
+    },
+    {
+      "part": "Description",
+      "holds": "description, 14 px, centred.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "description, 14 px, centred"
+      }
+    },
+    {
+      "part": "Stats",
+      "holds": "stats: a value over a label each, in equal columns.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "stats: a value over a label each, in equal columns."
+      }
+    },
+    {
+      "part": "Panel",
+      "holds": "A white panel, 24 px padding, no corners or border.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white panel, 24 px padding, no corners or border."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put the product's action on the screen next to the overview, not inside it.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Put the product’s action on the screen next to it, not inside it."
+      }
+    },
+    {
+      "text": "On a product page, the Buy button goes under the overview and belongs to the screen, because the card has no action of its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The overview explains the product; the Buy button under it belongs to the screen, because the card has no action of its own."
+      }
+    },
+    {
+      "text": "The card fills its host's width; Figma draws it at 343 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills its host’s width; Figma draws it at 343 px."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "imageSource adds the product's picture at the top, fitted inside the card's width at 288:170 unless imageRatio says otherwise; without it the card starts at the chip.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "imageSource adds the product’s picture at the top, fitted inside the full width at 288:170 unless imageRatio says otherwise; without it the card starts at the chip."
+      },
+      "target": "imageSource"
+    },
+    {
+      "text": "imageRatio 2 gives the picture a wider frame, so a smaller coin.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A wider frame, so a smaller coin."
+      },
+      "target": "imageRatio",
+      "value": "2"
+    },
+    {
+      "text": "labelImageSource puts a small round picture in the chip.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "labelImageSource puts a small round picture in the chip."
+      },
+      "target": "labelImageSource"
+    },
+    {
+      "text": "Without labelImageSource, the chip shows only its label.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The chip shows only its label."
+      },
+      "target": "labelImageSource"
+    },
+    {
+      "text": "stats takes any number of facts in equal columns, and [] removes the row.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "stats takes any number of facts in equal columns, and [] removes the row."
+      },
+      "target": "stats"
+    },
+    {
+      "text": "children adds your own content between the description and the stats, with the card's modes.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "children adds your own content between the description and the stats, with the card’s modes."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Don't put a Button in children: it lands between the description and the facts. Keep the action on the screen, below the overview.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "It lands between the description and the facts."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Text Appearance colours the name and the stat labels.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Text Appearance colours the name and the stat labels."
+      },
+      "target": "Text Appearance"
+    },
+    {
+      "text": "Text Appearance Primary gives a gold name and stat labels.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A gold name and stat labels."
+      },
+      "target": "Text Appearance",
+      "value": "Primary"
+    },
+    {
+      "text": "Text Appearance Secondary gives a purple name and stat labels.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A purple name and stat labels."
+      },
+      "target": "Text Appearance",
+      "value": "Secondary"
+    },
+    {
+      "text": "Stat values and labels stay on one line and end in … unless disableTruncation is set; with it, the stats wrap instead.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Stat values and labels stay on one line and end in … unless disableTruncation is set."
+      },
+      "target": "disableTruncation"
+    },
+    {
+      "text": "disableTruncation true lets the product name and description wrap instead of ending in …; by default the name is one line and the description at most two.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/10"
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make productName the product with its size, such as 5g Gold Coin.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make productName the product with its size, such as 5g Gold Coin"
+        },
+        "target": "productName"
+      },
+      {
+        "text": "Make the chip's label the metal or brand, not the product again.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "the chip’s label the metal or brand, not the product again."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Don't repeat the product's name in the chip.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The chip repeats 5g Gold Coin."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Write the description as a sentence or two on why to trust the product.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The description is a sentence or two on why to trust it."
+        },
+        "target": "description"
+      },
+      {
+        "text": "A stat value is the figure, such as 995 or 3%, and its label a word or two, such as Purity or GST.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "A stat value is the figure, such as 995 or 3%, and its label a word or two, such as Purity or GST."
+        },
+        "target": "stats"
+      },
+      {
+        "text": "Don't put a sentence in a stat: stats stay on one line, so it's cut short.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Stats stay on one line, so it’s cut short."
+        },
+        "target": "stats"
+      },
+      {
+        "text": "Set productName yourself: left out, the card shows the sample “0.5g Gold Coin”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/4"
+        },
+        "target": "productName"
+      },
+      {
+        "text": "Set description yourself: left out, the card shows the sample “Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.”",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/5"
+        },
+        "target": "description"
+      },
+      {
+        "text": "Pass your own stats, or [] to remove the row: left out, the card shows two sample stats, 995 Purity and 3% GST.",
+        "strength": "recommended",
+        "from": {
+          "section": "evidence",
+          "quote": "`stats` (995 Purity, 3% GST; `[]` removes the row)"
+        },
+        "target": "stats"
+      },
+      {
+        "text": "Set label to the product's metal or brand: left out, the chip shows “Gold”.",
+        "strength": "recommended",
+        "from": {
+          "fact": "/facts/props/3"
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "Gold",
+      "5g Gold Coin",
+      "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+      "995",
+      "Purity",
+      "3%",
+      "GST",
+      "Silver",
+      "10g Silver Coin",
+      "Insured delivery to your door, with a purity certificate.",
+      "999",
+      "10g",
+      "Weight"
+    ],
+    "bad": [
+      "Insured from our vault to you"
+    ]
+  },
+  "states": [
+    {
+      "state": "Read-only",
+      "when": "Always: Product Overview has no states, and the card itself isn't pressable.",
+      "from": {
+        "section": "states",
+        "quote": "Product Overview has no states: it isn’t pressable"
+      }
+    },
+    {
+      "state": "Selected, disabled, loading",
+      "when": "Not available: it has no selected, disabled, or loading look.",
+      "from": {
+        "section": "states",
+        "quote": "has no selected, disabled, or loading look."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "productName is the page's heading.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "productName, 26 px, centred: the page’s heading."
+      },
+      "target": "productName"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Figures in stats",
+      "dont": "A sentence in a stat",
+      "why": "Stats stay on one line, so it’s cut short.",
+      "from": {
+        "section": "doDont",
+        "quote": "A number and a word or two each."
+      }
+    },
+    {
+      "do": "The metal in the chip",
+      "dont": "The name twice",
+      "why": "The chip repeats 5g Gold Coin.",
+      "from": {
+        "section": "doDont",
+        "quote": "Gold, then the product’s name."
+      }
+    },
+    {
+      "do": "The action under the card",
+      "dont": "A Button in children",
+      "why": "It lands between the description and the facts.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep Buy on the screen, below the overview."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A gold coin's product page, the guide's In context: the overview explains the product, and the Buy button under it belongs to the screen, because the card has no action of its own; Buy opens the screen's own checkout. The image URIs stand for the product's own picture and the brand's logo.",
+      "jsx": "<VStack>\n  <ProductOverview\n    imageSource={{ uri: 'https://example.com/gold-coin.png' }}\n    labelImageSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n    label=\"Gold\"\n    productName=\"5g Gold Coin\"\n    description=\"Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.\"\n    stats={[\n      { value: '995', label: 'Purity' },\n      { value: '3%', label: 'GST' },\n    ]}\n  />\n  <Button label=\"Buy for ₹38,750\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The overview explains the product; the Buy button under it belongs to the screen, because the card has no action of its own."
+      }
+    },
+    {
+      "purpose": "A silver coin, the guide's Content example: Silver in the chip, the size in the name, and three figures. With no imageSource the card starts at the chip, and with no labelImageSource the chip shows only its label.",
+      "jsx": "<ProductOverview\n  label=\"Silver\"\n  productName=\"10g Silver Coin\"\n  description=\"Insured delivery to your door, with a purity certificate.\"\n  stats={[\n    { value: '999', label: 'Purity' },\n    { value: '3%', label: 'GST' },\n    { value: '10g', label: 'Weight' },\n  ]}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Silver in the chip, three figures."
+      }
+    },
+    {
+      "purpose": "No stats: stats={[]} removes the row, leaving the name and description.",
+      "jsx": "<ProductOverview\n  imageSource={{ uri: 'https://example.com/gold-coin.png' }}\n  labelImageSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  label=\"Gold\"\n  productName=\"5g Gold Coin\"\n  description=\"Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.\"\n  stats={[]}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "stats takes any number of facts in equal columns, and [] removes the row."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Hero image source rendered at the top of the card."
+      },
+      {
+        "name": "imageRatio",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 1.6941,
+        "description": "Aspect ratio for the hero image. Defaults to the Figma frame (288:170). Default 1.6941 (FIGMA_IMAGE_WIDTH / FIGMA_IMAGE_HEIGHT), from the component source."
+      },
+      {
+        "name": "labelImageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Avatar source for the inline ProductLabel chip."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Gold",
+        "description": "The chip always shows; label defaults to “Gold”. Declared: Text shown next to the avatar in the ProductLabel chip. Default \"Gold\", from the component source.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "productName",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "0.5g Gold Coin",
+        "description": "The name is a header (accessibilityRole header; an h1 on the web), centred. Declared: The large product name, e.g. \"0.5g Gold Coin\". Default \"0.5g Gold Coin\", from the component source.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.",
+        "description": "The short multi-line description below the product name. Default \"Your gold is insured from our vault to you. If lost or damaged, we’ll replace it.\", from the component source."
+      },
+      {
+        "name": "stats",
+        "type": "ProductOverviewStat[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Each stat is an equal column (flex 1): a 20 px heavy value over a 12 px label, each on one line ending in … unless disableTruncation is set. Declared: Stats rendered in the bottom row. Each stat shows a large value above a smaller label. Pass an empty array (or `null`) to hide the row.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom slot rendered between the description and the stats row, useful for badges, callouts, etc. Receives the same `modes` as the parent and is centred with the rest of the card."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, the product name and description wrap instead of ellipsizing. By default the name is one line and the description is at most two."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "L"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "Colours the product name and the stat labels: Primary gold, Secondary purple (#5d00b5), Tertiary blue, and Success, Warning and Error. It doesn't colour the description or the stat values. Declared: A token collection ProductOverview reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Neutral",
+        "checkedOn": "2026-10-20"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Custom slot rendered between the description and the stats row, useful for badges, callouts, etc. Receives the same `modes` as the parent and is centred with the rest of the card.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "The name's line is 32 px where Figma's is 26, and a stat value's 24 where Figma's is 20, so the card is taller than Figma's 396 px (Component Bug #355).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "Left out, imageSource and labelImageSource give no picture and no chip picture, where Figma's component shows the coin and the Jio dot.",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "Figma's Product Overview has no properties: the picture, chip, text, and two stats are layers there.",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "Figma has no children, imageRatio or disableTruncation, and its frame holds a fixed two stats; the package takes any number of stats.",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "The published Storybook is older than the installed package and still shows the older generated page (Component Bug #355).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=productoverview",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2768-56",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-productoverview--docs"
+  }
+}

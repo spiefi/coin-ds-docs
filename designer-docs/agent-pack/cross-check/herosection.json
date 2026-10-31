@@ -1,0 +1,29 @@
+{
+  "slug": "herosection",
+  "entryHash": "ab856506d2113058efa7fecbe594baa20d87cde44abc101eac8d21852866346c",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "checkedAt": "2026-10-31T05:11:09Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/3",
+      "reason": "misreads-source: The guide says the opposite: \"showSearch removes the whole row, the filter too\" and \"showSearch={false} removes the filter too.\" The evidence agrees: \"With `showSearch` false and no `searchSlot`, the filter and any `filterSlot` go too.\" The item relies on the type doc's \"Does not hide the filter\", which the rendered package contradicts."
+    },
+    {
+      "field": "/configuration/6",
+      "reason": "misreads-source: The guide says filterSlot \"gets the hero’s modes but not Secondary and Medium, so set them on it\". The evidence says a filterSlot IconButton without modes \"is gold `#cea15a`\". The item claims the slot inherits Secondary, Medium and Size M and needs no modes, which reverses the guide."
+    },
+    {
+      "field": "/configuration/11",
+      "reason": "misreads-source: The guide says \"An empty subtitle hides it, but leaving subtitle out shows the word Subtitle.\" The evidence Limits forbid implying the hero \"hides the subtitle when it's left out\". The item says omitting it hides it, following the type doc that the render contradicts."
+    },
+    {
+      "field": "/configuration/5",
+      "reason": "misreads-source: The guide's filterIcon card only says \"Change the icon and its label together.\" Its example text shows Watchlist / Stocks you follow / Search stocks. Nothing cited gives `ic_sort` or “Sort stocks”, so the item adds values its sources don't support."
+    }
+  ],
+  "notes": "The package type descriptions for showSearch (\"Does not hide the filter\"), filterSlot (\"FILTER_BUTTON_MODES ... merged under the slot's own modes\") and subtitle (\"Omit to hide it\") contradict the evidence's headless render and the guide. The type docs may be stale relative to 0.1.78, or this may be part of Component Bug #404. A human should check which is right and correct the facts at /facts/props/1, /5 and /14. /examples/1 carries the same unsupported ic_sort / “Sort stocks” values as /configuration/5. /useWhen/1 restates the core principle rather than a use condition; this is minor and not flagged."
+}

@@ -41,6 +41,14 @@ Checked 7 October 2026. Installed `jfs-components` is `0.1.78` from mirror tag `
 - #208 (Components, To do; Marcin Śpiewak), token problem shared with Note Input and Segmented Control: `nudge/title/color` is a literal #1e1a14 in Dark.
 - Existing: #179 (IconButton keeps a focus border after a click); #177 (Dark close icon orange, fixed upstream).
 
+## 636f3f5 check
+
+Checked 8 October 2026 against `jfs-components` 0.1.78 built from Biscuit's `main` at `636f3f5` (mirror tag `v0.1.78-636f3f5`) in headless Chrome with react-native-web 0.21.2.
+
+- #179 fixed in IconButton, which Nudge uses for its close button: after a mouse click IconButton draws no ring and keeps its size, and keyboard focus draws a 1 px outline ring in a token colour (`mode/Grey/200`) without changing the size. This supersedes the dark-border note under Browser measurements.
+- Still open: #206 and #208 as listed under Coin gaps.
+- Guide: the Sources note gives the 5 October build; checked date 8 October 2026. The page never described the click border, so no other copy changed.
+
 ## c1fa197 install (13 October 2026)
 
 The release that published #205, #255, #203, #252, and #250 moved the docs to mirror tag `v0.1.78-c1fa197` (Biscuit's `main` at c1fa197), which also carries Biscuit's #206 Nudge changes. The Nudge root is now a `<section role="region">` named by its title, and a close button shows by default. Only the guide's anatomy and sizing selectors changed (`:scope > div` → `:scope > section`) so the diagrams measure the real card again. The copy wasn't re-checked against #206, which goes through its own Component Fix loop; until it is published, the page may still describe the close button as optional.
@@ -53,7 +61,7 @@ The docs now install mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 
 
 Re-checked against `jfs-components` 0.1.78 from mirror tag `v0.1.78-a116616` (Biscuit's `main` at a116616, 16 October); `npm run coin:status` reports upstream, mirror, and docs in step. Since 636f3f5, `Nudge.tsx` changed in c1fa197 (#206) and 7020bf9 (#271), and `Nudge.mdx` and the stories were rewritten upstream; the published Storybook still serves the old generated page. Where this section differs from the Package and Accessibility bullets above, it replaces them. Headless Chrome, react-native-web 0.21.2, Light, 344 px column:
 
-- Copy: `title` and `body` default to empty. A bare `<Nudge />` is a 344 × 46 card with only the sparkle: no text and no button. The default button renders only with `buttonLabel` or `onPressButton`: `buttonLabel` alone gives a pill that does nothing (86 × 25 for "See plans"), and `onPressButton` without `buttonLabel` gives an empty 26 × 10 pill with no name.
+- Copy: `title` and `body` default to empty. A bare `<Nudge />` is a 344 × 46 card with only the sparkle: no text and no button. The default button renders only with `buttonLabel` or `onPressButton`: `buttonLabel` alone gives a Button that does nothing (86 × 25 for "See plans"), and `onPressButton` without `buttonLabel` gives an empty 26 × 10 Button with no name.
 - `buttonSlot={null}` (or `false`) removes the button: title and body only, 344 × 63.
 - Context: when the merged modes have no `Context`, Nudge sets `Context: 'Nudge&Alert'` itself. Unset and explicit Nudge&Alert render the same: 344 × 96, button 86 × 25 (padding 4 × 12, 12 px label). `Context: 'Default'` on the Nudge, or on a VStack or Card around it (their modes reach it through `cloneChildrenWithModes`), gives 344 × 113 with a 42 px button (padding 8 × 20, 16 px label). A container whose modes have no `Context` keeps the small button.
 - Semantics: with a `title`, the card is a `<section role="region">` named by the title (`accessibilityRole: 'summary'`); without one it is a `div role="presentation"`. inline-compact never shows `title` but still uses it as the region's name (an invisible name). The sparkle SVG carries no `aria-hidden`, so Chrome's accessibility tree lists the sparkle as an unnamed image inside the region.
@@ -81,6 +89,6 @@ The docs now install mirror tag `v0.1.78-c8526ae` (Biscuit's `main` at c8526ae, 
 - Title line height 15 (Figma 15; was 17). The default prominent card is 344 × 94 (Figma 91: a 25 px button against 24, and a 1 px border); the Sizing long-copy card is 125 px tall (was 129).
 - Close is 28 × 28 (Figma 28; was 26) and shows with `onClose` or `showClose`. New prop `closeAccessibilityLabel` renames it (re-test: “Dismiss split payment tip”).
 - Ignored props warn in development: stacked-detailed with `body`, `buttonLabel`, `showClose`, or `onClose` logs “Nudge: stacked-detailed ignores body, buttonLabel, showClose, onClose. Put that content in children.”; inline-compact warns that `title` isn't shown. Rendering is unchanged.
-- Still open, not claimed by #206's fix: no mode gives Figma's white card with a purple icon; `nudge/radius` still aliases the missing `VariableID:2892:386` (logged on every render, falls back to 12); the sparkle SVG isn't hidden from assistive tech; `onPressButton` without `buttonLabel` renders an empty, unnamed pill.
+- Still open, not claimed by #206's fix: no mode gives Figma's white card with a purple icon; `nudge/radius` still aliases the missing `VariableID:2892:386` (logged on every render, falls back to 12); the sparkle SVG isn't hidden from assistive tech; `onPressButton` without `buttonLabel` renders an empty, unnamed Button.
 
 Guide changes: Sizing long-copy height (129 → 125); Sources (23 October build; 28 px close with a changeable label; ignored props warn) replacing “the close button is always labelled ‘Close’”. Composites that render a Nudge (CardInsight, CardAdvisory, BenefitCard, CircularRating) were re-tested by `npm run verify`.

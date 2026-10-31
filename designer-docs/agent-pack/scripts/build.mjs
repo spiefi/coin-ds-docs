@@ -7,7 +7,7 @@
 // A committed release is never edited. If the release folder is tracked by git
 // and the build would change it, the build stops: raise the revision in
 // agent-pack/pack.json to make a new release. An uncommitted release folder is
-// rewritten freely.
+// rewritten freely. Writing also remakes the MCP server's packs (packs.mjs).
 //
 //   npm run build:agent-pack             # check, then write the release
 //   npm run build:agent-pack -- --check  # check only; write nothing
@@ -19,6 +19,7 @@ import { componentExports } from './facts.mjs'
 import { PACK, PUBLIC_AGENT, SCHEMAS, git, readJsonIfExists, validate } from './lib.mjs'
 import { briefMarkdown, componentMarkdown, linksMarkdown, llmsText, rulesMarkdown } from './render.mjs'
 import { buildGraph, triple } from './graph.mjs'
+import { writePacks } from './packs.mjs'
 
 const checkOnly = process.argv.includes('--check')
 // --only <slug,slug>: check just those entries (with --check); a release needs every entry.
@@ -214,3 +215,5 @@ if (JSON.stringify(nextReleases) !== JSON.stringify(readJsonIfExists(releasesFil
   writeFileSync(releasesFile, json(nextReleases))
   console.log(`✓ public/agent/index.json: current ${nextReleases.current}`)
 }
+const packed = writePacks()
+console.log(`✓ Packed ${packed.releases} releases for the MCP server: agent-pack/packs/`)

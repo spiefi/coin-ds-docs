@@ -17,6 +17,18 @@
       "reason": "lost-context: The anatomy row reads \"description, 14 px, centred; it renders white on white today.\" The item drops the white-on-white clause, so it implies a readable description. The evidence's Limits say not to imply \"that the description is readable today\".",
       "by": "Claude Code (claude-opus-5-5), overnight run agentpack-batch7, on the extraction’s behalf; for Astra and Marcin to confirm",
       "why": "The white-on-white clause is stale on the installed build: 0.1.78-dbe0e02 ProductOverview.tsx (lines 99-103) colours the description with card/supportive-text/color, which the package’s resolver gives as #1a1c1f in every Text Appearance mode; the old text/appearance/medium/color is still white but no longer read. Repeating “white on white” would tell agents the description can’t be read when it can. A human flag on the entry points at #355, whose fix this is."
+    },
+    {
+      "field": "/configuration/11",
+      "reason": "misreads-source: The guide says \"disableTruncation affects only the stats\" and \"The name and description wrap\", and the evidence's Limits say not to imply \"that `disableTruncation` changes the name or description\". The item repeats the package type comment, which the evidence lists as wrong (Discrepancies, ticket #355). It also adds a one-line name and a two-line description limit that neither the guide nor the evidence supports.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r21 (release 0.1.78+21), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /configuration/11 dismissal above, which Astra confirmed on 30 October, raised again in new words. The item follows the installed package, which the cross-check cannot see: in 0.1.78-dbe0e02 ProductOverview.tsx gives the name resolveTruncation(disableTruncation, 1) and the description resolveTruncation(disableTruncation, 2), so by default the name is one line and the description at most two, and disableTruncation lifts both (the props:disableTruncation fact says the same). The guide’s “disableTruncation affects only the stats” describes the 19 October build (c7d3348): that is #355’s fix, and the whole-entry human flag points at #355."
+    },
+    {
+      "field": "/anatomy/3",
+      "reason": "lost-context: The item drops the guide's \"it renders white on white today\" from the Description part. That makes the description look readable, which the evidence's Limits forbid implying (\"Don't imply ... that the description is readable today\").",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r21 (release 0.1.78+21), on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The same flag as the /anatomy/3 dismissal above, which Astra confirmed on 30 October, raised again in new words. “White on white” is stale on the installed build: 0.1.78-dbe0e02 ProductOverview.tsx colours the description with card/supportive-text/color, #1a1c1f in every Text Appearance mode. Repeating it would tell agents the description can’t be read when it can. The whole-entry human flag points at #355, whose fix this is."
     }
   ]
 }

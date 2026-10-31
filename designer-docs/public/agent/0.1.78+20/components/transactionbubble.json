@@ -1,0 +1,620 @@
+{
+  "schemaVersion": 1,
+  "id": "TransactionBubble",
+  "slug": "transactionbubble",
+  "category": "content",
+  "tags": [
+    "payment bubble",
+    "chat payment",
+    "payment in thread",
+    "transaction row",
+    "payment card"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:24:09Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide was checked on 28 October on the installed build (0.1.78-dbe0e02) for #394 and #346, but three of its sentences describe the bubble before the #395 fixes that dbe0e02 also carries, and the entry leaves them out. States: “Its default name is the description and the status word, with no amount or date, so set accessibilityLabel.” The installed bubble's default name is the description, the amount with its currency, the status and the date (“Paid to Priya Sharma, ₹1,200, Paid, 21 Oct 2026”), or the slot's words when statusSlot is set (TransactionBubble.tsx lines 110–144, 242–250). Sources: “its description is Regular where Figma’s is Medium, and its default accessible name leaves out the amount and date”; the description now reads its 500 weight token, Medium like Figma (198–202, 226). Configuration: “No other mode changes the bubble.”; the package's tokens say otherwise: Page type JioPlus turns the amount and the chevron white, context 10 jioPlus and context5 turn the chevron white, and Context2 AppBar and NavArrow Direction resize or turn it. The Content advice to set accessibilityLabel on a pressable bubble is kept. The guide fix belongs to #395 (open; a work note there lists these sentences). Re-extract once #395 is closed and the guide is re-checked and published. Added by Claude Code in the overnight run agentpack-batch11, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Transaction Bubble for one payment in a chat thread: who it was with, the amount, and its status, opening its details.",
+  "useWhen": [
+    {
+      "text": "One payment in a chat thread: who it was with, the amount, and its status, opening its details.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Transaction Bubble for one payment in a chat thread: who it was with, the amount, and its status, opening its details."
+      }
+    },
+    {
+      "text": "One payment per bubble; its details are one tap away.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One payment per bubble; its details are one tap away."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Receipt fields inside the bubble, such as a UPI ID or a bank account: the bubble becomes a receipt; put these in TransactionDetails, which opens from the bubble.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The bubble becomes a receipt; put these in Transaction Details."
+      },
+      "useInstead": "TransactionDetails"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Description",
+      "holds": "description, 14 px on one line; it ellipsizes unless disableTruncation.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "description, 14 px on one line; it ellipsizes unless disableTruncation."
+      }
+    },
+    {
+      "part": "Amount",
+      "holds": "A MoneyValue from value and currency, at the bubble’s size.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Money Value from value and currency, at the bubble’s size."
+      }
+    },
+    {
+      "part": "Status",
+      "holds": "A TransactionStatus from status and date; the mode sets its mark.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Transaction Status from status and date; the mode sets its mark."
+      }
+    },
+    {
+      "part": "Chevron",
+      "holds": "A NavArrow that says the bubble opens; statusSlot removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Nav Arrow that says the bubble opens; statusSlot removes it."
+      }
+    },
+    {
+      "part": "Bubble",
+      "holds": "White, with a 1 px grey border, 23 px corners and 16 px padding.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White, with a 1 px grey border, 23 px corners and 16 px padding."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "statusSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The bubble has no width of its own: it fills its host, so the thread places and sizes it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The bubble has no width of its own: it fills its host."
+      }
+    },
+    {
+      "text": "In a thread of the payments between two people, the ones you send sit on the right and the ones you receive on the left.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A thread lists the payments between two people: the ones you send sit on the right, the ones you receive on the left."
+      }
+    },
+    {
+      "text": "In Figma’s thread a bubble is 231 px wide in a 328 px column, on the right for payments you send.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In Figma’s thread it is 231 px of a 328 px column, on the right for payments you send."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set the Transaction Status mode on the bubble to set its status mark: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Set the Transaction Status mode on the bubble to set its status mark: Request an orange “!”, Paid a green tick, Declined a red cross, and Expired, the default, a grey “!”; status and date give the words."
+      },
+      "target": "Transaction Status"
+    },
+    {
+      "text": "Set the mode that goes with the word: Paid with the Paid mode shows a green mark, where the word alone leaves the default Expired mode’s grey “!”.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Paid with the Paid mode: a green mark."
+      },
+      "target": "Transaction Status",
+      "value": "Paid"
+    },
+    {
+      "text": "status and date give the words of the status line.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "status and date give the words."
+      },
+      "target": "status"
+    },
+    {
+      "text": "children add a row between the amount and the status, such as the note sent with the payment.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "children add a row between the amount and the status, such as the note sent with the payment."
+      },
+      "target": "children"
+    },
+    {
+      "text": "statusSlot replaces the status line and the chevron with your own content.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "statusSlot replaces the status line and the chevron with your own content."
+      },
+      "target": "statusSlot"
+    },
+    {
+      "text": "In a thread, each bubble’s onPress opens that payment’s details.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "each bubble’s onPress opens that payment’s details."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Without onPress the chevron still shows: if the bubble doesn’t open, drop the chevron with statusSlot.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the bubble is a picture of the payment, but its chevron still shows; if it doesn’t open, drop the chevron with statusSlot."
+      },
+      "target": "statusSlot"
+    },
+    {
+      "text": "disableTruncation lets the description wrap.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "disableTruncation lets the description wrap."
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write description as what happened and with whom, such as “Paid to Priya Sharma”; it gets one line, so keep it short or set disableTruncation.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write description as what happened and with whom, such as Paid to Priya Sharma; it gets one line, so keep it short or set disableTruncation."
+        },
+        "target": "description"
+      },
+      {
+        "text": "Give value without a currency sign: currency adds the ₹.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Give value without a currency sign: currency adds the ₹."
+        },
+        "target": "value"
+      },
+      {
+        "text": "Write status as one word that matches the mode, and date short.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write status as one word that matches the mode, and date short."
+        },
+        "target": "status"
+      },
+      {
+        "text": "Keep the bubble to who and how much: the receipt opens from the bubble.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The receipt opens from the bubble."
+        }
+      }
+    ],
+    "good": [
+      "Paid to Priya Sharma",
+      "Request from Priya Sharma",
+      "For Saturday’s dinner"
+    ],
+    "bad": [
+      "UPI ID 101674916166 · HDFC Bank ··4821"
+    ]
+  },
+  "states": [
+    {
+      "state": "Picture",
+      "when": "No onPress: nothing to press, yet the chevron shows.",
+      "from": {
+        "section": "states",
+        "quote": "No onPress: nothing to press, yet the chevron shows."
+      }
+    },
+    {
+      "state": "Button",
+      "when": "With onPress the whole bubble is one button, and it fades a little while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "With onPress the whole bubble is one button, and it fades a little while pressed."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "When the bubble presses, set accessibilityLabel to the person, the amount, the status, and the date.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "When the bubble presses, set accessibilityLabel to the person, the amount, the status, and the date."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "The mode with the word",
+      "dont": "Only the word",
+      "why": "Paid gets the default Expired mode’s grey “!”.",
+      "from": {
+        "section": "doDont",
+        "quote": "The mode with the word"
+      }
+    },
+    {
+      "do": "Who and how much",
+      "dont": "Receipt fields inside",
+      "why": "The bubble becomes a receipt; put these in Transaction Details.",
+      "from": {
+        "section": "doDont",
+        "quote": "Who and how much"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Payments in a thread, the guide's In context: the payment you sent sits on the right and the request you received on the left, each 231 px wide as in Figma, with the Transaction Status mode that goes with its word and an accessibilityLabel with the person, the amount, the status and the date. Each onPress opens that payment's details; the empty functions stand for that wiring.",
+      "jsx": "<VStack>\n  <TransactionBubble\n    style={{ width: 231, maxWidth: '100%', alignSelf: 'flex-end' }}\n    description=\"Paid to Priya Sharma\"\n    value=\"1,200\"\n    status=\"Paid\"\n    date=\"21 Oct 2026\"\n    modes={{ 'Transaction Status': 'Paid' }}\n    onPress={() => {}}\n    accessibilityLabel=\"Paid to Priya Sharma, ₹1,200, paid 21 Oct 2026\"\n  />\n  <TransactionBubble\n    style={{ width: 231, maxWidth: '100%', alignSelf: 'flex-start' }}\n    description=\"Request from Priya Sharma\"\n    value=\"450\"\n    status=\"Requested\"\n    date=\"Today\"\n    modes={{ 'Transaction Status': 'Request' }}\n    onPress={() => {}}\n    accessibilityLabel=\"Request from Priya Sharma, ₹450, requested today\"\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "A thread lists the payments between two people: the ones you send sit on the right, the ones you receive on the left."
+      }
+    },
+    {
+      "purpose": "A note sent with the payment, the guide's With a note: children add a row between the amount and the status.",
+      "jsx": "<TransactionBubble\n  style={{ width: 231, maxWidth: '100%' }}\n  description=\"Paid to Priya Sharma\"\n  value=\"1,200\"\n  status=\"Paid\"\n  date=\"21 Oct 2026\"\n  modes={{ 'Transaction Status': 'Paid' }}\n>\n  <Text text=\"For Saturday’s dinner\" />\n</TransactionBubble>",
+      "from": {
+        "section": "configuration",
+        "quote": "children add a row between the amount and the status, such as the note sent with the payment."
+      }
+    },
+    {
+      "purpose": "A bubble that doesn't open, the guide's Without the chevron: statusSlot replaces the status line and the chevron with a TransactionStatus of its own, which takes the bubble's Transaction Status mode.",
+      "jsx": "<TransactionBubble\n  style={{ width: 231, maxWidth: '100%' }}\n  description=\"Paid to Priya Sharma\"\n  value=\"1,200\"\n  modes={{ 'Transaction Status': 'Paid' }}\n  statusSlot={<TransactionStatus status=\"Paid\" date=\"21 Oct 2026\" />}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "if it doesn’t open, drop the chevron with statusSlot."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Payment to Uber India",
+        "description": "Default \"Payment to Uber India\", from the component source."
+      },
+      {
+        "name": "value",
+        "type": "string | number",
+        "required": false,
+        "source": "evidence",
+        "default": "56",
+        "description": "Shown by a MoneyValue. The amount is announced once, as an image named with the currency and the digits (“₹1,200”); the visible ₹ and digits are hidden from screen readers. Declared: Default \"56\", from the component source.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "₹",
+        "description": "Defaults to ₹; ISO codes such as INR show their symbol. The amount is drawn at the bubble's size: ₹ 28 px, digits 26 px, weight 900. Declared: Default \"₹\", from the component source.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "The status line stays on one line: in a 231 px bubble a long status and date end in an ellipsis, and the chevron stays inside.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "20 Mar 2025",
+        "description": "Default \"20 Mar 2025\", from the component source."
+      },
+      {
+        "name": "statusSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the whole status row, chevron included; what it holds gets the bubble's modes. Declared: Slot for the status area. When provided, replaces the default TransactionStatus + NavArrow.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Rendered between the amount and the status row, with the bubble's modes (a child's own modes win).",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Makes the root a Pressable button, at opacity 0.85 while pressed.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "style",
+        "type": "ViewStyle",
+        "required": false,
+        "source": "evidence",
+        "description": "Goes after the container style. The bubble sets no width: it fills its host.",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "webAccessibilityProps",
+        "type": "WebAccessibilityProps",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      },
+      {
+        "name": "...Omit<PressableProps, 'style' | 'children' | 'onPress'>",
+        "type": "Omit<PressableProps, 'style' | 'children' | 'onPress'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context3",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Transaction Bubble",
+          "Balance & Cards",
+          "Amount Input"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context5",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Fullscreen Modal",
+          "Mode 1"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "List Item Style",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Boxed",
+          "Minimal"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "NavArrow Direction",
+        "type": "mode collection",
+        "values": [
+          "Left&Right",
+          "Top&Bottom"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Left&Right"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Transaction Status",
+        "type": "mode collection",
+        "values": [
+          "Request",
+          "Paid",
+          "Declined",
+          "Expired"
+        ],
+        "description": "Sets the status mark: Request an orange “!”, Paid a green tick, Declined a red cross, Expired a grey “!”. With no Transaction Status mode the bubble is the Expired mode: a grey “!”. Declared: A token collection TransactionBubble reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Expired",
+        "checkedOn": "2026-10-28"
+      }
+    ],
+    "slots": [
+      {
+        "name": "statusSlot",
+        "type": "React.ReactNode",
+        "description": "Slot for the status area. When provided, replaces the default TransactionStatus + NavArrow.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The bubble is 119 px tall with one line of description where Figma's is 109, because the amount sits on a 34 px line.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "Figma's bubble is a fixed 231 px wide; the package's fills its host.",
+        "source": "evidence",
+        "checkedOn": "2026-10-25"
+      },
+      {
+        "text": "In the published Storybook, the Successful story keeps the orange mark and the slot story shows two amounts (reported).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=transactionbubble",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1517-1155",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-transactionbubble--docs"
+  }
+}

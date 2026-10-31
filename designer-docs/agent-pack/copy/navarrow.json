@@ -1,0 +1,268 @@
+{
+  "slug": "navarrow",
+  "label": "Nav Arrow",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "files": [
+    "src/guides/navarrow.guide.tsx"
+  ],
+  "evidence": "docs/evidence/navarrow.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:06:50.434Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "chevron",
+    "arrow",
+    "back arrow",
+    "disclosure indicator",
+    "caret"
+  ],
+  "title": "Nav Arrow",
+  "summary": "Use a Nav Arrow to show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header.",
+  "corePrinciple": "A cue, not a button. Make the whole row pressable, and give the arrow onPress only when it stands alone.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1444-33",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-navarrow--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A chevron with an optional target",
+      "description": "The arrow is a 2 px stroked chevron. Give it onPress and it gains a 44 × 44 pressable area; without it, it is a small image.",
+      "blocks": [
+        "Shown at 3×",
+        "1",
+        "2",
+        "Chevron",
+        "A 6 × 10 px chevron with a 2 px rounded grey stroke.",
+        "Touch target",
+        "With onPress, a 44 × 44 area surrounds the chevron.",
+        "Component bounds",
+        "Child bounds"
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Chevron",
+          "note": "A 6 × 10 px chevron with a 2 px rounded grey stroke."
+        },
+        {
+          "part": "Touch target",
+          "note": "With onPress, a 44 × 44 area surrounds the chevron."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Point where it leads",
+      "description": "Forward leads to another screen, Back returns to the previous one, and Down opens content below.",
+      "blocks": [
+        "Forward",
+        "At the end of a row. ListItem draws it for you.",
+        "Back",
+        "Beside a screen title, as its own button.",
+        "Down",
+        "Next to a label that opens more content below."
+      ],
+      "specimen": [
+        "Statements",
+        "Monthly and yearly",
+        "Accounts",
+        "Show all transactions"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Forward",
+          "description": "At the end of a row. ListItem draws it for you."
+        },
+        {
+          "title": "Back",
+          "description": "Beside a screen title, as its own button."
+        },
+        {
+          "title": "Down",
+          "description": "Next to a label that opens more content below."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Decorative or pressable",
+      "description": "Without onPress the arrow is an image inside something pressable. With onPress it is a button that dims to 70% while pressed. It has no disabled look.",
+      "blocks": [
+        "Decorative",
+        "A 6 × 10 image; the row around it handles presses.",
+        "Pressable",
+        "A 44 × 44 button; press it to see it dim."
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Decorative",
+          "description": "A 6 × 10 image; the row around it handles presses."
+        },
+        {
+          "title": "Pressable",
+          "description": "A 44 × 44 button; press it to see it dim."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Small chevron, 44 px target",
+      "description": "The chevron is 6 × 10 px (10 × 6 pointing down). A pressable arrow reserves 44 × 44 px so it is easy to tap.",
+      "blocks": [
+        "Shown at 1.5×",
+        "Pressable",
+        "Decorative",
+        "6 × 10",
+        "44 × 44"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the destination",
+      "description": "The arrow has no visible text. When it is a button, set accessibilityLabel to where it goes, such as “Back to Home”, instead of the default “Go back”.",
+      "blocks": [
+        "Labelled back arrow",
+        "Screen readers hear “Back to Home”."
+      ],
+      "specimen": [
+        "Accounts"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Labelled back arrow",
+          "description": "Screen readers hear “Back to Home”."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A header and a list of accounts",
+      "description": "The back arrow is its own button; each row is pressable as a whole and ListItem draws its forward arrow. The screen handles the navigation.",
+      "blocks": [
+        "On Accounts"
+      ],
+      "specimen": [
+        "Accounts",
+        "Savings •• 0245",
+        "₹1,24,500",
+        "Salary •• 1180",
+        "₹48,200"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "A clear cue in the right place",
+      "description": "Each pair shows an arrow that guides people versus one that misleads them.",
+      "blocks": [
+        "Do",
+        "Make the whole row pressable",
+        "The label and the arrow both open Statements.",
+        "Don’t",
+        "Make only the arrow pressable",
+        "People tap the label and nothing happens.",
+        "Point forward in a row",
+        "The row leads on to another screen.",
+        "Point back in a row",
+        "A back arrow reads as leaving, not opening.",
+        "Use the row’s own arrow",
+        "One chevron per row.",
+        "Add a second arrow",
+        "Two chevrons look like a mistake."
+      ],
+      "specimen": [
+        "Statements",
+        "Monthly and yearly"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Make the whole row pressable",
+            "caption": "The label and the arrow both open Statements.",
+            "specimen": "Statements · Monthly and yearly"
+          },
+          "dont": {
+            "title": "Make only the arrow pressable",
+            "caption": "People tap the label and nothing happens.",
+            "specimen": "Statements"
+          }
+        },
+        {
+          "do": {
+            "title": "Point forward in a row",
+            "caption": "The row leads on to another screen.",
+            "specimen": "Statements · Monthly and yearly"
+          },
+          "dont": {
+            "title": "Point back in a row",
+            "caption": "A back arrow reads as leaving, not opening.",
+            "specimen": "Statements · Monthly and yearly"
+          }
+        },
+        {
+          "do": {
+            "title": "Use the row’s own arrow",
+            "caption": "One chevron per row.",
+            "specimen": "Statements · Monthly and yearly"
+          },
+          "dont": {
+            "title": "Add a second arrow",
+            "caption": "Two chevrons look like a mistake.",
+            "specimen": "Statements · Monthly and yearly"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Nav Arrow contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Forward",
+        "Back",
+        "Down",
+        "Pressable",
+        "All directions",
+        "Checked 29 September 2026",
+        "Installed jfs-components is 0.1.77 from the team’s private package repository. List Item, App Bar, Section, and Summary Tile already draw their own arrows. A decorative arrow is still announced as an image, and a disabled arrow looks the same as an enabled one. In Dark colour mode the chevron currently turns orange because of a token value, so use it on light surfaces.",
+        "jfs-components",
+        "0.1.77"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

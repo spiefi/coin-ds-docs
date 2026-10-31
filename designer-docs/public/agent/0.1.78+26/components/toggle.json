@@ -1,0 +1,446 @@
+{
+  "schemaVersion": 1,
+  "id": "Toggle",
+  "slug": "toggle",
+  "category": "input",
+  "tags": [
+    "switch",
+    "on/off",
+    "setting"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": []
+  },
+  "summary": "Use a Toggle to switch one setting on or off, with the change taking effect straight away.",
+  "useWhen": [
+    {
+      "text": "Switch one setting on or off, with the change taking effect straight away.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Toggle to switch one setting on or off, with the change taking effect straight away."
+      }
+    },
+    {
+      "text": "One setting, one switch, and the change happens at once.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One setting, one switch, and the change happens at once."
+      }
+    },
+    {
+      "text": "One on/off setting, such as “Hide balances”, which is either on or off.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "“Hide balances” is either on or off."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A setting that waits for a Save button: a switch that needs Save looks applied when it isn't; use a Checkbox.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A switch that needs Save looks applied when it isn’t; use a Checkbox."
+      },
+      "useInstead": "Checkbox"
+    },
+    {
+      "text": "Choosing between options, such as a Light / Dark theme: which side means Light? Use a pair of Radios.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Which side means Light? Use a pair of Radios."
+      },
+      "useInstead": "Radio"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Track",
+      "holds": "Fully rounded ends; grey when off and purple when on.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Fully rounded; grey when off and purple when on."
+      }
+    },
+    {
+      "part": "Thumb",
+      "holds": "White circle; its side shows the state.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White circle; its side shows the state."
+      }
+    },
+    {
+      "part": "Off position",
+      "holds": "Thumb on the left of a grey track.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Thumb on the left of a grey track."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "It has no label of its own, so it sits at the end of a row whose title names the setting.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "It has no label of its own, so it always sits at the end of a row whose title names the setting."
+      }
+    },
+    {
+      "text": "The toggle never stretches: it is always 52 × 31 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The toggle never stretches."
+      }
+    },
+    {
+      "text": "The track is 52 × 31 px with 3 px padding around a 25 px thumb, so give its row at least 31 px of height.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The track is 52 × 31 px with 3 px padding around a 25 px thumb, so give its row at least 31 px of height."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Toggle has no size or style options.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Toggle has no size or style options."
+      }
+    },
+    {
+      "text": "The screen sets each toggle's value.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The screen sets each toggle’s value."
+      },
+      "target": "value"
+    },
+    {
+      "text": "Each change applies as soon as the toggle moves.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Each change applies as soon as the toggle moves."
+      }
+    },
+    {
+      "text": "The screen keeps every value and saves it; the toggle only reports the new value through onValueChange.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps every value and saves it; the toggle only reports the new value."
+      },
+      "target": "onValueChange"
+    },
+    {
+      "text": "Disable a toggle only while its setting can't change, and say why nearby.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Disable a toggle only while its setting can’t change, and say why nearby."
+      },
+      "target": "disabled",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "The row's title says what the toggle controls, such as “Payment alerts”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The row’s title says what the toggle controls, such as “Payment alerts”."
+        }
+      },
+      {
+        "text": "Name the setting, not the action: don't write “Turn on” or “Enable”, because the switch already shows on or off.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "Don’t write “Turn on” or “Enable”: the switch already shows on or off."
+        }
+      },
+      {
+        "text": "Support text explains what on means.",
+        "strength": "recommended",
+        "from": {
+          "section": "configuration",
+          "quote": "Support text explains what on means."
+        }
+      },
+      {
+        "text": "Label every toggle: the row's title says what switches.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "The row’s title says what switches."
+        }
+      },
+      {
+        "text": "Don't leave a toggle bare: without a label people can't tell what it controls.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Without a label people can’t tell what it controls."
+        }
+      }
+    ],
+    "good": [
+      "Payment alerts",
+      "Biometric login",
+      "Hide balances"
+    ],
+    "bad": [
+      "Turn on",
+      "Enable"
+    ]
+  },
+  "states": [
+    {
+      "state": "Off",
+      "when": "Grey track, thumb left: the setting is off.",
+      "from": {
+        "section": "states",
+        "quote": "Grey track, thumb left: the setting is off."
+      }
+    },
+    {
+      "state": "On",
+      "when": "Purple track, thumb right: the setting is on.",
+      "from": {
+        "section": "states",
+        "quote": "Purple track, thumb right: the setting is on."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "Dimmed to 50% and grey in both states; only the thumb position shows which is on.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed to 50% and grey in both states; only the thumb position shows which is on."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Toggle has no label of its own, so the screen names it, usually with the row's title.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Toggle has no label of its own, so the screen names it, usually with the row’s title."
+      }
+    },
+    {
+      "text": "accessibilityLabel is the toggle's label for screen readers.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web it is a switch with a name, and its on or off state is announced.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web it is a switch with a name, and its on or off state is announced."
+      }
+    },
+    {
+      "text": "Enter, Space, and click switch it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Enter, Space, and click switch it."
+      }
+    },
+    {
+      "text": "A disabled toggle is announced as disabled and skipped by Tab.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "A disabled toggle is announced as disabled and skipped by Tab."
+      },
+      "target": "disabled"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Apply the change at once",
+      "dont": "Wait for a Save button",
+      "why": "A switch that needs Save looks applied when it isn’t; use a Checkbox.",
+      "from": {
+        "section": "doDont",
+        "quote": "Apply the change at once"
+      }
+    },
+    {
+      "do": "Label every toggle",
+      "dont": "Leave a toggle bare",
+      "why": "Without a label people can’t tell what it controls.",
+      "from": {
+        "section": "doDont",
+        "quote": "Label every toggle"
+      }
+    },
+    {
+      "do": "Use it for one on/off setting",
+      "dont": "Use it to choose between options",
+      "why": "Which side means Light? Use a pair of Radios.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use it for one on/off setting"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A settings card, the guide's In context: a Card holding three rows, each a horizontal ListItem whose title names the setting, with no support text and no arrow, and a Toggle at its end named with the same words. Each change applies as soon as the toggle moves; the screen keeps the values and saves them. The literal values and the empty onValueChange stand for the screen's own state and saving.",
+      "jsx": "<Card>\n  <VStack>\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"Payment alerts\"\n      showSupportText={false}\n      trailing={<Toggle value onValueChange={(value) => {}} accessibilityLabel=\"Payment alerts\" />}\n    />\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"Biometric login\"\n      showSupportText={false}\n      trailing={<Toggle value={false} onValueChange={(value) => {}} accessibilityLabel=\"Biometric login\" />}\n    />\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"Hide balances\"\n      showSupportText={false}\n      trailing={<Toggle value={false} onValueChange={(value) => {}} accessibilityLabel=\"Hide balances\" />}\n    />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "Each change applies as soon as the toggle moves. The screen keeps every value and saves it; the toggle only reports the new value."
+      }
+    },
+    {
+      "purpose": "Title and support text, from the guide's Configuration: the row's title names the setting and its support text explains what on means; the Toggle at its end is off and named with the title.",
+      "jsx": "<ListItem\n  layout=\"Horizontal\"\n  navArrow={false}\n  title=\"Round up savings\"\n  supportText=\"Invest the spare change from each payment\"\n  trailing={<Toggle value={false} onValueChange={(value) => {}} accessibilityLabel=\"Round up savings\" />}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Support text explains what on means."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "value",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "On the web, aria-checked follows the value. Declared: Whether the toggle is on (controlled)",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "defaultValue",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial value (uncontrolled) Default false, from the component source."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: boolean) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Called once with the new value for each Enter, Space or click. Declared: Callback when the toggle state changes.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "On the web, sets aria-disabled and tabindex -1, so Tab skips it. Declared: Whether the toggle is disabled. Default false, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override container styles."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for screen readers."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Toggle reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Toggle States",
+        "type": "mode collection",
+        "values": [
+          "Off",
+          "On",
+          "Disabled Off",
+          "Disabled On"
+        ],
+        "description": "A token collection Toggle reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Off"
+      }
+    ],
+    "slots": [],
+    "events": [
+      {
+        "name": "onValueChange",
+        "type": "(value: boolean) => void",
+        "description": "Callback when the toggle state changes",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma has two variants, Off and On, both 52 × 31; disabled exists only in the package, which dims the toggle to 50% and greys the track in both states.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "text": "Disabled On and Disabled Off share one grey track, so only the thumb position shows the state.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=toggle",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2906-8120",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-toggle--docs"
+  }
+}

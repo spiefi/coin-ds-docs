@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 1,
+  "id": "NavArrow",
+  "slug": "navarrow",
+  "category": "navigation",
+  "tags": [
+    "chevron",
+    "arrow",
+    "back arrow",
+    "disclosure indicator",
+    "caret"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:15:31Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The Nav Arrow guide (31f1c5e) and its evidence were checked on 29 September 2026 on jfs-components 0.1.77 (its Sources note says “Installed jfs-components is 0.1.77”); the installed package is 0.1.78 (mirror v0.1.78-dbe0e02). NavArrow.tsx is the same blob at v0.1.77 and dbe0e02, and every guide-body sentence this entry quotes still holds, but one Sources sentence no longer does, and the entry leaves it out: “In Dark colour mode the chevron currently turns orange because of a token value, so use it on light surfaces.” With Color Mode Dark, navArrow/icon/color now resolves to rgb(241, 241, 241), a light grey, not the orange rgb(255, 153, 0) of 0.1.77 (mode/Grey/400 Dark, fixed for #177 in 636f3f5). The entry also leaves out the Sources note's other limitations (the arrows List Item, App Bar, Section and Summary Tile draw; a decorative arrow announced as an image), which still hold on dbe0e02 but were checked only on 0.1.77. Re-check the guide on 0.1.78 and publish it, then re-extract. Added by Claude Code in the overnight run agentpack-r24, for Marcin to confirm. Guide fix #547.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Nav Arrow to show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header.",
+  "useWhen": [
+    {
+      "text": "Show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Nav Arrow to show that something leads elsewhere: a chevron at the end of a row, or a back arrow in a header."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "At the end of a list row: ListItem draws the forward arrow for you, so don't add a Nav Arrow there.",
+      "strength": "discouraged",
+      "from": {
+        "section": "configuration",
+        "quote": "At the end of a row. ListItem draws it for you."
+      },
+      "useInstead": "ListItem"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Chevron",
+      "holds": "A 6 × 10 px chevron with a 2 px rounded grey stroke.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 6 × 10 px chevron with a 2 px rounded grey stroke."
+      }
+    },
+    {
+      "part": "Touch target",
+      "holds": "With onPress, a 44 × 44 area surrounds the chevron.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "With onPress, a 44 × 44 area surrounds the chevron."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Put a back arrow beside a screen title, as its own button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Beside a screen title, as its own button."
+      },
+      "target": "direction",
+      "value": "Back"
+    },
+    {
+      "text": "Put a down arrow next to a label that opens more content below.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Next to a label that opens more content below."
+      },
+      "target": "direction",
+      "value": "Down"
+    },
+    {
+      "text": "Point forward in a row: the row leads on to another screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The row leads on to another screen."
+      }
+    },
+    {
+      "text": "One chevron per row: use the row's own arrow, and don't add a second one, since two chevrons look like a mistake.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Two chevrons look like a mistake."
+      }
+    },
+    {
+      "text": "In a header over a list, the back arrow is its own button; each row is pressable as a whole and ListItem draws its forward arrow. The screen handles the navigation.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The back arrow is its own button; each row is pressable as a whole and ListItem draws its forward arrow. The screen handles the navigation."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Set direction to where it leads: Forward leads to another screen, Back returns to the previous one, and Down opens content below.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Forward leads to another screen, Back returns to the previous one, and Down opens content below."
+      },
+      "target": "direction"
+    },
+    {
+      "text": "Left out, direction is Back, a left chevron, so set Forward or Down when the arrow points elsewhere.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "direction"
+    },
+    {
+      "text": "Forward: at the end of a row; ListItem draws it for you.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "At the end of a row. ListItem draws it for you."
+      },
+      "target": "direction",
+      "value": "Forward"
+    },
+    {
+      "text": "Don't point back in a row: a back arrow reads as leaving, not opening.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A back arrow reads as leaving, not opening."
+      },
+      "target": "direction",
+      "value": "Back"
+    },
+    {
+      "text": "Make the whole row pressable, and give the arrow onPress only when it stands alone.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Make the whole row pressable, and give the arrow onPress only when it stands alone."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Give it onPress and it gains a 44 × 44 pressable area; without it, it is a small image.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Give it onPress and it gains a 44 × 44 pressable area; without it, it is a small image."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Don't make only the arrow pressable in a row: people tap the label and nothing happens.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "People tap the label and nothing happens."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "The chevron is 6 × 10 px (10 × 6 pointing down). A pressable arrow reserves 44 × 44 px so it is easy to tap.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The chevron is 6 × 10 px (10 × 6 pointing down). A pressable arrow reserves 44 × 44 px so it is easy to tap."
+      }
+    },
+    {
+      "text": "disabled stops presses when onPress is set; it defaults to false.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "disabled"
+    },
+    {
+      "text": "The arrow has no disabled look.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled look."
+      },
+      "target": "disabled"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name the destination.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name the destination"
+        },
+        "target": "accessibilityLabel"
+      },
+      {
+        "text": "The arrow has no visible text.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The arrow has no visible text."
+        }
+      }
+    ],
+    "good": [
+      "Back to Home"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Decorative",
+      "when": "Without onPress: a 6 × 10 image; the row around it handles presses.",
+      "from": {
+        "section": "states",
+        "quote": "A 6 × 10 image; the row around it handles presses."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress: a 44 × 44 button.",
+      "from": {
+        "section": "states",
+        "quote": "A 44 × 44 button; press it to see it dim."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "A pressable arrow dims to 70% while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "With onPress it is a button that dims to 70% while pressed."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With disabled set there is no disabled look: the arrow looks as it does enabled.",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled look."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Without onPress the arrow is an image inside something pressable; with onPress it is a button.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Without onPress the arrow is an image inside something pressable. With onPress it is a button"
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "When it is a button, set accessibilityLabel to where it goes, such as “Back to Home”, instead of the default “Go back”.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "When it is a button, set accessibilityLabel to where it goes, such as “Back to Home”, instead of the default “Go back”."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Make the whole row pressable",
+      "dont": "Make only the arrow pressable",
+      "why": "People tap the label and nothing happens.",
+      "from": {
+        "section": "doDont",
+        "quote": "Make the whole row pressable"
+      }
+    },
+    {
+      "do": "Point forward in a row",
+      "dont": "Point back in a row",
+      "why": "A back arrow reads as leaving, not opening.",
+      "from": {
+        "section": "doDont",
+        "quote": "Point forward in a row"
+      }
+    },
+    {
+      "do": "Use the row’s own arrow",
+      "dont": "Add a second arrow",
+      "why": "Two chevrons look like a mistake.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use the row’s own arrow"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A header and a list of accounts, the guide's In context as its example code draws it: a back arrow beside the screen title “Accounts”, as its own button, over two account rows in a Card. The arrow's accessibilityLabel names where it goes (“Back to Home”), as the guide's Content section says. Each ListItem is pressable as a whole and draws its own forward arrow; the empty onPress handlers stand for the screen's navigation (back to Home, or opening that account).",
+      "jsx": "<VStack>\n  <HStack alignVertical=\"center\">\n    <NavArrow direction=\"Back\" accessibilityLabel=\"Back to Home\" onPress={() => {}} />\n    <Text text=\"Accounts\" />\n  </HStack>\n  <Card>\n    <VStack>\n      <ListItem layout=\"Horizontal\" title=\"Savings •• 0245\" supportText=\"₹1,24,500\" onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Salary •• 1180\" supportText=\"₹48,200\" onPress={() => {}} />\n    </VStack>\n  </Card>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The back arrow is its own button; each row is pressable as a whole and ListItem draws its forward arrow. The screen handles the navigation."
+      }
+    },
+    {
+      "purpose": "The guide's labelled back arrow: beside the screen title “Accounts”, a pressable Back arrow that screen readers hear as “Back to Home”. The empty onPress stands for the screen going back to Home.",
+      "jsx": "<HStack alignVertical=\"center\">\n  <NavArrow direction=\"Back\" accessibilityLabel=\"Back to Home\" onPress={() => {}} />\n  <Text text=\"Accounts\" />\n</HStack>",
+      "from": {
+        "section": "content",
+        "quote": "Screen readers hear “Back to Home”."
+      }
+    },
+    {
+      "purpose": "A forward arrow at the end of a row, the guide's Forward card: ListItem draws it for you, and the whole row (“Statements”, “Monthly and yearly”) is pressable. The empty onPress stands for the screen opening Statements.",
+      "jsx": "<ListItem layout=\"Horizontal\" title=\"Statements\" supportText=\"Monthly and yearly\" onPress={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "At the end of a row. ListItem draws it for you."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "direction",
+        "type": "NavArrowDirection",
+        "required": false,
+        "source": "types",
+        "values": [
+          "Back",
+          "Forward",
+          "Down"
+        ],
+        "default": "Back",
+        "description": "Direction of the arrow: 'Back' (left chevron), 'Forward' (right chevron), or 'Down'. Default \"Back\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes used to resolve design tokens."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional additional container style."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the arrow."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Called when the arrow is pressed. Expands the hit area to at least 44×44."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Disables press interaction when `onPress` is provided. Default false, from the component source."
+      },
+      {
+        "name": "...SafePressableProps",
+        "type": "SafePressableProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context5",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Fullscreen Modal",
+          "Mode 1"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "List Item Style",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Boxed",
+          "Minimal"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "NavArrow Direction",
+        "type": "mode collection",
+        "values": [
+          "Left&Right",
+          "Top&Bottom"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Left&Right"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection NavArrow reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      }
+    ],
+    "slots": [],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Called when the arrow is pressed. Expands the hit area to at least 44×44.",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=navarrow",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1444-33",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-navarrow--docs"
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "slug": "categorycard",
+  "label": "Category Card",
+  "guideCommit": "4a044e7567d826f9487e2a51a4f655630d5902a0",
+  "files": [
+    "src/guides/categorycard.guide.tsx"
+  ],
+  "evidence": "docs/evidence/categorycard.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T01:23:08.181Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "category tile",
+    "category rail",
+    "card tab",
+    "product category",
+    "filter tile"
+  ],
+  "title": "Category Card",
+  "summary": "Use a Category Card for one category in a horizontal rail: a picture, a one- or two-word label, and an optional badge.",
+  "corePrinciple": "One picture, one word, one tap.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7659-4398",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-categorycard--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A badge, a picture, and a label",
+      "description": "A 60 px white tile stacks a square picture over a one-line label, with an optional badge on its top edge. Here a Coin Icon Capsule in imageSlot stands in for your category art.",
+      "blocks": [
+        "Shown at 2.5×",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Badge",
+        "Optional: badge sets one short word, cut off past 38 px.",
+        "Image",
+        "imageSource fills a 36 px square; imageSlot takes any node instead, as here.",
+        "Label",
+        "12 px on one line; by default a longer label spills past both edges.",
+        "Card",
+        "A white tile, 60 px wide, whose 1 px border turns gold when active."
+      ],
+      "specimen": [
+        "New",
+        "Gold"
+      ],
+      "anatomy": [
+        {
+          "part": "Badge",
+          "note": "Optional: badge sets one short word, cut off past 38 px."
+        },
+        {
+          "part": "Image",
+          "note": "imageSource fills a 36 px square; imageSlot takes any node instead, as here."
+        },
+        {
+          "part": "Label",
+          "note": "12 px on one line; by default a longer label spills past both edges."
+        },
+        {
+          "part": "Card",
+          "note": "A white tile, 60 px wide, whose 1 px border turns gold when active."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Badge and brand colour",
+      "description": "badge adds a short tag on the card’s top edge; leave it out for none. AppearanceBrand colours the badge, Tertiary blue by default, and anything in imageSlot gets the same modes, so the Icon Capsule follows it. Emphasis Medium or Low makes the badge pale. Radius rounds the corners of the default image only. The card’s surface, border, and label look the same in every mode.",
+      "blocks": [
+        "No badge",
+        "Leave badge out: just the picture and the label.",
+        "Tertiary",
+        "The default: a blue badge, as in Figma.",
+        "Primary",
+        "Gold for the badge and the capsule.",
+        "Secondary",
+        "Purple for the badge and the capsule.",
+        "Neutral",
+        "Dark grey, for a quieter rail.",
+        "Emphasis Low",
+        "A pale badge; the capsule drops its fill."
+      ],
+      "specimen": [
+        "Gold",
+        "New"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "No badge",
+          "description": "Leave badge out: just the picture and the label."
+        },
+        {
+          "title": "Tertiary",
+          "description": "The default: a blue badge, as in Figma."
+        },
+        {
+          "title": "Primary",
+          "description": "Gold for the badge and the capsule."
+        },
+        {
+          "title": "Secondary",
+          "description": "Purple for the badge and the capsule."
+        },
+        {
+          "title": "Neutral",
+          "description": "Dark grey, for a quieter rail."
+        },
+        {
+          "title": "Emphasis Low",
+          "description": "A pale badge; the capsule drops its fill."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Idle, active, and disabled",
+      "description": "active turns the border gold on the category that’s showing. The card keeps no state of its own: the screen sets active on one card and moves it in onPress. A pressed card dims to 85 %; disabled dims it to half and stops onPress.",
+      "blocks": [
+        "Idle",
+        "The default: a light grey border.",
+        "Active",
+        "A gold border marks the category that’s showing.",
+        "Disabled",
+        "Half opacity, and onPress isn’t called."
+      ],
+      "specimen": [
+        "Loans"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Idle",
+          "description": "The default: a light grey border."
+        },
+        {
+          "title": "Active",
+          "description": "A gold border marks the category that’s showing."
+        },
+        {
+          "title": "Disabled",
+          "description": "Half opacity, and onPress isn’t called."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "60 px wide, as tall as its content",
+      "description": "The card is 60 px wide unless you set width, and as tall as its content: 4 px padding, the picture, a 6 px gap, and a 16 px label line. With the default 36 px image it’s 68 px tall; the 42 px capsule here makes it 74. A badge sits 11 px above the card, and every card keeps that room in its layout, with or without a badge.",
+      "blocks": [
+        "Shown at 2.5×",
+        "60 × 74",
+        "6",
+        "60 px, the default",
+        "“Mutual funds” is wider than the card and spills.",
+        "width={80}",
+        "A wider card holds the label; give every card in a rail the same width."
+      ],
+      "specimen": [
+        "Gold",
+        "Mutual funds"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "60 px, the default",
+          "description": "“Mutual funds” is wider than the card and spills."
+        },
+        {
+          "title": "width={80}",
+          "description": "A wider card holds the label; give every card in a rail the same width."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One or two short words",
+      "description": "Name the category in a word or two, and keep the badge to one short word that doesn’t repeat it. A label wider than the card spills past both edges by default. singleLine={false} wraps it onto two lines and makes that card taller; add disableTruncation={false} as well for one line that ends in an ellipsis, as Figma shows.",
+      "blocks": [
+        "Spills, the default",
+        "One line, wider than the card.",
+        "Wraps",
+        "Two lines; this card grows 16 px taller.",
+        "Ellipsis",
+        "One line, cut to the card’s width."
+      ],
+      "specimen": [
+        "Mutual funds"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Spills, the default",
+          "description": "One line, wider than the card."
+        },
+        {
+          "title": "Wraps",
+          "description": "Two lines; this card grows 16 px taller."
+        },
+        {
+          "title": "Ellipsis",
+          "description": "One line, cut to the card’s width."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A category rail on the Invest screen",
+      "description": "The screen keeps the selected category and sets active on that card; each card’s onPress selects it. Every card keeps 11 px above it for a badge, so cards with and without one line up in the rail.",
+      "blocks": [
+        "Showing Gold"
+      ],
+      "specimen": [
+        "Invest",
+        "Pick a category",
+        "New",
+        "Gold",
+        "Loans",
+        "Savings",
+        "Hot",
+        "Insurance"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Short words, one active card",
+      "description": "Each pair shows a rail people scan at a glance next to one that spills, clips, or marks two categories at once.",
+      "blocks": [
+        "Do",
+        "Keep the label short",
+        "“Gold” sits inside the card.",
+        "Don’t",
+        "Write a long label",
+        "“Mutual funds” spills past both edges of the card.",
+        "One short badge word",
+        "“New” fits the badge.",
+        "Write a long badge",
+        "“Limited offer” is cut to a few letters.",
+        "Mark one card active",
+        "One gold border shows the category on screen.",
+        "Mark several cards active",
+        "Two gold borders leave people unsure which category is showing."
+      ],
+      "specimen": [
+        "Gold",
+        "Mutual funds",
+        "New",
+        "Limited offer",
+        "Loans"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the label short",
+            "caption": "“Gold” sits inside the card.",
+            "specimen": "Gold"
+          },
+          "dont": {
+            "title": "Write a long label",
+            "caption": "“Mutual funds” spills past both edges of the card.",
+            "specimen": "Mutual funds"
+          }
+        },
+        {
+          "do": {
+            "title": "One short badge word",
+            "caption": "“New” fits the badge.",
+            "specimen": "New · Gold"
+          },
+          "dont": {
+            "title": "Write a long badge",
+            "caption": "“Limited offer” is cut to a few letters.",
+            "specimen": "Limited offer · Gold"
+          }
+        },
+        {
+          "do": {
+            "title": "Mark one card active",
+            "caption": "One gold border shows the category on screen.",
+            "specimen": "New · Gold · Loans"
+          },
+          "dont": {
+            "title": "Mark several cards active",
+            "caption": "Two gold borders leave people unsure which category is showing.",
+            "specimen": "New · Gold · Loans"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Category Card contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Active",
+        "Long label",
+        "Without badge",
+        "Image slot",
+        "Horizontal rail",
+        "Disabled",
+        "Checked 19 October 2026",
+        "Installed jfs-components is 0.1.78, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Category Card has a State variant (Idle, Active) and a badge on or off; in code, active and the badge text are props. Without an image the card shows a plain light square, so these examples put a Coin Icon Capsule in imageSlot. The label’s font token is spelt “Jio Type Var”, so the label shows in a fallback serif font until the token is fixed. Figma ends a long label in an ellipsis; the package lets it spill unless you change singleLine and disableTruncation. Every card keeps 11 px above it for a badge, so a rail lines up with or without badges, and on the web the active card is announced as pressed. The published Storybook still shows the older generated page.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

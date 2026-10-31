@@ -1,0 +1,1011 @@
+{
+  "schemaVersion": 1,
+  "id": "ProductMerchandisingCard",
+  "slug": "productmerchandisingcard",
+  "category": "card",
+  "tags": [
+    "promo card",
+    "merchandising card",
+    "campaign card",
+    "offer card",
+    "banner",
+    "image card"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:54:03Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The Product Merchandising Card guide (3f56271) and its evidence were checked on 20 October 2026 on the c7d3348 build; the installed v0.1.78-dbe0e02 has a different ProductMerchandisingCard.tsx (9e4e6ac at c7d3348, 660c1b0 at dbe0e02), changed by Biscuit's ace46ca and dbe0e02 for Component Bug #356, and the evidence's 28 October note says the guide's copy waits for #356's own publish. Read against the installed source, these sentences no longer hold, and the entry leaves them out: (1) Anatomy's Footer note “A blurred copy of the photo behind the text; no dark shade.”: a 65 px gradient from transparent to black now sits over the blur (ProductMerchandisingCard.tsx lines 331–399). (2) Configuration's “badge, avatar, specialBadge, and cta replace those parts and don’t get the card’s modes.” and the Badge icons caption “An Icon before each label; the card doesn’t colour it.”: the slots are cloned with the card's modes (45–58, 235–297), and a default Icon in badgeIcon is purple, rgb(93, 0, 181), and white in specialBadgeIcon. (3) The Badge Size Small caption “Smaller badges.”: the glass badge is pinned to Badge Size Medium (224–233, 505–513), so only the corner badge gets smaller. (4) Do & Don'ts: “White text needs a photo behind it.” and “The card has no background, so its white title disappears.”: without imageSource the card draws a #141414 surface (318–324, 377–379); “A stranger’s stock photo appears.”: without avatarSource the avatar is a monogram of avatarMonogram or else the title's first letter (248–262), and the page rendered on this build already shows “S” in that Don't; and the description's “loses its text, shows a stranger”. (5) Sources: “… and has no gradient”, “Figma darkens the footer with a black gradient, while the package draws only a blurred copy of the photo, so the white text sits on a pale haze, with a lighter band where the copy is re-cropped.”, “Badge icons and the badge, avatar, specialBadge, and cta slots don’t get the card’s modes.” and “Without avatarSource or avatarMonogram the avatar is a stock portrait, and without imageSource the card has no background.” The guide is updated when Component Bug #356 publishes (the Component Fix flow updates the guide copy a fix changed; the sentences are listed in a note on #356), then a new Agent pack ticket re-extracts. Added by Claude Code in the overnight run agentpack-r25, for Marcin to confirm. Component Bug #356.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Product Merchandising Card to promote one product or campaign on a photo, with a badge, a short title, and one action.",
+  "useWhen": [
+    {
+      "text": "Promote one product or campaign on a photo, with a badge, a short title and one action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Product Merchandising Card to promote one product or campaign on a photo, with a badge, a short title, and one action."
+      }
+    },
+    {
+      "text": "The photo sells; the footer names it and acts.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "The photo sells; the footer names it and acts."
+      }
+    },
+    {
+      "text": "One campaign or product, where the photo is the message, as the card’s handwritten Storybook docs say in the evidence’s record.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "one campaign or product, where the photo is the message"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A spec sheet: the card’s handwritten Storybook docs, as the evidence records them, use Product Overview.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a spec sheet (ProductOverview) or a card with no photo"
+      },
+      "useInstead": "ProductOverview"
+    },
+    {
+      "text": "A card with no photo: the card’s handwritten Storybook docs, as the evidence records them, say it isn’t for one.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a spec sheet (ProductOverview) or a card with no photo"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Photo",
+      "holds": "imageSource, cropped to fill the card.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource, cropped to fill the card."
+      }
+    },
+    {
+      "part": "Avatar",
+      "holds": "avatarSource, or avatarMonogram’s initials, 36 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "avatarSource, or avatarMonogram’s initials, 36 px."
+      }
+    },
+    {
+      "part": "Corner badge",
+      "holds": "badgeLabel: a lilac Badge; hidden without a label.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "badgeLabel: a lilac Badge; hidden without a label."
+      }
+    },
+    {
+      "part": "Glass badge",
+      "holds": "specialBadgeLabel: a small frosted badge above the title; hidden without a label.",
+      "required": false,
+      "from": {
+        "fact": "/facts/props/10"
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title, 14 px bold white, over subtitle; one line each.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "title, 14 px bold white, over subtitle; one line each."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "A small purple Button from ctaLabel and onCtaPress.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A small purple Button from ctaLabel and onCtaPress."
+      }
+    },
+    {
+      "part": "Footer",
+      "holds": "A blurred band under the footer’s content, with a gradient over the blur.",
+      "required": true,
+      "from": {
+        "section": "evidence",
+        "quote": "a separate blurred band before the footer’s content, so the targets count from child 2 (photo), 3 (header) and 5 (footer content); a gradient now sits over the blur"
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "badgeIcon",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "badge",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "avatar",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "specialBadgeIcon",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "specialBadge",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "cta",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "One offer under the screen’s heading, as on the guide’s Home screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Home shows one offer under its heading."
+      }
+    },
+    {
+      "text": "The screen owns what the action does: on the guide’s Home screen, Open starts the screen’s own sign-up through onCtaPress, and the card shows the offer.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Open starts the screen’s own sign-up through onCtaPress; the card only shows the offer."
+      },
+      "target": "onCtaPress"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass the photo in imageSource: the card has none of its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "imageSource is the photo; the card has none of its own."
+      },
+      "target": "imageSource"
+    },
+    {
+      "text": "badgeLabel adds the corner badge at the top right; without a label the badge is hidden.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "badgeLabel"
+    },
+    {
+      "text": "badgeIcon puts a node such as an Icon before the corner badge’s label, and gives it the lilac badge’s modes, so a default Icon is purple.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/4"
+      },
+      "target": "badgeIcon"
+    },
+    {
+      "text": "specialBadgeIcon puts a leading node, such as an Icon, inside the special badge.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "specialBadgeIcon"
+    },
+    {
+      "text": "avatarSource shows a round picture at the top left.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it."
+      },
+      "target": "avatarSource"
+    },
+    {
+      "text": "Pass your own avatar in avatarSource, such as the brand’s logo in the corner.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The brand’s logo in the corner."
+      },
+      "target": "avatarSource"
+    },
+    {
+      "text": "avatarMonogram shows initials instead of a picture.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it."
+      },
+      "target": "avatarMonogram"
+    },
+    {
+      "text": "showAvatar={false} removes the avatar.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it."
+      },
+      "target": "showAvatar",
+      "value": "false"
+    },
+    {
+      "text": "ctaLabel and onCtaPress make the small purple Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "ctaLabel and onCtaPress make the small purple Button."
+      },
+      "target": "ctaLabel"
+    },
+    {
+      "text": "Pass onCtaPress: without it the Button still shows and does nothing.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Without `onCtaPress` the Button still renders and does nothing."
+      },
+      "target": "onCtaPress"
+    },
+    {
+      "text": "One modes object styles the corner badge and the Button together; Emphasis, Badge Size and Button / Size change them too.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "One modes object styles the corner badge and the Button together: AppearanceBrand Primary turns both gold, and Emphasis, Badge Size, and Button / Size change them too."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "The card’s modes reach its default parts and anything passed in the badge, avatar, specialBadge, cta and icon slots.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/18"
+      },
+      "target": "modes"
+    },
+    {
+      "text": "AppearanceBrand Primary: a cream badge and a gold Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A cream badge and a gold Button."
+      },
+      "target": "AppearanceBrand",
+      "value": "Primary"
+    },
+    {
+      "text": "Emphasis Medium: a light purple Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A light purple Button."
+      },
+      "target": "Emphasis",
+      "value": "Medium"
+    },
+    {
+      "text": "Button / Size XS: a smaller, 24 px Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A smaller, 24 px Button."
+      },
+      "target": "Button / Size",
+      "value": "XS"
+    },
+    {
+      "text": "Use the Button or the whole card, not both: with onPress, Open stays a separate button inside the card, so drop the Button with cta={false}.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Open stays a separate button inside it, so use one or the other: cta={false} drops the Button."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "cta={false} drops the Button.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Open stays a separate button inside it, so use one or the other: cta={false} drops the Button."
+      },
+      "target": "cta",
+      "value": "false"
+    },
+    {
+      "text": "The card is 223 px tall unless you set height.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 223 px tall unless you set height, and takes its width from its host; Figma draws it at 328 px."
+      },
+      "target": "height"
+    },
+    {
+      "text": "The card takes its width from its host; Figma draws it at 328 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 223 px tall unless you set height, and takes its width from its host; Figma draws it at 328 px."
+      }
+    },
+    {
+      "text": "The photo fills and crops to the card.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The photo fills and crops to the card."
+      }
+    },
+    {
+      "text": "The header and footer sit on the photo: the footer grows upward with its content, and in a narrow card the Button drops under the title.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The header and footer sit on the photo: the footer grows upward with its content, and in a narrow card the Button drops under the title."
+      }
+    },
+    {
+      "text": "The title and subtitle stay on one line and end in … unless disableTruncation is set.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The title and subtitle stay on one line and end in … unless disableTruncation is set."
+      },
+      "target": "disableTruncation"
+    },
+    {
+      "text": "disableTruncation: the title and subtitle wrap, and the footer grows upward.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "They wrap, and the footer grows upward."
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    },
+    {
+      "text": "The card has no selected, disabled or loading look.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "There’s no selected, disabled, or loading look."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make the title the product or campaign in two to four words.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the product or campaign in two to four words"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Make the subtitle one line of support.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "the subtitle one line of support"
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Badge labels are a word or two, such as New or Zero balance.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Badge labels are a word or two, such as New or Zero balance"
+        },
+        "target": "badgeLabel"
+      },
+      {
+        "text": "Make ctaLabel a verb, such as Open or Buy.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "ctaLabel a verb, such as Open or Buy."
+        },
+        "target": "ctaLabel"
+      },
+      {
+        "text": "Don’t write a long title: it ends in … on one line.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It ends in … on one line"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Set title: left out, it reads “Title”.",
+        "strength": "recommended",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Set subtitle: left out, it reads “Subtitle”.",
+        "strength": "recommended",
+        "from": {
+          "fact": "/facts/props/2"
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Set ctaLabel: left out, the Button reads “CTA”.",
+        "strength": "recommended",
+        "from": {
+          "fact": "/facts/props/13"
+        },
+        "target": "ctaLabel"
+      }
+    ],
+    "good": [
+      "Savings account",
+      "Open in 5 minutes",
+      "New",
+      "Zero balance",
+      "Open",
+      "Festive rewards",
+      "Earn 2× JioPoints on UPI",
+      "Diwali",
+      "Ends Sunday",
+      "Join"
+    ],
+    "bad": [
+      "Zero-balance savings account with free debit card"
+    ]
+  },
+  "states": [
+    {
+      "state": "Button acts",
+      "when": "The default, without onPress: the card isn’t pressable, its Button is.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t pressable: its Button is."
+      }
+    },
+    {
+      "state": "Whole card",
+      "when": "With onPress the whole card is one button, which dims slightly while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button that dims slightly while pressed"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Pass accessibilityLabel with the offer: the photo tells a screen reader nothing.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Pass accessibilityLabel with the offer: the photo tells a screen reader nothing."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "A pressable card is one button, announced by accessibilityLabel or else the title.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button that dims slightly while pressed, announced by accessibilityLabel or the title."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Left out, accessibilityLabel falls back to the title.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/20"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "A short title",
+      "dont": "A long title",
+      "why": "It ends in … on one line",
+      "from": {
+        "section": "doDont",
+        "quote": "A short title"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The offer on the Home screen, the guide’s In context: a Title heading over one card with a photo, an avatar, both badges and the Open Button. The URIs stand for the offer’s photo and the brand’s logo, and onCtaPress for the screen starting its own sign-up. The accessibilityLabel is the one the guide’s code gives the card (the rendered copy doesn’t show it).",
+      "jsx": "<VStack>\n  <Title title=\"For you\" subtitle=\"Offers picked for your savings\" />\n  <ProductMerchandisingCard\n    imageSource={{ uri: 'https://example.com/savings-account-photo.png' }}\n    avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n    badgeLabel=\"New\"\n    specialBadgeLabel=\"Zero balance\"\n    title=\"Savings account\"\n    subtitle=\"Open in 5 minutes\"\n    ctaLabel=\"Open\"\n    onCtaPress={() => {}}\n    accessibilityLabel=\"Savings account, zero balance, open in 5 minutes\"\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Open starts the screen’s own sign-up through onCtaPress; the card only shows the offer."
+      }
+    },
+    {
+      "purpose": "The whole card as the one target, the guide’s Whole card state: onPress makes the card one button and cta={false} drops the Button, so the card shows no Open. The URIs stand for the offer’s photo and the brand’s logo, and onPress for the screen opening the offer.",
+      "jsx": "<ProductMerchandisingCard\n  imageSource={{ uri: 'https://example.com/savings-account-photo.png' }}\n  avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  badgeLabel=\"New\"\n  specialBadgeLabel=\"Zero balance\"\n  title=\"Savings account\"\n  subtitle=\"Open in 5 minutes\"\n  cta={false}\n  onPress={() => {}}\n  accessibilityLabel=\"Savings account, zero balance, open in 5 minutes\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "cta={false}: the card is the one target."
+      }
+    },
+    {
+      "purpose": "A campaign, the guide’s Content example: the campaign as the title, its reward as the subtitle, Diwali and Ends Sunday as the badges, and Join as the verb. The URIs stand for the campaign’s photo and the brand’s logo, and onCtaPress for the screen joining the campaign. The accessibilityLabel is the one the guide’s code gives it (the rendered copy doesn’t show it).",
+      "jsx": "<ProductMerchandisingCard\n  imageSource={{ uri: 'https://example.com/festive-rewards-photo.png' }}\n  avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  badgeLabel=\"Diwali\"\n  specialBadgeLabel=\"Ends Sunday\"\n  title=\"Festive rewards\"\n  subtitle=\"Earn 2× JioPoints on UPI\"\n  ctaLabel=\"Join\"\n  onCtaPress={() => {}}\n  accessibilityLabel=\"Festive rewards, earn 2× JioPoints on UPI, ends Sunday\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "A campaign, its reward, and Join."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Background media for the card. Accepts a URL string or any RN `ImageSourcePropType` (same shape as `Avatar`, `MediaCard`, etc.). The image is rendered full-bleed behind the header and glass footer."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Title",
+        "description": "Footer title (bold, white). Default \"Title\", from the component source."
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Subtitle",
+        "description": "Footer subtitle (muted). Default \"Subtitle\", from the component source."
+      },
+      {
+        "name": "badgeLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Header badge label (top-right). The badge is hidden when this is `undefined` and no `badge` override is provided."
+      },
+      {
+        "name": "badgeIcon",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional leading node (icon/image) rendered before the header badge label, inside the badge surface. Maps to `Badge`'s `leading` slot — the same pattern as `specialBadgeIcon` for the footer badge. Ignored when a full `badge` override is supplied. Receives the lilac-badge modes so a default `Icon` is purple."
+      },
+      {
+        "name": "badge",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the header badge. Takes precedence over `badgeLabel`. `null`, `false` and `''` hide the badge (same as omitting `badgeLabel`)."
+      },
+      {
+        "name": "showAvatar",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Show the header avatar (top-left). Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "avatarSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Avatar image source."
+      },
+      {
+        "name": "avatarMonogram",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Avatar monogram fallback when no image is supplied."
+      },
+      {
+        "name": "avatar",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the header avatar. Takes precedence over avatar props. `null`, `false` and `''` hide the avatar."
+      },
+      {
+        "name": "specialBadgeLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Footer \"special badge\" label (small frosted pill above the title). The badge is hidden when this is `undefined` and no `specialBadge` override is provided."
+      },
+      {
+        "name": "specialBadgeIcon",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional leading node (icon/image) rendered inside the special badge."
+      },
+      {
+        "name": "specialBadge",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the special badge. Takes precedence over the props above. `null`, `false` and `''` hide the pill."
+      },
+      {
+        "name": "ctaLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "CTA",
+        "description": "CTA button label. Defaults to `\"CTA\"`. Default \"CTA\", from the component source."
+      },
+      {
+        "name": "onCtaPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "CTA button press handler."
+      },
+      {
+        "name": "cta",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Full override for the CTA. Takes precedence over `ctaLabel`/`onCtaPress`. `null`, `false` and `''` hide the button."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "With onPress the card is a Pressable with role button, named accessibilityLabel or else the title, at 0.92 opacity while pressed; the Button keeps its own onCtaPress, so the two nest, a button in a button. Declared: Press handler for the whole card. When set, the card becomes pressable.",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 223,
+        "description": "Card height in px. Defaults to `223` (Figma spec). Default 223, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object for design-token resolution. Cascaded to default children and to `badge` / `avatar` / `specialBadge` / `cta` / icon slots."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the card container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the card. Defaults to `title`."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight. Also forwarded to the default glass special badge (not the corner badge)."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "The card gives its corner badge and its Button AppearanceBrand Secondary unless modes set one: a lilac badge with a purple label, and a purple Button. Declared: A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Secondary",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "The card’s avatar is Avatar Size M, 36 px, unless modes set one. Declared: A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "M",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "The card’s Button is Button / Size S, 32 px, unless modes set one. Declared: A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "The card gives its corner badge Emphasis Medium unless modes set one. Declared: A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "High",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection ProductMerchandisingCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "badgeIcon",
+        "type": "React.ReactNode",
+        "description": "Optional leading node (icon/image) rendered before the header badge label, inside the badge surface. Maps to `Badge`'s `leading` slot — the same pattern as `specialBadgeIcon` for the footer badge. Ignored when a full `badge` override is supplied. Receives the lilac-badge modes so a default `Icon` is purple.",
+        "source": "types"
+      },
+      {
+        "name": "badge",
+        "type": "React.ReactNode",
+        "description": "Full override for the header badge. Takes precedence over `badgeLabel`. `null`, `false` and `''` hide the badge (same as omitting `badgeLabel`).",
+        "source": "types"
+      },
+      {
+        "name": "avatar",
+        "type": "React.ReactNode",
+        "description": "Full override for the header avatar. Takes precedence over avatar props. `null`, `false` and `''` hide the avatar.",
+        "source": "types"
+      },
+      {
+        "name": "specialBadgeIcon",
+        "type": "React.ReactNode",
+        "description": "Optional leading node (icon/image) rendered inside the special badge.",
+        "source": "types"
+      },
+      {
+        "name": "specialBadge",
+        "type": "React.ReactNode",
+        "description": "Full override for the special badge. Takes precedence over the props above. `null`, `false` and `''` hide the pill.",
+        "source": "types"
+      },
+      {
+        "name": "cta",
+        "type": "React.ReactNode",
+        "description": "Full override for the CTA. Takes precedence over `ctaLabel`/`onCtaPress`. `null`, `false` and `''` hide the button.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onCtaPress",
+        "type": "() => void",
+        "description": "CTA button press handler.",
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the whole card. When set, the card becomes pressable.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "At 328 px with both badges the header is 60 px and the footer 97, where Figma’s are 55 and 95, and the badges are 23 px against Figma’s 22 (Component Bug #356).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "Figma binds a title font-weight token that the token file lacks; the code uses the body high weight token, also 700 (Component Bug #356).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      },
+      {
+        "text": "Figma’s card has the booleans showBadge and showSpecialBadge; the package has neither and shows each badge only when you pass its label (Component Bug #356).",
+        "source": "evidence",
+        "checkedOn": "2026-10-20"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=productmerchandisingcard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5277-317",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-productmerchandisingcard--docs"
+  }
+}

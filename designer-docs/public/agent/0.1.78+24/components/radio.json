@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "id": "Radio",
+  "slug": "radio",
+  "category": "input",
+  "tags": [
+    "radio button",
+    "single select",
+    "single choice",
+    "option"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T02:32:56Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The Radio guide (4e470cf) was checked on 1 October 2026 on 0.1.78 (5b6894b); Radio.tsx and all 37 radio tokens are the same on the installed v0.1.78-dbe0e02. Read against the installed source and the guide page rendered on it (31 October, headless Chrome, 1280 px), one sentence does not hold, and the entry leaves it out: the States description's “keyboard focus adds a yellow ring and an orange border.” is true only of an unselected Radio. A focused selected Radio keeps its selected look, a deep-purple border rgb(34, 0, 74) and no ring (box-shadow none): the orange border is a fallback for a focused unselected Radio only (Radio.tsx lines 142–147), and radio/focusSelected/boxShadow/size is not in the packaged Coin Variables, so the ring's size is 0 (165, 177, 192). The published Storybook (an older build) draws the same, so this is also a Component Bug: a selected Radio shows no Coin focus indicator. The entry's Focus state rests on the evidence's 0.1.78 sentence for an unselected Radio. Component Bug #548 asks for the focus ring on a selected Radio; once it is fixed the sentence holds, and if it isn't, the guide should say the ring and the orange border show on an unselected Radio. Then re-extract. Added by Claude Code in the overnight run agentpack-r24, for Marcin to confirm. Component Bug #548.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Radio to pick exactly one option from a short list, such as the account to pay from or how often to invest.",
+  "useWhen": [
+    {
+      "text": "Pick exactly one option from a short list, such as the account to pay from or how often to invest.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Radio to pick exactly one option from a short list, such as the account to pay from or how often to invest."
+      }
+    },
+    {
+      "text": "One choice from a visible set.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One choice from a visible set."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A yes-or-no choice: use a Checkbox, which can be ticked and cleared; once chosen, a single Radio can't be cleared.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a Checkbox for yes or no"
+      },
+      "useInstead": "Checkbox"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Ring",
+      "holds": "A 1 px deep-purple border outlines the 18 px circle, white inside when unselected; a disabled Radio is grey, or pale purple when selected (see States).",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 1 px deep-purple border outlines the circle."
+      }
+    },
+    {
+      "part": "Fill",
+      "holds": "The selected Radio fills purple.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The selected Radio fills purple."
+      }
+    },
+    {
+      "part": "Dot",
+      "holds": "A 10 px white dot confirms the choice, on the selected Radio.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 10 px white dot confirms the choice."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Put a label beside every Radio, and let the whole row select it.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Put a label beside every Radio, and let the whole row select it."
+      }
+    },
+    {
+      "text": "Use list rows when options need detail, and a plain label for short options.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Use list rows when options need detail, and a plain label for short options."
+      }
+    },
+    {
+      "text": "In list rows, for options with detail such as accounts, the whole row selects its Radio.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For options with detail, such as accounts. The whole row selects its Radio."
+      }
+    },
+    {
+      "text": "Beside a short label, for short options, only the circle responds to a press: 18 px in a browser, 44 px on phones.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For short options. Only the circle responds to a press: 18 px in a browser, 44 px on phones."
+      }
+    },
+    {
+      "text": "The Radio is always 18 × 18 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The Radio is always 18 × 18 px."
+      }
+    },
+    {
+      "text": "On its own only the circle is pressable (44 px on phones, 18 px in a browser), so put it in a list row whose whole height and width select it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "On its own only the circle is pressable (44 px on phones, 18 px in a browser), so put it in a list row whose whole height and width select it."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Radio has no label of its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Radio has no label of its own."
+      }
+    },
+    {
+      "text": "Never let two Radios in a set be selected at once: Radio has no group, so the screen must stop a second selection.",
+      "strength": "required",
+      "from": {
+        "section": "doDont",
+        "quote": "Radio has no group, so the screen must stop a second selection."
+      },
+      "target": "selected"
+    },
+    {
+      "text": "The screen sets which Radio is selected and which are disabled.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The screen sets which Radio is selected and which are disabled."
+      },
+      "target": "selected"
+    },
+    {
+      "text": "The screen keeps the chosen option and passes selected to each Radio; on the guide's account screen, Continue is enabled once one is chosen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the chosen account, passes selected to each Radio, and enables Continue once one is chosen."
+      },
+      "target": "selected"
+    },
+    {
+      "text": "In list rows, pressing a row or its Radio selects it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Pressing a row or its Radio selects it."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Set disabled for an option that is unavailable now: the Radio turns grey and can't be pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Grey and not pressable, for an option that is unavailable now."
+      },
+      "target": "disabled"
+    },
+    {
+      "text": "Figma's eight variants come down to two props, selected and disabled; the package draws hover and focus itself.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma has eight variants (Idle, Hover, Active, Focus, and Disabled, unselected and selected); the package sets selected and disabled, and draws hover and focus itself."
+      }
+    },
+    {
+      "text": "RadioButton is a deprecated name for the same component: build with Radio.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "RadioButton is a deprecated name for the same component."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write options in sentence case with the same grammar, so they read as one set.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write options in sentence case with the same grammar, so they read as one set."
+        }
+      },
+      {
+        "text": "Lead with the word that tells the options apart.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Lead with the word that tells them apart"
+        }
+      },
+      {
+        "text": "Keep two to five options visible.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "keep two to five options visible."
+        }
+      },
+      {
+        "text": "Label every Radio, so each option says what it is.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Each option says what it is."
+        }
+      },
+      {
+        "text": "Don't leave Radios bare: without labels people can't tell the options apart.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Without labels people can’t tell the options apart."
+        }
+      }
+    ],
+    "good": [
+      "Monthly",
+      "Quarterly",
+      "Yearly",
+      "Savings •• 0245",
+      "Salary •• 1180",
+      "Joint •• 7731"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Unselected",
+      "when": "An empty ring: not chosen.",
+      "from": {
+        "section": "states",
+        "quote": "An empty ring: not chosen."
+      }
+    },
+    {
+      "state": "Selected",
+      "when": "With selected set: a purple fill with a white dot.",
+      "from": {
+        "section": "states",
+        "quote": "Purple fill with a white dot."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With disabled set: grey and not pressable, for an option that is unavailable now.",
+      "from": {
+        "section": "states",
+        "quote": "Grey and not pressable, for an option that is unavailable now."
+      }
+    },
+    {
+      "state": "Disabled and selected",
+      "when": "With disabled and selected set: pale purple, chosen but locked.",
+      "from": {
+        "section": "states",
+        "quote": "Pale purple: chosen, but locked."
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "Hover adds a lilac glow.",
+      "from": {
+        "section": "states",
+        "quote": "Hover adds a lilac glow"
+      }
+    },
+    {
+      "state": "Focus",
+      "when": "Keyboard focus on an unselected Radio draws an orange border with a 4 px yellow ring.",
+      "from": {
+        "section": "evidence",
+        "quote": "A focused unselected radio draws a `rgb(253,90,19)` (#fd5a13) border plus the existing 4 px yellow ring"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web a Radio is announced as a radio button with its selected state, and Space selects it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web a Radio is announced as a radio button with its selected state, Space selects it"
+      }
+    },
+    {
+      "text": "Name each Radio with accessibilityLabel.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Developers name each Radio with accessibilityLabel."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "A 44 px touch area is set in code; react-native-web ignores it, so in a browser the Radio still measures 18 × 18.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "A 44 px `hitSlop` is set in code. react-native-web's Pressable ignores it, so a browser still measures 18 × 18."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep exactly one selected",
+      "dont": "Select two at once",
+      "why": "Radio has no group, so the screen must stop a second selection.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep exactly one selected"
+      }
+    },
+    {
+      "do": "Label every Radio",
+      "dont": "Leave Radios bare",
+      "why": "Without labels people can’t tell the options apart.",
+      "from": {
+        "section": "doDont",
+        "quote": "Label every Radio"
+      }
+    },
+    {
+      "do": "Use a Checkbox for yes or no",
+      "dont": "Use a lone Radio",
+      "why": "Once chosen, a single Radio can’t be cleared.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a Checkbox for yes or no"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Choosing the account to pay from, the guide's In context: a Card holding three ListItem rows, each with a Radio as its trailing part, and a Continue Button. The titles and balances stand for the person's accounts; selected on Salary •• 1180 stands for the account the screen keeps as chosen; each row's onPress and its Radio's onPress stand for the screen choosing that account; Continue stays disabled until one is chosen, so here it is enabled. Each Radio is named by accessibilityLabel with its account, as the Sources note asks.",
+      "jsx": "<Card>\n  <VStack>\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"Savings •• 0245\"\n      supportText=\"₹1,24,500\"\n      onPress={() => {}}\n      trailing={<Radio selected={false} accessibilityLabel=\"Savings •• 0245\" onPress={() => {}} />}\n    />\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"Salary •• 1180\"\n      supportText=\"₹48,200\"\n      onPress={() => {}}\n      trailing={<Radio selected accessibilityLabel=\"Salary •• 1180\" onPress={() => {}} />}\n    />\n    <ListItem\n      layout=\"Horizontal\"\n      navArrow={false}\n      title=\"Joint •• 7731\"\n      supportText=\"₹9,870\"\n      onPress={() => {}}\n      trailing={<Radio selected={false} accessibilityLabel=\"Joint •• 7731\" onPress={() => {}} />}\n    />\n    <Button label=\"Continue\" onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the chosen account, passes selected to each Radio, and enables Continue once one is chosen."
+      }
+    },
+    {
+      "purpose": "Short options beside a plain label, the guide's Frequencies with its playground's Disable Yearly on: each option is an HStack of a Radio and a Text. selected on Monthly stands for the frequency the screen keeps; each onPress stands for the screen choosing that frequency; Yearly is disabled and has no onPress, as an option that is unavailable now. Each Radio is named by accessibilityLabel with its option.",
+      "jsx": "<VStack>\n  <HStack alignVertical=\"center\">\n    <Radio selected accessibilityLabel=\"Monthly\" onPress={() => {}} />\n    <Text text=\"Monthly\" />\n  </HStack>\n  <HStack alignVertical=\"center\">\n    <Radio selected={false} accessibilityLabel=\"Quarterly\" onPress={() => {}} />\n    <Text text=\"Quarterly\" />\n  </HStack>\n  <HStack alignVertical=\"center\">\n    <Radio selected={false} disabled accessibilityLabel=\"Yearly\" />\n    <Text text=\"Yearly\" />\n  </HStack>\n</VStack>",
+      "from": {
+        "section": "configuration",
+        "quote": "For short options. Only the circle responds to a press: 18 px in a browser, 44 px on phones."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "selected",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Whether the radio is selected. Default false, from the component source."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Whether the radio is disabled. Default false, from the component source."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Function to call when the radio is pressed."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object for design-token resolution."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Custom style for the radio container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "On the web accessibilityLabel becomes the Radio's aria-label. Declared: Accessibility label for screen readers / assistive tech.",
+        "checkedOn": "2026-10-01"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility hint for screen readers / assistive tech."
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test ID for testing."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Radio reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      }
+    ],
+    "slots": [],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Function to call when the radio is pressed.",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=radio",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=922-3645",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-radio--docs"
+  }
+}

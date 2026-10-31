@@ -1,8 +1,8 @@
 {
   "slug": "attached",
-  "entryHash": "fe2142bb5b8a073a81edc1026f52117a69209045d8c68e2315d447fabd714759",
+  "entryHash": "e086f1b508c00d5cf8097bc88e857acd11f7a70282ff94c6c707c8cd57e43b47",
   "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
-  "checkedAt": "2026-10-29T04:24:42Z",
+  "checkedAt": "2026-10-31T00:46:06Z",
   "reviewer": {
     "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
     "model": "claude-opus-5-5"
@@ -10,8 +10,8 @@
   "flags": [
     {
       "field": "/anatomy/0",
-      "reason": "misreads-source: Marks the main bounds part as alwaysPresent=false, but nothing in the guide supports an absent main child. The guide says \"The child in the main slot establishes the size and the visual object people identify first\", and both the \"Badge present\" and \"Badge absent\" states keep the main item. Only the badge-related parts are optional."
+      "reason": "misreads-source: The main child is marked alwaysPresent=false, but the guide says it \"establishes the size and the visual object people identify first\". It is present in both the \"Badge present\" and \"Badge absent\" states. Only the badge is optional."
     }
   ],
-  "notes": "/configuration/1 and /examples/0 say the default position is bottom-right. /examples/0 also says the main IconCapsule uses its default size, while the guide states it uses Icon Capsule Size M. The guide does not state either default. If both come from the package types they are fine; otherwise a human should check them. Also check that IconCapsule's default size is M, so that omitting the mode in the example matches the guide's composition."
+  "notes": "/examples/0 says the main IconCapsule is 'at its default size' and leaves out a size mode. The cited sources sentence says the guide uses Icon Capsule Size M for the main child. If IconCapsule's default is not M, the example misstates the guide; check this against the package. The 'default bottom-right anchor' claim and the circular=true / false mapping to Circle edge / Bounding box are package facts and were not judged here. /configuration/6 turns the guide's own sizing choice into general advice. The evidence supports that advice (a style override bypasses the native radius), so it is not flagged."
 }

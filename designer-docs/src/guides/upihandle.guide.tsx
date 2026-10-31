@@ -9,9 +9,9 @@ const FIGMA = 'https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Componen
 const AVATAR = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46"><rect width="46" height="46" fill="#E9DDF7"/><text x="23" y="30" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="600" fill="#5D00B5">P</text></svg>'
 const noop = () => {}
 const ICON_NOTES = {
-  Copy: 'Pressing the pill copies the handle.',
-  Scan: 'Pressing the pill opens the scanner.',
-  None: 'Without an icon the pill only shows the handle.',
+  Copy: 'Pressing the UPI Handle copies the handle.',
+  Scan: 'Pressing the UPI Handle opens the scanner.',
+  None: 'Without an icon the UPI Handle only shows the handle.',
 } as const
 
 function Copy({ label, source }: { label: string; source?: string }) {
@@ -32,38 +32,38 @@ function UpiHandleGuide() {
   const sections: GuideSectionSlots = {
     anatomy: {
       header: 'Anatomy', title: 'Avatar, handle, and an action icon',
-      description: 'A grey, fully rounded pill holds an optional avatar, the handle on one line, and an optional icon for the pill’s action.',
+      description: 'A grey, fully rounded background holds an optional avatar, the handle on one line, and an optional icon for the UPI Handle’s action.',
       body: <Anatomy surface="white" parts={[
         { name: 'Avatar', note: 'Optional photo or logo; it shows only when a source is set.', target: `${byTestId('upi-anatomy')} > div:first-child`, side: 'left' },
         { name: 'Handle', note: 'The UPI ID or number, on one line.', target: `${byTestId('upi-anatomy')} [dir="auto"]`, side: 'top' },
         { name: 'Action icon', note: 'Optional cue for what pressing does: copy or scan.', target: `${byTestId('upi-anatomy')} > div:last-child`, side: 'right' },
-        { name: 'Pill', note: 'Grey rounded surface that hugs its content.', target: byTestId('upi-anatomy'), side: 'bottom' },
+        { name: 'Background', note: 'Grey rounded surface that hugs its content.', target: byTestId('upi-anatomy'), side: 'bottom' },
       ]}>
         <UpiHandle modes={LIGHT} testID="upi-anatomy" label="priya@jio" source={AVATAR} iconName="ic_copy" onPress={noop} />
       </Anatomy>,
     },
     configuration: {
       header: 'Configuration', title: 'Avatar and icon are optional',
-      description: 'Add an avatar when a photo or logo helps people recognise the account. Choose the icon for the action the pill performs, or none when it only shows the handle.',
+      description: 'Add an avatar when a photo or logo helps people recognise the account. Choose the icon for the action the UPI Handle performs, or none when it only shows the handle.',
       body: <div className="coin-new-example-grid">
         <ExampleCard title="With avatar" description="A photo helps people confirm whose handle it is."><Host><Copy label="priya@jio" source={AVATAR} /></Host></ExampleCard>
-        <ExampleCard title="Without avatar" description="The pill pads evenly; use it where a name is already shown."><Host><Copy label="shrutirai-1@jio" /></Host></ExampleCard>
+        <ExampleCard title="Without avatar" description="The UPI Handle pads evenly; use it where a name is already shown."><Host><Copy label="shrutirai-1@jio" /></Host></ExampleCard>
         <ExampleCard title="Scan icon" description="For a handle people scan to pay."><Host><UpiHandle modes={LIGHT} label="merchant@jio" iconName="ic_scan_qr_code" onPress={noop} /></Host></ExampleCard>
         <ExampleCard title="No icon" description="Display only: nothing to press."><Host><UpiHandle modes={LIGHT} label="merchant@jio" showIcon={false} /></Host></ExampleCard>
       </div>,
     },
     states: {
       header: 'States', title: 'Display only or pressable',
-      description: 'Without an action the pill only shows the handle. With one, the whole pill is a button and shrinks slightly while pressed. A disabled pill is dimmed and ignores presses.',
+      description: 'Without an action the UPI Handle only shows the handle. With one, the whole UPI Handle is a button and shrinks slightly while pressed. A disabled UPI Handle is dimmed and ignores presses.',
       body: <div className="coin-new-example-grid three">
-        <ExampleCard title="Display only" description="Static text in a pill."><Host><UpiHandle modes={LIGHT} label="priya@jio" showIcon={false} /></Host></ExampleCard>
-        <ExampleCard title="Pressable" description="The whole pill responds to a press."><Host><Copy label="priya@jio" /></Host></ExampleCard>
+        <ExampleCard title="Display only" description="Static text on a grey rounded background."><Host><UpiHandle modes={LIGHT} label="priya@jio" showIcon={false} /></Host></ExampleCard>
+        <ExampleCard title="Pressable" description="The whole UPI Handle responds to a press."><Host><Copy label="priya@jio" /></Host></ExampleCard>
         <ExampleCard title="Disabled" description="Dimmed to half opacity and skipped by keyboard focus."><Host><UpiHandle modes={LIGHT} label="priya@jio" iconName="ic_copy" accessibilityLabel="Copy priya@jio" onPress={noop} disabled /></Host></ExampleCard>
       </div>,
     },
     sizing: {
       header: 'Sizing', title: '29 px tall, as wide as its content',
-      description: 'The pill is 29 px tall and grows with its handle: 14 px of padding at each end (4 px before an avatar), a 23 px avatar, and a 12 px icon. When space runs out, a long handle ends in an ellipsis, so leave room for the whole ID.',
+      description: 'The UPI Handle is 29 px tall and grows with its handle: 14 px of padding at each end (4 px before an avatar), a 23 px avatar, and a 12 px icon. When space runs out, a long handle ends in an ellipsis, so leave room for the whole ID.',
       body: <div className="coin-new-stack">
         <Anatomy surface="white" legend={false} marks={[
           { kind: 'size', target: byTestId('upi-size'), side: 'bottom', label: 'both' },
@@ -71,21 +71,21 @@ function UpiHandleGuide() {
         ]}>
           <UpiHandle modes={LIGHT} testID="upi-size" label="shrutirai-1@jio" iconName="ic_copy" onPress={noop} />
         </Anatomy>
-        <ExampleCard title="Long handles truncate" description="Limited to 140 px, the handle ends in an ellipsis and the pill stays inside its space."><Host>
+        <ExampleCard title="Long handles truncate" description="Limited to 140 px, the handle ends in an ellipsis and the UPI Handle stays inside its space."><Host>
           <UpiHandle modes={LIGHT} label="very-long-upi-handle-id@jio" iconName="ic_copy" accessibilityLabel="Copy very-long-upi-handle-id@jio" onPress={noop} style={{ maxWidth: 140 }} />
         </Host></ExampleCard>
       </div>,
     },
     content: {
       header: 'Content', title: 'Show the real handle',
-      description: 'Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio. Don’t add “UPI:” or translate it; the pill already says what it is. On a pressable pill, set an accessibility label that says the action, such as “Copy priya@jio”.',
+      description: 'Write the UPI ID or number exactly as people will pay or copy it, such as priya@jio. Don’t add “UPI:” or translate it; the UPI Handle already says what it is. On a pressable UPI Handle, set an accessibility label that says the action, such as “Copy priya@jio”.',
       body: <ExampleCard title="Handles"><Host>
         <Copy label="priya@jio" /><Copy label="merchant-1234@jio" /><Copy label="9184844184" />
       </Host></ExampleCard>,
     },
     context: {
       header: 'In context', title: 'Confirm the payee',
-      description: 'The screen copies the handle or opens the payment when pressed; the pill only reports the press.',
+      description: 'The screen copies the handle or opens the payment when pressed; the UPI Handle only reports the press.',
       body: <div className="coin-new-context">
         <Card modes={LIGHT}><VStack modes={LIGHT}>
           <Text modes={LIGHT}>Paying Priya Sharma</Text>
@@ -101,9 +101,9 @@ function UpiHandleGuide() {
       body: <div className="coin-new-stack">
         <DoDont goodTitle="Use the real handle" goodCaption="People recognise the ID they will pay or copy." good={<Host><Copy label="priya@jio" /></Host>}
           badTitle="Leave the placeholder" badCaption="“Label” is the Figma placeholder, not a handle." bad={<Host><Copy label="Label" /></Host>} />
-        <DoDont goodTitle="Put the action on the pill" goodCaption="The copy icon says what pressing does." good={<Host><Copy label="priya@jio" /></Host>}
-          badTitle="Show an icon with no action" badCaption="A scan icon on a static pill looks tappable but does nothing." bad={<Host><UpiHandle modes={LIGHT} label="merchant@jio" iconName="ic_scan_qr_code" /></Host>} />
-        <DoDont goodTitle="One handle per pill" goodCaption="Each pill copies one ID." good={<Host><Copy label="priya@jio" /><Copy label="priya@okaxis" /></Host>}
+        <DoDont goodTitle="Put the action on the UPI Handle" goodCaption="The copy icon says what pressing does." good={<Host><Copy label="priya@jio" /></Host>}
+          badTitle="Show an icon with no action" badCaption="A scan icon on a static UPI Handle looks tappable but does nothing." bad={<Host><UpiHandle modes={LIGHT} label="merchant@jio" iconName="ic_scan_qr_code" /></Host>} />
+        <DoDont goodTitle="One ID per UPI Handle" goodCaption="Each UPI Handle copies one ID." good={<Host><Copy label="priya@jio" /><Copy label="priya@okaxis" /></Host>}
           badTitle="Combine handles in one label" badCaption="People can’t tell which ID they copied." bad={<Host><Copy label="priya@jio, priya@okaxis" /></Host>} />
       </div>,
     },
@@ -117,13 +117,13 @@ function UpiHandleGuide() {
         { label: 'Pressable', id: 'components-upihandle--pressable-handle' },
         { label: 'Disabled', id: 'components-upihandle--disabled' },
         { label: 'Several handles', id: 'components-upihandle--multiple-handles' },
-      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma shows an avatar, the handle, and a copy icon in a 144 × 29 pill. The package defaults to a scan icon, so this guide sets the copy icon wherever the pill copies. The avatar shows only when a source is set and is never tinted. On the web a pressable pill is a button named by its accessibility label, or by the handle when none is set. Keyboard focus draws a thin ring without moving anything, and a mouse click leaves no ring.</Sources>,
+      ]}>Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. Figma shows an avatar, the handle, and a copy icon on a 144 × 29 grey rounded background. The package defaults to a scan icon, so this guide sets the copy icon wherever the UPI Handle copies. The avatar shows only when a source is set and is never tinted. On the web a pressable UPI Handle is a button named by its accessibility label, or by the handle when none is set. Keyboard focus draws a thin ring without moving anything, and a mouse click leaves no ring.</Sources>,
     },
   }
 
   return <ComponentGuideTemplate metadata={{
     slug: 'upihandle',
-    corePrinciple: 'Show the real handle and put its action on the pill.',
+    corePrinciple: 'Show the real handle and put its action on the UPI Handle.',
     figmaUrl: FIGMA, storybookUrl: docsUrl('upihandle'),
   }} playground={<>
     <div className="preview-stage">

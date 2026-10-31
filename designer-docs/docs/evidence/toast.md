@@ -10,10 +10,10 @@ Re-checked 17 October 2026 for the #267 publish: the docs now install mirror tag
 
 ## Sources
 
-- Package: `src/components/Toast/` — `Toast.tsx` (the pill), `ToastProvider.tsx`, `useToast.ts`; exports `Toast`, `ToastProvider`, `useToast`, `addToast`, `closeToast`, `closeAll`, and types `ToastProps`, `ToastProviderProps`, `ToastOptions`, `ToastEntry`, `ToastPlacement`.
+- Package: `src/components/Toast/` — `Toast.tsx` (the toast itself), `ToastProvider.tsx`, `useToast.ts`; exports `Toast`, `ToastProvider`, `useToast`, `addToast`, `closeToast`, `closeAll`, and types `ToastProps`, `ToastProviderProps`, `ToastOptions`, `ToastEntry`, `ToastPlacement`.
 - Figma: [Coin Components Library · Toast](https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2197-1510), node `2197:1510`: one component, 291 × 46, properties `Text` (“Mobile number is invalid”), `Start Item` (boolean, off), `SlotItem` (instance swap, `ic_card`). Padding 16 / 14, gap 8, radius 14, 1 px border `#ffffff1a`, fill `#303338`, text white 14/18 JioType Var 500, icon 18 px, shadows 0/16/32 and 0/16/48 at `rgba(13,13,15,0.16)`. Width hugs the text (examples 328 and 193 wide). A visible-icon instance (8607:53) resolves `toast/icon/color` to white.
 - Storybook (published `index.json`): docs `components-toast--docs`; stories `--default`, `--top-placement`, `--multiple-toasts`, `--persistent-toast`, `--custom-timeout`, `--with-start-item`. The published page is the old generated page, not c1fa197c's rewrite. Every story is a `ToastProvider` around a `#f5f5f5` screen (min height 400) with centred buttons; no story reads its args or passes modes.
-- Biscuit's #63 comment (“addToast, the single provider, and that pill colors are fixed”) matches the code.
+- Biscuit's #63 comment (on addToast, the single provider, and the toast's fixed colours) matches the code.
 
 ## Contract
 
@@ -26,14 +26,14 @@ Re-checked 17 October 2026 for the #267 publish: the docs now install mirror tag
 
 ## Modes and tokens
 
-- Collection “Tost Output” (sic), one mode: background `#303338`, foreground `#ffffff`, border 1 px `rgba(255,255,255,0.1)`, padding 16 / 14, gap 8, radius 14, JioType Var 14 / 500 / 18, shadows as Figma. `toast/height` 46 is never read. The pill is the same in every mode.
+- Collection “Tost Output” (sic), one mode: background `#303338`, foreground `#ffffff`, border 1 px `rgba(255,255,255,0.1)`, padding 16 / 14, gap 8, radius 14, JioType Var 14 / 500 / 18, shadows as Figma. `toast/height` 46 is never read. The surface is the same in every mode.
 - `toast/icon/color` follows AppearanceBrand (Light): Primary `rgb(206,161,90)` gold, Secondary `rgb(93,0,181)`, Tertiary `rgb(3,107,153)`, Neutral `#ffffff` (Figma's value; the default since a116616, #267).
 - A custom `slotItem` Icon without a colour takes `icon/color`: `rgb(173,132,68)` in Light Primary.
 - Toast never reads `JFSThemeProvider`; modes reach it through the entry or the provider.
 
 ## Web render
 
-Provider: a `div` (flex 1) around the screen, then, while toasts exist, an absolute region (`bottom: 8px` or `top: 8px`, z-index 9999). Pill: `div[role="alert"][aria-live="assertive"]`, `minWidth 200`, `maxWidth 90%`, `alignSelf center`; leading icon `svg` 18 × 18 (no `aria-hidden`); title `div[dir="auto"]` with a two-line clamp. No `testID`.
+Provider: a `div` (flex 1) around the screen, then, while toasts exist, an absolute region (`bottom: 8px` or `top: 8px`, z-index 9999). Surface: `div[role="alert"][aria-live="assertive"]`, `minWidth 200`, `maxWidth 90%`, `alignSelf center`; leading icon `svg` 18 × 18 (no `aria-hidden`); title `div[dir="auto"]` with a two-line clamp. No `testID`.
 
 ## Docs site
 
@@ -54,4 +54,4 @@ The site replaces `react-native-reanimated` with a web stub; layout animations (
 
 ## Review 12 October 2026
 
-Checked in Chrome at 1280 and 390 px. A toast is off-screen 120 ms after Show toast (sliding up from 100vh over 250 ms) and settled at the frame's bottom by 820 ms. Show five shows Notification 3–5; after 4 s they close and Notification 1 and 2 appear. Every static Toast view on the page is also `role="alert"`. First fix round: the pill's 0/16/48 shadow spilled out of the example stages onto the cards, so static pills sit in the kit's new `Surface elevated` (room below for the shadow); the anatomy and the measured diagram wrapped the pill to two lines (206.5 × 66) and now get a 300 px specimen.
+Checked in Chrome at 1280 and 390 px. A toast is off-screen 120 ms after Show toast (sliding up from 100vh over 250 ms) and settled at the frame's bottom by 820 ms. Show five shows Notification 3–5; after 4 s they close and Notification 1 and 2 appear. Every static Toast view on the page is also `role="alert"`. First fix round: the toast's 0/16/48 shadow spilled out of the example stages onto the cards, so static toasts sit in the kit's new `Surface elevated` (room below for the shadow); the anatomy and the measured diagram wrapped the toast to two lines (206.5 × 66) and now get a 300 px specimen.

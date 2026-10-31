@@ -1,0 +1,899 @@
+{
+  "schemaVersion": 1,
+  "id": "BenefitCard",
+  "slug": "benefitcard",
+  "category": "card",
+  "tags": [
+    "benefits card",
+    "plan benefits",
+    "rewards card",
+    "upgrade card",
+    "perks",
+    "membership"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:10:13Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Benefit Card to list what a plan or offer gives, with an optional upsell and one button to upgrade.",
+  "useWhen": [
+    {
+      "text": "List what a plan or offer gives, with an optional upsell and one button to upgrade.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Benefit Card to list what a plan or offer gives, with an optional upsell and one button to upgrade."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Header title",
+      "holds": "headerTitle at 12 px, a label for the rows below it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "headerTitle at 12 px, a label for the rows below it."
+      }
+    },
+    {
+      "part": "Earnings row",
+      "holds": "A headerItems row: an icon, a short title, and the figure on the right.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A headerItems row: an icon, a short title, and the figure on the right."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "Separates what you earn from what the plan includes; goes with the header.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Separates what you earn from what the plan includes."
+      }
+    },
+    {
+      "part": "Upsell",
+      "holds": "The bodyHeader slot: a Nudge by default, with no Close; bodyHeader replaces or removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Nudge by default, with no Close; bodyHeader replaces or removes it."
+      }
+    },
+    {
+      "part": "Benefit row",
+      "holds": "An items row: an icon and a short perk.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "An items row: an icon and a short perk."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "The call to action: buttonLabel and onButtonPress; showButton hides it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "buttonLabel and onButtonPress; showButton hides it."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "headerItems",
+      "accepts": [
+        "BenefitCardItem"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "header",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "bodyHeader",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "items",
+      "accepts": [
+        "BenefitCardItem"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "button",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card is 344 px wide by default; to fill its container, set width to '100%'.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It's 344 px wide unless you set width to another number or a percentage, such as 100% to fill its container."
+      },
+      "target": "width"
+    },
+    {
+      "text": "Let the screen own the next step through onButtonPress; the card doesn't act on its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The card doesn't act on its own."
+      },
+      "target": "onButtonPress"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass your own rows (headerItems and items, or the header and children slots) whenever those sections show: the default rows repeat one placeholder.",
+      "strength": "required",
+      "from": {
+        "section": "sources",
+        "quote": "Its default rows repeat one placeholder, so always pass your own."
+      },
+      "target": "items"
+    },
+    {
+      "text": "Set showHeader false to drop the header title, its rows and the divider together.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "showHeader drops the title, its rows, and the divider"
+      },
+      "target": "showHeader",
+      "value": "false"
+    },
+    {
+      "text": "Set bodyHeader to null to remove the upsell, or pass a node to replace it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "bodyHeader set to null removes the upsell"
+      },
+      "target": "bodyHeader",
+      "value": "null"
+    },
+    {
+      "text": "To hide the button, set showButton false; button={null} still renders the default button.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "showButton",
+      "value": "false"
+    },
+    {
+      "text": "Use AppearanceBrand to recolour the icons, the upsell and the button together; the card stays white.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand recolours the icons, the upsell, and the button together; the card stays white."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "Set modes once on the card: they cascade to its rows, icons, upsell and button.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/15"
+      },
+      "target": "modes"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Show what people get, then one way to get it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Show what people get, then one way to get it."
+        }
+      },
+      {
+        "text": "Write the header title as a label, such as “You will earn”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write the header title as a label, such as “You will earn”."
+        },
+        "target": "headerTitle"
+      },
+      {
+        "text": "Keep each row title to a short noun phrase, one benefit per row.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep each row to a short noun phrase"
+        },
+        "target": "BenefitCardItem.title"
+      },
+      {
+        "text": "Put a row's figure in trailingText, where the figures line up on the right, not in its title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "put its number in trailingText, where the figures line up on the right."
+        },
+        "target": "BenefitCardItem.trailingText"
+      },
+      {
+        "text": "Do not write a sentence as a row title: a long title is cut off, and the benefit with it.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A long title is cut off, and the benefit with it."
+        },
+        "target": "BenefitCardItem.title"
+      },
+      {
+        "text": "Label the button with a verb, such as “Upgrade”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Label the button with a verb, such as “Upgrade”."
+        },
+        "target": "buttonLabel"
+      }
+    ],
+    "good": [
+      "You will earn",
+      "JioPoints",
+      "Up to 2000 pts",
+      "Zero forex markup on cards",
+      "Priority support, 24/7",
+      "Upgrade"
+    ],
+    "bad": [
+      "Pay abroad with any of your cards and get zero forex markup",
+      "Up to 2000 JioPoints",
+      "Up to ₹5000 cashback"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "The card has no state of its own; only its button acts, through onButtonPress, with Button's states.",
+      "from": {
+        "section": "states",
+        "quote": "The card has no state of its own: only its button acts, through onButtonPress, with Button's usual states."
+      }
+    },
+    {
+      "state": "Without the button",
+      "when": "showButton false: a summary of the plan.",
+      "from": {
+        "section": "states",
+        "quote": "showButton off: a summary of the plan."
+      }
+    },
+    {
+      "state": "Pressable card",
+      "when": "onPress set: the header becomes a button named by its title, and pressing the header or the lists dims them and calls onPress; the upsell and the card's button stay separate buttons.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the header a button named by its title, and pressing the header or the lists dims them and calls it; the upsell and the card’s button stay separate buttons beside it."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Keep each perk short",
+      "dont": "Write a sentence as a row",
+      "why": "A long title is cut off, and the benefit with it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep each perk short"
+      }
+    },
+    {
+      "do": "Put the figure in trailingText",
+      "dont": "Put the figure in the title",
+      "why": "The amounts are buried in the text.",
+      "from": {
+        "section": "doDont",
+        "quote": "Put the figure in trailingText"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A plan card with its own earnings rows, perks and an upgrade button.",
+      "jsx": "<BenefitCard\n  headerTitle=\"You will earn\"\n  headerItems={[\n    { icon: 'ic_jewellery_diamond', title: 'JioPoints', trailingText: 'Up to 2000 pts' },\n    { icon: 'ic_offer', title: 'Cashback', trailingText: 'Up to ₹5000' },\n  ]}\n  items={[\n    { icon: 'ic_card', title: 'Zero forex markup on cards' },\n    { icon: 'ic_support', title: 'Priority support, 24/7' },\n  ]}\n  buttonLabel=\"Upgrade\"\n  onButtonPress={() => {}}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "“JioPoints” with “Up to 2000 pts”, two perks, and “Upgrade”."
+      }
+    },
+    {
+      "purpose": "Full width on a plan screen, without the upsell, in one brand.",
+      "jsx": "<BenefitCard\n  width=\"100%\"\n  bodyHeader={null}\n  headerItems={[{ icon: 'ic_offer', title: 'Cashback', trailingText: 'Up to ₹5000' }]}\n  items={[{ icon: 'ic_support', title: 'Priority support, 24/7' }]}\n  onButtonPress={() => {}}\n  modes={{ 'Color Mode': 'Light', AppearanceBrand: 'Tertiary' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "bodyHeader set to null closes the gap between the lists."
+      }
+    },
+    {
+      "purpose": "A summary of the plan: no header and no button.",
+      "jsx": "<BenefitCard\n  showHeader={false}\n  showButton={false}\n  items={[\n    { icon: 'ic_card', title: 'Zero forex markup on cards' },\n    { icon: 'ic_support', title: 'Priority support, 24/7' },\n  ]}\n  modes={{ 'Color Mode': 'Light' }}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "showButton off: a summary of the plan."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "headerTitle",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "You will earn",
+        "description": "Header section title (e.g. `\"You will earn\"`). Default \"You will earn\", from the component source."
+      },
+      {
+        "name": "headerItem",
+        "type": "BenefitCardItem",
+        "required": false,
+        "source": "types",
+        "description": "Deprecated: The header is now a multi-row list wrap. A single item still works and is rendered as a one-row list (lowest precedence, after `header` and `headerItems`). Prefer `headerItems` (declarative) or `header` (slot)."
+      },
+      {
+        "name": "headerItems",
+        "type": "BenefitCardItem[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Defaults to two duplicate JioPoints rows, a placeholder. Declared: Declarative header list-wrap rows shown under the header title and above the divider (icon + title + optional trailing value). Replaces the legacy single {@link BenefitCardProps.headerItem}. Ignored when the `header` slot is provided.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Real slot for the header \"list wrap\" (the rows under the header title). Highest precedence — when provided, these children render instead of `headerItems` / `headerItem`; `modes` (plus the `List Item Style: Minimal` style) cascade into every child automatically."
+      },
+      {
+        "name": "showHeader",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggles the whole header section (title + item + divider). Mirrors the Figma `showHeader` property. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "bodyTitle",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Deprecated: In the Figma redesign the plain body title was replaced by a slot-based upsell `Nudge` ({@link BenefitCardProps.bodyHeader}). Still honored for backward compatibility: when set, it renders as a plain text title in place of the default nudge. Prefer `bodyHeader`."
+      },
+      {
+        "name": "bodyHeader",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Defaults to the upsell Nudge; null or false removes it; a node replaces it. Declared: Real slot rendered between the header divider and the body list — in the Figma reference this is an upsell `Nudge` (avatar + highlighted \"JioFinance+\" message). Defaults to that nudge. Pass `null`/`false` to hide it, `bodyTitle` for the legacy plain-text title, or any `ReactNode` for full control; `modes` cascade into the slot.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "items",
+        "type": "BenefitCardItem[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Defaults to two placeholder rows; children wins over items. Declared: Body benefit rows. Ignored when `children` is provided (the slot wins).",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Real slot for the body \"list wrap\". When provided, these children render instead of `items`; `modes` (plus the `List Item Style: Minimal` style) cascade into every child automatically."
+      },
+      {
+        "name": "buttonLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Upgrade",
+        "description": "CTA button label. Defaults to `\"Upgrade\"`. Default \"Upgrade\", from the component source."
+      },
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "CTA press handler."
+      },
+      {
+        "name": "button",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the call to action; null still renders the default button, so hide it with showButton false. Declared: Full override for the CTA. Takes precedence over `buttonLabel`.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "showButton",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Toggles the CTA button. Mirrors the Figma `showButton` property. Defaults to `true`. Default true, from the component source."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Since a116616 the header becomes a Pressable button named by accessibilityLabel, else headerTitle, else bodyTitle; the lists become a pointer-only press region with no role or Tab stop, and each dims to 0.92 opacity while pressed. With showHeader false the lists are the button. The upsell and the card's button are siblings, not children. Declared: Press handler for the card body. The upgrade button and the upsell stay siblings of this control, so they are not nested inside it.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "width",
+        "type": "number | `${number}%`",
+        "required": false,
+        "source": "types",
+        "default": 344,
+        "description": "Card width. Defaults to the Figma spec (`344`). Pass `'100%'` to fill the parent. Default 344, from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Cascades to the card's children, each over its own defaults: rows (List Item Style Minimal, Nudge padding None), icons (AppearanceBrand Secondary), figures (Text Sizes Small, Weight Regular), the button (Button / Size S) and the upsell (AppearanceBrand Neutral). A consumer AppearanceBrand overrides all three brand defaults at once. Declared: Modes object for design-token resolution. Cascaded to all children.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style overrides for the card container."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the card."
+      },
+      {
+        "name": "BenefitCardItem.icon",
+        "type": "string",
+        "required": false,
+        "description": "Registry icon name for the leading glyph (e.g. `'ic_jewellery_diamond'`). A field of each headerItems and items row.",
+        "source": "types"
+      },
+      {
+        "name": "BenefitCardItem.iconColor",
+        "type": "string",
+        "required": false,
+        "description": "Per-item override for the leading icon color. Defaults to the brand token. A field of each headerItems and items row.",
+        "source": "types"
+      },
+      {
+        "name": "BenefitCardItem.leading",
+        "type": "React.ReactNode",
+        "required": false,
+        "description": "Full override for the leading node. Takes precedence over `icon`. A field of each headerItems and items row.",
+        "source": "types"
+      },
+      {
+        "name": "BenefitCardItem.title",
+        "type": "string",
+        "required": true,
+        "description": "Row title (e.g. `\"JioPoints\"`). A field of each headerItems and items row.",
+        "source": "types"
+      },
+      {
+        "name": "BenefitCardItem.trailingText",
+        "type": "string",
+        "required": false,
+        "description": "Optional right-aligned trailing value (e.g. `\"Up to 2000 pts\"`). A field of each headerItems and items row.",
+        "source": "types"
+      },
+      {
+        "name": "BenefitCardItem.trailing",
+        "type": "React.ReactNode",
+        "required": false,
+        "description": "Full override for the trailing node. Takes precedence over `trailingText`. A field of each headerItems and items row.",
+        "source": "types"
+      },
+      {
+        "name": "BenefitCardItem.onPress",
+        "type": "() => void",
+        "required": false,
+        "description": "Makes the row pressable. A field of each headerItems and items row.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Recolours the icons, the upsell and the button; no mode changes the card's surface or title. Declared: A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "Listed for BenefitCard, but changes nothing on the card. Declared: A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "L",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "Listed for BenefitCard, but changes nothing on the card. Declared: A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Medium",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Border Boolean",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "False"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Nudge padding",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "None"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "Listed for BenefitCard, but changes nothing on the card. Declared: A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "Listed for BenefitCard, but changes nothing on the card. Declared: A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection BenefitCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "List Item Style",
+        "source": "evidence",
+        "type": "mode collection",
+        "description": "Not in the package's mode list for BenefitCard, but it changes the rows; the card sets Minimal.",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "slots": [
+      {
+        "name": "headerItems",
+        "type": "BenefitCardItem[]",
+        "description": "A structured slot: an array of BenefitCardItem rows. Declarative header list-wrap rows shown under the header title and above the divider (icon + title + optional trailing value). Replaces the legacy single {@link BenefitCardProps.headerItem}. Ignored when the `header` slot is provided.",
+        "source": "types"
+      },
+      {
+        "name": "header",
+        "type": "React.ReactNode",
+        "description": "Real slot for the header \"list wrap\" (the rows under the header title). Highest precedence — when provided, these children render instead of `headerItems` / `headerItem`; `modes` (plus the `List Item Style: Minimal` style) cascade into every child automatically.",
+        "source": "types"
+      },
+      {
+        "name": "bodyHeader",
+        "type": "React.ReactNode",
+        "description": "Real slot rendered between the header divider and the body list — in the Figma reference this is an upsell `Nudge` (avatar + highlighted \"JioFinance+\" message). Defaults to that nudge. Pass `null`/`false` to hide it, `bodyTitle` for the legacy plain-text title, or any `ReactNode` for full control; `modes` cascade into the slot.",
+        "source": "types"
+      },
+      {
+        "name": "items",
+        "type": "BenefitCardItem[]",
+        "description": "A structured slot: an array of BenefitCardItem rows. Body benefit rows. Ignored when `children` is provided (the slot wins).",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Real slot for the body \"list wrap\". When provided, these children render instead of `items`; `modes` (plus the `List Item Style: Minimal` style) cascade into every child automatically.",
+        "source": "types"
+      },
+      {
+        "name": "button",
+        "type": "React.ReactNode",
+        "description": "Full override for the CTA. Takes precedence over `buttonLabel`.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onButtonPress",
+        "type": "() => void",
+        "description": "CTA press handler.",
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the card body. The upgrade button and the upsell stay siblings of this control, so they are not nested inside it.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "No mode changes the card's white surface or black title, including Color Mode Dark.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=benefitcard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5352-1077",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-benefitcard--docs"
+  }
+}

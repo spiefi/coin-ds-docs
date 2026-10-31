@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "id": "AllocationComparisonChart",
+  "slug": "allocationcomparisonchart",
+  "category": "data",
+  "tags": [
+    "bar chart",
+    "graph",
+    "portfolio"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T05:18:28Z",
+    "flags": [
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-22); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Compare category amounts with a supplied reference.",
+  "useWhen": [
+    {
+      "text": "Compare category amounts with a supplied reference.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Compare category amounts with a supplied reference."
+      }
+    },
+    {
+      "text": "Use one shared scale so comparison stays honest.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Use one shared scale so comparison stays honest."
+      }
+    },
+    {
+      "text": "Let people compare categories directly on one shared scale.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The shared scale lets people compare categories directly."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Anything people press or select: the chart has no selected or pressed state.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The chart has no selected or pressed state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Legend",
+      "holds": "Current and Recommended explain the two readings when a baseline exists.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Current and Recommended explain the two readings when a baseline exists."
+      }
+    },
+    {
+      "part": "Current pillar",
+      "holds": "The main bar; its height encodes each supplied value.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The main bar height encodes each supplied value."
+      }
+    },
+    {
+      "part": "Baseline overlay",
+      "holds": "A supplied recommendation overlays the same category from the bottom.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A supplied recommendation overlays the same category from the bottom."
+      }
+    },
+    {
+      "part": "Marker",
+      "holds": "A dashed callout on the first reference, unless another marker is needed.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep the dashed callout focused on the first reference unless another marker is needed."
+      }
+    },
+    {
+      "part": "Category label",
+      "holds": "A short, distinct name below each bar.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use short distinct names that stay readable below the bars."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "valueLegendLabel",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "baselineLegendLabel",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the chart beside a summary that explains what the categories mean.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use the chart beside a summary that explains what the categories mean."
+      }
+    },
+    {
+      "text": "A Card can give the portfolio label and the explanation while the chart owns the category comparison.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the portfolio label and explanation while the chart owns the category comparison."
+      }
+    },
+    {
+      "text": "The host supplies the width, the chart takes its bar width from a token, and height sets the bar area.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The host supplies width, the chart owns the bar width token, and height sets the bar area."
+      }
+    },
+    {
+      "text": "Narrow hosts need short category names and a shared scale.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "narrow hosts need short category names and a shared scale"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "data lists the segments left to right; each carries its value, an optional baseline and its label.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "data"
+    },
+    {
+      "text": "A recommended value appears only when the data includes a baseline.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A recommended value appears only when the data includes a baseline."
+      },
+      "target": "data"
+    },
+    {
+      "text": "The Recommended legend item appears only when at least one segment has a baseline.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "baselineLegendLabel"
+    },
+    {
+      "text": "Leave the reference out when the page only needs current category amounts.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Omit the reference when the page only needs current category amounts."
+      },
+      "target": "data"
+    },
+    {
+      "text": "max scales every bar and baseline. Left out, it is the largest value or baseline in data; pass an explicit max, such as 100 for percentages, for a fixed scale.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "max"
+    },
+    {
+      "text": "Use one shared 100 scale (max 100) for percentages: a fixed percentage frame makes category heights comparable.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "A fixed percentage frame makes category heights comparable."
+      },
+      "target": "max"
+    },
+    {
+      "text": "Don't let each chart scale to its own values: separate automatic scales make the same visual height represent different amounts.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Separate automatic scales make the same visual height represent different amounts."
+      },
+      "target": "max"
+    },
+    {
+      "text": "Use a consistent max when categories are compared across a summary.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Use a consistent max when categories are compared across a summary."
+      },
+      "target": "max"
+    },
+    {
+      "text": "The default bar area is 154 px; choose any nonnegative height when the host needs more or less room.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default bar area is 154px; choose any nonnegative numeric height when the host needs more or less room."
+      },
+      "target": "height"
+    },
+    {
+      "text": "height is the bar area only: the labels and the legend add to the total chart height.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Labels and legend add to the total chart height."
+      },
+      "target": "height"
+    },
+    {
+      "text": "Keep the reference legend (showLegend is on by default): Current and Recommended tell people what the overlay means.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Current and Recommended tell people what the overlay means."
+      },
+      "target": "showLegend"
+    },
+    {
+      "text": "Don't hide the legend when there is a reference: without it, the second reading becomes ambiguous.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Without the legend, the second reading becomes ambiguous."
+      },
+      "target": "showLegend",
+      "value": "false"
+    },
+    {
+      "text": "formatValue formats each value and baseline into its label; left out, they read as percentages, such as 65%.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/7"
+      },
+      "target": "formatValue"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Use short, distinct labels: they help people map each value to the right category.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short, distinct labels help people map each value to the right category."
+        }
+      },
+      {
+        "text": "Use short distinct labels, such as Small & Mid, Large and Others.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Names such as Small & Mid, Large, and Others stay readable."
+        }
+      },
+      {
+        "text": "Don't crowd the categories: long repeated labels compete with the values and crowd a narrow host.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Long repeated labels compete with the values and crowd a narrow host."
+        }
+      },
+      {
+        "text": "Keep the recommended legend when a baseline changes the decision.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the recommended legend when a baseline changes the decision."
+        },
+        "target": "showLegend"
+      },
+      {
+        "text": "Keep units consistent: percentages, amounts or another unit share one max and one format.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Percentages, amounts, or another unit should share one max and format."
+        },
+        "target": "formatValue"
+      }
+    ],
+    "good": [
+      "Small & Mid",
+      "Large",
+      "Others"
+    ],
+    "bad": [
+      "Small and mid-capital holdings",
+      "Large-capital holdings",
+      "Other diversified holdings"
+    ]
+  },
+  "states": [
+    {
+      "state": "Without reference",
+      "when": "No segment has a baseline: the current bars stand on their own.",
+      "from": {
+        "section": "states",
+        "quote": "Current bars stand on their own when there is no recommendation."
+      }
+    },
+    {
+      "state": "With reference",
+      "when": "A segment has a baseline: the legend and the first marker explain the additional reading.",
+      "from": {
+        "section": "states",
+        "quote": "The legend and first marker explain the additional reading."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "accessibilityLabel names the whole chart.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/12"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use one shared 100 scale",
+      "dont": "Autoscale each chart",
+      "why": "Separate automatic scales make the same visual height represent different amounts.",
+      "from": {
+        "section": "doDont",
+        "quote": "A fixed percentage frame makes category heights comparable."
+      }
+    },
+    {
+      "do": "Keep the reference legend",
+      "dont": "Hide the explanation",
+      "why": "Without the legend, the second reading becomes ambiguous.",
+      "from": {
+        "section": "doDont",
+        "quote": "Current and Recommended tell people what the overlay means."
+      }
+    },
+    {
+      "do": "Use short distinct labels",
+      "dont": "Crowd the categories",
+      "why": "Long repeated labels compete with the values and crowd a narrow host.",
+      "from": {
+        "section": "doDont",
+        "quote": "Names such as Small & Mid, Large, and Others stay readable."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A portfolio allocation, the guide's In context: a Card gives the portfolio label and its explanation, and the chart owns the category comparison. The values are percentages of the portfolio on a shared 0–100 scale (max 100): Small & Mid is 65% now against a recommended 35%, and Large (25%) and Others (10%) have no recommendation. The bar area is 138 px.",
+      "jsx": "<Card>\n  <Card.Title>Portfolio allocation</Card.Title>\n  <Card.SupportText>Current mix compared with the recommended reference</Card.SupportText>\n  <AllocationComparisonChart\n    data={[\n      { label: 'Small & Mid', value: 65, baseline: 35 },\n      { label: 'Large', value: 25 },\n      { label: 'Others', value: 10 },\n    ]}\n    max={100}\n    height={138}\n  />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the portfolio label and explanation while the chart owns the category comparison."
+      }
+    },
+    {
+      "purpose": "Current amounts only, the guide's Current only: the same three categories as percentages on the shared 0–100 scale, with no baseline, so there is no overlay or marker and the legend shows Current alone. The bar area keeps its 154 px default.",
+      "jsx": "<AllocationComparisonChart\n  data={[\n    { label: 'Small & Mid', value: 65 },\n    { label: 'Large', value: 25 },\n    { label: 'Others', value: 10 },\n  ]}\n  max={100}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Omit the reference when the page only needs current category amounts."
+      }
+    },
+    {
+      "purpose": "More room for the comparison, the guide's Plot height: the same portfolio percentages, Small & Mid 65% against a recommended 35%, with a 220 px bar area (height 220, the height of a bar at the max of 100); the legend and labels add to it.",
+      "jsx": "<AllocationComparisonChart\n  data={[\n    { label: 'Small & Mid', value: 65, baseline: 35 },\n    { label: 'Large', value: 25 },\n    { label: 'Others', value: 10 },\n  ]}\n  max={100}\n  height={220}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The default bar area is 154px; choose any nonnegative numeric height when the host needs more or less room."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "data",
+        "type": "AllocationSegment[]",
+        "required": false,
+        "source": "types",
+        "description": "The segments to plot, left → right. Each carries its `value`, optional `baseline` and its `label`, so a bar can never drift from its caption."
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Maximum value used to scale every bar **and** baseline. Defaults to the largest `value`/`baseline` across `data`. Pass an explicit `max` (e.g. `100` for percentages) for a fixed scale."
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 154,
+        "description": "Height in px of the bar area — i.e. the height of a bar whose value equals `max`. Excludes the value/caption label rows. Default: `154`. Default 154, from the component source."
+      },
+      {
+        "name": "barWidth",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Width of each pill bar in px. Default: the `segmentIndicator/track/width` token (`28`)."
+      },
+      {
+        "name": "showLegend",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Show the legend row above the chart. Default: `true`. Default true, from the component source."
+      },
+      {
+        "name": "valueLegendLabel",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "default": "Current",
+        "description": "Legend label for the bar (current) series. Default: `\"Current\"`. Default \"Current\", from the component source."
+      },
+      {
+        "name": "baselineLegendLabel",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "default": "Recommended",
+        "description": "Legend label for the baseline (recommended) series. Default: `\"Recommended\"`. The baseline legend item only appears when at least one segment defines a `baseline`. Default \"Recommended\", from the component source."
+      },
+      {
+        "name": "formatValue",
+        "type": "(value: number) => string",
+        "required": false,
+        "source": "types",
+        "description": "Formats numeric `value`/`baseline` into the default labels. Default: `(v) => \\`${v}%\\``."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      },
+      {
+        "name": "chartStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style applied to the bars row."
+      },
+      {
+        "name": "legendStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style applied to the legend row."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the whole chart."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Appearance / DataViz",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Quaternary",
+          "Quinary",
+          "Senary",
+          "Neutral"
+        ],
+        "description": "A token collection AllocationComparisonChart reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection AllocationComparisonChart reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Emphasis / DataViz",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection AllocationComparisonChart reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      }
+    ],
+    "slots": [
+      {
+        "name": "valueLegendLabel",
+        "type": "React.ReactNode",
+        "default": "Current",
+        "description": "Legend label for the bar (current) series. Default: `\"Current\"`.",
+        "source": "types"
+      },
+      {
+        "name": "baselineLegendLabel",
+        "type": "React.ReactNode",
+        "default": "Recommended",
+        "description": "Legend label for the baseline (recommended) series. Default: `\"Recommended\"`. The baseline legend item only appears when at least one segment defines a `baseline`.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "A recommendation above the current value is clipped at the top of the current bar, so the chart can't show a baseline higher than its bar (Component Bug #550).",
+        "source": "evidence",
+        "checkedOn": "2026-09-22"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=allocationcomparisonchart",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4976-1080",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-allocationcomparisonchart--docs"
+  }
+}

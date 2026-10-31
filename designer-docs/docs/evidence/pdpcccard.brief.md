@@ -3,7 +3,7 @@
 slug: pdpcccard · label: PDP Card · public API: PdpCcCard (Title and VStack for In context; the kit's FitWidth)
 figma: https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=5352-935 · storybook: docsUrl('pdpcccard') · stories: Default=components-pdpcccard--default, Single metric=components-pdpcccard--single-metric, Metrics without icons=components-pdpcccard--metrics-without-icons, Button hidden=components-pdpcccard--button-hidden, Pressable card=components-pdpcccard--pressable-card, Title truncation=components-pdpcccard--title-truncation
 checked: 21 October 2026 · jfs-components 0.1.78 (mirror v0.1.78-c7d3348; Biscuit's newer e60f8bd8 changes only the Storybook page)
-icon: a card with a picture on top, a title line, and a pill button — `<><rect x="2.5" y="2" width="13" height="14" rx="1.5" stroke="currentColor" strokeWidth="1.5" fill="none" /><rect x="7" y="4.5" width="4" height="3" rx="1" stroke="currentColor" strokeWidth="1.2" fill="none" /><path d="M5.5 10h7M7 13h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" /></>`
+icon: a card with a picture on top, a title line, and a rounded button — `<><rect x="2.5" y="2" width="13" height="14" rx="1.5" stroke="currentColor" strokeWidth="1.5" fill="none" /><rect x="7" y="4.5" width="4" height="3" rx="1" stroke="currentColor" strokeWidth="1.2" fill="none" /><path d="M5.5 10h7M7 13h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" /></>`
 keywords: product card, product detail, PDP, product summary, gold coin, PdpCcCard
 
 Setup: `import coin from '../assets/gold-coin.png'` (the docs' own picture; the package ships none). `LIGHT = { 'Color Mode': 'Light' } as Modes`; `noop = () => {}`.

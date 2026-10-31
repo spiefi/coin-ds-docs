@@ -1,0 +1,314 @@
+{
+  "slug": "segmentedcontrol",
+  "label": "Segmented Control",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "files": [
+    "src/guides/segmentedcontrol.guide.tsx"
+  ],
+  "evidence": "docs/evidence/segmentedcontrol.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T03:32:50.797Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "segmented button",
+    "toggle group",
+    "period switcher",
+    "button group"
+  ],
+  "title": "Segmented Control",
+  "summary": "Use a Segmented Control to switch between two to five short, exclusive options, such as Daily, Weekly and Monthly.",
+  "corePrinciple": "One choice from a short set, always in view.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2994-2578",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-segmentedcontrol--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A track of equal segments",
+      "description": "A lavender track holds the options side by side. The selected one fills purple with a white label; the others are labels on the track.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Track",
+        "Rounded lavender background that holds the segments and fills its container.",
+        "Segment",
+        "An option people can tap; its label sits on the track.",
+        "Label",
+        "One or two short words, centred.",
+        "Selected segment",
+        "Purple fill and a white label mark the current choice."
+      ],
+      "specimen": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "anatomy": [
+        {
+          "part": "Track",
+          "note": "Rounded lavender background that holds the segments and fills its container."
+        },
+        {
+          "part": "Segment",
+          "note": "An option people can tap; its label sits on the track."
+        },
+        {
+          "part": "Label",
+          "note": "One or two short words, centred."
+        },
+        {
+          "part": "Selected segment",
+          "note": "Purple fill and a white label mark the current choice."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Two to five options",
+      "description": "Set the options and the one that starts selected. Every segment gets the same width, so the number of options decides how much room each label has.",
+      "blocks": [
+        "Two options",
+        "Opposites, such as Buy and Sell, each take half the track.",
+        "Three options",
+        "The usual case: a period or a view with three choices.",
+        "Five options",
+        "Five is the most that fits: on a 360 px phone each segment is about 59 px."
+      ],
+      "specimen": [
+        "Buy",
+        "Sell",
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "1M",
+        "3M",
+        "6M",
+        "1Y",
+        "All"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Two options",
+          "description": "Opposites, such as Buy and Sell, each take half the track."
+        },
+        {
+          "title": "Three options",
+          "description": "The usual case: a period or a view with three choices."
+        },
+        {
+          "title": "Five options",
+          "description": "Five is the most that fits: on a 360 px phone each segment is about 59 px."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Selected, unselected, and pressed",
+      "description": "One segment is always selected. A pressed segment dims until release, then becomes the selection. There is no disabled or loading state.",
+      "blocks": [
+        "Tap to choose",
+        "The purple fill moves to the segment you tap; Enter, Space, and the arrow keys do the same from the keyboard."
+      ],
+      "specimen": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Tap to choose",
+          "description": "The purple fill moves to the segment you tap; Enter, Space, and the arrow keys do the same from the keyboard."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Full width, 43 px tall, equal segments",
+      "description": "The track fills its container and splits it equally, with 8 px between segments and no padding of its own. Each segment is 43 px tall: 12 px above and below a 19 px label, with 16 px at each side. A label that doesn’t fit ends in an ellipsis, and the track never runs past its column. In a row, the track is as wide as its labels need, 304 px for Daily, Weekly, and Monthly, and a narrower row ends them in an ellipsis.",
+      "blocks": [
+        "104 × 43",
+        "8",
+        "In a narrow column",
+        "In a 216 px column each segment is about 66 px, too narrow for any of these labels, so each ends in an ellipsis. Daily, Weekly, and Monthly need about 300 px."
+      ],
+      "specimen": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "In a narrow column",
+          "description": "In a 216 px column each segment is about 66 px, too narrow for any of these labels, so each ends in an ellipsis. Daily, Weekly, and Monthly need about 300 px."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "One or two words per option",
+      "description": "Labels share the width equally and end in an ellipsis when they don’t fit, so keep them short and parallel: Daily, Weekly, Monthly. Use the words people see in the content below, and select the likeliest option first.",
+      "blocks": [
+        "Short and parallel"
+      ],
+      "specimen": [
+        "Buy",
+        "Sell",
+        "1M",
+        "3M",
+        "6M",
+        "1Y",
+        "All"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Short and parallel",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Switching a portfolio’s period",
+      "description": "The control sits above the numbers it changes. The screen keeps the selected period and updates the value below; the control only reports the tap.",
+      "blocks": [
+        "Showing the weekly change"
+      ],
+      "specimen": [
+        "Portfolio value",
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "₹",
+        "1,24,560",
+        "+₹3,020 (2.4%) this week"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Keep every option readable",
+      "description": "Each pair shows a control people can read at a glance versus one that breaks its own layout.",
+      "blocks": [
+        "Do",
+        "Keep labels short",
+        "Each label fits its segment, so every option reads in full.",
+        "Don’t",
+        "Write long labels",
+        "Every label is cut short, and “One-ti…” doesn’t say which plan it is.",
+        "Offer five options at most",
+        "Each label has room to breathe.",
+        "Squeeze in seven",
+        "Segments of about 40 px show at most a sliver of each day, so nobody can tell them apart.",
+        "Select one of the options",
+        "One segment is always filled, so people see the current view.",
+        "Pass a key that isn’t an option",
+        "Nothing is selected, and people can’t tell what they’re looking at."
+      ],
+      "specimen": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "One-time payment",
+        "Monthly SIP",
+        "Step-up SIP",
+        "1M",
+        "3M",
+        "6M",
+        "1Y",
+        "All",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep labels short",
+            "caption": "Each label fits its segment, so every option reads in full.",
+            "specimen": "Daily · Weekly · Monthly · Daily · Weekly · Monthly"
+          },
+          "dont": {
+            "title": "Write long labels",
+            "caption": "Every label is cut short, and “One-ti…” doesn’t say which plan it is.",
+            "specimen": "One-time payment · Monthly SIP · Step-up SIP · One-time payment · Monthly SIP · Step-up SIP"
+          }
+        },
+        {
+          "do": {
+            "title": "Offer five options at most",
+            "caption": "Each label has room to breathe.",
+            "specimen": "1M · 3M · 6M · 1Y · All · 1M · 3M · 6M · 1Y · All"
+          },
+          "dont": {
+            "title": "Squeeze in seven",
+            "caption": "Segments of about 40 px show at most a sliver of each day, so nobody can tell them apart.",
+            "specimen": "Mon · Tue · Wed · Thu · Fri · Sat · Sun · Mon · Tue · Wed · Thu · Fri · Sat · Sun"
+          }
+        },
+        {
+          "do": {
+            "title": "Select one of the options",
+            "caption": "One segment is always filled, so people see the current view.",
+            "specimen": "Daily · Weekly · Monthly · Daily · Weekly · Monthly"
+          },
+          "dont": {
+            "title": "Pass a key that isn’t an option",
+            "caption": "Nothing is selected, and people can’t tell what they’re looking at.",
+            "specimen": "Daily · Weekly · Monthly · Daily · Weekly · Monthly"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Segmented Control contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Two segments",
+        "Interactive",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build) from the team’s private package repository. Figma’s Segmented Control is one 393 × 43 component whose slot holds the segments; the package matches its colours, its 43 px height, and its equal widths. Labels that don’t fit end in an ellipsis. On the web the control is a tab list: the selected segment is announced as selected and is the only one in the Tab order, and Enter, Space, and the arrow keys select. Dark mode shows the same colours as Light, so this page shows Light only. The published Storybook predates the current stories.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

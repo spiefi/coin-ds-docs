@@ -1,0 +1,16 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The Filter Bar guide (Sources: checked 2 October 2026 on the 3795b4c build) and its evidence (last check 8 October, on 636f3f5) were read against the installed v0.1.78-dbe0e02. FilterBar.tsx is the same file on every build since 0.1.78 (155f6f5 at 5b6894b, 3795b4c, 636f3f5 and dbe0e02); TextInput.tsx changed after the guide's check (17c8f68 at 3795b4c, 2004ac9 from 636f3f5 through dbe0e02), and the filterBar and textInput tokens resolve to the same values on both. One guide sentence does not hold on dbe0e02, and the entry leaves its second half out: the Anatomy Placeholder note “Names what is being searched until they type.” The Text Input inside clears its placeholder as soon as the field is focused, before anything is typed (TextInput.tsx: displayPlaceholder is empty while focused; it was so at 3795b4c too), and the Text Input guide says so itself (“Focused, a darker grey border appears and the placeholder clears.”). The entry quotes only “Names what is being searched”. Also for the same guide fix: the States Empty caption “The placeholder carries the name.” is not quoted, since it can be read as the input's accessible name, which is “Search filter” unless accessibilityLabel is set (evidence, 8 October); and the Focused card describes only the bar's ring, while since 636f3f5 the field also shows Text Input's grey Active border (evidence, 8 October). Guide fix #558. Added by Claude Code in the overnight run agentpack-r27, for Marcin to confirm."
+    }
+  ],
+  "dismissed": [
+    {
+      "field": "/examples/1",
+      "reason": "misreads-source: The entry says the guide's Prefilled query card opens with the query “Gold”. The configuration section's live text is only “Search | Search transactions”, and no cited text shows a “Gold” query. The example value is the extractor's invention, presented as the guide's.",
+      "by": "Claude Code (claude-opus-5-5), overnight run agentpack-r27, on the extraction’s behalf; for Astra and Marcin to confirm",
+      "why": "The query is the guide’s own: at 3f56271 the Prefilled query card renders <Bar placeholder=\"Search transactions\" initial=\"Gold\" /> (src/guides/filterbar.guide.tsx, Configuration), and the Bar helper passes it as the FilterBar’s value, so the card’s field shows “Gold”; the playground’s “Start with: A query” sets the same “Gold”. The copy snapshot records the page’s text, not the value inside an input, which is why the reviewer sees only the placeholders “Search | Search transactions”. The example cites the card’s caption (“Use it when returning to a list that is already filtered.”) and takes its literals from the guide source, as other entries do."
+    }
+  ]
+}

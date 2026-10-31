@@ -1,0 +1,401 @@
+{
+  "slug": "allocationcomparisonchart",
+  "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r25, extraction worker",
+  "extractedOn": "2026-10-31",
+  "useWhen": [
+    {
+      "text": "Compare category amounts with a supplied reference.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Compare category amounts with a supplied reference."
+      }
+    },
+    {
+      "text": "Use one shared scale so comparison stays honest.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Use one shared scale so comparison stays honest."
+      }
+    },
+    {
+      "text": "Let people compare categories directly on one shared scale.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The shared scale lets people compare categories directly."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Anything people press or select: the chart has no selected or pressed state.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "The chart has no selected or pressed state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Legend",
+      "holds": "Current and Recommended explain the two readings when a baseline exists.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Current and Recommended explain the two readings when a baseline exists."
+      }
+    },
+    {
+      "part": "Current pillar",
+      "holds": "The main bar; its height encodes each supplied value.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The main bar height encodes each supplied value."
+      }
+    },
+    {
+      "part": "Baseline overlay",
+      "holds": "A supplied recommendation overlays the same category from the bottom.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A supplied recommendation overlays the same category from the bottom."
+      }
+    },
+    {
+      "part": "Marker",
+      "holds": "A dashed callout on the first reference, unless another marker is needed.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Keep the dashed callout focused on the first reference unless another marker is needed."
+      }
+    },
+    {
+      "part": "Category label",
+      "holds": "A short, distinct name below each bar.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Use short distinct names that stay readable below the bars."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place the chart beside a summary that explains what the categories mean.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Use the chart beside a summary that explains what the categories mean."
+      }
+    },
+    {
+      "text": "A Card can give the portfolio label and the explanation while the chart owns the category comparison.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the portfolio label and explanation while the chart owns the category comparison."
+      }
+    },
+    {
+      "text": "The host supplies the width, the chart takes its bar width from a token, and height sets the bar area.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The host supplies width, the chart owns the bar width token, and height sets the bar area."
+      }
+    },
+    {
+      "text": "Narrow hosts need short category names and a shared scale.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "narrow hosts need short category names and a shared scale"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "data lists the segments left to right; each carries its value, an optional baseline and its label.",
+      "strength": "recommended",
+      "target": "data",
+      "from": {
+        "fact": "props:data"
+      }
+    },
+    {
+      "text": "A recommended value appears only when the data includes a baseline.",
+      "strength": "recommended",
+      "target": "data",
+      "from": {
+        "section": "configuration",
+        "quote": "A recommended value appears only when the data includes a baseline."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes every Allocation Comparison Chart: the recommended reading comes from a segment's baseline, so with no baseline in the data there is no recommendation to show (the baselineLegendLabel fact says the same of the legend item). It states behaviour, not an instruction, so it stays recommended."
+      }
+    },
+    {
+      "text": "The Recommended legend item appears only when at least one segment has a baseline.",
+      "strength": "recommended",
+      "target": "baselineLegendLabel",
+      "from": {
+        "fact": "props:baselineLegendLabel"
+      }
+    },
+    {
+      "text": "Leave the reference out when the page only needs current category amounts.",
+      "strength": "recommended",
+      "target": "data",
+      "from": {
+        "section": "configuration",
+        "quote": "Omit the reference when the page only needs current category amounts."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "“only” sets the condition, a page that needs nothing beyond the current amounts; it is not a rule for every chart. Where a recommendation answers a question, the With reference configuration keeps it."
+      }
+    },
+    {
+      "text": "max scales every bar and baseline. Left out, it is the largest value or baseline in data; pass an explicit max, such as 100 for percentages, for a fixed scale.",
+      "strength": "recommended",
+      "target": "max",
+      "from": {
+        "fact": "props:max"
+      }
+    },
+    {
+      "text": "Use one shared 100 scale (max 100) for percentages: a fixed percentage frame makes category heights comparable.",
+      "strength": "recommended",
+      "target": "max",
+      "from": {
+        "section": "doDont",
+        "quote": "A fixed percentage frame makes category heights comparable."
+      }
+    },
+    {
+      "text": "Don't let each chart scale to its own values: separate automatic scales make the same visual height represent different amounts.",
+      "strength": "discouraged",
+      "target": "max",
+      "from": {
+        "section": "doDont",
+        "quote": "Separate automatic scales make the same visual height represent different amounts."
+      }
+    },
+    {
+      "text": "Use a consistent max when categories are compared across a summary.",
+      "strength": "recommended",
+      "target": "max",
+      "from": {
+        "section": "sizing",
+        "quote": "Use a consistent max when categories are compared across a summary."
+      }
+    },
+    {
+      "text": "The default bar area is 154 px; choose any nonnegative height when the host needs more or less room.",
+      "strength": "recommended",
+      "target": "height",
+      "from": {
+        "section": "configuration",
+        "quote": "The default bar area is 154px; choose any nonnegative numeric height when the host needs more or less room."
+      }
+    },
+    {
+      "text": "height is the bar area only: the labels and the legend add to the total chart height.",
+      "strength": "recommended",
+      "target": "height",
+      "from": {
+        "section": "configuration",
+        "quote": "Labels and legend add to the total chart height."
+      }
+    },
+    {
+      "text": "Keep the reference legend (showLegend is on by default): Current and Recommended tell people what the overlay means.",
+      "strength": "recommended",
+      "target": "showLegend",
+      "from": {
+        "section": "doDont",
+        "quote": "Current and Recommended tell people what the overlay means."
+      }
+    },
+    {
+      "text": "Don't hide the legend when there is a reference: without it, the second reading becomes ambiguous.",
+      "strength": "discouraged",
+      "target": "showLegend",
+      "value": "false",
+      "from": {
+        "section": "doDont",
+        "quote": "Without the legend, the second reading becomes ambiguous."
+      }
+    },
+    {
+      "text": "formatValue formats each value and baseline into its label; left out, they read as percentages, such as 65%.",
+      "strength": "recommended",
+      "target": "formatValue",
+      "from": {
+        "fact": "props:formatValue"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Use short, distinct labels: they help people map each value to the right category.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Short, distinct labels help people map each value to the right category."
+        }
+      },
+      {
+        "text": "Use short distinct labels, such as Small & Mid, Large and Others.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Names such as Small & Mid, Large, and Others stay readable."
+        }
+      },
+      {
+        "text": "Don't crowd the categories: long repeated labels compete with the values and crowd a narrow host.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Long repeated labels compete with the values and crowd a narrow host."
+        }
+      },
+      {
+        "text": "Keep the recommended legend when a baseline changes the decision.",
+        "strength": "recommended",
+        "target": "showLegend",
+        "from": {
+          "section": "content",
+          "quote": "Keep the recommended legend when a baseline changes the decision."
+        }
+      },
+      {
+        "text": "Keep units consistent: percentages, amounts or another unit share one max and one format.",
+        "strength": "recommended",
+        "target": "formatValue",
+        "from": {
+          "section": "content",
+          "quote": "Percentages, amounts, or another unit should share one max and format."
+        }
+      }
+    ],
+    "good": [
+      "Small & Mid",
+      "Large",
+      "Others"
+    ],
+    "bad": [
+      "Small and mid-capital holdings",
+      "Large-capital holdings",
+      "Other diversified holdings"
+    ]
+  },
+  "states": [
+    {
+      "state": "Without reference",
+      "when": "No segment has a baseline: the current bars stand on their own.",
+      "from": {
+        "section": "states",
+        "quote": "Current bars stand on their own when there is no recommendation."
+      }
+    },
+    {
+      "state": "With reference",
+      "when": "A segment has a baseline: the legend and the first marker explain the additional reading.",
+      "from": {
+        "section": "states",
+        "quote": "The legend and first marker explain the additional reading."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "accessibilityLabel names the whole chart.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use one shared 100 scale",
+      "dont": "Autoscale each chart",
+      "why": "Separate automatic scales make the same visual height represent different amounts.",
+      "from": {
+        "section": "doDont",
+        "quote": "A fixed percentage frame makes category heights comparable."
+      }
+    },
+    {
+      "do": "Keep the reference legend",
+      "dont": "Hide the explanation",
+      "why": "Without the legend, the second reading becomes ambiguous.",
+      "from": {
+        "section": "doDont",
+        "quote": "Current and Recommended tell people what the overlay means."
+      }
+    },
+    {
+      "do": "Use short distinct labels",
+      "dont": "Crowd the categories",
+      "why": "Long repeated labels compete with the values and crowd a narrow host.",
+      "from": {
+        "section": "doDont",
+        "quote": "Names such as Small & Mid, Large, and Others stay readable."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A portfolio allocation, the guide's In context: a Card gives the portfolio label and its explanation, and the chart owns the category comparison. The values are percentages of the portfolio on a shared 0–100 scale (max 100): Small & Mid is 65% now against a recommended 35%, and Large (25%) and Others (10%) have no recommendation. The bar area is 138 px.",
+      "jsx": "<Card>\n  <Card.Title>Portfolio allocation</Card.Title>\n  <Card.SupportText>Current mix compared with the recommended reference</Card.SupportText>\n  <AllocationComparisonChart\n    data={[\n      { label: 'Small & Mid', value: 65, baseline: 35 },\n      { label: 'Large', value: 25 },\n      { label: 'Others', value: 10 },\n    ]}\n    max={100}\n    height={138}\n  />\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "A Card can provide the portfolio label and explanation while the chart owns the category comparison."
+      }
+    },
+    {
+      "purpose": "Current amounts only, the guide's Current only: the same three categories as percentages on the shared 0–100 scale, with no baseline, so there is no overlay or marker and the legend shows Current alone. The bar area keeps its 154 px default.",
+      "jsx": "<AllocationComparisonChart\n  data={[\n    { label: 'Small & Mid', value: 65 },\n    { label: 'Large', value: 25 },\n    { label: 'Others', value: 10 },\n  ]}\n  max={100}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Omit the reference when the page only needs current category amounts."
+      }
+    },
+    {
+      "purpose": "More room for the comparison, the guide's Plot height: the same portfolio percentages, Small & Mid 65% against a recommended 35%, with a 220 px bar area (height 220, the height of a bar at the max of 100); the legend and labels add to it.",
+      "jsx": "<AllocationComparisonChart\n  data={[\n    { label: 'Small & Mid', value: 65, baseline: 35 },\n    { label: 'Large', value: 25 },\n    { label: 'Others', value: 10 },\n  ]}\n  max={100}\n  height={220}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "The default bar area is 154px; choose any nonnegative numeric height when the host needs more or less room."
+      }
+    }
+  ],
+  "evidenceFacts": [],
+  "gaps": [
+    {
+      "text": "A recommendation above the current value is clipped at the top of the current bar, so the chart can't show a baseline higher than its bar (Component Bug #550).",
+      "from": {
+        "section": "sources",
+        "quote": "a recommendation above the current value is visibly clipped at the current pillar"
+      },
+      "checkedOn": "2026-09-22",
+      "checkedVersion": "0.1.60"
+    }
+  ],
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/allocationcomparisonchart.guide.tsx, which only registers src/AllocationComparisonChartGuide.tsx, where the content is) and docs/evidence/allocationcomparisonchart.md at 31f1c5e (“docs: add onboarding home page, component search, and favicon”, 29 September), an ancestor of origin/main; the three files are the same on origin/main and origin/docs-next. The guide's Sources note (“Checked 22 September 2026”, “exports from jfs-components 0.1.60”) and the evidence's Batch check (22 September, declared and resolved 0.1.60) were checked on 0.1.60, and the guide has had no 0.1.78 check. So only the guide body (summary, core principle, Anatomy, Configuration, States, Sizing, Content, In context, Do & Don'ts) is quoted for guidance, and the one item resting on the Sources note, /facts/gaps/0 (the clipped baseline), carries 2026-09-22 and 0.1.60 and stays flagged by the trace check: no guide-body sentence or later check carries it. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). The mirror's history starts at 0.1.77 (1f05631, 28 September), so 0.1.60 was read upstream (MrBiscuit/react-native-storybook-boilerplate-master, “Release v0.1.60”, e02346e, 30 July) through gh api. Builds compared (blob SHAs): AllocationComparisonChart.tsx is 7b9c364 at upstream 0.1.60, unchanged upstream since 7833d2e (v0.1.12, June), at v0.1.77, v0.1.78, -636f3f5, -c7d3348 and -dbe0e02, and in node_modules. MetricLegendItem.tsx (the legend items) is 5a46fd2 at 0.1.60 and eb7c1e2 from upstream 0.1.65 (0af3eb7) to dbe0e02; the only change wraps the label and value line heights in safeTextLineHeight (12 px text on a 16 px line stays 16). react-utils.ts (bd10632), figma-variables-resolver.ts (d03e77c) and JFSThemeProvider.tsx (fa8a86a) are the same blobs at 0.1.60 and dbe0e02; figma-modes.generated.ts changed, but its AllocationComparisonChart and MetricLegendItem lines (Appearance / DataViz, Color Mode, Emphasis / DataViz) read the same. The Coin Variables file is 71587b0 at 0.1.60 and 4545aec on dbe0e02; all 33 segmentIndicator/*, allocationComparisonChart/* and metricLegendItem/* variables have the same values in both. So nothing the 22 September check read has changed, and every guide sentence quoted here was read against the installed source (read, not rendered; token values through the package's own getVariableByName in lib/commonjs): the container is 100% wide (AllocationComparisonChart.tsx line 388); the legend row shows Current, and Recommended only when some segment has a baseline (389–411); bars sit in a row with role image, 8 px apart (413–419); each bar's height is height × value / max, held between 0 and the full bar area, with max defaulting to the largest value or baseline (349–355, 420–422); height defaults to 154 and excludes the value and caption rows (295; the height fact); the bar width is segmentIndicator/track/width, 28, unless barWidth is set, with fully rounded ends (radius 99999, capped at half the width) (314–317); the baseline overlay is drawn from the bottom of the bar at min(baseline height, bar height) (196–198, 222–233), and its dashed 1 px white marker and label sit at the top of the overlay, on the first segment with a baseline unless a segment sets its own marker (234–262, 440–441); the value above each bar and the caption below are one line each (205–209, 268–270), 12 px on a 12 px line, weight 400, rgb(12, 13, 16); bar fill rgb(93, 0, 181), overlay rgb(184, 79, 189); formatValue defaults to `${v}%` (300); the chart has no press handler or state anywhere. No guide sentence quoted here is contradicted. Not current and not quoted: the Sources “Examples use public AllocationComparisonChart and AllocationSegment exports from jfs-components 0.1.60” and the evidence's batch line (the version is stale; every prop the guide's examples pass, data, max, height, showLegend, modes, accessibilityLabel and style, and every segment field they use, label, value, baseline and showMarker, still exists on dbe0e02), reported to the coordinator as a candidate guide fix (re-check on 0.1.78 and update the Sources note). The clipped baseline still holds on dbe0e02 and also shows in Storybook's BaselineEverywhere story (upstream stories at dbe0e02: Large 25 against 40, Others 10 against 25): the overlay, and with a marker the dashed line and its label (“40%”), stop at the top of the shorter bar. It is recorded as /facts/gaps/0 and reported to the coordinator as a Component Bug candidate; no ticket on the board reports it (all 543 tickets searched, read only; Codex's 22 September comment on Documentation #146 calls it a documented package limitation). Facts: the facts generator lists the fields of row types whose name ends in Item, so AllocationSegment's fields (key, label, value, baseline, showMarker, valueLabel, baselineLabel, color, baselineColor, accessibilityLabel) are not facts; the entry names a segment's value, baseline and label in plain words, as the data fact does, and the examples use only those three (reported to the coordinator). The component's JSDoc (the facts' doc) and the barWidth fact describe the bars with a shape word Coin doesn't use (AllocationComparisonChart.tsx 17, 85, 175, 276 and 286, listed in #544, Component Fix, To do, Biscuit); nothing hand-written here repeats it, and the guide's own word for a bar, pillar, stays in the anatomy part name Current pillar and in the quoted Sources sentence. Storybook's MDX and stories (upstream at dbe0e02) use the same word (not in #544's list; reported). Modes: the facts list Appearance / DataViz (default Primary), Emphasis / DataViz (default High) and Color Mode. On dbe0e02 none of them changes anything the chart draws: the segmentIndicator/* and allocationComparisonChart/* variables are single-mode (“Segment Indicator / Output”) and the legend's label tokens resolve the same in every mode (checked for every Appearance / DataViz and Emphasis / DataViz value and Color Mode Dark), although the Storybook MDX says Appearance and Emphasis retint the fills (reported; Dark mode is not recorded here). Strength: two quotes hold “only”: /configuration/1 “A recommended value appears only when the data includes a baseline.” (everywhere: behaviour, so recommended) and /configuration/3 “Omit the reference when the page only needs current category amounts.” (contextual: the word sets the page's condition). Nothing is required: the guide has no everywhere-scoped instruction, and the package requires no prop (data falls back to a built-in Small & Mid, Large, Others sample when left out, lines 120–124 and 293; not recorded). avoidWhen rests on the States description (no selected or pressed state); the guide names no other component to use instead, so no rule carries useInstead. Anatomy required: the Current pillar and the Category label are drawn for every segment; the Legend can be hidden (showLegend), and the Baseline overlay and the Marker need a baseline. Examples follow the building rules: no Color Mode, and no Appearance / DataViz or Emphasis / DataViz (the guide sets Light, Primary and High on every chart; Primary and High are the defaults and, on dbe0e02, change nothing); no style (the guide's width 100% is the container's default) and no accessibilityLabel (the guide's are built from its playground preset, such as “allocation allocation comparison chart”; left out, the package names the chart from the data, 373–385); the guide's AllocationExample helper is written out with its data (65, 25 and 10, a 35 baseline on Small & Mid) and max 100 (its fixed scale), and showMarker is left out (the first baseline gets the marker by default). The In context Card drops the guide's Color Mode Light, AppearanceBrand Neutral and width style, which the guide doesn't explain; Card has an entry and is used with Card.Title and Card.SupportText as the guide does. The guide's “Shared 0–100 scale” and “Automatic scale from supplied values” captions are page text under each chart, not Coin, and are left out. Left out of examples (three at most): the anatomy specimen, the States cards, the Sizing wide and narrow hosts, the Content example, the Do & Don't previews and the playground. Not recorded: barWidth, valueLegendLabel, disableTruncation, style, chartStyle and legendStyle (no guide sentence; the building rules forbid style overrides of colour, border, radius and font); a segment's per-bar colours (the Sources note: no custom segment colors), value and baseline label overrides and accessibility label; the evidence's Figma node, review image and anatomy-measurement notes; the Storybook story ids the Sources note lists (not re-checked); the one-line truncation of labels and the default accessibility label (source only). Content: good is the guide's short labels; bad is its long Don't labels. Consistency with related entries: ComparisonBar's avoidWhen sends value comparisons to Allocation Comparison Chart and Plan Comparison Card with no useInstead because “neither has an entry”; both now have one (reported to the coordinator; no disagreement in what it says). SegmentedTrack's entry (one whole split into a few parts, a single track) and AreaLineChart's (a continuous trend over time) cover different jobs from this one (category amounts against a reference on one shared scale); none of the three guides names another, and their unit advice agrees (AreaLineChart: the same unit and scale for series people compare; this guide: one unit, one max and one format). No other guidance file names AllocationComparisonChart. Cross-check: round 1 raised no flags. Its notes asked about two items, both resting on facts in this entry: /configuration/10's “showLegend is on by default” is the showLegend fact (default true), and /examples/2's “the height of a bar at the max of 100” is the height fact (“the height of a bar whose value equals max”); the 138 and 220 px heights are the guide's own (In context and Plot height). Left as they are. Sorted by the coordinator: Component Bug #550 (a baseline above its bar is cut off at the bar’s top) and guide fix #553 (re-check on 0.1.78) were filed; /facts/gaps/0 names #550. The cross-check ran again after that (round 2: 1 flag, that the evidence names no bug number), dismissed in reviews/allocationcomparisonchart.json for Astra and Marcin to confirm."
+}

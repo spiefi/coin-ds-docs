@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "id": "Form",
+  "slug": "form",
+  "category": "input",
+  "tags": [
+    "form layout",
+    "validation",
+    "field group",
+    "server errors"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "8572e95e0efc0ee2a52ae3a5b945d3b49dec3226",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:47:40Z",
+    "flags": [
+      {
+        "field": "/accessibility",
+        "reason": "The guide gives no accessibility guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The live Form guide on main (51f6153) is older than the guide on docs-next (8572e95, where this entry’s copy was read): the 8 October publish of the #186/#187 fixes never reached main’s Form guide, so the live Sources note still says “In this version Message Field turns red but shows no message”, which the installed 0.1.78-dbe0e02 contradicts (MessageField shows the Form error). Both versions also say “its onSubmit property does nothing” and that the form has no accessible name; the installed Form.tsx calls onSubmit on Enter and when a Form Field submits, and names the form with accessibilityLabel (Component Bug #207’s points, In progress). The entry quotes only sentences the same on main and docs-next and leaves the Sources note out. Guide fix #528. Added by Claude Code in the overnight run agentpack-batch8, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Form to stack related fields and show the errors your screen sends for each one, such as a bank account’s details.",
+  "useWhen": [
+    {
+      "text": "Stack related fields and show the errors your screen sends for each one, such as a bank account’s details.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Form to stack related fields and show the errors your screen sends for each one, such as a bank account’s details."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A single field on its own: the Storybook docs, as the evidence records them, say not to wrap a lone field in a Form.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "don't wrap a lone field"
+      }
+    },
+    {
+      "text": "A one-time code: the Storybook docs, as the evidence records them, say not to use a Form for OTP.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "don't use it for OTP"
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Form",
+      "holds": "An invisible column around the fields (children): 12 px between fields, no padding.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "An invisible column: 12 px between fields, no padding."
+      }
+    },
+    {
+      "part": "Named field",
+      "holds": "A Form Field with a name; it gets the error for that name from validationErrors.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Form Field with a name gets the error for that name."
+      }
+    },
+    {
+      "part": "Error message",
+      "holds": "Shown by the field while the Form has an error for it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown by the field while the Form has an error for it."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "A Form fills its container and adds 12 px between its fields, with no padding.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Form fills its container and adds 12 px between its fields, with no padding."
+      }
+    },
+    {
+      "text": "A Form draws nothing of its own: no background, border, or title.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "It draws nothing of its own: no background, border, or title."
+      }
+    },
+    {
+      "text": "Each Form Field keeps its own height in a Form: 72 px with a label, 96 px with a message.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Each Form Field keeps its own height: 72 px with a label, 96 px with a message."
+      }
+    },
+    {
+      "text": "In the guide’s bank-details screen, the Verify account button sits outside the Form and stays enabled.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The button sits outside the Form and stays enabled."
+      }
+    },
+    {
+      "text": "Keep the button enabled: people tap it and see which field to fix.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "People tap it and see which field to fix."
+      }
+    },
+    {
+      "text": "Do not disable the button instead: a greyed-out button doesn’t say what’s missing.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A greyed-out button doesn’t say what’s missing."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Give each field a name, and pass the errors keyed by those names in validationErrors.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Give each field a name, and pass the errors keyed by those names."
+      },
+      "target": "validationErrors"
+    },
+    {
+      "text": "Form has no other options that change what people see.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Form has no other options that change what people see."
+      }
+    },
+    {
+      "text": "An error for one field: only the field whose name matches shows the message.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the field whose name matches shows the message."
+      },
+      "target": "validationErrors"
+    },
+    {
+      "text": "Given a list of messages for one field, the field shows only the first message.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Given a list, the field shows only the first message."
+      },
+      "target": "validationErrors"
+    },
+    {
+      "text": "Like the guide’s bank-details screen: when people tap Verify, the screen checks the details and passes the errors to the Form.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "When people tap Verify, the screen checks the details and passes the errors to the Form."
+      },
+      "target": "validationErrors"
+    },
+    {
+      "text": "Name every field: the message appears under the field it’s about.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The message appears under the field it’s about."
+      }
+    },
+    {
+      "text": "Do not leave a field unnamed: the Form has an error for it, but the field never shows it.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The Form has an error for it, but the field never shows it."
+      }
+    },
+    {
+      "text": "Use a Form Field for each value: Form Field shows the message under the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Form Field shows the message under the field."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Do not put a Text Input in a Form: Text Input ignores the Form, so the error never appears.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Text Input ignores the Form, so the error never appears."
+      },
+      "target": "children"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Group the fields; let each one show its own problem.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Group the fields; let each one show its own problem."
+        }
+      },
+      {
+        "text": "Key each message to the field it’s about, and write it as one sentence that says how to fix the value.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Key each message to the field it’s about, and write it as one sentence that says how to fix the value."
+        },
+        "target": "validationErrors"
+      },
+      {
+        "text": "Show problems with the whole form, such as a failed payment, outside the Form.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Show problems with the whole form, such as a failed payment, outside it."
+        }
+      }
+    ],
+    "good": [
+      "IFSC codes have 11 characters",
+      "Account numbers have 9 to 18 digits",
+      "Enter an email address like name@example.com"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "No errors",
+      "when": "With no errors sent, the fields stand 12 px apart with nothing added.",
+      "from": {
+        "section": "configuration",
+        "quote": "The fields, 12 px apart, with nothing added."
+      }
+    },
+    {
+      "state": "Showing an error",
+      "when": "A field shows its error until people change its value, then the message clears.",
+      "from": {
+        "section": "states",
+        "quote": "A field shows its error until people change its value, then the message clears."
+      }
+    },
+    {
+      "state": "Edited",
+      "when": "Typing in a named field clears its error; the others stay.",
+      "from": {
+        "section": "evidence",
+        "quote": "Typing in the named field clears its error; the others stay."
+      }
+    },
+    {
+      "state": "New errors sent",
+      "when": "When the screen sends a new set of errors, they all show again.",
+      "from": {
+        "section": "states",
+        "quote": "When the screen sends a new set of errors, they all show again."
+      }
+    }
+  ],
+  "accessibility": [],
+  "doDont": [
+    {
+      "do": "Name every field",
+      "dont": "Leave a field unnamed",
+      "why": "The Form has an error for it, but the field never shows it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name every field"
+      }
+    },
+    {
+      "do": "Use Form Field for each value",
+      "dont": "Put a Text Input in a Form",
+      "why": "Text Input ignores the Form, so the error never appears.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use Form Field for each value"
+      }
+    },
+    {
+      "do": "Keep the button enabled",
+      "dont": "Disable the button instead",
+      "why": "A greyed-out button doesn’t say what’s missing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the button enabled"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Checking bank details, the guide's In context: a Card holds the Form and the Verify account Button, which sits outside the Form and stays enabled. Shown after people tapped Verify account with the account number and IFSC code empty: the screen's check passed these errors, keyed by the fields' names, and each named field shows its own. Editing a field clears its message. The inline errors and the onChangeText and onPress stubs stand in for the screen's own state and check.",
+      "jsx": "<Card>\n  <VStack>\n    <Form validationErrors={{ account: 'Account numbers have 9 to 18 digits', ifsc: 'IFSC codes have 11 characters' }}>\n      <FormField name=\"holder\" label=\"Account holder name\" value=\"Asha Rao\" onChangeText={() => {}} />\n      <FormField name=\"account\" type=\"number\" label=\"Account number\" value=\"\" onChangeText={() => {}} />\n      <FormField name=\"ifsc\" label=\"IFSC code\" value=\"\" onChangeText={() => {}} />\n    </Form>\n    <Button label=\"Verify account\" onPress={() => {}} />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "When people tap Verify, the screen checks the details and passes the errors to the Form."
+      }
+    },
+    {
+      "purpose": "An error for one field: only the field named ifsc shows the message; the account holder name field shows nothing added.",
+      "jsx": "<Form validationErrors={{ ifsc: 'IFSC codes have 11 characters' }}>\n  <FormField name=\"holder\" label=\"Account holder name\" value=\"Asha Rao\" onChangeText={() => {}} />\n  <FormField name=\"ifsc\" label=\"IFSC code\" value=\"SBIN000123\" onChangeText={() => {}} />\n</Form>",
+      "from": {
+        "section": "configuration",
+        "quote": "Only the field whose name matches shows the message."
+      }
+    },
+    {
+      "purpose": "Edit to clear, the guide's States example: errors for two fields; typing in either field clears its message and the other stays.",
+      "jsx": "<Form validationErrors={{ account: 'Account numbers have 9 to 18 digits', ifsc: 'IFSC codes have 11 characters' }}>\n  <FormField name=\"account\" type=\"number\" label=\"Account number\" value=\"12345\" onChangeText={() => {}} />\n  <FormField name=\"ifsc\" label=\"IFSC code\" value=\"SBIN000123\" onChangeText={() => {}} />\n</Form>",
+      "from": {
+        "section": "states",
+        "quote": "Type in either field: its message clears and the other stays."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": true,
+        "source": "types"
+      },
+      {
+        "name": "validationErrors",
+        "type": "Record<string, string | string[]>",
+        "required": false,
+        "source": "evidence",
+        "description": "Only FormField, FormUpload and MessageField read it, and only when they have a name; a field's own errorMessage wins over the Form's error.",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "onSubmit",
+        "type": "() => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Resolves only the Form's own tokens (gap and padding, single mode) and is not passed to the fields.",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      }
+    ],
+    "modes": [],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "source": "evidence",
+        "description": "TextInput ignores the Form: a Text Input never shows the Form's errors.",
+        "checkedOn": "2026-10-07"
+      }
+    ],
+    "events": [
+      {
+        "name": "onSubmit",
+        "type": "() => void",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Form shows no error summary of its own: each error shows only under its field (#207).",
+        "source": "evidence",
+        "checkedOn": "2026-10-07"
+      },
+      {
+        "text": "The published Storybook for Form is stale, and its docs page claims mode theming (#207).",
+        "source": "evidence",
+        "checkedOn": "2026-10-07"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=form",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1949-7250",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-form--docs"
+  }
+}

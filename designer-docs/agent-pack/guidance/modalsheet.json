@@ -189,7 +189,7 @@
       }
     },
     {
-      "text": "With showOverlay, set onOverlayPress to hide the sheet when the scrim is pressed; when it's omitted, the scrim calls onRequestClose.",
+      "text": "With showOverlay, set onOverlayPress to hide the sheet when the scrim is pressed; when it's omitted, the scrim calls onRequestClose if that is set.",
       "strength": "recommended",
       "target": "onOverlayPress",
       "from": {
@@ -197,13 +197,24 @@
       }
     },
     {
-      "text": "A top inset (topInset) lets the page peek above the sheet; the sheet shortens to keep its bottom on the screen.",
+      "text": "On a full-height sheet (fillHeight true, the default), a top inset (topInset) lets the page peek above the sheet; the sheet shortens to keep its bottom on the screen.",
       "strength": "recommended",
       "target": "topInset",
       "from": {
         "section": "configuration",
         "quote": "The page peeks 40 px above, and the sheet shortens to keep its bottom on the screen."
       }
+    },
+    {
+      "text": "A fitted sheet (fillHeight false) docks to the bottom and ignores topInset.",
+      "strength": "recommended",
+      "target": "topInset",
+      "from": {
+        "section": "evidence",
+        "quote": "With `fillHeight={false}` it docks to the bottom and ignores the inset."
+      },
+      "checkedOn": "2026-10-13",
+      "checkedVersion": "0.1.78-c1fa197"
     },
     {
       "text": "Page type MainPage (the default) and SubPage both give a white sheet.",

@@ -37,7 +37,7 @@ Props (defaults): `institutionName` ('State Bank of India'), `institutionAvatar`
 
 ## Web render
 
-Root `div[aria-label]` › header row `div` (› `div` › InstitutionBadge; › Badge pill when set) › rows block `div` (› row `div` › label wrapper `div` › label `div[dir=auto]`; value `div[dir=auto]`) › footer `button[role=button]`. No `data-testid`. Width 100% of its host. Measured at 292 wide: 292 × 207 (Figma 204); rows 17 px, 12 apart; button 32. The guide's Sizing diagram measures the same: 292 × 207, padding 16/12, gap 16.
+Root `div[aria-label]` › header row `div` (› `div` › InstitutionBadge; › Badge when set) › rows block `div` (› row `div` › label wrapper `div` › label `div[dir=auto]`; value `div[dir=auto]`) › footer `button[role=button]`. No `data-testid`. Width 100% of its host. Measured at 292 wide: 292 × 207 (Figma 204); rows 17 px, 12 apart; button 32. The guide's Sizing diagram measures the same: 292 × 207, padding 16/12, gap 16.
 
 ## Discrepancies
 

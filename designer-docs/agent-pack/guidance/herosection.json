@@ -1,0 +1,417 @@
+{
+  "slug": "herosection",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r27, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/herosection.guide.tsx, which holds HeroSectionGuide itself) and docs/evidence/herosection.md (+ .brief.md) at 3f56271 (the #543 wording fix on docs-next); the guide was built for Documentation #160 at 93f5870 (Done, live 26 October as ccb4c4c). The guide file reads the same on origin/main and origin/docs-next; the evidence’s Web render line and the .brief.md icon line differ (docs-next replaced the shape word with “fully rounded” and “a rounded search field”), and neither is quoted. The guide’s Sources note (“0.1.78 (23 October build of Biscuit’s main)”) and the evidence (“mirror tag v0.1.78-c8526ae”) were checked on 26 October 2026 on c8526ae. Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit’s main at dbe0e02, 27 October). Blobs compared: HeroSection.tsx is f594fba at c8526ae, d3efc90 at ace46ca and b2435fe at dbe0e02 and in node_modules (git hash-object), changed by Biscuit for Component Bug #404 (filed from #160, the only ticket #160’s comments record); InputSearch.tsx (2ad0691), IconButton.tsx (dd6c456), Title.tsx (065bcb1), TextInput and the design tokens are the same at c8526ae and dbe0e02 (the only utils change, web-focus-trap.ts, is not used here). The c8526ae→dbe0e02 diff: subtitle lost its default “Subtitle” and an omitted or empty one is hidden (125, 27–29, 182); showSearch={false} drops only the field and the row stays while there is a filter or filterSlot (203, 231); the filter and a filterSlot get { Secondary, Medium, Button / Size M } under their own modes, with Size M re-applied after the hero’s modes (15–21, 173–180, 217–218); the search row is inset 8 px at each side (41, 248); an empty-string or false slot counts as no slot (23–25). #404’s 27 October re-tests (ace46ca, then dbe0e02) confirm items 1, 2, 3, 5 and 6 fixed and the inset added; its sizes (item 4) stay open. The guide sentences that no longer hold are left out and listed in the human flag (reviews/herosection.json), naming #404; the guide copy recorded today on the installed build already shows no “Subtitle” in any example. Every quoted sentence that is kept was read against the installed source: the root is a column with heroSection/background (white), padding 16 / 12 and gap 16, width 100%, so it fills its host; the title block is a Title with the hero’s modes over context7 Page Hero ({ ...TITLE_MODES, ...modes }), one line by default (Title.tsx numberOfLines 1), so a long title ends with an ellipsis; InputSearch gets value={searchValue} and renders value || '', so without searchValue and onSearchChange typing shows nothing, and it shows its clear button (“Clear search”) while the value is not empty; the field is flex 1 in the row and the filter an IconButton with ic_filter and filterAccessibilityLabel; children are cloned with the hero’s modes into a full-width View under the row; title defaults to “Page Title”, searchPlaceholder to “Search”, filterIcon to ic_filter and filterAccessibilityLabel to “Filter”. The Sizing heights (16, 50, 16, 42, 16, body, 16) and 360 × 140 still hold: the inset is horizontal, and #404’s dbe0e02 re-test measured 360 × 140. Strength: one quote holds an absolute word: /configuration/8 “The hero only passes the text on; the page does the filtering.” (everywhere, recommended: it describes every hero, and the evidence records “The section does not filter a list for you.”). Default-value facts (title, searchPlaceholder, filterAccessibilityLabel) and the dbe0e02 behaviour facts (showSearch, filterSlot, subtitle) back recommended items only. Nothing is required: no prop is required and no everywhere-absolute instructs. Left out, and why: the sentences in the human flag (showSearch removing the filter; filterSlot without Secondary and Medium and its caption and example modes; leaving subtitle out showing “Subtitle”; the second Do & Don’t pair on Button / Size S; the Left caption, the field width after the filter and gap, Figma’s “another 8 px” and the package’s flush row); the first Don’t caption is quoted only up to “Page Title” (its “and Subtitle” no longer holds). The Sources note in full: its version line; the Figma-against-package prop list (the facts carry the props and slots); its sizes sentence (the gap quotes Sizing instead) and its reported issues (stale, above). titleSlot and searchSlot, which only the Sources list names, style, testID, Color Mode, the hero’s other modes (Button / Size, Button / State, context 9, Context2, FormField States, InputState, Page type, Status: the evidence’s “change nothing visible” line and its Button / Size line were checked before Size M was pinned), the evidence’s Web render and Figma frame (360 × 466), the MDX’s “placeholder stays Search” advice, the playground’s controls and readout, and the guide’s “No transactions match” Text. useWhen/1 quotes the core principle (round 2’s reviewer noted that it restates it rather than a use condition, without flagging it). avoidWhen is the evidence’s record of Biscuit’s handwritten Storybook docs (“For a list page; not a marketing offer (PageHero) or search with no title (InputSearch alone).”, as the CardCTA and CardFeedback entries cite theirs); the MDX at dbe0e02 still says “A marketing offer with one button. Use PageHero.” and “Search with no page title. Use InputSearch on its own.” States: Empty, With a query and Focused from the States description, each in its own words; “The section itself has no states.” is kept in the Focused item. Evidence facts: children (“a full-width body under the row (cascaded modes)”) and context7 (Default adds the Title’s 12 / 8 padding, Card shrinks it to 14 px), both on code paths and components that are unchanged at dbe0e02. Gaps: one, Figma’s 44 px field, 42 px filter and 44 px title block against the package’s 42, 40 and 50, quoted from Sizing (checked 26 October on c8526ae; #404’s 27 October dbe0e02 re-test measured the same, and #404 stays In progress on it: Biscuit keeps the shared control sizes, Marcin to decide). Examples follow the building rules: no Color Mode (the guide sets Light on every hero, host, group, row and value) and no other modes. Example 1 is the guide’s In context: a Screen stands for the guide’s ScreenFrame, and the hero’s body is a ListGroup of the guide’s five transactions (TX: titles, dates and amounts), each a horizontal ListItem with a MoneyValue in trailing and an empty onPress, as the guide renders them; MoneyValue has no entry and is kept as the ListGroup entry keeps it (ListItem’s own doc names MoneyValue for trailing). Example 2 is the filterIcon card (Watchlist, Stocks you follow, Search stocks, ic_sort, “Sort stocks”: the guide source’s values); example 3 is the Search only card. The empty searchValue and handlers stand for the page’s state; the guide’s HSView keeps the query in state and the In context page filters TX by it. The filterSlot card is not used as an example: on dbe0e02 the modes it sets on its Icon Button only repeat the slot’s defaults. Consistency with related entries: no guidance file names HeroSection. InputSearch’s entry agrees: a 42 px field, the clear button while there is text, value and onChangeText needed for typing and clearing, the screen filtering the list, a placeholder that names what people search (default “Search”), and the focus look; its “give it an accessibilityLabel with the same words as the prompt” cannot be followed through HeroSection, which has no prop for the field’s label, and its own web item says the placeholder names the field without one, as this guide’s “screen readers read both” does. IconButton’s entry agrees: Medium is 40 px (Figma 42), Emphasis steps the fill from solid (High) to tint (Medium) to none (Low) (gold in its own default AppearanceBrand; the hero’s filter is Secondary, so solid purple), and every Icon Button needs an accessibility label (the hero’s is filterAccessibilityLabel). ListGroup’s entry writes the same rows (horizontal ListItems with a MoneyValue trailing). ListItem and Text are undocumented entries (Text unused here); MoneyValue has no entry. Filter Bar: the guide, the evidence and the MDX at dbe0e02 never mention it. Nothing hand-written here uses the shape word Coin doesn’t have. Cross-check: round 1 raised 4 flags: /configuration/3 (showSearch), /configuration/6 (filterSlot) and /configuration/11 (subtitle) read the entry against the c8526ae guide and evidence, and /facts/gaps/0 said the evidence is dated 26 October and doesn’t call #404 still open; the gap was changed to the guide’s check (26 October, c8526ae) and to “(Component Bug #404)”. Round 2 (the entry’s final form) raised the same three and /configuration/5 (ic_sort and “Sort stocks” not in the rendered copy); all four are dismissed in reviews/herosection.json (the items follow the installed package’s facts, changed for #404; the values are the guide source’s own). Human flag (reviews/herosection.json): the c8526ae check and the sentences left out above, waiting for #404 to publish.",
+  "useWhen": [
+    {
+      "text": "At the top of a list page: the page’s name, a search field and a filter button, and the list under them.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Hero Section at the top of a list page: the page’s name, a search field and a filter button, and the list under them."
+      }
+    },
+    {
+      "text": "Name the page, then help people find what’s on it.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Name the page, then help people find what’s on it."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A marketing offer: the handwritten Storybook docs, as the evidence records them, point to Page Hero.",
+      "strength": "discouraged",
+      "useInstead": "PageHero",
+      "from": {
+        "section": "evidence",
+        "quote": "not a marketing offer (PageHero)"
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "Search with no page title: the handwritten Storybook docs, as the evidence records them, use Input Search alone.",
+      "strength": "discouraged",
+      "useInstead": "InputSearch",
+      "from": {
+        "section": "evidence",
+        "quote": "search with no title (InputSearch alone)"
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "title and subtitle in a Title, on top; the title stays on one line.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "title and subtitle in a Title; the title stays on one line."
+      }
+    },
+    {
+      "part": "Search field",
+      "holds": "An Input Search that grows to fill the row under the title.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An Input Search that grows to fill the row."
+      }
+    },
+    {
+      "part": "Filter",
+      "holds": "An Icon Button at the end of the row: ic_filter, Secondary at Emphasis Medium.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An Icon Button, ic_filter, Secondary at Emphasis Medium."
+      }
+    },
+    {
+      "part": "Body",
+      "holds": "children, full width under the row.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "children, full width under the row."
+      }
+    },
+    {
+      "part": "Section",
+      "holds": "White, 12 px at the sides, 16 px above and below.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "White, 12 px at the sides, 16 px above and below."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put the hero at the top of its page, as it heads the guide's Transactions page, with the page's list in its body (children).",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero heads the Transactions page."
+      }
+    },
+    {
+      "text": "The title sits on top, the search field and the filter button share the row under it, and children fill the body below.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The title sits on top, the search field and the filter button share the row under it, and children fill the body below."
+      }
+    },
+    {
+      "text": "The hero fills its host’s width: the section is white and spans its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The hero fills its host’s width."
+      }
+    },
+    {
+      "text": "Top to bottom: 16 px of padding, the 50 px title block, 16 px, the 42 px search row, 16 px, then the body and 16 px more.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Top to bottom: 16 px of padding, the 50 px title block, 16 px, the 42 px search row, 16 px, then the body and 16 px more."
+      }
+    },
+    {
+      "text": "In a 360 px host the hero is 360 × 140 without a body.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In a 360 px host it is 360 × 140 without a body"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "showTitle, showSearch and showFilter turn the parts on and off, and titleTextAlign centres the title.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "showTitle, showSearch, and showFilter turn the parts on and off, and titleTextAlign centres the title."
+      }
+    },
+    {
+      "text": "titleTextAlign Center centres the title and subtitle; Left is the default.",
+      "strength": "recommended",
+      "target": "titleTextAlign",
+      "value": "Center",
+      "from": {
+        "section": "configuration",
+        "quote": "titleTextAlign Center centres the title and subtitle."
+      }
+    },
+    {
+      "text": "showFilter={false} removes the filter button: the field takes the row.",
+      "strength": "recommended",
+      "target": "showFilter",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "showFilter={false}: the field takes the row."
+      }
+    },
+    {
+      "text": "showSearch={false} removes the search field only: in the installed package it does not hide the filter, so set showFilter={false} too to remove the whole row.",
+      "strength": "recommended",
+      "target": "showSearch",
+      "value": "false",
+      "from": {
+        "fact": "props:showSearch"
+      }
+    },
+    {
+      "text": "The hero gives its filter AppearanceBrand Secondary at Emphasis Medium. Emphasis on the hero makes the filter solid (High, solid purple) or bare (Low, the icon alone).",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "from": {
+        "section": "configuration",
+        "quote": "The hero gives its filter AppearanceBrand Secondary at Emphasis Medium; Emphasis on the hero makes it solid or bare."
+      }
+    },
+    {
+      "text": "filterIcon and filterAccessibilityLabel change what the button is: change the icon and its label together, such as ic_sort with “Sort stocks”.",
+      "strength": "recommended",
+      "target": "filterIcon",
+      "from": {
+        "section": "configuration",
+        "quote": "Change the icon and its label together."
+      }
+    },
+    {
+      "text": "filterSlot replaces the filter with your own control, and filterIcon, onFilterPress and showFilter are then ignored. In the installed package the slot gets the filter's Secondary, Medium and Button / Size M under its own modes, so an Icon Button in it needs no modes.",
+      "strength": "recommended",
+      "target": "filterSlot",
+      "from": {
+        "fact": "props:filterSlot"
+      }
+    },
+    {
+      "text": "The hero keeps no text: wire searchValue and onSearchChange, or typing does nothing.",
+      "strength": "recommended",
+      "target": "searchValue",
+      "from": {
+        "section": "states",
+        "quote": "The hero keeps no text: wire searchValue and onSearchChange, or typing does nothing."
+      }
+    },
+    {
+      "text": "The hero only passes the text on (onSearchChange); the page does the filtering of the list in its body.",
+      "strength": "recommended",
+      "target": "onSearchChange",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero only passes the text on; the page does the filtering."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it describes every hero: the section never filters its body itself (the evidence's “The section does not filter a list for you.”), so the page always filters. It is a description of what the hero does, so it stays recommended."
+      }
+    },
+    {
+      "text": "Give onFilterPress the page's action: the filter button opens the filters.",
+      "strength": "recommended",
+      "target": "onFilterPress",
+      "from": {
+        "section": "inContext",
+        "quote": "Typing narrows the list in its body, and the filter button opens the filters."
+      }
+    },
+    {
+      "text": "Left out, title reads “Page Title”, its default: give every hero the page's name.",
+      "strength": "recommended",
+      "target": "title",
+      "from": {
+        "fact": "props:title"
+      }
+    },
+    {
+      "text": "subtitle is optional: in the installed package, leaving it out hides it.",
+      "strength": "recommended",
+      "target": "subtitle",
+      "from": {
+        "fact": "props:subtitle"
+      }
+    },
+    {
+      "text": "Left out, searchPlaceholder reads “Search”, its default: make it say what the field finds.",
+      "strength": "recommended",
+      "target": "searchPlaceholder",
+      "from": {
+        "fact": "props:searchPlaceholder"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write title as the page’s name, such as Transactions, and subtitle as its scope in a few words, such as Last 30 days.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write title as the page’s name, such as Transactions, and subtitle as its scope in a few words, such as Last 30 days."
+        }
+      },
+      {
+        "text": "An empty subtitle hides it.",
+        "strength": "recommended",
+        "target": "subtitle",
+        "from": {
+          "section": "content",
+          "quote": "An empty subtitle hides it."
+        }
+      },
+      {
+        "text": "Make searchPlaceholder say what the field finds, such as “Search transactions”.",
+        "strength": "recommended",
+        "target": "searchPlaceholder",
+        "from": {
+          "section": "states",
+          "quote": "The placeholder says what the field finds."
+        }
+      },
+      {
+        "text": "A long title ends with an ellipsis: the title stays on one line.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "A long title ends with an ellipsis."
+        }
+      }
+    ],
+    "good": [
+      "Transactions",
+      "Last 30 days",
+      "Search transactions"
+    ],
+    "bad": [
+      "Page Title"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty",
+      "when": "The search field shows the placeholder when empty.",
+      "from": {
+        "section": "states",
+        "quote": "Its search field shows the placeholder when empty"
+      }
+    },
+    {
+      "state": "With a query",
+      "when": "With text, the field shows the query and a clear button.",
+      "from": {
+        "section": "states",
+        "quote": "and the query and a clear button when it has text"
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "The field's focus look comes from Input Search. The section itself has no states.",
+      "from": {
+        "section": "states",
+        "quote": "its focus look comes from Input Search"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Make searchPlaceholder say what the field finds and filterAccessibilityLabel say what the button filters: screen readers read both.",
+      "strength": "recommended",
+      "target": "filterAccessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "Make searchPlaceholder say what the field finds and filterAccessibilityLabel say what the button filters; screen readers read both."
+      }
+    },
+    {
+      "text": "Left out, filterAccessibilityLabel is “Filter”, its default: say what the button filters, such as “Filter transactions”.",
+      "strength": "recommended",
+      "target": "filterAccessibilityLabel",
+      "from": {
+        "fact": "props:filterAccessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "The page’s name",
+      "dont": "The defaults left in",
+      "why": "Without title and subtitle it shows Page Title",
+      "from": {
+        "section": "doDont",
+        "quote": "The page’s name"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A searchable list, the guide's In context: the hero heads the Transactions page with its name and scope, a search field that says what it finds and a filter button named for what it filters, and the page's list in its body (a ListGroup of the guide's five transactions, each amount a MoneyValue in the row's trailing). The empty searchValue and the empty handlers stand for the page's own state: the page filters the list as people type and opens its filters on onFilterPress.",
+      "jsx": "<Screen>\n  <HeroSection\n    title=\"Transactions\"\n    subtitle=\"Last 30 days\"\n    searchPlaceholder=\"Search transactions\"\n    filterAccessibilityLabel=\"Filter transactions\"\n    searchValue=\"\"\n    onSearchChange={(text) => {}}\n    onFilterPress={() => {}}\n  >\n    <ListGroup>\n      <ListItem layout=\"Horizontal\" title=\"Blue Tokai Coffee\" supportText=\"Today, 9:12 am\" trailing={<MoneyValue value=\"240.00\" currency=\"₹\" />} onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Fresh Mart\" supportText=\"Yesterday\" trailing={<MoneyValue value=\"1,180.50\" currency=\"₹\" />} onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"HP Petrol\" supportText=\"22 Oct\" trailing={<MoneyValue value=\"2,000.00\" currency=\"₹\" />} onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Coffee Day\" supportText=\"21 Oct\" trailing={<MoneyValue value=\"180.00\" currency=\"₹\" />} onPress={() => {}} />\n      <ListItem layout=\"Horizontal\" title=\"Airtel Recharge\" supportText=\"20 Oct\" trailing={<MoneyValue value=\"299.00\" currency=\"₹\" />} onPress={() => {}} />\n    </ListGroup>\n  </HeroSection>\n</Screen>",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero heads the Transactions page."
+      }
+    },
+    {
+      "purpose": "Another filter, the guide's filterIcon card: a Watchlist page whose button sorts, so the icon (ic_sort) and its label (“Sort stocks”) change together. The empty searchValue and handlers stand for the page's own state.",
+      "jsx": "<HeroSection\n  title=\"Watchlist\"\n  subtitle=\"Stocks you follow\"\n  searchPlaceholder=\"Search stocks\"\n  filterIcon=\"ic_sort\"\n  filterAccessibilityLabel=\"Sort stocks\"\n  searchValue=\"\"\n  onSearchChange={(text) => {}}\n  onFilterPress={() => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Change the icon and its label together."
+      }
+    },
+    {
+      "purpose": "Search only, the guide's Search only card: showFilter={false} removes the filter button and the field takes the row. The empty searchValue and handler stand for the page's own state.",
+      "jsx": "<HeroSection\n  title=\"Transactions\"\n  subtitle=\"Last 30 days\"\n  searchPlaceholder=\"Search transactions\"\n  showFilter={false}\n  searchValue=\"\"\n  onSearchChange={(text) => {}}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "showFilter={false}: the field takes the row."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "children",
+      "description": "A full-width body under the row; the hero's modes cascade into it.",
+      "quote": "`children`: a full-width body under the row (cascaded modes).",
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "modes",
+      "name": "context7",
+      "description": "The hero gives its Title context7 Page Hero, and a context7 in the hero's modes overrides it: Default adds the Title's own 12 / 8 padding and Card shrinks the title to 14 px.",
+      "quote": "`context7` other than Page Hero changes the Title (Default adds its own 12 / 8 padding; Card shrinks it to 14 px).",
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Figma draws a 44 px field, a 42 px filter and a 44 px title block; the package's field is 42 px, its filter 40 px and its title block 50 px (Component Bug #404).",
+      "from": {
+        "section": "sizing",
+        "quote": "draws a 44 px field, a 42 px filter, and a 44 px title block"
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ]
+}

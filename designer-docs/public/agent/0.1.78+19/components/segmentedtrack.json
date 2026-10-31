@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "SegmentedTrack",
+  "slug": "segmentedtrack",
+  "category": "data",
+  "tags": [
+    "stacked bar",
+    "allocation bar",
+    "share chart",
+    "portfolio mix"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-30T12:30:13Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide (checked 13 October on 0.1.78-c1fa197) has two lines the installed 0.1.78-dbe0e02 contradicts: the Don’t “All three slices turn the same grey and the split disappears.” (Neutral’s dataViz backgrounds have been Grey/2000, 2200 and 2400 since 636f3f5: three different greys), and the “Primary appearance” example and playground option pass only Color Mode, so they show the Senary gold default, not the “Purple steps instead of gold.” the caption gives. The entry leaves the Neutral caption out and keeps the purple caption for Appearance / DataViz Primary. Guide fix #529. Added by Claude Code in the overnight run agentpack-batch8, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Segmented Track to show how one whole splits into a few parts, such as a portfolio’s equity, debt, and cash.",
+  "useWhen": [
+    {
+      "text": "Show how one whole splits into a few parts, such as a portfolio’s equity, debt, and cash.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Segmented Track to show how one whole splits into a few parts, such as a portfolio’s equity, debt, and cash."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "One value filling a track, such as “KYC 70% complete”: that is a progress bar, not a split.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "One value filling a track is a progress bar, not a split."
+      }
+    },
+    {
+      "text": "Switching between mixes: nothing on the track is pressable. Use Range Track, which adds tabs.",
+      "strength": "discouraged",
+      "from": {
+        "section": "inContext",
+        "quote": "Nothing on the track is pressable; to switch between mixes, use Range Track, which adds tabs."
+      },
+      "useInstead": "RangeTrack"
+    },
+    {
+      "text": "Anything people press, select or focus: a Segmented Track has no hover, pressed, selected, or disabled state and can’t take focus.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Segmented Track has no hover, pressed, selected, or disabled state and can’t take focus."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Track",
+      "holds": "The 24 px bar with fully rounded ends; it holds the slices with no gaps.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Rounds the ends and holds the slices with no gaps."
+      }
+    },
+    {
+      "part": "First slice",
+      "holds": "The first part in segments: strongest colour; its width is its share.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Strongest colour; its width is its share."
+      }
+    },
+    {
+      "part": "Second slice",
+      "holds": "The second part: a lighter step of the same colour.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A lighter step of the same colour."
+      }
+    },
+    {
+      "part": "Third slice",
+      "holds": "The third part: lightest; the steps repeat after three slices.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Lightest; the steps repeat after three slices."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The container sets the width: the track is 24 px tall with fully rounded ends and stretches to the width of its container.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The track is 24 px tall with fully rounded ends and stretches to the width of its container."
+      }
+    },
+    {
+      "text": "Put a legend with the same names next to the track.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "put a legend with the same names next to it"
+      }
+    },
+    {
+      "text": "A MetricLegendItem resolves its dot from the same colour token as the slices: its modes set to the Senary appearance with High emphasis give the first slice’s colour without hard-coding it.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "`MetricLegendItem` resolves its dot from the same `dataViz/bg` chain, so `modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'High' }}` gives the first slice's colour without hard-coding it."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass each part’s share in segments; the track works out the widths.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Pass each part’s share; the track works out the widths."
+      },
+      "target": "segments"
+    },
+    {
+      "text": "Weighted slices: widths follow the shares, such as 60, 25, and 15.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Widths follow the shares: 60, 25, and 15."
+      },
+      "target": "segments"
+    },
+    {
+      "text": "Equal slices: without shares every slice is the same width, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Without shares every slice is the same width, as in Figma."
+      },
+      "target": "segments"
+    },
+    {
+      "text": "More than three parts: after three slices the colours repeat, so the legend tells them apart.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "After three slices the colours repeat, so the legend tells them apart."
+      },
+      "target": "segments"
+    },
+    {
+      "text": "Like the guide’s portfolio card, the screen works out each part’s share and passes the same list, in the same order, to the track and the legend, so their colours match.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen works out each part’s share and passes the same list, in the same order, to the track and the legend, so their colours match."
+      },
+      "target": "segments"
+    },
+    {
+      "text": "Only the data changes the track: pass real shares, and hide the track when there are none.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Only the data changes it, so pass real shares and hide the track when there are none."
+      },
+      "target": "segments"
+    },
+    {
+      "text": "An appearance recolours every slice.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "An appearance recolours every slice."
+      },
+      "target": "Appearance / DataViz"
+    },
+    {
+      "text": "Figma and code both default to Senary gold.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Figma and code both default to Senary gold."
+      },
+      "target": "Appearance / DataViz",
+      "value": "Senary"
+    },
+    {
+      "text": "Senary gives three distinct golds.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Senary gives three distinct golds."
+      },
+      "target": "Appearance / DataViz",
+      "value": "Senary"
+    },
+    {
+      "text": "The Primary appearance gives purple steps instead of gold.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Purple steps instead of gold."
+      },
+      "target": "Appearance / DataViz",
+      "value": "Primary"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Parts of one whole, sized by their share and named in a legend.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Parts of one whole, sized by their share and named in a legend."
+        }
+      },
+      {
+        "text": "Use short names in sentence case and plain percentages.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use short names in sentence case and plain percentages."
+        }
+      },
+      {
+        "text": "Show parts of one whole: equity, debt, and cash add up to the portfolio.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Equity, debt, and cash add up to the portfolio."
+        }
+      },
+      {
+        "text": "Pair the track with a legend: each name and share sits next to its colour.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Each name and share sits next to its colour."
+        }
+      },
+      {
+        "text": "Do not rely on colour alone: without a legend nobody knows which slice is which.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Without a legend nobody knows which slice is which."
+        }
+      },
+      {
+        "text": "Hide the track when there’s no data, and say so in words instead, such as “No investments yet”.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Say so in words instead."
+        }
+      },
+      {
+        "text": "Do not pass an empty list: it leaves a blank gap that says nothing about why.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It leaves a blank gap that says nothing about why."
+        },
+        "target": "segments"
+      }
+    ],
+    "good": [
+      "Portfolio mix: equity 60%, debt 25%, cash 15%",
+      "Equity",
+      "60%",
+      "No investments yet"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Display only",
+      "when": "A Segmented Track has no hover, pressed, selected, or disabled state and can’t take focus.",
+      "from": {
+        "section": "states",
+        "quote": "Segmented Track has no hover, pressed, selected, or disabled state and can’t take focus."
+      }
+    },
+    {
+      "state": "A zero share",
+      "when": "A part worth 0 still draws a 1 px sliver; leave it out instead.",
+      "from": {
+        "section": "states",
+        "quote": "A part worth 0 still draws a 1 px sliver; leave it out instead."
+      }
+    },
+    {
+      "state": "No data",
+      "when": "An empty list draws an empty 24 px track; hide the track instead.",
+      "from": {
+        "section": "states",
+        "quote": "An empty list draws an empty 24 px track; hide the track instead."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The track has no text, so give it a spoken name in accessibilityLabel that lists the shares, such as “Portfolio mix: equity 60%, debt 25%, cash 15%”.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The track has no text, so give it a spoken name that lists the shares, such as “Portfolio mix: equity 60%, debt 25%, cash 15%”"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "It is display-only: on the web it is a group named by its spoken name, and a slice given its own name is read as an image inside that group.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "It is display-only: on the web it is a group named by its spoken name, and a slice given its own name is read as an image inside that group."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Show parts of one whole",
+      "dont": "Use it as a progress bar",
+      "why": "One value filling a track is a progress bar, not a split.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show parts of one whole"
+      }
+    },
+    {
+      "do": "Pair it with a legend",
+      "dont": "Rely on colour alone",
+      "why": "Without a legend nobody knows which slice is which.",
+      "from": {
+        "section": "doDont",
+        "quote": "Pair it with a legend"
+      }
+    },
+    {
+      "do": "Hide it when there’s no data",
+      "dont": "Pass an empty list",
+      "why": "It leaves a blank gap that says nothing about why.",
+      "from": {
+        "section": "doDont",
+        "quote": "Hide it when there’s no data"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A portfolio card, the guide's In context: the screen works out each part's share and passes the same list, in the same order, to the track and the legend, so their colours match. The track keeps its default Senary gold and is named by its spoken name; each MetricLegendItem carries Senary and its slice's emphasis (High, Medium, Low), so its dot takes its slice's colour.",
+      "jsx": "<Card>\n  <VStack>\n    <Text text=\"Portfolio mix\" />\n    <Text text=\"₹4,20,000 invested\" />\n    <SegmentedTrack\n      segments={[\n        { key: 'Equity', value: 60 },\n        { key: 'Debt', value: 25 },\n        { key: 'Cash', value: 15 },\n      ]}\n      accessibilityLabel=\"Portfolio mix: equity 60%, debt 25%, cash 15%\"\n    />\n    <VStack>\n      <MetricLegendItem label=\"Equity\" value=\"60%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'High' }} />\n      <MetricLegendItem label=\"Debt\" value=\"25%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'Medium' }} />\n      <MetricLegendItem label=\"Cash\" value=\"15%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'Low' }} />\n    </VStack>\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen works out each part’s share and passes the same list, in the same order, to the track and the legend, so their colours match."
+      }
+    },
+    {
+      "purpose": "Five parts, the guide's Configuration: after three slices the colours repeat (High, Medium, Low, High, Medium), so the legend tells them apart; its items follow the same order and emphasis.",
+      "jsx": "<VStack>\n  <SegmentedTrack\n    segments={[\n      { key: 'Large cap', value: 35 },\n      { key: 'Mid cap', value: 25 },\n      { key: 'Small cap', value: 15 },\n      { key: 'Debt', value: 15 },\n      { key: 'Cash', value: 10 },\n    ]}\n    accessibilityLabel=\"Portfolio mix: large cap 35%, mid cap 25%, small cap 15%, debt 15%, cash 10%\"\n  />\n  <VStack>\n    <MetricLegendItem label=\"Large cap\" value=\"35%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'High' }} />\n    <MetricLegendItem label=\"Mid cap\" value=\"25%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'Medium' }} />\n    <MetricLegendItem label=\"Small cap\" value=\"15%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'Low' }} />\n    <MetricLegendItem label=\"Debt\" value=\"15%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'High' }} />\n    <MetricLegendItem label=\"Cash\" value=\"10%\" modes={{ 'Appearance / DataViz': 'Senary', 'Emphasis / DataViz': 'Medium' }} />\n  </VStack>\n</VStack>",
+      "from": {
+        "section": "configuration",
+        "quote": "After three slices the colours repeat, so the legend tells them apart."
+      }
+    },
+    {
+      "purpose": "No data, the guide's Do: when there are no parts, the screen hides the track and says so in words instead of passing an empty list.",
+      "jsx": "<Text text=\"No investments yet\" />",
+      "from": {
+        "section": "doDont",
+        "quote": "Say so in words instead."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "segments",
+        "type": "SegmentedTrackSegmentData[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Each part's value sets its width as a share of the total (flex: value; a missing value counts as 1; 0 keeps a 1 px sliver). An empty list draws an empty, transparent 24 px track; leaving segments out draws three equal default slices. Declared: Data-driven segment list. Used when no `children` slot is provided. Defaults to three equal segments which receive per-index Emphasis defaults (`High`, `Medium`, `Low`).",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Slot for fully custom segment children. Each top-level child is treated as one segment. The parent injects per-index Emphasis defaults and the shared `modes`, while child-level `modes` overrides win."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override the container styles."
+      },
+      {
+        "name": "segmentStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Style applied to every segment (data-driven mode only)."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "The track's spoken name. On the web the track is a group (role group) named by it. Declared: Accessibility label announced for the whole distribution row.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Test identifier."
+      },
+      {
+        "name": "SegmentedTrack.Segment",
+        "type": "component",
+        "description": "A static sub-component of SegmentedTrack. Its own props: value, color, modes, style, accessibilityLabel.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Appearance / DataViz",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Quaternary",
+          "Quinary",
+          "Senary",
+          "Neutral"
+        ],
+        "description": "A track with no modes has Senary gold slices (206,161,90 / 232,188,122 / 253,232,201 at High, Medium, Low), as in Figma, not the collection's default Primary (purple). An appearance recolours every slice. Declared: A token collection SegmentedTrack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: Each segment resolves its color through the `dataViz/bg` token, which cascades through `Emphasis / DataViz` and `Appearance / DataViz`. Pass `modes` per segment (or override `Appearance / DataViz` at the parent level via `modes`) to retheme the row without touching colors directly.",
+        "source": "evidence",
+        "default": "Senary",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection SegmentedTrack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Emphasis / DataViz",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "Set on each slice by its position: High, Medium, Low, then repeating, as checked in Light (the guide shows Light only). An Emphasis / DataViz on the track itself is overwritten; a segment's own modes win. Declared: A token collection SegmentedTrack reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode. Package docs: Each segment resolves its color through the `dataViz/bg` token, which cascades through `Emphasis / DataViz` and `Appearance / DataViz`.",
+        "source": "evidence",
+        "default": "High",
+        "checkedOn": "2026-10-05"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Slot for fully custom segment children. Each top-level child is treated as one segment. The parent injects per-index Emphasis defaults and the shared `modes`, while child-level `modes` overrides win.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "The published Storybook predates 0.1.78 (the stale Storybook reported in #196).",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=segmentedtrack",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4176-39960",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-segmentedtrack--docs"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "portfoliohero",
+  "entryHash": "2f84a83d319d2a02b73004c06aa44438a4d5602ade7aebd2c82838d4c41b036b",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "checkedAt": "2026-10-31T02:23:39Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/anatomy/1",
+      "reason": "misreads-source: The guide's Sources section says \"the package has a fixed label and amount\", and the evidence says \"the chip is fixed\". Marking Label alwaysPresent=false contradicts that. Only the optional Avatar depends on imageSource."
+    },
+    {
+      "field": "/examples/0",
+      "reason": "misreads-source: The In context section says only that \"the two actions sit at the bottom\" (Buy ₹1,000 and Sell ₹1,000). Nothing cited supports \"Buy keeps the defaults and Sell takes Emphasis Medium\", so that is an added claim about props."
+    }
+  ],
+  "notes": "configuration/7, configuration/8, configuration/9 and accessibility/2 rest on package-type facts (topSlot, actionSlot, actionActive, actionAccessibilityLabel). They describe a replaceable chip and a pressable default toggle action. That directly contradicts the guide: \"Figma's Action Slot… isn't in the package\", \"the package has a fixed label and amount, children for the slot, and no action\", \"the hero has no button of its own\". It also contradicts the evidence, which says \"No testID, onPress, accessibility props, or top-area slot\" and whose Limits say \"Don't imply the hero presses, has an action button, replaces the chip\". The items read their facts faithfully, so I haven't flagged them. However, the type facts may come from a different package version than the checked 0.1.78. A human should reconcile this before publishing these items. Two smaller points: content/rules/0 and content/rules/1 are marked [required] only on the strength of the prop defaults, and useWhen/1 restates the core principle rather than a use-when condition."
+}

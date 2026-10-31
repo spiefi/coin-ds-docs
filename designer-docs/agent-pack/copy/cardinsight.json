@@ -1,0 +1,369 @@
+{
+  "slug": "cardinsight",
+  "label": "Card Insight",
+  "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+  "files": [
+    "src/guides/cardinsight.guide.tsx"
+  ],
+  "evidence": "docs/evidence/cardinsight.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T01:23:06.616Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "insight card",
+    "savings goal card",
+    "savings insight",
+    "goal progress",
+    "spending insight"
+  ],
+  "title": "Card Insight",
+  "summary": "Use a Card Insight to show one finding about someone's money: a title, a status badge, one figure, and a hint on what to do next.",
+  "corePrinciple": "One finding, one figure, one hint.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3702-17347",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cardinsight--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A finding, its figure, and a hint",
+      "description": "A white card puts a title, one line of context, and a badge on top. Below sit the figure, here a Savings Goal Summary, and a footer under a divider: a hint with one action.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Title",
+        "The topic in 16 px bold; it wraps rather than cutting off.",
+        "Subtitle",
+        "One sentence of context at 12 px.",
+        "Badge",
+        "A string becomes a Badge; false removes it.",
+        "Figure",
+        "children: here a Savings Goal Summary with a bar and two legend rows.",
+        "Divider",
+        "A 1 px rule, shown only with a footer.",
+        "Footer",
+        "A hint and one action, set with footerBody and footerButtonLabel; false removes it."
+      ],
+      "specimen": [
+        "Emergency savings",
+        "Four of the eight months we suggest.",
+        "On track",
+        "50%",
+        "Saved (4 months)",
+        "₹2.4L",
+        "Goal (8 months)",
+        "₹4.8L",
+        "Add ₹10,000 a month to reach it by June.",
+        "Set up"
+      ],
+      "anatomy": [
+        {
+          "part": "Title",
+          "note": "The topic in 16 px bold; it wraps rather than cutting off."
+        },
+        {
+          "part": "Subtitle",
+          "note": "One sentence of context at 12 px."
+        },
+        {
+          "part": "Badge",
+          "note": "A string becomes a Badge; false removes it."
+        },
+        {
+          "part": "Figure",
+          "note": "children: here a Savings Goal Summary with a bar and two legend rows."
+        },
+        {
+          "part": "Divider",
+          "note": "A 1 px rule, shown only with a footer."
+        },
+        {
+          "part": "Footer",
+          "note": "A hint and one action, set with footerBody and footerButtonLabel; false removes it."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Brand colour",
+      "description": "AppearanceBrand colours the badge and the bar: Primary gold by default, Secondary purple as in Figma, Tertiary blue, or Neutral grey. The footer is grey with a dark button, as in Figma, until you set AppearanceBrand on the card; then it takes that colour too. The card, its title, and its subtitle stay the same. badge takes a string, your own node, or false; children replaces the figure, and footer takes your own node or false.",
+      "blocks": [
+        "Primary",
+        "The default: a gold badge and bar, with a grey footer.",
+        "Secondary",
+        "Purple, the colour of Figma’s bar.",
+        "Tertiary",
+        "Blue throughout.",
+        "Neutral",
+        "Grey for a quieter card."
+      ],
+      "specimen": [
+        "Emergency savings",
+        "Four of the eight months we suggest.",
+        "On track",
+        "50%",
+        "Saved (4 months)",
+        "₹2.4L",
+        "Goal (8 months)",
+        "₹4.8L",
+        "Add ₹10,000 a month to reach it by June.",
+        "Set up"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Primary",
+          "description": "The default: a gold badge and bar, with a grey footer."
+        },
+        {
+          "title": "Secondary",
+          "description": "Purple, the colour of Figma’s bar."
+        },
+        {
+          "title": "Tertiary",
+          "description": "Blue throughout."
+        },
+        {
+          "title": "Neutral",
+          "description": "Grey for a quieter card."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Leave out what you don't need",
+      "description": "badge={false} removes the badge, and the title takes its width. footer={false} removes the footer and, unless you pass a divider, the rule above it; divider={false} keeps the footer without the rule. onPress makes the whole card one button with no pressed look; don't use it when the footer has a button.",
+      "blocks": [
+        "Without the badge",
+        "The title runs the full width.",
+        "Without the footer",
+        "The divider goes with it.",
+        "Without the divider",
+        "The footer sits 12 px under the figure."
+      ],
+      "specimen": [
+        "Emergency savings",
+        "Four of the eight months we suggest.",
+        "50%",
+        "Saved (4 months)",
+        "₹2.4L",
+        "Goal (8 months)",
+        "₹4.8L",
+        "Add ₹10,000 a month to reach it by June.",
+        "Set up",
+        "On track"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Without the badge",
+          "description": "The title runs the full width."
+        },
+        {
+          "title": "Without the footer",
+          "description": "The divider goes with it."
+        },
+        {
+          "title": "Without the divider",
+          "description": "The footer sits 12 px under the figure."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Your screen sets the width",
+      "description": "The card fills its host's width; Figma draws it at 356 px. It has 16 px padding at the top and bottom, 12 px at the sides, and 12 px between the header, the figure, the divider, and the footer. Its height follows the content.",
+      "blocks": [
+        "356 × 336.5",
+        "12"
+      ],
+      "specimen": [
+        "Emergency savings",
+        "Four of the eight months we suggest.",
+        "On track",
+        "50%",
+        "Saved (4 months)",
+        "₹2.4L",
+        "Goal (8 months)",
+        "₹4.8L",
+        "Add ₹10,000 a month to reach it by June.",
+        "Set up"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Name the finding, then the hint",
+      "description": "Name the topic in the title and add one sentence of context. The badge is a one- or two-word status, such as “On track”, that doesn't repeat the title. Give the footer one hint and at most one action, labelled with a verb.",
+      "blocks": [
+        "One finding, one hint",
+        "“Emergency savings”, how far along it is, “On track”, and one way to get there."
+      ],
+      "specimen": [
+        "Emergency savings",
+        "Four of the eight months we suggest.",
+        "On track",
+        "50%",
+        "Saved (4 months)",
+        "₹2.4L",
+        "Goal (8 months)",
+        "₹4.8L",
+        "Add ₹10,000 a month to reach it by June.",
+        "Set up"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "One finding, one hint",
+          "description": "“Emergency savings”, how far along it is, “On track”, and one way to get there."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "A savings insight on the Insights screen",
+      "description": "Set up runs the screen's own action through onPressFooter. Once the plan is set, the screen passes a new hint and no button label, so the footer has no button; the card doesn't change itself.",
+      "blocks": [
+        "No plan yet"
+      ],
+      "specimen": [
+        "Insights",
+        "October 2026",
+        "Emergency savings",
+        "Four of the eight months we suggest.",
+        "On track",
+        "50%",
+        "Saved (4 months)",
+        "₹2.4L",
+        "Goal (8 months)",
+        "₹4.8L",
+        "Add ₹10,000 a month to reach it by June.",
+        "Set up"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One clear finding",
+      "description": "Each pair shows a card people read at a glance next to one that squeezes its title or leaves its footer empty.",
+      "blocks": [
+        "Do",
+        "Keep the badge short",
+        "“On track” leaves the title room.",
+        "Don’t",
+        "Write a long badge",
+        "“On track to finish by June” squeezes the title onto two lines.",
+        "Write the footer’s hint",
+        "Your hint, and a Set up button that runs the screen’s action.",
+        "Keep the default footer copy",
+        "“One line of guidance.” and a “Button” that does nothing.",
+        "Keep the subtitle to one sentence",
+        "It reads in one glance.",
+        "Write a paragraph as the subtitle",
+        "It wraps to several lines and pushes the figure down."
+      ],
+      "specimen": [
+        "Emergency savings",
+        "Four of the eight months we suggest.",
+        "On track",
+        "50%",
+        "Saved (4 months)",
+        "₹2.4L",
+        "Goal (8 months)",
+        "₹4.8L",
+        "On track to finish by June",
+        "Add ₹10,000 a month to reach it by June.",
+        "Set up",
+        "One line of guidance.",
+        "Button",
+        "You have saved four of the eight months of expenses we suggest keeping aside, based on what you spent over the last six months."
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep the badge short",
+            "caption": "“On track” leaves the title room.",
+            "specimen": "Emergency savings · Four of the eight months we suggest. · On track · 50% · Saved (4 months) · ₹2.4L · Goal (8 months) · ₹4.8L"
+          },
+          "dont": {
+            "title": "Write a long badge",
+            "caption": "“On track to finish by June” squeezes the title onto two lines.",
+            "specimen": "Emergency savings · Four of the eight months we suggest. · On track to finish by June · 50% · Saved (4 months) · ₹2.4L · Goal (8 months) · ₹4.8L"
+          }
+        },
+        {
+          "do": {
+            "title": "Write the footer’s hint",
+            "caption": "Your hint, and a Set up button that runs the screen’s action.",
+            "specimen": "Emergency savings · Four of the eight months we suggest. · On track · 50% · Saved (4 months) · ₹2.4L · Goal (8 months) · ₹4.8L · Add ₹10,000 a month to reach it by June. · Set up"
+          },
+          "dont": {
+            "title": "Keep the default footer copy",
+            "caption": "“One line of guidance.” and a “Button” that does nothing.",
+            "specimen": "Emergency savings · Four of the eight months we suggest. · On track · 50% · Saved (4 months) · ₹2.4L · Goal (8 months) · ₹4.8L · One line of guidance. · Button"
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the subtitle to one sentence",
+            "caption": "It reads in one glance.",
+            "specimen": "Emergency savings · Four of the eight months we suggest. · On track · 50% · Saved (4 months) · ₹2.4L · Goal (8 months) · ₹4.8L"
+          },
+          "dont": {
+            "title": "Write a paragraph as the subtitle",
+            "caption": "It wraps to several lines and pushes the figure down.",
+            "specimen": "Emergency savings · You have saved four of the eight months of expenses we suggest keeping aside, based on what you spent over the last six months. · On track · 50% · Saved (4 months) · ₹2.4L · Goal (8 months) · ₹4.8L"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Card Insight contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Custom savings goal",
+        "Without badge",
+        "Without footer",
+        "Custom footer",
+        "Without divider",
+        "Checked 23 October 2026",
+        "Installed jfs-components is 0.1.78 (23 October build) from the team’s private package repository. Figma’s Card/Insight is one 356 × 322 component with a title, a subtitle, and a slot; its badge, divider, and footer are fixed, its badge is green, and its bar is purple, while the package defaults to gold. The default footer shows Figma’s placeholder hint and “Button”; set its hint, button label, and action, as these examples do. The default figure’s caption, “Credit usage”, reads on the white card, and the bar keeps its fill at every Emphasis. A System badge’s label is white, as in Figma. The published Storybook predates this build.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

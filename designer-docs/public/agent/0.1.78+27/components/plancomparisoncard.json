@@ -1,0 +1,680 @@
+{
+  "schemaVersion": 1,
+  "id": "PlanComparisonCard",
+  "slug": "plancomparisoncard",
+  "category": "card",
+  "tags": [
+    "plan comparison",
+    "compare plans",
+    "feature matrix",
+    "upgrade table",
+    "membership plans"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T05:18:28Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The guide and most of its evidence were checked on 21 October on 0.1.78-c7d3348 and not re-checked on the installed build, dbe0e02, which changed PlanComparisonCard for #360 (plan names centred over their columns, names that end in … on one line, labels and values that wrap, rows of at least 46 px, a table with rows, column headers and cells, a cross named “Not included”, infoLabel and notIncludedLabel). This entry follows the installed package and leaves out the guide sentences dbe0e02 contradicts (listed in its notes). The guide also doesn't say which surface hosts the card: its plan names are white with no panel behind them, every example sits on the docs' dark frame, and on a light Coin Screen the names don't show, so the entry's examples carry no host. Re-extract once #360 is fixed and the guide is re-checked and published. Added by Claude Code in the overnight run agentpack-batch10, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Plan Comparison Card to compare two or three plans feature by feature, with the plan you recommend in gold.",
+  "useWhen": [
+    {
+      "text": "Comparing two or three plans feature by feature, with the plan you recommend in gold.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Plan Comparison Card to compare two or three plans feature by feature, with the plan you recommend in gold."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Plan names",
+      "holds": "columns: one name per plan, 14 px, centred over its column.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "columns: one name per plan, 14 px, centred over its column."
+      }
+    },
+    {
+      "part": "Recommended plan",
+      "holds": "brand: true turns that plan's name gold.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "brand: true turns that plan’s name gold."
+      }
+    },
+    {
+      "part": "Feature",
+      "holds": "A row's label, 12 px, on the left of the row.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A row’s label, 12 px"
+      }
+    },
+    {
+      "part": "Value",
+      "holds": "A string or number from values, 12 px medium, centred in its plan's cell.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A string or number from values, 12 px medium, centred."
+      }
+    },
+    {
+      "part": "Info icon",
+      "holds": "showInfo adds it after the label; onInfoPress makes it a button.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "showInfo adds it after the label; onInfoPress makes it a button."
+      }
+    },
+    {
+      "part": "Not included",
+      "holds": "false in values: a grey cross.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "false in values: a grey cross."
+      }
+    },
+    {
+      "part": "Table",
+      "holds": "A dark panel with 16 px corners and a 1 px line between rows; children replace it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A dark panel with 16 px corners and a 1 px line between rows."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "On the guide's JioFinance+ upgrade screen, the comparison sits between the screen's heading and its upgrade button.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The comparison sits between the screen’s heading and its upgrade button."
+      }
+    },
+    {
+      "text": "Each info icon opens that feature's explanation through onInfoPress; the upgrade button starts the upgrade through its own onPress.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Each info icon opens that feature’s explanation through onInfoPress; the button starts the upgrade through its own onPress."
+      },
+      "target": "PlanComparisonRow.onInfoPress"
+    },
+    {
+      "text": "The card fills the width of its host; Figma draws it at 328 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills the width of its host; Figma draws it at 328 px."
+      }
+    },
+    {
+      "text": "The feature column takes 1.8 shares of the width and each plan column one share.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The feature column takes 1.8 shares of the width and each plan column one share"
+      }
+    },
+    {
+      "text": "The card's height follows its rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the rows"
+      },
+      "target": "rows"
+    },
+    {
+      "text": "The plan names sit 16 px above the table.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "the plan names sit 16 px above the table"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "columns names the plans, left to right.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "columns names the plans, left to right."
+      },
+      "target": "columns"
+    },
+    {
+      "text": "Mark the plan you recommend with brand: its name turns gold.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Mark the one you recommend with brand: its name turns gold."
+      },
+      "target": "PlanComparisonColumn.brand",
+      "value": "true"
+    },
+    {
+      "text": "Without brand, every plan name is white.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Without brand, every plan name is white."
+      },
+      "target": "PlanComparisonColumn.brand",
+      "value": "false"
+    },
+    {
+      "text": "Don't make every plan gold: nothing stands out as the one to pick.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Nothing stands out as the one to pick."
+      },
+      "target": "PlanComparisonColumn.brand"
+    },
+    {
+      "text": "With three plans, each plan column gets narrower, so names and values stay short.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Each plan column gets narrower, so names and values stay short."
+      },
+      "target": "columns"
+    },
+    {
+      "text": "rows lists the features: each row's values fill the plan columns in the same order.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "rows lists the features: each row’s values fill the plan columns in the same order."
+      },
+      "target": "rows"
+    },
+    {
+      "text": "Give each row one value per plan, in column order: values fill the columns in order, so leaving one out shifts the ones after it under the wrong plan.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Values fill columns in order, so ₹5,000 lands under Your plan."
+      },
+      "target": "PlanComparisonRow.values"
+    },
+    {
+      "text": "In values, a string or number shows as text, false shows a grey cross, and any Coin component, such as a Badge, shows as it is.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A string or number shows as text, false shows a grey cross, and any Coin component, such as a Badge, shows as it is."
+      },
+      "target": "PlanComparisonRow.values"
+    },
+    {
+      "text": "A Coin component in a cell fills the cell and gets the card's modes.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A Coin component fills the cell and gets the card’s modes."
+      },
+      "target": "PlanComparisonRow.values"
+    },
+    {
+      "text": "showInfo adds an info icon after a feature's label.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "showInfo adds an info icon after a feature’s label."
+      },
+      "target": "PlanComparisonRow.showInfo",
+      "value": "true"
+    },
+    {
+      "text": "Leave out showInfo when a feature needs no explaining.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave out showInfo when a feature needs no explaining."
+      },
+      "target": "PlanComparisonRow.showInfo"
+    },
+    {
+      "text": "Use onInfoPress to open a feature's explanation, for example in a sheet.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Use it to open the explanation, for example in a sheet."
+      },
+      "target": "PlanComparisonRow.onInfoPress"
+    },
+    {
+      "text": "onInfoPress shows the info icon by itself: it implies showInfo.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/12"
+      },
+      "target": "PlanComparisonRow.onInfoPress"
+    },
+    {
+      "text": "children replaces the table with your own content, under the same plan names.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "children replaces the table with your own content, under the same plan names."
+      },
+      "target": "children"
+    },
+    {
+      "text": "With children, the plan names stay and the card adds no panel around your content.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Your content replaces the table; the plan names stay, and the card adds no panel."
+      },
+      "target": "children"
+    },
+    {
+      "text": "No mode restyles the card: the modes you give it pass to the components in its cells and slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "No mode restyles the card: the modes you give it pass to the components in its cells and slot."
+      },
+      "target": "modes"
+    },
+    {
+      "text": "The card and its rows have no pressed, selected, or disabled state.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The card and its rows have no pressed, selected, or disabled state."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Same features, side by side.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Same features, side by side."
+        }
+      },
+      {
+        "text": "Pass your own columns: left out, the card shows two sample plans, “Your plan” and a gold “JioFinance+”.",
+        "strength": "recommended",
+        "from": {
+          "fact": "/facts/props/0"
+        },
+        "target": "columns"
+      },
+      {
+        "text": "Pass your own rows (or children): left out, the card shows four sample features.",
+        "strength": "recommended",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "rows"
+      },
+      {
+        "text": "Call the user's current plan “Your plan” and the others by their product names, in a word or two.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Call the user’s current plan Your plan and the others by their product names, in a word or two."
+        },
+        "target": "columns"
+      },
+      {
+        "text": "When the card compares the user's plan with an upgrade, put the current plan first, then the upgrade by its product name.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The current plan first, the upgrade by its product name."
+        },
+        "target": "columns"
+      },
+      {
+        "text": "With three plans, keep names under about 8 characters.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "With three plans, keep names under about 8 characters."
+        },
+        "target": "columns"
+      },
+      {
+        "text": "Write features as nouns, such as “Cashback”, not sentences.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write features as nouns, such as Cashback or Bonus JioGold, not sentences."
+        },
+        "target": "rows"
+      },
+      {
+        "text": "Keep values to a number or a few characters, such as “1.25x”, “₹5,000” or “1%”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep values to a number or a few characters: 1.25x, ₹5,000, 1%."
+        },
+        "target": "PlanComparisonRow.values"
+      },
+      {
+        "text": "Use false for a feature a plan doesn't include, not the word “No”, so every missing feature looks the same.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use false for a feature a plan doesn’t include, not the word No, so every missing feature looks the same."
+        },
+        "target": "PlanComparisonRow.values"
+      }
+    ],
+    "good": [
+      "Your plan",
+      "JioFinance+",
+      "JioPoints multiplier",
+      "1x",
+      "1.25x",
+      "Cashback",
+      "₹5,000",
+      "Bonus JioGold",
+      "1%",
+      "Free",
+      "Plus",
+      "Premium",
+      "JioPoints",
+      "1.1x",
+      "₹2,000",
+      "Gold bonus"
+    ],
+    "bad": [
+      "No",
+      "Up to ₹2,000",
+      "Up to ₹5,000"
+    ]
+  },
+  "states": [
+    {
+      "state": "Hint",
+      "when": "showInfo draws the info icon as a hint: it only marks that more detail exists and doesn't press.",
+      "from": {
+        "section": "states",
+        "quote": "showInfo draws the icon as a hint: it doesn’t press"
+      }
+    },
+    {
+      "state": "Button",
+      "when": "onInfoPress makes the same icon a button named “More information about” and the feature, with a bigger tap area than it looks.",
+      "from": {
+        "section": "states",
+        "quote": "onInfoPress makes the same icon a button named “More information about” and the feature, with a bigger tap area than it looks."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "With onInfoPress, each info icon looks the same as the hint but is a button you can tab to.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Looks the same, but each icon is a button you can tab to."
+      },
+      "target": "PlanComparisonRow.onInfoPress"
+    },
+    {
+      "text": "infoLabel sets the spoken prefix of each info icon's name, before the row's label; it defaults to “More information about”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "infoLabel"
+    },
+    {
+      "text": "notIncludedLabel sets the spoken name of a false cell's cross; it defaults to “Not included”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/4"
+      },
+      "target": "notIncludedLabel"
+    },
+    {
+      "text": "The card is a table, with rows, column headers and cells.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "it is now a `role=\"table\"` with rows, column headers and cells"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Cross for not included",
+      "dont": "The word No",
+      "why": "Text reads like a value and looks different from the crosses.",
+      "from": {
+        "section": "doDont",
+        "quote": "false shows the same grey cross in every cell."
+      }
+    },
+    {
+      "do": "One recommended plan",
+      "dont": "Every plan gold",
+      "why": "Nothing stands out as the one to pick.",
+      "from": {
+        "section": "doDont",
+        "quote": "One recommended plan"
+      }
+    },
+    {
+      "do": "One value per plan",
+      "dont": "A value missing",
+      "why": "Values fill columns in order, so ₹5,000 lands under Your plan.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each value sits under its own plan."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Upgrading from the user's plan, the guide's two-plan comparison: “Your plan” first, then the upgrade by its product name, gold as the recommended plan (brand). false marks what “Your plan” doesn't include, and showInfo adds hint icons to the features that need explaining.",
+      "jsx": "<PlanComparisonCard\n  columns={[{ label: 'Your plan' }, { label: 'JioFinance+', brand: true }]}\n  rows={[\n    { label: 'JioPoints multiplier', values: ['1x', '1.25x'] },\n    { label: 'Cashback', showInfo: true, values: [false, '₹5,000'] },\n    { label: 'Bonus JioGold', showInfo: true, values: [false, '1%'] },\n  ]}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "The current plan first, the upgrade by its product name."
+      }
+    },
+    {
+      "purpose": "Three tiers: short names and values that fit the narrower columns, with Premium recommended in gold.",
+      "jsx": "<PlanComparisonCard\n  columns={[{ label: 'Free' }, { label: 'Plus' }, { label: 'Premium', brand: true }]}\n  rows={[\n    { label: 'JioPoints', values: ['1x', '1.1x', '1.25x'] },\n    { label: 'Cashback', showInfo: true, values: [false, '₹2,000', '₹5,000'] },\n    { label: 'Gold bonus', showInfo: true, values: [false, false, '1%'] },\n  ]}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Short names and values that fit the narrower columns."
+      }
+    },
+    {
+      "purpose": "The JioFinance+ upgrade screen, the guide's In context: the comparison sits between the screen's heading and its upgrade button. Each info icon opens that feature's explanation through onInfoPress, and the button starts the upgrade through its own onPress; the handlers are stubs standing for the screen's own wiring.",
+      "jsx": "<VStack>\n  <VStack>\n    <Text text=\"Get more with JioFinance+\" />\n    <Text text=\"Compare what you get today with the upgrade.\" />\n  </VStack>\n  <PlanComparisonCard\n    columns={[{ label: 'Your plan' }, { label: 'JioFinance+', brand: true }]}\n    rows={[\n      { label: 'JioPoints multiplier', values: ['1x', '1.25x'] },\n      { label: 'Cashback', onInfoPress: () => {}, values: [false, '₹5,000'] },\n      { label: 'Bonus JioGold', onInfoPress: () => {}, values: [false, '1%'] },\n    ]}\n  />\n  <Button label=\"Upgrade to JioFinance+\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Each info icon opens that feature’s explanation through onInfoPress; the button starts the upgrade through its own onPress."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "columns",
+        "type": "PlanComparisonColumn[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Left out, the card shows two sample plans: “Your plan”, and “JioFinance+” with brand. Declared: Plan column headers (excludes the leading label column). The order here maps 1:1 to each row's `values` array.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "rows",
+        "type": "PlanComparisonRow[]",
+        "required": false,
+        "source": "evidence",
+        "description": "Left out, the card shows four sample feature rows. Declared: Feature rows compared across the plan columns.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the table body; the plan names still come from columns. The card gives the slot no panel, border or padding. Declared: Slot that replaces the default comparison table (Figma `Slot`). When omitted, the table is built from `columns` + `rows`. Header still renders from `columns`. `modes` are cascaded into slot children.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "infoLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "More information about",
+        "description": "Spoken prefix for each info icon, followed by the row label. Defaults to `\"More information about\"`. Default \"More information about\", from the component source."
+      },
+      {
+        "name": "notIncludedLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Not included",
+        "description": "Spoken name for a `false` cell (the muted cross). Defaults to `\"Not included\"`. Default \"Not included\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Used for the card's tokens and cascaded to slot children and element cells; a child's own modes win. Declared: Design token modes for theming (e.g. `{ \"Color Mode\": \"Light\" }`).",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "evidence",
+        "description": "Applied to the root after its own { gap: 16, width: '100%' }. Declared: Override the outer container style.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "PlanComparisonColumn.label",
+        "source": "evidence",
+        "type": "string",
+        "required": true,
+        "description": "A field of each columns item: the plan's name, one header per plan.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "PlanComparisonColumn.brand",
+        "source": "evidence",
+        "type": "boolean",
+        "required": false,
+        "description": "A field of each columns item: true turns that plan's name gold. Any number of columns can be given, and any number branded.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "PlanComparisonRow.label",
+        "source": "evidence",
+        "type": "string",
+        "required": true,
+        "description": "A field of each rows item: the feature's label.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "PlanComparisonRow.values",
+        "source": "evidence",
+        "type": "PlanComparisonCellValue[]",
+        "required": true,
+        "description": "A field of each rows item: values[i] fills plan column i. A string or number shows as white text (12 px, weight 500, centred); false as a grey cross (ic_close, 16 px); null, undefined or true leave the cell empty; a React element is rendered as it is and given the card's modes. A short array leaves empty cells; extra values are ignored.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "PlanComparisonRow.showInfo",
+        "source": "evidence",
+        "type": "boolean",
+        "required": false,
+        "description": "A field of each rows item: adds a white 16 px info icon (ic_info) after the label.",
+        "checkedOn": "2026-10-21"
+      },
+      {
+        "name": "PlanComparisonRow.onInfoPress",
+        "source": "evidence",
+        "type": "() => void",
+        "required": false,
+        "description": "A field of each rows item: implies showInfo and wraps the icon in a Pressable, a button named “More information about” and the label, with hitSlop 8 (about 32 × 32 on the web); Enter and Space work.",
+        "checkedOn": "2026-10-21"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection PlanComparisonCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Slot that replaces the default comparison table (Figma `Slot`). When omitted, the table is built from `columns` + `rows`. Header still renders from `columns`. `modes` are cascaded into slot children.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "Figma draws a row line under rows 1 and 2 only; the package puts one under every row but the last.",
+        "source": "evidence",
+        "checkedOn": "2026-10-21"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=plancomparisoncard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4498-2968",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-plancomparisoncard--docs"
+  }
+}

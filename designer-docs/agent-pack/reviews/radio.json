@@ -1,0 +1,8 @@
+{
+  "flags": [
+    {
+      "field": "",
+      "reason": "The Radio guide (4e470cf) was checked on 1 October 2026 on 0.1.78 (5b6894b); Radio.tsx and all 37 radio tokens are the same on the installed v0.1.78-dbe0e02. Read against the installed source and the guide page rendered on it (31 October, headless Chrome, 1280 px), one sentence does not hold, and the entry leaves it out: the States description's “keyboard focus adds a yellow ring and an orange border.” is true only of an unselected Radio. A focused selected Radio keeps its selected look, a deep-purple border rgb(34, 0, 74) and no ring (box-shadow none): the orange border is a fallback for a focused unselected Radio only (Radio.tsx lines 142–147), and radio/focusSelected/boxShadow/size is not in the packaged Coin Variables, so the ring's size is 0 (165, 177, 192). The published Storybook (an older build) draws the same, so this is also a Component Bug: a selected Radio shows no Coin focus indicator. The entry's Focus state rests on the evidence's 0.1.78 sentence for an unselected Radio. Component Bug #548 asks for the focus ring on a selected Radio; once it is fixed the sentence holds, and if it isn't, the guide should say the ring and the orange border show on an unselected Radio. Then re-extract. Added by Claude Code in the overnight run agentpack-r24, for Marcin to confirm. Component Bug #548."
+    }
+  ]
+}

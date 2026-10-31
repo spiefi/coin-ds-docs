@@ -1,0 +1,597 @@
+{
+  "schemaVersion": 1,
+  "id": "AccordionCheckbox",
+  "slug": "accordioncheckbox",
+  "category": "input",
+  "tags": [
+    "collapsible",
+    "expandable",
+    "nested options",
+    "grouped checkboxes"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "09a45da67a3889510d68e8e1429768cef684d396",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:50:12Z",
+    "flags": [
+      {
+        "field": "/facts/props/7",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/8",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-19); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/9",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-18); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/examples/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-18); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The Accordion Checkbox guide and its evidence were checked on 18–19 September 2026 on jfs-components 0.1.60 (its Sources note still says so); the installed package is 0.1.78 (mirror v0.1.78-dbe0e02). Read against the installed AccordionCheckbox.tsx (the same blob from v0.1.78 to dbe0e02) and CheckboxItem.tsx, and run on the installed build, every sentence this entry quotes still holds, but one keyboard sentence is out of date. The Sources note's “child choices do not respond to Space. This is a known package limitation.” and the evidence's “Space on a nested child did not change its checked state” are contradicted: since dbe0e02 a CheckboxItem row toggles with Space on the web (CheckboxItem.tsx lines 230–244 and 317–323), and on 29 October, in headless Chrome on the guide's own playground, Space on the focused “Savings • 0245” row inside AccordionCheckbox ticked it. The note's first clause (“In this web build, checkbox keyboard activation can also toggle expansion”) still holds, and so does the evidence's header-checkbox sentence. The entry doesn't quote the out-of-date part. Re-check the guide on 0.1.78 and publish it, then re-extract. Added by Claude Code in the overnight run agentpack-batch14, for Marcin to confirm. Guide fix #539.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Group related choices behind a clear heading. People can select the group and open its options independently.",
+  "useWhen": [
+    {
+      "text": "Related choices grouped behind a clear heading, where people can select the group and open its options independently.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Group related choices behind a clear heading. People can select the group and open its options independently."
+      }
+    },
+    {
+      "text": "Choosing items as a group, such as the accounts to include: people open the group to review each one, or use the header checkbox to select them all through the screen's own wiring.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Open the group to review each account, or use the header checkbox to select all through the surrounding flow."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Checkbox",
+      "holds": "The header checkbox (checked). Selects the group; it does not open the content.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Selects the group. It does not open the content."
+      }
+    },
+    {
+      "part": "Title + subtitle",
+      "holds": "title names the group; subtitle, shown only when set, gives a short piece of supporting context.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the group and gives a short piece of supporting context."
+      }
+    },
+    {
+      "part": "Chevron",
+      "holds": "Shows whether the content slot is collapsed or open.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows whether the content slot is collapsed or open."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "Shown only when expanded; separates the header from the options.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Separates the header from the options when expanded."
+      }
+    },
+    {
+      "part": "Content slot",
+      "holds": "children, shown only when expanded; usually a CheckboxGroup of CheckboxItem rows.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Usually contains a public CheckboxGroup of CheckboxItems."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Let the host supply the width; AccordionCheckbox grows in height as its content wraps or expands.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "In a product layout, the parent supplies the available width and the component grows in height as content wraps or expands."
+      }
+    },
+    {
+      "text": "Put a CheckboxGroup of CheckboxItem rows in the content slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Usually contains a public CheckboxGroup of CheckboxItems."
+      },
+      "target": "children"
+    },
+    {
+      "text": "Keep related choices together in the content area.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep related choices together in the content area."
+      },
+      "target": "children"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Selecting is not expanding: the header checkbox changes checked (onCheckedChange), and pressing the rest of the header changes expanded (onExpandedChange).",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Selecting is not expanding."
+      }
+    },
+    {
+      "text": "Choose selection and expansion separately: a group can be selected while closed, or open while unselected.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A group can be selected while closed, or open while unselected."
+      }
+    },
+    {
+      "text": "Agree how selecting a group affects its choices before using it in a flow.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Agree how selecting a group affects its choices before using it in a flow."
+      }
+    },
+    {
+      "text": "AccordionCheckbox only reports the header checkbox and expand changes; it does not change its rows. When the product needs select-all, the screen's code connects the header's checked to the rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "AccordionCheckbox itself only exposes the parent check and expand events."
+      },
+      "target": "onCheckedChange"
+    },
+    {
+      "text": "When a product needs select-all behavior, connect the parent and child state explicitly in consumer code.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "When a product needs select-all behavior, connect the parent and child state explicitly in consumer code."
+      },
+      "target": "checked"
+    },
+    {
+      "text": "Don't imply that checking the header automatically changes the rows below it.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "Do not imply that checking this component automatically changes its descendants."
+      }
+    },
+    {
+      "text": "Rows keep their own checked state and labels: each CheckboxItem holds its own value, which the header does not change.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Keep their own checked state and labels."
+      },
+      "target": "children"
+    },
+    {
+      "text": "checked makes the header checkbox controlled: the screen keeps the value, and onCheckedChange reports the next one.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "checked"
+    },
+    {
+      "text": "expanded makes the open state controlled: the screen keeps it, and onExpandedChange reports the next one. Without expanded, the group starts from defaultExpanded (false by default) and opens and closes on its own.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "expanded"
+    },
+    {
+      "text": "disabled makes the header unavailable (its checkbox and the expand press); pass disabled to the rows too when they must also be unavailable.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The public disabled prop disables the parent header controls; pass disabled to nested rows when those rows must also be unavailable."
+      },
+      "target": "disabled",
+      "value": "true"
+    },
+    {
+      "text": "Allow long labels to wrap when the content decision needs more than one line: set disableTruncation. Without it, the title and the subtitle each stay on one line and end in an ellipsis.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Allow long labels to wrap when the content decision needs more than one line."
+      },
+      "target": "disableTruncation",
+      "value": "true"
+    },
+    {
+      "text": "AccordionCheckbox passes its modes to everything in the content slot, so the rows need no modes of their own.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/9"
+      },
+      "target": "modes"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Give each level a distinct job: the heading identifies the group, the subtitle gives a short count or qualifier, and each row names one choice.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The heading identifies the group, the subtitle gives a short count or qualifier, and each row names one choice."
+        }
+      },
+      {
+        "text": "Make the group scannable: use a meaningful title and a compact subtitle that helps someone decide whether to open the group.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use a meaningful title and a compact subtitle that helps someone decide whether to open the group."
+        }
+      },
+      {
+        "text": "Keep row labels distinct: use the account name and a short identifier so people can tell sibling choices apart.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the account name and a short identifier so people can tell sibling choices apart."
+        }
+      },
+      {
+        "text": "Keep hierarchy short: one title, one subtitle, and one label per row. Move longer help text outside the row.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use one title, one subtitle, and one label per row. Move longer help text outside the row."
+        }
+      }
+    ],
+    "good": [
+      "Axis Bank",
+      "3 accounts",
+      "Savings • 0245",
+      "Current • 1182",
+      "Fixed deposit • 9073"
+    ],
+    "bad": [
+      "Options",
+      "3 items"
+    ]
+  },
+  "states": [
+    {
+      "state": "Collapsed, unchecked",
+      "when": "The group is closed and the header is not selected.",
+      "from": {
+        "section": "states",
+        "quote": "The group is closed and the header is not selected."
+      }
+    },
+    {
+      "state": "Collapsed, checked",
+      "when": "checked while closed: selection can be visible while the options stay closed.",
+      "from": {
+        "section": "states",
+        "quote": "Selection can be visible while the options stay closed."
+      }
+    },
+    {
+      "state": "Expanded",
+      "when": "expanded: the divider and content slot appear after the header.",
+      "from": {
+        "section": "states",
+        "quote": "The divider and content slot appear after the header."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "disabled: the parent header controls are unavailable until the condition changes.",
+      "from": {
+        "section": "states",
+        "quote": "The parent header controls are unavailable until the condition changes."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "While the header is pressed it shows pressed feedback; checked and expanded change independently.",
+      "from": {
+        "section": "states",
+        "quote": "The checked and expanded values can change independently while the runtime supplies pressed feedback during interaction."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "accessibilityLabel names the header press target; it defaults to the title.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/12"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Name the group and add a useful qualifier",
+      "dont": "Use a vague heading and unexplained count",
+      "why": "People can predict what is inside before they open it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Name the group and add a useful qualifier"
+      }
+    },
+    {
+      "do": "Give each child row a distinct name",
+      "dont": "Repeat generic row labels",
+      "why": "People cannot tell which choice they are selecting.",
+      "from": {
+        "section": "doDont",
+        "quote": "Give each child row a distinct name"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Select accounts as a group, the guide's In context: a named group with a short qualifier, and CheckboxItem rows with distinct names in a CheckboxGroup. Every value is controlled; the handlers stand for the screen's own wiring, which opens and closes the group from onExpandedChange and, for select-all, sets every row from onCheckedChange and checks the header when every row is checked.",
+      "jsx": "<AccordionCheckbox\n  title=\"Axis Bank\"\n  subtitle=\"3 accounts\"\n  checked={false}\n  onCheckedChange={(checked) => {}}\n  expanded\n  onExpandedChange={(expanded) => {}}\n>\n  <CheckboxGroup accessibilityLabel=\"Account choices\">\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Savings • 0245</CheckboxItem>\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Current • 1182</CheckboxItem>\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Fixed deposit • 9073</CheckboxItem>\n  </CheckboxGroup>\n</AccordionCheckbox>",
+      "from": {
+        "section": "inContext",
+        "quote": "Consumer logic makes the header a select-all control."
+      }
+    },
+    {
+      "purpose": "A group that is unavailable, rows included: disabled on AccordionCheckbox makes the header unavailable, and each row gets disabled too, because the header's disabled does not reach them.",
+      "jsx": "<AccordionCheckbox title=\"Axis Bank\" subtitle=\"3 accounts\" disabled expanded>\n  <CheckboxGroup accessibilityLabel=\"Account choices\">\n    <CheckboxItem checked={false} disabled>Savings • 0245</CheckboxItem>\n    <CheckboxItem checked={false} disabled>Current • 1182</CheckboxItem>\n    <CheckboxItem checked={false} disabled>Fixed deposit • 9073</CheckboxItem>\n  </CheckboxGroup>\n</AccordionCheckbox>",
+      "from": {
+        "section": "sources",
+        "quote": "pass disabled to nested rows when those rows must also be unavailable."
+      }
+    },
+    {
+      "purpose": "A long group name in a narrow host, the guide's Sizing: disableTruncation lets the title and subtitle wrap instead of ending in an ellipsis; the group starts open and keeps its own open state.",
+      "jsx": "<AccordionCheckbox title=\"Longer investment account group\" subtitle=\"3 linked accounts\" disableTruncation defaultExpanded>\n  <CheckboxGroup accessibilityLabel=\"Account choices\">\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Savings • 0245</CheckboxItem>\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Current • 1182</CheckboxItem>\n    <CheckboxItem checked={false} onValueChange={(checked) => {}}>Fixed deposit • 9073</CheckboxItem>\n  </CheckboxGroup>\n</AccordionCheckbox>",
+      "from": {
+        "section": "sizing",
+        "quote": "Allow long labels to wrap when the content decision needs more than one line."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Axis Bank",
+        "description": "Title shown next to the checkbox (e.g. \"Axis Bank\"). Default \"Axis Bank\", from the component source."
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "3 accounts",
+        "description": "Subtitle shown beneath the title (e.g. \"3 accounts\"). Default \"3 accounts\", from the component source."
+      },
+      {
+        "name": "defaultExpanded",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial expanded state (uncontrolled). Defaults to `false`. Default false, from the component source."
+      },
+      {
+        "name": "expanded",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Controlled expanded state. When provided, the component becomes controlled."
+      },
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded: boolean) => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback fired whenever the expanded state changes."
+      },
+      {
+        "name": "defaultChecked",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Initial checked state of the header checkbox (uncontrolled). Default false, from the component source."
+      },
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Controlled checked state of the header checkbox."
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked: boolean) => void",
+        "required": false,
+        "source": "evidence",
+        "description": "Pressing the header checkbox calls onCheckedChange; pressing the rest of the header calls onExpandedChange. AccordionCheckbox does not select or clear its rows: select-all is the screen's wiring. Declared: Callback fired whenever the header checkbox value changes.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "disabled reaches the header press target and the header Checkbox; the content slot's children get only modes, so rows stay available unless each is disabled too. Declared: Disables the entire component (header press + checkbox + content). Default false, from the component source.",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Slot — content rendered below the divider when expanded. Typically a `CheckboxGroup` of child `CheckboxItem`s. The `modes` prop is forwarded recursively to every child."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override outer container styles."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label for the header press target. Defaults to `title`."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection AccordionCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection AccordionCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection AccordionCheckbox reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Slot — content rendered below the divider when expanded. Typically a `CheckboxGroup` of child `CheckboxItem`s. The `modes` prop is forwarded recursively to every child.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onExpandedChange",
+        "type": "(expanded: boolean) => void",
+        "description": "Callback fired whenever the expanded state changes.",
+        "source": "types"
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked: boolean) => void",
+        "description": "Callback fired whenever the header checkbox value changes.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "On the web, the keyboard does not keep selecting apart from expanding: Enter on the focused header checkbox selects the group and also opens or closes it, and Space opens or closes it without selecting it. Pointer presses keep the two apart. Still so on dbe0e02 (Component Bug #540; Space not selecting is the Checkbox's own Component Bug #535).",
+        "source": "evidence",
+        "checkedOn": "2026-09-19"
+      },
+      {
+        "text": "disabled dims the whole component, content slot included, but makes only the header unavailable: rows that are not disabled themselves look unavailable yet still respond, though the package's own description of disabled says the content is disabled too. Still so on dbe0e02 (Component Bug #540).",
+        "source": "evidence",
+        "checkedOn": "2026-09-19"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=accordioncheckbox",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=4005-2906",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-accordioncheckbox--docs"
+  }
+}

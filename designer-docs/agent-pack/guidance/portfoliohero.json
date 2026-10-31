@@ -1,0 +1,494 @@
+{
+  "slug": "portfoliohero",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r24, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/portfoliohero.guide.tsx, self-contained) and docs/evidence/portfoliohero.md at e7ed622 (the 28 October dbe0e02 publish, which changed only the Sources note, for #346); e7ed622 is on origin/main, and both files read the same on main and docs-next. The guide's Sources note says it was checked on 28 October 2026 on the 27 October build (dbe0e02), so items citing it carry 2026-10-28 and 0.1.78-dbe0e02; the evidence's “dbe0e02 publish” section records #346 verified on dbe0e02 on 27 October (2026-10-27, 0.1.78-dbe0e02); its older sections were checked on 26 October on 0.1.78-c8526ae, so items citing them carry that build (same package version as installed, so the trace check does not flag them). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c8526ae and v0.1.78-dbe0e02 (2 commits, 163 files) changes PortfolioHero.tsx (8907545 → d1a9deb, the installed blob) and MoneyValue.tsx (3f81f58 → 7e013fd, installed), and no ProductLabel, Badge, Avatar, IconButton, Icon, Text, design-tokens, react-utils or typography file; ProductLabel.tsx (71fe106), Badge.tsx (b091d4d) and Avatar.tsx (26f5b52) are the same blobs at both tags and in node_modules. The MoneyValue change is #346's fix: a static amount is one element named with its currency and figure (role img on the web, an accessible text element on native) over hidden visible text (MoneyValue.tsx lines 330–375). The PortfolioHero change is #403's fix (Biscuit's ace46ca, then dbe0e02), which the 28 October publish did not take into the guide: topSlot replaces the product label (lines 160–169); actionSlot, showAction and onActionPress add a control beside the amount, by default a 42 px IconButton toggle on Emphasis Low and AppearanceBrand Neutral, named from actionIconName (ic_card is “Card”), with actionActive to control it (24–38, 114–119, 171–189); accessibilityLabel makes the root a named group (210–216); the slot spacing now reads portfolioHero/slotWrap/gap instead of slot/gap (123); a plain string in children becomes a note styled from portfolioHero/text/* (124–128, 151–158, 197–203); value also takes a number; style is StyleProp. Every guide and evidence sentence quoted here was read against the installed source (read, not rendered; token values through the package's own getVariableByName in lib/commonjs, with the hero's default modes): DEFAULT_MODES still set Avatar Size S and Text Sizes Small under the caller's modes (18–22, 113); avatar/size is 42, 36, 29 and 14 at L, M, S and XS; without imageSource Product Label draws no avatar and no placeholder (ProductLabel.tsx 47, 65–80); the label is 16 px on a 21 px line, weight 700, black; the amount is 36 px, weight 900, rgb(15, 13, 10), on a 44 px line (the 36 px token raised by safeTextLineHeight's 1.2 minimum), with no gap between ₹ and the figure; INR maps to ₹ and value is shown as written; portfolioHero/gap is 16 and portfolioHero/padding 8; the slot is a centred column 8 px apart; a Text child gets Text Sizes Small, text/fontSize 12 on 16 (14 without it). Board tickets, read only: #346 (Component Fix, Done, live 27 October) is fixed and the installed source confirms it, so it is not a gap. #403 (Component Fix, In progress, Biscuit) has items 1, 2, 4 and 5 verified on dbe0e02 in the 27 October re-test; only item 3, the height, is open (168 px with Figma's content against Figma's 159; Biscuit calls it the glyph-clipping guard; Marcin's call), and the first gap names it.\n\nGuide sentences the installed build contradicts, left out and reported as a candidate guide fix (the human flag in reviews/portfoliohero.json): States “The hero doesn’t press, load, or animate, and it has no action: Figma’s Action Slot, an icon button beside the amount, isn’t in the package.” (the package has actionSlot and a default action); Sources “the package has a fixed label and amount, children for the slot, and no action.” (topSlot, actionSlot); Configuration “Slot gap spaces them.” with the Slot gap S and Slot gap L cards (“8 px between the badge and the note, the default.”, “24 px.”): portfolioHero/slotWrap/gap is 8 in every Slot gap mode (slot/gap was 2, 8, 16, 24 and 32), so Slot gap no longer changes the slot's spacing; In context “the hero has no button of its own” (true of the guide's example, not of the package; /configuration/6 quotes only the sentence's first half). Also left out: Sources “Storybook’s Default story shows a stock photo there instead” (#403 item 2 is fixed in the stories, but the published Storybook's index.json, last modified 31 October 01:30, still lists only Default, Without Slot, Dark Mode and Custom Slot Content, with no WithAction story, so it predates ace46ca; neither reading is needed here), and the States title “No states of its own” (the default action keeps its own on and off state). Evidence sentences out of date on dbe0e02 and not used: the Contract's slot/gap and Slot gap lines and “No testID, onPress, accessibility props, or top-area slot”, and the Discrepancies' Action Slot and Top Slot line and “Unused tokens”. The facts still list Slot gap among the modes the package's metadata says PortfolioHero reads (FIGMA_COMPONENT_MODES); no rule says what it does, since the guide's sentence is contradicted.\n\nThe topSlot, actionSlot, actionActive and actionAccessibilityLabel rules rest only on their package facts (the JSDoc), worded no further than those; the guide does not cover them. Not recorded: showAction, onActionPress and actionIconName beyond the actionSlot rule (their facts carry them); the default toggle's on look (the 27 October #403 re-test says it barely shows on white, an IconButton token question that no guide or evidence sentence carries); style (the building rules keep it off Coin components); plain-string children styled as a note (source only); Context3, Page type and Color Mode (the evidence's Limits; building rules); the evidence's hex values, web render tree, Figma layer names and Hosting note.\n\nStrength: one quote holds an absolute word, “The amount never wraps or shrinks …” (everywhere). Required: label and value, on their facts (left out, the hero shows “Gold” and 12,000.11, the package defaults). Anatomy required: the Amount only; the Avatar needs imageSource, the Slot needs children, and on dbe0e02 topSlot can replace or hide the Label. avoidWhen rests on the evidence's record of Biscuit's handwritten PortfolioHero.mdx (“not a left-aligned total (Balance) or a product explanation (ProductOverview)”); both have entries, so both carry useInstead, and their entries agree (Balance: one money amount in large type under a short title; Product Overview: introduce one product). Evidence facts set the hero's own Avatar Size default (S, not the collection's L) and add Text Sizes (not in the package's mode list for PortfolioHero; its values from FIGMA_MODES).\n\nExamples follow the building rules: no Color Mode (the guide sets Light on every hero, Badge, Icon, Text, VStack, HStack, ListGroup, ListItem and Button), no Slot gap on the In context stacks, and no style (the guide's flex: 1 on the Buttons, its padding and its Host width belong to its frame; justifyVertical goes with the flex frame). The guide's PH helper is written out: label, imageSource (the guide's local Jio logo becomes a placeholder URI), value and children. A gain's Badge carries no modes (Context4 Badge, which the guide also sets on it, changes nothing on the Badge itself, read through the resolver); a loss's Badge carries Semantic Intent System and AppearanceSystem negative, the guide's Down card (Button's entry keeps Semantic Intent System for a clear outcome, and Badge's asks for an intent that agrees with the status). The leading Icon takes the Badge's modes with Context4 Badge (14 px, 18 px without), as the Badge entry says, and the guide's accessibilityElementsHidden and importantForAccessibility. Sell takes Emphasis Medium, as in the guide, which matches “Two actions in one place”. Badge, Button, ListGroup, VStack and HStack have entries; Text, Icon and ListItem have undocumented entries. Left out of examples (three at most): the anatomy and sizing specimens, Logo and label, Label only, With a note, the Avatar Size and Slot gap cards, Up, One fact, the Do & Don'ts and the playground.\n\nConsistency with related entries: Balance agrees (its notes name PortfolioHero only as a Money Value user). StatusHero's /avoidWhen/2 sends a portfolio total to PortfolioHero, “which has no entry in this pack”, which goes stale once this entry ships (reported); its placement “The hero has no button of its own” is about Status Hero. Product Overview agrees. Badge (checked on 0.1.60) agrees: its modes go to the leading Icon with Context4; Badge ignores accessibilityLabel, and these examples rely on its label. Avatar agrees on 42, 36, 29 and 14 px and that L is the collection's default (this hero sets S). ListGroup agrees (rows are List Item elements; with no label the rows start at the top). VStack, HStack, Button and Holdings Card: no disagreement. Card Provider Info, being extracted by another worker, renders the same unchanged ProductLabel.tsx (71fe106): the two entries must agree that the label defaults to “Gold”, 16 px Bold; that there is no avatar without imageSource (Card Provider Info also has showAvatar, which can draw a plain placeholder circle; the hero has no showAvatar); and that the avatar is 29 px (Avatar Size S) when no Avatar Size is set (here from the hero's defaults, there from Product Label's own fallback). Neither the guide, the evidence nor this entry uses the shape word Coin doesn't use; the package's topSlot JSDoc says “Product Label chip” and the evidence quotes the MDX's “a product chip”; this entry says product label.\n\nSorting (agentpack-r24, three cross-check rounds): round 1 raised 4 flags; /examples/0 (the purpose said the icon is hidden “as in the guide”, which the copy doesn't say), /facts/modes/0 (“not the collection's L”) and /facts/gaps/0 (“open”) were fixed by saying only what the evidence says; /anatomy/1 recurred. Round 2 raised 3; /facts/modes/11 (“not in the package's mode list”) and /avoidWhen/0–1 (“uses” Balance and Product Overview, now “points to … instead”) were fixed. Round 3 raised 2, both dismissed in reviews/portfoliohero.json: /anatomy/1 (the topSlot fact, cited by /configuration/7, says the label can be replaced or hidden) and /examples/0 (the purpose describes the example's own JSX, Emphasis Medium on Sell, per “Two actions in one place”). Every round's notes said the action and topSlot rules contradict the guide; they rest on the installed package's facts, and the contradiction is the human flag (guide fix). The human flag keeps the entry flagged until the guide is re-checked on dbe0e02 and re-extracted.",
+  "useWhen": [
+    {
+      "text": "Show what a holding is and what it's worth at the top of its page, with an optional note under the amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Portfolio Hero at the top of a holding’s page to show what it is and what it’s worth, with an optional note under the amount."
+      }
+    },
+    {
+      "text": "The product, its value, then one note.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "The product, its value, then one note."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A left-aligned total: Biscuit's Storybook page, as the evidence records it, points to Balance instead.",
+      "strength": "discouraged",
+      "useInstead": "Balance",
+      "from": {
+        "section": "evidence",
+        "quote": "not a left-aligned total (Balance)"
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "text": "A product explanation: Biscuit's Storybook page, as the evidence records it, points to Product Overview instead.",
+      "strength": "discouraged",
+      "useInstead": "ProductOverview",
+      "from": {
+        "section": "evidence",
+        "quote": "or a product explanation (ProductOverview)"
+      },
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "imageSource, 29 px at the default Avatar Size S.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource, 29 px at the default Avatar Size S."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label, the product name, 16 px Bold.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "label, the product name, 16 px Bold."
+      }
+    },
+    {
+      "part": "Amount",
+      "holds": "A Money Value from value and currency, 36 px Black.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Money Value from value and currency, 36 px Black."
+      }
+    },
+    {
+      "part": "Slot",
+      "holds": "children, centred under the amount, 8 px apart.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "children, centred under the amount, 8 px apart."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put it at the top of a holding's page.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Portfolio Hero at the top of a holding’s page"
+      }
+    },
+    {
+      "text": "On the guide's Gold page the hero comes first, the holding's details follow in a list, and the two actions sit at the bottom.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero opens the Gold page, the holding’s details follow in a list, and the two actions sit at the bottom."
+      }
+    },
+    {
+      "text": "The product label sits on top, the amount under it, and children under that; everything is centred.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The product label sits on top, the amount under it, and anything you pass as children under that. Everything is centred."
+      }
+    },
+    {
+      "text": "The hero has no width of its own: it is as wide as its widest line, usually the amount, plus 8 px on each side.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The hero has no width of its own: it is as wide as its widest line, usually the amount, plus 8 px on each side, and centres everything."
+      }
+    },
+    {
+      "text": "Top to bottom: 8 px of padding, the 29 px label row, 16 px, the amount on a 44 px line, 16 px, then the slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Top to bottom: 8 px of padding, the 29 px label row, 16 px, the amount on a 44 px line, 16 px, then the slot."
+      }
+    },
+    {
+      "text": "The amount never wraps or shrinks, so give the hero a host wider than its longest amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The amount never wraps or shrinks, so give the hero a host wider than its longest amount."
+      },
+      "absolute": {
+        "word": "never",
+        "scope": "everywhere",
+        "reason": "it describes every Portfolio Hero's amount: the evidence records that the amount never wraps or shrinks and that a long amount overflows a narrow host; nothing in the hero or Money Value limits its lines (PortfolioHero.tsx lines 144–149 and 219–222, MoneyValue.tsx, 0.1.78-dbe0e02)."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "imageSource puts the product's logo before its label; without it there is no avatar, not an empty circle.",
+      "strength": "recommended",
+      "target": "imageSource",
+      "from": {
+        "section": "configuration",
+        "quote": "imageSource puts the product’s logo before its label; without it there is no avatar, not an empty circle."
+      }
+    },
+    {
+      "text": "Avatar Size sets the logo to 42, 36 or 29 px.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "from": {
+        "section": "configuration",
+        "quote": "Avatar Size sets the logo to 42, 36, or 29 px."
+      }
+    },
+    {
+      "text": "Avatar Size L: a 42 px logo.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "value": "L",
+      "from": {
+        "section": "configuration",
+        "quote": "A 42 px logo."
+      }
+    },
+    {
+      "text": "Avatar Size M: a 36 px logo.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "value": "M",
+      "from": {
+        "section": "configuration",
+        "quote": "36 px."
+      }
+    },
+    {
+      "text": "Avatar Size S: a 29 px logo, the hero's default.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "value": "S",
+      "from": {
+        "section": "configuration",
+        "quote": "29 px, the default."
+      }
+    },
+    {
+      "text": "children adds what sits under the amount, usually a Badge with the change and a Text with one fact.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "configuration",
+        "quote": "children adds what sits under the amount, usually a Badge with the change and a Text with one fact"
+      }
+    },
+    {
+      "text": "The screen keeps the holding's value and passes it in value: on the guide's Gold page, Buy ₹1,000 and Sell ₹1,000 change the holding and the hero shows the new value.",
+      "strength": "recommended",
+      "target": "value",
+      "from": {
+        "section": "inContext",
+        "quote": "Buy ₹1,000 and Sell ₹1,000 change the holding, and the hero shows the new value"
+      }
+    },
+    {
+      "text": "topSlot replaces the product label (the avatar and label); false, '' or null hide it. Leave topSlot out to keep the label.",
+      "strength": "recommended",
+      "target": "topSlot",
+      "from": {
+        "fact": "props:topSlot"
+      }
+    },
+    {
+      "text": "actionSlot puts your own control beside the amount; false, '' or null hide it. Without actionSlot, showAction or onActionPress shows the default action: a 42 px Neutral Low IconButton.",
+      "strength": "recommended",
+      "target": "actionSlot",
+      "from": {
+        "fact": "props:actionSlot"
+      }
+    },
+    {
+      "text": "The default action is a toggle: left without actionActive it switches itself on and off when pressed; pass actionActive to set its state from the screen.",
+      "strength": "recommended",
+      "target": "actionActive",
+      "from": {
+        "fact": "props:actionActive"
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Set label to the product's name: left out, the hero shows “Gold”.",
+        "strength": "required",
+        "target": "label",
+        "from": {
+          "fact": "props:label"
+        }
+      },
+      {
+        "text": "Set value to the holding's value: left out, the hero shows 12,000.11.",
+        "strength": "required",
+        "target": "value",
+        "from": {
+          "fact": "props:value"
+        }
+      },
+      {
+        "text": "Write label as the product in a word or two, such as Gold or Mutual Funds.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Write label as the product in a word or two, such as Gold or Mutual Funds."
+        }
+      },
+      {
+        "text": "Give value as the formatted figure alone: currency adds the symbol, and INR or ₹ both show ₹.",
+        "strength": "recommended",
+        "target": "value",
+        "from": {
+          "section": "content",
+          "quote": "Give value as the formatted figure alone: currency adds the symbol, and INR or ₹ both show ₹."
+        }
+      },
+      {
+        "text": "The amount keeps its digit grouping as you write it.",
+        "strength": "recommended",
+        "target": "value",
+        "from": {
+          "section": "content",
+          "quote": "the grouping stays as you write it."
+        }
+      },
+      {
+        "text": "Use children for a caption, such as the change in a Badge and one fact in a Text.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "Use children for a caption, such as the change in a Badge and one fact in a Text"
+        }
+      },
+      {
+        "text": "A Text in children is 12 px, because the hero sets Text Sizes Small.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "a Text there is 12 px, because the hero sets Text Sizes Small."
+        }
+      },
+      {
+        "text": "Show a gain or a loss with the Badge in children.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "states",
+          "quote": "What changes is what you pass: a gain or a loss is the Badge in children."
+        }
+      },
+      {
+        "text": "Don't put a second total in children: the amount stays the only total.",
+        "strength": "discouraged",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "It isn’t a place for a second total."
+        }
+      },
+      {
+        "text": "Don't write a paragraph under the amount: a long note turns the hero into a block of text.",
+        "strength": "discouraged",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "A long note turns the hero into a block of text."
+        }
+      }
+    ],
+    "good": [
+      "Gold",
+      "Mutual Funds",
+      "12,000.11",
+      "1,45,230.50",
+      "+₹2,722.45 (+22.5%)",
+      "−₹1,204.10 (−0.8%)",
+      "Worth 1.23g Gold"
+    ],
+    "bad": [
+      "Your gold has grown 22.5% since you started saving in March 2024, and you can sell it at any time at today’s price.",
+      "Total portfolio ₹4,52,300.00"
+    ]
+  },
+  "states": [
+    {
+      "state": "Up",
+      "when": "A gain: the gold Badge in children, as Figma shows it.",
+      "from": {
+        "section": "states",
+        "quote": "The gold Badge, as Figma shows it."
+      }
+    },
+    {
+      "state": "Down",
+      "when": "A loss: the Badge in children with Semantic Intent System and AppearanceSystem negative.",
+      "from": {
+        "section": "states",
+        "quote": "The Badge’s Semantic Intent System, AppearanceSystem negative."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Screen readers read the amount once, with its currency.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Screen readers read the amount once, with its currency."
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "accessibilityLabel names the hero region: with it the hero is one named group; without it the hero doesn't group its parts.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    },
+    {
+      "text": "The default action is named from its icon (ic_card reads “Card”); actionAccessibilityLabel gives it another name.",
+      "strength": "recommended",
+      "target": "actionAccessibilityLabel",
+      "from": {
+        "fact": "props:actionAccessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "One short note",
+      "dont": "A paragraph under the amount",
+      "why": "A long note turns the hero into a block of text.",
+      "from": {
+        "section": "doDont",
+        "quote": "One short note"
+      }
+    },
+    {
+      "do": "The change in a Badge",
+      "dont": "A second total in the slot",
+      "why": "Two figures compete; put the portfolio total on its own page.",
+      "from": {
+        "section": "doDont",
+        "quote": "The change in a Badge"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The top of a holding's page, the guide's In context: the hero opens the Gold page with the product's logo, the holding's value, and under the amount a Badge with the change (its leading ic_card Icon on Context4 Badge, as the Badge entry says) and a Text with one fact; the holding's details follow in a ListGroup of List Items, and the two actions sit below: Buy keeps the defaults and Sell takes Emphasis Medium. The URI stands for the product's logo image, value for the holding's current value (Buy and Sell change it), and each onPress for the screen buying or selling ₹1,000.",
+      "jsx": "<VStack>\n  <VStack>\n    <PortfolioHero\n      label=\"Gold\"\n      imageSource={{ uri: 'https://example.com/logos/gold.png' }}\n      value=\"12,000.11\"\n    >\n      <Badge\n        label=\"+₹2,722.45 (+22.5%)\"\n        leading={<Icon iconName=\"ic_card\" modes={{ Context4: 'Badge' }} accessibilityElementsHidden importantForAccessibility=\"no\" />}\n      />\n      <Text text=\"Worth 1.23g Gold\" />\n    </PortfolioHero>\n    <ListGroup>\n      <ListItem layout=\"Horizontal\" title=\"Gold in your locker\" supportText=\"1.23 g · 24K, 99.9% pure\" navArrow={false} />\n      <ListItem layout=\"Horizontal\" title=\"Average buy price\" supportText=\"₹7,544 a gram\" navArrow={false} />\n      <ListItem layout=\"Horizontal\" title=\"Today’s price\" supportText=\"₹9,756 a gram\" navArrow={false} />\n    </ListGroup>\n  </VStack>\n  <HStack>\n    <Button label=\"Sell ₹1,000\" modes={{ Emphasis: 'Medium' }} onPress={() => {}} />\n    <Button label=\"Buy ₹1,000\" onPress={() => {}} />\n  </HStack>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero opens the Gold page, the holding’s details follow in a list, and the two actions sit at the bottom."
+      }
+    },
+    {
+      "purpose": "A holding that lost value, the guide's Down card: the change goes in a Badge with Semantic Intent System and AppearanceSystem negative, and its leading Icon takes the same modes with Context4 Badge. The URI stands for the product's logo image, and the figures for the holding's value and its change.",
+      "jsx": "<PortfolioHero\n  label=\"Mutual Funds\"\n  imageSource={{ uri: 'https://example.com/logos/mutual-funds.png' }}\n  value=\"1,45,230.50\"\n>\n  <Badge\n    label=\"−₹1,204.10 (−0.8%)\"\n    modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }}\n    leading={<Icon iconName=\"ic_card\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative', Context4: 'Badge' }} accessibilityElementsHidden importantForAccessibility=\"no\" />}\n  />\n</PortfolioHero>",
+      "from": {
+        "section": "states",
+        "quote": "The Badge’s Semantic Intent System, AppearanceSystem negative."
+      }
+    },
+    {
+      "purpose": "The product and its figure alone, the guide's Product and figure card: currency INR shows ₹, and the amount keeps its grouping as written. The URI stands for the product's logo image, and value for the holding's value.",
+      "jsx": "<PortfolioHero\n  label=\"Mutual Funds\"\n  imageSource={{ uri: 'https://example.com/logos/mutual-funds.png' }}\n  value=\"1,45,230.50\"\n  currency=\"INR\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "INR shows ₹; the grouping stays as you write it."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Avatar Size",
+      "default": "S",
+      "description": "With imageSource, Avatar Size sets the logo: L 42, M 36, S 29 px or XS 14 px. The hero's default is S, a 29 px logo.",
+      "quote": "`Avatar Size` (with an image): L 42, M 36, S 29 (default), XS 14",
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "modes",
+      "name": "Text Sizes",
+      "create": true,
+      "type": "mode collection",
+      "values": [
+        "Medium",
+        "Small",
+        "Large"
+      ],
+      "default": "Small",
+      "description": "The hero sets Text Sizes Small, so a Text in children is 12 px on a 16 px line (a Text's own default is 14 px).",
+      "quote": "`Text Sizes Small` (default) makes a Text child 12/16 (its own default is 14).",
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "imageSource",
+      "description": "Without imageSource there is no avatar and no placeholder.",
+      "quote": "Without it there is no avatar and no placeholder",
+      "checkedOn": "2026-10-26",
+      "checkedVersion": "0.1.78-c8526ae"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "With accessibilityLabel the hero is a group named by it; without one the hero does not group its children.",
+      "quote": "PortfolioHero only groups its children when it has an `accessibilityLabel`.",
+      "checkedOn": "2026-10-27",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "The amount sits on a 44 px line, so the hero is taller than Figma's 159 px (Component Bug #403).",
+      "from": {
+        "section": "sources",
+        "quote": "The amount sits on a 44 px line, so the hero is taller than Figma’s 159 px"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    },
+    {
+      "text": "Figma shows the Jio logo by default; the package shows an avatar only when imageSource is set.",
+      "from": {
+        "section": "sources",
+        "quote": "Figma shows the Jio logo by default; the package shows an avatar only with imageSource"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ]
+}

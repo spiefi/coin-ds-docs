@@ -1,0 +1,605 @@
+{
+  "slug": "productmerchandisingcard",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r25, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/productmerchandisingcard.guide.tsx, self-contained) and docs/evidence/productmerchandisingcard.md at 3f56271 (the #543 wording fix). 3f56271 is on origin/docs-next only: between origin/main and origin/docs-next the guide differs in two sentences, the Glass badge anatomy note and the Configuration description's sentence on badgeLabel and specialBadgeLabel (main used a shape word Coin doesn't have), and the evidence file is the same at both. Neither differing sentence is quoted here: the Glass badge part rests on the specialBadgeLabel fact, and every quoted sentence reads the same on main and docs-next. The guide's Sources note (“19 October build of Biscuit’s main”) and the evidence were checked on 20 October 2026 on 0.1.78-c7d3348, so items citing them carry 2026-10-20 and 0.1.78-c7d3348; the evidence's 28 October note on the dbe0e02 install carries 2026-10-28 and 0.1.78-dbe0e02 (same package version, so the trace check flags neither). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c7d3348 and v0.1.78-dbe0e02 (3 commits, 195 files) changes ProductMerchandisingCard (its .tsx, both lib builds and the .d.ts) and no other file the card renders: ProductMerchandisingCard.tsx is 9e4e6ac at c7d3348, d82d102 at ace46ca and 660c1b0 at dbe0e02, the same blob as node_modules and as upstream MrBiscuit dbe0e02f; Avatar.tsx (26f5b52), Badge.tsx (b091d4d), Button.tsx (e266c65), Image.tsx (049a31f), Icon.tsx (cddaa05), GlassFill.tsx (c2a94c2), react-utils.ts (bd10632), typography.ts (cbabe67), figma-variables-resolver.ts (d03e77c), the token file (4545aec) and figma-modes.generated.ts (f6aa2f7) are the same blobs at both tags. So the card itself changed after the guide's check (Biscuit's ace46ca and dbe0e02 for Component Bug #356), as the evidence's 28 October note says (“this guide's copy wasn't re-checked and waits for #356's own publish”). Read in the installed source: a 65 px gradient from transparent to black over a same-crop blurred copy of the photo (lines 331–399); without imageSource a #141414 surface under a dark GlassFill (318–324, 377–379); without avatarSource a Monogram Avatar of avatarMonogram or else the title's first letter (248–262), not a stock portrait; the badge, avatar, specialBadge, cta and icon slots cloned with the card's modes (45–58, 235–297), so a default Icon in badgeIcon gets the lilac badge's modes and Context4 Badge (icon/color rgb(93, 0, 181)) and in specialBadgeIcon Context4 Badge/glass (white); the glass badge pinned to Badge Size Medium (224–233, 505–513); null and '' hide a slot; an in-flow sizer keeps a pressable card from collapsing on the web (303–306); the static card is a group named accessibilityLabel ?? title (434–444). So these guide sentences no longer hold and are left out (human flag in reviews/productmerchandisingcard.json, reported to the coordinator as a candidate guide fix): Anatomy's Footer note (“no dark shade”); Configuration's “badge, avatar, specialBadge, and cta replace those parts and don’t get the card’s modes.”; the Badge icons caption (“the card doesn’t colour it”); the Badge Size Small caption “Smaller badges.” (only the corner badge shrinks); the photo pair's captions and the avatar pair's Don't caption in Do & Don'ts, and the Do & Don'ts description; and the Sources sentences on the gradient, the pale haze, modes-less slots, the stock portrait and the missing background. Every sentence quoted here was read against the installed source, with token values through the package's own getVariableByName (lib/commonjs): card radius 12; header padding 12; footer padding 16 and gap 8; title rgb(255, 255, 255), 14 px, weight typography/body/fontWeight/high 700, one line unless disableTruncation (resolveTruncation); subtitle rgb(197, 188, 181), 12 px, 400; height 223, width 100% with alignSelf stretch (198–205); the photo an Image with resizeMode cover over the whole card, hidden from screen readers (308–317); avatar Avatar Size M (209), 36 px, radius 9999; corner badge AppearanceBrand Secondary and Emphasis Medium (213–216), rgb(228, 219, 255) with a rgb(93, 0, 181) label, hidden without a label (236–246); AppearanceBrand Primary gives the badge rgb(253, 232, 201) with a rgb(147, 113, 58) label and the Button rgb(206, 161, 90): a cream badge and a gold Button, so the Configuration description's “turns both gold” reads the badge loosely, and the modes rule leaves that clause out while the Primary value rule quotes the caption; Emphasis Medium gives the Button rgb(228, 219, 255) with a purple label; the Button is Button / Size S and AppearanceBrand Secondary (284–297), rgb(93, 0, 181), padding 4, line 22 and a 1 px border, 32 px; XS is 2 + 18 + 2 + 2 = 24 px; Badge Size Small makes the corner badge 10 px with padding 2 and 4 and weight 500 and leaves the glass badge as it is. The footer sits at the bottom (526–547) and its row wraps (606–617: flexWrap, text minimum width 100, row gap 10, column gap 0), so a narrow card drops the Button under the title. onPress makes the root a Pressable with role button, named accessibilityLabel ?? title, at 0.92 opacity while pressed (421–431); cta={false} hides the Button (renderSlot). Ticket #356 (Component Fix, In progress, Biscuit), read on the board (read only): the 27 October re-test on dbe0e02 found items 1, 2, 3 (monogram, dark surface), 4, 7, 8, 9 and 10 fixed and item 5 left: header 60 px (Figma 55), footer 97 (95), badges 23 (22), the first gap (header 12 + 36 + 12 from the unchanged tokens). Item 6, Figma's title font-weight token missing from the token file, still holds (the resolver doesn't find productMerchandisingcard/footer/title/fontweight; lines 496–498): the second gap. Item 3's badges hidden until a label is passed, where Figma's showBadge and showSpecialBadge are on, Biscuit kept for Marcin to decide: the third gap, quoting the Sources sentence only up to “… only when you pass its label” (its “and has no gradient” no longer holds). The ticket's other open points are not recorded: a pure-white photo's contrast is a Figma matter, and the black glass label in Dark is dark mode. Strength: no rule is required: no prop is required in the facts and no quoted absolute applies everywhere; the defaults “Title”, “Subtitle” and “CTA” back recommended “Set …” rules. The only absolute word quoted in a rule is In context's “the card only shows the offer”, scoped contextual. useWhen/2 and both avoidWhen rules rest on the evidence's record of Biscuit's handwritten mdx (e60f8bd8); read through gh api, the mdx at upstream dbe0e02f still says both (“A spec sheet. Use ProductOverview or PdpCcCard.” and “A card with no photo. This layout is the image.”); it now also names PdpCcCard, which the evidence doesn't record, so only ProductOverview is useInstead. The Footer part rests on the evidence's 28 October note, the only citable sentence for the installed footer: it says a gradient sits over the blur, not its colour or height (65 px, transparent to black, in the source only). The Glass badge part rests on the specialBadgeLabel fact; the fact's own text (the package's JSDoc) uses a shape word for it, and nothing hand-written here does. Facts: FIGMA_COMPONENT_MODES give Avatar Size its collection default L, AppearanceBrand Primary and Button / Size M, which the card overrides for its own parts (209, 213–216, 284–287), so evidence facts set M, Secondary and S, and an Emphasis fact says the corner badge is Medium; AppearanceBrand reaches only the corner badge, its icon and the Button (the avatar and the glass badge resolve the same for all four values). Do & Don'ts: only the title pair is kept; the Do caption of the avatar pair (“The brand’s logo in the corner.”) backs a configuration rule. Examples follow the building rules: no Color Mode (the guide sets Light on every card, the VStack and the Title), no Slot gap M on the VStack, no style width 328 (the guide's frame, which before dbe0e02 also kept a pressable card from collapsing on the web), no modes. The guide's photo (bank-hero.png) and logo (jio-gold-logo.png) are docs assets; the examples pass a { uri } for each. Copy is the guide's own: the card's props from M() (guide line 18), the Title's “For you” and “Offers picked for your savings” (123) and the Campaign card (114); the accessibilityLabel values are in the code, not the rendered copy. VStack has an entry; Title has an undocumented entry. Left out of examples (three at most): the anatomy and sizing specimens, Monogram, Photo and footer, Badge icons (its caption no longer holds), the mode cards (building rules keep modes at their defaults; three captions are kept as rules), Narrow card (it sets Button / Size XS and a style width), Shorter card, Long title, disableTruncation, Product (the In context card), the Do & Don'ts and the playground. Not recorded: style (hosting; the building rules forbid colour, border, radius and font overrides); Color Mode, Page type, Profile Card Appearance, Context, Context2, context 10, Avatar Size, Context4, Semantic Intent and Button / State, and the badge, avatar and specialBadge slots and cta beyond cta={false} (the evidence's Limits); the evidence's hex values, web render tree and Hosting; the Sources' Storybook sentence: the published index.json, read 31 October, lists the five stories and now an attached-mdx docs entry, whose text wasn't read, so the sentence isn't carried. Consistency with related entries: Badge's entry (Badge renders a leading node as given, so pass the Badge's modes and Context4 to the Icon) agrees: the card does that itself for badgeIcon and specialBadgeIcon. Button's entry (Button / Size S for an action inside a card) agrees with the card's small Button. Avatar's entry (L 42, M 36, round; L when Avatar Size is unset) agrees with the card's M avatar; its warning about the bundled fallback picture doesn't arise here, since the card falls back to a monogram. Product Overview's evidence sends “a campaign photo” to this card, which agrees with avoidWhen/0. No other guidance file names Product Merchandising Card. Shape words: nothing hand-written here uses one Coin doesn't have; the package's specialBadgeLabel and specialBadge JSDoc (lines 105 and 114) and three comments (224, 505, 614), and the upstream mdx at dbe0e02f (lines 27, 67, 100, 101, 189), do (reported to the coordinator; not in #544's list). Cross-check: three rounds. Each raised the same four flags against items that rest on the installed package's facts (/configuration/2 badgeIcon, /configuration/11 modes, /accessibility/2 accessibilityLabel) or on the evidence's 28 October dbe0e02 note (/anatomy/6 Footer), read against the c7d3348 guide and evidence: dismissed in reviews/productmerchandisingcard.json. Rounds 1 and 2 also flagged the third gap's ticket wording (“left for Marcin to decide”, then “item 3”, which the evidence doesn't carry), so it now names only Component Bug #356. Round 3 noted that the Whole card example passes onPress with no style width; on dbe0e02 the card's in-flow sizer keeps a pressable card from collapsing on the web (lines 303–306; #356 item 9, fixed). Sorted by the coordinator: the sentences that no longer hold are listed in a note on Component Bug #356 (Component Fix, In progress), whose publish updates the guide copy the fix changed, so no separate guide fix was filed; the human flag names #356. The four cross-check dismissals are for Astra and Marcin to confirm.",
+  "useWhen": [
+    {
+      "text": "Promote one product or campaign on a photo, with a badge, a short title and one action.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Product Merchandising Card to promote one product or campaign on a photo, with a badge, a short title, and one action."
+      }
+    },
+    {
+      "text": "The photo sells; the footer names it and acts.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "The photo sells; the footer names it and acts."
+      }
+    },
+    {
+      "text": "One campaign or product, where the photo is the message, as the card’s handwritten Storybook docs say in the evidence’s record.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "one campaign or product, where the photo is the message"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A spec sheet: the card’s handwritten Storybook docs, as the evidence records them, use Product Overview.",
+      "strength": "discouraged",
+      "useInstead": "ProductOverview",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a spec sheet (ProductOverview) or a card with no photo"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "A card with no photo: the card’s handwritten Storybook docs, as the evidence records them, say it isn’t for one.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not for a spec sheet (ProductOverview) or a card with no photo"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Photo",
+      "holds": "imageSource, cropped to fill the card.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource, cropped to fill the card."
+      }
+    },
+    {
+      "part": "Avatar",
+      "holds": "avatarSource, or avatarMonogram’s initials, 36 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "avatarSource, or avatarMonogram’s initials, 36 px."
+      }
+    },
+    {
+      "part": "Corner badge",
+      "holds": "badgeLabel: a lilac Badge; hidden without a label.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "badgeLabel: a lilac Badge; hidden without a label."
+      }
+    },
+    {
+      "part": "Glass badge",
+      "holds": "specialBadgeLabel: a small frosted badge above the title; hidden without a label.",
+      "required": false,
+      "from": {
+        "fact": "props:specialBadgeLabel"
+      }
+    },
+    {
+      "part": "Title",
+      "holds": "title, 14 px bold white, over subtitle; one line each.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "title, 14 px bold white, over subtitle; one line each."
+      }
+    },
+    {
+      "part": "Button",
+      "holds": "A small purple Button from ctaLabel and onCtaPress.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A small purple Button from ctaLabel and onCtaPress."
+      }
+    },
+    {
+      "part": "Footer",
+      "holds": "A blurred band under the footer’s content, with a gradient over the blur.",
+      "required": true,
+      "from": {
+        "section": "evidence",
+        "quote": "a separate blurred band before the footer’s content, so the targets count from child 2 (photo), 3 (header) and 5 (footer content); a gradient now sits over the blur"
+      },
+      "checkedOn": "2026-10-28",
+      "checkedVersion": "0.1.78-dbe0e02"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "One offer under the screen’s heading, as on the guide’s Home screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Home shows one offer under its heading."
+      }
+    },
+    {
+      "text": "The screen owns what the action does: on the guide’s Home screen, Open starts the screen’s own sign-up through onCtaPress, and the card shows the offer.",
+      "strength": "recommended",
+      "target": "onCtaPress",
+      "from": {
+        "section": "inContext",
+        "quote": "Open starts the screen’s own sign-up through onCtaPress; the card only shows the offer."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "contextual",
+        "reason": "it describes the guide's Home screen card, whose Open starts that screen's own sign-up; it says what the card does there, not a constraint on every card."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Pass the photo in imageSource: the card has none of its own.",
+      "strength": "recommended",
+      "target": "imageSource",
+      "from": {
+        "section": "configuration",
+        "quote": "imageSource is the photo; the card has none of its own."
+      }
+    },
+    {
+      "text": "badgeLabel adds the corner badge at the top right; without a label the badge is hidden.",
+      "strength": "recommended",
+      "target": "badgeLabel",
+      "from": {
+        "fact": "props:badgeLabel"
+      }
+    },
+    {
+      "text": "badgeIcon puts a node such as an Icon before the corner badge’s label, and gives it the lilac badge’s modes, so a default Icon is purple.",
+      "strength": "recommended",
+      "target": "badgeIcon",
+      "from": {
+        "fact": "props:badgeIcon"
+      }
+    },
+    {
+      "text": "specialBadgeIcon puts a leading node, such as an Icon, inside the special badge.",
+      "strength": "recommended",
+      "target": "specialBadgeIcon",
+      "from": {
+        "fact": "props:specialBadgeIcon"
+      }
+    },
+    {
+      "text": "avatarSource shows a round picture at the top left.",
+      "strength": "recommended",
+      "target": "avatarSource",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it."
+      }
+    },
+    {
+      "text": "Pass your own avatar in avatarSource, such as the brand’s logo in the corner.",
+      "strength": "recommended",
+      "target": "avatarSource",
+      "from": {
+        "section": "doDont",
+        "quote": "The brand’s logo in the corner."
+      }
+    },
+    {
+      "text": "avatarMonogram shows initials instead of a picture.",
+      "strength": "recommended",
+      "target": "avatarMonogram",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it."
+      }
+    },
+    {
+      "text": "showAvatar={false} removes the avatar.",
+      "strength": "recommended",
+      "target": "showAvatar",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "avatarSource shows a round picture at the top left, avatarMonogram initials instead, and showAvatar={false} removes it."
+      }
+    },
+    {
+      "text": "ctaLabel and onCtaPress make the small purple Button.",
+      "strength": "recommended",
+      "target": "ctaLabel",
+      "from": {
+        "section": "configuration",
+        "quote": "ctaLabel and onCtaPress make the small purple Button."
+      }
+    },
+    {
+      "text": "Pass onCtaPress: without it the Button still shows and does nothing.",
+      "strength": "recommended",
+      "target": "onCtaPress",
+      "from": {
+        "section": "evidence",
+        "quote": "Without `onCtaPress` the Button still renders and does nothing."
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "One modes object styles the corner badge and the Button together; Emphasis, Badge Size and Button / Size change them too.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "section": "configuration",
+        "quote": "One modes object styles the corner badge and the Button together: AppearanceBrand Primary turns both gold, and Emphasis, Badge Size, and Button / Size change them too."
+      }
+    },
+    {
+      "text": "The card’s modes reach its default parts and anything passed in the badge, avatar, specialBadge, cta and icon slots.",
+      "strength": "recommended",
+      "target": "modes",
+      "from": {
+        "fact": "props:modes"
+      }
+    },
+    {
+      "text": "AppearanceBrand Primary: a cream badge and a gold Button.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Primary",
+      "from": {
+        "section": "configuration",
+        "quote": "A cream badge and a gold Button."
+      }
+    },
+    {
+      "text": "Emphasis Medium: a light purple Button.",
+      "strength": "recommended",
+      "target": "Emphasis",
+      "value": "Medium",
+      "from": {
+        "section": "configuration",
+        "quote": "A light purple Button."
+      }
+    },
+    {
+      "text": "Button / Size XS: a smaller, 24 px Button.",
+      "strength": "recommended",
+      "target": "Button / Size",
+      "value": "XS",
+      "from": {
+        "section": "configuration",
+        "quote": "A smaller, 24 px Button."
+      }
+    },
+    {
+      "text": "Use the Button or the whole card, not both: with onPress, Open stays a separate button inside the card, so drop the Button with cta={false}.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "Open stays a separate button inside it, so use one or the other: cta={false} drops the Button."
+      }
+    },
+    {
+      "text": "cta={false} drops the Button.",
+      "strength": "recommended",
+      "target": "cta",
+      "value": "false",
+      "from": {
+        "section": "states",
+        "quote": "Open stays a separate button inside it, so use one or the other: cta={false} drops the Button."
+      }
+    },
+    {
+      "text": "The card is 223 px tall unless you set height.",
+      "strength": "recommended",
+      "target": "height",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 223 px tall unless you set height, and takes its width from its host; Figma draws it at 328 px."
+      }
+    },
+    {
+      "text": "The card takes its width from its host; Figma draws it at 328 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 223 px tall unless you set height, and takes its width from its host; Figma draws it at 328 px."
+      }
+    },
+    {
+      "text": "The photo fills and crops to the card.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The photo fills and crops to the card."
+      }
+    },
+    {
+      "text": "The header and footer sit on the photo: the footer grows upward with its content, and in a narrow card the Button drops under the title.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The header and footer sit on the photo: the footer grows upward with its content, and in a narrow card the Button drops under the title."
+      }
+    },
+    {
+      "text": "The title and subtitle stay on one line and end in … unless disableTruncation is set.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "from": {
+        "section": "sizing",
+        "quote": "The title and subtitle stay on one line and end in … unless disableTruncation is set."
+      }
+    },
+    {
+      "text": "disableTruncation: the title and subtitle wrap, and the footer grows upward.",
+      "strength": "recommended",
+      "target": "disableTruncation",
+      "value": "true",
+      "from": {
+        "section": "sizing",
+        "quote": "They wrap, and the footer grows upward."
+      }
+    },
+    {
+      "text": "The card has no selected, disabled or loading look.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "There’s no selected, disabled, or loading look."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Make the title the product or campaign in two to four words.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "section": "content",
+          "quote": "Make the title the product or campaign in two to four words"
+        }
+      },
+      {
+        "text": "Make the subtitle one line of support.",
+        "strength": "recommended",
+        "target": "subtitle",
+        "from": {
+          "section": "content",
+          "quote": "the subtitle one line of support"
+        }
+      },
+      {
+        "text": "Badge labels are a word or two, such as New or Zero balance.",
+        "strength": "recommended",
+        "target": "badgeLabel",
+        "from": {
+          "section": "content",
+          "quote": "Badge labels are a word or two, such as New or Zero balance"
+        }
+      },
+      {
+        "text": "Make ctaLabel a verb, such as Open or Buy.",
+        "strength": "recommended",
+        "target": "ctaLabel",
+        "from": {
+          "section": "content",
+          "quote": "ctaLabel a verb, such as Open or Buy."
+        }
+      },
+      {
+        "text": "Don’t write a long title: it ends in … on one line.",
+        "strength": "discouraged",
+        "target": "title",
+        "from": {
+          "section": "doDont",
+          "quote": "It ends in … on one line"
+        }
+      },
+      {
+        "text": "Set title: left out, it reads “Title”.",
+        "strength": "recommended",
+        "target": "title",
+        "from": {
+          "fact": "props:title"
+        }
+      },
+      {
+        "text": "Set subtitle: left out, it reads “Subtitle”.",
+        "strength": "recommended",
+        "target": "subtitle",
+        "from": {
+          "fact": "props:subtitle"
+        }
+      },
+      {
+        "text": "Set ctaLabel: left out, the Button reads “CTA”.",
+        "strength": "recommended",
+        "target": "ctaLabel",
+        "from": {
+          "fact": "props:ctaLabel"
+        }
+      }
+    ],
+    "good": [
+      "Savings account",
+      "Open in 5 minutes",
+      "New",
+      "Zero balance",
+      "Open",
+      "Festive rewards",
+      "Earn 2× JioPoints on UPI",
+      "Diwali",
+      "Ends Sunday",
+      "Join"
+    ],
+    "bad": [
+      "Zero-balance savings account with free debit card"
+    ]
+  },
+  "states": [
+    {
+      "state": "Button acts",
+      "when": "The default, without onPress: the card isn’t pressable, its Button is.",
+      "from": {
+        "section": "states",
+        "quote": "The card isn’t pressable: its Button is."
+      }
+    },
+    {
+      "state": "Whole card",
+      "when": "With onPress the whole card is one button, which dims slightly while pressed.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button that dims slightly while pressed"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Pass accessibilityLabel with the offer: the photo tells a screen reader nothing.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "Pass accessibilityLabel with the offer: the photo tells a screen reader nothing."
+      }
+    },
+    {
+      "text": "A pressable card is one button, announced by accessibilityLabel or else the title.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button that dims slightly while pressed, announced by accessibilityLabel or the title."
+      }
+    },
+    {
+      "text": "Left out, accessibilityLabel falls back to the title.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "fact": "props:accessibilityLabel"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "A short title",
+      "dont": "A long title",
+      "why": "It ends in … on one line",
+      "from": {
+        "section": "doDont",
+        "quote": "A short title"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The offer on the Home screen, the guide’s In context: a Title heading over one card with a photo, an avatar, both badges and the Open Button. The URIs stand for the offer’s photo and the brand’s logo, and onCtaPress for the screen starting its own sign-up. The accessibilityLabel is the one the guide’s code gives the card (the rendered copy doesn’t show it).",
+      "jsx": "<VStack>\n  <Title title=\"For you\" subtitle=\"Offers picked for your savings\" />\n  <ProductMerchandisingCard\n    imageSource={{ uri: 'https://example.com/savings-account-photo.png' }}\n    avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n    badgeLabel=\"New\"\n    specialBadgeLabel=\"Zero balance\"\n    title=\"Savings account\"\n    subtitle=\"Open in 5 minutes\"\n    ctaLabel=\"Open\"\n    onCtaPress={() => {}}\n    accessibilityLabel=\"Savings account, zero balance, open in 5 minutes\"\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Open starts the screen’s own sign-up through onCtaPress; the card only shows the offer."
+      }
+    },
+    {
+      "purpose": "The whole card as the one target, the guide’s Whole card state: onPress makes the card one button and cta={false} drops the Button, so the card shows no Open. The URIs stand for the offer’s photo and the brand’s logo, and onPress for the screen opening the offer.",
+      "jsx": "<ProductMerchandisingCard\n  imageSource={{ uri: 'https://example.com/savings-account-photo.png' }}\n  avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  badgeLabel=\"New\"\n  specialBadgeLabel=\"Zero balance\"\n  title=\"Savings account\"\n  subtitle=\"Open in 5 minutes\"\n  cta={false}\n  onPress={() => {}}\n  accessibilityLabel=\"Savings account, zero balance, open in 5 minutes\"\n/>",
+      "from": {
+        "section": "states",
+        "quote": "cta={false}: the card is the one target."
+      }
+    },
+    {
+      "purpose": "A campaign, the guide’s Content example: the campaign as the title, its reward as the subtitle, Diwali and Ends Sunday as the badges, and Join as the verb. The URIs stand for the campaign’s photo and the brand’s logo, and onCtaPress for the screen joining the campaign. The accessibilityLabel is the one the guide’s code gives it (the rendered copy doesn’t show it).",
+      "jsx": "<ProductMerchandisingCard\n  imageSource={{ uri: 'https://example.com/festive-rewards-photo.png' }}\n  avatarSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  badgeLabel=\"Diwali\"\n  specialBadgeLabel=\"Ends Sunday\"\n  title=\"Festive rewards\"\n  subtitle=\"Earn 2× JioPoints on UPI\"\n  ctaLabel=\"Join\"\n  onCtaPress={() => {}}\n  accessibilityLabel=\"Festive rewards, earn 2× JioPoints on UPI, ends Sunday\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "A campaign, its reward, and Join."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Avatar Size",
+      "default": "M",
+      "description": "The card’s avatar is Avatar Size M, 36 px, unless modes set one.",
+      "quote": "Avatar `Avatar Size: M` (36 px)",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "AppearanceBrand",
+      "default": "Secondary",
+      "description": "The card gives its corner badge and its Button AppearanceBrand Secondary unless modes set one: a lilac badge with a purple label, and a purple Button.",
+      "quote": "corner Badge `AppearanceBrand: Secondary, Emphasis: Medium` (lilac `#e4dbff`, purple label); Button `Button / Size: S, AppearanceBrand: Secondary` (purple, 32 px)",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Emphasis",
+      "description": "The card gives its corner badge Emphasis Medium unless modes set one.",
+      "quote": "corner Badge `AppearanceBrand: Secondary, Emphasis: Medium`",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "modes",
+      "name": "Button / Size",
+      "default": "S",
+      "description": "The card’s Button is Button / Size S, 32 px, unless modes set one.",
+      "quote": "Button `Button / Size: S, AppearanceBrand: Secondary` (purple, 32 px)",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "With onPress the card is a Pressable with role button, named accessibilityLabel or else the title, at 0.92 opacity while pressed; the Button keeps its own onCtaPress, so the two nest, a button in a button.",
+      "quote": "`onPress`: root `Pressable`, `role=button`, name `accessibilityLabel ?? title`, opacity 0.92 while pressed; the CTA keeps its own `onCtaPress`, so both nest (a button in a button).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "At 328 px with both badges the header is 60 px and the footer 97, where Figma’s are 55 and 95, and the badges are 23 px against Figma’s 22 (Component Bug #356).",
+      "quote": "Header 60 vs 55, footer 97 vs 95, badges 23 vs 22",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Figma binds a title font-weight token that the token file lacks; the code uses the body high weight token, also 700 (Component Bug #356).",
+      "quote": "Figma binds `footer/title/fontweight`, which the token file lacks (code uses `typography/body/fontWeight/high`, also 700).",
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Figma’s card has the booleans showBadge and showSpecialBadge; the package has neither and shows each badge only when you pass its label (Component Bug #356).",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Product Merchandising card has the booleans avatar, gradient, showBadge, and showSpecialBadge and the text title and subtitle; the package shows each badge only when you pass its label"
+      },
+      "checkedOn": "2026-10-20",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ]
+}

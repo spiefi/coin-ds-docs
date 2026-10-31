@@ -1,0 +1,349 @@
+{
+  "slug": "cardproviderinfo",
+  "label": "Card Provider Info",
+  "guideCommit": "4a044e7567d826f9487e2a51a4f655630d5902a0",
+  "files": [
+    "src/guides/cardproviderinfo.guide.tsx"
+  ],
+  "evidence": "docs/evidence/cardproviderinfo.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:06:47.255Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "provider card",
+    "seller info",
+    "vault info",
+    "stats card",
+    "product provider",
+    "trust facts"
+  ],
+  "title": "Card Provider Info",
+  "summary": "Use a Card Provider Info to introduce who provides a product, with their logo and a few short facts in two columns.",
+  "corePrinciple": "Who provides it, and why to trust them.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2916-9155",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cardproviderinfo--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A provider and its facts",
+      "description": "A rounded card puts the provider’s logo and name on top, then lays its children out two to a row. The facts are StatItem components: a small label over a large value.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "Avatar",
+        "imageSource in a round 29 px Avatar, as in Figma; showAvatar={false} hides it.",
+        "Label",
+        "label names the provider in 16 px bold.",
+        "Fact",
+        "A StatItem child: a 12 px label over a 26 px value.",
+        "Grid",
+        "Children sit two to a row, 8 px apart, each half the width.",
+        "Card",
+        "16 px corners and 20 px padding; AppearanceBrand sets the fill."
+      ],
+      "specimen": [
+        "Gold",
+        "Purity verified by NABL",
+        "99.99%",
+        "Customers served",
+        "1M+",
+        "Insured vault storage",
+        "100%",
+        "Established",
+        "2017"
+      ],
+      "anatomy": [
+        {
+          "part": "Avatar",
+          "note": "imageSource in a round 29 px Avatar, as in Figma; showAvatar={false} hides it."
+        },
+        {
+          "part": "Label",
+          "note": "label names the provider in 16 px bold."
+        },
+        {
+          "part": "Fact",
+          "note": "A StatItem child: a 12 px label over a 26 px value."
+        },
+        {
+          "part": "Grid",
+          "note": "Children sit two to a row, 8 px apart, each half the width."
+        },
+        {
+          "part": "Card",
+          "note": "16 px corners and 20 px padding; AppearanceBrand sets the fill."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Brand and avatar size",
+      "description": "AppearanceBrand sets the card’s fill: Primary cream by default, Secondary lilac, and Neutral or Tertiary white with a light border. The label and the facts stay the same colour. The logo is Figma’s 29 px; Avatar Size L makes it 42 px, and showAvatar={false} hides it.",
+      "blocks": [
+        "Primary",
+        "The default: a cream card, as in Figma.",
+        "Secondary",
+        "A lilac card.",
+        "Neutral",
+        "White with a light border; Tertiary looks the same.",
+        "Avatar Size L",
+        "A larger 42 px logo."
+      ],
+      "specimen": [
+        "Gold",
+        "Purity verified by NABL",
+        "99.99%",
+        "Customers served",
+        "1M+",
+        "Insured vault storage",
+        "100%",
+        "Established",
+        "2017"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Primary",
+          "description": "The default: a cream card, as in Figma."
+        },
+        {
+          "title": "Secondary",
+          "description": "A lilac card."
+        },
+        {
+          "title": "Neutral",
+          "description": "White with a light border; Tertiary looks the same."
+        },
+        {
+          "title": "Avatar Size L",
+          "description": "A larger 42 px logo."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Facts only, by default",
+      "description": "The card shows facts and does nothing when tapped. onPress makes the whole card one button, named by accessibilityLabel or label; it doesn’t change its look when pressed, and disabled only stops presses. Don’t put buttons among the facts of a pressable card.",
+      "blocks": [
+        "Facts only",
+        "The default: nothing to press.",
+        "Not opened yet",
+        "Pressable",
+        "The whole card is one button and looks the same."
+      ],
+      "specimen": [
+        "Gold",
+        "Purity verified by NABL",
+        "99.99%",
+        "Customers served",
+        "1M+",
+        "Insured vault storage",
+        "100%",
+        "Established",
+        "2017"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Facts only",
+          "description": "The default: nothing to press."
+        },
+        {
+          "title": "Pressable",
+          "description": "The whole card is one button and looks the same."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "Your screen sets the width",
+      "description": "The card fills its host’s width; Figma draws it at 342 px. It has 20 px padding and 20 px between the header and the facts, and each fact takes half the width with 8 px between them. Height follows the content: 199 px with four facts and the 29 px logo.",
+      "blocks": [
+        "342 × 199",
+        "20"
+      ],
+      "specimen": [
+        "Gold",
+        "Purity verified by NABL",
+        "99.99%",
+        "Customers served",
+        "1M+",
+        "Insured vault storage",
+        "100%",
+        "Established",
+        "2017"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Short facts with their figures",
+      "description": "Put the provider’s name in label. Give each fact a short noun phrase for its label and the figure for its value: values are large and heavy, so keep them to a few characters. Two to six facts, in pairs, read best.",
+      "blocks": [
+        "Two facts",
+        "One row of two facts.",
+        "Three facts",
+        "The third fact sits alone and leaves a gap beside it."
+      ],
+      "specimen": [
+        "Gold",
+        "Purity verified by NABL",
+        "99.99%",
+        "Customers served",
+        "1M+",
+        "Insured vault storage",
+        "100%"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Two facts",
+          "description": "One row of two facts."
+        },
+        {
+          "title": "Three facts",
+          "description": "The third fact sits alone and leaves a gap beside it."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "The provider on the Buy Gold screen",
+      "description": "The screen supplies the provider’s logo, name, and facts. The card only shows them; the Buy button below is the screen’s own action.",
+      "blocks": [
+        "Ready to buy"
+      ],
+      "specimen": [
+        "Buy gold",
+        "24K, stored in an insured vault",
+        "Gold",
+        "Purity verified by NABL",
+        "99.99%",
+        "Customers served",
+        "1M+",
+        "Insured vault storage",
+        "100%",
+        "Established",
+        "2017"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Short facts from a known provider",
+      "description": "Each pair shows a card people trust at a glance next to one that crowds its facts or shows the wrong picture.",
+      "blocks": [
+        "Do",
+        "Keep values short",
+        "“99.99%” and “1M+” read at a glance.",
+        "Don’t",
+        "Write sentences as values",
+        "“Over one million” wraps and crowds the row.",
+        "Pass the provider’s logo",
+        "imageSource shows who provides it.",
+        "Leave out imageSource",
+        "The name stands alone, with nothing to show who provides it.",
+        "Pair the facts",
+        "Four facts fill two rows.",
+        "Leave one fact alone",
+        "Three facts leave a gap beside the last."
+      ],
+      "specimen": [
+        "Gold",
+        "Purity verified by NABL",
+        "99.99%",
+        "Customers served",
+        "1M+",
+        "Over one million",
+        "Established",
+        "In the year 2017",
+        "Insured vault storage",
+        "100%",
+        "2017"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep values short",
+            "caption": "“99.99%” and “1M+” read at a glance.",
+            "specimen": "Gold · Purity verified by NABL · 99.99% · Customers served · 1M+"
+          },
+          "dont": {
+            "title": "Write sentences as values",
+            "caption": "“Over one million” wraps and crowds the row.",
+            "specimen": "Gold · Customers served · Over one million · Established · In the year 2017"
+          }
+        },
+        {
+          "do": {
+            "title": "Pass the provider’s logo",
+            "caption": "imageSource shows who provides it.",
+            "specimen": "Gold · Purity verified by NABL · 99.99% · Customers served · 1M+"
+          },
+          "dont": {
+            "title": "Leave out imageSource",
+            "caption": "The name stands alone, with nothing to show who provides it.",
+            "specimen": "Gold · Purity verified by NABL · 99.99% · Customers served · 1M+"
+          }
+        },
+        {
+          "do": {
+            "title": "Pair the facts",
+            "caption": "Four facts fill two rows.",
+            "specimen": "Gold · Purity verified by NABL · 99.99% · Customers served · 1M+ · Insured vault storage · 100% · Established · 2017"
+          },
+          "dont": {
+            "title": "Leave one fact alone",
+            "caption": "Three facts leave a gap beside the last.",
+            "specimen": "Gold · Purity verified by NABL · 99.99% · Customers served · 1M+ · Insured vault storage · 100%"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Card Provider Info contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Two stats",
+        "Checked 19 October 2026",
+        "Installed jfs-components is 0.1.78, built from Biscuit’s main at c7d3348 (19 October) and taken from the team’s private package repository. Figma’s Card/Provider Info is one 342 × 185 component with no properties of its own; its Product Label can hide the avatar, and in code showAvatar does the same. The header comes from label and imageSource: without imageSource it shows the name alone, so this page passes the Jio Gold logo from the Figma component. The logo is Figma’s 29 px (Avatar Size S) by default. Fact rows are 50 px in code and 44 in Figma. The published Storybook still shows the older build, with a placeholder portrait, and the older generated page.",
+        "jfs-components",
+        "0.1.78"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

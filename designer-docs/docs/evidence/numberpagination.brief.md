@@ -13,16 +13,16 @@ principle: A few pages, over imagery. The screen tracks the page; the component 
 playground: `.preview-stage` holding a `<Backdrop>` with `<NumberPagination totalPages={pages} activePage={page} onPageChange={setPage} />`. Controls: Segment "Pages" 3 | 4 | 5 → `totalPages` (default 4; clamp the active page when it shrinks). Readout title "Showing", value "Slide <page> of <pages>". Stage label: "Live Coin Number Pagination".
 
 ## Anatomy
-header: Anatomy · title: Numbers on a glass pill · description: A frosted, translucent pill holds one circular number per page. The page in view is a white circle with a dark number.
+header: Anatomy · title: Numbers on rounded glass · description: A frosted, translucent, fully rounded background holds one circular number per page. The page in view is a white circle with a dark number.
 specimen: `<Anatomy surface="dark" …><NumberPagination totalPages={4} activePage={1} /></Anatomy>`
 parts:
-1. Glass pill — Frosted, translucent surface with a thin light border. — target: `[role="navigation"]` — side: left
+1. Glass background — Frosted, translucent surface with a thin light border. — target: `[role="navigation"]` — side: left
 2. Active page — White circle with a dark number for the slide in view. — target: `[aria-label="Page 1"]` — side: top
 3. Page number — Other pages in white; each is a 32 px pressable circle. — target: `[aria-label="Page 3"]` — side: bottom
 marks: size `[aria-label="Page 4"]` right
 
 ## Configuration
-header: Configuration · title: Set how many pages · description: Each page adds a 32 px circle. Keep the count small so the pill stays compact over the image.
+header: Configuration · title: Set how many pages · description: Each page adds a 32 px circle. Keep the count small so Number Pagination stays compact over the image.
 Grid `coin-new-example-grid three`, each in a Backdrop:
 - Three pages — `totalPages={3}`, page 1 — lesson: For a short set, such as three offers.
 - Four pages — `totalPages={4}`, page 2 — lesson: The Figma default.
@@ -35,7 +35,7 @@ Grid `coin-new-example-grid`, each in a Backdrop:
 - Last slide — `totalPages={4}`, page 4 — lesson: The white circle moves to the last number.
 
 ## Sizing
-header: Sizing · title: 39 px tall, 32 px per page · description: The pill is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide. It does not wrap: pages that do not fit scroll sideways inside the pill.
+header: Sizing · title: 39 px tall, 32 px per page · description: Number Pagination is 39 px tall and grows by 32 px for each page: four pages are about 138 px wide. It does not wrap: pages that do not fit scroll sideways inside the glass background.
 Measured diagram: `<Anatomy legend={false} surface="dark" marks={[{ kind: 'size', target: '[role="navigation"]', side: 'top', label: 'both' }, { kind: 'size', target: '[aria-label="Page 1"]', side: 'bottom', label: 'both' }]}>` around `<NumberPagination totalPages={4} activePage={1} />`.
 
 ## Content
@@ -49,11 +49,11 @@ Composition in `.coin-new-context`: `<Backdrop size="card">` with `<NumberPagina
 ## Do & Don'ts
 header: Do & Don’ts · title: Keep it readable · description: Each pair shows pagination people can read versus pagination they can’t.
 - Do Place it on imagery: White numbers stand out on a photo. — Backdrop with `totalPages={4}` | Don't Place it on a light surface: White numbers disappear on white. — `<Card modes={LIGHT}>` holding the same NumberPagination
-- Do Keep to a few pages: Five numbers fit comfortably. — Backdrop with `totalPages={5}` | Don't Show every page of a long set: Twelve pages don’t fit, so people must scroll the pill to find the rest. — Backdrop with `totalPages={12}`
+- Do Keep to a few pages: Five numbers fit comfortably. — Backdrop with `totalPages={5}` | Don't Show every page of a long set: Twelve pages don’t fit, so people must scroll the numbers to find the rest. — Backdrop with `totalPages={12}`
 
 ## Sources
 header: Sources · title: Use the public Number Pagination contract · description: The guide compares the Figma component with the installed package and its Storybook stories.
-note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the pill. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.
+note: Installed <code>jfs-components</code> is <code>0.1.78</code> (5 October build) from the team’s private package repository. The screen owns the active page and the slides; Number Pagination draws the numbers and reports presses. It has no arrows or disabled state; pages that do not fit scroll inside the glass background. On the web the active page is announced as the current page, and the numbers are grouped under the name “Pagination”.
 
 ## Limits
 Do not show `children` custom content, `style`, arrows, a disabled state, or Dark mode. Do not describe square blur corners (fixed in #180).

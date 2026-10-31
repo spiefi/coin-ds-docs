@@ -1,0 +1,299 @@
+{
+  "slug": "filterbar",
+  "label": "Filter Bar",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "files": [
+    "src/guides/filterbar.guide.tsx"
+  ],
+  "evidence": "docs/evidence/filterbar.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T04:05:51.025Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "search",
+    "search bar",
+    "search field",
+    "text field",
+    "filter"
+  ],
+  "title": "Filter Bar",
+  "summary": "Use a Filter Bar at the top of a list so people can narrow what they see by typing.",
+  "corePrinciple": "Name what is being searched, then let the list below respond to every keystroke.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=541-4823",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-filterbar--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A padded search field",
+      "description": "The bar holds one public Text Input set up for search, inset from the screen edges.",
+      "blocks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Bar",
+        "Full-width container that insets the field from the screen edges.",
+        "Field",
+        "Fully rounded input surface from the public Text Input.",
+        "Search icon",
+        "Tells people the field searches.",
+        "Placeholder",
+        "Names what is being searched until they type.",
+        "Padding"
+      ],
+      "specimen": [
+        "Search transactions"
+      ],
+      "anatomy": [
+        {
+          "part": "Bar",
+          "note": "Full-width container that insets the field from the screen edges."
+        },
+        {
+          "part": "Field",
+          "note": "Fully rounded input surface from the public Text Input."
+        },
+        {
+          "part": "Search icon",
+          "note": "Tells people the field searches."
+        },
+        {
+          "part": "Placeholder",
+          "note": "Names what is being searched until they type."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Only the words change",
+      "description": "The bar, field, and icon come from tokens. Designers choose the placeholder and whether the bar opens with a query already in place.",
+      "blocks": [
+        "Default placeholder",
+        "The generic word says nothing about what can be found.",
+        "Specific placeholder",
+        "Naming the list tells people what they can find.",
+        "Prefilled query",
+        "Use it when returning to a list that is already filtered."
+      ],
+      "specimen": [
+        "Search",
+        "Search transactions"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Default placeholder",
+          "description": "The generic word says nothing about what can be found."
+        },
+        {
+          "title": "Specific placeholder",
+          "description": "Naming the list tells people what they can find."
+        },
+        {
+          "title": "Prefilled query",
+          "description": "Use it when returning to a list that is already filtered."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Empty, filled, and focused",
+      "description": "Filter Bar has no disabled or error state. It shows its placeholder when empty, the query when filled, and an outline while focused.",
+      "blocks": [
+        "Empty",
+        "The placeholder carries the name.",
+        "Filled",
+        "The query replaces the placeholder.",
+        "Focused",
+        "Select the field: a 1 px ring outlines its padded area without changing the bar’s height."
+      ],
+      "specimen": [
+        "Search funds"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Empty",
+          "description": "The placeholder carries the name."
+        },
+        {
+          "title": "Filled",
+          "description": "The query replaces the placeholder."
+        },
+        {
+          "title": "Focused",
+          "description": "Select the field: a 1 px ring outlines its padded area without changing the bar’s height."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "It always fills its host",
+      "description": "Filter Bar takes the full width of its container and keeps a fixed height. Place it in a full-width row; the screen owns the width.",
+      "blocks": [
+        "360 × 62",
+        "360 px screen",
+        "240 px column",
+        "The field shrinks with its host while the bar keeps its padding."
+      ],
+      "specimen": [
+        "Search transactions"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "360 px screen",
+          "description": ""
+        },
+        {
+          "title": "240 px column",
+          "description": "The field shrinks with its host while the bar keeps its padding."
+        }
+      ]
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Say what can be found",
+      "description": "Start with “Search” and name the list. Keep it to three words or fewer so it fits a narrow field.",
+      "blocks": [],
+      "specimen": [
+        "Search transactions",
+        "Search funds",
+        "Search by merchant"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Filter a transaction list",
+      "description": "The screen passes the query to its list and shows only matching rows. Filter Bar reports the text; it does not filter anything itself.",
+      "blocks": [],
+      "specimen": [
+        "Digital Gold",
+        "12 Sep · ₹2,000",
+        "Nifty 50 Index Fund",
+        "10 Sep · ₹5,000",
+        "Electricity bill",
+        "8 Sep · ₹1,240",
+        "Gold savings plan",
+        "1 Sep · ₹1,000",
+        "Search transactions"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "Make search predictable",
+      "description": "Each pair shows what people see when the placeholder or placement changes.",
+      "blocks": [
+        "Do",
+        "Name the list",
+        "“Search transactions” tells people what they will find.",
+        "Don’t",
+        "Leave a vague prompt",
+        "“Type here” hides what the field searches.",
+        "Keep the placeholder short",
+        "The whole placeholder stays readable in a narrow field.",
+        "Write a long placeholder",
+        "A long prompt is cut off, so people lose what it searches.",
+        "Keep one search per list",
+        "One field, one set of results.",
+        "Stack several search bars",
+        "Two bars make people guess which one filters the list."
+      ],
+      "specimen": [
+        "Search transactions",
+        "Type here",
+        "Search by merchant",
+        "Search transactions, merchants, and categories",
+        "Search funds",
+        "Search by category"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Name the list",
+            "caption": "“Search transactions” tells people what they will find.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Leave a vague prompt",
+            "caption": "“Type here” hides what the field searches.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Keep the placeholder short",
+            "caption": "The whole placeholder stays readable in a narrow field.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Write a long placeholder",
+            "caption": "A long prompt is cut off, so people lose what it searches.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Keep one search per list",
+            "caption": "One field, one set of results.",
+            "specimen": ""
+          },
+          "dont": {
+            "title": "Stack several search bars",
+            "caption": "Two bars make people guess which one filters the list.",
+            "specimen": ""
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Filter Bar contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Custom placeholder",
+        "Prefilled value",
+        "Custom input",
+        "Checked 2 October 2026",
+        "Declared and installed jfs-components is 0.1.78 from the team’s private package repository. Figma draws the bar at 360 × 64 with a 44 px field; the installed package renders 62 px with a 42 px field. The focus outline is a fixed 1 px dark ring (not a token) that keeps the bar’s height. On the web, accessibilityLabel names the input. renderInput and children are developer overrides and are not shown.",
+        "jfs-components",
+        "0.1.78",
+        "accessibilityLabel",
+        "renderInput",
+        "children"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

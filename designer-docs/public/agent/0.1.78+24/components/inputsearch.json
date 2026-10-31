@@ -1,0 +1,651 @@
+{
+  "schemaVersion": 1,
+  "id": "InputSearch",
+  "slug": "inputsearch",
+  "category": "input",
+  "tags": [
+    "search",
+    "search bar",
+    "search field",
+    "find",
+    "clear button"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T02:32:56Z",
+    "flags": []
+  },
+  "summary": "Use an Input Search to search a list, with a clear button that appears as people type and an optional hint below.",
+  "useWhen": [
+    {
+      "text": "Search a list, with a clear button that appears as people type and an optional hint below.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Input Search to search a list, with a clear button that appears as people type and an optional hint below."
+      }
+    },
+    {
+      "text": "Say what people can find, and let them start over.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Say what people can find, and let them start over."
+      }
+    },
+    {
+      "text": "Find one item in a list on the screen, such as a payee, as in the guide's In context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Find a payee"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Collecting a value, such as an account number: use a Form Field, whose label stays while people type.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a Form Field for a labelled value"
+      },
+      "useInstead": "FormField"
+    },
+    {
+      "text": "The field needs a disabled or an error state: Input Search has neither.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled or error state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Search icon",
+      "holds": "Marks the field as search; always shown.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Marks the field as search; always shown."
+      }
+    },
+    {
+      "part": "Query",
+      "holds": "The placeholder, then what people type; one line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The placeholder, then what people type; one line."
+      }
+    },
+    {
+      "part": "Clear",
+      "holds": "Appears with text and empties the field.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Appears with text and empties the field."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "Grey rounded surface; a grey border shows focus.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey rounded surface; a grey border shows focus."
+      }
+    },
+    {
+      "part": "Hint",
+      "holds": "Optional support text about what people can search for.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional support text about what people can search for."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "leading",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "trailing",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Input Search fills its container's width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Input Search fills its container’s width."
+      }
+    },
+    {
+      "text": "The screen sets the width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The screen sets the width."
+      }
+    },
+    {
+      "text": "The field is 42 px tall with 14 px of padding at each end and 18 px icons, and the hint sits 8 px below.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field is 42 px tall with 14 px of padding at each end and 18 px icons, and the hint sits 8 px below."
+      }
+    },
+    {
+      "text": "In a narrow column the field narrows with it, and the hint wraps.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field narrows with its column, and the hint wraps."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The hint is off by default.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The hint is off by default."
+      },
+      "target": "supportText"
+    },
+    {
+      "text": "Turn the hint on (supportText) only with a short hint you write (supportTextLabel): on its own it reads “Support Text”.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Turn it on only with a short hint you write; on its own it reads “Support Text”."
+      },
+      "target": "supportText"
+    },
+    {
+      "text": "With supportText on, set supportTextLabel: left out, the hint reads “Support Text”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "supportTextLabel"
+    },
+    {
+      "text": "Add a hint when the prompt is not enough: set supportText with a supportTextLabel that says what kinds of search work.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a hint when the prompt is not enough"
+      },
+      "target": "supportText",
+      "value": "true"
+    },
+    {
+      "text": "Leave the hint off when the prompt says enough.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave it off when the prompt says enough."
+      },
+      "target": "supportText",
+      "value": "false"
+    },
+    {
+      "text": "Give the field value and onChangeText: typing and clearing need both.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The field needs `value` and `onChangeText` for typing and clearing to work."
+      },
+      "target": "value"
+    },
+    {
+      "text": "Input Search only reports the text (onChangeText): the screen filters the list as people type and restores it when they clear the field.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen filters the list as people type and restores it when they clear the field; Input Search only reports the text."
+      },
+      "target": "onChangeText"
+    },
+    {
+      "text": "The clear button shows while value is not empty and trailing is not passed, so passing trailing hides it; it calls onChangeText('').",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "The clear button shows while `value` is not empty and `trailing` is not passed; it calls `onChangeText('')`."
+      },
+      "target": "trailing"
+    },
+    {
+      "text": "Set placeholder to your own prompt: left out, it reads “Search”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "placeholder"
+    },
+    {
+      "text": "There is no disabled or error state.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled or error state."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write a short prompt that names what people search, such as “Search payees”, in sentence case with no full stop.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write a short prompt that names what people search, such as “Search payees”, in sentence case with no full stop."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Use the hint for an example of what works.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the hint for an example of what works."
+        },
+        "target": "supportTextLabel"
+      },
+      {
+        "text": "Keep one fixed prompt.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Keep one fixed prompt"
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Don't rotate the prompt (a placeholder array): changing text distracts, and screen readers hear only the first prompt when the field has no accessibility label.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Changing text distracts, and screen readers hear only the first prompt."
+        },
+        "target": "placeholder"
+      },
+      {
+        "text": "Don't leave the default hint: the placeholder words “Support Text” reach people.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The placeholder words “Support Text” reach people."
+        },
+        "target": "supportTextLabel"
+      }
+    ],
+    "good": [
+      "Search payees",
+      "Search funds",
+      "Search help articles",
+      "Search investments",
+      "Try a name or mobile number",
+      "Try a fund name or fund house"
+    ],
+    "bad": [
+      "Support Text"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty",
+      "when": "No text yet: the field shows its prompt.",
+      "from": {
+        "section": "states",
+        "quote": "Empty, the field shows its prompt."
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "While focused: a grey border appears and the prompt clears.",
+      "from": {
+        "section": "states",
+        "quote": "Focused, a grey border appears and the prompt clears."
+      }
+    },
+    {
+      "state": "Filled",
+      "when": "With text: a clear button appears at the end.",
+      "from": {
+        "section": "states",
+        "quote": "Filled, a clear button appears at the end."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The field has no visible label: give it an accessibilityLabel with the same words as the prompt.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "The field has no visible label, so give it an accessibility label with the same words."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web the clear button is a button named “Clear search”.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the clear button is a button named “Clear search”"
+      }
+    },
+    {
+      "text": "On the web the field has one tab stop, the input: Tab goes from the input to Clear (when there is text) and on to the next field.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Tab goes input → Clear → next field, so the wrapper is no longer a tab stop."
+      }
+    },
+    {
+      "text": "On the web, without an accessibilityLabel the placeholder names the field, also while focused; a rotating placeholder is named by its first prompt.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "without an accessibility label the placeholder names the field, also while focused; a rotating placeholder is named by its first prompt."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Write your own hint",
+      "dont": "Leave the default hint",
+      "why": "The placeholder words “Support Text” reach people.",
+      "from": {
+        "section": "doDont",
+        "quote": "The hint gives an example that works."
+      }
+    },
+    {
+      "do": "Keep one fixed prompt",
+      "dont": "Rotate the prompt",
+      "why": "Changing text distracts, and screen readers hear only the first prompt.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep one fixed prompt"
+      }
+    },
+    {
+      "do": "Use a Form Field for a labelled value",
+      "dont": "Collect a value with a search field",
+      "why": "The prompt disappears as people type, and there is no label or error.",
+      "from": {
+        "section": "doDont",
+        "quote": "The label stays while people type."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Find a payee, the guide's In context: a Card holding a VStack with Input Search over the payee rows (List Items with the payee's name and mobile number). value=\"\" stands for the screen's query, still empty, so every payee shows; onChangeText stands for the screen storing the query and filtering the rows as people type, and clearing the field gives all of them back.",
+      "jsx": "<Card>\n  <VStack>\n    <InputSearch\n      value=\"\"\n      onChangeText={() => {}}\n      placeholder=\"Search payees\"\n      accessibilityLabel=\"Search payees\"\n      supportText\n      supportTextLabel=\"Try a name or mobile number\"\n    />\n    <ListItem layout=\"Horizontal\" navArrow={false} title=\"Asha Rao\" supportText=\"98765 43210\" />\n    <ListItem layout=\"Horizontal\" navArrow={false} title=\"Ravi Kumar\" supportText=\"91234 56780\" />\n    <ListItem layout=\"Horizontal\" navArrow={false} title=\"Meera Shah\" supportText=\"99887 76655\" />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen filters the list as people type and restores it when they clear the field; Input Search only reports the text."
+      }
+    },
+    {
+      "purpose": "A fund search with a hint, from the guide's Prompts and hints: the prompt names what people search, the hint gives an example of what works, and the accessibility label repeats the prompt. value and onChangeText stand for the screen's query state.",
+      "jsx": "<InputSearch\n  value=\"\"\n  onChangeText={() => {}}\n  placeholder=\"Search funds\"\n  accessibilityLabel=\"Search funds\"\n  supportText\n  supportTextLabel=\"Try a fund name or fund house\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Use the hint for an example of what works."
+      }
+    },
+    {
+      "purpose": "A search with no hint, the guide's Without a hint: the prompt says enough, and the hint is off by default, so supportText is left out. value and onChangeText stand for the screen's query state.",
+      "jsx": "<InputSearch\n  value=\"\"\n  onChangeText={() => {}}\n  placeholder=\"Search help articles\"\n  accessibilityLabel=\"Search help articles\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave it off when the prompt says enough."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "supportText",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "Off by default; turned on with no supportTextLabel, the hint reads “Support Text”. Declared: Default false, from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "supportTextLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Support Text",
+        "description": "Default \"Support Text\", from the component source."
+      },
+      {
+        "name": "supportTextIcon",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_info",
+        "description": "Icon name from the icon registry to render inside the support text (e.g. 'ic_info', 'ic_cart'). Defaults to 'ic_info'. Default \"ic_info\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "containerStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "placeholder",
+        "type": "string | readonly string[]",
+        "required": false,
+        "source": "evidence",
+        "default": "Search",
+        "description": "The visible placeholder clears on focus. Declared: Placeholder shown when the field is empty. Pass a string for a static placeholder, or a string array (2+) to cycle with a vertical slide (2000ms dwell, 500ms ease-out). Styled by TextInput. Default \"Search\", from the component source.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Typing and clearing need value and onChangeText both.",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onFocus",
+        "type": "(e: any) => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onBlur",
+        "type": "(e: any) => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "The clear button shows while value is not empty and trailing is not passed; it calls onChangeText('').",
+        "checkedOn": "2026-10-02"
+      },
+      {
+        "name": "inputStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Without accessibilityLabel the placeholder names the input and keeps naming it while focused; a rotating placeholder names it after its first item.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...Omit<RNTextInputProps, 'style' | 'onChangeText' | 'onFocus' | 'onBlur' | 'placeholder' | 'value'>",
+        "type": "Omit<RNTextInputProps, 'style' | 'onChangeText' | 'onFocus' | 'onBlur' | 'placeholder' | 'value'>",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection InputSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "FormField States",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active",
+          "Read Only",
+          "Error",
+          "Disabled"
+        ],
+        "description": "A token collection InputSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "InputState",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Active"
+        ],
+        "description": "A token collection InputSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Status",
+        "type": "mode collection",
+        "values": [
+          "Auto",
+          "Warning",
+          "Error",
+          "Success",
+          "Loading",
+          "Neutral"
+        ],
+        "description": "A token collection InputSearch reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Auto"
+      }
+    ],
+    "slots": [
+      {
+        "name": "leading",
+        "type": "React.ReactNode",
+        "source": "types"
+      },
+      {
+        "name": "trailing",
+        "type": "React.ReactNode",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "source": "types"
+      },
+      {
+        "name": "onFocus",
+        "type": "(e: any) => void",
+        "source": "types"
+      },
+      {
+        "name": "onBlur",
+        "type": "(e: any) => void",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Input Search has no label, error or disabled design.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "The field is 42 px tall; Figma's is 44 px.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "There is no disabled, error or label prop; editable={false} blocks typing with no visual change.",
+        "source": "evidence",
+        "checkedOn": "2026-10-02"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=inputsearch",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=1796-188",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-inputsearch--docs"
+  }
+}

@@ -1,0 +1,953 @@
+{
+  "schemaVersion": 1,
+  "id": "CardInsight",
+  "slug": "cardinsight",
+  "category": "card",
+  "tags": [
+    "insight card",
+    "savings goal card",
+    "savings insight",
+    "goal progress",
+    "spending insight"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "b4988c574ac60920a01955dcd3b8ca2d24aad3d7",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:50:12Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The Card Insight guide (b4988c5) was checked on 23 October 2026 on the c8526ae build; every file the card renders is the same blob on the installed v0.1.78-dbe0e02. Read against the installed source and the guide page rendered on it (31 October, headless Chrome, 1280 px), three sentences no longer hold, and the entry leaves them out: (1) Configuration “The footer is grey with a dark button, as in Figma, …” and the Primary card's “The default: a gold badge and bar, with a grey footer.”: with no AppearanceBrand on the card the default footer (AppearanceBrand Neutral, CardInsight.tsx lines 166–170) has a white surface, nudge/background rgb(255, 255, 255), on the white card, with a grey sparkle rgb(84, 89, 97) and a dark button rgb(48, 51, 56); nothing about its surface is grey (the evidence's 23 October line says grey too). /configuration/1 quotes the sentence only from “with a dark button” on. (2) Anatomy's Divider note “A 1 px rule, shown only with a footer.”: a passed divider (true or a node) stays with footer={false} (CardInsight.tsx 200–209, 282), as the guide's own States sentence and playground readout say; the Divider part rests on the divider fact. (3) The Do & Don'ts description's “… or leaves its footer empty.”: since c8526ae the Don't shows the default copy, “One line of guidance.” and “Button”, not an empty footer. Also unclear: In context's “the screen passes a new hint and no button label” means an empty footerButtonLabel (the guide's code passes '' at line 103); a label left out reads “Button”. The entry keeps the sentence and adds /configuration/9 from the evidence. Re-check these sentences on the installed build and publish the guide, then re-extract. Added by Claude Code in the overnight run agentpack-r23, for Marcin to confirm. Guide fix #546.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Card Insight to show one finding about someone's money: a title, a status badge, one figure, and a hint on what to do next.",
+  "useWhen": [
+    {
+      "text": "Show one finding about someone's money: a title, a status badge, one figure, and a hint on what to do next.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card Insight to show one finding about someone's money: a title, a status badge, one figure, and a hint on what to do next."
+      }
+    },
+    {
+      "text": "A savings insight on an Insights screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A savings insight on the Insights screen"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A list of perks: the handwritten Storybook docs, as the evidence records them, point to Benefit Card.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "Not a perk list (BenefitCard), not a coverage ring (CardFinancialCondition), not several insights in one card."
+      },
+      "useInstead": "BenefitCard"
+    },
+    {
+      "text": "A coverage ring: the handwritten Storybook docs, as the evidence records them, point to Card Financial Condition.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "Not a perk list (BenefitCard), not a coverage ring (CardFinancialCondition), not several insights in one card."
+      },
+      "useInstead": "CardFinancialCondition"
+    },
+    {
+      "text": "Several insights in one card: the same docs, as the evidence records them, say one finding per card.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "Not a perk list (BenefitCard), not a coverage ring (CardFinancialCondition), not several insights in one card."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "The topic in 16 px bold; it wraps rather than cutting off.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The topic in 16 px bold; it wraps rather than cutting off."
+      }
+    },
+    {
+      "part": "Subtitle",
+      "holds": "One sentence of context at 12 px.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One sentence of context at 12 px."
+      }
+    },
+    {
+      "part": "Badge",
+      "holds": "A string becomes a Badge; false removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A string becomes a Badge; false removes it."
+      }
+    },
+    {
+      "part": "Figure",
+      "holds": "children: the figure; the guide's is a Savings Goal Summary with a bar and two legend rows.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "children: here a Savings Goal Summary with a bar and two legend rows."
+      }
+    },
+    {
+      "part": "Divider",
+      "holds": "A Divider between the figure and the footer: on by default whenever a footer shows; false hides it, a node replaces it.",
+      "required": false,
+      "from": {
+        "fact": "/facts/props/10"
+      }
+    },
+    {
+      "part": "Footer",
+      "holds": "A hint and one action, set with footerBody and footerButtonLabel; false removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A hint and one action, set with footerBody and footerButtonLabel; false removes it."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "badge",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "footer",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "divider",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Let the screen set the width: the card fills its host's width (Figma draws it at 356 px).",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills its host's width; Figma draws it at 356 px."
+      }
+    },
+    {
+      "text": "Run the screen's own action from the footer's button, through onPressFooter.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Set up runs the screen's own action through onPressFooter."
+      },
+      "target": "onPressFooter"
+    },
+    {
+      "text": "Once that action is done, the screen passes a new hint and no button label, so the footer has no button; the card doesn't change itself.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Once the plan is set, the screen passes a new hint and no button label, so the footer has no button; the card doesn't change itself."
+      },
+      "target": "footerBody"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "AppearanceBrand colours the badge and the bar: Primary gold by default, Secondary purple as in Figma, Tertiary blue, or Neutral grey.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand colours the badge and the bar: Primary gold by default, Secondary purple as in Figma, Tertiary blue, or Neutral grey."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "The footer has a dark button, as in Figma, until you set AppearanceBrand on the card; then the footer takes that colour too.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "with a dark button, as in Figma, until you set AppearanceBrand on the card; then it takes that colour too."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "AppearanceBrand leaves the card, its title and its subtitle as they are.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The card, its title, and its subtitle stay the same."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "badge takes a string (shown as a Badge), your own node, or false.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "badge takes a string, your own node, or false"
+      },
+      "target": "badge"
+    },
+    {
+      "text": "badge={false} removes the badge, and the title takes its width.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "badge={false} removes the badge, and the title takes its width."
+      },
+      "target": "badge",
+      "value": "false"
+    },
+    {
+      "text": "children replaces the figure; left out, the card shows its default figure, a SavingsGoalSummary captioned “Credit usage”.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "children"
+    },
+    {
+      "text": "footer takes your own node, or false.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "footer takes your own node or false."
+      },
+      "target": "footer"
+    },
+    {
+      "text": "footer={false} removes the footer and, unless you pass a divider, the rule above it.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "footer={false} removes the footer and, unless you pass a divider, the rule above it"
+      },
+      "target": "footer",
+      "value": "false"
+    },
+    {
+      "text": "divider={false} keeps the footer without the rule.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "divider={false} keeps the footer without the rule."
+      },
+      "target": "divider",
+      "value": "false"
+    },
+    {
+      "text": "For a footer with no button, pass an empty footerButtonLabel and no onPressFooter.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "An empty `footerButtonLabel` with no `onPressFooter` gives a footer with no button."
+      },
+      "target": "footerButtonLabel"
+    },
+    {
+      "text": "Don't make the whole card pressable (onPress) when the footer has a button.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "don't use it when the footer has a button."
+      },
+      "target": "onPress"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One finding, one figure, one hint.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One finding, one figure, one hint."
+        }
+      },
+      {
+        "text": "Name the topic in the title and add one sentence of context in the subtitle.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name the topic in the title and add one sentence of context."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Write the badge as a one- or two-word status, such as “On track”, that doesn't repeat the title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The badge is a one- or two-word status, such as “On track”, that doesn't repeat the title."
+        },
+        "target": "badge"
+      },
+      {
+        "text": "Give the footer one hint and at most one action, labelled with a verb.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Give the footer one hint and at most one action, labelled with a verb."
+        },
+        "target": "footerButtonLabel"
+      },
+      {
+        "text": "Don't write a long badge: “On track to finish by June” squeezes the title onto two lines.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“On track to finish by June” squeezes the title onto two lines."
+        },
+        "target": "badge"
+      },
+      {
+        "text": "Don't write a paragraph as the subtitle: it wraps to several lines and pushes the figure down.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It wraps to several lines and pushes the figure down."
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Set title to the finding's topic: left out, it reads “Emergency savings”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/0"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Set subtitle yourself: left out, it reads “One line explanation here.”",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "subtitle"
+      },
+      {
+        "text": "Set badge to the status, or to false for none: left out, it reads “Label”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/2"
+        },
+        "target": "badge"
+      },
+      {
+        "text": "Whenever the default footer shows, set footerBody to your hint: left out, it reads “One line of guidance.”",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/5"
+        },
+        "target": "footerBody"
+      },
+      {
+        "text": "Whenever the default footer shows, set footerButtonLabel to the action, or to an empty string for no button: left out, it reads “Button”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/6"
+        },
+        "target": "footerButtonLabel"
+      },
+      {
+        "text": "Whenever the default footer shows a button, give it the screen's action through onPressFooter: without it, the button does nothing.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/7"
+        },
+        "target": "onPressFooter"
+      }
+    ],
+    "good": [
+      "Emergency savings",
+      "Four of the eight months we suggest.",
+      "On track",
+      "Add ₹10,000 a month to reach it by June.",
+      "Set up"
+    ],
+    "bad": [
+      "On track to finish by June",
+      "One line of guidance.",
+      "Button",
+      "You have saved four of the eight months of expenses we suggest keeping aside, based on what you spent over the last six months."
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Without onPress (the default), the card itself isn't pressable.",
+      "from": {
+        "fact": "/facts/props/13"
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "onPress makes the whole card one button with no pressed look.",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button with no pressed look"
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With onPress set, disabled stops presses; the card looks the same.",
+      "from": {
+        "fact": "/facts/props/14"
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "A pressable card (onPress) is one button, named by accessibilityLabel or, when that is not set, by the title.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/15"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the badge short",
+      "dont": "Write a long badge",
+      "why": "“On track to finish by June” squeezes the title onto two lines.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the badge short"
+      }
+    },
+    {
+      "do": "Write the footer’s hint",
+      "dont": "Keep the default footer copy",
+      "why": "“One line of guidance.” and a “Button” that does nothing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Write the footer’s hint"
+      }
+    },
+    {
+      "do": "Keep the subtitle to one sentence",
+      "dont": "Write a paragraph as the subtitle",
+      "why": "It wraps to several lines and pushes the figure down.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the subtitle to one sentence"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A savings insight on the Insights screen, the guide's In context before the plan is set: a Title for the screen and the card in a VStack. The card names the finding (the title, one sentence of context, a short status badge) and its footer gives one hint and one action; onPressFooter stands for the screen's own action behind Set up. children is left out: the guide's figure is a SavingsGoalSummary (Saved (4 months) ₹2.4L against Goal (8 months) ₹4.8L), which has no entry in this pack, so the card shows its default figure in its place, a SavingsGoalSummary captioned “Credit usage”. The screen's own figure goes in children: report that it needs one.",
+      "jsx": "<VStack>\n  <Title title=\"Insights\" subtitle=\"October 2026\" />\n  <CardInsight\n    title=\"Emergency savings\"\n    subtitle=\"Four of the eight months we suggest.\"\n    badge=\"On track\"\n    footerBody=\"Add ₹10,000 a month to reach it by June.\"\n    footerButtonLabel=\"Set up\"\n    onPressFooter={() => {}}\n  />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "Set up runs the screen's own action through onPressFooter."
+      }
+    },
+    {
+      "purpose": "The same card once the plan is set, the guide's In context after Set up: the screen passes a new hint (the one the guide's In context code passes once Set up is pressed), an empty footerButtonLabel and no onPressFooter, so the footer has no button. children is left out, as in the first example.",
+      "jsx": "<CardInsight\n  title=\"Emergency savings\"\n  subtitle=\"Four of the eight months we suggest.\"\n  badge=\"On track\"\n  footerBody=\"₹10,000 moves to savings on the 1st of each month.\"\n  footerButtonLabel=\"\"\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Once the plan is set, the screen passes a new hint and no button label, so the footer has no button"
+      }
+    },
+    {
+      "purpose": "A card that only reports its finding, the guide's Without the footer: footer={false} removes the footer and the divider with it. children is left out, as in the first example.",
+      "jsx": "<CardInsight\n  title=\"Emergency savings\"\n  subtitle=\"Four of the eight months we suggest.\"\n  badge=\"On track\"\n  footer={false}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "footer={false} removes the footer and, unless you pass a divider, the rule above it"
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Emergency savings",
+        "description": "Card title rendered in the header (left of the badge). Default \"Emergency savings\", from the component source."
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "One line explanation here.",
+        "description": "One-line explanation rendered under the title. Default \"One line explanation here.\", from the component source."
+      },
+      {
+        "name": "badge",
+        "type": "React.ReactNode | string | false",
+        "required": false,
+        "source": "types",
+        "default": "Label",
+        "description": "Header badge. Pass a string to render the default `Badge` with that label, or a custom `ReactNode` for full control. Pass `false` or `null` to hide the badge entirely. Default \"Label\", from the component source."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Left out, the figure is a SavingsGoalSummary captioned “Credit usage”; since #284 the caption is black on the white card. Declared: Main content slot. Defaults to a `SavingsGoalSummary` to match the Figma reference. Pass any `ReactNode` to override.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "footer",
+        "type": "React.ReactNode | false",
+        "required": false,
+        "source": "evidence",
+        "description": "The default footer and your own footer node both get the modes { AppearanceBrand: 'Neutral', Context: 'Nudge&Alert', ...modes }: the card's own modes win, so AppearanceBrand set on the card recolours the footer. Declared: Footer Nudge. Pass a `ReactNode` to override the default inline-compact `Nudge`, or `false`/`null` to hide it.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "footerBody",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "One line of guidance.",
+        "description": "Body of the default footer nudge. Ignored when `footer` is a node or hidden. Default \"One line of guidance.\", from the component source."
+      },
+      {
+        "name": "footerButtonLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Button",
+        "description": "An empty footerButtonLabel with no onPressFooter gives a footer with no button. Declared: Label for the default footer's button. Ignored when `footer` is a node or hidden. Default \"Button\", from the component source.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "onPressFooter",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "The default footer's button (labelled footerButtonLabel, default “Button”) does nothing until onPressFooter is set. Declared: Press handler for the default footer's button.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "onClose and showClose reach the default footer's Close. Declared: Shows the default footer's close button and handles its press.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "showClose",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Force the default footer's close button on or off."
+      },
+      {
+        "name": "divider",
+        "type": "React.ReactNode | boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "Unset, the divider follows the footer; a passed divider (true or a node) stays when footer={false}. Declared: Whether to render a `Divider` between the content slot and the footer. Defaults to `true` whenever a footer is shown. Pass `false` to hide it, or a custom `ReactNode` to override.",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override container styles."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "evidence",
+        "description": "The card becomes a Pressable with role button, named accessibilityLabel, else the title; it has no pressed or disabled look. Declared: Press handler for the whole card. When set, the card becomes pressable (rendered through a `Pressable` with `accessibilityRole=\"button\"`).",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "With onPress set, disabled stops presses; the card shows no disabled look. Declared: Disable interaction when `onPress` is set.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label forwarded to the pressable wrapper (defaults to `title`)."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Appearance / DataViz",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Quaternary",
+          "Quinary",
+          "Senary",
+          "Neutral"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Colours the badge, the bar and its legend dots: Primary gold #cea15a on #fde8c9 by default, Secondary purple #5d00b5 on #ede7ff (Figma's bar), Tertiary blue, Neutral grey. Set on the card, it colours a Nudge footer too. Declared: A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Border Boolean",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "False"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "M"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Idle"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 8",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Section"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "Emphasis Low and Medium keep the bar's fill (fixed in #284). Declared: A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "High",
+        "checkedOn": "2026-10-23"
+      },
+      {
+        "name": "Emphasis / DataViz",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "LinearProgress Size",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XS"
+        ],
+        "description": "The default figure's bar defaults to L (23 px); M is Figma's 16 px. Declared: A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "Nudge padding",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "None"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "Page type SubPage (or context 8 Section) gives the card a grey border, #ebebed. Declared: A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "Semantic Intent System with AppearanceSystem gives the badge, the bar and the footer the status colour; the badge's label is white (since #283). Declared: A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Brand",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection CardInsight reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      }
+    ],
+    "slots": [
+      {
+        "name": "badge",
+        "type": "React.ReactNode | string | false",
+        "default": "Label",
+        "description": "Header badge. Pass a string to render the default `Badge` with that label, or a custom `ReactNode` for full control. Pass `false` or `null` to hide the badge entirely.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Main content slot. Defaults to a `SavingsGoalSummary` to match the Figma reference. Pass any `ReactNode` to override.",
+        "source": "types"
+      },
+      {
+        "name": "footer",
+        "type": "React.ReactNode | false",
+        "description": "Footer Nudge. Pass a `ReactNode` to override the default inline-compact `Nudge`, or `false`/`null` to hide it.",
+        "source": "types"
+      },
+      {
+        "name": "divider",
+        "type": "React.ReactNode | boolean",
+        "description": "Whether to render a `Divider` between the content slot and the footer. Defaults to `true` whenever a footer is shown. Pass `false` to hide it, or a custom `ReactNode` to override.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPressFooter",
+        "type": "() => void",
+        "description": "Press handler for the default footer's button.",
+        "source": "types"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "description": "Shows the default footer's close button and handles its press.",
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler for the whole card. When set, the card becomes pressable (rendered through a `Pressable` with `accessibilityRole=\"button\"`).",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "Figma's badge is green with a white label; the package's default badge is gold (AppearanceBrand Primary). Semantic Intent System gives a green badge with a white label.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "text": "Figma's bar is purple and 16 px; the default figure's bar is gold and 23 px.",
+        "source": "evidence",
+        "checkedOn": "2026-10-17"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=cardinsight",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3702-17347",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cardinsight--docs"
+  }
+}
