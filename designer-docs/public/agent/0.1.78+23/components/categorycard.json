@@ -1,0 +1,829 @@
+{
+  "schemaVersion": 1,
+  "id": "CategoryCard",
+  "slug": "categorycard",
+  "category": "card",
+  "tags": [
+    "category tile",
+    "category rail",
+    "card tab",
+    "product category",
+    "filter tile"
+  ],
+  "status": {
+    "state": "documented",
+    "guideCommit": "4a044e7567d826f9487e2a51a4f655630d5902a0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:50:12Z",
+    "flags": []
+  },
+  "summary": "Use a Category Card for one category in a horizontal rail: a picture, a one- or two-word label, and an optional badge.",
+  "useWhen": [
+    {
+      "text": "Show one category in a horizontal rail: a picture, a one- or two-word label, and an optional badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Category Card for one category in a horizontal rail: a picture, a one- or two-word label, and an optional badge."
+      }
+    },
+    {
+      "text": "One picture, one word, one tap.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "One picture, one word, one tap."
+      }
+    },
+    {
+      "text": "A horizontal rail of categories in which the active card is the current filter: the upstream Storybook docs, as the evidence records them.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "use it for a horizontal rail of categories, the active tile is the current filter"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Peers: the upstream Storybook docs, as the evidence records them, use Tabs.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "peers use Tabs, combinable filters use ChipSelect."
+      },
+      "useInstead": "Tabs"
+    },
+    {
+      "text": "Filters people can combine: the upstream Storybook docs, as the evidence records them, use Chip Select.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "peers use Tabs, combinable filters use ChipSelect."
+      },
+      "useInstead": "ChipSelect"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Badge",
+      "holds": "Optional: badge sets one short word, cut off past 38 px.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional: badge sets one short word, cut off past 38 px."
+      }
+    },
+    {
+      "part": "Image",
+      "holds": "imageSource fills a 36 px square; imageSlot takes any node instead.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource fills a 36 px square; imageSlot takes any node instead, as here."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "12 px on one line; by default a longer label spills past both edges.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "12 px on one line; by default a longer label spills past both edges."
+      }
+    },
+    {
+      "part": "Card",
+      "holds": "A white tile, 60 px wide, whose 1 px border turns gold when active.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A white tile, 60 px wide, whose 1 px border turns gold when active."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "imageSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Lay the cards out side by side in a category rail, as on the guide's Invest screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "A category rail on the Invest screen"
+      }
+    },
+    {
+      "text": "Cards with and without a badge line up in a rail: every card keeps 11 px above it for a badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Every card keeps 11 px above it for a badge, so cards with and without one line up in the rail."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "badge adds a short tag on the card's top edge; leave it out for none.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "badge adds a short tag on the card’s top edge; leave it out for none."
+      },
+      "target": "badge"
+    },
+    {
+      "text": "Figma's State variant (Idle, Active) is the active prop, and Figma's badge on or off is the badge text.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Figma’s Category Card has a State variant (Idle, Active) and a badge on or off; in code, active and the badge text are props."
+      },
+      "target": "active"
+    },
+    {
+      "text": "Give the card a picture, such as a Coin Icon Capsule in imageSlot as the guide's examples do: without an image the card shows a plain light square.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Without an image the card shows a plain light square, so these examples put a Coin Icon Capsule in imageSlot."
+      },
+      "target": "imageSlot"
+    },
+    {
+      "text": "children is another way to fill the image slot; when both are set, imageSlot wins.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/4"
+      },
+      "target": "children"
+    },
+    {
+      "text": "AppearanceBrand colours the badge, Tertiary (blue) by default, and whatever is in imageSlot gets the same modes, so an Icon Capsule there follows it.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand colours the badge, Tertiary blue by default, and anything in imageSlot gets the same modes, so the Icon Capsule follows it."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "AppearanceBrand Tertiary, the default: a blue badge, as in Figma.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: a blue badge, as in Figma."
+      },
+      "target": "AppearanceBrand",
+      "value": "Tertiary"
+    },
+    {
+      "text": "AppearanceBrand Primary: gold for the badge and an Icon Capsule in imageSlot.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Gold for the badge and the capsule."
+      },
+      "target": "AppearanceBrand",
+      "value": "Primary"
+    },
+    {
+      "text": "AppearanceBrand Secondary: purple for the badge and an Icon Capsule in imageSlot.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Purple for the badge and the capsule."
+      },
+      "target": "AppearanceBrand",
+      "value": "Secondary"
+    },
+    {
+      "text": "AppearanceBrand Neutral: dark grey, for a quieter rail.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Dark grey, for a quieter rail."
+      },
+      "target": "AppearanceBrand",
+      "value": "Neutral"
+    },
+    {
+      "text": "Emphasis Medium or Low makes the badge pale.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Emphasis Medium or Low makes the badge pale."
+      },
+      "target": "Emphasis"
+    },
+    {
+      "text": "Emphasis Low: a pale badge, and an Icon Capsule in imageSlot drops its fill.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A pale badge; the capsule drops its fill."
+      },
+      "target": "Emphasis",
+      "value": "Low"
+    },
+    {
+      "text": "Radius rounds the corners of the default image only, not an Icon Capsule or anything else in imageSlot.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Radius rounds the corners of the default image only."
+      },
+      "target": "Radius"
+    },
+    {
+      "text": "AppearanceBrand, Emphasis and Radius leave the card's surface, border and label as they are.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The card’s surface, border, and label look the same in every mode."
+      }
+    },
+    {
+      "text": "Set active, not the Card Tab State mode: active beats the mode.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/modes/3"
+      },
+      "target": "active"
+    },
+    {
+      "text": "The card keeps no state of its own: the screen sets active on one card and moves it in onPress.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The card keeps no state of its own: the screen sets active on one card and moves it in onPress."
+      },
+      "target": "active"
+    },
+    {
+      "text": "The screen keeps the selected category and sets active on that card; each card's onPress selects it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the selected category and sets active on that card; each card’s onPress selects it."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "Mark one card active at a time: two gold borders leave people unsure which category is showing.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Two gold borders leave people unsure which category is showing."
+      },
+      "target": "active"
+    },
+    {
+      "text": "The card is 60 px wide unless you set width, and as tall as its content: 4 px padding, the picture, a 6 px gap, and a 16 px label line.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 60 px wide unless you set width, and as tall as its content: 4 px padding, the picture, a 6 px gap, and a 16 px label line."
+      },
+      "target": "width"
+    },
+    {
+      "text": "With the default 36 px image the card is 68 px tall; a 42 px Icon Capsule makes it 74.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "With the default 36 px image it’s 68 px tall; the 42 px capsule here makes it 74."
+      }
+    },
+    {
+      "text": "A badge sits 11 px above the card, and every card keeps that room in its layout, with or without a badge.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A badge sits 11 px above the card, and every card keeps that room in its layout, with or without a badge."
+      },
+      "target": "badge"
+    },
+    {
+      "text": "A wider card (width) holds a longer label; give every card in a rail the same width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "A wider card holds the label; give every card in a rail the same width."
+      },
+      "target": "width"
+    },
+    {
+      "text": "singleLine={false} wraps a long label onto two lines and makes that card taller.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "singleLine={false} wraps it onto two lines and makes that card taller"
+      },
+      "target": "singleLine",
+      "value": "false"
+    },
+    {
+      "text": "For one line that ends in an ellipsis, as Figma shows, add disableTruncation={false} to singleLine={false}.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "add disableTruncation={false} as well for one line that ends in an ellipsis, as Figma shows."
+      },
+      "target": "disableTruncation",
+      "value": "false"
+    },
+    {
+      "text": "disableTruncation={false} alone changes nothing: with singleLine left at true, the label stays on one line and spills.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/8"
+      },
+      "target": "disableTruncation",
+      "value": "false"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Set label to the category's name: left out, the card shows “Popular”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/1"
+        },
+        "target": "label"
+      },
+      {
+        "text": "Name the category in a word or two.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name the category in a word or two, and keep the badge to one short word that doesn’t repeat it."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Keep the badge to one short word that doesn't repeat the label.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Name the category in a word or two, and keep the badge to one short word that doesn’t repeat it."
+        },
+        "target": "badge"
+      },
+      {
+        "text": "A label wider than the card spills past both edges by default.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "A label wider than the card spills past both edges by default."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Don't write a long badge: “Limited offer” is cut to a few letters.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Limited offer” is cut to a few letters."
+        },
+        "target": "badge"
+      }
+    ],
+    "good": [
+      "Gold",
+      "Loans",
+      "Savings",
+      "Insurance",
+      "New",
+      "Hot"
+    ],
+    "bad": [
+      "Mutual funds",
+      "Limited offer"
+    ]
+  },
+  "states": [
+    {
+      "state": "Idle",
+      "when": "The default: a light grey border.",
+      "from": {
+        "section": "states",
+        "quote": "The default: a light grey border."
+      }
+    },
+    {
+      "state": "Active",
+      "when": "With active set, the border turns gold on the category that's showing.",
+      "from": {
+        "section": "states",
+        "quote": "active turns the border gold on the category that’s showing."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "While pressed, the card dims to 85 %.",
+      "from": {
+        "section": "states",
+        "quote": "A pressed card dims to 85 %"
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With disabled set, the card dims to half opacity and onPress isn't called.",
+      "from": {
+        "section": "states",
+        "quote": "disabled dims it to half and stops onPress."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The card is a button named by its label, with the badge after a comma (“Gold, New”); accessibilityLabel replaces that name.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/15"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web the active card is announced as pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "on the web the active card is announced as pressed"
+      },
+      "target": "active"
+    },
+    {
+      "text": "A disabled card is skipped by keyboard focus on the web and doesn't call onPress.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "disabled"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep the label short",
+      "dont": "Write a long label",
+      "why": "“Mutual funds” spills past both edges of the card.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the label short"
+      }
+    },
+    {
+      "do": "One short badge word",
+      "dont": "Write a long badge",
+      "why": "“Limited offer” is cut to a few letters.",
+      "from": {
+        "section": "doDont",
+        "quote": "One short badge word"
+      }
+    },
+    {
+      "do": "Mark one card active",
+      "dont": "Mark several cards active",
+      "why": "Two gold borders leave people unsure which category is showing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Mark one card active"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A category rail on the Invest screen, the guide's In context: a Title over an HStack of four Category Cards, each with an Icon Capsule in imageSlot as its category art, two of them with a badge. active on Gold stands for the category the screen is showing, and each onPress for the screen selecting that card's category (and moving active to it).",
+      "jsx": "<VStack>\n  <Title title=\"Invest\" subtitle=\"Pick a category\" />\n  <HStack>\n    <CategoryCard\n      label=\"Gold\"\n      badge=\"New\"\n      imageSlot={<IconCapsule iconName=\"ic_rupee_coin\" />}\n      active\n      onPress={() => {}}\n    />\n    <CategoryCard\n      label=\"Loans\"\n      imageSlot={<IconCapsule iconName=\"ic_loans\" />}\n      active={false}\n      onPress={() => {}}\n    />\n    <CategoryCard\n      label=\"Savings\"\n      imageSlot={<IconCapsule iconName=\"ic_savings\" />}\n      active={false}\n      onPress={() => {}}\n    />\n    <CategoryCard\n      label=\"Insurance\"\n      badge=\"Hot\"\n      imageSlot={<IconCapsule iconName=\"ic_insurance\" />}\n      active={false}\n      onPress={() => {}}\n    />\n  </HStack>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen keeps the selected category and sets active on that card; each card’s onPress selects it."
+      }
+    },
+    {
+      "purpose": "A two-word label on one line that ends in an ellipsis, as Figma shows, the guide's Ellipsis card: singleLine={false} with disableTruncation={false}. The Icon Capsule stands for the category's art, and onPress for the screen selecting the category.",
+      "jsx": "<CategoryCard\n  label=\"Mutual funds\"\n  imageSlot={<IconCapsule iconName=\"ic_graph_increasing\" />}\n  singleLine={false}\n  disableTruncation={false}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "content",
+        "quote": "add disableTruncation={false} as well for one line that ends in an ellipsis, as Figma shows."
+      }
+    },
+    {
+      "purpose": "A wider card that holds a longer label, the guide's width={80} card; every card in the same rail would get the same width. The Icon Capsule stands for the category's art, and onPress for the screen selecting the category.",
+      "jsx": "<CategoryCard\n  label=\"Mutual funds\"\n  width={80}\n  imageSlot={<IconCapsule iconName=\"ic_graph_increasing\" />}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "sizing",
+        "quote": "A wider card holds the label; give every card in a rail the same width."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "testID",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Popular",
+        "description": "Bottom label (e.g. `\"Popular\"`). Default \"Popular\", from the component source."
+      },
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Image shown in the card centre. Ignored when `imageSlot` / `children` is provided. Accepts a remote URL string, `{ uri }` object, or `require()`-ed asset."
+      },
+      {
+        "name": "imageSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Slot replacing the default `Image` (Figma Image instance / Code Connect). Receives `modes` recursively so inner components inherit theming. Prefer this or `children` when swapping the media."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Alias for {@link imageSlot} — the Figma image slot. When both are set, `imageSlot` wins so existing `imageSlot` callers stay authoritative."
+      },
+      {
+        "name": "badge",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "An empty string or undefined hides the badge. Declared: Optional badge label rendered as an overlapping pill at the top edge. Omit or pass `undefined` to hide the badge.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "On the web the card also gets aria-pressed from active. Declared: Whether the card is in the selected / active state (gold stroke). When omitted, falls back to `modes['Card Tab State'] === 'Active'` (and the legacy `modes['Category Card State'] === 'Active'` alias).",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "default": 60,
+        "description": "Fixed width of the card in dp. Defaults to `60` per the Figma spec. Default 60, from the component source."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "disableTruncation={false} alone changes nothing: with singleLine left true, the label still stays on one line and spills. Declared: When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored. Defaults to `true` (same overflow behaviour as {@link Text}'s `disableTruncation`). Pass `false` to restore single-line ellipsis clamping. Default true, from the component source.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "singleLine",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "When `true`, forces the label onto a single line with no wrapping (implies `disableTruncation`). On web the line overflows horizontally instead of wrapping or truncating. Defaults to `true` — same API as {@link Text}'s `singleLine`. Pass `false` to allow wrapping. Default true, from the component source."
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Press handler — the card is always a `Pressable`."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": false,
+        "description": "A disabled card renders at 0.5 opacity, with disabled and aria-disabled, tabindex -1 on the web, and no onPress. Declared: Default false, from the component source.",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      },
+      {
+        "name": "labelStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Label style override."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "The card is always a Pressable with role button, named by accessibilityLabel, or else by the label, with the badge after a comma when there is one (“Gold, New”).",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "accessibilityHint",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityState",
+        "type": "AccessibilityState",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "webAccessibilityProps",
+        "type": "WebAccessibilityProps",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "...SafePressableProps",
+        "type": "SafePressableProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "CategoryCard sets AppearanceBrand Tertiary over the theme's modes, so Tertiary is its default; modes on the card override it. Declared: A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Tertiary",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "CategoryCard sets Badge Size Small over the theme's modes, so Small is its default; modes on the card override it. Declared: A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Small",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "Card Tab State",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Active"
+        ],
+        "description": "The active prop beats the Card Tab State mode: with active set, the card sets Card Tab State from it. Declared: A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Radius",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "None"
+        ],
+        "description": "CategoryCard sets Radius None over the theme's modes, so None (square corners on the default image) is its default; modes on the card override it. Declared: A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "None",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection CategoryCard reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "imageSlot",
+        "type": "React.ReactNode",
+        "description": "Slot replacing the default `Image` (Figma Image instance / Code Connect). Receives `modes` recursively so inner components inherit theming. Prefer this or `children` when swapping the media.",
+        "source": "types"
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Alias for {@link imageSlot} — the Figma image slot. When both are set, `imageSlot` wins so existing `imageSlot` callers stay authoritative.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Press handler — the card is always a `Pressable`.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The label's font token is spelt “Jio Type Var”, so the label shows in a fallback serif font until the token is fixed (token problem #288, open).",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "text": "Figma ends a long label in an ellipsis; the package lets it spill unless you change singleLine and disableTruncation.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      },
+      {
+        "text": "The published Storybook still shows the older generated Category Card page.",
+        "source": "evidence",
+        "checkedOn": "2026-10-19"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=categorycard",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7659-4398",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-categorycard--docs"
+  }
+}

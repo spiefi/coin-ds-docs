@@ -1,0 +1,919 @@
+{
+  "schemaVersion": 1,
+  "id": "CardAdvisory",
+  "slug": "cardadvisory",
+  "category": "card",
+  "tags": [
+    "advisory card",
+    "score card",
+    "insight card",
+    "spending score",
+    "financial health"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "622cd823bce501bff1c54d162decbfa4e3323f28",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T01:50:12Z",
+    "flags": [
+      {
+        "field": "/avoidWhen",
+        "reason": "The guide gives no avoidWhen guidance; left empty rather than guessed.",
+        "by": "trace-check"
+      }
+    ]
+  },
+  "summary": "Use a Card Advisory to show one score with a sentence on what it means and, if it helps, one next step.",
+  "useWhen": [
+    {
+      "text": "Show one score with a sentence on what it means and, if it helps, one next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card Advisory to show one score with a sentence on what it means and, if it helps, one next step."
+      }
+    }
+  ],
+  "avoidWhen": [],
+  "anatomy": [
+    {
+      "part": "Title",
+      "holds": "title, 26 px heavy, on one line; a longer title ends in an ellipsis.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "26 px heavy, on one line; a longer title ends in an ellipsis."
+      }
+    },
+    {
+      "part": "Info icon",
+      "holds": "An info icon beside the title, shown by default; showInfoIcon hides it and titleEndSlot replaces it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown by default; showInfoIcon hides it and titleEndSlot replaces it."
+      }
+    },
+    {
+      "part": "Description",
+      "holds": "description, one sentence at 12 px that says what the score means.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "One sentence at 12 px that says what the score means."
+      }
+    },
+    {
+      "part": "Score",
+      "holds": "A 60 px Circular Progress Bar of value out of 100; valueLabel changes the figure.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 60 px Circular Progress Bar of value out of 100; valueLabel changes the figure."
+      }
+    },
+    {
+      "part": "Nudge",
+      "holds": "An inline Nudge with nudgeBody and one button (nudgeButtonLabel, onPressNudgeButton); showNudge removes it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "An inline Nudge with nudgeBody and one button; showNudge removes it."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "titleEndSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "progressSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "nudgeSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "The card is 360 px wide, set by a token that no mode changes, and as tall as its content: it doesn't stretch or shrink with its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card is 360 px wide, set by a token that no mode changes, and as tall as its content: it doesn’t stretch or shrink with its host."
+      }
+    },
+    {
+      "text": "It has no padding or corners: it's a white section for a white screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It has no padding or corners: it’s a white section for a white screen."
+      }
+    },
+    {
+      "text": "The nudge button runs the screen's own action through onPressNudgeButton.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Add accounts runs the screen’s own action through onPressNudgeButton."
+      },
+      "target": "onPressNudgeButton"
+    },
+    {
+      "text": "The card doesn't act on its own: once the next step is done (on the guide's Insights screen, once the accounts are linked), the screen hides the nudge with showNudge and updates the reading.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Once the accounts are linked, the screen hides the nudge with showNudge and updates the reading; the card doesn’t act on its own."
+      },
+      "target": "showNudge",
+      "value": "false"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "AppearanceBrand colours the ring, the nudge and its button; the package defaults to Primary, and Storybook uses Neutral.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand colours the ring, the nudge, and its button: Storybook uses Neutral, and the package defaults to Primary."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "Primary, the package default: a gold ring and a cream nudge.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The package default: a gold ring and a cream nudge."
+      },
+      "target": "AppearanceBrand",
+      "value": "Primary"
+    },
+    {
+      "text": "Neutral, Storybook's look: a dark ring and button, a white nudge.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Storybook’s look: a dark ring and button, a white nudge."
+      },
+      "target": "AppearanceBrand",
+      "value": "Neutral"
+    },
+    {
+      "text": "For a score that's good or bad, set Semantic Intent to System and pick AppearanceSystem.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "For a score that’s good or bad, set Semantic Intent to System and pick AppearanceSystem."
+      },
+      "target": "Semantic Intent",
+      "value": "System"
+    },
+    {
+      "text": "System with positive: green for a good score.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "System with positive: green for a good score."
+      },
+      "target": "AppearanceSystem",
+      "value": "positive"
+    },
+    {
+      "text": "System with negative: red for a score to act on.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "System with negative: red for a score to act on."
+      },
+      "target": "AppearanceSystem",
+      "value": "negative"
+    },
+    {
+      "text": "Brand and status modes colour the ring and the nudge; the card itself stays white.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The card itself stays white."
+      }
+    },
+    {
+      "text": "titleEndSlot replaces the info icon with your own component.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Three slots, titleEndSlot, progressSlot, and nudgeSlot, replace the info icon, the ring, and the nudge with your own components."
+      },
+      "target": "titleEndSlot"
+    },
+    {
+      "text": "progressSlot replaces the ring with your own component.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Three slots, titleEndSlot, progressSlot, and nudgeSlot, replace the info icon, the ring, and the nudge with your own components."
+      },
+      "target": "progressSlot"
+    },
+    {
+      "text": "nudgeSlot replaces the nudge with your own component.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Three slots, titleEndSlot, progressSlot, and nudgeSlot, replace the info icon, the ring, and the nudge with your own components."
+      },
+      "target": "nudgeSlot"
+    },
+    {
+      "text": "The info icon shows by default: set showInfoIcon false to hide it, or titleEndSlot to replace it.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown by default; showInfoIcon hides it and titleEndSlot replaces it."
+      },
+      "target": "showInfoIcon",
+      "value": "false"
+    },
+    {
+      "text": "value is the score out of 100: the ring clamps it to 0–100.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/3"
+      },
+      "target": "value"
+    },
+    {
+      "text": "valueLabel changes the figure shown in the ring.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "A 60 px Circular Progress Bar of value out of 100; valueLabel changes the figure."
+      },
+      "target": "valueLabel"
+    },
+    {
+      "text": "Set showNudge false to remove the nudge, leaving the score and its reading.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "showNudge removes the nudge, leaving the score and its reading."
+      },
+      "target": "showNudge",
+      "value": "false"
+    },
+    {
+      "text": "showNudge also gates nudgeSlot: with showNudge false, a nudgeSlot doesn't render either.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "showNudge",
+      "value": "false"
+    },
+    {
+      "text": "The card passes its modes to the ring, the nudge and the components in its slots; no mode changes the card's own surface or text.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/13"
+      },
+      "target": "modes"
+    },
+    {
+      "text": "The card's nudge has no Close button: the card passes no onClose, so since the #271 fix its nudge shows none.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The card passes no onClose, so since the #271 fix its nudge shows no Close button."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "One score, one reading, one next step.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "One score, one reading, one next step."
+        }
+      },
+      {
+        "text": "Keep the title to one or two words: it's cut to one line.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the title to one or two words: it’s cut to one line."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Say what the score means in one sentence.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Say what the score means in one sentence"
+        },
+        "target": "description"
+      },
+      {
+        "text": "Give the nudge one reason to act.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "give the nudge one reason to act"
+        },
+        "target": "nudgeBody"
+      },
+      {
+        "text": "Label the nudge's button with a verb, such as “Add accounts”; the default label is “Button”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "label its button with a verb; the default label is “Button”."
+        },
+        "target": "nudgeButtonLabel"
+      },
+      {
+        "text": "Do not leave the default label: the button reads “Button” and promises nothing.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The button reads “Button” and promises nothing."
+        },
+        "target": "nudgeButtonLabel"
+      },
+      {
+        "text": "Do not write a long title: it's cut to one line, so its end is lost.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "It's cut to one line, so its end is lost."
+        },
+        "target": "title"
+      },
+      {
+        "text": "Do not put two actions in the nudge: a long label such as “Add accounts and review bills” squeezes the reason to act.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "The long label squeezes the reason to act."
+        },
+        "target": "nudgeButtonLabel"
+      }
+    ],
+    "good": [
+      "Spending",
+      "You’re within the plan you set for this month.",
+      "Data confidence is low. Add more accounts for better insights.",
+      "Add accounts",
+      "Spending score 70",
+      "You’re well within this month’s plan.",
+      "You’ve used most of this month’s plan."
+    ],
+    "bad": [
+      "Button",
+      "Spending across all your accounts this month",
+      "Add accounts and review bills"
+    ]
+  },
+  "states": [
+    {
+      "state": "Default",
+      "when": "The card has no pressed or disabled state of its own: only the nudge button acts, through onPressNudgeButton.",
+      "from": {
+        "section": "states",
+        "quote": "The card has no pressed or disabled state of its own: only the nudge button acts, through onPressNudgeButton."
+      }
+    },
+    {
+      "state": "With nudge",
+      "when": "showNudge true, the default: the score, its reading, and one next step.",
+      "from": {
+        "section": "states",
+        "quote": "The score, its reading, and one next step."
+      }
+    },
+    {
+      "state": "Score only",
+      "when": "showNudge false: the nudge is removed, leaving the score and its reading.",
+      "from": {
+        "section": "states",
+        "quote": "showNudge removes the nudge, leaving the score and its reading."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Set accessibilityLabel to the score in words, such as “Spending score 70”: the default reads out every line, the nudge included.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Set accessibilityLabel to the score in words, such as “Spending score 70”, because the default reads out every line, the nudge included."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "Without accessibilityLabel, the card's spoken name reads the title, description, score and nudge text, even when the nudge is hidden.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Its default spoken name reads the title, description, score, and nudge text, even when the nudge is hidden."
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Label the button with a verb",
+      "dont": "Leave the default label",
+      "why": "The button reads “Button” and promises nothing.",
+      "from": {
+        "section": "doDont",
+        "quote": "Label the button with a verb"
+      }
+    },
+    {
+      "do": "Keep the title short",
+      "dont": "Write a long title",
+      "why": "It's cut to one line, so its end is lost.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the title short"
+      }
+    },
+    {
+      "do": "Give the nudge one action",
+      "dont": "Put two actions in the nudge",
+      "why": "The long label squeezes the reason to act.",
+      "from": {
+        "section": "doDont",
+        "quote": "Give the nudge one action"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "A spending score with its reading and one next step, named for screen readers by the score in words.",
+      "jsx": "<CardAdvisory\n  title=\"Spending\"\n  description=\"You’re within the plan you set for this month.\"\n  value={70}\n  nudgeBody=\"Data confidence is low. Add more accounts for better insights.\"\n  nudgeButtonLabel=\"Add accounts\"\n  onPressNudgeButton={() => {}}\n  accessibilityLabel=\"Spending score 70\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "“Spending”, what 70 means this month, and “Add accounts” as the next step, named “Spending score 70”."
+      }
+    },
+    {
+      "purpose": "A score to act on, in red: Semantic Intent System with AppearanceSystem negative.",
+      "jsx": "<CardAdvisory\n  title=\"Spending\"\n  description=\"You’ve used most of this month’s plan.\"\n  value={25}\n  nudgeBody=\"Data confidence is low. Add more accounts for better insights.\"\n  nudgeButtonLabel=\"Add accounts\"\n  onPressNudgeButton={() => {}}\n  accessibilityLabel=\"Spending score 25\"\n  modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }}\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "System with negative: red for a score to act on."
+      }
+    },
+    {
+      "purpose": "Score only, after the screen's step is done: on the guide's Insights screen, once the accounts are linked, the screen hides the nudge with showNudge and updates the reading.",
+      "jsx": "<CardAdvisory\n  title=\"Spending\"\n  description=\"Based on all 3 of your accounts.\"\n  value={70}\n  showNudge={false}\n  accessibilityLabel=\"Spending score 70\"\n/>",
+      "from": {
+        "section": "inContext",
+        "quote": "Once the accounts are linked, the screen hides the nudge with showNudge and updates the reading; the card doesn’t act on its own."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Without it, the card's root (no role) is named `${title}. ${description}. ${round(value)} out of 100. ${nudgeBody}`: the name includes the nudge text when the nudge is hidden, a double period after a description ending in “.”, and the unclamped value. Declared: Accessibility label for the full card.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Spending",
+        "description": "Clamped to one line unless disableTruncation is set. Declared: Main heading text. Default \"Spending\", from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Track your spending habits and stay within your budget.",
+        "description": "Wraps, with no line clamp. Declared: Description shown below the heading. Default \"Track your spending habits and stay within your budget.\", from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "source": "evidence",
+        "default": 70,
+        "description": "The ring clamps it to 0–100. Declared: Progress score displayed in the circular progress bar. Default 70, from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "valueLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Replaces the number in the ring. Declared: Optional formatted score label.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "showInfoIcon",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": true,
+        "description": "Show the info icon beside the title. Default true, from the component source."
+      },
+      {
+        "name": "showNudge",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "default": true,
+        "description": "Also gates nudgeSlot: with showNudge false, a nudgeSlot doesn't render either. Declared: Show the bottom advisory nudge. Default true, from the component source.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "nudgeBody",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Data confidence is low, add more accounts for better insights.",
+        "description": "Body text for the default nudge. Default \"Data confidence is low, add more accounts for better insights.\", from the component source."
+      },
+      {
+        "name": "nudgeButtonLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Button",
+        "description": "Also names the nudge button for screen readers (aria-label on the web). Declared: Button label for the default nudge. Default \"Button\", from the component source.",
+        "checkedOn": "2026-10-17"
+      },
+      {
+        "name": "onPressNudgeButton",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Callback for the default nudge button."
+      },
+      {
+        "name": "titleEndSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Optional slot replacing the title info icon. Receives `modes` recursively."
+      },
+      {
+        "name": "progressSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "The card forwards no supportText or state to its default ring. Declared: Optional slot replacing the circular progress bar. Receives `modes` recursively.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "nudgeSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "The card forwards no title, showClose, onClose or buttonSlot to its default nudge. Declared: Optional slot replacing the bottom nudge. Receives `modes` recursively.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "evidence",
+        "description": "Reach the ring and the nudge; no mode changes the card's own surface or text. Declared: Design token modes forwarded to token lookups and child components.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional container style override."
+      },
+      {
+        "name": "mainContentStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional main content row style override."
+      },
+      {
+        "name": "titleStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional title text style override."
+      },
+      {
+        "name": "descriptionStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional description text style override."
+      },
+      {
+        "name": "progressStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional progress wrapper style override."
+      },
+      {
+        "name": "nudgeStyle",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional nudge style override."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "evidence",
+        "description": "Affects the title only, the card's one clamped text (Biscuit's unpublished 7020bf9 mdx says it also wraps the description and nudge text; the code does not). Declared: When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight.",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "...CardAdvisoryBaseProps",
+        "type": "CardAdvisoryBaseProps",
+        "description": "Inherited React Native props the component also accepts. They are not part of the design contract and no guide documents them.",
+        "source": "types"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "Colours the ring's arc and the nudge with its sparkle and button: Primary (the default) a gold arc and a cream nudge; Neutral a dark arc and button with a white nudge (Storybook); Secondary purple; Tertiary blue. The ring's track stays grey. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Primary",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "With Semantic Intent System: positive green, warning orange, negative red, on the ring (its track too) and the nudge. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "positive",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Border Boolean",
+        "type": "mode collection",
+        "values": [
+          "False",
+          "True"
+        ],
+        "description": "Changes the nudge's border. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "False",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Button / Size",
+        "type": "mode collection",
+        "values": [
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "Listed for CardAdvisory, but changes nothing visible. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "M",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Button / State",
+        "type": "mode collection",
+        "values": [
+          "Idle",
+          "Hover",
+          "Pressed",
+          "Disabled"
+        ],
+        "description": "Static restyles. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Idle",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "circularProgressBar Size",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M"
+        ],
+        "description": "M makes the ring 164 px. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "Sets the nudge button's size; the Nudge defaults to Nudge&Alert. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "Listed for CardAdvisory, but changes nothing visible. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "Changes only the nudge's Close icon, and the card's nudge has shown no Close since a116616. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "Pales the ring's arc and the nudge button. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "High",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Nudge padding",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "None"
+        ],
+        "description": "Changes the nudge's padding. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "Changes only the nudge's Close icon, and the card's nudge has shown no Close since a116616. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "MainPage",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "Listed for CardAdvisory, but changes nothing visible. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Default",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "System, with AppearanceSystem, colours the ring (its track too) and the nudge for a status. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "Brand",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "Listed for CardAdvisory, but changes nothing visible. Declared: A token collection CardAdvisory reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-13"
+      }
+    ],
+    "slots": [
+      {
+        "name": "titleEndSlot",
+        "type": "React.ReactNode",
+        "description": "Optional slot replacing the title info icon. Receives `modes` recursively.",
+        "source": "types"
+      },
+      {
+        "name": "progressSlot",
+        "type": "React.ReactNode",
+        "description": "Optional slot replacing the circular progress bar. Receives `modes` recursively.",
+        "source": "types"
+      },
+      {
+        "name": "nudgeSlot",
+        "type": "React.ReactNode",
+        "description": "Optional slot replacing the bottom nudge. Receives `modes` recursively.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPressNudgeButton",
+        "type": "() => void",
+        "description": "Callback for the default nudge button.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "No mode combination reproduces Figma's nudge on Card / Advisory: white, with a purple sparkle.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      },
+      {
+        "text": "The title sits on a 32 px line in code (26 in Figma), so the main row is about 70 px tall against Figma's 64.",
+        "source": "evidence",
+        "checkedOn": "2026-10-13"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=cardadvisory",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3780-5784",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-cardadvisory--docs"
+  }
+}

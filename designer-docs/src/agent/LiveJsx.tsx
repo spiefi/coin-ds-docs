@@ -1,4 +1,4 @@
-import { Component, createElement, Fragment, useMemo, type ErrorInfo, type ReactNode } from 'react'
+import { Component, createElement, Fragment, useMemo, useState, type ComponentType, type ErrorInfo, type ReactNode } from 'react'
 import * as Coin from 'jfs-components'
 import { parseJsx, type JsxNode, type Value } from './jsx'
 
@@ -20,18 +20,20 @@ function resolveName(path: string[]) {
 
 const noop = () => {}
 
-function toValue(value: Value): unknown {
+// press is what an onPress does: nothing, except inside a popup the site holds
+// open (HeldPopup), where it closes the popup.
+function toValue(value: Value, press: () => void = noop, name = ''): unknown {
   switch (value.kind) {
     case 'literal':
       return value.value
     case 'object':
-      return Object.fromEntries(value.entries.map(([key, item]) => [key, toValue(item)]))
+      return Object.fromEntries(value.entries.map(([key, item]) => [key, toValue(item, press)]))
     case 'array':
-      return value.items.map(toValue)
+      return value.items.map((item) => toValue(item, press))
     case 'function':
-      return noop
+      return name === 'onPress' ? press : noop
     case 'jsx':
-      return toElement(value.node, 0)
+      return toElement(value.node, 0, press)
     case 'name': {
       const resolved = resolveName(value.path)
       if (resolved === undefined) throw new Error(`${value.path.join('.')} is not a jfs-components export`)
@@ -40,30 +42,67 @@ function toValue(value: Value): unknown {
   }
 }
 
-function toElement(node: JsxNode, key: number): ReactNode {
+type ElementNode = Extract<JsxNode, { kind: 'element' }>
+
+function elementProps(node: ElementNode, key: number, press: () => void) {
+  const props: Record<string, unknown> = { key }
+  for (const [name, value] of node.props) {
+    // Functions can't run here. Event handlers become no-ops; other
+    // functions (format or render props) are left out, so the component
+    // uses its default instead of a function that returns nothing.
+    if (value.kind === 'function' && !/^on[A-Z]/.test(name)) continue
+    props[name] = toValue(value, press, name)
+  }
+  return props
+}
+
+function toElement(node: JsxNode, key: number, press: () => void = noop): ReactNode {
   switch (node.kind) {
     case 'text':
       return node.value
     case 'expression':
-      return node.value ? (toValue(node.value) as ReactNode) : null
+      return node.value ? (toValue(node.value, press) as ReactNode) : null
     case 'fragment':
-      return createElement(Fragment, { key }, ...node.children.map(toElement))
+      return createElement(Fragment, { key }, ...node.children.map((child, index) => toElement(child, index, press)))
     case 'element': {
       const type = resolveName(node.name.split('.'))
       if (!/^[A-Z]/.test(node.name) || (typeof type !== 'function' && typeof type !== 'object') || !type) {
         throw new Error(`<${node.name}> is not a jfs-components export`)
       }
-      const props: Record<string, unknown> = { key }
-      for (const [name, value] of node.props) {
-        // Functions can't run here. Event handlers become no-ops; other
-        // functions (format or render props) are left out, so the component
-        // uses its default instead of a function that returns nothing.
-        if (value.kind === 'function' && !/^on[A-Z]/.test(name)) continue
-        props[name] = toValue(value)
+      if (type === COIN.Popup && node.props.some(([name, value]) => name === 'open' && value.kind === 'literal')) {
+        return createElement(HeldPopup, { key, node })
       }
-      return createElement(type as Parameters<typeof createElement>[0], props, ...node.children.map(toElement))
+      return createElement(
+        type as Parameters<typeof createElement>[0],
+        elementProps(node, key, press),
+        ...node.children.map((child, index) => toElement(child, index, press)),
+      )
     }
   }
+}
+
+// A Popup example is controlled: its literal open stands for the screen's
+// state. Rendered as written, it would open over the whole page (React
+// Native's Modal) and never close, so the site holds that state instead: the
+// popup starts closed, opens from a button, and closes on the scrim, Escape
+// or a button in the sheet, as the example's screen would close it.
+function HeldPopup({ node }: { node: ElementNode }) {
+  const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
+  const props = elementProps(node, 0, close)
+  delete props.key
+  return (
+    <>
+      <button type="button" className="agent-example-open" onClick={() => setOpen(true)}>
+        Open the popup
+      </button>
+      {createElement(
+        COIN.Popup as ComponentType<Record<string, unknown>>,
+        { ...props, open, onOpenChange: (next: boolean) => setOpen(next) },
+        ...node.children.map((child, index) => toElement(child, index, close)),
+      )}
+    </>
+  )
 }
 
 /** Parses example JSX into React elements. Throws a readable error when it can't. */
