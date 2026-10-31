@@ -1,0 +1,29 @@
+{
+  "slug": "productmerchandisingcard",
+  "entryHash": "6b14bb2418f7dd2272c49f0e038ad9bebbb46f2b74fc8a81b961ba215bcbb716",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "checkedAt": "2026-10-31T03:07:36Z",
+  "reviewer": {
+    "tool": "claude -p (fresh session: no tools, no settings, empty folder)",
+    "model": "claude-opus-5-5"
+  },
+  "flags": [
+    {
+      "field": "/configuration/2",
+      "reason": "misreads-source: The guide says of badge icons \"the card doesn’t colour it\", and the evidence says badge icons get no modes, so a default Icon renders gold. The item instead claims the icon gets the lilac badge's modes and turns purple. That comes from a JSDoc line the evidence records as wrong (Component Bug #356)."
+    },
+    {
+      "field": "/configuration/11",
+      "reason": "misreads-source: The guide says \"badge, avatar, specialBadge, and cta replace those parts and don’t get the card’s modes\", and the evidence adds that badgeIcon and specialBadgeIcon get none either. The item says the reverse, and the evidence's Limits forbid implying \"that modes reach custom slots\"."
+    },
+    {
+      "field": "/accessibility/2",
+      "reason": "lost-context: The guide ties the title fallback to onPress: \"onPress makes the whole card one button ... announced by accessibilityLabel or the title.\" The evidence says a static card uses \"accessibilityLabel only\". The item states the fallback unconditionally."
+    },
+    {
+      "field": "/anatomy/6",
+      "reason": "misreads-source: The guide's Footer is \"A blurred copy of the photo behind the text; no dark shade.\" The cited evidence describes the later dbe0e02 build, which is \"not this guide's tickets\" and wasn't re-checked, and says only that the note \"may be out of date\". Stating a gradient as fact contradicts the guide and the Limits (\"Don't imply a dark scrim\")."
+    }
+  ],
+  "notes": "/examples/1 uses onPress without style={{ width }}. The evidence says the pressable root collapses to zero width on the web unless a width is given, and the guide's own code gives every card style={{ width: 328 }}. The JSDoc facts /facts/props/4 and /facts/props/18 contradict the evidence (#356) and may need correcting at the fact level."
+}

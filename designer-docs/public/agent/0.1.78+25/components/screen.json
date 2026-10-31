@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "Screen",
+  "slug": "screen",
+  "category": "layout",
+  "tags": [],
+  "status": {
+    "state": "undocumented",
+    "guideCommit": null,
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:15:31Z",
+    "flags": []
+  },
+  "summary": "Screen component that acts as the outer most container providing the background color. (Package docs; Coin has no designer guide for Screen.)",
+  "useWhen": [],
+  "avoidWhen": [],
+  "anatomy": [],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [],
+  "configuration": [],
+  "content": {
+    "rules": [],
+    "good": [],
+    "bad": []
+  },
+  "states": [],
+  "accessibility": [],
+  "doDont": [],
+  "examples": [
+    {
+      "purpose": "A screen's outermost container holding the page flow.",
+      "jsx": "<Screen modes={{ 'Color Mode': 'Light' }}>\n  <VStack modes={{ 'Color Mode': 'Light' }}>\n    <Title title=\"Personal loan\" modes={{ 'Color Mode': 'Light' }} />\n  </VStack>\n</Screen>",
+      "from": null
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "The content to display inside the screen."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes object to override default variable values."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Optional style overrides for the container."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection Screen reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection Screen reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "description": "The content to display inside the screen.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": []
+  },
+  "sources": {
+    "guide": null,
+    "figma": null,
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-screen--docs"
+  }
+}

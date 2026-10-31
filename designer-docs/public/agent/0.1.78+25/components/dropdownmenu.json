@@ -1,0 +1,684 @@
+{
+  "schemaVersion": 1,
+  "id": "DropdownMenu",
+  "slug": "dropdownmenu",
+  "category": "action",
+  "tags": [
+    "overflow menu",
+    "kebab menu",
+    "more menu",
+    "context menu",
+    "actions menu"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T03:15:31Z",
+    "flags": [
+      {
+        "field": "/facts/props/7",
+        "reason": "Checked on jfs-components 0.1.77 (2026-09-28); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/useWhen/0",
+        "reason": "Two guides offer an action menu. This guide's summary uses Dropdown Menu for “a short list of actions that opens from a button, such as an overflow or account menu”, while the Dropdown guide (889444e) uses Dropdown for “a short list of choices or actions that opens from a button or field”, and its In context is the same overflow menu on a September statement card (Download statement, Share statement, Report a problem); the Dropdown entry's useWhen says so too. Neither guide says which one an action menu uses, so this entry doesn't decide it: it gives no avoidWhen for Dropdown, and the Dropdown entry none for Dropdown Menu. The question is open in guide fixes #523 (the Dropdown guide) and #554 (this guide), for Marcin; once a guide answers it, re-extract both entries. Added by Claude Code in the overnight run agentpack-r25, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Dropdown Menu for a short list of actions that opens from a button, such as an overflow or account menu.",
+  "useWhen": [
+    {
+      "text": "A short list of actions that opens from a button, such as an overflow or account menu.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Dropdown Menu for a short list of actions that opens from a button, such as an overflow or account menu."
+      }
+    },
+    {
+      "text": "Actions, not answers.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Actions, not answers."
+      }
+    },
+    {
+      "text": "An overflow menu on a card, as in the guide's In context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "An overflow menu on a card"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Choosing a form value: use Dropdown Input.",
+      "strength": "discouraged",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "For choosing a form value, use Dropdown Input."
+      },
+      "useInstead": "DropdownInput"
+    },
+    {
+      "text": "Picking a form value, such as an account: account names in a menu have no label, value or error to go with them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Account names in a menu have no label, value, or error to go with them."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Panel",
+      "holds": "Rounded surface with a soft shadow; it holds the rows, each a DropdownMenu.Item (children).",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Rounded surface with a soft shadow."
+      }
+    },
+    {
+      "part": "Leading visual",
+      "holds": "Avatar or icon that identifies the row (leading); optional.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Avatar or icon that identifies the row."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "Names the action in a few words.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the action in a few words."
+      }
+    },
+    {
+      "part": "Chevron",
+      "holds": "Shows the row leads somewhere further; optional (showTrailing).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shows the row leads somewhere further."
+      }
+    },
+    {
+      "part": "Selected row",
+      "holds": "Lilac fill marks the current row (selected).",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Lilac fill marks the current row."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "In the guide's overflow menu, the screen opens the menu from the More button, places it under the button, and closes it after an action.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the menu from the More button, places it under the button, and closes it after an action."
+      }
+    },
+    {
+      "text": "Dropdown Menu only draws the panel.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Dropdown Menu only draws the panel."
+      }
+    },
+    {
+      "text": "Dropdown Menu draws the panel and rows; opening, placing and closing it, and which row is selected, belong to the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Dropdown Menu draws the panel and rows; opening, placing, and closing it, and which row is selected, belong to the screen."
+      }
+    },
+    {
+      "text": "The screen sets the menu’s width (the guide's menus are 256 px wide); rows fill it.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The screen sets the menu’s width; rows fill it"
+      }
+    },
+    {
+      "text": "Rows are 45 px tall.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Rows are 45 px tall"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Each row is a DropdownMenu.Item in the menu's children.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "DropdownMenu.Item"
+    },
+    {
+      "text": "Choose what each row shows: avatars suit people and accounts, icons suit actions, and plain labels suit short lists.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Avatars suit people and accounts, icons suit actions, and plain labels suit short lists."
+      },
+      "target": "DropdownMenu.Item"
+    },
+    {
+      "text": "Actions with icons: an Icon in each row's leading helps people spot an action quickly.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Icons help people spot an action quickly."
+      },
+      "target": "DropdownMenu.Item"
+    },
+    {
+      "text": "Labels only, with no leading visual: the lightest menu, for two or three actions.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The lightest menu, for two or three actions."
+      },
+      "target": "DropdownMenu.Item"
+    },
+    {
+      "text": "People and accounts: avatar rows, the Figma default, for switching between people or accounts.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The Figma default, for switching between people or accounts."
+      },
+      "target": "DropdownMenu.Item"
+    },
+    {
+      "text": "The default leading Avatar is a sample photo: replace it with a real avatar or an icon.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The default leading Avatar is a sample photo, so replace it with a real avatar or an icon."
+      },
+      "target": "DropdownMenu.Item"
+    },
+    {
+      "text": "Add a chevron only when a row opens another screen or menu.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a chevron only when a row opens another screen or menu."
+      },
+      "target": "DropdownMenu.Item.showTrailing"
+    },
+    {
+      "text": "A long menu scrolls inside the panel: set maxHeight.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A long menu scrolls inside the panel."
+      },
+      "target": "maxHeight"
+    },
+    {
+      "text": "Don't let a long menu grow without a max height: ten rows push the panel far down the screen.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "Ten rows push the panel far down the screen."
+      },
+      "target": "maxHeight"
+    },
+    {
+      "text": "The screen marks the current row as selected (selected on its DropdownMenu.Item).",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "The screen marks the current row as selected."
+      },
+      "target": "DropdownMenu.Item.selected"
+    },
+    {
+      "text": "Don't mark every row selected: when every row is lilac, the highlight means nothing.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "When every row is lilac, the highlight means nothing."
+      },
+      "target": "DropdownMenu.Item.selected"
+    },
+    {
+      "text": "Disable an action that is temporarily unavailable (disabled on its row) rather than removing it.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Disable an action that is temporarily unavailable rather than removing it."
+      },
+      "target": "DropdownMenu.Item"
+    },
+    {
+      "text": "Labels stay on one line, ending in an ellipsis when they run out of room.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "labels stay on one line, ending in an ellipsis when they run out of room."
+      },
+      "target": "DropdownMenu.Item"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write actions in sentence case, starting with a verb such as “Download” or a clear noun such as “Settings”.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write actions in sentence case, starting with a verb such as “Download” or a clear noun such as “Settings”."
+        },
+        "target": "DropdownMenu.Item"
+      },
+      {
+        "text": "Keep labels short and skip end punctuation.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep them short and skip end punctuation."
+        },
+        "target": "DropdownMenu.Item"
+      }
+    ],
+    "good": [
+      "Download statement",
+      "Share statement",
+      "Edit details",
+      "Report a problem",
+      "Profile",
+      "Settings",
+      "Help"
+    ],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Selected",
+      "when": "The current row, which the screen marks selected: a lilac fill.",
+      "from": {
+        "section": "states",
+        "quote": "A lilac fill marks the current row."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "An action that is temporarily unavailable (disabled): dimmed, skipped by keyboard focus, and not pressable.",
+      "from": {
+        "section": "states",
+        "quote": "Dimmed, skipped by keyboard focus, and not pressable."
+      }
+    },
+    {
+      "state": "Hover",
+      "when": "Hover uses the same lilac as selected.",
+      "from": {
+        "section": "states",
+        "quote": "Hover uses the same lilac as selected."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web the menu renders as a named menu with menu items; accessibilityLabel names it.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "They render as a named menu with menu items"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "On the web the selected row is shown only visually: it is not announced as selected.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the selected row is shown only visually"
+      },
+      "target": "DropdownMenu.Item.selected"
+    },
+    {
+      "text": "On the web arrow keys do not move between rows.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "arrow keys do not move between rows."
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Highlight only the current row",
+      "dont": "Mark every row selected",
+      "why": "When every row is lilac, the highlight means nothing.",
+      "from": {
+        "section": "doDont",
+        "quote": "One lilac row shows where people are."
+      }
+    },
+    {
+      "do": "Use it for actions",
+      "dont": "Use it to pick a form value",
+      "why": "Account names in a menu have no label, value, or error to go with them.",
+      "from": {
+        "section": "doDont",
+        "quote": "Each row does something."
+      }
+    },
+    {
+      "do": "Scroll a long menu",
+      "dont": "Let a long menu grow",
+      "why": "Ten rows push the panel far down the screen.",
+      "from": {
+        "section": "doDont",
+        "quote": "A max height keeps the panel within the screen."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The guide's In context, an overflow menu on a statement card, with the menu open under the card's More button. The rows are the guide's Actions with icons menu: each has an Icon and no chevron (showTrailing false), since each row acts in place. The More button's onPress stands for the screen opening the menu, and each row's onPress for running that action and closing the menu; Dropdown Menu only draws the panel.",
+      "jsx": "<Card>\n  <HStack alignVertical=\"center\" justifyHorizontal=\"space-between\">\n    <Text>September statement</Text>\n    <IconButton iconName=\"ic_more_vertical\" accessibilityLabel=\"More actions\" onPress={() => {}} />\n  </HStack>\n  <DropdownMenu accessibilityLabel=\"Statement actions\" style={{ width: 256 }}>\n    <DropdownMenu.Item label=\"Download statement\" leading={<Icon iconName=\"ic_download\" />} showTrailing={false} onPress={() => {}} />\n    <DropdownMenu.Item label=\"Share statement\" leading={<Icon iconName=\"ic_share\" />} showTrailing={false} onPress={() => {}} />\n    <DropdownMenu.Item label=\"Edit details\" leading={<Icon iconName=\"ic_edit\" />} showTrailing={false} onPress={() => {}} />\n    <DropdownMenu.Item label=\"Report a problem\" leading={<Icon iconName=\"ic_info\" />} showTrailing={false} onPress={() => {}} />\n  </DropdownMenu>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the menu from the More button, places it under the button, and closes it after an action."
+      }
+    },
+    {
+      "purpose": "Places, from the guide's Content: an account menu whose rows are clear nouns and open other screens, so each keeps its chevron (showTrailing is true by default) and shows no leading visual. Each onPress stands for the screen opening that place.",
+      "jsx": "<DropdownMenu accessibilityLabel=\"Account menu\" style={{ width: 256 }}>\n  <DropdownMenu.Item label=\"Profile\" showLeading={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Settings\" showLeading={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Help\" showLeading={false} onPress={() => {}} />\n</DropdownMenu>",
+      "from": {
+        "section": "content",
+        "quote": "Write actions in sentence case, starting with a verb such as “Download” or a clear noun such as “Settings”."
+      }
+    },
+    {
+      "purpose": "A scrolling menu, from the guide's Configuration: ten labels-only rows (“Action 1” to “Action 10” stand for real actions) with no chevrons, and maxHeight 180, so the menu scrolls inside the panel instead of growing.",
+      "jsx": "<DropdownMenu accessibilityLabel=\"Actions\" maxHeight={180} style={{ width: 256 }}>\n  <DropdownMenu.Item label=\"Action 1\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 2\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 3\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 4\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 5\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 6\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 7\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 8\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 9\" showLeading={false} showTrailing={false} onPress={() => {}} />\n  <DropdownMenu.Item label=\"Action 10\" showLeading={false} showTrailing={false} onPress={() => {}} />\n</DropdownMenu>",
+      "from": {
+        "section": "configuration",
+        "quote": "A long menu scrolls inside the panel."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Menu rows — typically {@link DropdownMenuItem} children. Maps to the Figma composition of `Menu Item` instances inside the surface."
+      },
+      {
+        "name": "maxHeight",
+        "type": "number",
+        "required": false,
+        "source": "types",
+        "description": "Max height before the menu body scrolls."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "DropdownMenu.Item",
+        "type": "component",
+        "description": "A static sub-component of DropdownMenu. Its own props: label, children, leading, trailing, showLeading, showTrailing, selected, disabled, onPress, modes, style, labelStyle, accessibilityLabel, accessibilityHint, disableTruncation.",
+        "source": "types"
+      },
+      {
+        "name": "DropdownMenu.Item.selected",
+        "source": "evidence",
+        "type": "boolean",
+        "description": "On DropdownMenu.Item: marks the current row. On the web it reaches only accessibilityState, which react-native-web 0.21 does not turn into aria-selected (the 8 October check read this from the installed source; not browser-checked).",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "DropdownMenu.Item.showTrailing",
+        "source": "evidence",
+        "type": "boolean",
+        "default": true,
+        "description": "On DropdownMenu.Item: shows the default trailing chevron (ic_chevron_right) when trailing is not given; true by default.",
+        "checkedOn": "2026-09-28"
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "L"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Menu State",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "hover",
+          "pressed"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection DropdownMenu reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Menu rows — typically {@link DropdownMenuItem} children. Maps to the Figma composition of `Menu Item` instances inside the surface.",
+        "source": "types"
+      }
+    ],
+    "events": [],
+    "gaps": [
+      {
+        "text": "On the web the selected row is shown only visually.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "text": "On the web arrow keys do not move between rows.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=dropdownmenu",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=9473-2192",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-dropdownmenu--docs"
+  }
+}
