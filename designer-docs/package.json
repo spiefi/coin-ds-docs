@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc --noEmit && node scripts/check-guides.mjs && vite build",
+    "build": "tsc --noEmit && node scripts/check-guides.mjs && vite build && node agent-pack/scripts/trim-site.mjs",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview --host 127.0.0.1",
+    "postinstall": "node agent-pack/scripts/packs.mjs",
     "check": "node scripts/check-guides.mjs",
     "test:browser": "node scripts/test-browser.mjs",
     "verify": "npm run build && npm run test:mcp && npm run test:browser",
@@ -15,11 +16,12 @@
     "coin:sync": "node scripts/coin-components.mjs sync",
     "coin:use": "node scripts/coin-components.mjs use",
     "build:agent-pack": "node agent-pack/scripts/build.mjs",
+    "agent-pack:packs": "node agent-pack/scripts/packs.mjs",
     "agent-pack:copy": "node agent-pack/scripts/copy.mjs",
     "agent-pack:cross-check": "node agent-pack/scripts/cross-check.mjs",
     "agent-pack:pilot": "node agent-pack/pilot/run.mjs",
-    "test:mcp": "node agent-pack/mcp/test.mjs",
-    "mcp:serve": "node agent-pack/mcp/test.mjs --serve"
+    "test:mcp": "node agent-pack/scripts/packs.mjs && node agent-pack/mcp/test.mjs",
+    "mcp:serve": "node agent-pack/scripts/packs.mjs && node agent-pack/mcp/test.mjs --serve"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.31.0",

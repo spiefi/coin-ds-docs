@@ -1,5 +1,5 @@
 // Tests the Coin docs MCP server with the official MCP client, over HTTP, against
-// the releases in public/agent/. Run from designer-docs/: npm run test:mcp
+// the releases in public/agent/, read from their packs. Run from designer-docs/: npm run test:mcp
 //   --serve [port]   keep a local server running instead (default port 8787), for
 //                    trying it from an agent: claude mcp add --transport http coin-docs http://127.0.0.1:8787/mcp
 import assert from 'node:assert/strict'
