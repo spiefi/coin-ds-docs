@@ -1,0 +1,551 @@
+{
+  "slug": "cardproviderinfo",
+  "guideCommit": "4a044e7567d826f9487e2a51a4f655630d5902a0",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r24, extraction worker",
+  "extractedOn": "2026-10-31",
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/cardproviderinfo.guide.tsx, self-contained) and docs/evidence/cardproviderinfo.md at 4a044e7 (the 19 October publish of #287, “Live” on #287). 4a044e7 is on origin/main, and both files read the same on main and docs-next. The guide's Sources note and the evidence were checked on 19 October 2026 on 0.1.78-c7d3348 (Biscuit's main at c7d3348, which fixes #287; first checked 17 October on a116616), so items citing them carry 2026-10-19 and 0.1.78-c7d3348 (same package version as installed, so the trace check does not flag them). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-c7d3348 and v0.1.78-dbe0e02 (3 commits, 195 files) changes no CardProviderInfo, ProductLabel, Avatar, StatItem, react-utils, typography, figma-variables-resolver, JFSThemeProvider, components/index.ts, Coin Variables-variables-full.json or figma-modes.generated.ts file; CardProviderInfo.tsx is the same blob (f57bbba) at both tags and in node_modules (a116616 had 1be4b33), ProductLabel.tsx too (71fe106; a116616 had 07c9152), Avatar.tsx (26f5b52) and StatItem.tsx (d649521) are unchanged since a116616, and the token file (4545aec) and the modes file (f6aa2f7) are the same blobs at both tags. So nothing the 19 October check read has changed. Every guide and evidence sentence quoted here was read against the installed source (read, not rendered; token values through the package's own getVariableByName in lib/commonjs): the root is a View, or with onPress a Pressable, with card/providerInfo padding 20, gap 20, radius 16, a 1 px border and grid gap 8 (CardProviderInfo.tsx lines 53–69); fill and border are rgb(254, 244, 229) for Primary (the default), rgb(246, 243, 255) for Secondary, and white with an rgb(245, 245, 245) border for Neutral and Tertiary; AppearanceBrand changes no ProductLabel, StatItem or Avatar token. The header is always a ProductLabel (82–87): its label is 16 px, weight 700, on a 21 px line, black; it draws the Avatar only when showAvatar ?? imageSource != null (ProductLabel.tsx 47), as an Image-style Avatar with the card's modes plus Avatar Size S unless modes set one (48–52, 67); avatar/size is 29 at S, 42 at L, 36 at M, 14 at XS, and avatar/radius 9999 makes it round. Context4 beats Avatar Size there (Chip 29, Button 22, Badge 14 even with S): not in the guide, not recorded. showAvatar with no image draws a 29 px circle in a hard-coded #f3f1ec, hidden from screen readers (69–78): only the evidence fact records it. Children are cloned with the card's modes, the child's own modes winning (72; react-utils.ts cloneChildrenWithModes), put in rows of two (75–78), each in a flex 1 cell (91–97), and the grid renders only with children (88); a lone last child's cell is alone in its row and spans it, and a Top StatItem left-aligns its text (StatItem.tsx 103–125), so it starts in the first column's place as the evidence says, but “each half the width” (Anatomy's Grid note and Sizing) holds only in a row of two, so the Grid part and the spacing rule leave the half-width words out (reported to the coordinator as a candidate guide clarification). StatItem's Top layout is a 12 px, 500 label on a 16 px line over a 26 px, 900 value whose 26 px line token safeTextLineHeight raises to 32 (typography.ts), so a fact is 16 + 2 + 32 = 50 px, and the card is 1 + 20 + 29 + 20 + 50 + 8 + 50 + 20 + 1 = 199 px with four facts and the 29 px logo (212 with L, 191 without imageSource). With onPress the card is a Pressable with role button, named accessibilityLabel ?? label, with accessibilityState disabled and one static style, so no pressed, hover or disabled look (104–117); without onPress it is a View carrying accessibilityLabel (119–123). Ticket #287 (Component Fix, Done, live 19 October), read on the board (read only): fixed, and the installed source confirms all three parts (no portrait without imageSource, showAvatar, a 29 px default), so it is not a gap. The published Storybook was re-read on 31 October (index.json last modified 31 October): the Default and Two Stats stories are there, and the docs entry is now an attached mdx, but its text is still the older generated page (“Available Collections and Modes”, nothing about Profile Card) and its bundled ProductLabel has no showAvatar (the build before #287, so the stock portrait still shows); the Sources sentence still holds and is the third gap. Gaps: fact rows 50 px against Figma's 44 (StatItem's 26 px value line raised to 32 by safeTextLineHeight, still so on dbe0e02; no ticket covers StatItem: #355's item 3, open, is the same raise in ProductOverview), and Figma's and Code Connect's ProductLabel child (from the evidence; the installed card still builds its own header and puts every child in the grid, lines 72–100; no ticket) are reported to the coordinator as candidate Component Bugs. Facts: the package's FIGMA_COMPONENT_MODES give Avatar Size its collection default L (42 px), which the card's header overrides, so an evidence fact sets S; AppearanceBrand's default Primary matches. Strength: the only quoted absolute word is the States “disabled only stops presses.”, used as a state (no strength); the disabled accessibility rule rests on the disabled fact. placementAdvice/0 quotes the evidence's record of the handwritten mdx (“on a product page”) rather than generalising the guide's one Buy Gold screen. The In context placement rule quotes only “the Buy button below is the screen’s own action.”, since that sentence's “The card only shows them” describes the In context card, which has no onPress. No rule is required: label is optional in the types, and its fact (default “Gold”) backs a recommended “Set label”, which the second cross-check asked for in place of required. avoidWhen rests on the evidence's record of Biscuit's handwritten CardProviderInfo.mdx (“not a person (ProfileCard) or bank account”); Profile Card has an entry, so that rule carries useInstead; the record names no component for a bank account, so that rule has none (Card Bank Account's entry, “one linked bank account”, agrees). useWhen/2 quotes the same record. Configuration's “The label and the facts stay the same colour.” follows the AppearanceBrand sentence, so the rule names AppearanceBrand (true for all four values). Examples: the guide's facts are StatItem children, and StatItem has no entry in this pack (pack.json), so per building.md neither example passes facts, and no other component stands in for one (that would rebuild StatItem); each card shows its header only and the purpose says so, as FullscreenModal's entry leaves its body out and ComparisonBar's its Avatars. The examples follow the building rules: no Color Mode (the guide sets Light on every card, the VStack, the Title and the Button), no Slot gap M on the In context VStack, no maxWidth 342 style (the guide's frame for the page), and no alignSelf stretch on the Buy Button (VStack stretches its children by default). The guide's logo is a docs asset (jio-gold-logo.png, Figma's own Jio Gold logo); the examples pass a { uri } that stands for the provider's logo, as the ProductOverview entry does. Copy is the guide's own: the Title's “Buy gold” and “24K, stored in an insured vault” and the Button's “Buy gold” (guide lines 105 and 107), and the Pressable card's accessibilityLabel “Gold, by Jio. Open provider details” (line 76), which the rendered copy doesn't show; the third cross-check noted both as unconfirmable from the copy alone. VStack, Button and Profile Card have entries; Title has an undocumented entry. Left out of examples (three at most): the anatomy and sizing specimens, the Secondary, Neutral and Avatar Size L cards (building rules keep modes at their defaults; their captions are kept as rules), Facts only (the In context card without the screen), Two facts and Three facts, the Do & Don'ts, the playground and its readouts. Not recorded: style (the guide's 342 px frame is hosting; the building rules forbid colour, border, radius and font overrides); Color Mode, Context2, Context4 and Page type (the evidence's Limits: not shown), Badge Size, context 10 and Profile Card Appearance (the evidence: they change nothing); the evidence's hex values, web render tree, Hosting note and CHANGELOG remark; the 128 × 128 logo export; Avatar's dropped accessibility label and image role (not in this guide; the Avatar entry says it); StatItem's labelPosition and styles (StatItem has no entry). Consistency with related entries: Avatar's entry (checked on 0.1.60) agrees: sizes L 42, M 36, S 29, XS 14, round, and with no Avatar Size an Avatar is L; here the card's header sets S, which this entry says, so both hold. Profile Card's entry (“Show who the user is on a dark panel”) agrees with avoidWhen/0. Product Overview's entry agrees on ProductLabel: a 29 px round Avatar only when its picture is set, and the label always renders. PortfolioHero (being extracted by another worker; its files not read or touched here): its installed source renders the same ProductLabel with label and imageSource only (PortfolioHero.tsx line 163, no showAvatar), so its entry should agree that the avatar shows only with an image, 29 px (Avatar Size S) unless modes set Avatar Size (L 42), beside a 16 px bold label. No other guidance file names Card Provider Info or StatItem; Product Overview's names ProductLabel and agrees. Neither this entry nor the guide, the evidence or the package source for these four components uses a shape word Coin doesn't have.",
+  "useWhen": [
+    {
+      "text": "Introduce who provides a product: their logo and a few short facts in two columns.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Card Provider Info to introduce who provides a product, with their logo and a few short facts in two columns."
+      }
+    },
+    {
+      "text": "Who provides it, and why to trust them.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Who provides it, and why to trust them."
+      }
+    },
+    {
+      "text": "A seller or vault on a product page: a provider header and two to six facts, as the card’s handwritten Storybook docs (upstream, not the published page) say in the evidence’s record.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "a provider header plus facts for a seller or vault on a product page, two to six facts"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A person: the card’s handwritten Storybook docs, as the evidence records them, use Profile Card.",
+      "strength": "discouraged",
+      "useInstead": "ProfileCard",
+      "from": {
+        "section": "evidence",
+        "quote": "not a person (ProfileCard) or bank account"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "A bank account: the card’s handwritten Storybook docs, as the evidence records them, say the card is not for one.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not a person (ProfileCard) or bank account"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "imageSource in a round 29 px Avatar, as in Figma; showAvatar={false} hides it.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource in a round 29 px Avatar, as in Figma; showAvatar={false} hides it."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label names the provider in 16 px bold.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "label names the provider in 16 px bold."
+      }
+    },
+    {
+      "part": "Fact",
+      "holds": "A StatItem child: a 12 px label over a 26 px value.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "A StatItem child: a 12 px label over a 26 px value."
+      }
+    },
+    {
+      "part": "Grid",
+      "holds": "Children sit two to a row, 8 px apart.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Children sit two to a row, 8 px apart, each half the width."
+      }
+    },
+    {
+      "part": "Card",
+      "holds": "16 px corners and 20 px padding; AppearanceBrand sets the fill.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "16 px corners and 20 px padding; AppearanceBrand sets the fill."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "On a product page, for its seller or vault, as the card’s handwritten Storybook docs say in the evidence’s record.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "a provider header plus facts for a seller or vault on a product page"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The screen supplies the provider’s logo, name and facts.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen supplies the provider’s logo, name, and facts."
+      }
+    },
+    {
+      "text": "A screen action such as Buy is the screen’s own, not the card’s: on the guide’s Buy Gold screen the Buy Button sits below the card.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "the Buy button below is the screen’s own action."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The facts go in children as StatItem components: a small label over a large value.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "anatomy",
+        "quote": "The facts are StatItem components: a small label over a large value."
+      }
+    },
+    {
+      "text": "The card puts the provider’s logo and name on top, then lays its children out two to a row.",
+      "strength": "recommended",
+      "target": "children",
+      "from": {
+        "section": "anatomy",
+        "quote": "A rounded card puts the provider’s logo and name on top, then lays its children out two to a row."
+      }
+    },
+    {
+      "text": "Don’t put a ProductLabel in children: the card builds its header from label and imageSource, and a child ProductLabel lands in the grid.",
+      "strength": "discouraged",
+      "target": "children",
+      "from": {
+        "section": "evidence",
+        "quote": "code builds the header from `label` and `imageSource` (a child ProductLabel would land in the grid)"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Pass the provider’s logo in imageSource: without it the header shows the name alone.",
+      "strength": "recommended",
+      "target": "imageSource",
+      "from": {
+        "section": "sources",
+        "quote": "The header comes from label and imageSource: without imageSource it shows the name alone"
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "AppearanceBrand sets the card’s fill: Primary cream by default, Secondary lilac, and Neutral or Tertiary white with a light border.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "AppearanceBrand sets the card’s fill: Primary cream by default, Secondary lilac, and Neutral or Tertiary white with a light border."
+      }
+    },
+    {
+      "text": "AppearanceBrand Primary, the default: a cream card, as in Figma.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Primary",
+      "from": {
+        "section": "configuration",
+        "quote": "The default: a cream card, as in Figma."
+      }
+    },
+    {
+      "text": "AppearanceBrand Secondary: a lilac card.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Secondary",
+      "from": {
+        "section": "configuration",
+        "quote": "A lilac card."
+      }
+    },
+    {
+      "text": "AppearanceBrand Neutral: white with a light border; Tertiary looks the same.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "value": "Neutral",
+      "from": {
+        "section": "configuration",
+        "quote": "White with a light border; Tertiary looks the same."
+      }
+    },
+    {
+      "text": "AppearanceBrand leaves the label and the facts their colour.",
+      "strength": "recommended",
+      "target": "AppearanceBrand",
+      "from": {
+        "section": "configuration",
+        "quote": "The label and the facts stay the same colour."
+      }
+    },
+    {
+      "text": "The logo is 29 px by default, Figma’s size; Avatar Size L makes it 42 px.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "from": {
+        "section": "configuration",
+        "quote": "The logo is Figma’s 29 px; Avatar Size L makes it 42 px, and showAvatar={false} hides it."
+      }
+    },
+    {
+      "text": "Avatar Size L: a larger 42 px logo.",
+      "strength": "recommended",
+      "target": "Avatar Size",
+      "value": "L",
+      "from": {
+        "section": "configuration",
+        "quote": "A larger 42 px logo."
+      }
+    },
+    {
+      "text": "showAvatar={false} hides the logo.",
+      "strength": "recommended",
+      "target": "showAvatar",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "The logo is Figma’s 29 px; Avatar Size L makes it 42 px, and showAvatar={false} hides it."
+      }
+    },
+    {
+      "text": "Figma’s Product Label can hide the avatar; in code showAvatar does the same.",
+      "strength": "recommended",
+      "target": "showAvatar",
+      "from": {
+        "section": "sources",
+        "quote": "its Product Label can hide the avatar, and in code showAvatar does the same."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Without onPress the card shows facts and does nothing when tapped.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "The card shows facts and does nothing when tapped."
+      }
+    },
+    {
+      "text": "With onPress the whole card is one button.",
+      "strength": "recommended",
+      "target": "onPress",
+      "from": {
+        "fact": "props:onPress"
+      }
+    },
+    {
+      "text": "Don’t put buttons among the facts of a pressable card.",
+      "strength": "discouraged",
+      "target": "onPress",
+      "from": {
+        "section": "states",
+        "quote": "Don’t put buttons among the facts of a pressable card."
+      }
+    },
+    {
+      "text": "The card fills its host’s width; Figma draws it at 342 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card fills its host’s width; Figma draws it at 342 px."
+      }
+    },
+    {
+      "text": "20 px padding, 20 px between the header and the facts, and 8 px between facts.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It has 20 px padding and 20 px between the header and the facts, and each fact takes half the width with 8 px between them."
+      }
+    },
+    {
+      "text": "Height follows the content: 199 px with four facts and the 29 px logo.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Height follows the content: 199 px with four facts and the 29 px logo."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Set label: left out, the card shows “Gold”.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "fact": "props:label"
+        }
+      },
+      {
+        "text": "Put the provider’s name in label.",
+        "strength": "recommended",
+        "target": "label",
+        "from": {
+          "section": "content",
+          "quote": "Put the provider’s name in label."
+        }
+      },
+      {
+        "text": "Give each fact a short noun phrase for its label and the figure for its value.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "Give each fact a short noun phrase for its label and the figure for its value"
+        }
+      },
+      {
+        "text": "Values are large and heavy, so keep them to a few characters.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "values are large and heavy, so keep them to a few characters."
+        }
+      },
+      {
+        "text": "Two to six facts, in pairs, read best.",
+        "strength": "recommended",
+        "target": "children",
+        "from": {
+          "section": "content",
+          "quote": "Two to six facts, in pairs, read best."
+        }
+      },
+      {
+        "text": "Don’t write sentences as values: “Over one million” wraps and crowds the row.",
+        "strength": "discouraged",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "“Over one million” wraps and crowds the row."
+        }
+      },
+      {
+        "text": "Don’t leave one fact alone: three facts leave a gap beside the last.",
+        "strength": "discouraged",
+        "target": "children",
+        "from": {
+          "section": "doDont",
+          "quote": "Three facts leave a gap beside the last."
+        }
+      }
+    ],
+    "good": [
+      "Gold",
+      "Purity verified by NABL",
+      "99.99%",
+      "Customers served",
+      "1M+"
+    ],
+    "bad": [
+      "Over one million",
+      "In the year 2017"
+    ]
+  },
+  "states": [
+    {
+      "state": "Facts only",
+      "when": "The default, without onPress: nothing to press.",
+      "from": {
+        "section": "states",
+        "quote": "The default: nothing to press."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress the whole card is one button and looks the same.",
+      "from": {
+        "section": "states",
+        "quote": "The whole card is one button and looks the same."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "A pressable card doesn’t change its look when pressed.",
+      "from": {
+        "section": "states",
+        "quote": "it doesn’t change its look when pressed"
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "With onPress and disabled set, presses stop and the card looks the same.",
+      "from": {
+        "section": "states",
+        "quote": "disabled only stops presses."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "A pressable card is one button, named by accessibilityLabel, or else by label.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "states",
+        "quote": "onPress makes the whole card one button, named by accessibilityLabel or label"
+      }
+    },
+    {
+      "text": "disabled stops a pressable card’s presses.",
+      "strength": "recommended",
+      "target": "disabled",
+      "from": {
+        "fact": "props:disabled"
+      }
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Keep values short",
+      "dont": "Write sentences as values",
+      "why": "“Over one million” wraps and crowds the row.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep values short"
+      }
+    },
+    {
+      "do": "Pass the provider’s logo",
+      "dont": "Leave out imageSource",
+      "why": "The name stands alone, with nothing to show who provides it.",
+      "from": {
+        "section": "doDont",
+        "quote": "Pass the provider’s logo"
+      }
+    },
+    {
+      "do": "Pair the facts",
+      "dont": "Leave one fact alone",
+      "why": "Three facts leave a gap beside the last.",
+      "from": {
+        "section": "doDont",
+        "quote": "Pair the facts"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The provider on the Buy Gold screen, the guide’s In context: a Title, the Card Provider Info with the provider’s name and logo, and the screen’s own Buy Button below it. The URI stands for the provider’s logo, and onPress for the screen starting the purchase. The guide’s card has four facts as StatItem children; StatItem has no entry in this pack, so they are left out and the card shows its header alone: report that the facts need StatItem.",
+      "jsx": "<VStack>\n  <Title title=\"Buy gold\" subtitle=\"24K, stored in an insured vault\" />\n  <CardProviderInfo\n    label=\"Gold\"\n    imageSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  />\n  <Button label=\"Buy gold\" onPress={() => {}} />\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen supplies the provider’s logo, name, and facts."
+      }
+    },
+    {
+      "purpose": "A pressable card, the guide’s Pressable: onPress makes the whole card one button that looks the same as the default, named by accessibilityLabel or else by label. The accessibilityLabel is the one the guide’s code gives its Pressable card (the rendered copy doesn’t show it). onPress stands for the screen’s response to the press, and the URI for the provider’s logo. The facts (StatItem children) are left out, as above.",
+      "jsx": "<CardProviderInfo\n  label=\"Gold\"\n  imageSource={{ uri: 'https://example.com/jio-gold-logo.png' }}\n  accessibilityLabel=\"Gold, by Jio. Open provider details\"\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "The whole card is one button and looks the same."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "modes",
+      "name": "Avatar Size",
+      "default": "S",
+      "description": "The card’s header (ProductLabel) sets Avatar Size S unless modes set one, so the logo is 29 px, Figma’s size; L is 42, M 36, XS 14.",
+      "quote": "S 29 px (default since #287: ProductLabel adds `Avatar Size: S` unless modes set one; Figma's size), L 42, M 36, XS 14",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "showAvatar",
+      "description": "showAvatar={true} with no imageSource shows a plain neutral 29 px circle, not a picture; left unset, no imageSource means no avatar.",
+      "quote": "`true` without an image shows a neutral 29 px circle",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "children",
+      "description": "Children get the card’s modes and sit two per row, each in an equal cell.",
+      "quote": "`children` (facts; cloned with the card's modes; two per row, each in a `flex: 1` cell)",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "list": "props",
+      "name": "onPress",
+      "description": "With onPress the card is a Pressable with role button, named accessibilityLabel, or else label; it has no pressed, hover or disabled look.",
+      "quote": "`onPress` makes the root a Pressable `role=\"button\"` named `accessibilityLabel ?? label`; no pressed, hover or disabled look",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Fact rows are 50 px in code and 44 in Figma.",
+      "from": {
+        "section": "sources",
+        "quote": "Fact rows are 50 px in code and 44 in Figma."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "Figma and Code Connect put the Product Label in as a child; in code the header comes from label and imageSource, and a child ProductLabel lands in the grid.",
+      "quote": "Figma and Code Connect put ProductLabel in as a child; code builds the header from `label` and `imageSource` (a child ProductLabel would land in the grid).",
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    },
+    {
+      "text": "The published Storybook still shows the older build, with a placeholder portrait, and the older generated page.",
+      "from": {
+        "section": "sources",
+        "quote": "The published Storybook still shows the older build, with a placeholder portrait, and the older generated page."
+      },
+      "checkedOn": "2026-10-19",
+      "checkedVersion": "0.1.78-c7d3348"
+    }
+  ]
+}

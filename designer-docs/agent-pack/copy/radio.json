@@ -1,0 +1,307 @@
+{
+  "slug": "radio",
+  "label": "Radio",
+  "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+  "files": [
+    "src/guides/radio.guide.tsx"
+  ],
+  "evidence": "docs/evidence/radio.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:06:45.682Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "radio button",
+    "single select",
+    "single choice",
+    "option"
+  ],
+  "title": "Radio",
+  "summary": "Use a Radio to pick exactly one option from a short list, such as the account to pay from or how often to invest.",
+  "corePrinciple": "One choice from a visible set. Put a label beside every Radio, and let the whole row select it.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=922-3645",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-radio--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A ring that fills when chosen",
+      "description": "Radio is an 18 px circle. Unselected it is a white ring; selected it fills purple and shows a white dot.",
+      "blocks": [
+        "Shown at 1.5×",
+        "Unselected",
+        "Selected",
+        "1",
+        "2",
+        "3",
+        "Ring",
+        "A 1 px deep-purple border outlines the circle.",
+        "Fill",
+        "The selected Radio fills purple.",
+        "Dot",
+        "A 10 px white dot confirms the choice."
+      ],
+      "specimen": [],
+      "anatomy": [
+        {
+          "part": "Ring",
+          "note": "A 1 px deep-purple border outlines the circle."
+        },
+        {
+          "part": "Fill",
+          "note": "The selected Radio fills purple."
+        },
+        {
+          "part": "Dot",
+          "note": "A 10 px white dot confirms the choice."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "Place it beside its label",
+      "description": "Radio has no label of its own. Use list rows when options need detail, and a plain label for short options.",
+      "blocks": [
+        "In list rows",
+        "For options with detail, such as accounts. The whole row selects its Radio.",
+        "Beside a short label",
+        "For short options. Only the circle responds to a press: 18 px in a browser, 44 px on phones."
+      ],
+      "specimen": [
+        "Savings •• 0245",
+        "₹1,24,500",
+        "Salary •• 1180",
+        "₹48,200",
+        "Joint •• 7731",
+        "₹9,870",
+        "Monthly",
+        "Quarterly",
+        "Yearly"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "In list rows",
+          "description": "For options with detail, such as accounts. The whole row selects its Radio."
+        },
+        {
+          "title": "Beside a short label",
+          "description": "For short options. Only the circle responds to a press: 18 px in a browser, 44 px on phones."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "Selected, unselected, and disabled",
+      "description": "The screen sets which Radio is selected and which are disabled. Hover adds a lilac glow; keyboard focus adds a yellow ring and an orange border.",
+      "blocks": [
+        "Unselected",
+        "An empty ring: not chosen.",
+        "Selected",
+        "Purple fill with a white dot.",
+        "Disabled",
+        "Grey and not pressable, for an option that is unavailable now.",
+        "Disabled and selected",
+        "Pale purple: chosen, but locked."
+      ],
+      "specimen": [
+        "Quarterly",
+        "Monthly",
+        "Yearly"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Unselected",
+          "description": "An empty ring: not chosen."
+        },
+        {
+          "title": "Selected",
+          "description": "Purple fill with a white dot."
+        },
+        {
+          "title": "Disabled",
+          "description": "Grey and not pressable, for an option that is unavailable now."
+        },
+        {
+          "title": "Disabled and selected",
+          "description": "Pale purple: chosen, but locked."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "An 18 px circle inside a larger row",
+      "description": "The Radio is always 18 × 18 px. On its own only the circle is pressable (44 px on phones, 18 px in a browser), so put it in a list row whose whole height and width select it.",
+      "blocks": [
+        "Radio",
+        "List row",
+        "18 × 18",
+        "264 × 34"
+      ],
+      "specimen": [
+        "Savings •• 0245",
+        "₹1,24,500"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "Short, parallel options",
+      "description": "Write options in sentence case with the same grammar, so they read as one set. Lead with the word that tells them apart, and keep two to five options visible.",
+      "blocks": [
+        "Frequencies",
+        "Accounts"
+      ],
+      "specimen": [
+        "Monthly",
+        "Quarterly",
+        "Yearly",
+        "Savings •• 0245",
+        "₹1,24,500",
+        "Salary •• 1180",
+        "₹48,200",
+        "Joint •• 7731",
+        "₹9,870"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Frequencies",
+          "description": ""
+        },
+        {
+          "title": "Accounts",
+          "description": ""
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "Choosing the account to pay from",
+      "description": "The screen keeps the chosen account, passes selected to each Radio, and enables Continue once one is chosen. Pressing a row or its Radio selects it.",
+      "blocks": [
+        "Choose an account"
+      ],
+      "specimen": [
+        "Savings •• 0245",
+        "₹1,24,500",
+        "Salary •• 1180",
+        "₹48,200",
+        "Joint •• 7731",
+        "₹9,870",
+        "Continue"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One choice, clearly labelled",
+      "description": "Each pair shows a set people can answer quickly versus one that confuses them.",
+      "blocks": [
+        "Do",
+        "Keep exactly one selected",
+        "One filled Radio shows the single answer.",
+        "Don’t",
+        "Select two at once",
+        "Radio has no group, so the screen must stop a second selection.",
+        "Label every Radio",
+        "Each option says what it is.",
+        "Leave Radios bare",
+        "Without labels people can’t tell the options apart.",
+        "Use a Checkbox for yes or no",
+        "A Checkbox can be ticked and cleared.",
+        "Use a lone Radio",
+        "Once chosen, a single Radio can’t be cleared."
+      ],
+      "specimen": [
+        "Monthly",
+        "Quarterly",
+        "Yearly",
+        "Save this account"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "Keep exactly one selected",
+            "caption": "One filled Radio shows the single answer.",
+            "specimen": "Monthly · Quarterly · Yearly"
+          },
+          "dont": {
+            "title": "Select two at once",
+            "caption": "Radio has no group, so the screen must stop a second selection.",
+            "specimen": "Monthly · Quarterly · Yearly"
+          }
+        },
+        {
+          "do": {
+            "title": "Label every Radio",
+            "caption": "Each option says what it is.",
+            "specimen": "Monthly · Quarterly · Yearly"
+          },
+          "dont": {
+            "title": "Leave Radios bare",
+            "caption": "Without labels people can’t tell the options apart.",
+            "specimen": ""
+          }
+        },
+        {
+          "do": {
+            "title": "Use a Checkbox for yes or no",
+            "caption": "A Checkbox can be ticked and cleared.",
+            "specimen": "Save this account"
+          },
+          "dont": {
+            "title": "Use a lone Radio",
+            "caption": "Once chosen, a single Radio can’t be cleared.",
+            "specimen": "Save this account"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Radio contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "All states",
+        "Checked 1 October 2026",
+        "Declared and installed jfs-components is 0.1.78 from the team’s private package repository. Figma has eight variants (Idle, Hover, Active, Focus, and Disabled, unselected and selected); the package sets selected and disabled, and draws hover and focus itself. RadioButton is a deprecated name for the same component. Radio has no label or group: the screen keeps one selected value. On the web a Radio is announced as a radio button with its selected state, Space selects it, and the focused unselected border is Figma’s orange. Developers name each Radio with accessibilityLabel.",
+        "jfs-components",
+        "0.1.78",
+        "selected",
+        "disabled",
+        "RadioButton",
+        "accessibilityLabel"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}

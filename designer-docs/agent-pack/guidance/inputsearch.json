@@ -1,0 +1,494 @@
+{
+  "slug": "inputsearch",
+  "guideCommit": "3f56271d020ae907611cc00ae615648a7d0d1028",
+  "extractedBy": "Claude Code (claude-opus-5-5), overnight run agentpack-r24, extraction worker",
+  "extractedOn": "2026-10-31",
+  "useWhen": [
+    {
+      "text": "Search a list, with a clear button that appears as people type and an optional hint below.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use an Input Search to search a list, with a clear button that appears as people type and an optional hint below."
+      }
+    },
+    {
+      "text": "Say what people can find, and let them start over.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Say what people can find, and let them start over."
+      }
+    },
+    {
+      "text": "Find one item in a list on the screen, such as a payee, as in the guide's In context.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Find a payee"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Collecting a value, such as an account number: use a Form Field, whose label stays while people type.",
+      "strength": "discouraged",
+      "useInstead": "FormField",
+      "from": {
+        "section": "doDont",
+        "quote": "Use a Form Field for a labelled value"
+      }
+    },
+    {
+      "text": "The field needs a disabled or an error state: Input Search has neither.",
+      "strength": "discouraged",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled or error state."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Search icon",
+      "holds": "Marks the field as search; always shown.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Marks the field as search; always shown."
+      }
+    },
+    {
+      "part": "Query",
+      "holds": "The placeholder, then what people type; one line.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "The placeholder, then what people type; one line."
+      }
+    },
+    {
+      "part": "Clear",
+      "holds": "Appears with text and empties the field.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Appears with text and empties the field."
+      }
+    },
+    {
+      "part": "Field",
+      "holds": "Grey rounded surface; a grey border shows focus.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Grey rounded surface; a grey border shows focus."
+      }
+    },
+    {
+      "part": "Hint",
+      "holds": "Optional support text about what people can search for.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Optional support text about what people can search for."
+      }
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Input Search fills its container's width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Input Search fills its container’s width."
+      }
+    },
+    {
+      "text": "The screen sets the width.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The screen sets the width."
+      }
+    },
+    {
+      "text": "The field is 42 px tall with 14 px of padding at each end and 18 px icons, and the hint sits 8 px below.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field is 42 px tall with 14 px of padding at each end and 18 px icons, and the hint sits 8 px below."
+      }
+    },
+    {
+      "text": "In a narrow column the field narrows with it, and the hint wraps.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The field narrows with its column, and the hint wraps."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "The hint is off by default.",
+      "strength": "recommended",
+      "target": "supportText",
+      "from": {
+        "section": "configuration",
+        "quote": "The hint is off by default."
+      }
+    },
+    {
+      "text": "Turn the hint on (supportText) only with a short hint you write (supportTextLabel): on its own it reads “Support Text”.",
+      "strength": "recommended",
+      "target": "supportText",
+      "from": {
+        "section": "configuration",
+        "quote": "Turn it on only with a short hint you write; on its own it reads “Support Text”."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "it applies to every Input Search: whenever the hint is on, its text must be one you wrote, because the hint's own text is the placeholder words “Support Text” (the supportTextLabel fact)."
+      }
+    },
+    {
+      "text": "With supportText on, set supportTextLabel: left out, the hint reads “Support Text”.",
+      "strength": "recommended",
+      "target": "supportTextLabel",
+      "from": {
+        "fact": "props:supportTextLabel"
+      }
+    },
+    {
+      "text": "Add a hint when the prompt is not enough: set supportText with a supportTextLabel that says what kinds of search work.",
+      "strength": "recommended",
+      "target": "supportText",
+      "value": "true",
+      "from": {
+        "section": "configuration",
+        "quote": "Add a hint when the prompt is not enough"
+      }
+    },
+    {
+      "text": "Leave the hint off when the prompt says enough.",
+      "strength": "recommended",
+      "target": "supportText",
+      "value": "false",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave it off when the prompt says enough."
+      }
+    },
+    {
+      "text": "Give the field value and onChangeText: typing and clearing need both.",
+      "strength": "recommended",
+      "target": "value",
+      "from": {
+        "section": "evidence",
+        "quote": "The field needs `value` and `onChangeText` for typing and clearing to work."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "Input Search only reports the text (onChangeText): the screen filters the list as people type and restores it when they clear the field.",
+      "strength": "recommended",
+      "target": "onChangeText",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen filters the list as people type and restores it when they clear the field; Input Search only reports the text."
+      },
+      "absolute": {
+        "word": "only",
+        "scope": "everywhere",
+        "reason": "“only” describes the component in every use: it keeps no list and filters nothing, it reports the text; the screen does the filtering. It states behaviour rather than an instruction, so it stays recommended."
+      }
+    },
+    {
+      "text": "The clear button shows while value is not empty and trailing is not passed, so passing trailing hides it; it calls onChangeText('').",
+      "strength": "recommended",
+      "target": "trailing",
+      "from": {
+        "section": "evidence",
+        "quote": "The clear button shows while `value` is not empty and `trailing` is not passed; it calls `onChangeText('')`."
+      },
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "text": "Set placeholder to your own prompt: left out, it reads “Search”.",
+      "strength": "recommended",
+      "target": "placeholder",
+      "from": {
+        "fact": "props:placeholder"
+      }
+    },
+    {
+      "text": "There is no disabled or error state.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "It has no disabled or error state."
+      }
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Write a short prompt that names what people search, such as “Search payees”, in sentence case with no full stop.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "content",
+          "quote": "Write a short prompt that names what people search, such as “Search payees”, in sentence case with no full stop."
+        }
+      },
+      {
+        "text": "Use the hint for an example of what works.",
+        "strength": "recommended",
+        "target": "supportTextLabel",
+        "from": {
+          "section": "content",
+          "quote": "Use the hint for an example of what works."
+        }
+      },
+      {
+        "text": "Keep one fixed prompt.",
+        "strength": "recommended",
+        "target": "placeholder",
+        "from": {
+          "section": "doDont",
+          "quote": "Keep one fixed prompt"
+        }
+      },
+      {
+        "text": "Don't rotate the prompt (a placeholder array): changing text distracts, and screen readers hear only the first prompt when the field has no accessibility label.",
+        "strength": "discouraged",
+        "target": "placeholder",
+        "from": {
+          "section": "doDont",
+          "quote": "Changing text distracts, and screen readers hear only the first prompt."
+        },
+        "absolute": {
+          "word": "only",
+          "scope": "contextual",
+          "reason": "“only” describes the guide's Rotate the prompt Don't, a rotating placeholder with no accessibility label: there the field is named by its first prompt, as the Sources note says. With an accessibility label, the label names the field."
+        }
+      },
+      {
+        "text": "Don't leave the default hint: the placeholder words “Support Text” reach people.",
+        "strength": "discouraged",
+        "target": "supportTextLabel",
+        "from": {
+          "section": "doDont",
+          "quote": "The placeholder words “Support Text” reach people."
+        }
+      }
+    ],
+    "good": [
+      "Search payees",
+      "Search funds",
+      "Search help articles",
+      "Search investments",
+      "Try a name or mobile number",
+      "Try a fund name or fund house"
+    ],
+    "bad": [
+      "Support Text"
+    ]
+  },
+  "states": [
+    {
+      "state": "Empty",
+      "when": "No text yet: the field shows its prompt.",
+      "from": {
+        "section": "states",
+        "quote": "Empty, the field shows its prompt."
+      }
+    },
+    {
+      "state": "Focused",
+      "when": "While focused: a grey border appears and the prompt clears.",
+      "from": {
+        "section": "states",
+        "quote": "Focused, a grey border appears and the prompt clears."
+      }
+    },
+    {
+      "state": "Filled",
+      "when": "With text: a clear button appears at the end.",
+      "from": {
+        "section": "states",
+        "quote": "Filled, a clear button appears at the end."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The field has no visible label: give it an accessibilityLabel with the same words as the prompt.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "content",
+        "quote": "The field has no visible label, so give it an accessibility label with the same words."
+      }
+    },
+    {
+      "text": "On the web the clear button is a button named “Clear search”.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web the clear button is a button named “Clear search”"
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "On the web the field has one tab stop, the input: Tab goes from the input to Clear (when there is text) and on to the next field.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Tab goes input → Clear → next field, so the wrapper is no longer a tab stop."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "On the web, without an accessibilityLabel the placeholder names the field, also while focused; a rotating placeholder is named by its first prompt.",
+      "strength": "recommended",
+      "target": "accessibilityLabel",
+      "from": {
+        "section": "sources",
+        "quote": "without an accessibility label the placeholder names the field, also while focused; a rotating placeholder is named by its first prompt."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Write your own hint",
+      "dont": "Leave the default hint",
+      "why": "The placeholder words “Support Text” reach people.",
+      "from": {
+        "section": "doDont",
+        "quote": "The hint gives an example that works."
+      }
+    },
+    {
+      "do": "Keep one fixed prompt",
+      "dont": "Rotate the prompt",
+      "why": "Changing text distracts, and screen readers hear only the first prompt.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep one fixed prompt"
+      }
+    },
+    {
+      "do": "Use a Form Field for a labelled value",
+      "dont": "Collect a value with a search field",
+      "why": "The prompt disappears as people type, and there is no label or error.",
+      "from": {
+        "section": "doDont",
+        "quote": "The label stays while people type."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Find a payee, the guide's In context: a Card holding a VStack with Input Search over the payee rows (List Items with the payee's name and mobile number). value=\"\" stands for the screen's query, still empty, so every payee shows; onChangeText stands for the screen storing the query and filtering the rows as people type, and clearing the field gives all of them back.",
+      "jsx": "<Card>\n  <VStack>\n    <InputSearch\n      value=\"\"\n      onChangeText={() => {}}\n      placeholder=\"Search payees\"\n      accessibilityLabel=\"Search payees\"\n      supportText\n      supportTextLabel=\"Try a name or mobile number\"\n    />\n    <ListItem layout=\"Horizontal\" navArrow={false} title=\"Asha Rao\" supportText=\"98765 43210\" />\n    <ListItem layout=\"Horizontal\" navArrow={false} title=\"Ravi Kumar\" supportText=\"91234 56780\" />\n    <ListItem layout=\"Horizontal\" navArrow={false} title=\"Meera Shah\" supportText=\"99887 76655\" />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen filters the list as people type and restores it when they clear the field; Input Search only reports the text."
+      }
+    },
+    {
+      "purpose": "A fund search with a hint, from the guide's Prompts and hints: the prompt names what people search, the hint gives an example of what works, and the accessibility label repeats the prompt. value and onChangeText stand for the screen's query state.",
+      "jsx": "<InputSearch\n  value=\"\"\n  onChangeText={() => {}}\n  placeholder=\"Search funds\"\n  accessibilityLabel=\"Search funds\"\n  supportText\n  supportTextLabel=\"Try a fund name or fund house\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "Use the hint for an example of what works."
+      }
+    },
+    {
+      "purpose": "A search with no hint, the guide's Without a hint: the prompt says enough, and the hint is off by default, so supportText is left out. value and onChangeText stand for the screen's query state.",
+      "jsx": "<InputSearch\n  value=\"\"\n  onChangeText={() => {}}\n  placeholder=\"Search help articles\"\n  accessibilityLabel=\"Search help articles\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Leave it off when the prompt says enough."
+      }
+    }
+  ],
+  "evidenceFacts": [
+    {
+      "list": "props",
+      "name": "supportText",
+      "description": "Off by default; turned on with no supportTextLabel, the hint reads “Support Text”.",
+      "quote": "`supportText` now defaults to `false` (with `supportText` on and no label it still reads “Support Text”).",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "value",
+      "description": "Typing and clearing need value and onChangeText both.",
+      "quote": "The field needs `value` and `onChangeText` for typing and clearing to work.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "trailing",
+      "description": "The clear button shows while value is not empty and trailing is not passed; it calls onChangeText('').",
+      "quote": "The clear button shows while `value` is not empty and `trailing` is not passed; it calls `onChangeText('')`.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    },
+    {
+      "list": "props",
+      "name": "placeholder",
+      "description": "The visible placeholder clears on focus.",
+      "quote": "The visible placeholder still clears on focus.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "list": "props",
+      "name": "accessibilityLabel",
+      "description": "Without accessibilityLabel the placeholder names the input and keeps naming it while focused; a rotating placeholder names it after its first item.",
+      "quote": "without `accessibilityLabel` the placeholder names the input and keeps naming it while focused; a rotating placeholder names it after its first item.",
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    }
+  ],
+  "gaps": [
+    {
+      "text": "Input Search has no label, error or disabled design.",
+      "from": {
+        "section": "sources",
+        "quote": "It has no label, error, or disabled design."
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "The field is 42 px tall; Figma's is 44 px.",
+      "from": {
+        "section": "sources",
+        "quote": "The field is 42 px tall (44 px in Figma)"
+      },
+      "checkedOn": "2026-10-08",
+      "checkedVersion": "0.1.78-636f3f5"
+    },
+    {
+      "text": "There is no disabled, error or label prop; editable={false} blocks typing with no visual change.",
+      "quote": "There is no disabled, error, or label prop; `editable={false}` blocks typing with no visual change.",
+      "checkedOn": "2026-10-02",
+      "checkedVersion": "0.1.78-3795b4c"
+    }
+  ],
+  "notes": "Extracted 31 October 2026 from the guide (src/guides/inputsearch.guide.tsx, self-contained) and docs/evidence/inputsearch.md at 3f56271, the #543 wording fix, which is on docs-next only (not an ancestor of origin/main). Between origin/main and origin/docs-next the guide is the same and the evidence differs in one line, the 2 October Figma line, where #543 replaced a shape word Coin doesn't use with “field”, which this entry does not quote; every sentence quoted here reads the same at both. The evidence was first checked on 2 October 2026 on 0.1.78-3795b4c and re-checked on 8 October on 0.1.78-636f3f5 (Biscuit's main at 636f3f5, pushed 5 October, which fixes #189 and #183); the guide's Sources note was checked on 8 October on that 5 October build. Items citing the Sources note or the 8 October check carry 2026-10-08 and 0.1.78-636f3f5; the three items resting on the 2 October package lines (value and onChangeText, the clear button and trailing, editable) carry 2026-10-02 and 0.1.78-3795b4c. All are the installed package version, so the trace check does not flag them; only 2 October sentences that the 8 October check left standing are quoted (the 2 October focus colour, unnamed clear button, extra tab stop, support text default and accessible-name lines are superseded and left out). Installed build: jfs-components 0.1.78, mirror v0.1.78-dbe0e02 (Biscuit's main at dbe0e02, 27 October). GitHub's compare of v0.1.78-636f3f5 and v0.1.78-dbe0e02 (7 commits) is cut off at 300 files, so blobs were compared: InputSearch.tsx (2ad0691) and TextInput.tsx (2004ac9) are the same blobs at 636f3f5, c7d3348 and dbe0e02 and in node_modules; figma-variables-resolver.ts (d03e77c), react-utils.ts (bd10632) and typography.ts (cbabe67) are unchanged since 3795b4c; the history of src/design-tokens on dbe0e02 ends at 692e681 (the 636f3f5 mirror commit, 8 October), so token values are as the 8 October check read them; Icon.tsx changed once (8e2a35e, 17 October: the loading Skeleton's visible prop only). Since 3795b4c, 692e681 changed InputSearch.tsx (supportText default true to false; Clear became a Pressable with role button named “Clear search”, aria-label on the web), TextInput.tsx (focus border from the InputState Active token instead of #222; the web wrapper focusable false and tabIndex -1; the input named by accessibilityLabel, else a rotating placeholder's first item, else the static placeholder) and the Coin Variables file: exactly the #189 and #183 fixes the 8 October check verified. So nothing the 8 October check read has changed. Every guide and evidence sentence quoted here was read against the installed source (read, not rendered; token values through the package's own getVariableByName in lib/commonjs, Light): InputSearch sets InputState from focus over the caller's modes (InputSearch.tsx 105–111); idle, the field is rgb(245, 245, 245) fill and border; focused, a transparent fill with a 1 px rgb(181, 181, 181) border (TextInput.tsx 265–324); radius 99999 (fully rounded), 14 px horizontal padding, and minHeight 12 × 2 + max(18, 18) = 42 px (290–314); 18 px icons (textInput/icon/size; the clear icon is a fixed 18, InputSearch 144–148); 14/18 text; the placeholder is cleared while focused, and a rotating placeholder's reel hides while focused or filled (410, 427); the hint row sits formField/gap 8 below (InputSearch 113, 167–170): a 16 px ic_info icon, 12/16 weight 500, rgb(0, 0, 0), 4 px gap (24–58); supportText defaults to false, supportTextLabel to “Support Text”, placeholder to “Search” (89–95); the clear button renders only while value is non-empty and trailing is undefined, and calls onChangeText('') (122–154); value is passed on as value || '', so the field is always controlled, which is why typing needs value and onChangeText (174–175); on the web the wrapper is not a tab stop (TextInput 491–503) and the input's name is accessibilityLabel, else the first rotating prompt, else the static placeholder (414–417, 474–477). No sentence quoted here is contradicted. Tickets, read on the board (read only): #189 (Component Fix, Done, live 8 October) and #183 (Component Fix, Done, live 8 October) are fixed and the installed source confirms both, so neither is a gap. #183's 8 October comment kept the 42 px against Figma's 44 px as “still open, lower priority” inside the now closed ticket; the Sources note states the difference, so /gaps/1 records it with no ticket number. #177 (Dark token) is not a gap here; on dbe0e02 Dark text resolves to rgb(241, 241, 241) and the hint stays rgb(0, 0, 0) (dark mode, not recorded). Storybook: the published index (31 October) has the five stories the Sources note lists plus Disabled (editable false); its docs page (attached MDX) is the older generated one (Props, Available Collections and Modes, Variants, Design Tokens), so the evidence's 2 October record of the MDX (Form Field for a labelled field, Text Input for a bare row, FilterBar for list-filter chrome) is no longer on the published page and is not quoted. avoidWhen rests on the guide's own Do & Don't (Form Field, which has an entry) and its States sentence; Text Input and FilterBar are not named as alternatives (no guide sentence names them; FilterBar has no entry). Strength: three quotes hold an absolute word. /configuration/1 “Turn it on only with a short hint you write” (everywhere: whenever the hint is on it must carry text you wrote, since its own text is “Support Text”); /configuration/6 “Input Search only reports the text” (everywhere: behaviour, so recommended); /content/rules/3 “screen readers hear only the first prompt” (contextual: the guide's Don't sets no accessibility label; with one, the label names the field). Nothing is required: cross-check round 1 flagged /configuration/2 (the supportTextLabel fact) as stronger than its source while it was required, so it is recommended. Anatomy required: the Search icon, the Query and the Field are always drawn; Clear only with text (and no trailing); the Hint only with supportText. “always shown” holds for Input Search as the guide shows it: the leading prop, which the evidence lists but the guide does not show, would put other content in the icon's place (TextInput.tsx 371–373); leading is not recorded. Examples follow the building rules: no Color Mode (the guide sets Light on every Input Search, Card, VStack, List Item and Text) and no other modes; the guide's Search and Field helpers are written out: value and onChangeText (standing for the screen's query state), accessibilityLabel equal to the prompt, and supportText with supportTextLabel where the guide shows a hint; the Without a hint example leaves supportText out (it is off by default) rather than repeating supportText={false}. The In context example has the three payee rows and an empty query; the guide's empty-result Text (“No payees match”, drawn only when nothing matches, so not in the rendered copy) was taken out of its purpose after cross-check round 1. Card and VStack have entries (Card used plainly with children, as the guide does); ListItem has an undocumented entry. Left out of examples (three at most): the anatomy specimen, the sizing measure and narrow column, the States cards, the Do & Don't previews and the playground. Not recorded: containerStyle and inputStyle (the building rules forbid style overrides); leading and supportTextIcon (no guide sentence; the guide's writing brief keeps them out); onFocus, onBlur, accessibilityHint, testID and the inherited React Native TextInput props (editable appears only in /gaps/2); the modes FormField States (changes no token Input Search reads), Status (it colours only the hint, for example Error rgb(245, 0, 48); the guide shows none), InputState (set from focus) and Color Mode (building rules); Figma's 251 × 68 set, its layer names and hex values; and the slot wrappers' native accessibility props (TextInput 480–487 wraps the trailing slot, which holds Clear, in a View with accessibilityElementsHidden and importantForAccessibility no; react-native-web 0.21.2 ignores both, so on the web Clear is named as the guide says; native screen readers were not checked, so nothing is said about them). Content: good is the guide's prompts and hints; bad is the default hint “Support Text”. “Account number” (the Don't's search prompt) was taken out of bad after cross-check round 1 noted it is also the Form Field label in the Do. Cross-check: round 1 raised 2 flags, both fixed in the entry; round 2 raised none. Consistency with related entries: TextInput's entry (checked on 636f3f5) agrees: no visible label, error or disabled state; it fills its container's width; a grey border shows focus and the placeholder clears; without accessibilityLabel the placeholder names the field and keeps the name while focused, and a rotating placeholder is named after its first prompt; don't rotate the prompt; the screen acts on the text through onChangeText. One difference, reported to the coordinator: TextInput's /gaps/2 calls the 42 against 44 px height “open, lower priority, in #183”, while #183 is Done. FormField's avoidWhen sends unlabelled chrome to TextInput or InputSearch (its evidence's record of the MDX), which agrees with this entry's Form Field for a labelled value. HelloJioInput's avoidWhen/1 sends search to InputSearch (useInstead), which agrees with this entry's useWhen; its notes call InputSearch “a package export with no entry in this pack”, out of date once this entry ships (reported). SuggestiveSearch's entry does not name InputSearch, and this guide does not name SuggestiveSearch, so neither points at the other. Card's entry (a panel for one product, offer or article) does not cover a search panel, but the guide's own In context puts Input Search and its rows in a plain Card, which this entry repeats. Nothing hand-written here, in the guide at 3f56271 or in the installed InputSearch and TextInput source uses that shape word."
+}

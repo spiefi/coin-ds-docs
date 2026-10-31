@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "id": "AutoplayControl",
+  "slug": "autoplaycontrol",
+  "category": "action",
+  "tags": [
+    "play",
+    "pause",
+    "carousel",
+    "slideshow"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "4e470cf461b08fc63a297eb73f1f41c19865eb74",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T02:32:56Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The States description says “Pressed feedback is shown only while a pointer is down.” On the web, holding Enter or Space on the focused control shows it too: AutoplayControl drops to 70% opacity whenever its Pressable reports pressed (AutoplayControl.tsx line 72, 0.1.78-dbe0e02), and react-native-web 0.21.2's Pressable sets pressed from keyboard presses as well (PressResponder.js lines 236–243 start a press on an Enter or Space keydown and lines 209–213 end it on keyup; Pressable index.js lines 66 and 131). Confirmed in headless Chrome on the installed build on 29 October: on this guide, the focused live Pause control went from opacity 1 to 0.7 while Enter was held and back to 1 on release, and the same with Space. Every other sentence the guide renders still holds on dbe0e02, so the entry quotes the States card “While pressed, the control drops to 70% opacity.” and leaves the “only while a pointer is down” sentence out. Fix the sentence (for example “Pressed feedback is shown only while the control is being pressed, by pointer or by Enter or Space.”), publish, and re-extract the States section. Added by Claude Code in the overnight run agentpack-batch13, for Marcin to confirm. Guide fix #537.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Let people pause and resume content that advances on its own, such as a slideshow.",
+  "useWhen": [
+    {
+      "text": "Let people pause and resume content that advances on its own, such as a slideshow.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Let people pause and resume content that advances on its own, such as a slideshow."
+      }
+    },
+    {
+      "text": "Moving content: canonical guidance names video, audio, and slideshow playback as its uses.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Canonical guidance names video, audio, and slideshow playback as its uses."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "On a white surface: the white circle disappears, leaving an unbounded glyph with no visible target.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The white circle disappears, leaving an unbounded glyph with no visible target."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Container",
+      "holds": "A 36 × 36 circle. Width, height, radius, and the white fill come from Autoplay Control tokens.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A 36 × 36 circle. Width, height, radius, and the white fill come from Autoplay Control tokens."
+      }
+    },
+    {
+      "part": "Pause icon",
+      "holds": "Shown for state=\"pause\", the default, while content advances.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown for state=\"pause\", the default, while content advances."
+      }
+    },
+    {
+      "part": "Play icon",
+      "holds": "Shown for state=\"play\", while content is stopped. Both icons are 24 px and black.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "Shown for state=\"play\", while content is stopped. Both icons are 24 px and black."
+      }
+    }
+  ],
+  "allowedChildren": [],
+  "placementAdvice": [
+    {
+      "text": "Place it on media or a dark surface: the white circle stands out, so the target is easy to find.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "The white circle stands out, so the target is easy to find."
+      }
+    },
+    {
+      "text": "The control does not stretch or shrink with its host: tokens fix its size at 36 × 36 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The control does not stretch or shrink with its host."
+      }
+    },
+    {
+      "text": "Leave room around the 36 px circle so it is easy to press.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Leave room around the 36 px circle so it is easy to press."
+      }
+    },
+    {
+      "text": "Keep progress visible: Carousel’s Numbered type places the control beside NumberPagination, so people can see which slide is showing.",
+      "strength": "recommended",
+      "from": {
+        "section": "content",
+        "quote": "Carousel’s Numbered type places the control beside NumberPagination, so people can see which slide is showing."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Show the action a press will take: pause while content plays, play while it is stopped.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "Show the action a press will take: pause while content plays, play while it is stopped."
+      },
+      "target": "state"
+    },
+    {
+      "text": "state swaps the icon between pause and play. Nothing else changes: tokens fix the circle and its colors in a single mode, and the icon is always 24 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "state swaps the icon between pause and play. Nothing else changes: tokens fix the circle and its colors in a single mode, and the icon is always 24 px."
+      },
+      "target": "state"
+    },
+    {
+      "text": "state=\"pause\" is the default: it tells people a press will stop the slideshow, video, or audio.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "The default. It tells people a press will stop the slideshow, video, or audio."
+      },
+      "target": "state",
+      "value": "pause"
+    },
+    {
+      "text": "state=\"play\" is shown after playback stops; a press should start it again.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Shown after playback stops. A press should start it again."
+      },
+      "target": "state",
+      "value": "play"
+    },
+    {
+      "text": "Don't show play while slides advance: the play icon suggests the slides are already stopped, so people cannot tell how to pause them.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "The play icon suggests the slides are already stopped, so people cannot tell how to pause them."
+      },
+      "target": "state",
+      "value": "play"
+    },
+    {
+      "text": "The control has no timer: Carousel’s Numbered type owns autoplay, with a 4-second default interval.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The control has no timer: Carousel’s Numbered type owns autoplay, with a 4-second default interval."
+      }
+    },
+    {
+      "text": "In Carousel’s Numbered type, the Carousel owns the timer and swaps the control’s state.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The Carousel owns the timer and swaps the control’s state."
+      },
+      "target": "state"
+    },
+    {
+      "text": "disabled fades the control and ignores presses.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "disabled fades the control and ignores presses."
+      },
+      "target": "disabled",
+      "value": "true"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "The control shows no text: its icon has to describe what a press will do, and nearby content has to show what is playing.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "The control shows no text. Its icon has to describe what a press will do, and nearby content has to show what is playing."
+        }
+      },
+      {
+        "text": "Show the action, not the status: while slides advance, show pause; when they stop, show play.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "While slides advance, show pause. When they stop, show play."
+        }
+      }
+    ],
+    "good": [],
+    "bad": []
+  },
+  "states": [
+    {
+      "state": "Enabled",
+      "when": "Full opacity and pressable.",
+      "from": {
+        "section": "states",
+        "quote": "Full opacity and pressable."
+      }
+    },
+    {
+      "state": "Pressed",
+      "when": "While pressed, the control drops to 70% opacity.",
+      "from": {
+        "section": "states",
+        "quote": "While pressed, the control drops to 70% opacity."
+      }
+    },
+    {
+      "state": "Disabled",
+      "when": "Half opacity. Presses are ignored and the control leaves the Tab order.",
+      "from": {
+        "section": "states",
+        "quote": "Half opacity. Presses are ignored and the control leaves the Tab order."
+      }
+    },
+    {
+      "state": "Hover and focus",
+      "when": "No hover style of its own; keyboard focus shows the browser's standard focus ring.",
+      "from": {
+        "section": "states",
+        "quote": "It adds no hover style of its own; keyboard focus shows the browser’s standard focus ring."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The control is named “Pause” or “Play” after its state; developers can set a more specific accessibilityLabel, such as “Pause slideshow”, as Storybook asks.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The control is named “Pause” or “Play” after its state; developers can set a more specific accessibilityLabel, such as “Pause slideshow”, as Storybook asks."
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "accessibilityLabel is the control's accessible name; left unset, the name is the action for state, Pause or Play.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/5"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "A disabled control ignores presses and leaves the Tab order.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Presses are ignored and the control leaves the Tab order."
+      },
+      "target": "disabled"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Show pause while slides advance",
+      "dont": "Show play while slides advance",
+      "why": "The play icon suggests the slides are already stopped, so people cannot tell how to pause them.",
+      "from": {
+        "section": "doDont",
+        "quote": "Show pause while slides advance"
+      }
+    },
+    {
+      "do": "Place it on media or a dark surface",
+      "dont": "Place it on a white surface",
+      "why": "The white circle disappears, leaving an unbounded glyph with no visible target.",
+      "from": {
+        "section": "doDont",
+        "quote": "Place it on media or a dark surface"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Content advancing, such as a slideshow the screen is playing: the control offers Pause, named “Pause slideshow”, the more specific name the Sources note gives as its example. The screen owns playback: when the control is pressed it stops the slides and passes state=\"play\". A label that is set replaces the state's own name (Pause or Play), so the screen passes a label that matches each state. The empty onPress stands for the screen's own handler.",
+      "jsx": "<AutoplayControl state=\"pause\" onPress={() => {}} accessibilityLabel=\"Pause slideshow\" />",
+      "from": {
+        "section": "configuration",
+        "quote": "The default. It tells people a press will stop the slideshow, video, or audio."
+      }
+    },
+    {
+      "purpose": "Content stopped: the control offers Play and, with no accessibilityLabel, is named “Play” after its state. A press should start playback again; the screen then passes state=\"pause\". The empty onPress stands for the screen's own handler.",
+      "jsx": "<AutoplayControl state=\"play\" onPress={() => {}} />",
+      "from": {
+        "section": "configuration",
+        "quote": "Shown after playback stops. A press should start it again."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "state",
+        "type": "'pause' | 'play'",
+        "required": false,
+        "source": "types",
+        "values": [
+          "pause",
+          "play"
+        ],
+        "default": "pause",
+        "description": "Default \"pause\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "default": false,
+        "description": "Default false, from the component source."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types"
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "Without it, the control is named Pause or Play from state; the icon is hidden from assistive technology. Declared: Accessible name. Defaults to the action for `state` (`Pause` or `Play`).",
+        "checkedOn": "2026-10-01"
+      }
+    ],
+    "modes": [],
+    "slots": [],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "source": "types"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=autoplaycontrol",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7522-7658",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-autoplaycontrol--docs"
+  }
+}

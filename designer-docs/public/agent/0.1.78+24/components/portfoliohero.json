@@ -1,0 +1,773 @@
+{
+  "schemaVersion": 1,
+  "id": "PortfolioHero",
+  "slug": "portfoliohero",
+  "category": "content",
+  "tags": [
+    "holding value",
+    "portfolio value",
+    "investment total",
+    "gold value",
+    "asset hero"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T02:32:56Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The Portfolio Hero guide (e7ed622) says it was checked on 28 October 2026 on the 27 October build, the installed v0.1.78-dbe0e02, but that publish changed only the screen-reader sentence (#346); #403's fix to PortfolioHero.tsx (ace46ca, then dbe0e02; blob 8907545 on c8526ae, d1a9deb installed) is not in the guide. Read against the installed source and its tokens through the package's resolver, three guide statements no longer hold, and the entry leaves them out: (1) States “… and it has no action: Figma’s Action Slot, an icon button beside the amount, isn’t in the package.” and Sources “the package has a fixed label and amount, children for the slot, and no action.”: the package now has topSlot, which replaces or hides the product label, and actionSlot, showAction and onActionPress, which put a control beside the amount (by default a 42 px Icon Button toggle, Emphasis Low, AppearanceBrand Neutral, named “Card”), plus actionActive, actionAccessibilityLabel and accessibilityLabel (PortfolioHero.tsx lines 53–78, 160–189, 210–216); the States title “No states of its own” goes with it, since the default action keeps its own on and off state. (2) Configuration “Slot gap spaces them.” and the Slot gap cards (“Slot gap L … 24 px.”): the slot now reads portfolioHero/slotWrap/gap (line 123), which is 8 px in every Slot gap mode, so Slot gap L leaves 8 px between the badge and the note. (3) In context “the hero has no button of its own”: true of the guide's example, not of the package. Also out of date in the evidence: the Contract's slot/gap and Slot gap lines, “No testID, onPress, accessibility props, or top-area slot”, the Discrepancies' Action Slot / Top Slot and “Unused tokens” lines, and the Limits' “Don't imply the hero presses, has an action button, replaces the chip, …, or that screen readers announce the amount” (on dbe0e02 the amount is announced once, #346). #403 is still In progress for its height item alone. The guide changes when #403 is closed and published (the stale sentences are listed in a note on #403); then re-extract. Added by Claude Code in the overnight run agentpack-r24, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Portfolio Hero at the top of a holding’s page to show what it is and what it’s worth, with an optional note under the amount.",
+  "useWhen": [
+    {
+      "text": "Show what a holding is and what it's worth at the top of its page, with an optional note under the amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Portfolio Hero at the top of a holding’s page to show what it is and what it’s worth, with an optional note under the amount."
+      }
+    },
+    {
+      "text": "The product, its value, then one note.",
+      "strength": "recommended",
+      "from": {
+        "section": "corePrinciple",
+        "quote": "The product, its value, then one note."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "A left-aligned total: Biscuit's Storybook page, as the evidence records it, points to Balance instead.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "not a left-aligned total (Balance)"
+      },
+      "useInstead": "Balance"
+    },
+    {
+      "text": "A product explanation: Biscuit's Storybook page, as the evidence records it, points to Product Overview instead.",
+      "strength": "discouraged",
+      "from": {
+        "section": "evidence",
+        "quote": "or a product explanation (ProductOverview)"
+      },
+      "useInstead": "ProductOverview"
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "imageSource, 29 px at the default Avatar Size S.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "imageSource, 29 px at the default Avatar Size S."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label, the product name, 16 px Bold.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "label, the product name, 16 px Bold."
+      }
+    },
+    {
+      "part": "Amount",
+      "holds": "A Money Value from value and currency, 36 px Black.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "A Money Value from value and currency, 36 px Black."
+      }
+    },
+    {
+      "part": "Slot",
+      "holds": "children, centred under the amount, 8 px apart.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "children, centred under the amount, 8 px apart."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "topSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "actionSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Put it at the top of a holding's page.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Portfolio Hero at the top of a holding’s page"
+      }
+    },
+    {
+      "text": "On the guide's Gold page the hero comes first, the holding's details follow in a list, and the two actions sit at the bottom.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero opens the Gold page, the holding’s details follow in a list, and the two actions sit at the bottom."
+      }
+    },
+    {
+      "text": "The product label sits on top, the amount under it, and children under that; everything is centred.",
+      "strength": "recommended",
+      "from": {
+        "section": "anatomy",
+        "quote": "The product label sits on top, the amount under it, and anything you pass as children under that. Everything is centred."
+      }
+    },
+    {
+      "text": "The hero has no width of its own: it is as wide as its widest line, usually the amount, plus 8 px on each side.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The hero has no width of its own: it is as wide as its widest line, usually the amount, plus 8 px on each side, and centres everything."
+      }
+    },
+    {
+      "text": "Top to bottom: 8 px of padding, the 29 px label row, 16 px, the amount on a 44 px line, 16 px, then the slot.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "Top to bottom: 8 px of padding, the 29 px label row, 16 px, the amount on a 44 px line, 16 px, then the slot."
+      }
+    },
+    {
+      "text": "The amount never wraps or shrinks, so give the hero a host wider than its longest amount.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The amount never wraps or shrinks, so give the hero a host wider than its longest amount."
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "imageSource puts the product's logo before its label; without it there is no avatar, not an empty circle.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "imageSource puts the product’s logo before its label; without it there is no avatar, not an empty circle."
+      },
+      "target": "imageSource"
+    },
+    {
+      "text": "Avatar Size sets the logo to 42, 36 or 29 px.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Avatar Size sets the logo to 42, 36, or 29 px."
+      },
+      "target": "Avatar Size"
+    },
+    {
+      "text": "Avatar Size L: a 42 px logo.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A 42 px logo."
+      },
+      "target": "Avatar Size",
+      "value": "L"
+    },
+    {
+      "text": "Avatar Size M: a 36 px logo.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "36 px."
+      },
+      "target": "Avatar Size",
+      "value": "M"
+    },
+    {
+      "text": "Avatar Size S: a 29 px logo, the hero's default.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "29 px, the default."
+      },
+      "target": "Avatar Size",
+      "value": "S"
+    },
+    {
+      "text": "children adds what sits under the amount, usually a Badge with the change and a Text with one fact.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "children adds what sits under the amount, usually a Badge with the change and a Text with one fact"
+      },
+      "target": "children"
+    },
+    {
+      "text": "The screen keeps the holding's value and passes it in value: on the guide's Gold page, Buy ₹1,000 and Sell ₹1,000 change the holding and the hero shows the new value.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Buy ₹1,000 and Sell ₹1,000 change the holding, and the hero shows the new value"
+      },
+      "target": "value"
+    },
+    {
+      "text": "topSlot replaces the product label (the avatar and label); false, '' or null hide it. Leave topSlot out to keep the label.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/6"
+      },
+      "target": "topSlot"
+    },
+    {
+      "text": "actionSlot puts your own control beside the amount; false, '' or null hide it. Without actionSlot, showAction or onActionPress shows the default action: a 42 px Neutral Low IconButton.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/7"
+      },
+      "target": "actionSlot"
+    },
+    {
+      "text": "The default action is a toggle: left without actionActive it switches itself on and off when pressed; pass actionActive to set its state from the screen.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/12"
+      },
+      "target": "actionActive"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Set label to the product's name: left out, the hero shows “Gold”.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/0"
+        },
+        "target": "label"
+      },
+      {
+        "text": "Set value to the holding's value: left out, the hero shows 12,000.11.",
+        "strength": "required",
+        "from": {
+          "fact": "/facts/props/2"
+        },
+        "target": "value"
+      },
+      {
+        "text": "Write label as the product in a word or two, such as Gold or Mutual Funds.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Write label as the product in a word or two, such as Gold or Mutual Funds."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Give value as the formatted figure alone: currency adds the symbol, and INR or ₹ both show ₹.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Give value as the formatted figure alone: currency adds the symbol, and INR or ₹ both show ₹."
+        },
+        "target": "value"
+      },
+      {
+        "text": "The amount keeps its digit grouping as you write it.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "the grouping stays as you write it."
+        },
+        "target": "value"
+      },
+      {
+        "text": "Use children for a caption, such as the change in a Badge and one fact in a Text.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use children for a caption, such as the change in a Badge and one fact in a Text"
+        },
+        "target": "children"
+      },
+      {
+        "text": "A Text in children is 12 px, because the hero sets Text Sizes Small.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "a Text there is 12 px, because the hero sets Text Sizes Small."
+        },
+        "target": "children"
+      },
+      {
+        "text": "Show a gain or a loss with the Badge in children.",
+        "strength": "recommended",
+        "from": {
+          "section": "states",
+          "quote": "What changes is what you pass: a gain or a loss is the Badge in children."
+        },
+        "target": "children"
+      },
+      {
+        "text": "Don't put a second total in children: the amount stays the only total.",
+        "strength": "discouraged",
+        "from": {
+          "section": "content",
+          "quote": "It isn’t a place for a second total."
+        },
+        "target": "children"
+      },
+      {
+        "text": "Don't write a paragraph under the amount: a long note turns the hero into a block of text.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "A long note turns the hero into a block of text."
+        },
+        "target": "children"
+      }
+    ],
+    "good": [
+      "Gold",
+      "Mutual Funds",
+      "12,000.11",
+      "1,45,230.50",
+      "+₹2,722.45 (+22.5%)",
+      "−₹1,204.10 (−0.8%)",
+      "Worth 1.23g Gold"
+    ],
+    "bad": [
+      "Your gold has grown 22.5% since you started saving in March 2024, and you can sell it at any time at today’s price.",
+      "Total portfolio ₹4,52,300.00"
+    ]
+  },
+  "states": [
+    {
+      "state": "Up",
+      "when": "A gain: the gold Badge in children, as Figma shows it.",
+      "from": {
+        "section": "states",
+        "quote": "The gold Badge, as Figma shows it."
+      }
+    },
+    {
+      "state": "Down",
+      "when": "A loss: the Badge in children with Semantic Intent System and AppearanceSystem negative.",
+      "from": {
+        "section": "states",
+        "quote": "The Badge’s Semantic Intent System, AppearanceSystem negative."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Screen readers read the amount once, with its currency.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Screen readers read the amount once, with its currency."
+      }
+    },
+    {
+      "text": "accessibilityLabel names the hero region: with it the hero is one named group; without it the hero doesn't group its parts.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/13"
+      },
+      "target": "accessibilityLabel"
+    },
+    {
+      "text": "The default action is named from its icon (ic_card reads “Card”); actionAccessibilityLabel gives it another name.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/11"
+      },
+      "target": "actionAccessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "One short note",
+      "dont": "A paragraph under the amount",
+      "why": "A long note turns the hero into a block of text.",
+      "from": {
+        "section": "doDont",
+        "quote": "One short note"
+      }
+    },
+    {
+      "do": "The change in a Badge",
+      "dont": "A second total in the slot",
+      "why": "Two figures compete; put the portfolio total on its own page.",
+      "from": {
+        "section": "doDont",
+        "quote": "The change in a Badge"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The top of a holding's page, the guide's In context: the hero opens the Gold page with the product's logo, the holding's value, and under the amount a Badge with the change (its leading ic_card Icon on Context4 Badge, as the Badge entry says) and a Text with one fact; the holding's details follow in a ListGroup of List Items, and the two actions sit below: Buy keeps the defaults and Sell takes Emphasis Medium. The URI stands for the product's logo image, value for the holding's current value (Buy and Sell change it), and each onPress for the screen buying or selling ₹1,000.",
+      "jsx": "<VStack>\n  <VStack>\n    <PortfolioHero\n      label=\"Gold\"\n      imageSource={{ uri: 'https://example.com/logos/gold.png' }}\n      value=\"12,000.11\"\n    >\n      <Badge\n        label=\"+₹2,722.45 (+22.5%)\"\n        leading={<Icon iconName=\"ic_card\" modes={{ Context4: 'Badge' }} accessibilityElementsHidden importantForAccessibility=\"no\" />}\n      />\n      <Text text=\"Worth 1.23g Gold\" />\n    </PortfolioHero>\n    <ListGroup>\n      <ListItem layout=\"Horizontal\" title=\"Gold in your locker\" supportText=\"1.23 g · 24K, 99.9% pure\" navArrow={false} />\n      <ListItem layout=\"Horizontal\" title=\"Average buy price\" supportText=\"₹7,544 a gram\" navArrow={false} />\n      <ListItem layout=\"Horizontal\" title=\"Today’s price\" supportText=\"₹9,756 a gram\" navArrow={false} />\n    </ListGroup>\n  </VStack>\n  <HStack>\n    <Button label=\"Sell ₹1,000\" modes={{ Emphasis: 'Medium' }} onPress={() => {}} />\n    <Button label=\"Buy ₹1,000\" onPress={() => {}} />\n  </HStack>\n</VStack>",
+      "from": {
+        "section": "inContext",
+        "quote": "The hero opens the Gold page, the holding’s details follow in a list, and the two actions sit at the bottom."
+      }
+    },
+    {
+      "purpose": "A holding that lost value, the guide's Down card: the change goes in a Badge with Semantic Intent System and AppearanceSystem negative, and its leading Icon takes the same modes with Context4 Badge. The URI stands for the product's logo image, and the figures for the holding's value and its change.",
+      "jsx": "<PortfolioHero\n  label=\"Mutual Funds\"\n  imageSource={{ uri: 'https://example.com/logos/mutual-funds.png' }}\n  value=\"1,45,230.50\"\n>\n  <Badge\n    label=\"−₹1,204.10 (−0.8%)\"\n    modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative' }}\n    leading={<Icon iconName=\"ic_card\" modes={{ 'Semantic Intent': 'System', AppearanceSystem: 'negative', Context4: 'Badge' }} accessibilityElementsHidden importantForAccessibility=\"no\" />}\n  />\n</PortfolioHero>",
+      "from": {
+        "section": "states",
+        "quote": "The Badge’s Semantic Intent System, AppearanceSystem negative."
+      }
+    },
+    {
+      "purpose": "The product and its figure alone, the guide's Product and figure card: currency INR shows ₹, and the amount keeps its grouping as written. The URI stands for the product's logo image, and value for the holding's value.",
+      "jsx": "<PortfolioHero\n  label=\"Mutual Funds\"\n  imageSource={{ uri: 'https://example.com/logos/mutual-funds.png' }}\n  value=\"1,45,230.50\"\n  currency=\"INR\"\n/>",
+      "from": {
+        "section": "content",
+        "quote": "INR shows ₹; the grouping stays as you write it."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "Gold",
+        "description": "Product label text displayed next to the avatar. Default \"Gold\", from the component source."
+      },
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "evidence",
+        "description": "Without imageSource there is no avatar and no placeholder. Declared: Image source for the product avatar.",
+        "checkedOn": "2026-10-26"
+      },
+      {
+        "name": "value",
+        "type": "string | number",
+        "required": false,
+        "source": "types",
+        "default": "12,000.11",
+        "description": "Monetary value to display. Default \"12,000.11\", from the component source."
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "₹",
+        "description": "Currency symbol or ISO code. Default \"₹\", from the component source."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Modes configuration mapped to Figma tokens."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Slot content rendered below the money value (e.g. Badge, subtitle)."
+      },
+      {
+        "name": "topSlot",
+        "type": "ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Replaces the Product Label chip when given. `false`, `''` and `null` hide the chip. Omit the prop to keep the default label."
+      },
+      {
+        "name": "actionSlot",
+        "type": "ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Custom control beside the amount. `false`, `''` and `null` hide the action. When omitted, `showAction` or `onActionPress` can still show the default 42 px Neutral Low IconButton."
+      },
+      {
+        "name": "showAction",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Show the default action next to the amount."
+      },
+      {
+        "name": "onActionPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Press handler for the default action button."
+      },
+      {
+        "name": "actionIconName",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "ic_card",
+        "description": "Icon for the default action. Defaults to `ic_card`. Default \"ic_card\", from the component source."
+      },
+      {
+        "name": "actionAccessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessible name for the default action. Defaults from `actionIconName` (`ic_card` is \"Card\")."
+      },
+      {
+        "name": "actionActive",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "On/off state of the default toggle. Omit it and the button toggles itself when pressed. Pass it to control the state from outside."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "With accessibilityLabel the hero is a group named by it; without one the hero does not group its children. Declared: Optional accessible name for the hero region.",
+        "checkedOn": "2026-10-27"
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "With imageSource, Avatar Size sets the logo: L 42, M 36, S 29 px or XS 14 px. The hero's default is S, a 29 px logo. Declared: A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "S",
+        "checkedOn": "2026-10-26"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context3",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Transaction Bubble",
+          "Balance & Cards",
+          "Amount Input"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Slot gap",
+        "type": "mode collection",
+        "values": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XS"
+        ],
+        "description": "A token collection PortfolioHero reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "S"
+      },
+      {
+        "name": "Text Sizes",
+        "source": "evidence",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "default": "Small",
+        "description": "The hero sets Text Sizes Small, so a Text in children is 12 px on a 16 px line (a Text's own default is 14 px).",
+        "checkedOn": "2026-10-26"
+      }
+    ],
+    "slots": [
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "description": "Slot content rendered below the money value (e.g. Badge, subtitle).",
+        "source": "types"
+      },
+      {
+        "name": "topSlot",
+        "type": "ReactNode",
+        "description": "Replaces the Product Label chip when given. `false`, `''` and `null` hide the chip. Omit the prop to keep the default label.",
+        "source": "types"
+      },
+      {
+        "name": "actionSlot",
+        "type": "ReactNode",
+        "description": "Custom control beside the amount. `false`, `''` and `null` hide the action. When omitted, `showAction` or `onActionPress` can still show the default 42 px Neutral Low IconButton.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onActionPress",
+        "type": "() => void",
+        "description": "Press handler for the default action button.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "The amount sits on a 44 px line, so the hero is taller than Figma's 159 px (Component Bug #403).",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      },
+      {
+        "text": "Figma shows the Jio logo by default; the package shows an avatar only when imageSource is set.",
+        "source": "evidence",
+        "checkedOn": "2026-10-28"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=portfoliohero",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2705-14040",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-portfoliohero--docs"
+  }
+}

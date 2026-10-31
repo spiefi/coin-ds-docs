@@ -1,0 +1,341 @@
+{
+  "slug": "portfoliohero",
+  "label": "Portfolio Hero",
+  "guideCommit": "e7ed6224b46af12b00ea824081a6ccefc8e66cf1",
+  "files": [
+    "src/guides/portfoliohero.guide.tsx"
+  ],
+  "evidence": "docs/evidence/portfoliohero.md",
+  "packageVersion": "0.1.78",
+  "renderedAt": "2026-10-31T02:06:48.864Z",
+  "viewport": "1280x900",
+  "keywords": [
+    "holding value",
+    "portfolio value",
+    "investment total",
+    "gold value",
+    "asset hero"
+  ],
+  "title": "Portfolio Hero",
+  "summary": "Use a Portfolio Hero at the top of a holding’s page to show what it is and what it’s worth, with an optional note under the amount.",
+  "corePrinciple": "The product, its value, then one note.",
+  "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=2705-14040",
+  "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-portfoliohero--docs",
+  "sections": {
+    "anatomy": {
+      "id": "anatomy",
+      "header": "Anatomy",
+      "title": "A product, an amount, a note",
+      "description": "The product label sits on top, the amount under it, and anything you pass as children under that. Everything is centred.",
+      "blocks": [
+        "16",
+        "1",
+        "2",
+        "3",
+        "4",
+        "Avatar",
+        "imageSource, 29 px at the default Avatar Size S.",
+        "Label",
+        "label, the product name, 16 px Bold.",
+        "Amount",
+        "A Money Value from value and currency, 36 px Black.",
+        "Slot",
+        "children, centred under the amount, 8 px apart.",
+        "Gap",
+        "Measured size (px)"
+      ],
+      "specimen": [
+        "Gold",
+        "₹",
+        "12,000.11",
+        "+₹2,722.45 (+22.5%)",
+        "Worth 1.23g Gold"
+      ],
+      "anatomy": [
+        {
+          "part": "Avatar",
+          "note": "imageSource, 29 px at the default Avatar Size S."
+        },
+        {
+          "part": "Label",
+          "note": "label, the product name, 16 px Bold."
+        },
+        {
+          "part": "Amount",
+          "note": "A Money Value from value and currency, 36 px Black."
+        },
+        {
+          "part": "Slot",
+          "note": "children, centred under the amount, 8 px apart."
+        }
+      ],
+      "doDont": [],
+      "examples": []
+    },
+    "configuration": {
+      "id": "configuration",
+      "header": "Configuration",
+      "title": "The logo, its size, and the note",
+      "description": "imageSource puts the product’s logo before its label; without it there is no avatar, not an empty circle. Avatar Size sets the logo to 42, 36, or 29 px. children adds what sits under the amount, usually a Badge with the change and a Text with one fact; Slot gap spaces them.",
+      "blocks": [
+        "Logo and label",
+        "imageSource puts the logo before the label.",
+        "Label only",
+        "No imageSource, no avatar.",
+        "With a note",
+        "children add the change and one fact.",
+        "Avatar Size L",
+        "A 42 px logo.",
+        "Avatar Size M",
+        "36 px.",
+        "Avatar Size S",
+        "29 px, the default.",
+        "Slot gap S",
+        "8 px between the badge and the note, the default.",
+        "Slot gap L",
+        "24 px."
+      ],
+      "specimen": [
+        "Gold",
+        "₹",
+        "12,000.11",
+        "+₹2,722.45 (+22.5%)",
+        "Worth 1.23g Gold"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Logo and label",
+          "description": "imageSource puts the logo before the label."
+        },
+        {
+          "title": "Label only",
+          "description": "No imageSource, no avatar."
+        },
+        {
+          "title": "With a note",
+          "description": "children add the change and one fact."
+        },
+        {
+          "title": "Avatar Size L",
+          "description": "A 42 px logo."
+        },
+        {
+          "title": "Avatar Size M",
+          "description": "36 px."
+        },
+        {
+          "title": "Avatar Size S",
+          "description": "29 px, the default."
+        },
+        {
+          "title": "Slot gap S",
+          "description": "8 px between the badge and the note, the default."
+        },
+        {
+          "title": "Slot gap L",
+          "description": "24 px."
+        }
+      ]
+    },
+    "states": {
+      "id": "states",
+      "header": "States",
+      "title": "No states of its own",
+      "description": "The hero doesn’t press, load, or animate, and it has no action: Figma’s Action Slot, an icon button beside the amount, isn’t in the package. What changes is what you pass: a gain or a loss is the Badge in children.",
+      "blocks": [
+        "Up",
+        "The gold Badge, as Figma shows it.",
+        "Down",
+        "The Badge’s Semantic Intent System, AppearanceSystem negative."
+      ],
+      "specimen": [
+        "Gold",
+        "₹",
+        "12,000.11",
+        "+₹2,722.45 (+22.5%)",
+        "Worth 1.23g Gold",
+        "Mutual Funds",
+        "1,45,230.50",
+        "−₹1,204.10 (−0.8%)"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Up",
+          "description": "The gold Badge, as Figma shows it."
+        },
+        {
+          "title": "Down",
+          "description": "The Badge’s Semantic Intent System, AppearanceSystem negative."
+        }
+      ]
+    },
+    "sizing": {
+      "id": "sizing",
+      "header": "Sizing",
+      "title": "As wide as its amount",
+      "description": "The hero has no width of its own: it is as wide as its widest line, usually the amount, plus 8 px on each side, and centres everything. Top to bottom: 8 px of padding, the 29 px label row, 16 px, the amount on a 44 px line, 16 px, then the slot. Figma’s amount sits on a 36 px line, so Figma’s hero is 159 px tall. The amount never wraps or shrinks, so give the hero a host wider than its longest amount.",
+      "blocks": [
+        "199 × 168",
+        "16"
+      ],
+      "specimen": [
+        "Gold",
+        "₹",
+        "12,000.11",
+        "+₹2,722.45 (+22.5%)",
+        "Worth 1.23g Gold"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "content": {
+      "id": "content",
+      "header": "Content",
+      "title": "The product, the figure, one note",
+      "description": "Write label as the product in a word or two, such as Gold or Mutual Funds. Give value as the formatted figure alone: currency adds the symbol, and INR or ₹ both show ₹. Use children for a caption, such as the change in a Badge and one fact in a Text; a Text there is 12 px, because the hero sets Text Sizes Small. It isn’t a place for a second total.",
+      "blocks": [
+        "Product and figure",
+        "INR shows ₹; the grouping stays as you write it.",
+        "One fact",
+        "A Text in children is 12 px."
+      ],
+      "specimen": [
+        "Mutual Funds",
+        "₹",
+        "1,45,230.50",
+        "Gold",
+        "12,000.11",
+        "Worth 1.23g Gold"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": [
+        {
+          "title": "Product and figure",
+          "description": "INR shows ₹; the grouping stays as you write it."
+        },
+        {
+          "title": "One fact",
+          "description": "A Text in children is 12 px."
+        }
+      ]
+    },
+    "inContext": {
+      "id": "context",
+      "header": "In context",
+      "title": "The top of a holding’s page",
+      "description": "The hero opens the Gold page, the holding’s details follow in a list, and the two actions sit at the bottom. Buy ₹1,000 and Sell ₹1,000 change the holding, and the hero shows the new value; the hero has no button of its own.",
+      "blocks": [
+        "Holding ₹12,000.11"
+      ],
+      "specimen": [
+        "Gold",
+        "₹",
+        "12,000.11",
+        "+₹2,722.45 (+22.5%)",
+        "Worth 1.23g Gold",
+        "Gold in your locker",
+        "1.23 g · 24K, 99.9% pure",
+        "Average buy price",
+        "₹7,544 a gram",
+        "Today’s price",
+        "₹9,756 a gram",
+        "Sell ₹1,000",
+        "Buy ₹1,000"
+      ],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    },
+    "doDont": {
+      "id": "dos-donts",
+      "header": "Do & Don’ts",
+      "title": "One holding, one figure",
+      "description": "Each pair shows a hero people read at a glance next to one that buries the amount.",
+      "blocks": [
+        "Do",
+        "One short note",
+        "The change and one fact.",
+        "Don’t",
+        "A paragraph under the amount",
+        "A long note turns the hero into a block of text.",
+        "The change in a Badge",
+        "The amount stays the only total.",
+        "A second total in the slot",
+        "Two figures compete; put the portfolio total on its own page."
+      ],
+      "specimen": [
+        "Gold",
+        "₹",
+        "12,000.11",
+        "+₹2,722.45 (+22.5%)",
+        "Worth 1.23g Gold",
+        "Your gold has grown 22.5% since you started saving in March 2024, and you can sell it at any time at today’s price.",
+        "Total portfolio ₹4,52,300.00"
+      ],
+      "anatomy": [],
+      "doDont": [
+        {
+          "do": {
+            "title": "One short note",
+            "caption": "The change and one fact.",
+            "specimen": "Gold · ₹ · 12,000.11 · +₹2,722.45 (+22.5%) · Worth 1.23g Gold"
+          },
+          "dont": {
+            "title": "A paragraph under the amount",
+            "caption": "A long note turns the hero into a block of text.",
+            "specimen": "Gold · ₹ · 12,000.11 · Your gold has grown 22.5% since you started saving in March 2024, and you can sell it at any time at today’s price."
+          }
+        },
+        {
+          "do": {
+            "title": "The change in a Badge",
+            "caption": "The amount stays the only total.",
+            "specimen": "Gold · ₹ · 12,000.11 · +₹2,722.45 (+22.5%) · Worth 1.23g Gold"
+          },
+          "dont": {
+            "title": "A second total in the slot",
+            "caption": "Two figures compete; put the portfolio total on its own page.",
+            "specimen": "Gold · ₹ · 12,000.11 · Total portfolio ₹4,52,300.00"
+          }
+        }
+      ],
+      "examples": []
+    },
+    "sources": {
+      "id": "sources",
+      "header": "Sources",
+      "title": "Use the public Portfolio Hero contract",
+      "description": "The guide compares the Figma component with the installed package and its Storybook stories.",
+      "blocks": [
+        "01",
+        "Coin Components Library",
+        "Public component and designer properties",
+        "02",
+        "Canonical Storybook",
+        "Published examples and behavior",
+        "Default",
+        "Without Slot",
+        "Custom Slot Content",
+        "Checked 28 October 2026",
+        "Installed jfs-components is 0.1.78 (27 October build of Biscuit’s main) from the team’s private package repository. Figma’s Portfolio Hero has Top Slot, Bottom Slot, and Action Slot switches; the package has a fixed label and amount, children for the slot, and no action. Figma shows the Jio logo by default; the package shows an avatar only with imageSource, and Storybook’s Default story shows a stock photo there instead. The amount sits on a 44 px line, so the hero is taller than Figma’s 159 px (all reported). Screen readers read the amount once, with its currency.",
+        "jfs-components",
+        "0.1.78",
+        "Top Slot",
+        "Bottom Slot",
+        "Action Slot",
+        "children",
+        "imageSource"
+      ],
+      "specimen": [],
+      "anatomy": [],
+      "doDont": [],
+      "examples": []
+    }
+  }
+}
