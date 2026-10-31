@@ -1,0 +1,803 @@
+{
+  "schemaVersion": 1,
+  "id": "ValueBackMetric",
+  "slug": "valuebackmetric",
+  "category": "content",
+  "tags": [
+    "JioPoints",
+    "cashback",
+    "rewards",
+    "points",
+    "value back"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "cba512fdf82b9dd08fea69469f6639abc06c3ce0",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:47:40Z",
+    "flags": [
+      {
+        "field": "",
+        "reason": "The guide (checked 8 October on 0.1.78-636f3f5) says in Anatomy “It has no surface or padding of its own”, but the installed ValueBackMetric.tsx (0.1.78-dbe0e02, read from source) paints valueBackMetric/background/color, white in Light and Dark; and on dbe0e02 its In context Card defaults to AppearanceBrand Neutral, so the header icons there are grey, not gold. The entry follows the package and does not repeat “no surface”. Guide fix #525. Added by Claude Code in the overnight run agentpack-batch7, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use a Value Back Metric to show a rewards balance, such as JioPoints or cashback, with how to earn more and one next step.",
+  "useWhen": [
+    {
+      "text": "Use a Value Back Metric to show a rewards balance, such as JioPoints or cashback, with how to earn more and one next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use a Value Back Metric to show a rewards balance, such as JioPoints or cashback, with how to earn more and one next step."
+      }
+    },
+    {
+      "text": "Rewards programmes: JioPoints and cashback are earn-and-redeem programmes.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "JioPoints and cashback are earn-and-redeem programmes."
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "An account balance, such as a savings balance: a savings balance is not a rewards programme.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A savings balance is not a rewards programme."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Header",
+      "holds": "The programme's icon (icon, default ic_rupee_coin) and name (title, default JioPoints); always shown.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Programme icon and name; always shown."
+      }
+    },
+    {
+      "part": "Value",
+      "holds": "value: the amount, in the largest type. Hidden when left out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "The amount, in the largest type."
+      }
+    },
+    {
+      "part": "Caption",
+      "holds": "caption: one short line on how to earn or when it's credited. Hidden when left out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One short line on how to earn or when it’s credited."
+      }
+    },
+    {
+      "part": "Call to action",
+      "holds": "linkLabel with onLinkPress: one purple verb, such as Earn. Hidden when left out.",
+      "required": false,
+      "from": {
+        "section": "anatomy",
+        "quote": "One purple verb, such as Earn."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "icon",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "value",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    },
+    {
+      "slot": "link",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Place one programme per card, side by side, with a distinct verb on each.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Place one programme per card, side by side, with a distinct verb on each."
+      }
+    },
+    {
+      "text": "The card has no padding and is at least 82 px tall.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The card has no padding and is at least 82 px tall."
+      }
+    },
+    {
+      "text": "The card is no wider than its column: in a narrow column its text wraps instead of overflowing.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "It never grows wider than its column: in a narrow column the text wraps instead of overflowing"
+      }
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Full: the balance, how to earn, and the next step.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Balance, how to earn, and the next step."
+      }
+    },
+    {
+      "text": "Add the value, caption and call to action as the card needs them; each disappears when left out. The header shows either way.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Add the value, caption, and call to action as the card needs them; each disappears when left out."
+      }
+    },
+    {
+      "text": "Leave out the call to action (linkLabel) when the card is informational and the next step lives elsewhere on the screen.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Informational; the next step lives elsewhere on the screen."
+      },
+      "target": "linkLabel"
+    },
+    {
+      "text": "Leave out the caption when the amount speaks for itself.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "When the amount speaks for itself."
+      },
+      "target": "caption"
+    },
+    {
+      "text": "AppearanceBrand (the icon colour) retints only the header icon; the amount and Earn keep their colours.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Retints only the icon; the amount and Earn keep their colours."
+      },
+      "target": "AppearanceBrand"
+    },
+    {
+      "text": "The default icon is ic_rupee_coin, because the JioPoints mark is not in the icon set.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The package uses ic_rupee_coin as the default icon because the JioPoints mark is not in the icon set."
+      },
+      "target": "icon"
+    },
+    {
+      "text": "icon takes an icon name from the registry, drawn in the icon colour, or a node such as an Icon or Image, which gets the card's modes.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/0"
+      },
+      "target": "icon"
+    },
+    {
+      "text": "title defaults to JioPoints: set it to the programme's name, or the card reads JioPoints.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "title"
+    },
+    {
+      "text": "The call to action is purple text, not a Link, so it has no underline.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The call to action is purple text, not a Link, so it has no underline."
+      },
+      "target": "linkLabel"
+    },
+    {
+      "text": "Pair linkLabel with onLinkPress: the screen opens the programme when a call to action is pressed.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The screen opens the programme when a call to action is pressed."
+      },
+      "target": "onLinkPress"
+    },
+    {
+      "text": "Content in the link slot renders instead of linkLabel.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/slots/2"
+      },
+      "target": "link"
+    },
+    {
+      "text": "Add a press action to the card (onPress) when it should open the programme; Earn keeps its own action.",
+      "strength": "recommended",
+      "from": {
+        "section": "states",
+        "quote": "Add a press action to the card when it should open the programme; Earn keeps its own action."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "In a pressable card the call to action sits beside the card's button, not inside it, so each press runs only its own action.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "in a pressable card the call to action sits beside the card’s button, not inside it, so each press runs only its own action."
+      },
+      "target": "onPress"
+    },
+    {
+      "text": "disabled turns off the card's press when onPress is set.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/8"
+      },
+      "target": "disabled"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Name the programme, show the amount, offer one verb.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Name the programme, show the amount, offer one verb."
+        }
+      },
+      {
+        "text": "Use the programme name as the title.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Use the programme name as the title"
+        },
+        "target": "title"
+      },
+      {
+        "text": "Put the countable amount in the value.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "put the countable amount in the value"
+        },
+        "target": "value"
+      },
+      {
+        "text": "Keep the caption to one short sentence: how to earn or when it's credited.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "keep the caption to one short sentence"
+        },
+        "target": "caption"
+      },
+      {
+        "text": "Make the call to action one verb in sentence case, such as Earn, View, or Claim.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "make the call to action one verb in sentence case, such as Earn, View, or Claim"
+        },
+        "target": "linkLabel"
+      },
+      {
+        "text": "When cards sit side by side, give each a distinct verb.",
+        "strength": "recommended",
+        "from": {
+          "section": "inContext",
+          "quote": "with a distinct verb on each"
+        },
+        "target": "linkLabel"
+      },
+      {
+        "text": "Keep lines short: in a narrow column the text wraps, but short lines still read best.",
+        "strength": "recommended",
+        "from": {
+          "section": "sizing",
+          "quote": "but short lines still read best"
+        }
+      },
+      {
+        "text": "Name the programme and show an amount, so people can tell what the number is for.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "People can tell what the number is for."
+        },
+        "target": "value"
+      },
+      {
+        "text": "Don't keep the Figma placeholder “Value” as the value: it is not product copy.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Value” is the Figma placeholder, not product copy."
+        },
+        "target": "value"
+      },
+      {
+        "text": "Use one verb: Earn says what happens next.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Earn says what happens next."
+        },
+        "target": "linkLabel"
+      },
+      {
+        "text": "Don't write a vague call to action such as “Click here”: it says nothing about what happens.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "“Click here” says nothing about what happens."
+        },
+        "target": "linkLabel"
+      }
+    ],
+    "good": [
+      "JioPoints",
+      "1,240",
+      "Earn 10 points with UPI",
+      "Earn",
+      "Cashback",
+      "₹120",
+      "Credited monthly",
+      "View",
+      "Claim"
+    ],
+    "bad": [
+      "Value",
+      "Click here"
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "By default (no onPress) only the call to action responds to a press: Earn, with onLinkPress.",
+      "from": {
+        "section": "states",
+        "quote": "By default only the call to action responds."
+      }
+    },
+    {
+      "state": "Pressable",
+      "when": "With onPress, the card opens the programme; Earn still runs its own action (onLinkPress).",
+      "from": {
+        "section": "states",
+        "quote": "The whole card opens the programme; Earn still runs its own action."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "On the web, Enter and Space activate the call to action.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "On the web, Enter and Space activate the call to action"
+      },
+      "target": "onLinkPress"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Name the programme and show an amount",
+      "dont": "Keep the placeholder",
+      "why": "“Value” is the Figma placeholder, not product copy.",
+      "from": {
+        "section": "doDont",
+        "quote": "People can tell what the number is for."
+      }
+    },
+    {
+      "do": "Use one verb",
+      "dont": "Write a vague call to action",
+      "why": "“Click here” says nothing about what happens.",
+      "from": {
+        "section": "doDont",
+        "quote": "Earn says what happens next."
+      }
+    },
+    {
+      "do": "Use it for rewards",
+      "dont": "Use it for an account balance",
+      "why": "A savings balance is not a rewards programme.",
+      "from": {
+        "section": "doDont",
+        "quote": "JioPoints and cashback are earn-and-redeem programmes."
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "Rewards on the home screen, the guide's In context: one programme per card, side by side, with a distinct verb on each (Earn, View); the screen opens the programme when a call to action is pressed (onLinkPress).",
+      "jsx": "<Card>\n  <VStack>\n    <Text>Your rewards</Text>\n    <HStack justifyHorizontal=\"space-around\" wrap>\n      <ValueBackMetric\n        title=\"JioPoints\"\n        value=\"1,240\"\n        caption=\"Earn 10 points with UPI\"\n        linkLabel=\"Earn\"\n        onLinkPress={() => {}}\n      />\n      <ValueBackMetric\n        title=\"Cashback\"\n        value=\"₹120\"\n        caption=\"Credited monthly\"\n        linkLabel=\"View\"\n        onLinkPress={() => {}}\n      />\n    </HStack>\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "Place one programme per card, side by side, with a distinct verb on each. The screen opens the programme when a call to action is pressed."
+      }
+    },
+    {
+      "purpose": "Pressable: onPress makes the card open the programme, and Earn still runs its own action (onLinkPress).",
+      "jsx": "<ValueBackMetric\n  title=\"JioPoints\"\n  value=\"1,240\"\n  caption=\"Earn 10 points with UPI\"\n  linkLabel=\"Earn\"\n  onLinkPress={() => {}}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "The whole card opens the programme; Earn still runs its own action."
+      }
+    },
+    {
+      "purpose": "Without call to action: an informational card, when the next step lives elsewhere on the screen.",
+      "jsx": "<ValueBackMetric\n  title=\"JioPoints\"\n  value=\"1,240\"\n  caption=\"Earn 10 points with UPI\"\n/>",
+      "from": {
+        "section": "configuration",
+        "quote": "Informational; the next step lives elsewhere on the screen."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "icon",
+        "type": "string | React.ReactNode",
+        "required": false,
+        "source": "types",
+        "default": "ic_rupee_coin",
+        "description": "Header glyph slot, shown to the left of the title. Mirrors the Figma swap slot whose preferred instances are `Icon` and `Image`: - a registry icon name (e.g. `'ic_rupee_coin'`) renders the shared {@link Icon}, colour/size from the `icon/*` tokens (default 18px gold — retint via `modes`, e.g. `{ AppearanceBrand: 'Secondary' }`); - a custom node (an `<Icon/>`, an `<Image/>`, your brand logo) renders as-is with `modes` cascaded into it. The Figma design uses a dedicated JioPoints brand mark that is not in the icon registry, so `ic_rupee_coin` stands in by default. Default \"ic_rupee_coin\", from the component source."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "default": "JioPoints",
+        "description": "Header title next to the icon. Defaults to `'JioPoints'`. Default \"JioPoints\", from the component source."
+      },
+      {
+        "name": "value",
+        "type": "string | React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "The prominent value line (16px/500). Pass a string, or any node to compose a richer value. Hidden when omitted."
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "description": "In a 120 px column the caption wraps and nothing overflows. Declared: Muted caption below the value (12px, `#777`). Hidden when omitted.",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "linkLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Bottom CTA label rendered as the shared {@link Text} (purple 12px via seeded `Text Appearance: Secondary` + `Text Sizes: Small`). Hidden when omitted. Ignored when the {@link link} slot is provided."
+      },
+      {
+        "name": "link",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "types",
+        "description": "Real slot for the bottom CTA. Highest precedence — when provided, these children render instead of the declarative `linkLabel` Text. Seeded `Text Appearance: Secondary` + `Text Sizes: Small` cascade into the slot (so a bare `<Text text=\"Earn\" />` matches the design); child-level modes still win."
+      },
+      {
+        "name": "onLinkPress",
+        "type": "(event: GestureResponderEvent) => void",
+        "required": false,
+        "source": "types",
+        "description": "Fired when the declarative CTA (`linkLabel`) is pressed."
+      },
+      {
+        "name": "onPress",
+        "type": "(event: GestureResponderEvent) => void",
+        "required": false,
+        "source": "types",
+        "description": "Press handler for the whole card. When set, the card becomes pressable (rendered through a `Pressable` with `accessibilityRole=\"button\"`). Independent of {@link onLinkPress} — the bottom CTA keeps its own handler."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "Disable interaction when `onPress` is set."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design-token modes for theming. Cascaded to slot children."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override the container styles."
+      },
+      {
+        "name": "titleStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override the title text styles."
+      },
+      {
+        "name": "valueStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override the value text styles."
+      },
+      {
+        "name": "captionStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Override the caption text styles."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label. Defaults to the resolved `title`, `value`, `caption` and `linkLabel` joined together."
+      }
+    ],
+    "modes": [
+      {
+        "name": "AppearanceBrand",
+        "type": "mode collection",
+        "values": [
+          "Primary",
+          "Secondary",
+          "Neutral",
+          "Tertiary"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Primary"
+      },
+      {
+        "name": "AppearanceSystem",
+        "type": "mode collection",
+        "values": [
+          "positive",
+          "warning",
+          "negative"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "positive"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "Context",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Nudge&Alert",
+          "CTACard",
+          "ListItem"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Emphasis",
+        "type": "mode collection",
+        "values": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "High"
+      },
+      {
+        "name": "Icon Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Semantic Intent",
+        "type": "mode collection",
+        "values": [
+          "Brand",
+          "System"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Brand"
+      },
+      {
+        "name": "Text Appearance",
+        "type": "mode collection",
+        "values": [
+          "Neutral",
+          "Primary",
+          "Secondary",
+          "Tertiary",
+          "Success",
+          "Warning",
+          "Error"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Neutral"
+      },
+      {
+        "name": "Text Sizes",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small",
+          "Large"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Weight",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Regular",
+          "Bold"
+        ],
+        "description": "A token collection ValueBackMetric reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      }
+    ],
+    "slots": [
+      {
+        "name": "icon",
+        "type": "string | React.ReactNode",
+        "default": "ic_rupee_coin",
+        "description": "Header glyph slot, shown to the left of the title. Mirrors the Figma swap slot whose preferred instances are `Icon` and `Image`: - a registry icon name (e.g. `'ic_rupee_coin'`) renders the shared {@link Icon}, colour/size from the `icon/*` tokens (default 18px gold — retint via `modes`, e.g. `{ AppearanceBrand: 'Secondary' }`); - a custom node (an `<Icon/>`, an `<Image/>`, your brand logo) renders as-is with `modes` cascaded into it. The Figma design uses a dedicated JioPoints brand mark that is not in the icon registry, so `ic_rupee_coin` stands in by default.",
+        "source": "types"
+      },
+      {
+        "name": "value",
+        "type": "string | React.ReactNode",
+        "description": "The prominent value line (16px/500). Pass a string, or any node to compose a richer value. Hidden when omitted.",
+        "source": "types"
+      },
+      {
+        "name": "link",
+        "type": "React.ReactNode",
+        "description": "Real slot for the bottom CTA. Highest precedence — when provided, these children render instead of the declarative `linkLabel` Text. Seeded `Text Appearance: Secondary` + `Text Sizes: Small` cascade into the slot (so a bare `<Text text=\"Earn\" />` matches the design); child-level modes still win.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onLinkPress",
+        "type": "(event: GestureResponderEvent) => void",
+        "description": "On the web, Enter and Space on the call to action call onLinkPress, as a click does (#184, fixed on 636f3f5). Declared: Fired when the declarative CTA (`linkLabel`) is pressed.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      },
+      {
+        "name": "onPress",
+        "type": "(event: GestureResponderEvent) => void",
+        "description": "With onPress the card is a button and the call to action is a sibling link beside it, not inside it; each click calls only its own handler. Declared: Press handler for the whole card. When set, the card becomes pressable (rendered through a `Pressable` with `accessibilityRole=\"button\"`). Independent of {@link onLinkPress} — the bottom CTA keeps its own handler.",
+        "source": "evidence",
+        "checkedOn": "2026-10-08"
+      }
+    ],
+    "gaps": []
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=valuebackmetric",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=7581-1460",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-valuebackmetric--docs"
+  }
+}

@@ -1,0 +1,599 @@
+{
+  "schemaVersion": 1,
+  "id": "BrandChip",
+  "slug": "brandchip",
+  "category": "content",
+  "tags": [
+    "chip",
+    "logo",
+    "bank",
+    "merchant",
+    "linked account"
+  ],
+  "status": {
+    "state": "flagged",
+    "guideCommit": "31f1c5ef670dba848f72459f2b2eba0331f9e1cb",
+    "packageVersion": "0.1.78",
+    "builtAt": "2026-10-31T00:47:40Z",
+    "flags": [
+      {
+        "field": "/facts/props/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/props/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/modes/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/0",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/facts/gaps/1",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/placementAdvice/2",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/4",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "/configuration/6",
+        "reason": "Checked on jfs-components 0.1.60 (2026-09-23); the installed package is 0.1.78. Re-check before relying on it.",
+        "by": "trace-check"
+      },
+      {
+        "field": "",
+        "reason": "The Brand Chip guide and its evidence were checked on 23 September 2026 on jfs-components 0.1.60, not on the installed 0.1.78 (mirror v0.1.78-dbe0e02). The installed BrandChip.tsx still matches what the entry says (read, not rendered). Re-extract once the guide is re-checked on 0.1.78 and published (#516). Added by Claude Code in the overnight run agentpack-batch3, for Marcin to confirm.",
+        "by": "human"
+      }
+    ]
+  },
+  "summary": "Use Brand Chip to identify a linked brand or account with an avatar and a short label.",
+  "useWhen": [
+    {
+      "text": "Identify a linked brand or account with an avatar and a short label.",
+      "strength": "recommended",
+      "from": {
+        "section": "summary",
+        "quote": "Use Brand Chip to identify a linked brand or account with an avatar and a short label."
+      }
+    },
+    {
+      "text": "Show the account in use, such as the account a payment is made from (the guide's “Paying from”).",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "Show the account in use"
+      }
+    }
+  ],
+  "avoidWhen": [
+    {
+      "text": "Showing a status such as Payment complete: a status label no longer tells people which account is involved. Put the status in nearby content and keep the chip for the account.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A status label no longer tells people which account is involved."
+      }
+    }
+  ],
+  "anatomy": [
+    {
+      "part": "Avatar",
+      "holds": "The brand's image (imageSource) or the Avatar given in avatarSlot, such as a monogram; helps recognize the brand.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Helps recognize the brand."
+      }
+    },
+    {
+      "part": "Label",
+      "holds": "label: names the account and distinguishes it from similar accounts.",
+      "required": true,
+      "from": {
+        "section": "anatomy",
+        "quote": "Names the account and distinguishes it from similar accounts."
+      }
+    }
+  ],
+  "allowedChildren": [
+    {
+      "slot": "avatarSlot",
+      "accepts": [
+        "ReactNode"
+      ],
+      "source": "types"
+    }
+  ],
+  "placementAdvice": [
+    {
+      "text": "Let the surrounding composition explain the chip's role, such as a “Paying from” line above it.",
+      "strength": "recommended",
+      "from": {
+        "section": "inContext",
+        "quote": "The surrounding composition explains the chip’s role."
+      }
+    },
+    {
+      "text": "The chip grows with its content: it hugs its avatar and label rather than filling its host.",
+      "strength": "recommended",
+      "from": {
+        "section": "sizing",
+        "quote": "The chip grows with its content."
+      }
+    },
+    {
+      "text": "The label is one line by default; in constrained hosts, use short identifiers.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "Its label is one line by default; use short identifiers in constrained hosts."
+      },
+      "target": "label"
+    }
+  ],
+  "configuration": [
+    {
+      "text": "Keep the avatar and the label about the same brand.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "Keep the avatar and label about the same brand."
+      }
+    },
+    {
+      "text": "Use an avatar or monogram for the brand named in the label.",
+      "strength": "recommended",
+      "from": {
+        "section": "doDont",
+        "quote": "Use an avatar or monogram for the brand named in the label."
+      }
+    },
+    {
+      "text": "Do not pair the label with another brand's avatar or monogram (such as HB beside Axis Bank • 0245): a different brand cue creates uncertainty about the account.",
+      "strength": "discouraged",
+      "from": {
+        "section": "doDont",
+        "quote": "A different brand cue creates uncertainty about the account."
+      }
+    },
+    {
+      "text": "When no brand image is available, a monogram gives a clear fallback: an Avatar with style Monogram in avatarSlot, such as AB for Axis Bank.",
+      "strength": "recommended",
+      "from": {
+        "section": "configuration",
+        "quote": "A monogram can provide a clear fallback when an image is unavailable."
+      },
+      "target": "avatarSlot"
+    },
+    {
+      "text": "The monogram is supplied through avatarSlot by the screen: BrandChip does not replace a failed image with a monogram on its own.",
+      "strength": "recommended",
+      "from": {
+        "section": "sources",
+        "quote": "The monogram here is supplied through the public avatarSlot; it is not an automatic image-error fallback."
+      },
+      "target": "avatarSlot"
+    },
+    {
+      "text": "imageSource puts the brand's image in the chip's own Avatar; it is ignored when avatarSlot is given.",
+      "strength": "required",
+      "from": {
+        "fact": "/facts/props/1"
+      },
+      "target": "imageSource"
+    },
+    {
+      "text": "BrandChip already shows its avatar at Avatar Size S (29 px, as in Figma) and passes its modes on to the Avatar in avatarSlot.",
+      "strength": "recommended",
+      "from": {
+        "section": "evidence",
+        "quote": "Brand Chip forwards its modes recursively and defaults the slot Avatar to S"
+      },
+      "target": "Avatar Size",
+      "value": "S"
+    },
+    {
+      "text": "Make the chip actionable (onPress) only when pressing it opens account detail or a choice; to identify the current account, leave it static.",
+      "strength": "required",
+      "from": {
+        "section": "states",
+        "quote": "Make it actionable only when it opens account detail or a choice."
+      },
+      "target": "onPress"
+    }
+  ],
+  "content": {
+    "rules": [
+      {
+        "text": "Pair a recognizable identity with just enough text to distinguish it.",
+        "strength": "recommended",
+        "from": {
+          "section": "corePrinciple",
+          "quote": "Pair a recognizable identity with just enough text to distinguish it."
+        }
+      },
+      {
+        "text": "Keep the brand name recognizable.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Keep the brand name recognizable."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Include the account suffix when more than one account shares the same brand, such as Axis Bank • 0245 and Axis Bank • 1182.",
+        "strength": "recommended",
+        "from": {
+          "section": "content",
+          "quote": "Include the account suffix when more than one account shares the same brand."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Do not give different accounts identical labels.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Avoid identical labels for different accounts."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Prefer a short brand name and a distinguishing account suffix.",
+        "strength": "recommended",
+        "from": {
+          "section": "sizing",
+          "quote": "Prefer a short brand name and a distinguishing account suffix."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Keep the identifier compact: the brand and the distinguishing suffix.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Keep the brand and the distinguishing suffix."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Do not write a full description (such as Axis Bank savings account • 0245): long descriptions consume space needed by surrounding content.",
+        "strength": "discouraged",
+        "from": {
+          "section": "doDont",
+          "quote": "Long descriptions consume space needed by surrounding content."
+        },
+        "target": "label"
+      },
+      {
+        "text": "Put a transaction status in nearby content, not in the label.",
+        "strength": "recommended",
+        "from": {
+          "section": "doDont",
+          "quote": "Use nearby content for the transaction status."
+        },
+        "target": "label"
+      }
+    ],
+    "good": [
+      "Axis Bank • 0245",
+      "Axis Bank • 1182",
+      "Horizon Bank • 1182",
+      "Axis • 0245"
+    ],
+    "bad": [
+      "Axis Bank savings account • 0245",
+      "Payment complete"
+    ]
+  },
+  "states": [
+    {
+      "state": "Static",
+      "when": "Without onPress: a read-only chip that identifies the current account.",
+      "from": {
+        "section": "states",
+        "quote": "Use a static chip to identify the current account."
+      }
+    },
+    {
+      "state": "Interactive",
+      "when": "With onPress the chip can be pressed. Use it when pressing opens account detail or a choice, and not otherwise.",
+      "from": {
+        "section": "states",
+        "quote": "Make it actionable only when it opens account detail or a choice."
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "The chip's accessibility label defaults to its label; set accessibilityLabel to replace it.",
+      "strength": "recommended",
+      "from": {
+        "fact": "/facts/props/7"
+      },
+      "target": "accessibilityLabel"
+    }
+  ],
+  "doDont": [
+    {
+      "do": "Use an account suffix",
+      "dont": "duplicate labels",
+      "why": "Avoid identical labels for different accounts.",
+      "from": {
+        "section": "doDont",
+        "quote": "Use an account suffix"
+      }
+    },
+    {
+      "do": "Match avatar and label",
+      "dont": "conflicting identities",
+      "why": "A different brand cue creates uncertainty about the account.",
+      "from": {
+        "section": "doDont",
+        "quote": "Match avatar and label"
+      }
+    },
+    {
+      "do": "Keep the identifier compact",
+      "dont": "full descriptions",
+      "why": "Long descriptions consume space needed by surrounding content.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep the identifier compact"
+      }
+    },
+    {
+      "do": "Keep status beside the identifier",
+      "dont": "replace identity with status",
+      "why": "A status label no longer tells people which account is involved.",
+      "from": {
+        "section": "doDont",
+        "quote": "Keep status beside the identifier"
+      }
+    }
+  ],
+  "examples": [
+    {
+      "purpose": "The account in use, the guide's In context: a “Paying from” line explains the chip's role, and the chip names the account with an AB monogram Avatar in avatarSlot.",
+      "jsx": "<Card variant=\"slim\">\n  <VStack>\n    <Text>Paying from</Text>\n    <BrandChip\n      label=\"Axis Bank • 0245\"\n      avatarSlot={<Avatar style=\"Monogram\" monogram=\"AB\" />}\n    />\n  </VStack>\n</Card>",
+      "from": {
+        "section": "inContext",
+        "quote": "The surrounding composition explains the chip’s role."
+      }
+    },
+    {
+      "purpose": "Two accounts at the same bank, told apart by their account suffixes.",
+      "jsx": "<VStack>\n  <BrandChip\n    label=\"Axis Bank • 0245\"\n    avatarSlot={<Avatar style=\"Monogram\" monogram=\"AB\" />}\n  />\n  <BrandChip\n    label=\"Axis Bank • 1182\"\n    avatarSlot={<Avatar style=\"Monogram\" monogram=\"AB\" />}\n  />\n</VStack>",
+      "from": {
+        "section": "content",
+        "quote": "Include the account suffix when more than one account shares the same brand."
+      }
+    },
+    {
+      "purpose": "An actionable chip (onPress) that opens the account's details.",
+      "jsx": "<BrandChip\n  label=\"Axis Bank • 0245\"\n  avatarSlot={<Avatar style=\"Monogram\" monogram=\"AB\" />}\n  onPress={() => {}}\n/>",
+      "from": {
+        "section": "states",
+        "quote": "Make it actionable only when it opens account detail or a choice."
+      }
+    }
+  ],
+  "facts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "source": "evidence",
+        "default": "Axis Bank • 0245",
+        "description": "One line by default, and the label lacks flex shrink: the chip hugs its content, so a long label is not promised to fit a narrow host (the guide's long-label example runs past its 240 px host). Declared: Visible label (e.g. `\"Axis Bank • 0245\"`). Default \"Axis Bank • 0245\", from the component source.",
+        "checkedOn": "2026-09-23"
+      },
+      {
+        "name": "imageSource",
+        "type": "ImageSourcePropType | string",
+        "required": false,
+        "source": "types",
+        "description": "Image shown in the avatar. Forwarded to the underlying `Avatar`'s `imageSource` prop. Pass a `require()`-ed asset, an `{ uri }` object or a remote URL string. Ignored when `avatarSlot` is provided."
+      },
+      {
+        "name": "avatarSlot",
+        "type": "React.ReactNode",
+        "required": false,
+        "source": "evidence",
+        "description": "Gets the chip's modes recursively and Avatar Size S by default. BrandChip does not replace a failed image with a monogram: a monogram is an Avatar the screen puts in the slot. Declared: Slot replacing the default `Avatar`. Receives `modes` recursively, so inner `Avatar` / `IconCapsule` instances inherit theming.",
+        "checkedOn": "2026-09-23"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "source": "types",
+        "description": "Optional press handler — when provided, the chip becomes a `Pressable`."
+      },
+      {
+        "name": "modes",
+        "type": "Modes",
+        "required": false,
+        "source": "types",
+        "description": "Design token modes for theming (e.g. `{ 'Color Mode': 'Light' }`)."
+      },
+      {
+        "name": "style",
+        "type": "StyleProp<ViewStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Container style override."
+      },
+      {
+        "name": "labelStyle",
+        "type": "StyleProp<TextStyle>",
+        "required": false,
+        "source": "types",
+        "description": "Label style override."
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "source": "types",
+        "description": "Accessibility label. Defaults to `label`."
+      },
+      {
+        "name": "disableTruncation",
+        "type": "boolean",
+        "required": false,
+        "source": "types",
+        "description": "When `true`, disables text truncation: the trailing ellipsis (`…`) is never shown and any `numberOfLines` clamp is ignored, so the text wraps to as many lines as it needs even when horizontal space is tight."
+      }
+    ],
+    "modes": [
+      {
+        "name": "Avatar Size",
+        "type": "mode collection",
+        "values": [
+          "L",
+          "M",
+          "S",
+          "XS"
+        ],
+        "description": "BrandChip shows its avatar at S (29 px, Figma's size) unless its modes set Avatar Size. Declared: A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "evidence",
+        "default": "L",
+        "checkedOn": "2026-09-23"
+      },
+      {
+        "name": "Badge Size",
+        "type": "mode collection",
+        "values": [
+          "Medium",
+          "Small"
+        ],
+        "description": "A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Medium"
+      },
+      {
+        "name": "Color Mode",
+        "type": "mode collection",
+        "values": [
+          "Light",
+          "Dark"
+        ],
+        "description": "A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Light"
+      },
+      {
+        "name": "context 10",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "jioPlus"
+        ],
+        "description": "A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context2",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "AppBar"
+        ],
+        "description": "A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Context4",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Chip",
+          "Button",
+          "Badge",
+          "Badge/glass"
+        ],
+        "description": "A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      },
+      {
+        "name": "Page type",
+        "type": "mode collection",
+        "values": [
+          "MainPage",
+          "SubPage",
+          "JioPlus"
+        ],
+        "description": "A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "MainPage"
+      },
+      {
+        "name": "Profile Card Appearance",
+        "type": "mode collection",
+        "values": [
+          "Default",
+          "Premium"
+        ],
+        "description": "A token collection BrandChip reads (the package's FIGMA_COMPONENT_MODES). When modes leave it unset, the resolver uses the collection's default mode.",
+        "source": "types",
+        "default": "Default"
+      }
+    ],
+    "slots": [
+      {
+        "name": "avatarSlot",
+        "type": "React.ReactNode",
+        "description": "Slot replacing the default `Avatar`. Receives `modes` recursively, so inner `Avatar` / `IconCapsule` instances inherit theming.",
+        "source": "types"
+      }
+    ],
+    "events": [
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "description": "Optional press handler — when provided, the chip becomes a `Pressable`.",
+        "source": "types"
+      }
+    ],
+    "gaps": [
+      {
+        "text": "BrandChip has no selected or disabled state: the package offers an optional action (onPress) only.",
+        "source": "evidence",
+        "checkedOn": "2026-09-23"
+      },
+      {
+        "text": "The label has no flex shrink, so a long label can run past a narrow host: the guide’s long-label example exceeds its 240 px host. Keep identifiers short.",
+        "source": "evidence",
+        "checkedOn": "2026-09-23"
+      }
+    ]
+  },
+  "sources": {
+    "guide": "https://coin-designer-docs.vercel.app/?component=brandchip",
+    "figma": "https://www.figma.com/design/3z7bmhA73Ls7j8Eu4qhYhE/Coin-Components-Library?node-id=3994-3252",
+    "storybook": "https://jfs-components-storybook.vercel.app/?path=/docs/components-brandchip--docs"
+  }
+}
